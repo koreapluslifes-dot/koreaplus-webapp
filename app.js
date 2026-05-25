@@ -38,14 +38,6 @@ function initMap() {
     return e;
   }
 
-  // SVG element factory
-  function el(tag, attrs = {}, parent) {
-    const e = document.createElementNS(NS, tag);
-    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
-    if (parent) parent.appendChild(e);
-    return e;
-  }
-
   const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'xMidYMid slice' });
   svg.style.cssText = 'width:100%;height:100%;display:block;cursor:grab;touch-action:none;';
   const defs = el('defs', {}, svg);
@@ -81,47 +73,55 @@ function initMap() {
   el('path',{d:`M 0,${H} L 0,${H*0.42} C ${W*0.25},${H*0.28} ${W*0.75},${H*0.3} ${W},${H*0.44} L ${W},${H} Z`,fill:'url(#atmG)',opacity:'0.22'},svg);
   el('path',{d:`M -20,${H*0.43} C ${W*0.25},${H*0.27} ${W*0.75},${H*0.29} ${W+20},${H*0.45}`,fill:'none',stroke:'#40b8f0','stroke-width':'2',opacity:'0.45',filter:'url(#glow)'},svg);
 
-  // === ACCURATE KOREAN PENINSULA (lat/lng waypoints → SVG via ll()) ===
-  // South Korea — clockwise from NW DMZ corner, ~50 waypoints
+  // === DETAILED KOREAN PENINSULA (lat/lng → SVG) ===
+  // South Korea — ~90 waypoints clockwise from DMZ west junction
   const SK = [
-    // DMZ (west→east, gentle north bow)
-    [38.30,124.55],[38.20,125.00],[38.12,125.45],[38.07,125.88],
-    [37.94,126.32],[37.88,126.58],[37.84,126.72],
-    // northeast along DMZ ridge
-    [37.97,127.02],[38.05,127.48],[38.14,127.90],
-    [38.32,128.22],[38.52,128.44],[38.62,128.52],
-    // East coast (Goseong→Gangneung→Pohang→Ulsan→Busan)
-    [38.28,128.86],[37.95,128.90],[37.75,128.90],
-    [37.42,129.28],[36.90,129.44],[36.53,129.50],
-    [36.05,129.55],[35.60,129.45],[35.30,129.22],[35.10,129.05],
-    // South coast (Busan→Yeosu→Mokpo) — indented
-    [34.88,128.75],[34.70,128.48],[34.62,128.05],
-    [34.73,127.80],[34.62,127.56],[34.52,127.35],
-    [34.50,127.10],[34.58,126.88],[34.56,126.62],[34.42,126.32],
-    // West coast (Mokpo→Gunsan→Taean→Incheon→NW)
-    [34.72,126.40],[34.97,126.43],[35.14,126.48],
-    [35.38,126.50],[35.62,126.48],[35.82,126.52],
-    [36.02,126.48],[36.22,126.44],[36.40,126.53],
-    [36.62,126.55],[36.75,126.46],[36.88,126.50],
-    [37.06,126.53],[37.24,126.57],[37.46,126.62],
-    [37.62,126.70],[37.73,126.72],[37.82,126.80],
-    [37.96,126.32],[38.12,125.65],[38.22,125.10],
+    // DMZ: west junction → east coast (gentle northward bow along ~38°N)
+    [37.92,126.62],[37.97,126.86],[38.03,127.14],[38.09,127.44],
+    [38.14,127.74],[38.21,128.03],[38.29,128.24],[38.41,128.37],[38.58,128.41],
+    // East coast: Goseong → Sokcho → Yangyang → Gangneung → Donghae → Samcheok →
+    //             Uljin → Yeongdeok → Pohang → Ulsan → Busan
+    [38.40,128.49],[38.22,128.57],[38.08,128.63],[37.93,128.69],
+    [37.77,128.92],[37.57,129.09],[37.44,129.17],[37.24,129.30],
+    [36.99,129.41],[36.75,129.46],[36.52,129.49],[36.30,129.44],
+    [36.03,129.37],[35.90,129.56],[35.73,129.49],[35.56,129.36],
+    [35.36,129.23],[35.14,129.18],[35.05,129.02],
+    // South coast: Busan → Geoje → Tongyeong → Namhae → Yeosu → Goheung → Haenam → Mokpo
+    [34.90,128.79],[34.78,128.65],[34.64,128.50],[34.61,128.33],
+    [34.57,128.14],[34.72,128.03],[34.63,127.88],[34.61,127.74],
+    [34.75,127.73],[34.68,127.57],[34.58,127.40],[34.52,127.22],
+    [34.55,127.08],[34.63,126.96],[34.58,126.82],[34.63,126.66],
+    [34.59,126.54],[34.48,126.42],[34.38,126.31],[34.32,126.22],
+    [34.41,126.15],[34.58,126.24],[34.70,126.33],[34.79,126.40],
+    // West coast: Mokpo → Buan/Saemangeum → Gunsan → Boryeong →
+    //             Taean Peninsula → Ansan → Incheon → Ganghwa → DMZ
+    [34.89,126.43],[35.02,126.48],[35.19,126.52],[35.36,126.56],
+    [35.52,126.53],[35.68,126.57],[35.83,126.60],[35.98,126.73],
+    [36.09,126.65],[36.21,126.56],[36.34,126.52],[36.43,126.58],
+    [36.53,126.62],[36.63,126.56],[36.73,126.47],[36.79,126.26],
+    [36.86,126.11],[36.91,126.32],[36.97,126.49],[37.07,126.57],
+    [37.22,126.63],[37.37,126.68],[37.49,126.66],[37.60,126.63],
+    [37.68,126.68],[37.74,126.56],[37.79,126.44],[37.84,126.41],
+    [37.88,126.53],
   ].map(([a,b])=>ll(a,b));
 
-  // North Korea — upper peninsula, visible as dark mass
+  // North Korea — ~40 waypoints, clockwise from DMZ west junction
   const NK = [
-    [38.30,124.55],[38.48,124.35],[38.72,124.52],[39.05,124.80],
-    [39.32,124.40],[39.62,124.35],[39.85,124.45],[40.12,125.15],
-    [40.55,126.05],[41.00,126.68],[41.42,127.48],
-    [41.85,128.38],[42.10,129.65],[42.30,130.55],
-    [42.00,130.70],[41.60,129.48],[41.12,129.90],
-    [40.58,129.48],[40.02,129.30],[39.52,128.80],
-    [39.00,128.62],[38.62,128.52],
-    // close along DMZ back to NW
-    [38.52,128.44],[38.32,128.22],[38.14,127.90],
-    [38.05,127.48],[37.97,127.02],[37.84,126.72],
-    [37.88,126.58],[37.94,126.32],[38.07,125.88],
-    [38.12,125.45],[38.20,125.00],
+    // NK west coast going north
+    [37.92,126.62],[37.98,126.42],[38.08,126.15],[38.23,125.88],
+    [38.42,125.60],[38.60,125.34],[38.77,124.87],[38.97,124.62],
+    [39.20,124.40],[39.47,124.18],[39.77,124.32],[40.08,124.40],
+    // North border: Yalu River → Tumen River (border with China / Russia)
+    [40.32,124.66],[40.57,124.92],[40.78,125.38],[41.02,126.70],
+    [41.37,127.47],[41.65,128.20],[41.87,128.58],[42.09,129.20],
+    [42.24,129.77],[42.37,130.22],[42.40,130.57],
+    // East coast NK going south to DMZ
+    [42.15,130.64],[41.92,129.87],[41.60,129.46],[41.22,129.53],
+    [40.84,129.38],[40.46,129.28],[40.06,129.15],[39.66,128.92],
+    [39.24,128.68],[38.90,128.55],[38.63,128.41],
+    // DMZ east → west (matches SK DMZ in reverse)
+    [38.58,128.41],[38.41,128.37],[38.29,128.24],[38.21,128.03],
+    [38.14,127.74],[38.09,127.44],[38.03,127.14],[37.97,126.86],
   ].map(([a,b])=>ll(a,b));
 
   // Draw North Korea (dark, barely lit)
@@ -132,18 +132,22 @@ function initMap() {
   // Coastal sea glow
   el('path',{d:smoothPath(SK), fill:'none', stroke:'#1a5888', 'stroke-width':'1.8', opacity:'0.6'},svg);
 
-  // DMZ marker line
-  const dmzPts = [[38.30,124.55],[37.84,126.72],[37.97,127.02],[38.62,128.52]].map(([a,b])=>ll(a,b));
-  el('path',{d:`M ${dmzPts.map(p=>p.join(',')).join(' L ')}`,fill:'none',stroke:'#304848','stroke-width':'0.7','stroke-dasharray':'4,3',opacity:'0.5'},svg);
+  // DMZ dashed line
+  const dmzPts = [[37.92,126.62],[38.03,127.14],[38.14,127.74],[38.29,128.24],[38.58,128.41]].map(([a,b])=>ll(a,b));
+  el('path',{d:`M ${dmzPts.map(p=>p.join(',')).join(' L ')}`,fill:'none',stroke:'#3a5858','stroke-width':'0.8','stroke-dasharray':'5,3',opacity:'0.55'},svg);
 
-  // Jeju Island (33.49°N 126.53°E)
+  // Jeju Island
   const [jx,jy] = ll(33.49,126.53);
-  el('ellipse',{cx:jx,cy:jy,rx:24,ry:13,fill:'#060c06',stroke:'#1a5888','stroke-width':'1.2','stroke-opacity':'0.5'},svg);
+  el('ellipse',{cx:jx,cy:jy,rx:26,ry:14,fill:'#060c06',stroke:'#1a5888','stroke-width':'1.3','stroke-opacity':'0.55'},svg);
 
-  // Geoje, Namhae hint islands
-  [[34.88,128.60],[34.72,128.04]].forEach(([a,b])=>{
+  // Ulleungdo Island (37.49°N 130.87°E)
+  const [ulx,uly] = ll(37.49,130.87);
+  el('ellipse',{cx:ulx,cy:uly,rx:8,ry:8,fill:'#060e06',stroke:'#1a5888','stroke-width':'1','stroke-opacity':'0.45'},svg);
+
+  // Geoje, Namhae, Wando islands
+  [[34.88,128.60],[34.72,128.04],[34.32,126.71]].forEach(([a,b])=>{
     const [ix,iy]=ll(a,b);
-    el('ellipse',{cx:ix,cy:iy,rx:7,ry:4,fill:'#050a05',stroke:'#1a4868','stroke-width':'0.6','stroke-opacity':'0.35'},svg);
+    el('ellipse',{cx:ix,cy:iy,rx:7,ry:4,fill:'#050a05',stroke:'#1a4868','stroke-width':'0.7','stroke-opacity':'0.38'},svg);
   });
 
   // === CITY LIGHT HALOS ===
