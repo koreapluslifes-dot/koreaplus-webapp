@@ -1,5 +1,6 @@
 // Cloudflare Worker — KoreaPlus AI Guide (OpenRouter free LLM) + Google Places proxy
 // Secret 필요: OPENROUTER_API_KEY, GOOGLE_PLACES_KEY
+// v2 — Places API enabled
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
