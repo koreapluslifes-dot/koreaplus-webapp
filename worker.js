@@ -8,14 +8,11 @@ const CORS = {
 };
 
 // ====== 미국 기반 무료 OpenRouter 모델 (모두 $0) ======
-// Primary: Meta Llama 3.3 70B — Meta AI (US), 검증된 최고 품질
-const MODEL = 'meta-llama/llama-3.3-70b-instruct:free';
-// 대체 모델 (모두 미국 기업):
-// const MODEL = 'openai/gpt-oss-120b:free';                     // OpenAI (US) — 162B 토큰/주
-// const MODEL = 'openai/gpt-oss-20b:free';                      // OpenAI (US) — 31B 토큰/주
-// const MODEL = 'nvidia/llama-3.1-nemotron-70b-instruct:free';  // NVIDIA (US) — 256K 컨텍스트
-// const MODEL = 'nous/hermes-3-llama-3.1-405b:free';            // Nous Research (US) — 405B
-// const MODEL = 'meta-llama/llama-3.2-3b-instruct:free';        // Meta (US) — 경량/빠름
+// Primary: Meta Llama 3.2 3B — 빠른 응답용 경량 모델
+const MODEL = 'meta-llama/llama-3.2-3b-instruct:free';
+// 대체 모델:
+// const MODEL = 'meta-llama/llama-3.3-70b-instruct:free';  // 고품질이나 느림
+// const MODEL = 'openai/gpt-oss-20b:free';                 // OpenAI (US)
 // ❌ 제외 (중국): deepseek/*, qwen/*, zhipuai/*, minimax/*
 
 const SYSTEM_PROMPT = `You are "Korea AI Guide" — a friendly expert on South Korea for international visitors.
@@ -51,8 +48,8 @@ async function handleChat(body, env) {
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 350,
-      temperature: 0.7,
+      max_tokens: 220,
+      temperature: 0.6,
       messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
     }),
   });
@@ -81,9 +78,9 @@ async function fallbackChat(messages, env) {
         'X-Title': 'KoreaPlus AI Guide',
       },
       body: JSON.stringify({
-        model: 'openai/gpt-oss-120b:free',  // OpenAI US — fallback
-        max_tokens: 350,
-        temperature: 0.7,
+        model: 'openai/gpt-oss-20b:free',   // OpenAI US — fallback
+        max_tokens: 220,
+        temperature: 0.6,
         messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
       }),
     });
