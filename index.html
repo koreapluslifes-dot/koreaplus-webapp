@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KoreaPlus | Everything About Korea 한국의 모든것</title>
+  <meta name="description" content="Discover everything about South Korea — food, travel, K-beauty, K-pop, shopping, history and more. AI guide included.">
+  <meta property="og:title" content="KoreaPlus | Everything About Korea">
+  <meta property="og:description" content="Your complete guide to South Korea — food, travel, culture, companies, AI chatbot.">
+  <meta property="og:url" content="https://koreaplus-lifes.com">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <!-- Google Maps: replace MAPS_KEY with your API key -->
+  <script>
+    window.MAPS_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
+    window.WORKER_URL = 'https://koreaplus-ai.alllifes77-hue.workers.dev';
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a class="logo" href="https://koreaplus-lifes.com">
+      <span class="logo-flag">🇰🇷</span>
+      <span class="logo-text">Korea<strong>Plus</strong></span>
+    </a>
+    <nav class="nav" id="main-nav">
+      <button class="nav-btn" data-cat="food">🍜 Food</button>
+      <button class="nav-btn" data-cat="travel">✈️ Travel</button>
+      <button class="nav-btn" data-cat="transport">🚄 Transport</button>
+      <button class="nav-btn" data-cat="companies">🏢 Companies</button>
+      <button class="nav-btn" data-cat="kbeauty">💄 K-Beauty</button>
+      <button class="nav-btn" data-cat="kpop">🎤 K-Pop</button>
+      <button class="nav-btn" data-cat="shopping">🛍️ Shopping</button>
+      <button class="nav-btn" data-cat="history">📜 History</button>
+    </nav>
+    <button class="ai-btn" id="ai-open-btn">💬 AI Guide</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">🇰🇷 Land of Morning Calm</div>
+    <h1 class="hero-title">Everything<br>About <span class="red">Korea</span></h1>
+    <p class="hero-sub">Food · Travel · K-Beauty · K-Pop<br>Shopping · History · AI Guide</p>
+    <div class="hero-btns">
+      <button class="hero-cta" data-cat="food">Explore Korea</button>
+      <button class="hero-cta outline" id="hero-ai-btn">💬 Ask AI Guide</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>8</strong><span>Categories</span></div>
+      <div class="stat"><strong>80+</strong><span>Topics</span></div>
+      <div class="stat"><strong>AI</strong><span>Powered</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="map-wrap" id="map-wrap">
+      <canvas id="korea-canvas"></canvas>
+      <div class="map-overlay-labels" id="city-labels"></div>
+      <div class="map-hint">🖱 Drag to rotate · Click city to explore</div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section" id="categories-section">
+  <div class="section-header">
+    <h2>Discover Korea</h2>
+    <p>Everything you need to know about Korea in one place</p>
+  </div>
+  <div class="cat-tabs" id="cat-tabs">
+    <button class="cat-tab active" data-cat="food">
+      <span class="tab-icon">🍜</span><span class="tab-en">Food</span><span class="tab-kr">음식</span>
+    </button>
+    <button class="cat-tab" data-cat="travel">
+      <span class="tab-icon">✈️</span><span class="tab-en">Travel</span><span class="tab-kr">여행지</span>
+    </button>
+    <button class="cat-tab" data-cat="transport">
+      <span class="tab-icon">🚄</span><span class="tab-en">Transport</span><span class="tab-kr">교통</span>
+    </button>
+    <button class="cat-tab" data-cat="companies">
+      <span class="tab-icon">🏢</span><span class="tab-en">Companies</span><span class="tab-kr">기업</span>
+    </button>
+    <button class="cat-tab" data-cat="kbeauty">
+      <span class="tab-icon">💄</span><span class="tab-en">K-Beauty</span><span class="tab-kr">뷰티</span>
+    </button>
+    <button class="cat-tab" data-cat="kpop">
+      <span class="tab-icon">🎤</span><span class="tab-en">K-Pop</span><span class="tab-kr">K팝</span>
+    </button>
+    <button class="cat-tab" data-cat="shopping">
+      <span class="tab-icon">🛍️</span><span class="tab-en">Shopping</span><span class="tab-kr">쇼핑</span>
+    </button>
+    <button class="cat-tab" data-cat="history">
+      <span class="tab-icon">📜</span><span class="tab-en">History</span><span class="tab-kr">역사</span>
+    </button>
+  </div>
+  <div class="content-grid" id="content-grid"></div>
+</section>
+
+<!-- Google Maps Panel (slide-over) -->
+<div class="map-panel" id="map-panel">
+  <div class="mp-header">
+    <div>
+      <h3 id="mp-title">—</h3>
+      <span id="mp-kr" class="mp-kr">—</span>
+    </div>
+    <button class="mp-close" id="mp-close">✕</button>
+  </div>
+  <div id="gmap" class="gmap-frame"></div>
+  <div class="mp-body">
+    <div class="mp-rating" id="mp-rating"></div>
+    <div class="mp-reviews" id="mp-reviews"></div>
+    <div class="mp-actions">
+      <a id="mp-directions" class="mp-btn primary" href="#" target="_blank">📍 Get Directions</a>
+      <a id="mp-gmaps" class="mp-btn" href="#" target="_blank">🗺️ Open in Google Maps</a>
+    </div>
+  </div>
+</div>
+<div class="map-panel-backdrop" id="mp-backdrop"></div>
+
+<!-- AI Chatbot -->
+<div class="chatbot" id="chatbot">
+  <div class="chat-header">
+    <div class="chat-title">
+      <span class="chat-avatar">🤖</span>
+      <div><strong>Korea AI Guide</strong><span class="chat-status">● Online</span></div>
+    </div>
+    <button class="chat-close" id="chat-close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg assistant">
+      <div class="msg-bubble">👋 안녕하세요! I'm your Korea AI Guide — powered by Llama 3.3.<br><br>Ask me anything about Korea: food, travel, culture, language tips, or company info!</div>
+    </div>
+  </div>
+  <div class="chat-quick" id="chat-quick">
+    <button onclick="sendQuick('Best Korean foods for first timers?')">🍜 Best foods</button>
+    <button onclick="sendQuick('Top travel spots in Korea?')">✈️ Must-visit</button>
+    <button onclick="sendQuick('How to use the Seoul subway?')">🚇 Subway tips</button>
+    <button onclick="sendQuick('K-beauty skincare routine tips?')">💄 K-Beauty</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" placeholder="Ask about Korea..." autocomplete="off">
+    <button id="chat-send">➤</button>
+  </div>
+</div>
+
+<button class="chat-fab" id="chat-fab">
+  <span class="fab-icon">💬</span>
+  <span class="fab-label">AI Guide</span>
+</button>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span>🇰🇷</span><strong>KoreaPlus-Lifes.com</strong></div>
+    <p>Your complete guide to everything Korea</p>
+    <div class="footer-links">
+      <a href="https://koreaplus-lifes.com">Home</a>
+      <a href="https://koreaplus-lifes.com/about">About</a>
+      <a href="https://koreaplus-lifes.com/contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
