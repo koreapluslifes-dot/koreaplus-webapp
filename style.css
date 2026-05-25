@@ -51,6 +51,13 @@ button{cursor:pointer;border:none;font-family:inherit}
 .map-hero{position:relative;height:calc(100vh - 60px);margin-top:60px;overflow:hidden}
 #korea-map{width:100%;height:100%;z-index:1}
 
+/* Left dark gradient — text contrast over light map */
+.map-hero::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;
+  width:62%;z-index:5;pointer-events:none;
+  background:linear-gradient(to right,rgba(12,8,6,0.62) 0%,rgba(12,8,6,0.38) 55%,transparent 100%);
+}
+
 /* Leaflet overrides */
 .leaflet-container{font-family:'Inter','Noto Sans KR',sans-serif !important}
 .leaflet-control-zoom{border:none !important;margin:16px !important}
@@ -78,27 +85,28 @@ button{cursor:pointer;border:none;font-family:inherit}
 
 /* Hero overlay — white text on map background */
 .map-hero-overlay{
-  position:absolute;top:0;left:0;z-index:10;pointer-events:none;
-  padding:44px 52px;max-width:540px;
+  position:absolute;top:0;left:0;z-index:20;pointer-events:none;
+  padding:44px 52px;max-width:560px;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:6px;
-  background:rgba(214,34,70,0.9);
-  color:#fff;font-size:12px;font-weight:600;letter-spacing:0.5px;
-  padding:5px 14px;border-radius:20px;margin-bottom:18px;
-  backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(214,34,70,0.35);
+  background:var(--red);
+  color:#fff;font-size:12px;font-weight:700;letter-spacing:0.8px;
+  padding:6px 16px;border-radius:20px;margin-bottom:20px;
+  box-shadow:0 4px 16px rgba(214,34,70,0.45);
 }
 .hero-title{
-  font-size:clamp(30px,4.2vw,56px);font-weight:900;line-height:1.1;
-  color:#fff;text-shadow:0 2px 24px rgba(0,0,0,0.55);margin-bottom:10px;
+  font-size:clamp(36px,4.5vw,62px);font-weight:900;line-height:1.08;
+  color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.4);margin-bottom:12px;
 }
 .hero-title .kr{
-  display:block;font-size:0.5em;color:#FFD878;
-  font-weight:700;letter-spacing:4px;margin-top:6px;text-shadow:0 1px 8px rgba(0,0,0,0.4);
+  display:block;font-size:0.48em;color:#FFD264;
+  font-weight:800;letter-spacing:5px;margin-top:8px;
+  text-shadow:0 1px 8px rgba(0,0,0,0.35);
 }
 .hero-sub{
-  font-size:13px;color:rgba(255,255,255,0.88);margin-bottom:24px;
-  text-shadow:0 1px 8px rgba(0,0,0,0.5);letter-spacing:0.3px;
+  font-size:14px;color:rgba(255,255,255,0.92);margin-bottom:28px;
+  text-shadow:0 1px 6px rgba(0,0,0,0.45);letter-spacing:0.5px;font-weight:500;
 }
 .hero-btns{display:flex;gap:10px;pointer-events:all}
 .hero-cta{
@@ -112,7 +120,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 
 /* City pills — blend into white page below */
 .map-bottom{
-  position:absolute;bottom:0;left:0;right:0;z-index:10;pointer-events:none;
+  position:absolute;bottom:0;left:0;right:0;z-index:20;pointer-events:none;
   background:linear-gradient(transparent,rgba(250,250,248,0.97));
   padding:80px 24px 22px;
 }
