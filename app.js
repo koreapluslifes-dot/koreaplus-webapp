@@ -126,7 +126,7 @@ function openMapPanel(item) {
   const gmapFrame = document.getElementById('gmap');
   const q = encodeURIComponent(item.mapQ || item.name + ' Korea');
   if (MAPS_KEY && MAPS_KEY !== 'YOUR_GOOGLE_MAPS_API_KEY') {
-    gmapFrame.innerHTML = `<iframe src="https://www.google.com/maps/embed/v1/search?key=${MAPS_KEY}&q=${q}&zoom=14" allowfullscreen loading="lazy"></iframe>`;
+    gmapFrame.innerHTML = `<iframe src="https://www.google.com/maps/embed/v1/search?key=${MAPS_KEY}&q=${q}&zoom=14&language=en&region=KR" allowfullscreen loading="lazy"></iframe>`;
     fetchPlaceDetails(item.mapQ || item.name + ' Korea');
   } else {
     gmapFrame.innerHTML = `<div class="gmap-loading">📍 Add your Google Maps API key in index.html to enable the map preview</div>`;
@@ -256,6 +256,19 @@ function initChat() {
   input?.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(input.value); });
 }
 
+/* ===== SCROLL REVEAL ===== */
+function initScrollReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
 /* ===== HEADER SCROLL ===== */
 function initHeader() {
   window.addEventListener('scroll', () => {
@@ -271,4 +284,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGrid('food');
   initChat();
   initHeader();
+  initScrollReveal();
 });
