@@ -97,15 +97,16 @@ async function fallbackChat(messages, env) {
 async function handlePlace(body, env) {
   const { query } = body;
   if (!query) return json({ error: 'No query' }, 400);
-  if (!env.GOOGLE_PLACES_KEY) return json({ rating: null, reviews: [] });
+  if (!env.GOOGLE_PLACES_KEY) return json({ rating: null, reviews: [], _debug: 'no_key' });
 
   // 1. 장소 검색
   const searchRes = await fetch(
     `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${env.GOOGLE_PLACES_KEY}`
   );
   const searchData = await searchRes.json();
+  if (searchData.error_message) return json({ rating: null, reviews: [], _debug: searchData.error_message });
   const place = searchData.results?.[0];
-  if (!place) return json({ rating: null, reviews: [] });
+  if (!place) return json({ rating: null, reviews: [], _debug: 'no_place_found', status: searchData.status });
 
   // 2. 상세 정보 (리뷰 포함)
   const detailRes = await fetch(
