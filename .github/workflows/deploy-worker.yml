@@ -22,7 +22,5 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           secrets: |
             OPENROUTER_API_KEY
-            GOOGLE_PLACES_KEY
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          GOOGLE_PLACES_KEY: ${{ secrets.GOOGLE_PLACES_KEY }}
