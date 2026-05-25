@@ -1,5 +1,5 @@
-// Cloudflare Worker — KoreaPlus AI Guide + Google Places proxy
-// Secrets: GROQ_API_KEY, GOOGLE_PLACES_KEY
+// Cloudflare Worker — KoreaPlus AI Guide (OpenRouter free LLM) + Google Places proxy
+// Secret 필요: OPENROUTER_API_KEY, GOOGLE_PLACES_KEY
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -7,12 +7,22 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+// ====== FREE OPENROUTER MODELS (모두 $0) ======
+// 현재 선택: DeepSeek V4 Flash — 가장 빠르고 컨텍스트 1M, 주간 47B 토큰 무료
+// 대체 모델들 (주석 해제해서 전환 가능):
+const MODEL = 'deepseek/deepseek-chat-v4-flash:free';
+// const MODEL = 'meta-llama/llama-3.3-70b-instruct:free';   // Llama 70B
+// const MODEL = 'openai/gpt-4o-mini:free';                  // GPT-4o mini
+// const MODEL = 'google/gemma-2-27b-it:free';               // Google Gemma 27B
+// const MODEL = 'qwen/qwen3-235b-a22b:free';                // Qwen3 235B
+// const MODEL = 'nvidia/llama-3.1-nemotron-70b-instruct:free'; // NVIDIA Nemotron 70B
+
 const SYSTEM_PROMPT = `You are "Korea AI Guide" — a friendly expert on South Korea for international visitors.
-Answer concisely in 2-3 short paragraphs. Use emojis naturally (🍜🇰🇷🚄).
-Give specific, practical tips. Mention Korean words when helpful (감사합니다 = thank you).
-If asked in Korean, reply in Korean.
-Topics: food, travel spots, transportation, K-beauty, K-pop, shopping, history, culture, companies, practical tips.
-Keep answers under 200 words. Always end with one quick practical tip.`;
+Answer concisely in 2-3 short paragraphs max. Use emojis naturally 🍜🇰🇷🚄.
+Give specific, practical tips. Mention Korean words when helpful.
+If asked in Korean, reply in Korean. Keep answers under 200 words.
+Always end with one quick practical tip 💡.
+Topics: Korean food, travel, transportation, K-beauty, K-pop, shopping, history, culture, companies.`;
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -20,7 +30,7 @@ function json(data, status = 200) {
   });
 }
 
-// Route: POST /chat
+// /chat — OpenRouter free LLM
 async function handleChat(body, env) {
   const { message, history = [] } = body;
   if (!message?.trim()) return json({ error: 'No message' }, 400);
@@ -30,38 +40,67 @@ async function handleChat(body, env) {
     { role: 'user', content: message }
   ];
 
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${env.GROQ_API_KEY}`,
+      'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://koreaplus-lifes.com',
+      'X-Title': 'KoreaPlus AI Guide',
     },
     body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',   // Best free Groq model
+      model: MODEL,
       max_tokens: 350,
-      temperature: 0.75,
+      temperature: 0.7,
       messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
     }),
   });
 
   if (!res.ok) {
     const err = await res.text();
-    console.error('Groq error:', err);
-    return json({ error: 'AI service error' }, 502);
+    console.error('OpenRouter error:', err);
+    // 오류 시 다른 무료 모델로 자동 폴백
+    return fallbackChat(messages, env);
   }
 
   const data = await res.json();
   const reply = data.choices?.[0]?.message?.content || 'No response.';
-  return json({ reply });
+  return json({ reply, model: MODEL });
 }
 
-// Route: POST /place  — Google Places proxy (keeps API key server-side)
+// 폴백: DeepSeek 실패 시 Llama 3.3 70B 시도
+async function fallbackChat(messages, env) {
+  try {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://koreaplus-lifes.com',
+        'X-Title': 'KoreaPlus AI Guide',
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-3.3-70b-instruct:free',
+        max_tokens: 350,
+        temperature: 0.7,
+        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+      }),
+    });
+    const data = await res.json();
+    const reply = data.choices?.[0]?.message?.content || 'Service temporarily unavailable.';
+    return json({ reply, model: 'meta-llama/llama-3.3-70b-instruct:free (fallback)' });
+  } catch {
+    return json({ reply: '⚠️ AI service is temporarily unavailable. Please try again in a moment.' });
+  }
+}
+
+// /place — Google Places API 프록시 (API 키 서버사이드 보관)
 async function handlePlace(body, env) {
   const { query } = body;
   if (!query) return json({ error: 'No query' }, 400);
-  if (!env.GOOGLE_PLACES_KEY) return json({ error: 'No Places key' }, 500);
+  if (!env.GOOGLE_PLACES_KEY) return json({ rating: null, reviews: [] });
 
-  // 1. Text Search to get place_id
+  // 1. 장소 검색
   const searchRes = await fetch(
     `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${env.GOOGLE_PLACES_KEY}`
   );
@@ -69,46 +108,38 @@ async function handlePlace(body, env) {
   const place = searchData.results?.[0];
   if (!place) return json({ rating: null, reviews: [] });
 
-  // 2. Place Details for reviews
+  // 2. 상세 정보 (리뷰 포함)
   const detailRes = await fetch(
-    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,user_ratings_total,reviews,opening_hours&key=${env.GOOGLE_PLACES_KEY}`
+    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,user_ratings_total,reviews,opening_hours&language=en&key=${env.GOOGLE_PLACES_KEY}`
   );
   const detailData = await detailRes.json();
   const detail = detailData.result || {};
 
-  const reviews = (detail.reviews || []).map(r => ({
-    authorName: r.author_name,
-    rating: r.rating,
-    text: r.text,
-    relativeTime: r.relative_time_description,
-  }));
-
   return json({
+    name: detail.name || place.name,
     rating: detail.rating || place.rating,
     userRatingsTotal: detail.user_ratings_total || place.user_ratings_total,
-    reviews,
     isOpen: detail.opening_hours?.open_now ?? null,
+    reviews: (detail.reviews || []).slice(0, 3).map(r => ({
+      authorName: r.author_name,
+      rating: r.rating,
+      text: r.text,
+      relativeTime: r.relative_time_description,
+    })),
   });
 }
 
 export default {
   async fetch(request, env) {
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: CORS });
-    }
-    if (request.method !== 'POST') {
-      return new Response('Method not allowed', { status: 405, headers: CORS });
-    }
+    if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
+    if (request.method !== 'POST') return new Response('Method not allowed', { status: 405, headers: CORS });
 
     const url = new URL(request.url);
     let body;
     try { body = await request.json(); }
     catch { return json({ error: 'Invalid JSON' }, 400); }
 
-    if (url.pathname.endsWith('/chat')) return handleChat(body, env);
     if (url.pathname.endsWith('/place')) return handlePlace(body, env);
-
-    // Default: treat as /chat for backwards compatibility
-    return handleChat(body, env);
+    return handleChat(body, env); // /chat 또는 기본
   }
 };
