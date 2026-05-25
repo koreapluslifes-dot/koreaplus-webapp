@@ -10,6 +10,35 @@ function initMap() {
   const W = 1400, H = 700;
   const NS = 'http://www.w3.org/2000/svg';
 
+  // Geographic projection — tuned so peninsula fills right-center of frame
+  function ll(lat, lng) {
+    return [+(580 + (lng - 124.0) * 60).toFixed(1), +(108 + (42.0 - lat) * 48).toFixed(1)];
+  }
+
+  // Catmull-Rom → Cubic Bezier smooth closed path
+  function smoothPath(pts) {
+    const n = pts.length;
+    let d = `M ${pts[0][0]},${pts[0][1]}`;
+    for (let i = 0; i < n; i++) {
+      const p0 = pts[(i - 1 + n) % n], p1 = pts[i];
+      const p2 = pts[(i + 1) % n],    p3 = pts[(i + 2) % n];
+      const c1x = +(p1[0] + (p2[0] - p0[0]) / 6).toFixed(1);
+      const c1y = +(p1[1] + (p2[1] - p0[1]) / 6).toFixed(1);
+      const c2x = +(p2[0] - (p3[0] - p1[0]) / 6).toFixed(1);
+      const c2y = +(p2[1] - (p3[1] - p1[1]) / 6).toFixed(1);
+      d += ` C ${c1x},${c1y} ${c2x},${c2y} ${p2[0]},${p2[1]}`;
+    }
+    return d + ' Z';
+  }
+
+  function el(tag, attrs = {}, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  // SVG element factory
   function el(tag, attrs = {}, parent) {
     const e = document.createElementNS(NS, tag);
     for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
@@ -18,195 +47,299 @@ function initMap() {
   }
 
   const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'xMidYMid slice' });
-  svg.style.cssText = 'width:100%;height:100%;display:block;';
+  svg.style.cssText = 'width:100%;height:100%;display:block;cursor:grab;touch-action:none;';
   const defs = el('defs', {}, svg);
 
-  // === GRADIENTS & FILTERS ===
-  const bgGrad = el('radialGradient', { id: 'bgG', cx: '50%', cy: '55%', r: '75%' }, defs);
-  el('stop', { offset: '0%', 'stop-color': '#07122a' }, bgGrad);
-  el('stop', { offset: '60%', 'stop-color': '#030a18' }, bgGrad);
-  el('stop', { offset: '100%', 'stop-color': '#000305' }, bgGrad);
+  // === DEFS: GRADIENTS & FILTERS ===
+  const bgG = el('radialGradient', { id:'bgG', cx:'50%', cy:'55%', r:'75%' }, defs);
+  [['0%','#06102a'],['65%','#020910'],['100%','#000204']].forEach(([o,c]) => el('stop',{offset:o,'stop-color':c},bgG));
 
-  const oceanGrad = el('radialGradient', { id: 'oceanG', cx: '38%', cy: '38%', r: '65%' }, defs);
-  el('stop', { offset: '0%', 'stop-color': '#061828' }, oceanGrad);
-  el('stop', { offset: '100%', 'stop-color': '#010810' }, oceanGrad);
+  const oceanG = el('radialGradient', { id:'oceanG', cx:'40%', cy:'40%', r:'70%' }, defs);
+  [['0%','#071828'],['100%','#010810']].forEach(([o,c]) => el('stop',{offset:o,'stop-color':c},oceanG));
 
-  const atmGrad = el('linearGradient', { id: 'atmG', x1: '0', y1: '0', x2: '0', y2: '1' }, defs);
-  el('stop', { offset: '0%', 'stop-color': '#1a90d8', 'stop-opacity': '0' }, atmGrad);
-  el('stop', { offset: '100%', 'stop-color': '#0fa0e8', 'stop-opacity': '0.55' }, atmGrad);
+  const atmG = el('linearGradient', { id:'atmG', x1:'0', y1:'1', x2:'0', y2:'0' }, defs);
+  el('stop',{offset:'0%','stop-color':'#1a96e0','stop-opacity':'0.55'},atmG);
+  el('stop',{offset:'50%','stop-color':'#0a60b0','stop-opacity':'0.12'},atmG);
+  el('stop',{offset:'100%','stop-color':'#001530','stop-opacity':'0'},atmG);
 
-  // Glow filter for city lights
-  const gf = el('filter', { id: 'glow', x: '-80%', y: '-80%', width: '260%', height: '260%' }, defs);
-  el('feGaussianBlur', { in: 'SourceGraphic', stdDeviation: '5', result: 'b' }, gf);
-  const m1 = el('feMerge', {}, gf);
-  el('feMergeNode', { in: 'b' }, m1); el('feMergeNode', { in: 'SourceGraphic' }, m1);
+  const glowF = el('filter', { id:'glow', x:'-60%', y:'-60%', width:'220%', height:'220%' }, defs);
+  el('feGaussianBlur', { in:'SourceGraphic', stdDeviation:'4', result:'b' }, glowF);
+  const gm = el('feMerge',{},glowF); el('feMergeNode',{in:'b'},gm); el('feMergeNode',{in:'SourceGraphic'},gm);
 
   // === SPACE BACKGROUND ===
-  el('rect', { width: W, height: H, fill: 'url(#bgG)' }, svg);
+  el('rect', { width:W, height:H, fill:'url(#bgG)' }, svg);
 
   // === STARS ===
-  const s = (n) => { let x = Math.sin(n) * 10000; return x - Math.floor(x); };
-  for (let i = 0; i < 140; i++) {
-    el('circle', {
-      cx: s(i * 3.7) * W, cy: s(i * 5.1) * H * 0.78,
-      r: s(i * 2.3) * 1.4 + 0.25,
-      fill: '#fff', opacity: s(i * 4.9) * 0.65 + 0.18
-    }, svg);
-  }
-  // Milky way hint — faint band of denser stars
-  for (let i = 0; i < 60; i++) {
-    el('circle', {
-      cx: s(i * 7.1) * W * 0.6 + W * 0.2,
-      cy: s(i * 9.3) * H * 0.35 + H * 0.05,
-      r: s(i * 1.9) * 0.8 + 0.15,
-      fill: '#c8e0ff', opacity: s(i * 6.2) * 0.35 + 0.08
-    }, svg);
-  }
+  const rnd = n => { let x = Math.sin(n)*10000; return x-Math.floor(x); };
+  for (let i = 0; i < 160; i++)
+    el('circle',{cx:rnd(i*3.7+1)*W, cy:rnd(i*5.1+2)*H*0.75, r:rnd(i*2.3+3)*1.5+0.2, fill:'#fff', opacity:rnd(i*4.9+4)*0.6+0.15},svg);
+  for (let i = 0; i < 80; i++)
+    el('circle',{cx:rnd(i*7.3+10)*W*0.7+W*0.15, cy:rnd(i*9.7+20)*H*0.4+H*0.05, r:rnd(i*1.9+30)*0.9+0.1, fill:'#d0e8ff', opacity:rnd(i*6.1+40)*0.3+0.05},svg);
 
   // === EARTH SURFACE ===
-  // Large ellipse = Earth's curved surface
-  el('ellipse', { cx: W * 0.46, cy: H + 160, rx: 1200, ry: 560, fill: 'url(#oceanG)' }, svg);
+  el('ellipse',{cx:W*0.47, cy:H+180, rx:1250, ry:590, fill:'url(#oceanG)'},svg);
+  el('path',{d:`M 0,${H} L 0,${H*0.42} C ${W*0.25},${H*0.28} ${W*0.75},${H*0.3} ${W},${H*0.44} L ${W},${H} Z`,fill:'url(#atmG)',opacity:'0.22'},svg);
+  el('path',{d:`M -20,${H*0.43} C ${W*0.25},${H*0.27} ${W*0.75},${H*0.29} ${W+20},${H*0.45}`,fill:'none',stroke:'#40b8f0','stroke-width':'2',opacity:'0.45',filter:'url(#glow)'},svg);
 
-  // Atmosphere glow band along horizon
-  el('path', {
-    d: `M 0,${H*0.44} C ${W*0.3},${H*0.28} ${W*0.7},${H*0.3} ${W},${H*0.42} L ${W},${H} L 0,${H} Z`,
-    fill: 'url(#atmG)', opacity: '0.18'
-  }, svg);
-  // Bright atmosphere rim
-  el('path', {
-    d: `M -50,${H*0.44} C ${W*0.3},${H*0.26} ${W*0.7},${H*0.28} ${W+50},${H*0.42}`,
-    fill: 'none', stroke: '#3ab8f0', 'stroke-width': '2.5', opacity: '0.4',
-    filter: 'url(#glow)'
-  }, svg);
+  // === ACCURATE KOREAN PENINSULA (lat/lng waypoints → SVG via ll()) ===
+  // South Korea — clockwise from NW DMZ corner, ~50 waypoints
+  const SK = [
+    // DMZ (west→east, gentle north bow)
+    [38.30,124.55],[38.20,125.00],[38.12,125.45],[38.07,125.88],
+    [37.94,126.32],[37.88,126.58],[37.84,126.72],
+    // northeast along DMZ ridge
+    [37.97,127.02],[38.05,127.48],[38.14,127.90],
+    [38.32,128.22],[38.52,128.44],[38.62,128.52],
+    // East coast (Goseong→Gangneung→Pohang→Ulsan→Busan)
+    [38.28,128.86],[37.95,128.90],[37.75,128.90],
+    [37.42,129.28],[36.90,129.44],[36.53,129.50],
+    [36.05,129.55],[35.60,129.45],[35.30,129.22],[35.10,129.05],
+    // South coast (Busan→Yeosu→Mokpo) — indented
+    [34.88,128.75],[34.70,128.48],[34.62,128.05],
+    [34.73,127.80],[34.62,127.56],[34.52,127.35],
+    [34.50,127.10],[34.58,126.88],[34.56,126.62],[34.42,126.32],
+    // West coast (Mokpo→Gunsan→Taean→Incheon→NW)
+    [34.72,126.40],[34.97,126.43],[35.14,126.48],
+    [35.38,126.50],[35.62,126.48],[35.82,126.52],
+    [36.02,126.48],[36.22,126.44],[36.40,126.53],
+    [36.62,126.55],[36.75,126.46],[36.88,126.50],
+    [37.06,126.53],[37.24,126.57],[37.46,126.62],
+    [37.62,126.70],[37.73,126.72],[37.82,126.80],
+    [37.96,126.32],[38.12,125.65],[38.22,125.10],
+  ].map(([a,b])=>ll(a,b));
 
-  // === KOREAN PENINSULA SHAPE ===
-  // South Korea outline (simplified, clockwise from NW)
-  const landPath = `
-    M 558,244 L 580,231 L 608,223 L 638,217 L 668,214
-    L 700,217 L 724,225 L 744,237
-    L 763,273 L 770,314 L 768,351 L 762,384
-    L 750,399 L 740,411 L 724,420 L 706,426
-    L 686,429 L 664,425 L 645,428 L 625,422
-    L 606,416 L 589,405 L 573,387 L 561,365
-    L 551,341 L 550,317 L 553,295 L 559,275
-    L 566,259 Z
-  `;
-  // North Korea (faint silhouette above DMZ)
-  const nkPath = `
-    M 558,244 L 566,259 L 542,258 L 520,252 L 498,246
-    L 475,240 L 452,240 L 428,248 L 410,258
-    L 400,265 L 395,280 L 400,275 L 430,265
-    L 460,258 L 490,252 L 510,250 L 530,248
-    L 540,248 L 542,242
-    M 668,214 L 700,217 L 730,210 L 755,205 L 780,200
-    L 800,195 L 810,200 L 800,208 L 770,212
-    L 744,218 L 724,225
-  `;
+  // North Korea — upper peninsula, visible as dark mass
+  const NK = [
+    [38.30,124.55],[38.48,124.35],[38.72,124.52],[39.05,124.80],
+    [39.32,124.40],[39.62,124.35],[39.85,124.45],[40.12,125.15],
+    [40.55,126.05],[41.00,126.68],[41.42,127.48],
+    [41.85,128.38],[42.10,129.65],[42.30,130.55],
+    [42.00,130.70],[41.60,129.48],[41.12,129.90],
+    [40.58,129.48],[40.02,129.30],[39.52,128.80],
+    [39.00,128.62],[38.62,128.52],
+    // close along DMZ back to NW
+    [38.52,128.44],[38.32,128.22],[38.14,127.90],
+    [38.05,127.48],[37.97,127.02],[37.84,126.72],
+    [37.88,126.58],[37.94,126.32],[38.07,125.88],
+    [38.12,125.45],[38.20,125.00],
+  ].map(([a,b])=>ll(a,b));
 
-  // North Korea — barely visible
-  el('path', { d: nkPath, fill: 'rgba(5,15,5,0.6)', stroke: 'rgba(40,80,60,0.15)', 'stroke-width': '1' }, svg);
+  // Draw North Korea (dark, barely lit)
+  el('path',{d:smoothPath(NK), fill:'#040c04', stroke:'rgba(30,60,30,0.2)', 'stroke-width':'0.8'},svg);
 
-  // South Korea land base
-  el('path', { d: landPath, fill: '#060d06' }, svg);
-  // Subtle coastal glow
-  el('path', { d: landPath, fill: 'none', stroke: '#1a5080', 'stroke-width': '1.5', opacity: '0.5' }, svg);
-  // Inner terrain hint — very faint lighter areas
-  el('path', { d: landPath, fill: 'rgba(20,40,20,0.5)', 'clip-path': 'inset(0)' }, svg);
+  // Draw South Korea
+  el('path',{d:smoothPath(SK), fill:'#060e06'},svg);
+  // Coastal sea glow
+  el('path',{d:smoothPath(SK), fill:'none', stroke:'#1a5888', 'stroke-width':'1.8', opacity:'0.6'},svg);
 
-  // Jeju Island
-  el('ellipse', { cx: 648, cy: 462, rx: 26, ry: 14, fill: '#060c06', stroke: '#1a5080', 'stroke-width': '1', 'stroke-opacity': '0.4' }, svg);
+  // DMZ marker line
+  const dmzPts = [[38.30,124.55],[37.84,126.72],[37.97,127.02],[38.62,128.52]].map(([a,b])=>ll(a,b));
+  el('path',{d:`M ${dmzPts.map(p=>p.join(',')).join(' L ')}`,fill:'none',stroke:'#304848','stroke-width':'0.7','stroke-dasharray':'4,3',opacity:'0.5'},svg);
 
-  // === CITY LIGHT HALOS (diffuse, layered) ===
-  const lights = [
-    // [x, y, innerR, outerR, color, coreOpacity]
-    [644, 271, 48, 90, '#ffb050', 0.42],  // Seoul — brightest
-    [616, 280, 22, 45, '#ffaa45', 0.28],  // Incheon
-    [748, 407, 30, 58, '#ffc060', 0.34],  // Busan
-    [724, 353, 18, 36, '#ffb040', 0.22],  // Daegu
-    [666, 321, 16, 32, '#ffaa40', 0.20],  // Daejeon
-    [634, 388, 16, 30, '#ffaa40', 0.19],  // Gwangju
-    [744, 376, 13, 26, '#ffb040', 0.18],  // Gyeongju
-    [667, 415, 12, 24, '#ffa030', 0.17],  // Yeosu
-    [647, 462, 12, 22, '#ffb040', 0.20],  // Jeju
-    [700, 303, 11, 22, '#ffa830', 0.16],  // Andong
-  ];
+  // Jeju Island (33.49°N 126.53°E)
+  const [jx,jy] = ll(33.49,126.53);
+  el('ellipse',{cx:jx,cy:jy,rx:24,ry:13,fill:'#060c06',stroke:'#1a5888','stroke-width':'1.2','stroke-opacity':'0.5'},svg);
 
-  lights.forEach(([x, y, r1, r2, c, op], i) => {
-    const id = `lg${i}`;
-    const g = el('radialGradient', { id, cx: '50%', cy: '50%', r: '50%' }, defs);
-    el('stop', { offset: '0%', 'stop-color': c, 'stop-opacity': op.toString() }, g);
-    el('stop', { offset: '45%', 'stop-color': c, 'stop-opacity': (op * 0.4).toFixed(2) }, g);
-    el('stop', { offset: '100%', 'stop-color': c, 'stop-opacity': '0' }, g);
-    // Outer halo
-    el('circle', { cx: x, cy: y, r: r2, fill: `url(#${id})` }, svg);
-    // Inner bright core
-    const id2 = `lg${i}c`;
-    const g2 = el('radialGradient', { id: id2, cx: '50%', cy: '50%', r: '50%' }, defs);
-    el('stop', { offset: '0%', 'stop-color': '#fff8e0', 'stop-opacity': (op * 1.5 > 1 ? 1 : op * 1.5).toFixed(2) }, g2);
-    el('stop', { offset: '100%', 'stop-color': c, 'stop-opacity': '0' }, g2);
-    el('circle', { cx: x, cy: y, r: r1 * 0.45, fill: `url(#${id2})` }, svg);
+  // Geoje, Namhae hint islands
+  [[34.88,128.60],[34.72,128.04]].forEach(([a,b])=>{
+    const [ix,iy]=ll(a,b);
+    el('ellipse',{cx:ix,cy:iy,rx:7,ry:4,fill:'#050a05',stroke:'#1a4868','stroke-width':'0.6','stroke-opacity':'0.35'},svg);
   });
 
-  // === INTERACTIVE CITY MARKERS ===
-  const cities = [
-    { name: 'Seoul',    kr: '서울', x: 644, y: 271, color: '#ff6b6b', r: 5,   right: true  },
-    { name: 'Busan',    kr: '부산', x: 748, y: 407, color: '#74b9ff', r: 4,   right: false },
-    { name: 'Incheon',  kr: '인천', x: 616, y: 280, color: '#55efc4', r: 3.5, right: false },
-    { name: 'Gyeongju', kr: '경주', x: 744, y: 376, color: '#fdcb6e', r: 3,   right: false },
-    { name: 'Jeonju',   kr: '전주', x: 637, y: 389, color: '#a29bfe', r: 3,   right: true  },
-    { name: 'Jeju',     kr: '제주', x: 647, y: 462, color: '#00cec9', r: 3.5, right: true  },
-    { name: 'Andong',   kr: '안동', x: 700, y: 303, color: '#fd79a8', r: 3,   right: false },
-    { name: 'Yeosu',    kr: '여수', x: 667, y: 415, color: '#81ecec', r: 3,   right: true  },
+  // === CITY LIGHT HALOS ===
+  // [lat, lng, outerR, innerCoreR, color, opacity]
+  const LIGHTS = [
+    [37.57,126.97, 88,38,'#ffb050',0.44], // Seoul
+    [37.46,126.70, 40,18,'#ffaa45',0.30], // Incheon
+    [37.28,127.01, 26,11,'#ffaa40',0.20], // Suwon
+    [35.18,129.07, 58,26,'#ffc055',0.36], // Busan
+    [35.87,128.60, 38,17,'#ffb040',0.24], // Daegu
+    [36.35,127.38, 30,14,'#ffaa40',0.22], // Daejeon
+    [35.16,126.85, 28,13,'#ffaa40',0.20], // Gwangju
+    [35.54,129.31, 26,12,'#ffb040',0.20], // Ulsan
+    [35.84,129.21, 18, 8,'#ffb040',0.17], // Gyeongju
+    [35.82,127.15, 20, 9,'#ffaa38',0.18], // Jeonju
+    [36.57,128.73, 14, 6,'#ffa830',0.15], // Andong
+    [34.76,127.66, 14, 6,'#ffa030',0.16], // Yeosu
+    [33.50,126.53, 17, 7,'#ffb040',0.20], // Jeju
+    [35.23,128.68, 18, 8,'#ffaa38',0.17], // Changwon
   ];
 
-  cities.forEach(city => {
-    const g = el('g', { style: 'cursor:pointer', class: 'city-dot' }, svg);
+  LIGHTS.forEach(([lat,lng,r2,r1,c,op],i)=>{
+    const [lx,ly]=ll(lat,lng);
+    const id=`lg${i}`, id2=`lc${i}`;
+    const g=el('radialGradient',{id,cx:'50%',cy:'50%',r:'50%'},defs);
+    el('stop',{offset:'0%','stop-color':c,'stop-opacity':op.toFixed(2)},g);
+    el('stop',{offset:'50%','stop-color':c,'stop-opacity':(op*0.3).toFixed(2)},g);
+    el('stop',{offset:'100%','stop-color':c,'stop-opacity':'0'},g);
+    el('circle',{cx:lx,cy:ly,r:r2,fill:`url(#${id})`},svg);
+    const g2=el('radialGradient',{id:id2,cx:'50%',cy:'50%',r:'50%'},defs);
+    el('stop',{offset:'0%','stop-color':'#fff8e8','stop-opacity':Math.min(1,op*1.7).toFixed(2)},g2);
+    el('stop',{offset:'100%','stop-color':c,'stop-opacity':'0'},g2);
+    el('circle',{cx:lx,cy:ly,r:r1*0.55,fill:`url(#${id2})`},svg);
+  });
 
-    // Pulse ring (animated via CSS)
-    el('circle', {
-      cx: city.x, cy: city.y, r: city.r * 2.2,
-      fill: 'none', stroke: city.color, 'stroke-width': '1.2',
-      class: 'city-pulse', opacity: '0.7'
-    }, g);
-    // Dot
-    el('circle', { cx: city.x, cy: city.y, r: city.r, fill: city.color, filter: 'url(#glow)' }, g);
-    el('circle', { cx: city.x, cy: city.y, r: city.r * 0.38, fill: '#fff8f0' }, g);
+  // === ZOOM / PAN STATE ===
+  let zoom=1, panX=0, panY=0, isDrag=false, dragX=0, dragY=0;
+  const detailLayer = el('g',{id:'detailLayer',opacity:'0'},svg);
 
-    // Tooltip
-    const lx = city.right ? city.x + 10 : city.x - 92;
-    const tip = el('g', { class: 'city-tip', opacity: '0', style: 'pointer-events:none' }, g);
-    el('rect', { x: lx, y: city.y - 18, width: 82, height: 28, rx: 6,
-      fill: 'rgba(0,5,20,0.82)', stroke: city.color, 'stroke-width': '0.8' }, tip);
-    const te = el('text', { x: lx + 8, y: city.y - 5, fill: '#fff', 'font-size': '10',
-      'font-weight': '700', 'font-family': 'Inter,sans-serif' }, tip);
-    te.textContent = city.name;
-    const tk = el('text', { x: lx + 8, y: city.y + 6, fill: city.color, 'font-size': '9',
-      'font-family': 'Inter,sans-serif' }, tip);
-    tk.textContent = city.kr;
+  function applyView() {
+    const vw=W/zoom, vh=H/zoom;
+    svg.setAttribute('viewBox',`${W/2-vw/2-panX} ${H/2-vh/2-panY} ${vw} ${vh}`);
+    const det = zoom>1.9 ? Math.min(1,(zoom-1.9)*1.8).toFixed(2) : '0';
+    detailLayer.setAttribute('opacity', det);
+    svg.style.cursor = isDrag ? 'grabbing' : (zoom>1 ? 'grab' : 'grab');
+  }
 
-    g.addEventListener('mouseenter', () => tip.setAttribute('opacity', '1'));
-    g.addEventListener('mouseleave', () => tip.setAttribute('opacity', '0'));
-    g.addEventListener('click', () => {
-      document.querySelectorAll('.city-pill').forEach(p => p.classList.remove('active'));
+  // Zoom buttons
+  const zCtrl = el('g',{class:'zoom-ctrl'},svg);
+  [['+',20,0.5],['−',56,-0.5],['⌂',92,null]].forEach(([lbl,dy,dz])=>{
+    const bg=el('rect',{x:W-48,y:dy,width:34,height:32,rx:8,fill:'rgba(255,255,255,0.1)',stroke:'rgba(255,255,255,0.18)','stroke-width':'1'},zCtrl);
+    const t=el('text',{x:W-31,y:dy+20.5,fill:'rgba(255,255,255,0.8)','font-size':lbl==='⌂'?'16':'18','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl);
+    t.textContent=lbl;
+    [bg,t].forEach(e=>e.addEventListener('click',()=>{
+      if(dz===null){zoom=1;panX=0;panY=0;}
+      else zoom=Math.max(1,Math.min(5,zoom+dz));
+      if(zoom<=1){panX=0;panY=0;}
+      applyView();
+    }));
+    [bg,t].forEach(e=>e.style.cursor='pointer');
+  });
+
+  // Mouse wheel zoom
+  mapEl.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const rect=svg.getBoundingClientRect();
+    const mx=(e.clientX-rect.left)/rect.width*W, my=(e.clientY-rect.top)/rect.height*H;
+    const f=e.deltaY<0?1.14:0.88, nz=Math.max(1,Math.min(5,zoom*f));
+    panX+=((mx-W/2)/zoom)*(1-zoom/nz);
+    panY+=((my-H/2)/zoom)*(1-zoom/nz);
+    zoom=nz; if(zoom<=1){panX=0;panY=0;}
+    applyView();
+  },{passive:false});
+
+  // Drag pan
+  mapEl.addEventListener('mousedown',e=>{
+    if(e.target.closest('.city-dot,.zoom-ctrl'))return;
+    isDrag=true; dragX=e.clientX; dragY=e.clientY; svg.style.cursor='grabbing';
+  });
+  window.addEventListener('mousemove',e=>{
+    if(!isDrag)return;
+    const rect=svg.getBoundingClientRect();
+    panX+=(e.clientX-dragX)*(W/rect.width)/zoom;
+    panY+=(e.clientY-dragY)*(H/rect.height)/zoom;
+    dragX=e.clientX; dragY=e.clientY; applyView();
+  });
+  window.addEventListener('mouseup',()=>{isDrag=false;svg.style.cursor='grab';});
+
+  // Touch pinch+drag
+  let lastD=0;
+  mapEl.addEventListener('touchstart',e=>{
+    if(e.touches.length===2) lastD=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    else if(e.touches.length===1){isDrag=true;dragX=e.touches[0].clientX;dragY=e.touches[0].clientY;}
+  },{passive:true});
+  mapEl.addEventListener('touchmove',e=>{
+    if(e.touches.length===2){
+      const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      zoom=Math.max(1,Math.min(5,zoom*(d/lastD))); lastD=d; applyView();
+    } else if(e.touches.length===1&&isDrag){
+      const rect=svg.getBoundingClientRect();
+      panX+=(e.touches[0].clientX-dragX)*(W/rect.width)/zoom;
+      panY+=(e.touches[0].clientY-dragY)*(H/rect.height)/zoom;
+      dragX=e.touches[0].clientX; dragY=e.touches[0].clientY; applyView();
+    }
+  },{passive:true});
+  mapEl.addEventListener('touchend',()=>{isDrag=false;});
+
+  // === CITY MARKERS ===
+  const CITIES_MAP = [
+    {name:'Seoul',  kr:'서울',lat:37.57,lng:126.97,color:'#ff7675',r:5.5},
+    {name:'Busan',  kr:'부산',lat:35.18,lng:129.07,color:'#74b9ff',r:4.5},
+    {name:'Incheon',kr:'인천',lat:37.46,lng:126.70,color:'#55efc4',r:3.5},
+    {name:'Gyeongju',kr:'경주',lat:35.84,lng:129.21,color:'#fdcb6e',r:3},
+    {name:'Jeonju', kr:'전주',lat:35.82,lng:127.15,color:'#a29bfe',r:3},
+    {name:'Jeju',   kr:'제주',lat:33.50,lng:126.53,color:'#00cec9',r:3.5},
+    {name:'Andong', kr:'안동',lat:36.57,lng:128.73,color:'#fd79a8',r:3},
+    {name:'Yeosu',  kr:'여수',lat:34.76,lng:127.66,color:'#81ecec',r:3},
+  ];
+
+  CITIES_MAP.forEach(city=>{
+    const [cx,cy]=ll(city.lat,city.lng);
+    const g=el('g',{class:'city-dot',style:'cursor:pointer'},svg);
+    el('circle',{cx,cy,r:city.r*2.3,fill:'none',stroke:city.color,'stroke-width':'1.2',class:'city-pulse',opacity:'0.7'},g);
+    el('circle',{cx,cy,r:city.r,fill:city.color,filter:'url(#glow)'},g);
+    el('circle',{cx,cy,r:city.r*0.38,fill:'#fffaf0'},g);
+    const lx=cx>800?cx-92:cx+10;
+    const tip=el('g',{class:'city-tip',opacity:'0',style:'pointer-events:none'},g);
+    el('rect',{x:lx,y:cy-19,width:84,height:30,rx:7,fill:'rgba(0,4,18,0.88)',stroke:city.color,'stroke-width':'0.8'},tip);
+    const tn=el('text',{x:lx+8,y:cy-5,fill:'#fff','font-size':'10','font-weight':'700','font-family':'Inter,sans-serif'},tip); tn.textContent=city.name;
+    const tk=el('text',{x:lx+8,y:cy+7,fill:city.color,'font-size':'9','font-family':'Inter,sans-serif'},tip); tk.textContent=city.kr;
+    g.addEventListener('mouseenter',()=>tip.setAttribute('opacity','1'));
+    g.addEventListener('mouseleave',()=>tip.setAttribute('opacity','0'));
+    g.addEventListener('click',()=>{
+      document.querySelectorAll('.city-pill').forEach(p=>p.classList.remove('active'));
       document.querySelector(`.city-pill[data-name="${city.name}"]`)?.classList.add('active');
-      document.getElementById('categories-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Zoom to city
+      const [tx,ty]=ll(city.lat,city.lng);
+      zoom=2.8; panX=tx-W/2; panY=ty-H/2; applyView();
+      setTimeout(()=>document.getElementById('categories-section')?.scrollIntoView({behavior:'smooth',block:'start'}),500);
     });
   });
 
-  mapEl.appendChild(svg);
+  // === DETAIL LAYER — appears when zoomed in (zoom > 1.9) ===
+  const SPOTS = [
+    {name:'Gyeongbokgung',lat:37.577,lng:126.977,e:'🏯'},
+    {name:'N Seoul Tower', lat:37.551,lng:126.988,e:'🗼'},
+    {name:'Myeongdong',   lat:37.563,lng:126.983,e:'🛍️'},
+    {name:'Hongdae',      lat:37.556,lng:126.923,e:'🎵'},
+    {name:'Insadong',     lat:37.574,lng:126.985,e:'🎨'},
+    {name:'Han River',    lat:37.529,lng:126.993,e:'🌊'},
+    {name:'COEX',         lat:37.511,lng:127.059,e:'🏢'},
+    {name:'Haeundae',     lat:35.159,lng:129.161,e:'🏖️'},
+    {name:'Gamcheon',     lat:35.097,lng:129.010,e:'🎨'},
+    {name:'Jagalchi',     lat:35.097,lng:129.030,e:'🦀'},
+    {name:'Hallasan',     lat:33.362,lng:126.529,e:'🌋'},
+    {name:'Seongsan',     lat:33.458,lng:126.942,e:'🌅'},
+    {name:'Bulguksa',     lat:35.790,lng:129.332,e:'⛩️'},
+    {name:'Hanok Village',lat:35.815,lng:127.153,e:'🏘️'},
+    {name:'Andong Hahoe', lat:36.540,lng:128.518,e:'🎎'},
+    {name:'Yeosu Expo',   lat:34.760,lng:127.664,e:'🌉'},
+    {name:'DMZ Tour',     lat:37.950,lng:126.800,e:'🚧'},
+    {name:'Nami Island',  lat:37.790,lng:127.524,e:'🍂'},
+    {name:'Seoraksan',    lat:38.119,lng:128.465,e:'🏔️'},
+  ];
 
-  // City pills
+  SPOTS.forEach(s=>{
+    const [ax,ay]=ll(s.lat,s.lng);
+    const ag=el('g',{},detailLayer);
+    el('circle',{cx:ax,cy:ay,r:5,fill:'rgba(255,210,120,0.18)',stroke:'rgba(255,210,120,0.55)','stroke-width':'0.9'},ag);
+    const t=el('text',{x:ax+7,y:ay+4,fill:'rgba(255,240,200,0.9)','font-size':'7.5','font-family':'Inter,sans-serif','font-weight':'600','paint-order':'stroke','stroke':'rgba(0,0,0,0.6)','stroke-width':'3'},ag);
+    t.textContent=`${s.e} ${s.name}`;
+  });
+
+  // Zoom hint text (fades out after first zoom)
+  const hint = el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.38)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl);
+  hint.textContent='scroll';
+  const hint2 = el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.38)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl);
+  hint2.textContent='to zoom';
+  mapEl.addEventListener('wheel',()=>{hint.remove();hint2.remove();},{once:true,passive:true});
+
+  mapEl.appendChild(svg);
+  mapEl.style.background = '#000204';
+
+  // === CITY PILLS ===
   const pillsEl = document.getElementById('city-pills');
   if (pillsEl) {
-    cities.forEach(city => {
-      const btn = document.createElement('button');
-      btn.className = 'city-pill';
-      btn.dataset.name = city.name;
-      btn.innerHTML = `<span class="pill-dot" style="background:${city.color}"></span>${city.name}<span class="pill-kr"> ${city.kr}</span>`;
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.city-pill').forEach(p => p.classList.remove('active'));
+    CITIES_MAP.forEach(city=>{
+      const btn=document.createElement('button');
+      btn.className='city-pill'; btn.dataset.name=city.name;
+      btn.innerHTML=`<span class="pill-dot" style="background:${city.color}"></span>${city.name}<span class="pill-kr"> ${city.kr}</span>`;
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.city-pill').forEach(p=>p.classList.remove('active'));
         btn.classList.add('active');
-        document.getElementById('categories-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const [tx,ty]=ll(city.lat,city.lng);
+        zoom=2.8; panX=tx-W/2; panY=ty-H/2; applyView();
+        document.getElementById('categories-section')?.scrollIntoView({behavior:'smooth',block:'start'});
       });
       pillsEl.appendChild(btn);
     });
