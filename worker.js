@@ -7,15 +7,16 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-// ====== FREE OPENROUTER MODELS (모두 $0) ======
-// 현재 선택: DeepSeek V4 Flash — 가장 빠르고 컨텍스트 1M, 주간 47B 토큰 무료
-// 대체 모델들 (주석 해제해서 전환 가능):
-const MODEL = 'deepseek/deepseek-chat-v4-flash:free';
-// const MODEL = 'meta-llama/llama-3.3-70b-instruct:free';   // Llama 70B
-// const MODEL = 'openai/gpt-4o-mini:free';                  // GPT-4o mini
-// const MODEL = 'google/gemma-2-27b-it:free';               // Google Gemma 27B
-// const MODEL = 'qwen/qwen3-235b-a22b:free';                // Qwen3 235B
-// const MODEL = 'nvidia/llama-3.1-nemotron-70b-instruct:free'; // NVIDIA Nemotron 70B
+// ====== 미국 기반 무료 OpenRouter 모델 (모두 $0) ======
+// Primary: Meta Llama 3.3 70B — Meta AI (US), 검증된 최고 품질
+const MODEL = 'meta-llama/llama-3.3-70b-instruct:free';
+// 대체 모델 (모두 미국 기업):
+// const MODEL = 'openai/gpt-oss-120b:free';                     // OpenAI (US) — 162B 토큰/주
+// const MODEL = 'openai/gpt-oss-20b:free';                      // OpenAI (US) — 31B 토큰/주
+// const MODEL = 'nvidia/llama-3.1-nemotron-70b-instruct:free';  // NVIDIA (US) — 256K 컨텍스트
+// const MODEL = 'nous/hermes-3-llama-3.1-405b:free';            // Nous Research (US) — 405B
+// const MODEL = 'meta-llama/llama-3.2-3b-instruct:free';        // Meta (US) — 경량/빠름
+// ❌ 제외 (중국): deepseek/*, qwen/*, zhipuai/*, minimax/*
 
 const SYSTEM_PROMPT = `You are "Korea AI Guide" — a friendly expert on South Korea for international visitors.
 Answer concisely in 2-3 short paragraphs max. Use emojis naturally 🍜🇰🇷🚄.
@@ -80,7 +81,7 @@ async function fallbackChat(messages, env) {
         'X-Title': 'KoreaPlus AI Guide',
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.3-70b-instruct:free',
+        model: 'openai/gpt-oss-120b:free',  // OpenAI US — fallback
         max_tokens: 350,
         temperature: 0.7,
         messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
