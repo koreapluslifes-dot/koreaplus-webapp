@@ -30,17 +30,13 @@
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://koreaplus-lifes.com/"},{"@type":"ListItem","position":2,"name":"Korea Guide","item":"https://koreaplus-lifes.com/guide/"}]}
   </script>
 
-  <!-- Leaflet real map (replaces Three.js) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
   <script>
-    window.MAPS_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
+    window.MAPS_KEY = 'REDACTED_MAPS_KEY';
     window.WORKER_URL = 'https://koreaplus-webapp.jeybeeicon.workers.dev';
   </script>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 
@@ -118,6 +114,111 @@
     </button>
   </div>
   <div class="content-grid" id="content-grid"></div>
+</section>
+
+<!-- Must-Visit Korea Section -->
+<section class="mv-section" id="must-visit">
+  <div class="mv-header reveal">
+    <div class="mv-eyebrow">꼭 가봐야 할 곳</div>
+    <h2 class="mv-title">Must-Visit <em>Korea</em></h2>
+    <p class="mv-sub">Iconic landmarks and hidden gems — scroll to explore the best of 대한민국</p>
+  </div>
+
+  <div class="mv-grid">
+    <div class="mv-card reveal" style="--mv-delay:0s;--mv-accent:#2C4A8E">
+      <div class="mv-card-top">
+        <span class="mv-emoji">🏯</span>
+        <div class="mv-name-block">
+          <div class="mv-kr">경복궁</div>
+          <h3 class="mv-name">Gyeongbokgung Palace</h3>
+        </div>
+      </div>
+      <p class="mv-desc">Seoul's grandest Joseon-era palace. Witness the royal guard changing ceremony at 10am. Wear hanbok and enter for free — the 600-year-old courtyards are breathtaking.</p>
+      <div class="mv-tags"><span>Seoul · 서울</span><span>⏱ Half day</span><span>🎭 Cultural</span></div>
+    </div>
+
+    <div class="mv-card reveal" style="--mv-delay:0.1s;--mv-accent:#8B3A2A">
+      <div class="mv-card-top">
+        <span class="mv-emoji">🏘️</span>
+        <div class="mv-name-block">
+          <div class="mv-kr">북촌한옥마을</div>
+          <h3 class="mv-name">Bukchon Hanok Village</h3>
+        </div>
+      </div>
+      <p class="mv-desc">600-year-old neighborhood of traditional Korean houses nestled between two royal palaces. Visit at dawn before the crowds — golden light on clay-tiled rooftops is unforgettable.</p>
+      <div class="mv-tags"><span>Seoul · 서울</span><span>⏱ 2 hours</span><span>📸 Photogenic</span></div>
+    </div>
+
+    <div class="mv-card reveal" style="--mv-delay:0.2s;--mv-accent:#2A6B3F">
+      <div class="mv-card-top">
+        <span class="mv-emoji">⛩️</span>
+        <div class="mv-name-block">
+          <div class="mv-kr">해인사</div>
+          <h3 class="mv-name">Haeinsa Temple</h3>
+        </div>
+      </div>
+      <p class="mv-desc">Home to the Tripitaka Koreana — 80,000 hand-carved wooden printing blocks from the 13th century. A UNESCO World Heritage site deep in the Gayasan mountains. Pure serenity.</p>
+      <div class="mv-tags"><span>Hapcheon · 합천</span><span>⏱ Full day</span><span>🏛️ UNESCO</span></div>
+    </div>
+
+    <div class="mv-card reveal" style="--mv-delay:0s;--mv-accent:#C8602A">
+      <div class="mv-card-top">
+        <span class="mv-emoji">🎨</span>
+        <div class="mv-name-block">
+          <div class="mv-kr">감천문화마을</div>
+          <h3 class="mv-name">Gamcheon Culture Village</h3>
+        </div>
+      </div>
+      <p class="mv-desc">Busan's 'Machu Picchu of Korea' — a hillside labyrinth of pastel houses, murals, and hidden sculptures. Born as a refugee settlement, now a world-class cultural attraction.</p>
+      <div class="mv-tags"><span>Busan · 부산</span><span>⏱ 3 hours</span><span>🎨 Art Village</span></div>
+    </div>
+
+    <div class="mv-card reveal" style="--mv-delay:0.1s;--mv-accent:#7A5C1E">
+      <div class="mv-card-top">
+        <span class="mv-emoji">🍂</span>
+        <div class="mv-name-block">
+          <div class="mv-kr">남이섬</div>
+          <h3 class="mv-name">Nami Island</h3>
+        </div>
+      </div>
+      <p class="mv-desc">A half-moon island of stunning tree-lined avenues, made famous by the K-drama 'Winter Sonata'. Magical in autumn foliage, ethereal in winter snow — a photographer's paradise.</p>
+      <div class="mv-tags"><span>Chuncheon · 춘천</span><span>⏱ Half day</span><span>🎬 K-Drama</span></div>
+    </div>
+
+    <div class="mv-card reveal" style="--mv-delay:0.2s;--mv-accent:#1A5C6B">
+      <div class="mv-card-top">
+        <span class="mv-emoji">🌋</span>
+        <div class="mv-name-block">
+          <div class="mv-kr">성산일출봉</div>
+          <h3 class="mv-name">Seongsan Ilchulbong</h3>
+        </div>
+      </div>
+      <p class="mv-desc">A 182m volcanic crater erupting from the sea at Jeju's eastern tip. Wake at 5am and climb before dawn — watching the sun rise over the ocean from the crater rim is life-changing.</p>
+      <div class="mv-tags"><span>Jeju · 제주</span><span>⏱ 2 hours</span><span>🌅 Sunrise</span></div>
+    </div>
+  </div>
+
+  <div class="bucket-section">
+    <div class="bucket-header reveal">
+      <div class="mv-eyebrow" style="color:var(--gold)">버킷리스트</div>
+      <h3 class="bucket-title">Korea Bucket List</h3>
+      <p class="bucket-sub">12 experiences every Korea traveler must have</p>
+    </div>
+    <div class="bucket-grid">
+      <div class="bucket-item reveal" style="--mv-delay:0s"><span class="bucket-num">01</span><span class="bucket-icon">🌅</span><div class="bucket-text"><strong>Watch sunrise at Seongsan Ilchulbong</strong><span class="bucket-kr">성산일출봉 일출</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.05s"><span class="bucket-num">02</span><span class="bucket-icon">👘</span><div class="bucket-text"><strong>Wear hanbok at Gyeongbokgung Palace</strong><span class="bucket-kr">경복궁 한복 체험</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.1s"><span class="bucket-num">03</span><span class="bucket-icon">🥢</span><div class="bucket-text"><strong>Eat tteokbokki at Gwangjang Market</strong><span class="bucket-kr">광장시장 떡볶이</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.15s"><span class="bucket-num">04</span><span class="bucket-icon">🚄</span><div class="bucket-text"><strong>Ride KTX bullet train Seoul ↔ Busan</strong><span class="bucket-kr">KTX 서울-부산</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.2s"><span class="bucket-num">05</span><span class="bucket-icon">🍺</span><div class="bucket-text"><strong>Drink soju at a street pojangmacha</strong><span class="bucket-kr">포장마차 소주</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.25s"><span class="bucket-num">06</span><span class="bucket-icon">🌸</span><div class="bucket-text"><strong>See cherry blossoms in spring Gyeongju</strong><span class="bucket-kr">경주 봄 벚꽃</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0s"><span class="bucket-num">07</span><span class="bucket-icon">🧖</span><div class="bucket-text"><strong>Soak all night in a jjimjilbang sauna</strong><span class="bucket-kr">찜질방 하룻밤</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.05s"><span class="bucket-num">08</span><span class="bucket-icon">🏔️</span><div class="bucket-text"><strong>Hike Seoraksan in autumn foliage</strong><span class="bucket-kr">설악산 단풍 트레킹</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.1s"><span class="bucket-num">09</span><span class="bucket-icon">🎵</span><div class="bucket-text"><strong>Watch live street busking in Hongdae</strong><span class="bucket-kr">홍대 버스킹</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.15s"><span class="bucket-num">10</span><span class="bucket-icon">🦀</span><div class="bucket-text"><strong>Eat fresh sashimi at Jagalchi Fish Market</strong><span class="bucket-kr">자갈치시장 회</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.2s"><span class="bucket-num">11</span><span class="bucket-icon">🌿</span><div class="bucket-text"><strong>Walk through Boseong green tea fields</strong><span class="bucket-kr">보성 녹차밭</span></div></div>
+      <div class="bucket-item reveal" style="--mv-delay:0.25s"><span class="bucket-num">12</span><span class="bucket-icon">🌊</span><div class="bucket-text"><strong>Watch sunset at Yeosu's night sea</strong><span class="bucket-kr">여수 밤바다</span></div></div>
+    </div>
+  </div>
 </section>
 
 <!-- Google Maps Panel (slide-over) -->
@@ -221,6 +322,6 @@
 </footer>
 
 <script src="data.js?v=3"></script>
-<script src="app.js?v=3"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>
