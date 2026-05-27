@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KoreaPlus API Test Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, monospace; background: #0a0e1a; color: #e0e6f0; padding: 20px; min-height: 100vh; }
+  h1 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 12px; color: #556; margin-bottom: 20px; }
+  .config-row { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
+  .config-row input { flex: 1; min-width: 280px; padding: 8px 12px; background: #111827; border: 1px solid #2a3448; border-radius: 8px; color: #e0e6f0; font-size: 12px; font-family: monospace; }
+  .config-row input::placeholder { color: #4a5568; }
+  .btn { padding: 8px 18px; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.15s; }
+  .btn-run-all { background: #2563eb; color: #fff; }
+  .btn-run-all:hover { background: #1d4ed8; }
+  .btn-clear { background: #1f2937; color: #9ca3af; border: 1px solid #2a3448; }
+  .btn-clear:hover { background: #374151; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+  .card { background: #111827; border: 1px solid #1e2a3e; border-radius: 12px; overflow: hidden; }
+  .card-header { padding: 12px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1e2a3e; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: #374151; }
+  .status-dot.pass { background: #10b981; box-shadow: 0 0 6px #10b981; }
+  .status-dot.fail { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+  .status-dot.loading { background: #f59e0b; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .card-title { font-size: 13px; font-weight: 600; color: #e2e8f0; flex: 1; }
+  .card-meta { font-size: 10px; color: #4a5568; }
+  .badge { font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .badge-get  { background: #064e3b; color: #6ee7b7; }
+  .badge-post { background: #1e3a5f; color: #93c5fd; }
+  .card-body { padding: 12px 14px; }
+  .endpoint-url { font-size: 10px; color: #4a5568; font-family: monospace; word-break: break-all; margin-bottom: 8px; }
+  .btn-test { padding: 5px 12px; background: #1e3a5f; color: #93c5fd; border: 1px solid #2a5298; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; transition: all 0.15s; }
+  .btn-test:hover { background: #2563eb; border-color: #2563eb; color: #fff; }
+  .result { margin-top: 10px; }
+  .result-timing { font-size: 10px; color: #6b7280; margin-bottom: 4px; }
+  .result-body { font-size: 10px; font-family: monospace; background: #0d1117; border: 1px solid #1e2a3e; border-radius: 6px; padding: 8px; max-height: 160px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; color: #a8d0f8; line-height: 1.5; }
+  .result-body.err { color: #f87171; }
+  .result-body.cached { border-color: #064e3b; }
+  .summary-bar { display: flex; gap: 16px; margin-bottom: 20px; padding: 12px 16px; background: #111827; border: 1px solid #1e2a3e; border-radius: 10px; font-size: 12px; }
+  .sum-item { display: flex; align-items: center; gap: 6px; }
+  .sum-num { font-weight: 700; font-size: 16px; }
+  .sum-num.pass { color: #10b981; }
+  .sum-num.fail { color: #ef4444; }
+  .sum-num.total { color: #e2e8f0; }
+  .cache-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 9px; padding: 1px 5px; background: #064e3b; color: #6ee7b7; border-radius: 3px; }
+  scrollbar-width: thin;
+</style>
+</head>
+<body>
+<h1>🇰🇷 KoreaPlus API Test Dashboard</h1>
+<p class="subtitle">Tests all Worker API endpoints — enter your deployed Worker URL below</p>
+
+<div class="config-row">
+  <input id="worker-url" type="text" placeholder="https://koreaplus-ai.YOUR_SUBDOMAIN.workers.dev" />
+  <button class="btn btn-run-all" onclick="runAll()">▶ Run All Tests</button>
+  <button class="btn btn-clear" onclick="clearAll()">✕ Clear Results</button>
+</div>
+
+<div class="summary-bar" id="summary" style="display:none">
+  <div class="sum-item"><span class="sum-num total" id="s-total">0</span><span>Total</span></div>
+  <div class="sum-item"><span class="sum-num pass" id="s-pass">0</span><span>Pass</span></div>
+  <div class="sum-item"><span class="sum-num fail" id="s-fail">0</span><span>Fail</span></div>
+  <div class="sum-item" id="s-time-wrap"><span class="sum-num total" id="s-time">—</span><span>Total time</span></div>
+</div>
+
+<div class="grid" id="test-grid"></div>
+
+<script>
+const TESTS = [
+  { id:'health',   method:'GET',  path:'/api/health',    label:'Health Check',       desc:'All secrets configured?' },
+  { id:'weather',  method:'GET',  path:'/api/weather?city=Seoul',     label:'KMA Weather',        desc:'기상청 current conditions' },
+  { id:'forecast', method:'GET',  path:'/api/forecast?city=Busan',    label:'KMA Forecast',       desc:'3-day village forecast' },
+  { id:'aqi',      method:'GET',  path:'/api/airquality?city=Seoul',  label:'AirKorea AQI',       desc:'PM2.5 / PM10 real-time' },
+  { id:'festivals',method:'GET',  path:'/api/festivals?city=Seoul',   label:'TourAPI Festivals',  desc:'Upcoming 90-day events' },
+  { id:'places',   method:'GET',  path:'/api/places?city=Gyeongju&cat=attraction', label:'TourAPI Places', desc:'Area-based attractions' },
+  { id:'nearby',   method:'GET',  path:'/api/nearby?lat=37.57&lng=126.97&radius=3000', label:'TourAPI Nearby', desc:'GPS-based search' },
+  { id:'shows',    method:'GET',  path:'/api/shows?from=20250601&to=20250630&cat=BBBC', label:'KOPIS Shows', desc:'Musical performances' },
+  { id:'boxoffice',method:'GET',  path:'/api/boxoffice?type=week',    label:'KOPIS Box Office',   desc:'Weekly ranking' },
+  { id:'subway',   method:'GET',  path:'/api/subway?station=강남',    label:'Seoul Subway',       desc:'Real-time arrivals' },
+  { id:'bikes',    method:'GET',  path:'/api/bikes?lat=37.55&lng=126.93', label:'따릉이 Bikes',   desc:'Nearby bike stations' },
+  { id:'exchange', method:'GET',  path:'/api/exchange',               label:'Exchange Rates',     desc:'KRW → 15 currencies' },
+  { id:'cities',   method:'GET',  path:'/api/cities',                 label:'City List',          desc:'Supported cities for weather' },
+  { id:'chat',     method:'POST', path:'/chat',     label:'AI Chat',           desc:'OpenRouter Llama 3.2',
+    body: { message: 'What are the top 3 things to do in Seoul for a first-time visitor?' } },
+  { id:'place',    method:'POST', path:'/place',    label:'Google Places',     desc:'Ratings & reviews proxy',
+    body: { query: 'Gyeongbokgung Palace Seoul' } },
+];
+
+function getWorkerUrl() {
+  return document.getElementById('worker-url').value.trim().replace(/\/$/, '');
+}
+
+function buildCard(test) {
+  return `
+    <div class="card" id="card-${test.id}">
+      <div class="card-header">
+        <div class="status-dot" id="dot-${test.id}"></div>
+        <div class="card-title">${test.label}</div>
+        <span class="badge badge-${test.method.toLowerCase()}">${test.method}</span>
+      </div>
+      <div class="card-body">
+        <div class="endpoint-url" id="url-${test.id}">${test.path}</div>
+        <div style="font-size:10px;color:#6b7280;margin-bottom:8px;">${test.desc}</div>
+        <button class="btn-test" onclick="runTest('${test.id}')">Test</button>
+        <div class="result" id="result-${test.id}"></div>
+      </div>
+    </div>`;
+}
+
+document.getElementById('test-grid').innerHTML = TESTS.map(buildCard).join('');
+
+async function runTest(id) {
+  const base = getWorkerUrl();
+  if (!base) { alert('Enter the Worker URL first'); return; }
+
+  const test = TESTS.find(t => t.id === id);
+  if (!test) return;
+
+  const dot = document.getElementById(`dot-${test.id}`);
+  const resultEl = document.getElementById(`result-${test.id}`);
+  const urlEl = document.getElementById(`url-${test.id}`);
+
+  dot.className = 'status-dot loading';
+  resultEl.innerHTML = '';
+  const fullUrl = base + test.path;
+  urlEl.textContent = fullUrl;
+
+  const t0 = performance.now();
+  try {
+    const fetchOpts = test.method === 'POST'
+      ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(test.body) }
+      : { method: 'GET' };
+
+    const res = await fetch(fullUrl, fetchOpts);
+    const ms = Math.round(performance.now() - t0);
+    const text = await res.text();
+    let parsed, pretty, isCached = false;
+    try {
+      parsed = JSON.parse(text);
+      isCached = parsed?.cached === true;
+      // Pretty-print only relevant subset to keep display compact
+      const display = parsed?.data ?? parsed;
+      pretty = JSON.stringify(display, null, 2).slice(0, 800);
+      if (pretty.length === 800) pretty += '\n…';
+    } catch {
+      pretty = text.slice(0, 400);
+    }
+
+    const ok = res.ok && !parsed?.error;
+    dot.className = `status-dot ${ok ? 'pass' : 'fail'}`;
+
+    resultEl.innerHTML = `
+      <div class="result-timing">
+        ${ms}ms &nbsp;·&nbsp; HTTP ${res.status}
+        ${isCached ? '<span class="cache-badge">⚡ cached</span>' : ''}
+        ${parsed?.cacheAgeSeconds ? `<span style="color:#6b7280">(${parsed.cacheAgeSeconds}s old)</span>` : ''}
+      </div>
+      <div class="result-body ${ok ? (isCached ? 'cached' : '') : 'err'}">${escHtml(pretty)}</div>`;
+  } catch (err) {
+    const ms = Math.round(performance.now() - t0);
+    dot.className = 'status-dot fail';
+    resultEl.innerHTML = `
+      <div class="result-timing">${ms}ms &nbsp;·&nbsp; Network error</div>
+      <div class="result-body err">${escHtml(String(err))}</div>`;
+  }
+  updateSummary();
+}
+
+async function runAll() {
+  const base = getWorkerUrl();
+  if (!base) { alert('Enter the Worker URL first'); return; }
+  document.getElementById('summary').style.display = 'flex';
+  updateSummary();
+  // Run in parallel batches of 3 to avoid rate limiting
+  const batchSize = 3;
+  for (let i = 0; i < TESTS.length; i += batchSize) {
+    await Promise.all(TESTS.slice(i, i + batchSize).map(t => runTest(t.id)));
+    await new Promise(r => setTimeout(r, 400));
+  }
+}
+
+function clearAll() {
+  TESTS.forEach(t => {
+    document.getElementById(`dot-${t.id}`).className = 'status-dot';
+    document.getElementById(`result-${t.id}`).innerHTML = '';
+    document.getElementById(`url-${t.id}`).textContent = t.path;
+  });
+  document.getElementById('summary').style.display = 'none';
+}
+
+function updateSummary() {
+  const dots = document.querySelectorAll('.status-dot');
+  let pass = 0, fail = 0;
+  dots.forEach(d => {
+    if (d.classList.contains('pass')) pass++;
+    if (d.classList.contains('fail')) fail++;
+  });
+  document.getElementById('s-total').textContent = String(TESTS.length);
+  document.getElementById('s-pass').textContent = String(pass);
+  document.getElementById('s-fail').textContent = String(fail);
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Auto-populate worker URL from current host if served from same origin
+if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+  const stored = sessionStorage.getItem('kp-worker-url');
+  if (stored) document.getElementById('worker-url').value = stored;
+}
+document.getElementById('worker-url').addEventListener('input', e => {
+  sessionStorage.setItem('kp-worker-url', e.target.value);
+});
+</script>
+</body>
+</html>

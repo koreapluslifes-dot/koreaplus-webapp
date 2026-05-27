@@ -99,16 +99,16 @@ async function handlePlace(body, env) {
   if (!query) return json({ error: 'No query' }, 400);
   if (!env.GOOGLE_PLACES_KEY) return json({ rating: null, reviews: [], _debug: 'no_key' });
 
-  // 1. 장소 검색
+  // 1. 장소 검색 (English results)
   const searchRes = await fetch(
-    `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${env.GOOGLE_PLACES_KEY}`
+    `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&language=en&key=${env.GOOGLE_PLACES_KEY}`
   );
   const searchData = await searchRes.json();
   if (searchData.error_message) return json({ rating: null, reviews: [], _debug: searchData.error_message });
   const place = searchData.results?.[0];
   if (!place) return json({ rating: null, reviews: [], _debug: 'no_place_found', status: searchData.status });
 
-  // 2. 상세 정보 (리뷰 포함)
+  // 2. 상세 정보 (리뷰 포함, English)
   const detailRes = await fetch(
     `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,user_ratings_total,reviews,opening_hours&language=en&key=${env.GOOGLE_PLACES_KEY}`
   );

@@ -15,17 +15,31 @@ function initMap() {
     return [+(580 + (lng - 124.0) * 60).toFixed(1), +(108 + (42.0 - lat) * 48).toFixed(1)];
   }
 
-  // Catmull-Rom → Cubic Bezier (tension 1/7 — less overshoot at sharp capes)
+  // Catmull-Rom → Cubic Bezier (tension 1/9 — minimal overshoot at capes/bays)
   function smoothPath(pts) {
     const n = pts.length;
     let d = `M ${pts[0][0]},${pts[0][1]}`;
     for (let i = 0; i < n; i++) {
       const p0=pts[(i-1+n)%n], p1=pts[i], p2=pts[(i+1)%n], p3=pts[(i+2)%n];
+      const c1x=+(p1[0]+(p2[0]-p0[0])/9).toFixed(1), c1y=+(p1[1]+(p2[1]-p0[1])/9).toFixed(1);
+      const c2x=+(p2[0]-(p3[0]-p1[0])/9).toFixed(1), c2y=+(p2[1]-(p3[1]-p1[1])/9).toFixed(1);
+      d += ` C ${c1x},${c1y} ${c2x},${c2y} ${p2[0]},${p2[1]}`;
+    }
+    return d + ' Z';
+  }
+
+  // Open smooth path (for rivers / mountain lines — not closed)
+  function openPath(pts) {
+    if (pts.length < 2) return '';
+    const n = pts.length;
+    let d = `M ${pts[0][0]},${pts[0][1]}`;
+    for (let i = 0; i < n - 1; i++) {
+      const p0 = pts[Math.max(0,i-1)], p1=pts[i], p2=pts[i+1], p3=pts[Math.min(n-1,i+2)];
       const c1x=+(p1[0]+(p2[0]-p0[0])/7).toFixed(1), c1y=+(p1[1]+(p2[1]-p0[1])/7).toFixed(1);
       const c2x=+(p2[0]-(p3[0]-p1[0])/7).toFixed(1), c2y=+(p2[1]-(p3[1]-p1[1])/7).toFixed(1);
       d += ` C ${c1x},${c1y} ${c2x},${c2y} ${p2[0]},${p2[1]}`;
     }
-    return d + ' Z';
+    return d;
   }
 
   function el(tag, attrs={}, parent) {
@@ -76,7 +90,9 @@ function initMap() {
     [38.39,128.49],[38.21,128.57],[38.07,128.63],[37.92,128.70],
     [37.75,128.92],[37.56,129.09],[37.43,129.17],[37.22,129.31],
     [36.98,129.41],[36.74,129.46],[36.51,129.49],[36.29,129.44],
-    [36.02,129.37],[35.89,129.56],[35.72,129.49],[35.55,129.36],
+    [36.07,129.57],              // Homigot cape (easternmost point!)
+    [35.99,129.37],[35.87,129.54], // Pohang south → SE cape
+    [35.73,129.49],[35.55,129.36],
     [35.35,129.23],[35.13,129.18],[35.04,129.02],
     // South coast: Busan → Geoje → Tongyeong → Goseong bay → Namhae →
     //              Yeosu → Boseong → Goheung → Jangheung → Haenam →
@@ -120,6 +136,18 @@ function initMap() {
   el('path',{d:smoothPath(NK),fill:'#040c04',stroke:'rgba(30,60,30,0.18)','stroke-width':'0.7'},svg);
   el('path',{d:smoothPath(SK),fill:'#060e06'},svg);
   el('path',{d:smoothPath(SK),fill:'none',stroke:'#1a5888','stroke-width':'1.8',opacity:'0.58'},svg);
+
+  // Terrain: Baekdudaegan mountain spine (subtle green ridge)
+  const mtnPts=[[38.12,128.46],[37.79,128.54],[37.10,128.91],[36.54,128.33],[35.84,127.72],[35.34,127.73],[35.08,127.70],[34.86,127.56]].map(([a,b])=>ll(a,b));
+  el('path',{d:openPath(mtnPts),fill:'none',stroke:'rgba(55,90,50,0.42)','stroke-width':'2.5','stroke-linecap':'round','stroke-linejoin':'round',filter:'url(#glow)'},svg);
+
+  // Terrain: Han River
+  const hanPts=[[37.27,127.98],[37.36,127.72],[37.44,127.51],[37.51,127.33],[37.55,127.05],[37.52,126.73]].map(([a,b])=>ll(a,b));
+  el('path',{d:openPath(hanPts),fill:'none',stroke:'rgba(18,58,115,0.52)','stroke-width':'1.3','stroke-linecap':'round'},svg);
+
+  // Terrain: Nakdong River
+  const nakPts=[[36.97,128.63],[36.38,128.70],[35.87,128.60],[35.41,128.68],[35.13,128.87],[35.08,128.98]].map(([a,b])=>ll(a,b));
+  el('path',{d:openPath(nakPts),fill:'none',stroke:'rgba(18,58,115,0.40)','stroke-width':'1.0','stroke-linecap':'round'},svg);
 
   // DMZ dashed line
   const dmzPts=[[37.92,126.62],[38.03,127.14],[38.15,127.74],[38.30,128.25],[38.58,128.41]].map(([a,b])=>ll(a,b));

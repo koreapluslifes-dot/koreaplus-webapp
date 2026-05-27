@@ -1,3 +1,15 @@
 name = "koreaplus-ai"
-main = "worker.js"
+main = "src/worker.ts"
 compatibility_date = "2024-11-01"
+
+# ─── Cloudflare Workers KV (persistent cache across datacenters) ────────────
+# Create namespace: npx wrangler kv:namespace create CACHE_KV
+# Then fill in the id values below and uncomment.
+# [[kv_namespaces]]
+# binding = "CACHE_KV"
+# id = "YOUR_KV_NAMESPACE_ID_HERE"
+# preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID_HERE"
+
+# ─── Cron Triggers (optional: auto-refresh exchange rates daily) ────────────
+# [triggers]
+# crons = ["0 1 * * *"]   # 01:00 UTC daily
