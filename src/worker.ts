@@ -30,7 +30,7 @@ export interface WorkerEnv extends CacheEnv, LLMEnv {
   AIRKOREA_API_KEY:       string;
   SEOUL_OPEN_DATA_KEY:    string;
   EXCHANGE_RATE_KEY:      string;
-  // Phase 3 LLM keys (LLMEnv provides GROQ_API_KEY and GEMINI_API_KEY)
+  // Phase 3: GROQ_API_KEY (primary LLM). Fallback reuses OPENROUTER_API_KEY above.
 }
 
 const CORS = {
