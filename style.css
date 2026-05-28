@@ -39,6 +39,9 @@ button{cursor:pointer;border:none;font-family:inherit}
 }
 .nav-btn:hover{background:rgba(0,0,0,0.04);color:var(--text)}
 .nav-btn.active{background:rgba(214,34,70,0.09);color:var(--red);font-weight:600}
+.nav-btn.hub-link{text-decoration:none;color:var(--text2)}
+.nav-btn.hub-link:hover{color:var(--red)}
+.nav-sep{color:var(--text2);opacity:0.3;padding:0 4px;font-size:12px;align-self:center;flex-shrink:0}
 .ai-btn{
   padding:8px 18px;border-radius:20px;
   background:linear-gradient(135deg,var(--red),#a00e28);

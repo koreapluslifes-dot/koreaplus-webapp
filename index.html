@@ -32,10 +32,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-  <script>
-    window.MAPS_KEY = 'REDACTED_MAPS_KEY';
-    window.WORKER_URL = 'https://koreaplus-webapp.jeybeeicon.workers.dev';
-  </script>
+  <script src="config.js"></script>
   <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
@@ -56,6 +53,11 @@
       <button class="nav-btn" data-cat="kpop">🎤 K-Pop</button>
       <button class="nav-btn" data-cat="shopping">🛍️ Shopping</button>
       <button class="nav-btn" data-cat="history">📜 History</button>
+      <span class="nav-sep">|</span>
+      <a class="nav-btn hub-link" href="festivals.html">📅 Festivals</a>
+      <a class="nav-btn hub-link" href="culture.html">🏛️ Culture</a>
+      <a class="nav-btn hub-link" href="temples.html">🛕 Temples</a>
+      <a class="nav-btn hub-link" href="nightviews.html">🌃 Night Views</a>
     </nav>
     <button class="ai-btn" id="ai-open-btn">💬 AI Guide</button>
   </div>
@@ -80,6 +82,8 @@
     <div class="city-pills" id="city-pills"></div>
   </div>
 </section>
+
+<div id="week-anchor"></div>
 
 <!-- Categories -->
 <section class="categories-section" id="categories-section">
@@ -323,5 +327,9 @@
 
 <script src="data.js?v=3"></script>
 <script src="app.js?v=10"></script>
+<link rel="stylesheet" href="hub-styles.css">
+<script src="modules/api-client.js"></script>
+<script src="modules/dashboard.js"></script>
+<script src="modules/week-section.js"></script>
 </body>
 </html>

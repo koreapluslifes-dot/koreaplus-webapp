@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Buddhist Temples &amp; Temple Stay | KoreaPlus</title>
+<meta name="description" content="Explore Korea's ancient Buddhist temples including the UNESCO 7 Mountain Temples. Find temple stay programs for international visitors.">
+<link rel="stylesheet" href="hub-styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+<nav class="hub-nav">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🗺 Map Guide</a>
+    <a class="hub-nav-link" href="festivals.html">🎪 Festivals</a>
+    <a class="hub-nav-link" href="culture.html">🏛 Culture</a>
+    <a class="hub-nav-link active" href="temples.html">⛩ Temples</a>
+    <a class="hub-nav-link" href="nightviews.html">🌃 Night Views</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">K-Buddhism · Temple Stay · UNESCO</div>
+  <h1>Buddhist Temples &amp; Temple Experiences</h1>
+  <p>From mountain sanctuaries to UNESCO World Heritage sites — discover Korea's 1,700 years of Buddhist heritage.</p>
+</div>
+
+<div class="hub-content" style="padding-top:16px">
+  <div class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-pill active" data-filter="type" data-val="all">All Temples</button>
+    <button class="filter-pill" data-filter="type" data-val="stay">Temple Stay ⛺</button>
+    <button class="filter-pill" data-filter="type" data-val="unesco">UNESCO 🏆</button>
+    <button class="filter-pill" data-filter="type" data-val="english">English Friendly 🇬🇧</button>
+
+    <span class="filter-label" style="margin-left:12px">Region</span>
+    <button class="filter-pill active" data-filter="region" data-val="all">All Korea</button>
+    <button class="filter-pill" data-filter="region" data-val="gyeongnam">경남</button>
+    <button class="filter-pill" data-filter="region" data-val="gyeongbuk">경북</button>
+    <button class="filter-pill" data-filter="region" data-val="jeolla">전라</button>
+    <button class="filter-pill" data-filter="region" data-val="chungcheong">충청</button>
+    <button class="filter-pill" data-filter="region" data-val="gangwon">강원</button>
+
+    <div class="view-toggle">
+      <button class="view-btn active" id="btn-map"  onclick="setView('map')">🗺 Map</button>
+      <button class="view-btn"        id="btn-grid" onclick="setView('grid')">☰ List</button>
+    </div>
+  </div>
+
+  <div id="view-map" class="map-layout">
+    <div class="map-container"><div id="leaflet-map"></div></div>
+    <div class="map-sidebar" id="map-sidebar">
+      <div style="font-size:11px;color:rgba(255,255,255,0.3);padding:8px 0 12px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:8px">
+        🏆 UNESCO 7 Mountain Temples · ⛺ Temple Stay Available
+      </div>
+      <div id="sidebar-list"></div>
+    </div>
+  </div>
+
+  <div id="view-grid" style="display:none">
+    <div class="cards-grid" id="cards-grid"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="hub-modal-backdrop" id="modal-backdrop" onclick="closeModal()">
+  <div class="hub-modal" onclick="event.stopPropagation()">
+    <div class="hub-modal-header">
+      <div id="modal-badges" class="hub-card-badges"></div>
+      <button class="hub-modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="hub-modal-body">
+      <img class="hub-modal-img" id="modal-img" style="display:none" alt="">
+      <div class="hub-modal-title" id="modal-title"></div>
+      <div class="hub-modal-sub"  id="modal-sub"></div>
+      <div class="hub-modal-info" id="modal-info"></div>
+      <div class="hub-modal-desc" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="modules/api-client.js"></script>
+<script src="modules/dashboard.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── Curated temple data (UNESCO + Temple Stay + key sites) ───────────────────
+// Augmented with TourAPI data on load
+const TEMPLES_STATIC = [
+  { id:'t001', nameEn:'Haeinsa Temple',     nameKo:'해인사', lat:35.7958,lng:128.1052, region:'gyeongnam', unesco:true,  stay:true,  english:true,  sect:'Jogye',  founded:'802 CE',  heritage:'Tripitaka Koreana woodblocks (UNESCO)',     desc:'Home to the 81,258 Tripitaka Koreana wooden printing blocks — humanity\'s most complete Buddhist canon, carved in the 13th century.', phone:'055-934-3000' },
+  { id:'t002', nameEn:'Tongdosa Temple',    nameKo:'통도사', lat:35.4894,lng:129.0588, region:'gyeongnam', unesco:true,  stay:true,  english:true,  sect:'Jogye',  founded:'646 CE',  heritage:'No Buddha statue — the altar IS the Buddha', desc:'Korea\'s largest temple complex, founded by Monk Jajang who brought Buddha\'s robes and relics from Tang China. No Buddha statue exists — the altar itself represents the Buddha.', phone:'055-382-7182' },
+  { id:'t003', nameEn:'Beopjusa Temple',    nameKo:'법주사', lat:36.5370,lng:127.8318, region:'chungcheong', unesco:true, stay:true,  english:false, sect:'Jogye',  founded:'553 CE',  heritage:'33m Maitreya bronze Buddha statue',         desc:'Home to Korea\'s tallest bronze Buddha statue (33m) and the only existing 5-story wooden pagoda from the Joseon era. Located in Songnisan National Park.', phone:'043-543-3615' },
+  { id:'t004', nameEn:'Magoksa Temple',     nameKo:'마곡사', lat:36.5280,lng:126.9109, region:'chungcheong', unesco:true, stay:true,  english:true,  sect:'Jogye',  founded:'640 CE',  heritage:'Kim Gu (Korean independence movement) hideout', desc:'Hidden deep in Chungnam forest, this peaceful temple was a sanctuary for Korean independence fighter Kim Gu. The surrounding landscape features five mountains resembling lotus petals.', phone:'041-841-6220' },
+  { id:'t005', nameEn:'Seonamsa Temple',    nameKo:'선암사', lat:35.0236,lng:127.2979, region:'jeolla',     unesco:true, stay:true,  english:false, sect:'Taego',  founded:'875 CE',  heritage:'Cherry blossom bridge (Seungseongyo)',     desc:'One of Korea\'s most beautifully situated temples, famous for its arched stone bridge and springtime cherry blossoms. Unlike most Korean temples, it belongs to the Taego Order — preserving traditions often lost elsewhere.', phone:'061-754-5247' },
+  { id:'t006', nameEn:'Daeheungsa Temple',  nameKo:'대흥사', lat:34.5131,lng:126.6872, region:'jeolla',     unesco:true, stay:true,  english:true,  sect:'Jogye',  founded:'426 CE',  heritage:'13 great Buddhist masters trained here',    desc:'Called "the temple that will never fall in times of strife", Daeheungsa sits at the southern tip of Korea near Cape Kkeutdong. Thirteen great national masters practiced here across dynasties.', phone:'061-534-5502' },
+  { id:'t007', nameEn:'Bongjeongsa Temple', nameKo:'봉정사', lat:36.5333,lng:128.6453, region:'gyeongbuk',  unesco:true, stay:true,  english:false, sect:'Jogye',  founded:'672 CE',  heritage:"Korea's oldest surviving wooden building (Geungnakjeon)", desc:"Houses Korea's oldest surviving wooden structure — the Geungnakjeon Hall, built in 1363. Located on Cheondeungsan Mountain near Andong, this serene temple was blessed by Queen Elizabeth II during her 1999 Korea visit.", phone:'054-853-4181' },
+  { id:'t008', nameEn:'Bulguksa Temple',    nameKo:'불국사', lat:35.7902,lng:129.3319, region:'gyeongbuk',  unesco:false, stay:false, english:true,  sect:'Jogye',  founded:'528 CE',  heritage:'UNESCO World Heritage Site (with Seokguram)', desc:'Korea\'s most visited temple and a UNESCO World Heritage Site alongside the Seokguram Grotto. The stone staircases Cheongungyo and Baegungyo are national treasures representing the path from the mortal to spiritual world.', phone:'054-746-9913' },
+  { id:'t009', nameEn:'Jogyesa Temple',     nameKo:'조계사', lat:37.5742,lng:126.9818, region:'seoul',      unesco:false, stay:false, english:true,  sect:'Jogye',  founded:'1395 CE', heritage:'Headquarter of Korean Buddhism',           desc:'The head temple of the Jogye Order — headquarters of Korean Buddhism — sits in the heart of Seoul near Insadong. Accessible by subway, with Buddhist cultural programs for visitors throughout the year.', phone:'02-768-8600' },
+  { id:'t010', nameEn:'Hwaeomsa Temple',    nameKo:'화엄사', lat:35.2164,lng:127.4950, region:'jeolla',     unesco:false, stay:true,  english:false, sect:'Jogye',  founded:'544 CE',  heritage:'4-lion 3-story stone pagoda',              desc:'Located in Jirisan National Park, Hwaeomsa features the nationally celebrated 4-lion 3-story stone pagoda — unique in Korean Buddhist art. The Gakhwangjeon main hall is the largest wooden Buddhist structure in Korea.', phone:'061-782-7600' },
+  { id:'t011', nameEn:'Woljeongsa Temple',  nameKo:'월정사', lat:37.6967,lng:128.5429, region:'gangwon',    unesco:false, stay:true,  english:true,  sect:'Jogye',  founded:'643 CE',  heritage:'Ancient Fir Tree Forest trail',            desc:'Approach via a mystical 1km trail of 1,000-year-old fir trees. Woljeongsa sits at the base of Odaesan Mountain, and is famous for its 9-story octagonal stone pagoda and rigorous 100-day meditation programs.', phone:'033-339-6800' },
+  { id:'t012', nameEn:'Sinheungsa Temple',  nameKo:'신흥사', lat:38.1206,lng:128.4703, region:'gangwon',    unesco:false, stay:true,  english:false, sect:'Jogye',  founded:'652 CE',  heritage:'Near Ulsanbawi Rock in Seoraksan NP',      desc:'The gateway temple to Seoraksan National Park, framed by dramatic granite peaks. The 14.6m bronze Tongil Taebul outdoor Buddha statue — Korea\'s largest — overlooks the valley and symbolizes reunification of the peninsula.', phone:'033-636-9735' },
+];
+
+let map;
+let state = { type:'all', region:'all', all: TEMPLES_STATIC, filtered: TEMPLES_STATIC };
+
+function initMap() {
+  map = L.map('leaflet-map', { center: [36.0, 127.8], zoom: 7 });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution:'© OpenStreetMap contributors © CARTO', maxZoom:18
+  }).addTo(map);
+}
+
+function applyFilters() {
+  state.filtered = state.all.filter(t => {
+    if (state.type === 'stay'    && !t.stay)    return false;
+    if (state.type === 'unesco'  && !t.unesco)  return false;
+    if (state.type === 'english' && !t.english) return false;
+    if (state.region !== 'all'   && t.region !== state.region) return false;
+    return true;
+  });
+  renderSidebar(state.filtered);
+  renderGrid(state.filtered);
+  addMarkers(state.filtered);
+}
+
+function makeIcon(t) {
+  const bg = t.unesco ? '#fbbf24' : t.stay ? '#fb923c' : '#74b9ff';
+  return L.divIcon({
+    className:'',
+    html:`<div style="background:${bg};color:#000;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,0.5);border:2px solid rgba(255,255,255,0.2)">⛩</div>`,
+    iconSize:[30,30], iconAnchor:[15,15]
+  });
+}
+
+function addMarkers(temples) {
+  map.eachLayer(l => { if (l instanceof L.Marker) l.remove(); });
+  temples.forEach(t => {
+    if (!t.lat||!t.lng) return;
+    const m = L.marker([t.lat,t.lng], { icon:makeIcon(t) }).addTo(map);
+    m.bindPopup(`<strong style="font-size:12px">${t.nameEn}</strong><br><span style="font-size:10px;color:rgba(255,255,255,0.5)">${t.nameKo} · ${t.sect} Order · ${t.founded}</span>
+      ${t.stay ? '<br><span style="font-size:10px;color:#fb923c">⛺ Temple Stay available</span>' : ''}
+      ${t.unesco ? '<br><span style="font-size:10px;color:#fbbf24">🏆 UNESCO Heritage</span>' : ''}`, {maxWidth:220});
+    m.on('click', () => openModal(t));
+  });
+}
+
+function renderSidebar(temples) {
+  document.getElementById('sidebar-list').innerHTML = temples.map(t => `
+    <div class="map-list-item" onclick="onTempleClick('${t.id}')">
+      <div class="map-list-name">${t.nameEn} <span style="font-size:10px;color:rgba(255,255,255,0.35)">${t.nameKo}</span></div>
+      <div class="map-list-sub">${t.sect} Order · Est. ${t.founded}</div>
+      <div class="map-list-tags">
+        ${t.unesco  ? '<span class="badge badge-unesco">UNESCO</span>' : ''}
+        ${t.stay    ? '<span class="badge temple-stay-badge">⛺ Temple Stay</span>' : ''}
+        ${t.english ? '<span class="badge badge-gallery">English</span>' : ''}
+      </div>
+    </div>`).join('');
+}
+
+function renderGrid(temples) {
+  document.getElementById('cards-grid').innerHTML = temples.map(t => `
+    <div class="hub-card" onclick='openModal(${JSON.stringify(t).replace(/'/g,"&#39;")})'>
+      <div class="hub-card-img-placeholder" style="background:linear-gradient(135deg,#0d1f18,#162a10)">⛩️</div>
+      <div class="hub-card-body">
+        <div class="hub-card-badges">
+          ${t.unesco  ? '<span class="badge badge-unesco">🏆 UNESCO</span>' : ''}
+          ${t.stay    ? '<span class="badge temple-stay-badge">⛺ Temple Stay</span>' : ''}
+          ${t.english ? '<span class="badge badge-gallery">🇬🇧 English</span>' : ''}
+        </div>
+        <div class="hub-card-name">${t.nameEn}</div>
+        <div class="hub-card-sub">${t.nameKo} · ${t.sect} Order · Est. ${t.founded}</div>
+        <div class="hub-card-date">🏛 ${t.heritage}</div>
+        <div class="hub-card-desc">${t.desc.slice(0,90)}…</div>
+      </div>
+    </div>`).join('');
+}
+
+function onTempleClick(id) {
+  const t = state.all.find(x => x.id===id);
+  if (!t) return;
+  if (t.lat && t.lng) map.setView([t.lat,t.lng],13);
+  openModal(t);
+}
+
+function openModal(t) {
+  document.getElementById('modal-badges').innerHTML = `${t.unesco ? '<span class="badge badge-unesco">🏆 UNESCO Heritage</span>' : ''} ${t.stay ? '<span class="badge temple-stay-badge">⛺ Temple Stay</span>' : ''} ${t.english ? '<span class="badge badge-gallery">🇬🇧 English</span>' : ''}`;
+  document.getElementById('modal-img').style.display = 'none';
+  document.getElementById('modal-title').textContent = t.nameEn;
+  document.getElementById('modal-sub').textContent   = `${t.nameKo} · ${t.sect} Order · Founded ${t.founded}`;
+  document.getElementById('modal-info').innerHTML = [
+    `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Heritage</div><div class="hub-modal-info-value">${t.heritage}</div></div>`,
+    t.phone ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Phone</div><div class="hub-modal-info-value">📞 ${t.phone}</div></div>` : '',
+    t.stay ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Temple Stay</div><div class="hub-modal-info-value">⛺ Program available — book at templestay.com</div></div>` : '',
+  ].join('');
+  document.getElementById('modal-desc').textContent = t.desc;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function closeModal() { document.getElementById('modal-backdrop').classList.remove('open'); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+document.querySelectorAll('.filter-pill[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const g = btn.dataset.filter;
+    document.querySelectorAll(`.filter-pill[data-filter="${g}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state[g] = btn.dataset.val;
+    applyFilters();
+  });
+});
+
+function setView(v) {
+  document.getElementById('view-map').style.display  = v==='map'  ? '' : 'none';
+  document.getElementById('view-grid').style.display = v==='grid' ? '' : 'none';
+  document.getElementById('btn-map').classList.toggle('active', v==='map');
+  document.getElementById('btn-grid').classList.toggle('active', v==='grid');
+  if (v==='map') setTimeout(() => map.invalidateSize(), 100);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initMap();
+  applyFilters();
+});
+</script>
+</body>
+</html>

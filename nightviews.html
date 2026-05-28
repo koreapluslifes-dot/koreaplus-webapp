@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korea Night Views — Best Spots After Dark | KoreaPlus</title>
+<meta name="description" content="Korea's most spectacular night views — N Seoul Tower, Busan's Gwangan Bridge, Jeju's Seongsan, and more. Auto-calculated sunset times and best visit windows.">
+<link rel="stylesheet" href="hub-styles.css">
+</head>
+<body>
+
+<nav class="hub-nav">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🗺 Map Guide</a>
+    <a class="hub-nav-link" href="festivals.html">🎪 Festivals</a>
+    <a class="hub-nav-link" href="culture.html">🏛 Culture</a>
+    <a class="hub-nav-link" href="temples.html">⛩ Temples</a>
+    <a class="hub-nav-link active" href="nightviews.html">🌃 Night Views</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">Auto sunset times · Live weather</div>
+  <h1>Korea's Best Night Views 🌃</h1>
+  <p>Curated rooftops, bridges, mountains, and coastal viewpoints — with today's sunset time and the optimal window to arrive.</p>
+</div>
+
+<div class="hub-content">
+  <!-- Sunset Banner -->
+  <div class="sunset-banner" id="sunset-banner">
+    <div class="sunset-icon">🌅</div>
+    <div class="sunset-info">
+      <div class="sunset-time" id="sunset-time">Calculating…</div>
+      <div class="sunset-label">Today's sunset in Seoul — best views 30 min after sunset</div>
+    </div>
+    <div id="best-time-badge" class="best-time-badge" style="display:none"></div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span class="filter-label">City</span>
+    <button class="filter-pill active" data-filter="city" data-val="all">All Cities</button>
+    <button class="filter-pill" data-filter="city" data-val="Seoul">Seoul</button>
+    <button class="filter-pill" data-filter="city" data-val="Busan">Busan</button>
+    <button class="filter-pill" data-filter="city" data-val="Jeju">Jeju</button>
+    <button class="filter-pill" data-filter="city" data-val="Incheon">Incheon</button>
+
+    <span class="filter-label" style="margin-left:12px">Type</span>
+    <button class="filter-pill active" data-filter="type" data-val="all">All</button>
+    <button class="filter-pill" data-filter="type" data-val="free">Free Access</button>
+    <button class="filter-pill" data-filter="type" data-val="transport">Subway Access</button>
+  </div>
+
+  <div class="cards-grid" id="night-grid"></div>
+</div>
+
+<!-- Modal -->
+<div class="hub-modal-backdrop" id="modal-backdrop" onclick="closeModal()">
+  <div class="hub-modal" onclick="event.stopPropagation()">
+    <div class="hub-modal-header">
+      <div id="modal-badges" class="hub-card-badges"></div>
+      <button class="hub-modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="hub-modal-body">
+      <div class="hub-modal-title" id="modal-title"></div>
+      <div class="hub-modal-sub"  id="modal-sub"></div>
+      <div class="hub-modal-info" id="modal-info"></div>
+      <div class="hub-modal-desc" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="modules/api-client.js"></script>
+<script src="modules/dashboard.js"></script>
+<script>
+// ── Sunset calculation (astronomical formula, no API needed) ────────────────
+function getSunsetKST(lat, lng, date) {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff  = date - start;
+  const n     = Math.floor(diff / 86400000);
+  const lngHour = lng / 15;
+  const t = n + (18 - lngHour) / 24;
+  const M = 0.9856 * t - 3.289;
+  let L = M + 1.916 * Math.sin(M * Math.PI/180) + 0.020 * Math.sin(2 * M * Math.PI/180) + 282.634;
+  L = ((L % 360) + 360) % 360;
+  let RA = Math.atan(0.91764 * Math.tan(L * Math.PI/180)) * 180/Math.PI;
+  RA = ((RA % 360) + 360) % 360;
+  const Lq = Math.floor(L/90)*90;
+  const RAq = Math.floor(RA/90)*90;
+  const RA2 = (RA + (Lq - RAq)) / 15;
+  const sinDec = 0.39782 * Math.sin(L * Math.PI/180);
+  const cosDec = Math.cos(Math.asin(sinDec));
+  const cosH = (Math.cos(90.833*Math.PI/180) - sinDec * Math.sin(lat*Math.PI/180)) / (cosDec * Math.cos(lat*Math.PI/180));
+  if (cosH > 1 || cosH < -1) return null;
+  const H = (180 - Math.acos(cosH)*180/Math.PI) / 15;
+  const T = H + RA2 - 0.06571*t - 6.622;
+  const UT = ((T - lng/15) % 24 + 24) % 24;
+  const KST = (UT + 9) % 24;
+  return KST; // decimal hours in KST
+}
+
+function fmtHour(h) {
+  const hh = Math.floor(h);
+  const mm = Math.round((h - hh) * 60);
+  const ampm = hh >= 12 ? 'PM' : 'AM';
+  const disp = hh > 12 ? hh - 12 : hh;
+  return `${disp}:${String(mm).padStart(2,'0')} ${ampm}`;
+}
+
+function initSunset() {
+  const now = new Date();
+  const kstNow = new Date(Date.now() + 9*3600_000);
+  const sunsetH = getSunsetKST(37.57, 126.97, kstNow);
+  if (sunsetH !== null) {
+    const best = sunsetH + 0.5;
+    document.getElementById('sunset-time').textContent = `Sunset: ${fmtHour(sunsetH)} KST`;
+    const badge = document.getElementById('best-time-badge');
+    badge.style.display = '';
+    badge.textContent = `Best from ${fmtHour(best)}`;
+    // Check if we're in the golden hour right now
+    const kstH = (now.getUTCHours() + 9) % 24 + now.getUTCMinutes()/60;
+    if (kstH >= sunsetH - 0.5 && kstH <= sunsetH + 1.5) {
+      document.getElementById('sunset-banner').style.border = '1px solid rgba(249,115,22,0.5)';
+      document.getElementById('sunset-banner').style.background = 'linear-gradient(90deg,rgba(249,115,22,0.18),rgba(251,191,36,0.10))';
+      badge.textContent = '🌟 Golden Hour NOW!';
+    }
+  }
+}
+
+// ── Night view spots data ────────────────────────────────────────────────────
+const SPOTS = [
+  // Seoul
+  { id:'nv01', city:'Seoul', nameEn:'N Seoul Tower (Namsan)', nameKo:'N서울타워', lat:37.5512,lng:126.9882, type:'paid',   transport:true,  bestTime:'After sunset',            desc:"Seoul's most iconic viewpoint — 236m tower atop 262m Namsan Mountain gives a 360° panorama of the city lights. Take the cable car or hike 20 min from the base.", transit:'Cable car from Myeongdong (Line 4)', hours:'10:00 AM – 11:00 PM', emoji:'🗼', safety:5 },
+  { id:'nv02', city:'Seoul', nameEn:'Bukhansan Peak',          nameKo:'북한산',   lat:37.6595,lng:126.9770, type:'free',   transport:false, bestTime:'Full moon nights',         desc:'Night hiking to Insubong or Baegundae peak rewards with a sea of lights stretching to the horizon. A permit is required for summit trails.', transit:'Bus from Ui Station (Line 4)', hours:'24hr (trails close seasonally)', emoji:'⛰', safety:3 },
+  { id:'nv03', city:'Seoul', nameEn:'Lotte World Tower Sky100',nameKo:'롯데월드타워', lat:37.5125,lng:127.1025, type:'paid', transport:true,  bestTime:'30 min after sunset',     desc:'Korea\'s tallest building (555m) offers a transparent glass floor observatory at the 100th floor — not for the faint-hearted. Night views extend 80km on clear days.', transit:'Jamsil Station (Line 2/8)', hours:'10:00 AM – 11:00 PM', emoji:'🏙', safety:5 },
+  { id:'nv04', city:'Seoul', nameEn:'Seoullo 7017 Skygarden',  nameKo:'서울로7017',lat:37.5529,lng:126.9708, type:'free',   transport:true,  bestTime:'Anytime after dark',      desc:'A former highway overpass transformed into an elevated garden-walkway through Seoul Station. At night, it glows with seasonal light installations and frames views of Seoul Station.', transit:'Seoul Station (Line 1/4)', hours:'24hr', emoji:'🌿', safety:5 },
+  { id:'nv05', city:'Seoul', nameEn:'Inwangsan Sunset Bench',  nameKo:'인왕산',   lat:37.5858,lng:126.9620, type:'free',   transport:false, bestTime:'Sunset + 45 min',          desc:'The famous Instagram "sunset bench" — locals gather here 30 min before sunset for the best views over the old city walls toward the palace district.', transit:'Dongnimmun Station (Line 3), 30 min hike', hours:'Sunrise to sunset', emoji:'🌄', safety:4 },
+  { id:'nv06', city:'Seoul', nameEn:'Hangang Park Ttukseom',   nameKo:'뚝섬한강공원',lat:37.5330,lng:127.0659, type:'free', transport:true,  bestTime:'After 8 PM',               desc:'The best Han River night picnic spot — float lights from 63 Building across the river, bridges illuminated, and the energy of Seoul after dark.', transit:'Ttukseom Station (Line 2)', hours:'24hr', emoji:'🌉', safety:5 },
+  // Busan
+  { id:'nv07', city:'Busan', nameEn:'Gwangan Bridge Night',    nameKo:'광안대교',  lat:35.1491,lng:129.1192, type:'free',  transport:true,  bestTime:'After 8 PM',               desc:'Busan\'s twin-span cable-stayed bridge comes alive with color-changing LED lights after dark. Best viewed from Gwangalli Beach — bring a snack and sit on the sand.', transit:'Gwangalli Station (Line 2)', hours:'24hr', emoji:'🌉', safety:5 },
+  { id:'nv08', city:'Busan', nameEn:'Gamcheon Culture Village', nameKo:'감천문화마을',lat:35.0972,lng:129.0106, type:'free', transport:true,  bestTime:'Dusk until 10 PM',         desc:'The "Santorini of Korea" — pastel-colored houses cascade down a steep hillside. At dusk, lanterns illuminate the alleys and the stepped rooftops glow orange.', transit:'Toseong Station (Line 1) + bus', hours:'Alleys 24hr; shops close ~10 PM', emoji:'🎨', safety:4 },
+  { id:'nv09', city:'Busan', nameEn:'Haedong Yonggungsa at Night',nameKo:'해동용궁사',lat:35.1852,lng:129.2237, type:'free', transport:false, bestTime:'Monthly full moon',         desc:'Korea\'s only seaside Buddhist temple. On full moon nights, the sea-cliffs are lit by temple lanterns and the sound of crashing waves creates an otherworldly atmosphere.', transit:'Bus from Haedong Station area', hours:'Open all night on Buddha\'s Birthday & full moon', emoji:'⛩', safety:4 },
+  // Jeju
+  { id:'nv10', city:'Jeju',  nameEn:'Seongsan Ilchulbong',     nameKo:'성산일출봉', lat:33.4587,lng:126.9420, type:'paid', transport:false, bestTime:'Pre-dawn (4 AM arrive)',   desc:'Korea\'s most famous sunrise spot — climb the UNESCO crater before dawn for first light over the Pacific Ocean. Arrive by 5 AM for the peak sunrise experience.', transit:'Bus 201 from Jeju City (2hr)', hours:'7:00 AM – 9:00 PM (check season)', emoji:'🌋', safety:5 },
+  { id:'nv11', city:'Jeju',  nameEn:'Udo Island Stargazing',   nameKo:'우도',       lat:33.5024,lng:126.9517, type:'free', transport:false, bestTime:'Moonless nights',            desc:'The tiny island of Udo off Jeju\'s coast has almost zero light pollution. Rent a scooter, find the east coast cliffs, and lie on volcanic rock under the Milky Way.', transit:'Ferry from Seongsan (15 min)', hours:'Ferry until 6 PM; island 24hr', emoji:'🌌', safety:3 },
+  // Incheon
+  { id:'nv12', city:'Incheon',nameEn:'Incheon Songdo Central Park',nameKo:'송도중앙공원',lat:37.3839,lng:126.6509, type:'free', transport:true, bestTime:'After 7 PM',            desc:'The canal park of Korea\'s futuristic Songdo smart city reflects the glittering towers in its waterways. Water taxis run until 10 PM during summer.', transit:'Incheon Station (Line 1) + bus', hours:'24hr', emoji:'🏙', safety:5 },
+];
+
+let state = { city: 'all', type: 'all' };
+
+function filtered() {
+  return SPOTS.filter(s => {
+    if (state.city !== 'all' && s.city !== state.city) return false;
+    if (state.type === 'free'      && s.type !== 'free')     return false;
+    if (state.type === 'transport' && !s.transport)          return false;
+    return true;
+  });
+}
+
+function renderGrid() {
+  const grid = document.getElementById('night-grid');
+  const spots = filtered();
+  if (!spots.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🌃</div><div class="empty-state-text">No spots match your filters.</div></div>';
+    return;
+  }
+  grid.innerHTML = spots.map(s => `
+    <div class="hub-card" onclick='openModal(${JSON.stringify(s).replace(/'/g,"&#39;")})'>
+      <div class="hub-card-img-placeholder" style="background:linear-gradient(135deg,#050b1f,#0a1530);font-size:40px">${s.emoji}</div>
+      <div class="hub-card-body">
+        <div class="hub-card-badges">
+          <span class="badge ${s.type==='free' ? 'badge-free' : 'badge-paid'}">${s.type==='free' ? 'Free' : 'Paid'}</span>
+          ${s.transport ? '<span class="badge badge-museum">🚇 Transit</span>' : ''}
+          ${'⭐'.repeat(s.safety > 3 ? 1 : 0)} <span style="font-size:10px;color:rgba(255,255,255,0.35)">${s.city}</span>
+        </div>
+        <div class="hub-card-name">${s.nameEn}</div>
+        <div class="hub-card-sub">${s.nameKo}</div>
+        <div class="hub-card-date">🕐 Best: ${s.bestTime}</div>
+        <div class="hub-card-desc">${s.desc.slice(0,90)}…</div>
+      </div>
+      <div class="hub-card-footer">
+        <span>🚇 ${s.transit.slice(0,36)}</span>
+      </div>
+    </div>`).join('');
+}
+
+function openModal(s) {
+  document.getElementById('modal-badges').innerHTML = `<span class="badge ${s.type==='free'?'badge-free':'badge-paid'}">${s.type==='free'?'Free Admission':'Paid Admission'}</span> ${s.transport ? '<span class="badge badge-museum">🚇 By Transit</span>' : ''}`;
+  document.getElementById('modal-title').textContent = s.nameEn;
+  document.getElementById('modal-sub').textContent   = `${s.nameKo} · ${s.city}`;
+  document.getElementById('modal-info').innerHTML = [
+    `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Best Time</div><div class="hub-modal-info-value">🌙 ${s.bestTime}</div></div>`,
+    s.hours ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Hours</div><div class="hub-modal-info-value">🕐 ${s.hours}</div></div>` : '',
+    `<div class="hub-modal-info-item" style="grid-column:1/-1"><div class="hub-modal-info-label">Getting There</div><div class="hub-modal-info-value">🚇 ${s.transit}</div></div>`,
+    `<div class="hub-modal-info-item" style="grid-column:1/-1"><div class="hub-modal-info-label">Safety</div><div class="hub-modal-info-value">${'★'.repeat(s.safety)}${'☆'.repeat(5-s.safety)} (${s.safety}/5)</div></div>`,
+  ].join('');
+  document.getElementById('modal-desc').textContent = s.desc;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function closeModal() { document.getElementById('modal-backdrop').classList.remove('open'); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+document.querySelectorAll('.filter-pill[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const g = btn.dataset.filter;
+    document.querySelectorAll(`.filter-pill[data-filter="${g}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state[g] = btn.dataset.val;
+    renderGrid();
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSunset();
+  renderGrid();
+});
+</script>
+</body>
+</html>

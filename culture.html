@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Museums, Galleries &amp; Cultural Sites in Korea | KoreaPlus</title>
+<meta name="description" content="Explore Korea's museums, art galleries, hanok villages, temples and botanical gardens. Real-time opening hours and admission info.">
+<link rel="stylesheet" href="hub-styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+<nav class="hub-nav">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🗺 Map Guide</a>
+    <a class="hub-nav-link" href="festivals.html">🎪 Festivals</a>
+    <a class="hub-nav-link active" href="culture.html">🏛 Culture</a>
+    <a class="hub-nav-link" href="temples.html">⛩ Temples</a>
+    <a class="hub-nav-link" href="nightviews.html">🌃 Night Views</a>
+  </div>
+</nav>
+
+<div class="hub-hero" style="padding-bottom:16px">
+  <div class="hub-hero-tag">TourAPI · Live Hours</div>
+  <h1>Museums, Galleries &amp; Cultural Sites</h1>
+  <p>Find the best museums, galleries, hanok villages, and botanical gardens across Korea — with real-time opening status.</p>
+</div>
+
+<div class="hub-content" style="padding-top:16px">
+  <div class="filter-bar">
+    <span class="filter-label">City</span>
+    <button class="filter-pill active" data-filter="city" data-val="Seoul">Seoul</button>
+    <button class="filter-pill" data-filter="city" data-val="Busan">Busan</button>
+    <button class="filter-pill" data-filter="city" data-val="Gyeongju">Gyeongju</button>
+    <button class="filter-pill" data-filter="city" data-val="Jeonju">Jeonju</button>
+    <button class="filter-pill" data-filter="city" data-val="Jeju">Jeju</button>
+    <button class="filter-pill" data-filter="city" data-val="Andong">Andong</button>
+
+    <span class="filter-label" style="margin-left:12px">Type</span>
+    <button class="filter-pill active" data-filter="cat" data-val="culture">All Culture</button>
+    <button class="filter-pill" data-filter="cat" data-val="museum">Museums</button>
+    <button class="filter-pill" data-filter="cat" data-val="gallery">Galleries</button>
+    <button class="filter-pill" data-filter="cat" data-val="hanok">Hanok</button>
+    <button class="filter-pill" data-filter="cat" data-val="nature">Nature</button>
+
+    <div class="view-toggle">
+      <button class="view-btn active" id="btn-map"  onclick="setView('map')">🗺 Map</button>
+      <button class="view-btn"        id="btn-grid" onclick="setView('grid')">☰ List</button>
+    </div>
+  </div>
+
+  <!-- Map View -->
+  <div id="view-map" class="map-layout">
+    <div class="map-container">
+      <div id="leaflet-map"></div>
+    </div>
+    <div class="map-sidebar" id="map-sidebar">
+      <div class="loading-grid" style="min-height:200px"><div class="loading-spinner"></div><div class="loading-text">Loading sites…</div></div>
+    </div>
+  </div>
+
+  <!-- Grid View -->
+  <div id="view-grid" style="display:none">
+    <div class="cards-grid" id="cards-grid">
+      <div class="loading-grid"><div class="loading-spinner"></div><div class="loading-text">Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="hub-modal-backdrop" id="modal-backdrop" onclick="closeModal()">
+  <div class="hub-modal" onclick="event.stopPropagation()">
+    <div class="hub-modal-header">
+      <div id="modal-badges" class="hub-card-badges"></div>
+      <button class="hub-modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="hub-modal-body">
+      <img class="hub-modal-img" id="modal-img" style="display:none" alt="">
+      <div class="hub-modal-title" id="modal-title"></div>
+      <div class="hub-modal-sub"  id="modal-sub"></div>
+      <div class="hub-modal-info" id="modal-info"></div>
+      <div class="hub-modal-desc" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="modules/api-client.js"></script>
+<script src="modules/dashboard.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── Map init ────────────────────────────────────────────────────────────────
+let map, markers = [];
+let state = { city: 'Seoul', cat: 'culture', view: 'map', places: [] };
+
+function initMap() {
+  map = L.map('leaflet-map', { center: [37.56, 126.98], zoom: 12, zoomControl: true });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO',
+    maxZoom: 18,
+  }).addTo(map);
+}
+
+const CAT_META = {
+  museum:  { label:'Museum',   emoji:'🏛', color:'#74b9ff' },
+  gallery: { label:'Gallery',  emoji:'🖼', color:'#a78bfa' },
+  hanok:   { label:'Hanok',    emoji:'🏘', color:'#fbbf24' },
+  nature:  { label:'Nature',   emoji:'🌿', color:'#34d399' },
+  culture: { label:'Cultural', emoji:'🏛', color:'#74b9ff' },
+};
+
+function detectCat(place) {
+  const n = (place.nameEn || place.description || '').toLowerCase();
+  if (n.includes('museum'))                    return 'museum';
+  if (n.includes('gallery') || n.includes('art')) return 'gallery';
+  if (n.includes('hanok') || n.includes('folk')) return 'hanok';
+  if (n.includes('garden') || n.includes('park') || n.includes('botanical')) return 'nature';
+  return 'culture';
+}
+
+function isOpenNow(hours) {
+  if (!hours) return null;
+  const now = new Date();
+  const kstHour = (now.getUTCHours() + 9) % 24;
+  // Very simple heuristic: if hours mention typical open range
+  const closeMatch = hours.match(/(\d{1,2})[:\s]?(\d{2})?\s*(pm|PM)/);
+  if (closeMatch) {
+    const closeH = parseInt(closeMatch[1]) + (closeMatch[3] === 'PM' && parseInt(closeMatch[1]) !== 12 ? 12 : 0);
+    return kstHour < closeH;
+  }
+  return null;
+}
+
+function makeIcon(cat) {
+  const m = CAT_META[cat] || CAT_META.culture;
+  return L.divIcon({
+    className: '',
+    html: `<div style="background:${m.color};color:#000;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.5);border:2px solid rgba(255,255,255,0.2)">${m.emoji}</div>`,
+    iconSize: [28,28], iconAnchor: [14,14],
+  });
+}
+
+function clearMarkers() { markers.forEach(m => m.remove()); markers = []; }
+
+function addMarkers(places) {
+  clearMarkers();
+  places.forEach(p => {
+    if (!p.lat || !p.lng) return;
+    const cat  = detectCat(p);
+    const open = isOpenNow(p.hours);
+    const openStr = open === true ? '<span style="color:#34d399">● Open now</span>' : open === false ? '<span style="color:#f87171">● Closed</span>' : '';
+    const m = L.marker([p.lat, p.lng], { icon: makeIcon(cat) }).addTo(map);
+    m.bindPopup(`
+      <strong style="font-size:12px">${p.nameEn || p.nameKo}</strong><br>
+      ${p.address ? `<span style="color:rgba(255,255,255,0.5);font-size:10px">${p.address.slice(0,40)}</span><br>` : ''}
+      ${p.hours ? `<span style="font-size:10px;color:rgba(255,255,255,0.6)">🕐 ${p.hours.slice(0,30)}</span><br>` : ''}
+      ${openStr}
+    `, { maxWidth: 200 });
+    m.on('click', () => { selectSidebarItem(p.id); openModal(p); });
+    markers.push(m);
+  });
+
+  if (places.length) {
+    const latlngs = places.filter(p => p.lat && p.lng).map(p => [p.lat, p.lng]);
+    if (latlngs.length) map.fitBounds(L.latLngBounds(latlngs), { padding: [40,40], maxZoom: 14 });
+  }
+}
+
+function renderSidebar(places) {
+  const sidebar = document.getElementById('map-sidebar');
+  if (!places.length) {
+    sidebar.innerHTML = '<div class="empty-state" style="min-height:200px"><div class="empty-state-icon">🏛</div><div class="empty-state-text">No sites found</div></div>';
+    return;
+  }
+  sidebar.innerHTML = places.map(p => {
+    const cat  = detectCat(p);
+    const open = isOpenNow(p.hours);
+    const openBadge = open === true ? '<span class="badge badge-open">Open</span>' : open === false ? '<span class="badge badge-closed">Closed</span>' : '';
+    const isFree = (p.price||'').toLowerCase().includes('free') || p.price === '0';
+    return `<div class="map-list-item" id="item-${p.id}" onclick="onSidebarClick(${JSON.stringify(p.id)})">
+      <div class="map-list-name">${p.nameEn || p.nameKo}</div>
+      <div class="map-list-sub">${p.address ? p.address.slice(0,36)+'…' : (p.description||'').slice(0,36)}</div>
+      <div class="map-list-tags">
+        <span class="badge badge-museum">${CAT_META[cat]?.label||'Culture'}</span>
+        ${openBadge}
+        ${isFree ? '<span class="badge badge-free">Free</span>' : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderGrid(places) {
+  const grid = document.getElementById('cards-grid');
+  if (!places.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🏛</div><div class="empty-state-text">No sites found.</div></div>';
+    return;
+  }
+  grid.innerHTML = places.map(p => {
+    const cat  = detectCat(p);
+    const open = isOpenNow(p.hours);
+    const isFree = (p.price||'').toLowerCase().includes('free') || p.price==='0';
+    return `<div class="hub-card" onclick='openModal(${JSON.stringify(p).replace(/'/g,"&#39;")})'>
+      ${p.thumbnail ? `<img class="hub-card-img" src="${p.thumbnail}" alt="${p.nameEn||''}" loading="lazy" onerror="this.style.display='none'">` : `<div class="hub-card-img-placeholder">${CAT_META[cat]?.emoji||'🏛'}</div>`}
+      <div class="hub-card-body">
+        <div class="hub-card-badges">
+          <span class="badge badge-museum">${CAT_META[cat]?.label||'Cultural'}</span>
+          ${open===true ? '<span class="badge badge-open">Open Now</span>' : open===false ? '<span class="badge badge-closed">Closed</span>' : ''}
+          ${isFree ? '<span class="badge badge-free">Free</span>' : ''}
+        </div>
+        <div class="hub-card-name">${p.nameEn||p.nameKo}</div>
+        ${p.address ? `<div class="hub-card-sub">📍 ${p.address.slice(0,40)}</div>` : ''}
+        ${p.hours ? `<div class="hub-card-date">🕐 ${p.hours.slice(0,32)}</div>` : ''}
+        <div class="hub-card-desc">${(p.description||'').slice(0,80)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function onSidebarClick(id) {
+  const p = state.places.find(x => x.id === id);
+  if (!p) return;
+  selectSidebarItem(id);
+  if (p.lat && p.lng) map.setView([p.lat, p.lng], 15);
+  openModal(p);
+}
+
+function selectSidebarItem(id) {
+  document.querySelectorAll('.map-list-item').forEach(el => {
+    el.classList.toggle('selected', el.id === `item-${id}`);
+  });
+}
+
+// ── Data Loading ─────────────────────────────────────────────────────────────
+async function loadData() {
+  const sidebar = document.getElementById('map-sidebar');
+  const grid    = document.getElementById('cards-grid');
+  if (sidebar) sidebar.innerHTML = '<div class="loading-grid" style="min-height:200px"><div class="loading-spinner"></div><div class="loading-text">Loading…</div></div>';
+  if (grid)    grid.innerHTML    = '<div class="loading-grid"><div class="loading-spinner"></div><div class="loading-text">Loading…</div></div>';
+
+  try {
+    const result = await window.KPApi.getPlaces({ city: state.city, cat: 'culture' });
+    state.places = (result?.places ?? (Array.isArray(result) ? result : []));
+    addMarkers(state.places);
+    renderSidebar(state.places);
+    renderGrid(state.places);
+  } catch (err) {
+    const msg = `<div class="error-state">⚠️ Failed to load data: ${err.message}</div>`;
+    if (sidebar) sidebar.innerHTML = msg;
+    if (grid)    grid.innerHTML    = msg;
+  }
+}
+
+// ── Filters ──────────────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-pill[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const group = btn.dataset.filter;
+    document.querySelectorAll(`.filter-pill[data-filter="${group}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state[group] = btn.dataset.val;
+    loadData();
+  });
+});
+
+function setView(v) {
+  state.view = v;
+  document.getElementById('view-map').style.display  = v==='map'  ? '' : 'none';
+  document.getElementById('view-grid').style.display = v==='grid' ? '' : 'none';
+  document.getElementById('btn-map').classList.toggle('active', v==='map');
+  document.getElementById('btn-grid').classList.toggle('active', v==='grid');
+  if (v==='map') setTimeout(() => map.invalidateSize(), 100);
+}
+
+// ── Modal ────────────────────────────────────────────────────────────────────
+function openModal(p) {
+  const cat = detectCat(p);
+  const isFree = (p.price||'').toLowerCase().includes('free') || p.price==='0';
+  const open = isOpenNow(p.hours);
+  document.getElementById('modal-badges').innerHTML = `<span class="badge badge-museum">${CAT_META[cat]?.label||'Cultural'}</span>${isFree ? '<span class="badge badge-free">Free</span>' : ''}${open===true ? '<span class="badge badge-open">Open Now</span>' : ''}`;
+  const imgEl = document.getElementById('modal-img');
+  if (p.image) { imgEl.src=p.image; imgEl.style.display='block'; } else imgEl.style.display='none';
+  document.getElementById('modal-title').textContent = p.nameEn || p.nameKo;
+  document.getElementById('modal-sub').textContent   = p.nameKo || '';
+  document.getElementById('modal-info').innerHTML = [
+    p.hours   ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Hours</div><div class="hub-modal-info-value">🕐 ${p.hours}</div></div>` : '',
+    p.closed  ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Closed</div><div class="hub-modal-info-value">🚫 ${p.closed}</div></div>` : '',
+    p.price   ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Admission</div><div class="hub-modal-info-value">🎟 ${p.price}</div></div>` : '',
+    p.phone   ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Phone</div><div class="hub-modal-info-value">📞 ${p.phone}</div></div>` : '',
+    p.address ? `<div class="hub-modal-info-item" style="grid-column:1/-1"><div class="hub-modal-info-label">Address</div><div class="hub-modal-info-value">📍 ${p.address}</div></div>` : '',
+  ].join('');
+  document.getElementById('modal-desc').textContent = p.description || '';
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function closeModal() { document.getElementById('modal-backdrop').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initMap();
+  loadData();
+});
+</script>
+</body>
+</html>

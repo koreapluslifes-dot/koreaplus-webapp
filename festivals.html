@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korea Festivals Calendar 2025 | KoreaPlus</title>
+<meta name="description" content="Browse upcoming Korea festivals, events and cultural celebrations. Filter by region, month and category.">
+<link rel="stylesheet" href="hub-styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Korea Festivals Calendar","description":"Upcoming festivals in South Korea","url":"https://koreaplus-lifes.com/guide/festivals.html"}</script>
+</head>
+<body>
+
+<nav class="hub-nav">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🗺 Map Guide</a>
+    <a class="hub-nav-link active" href="festivals.html">🎪 Festivals</a>
+    <a class="hub-nav-link" href="culture.html">🏛 Culture</a>
+    <a class="hub-nav-link" href="temples.html">⛩ Temples</a>
+    <a class="hub-nav-link" href="nightviews.html">🌃 Night Views</a>
+    <a class="hub-nav-link" href="api-test.html">🛠 API</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">Auto-updating · TourAPI + KOPIS</div>
+  <h1>Upcoming Festivals &amp; Events</h1>
+  <p>Real-time festival calendar sourced from the Korea Tourism Organization and KOPIS performing arts database.</p>
+</div>
+
+<div class="hub-content">
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span class="filter-label">City</span>
+    <button class="filter-pill active" data-filter="city" data-val="">All Korea</button>
+    <button class="filter-pill" data-filter="city" data-val="Seoul">Seoul</button>
+    <button class="filter-pill" data-filter="city" data-val="Busan">Busan</button>
+    <button class="filter-pill" data-filter="city" data-val="Jeju">Jeju</button>
+    <button class="filter-pill" data-filter="city" data-val="Gyeongju">Gyeongju</button>
+    <button class="filter-pill" data-filter="city" data-val="Jeonju">Jeonju</button>
+
+    <span class="filter-label" style="margin-left:12px">Type</span>
+    <button class="filter-pill active" data-filter="type" data-val="all">All</button>
+    <button class="filter-pill" data-filter="type" data-val="festival">Festivals</button>
+    <button class="filter-pill" data-filter="type" data-val="show">Shows</button>
+
+    <div class="view-toggle">
+      <button class="view-btn active" id="btn-cal" onclick="setView('cal')">📅 Calendar</button>
+      <button class="view-btn" id="btn-list" onclick="setView('list')">☰ List</button>
+    </div>
+  </div>
+
+  <!-- Calendar View -->
+  <div id="view-cal">
+    <div class="cal-nav">
+      <button class="cal-nav-btn" onclick="changeMonth(-1)">← Prev</button>
+      <div class="cal-month-label" id="cal-month-label">—</div>
+      <button class="cal-nav-btn" onclick="changeMonth(1)">Next →</button>
+    </div>
+    <div class="cal-grid" id="cal-grid">
+      <div class="cal-header">Mon</div><div class="cal-header">Tue</div>
+      <div class="cal-header">Wed</div><div class="cal-header">Thu</div>
+      <div class="cal-header">Fri</div><div class="cal-header">Sat</div>
+      <div class="cal-header">Sun</div>
+    </div>
+
+    <!-- Day detail panel -->
+    <div id="day-panel" style="display:none;margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <strong id="day-panel-title" style="font-size:14px;color:#fff"></strong>
+        <button onclick="document.getElementById('day-panel').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:16px">✕</button>
+      </div>
+      <div class="cards-grid" id="day-events-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))"></div>
+    </div>
+  </div>
+
+  <!-- List View -->
+  <div id="view-list" style="display:none">
+    <div class="cards-grid" id="list-grid">
+      <div class="loading-grid"><div class="loading-spinner"></div><div class="loading-text">Loading festivals…</div></div>
+    </div>
+    <div id="load-more-wrap" style="text-align:center;margin-top:24px;display:none">
+      <button id="load-more-btn" onclick="loadMoreList()" class="filter-pill" style="padding:8px 24px;font-size:13px">Load More</button>
+    </div>
+  </div>
+</div>
+
+<!-- Event Detail Modal -->
+<div class="hub-modal-backdrop" id="modal-backdrop" onclick="closeModal()">
+  <div class="hub-modal" onclick="event.stopPropagation()">
+    <div class="hub-modal-header">
+      <div id="modal-badges" class="hub-card-badges"></div>
+      <button class="hub-modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="hub-modal-body">
+      <img class="hub-modal-img" id="modal-img" style="display:none" alt="">
+      <div class="hub-modal-title" id="modal-title"></div>
+      <div class="hub-modal-sub"  id="modal-sub"></div>
+      <div class="hub-modal-info" id="modal-info"></div>
+      <div class="hub-modal-desc" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="modules/api-client.js"></script>
+<script src="modules/dashboard.js"></script>
+<script>
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const SHORT_M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+let state = {
+  view: 'cal',
+  city: '',
+  type: 'all',
+  year: new Date().getFullYear(),
+  month: new Date().getMonth(), // 0-indexed
+  allFestivals: [],
+  allShows: [],
+  listPage: 1,
+  selectedDay: null,
+};
+
+// ── Filters ──────────────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-pill[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const group = btn.dataset.filter;
+    document.querySelectorAll(`.filter-pill[data-filter="${group}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state[group] = btn.dataset.val;
+    state.listPage = 1;
+    renderAll();
+    if (state.view === 'list') loadList();
+  });
+});
+
+function setView(v) {
+  state.view = v;
+  document.getElementById('view-cal').style.display  = v === 'cal'  ? '' : 'none';
+  document.getElementById('view-list').style.display = v === 'list' ? '' : 'none';
+  document.getElementById('btn-cal').classList.toggle('active', v === 'cal');
+  document.getElementById('btn-list').classList.toggle('active', v === 'list');
+  if (v === 'list' && !state.allFestivals.length) loadList();
+}
+
+// ── Calendar ──────────────────────────────────────────────────────────────────
+function changeMonth(delta) {
+  state.month += delta;
+  if (state.month < 0)  { state.month = 11; state.year--; }
+  if (state.month > 11) { state.month = 0;  state.year++; }
+  renderCalendar();
+  fetchMonthData();
+}
+
+function renderCalendar() {
+  document.getElementById('cal-month-label').textContent = `${MONTHS[state.month]} ${state.year}`;
+  const grid  = document.getElementById('cal-grid');
+  // Remove existing day cells (keep 7 headers)
+  while (grid.children.length > 7) grid.removeChild(grid.lastChild);
+
+  const first = new Date(state.year, state.month, 1);
+  const last  = new Date(state.year, state.month + 1, 0);
+  // Monday-first weekday offset (0=Mon, 6=Sun)
+  let startDow = (first.getDay() + 6) % 7;
+
+  // Pad from previous month
+  for (let i = 0; i < startDow; i++) {
+    const prevDate = new Date(state.year, state.month, 1 - (startDow - i));
+    grid.appendChild(makeCalCell(prevDate, true));
+  }
+  const today = new Date();
+  for (let d = 1; d <= last.getDate(); d++) {
+    const date = new Date(state.year, state.month, d);
+    const cell = makeCalCell(date, false);
+    if (date.toDateString() === today.toDateString()) cell.classList.add('today');
+    grid.appendChild(cell);
+  }
+  // Pad to complete grid rows
+  const total = startDow + last.getDate();
+  const rem = total % 7 === 0 ? 0 : 7 - (total % 7);
+  for (let i = 1; i <= rem; i++) {
+    const nextDate = new Date(state.year, state.month + 1, i);
+    grid.appendChild(makeCalCell(nextDate, true));
+  }
+}
+
+function makeCalCell(date, otherMonth) {
+  const cell = document.createElement('div');
+  cell.className = 'cal-day' + (otherMonth ? ' other-month' : '');
+  cell.innerHTML = `<div class="cal-day-num">${date.getDate()}</div><div class="cal-dots" id="dots-${fmtD(date)}"></div>`;
+  cell.addEventListener('click', () => showDayEvents(date));
+  return cell;
+}
+
+function fmtD(d) { return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`; }
+
+function markCalendarEvents() {
+  const events = filtered();
+  // Clear existing dots
+  document.querySelectorAll('.cal-dots').forEach(d => d.innerHTML = '');
+  document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('has-events'));
+
+  events.forEach(ev => {
+    const start = ev.eventStartDate || ev.startDate || '';
+    const end   = ev.eventEndDate   || ev.endDate   || start;
+    if (!start) return;
+    // Add dots for every day in range (cap at 14 days)
+    let cur = parseInt(start), endInt = parseInt(end);
+    let iterations = 0;
+    while (cur <= endInt && iterations++ < 14) {
+      const dots = document.getElementById(`dots-${cur}`);
+      if (dots) {
+        dots.closest('.cal-day').classList.add('has-events');
+        const dot = document.createElement('div');
+        dot.className = 'cal-dot ' + (ev._type === 'show' ? 'cal-dot-show' : 'cal-dot-festival');
+        dots.appendChild(dot);
+      }
+      // Advance date by 1 day
+      const d = new Date(String(cur).slice(0,4), parseInt(String(cur).slice(4,6))-1, parseInt(String(cur).slice(6,8))+1);
+      cur = parseInt(fmtD(d));
+    }
+  });
+}
+
+function showDayEvents(date) {
+  const key = fmtD(date);
+  const panel = document.getElementById('day-panel');
+  const grid  = document.getElementById('day-events-grid');
+  const title = document.getElementById('day-panel-title');
+  const dayEvents = filtered().filter(ev => {
+    const start = ev.eventStartDate || ev.startDate || '';
+    const end   = ev.eventEndDate   || ev.endDate   || start;
+    return start && end && key >= start && key <= end;
+  });
+  if (!dayEvents.length) { panel.style.display='none'; return; }
+  title.textContent = `Events on ${SHORT_M[date.getMonth()]} ${date.getDate()} (${dayEvents.length})`;
+  grid.innerHTML = dayEvents.map(ev => eventCardHtml(ev)).join('');
+  grid.querySelectorAll('.hub-card').forEach((c,i) => c.addEventListener('click', () => openModal(dayEvents[i])));
+  panel.style.display = '';
+  panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+// ── List View ─────────────────────────────────────────────────────────────────
+async function loadList() {
+  const grid = document.getElementById('list-grid');
+  grid.innerHTML = '<div class="loading-grid"><div class="loading-spinner"></div><div class="loading-text">Loading…</div></div>';
+  await fetchMonthData();
+  renderList();
+}
+
+function renderList() {
+  const grid = document.getElementById('list-grid');
+  const items = filtered();
+  if (!items.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎪</div><div class="empty-state-text">No events found for selected filters.</div></div>';
+    return;
+  }
+  grid.innerHTML = items.slice(0, 24).map(ev => eventCardHtml(ev)).join('');
+  grid.querySelectorAll('.hub-card').forEach((c,i) => c.addEventListener('click', () => openModal(items[i])));
+}
+
+function renderAll() {
+  markCalendarEvents();
+  if (state.view === 'list') renderList();
+}
+
+// ── Data Fetching ─────────────────────────────────────────────────────────────
+async function fetchMonthData() {
+  const y = state.year, m = state.month;
+  const from = `${y}${String(m+1).padStart(2,'0')}01`;
+  const last = new Date(y, m+1, 0).getDate();
+  const to   = `${y}${String(m+1).padStart(2,'0')}${last}`;
+  const city = state.city || undefined;
+
+  try {
+    const [festRes, showRes] = await Promise.allSettled([
+      window.KPApi.getFestivals({ from, to, city }),
+      window.KPApi.getShows({ from, to }),
+    ]);
+    if (festRes.status === 'fulfilled') {
+      const raw = festRes.value;
+      state.allFestivals = (raw?.festivals ?? (Array.isArray(raw) ? raw : [])).map(f => ({ ...f, _type:'festival' }));
+    }
+    if (showRes.status === 'fulfilled') {
+      state.allShows = (showRes.value ?? []).map(s => ({ ...s, _type:'show' }));
+    }
+  } catch {}
+  renderAll();
+}
+
+function filtered() {
+  let items = [];
+  if (state.type !== 'show')    items = items.concat(state.allFestivals);
+  if (state.type !== 'festival') items = items.concat(state.allShows);
+  // city filter already applied server-side for festivals; filter shows client-side
+  return items.sort((a,b) => {
+    const da = a.eventStartDate || a.startDate || '';
+    const db = b.eventStartDate || b.startDate || '';
+    return da < db ? -1 : 1;
+  });
+}
+
+// ── Card HTML ─────────────────────────────────────────────────────────────────
+function eventCardHtml(ev) {
+  const name   = ev.nameEn  || ev.title || 'Event';
+  const sub    = ev.nameKo  || ev.venue || '';
+  const date   = KPApi.fmtDateRange(ev.eventStartDate || ev.startDate, ev.eventEndDate || ev.endDate);
+  const loc    = ev.address  ? ev.address.split(' ').slice(0,2).join(' ') : (ev.area || ev.venue || '');
+  const thumb  = ev.thumbnail || ev.image || ev.poster;
+  const isFree = (ev.price || '').toLowerCase().includes('free') || (ev.price || '') === '0';
+  const type   = ev._type === 'show' ? 'show' : 'festival';
+  const typeLabel = ev._type === 'show' ? (ev.category || 'Performance') : 'Festival';
+  return `
+    <div class="hub-card">
+      ${thumb ? `<img class="hub-card-img" src="${thumb}" alt="${name}" loading="lazy" onerror="this.style.display='none'">` : `<div class="hub-card-img-placeholder">🎪</div>`}
+      <div class="hub-card-body">
+        <div class="hub-card-badges">
+          <span class="badge badge-${type}">${typeLabel}</span>
+          ${isFree ? '<span class="badge badge-free">Free</span>' : ''}
+        </div>
+        <div class="hub-card-name">${name}</div>
+        ${sub ? `<div class="hub-card-sub">${sub}</div>` : ''}
+        <div class="hub-card-date">📅 ${date}</div>
+        ${loc ? `<div class="hub-card-desc">📍 ${loc}</div>` : ''}
+      </div>
+    </div>`;
+}
+
+// ── Modal ──────────────────────────────────────────────────────────────────────
+function openModal(ev) {
+  const name  = ev.nameEn || ev.title || 'Event';
+  const img   = ev.image || ev.poster;
+  const date  = KPApi.fmtDateRange(ev.eventStartDate||ev.startDate, ev.eventEndDate||ev.endDate);
+  const isFree = (ev.price||'').toLowerCase().includes('free') || ev.price==='0';
+  const type  = ev._type === 'show' ? 'show' : 'festival';
+
+  document.getElementById('modal-badges').innerHTML = `<span class="badge badge-${type}">${type === 'show' ? (ev.category||'Performance') : 'Festival'}</span>${isFree ? '<span class="badge badge-free">Free</span>' : ''}`;
+  const imgEl = document.getElementById('modal-img');
+  if (img) { imgEl.src=img; imgEl.style.display='block'; } else { imgEl.style.display='none'; }
+  document.getElementById('modal-title').textContent = name;
+  document.getElementById('modal-sub').textContent   = ev.nameKo || ev.venue || '';
+  document.getElementById('modal-info').innerHTML = [
+    date      ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Date</div><div class="hub-modal-info-value">📅 ${date}</div></div>` : '',
+    ev.address||ev.area ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Location</div><div class="hub-modal-info-value">📍 ${ev.address||ev.venue||ev.area}</div></div>` : '',
+    ev.price  ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Admission</div><div class="hub-modal-info-value">${ev.price}</div></div>` : '',
+    ev.hours||ev.playtime ? `<div class="hub-modal-info-item"><div class="hub-modal-info-label">Duration</div><div class="hub-modal-info-value">${ev.hours||ev.playtime}</div></div>` : '',
+  ].join('');
+  document.getElementById('modal-desc').textContent = ev.description || ev.overview || ev.program || '';
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function closeModal() { document.getElementById('modal-backdrop').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderCalendar();
+  fetchMonthData();
+});
+</script>
+</body>
+</html>
