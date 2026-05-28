@@ -1,8 +1,8 @@
 /* KoreaPlus Analytics — GA4 + Microsoft Clarity, consent-gated */
 (function () {
   // ── Config — fill in your real IDs ─────────────────────────────────────────
-  const GA4_ID      = window.KP_GA4_ID      || 'G-XXXXXXXXXX';  // Replace with your GA4 Measurement ID
-  const CLARITY_ID  = window.KP_CLARITY_ID  || 'XXXXXXXXXX';    // Replace with your Clarity Project ID
+  const GA4_ID      = window.KP_GA4_ID      || 'G-FHNPTNFGJK';
+  const CLARITY_ID  = window.KP_CLARITY_ID  || 'wy3z7trikr';
 
   const CONSENT_KEY = 'kp_consent';  // 'accepted' | 'declined' | null
 
