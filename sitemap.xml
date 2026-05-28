@@ -41,6 +41,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- AI Itinerary Builder -->
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/plan.html</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
   <!-- API test (noindex via robots.txt ideally) -->
   <url>
     <loc>https://koreaplus-lifes.com/guide/api-test.html</loc>

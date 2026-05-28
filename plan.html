@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Korea Itinerary Builder 2025 | Plan Your Perfect Korea Trip | KoreaPlus</title>
+  <meta name="description" content="Generate a personalized Korea travel itinerary in seconds with AI. Optimized routes, insider tips, and day-by-day planning for Seoul, Busan, Jeju and more.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/plan.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="plan-styles.css">
+  <script src="config.js"></script>
+</head>
+<body class="plan-page">
+
+<!-- ── Header ──────────────────────────────────────────────────────────────── -->
+<header class="hub-nav">
+  <a class="hub-logo" href="index.html">🇰🇷 <strong>KoreaPlus</strong></a>
+  <nav class="hub-nav-links">
+    <a href="festivals.html">📅 Festivals</a>
+    <a href="culture.html">🏛️ Culture</a>
+    <a href="temples.html">🛕 Temples</a>
+    <a href="nightviews.html">🌃 Night Views</a>
+    <a href="plan.html" class="active">🗺️ Plan Trip</a>
+  </nav>
+</header>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────────── -->
+<div class="plan-hero">
+  <div class="plan-badge">✨ AI-Powered · Route Optimized · Free</div>
+  <h1>Build Your Perfect Korea Itinerary</h1>
+  <p>Answer 5 quick questions — get a day-by-day plan with insider tips, optimized routes, and real-time data.</p>
+</div>
+
+<!-- ── Wizard ───────────────────────────────────────────────────────────────── -->
+<div id="wizard">
+  <!-- Progress -->
+  <div class="wizard-progress">
+    <div class="wp-step active" data-step="1"><div class="wp-dot">1</div><span class="wp-label">Dates</span></div>
+    <div class="wp-step"        data-step="2"><div class="wp-dot">2</div><span class="wp-label">Travelers</span></div>
+    <div class="wp-step"        data-step="3"><div class="wp-dot">3</div><span class="wp-label">Interests</span></div>
+    <div class="wp-step"        data-step="4"><div class="wp-dot">4</div><span class="wp-label">Pace</span></div>
+    <div class="wp-step"        data-step="5"><div class="wp-dot">5</div><span class="wp-label">Budget</span></div>
+  </div>
+
+  <!-- Quick scenarios -->
+  <div class="scenarios-bar">
+    <p>Try an example:</p>
+    <div class="scenario-chips">
+      <button class="scenario-chip" data-scenario="solo-kpop">🎤 Solo K-pop fan, 4 days</button>
+      <button class="scenario-chip" data-scenario="couple-comfort">💑 Honeymoon couple, 7 days</button>
+      <button class="scenario-chip" data-scenario="family-jeju">👨‍👩‍👧 Family + Jeju, 5 days</button>
+      <button class="scenario-chip" data-scenario="vegan-temples">🌿 Vegan solo, temples, 3 days</button>
+      <button class="scenario-chip" data-scenario="friends-food">👥 Friends food+nightlife, 6 days</button>
+    </div>
+  </div>
+
+  <!-- ── Step 1: Travel Basics ─────────────────────────────────────────────── -->
+  <div class="wizard-body">
+    <div class="wizard-step active" data-step="1">
+      <h2 class="step-title">When are you visiting?</h2>
+      <p class="step-sub">Choose your arrival and departure dates, and which airport you'll fly into.</p>
+
+      <div class="date-row">
+        <div class="date-field">
+          <label>Arrival Date</label>
+          <input type="date" id="arrival" name="arrival">
+        </div>
+        <div class="date-field">
+          <label>Departure Date</label>
+          <input type="date" id="departure" name="departure">
+        </div>
+      </div>
+
+      <p class="step-sub" style="margin-bottom:12px">Which airport will you arrive at?</p>
+      <div class="airport-grid">
+        <label class="airport-card selected">
+          <input type="radio" name="airport" value="ICN" checked>
+          <div class="airport-code">ICN</div>
+          <div class="airport-name">Incheon Int'l</div>
+          <div class="airport-sub">Seoul / Incheon</div>
+        </label>
+        <label class="airport-card">
+          <input type="radio" name="airport" value="GMP">
+          <div class="airport-code">GMP</div>
+          <div class="airport-name">Gimpo Airport</div>
+          <div class="airport-sub">Western Seoul</div>
+        </label>
+        <label class="airport-card">
+          <input type="radio" name="airport" value="PUS">
+          <div class="airport-code">PUS</div>
+          <div class="airport-name">Gimhae Int'l</div>
+          <div class="airport-sub">Busan</div>
+        </label>
+        <label class="airport-card">
+          <input type="radio" name="airport" value="CJU">
+          <div class="airport-code">CJU</div>
+          <div class="airport-name">Jeju Airport</div>
+          <div class="airport-sub">Jeju Island</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- ── Step 2: Travelers ─────────────────────────────────────────────── -->
+    <div class="wizard-step" data-step="2">
+      <h2 class="step-title">Who's traveling?</h2>
+      <p class="step-sub">We'll tailor the pace and experiences to your group.</p>
+
+      <div class="opt-grid">
+        <div class="opt-card" data-field="travelers" data-val="solo">
+          <span class="oc-icon">🧳</span>
+          <span class="oc-label">Solo</span>
+          <span class="oc-sub">Just me</span>
+        </div>
+        <div class="opt-card" data-field="travelers" data-val="couple">
+          <span class="oc-icon">💑</span>
+          <span class="oc-label">Couple</span>
+          <span class="oc-sub">2 people</span>
+        </div>
+        <div class="opt-card" data-field="travelers" data-val="family">
+          <span class="oc-icon">👨‍👩‍👧</span>
+          <span class="oc-label">Family</span>
+          <span class="oc-sub">With kids (2–4 ppl)</span>
+        </div>
+        <div class="opt-card" data-field="travelers" data-val="group">
+          <span class="oc-icon">👥</span>
+          <span class="oc-label">Group</span>
+          <span class="oc-sub">5+ friends</span>
+        </div>
+      </div>
+
+      <p class="step-sub" style="margin-bottom:12px">Age groups in your party:</p>
+      <div class="check-grid" id="age-group-grid">
+        <label class="check-chip"><input type="checkbox" value="kids"> 👶 Kids under 12</label>
+        <label class="check-chip"><input type="checkbox" value="teens"> 🎮 Teens 13–17</label>
+        <label class="check-chip selected"><input type="checkbox" value="20s" checked> 🎉 20s–30s</label>
+        <label class="check-chip"><input type="checkbox" value="40s"> 👔 40s–50s</label>
+        <label class="check-chip"><input type="checkbox" value="60plus"> 🧓 60+</label>
+      </div>
+    </div>
+
+    <!-- ── Step 3: Interests ─────────────────────────────────────────────── -->
+    <div class="wizard-step" data-step="3">
+      <h2 class="step-title">What excites you most?</h2>
+      <p class="step-sub">Pick at least one interest — your itinerary will be built around these.</p>
+
+      <div class="interest-grid">
+        <div class="int-chip" data-interest="kpop"><span class="ic-icon">🎤</span><span class="ic-label">K-Pop</span></div>
+        <div class="int-chip" data-interest="kdrama"><span class="ic-icon">🎬</span><span class="ic-label">K-Drama Spots</span></div>
+        <div class="int-chip" data-interest="food"><span class="ic-icon">🍜</span><span class="ic-label">Food</span></div>
+        <div class="int-chip" data-interest="history"><span class="ic-icon">🏯</span><span class="ic-label">History</span></div>
+        <div class="int-chip" data-interest="nature"><span class="ic-icon">🌿</span><span class="ic-label">Nature</span></div>
+        <div class="int-chip" data-interest="shopping"><span class="ic-icon">🛍️</span><span class="ic-label">Shopping</span></div>
+        <div class="int-chip" data-interest="nightlife"><span class="ic-icon">🌃</span><span class="ic-label">Nightlife</span></div>
+        <div class="int-chip" data-interest="wellness"><span class="ic-icon">🧖</span><span class="ic-label">Wellness</span></div>
+        <div class="int-chip" data-interest="temples"><span class="ic-icon">🛕</span><span class="ic-label">Temples</span></div>
+        <div class="int-chip" data-interest="art"><span class="ic-icon">🎨</span><span class="ic-label">Art</span></div>
+      </div>
+    </div>
+
+    <!-- ── Step 4: Pace ──────────────────────────────────────────────────── -->
+    <div class="wizard-step" data-step="4">
+      <h2 class="step-title">How do you like to travel?</h2>
+      <p class="step-sub">This determines how many stops per day — choose what fits your energy level.</p>
+
+      <div class="opt-grid">
+        <div class="opt-card" data-field="pace" data-val="relaxed">
+          <span class="oc-icon">☕</span>
+          <span class="oc-label">Relaxed</span>
+          <span class="oc-sub">~3 spots/day — slow down and soak it all in</span>
+        </div>
+        <div class="opt-card" data-field="pace" data-val="balanced">
+          <span class="oc-icon">🚶</span>
+          <span class="oc-label">Balanced</span>
+          <span class="oc-sub">~5 spots/day — active but not exhausting</span>
+        </div>
+        <div class="opt-card" data-field="pace" data-val="packed">
+          <span class="oc-icon">🏃</span>
+          <span class="oc-label">Packed</span>
+          <span class="oc-sub">7+ spots/day — maximize every minute</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Step 5: Budget + Mode + Special Needs ─────────────────────────── -->
+    <div class="wizard-step" data-step="5">
+      <h2 class="step-title">Budget & preferences</h2>
+      <p class="step-sub">Almost there — set your daily budget and any special requirements.</p>
+
+      <div class="opt-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="opt-card" data-field="budget" data-val="budget">
+          <span class="oc-icon">💰</span>
+          <span class="oc-label">Budget</span>
+          <span class="oc-sub">~$50/day — street food & free attractions</span>
+        </div>
+        <div class="opt-card" data-field="budget" data-val="mid">
+          <span class="oc-icon">💳</span>
+          <span class="oc-label">Mid-Range</span>
+          <span class="oc-sub">~$100/day — mix of restaurants & paid spots</span>
+        </div>
+        <div class="opt-card" data-field="budget" data-val="comfort">
+          <span class="oc-icon">🏨</span>
+          <span class="oc-label">Comfort</span>
+          <span class="oc-sub">~$200/day — good restaurants & nice hotels</span>
+        </div>
+        <div class="opt-card" data-field="budget" data-val="luxury">
+          <span class="oc-icon">💎</span>
+          <span class="oc-label">Luxury</span>
+          <span class="oc-sub">$300+/day — fine dining & 5-star experiences</span>
+        </div>
+      </div>
+
+      <p class="step-sub" style="margin:8px 0 10px">Itinerary style:</p>
+      <div class="mode-toggle">
+        <button id="mode-local"      class="active">🇰🇷 Local Favorites</button>
+        <button id="mode-foreigner"  class="">🌍 Foreigner-Friendly</button>
+      </div>
+
+      <p class="step-sub" style="margin-bottom:10px">Special requirements (optional):</p>
+      <div class="check-grid" id="special-needs-grid">
+        <label class="check-chip"><input type="checkbox" value="vegetarian"> 🥗 Vegetarian</label>
+        <label class="check-chip"><input type="checkbox" value="halal"> ☪️ Halal</label>
+        <label class="check-chip"><input type="checkbox" value="english"> 🗣️ English Required</label>
+        <label class="check-chip"><input type="checkbox" value="wheelchair"> ♿ Wheelchair Access</label>
+      </div>
+    </div>
+  </div><!-- /wizard-body -->
+
+  <!-- Navigation -->
+  <div class="wizard-nav">
+    <button class="btn-prev" id="btn-prev" style="visibility:hidden">← Back</button>
+    <div>
+      <div class="error-msg" id="step-error"></div>
+      <button class="btn-next"     id="btn-next">Next →</button>
+      <button class="btn-generate" id="btn-generate" style="display:none">✨ Generate My Itinerary</button>
+    </div>
+  </div>
+</div><!-- /wizard -->
+
+<!-- ── Loading overlay ─────────────────────────────────────────────────────── -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-steps">
+    <div class="ls-item active" data-step="1"><div class="ls-dot"></div>Searching Korea's top attractions…</div>
+    <div class="ls-item"        data-step="2"><div class="ls-dot"></div>Building your day-by-day plan…</div>
+    <div class="ls-item"        data-step="3"><div class="ls-dot"></div>Optimizing daily routes…</div>
+    <div class="ls-item"        data-step="4"><div class="ls-dot"></div>Writing insider tips & descriptions…</div>
+  </div>
+  <div class="loading-note">This usually takes 20–35 seconds · Free tier: 3 itineraries/day</div>
+</div>
+
+<!-- ── Result page ─────────────────────────────────────────────────────────── -->
+<div id="plan-result">
+  <!-- Banner -->
+  <div class="result-banner">
+    <h2 id="result-title">Your Korea Itinerary</h2>
+    <p id="result-summary"></p>
+    <div class="result-highlights" id="result-highlights"></div>
+    <div class="result-toolbar">
+      <button class="tb-btn" id="btn-new-plan">← New Plan</button>
+      <button class="tb-btn" id="btn-regenerate">🔄 Regenerate</button>
+      <button class="tb-btn" id="btn-toggle-mode">🔀 Switch Mode</button>
+      <button class="tb-btn" id="btn-save">💾 Save</button>
+      <button class="tb-btn" id="btn-pdf">📄 PDF</button>
+      <button class="tb-btn primary" id="btn-share">🔗 Share</button>
+      <button class="tb-btn" id="btn-qr">📱 QR Code</button>
+    </div>
+  </div>
+
+  <!-- Day tabs -->
+  <div class="day-tabs-wrap">
+    <div class="day-tabs" id="day-tabs"></div>
+  </div>
+
+  <!-- Day panels (filled by JS) -->
+  <div id="day-panels"></div>
+</div>
+
+<!-- ── QR modal ────────────────────────────────────────────────────────────── -->
+<div class="qr-modal-backdrop" id="qr-modal">
+  <div class="qr-modal">
+    <h3>Scan to open on your phone</h3>
+    <div id="qr-canvas"></div>
+    <div class="qr-share-url" id="qr-url"></div>
+    <button class="qr-close" onclick="document.getElementById('qr-modal').classList.remove('active')">Close</button>
+  </div>
+</div>
+
+<!-- ── Save toast ──────────────────────────────────────────────────────────── -->
+<div class="save-toast" id="save-toast">✅ Itinerary saved!</div>
+
+<!-- ── Scripts ─────────────────────────────────────────────────────────────── -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="modules/planner.js"></script>
+</body>
+</html>

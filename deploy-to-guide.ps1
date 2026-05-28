@@ -16,12 +16,15 @@ $FILES = @(
     # Phase 2 shared
     "config.js", "hub-styles.css", "sitemap.xml",
     # Hub pages
-    "festivals.html", "culture.html", "temples.html", "nightviews.html", "api-test.html"
+    "festivals.html", "culture.html", "temples.html", "nightviews.html", "api-test.html",
+    # Phase 3
+    "plan.html", "plan-styles.css"
 )
 $MODULE_FILES = @(
     "modules/api-client.js",
     "modules/dashboard.js",
-    "modules/week-section.js"
+    "modules/week-section.js",
+    "modules/planner.js"
 )
 
 Write-Host "Deploying KoreaPlus Guide to $ServerIP..." -ForegroundColor Cyan

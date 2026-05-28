@@ -43,6 +43,8 @@ jobs:
             AIRKOREA_API_KEY
             SEOUL_OPEN_DATA_KEY
             EXCHANGE_RATE_KEY
+            GROQ_API_KEY
+            GEMINI_API_KEY
         env:
           OPENROUTER_API_KEY:    ${{ secrets.OPENROUTER_API_KEY }}
           GOOGLE_PLACES_KEY:     ${{ secrets.GOOGLE_PLACES_KEY }}
@@ -52,3 +54,5 @@ jobs:
           AIRKOREA_API_KEY:      ${{ secrets.AIRKOREA_API_KEY }}
           SEOUL_OPEN_DATA_KEY:   ${{ secrets.SEOUL_OPEN_DATA_KEY }}
           EXCHANGE_RATE_KEY:     ${{ secrets.EXCHANGE_RATE_KEY }}
+          GROQ_API_KEY:          ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY:        ${{ secrets.GEMINI_API_KEY }}

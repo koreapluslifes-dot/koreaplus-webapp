@@ -13,21 +13,24 @@
  */
 
 import { handleApiRoute } from './router.ts';
+import { handlePlanRequest, handleSharePost, handleShareGet } from './handlers/planner.ts';
 import type { CacheEnv } from './cache.ts';
+import type { LLMEnv } from './api/groq.ts';
 
 // ── Worker environment type ───────────────────────────────────────────────────
 
-export interface WorkerEnv extends CacheEnv {
-  // Existing
+export interface WorkerEnv extends CacheEnv, LLMEnv {
+  // Existing chat/places keys
   OPENROUTER_API_KEY: string;
   GOOGLE_PLACES_KEY:  string;
-  // New public API keys
+  // Phase 1 public API keys
   TOUR_API_KEY:           string;
   KOPIS_API_KEY:          string;
   KMA_API_KEY:            string;
   AIRKOREA_API_KEY:       string;
   SEOUL_OPEN_DATA_KEY:    string;
   EXCHANGE_RATE_KEY:      string;
+  // Phase 3 LLM keys (LLMEnv provides GROQ_API_KEY and GEMINI_API_KEY)
 }
 
 const CORS = {
@@ -148,16 +151,34 @@ export default {
       return new Response(null, { status: 204, headers: CORS });
     }
 
-    // ── GET routes (new public API layer) ─────────────────────────────────
+    const url = new URL(request.url);
+    const path = url.pathname.replace(/\/$/, '');
+
+    // ── GET routes ────────────────────────────────────────────────────────
     if (request.method === 'GET') {
+      // Shared itinerary retrieval
+      const shareMatch = path.match(/\/api\/plan\/share\/([a-f0-9]{24})$/);
+      if (shareMatch) return handleShareGet(shareMatch[1], env);
+
       const apiResponse = await handleApiRoute(request, env);
       if (apiResponse) return apiResponse;
       return new Response('Not found', { status: 404, headers: CORS });
     }
 
-    // ── POST routes (existing chatbot + places) ────────────────────────────
+    // ── POST routes ───────────────────────────────────────────────────────
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405, headers: CORS });
+    }
+
+    // Itinerary generation
+    if (path.endsWith('/api/plan') && !path.endsWith('/api/plan/share')) {
+      const clientIP = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? 'unknown';
+      return handlePlanRequest(request, env, clientIP);
+    }
+
+    // Share storage
+    if (path.endsWith('/api/plan/share')) {
+      return handleSharePost(request, env);
     }
 
     let body: Record<string, unknown>;
@@ -167,10 +188,8 @@ export default {
       return json({ error: 'Invalid JSON' }, 400);
     }
 
-    const url = new URL(request.url);
-    if (url.pathname.endsWith('/place')) {
-      return handlePlace(body as { query?: string }, env);
-    }
+    // Existing: /place and /chat
+    if (path.endsWith('/place')) return handlePlace(body as { query?: string }, env);
     return handleChat(body as { message?: string; history?: { role: string; content: string }[] }, env);
   },
 };
