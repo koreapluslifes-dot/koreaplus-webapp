@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Survival Korean Phrases | KoreaPlus</title>
+  <meta name="description" content="Essential Korean phrases for travelers — restaurant, taxi, shopping, directions, emergency. Listen to pronunciation, show to locals.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/phrases.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Survival Korean Phrases","description":"Essential Korean phrases for travelers with pronunciation audio.","url":"https://koreaplus-lifes.com/guide/phrases.html"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="modules/header.js"></script>
+  <style>
+    .cat-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px; }
+    .cat-tab  {
+      padding:7px 14px; border-radius:20px; font-size:13px; font-weight:600; cursor:pointer;
+      background:var(--surface); border:1px solid var(--border); color:var(--text2); transition:all .15s;
+    }
+    .cat-tab:hover  { color:var(--text); border-color:var(--border2); }
+    .cat-tab.active { background:rgba(59,142,234,.14); border-color:rgba(59,142,234,.4); color:var(--accent2); }
+
+    .phrase-list { display:flex; flex-direction:column; gap:8px; }
+    .phrase-row  {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+      padding:14px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:12px;
+      cursor:pointer; transition:border-color .15s;
+    }
+    .phrase-row:hover { border-color:var(--border2); }
+    .p-ko    { font-size:20px; font-weight:700; font-family:'Noto Sans KR',sans-serif; color:var(--text); }
+    .p-roman { font-size:13px; color:var(--accent2); margin-top:3px; font-style:italic; }
+    .p-en    { font-size:12px; color:var(--text2); margin-top:3px; }
+    .p-ctx   { font-size:11px; color:var(--text3); margin-top:2px; }
+    .p-btns  { display:flex; gap:8px; flex-shrink:0; }
+    .p-speak {
+      width:38px; height:38px; border-radius:50%; background:rgba(59,142,234,.1);
+      border:1px solid rgba(59,142,234,.25); color:var(--accent2); font-size:18px;
+      cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s;
+    }
+    .p-speak:hover { background:rgba(59,142,234,.22); }
+    .p-show {
+      width:38px; height:38px; border-radius:50%; background:rgba(251,191,36,.1);
+      border:1px solid rgba(251,191,36,.25); color:var(--gold); font-size:16px;
+      cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s;
+    }
+    .p-show:hover { background:rgba(251,191,36,.2); }
+
+    /* Fullscreen show-to-Korean mode */
+    #fs-overlay {
+      display:none; position:fixed; inset:0; z-index:99999; background:#000;
+      flex-direction:column; align-items:center; justify-content:center; padding:40px 24px;
+      touch-action:manipulation;
+    }
+    #fs-overlay.open { display:flex; }
+    #fs-big   { font-size:clamp(48px,12vw,96px); font-weight:900; color:#fff; text-align:center; line-height:1.2; font-family:'Noto Sans KR',sans-serif; }
+    #fs-rom   { font-size:clamp(18px,4vw,32px); color:rgba(255,255,255,.55); margin-top:16px; text-align:center; font-style:italic; }
+    #fs-en    { font-size:clamp(14px,3vw,24px); color:rgba(255,255,255,.35); margin-top:8px; text-align:center; }
+    #fs-close {
+      position:absolute; top:20px; right:20px; background:rgba(255,255,255,.1);
+      border:none; color:#fff; font-size:20px; width:44px; height:44px; border-radius:50%;
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+    }
+    #fs-replay {
+      margin-top:32px; padding:12px 28px; background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.25); border-radius:28px; color:#fff;
+      font-size:16px; cursor:pointer; display:flex; align-items:center; gap:8px;
+    }
+    #fs-hint { position:absolute; bottom:24px; font-size:12px; color:rgba(255,255,255,.25); text-align:center; }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🏠 Home</a>
+    <a class="hub-nav-link hub-nav-link active" href="phrases.html">💬 Phrases</a>
+    <a class="hub-nav-link" href="emergency.html">🆘 Emergency</a>
+    <a class="hub-nav-link" href="currency.html">💱 Currency</a>
+    <a class="hub-nav-link" href="menu-translator.html">📷 Menu</a>
+    <a class="hub-nav-link" href="subway.html">🚇 Subway</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">Korean Language</div>
+  <h1>🗣️ Survival Korean</h1>
+  <p>Essential phrases for every situation — tap 🔊 to hear, tap 👁️ to show locals in fullscreen mode</p>
+</div>
+
+<main class="hub-content" style="max-width:860px">
+  <div style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;font-size:13px;color:var(--text2)">
+    💡 <strong style="color:var(--gold)">Pro tip:</strong> Koreans appreciate ANY attempt at the language. Even "감사합니다" (thank you) will earn a big smile. You don't need to be perfect!
+  </div>
+
+  <div class="cat-tabs" id="cat-tabs" role="tablist" aria-label="Phrase categories"></div>
+  <div class="phrase-list" id="phrase-list" role="list"></div>
+</main>
+
+<!-- Fullscreen show-to-Korean overlay -->
+<div id="fs-overlay" role="dialog" aria-modal="true" aria-label="Show to Korean person">
+  <button id="fs-close" aria-label="Close fullscreen">✕</button>
+  <div id="fs-big"></div>
+  <div id="fs-rom"></div>
+  <div id="fs-en"></div>
+  <button id="fs-replay">🔊 Replay</button>
+  <div id="fs-hint">Tap anywhere to close · 탭하여 닫기</div>
+</div>
+
+<script>
+const CATEGORIES = [
+  { id:'restaurant', label:'🍜 Restaurant', color:'#f97316' },
+  { id:'taxi',       label:'🚕 Taxi',       color:'#fbbf24' },
+  { id:'shopping',   label:'🛍️ Shopping',   color:'#a78bfa' },
+  { id:'directions', label:'🗺️ Directions',  color:'#3b8eea' },
+  { id:'emergency',  label:'🆘 Emergency',   color:'#ef4444' },
+  { id:'general',    label:'😊 General',     color:'#10b981' },
+];
+
+const PHRASES = {
+  restaurant: [
+    { ko:'여기요!',               roman:'Yeogiyo!',                   en:'Excuse me! (calling waiter)',   ctx:'To get attention' },
+    { ko:'메뉴 주세요',           roman:'Menyu juseyo',               en:'Menu please',                   ctx:'' },
+    { ko:'이거 주세요',           roman:'Igeo juseyo',                en:"I'll have this one",             ctx:'Point at menu' },
+    { ko:'맵지 않게 해주세요',    roman:'Maepji anke haejuseyo',      en:'Please make it not spicy',      ctx:'' },
+    { ko:'조금 덜 맵게 해주세요', roman:'Jogeum deol maepge haejuseyo', en:'A little less spicy please',  ctx:'' },
+    { ko:'물 주세요',             roman:'Mul juseyo',                 en:'Water please',                  ctx:'' },
+    { ko:'맛있어요!',             roman:'Masisseoyo!',                en:"It's delicious!",               ctx:'Compliment the food' },
+    { ko:'더 주세요',             roman:'Deo juseyo',                 en:'More please',                   ctx:'Asking for more' },
+    { ko:'포장해 주세요',         roman:'Pojanghae juseyo',           en:'To go / Take away please',      ctx:'' },
+    { ko:'계산서 주세요',         roman:'Gyesanseo juseyo',           en:'Bill / Check please',           ctx:'' },
+    { ko:'카드 되나요?',          roman:'Kadeu doenayo?',             en:'Do you accept card?',           ctx:'' },
+    { ko:'채식주의자예요',        roman:'Chaeshik jujuijayeyo',       en:"I'm vegetarian",                ctx:'' },
+    { ko:'알레르기가 있어요',     roman:'Allereugi ga isseoyo',       en:'I have allergies',              ctx:'' },
+    { ko:'돼지고기 못 먹어요',    roman:'Dwaejigogi mot meogeoyo',    en:"I can't eat pork",              ctx:'Dietary restriction' },
+    { ko:'영수증 주세요',         roman:'Yeongsujeung juseyo',        en:'Receipt please',                ctx:'' },
+  ],
+  taxi: [
+    { ko:'___로 가주세요',        roman:'___ ro gajuseyo',            en:'Please take me to ___',         ctx:'Fill in destination' },
+    { ko:'여기서 세워주세요',     roman:'Yeogiseo sewojuseyo',        en:'Please stop here',              ctx:'' },
+    { ko:'얼마예요?',             roman:'Eolmayeyo?',                 en:'How much is it?',               ctx:'' },
+    { ko:'미터기 켜주세요',       roman:'Miteogi kyeojuseyo',         en:'Please turn on the meter',      ctx:'If meter not running' },
+    { ko:'천천히 가주세요',       roman:'Cheoncheonhi gajuseyo',      en:'Please drive slowly',           ctx:'' },
+    { ko:'에어컨 켜주세요',       roman:'Eeokon kyeojuseyo',          en:'Please turn on the AC',         ctx:'Hot summer' },
+    { ko:'영수증 주세요',         roman:'Yeongsujeung juseyo',        en:'Receipt please',                ctx:'For expenses' },
+    { ko:'지도 보여드릴게요',     roman:'Jido boyeodeurilgeyo',       en:"I'll show you the map",         ctx:'Show map on phone' },
+    { ko:'KTX역이 어디예요?',     roman:'KTX yeogi eodiyeyo?',        en:'Where is the KTX station?',     ctx:'' },
+    { ko:'인천공항 가주세요',     roman:'Incheon gonghang gajuseyo',  en:'Please go to Incheon Airport',  ctx:'' },
+  ],
+  shopping: [
+    { ko:'얼마예요?',             roman:'Eolmayeyo?',                 en:'How much is this?',             ctx:'' },
+    { ko:'너무 비싸요',           roman:'Neomu bissayo',              en:"It's too expensive",            ctx:'Bargaining opener' },
+    { ko:'깎아주세요',            roman:'Kkakka juseyo',              en:'Please give me a discount',     ctx:'Bargaining' },
+    { ko:'이걸로 할게요',         roman:'Igeolro halgeyo',            en:"I'll take this one",            ctx:'' },
+    { ko:'다른 색 있어요?',       roman:'Dareun saek isseoyo?',       en:'Do you have another color?',    ctx:'' },
+    { ko:'더 큰 거 있어요?',      roman:'Deo keun geo isseoyo?',      en:'Do you have a bigger size?',    ctx:'' },
+    { ko:'입어 봐도 돼요?',       roman:'Ibeo bwado dwaeyo?',         en:'Can I try this on?',            ctx:'Clothing' },
+    { ko:'카드 되나요?',          roman:'Kadeu doenayo?',             en:'Do you accept card?',           ctx:'' },
+    { ko:'면세 되나요?',          roman:'Myeonse doenayo?',           en:'Can I get tax-free/refund?',    ctx:'Tourist VAT refund' },
+    { ko:'영수증 주세요',         roman:'Yeongsujeung juseyo',        en:'Receipt please',                ctx:'For tax refund' },
+  ],
+  directions: [
+    { ko:'___이 어디예요?',       roman:'___ i eodiyeyo?',            en:'Where is ___?',                 ctx:'Fill in place name' },
+    { ko:'지하철역이 어디예요?',  roman:'Jihacheolyeogi eodiyeyo?',   en:'Where is the subway station?',  ctx:'' },
+    { ko:'화장실이 어디예요?',    roman:'Hwajangshiri eodiyeyo?',     en:'Where is the bathroom?',        ctx:'Essential!' },
+    { ko:'오른쪽',               roman:'Oreunjjok',                  en:'Right',                         ctx:'Direction' },
+    { ko:'왼쪽',                 roman:'Oenjjok',                    en:'Left',                          ctx:'Direction' },
+    { ko:'직진',                 roman:'Jikjin',                     en:'Straight ahead',                ctx:'Direction' },
+    { ko:'지도 보여줄 수 있어요?',roman:'Jido boyeojul su isseoyo?',  en:'Can you show me on the map?',   ctx:'' },
+    { ko:'걸어서 얼마나 걸려요?', roman:'Georeoeo eolmana geollyeoyo?', en:'How long to walk?',           ctx:'' },
+    { ko:'편의점이 어디예요?',    roman:'Pyeonuijeomi eodiyeyo?',     en:'Where is the convenience store?', ctx:'GS25 / CU / 7-Eleven' },
+    { ko:'이 주소로 가주세요',    roman:'I jusoro gajuseyo',          en:'Please go to this address',     ctx:'Show address on phone' },
+  ],
+  emergency: [
+    { ko:'도와주세요!',           roman:'Dowajuseyo!',                en:'Help me!',                      ctx:'Emergency' },
+    { ko:'119 불러주세요',        roman:'Il-il-gu bulleojuseyo',      en:'Please call 119 (ambulance)',    ctx:'Medical emergency' },
+    { ko:'경찰 불러주세요',       roman:'Gyeongchal bulleojuseyo',    en:'Please call the police (112)',   ctx:'Crime / threat' },
+    { ko:'아파요',               roman:'Apayo',                      en:"I'm sick / I'm in pain",         ctx:'' },
+    { ko:'길을 잃었어요',         roman:'Gireul ireoosseoyo',         en:"I'm lost",                      ctx:'' },
+    { ko:'지갑을 잃어버렸어요',   roman:'Jigabeul ireobeoryeosseoyo', en:'I lost my wallet',              ctx:'' },
+    { ko:'영어 하세요?',          roman:'Yeongeo haseyo?',            en:'Do you speak English?',         ctx:'' },
+    { ko:'병원이 어디예요?',      roman:'Byeongwoni eodiyeyo?',       en:'Where is the hospital?',        ctx:'' },
+    { ko:'알레르기 반응이에요',   roman:'Allereugi baneungieyo',      en:'Allergic reaction',             ctx:'Medical' },
+    { ko:'번역 앱 써도 될까요?',  roman:'Beonyeok aep sseodo doelkkayo?', en:'May I use a translator app?', ctx:'' },
+  ],
+  general: [
+    { ko:'안녕하세요',            roman:'Annyeonghaseyo',             en:'Hello (formal)',                ctx:'Standard greeting' },
+    { ko:'감사합니다',            roman:'Gamsahamnida',               en:'Thank you (formal)',            ctx:'Most useful phrase!' },
+    { ko:'죄송합니다',            roman:'Joesonghamnida',             en:'I\'m sorry / Excuse me',       ctx:'Apology / bumping into' },
+    { ko:'네',                   roman:'Ne',                         en:'Yes',                           ctx:'' },
+    { ko:'아니요',               roman:'Aniyo',                      en:'No',                            ctx:'' },
+    { ko:'괜찮아요',              roman:'Gwaenchanhayo',              en:"It's okay / I'm fine",          ctx:'' },
+    { ko:'모르겠어요',            roman:'Moreugesseoyo',              en:"I don't know",                  ctx:'' },
+    { ko:'잠깐만요',              roman:'Jamkkanmanyo',               en:'Just a moment please',          ctx:'' },
+    { ko:'한국 음식 너무 맛있어요!', roman:'Hanguk eumsik neomu masisseoyo!', en:'Korean food is so delicious!', ctx:'Say this and watch them smile' },
+    { ko:'사진 찍어도 될까요?',   roman:'Sajin jjigeodo doelkkayo?',  en:'May I take a photo?',           ctx:'Always ask first' },
+    { ko:'화이팅!',               roman:'Hwaiting!',                  en:'You can do it! / Fighting!',    ctx:'Korean cheer / encouragement' },
+    { ko:'잘 있어요',             roman:'Jal isseoyo',                en:'Goodbye (to the one staying)',  ctx:'When you\'re leaving' },
+  ],
+};
+
+let activeCat = 'restaurant';
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR'; u.rate = 0.75; u.pitch = 1;
+  window.speechSynthesis.speak(u);
+}
+
+function showFS(p) {
+  document.getElementById('fs-big').textContent = p.ko;
+  document.getElementById('fs-rom').textContent = p.roman;
+  document.getElementById('fs-en').textContent  = p.en;
+  document.getElementById('fs-overlay').classList.add('open');
+  speak(p.ko);
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen().catch(()=>{});
+  }
+}
+
+function closeFS() {
+  document.getElementById('fs-overlay').classList.remove('open');
+  if (document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+}
+
+function renderCats() {
+  const tabs = document.getElementById('cat-tabs');
+  CATEGORIES.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-tab' + (c.id === activeCat ? ' active' : '');
+    btn.textContent = c.label;
+    btn.setAttribute('role','tab');
+    btn.setAttribute('aria-selected', c.id === activeCat ? 'true' : 'false');
+    btn.addEventListener('click', () => {
+      activeCat = c.id;
+      document.querySelectorAll('.cat-tab').forEach(t => {
+        t.classList.toggle('active', t.textContent === c.label);
+        t.setAttribute('aria-selected', t.textContent === c.label ? 'true' : 'false');
+      });
+      renderPhrases();
+    });
+    tabs.appendChild(btn);
+  });
+}
+
+function renderPhrases() {
+  const list = document.getElementById('phrase-list');
+  list.innerHTML = '';
+  (PHRASES[activeCat] || []).forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'phrase-row';
+    el.setAttribute('role','listitem');
+    el.innerHTML = `
+      <div>
+        <div class="p-ko">${p.ko}</div>
+        <div class="p-roman">${p.roman}</div>
+        <div class="p-en">${p.en}</div>
+        ${p.ctx ? '<div class="p-ctx">💡 ' + p.ctx + '</div>' : ''}
+      </div>
+      <div class="p-btns">
+        <button class="p-speak" aria-label="Listen to pronunciation" title="Hear pronunciation">🔊</button>
+        <button class="p-show"  aria-label="Show to Korean person" title="Show to Korean person (fullscreen)">👁️</button>
+      </div>`;
+    el.querySelector('.p-speak').addEventListener('click', e => { e.stopPropagation(); speak(p.ko); });
+    el.querySelector('.p-show').addEventListener('click',  e => { e.stopPropagation(); showFS(p); });
+    list.appendChild(el);
+  });
+}
+
+document.getElementById('fs-close').addEventListener('click', closeFS);
+document.getElementById('fs-replay').addEventListener('click', () => {
+  speak(document.getElementById('fs-big').textContent);
+});
+document.getElementById('fs-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('fs-overlay') || e.target === document.getElementById('fs-hint')) closeFS();
+});
+
+renderCats();
+renderPhrases();
+</script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
-/* KoreaPlus Service Worker — v2 */
-const CACHE = 'kp-v2';
+/* KoreaPlus Service Worker — v3 */
+const CACHE = 'kp-v3';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -23,6 +23,15 @@ const PRECACHE = [
   BASE + '/privacy.html',
   BASE + '/terms.html',
   BASE + '/contact.html',
+  /* Phase 6 — offline-first priority */
+  BASE + '/emergency.html',
+  BASE + '/phrases.html',
+  BASE + '/currency.html',
+  BASE + '/etiquette.html',
+  BASE + '/seasons.html',
+  BASE + '/kdrama-locations.html',
+  BASE + '/menu-translator.html',
+  BASE + '/subway.html',
   BASE + '/modules/api-client.js',
   BASE + '/modules/dashboard.js',
   BASE + '/modules/week-section.js',

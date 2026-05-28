@@ -23,7 +23,10 @@ $ROOT_FILES = @(
     "plan.html", "plan-styles.css",
     # Phase 5 - PWA + Legal
     "manifest.json", "sw.js", "theme.css",
-    "about.html", "privacy.html", "terms.html", "contact.html"
+    "about.html", "privacy.html", "terms.html", "contact.html",
+    # Phase 6 - Killer Features
+    "emergency.html", "phrases.html", "currency.html", "etiquette.html",
+    "seasons.html", "kdrama-locations.html", "menu-translator.html", "subway.html"
 )
 
 $MODULE_FILES = @(
@@ -97,24 +100,30 @@ ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" @"
 "@
 
 Write-Host ""
-Write-Host "Done! Phase 5 deployed:" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/"         -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/plan.html"  -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/about.html" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/privacy.html" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/contact.html" -ForegroundColor Green
+Write-Host "Done! Phase 5 + 6 deployed:" -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/"                       -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/emergency.html"          -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/phrases.html"            -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/currency.html"           -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/etiquette.html"          -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/seasons.html"            -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/kdrama-locations.html"   -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/menu-translator.html"    -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/subway.html"             -ForegroundColor Green
 Write-Host ""
-Write-Host "Phase 5 Features:" -ForegroundColor Cyan
-Write-Host "  PWA  : manifest.json + sw.js + icon.svg"       -ForegroundColor White
-Write-Host "  Theme: dark/light toggle + font size 3-step"   -ForegroundColor White
-Write-Host "  i18n : EN/KO/JA/ZH/ES language switcher"       -ForegroundColor White
-Write-Host "  Search: Fuse.js fuzzy search + Cmd+K"          -ForegroundColor White
-Write-Host "  Analytics: GA4 + Clarity (consent-gated)"      -ForegroundColor White
-Write-Host "  Legal: Privacy, Terms, Contact, About"         -ForegroundColor White
+Write-Host "Phase 6 Features:" -ForegroundColor Cyan
+Write-Host "  Emergency  : offline cards, hospitals, embassy contacts + TTS"  -ForegroundColor White
+Write-Host "  Phrases    : 6-category survival Korean + Web Speech TTS"       -ForegroundColor White
+Write-Host "  Currency   : live exchange rates + price guide + budget calc"   -ForegroundColor White
+Write-Host "  Etiquette  : Do/Don't rules + interactive quiz"                 -ForegroundColor White
+Write-Host "  Seasons    : cherry blossom + foliage forecast Leaflet map"     -ForegroundColor White
+Write-Host "  K-Drama    : 25+ filming locations Leaflet map + YouTube links" -ForegroundColor White
+Write-Host "  Menu       : Tesseract.js OCR + AI translation (Worker)"        -ForegroundColor White
+Write-Host "  Subway     : Seoul metro live arrivals via Worker /api/subway"  -ForegroundColor White
 Write-Host ""
 Write-Host "NEXT STEPS:" -ForegroundColor Yellow
-Write-Host "  1. Set GA4 ID: edit modules/analytics.js, set GA4_ID = 'G-YOUR_ID'"
-Write-Host "  2. Set Clarity ID: edit modules/analytics.js, set CLARITY_ID = 'your_id'"
+Write-Host "  1. Set GA4 ID: edit modules/analytics.js, GA4_ID = 'G-YOUR_ID'"
+Write-Host "  2. Set Clarity ID: edit modules/analytics.js, CLARITY_ID = 'your_id'"
 Write-Host "  3. Set Formspree ID: edit contact.html, replace YOUR_FORM_ID"
-Write-Host "  4. Test PWA install: open Chrome DevTools > Application > Manifest"
+Write-Host "  4. Push Worker to GitHub to trigger deploy (translator.ts endpoint)"
 Write-Host "  5. Run PageSpeed: https://pagespeed.web.dev/?url=https://koreaplus-lifes.com/guide/"

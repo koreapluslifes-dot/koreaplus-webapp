@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-Drama Filming Locations Map | KoreaPlus</title>
+  <meta name="description" content="Visit real K-drama filming locations in Korea. Goblin, Crash Landing on You, Squid Game, Itaewon Class, Reply 1988 and more — interactive map with scene info.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/kdrama-locations.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="modules/header.js"></script>
+  <style>
+    .filter-bar {
+      display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; align-items:center;
+    }
+    .filter-label { font-size:12px; color:var(--text3); font-weight:600; margin-right:4px; }
+    .filter-chip {
+      padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; cursor:pointer;
+      border:2px solid var(--border); background:var(--surface); color:var(--text2); transition:all .15s;
+    }
+    .filter-chip:hover  { border-color:var(--border2); color:var(--text); }
+    .filter-chip.active { border-color:var(--accent); color:var(--accent); background:rgba(200,16,46,.1); }
+    .filter-chip.all.active { border-color:var(--accent2); color:var(--accent2); background:rgba(59,142,234,.1); }
+
+    .filter-sep { width:1px; height:24px; background:var(--border); margin:0 4px; }
+
+    .map-wrap { height:480px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); margin-bottom:24px; position:relative; }
+    #kdrama-map { width:100%; height:100%; }
+    .map-count  { position:absolute; top:10px; right:10px; z-index:1000; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:5px 12px; font-size:12px; color:var(--text2); font-weight:600; pointer-events:none; }
+
+    .locations-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; margin-bottom:32px; }
+    .loc-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+      padding:16px; cursor:pointer; transition:all .15s; position:relative; overflow:hidden;
+    }
+    .loc-card:hover { border-color:var(--border2); transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,.2); }
+    .loc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+    .loc-card[data-drama="goblin"]::before           { background:linear-gradient(90deg,#a855f7,#ec4899); }
+    .loc-card[data-drama="crash-landing"]::before    { background:linear-gradient(90deg,#3b8ee2,#06b6d4); }
+    .loc-card[data-drama="squid-game"]::before       { background:linear-gradient(90deg,#ef4444,#f97316); }
+    .loc-card[data-drama="itaewon"]::before          { background:linear-gradient(90deg,#f59e0b,#ef4444); }
+    .loc-card[data-drama="reply-1988"]::before       { background:linear-gradient(90deg,#10b981,#3b8ee2); }
+    .loc-card[data-drama="descendants"]::before      { background:linear-gradient(90deg,#6366f1,#a855f7); }
+    .loc-card[data-drama="kingdom"]::before          { background:linear-gradient(90deg,#374151,#6b7280); }
+    .loc-card[data-drama="boys-flowers"]::before     { background:linear-gradient(90deg,#ec4899,#f472b6); }
+    .loc-card[data-drama="startup"]::before          { background:linear-gradient(90deg,#f97316,#fbbf24); }
+    .loc-card[data-drama="hometown"]::before         { background:linear-gradient(90deg,#06b6d4,#10b981); }
+    .loc-card[data-drama="attorney-woo"]::before     { background:linear-gradient(90deg,#8b5cf6,#3b8ee2); }
+    .loc-card[data-drama="my-mister"]::before        { background:linear-gradient(90deg,#6b7280,#374151); }
+    .loc-card[data-drama="the-glory"]::before        { background:linear-gradient(90deg,#dc2626,#7f1d1d); }
+    .loc-card[data-drama="twenty-five"]::before      { background:linear-gradient(90deg,#f472b6,#a78bfa); }
+    .loc-card[data-drama="vincenzo"]::before         { background:linear-gradient(90deg,#854d0e,#a16207); }
+
+    .loc-drama-tag {
+      display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px;
+      margin-bottom:8px; color:#fff; letter-spacing:.03em;
+    }
+    .loc-name { font-size:15px; font-weight:800; color:var(--text); line-height:1.3; }
+    .loc-kr   { font-size:12px; color:var(--text3); margin-top:2px; }
+    .loc-scene { font-size:12px; color:var(--text2); margin-top:8px; line-height:1.5; }
+    .loc-meta { display:flex; gap:8px; margin-top:10px; align-items:center; flex-wrap:wrap; }
+    .loc-badge { font-size:10px; padding:2px 8px; border-radius:4px; font-weight:600; background:var(--bg); color:var(--text3); border:1px solid var(--border); }
+    .loc-yt {
+      margin-top:10px; display:inline-flex; align-items:center; gap:5px;
+      font-size:11px; font-weight:700; color:#ef4444; text-decoration:none; transition:opacity .15s;
+    }
+    .loc-yt:hover { opacity:.75; }
+
+    .tip-banner { background:rgba(251,191,36,.08); border:1px solid rgba(251,191,36,.2); border-radius:var(--radius); padding:14px 18px; margin-bottom:20px; font-size:13px; color:var(--text2); }
+
+    .drama-legend { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+    .legend-item  { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text2); }
+    .legend-dot   { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+    .hidden { display:none !important; }
+
+    .leaflet-popup-content-wrapper { background:var(--surface)!important; border:1px solid var(--border)!important; color:var(--text)!important; border-radius:10px!important; }
+    .leaflet-popup-tip { background:var(--surface)!important; }
+    .popup-drama { font-size:10px; font-weight:700; padding:1px 6px; border-radius:3px; color:#fff; margin-bottom:4px; display:inline-block; }
+    .popup-name  { font-size:13px; font-weight:800; color:var(--text); margin-bottom:3px; }
+    .popup-scene { font-size:11px; color:var(--text2); line-height:1.5; margin-bottom:6px; }
+    .popup-yt    { font-size:11px; font-weight:700; color:#ef4444; text-decoration:none; }
+    .popup-yt:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🏠 Home</a>
+    <a class="hub-nav-link hub-nav-link active" href="kdrama-locations.html">🎬 K-Drama</a>
+    <a class="hub-nav-link" href="seasons.html">🌸 Seasons</a>
+    <a class="hub-nav-link" href="festivals.html">📅 Festivals</a>
+    <a class="hub-nav-link" href="plan.html">🗺️ Plan Trip</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">K-Drama Travel</div>
+  <h1>🎬 K-Drama Filming Locations</h1>
+  <p>Walk in the footsteps of your favourite characters — interactive map of real filming locations across Korea</p>
+</div>
+
+<main class="hub-content" style="max-width:1100px">
+
+  <div class="tip-banner">📸 Tip: Most locations are open to visitors for free. Bring a screenshot of the scene to compare — locals love seeing fans recreate iconic moments!</div>
+
+  <div class="filter-bar" id="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-chip all active" data-filter="all" onclick="setFilter('all')">🗺️ All Dramas</button>
+    <div class="filter-sep"></div>
+  </div>
+
+  <div class="map-wrap">
+    <div id="kdrama-map"></div>
+    <div class="map-count" id="map-count"></div>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:14px">Filming Locations</h2>
+  <div class="locations-grid" id="locations-grid"></div>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const DRAMAS = {
+  'goblin':        { title:'Goblin (도깨비)',                color:'#a855f7', year:2016 },
+  'crash-landing': { title:'Crash Landing on You (사랑의 불시착)', color:'#3b8ee2', year:2019 },
+  'squid-game':    { title:'Squid Game (오징어 게임)',          color:'#ef4444', year:2021 },
+  'itaewon':       { title:'Itaewon Class (이태원 클라쓰)',       color:'#f59e0b', year:2020 },
+  'reply-1988':    { title:'Reply 1988 (응답하라 1988)',         color:'#10b981', year:2015 },
+  'descendants':   { title:'Descendants of the Sun (태양의 후예)', color:'#6366f1', year:2016 },
+  'kingdom':       { title:'Kingdom (킹덤)',                  color:'#6b7280', year:2019 },
+  'boys-flowers':  { title:"Boys Over Flowers (꽃보다 남자)",     color:'#ec4899', year:2009 },
+  'startup':       { title:'Start-Up (스타트업)',               color:'#f97316', year:2020 },
+  'hometown':      { title:'Hometown Cha-Cha-Cha (갯마을 차차차)', color:'#06b6d4', year:2021 },
+  'attorney-woo':  { title:'Extraordinary Attorney Woo (이상한 변호사 우영우)', color:'#8b5cf6', year:2022 },
+  'my-mister':     { title:'My Mister (나의 아저씨)',            color:'#6b7280', year:2018 },
+  'the-glory':     { title:'The Glory (더 글로리)',              color:'#dc2626', year:2022 },
+  'twenty-five':   { title:'Twenty-Five Twenty-One (스물다섯 스물하나)', color:'#f472b6', year:2022 },
+  'vincenzo':      { title:'Vincenzo (빈센조)',                 color:'#a16207', year:2021 },
+};
+
+const LOCATIONS = [
+  // Goblin
+  { drama:'goblin', name:'Quebec Bridge (Goblin Bridge)', kr:'캐나다 퀘벡 브리지 (비공개)', lat:37.5665, lng:126.9780, district:'Mapo-gu, Seoul', scene:"The iconic bridge where Goblin (공유) walks and calls for Ji Eun-tak. Re-created in Seoul — the actual Canada scenes were filmed overseas but this Ganghwa island bridge is Korea's filming double.", yt:'https://www.youtube.com/watch?v=1L6J9CiivdU', tip:'Ganghwa Island\'s Seoho Bridge doubles for the iconic bridge scenes.' },
+  { drama:'goblin', name:'Andong Hahoe Village', kr:'안동 하회마을', lat:36.535, lng:128.517, district:'Andong, Gyeongbuk', scene:'The traditional hanok village where Goblin walks and reflects. UNESCO heritage village with 600-year-old clan houses. Iconic with snowy winters.', yt:'https://www.youtube.com/watch?v=1L6J9CiivdU', tip:'Join the mask-dance performance on weekend evenings. 안동찜닭 (braised chicken) nearby is a must.' },
+  { drama:'goblin', name:'Jumunjin Beach', kr:'주문진 해수욕장', lat:37.893, lng:128.820, district:'Gangneung, Gangwon', scene:'Where Goblin watches the sunset, famous red bus stop scene with Ji Eun-tak. The red phone box is now a permanent photo spot.', yt:'https://www.youtube.com/watch?v=1L6J9CiivdU', tip:'The red phone box and bus stop are preserved as tourist spots. Sunrise is equally stunning.' },
+  { drama:'goblin', name:'Mapo Bridge', kr:'마포대교', lat:37.544, lng:126.929, district:'Seoul', scene:"Ji Eun-tak blows out candles on the bridge and summons the Goblin. Now a symbol of the drama and part of Seoul's iconic Han River landscape.", yt:'https://www.youtube.com/watch?v=1L6J9CiivdU', tip:'Walk across at sunset for the best views. Han River park below has cafés and rentable bicycles.' },
+
+  // Crash Landing on You
+  { drama:'crash-landing', name:'Swiss Alps scenes — Nami Island', kr:'남이섬 (스위스 대역)', lat:37.796, lng:127.521, district:'Chuncheon, Gangwon', scene:'Nami Island stood in for Switzerland scenes. The tree-lined paths and island atmosphere made it perfect for Se-ri\'s (손예진) paragliding sequences.', yt:'https://www.youtube.com/watch?v=XHxmYzxI0LY', tip:'30-min ferry from Gapyeong station. Sunrise visit avoids crowds.' },
+  { drama:'crash-landing', name:'DMZ Imjingak Park', kr:'임진각 평화누리공원', lat:37.888, lng:126.777, district:'Paju, Gyeonggi', scene:"The border areas and fences feature prominently. The bridge imagery echoes the series' North/South tension. Actual DMZ tour departs from here.", yt:'https://www.youtube.com/watch?v=XHxmYzxI0LY', tip:'Official DMZ tours depart from Dorasan Station nearby. Book in advance. Emotionally powerful visit.' },
+  { drama:'crash-landing', name:'Yeouido Hangang Park', kr:'여의도 한강공원', lat:37.528, lng:126.929, district:'Seoul', scene:'Multiple romantic riverside scenes filmed here. The area reflects the contrast of Se-ri\'s wealthy Seoul life before landing in North Korea.', yt:'https://www.youtube.com/watch?v=XHxmYzxI0LY', tip:'Rent a tandem bicycle and ride along the Han River just as the characters do.' },
+
+  // Squid Game
+  { drama:'squid-game', name:'Ssangmun-dong Playground', kr:'쌍문동 놀이터', lat:37.648, lng:127.030, district:'Dobong-gu, Seoul', scene:'The neighbourhood playground where Gi-hun (이정재) and Sang-woo played as kids. The slide and equipment appear in flashback sequences.', yt:'https://www.youtube.com/watch?v=oqxAJKy0ii4', tip:'A quiet residential area — be respectful of local residents. The street food stalls on nearby Ssangmun-ro are great.' },
+  { drama:'squid-game', name:'Macha Land Theme Park (Squid Game set)', kr:'마차랜드 (촬영지 세트)', lat:36.788, lng:127.004, district:'Cheonan, Chungnam', scene:'Parts of the Squid Game sets were built at this theme park. The colourful staircases and doll installation became globally recognisable.', yt:'https://www.youtube.com/watch?v=oqxAJKy0ii4', tip:'Squid Game: The Experience permanent exhibit opened in Seoul — check Netflix Korea for latest venue info.' },
+
+  // Itaewon Class
+  { drama:'itaewon', name:'Itaewon-ro Bar Street', kr:'이태원로 술집거리', lat:37.534, lng:126.994, district:'Yongsan-gu, Seoul', scene:"The street where Park Saeroyi (박서준) opens DanBam bar. The real bar used in filming is preserved. The area's multicultural food scene inspired the drama's international cast.", yt:'https://www.youtube.com/watch?v=PUJOiR9LcNk', tip:'The actual DanBam bar location is on Itaewon-ro. Try the neighbourhood\'s international food — over 40 cuisines within walking distance.' },
+  { drama:'itaewon', name:'Bukchon Hanok Village', kr:'북촌 한옥마을', lat:37.582, lng:126.985, district:'Jongno-gu, Seoul', scene:'Traditional alley scenes and rooftop views. The contrast of old hanok with modern Itaewon reflects the drama\'s theme of old vs new Korea.', yt:'https://www.youtube.com/watch?v=PUJOiR9LcNk', tip:'Visit before 10am for quiet alleys and great photos. The village is a living neighbourhood — keep noise down.' },
+
+  // Reply 1988
+  { drama:'reply-1988', name:'Ssangmun-dong Alley (Reply 1988 Set)', kr:'쌍문동 골목 (응답하라 세트)', lat:37.649, lng:127.029, district:'Dobong-gu, Seoul', scene:"The iconic alley between five households. The filming location in Dobong-gu was a real 1980s neighbourhood, now preserved as a K-drama tourism site.", yt:'https://www.youtube.com/watch?v=R9At2ICm4LQ', tip:'The outdoor set is open for photos. The nostalgia snack shop sells retro Korean candy from the 1980s era.' },
+
+  // Descendants of the Sun
+  { drama:'descendants', name:'Taean Haesol Park', kr:'태안 해솔공원', lat:36.806, lng:126.125, district:'Taean, Chungnam', scene:'The military base and medical camp scenes. The rugged coastal scenery doubled for the fictional country of Uruk.', yt:'https://www.youtube.com/watch?v=G_KNFN3P1jo', tip:'Beautiful coastal drive from Taean to Mallipo Beach after visiting the filming location.' },
+  { drama:'descendants', name:'Jumunjin Port', kr:'주문진항', lat:37.893, lng:128.819, district:'Gangneung, Gangwon', scene:'Port and military departure scenes. The same coastal town features in multiple dramas — Goblin, Reply 1994, and Descendants all filmed here.', yt:'https://www.youtube.com/watch?v=G_KNFN3P1jo', tip:'Fresh seafood at the fish market next to the port is excellent. Combine with a Gangneung coffee street visit.' },
+
+  // Kingdom
+  { drama:'kingdom', name:'Gyeongbokgung Palace', kr:'경복궁', lat:37.579, lng:126.977, district:'Jongno-gu, Seoul', scene:'The Joseon royal court where Crown Prince Lee Chang fights to expose the zombie plague. The palace complex is the largest of the five grand Joseon palaces.', yt:'https://www.youtube.com/watch?v=SdFHWc4F6W0', tip:'Book the 한복 (hanbok) rental inside the palace gates — wearing traditional dress gives free entry to all 5 palaces.' },
+  { drama:'kingdom', name:'Suwon Hwaseong Fortress', kr:'수원 화성', lat:37.287, lng:127.014, district:'Suwon, Gyeonggi', scene:'The fortress walls and gates served as the Joseon defence architecture. Night fortress walks are offered in autumn.', yt:'https://www.youtube.com/watch?v=SdFHWc4F6W0', tip:'Walk the full 5.7km fortress wall circuit in about 2 hours. The east gate (창룡문) area is the most photogenic.' },
+
+  // Boys Over Flowers
+  { drama:'boys-flowers', name:'Shinhwa High School exterior — Sunjeong High', kr:'선정고등학교', lat:37.480, lng:126.958, district:'Guro-gu, Seoul', scene:"The iconic school exterior where Jan-di (구혜선) first encounters the F4. The school's gates are a pilgrimage site for long-time K-drama fans.", yt:'https://www.youtube.com/watch?v=EWkNiR5Xt9Y', tip:'The school is still active — photograph from outside only. Nearby Shindorim station has great street food.' },
+  { drama:'boys-flowers', name:'Incheon International Airport (T1)', kr:'인천국제공항 제1여객터미널', lat:37.448, lng:126.451, district:'Incheon', scene:'Multiple airport farewell and reunion scenes. The airport appears in dozens of K-dramas — fittingly where most fans first set foot in Korea.', yt:'https://www.youtube.com/watch?v=EWkNiR5Xt9Y', tip:'Floor B1 Transit Hotel lets you freshen up between flights. The Korean food court on departure level 3 is outstanding.' },
+
+  // Start-Up
+  { drama:'startup', name:'Sandbox (TIPS Town, Mapo)', kr:'상암 서울창업허브 (샌드박스)', lat:37.577, lng:126.891, district:'Mapo-gu, Seoul', scene:"Dal-mi's (배수지) startup incubator 'Sandbox'. The real Seoul Startup Hub in Mapo inspired the fictional incubator. Tech startup culture in this district is real.", yt:'https://www.youtube.com/watch?v=MpFi4MSovxE', tip:'Visit the real startup ecosystem — many cafés nearby host startup events on weekday evenings.' },
+  { drama:'startup', name:'Dongtan Lake Park', kr:'동탄 호수공원', lat:37.197, lng:127.069, district:'Hwaseong, Gyeonggi', scene:'The childhood memories scenes and emotional lakeside conversations between Dal-mi and Ji-pyeong (김선호). The lighting at dusk is magical.', yt:'https://www.youtube.com/watch?v=MpFi4MSovxE', tip:'40-minute drive from Seoul. Beautiful walking paths around the entire lake.' },
+
+  // Hometown Cha-Cha-Cha
+  { drama:'hometown', name:'Pohang Guryongpo Port', kr:'포항 구룡포항', lat:35.986, lng:129.557, district:'Pohang, Gyeongbuk', scene:"The seaside village 'Gongjin' where city dentist Hye-jin (신민아) moves and falls for Chief Hong (김선호). The port town retains its retro 1960s-70s architecture.", yt:'https://www.youtube.com/watch?v=fRkFQ_mFNKc', tip:'The Japanese colonial-era alley (일본인 가옥 거리) near the port is UNESCO-listed. Fresh 물회 (spicy raw fish soup) is the local speciality.' },
+
+  // Extraordinary Attorney Woo
+  { drama:'attorney-woo', name:'Hanbada Law Firm exterior — Mapo', kr:'한바다 로펌 외관 (마포)', lat:37.545, lng:126.918, district:'Mapo-gu, Seoul', scene:"The glass-and-steel building exterior used for the law firm where Woo Young-woo (박은빈) works. Woo's walking route past the café became a fan pilgrimage trail.", yt:'https://www.youtube.com/watch?v=pNtxfR7FXZY', tip:'The GS25 convenience store Woo stops at is still operating and popular with fans.' },
+  { drama:'attorney-woo', name:'Ulsan Whale Museum (inspiration)', kr:'울산 고래박물관', lat:35.509, lng:129.414, district:'Ulsan', scene:"Woo's obsession with whales references the Ulsan Whale Museum. While indoor scenes were studio-filmed, the real museum is a fan favourite and genuinely spectacular.", yt:'https://www.youtube.com/watch?v=pNtxfR7FXZY', tip:'Ulsan is also famous for its late-autumn whale watching. The museum has life-size blue whale skeleton exhibits.' },
+
+  // My Mister
+  { drama:'my-mister', name:'Noryangjin Fish Market Area', kr:'노량진 수산시장 인근', lat:37.511, lng:126.942, district:'Dongjak-gu, Seoul', scene:"The gritty underpass and working-class neighbourhood where Ji-an (IU) lives. The drama's unflinching portrayal of Seoul's less glamorous districts resonated globally.", yt:'https://www.youtube.com/watch?v=KYx_aSvH4YQ', tip:'The fish market itself has moved to a new building but the neighbourhood\'s street food — especially tteokbokki and sundae — is excellent.' },
+
+  // The Glory
+  { drama:'the-glory', name:'Moon Dong-eun School — Yonsei University', kr:'연세대학교 (촬영)', lat:37.564, lng:126.939, district:'Seodaemun-gu, Seoul', scene:"Several school scenes were filmed on Yonsei's architecturally striking campus. The contrast with the elite school depicted in the drama is stark.", yt:'https://www.youtube.com/watch?v=cQdNKlI7HN0', tip:'Yonsei\'s campus is open to visitors. Sinchon neighbourhood outside the gates is packed with student cafés and cheap eats.' },
+  { drama:'the-glory', name:'Yeouido Park & IFC Mall', kr:'여의도공원 & IFC몰', lat:37.526, lng:126.927, district:'Seoul', scene:"The upscale meeting locations where the powerful clique gathers. IFC Mall's luxury retail zone reflects the wealth disparity central to the drama's revenge plot.", yt:'https://www.youtube.com/watch?v=cQdNKlI7HN0', tip:'The rooftop observation area of IFC offers great Han River views — free entry.' },
+
+  // Twenty-Five Twenty-One
+  { drama:'twenty-five', name:'National Sports University Fencing Hall', kr:'한국체육대학교 펜싱장', lat:37.548, lng:127.101, district:'Songpa-gu, Seoul', scene:"Na Hee-do's (김태리) fencing training grounds. The drama's athletic sequences were filmed with real Olympic-level choreography.", yt:'https://www.youtube.com/watch?v=JxnZEQ1bJFI', tip:'Olympic Park nearby has excellent public sports facilities open to visitors.' },
+  { drama:'twenty-five', name:'Hongdae Street & Café Area', kr:'홍대 거리', lat:37.555, lng:126.923, district:'Mapo-gu, Seoul', scene:"The youthful Hongdae neighbourhood reflects the 1990s-2000s indie spirit of the drama. Street busking scenes were filmed along the main pedestrian area.", yt:'https://www.youtube.com/watch?v=JxnZEQ1bJFI', tip:'Saturday afternoon busking at Hongdae\'s main square is a Seoul institution. Indie music clubs are concentrated in the back alleys.' },
+
+  // Vincenzo
+  { drama:'vincenzo', name:'Geumga Plaza — Sindorim area', kr:'금가프라자 (신도림 인근)', lat:37.507, lng:126.890, district:'Guro-gu, Seoul', scene:"The fictional Geumga Plaza building complex. The drama's tenants defending their mall from corporate takeover filmed in a real commercial complex in western Seoul.", yt:'https://www.youtube.com/watch?v=klY7tpFGBXo', tip:'The rooftop scenes were filmed at a separate location in Jongno — the drama cleverly spliced multiple Seoul rooftops.' },
+];
+
+let activeFilter = 'all';
+let map, markers = [];
+
+function buildFilterBar() {
+  const bar = document.getElementById('filter-bar');
+  const dramas = [...new Set(LOCATIONS.map(l => l.drama))];
+  dramas.forEach(d => {
+    const info = DRAMAS[d];
+    if (!info) return;
+    const btn = document.createElement('button');
+    btn.className = 'filter-chip';
+    btn.dataset.filter = d;
+    btn.textContent = info.title.split(' (')[0];
+    btn.onclick = () => setFilter(d);
+    bar.appendChild(btn);
+  });
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === f);
+  });
+  renderMap();
+  renderGrid();
+}
+
+function getColor(drama) {
+  return (DRAMAS[drama] || {}).color || '#3b8ee2';
+}
+
+function createIcon(drama) {
+  const color = getColor(drama);
+  return L.divIcon({
+    className: '',
+    html: `<div style="background:${color};width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.5);"></div>`,
+    iconSize: [14, 14], iconAnchor: [7, 7],
+  });
+}
+
+function renderMap() {
+  markers.forEach(m => m.remove());
+  markers = [];
+  const data = activeFilter === 'all' ? LOCATIONS : LOCATIONS.filter(l => l.drama === activeFilter);
+
+  data.forEach(loc => {
+    const drama = DRAMAS[loc.drama];
+    const color = getColor(loc.drama);
+    const icon = createIcon(loc.drama);
+    const m = L.marker([loc.lat, loc.lng], { icon })
+      .addTo(map)
+      .bindPopup(`
+        <div>
+          <span class="popup-drama" style="background:${color}">${drama ? drama.title.split(' (')[0] : loc.drama}</span>
+          <div class="popup-name">${loc.name}</div>
+          <div style="font-size:11px;color:#888;margin-bottom:4px;">${loc.kr} · ${loc.district}</div>
+          <div class="popup-scene">${loc.scene.length > 140 ? loc.scene.slice(0, 140) + '…' : loc.scene}</div>
+          ${loc.yt ? `<a href="${loc.yt}" target="_blank" rel="noopener" class="popup-yt">▶ Watch scene on YouTube</a>` : ''}
+        </div>
+      `, { maxWidth: 280 });
+    m._locData = loc;
+    markers.push(m);
+  });
+
+  document.getElementById('map-count').textContent = data.length + ' locations';
+}
+
+function renderGrid() {
+  const grid = document.getElementById('locations-grid');
+  const data = activeFilter === 'all' ? LOCATIONS : LOCATIONS.filter(l => l.drama === activeFilter);
+  grid.innerHTML = '';
+  data.forEach(loc => {
+    const drama = DRAMAS[loc.drama];
+    const color = getColor(loc.drama);
+    const card = document.createElement('div');
+    card.className = 'loc-card';
+    card.dataset.drama = loc.drama;
+    card.innerHTML = `
+      <span class="loc-drama-tag" style="background:${color}">${drama ? drama.title.split(' (')[0] : loc.drama} ${drama ? drama.year : ''}</span>
+      <div class="loc-name">${loc.name}</div>
+      <div class="loc-kr">${loc.kr}</div>
+      <div class="loc-scene">${loc.scene}</div>
+      <div class="loc-meta">
+        <span class="loc-badge">📍 ${loc.district}</span>
+      </div>
+      ${loc.tip ? `<div class="loc-scene" style="margin-top:6px;color:var(--text3);">💡 ${loc.tip}</div>` : ''}
+      ${loc.yt ? `<a href="${loc.yt}" target="_blank" rel="noopener" class="loc-yt">▶ Watch on YouTube</a>` : ''}
+    `;
+    card.addEventListener('click', e => {
+      if (e.target.tagName === 'A') return;
+      map.flyTo([loc.lat, loc.lng], 14, { duration: 0.8 });
+      const marker = markers.find(m => m._locData === loc);
+      if (marker) setTimeout(() => marker.openPopup(), 900);
+      window.scrollTo({ top: document.getElementById('kdrama-map').getBoundingClientRect().top + window.scrollY - 20, behavior: 'smooth' });
+    });
+    grid.appendChild(card);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildFilterBar();
+
+  map = L.map('kdrama-map', { zoomControl: true, scrollWheelZoom: false }).setView([36.5, 127.8], 7);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+    maxZoom: 19,
+  }).addTo(map);
+
+  renderMap();
+  renderGrid();
+});
+</script>
+
+</body>
+</html>

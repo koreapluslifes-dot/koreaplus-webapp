@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korea Currency Converter & Price Guide | KoreaPlus</title>
+  <meta name="description" content="Real-time KRW exchange rates + Korea price reference guide. Is this expensive? Coffee, meals, taxis, accommodation compared.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/currency.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="modules/header.js"></script>
+  <style>
+    .converter-card {
+      background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius);
+      padding:28px; margin-bottom:24px;
+    }
+    .curr-input-row { display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+    .curr-amount {
+      flex:1; min-width:140px; padding:14px 16px; font-size:28px; font-weight:700;
+      background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-sm);
+      color:var(--text); font-family:var(--font); outline:none; transition:border-color .2s;
+    }
+    .curr-amount:focus { border-color:var(--accent); }
+    .curr-select {
+      padding:10px 14px; font-size:16px; font-weight:600;
+      background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-sm);
+      color:var(--text); cursor:pointer; outline:none; min-width:130px;
+    }
+    .curr-result {
+      font-size:40px; font-weight:900; color:var(--accent2); margin-bottom:6px; line-height:1;
+    }
+    .curr-rate   { font-size:13px; color:var(--text2); }
+    .curr-updated{ font-size:11px; color:var(--text3); margin-top:4px; }
+
+    .price-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .price-table th { padding:10px 12px; text-align:left; color:var(--text3); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--border); }
+    .price-table td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+    .price-table tr:last-child td { border-bottom:none; }
+    .price-table tr:hover td { background:var(--surface); }
+    .p-item  { font-weight:600; color:var(--text); }
+    .p-krw   { color:var(--accent2); font-weight:700; font-family:monospace; font-size:14px; }
+    .p-usd   { color:var(--text2); }
+    .p-level { display:inline-block; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+    .p-cheap  { background:rgba(16,185,129,.12); color:#10b981; }
+    .p-mid    { background:rgba(251,191,36,.10); color:#fbbf24; }
+    .p-pricey { background:rgba(249,115,22,.10); color:#f97316; }
+
+    .tip-box {
+      background:rgba(239,68,68,.06); border:2px solid rgba(239,68,68,.3);
+      border-radius:var(--radius); padding:20px 24px; margin-bottom:28px;
+      display:flex; gap:16px; align-items:flex-start;
+    }
+    .tip-icon { font-size:32px; flex-shrink:0; }
+    .tip-title{ font-size:16px; font-weight:800; color:#ef4444; margin-bottom:4px; }
+    .tip-body { font-size:13px; color:var(--text2); line-height:1.7; }
+
+    .calc-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
+    .calc-label { font-size:14px; font-weight:600; color:var(--text2); min-width:120px; }
+    .calc-num {
+      width:120px; padding:8px 12px; font-size:16px; font-weight:700;
+      background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-sm);
+      color:var(--text); outline:none;
+    }
+    .calc-result-big { font-size:32px; font-weight:900; color:var(--green); }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🏠 Home</a>
+    <a class="hub-nav-link" href="phrases.html">💬 Phrases</a>
+    <a class="hub-nav-link hub-nav-link active" href="currency.html">💱 Currency</a>
+    <a class="hub-nav-link" href="emergency.html">🆘 Emergency</a>
+    <a class="hub-nav-link" href="menu-translator.html">📷 Menu</a>
+    <a class="hub-nav-link" href="subway.html">🚇 Subway</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">Finance & Budgeting</div>
+  <h1>💱 Korea Currency Guide</h1>
+  <p>Live KRW exchange rates + real price comparisons for travelers</p>
+</div>
+
+<main class="hub-content" style="max-width:880px">
+
+  <!-- No Tipping Banner -->
+  <div class="tip-box" role="note">
+    <div class="tip-icon">🙅</div>
+    <div>
+      <div class="tip-title">Korea Does NOT Have a Tipping Culture</div>
+      <div class="tip-body">Unlike the US, tipping is NOT expected or required in Korea — not at restaurants, hotels, taxis, or salons. Leaving a tip can sometimes cause confusion. <strong style="color:var(--text)">The price you see is the price you pay.</strong> Tax is always included in menu prices too.</div>
+    </div>
+  </div>
+
+  <!-- Live Converter -->
+  <h2 style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:16px">Live Exchange Rates</h2>
+  <div class="converter-card">
+    <div class="curr-input-row">
+      <input class="curr-amount" type="number" id="amount" value="100" min="0" step="any" aria-label="Amount to convert">
+      <select class="curr-select" id="currency" aria-label="Select currency">
+        <option value="USD">🇺🇸 USD</option>
+        <option value="EUR">🇪🇺 EUR</option>
+        <option value="JPY">🇯🇵 JPY</option>
+        <option value="GBP">🇬🇧 GBP</option>
+        <option value="CNY">🇨🇳 CNY</option>
+        <option value="AUD">🇦🇺 AUD</option>
+        <option value="CAD">🇨🇦 CAD</option>
+        <option value="SGD">🇸🇬 SGD</option>
+        <option value="HKD">🇭🇰 HKD</option>
+        <option value="TWD">🇹🇼 TWD</option>
+        <option value="THB">🇹🇭 THB</option>
+        <option value="PHP">🇵🇭 PHP</option>
+        <option value="VND">🇻🇳 VND</option>
+        <option value="MYR">🇲🇾 MYR</option>
+        <option value="INR">🇮🇳 INR</option>
+      </select>
+      <div style="font-size:28px;color:var(--text3)">→</div>
+      <div style="color:var(--accent2);font-size:22px;font-weight:800">KRW ₩</div>
+    </div>
+
+    <div class="curr-result" id="result">—</div>
+    <div class="curr-rate" id="rate-info">Loading exchange rates…</div>
+    <div class="curr-updated" id="rate-updated"></div>
+
+    <!-- Reverse: KRW → foreign -->
+    <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border)">
+      <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:10px;text-transform:uppercase">Reverse: ₩ to your currency</div>
+      <div class="curr-input-row">
+        <input class="curr-amount" type="number" id="krw-amount" value="10000" min="0" step="100" aria-label="KRW amount" style="font-size:20px">
+        <div style="font-size:16px;color:var(--text3)">KRW →</div>
+        <div class="curr-result" id="rev-result" style="font-size:24px;margin:0">—</div>
+        <div id="rev-currency" style="font-size:16px;font-weight:700;color:var(--accent2)">USD</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price Guide -->
+  <h2 style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px">Is This Expensive? Korea Price Guide</h2>
+  <p style="color:var(--text2);font-size:13px;margin-bottom:16px">Typical Seoul 2025 prices. Amounts shown in KRW and converted to your selected currency.</p>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px">
+    <table class="price-table">
+      <thead>
+        <tr><th>Item</th><th>KRW</th><th id="price-usd-header">USD ≈</th><th>Verdict</th></tr>
+      </thead>
+      <tbody id="price-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Quick Calculator -->
+  <h2 style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:16px">💰 Daily Budget Calculator</h2>
+  <div class="converter-card">
+    <div class="calc-row">
+      <span class="calc-label">🍜 Meals / day</span>
+      <input class="calc-num" type="number" id="b-meals" value="3" min="1" max="10">
+      <span style="font-size:13px;color:var(--text2)">× ₩12,000 avg</span>
+    </div>
+    <div class="calc-row">
+      <span class="calc-label">🚇 Transit / day</span>
+      <input class="calc-num" type="number" id="b-transit" value="4" min="0">
+      <span style="font-size:13px;color:var(--text2)">× ₩1,400 per ride</span>
+    </div>
+    <div class="calc-row">
+      <span class="calc-label">☕ Café visits</span>
+      <input class="calc-num" type="number" id="b-cafe" value="1" min="0">
+      <span style="font-size:13px;color:var(--text2)">× ₩6,000 avg</span>
+    </div>
+    <div class="calc-row">
+      <span class="calc-label">🛍️ Shopping (₩)</span>
+      <input class="calc-num" type="number" id="b-shopping" value="20000" min="0" step="1000">
+      <span style="font-size:13px;color:var(--text2)">daily budget</span>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:8px">
+      <div style="font-size:13px;color:var(--text2);margin-bottom:6px">Estimated daily total:</div>
+      <div class="calc-result-big" id="daily-total">—</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:4px" id="daily-total-foreign"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const WORKER = (window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev');
+let rates = {};
+let selectedCurrency = 'USD';
+
+const PRICES = [
+  { item:'☕ Americano (café)', krw:4500,  level:'cheap',  note:'GS25 coffee is ₩1,500' },
+  { item:'🍜 Convenience store meal', krw:4000, level:'cheap', note:'GS25 / CU / 7-Eleven' },
+  { item:'🍚 Bibimbap (restaurant)', krw:10000, level:'cheap', note:'Casual restaurant' },
+  { item:'🥩 Korean BBQ (per person)', krw:18000, level:'mid', note:'Samgyeopsal, includes sides' },
+  { item:'🍺 Soju (bottle)', krw:5000, level:'cheap', note:'At a restaurant' },
+  { item:'🚇 Subway / bus ride', krw:1400, level:'cheap', note:'With T-money card' },
+  { item:'🚕 Taxi (base fare)', krw:4800, level:'cheap', note:'KakaoTaxi' },
+  { item:'🛵 Subway from Incheon to Seoul', krw:9000, level:'cheap', note:'AREX express' },
+  { item:'🏨 Budget guesthouse (night)', krw:30000, level:'mid', note:'Hongdae area' },
+  { item:'🏨 Mid-range hotel (night)', krw:80000, level:'mid', note:'Gangnam, per night' },
+  { item:'💄 Sheet mask (Olive Young)', krw:2000, level:'cheap', note:'Per mask' },
+  { item:'🎭 Museum admission', krw:6000, level:'cheap', note:'Most national museums free' },
+  { item:'🎤 Norebang (karaoke, 2h)', krw:15000, level:'cheap', note:'Per person estimate' },
+  { item:'🧖 Jjimjilbang (overnight)', krw:13000, level:'cheap', note:'Includes sauna use' },
+  { item:'🚄 KTX Seoul → Busan', krw:59800, level:'mid', note:'2h 20min, standard seat' },
+];
+
+async function loadRates() {
+  try {
+    const r = await fetch(WORKER + '/api/exchange');
+    const d = await r.json();
+    if (d.data?.rates) {
+      rates = d.data.rates;
+      document.getElementById('rate-updated').textContent = 'Updated: ' + new Date().toLocaleTimeString();
+    }
+  } catch {
+    // Fallback approximate rates
+    rates = { USD:0.000738, EUR:0.000682, JPY:0.112, GBP:0.000583, CNY:0.00535, AUD:0.00115, CAD:0.00101, SGD:0.000998, HKD:0.00577, TWD:0.0237, THB:0.0268, PHP:0.0428, VND:18.7, MYR:0.00347, INR:0.0617 };
+    document.getElementById('rate-updated').textContent = 'Offline rates (approximate)';
+  }
+  updateAll();
+}
+
+function convertToForeign(krw, currency) {
+  const rate = rates[currency];
+  if (!rate) return '—';
+  const val = krw * rate;
+  if (val < 1) return currency + ' ' + val.toFixed(3);
+  if (val < 10) return currency + ' ' + val.toFixed(2);
+  return currency + ' ' + Math.round(val).toLocaleString();
+}
+
+function convertToKRW(amount, currency) {
+  const rate = rates[currency];
+  if (!rate || rate === 0) return '—';
+  return '₩ ' + Math.round(amount / rate).toLocaleString();
+}
+
+function updateAll() {
+  const amount = parseFloat(document.getElementById('amount').value) || 0;
+  selectedCurrency = document.getElementById('currency').value;
+
+  const rate = rates[selectedCurrency];
+  if (rate && rate > 0) {
+    const krw = Math.round(amount / rate);
+    document.getElementById('result').textContent = '₩ ' + krw.toLocaleString();
+    document.getElementById('rate-info').textContent = '1 ' + selectedCurrency + ' = ₩ ' + Math.round(1/rate).toLocaleString();
+  } else {
+    document.getElementById('result').textContent = '—';
+    document.getElementById('rate-info').textContent = 'Exchange rate not available';
+  }
+
+  // Reverse
+  const krwAmount = parseFloat(document.getElementById('krw-amount').value) || 0;
+  document.getElementById('rev-result').textContent = convertToForeign(krwAmount, selectedCurrency);
+  document.getElementById('rev-currency').textContent = selectedCurrency;
+
+  // Price table
+  renderPriceTable();
+  updateBudget();
+
+  // Table header
+  document.getElementById('price-usd-header').textContent = selectedCurrency + ' ≈';
+}
+
+function renderPriceTable() {
+  const tbody = document.getElementById('price-tbody');
+  tbody.innerHTML = '';
+  PRICES.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><div class="p-item">${p.item}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">${p.note}</div></td>
+      <td class="p-krw">₩${p.krw.toLocaleString()}</td>
+      <td class="p-usd">${convertToForeign(p.krw, selectedCurrency)}</td>
+      <td><span class="p-level p-${p.level}">${p.level==='cheap'?'💚 Cheap':p.level==='mid'?'💛 Normal':'🔶 Pricey'}</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function updateBudget() {
+  const meals    = parseInt(document.getElementById('b-meals').value)   || 3;
+  const transit  = parseInt(document.getElementById('b-transit').value) || 4;
+  const cafe     = parseInt(document.getElementById('b-cafe').value)    || 1;
+  const shopping = parseInt(document.getElementById('b-shopping').value)|| 20000;
+
+  const total = meals * 12000 + transit * 1400 + cafe * 6000 + shopping;
+  document.getElementById('daily-total').textContent = '₩ ' + total.toLocaleString();
+  document.getElementById('daily-total-foreign').textContent = '≈ ' + convertToForeign(total, selectedCurrency);
+}
+
+// Event listeners
+document.getElementById('amount').addEventListener('input', updateAll);
+document.getElementById('currency').addEventListener('change', updateAll);
+document.getElementById('krw-amount').addEventListener('input', updateAll);
+['b-meals','b-transit','b-cafe','b-shopping'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateAll);
+});
+
+loadRates();
+</script>
+
+</body>
+</html>

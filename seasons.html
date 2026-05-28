@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korea Cherry Blossom & Foliage Forecast 2025 | KoreaPlus</title>
+  <meta name="description" content="Korea spring cherry blossom and autumn foliage forecast map 2025. When and where to see blooms — Jeju, Busan, Seoul, Seoraksan.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/seasons.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="modules/header.js"></script>
+  <style>
+    .season-tabs { display:flex; gap:8px; margin-bottom:20px; }
+    .season-tab  {
+      padding:8px 20px; border-radius:20px; font-size:14px; font-weight:700; cursor:pointer;
+      border:2px solid transparent; transition:all .2s;
+    }
+    .season-tab.spring { color:var(--text2); background:var(--surface); border-color:var(--border); }
+    .season-tab.spring.active { color:#ec4899; background:rgba(236,72,153,.1); border-color:rgba(236,72,153,.4); }
+    .season-tab.autumn { color:var(--text2); background:var(--surface); border-color:var(--border); }
+    .season-tab.autumn.active { color:#f97316; background:rgba(249,115,22,.1); border-color:rgba(249,115,22,.4); }
+
+    .map-wrap { height:460px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); margin-bottom:24px; position:relative; }
+    #season-map { width:100%; height:100%; }
+
+    .location-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; margin-bottom:32px; }
+    .loc-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+      padding:14px 16px; cursor:pointer; transition:all .15s;
+    }
+    .loc-card:hover { border-color:var(--border2); transform:translateY(-1px); }
+    .loc-name { font-size:14px; font-weight:700; color:var(--text); }
+    .loc-kr   { font-size:12px; color:var(--text3); margin-top:2px; }
+    .loc-date { font-size:13px; font-weight:700; margin-top:8px; }
+    .loc-date.spring { color:#ec4899; }
+    .loc-date.autumn { color:#f97316; }
+    .loc-tip  { font-size:11px; color:var(--text2); margin-top:4px; line-height:1.5; }
+
+    .tip-banner { background:rgba(251,191,36,.08); border:1px solid rgba(251,191,36,.2); border-radius:var(--radius); padding:14px 18px; margin-bottom:20px; font-size:13px; color:var(--text2); }
+
+    .status-chip {
+      display:inline-block; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:700;
+      margin-left:8px; vertical-align:middle;
+    }
+    .status-now    { background:rgba(16,185,129,.15); color:#10b981; }
+    .status-soon   { background:rgba(251,191,36,.15); color:#fbbf24; }
+    .status-passed { background:var(--surface); color:var(--text3); border:1px solid var(--border); }
+    .status-future { background:rgba(59,142,234,.1); color:var(--accent2); }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🏠 Home</a>
+    <a class="hub-nav-link hub-nav-link active" href="seasons.html">🌸 Seasons</a>
+    <a class="hub-nav-link" href="festivals.html">📅 Festivals</a>
+    <a class="hub-nav-link" href="plan.html">🗺️ Plan Trip</a>
+    <a class="hub-nav-link" href="kdrama-locations.html">🎬 K-Drama</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">Seasonal Travel</div>
+  <h1>🌸 Blossom & Foliage Forecast</h1>
+  <p>Cherry blossoms (봄 벚꽃) and autumn leaves (단풍) — when and where to see Korea's best seasonal colours</p>
+</div>
+
+<main class="hub-content" style="max-width:1000px">
+
+  <div class="season-tabs">
+    <button class="season-tab spring active" id="tab-spring" onclick="switchSeason('spring')">🌸 Spring Cherry Blossom</button>
+    <button class="season-tab autumn" id="tab-autumn" onclick="switchSeason('autumn')">🍂 Autumn Foliage</button>
+  </div>
+
+  <div class="tip-banner" id="season-tip">💡 Loading seasonal tips…</div>
+
+  <div class="map-wrap">
+    <div id="season-map"></div>
+  </div>
+
+  <h2 style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:14px" id="list-title">Best Cherry Blossom Spots</h2>
+  <div class="location-list" id="location-list"></div>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const NOW = new Date();
+const YEAR = NOW.getFullYear();
+
+const SPRING = [
+  { name:'Seogwipo, Jeju', kr:'서귀포, 제주', lat:33.254, lng:126.559, start:'03-21', end:'03-28', color:'#ec4899', tip:'Earliest blossoms in Korea — the Japanese cherry (왕벚나무) originated here. Best at Jeju Cherry Blossom Festival.' },
+  { name:'Busan — Hwamyeong', kr:'부산 화명', lat:35.20, lng:128.97, start:'04-01', end:'04-07', color:'#f472b6', tip:'Yeojucheon Stream lined with 2.3km of cherry trees. Walk from Hwamyeong Station (Line 3).' },
+  { name:'Jinhae Cherry Blossom Festival', kr:'진해 군항제', lat:35.15, lng:128.67, start:'03-30', end:'04-05', color:'#ec4899', tip:"Korea's most famous cherry blossom event — 360,000 cherry trees! Very crowded — book accommodation months ahead." },
+  { name:'Gyeongju', kr:'경주', lat:35.856, lng:129.224, start:'04-03', end:'04-10', color:'#f472b6', tip:'Blooms along Bomun Lake and between royal tombs. Ancient city + cherry blossoms = magical combination.' },
+  { name:'Gwangju — Chungjang-ro', kr:'광주', lat:35.16, lng:126.85, start:'04-02', end:'04-08', color:'#f9a8d4', tip:'City center pedestrian street lined with cherry trees.' },
+  { name:'Seoul — Yeouido', kr:'서울 여의도', lat:37.529, lng:126.930, start:'04-04', end:'04-12', color:'#ec4899', tip:'Yeouido Spring Flower Festival. Stroll the Han River walking path. Cherry blossom café pop-ups everywhere.' },
+  { name:'Seoul — Namsan Park', kr:'서울 남산', lat:37.551, lng:126.988, start:'04-05', end:'04-13', color:'#f472b6', tip:'Stunning views of Seoul with blossoms. Best at sunrise or evening lighting.' },
+  { name:'Seoul — Bukchon Hanok Village', kr:'서울 북촌', lat:37.582, lng:126.985, start:'04-05', end:'04-12', color:'#f9a8d4', tip:'Cherry blossoms + 600-year-old hanok = best photos in Seoul.' },
+  { name:'Chuncheon — Nami Island', kr:'춘천 남이섬', lat:37.796, lng:127.521, start:'04-08', end:'04-15', color:'#f472b6', tip:'Island lined with cherry and other blossom trees. Romantic setting famous from Winter Sonata.' },
+  { name:'Sokcho / Seoraksan', kr:'속초/설악산', lat:38.119, lng:128.465, start:'04-12', end:'04-20', color:'#fce7f3', tip:'Latest mainland blossoms — mountain setting is spectacular. Mountain cherry trees bloom when Seoul is done.' },
+];
+
+const AUTUMN = [
+  { name:'Seoraksan National Park', kr:'설악산국립공원', lat:38.119, lng:128.465, start:'10-01', end:'10-15', color:'#f97316', tip:"Korea's most celebrated autumn destination — fiery reds and oranges from early October. Take cable car to Gwongeumseong." },
+  { name:'Odaesan National Park', kr:'오대산국립공원', lat:37.788, lng:128.545, start:'10-05', end:'10-20', color:'#f59e0b', tip:'Quieter than Seoraksan but equally stunning. Woljeongsa Temple approach road is breathtaking.' },
+  { name:'Suwon Hwaseong Fortress', kr:'수원 화성', lat:37.286, lng:127.011, start:'10-18', end:'11-02', color:'#fb923c', tip:'UNESCO fortress wall walks wrapped in autumn colours. Near Seoul — easy day trip.' },
+  { name:'Bukhansan National Park', kr:'북한산국립공원', lat:37.660, lng:126.978, start:'10-18', end:'11-05', color:'#f97316', tip:"Seoul's backyard mountain turns spectacular in autumn. Dobongsan and Mangwolsa Temple areas are stunning." },
+  { name:'Naejangsan National Park', kr:'내장산국립공원', lat:35.493, lng:126.889, start:'10-20', end:'11-05', color:'#dc2626', tip:"Korea's autumn crown jewel — the most intense reds in the country, especially the 108 maple tunnel. Arrive early." },
+  { name:'Gyeongbokgung Palace, Seoul', kr:'경복궁, 서울', lat:37.579, lng:126.977, start:'10-22', end:'11-08', color:'#f97316', tip:'Palace + autumn ginkgos = perfection. Evening admission available. Combine with Gyeonghuigung and Unhyeongung.' },
+  { name:'Jirisan National Park', kr:'지리산국립공원', lat:35.337, lng:127.730, start:'10-10', end:'10-25', color:'#ea580c', tip:"Korea's longest mountain range turns golden. Piagol Valley has one of the best maple forests in Asia." },
+  { name:'Seoul Forest', kr:'서울숲', lat:37.544, lng:127.038, start:'10-20', end:'11-05', color:'#fb923c', tip:'Urban forest in the heart of Seoul — free, easily accessible from Ttukseom Station.' },
+  { name:'Daejeon — Gyeryongsan', kr:'대전 계룡산', lat:36.348, lng:127.262, start:'10-15', end:'10-30', color:'#f59e0b', tip:'Mountain between Daejeon and Gongju. Bright yellows and reds surround three historic temples.' },
+  { name:'Southern Coast & Yeosu', kr:'여수/남해', lat:34.760, lng:127.662, start:'11-01', end:'11-15', color:'#f97316', tip:'Southernmost foliage — latest in Korea, extends into mid-November. Combine with Yeosu seafood.' },
+];
+
+let activeSeason = 'spring';
+let map, markers = [];
+
+function parseDate(yearStr, mmdd) {
+  const [m, d] = mmdd.split('-').map(Number);
+  return new Date(yearStr, m - 1, d);
+}
+
+function getStatus(loc) {
+  const start = parseDate(YEAR, loc.start);
+  const end   = parseDate(YEAR, loc.end);
+  const diffStart = (start - NOW) / 86400000;
+  const diffEnd   = (end   - NOW) / 86400000;
+
+  if (diffStart <= 0 && diffEnd >= 0) return { label:'🌸 In bloom NOW', cls:'status-now' };
+  if (diffStart >  0 && diffStart <= 21) return { label:'⏳ In ' + Math.round(diffStart) + ' days', cls:'status-soon' };
+  if (diffEnd   < 0) return { label:'✓ Passed this year', cls:'status-passed' };
+  return { label:'📅 ' + loc.start.replace('-','/') + ' – ' + loc.end.replace('-','/'), cls:'status-future' };
+}
+
+function switchSeason(s) {
+  activeSeason = s;
+  document.getElementById('tab-spring').classList.toggle('active', s === 'spring');
+  document.getElementById('tab-autumn').classList.toggle('active', s === 'autumn');
+
+  const tips = {
+    spring: '🌸 Peak timing varies by 1-2 weeks each year depending on winter temperatures. Flowers last only 7-10 days — timing is everything! Check KMA forecast closer to the date.',
+    autumn: '🍂 Autumn foliage moves south from the mountains — Seoraksan peaks early October, Southern Korea peaks in November. Weekends are very crowded at major parks.'
+  };
+  document.getElementById('season-tip').textContent = '💡 ' + tips[s];
+  document.getElementById('list-title').textContent = s === 'spring' ? 'Best Cherry Blossom Spots' : 'Best Autumn Foliage Spots';
+
+  renderMap();
+  renderList();
+}
+
+function renderMap() {
+  markers.forEach(m => m.remove());
+  markers = [];
+  const data = activeSeason === 'spring' ? SPRING : AUTUMN;
+  const season = activeSeason;
+
+  data.forEach(loc => {
+    const status = getStatus(loc);
+    const isNow = status.cls === 'status-now';
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="background:${loc.color};width:${isNow?'18':'14'}px;height:${isNow?'18':'14'}px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.5);${isNow?'animation:pulse-ring 1.5s infinite;':''}"></div>`,
+      iconSize: [18, 18], iconAnchor: [9, 9],
+    });
+    const marker = L.marker([loc.lat, loc.lng], { icon })
+      .addTo(map)
+      .bindPopup(`<div style="font-family:Inter,sans-serif;min-width:200px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:4px">${season === 'spring' ? '🌸' : '🍂'} ${loc.name}</div>
+        <div style="color:#666;font-size:12px;margin-bottom:6px">${loc.kr}</div>
+        <div style="font-size:12px;color:${loc.color};font-weight:700;margin-bottom:6px">${status.label}</div>
+        <div style="font-size:12px;line-height:1.5">${loc.tip}</div>
+      </div>`);
+    markers.push(marker);
+  });
+}
+
+function renderList() {
+  const list = document.getElementById('location-list');
+  list.innerHTML = '';
+  const data   = activeSeason === 'spring' ? SPRING : AUTUMN;
+  const season = activeSeason;
+
+  data.forEach(loc => {
+    const status = getStatus(loc);
+    const el = document.createElement('div');
+    el.className = 'loc-card';
+    el.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="width:12px;height:12px;border-radius:50%;background:${loc.color};display:inline-block;flex-shrink:0"></span>
+        <div class="loc-name">${loc.name} <span class="status-chip ${status.cls}">${status.label}</span></div>
+      </div>
+      <div class="loc-kr">${loc.kr}</div>
+      <div class="loc-date ${season}">📅 ${loc.start.replace('-','/')} – ${loc.end.replace('-','/')}</div>
+      <div class="loc-tip">${loc.tip}</div>`;
+    el.addEventListener('click', () => {
+      map.setView([loc.lat, loc.lng], 10);
+      markers.forEach(m => {
+        if (m.getLatLng().lat === loc.lat) m.openPopup();
+      });
+    });
+    list.appendChild(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  map = L.map('season-map', { center: [36.5, 127.9], zoom: 7 });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd', maxZoom: 17,
+  }).addTo(map);
+
+  // Detect if current month makes spring or autumn more relevant
+  const month = NOW.getMonth() + 1;
+  const defaultSeason = (month >= 9 && month <= 11) ? 'autumn' : 'spring';
+  switchSeason(defaultSeason);
+});
+</script>
+
+</body>
+</html>

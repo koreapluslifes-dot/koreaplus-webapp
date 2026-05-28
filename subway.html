@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seoul Subway Live Status | KoreaPlus</title>
+  <meta name="description" content="Seoul Metro live arrival times in English. Check real-time train arrivals for any Seoul subway station — Lines 1-9, Gyeongui-Jungang, Bundang and more.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/subway.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="modules/header.js"></script>
+  <style>
+    .line-colors {
+      --l1:#0052A4; --l2:#00A84D; --l3:#EF7C1C; --l4:#00A5DE;
+      --l5:#996CAC; --l6:#CD7C2F; --l7:#747F00; --l8:#E6186C; --l9:#BDB092;
+      --bundang:#D4003B; --sinbundang:#B0232A; --gyeongchun:#0C8040;
+      --gyeongui:#77C4A3; --arex:#0065B3;
+    }
+
+    .search-section { margin-bottom:24px; }
+    .search-row { display:flex; gap:10px; align-items:stretch; }
+    .station-input {
+      flex:1; padding:12px 16px; background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; color:var(--text); font-size:15px; font-family:inherit;
+      transition:border-color .15s;
+    }
+    .station-input:focus { outline:none; border-color:var(--accent); }
+    .search-btn {
+      padding:12px 20px; background:var(--accent); color:#fff; border:none; border-radius:10px;
+      font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; transition:opacity .15s;
+    }
+    .search-btn:hover:not(:disabled) { opacity:.85; }
+    .search-btn:disabled { opacity:.4; cursor:not-allowed; }
+    .search-hint { font-size:11px; color:var(--text3); margin-top:6px; }
+
+    .quick-stations { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+    .quick-label { font-size:12px; color:var(--text3); font-weight:600; width:100%; margin-bottom:2px; }
+    .quick-chip {
+      padding:5px 12px; border-radius:20px; font-size:12px; font-weight:700; cursor:pointer;
+      border:1px solid var(--border); background:var(--surface); color:var(--text2); transition:all .15s;
+    }
+    .quick-chip:hover { border-color:var(--border2); color:var(--text); }
+
+    .fav-section { margin-bottom:24px; }
+    .fav-title { font-size:13px; color:var(--text3); font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+    .fav-list  { display:flex; flex-wrap:wrap; gap:8px; }
+    .fav-chip {
+      display:flex; align-items:center; gap:6px; padding:5px 12px; border-radius:20px;
+      font-size:12px; font-weight:700; cursor:pointer; border:1px solid var(--border); background:var(--surface); color:var(--text2); transition:all .15s;
+    }
+    .fav-chip:hover { border-color:var(--border2); color:var(--text); }
+    .fav-chip .fav-rm { font-size:10px; color:var(--text3); margin-left:2px; }
+    .fav-chip .fav-rm:hover { color:var(--accent); }
+
+    .result-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:20px; }
+    .result-header {
+      display:flex; align-items:center; gap:12px; padding:16px 18px;
+      border-bottom:1px solid var(--border); background:var(--bg);
+    }
+    .station-name-en { font-size:17px; font-weight:800; color:var(--text); }
+    .station-name-kr { font-size:13px; color:var(--text3); }
+    .fav-star { font-size:16px; cursor:pointer; margin-left:auto; transition:transform .15s; }
+    .fav-star:hover { transform:scale(1.2); }
+    .refresh-btn {
+      font-size:11px; color:var(--accent); cursor:pointer; font-weight:700;
+      background:none; border:none; padding:4px 8px; border-radius:6px; transition:background .15s;
+    }
+    .refresh-btn:hover { background:rgba(200,16,46,.08); }
+
+    .arrivals-table { width:100%; }
+    .arrival-row { display:flex; align-items:center; gap:10px; padding:12px 18px; border-bottom:1px solid var(--border); }
+    .arrival-row:last-child { border-bottom:none; }
+    .arrival-line {
+      width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:11px; font-weight:900; color:#fff; flex-shrink:0;
+    }
+    .arrival-dest { flex:1; }
+    .arrival-dest-en { font-size:13px; font-weight:700; color:var(--text); }
+    .arrival-dest-kr { font-size:11px; color:var(--text3); }
+    .arrival-time    { font-size:13px; font-weight:800; text-align:right; min-width:80px; }
+    .time-arriving   { color:#10b981; }
+    .time-soon       { color:#fbbf24; }
+    .time-normal     { color:var(--text2); }
+    .arrival-status  { font-size:10px; color:var(--text3); text-align:right; }
+
+    .no-arrivals { padding:24px; text-align:center; color:var(--text3); font-size:14px; }
+
+    .loading-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:32px; text-align:center; }
+    .loading-spinner { font-size:28px; animation:spin 1s linear infinite; display:inline-block; }
+    @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+    .loading-text { font-size:14px; color:var(--text2); margin-top:10px; }
+
+    .error-card { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.2); border-radius:var(--radius); padding:20px; margin-bottom:20px; }
+    .error-title { font-size:14px; font-weight:700; color:#ef4444; margin-bottom:4px; }
+    .error-msg   { font-size:13px; color:var(--text2); }
+
+    .line-legend { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+    .legend-line { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text2); }
+    .legend-dot  { width:14px; height:14px; border-radius:50%; flex-shrink:0; }
+
+    .last-updated { font-size:11px; color:var(--text3); text-align:right; margin-top:-12px; margin-bottom:16px; }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🏠 Home</a>
+    <a class="hub-nav-link hub-nav-link active" href="subway.html">🚇 Subway</a>
+    <a class="hub-nav-link" href="phrases.html">🗣️ Phrases</a>
+    <a class="hub-nav-link" href="currency.html">💱 Currency</a>
+    <a class="hub-nav-link" href="emergency.html">🆘 Emergency</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">Live Transit</div>
+  <h1>🚇 Seoul Subway Live Status</h1>
+  <p>Real-time train arrivals in English — type any Seoul metro station to see the next trains</p>
+</div>
+
+<main class="hub-content" style="max-width:700px">
+
+  <div class="search-section">
+    <div class="search-row">
+      <input class="station-input" id="station-input" type="search" placeholder="Station name — e.g. Hongdae, Gangnam, Itaewon…" autocomplete="off" aria-label="Station name">
+      <button class="search-btn" id="search-btn" onclick="searchStation()">🔍 Live Status</button>
+    </div>
+    <div class="search-hint">Type in English or Korean (e.g. 홍대입구, Hongik University, 강남)</div>
+  </div>
+
+  <div id="fav-section" class="fav-section" style="display:none">
+    <div class="fav-title">⭐ Saved Stations <span style="color:var(--text3);font-weight:400;font-size:11px">(tap to check)</span></div>
+    <div class="fav-list" id="fav-list"></div>
+  </div>
+
+  <div class="quick-stations">
+    <div class="quick-label">Popular stations:</div>
+    <button class="quick-chip" onclick="quickSearch('Hongik University')">🎨 Hongdae</button>
+    <button class="quick-chip" onclick="quickSearch('Gangnam')">💼 Gangnam</button>
+    <button class="quick-chip" onclick="quickSearch('Itaewon')">🍻 Itaewon</button>
+    <button class="quick-chip" onclick="quickSearch('Myeongdong')">🛍 Myeongdong</button>
+    <button class="quick-chip" onclick="quickSearch('Gyeongbokgung')">🏯 Gyeongbokgung</button>
+    <button class="quick-chip" onclick="quickSearch('Dongdaemun')">🌃 Dongdaemun</button>
+    <button class="quick-chip" onclick="quickSearch('Seoul Station')">🚄 Seoul Station</button>
+    <button class="quick-chip" onclick="quickSearch('Sinchon')">🍺 Sinchon</button>
+    <button class="quick-chip" onclick="quickSearch('Insadong')">🎎 Insadong</button>
+    <button class="quick-chip" onclick="quickSearch('Yeouido')">🌸 Yeouido</button>
+  </div>
+
+  <div id="result-area"></div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-top:8px">
+    <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px">Seoul Metro Line Guide</div>
+    <div class="line-legend" id="line-legend"></div>
+    <div style="font-size:11px;color:var(--text3);margin-top:6px">Seoul Metro runs 05:30–24:00. Fare: ₩1,400 base (T-money card) — buy at airport GS25, convenience stores, or station machines. <strong>Tip:</strong> Kakao Metro app shows real-time departures offline.</div>
+  </div>
+
+</main>
+
+<script>
+const WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';
+
+const LINES = [
+  { id:'1', name:'Line 1', color:'#0052A4' },
+  { id:'2', name:'Line 2', color:'#00A84D' },
+  { id:'3', name:'Line 3', color:'#EF7C1C' },
+  { id:'4', name:'Line 4', color:'#00A5DE' },
+  { id:'5', name:'Line 5', color:'#996CAC' },
+  { id:'6', name:'Line 6', color:'#CD7C2F' },
+  { id:'7', name:'Line 7', color:'#747F00' },
+  { id:'8', name:'Line 8', color:'#E6186C' },
+  { id:'9', name:'Line 9', color:'#BDB092' },
+  { id:'bundang', name:'Bundang', color:'#D4003B' },
+  { id:'sinbundang', name:'Sinbundang', color:'#B0232A' },
+  { id:'gyeongchun', name:'Gyeongchun', color:'#0C8040' },
+  { id:'gyeongui', name:'Gyeongui-Jungang', color:'#77C4A3' },
+  { id:'arex', name:'AREX (Airport)', color:'#0065B3' },
+];
+
+const LINE_MAP = {
+  '1호선':'1','2호선':'2','3호선':'3','4호선':'4','5호선':'5',
+  '6호선':'6','7호선':'7','8호선':'8','9호선':'9',
+  '수인분당선':'bundang','신분당선':'sinbundang','경춘선':'gyeongchun',
+  '경의중앙선':'gyeongui','공항철도':'arex','인천1호선':'인천1','인천2호선':'인천2',
+  'GTX-A':'GTX-A',
+};
+
+function getLineColor(lineStr) {
+  for (const [kr, id] of Object.entries(LINE_MAP)) {
+    if ((lineStr || '').includes(kr)) {
+      const l = LINES.find(x => x.id === id);
+      if (l) return l.color;
+    }
+  }
+  if ((lineStr || '').match(/\d/)) {
+    const n = lineStr.match(/\d+/)[0];
+    const l = LINES.find(x => x.id === n);
+    if (l) return l.color;
+  }
+  return '#6b7280';
+}
+
+function getLineLabel(lineStr) {
+  for (const [kr, id] of Object.entries(LINE_MAP)) {
+    if ((lineStr || '').includes(kr)) {
+      const l = LINES.find(x => x.id === id);
+      if (l) return l.name.replace('Line ', '');
+    }
+  }
+  const m = (lineStr || '').match(/(\d+)/);
+  return m ? m[1] : '?';
+}
+
+function formatArrival(seconds) {
+  if (seconds == null) return { text: 'Check board', cls: 'time-normal' };
+  const s = parseInt(seconds, 10);
+  if (isNaN(s) || s <= 0) return { text: 'Arriving', cls: 'time-arriving' };
+  if (s < 60) return { text: s + 's', cls: 'time-arriving' };
+  if (s < 180) return { text: Math.round(s / 60) + ' min', cls: 'time-soon' };
+  const m = Math.floor(s / 60);
+  return { text: m + ' min', cls: 'time-normal' };
+}
+
+function getFavs() {
+  try { return JSON.parse(localStorage.getItem('kp_subway_favs') || '[]'); } catch { return []; }
+}
+function saveFavs(favs) {
+  localStorage.setItem('kp_subway_favs', JSON.stringify(favs));
+}
+function isFav(name) {
+  return getFavs().some(f => f.en === name || f.kr === name);
+}
+function toggleFav(stationEn, stationKr) {
+  let favs = getFavs();
+  const idx = favs.findIndex(f => f.en === stationEn);
+  if (idx >= 0) favs.splice(idx, 1);
+  else favs.unshift({ en: stationEn, kr: stationKr });
+  saveFavs(favs);
+  renderFavs();
+  renderFavStar(stationEn);
+}
+function renderFavs() {
+  const favs = getFavs();
+  const sec = document.getElementById('fav-section');
+  const list = document.getElementById('fav-list');
+  if (!favs.length) { sec.style.display = 'none'; return; }
+  sec.style.display = '';
+  list.innerHTML = '';
+  favs.forEach(f => {
+    const chip = document.createElement('button');
+    chip.className = 'fav-chip';
+    chip.innerHTML = `⭐ ${f.en} <span style="color:var(--text3)">${f.kr}</span> <span class="fav-rm" onclick="event.stopPropagation();toggleFav('${f.en}','${f.kr}')" title="Remove">✕</span>`;
+    chip.onclick = () => quickSearch(f.en);
+    list.appendChild(chip);
+  });
+}
+function renderFavStar(stationEn) {
+  const star = document.getElementById('fav-star-' + CSS.escape(stationEn));
+  if (star) star.textContent = isFav(stationEn) ? '⭐' : '☆';
+}
+
+async function fetchArrival(station) {
+  const url = WORKER_URL + '/api/subway?station=' + encodeURIComponent(station);
+  const resp = await fetch(url);
+  if (!resp.ok) {
+    const body = await resp.text().catch(() => '');
+    throw new Error(body || 'Server returned ' + resp.status);
+  }
+  return resp.json();
+}
+
+function renderLoading(station) {
+  document.getElementById('result-area').innerHTML = `
+    <div class="loading-card">
+      <div class="loading-spinner">🚇</div>
+      <div class="loading-text">Fetching live arrivals for <strong>${escHtml(station)}</strong>…</div>
+    </div>
+  `;
+}
+
+function renderError(msg) {
+  document.getElementById('result-area').innerHTML = `
+    <div class="error-card">
+      <div class="error-title">Could not fetch arrivals</div>
+      <div class="error-msg">${escHtml(msg)}<br><br>
+        <strong>Alternatives:</strong> Kakao Metro app (free), Naver Map, or check the digital display boards at the station entrance.
+      </div>
+    </div>
+  `;
+}
+
+function renderArrivals(data, station) {
+  const area = document.getElementById('result-area');
+
+  if (!data || data.error) {
+    renderError(data?.error || 'Station not found. Try a different spelling or use Korean (e.g. 강남역).');
+    return;
+  }
+
+  const stationEn = data.stationNameEn || station;
+  const stationKr = data.stationNameKr || '';
+  const arrivals  = data.arrivals || [];
+  const updatedAt = new Date().toLocaleTimeString('en-KR', { hour:'2-digit', minute:'2-digit' });
+  const favored   = isFav(stationEn);
+
+  let rows = '';
+  if (arrivals.length === 0) {
+    rows = `<div class="no-arrivals">No arrivals data available right now.<br>Service runs 05:30–24:00. Check the station display boards.</div>`;
+  } else {
+    arrivals.slice(0, 12).forEach(a => {
+      const lineColor = getLineColor(a.line || '');
+      const lineLabel = getLineLabel(a.line || '');
+      const time      = formatArrival(a.arrivalSeconds != null ? a.arrivalSeconds : a.remainSeconds);
+      const destEn    = a.destinationEn || a.destination || '';
+      const destKr    = a.destinationKr || a.bstatnNm || '';
+      const status    = a.arvlMsg2 || a.status || '';
+
+      rows += `
+        <div class="arrival-row">
+          <div class="arrival-line" style="background:${lineColor}">${escHtml(lineLabel)}</div>
+          <div class="arrival-dest">
+            <div class="arrival-dest-en">→ ${escHtml(destEn || destKr)}</div>
+            ${destKr && destKr !== destEn ? `<div class="arrival-dest-kr">${escHtml(destKr)}</div>` : ''}
+          </div>
+          <div>
+            <div class="arrival-time ${time.cls}">${escHtml(time.text)}</div>
+            ${status ? `<div class="arrival-status">${escHtml(status)}</div>` : ''}
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  area.innerHTML = `
+    <div class="last-updated">Updated ${updatedAt}</div>
+    <div class="result-card">
+      <div class="result-header">
+        <div>
+          <div class="station-name-en">${escHtml(stationEn)}</div>
+          ${stationKr ? `<div class="station-name-kr">${escHtml(stationKr)}역</div>` : ''}
+        </div>
+        <button class="refresh-btn" onclick="doSearch('${escHtml(stationEn)}')">↻ Refresh</button>
+        <button class="fav-star" id="fav-star-${escHtml(stationEn)}" onclick="toggleFav('${escHtml(stationEn)}','${escHtml(stationKr)}')" aria-label="Save station">
+          ${favored ? '⭐' : '☆'}
+        </button>
+      </div>
+      <div class="arrivals-table">${rows}</div>
+    </div>
+  `;
+}
+
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function doSearch(station) {
+  if (!station.trim()) return;
+  renderLoading(station);
+  try {
+    const data = await fetchArrival(station);
+    renderArrivals(data, station);
+  } catch (err) {
+    renderError(err.message || 'Network error. Check your connection.');
+  }
+}
+
+function searchStation() {
+  const v = document.getElementById('station-input').value.trim();
+  if (!v) return;
+  doSearch(v);
+}
+
+function quickSearch(name) {
+  document.getElementById('station-input').value = name;
+  doSearch(name);
+}
+
+document.getElementById('station-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') searchStation();
+});
+
+// Line legend
+(function buildLegend() {
+  const lg = document.getElementById('line-legend');
+  LINES.forEach(l => {
+    const item = document.createElement('div');
+    item.className = 'legend-line';
+    item.innerHTML = `<div class="legend-dot" style="background:${l.color}"></div>${l.name}`;
+    lg.appendChild(item);
+  });
+})();
+
+renderFavs();
+</script>
+
+</body>
+</html>

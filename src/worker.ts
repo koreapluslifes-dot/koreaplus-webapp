@@ -14,6 +14,7 @@
 
 import { handleApiRoute } from './router.ts';
 import { handlePlanRequest, handleSharePost, handleShareGet } from './handlers/planner.ts';
+import { handleMenuTranslate } from './handlers/translator.ts';
 import type { CacheEnv } from './cache.ts';
 import type { LLMEnv } from './api/groq.ts';
 
@@ -187,6 +188,9 @@ export default {
     } catch {
       return json({ error: 'Invalid JSON' }, 400);
     }
+
+    // Menu translator
+    if (path.endsWith('/api/translate-menu')) return handleMenuTranslate(request, env);
 
     // Existing: /place and /chat
     if (path.endsWith('/place')) return handlePlace(body as { query?: string }, env);

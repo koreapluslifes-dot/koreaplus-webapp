@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korean Menu Translator | KoreaPlus</title>
+  <meta name="description" content="Translate Korean restaurant menus instantly. Take a photo or upload an image — free OCR + AI translation with allergen info and spice levels.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/menu-translator.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="modules/header.js"></script>
+  <style>
+    .upload-zone {
+      border:2px dashed var(--border2); border-radius:var(--radius); padding:40px 20px; text-align:center;
+      cursor:pointer; transition:all .2s; position:relative; background:var(--surface);
+    }
+    .upload-zone:hover, .upload-zone.drag-over {
+      border-color:var(--accent); background:rgba(200,16,46,.05);
+    }
+    .upload-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+    .upload-icon { font-size:48px; margin-bottom:12px; }
+    .upload-title { font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px; }
+    .upload-sub   { font-size:13px; color:var(--text3); }
+    .upload-sub span { color:var(--accent); font-weight:600; }
+    .cam-btn {
+      margin-top:16px; padding:8px 20px; border-radius:8px; font-size:13px; font-weight:700;
+      background:var(--accent); color:#fff; border:none; cursor:pointer; transition:opacity .15s;
+    }
+    .cam-btn:hover { opacity:.85; }
+
+    .preview-wrap { position:relative; margin-bottom:20px; }
+    .preview-wrap img { width:100%; max-height:400px; object-fit:contain; border-radius:var(--radius); border:1px solid var(--border); background:var(--bg); }
+    .preview-clear { position:absolute; top:8px; right:8px; background:rgba(0,0,0,.7); color:#fff; border:none; border-radius:50%; width:28px; height:28px; font-size:14px; cursor:pointer; line-height:28px; }
+
+    .progress-wrap { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:20px; }
+    .progress-label { font-size:13px; font-weight:700; color:var(--text); margin-bottom:10px; }
+    .progress-bar-bg { background:var(--bg); border-radius:4px; height:6px; overflow:hidden; }
+    .progress-bar-fill { height:100%; background:linear-gradient(90deg,var(--accent),#f97316); border-radius:4px; transition:width .3s; }
+    .progress-step { font-size:12px; color:var(--text3); margin-top:8px; }
+
+    .results-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .results-title  { font-size:17px; font-weight:800; color:var(--text); }
+    .results-count  { font-size:13px; color:var(--text3); font-weight:600; }
+
+    .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; margin-bottom:32px; }
+    .menu-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px;
+      transition:border-color .15s;
+    }
+    .menu-card:hover { border-color:var(--border2); }
+    .menu-card-name { font-size:15px; font-weight:800; color:var(--text); margin-bottom:2px; }
+    .menu-card-kr   { font-size:13px; color:var(--text3); margin-bottom:8px; }
+    .menu-card-desc { font-size:12px; color:var(--text2); line-height:1.6; margin-bottom:10px; }
+    .menu-card-meta { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+    .meta-badge { font-size:11px; padding:3px 8px; border-radius:4px; font-weight:600; }
+    .badge-price  { background:rgba(16,185,129,.12); color:#10b981; }
+    .badge-veg    { background:rgba(34,197,94,.12); color:#22c55e; }
+    .badge-spice0 { background:var(--bg); color:var(--text3); border:1px solid var(--border); }
+    .badge-spice1 { background:rgba(251,191,36,.12); color:#fbbf24; }
+    .badge-spice2 { background:rgba(249,115,22,.12); color:#f97316; }
+    .badge-spice3 { background:rgba(239,68,68,.12); color:#ef4444; }
+    .badge-allergen { background:rgba(168,85,247,.12); color:#a855f7; }
+
+    .ocr-text-section { margin-bottom:24px; }
+    .ocr-toggle { font-size:12px; color:var(--text3); cursor:pointer; text-decoration:underline; margin-bottom:8px; display:inline-block; }
+    .ocr-raw { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:12px; font-size:11px; color:var(--text3); white-space:pre-wrap; max-height:200px; overflow-y:auto; display:none; }
+    .ocr-raw.visible { display:block; }
+
+    .tip-banner { background:rgba(251,191,36,.08); border:1px solid rgba(251,191,36,.2); border-radius:var(--radius); padding:14px 18px; margin-bottom:20px; font-size:13px; color:var(--text2); }
+
+    .error-card { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.2); border-radius:var(--radius); padding:20px; margin-bottom:20px; }
+    .error-card .error-title { font-size:14px; font-weight:700; color:#ef4444; margin-bottom:4px; }
+    .error-card .error-msg   { font-size:13px; color:var(--text2); }
+
+    .manual-input { margin-bottom:20px; }
+    .manual-input textarea { width:100%; min-height:100px; padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:13px; resize:vertical; font-family:inherit; }
+    .manual-input textarea:focus { outline:none; border-color:var(--accent); }
+    .translate-btn {
+      padding:10px 24px; background:var(--accent); color:#fff; border:none; border-radius:8px;
+      font-size:14px; font-weight:700; cursor:pointer; transition:opacity .15s; margin-top:8px;
+    }
+    .translate-btn:hover:not(:disabled) { opacity:.85; }
+    .translate-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+    .section-divider { display:flex; align-items:center; gap:10px; margin:24px 0; color:var(--text3); font-size:12px; }
+    .section-divider::before, .section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🏠 Home</a>
+    <a class="hub-nav-link hub-nav-link active" href="menu-translator.html">📷 Menu</a>
+    <a class="hub-nav-link" href="phrases.html">🗣️ Phrases</a>
+    <a class="hub-nav-link" href="currency.html">💱 Currency</a>
+    <a class="hub-nav-link" href="emergency.html">🆘 Emergency</a>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">AI Translation</div>
+  <h1>📷 Korean Menu Translator</h1>
+  <p>Take a photo of any Korean menu — OCR reads the text, AI translates every dish with descriptions and allergen info</p>
+</div>
+
+<main class="hub-content" style="max-width:800px">
+
+  <div class="tip-banner">🔒 Privacy first — photos are processed on your device (OCR). Only extracted text is sent to our server for AI translation. Images never leave your phone.</div>
+
+  <div id="upload-section">
+    <div class="upload-zone" id="drop-zone">
+      <input type="file" id="file-input" accept="image/*" capture="environment" aria-label="Upload menu photo">
+      <div class="upload-icon">📷</div>
+      <div class="upload-title">Take a photo or upload menu image</div>
+      <div class="upload-sub">Supports Korean menus — JPG, PNG, HEIC, WebP<br>Best results with <span>clear, well-lit photos</span></div>
+      <button class="cam-btn" type="button" onclick="document.getElementById('file-input').click()">📷 Use Camera / Choose File</button>
+    </div>
+  </div>
+
+  <div class="section-divider">or type / paste Korean text manually</div>
+
+  <div class="manual-input">
+    <textarea id="manual-text" placeholder="Paste Korean menu text here…&#10;Example: 된장찌개 8,000원&#10;비빔밥 9,000원&#10;삼겹살 13,000원/1인분"></textarea>
+    <br>
+    <button class="translate-btn" id="manual-btn" onclick="translateManual()">🔤 Translate Menu Text</button>
+  </div>
+
+  <div id="preview-section" style="display:none">
+    <div class="preview-wrap">
+      <img id="preview-img" src="" alt="Menu preview">
+      <button class="preview-clear" onclick="clearImage()" aria-label="Remove image">✕</button>
+    </div>
+  </div>
+
+  <div id="progress-section" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-label" id="progress-label">Initializing OCR…</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-bar" style="width:0%"></div></div>
+      <div class="progress-step" id="progress-step">Loading Korean language model…</div>
+    </div>
+  </div>
+
+  <div id="error-section" style="display:none">
+    <div class="error-card">
+      <div class="error-title" id="error-title">Translation failed</div>
+      <div class="error-msg" id="error-msg"></div>
+    </div>
+  </div>
+
+  <div id="results-section" style="display:none">
+    <div id="ocr-text-section" class="ocr-text-section">
+      <span class="ocr-toggle" onclick="toggleOcr()">Show extracted text ▾</span>
+      <pre class="ocr-raw" id="ocr-raw"></pre>
+    </div>
+
+    <div class="results-header">
+      <div class="results-title">Menu Items</div>
+      <div class="results-count" id="results-count"></div>
+    </div>
+
+    <div class="menu-grid" id="menu-grid"></div>
+
+    <button class="translate-btn" style="background:var(--surface);color:var(--text);border:1px solid var(--border)" onclick="clearAll()">↩ Translate Another Menu</button>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.0/dist/tesseract.min.js"></script>
+<script>
+const WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';
+let ocrWorker = null;
+
+const SPICE_LABELS = ['🌶 No spice', '🌶 Mild', '🌶🌶 Medium', '🌶🌶🌶 Hot'];
+const SPICE_CLASSES = ['badge-spice0', 'badge-spice1', 'badge-spice2', 'badge-spice3'];
+
+function setProgress(label, pct, step) {
+  document.getElementById('progress-label').textContent = label;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-step').textContent = step || '';
+}
+
+function showSection(id) {
+  ['upload-section','preview-section','progress-section','error-section','results-section'].forEach(s => {
+    document.getElementById(s).style.display = s === id ? '' : 'none';
+  });
+}
+
+function showError(title, msg) {
+  document.getElementById('error-title').textContent = title;
+  document.getElementById('error-msg').textContent = msg;
+  document.getElementById('error-section').style.display = '';
+  document.getElementById('progress-section').style.display = 'none';
+}
+
+function clearImage() {
+  if (ocrWorker) { ocrWorker.terminate(); ocrWorker = null; }
+  document.getElementById('file-input').value = '';
+  document.getElementById('results-section').style.display = 'none';
+  document.getElementById('error-section').style.display = 'none';
+  document.getElementById('preview-section').style.display = 'none';
+  document.getElementById('progress-section').style.display = 'none';
+  document.getElementById('upload-section').style.display = '';
+}
+
+function clearAll() {
+  clearImage();
+  document.getElementById('manual-text').value = '';
+}
+
+function toggleOcr() {
+  const el = document.getElementById('ocr-raw');
+  el.classList.toggle('visible');
+  document.querySelector('.ocr-toggle').textContent = el.classList.contains('visible') ? 'Hide extracted text ▴' : 'Show extracted text ▾';
+}
+
+function renderResults(items, rawText) {
+  document.getElementById('ocr-raw').textContent = rawText || '';
+  document.getElementById('ocr-text-section').style.display = rawText ? '' : 'none';
+
+  const grid = document.getElementById('menu-grid');
+  grid.innerHTML = '';
+  document.getElementById('results-count').textContent = items.length + ' dish' + (items.length !== 1 ? 'es' : '') + ' found';
+
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'menu-card';
+
+    const allergenBadges = (item.allergens || []).slice(0, 4).map(a =>
+      `<span class="meta-badge badge-allergen">⚠ ${a}</span>`
+    ).join('');
+
+    const spiceIdx = Math.min(Math.max(item.spice || 0, 0), 3);
+
+    card.innerHTML = `
+      <div class="menu-card-name">${escHtml(item.english || 'Unknown dish')}</div>
+      <div class="menu-card-kr">${escHtml(item.korean || '')}</div>
+      <div class="menu-card-desc">${escHtml(item.description || '')}</div>
+      <div class="menu-card-meta">
+        ${item.price ? `<span class="meta-badge badge-price">₩ ${escHtml(item.price)}</span>` : ''}
+        ${item.vegetarian ? '<span class="meta-badge badge-veg">🌱 Vegetarian</span>' : ''}
+        <span class="meta-badge ${SPICE_CLASSES[spiceIdx]}">${SPICE_LABELS[spiceIdx]}</span>
+        ${allergenBadges}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('results-section').style.display = '';
+  document.getElementById('progress-section').style.display = 'none';
+}
+
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function callTranslateAPI(text) {
+  const resp = await fetch(WORKER_URL + '/api/translate-menu', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: text.slice(0, 4000) }),
+  });
+  if (!resp.ok) {
+    const err = await resp.text().catch(() => 'Server error');
+    throw new Error(err || 'Translation server error (' + resp.status + ')');
+  }
+  const data = await resp.json();
+  return data.items || [];
+}
+
+async function runOCR(imageFile) {
+  document.getElementById('upload-section').style.display = 'none';
+  document.getElementById('progress-section').style.display = '';
+  document.getElementById('error-section').style.display = 'none';
+
+  try {
+    setProgress('Initializing OCR engine…', 5, 'Loading Tesseract.js');
+
+    ocrWorker = await Tesseract.createWorker('kor+eng', 1, {
+      logger: m => {
+        if (m.status === 'loading tesseract core') setProgress('Loading OCR engine…', 10, m.status);
+        else if (m.status === 'loading language traineddata') setProgress('Loading Korean language model…', 30, 'kor+eng');
+        else if (m.status === 'initializing api') setProgress('Starting OCR…', 50, m.status);
+        else if (m.status === 'recognizing text') setProgress('Reading menu text…', 50 + Math.round((m.progress || 0) * 35), Math.round((m.progress || 0) * 100) + '% complete');
+      }
+    });
+
+    setProgress('Processing image…', 55, 'Running OCR');
+    const result = await ocrWorker.recognize(imageFile);
+    const rawText = result.data.text.trim();
+
+    await ocrWorker.terminate();
+    ocrWorker = null;
+
+    if (!rawText || rawText.length < 5) {
+      showError('No text found', 'Could not extract text from this image. Try a clearer, well-lit photo with the menu text in focus.');
+      return;
+    }
+
+    setProgress('Translating with AI…', 88, 'Sending to translation server');
+
+    const items = await callTranslateAPI(rawText);
+
+    if (!items.length) {
+      showError('No menu items found', 'The AI could not identify menu items in the extracted text. The image may not contain a Korean restaurant menu, or the text quality was too low.');
+      return;
+    }
+
+    renderResults(items, rawText);
+
+  } catch (err) {
+    if (ocrWorker) { ocrWorker.terminate(); ocrWorker = null; }
+    showError('Processing failed', err.message || 'Unknown error. Please try again.');
+  }
+}
+
+async function translateManual() {
+  const text = document.getElementById('manual-text').value.trim();
+  if (!text) return;
+
+  const btn = document.getElementById('manual-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Translating…';
+
+  document.getElementById('upload-section').style.display = 'none';
+  document.getElementById('preview-section').style.display = 'none';
+  document.getElementById('progress-section').style.display = '';
+  document.getElementById('error-section').style.display = 'none';
+  document.getElementById('results-section').style.display = 'none';
+
+  setProgress('Translating with AI…', 50, 'Sending to translation server');
+
+  try {
+    const items = await callTranslateAPI(text);
+    if (!items.length) {
+      showError('No menu items found', 'The AI could not identify Korean menu items. Try pasting text from a Korean restaurant menu — one item per line works best.');
+    } else {
+      renderResults(items, null);
+    }
+  } catch (err) {
+    showError('Translation failed', err.message || 'Server error. Please try again.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🔤 Translate Menu Text';
+  }
+}
+
+// File / drag-drop handling
+document.getElementById('file-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  document.getElementById('preview-img').src = url;
+  document.getElementById('preview-section').style.display = '';
+  runOCR(file);
+});
+
+const dz = document.getElementById('drop-zone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => {
+  e.preventDefault();
+  dz.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+  document.getElementById('file-input').files = e.dataTransfer.files;
+  const url = URL.createObjectURL(file);
+  document.getElementById('preview-img').src = url;
+  document.getElementById('preview-section').style.display = '';
+  runOCR(file);
+});
+</script>
+
+</body>
+</html>
