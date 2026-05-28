@@ -1,26 +1,72 @@
 /**
- * LLM clients: Groq (primary, fastest) + OpenRouter free (fallback)
+ * LLM client for AI Itinerary Builder — OpenRouter free tier only.
  *
  * Security policy: US-based models only.
  * Never use DeepSeek, Qwen, GLM, MiniMax, or any Chinese-origin model.
  *
- * Primary:  Groq  — llama-3.3-70b-versatile   (30 req/min, 14400/day free)
- * Fallback: OpenRouter — llama-3.3-70b-instruct:free  (same model, different infra)
- *           Reuses the existing OPENROUTER_API_KEY — no extra secret needed.
+ * Primary:  meta-llama/llama-3.3-70b-instruct:free  — Meta (US), capable, free
+ * Fallback: meta-llama/llama-3.1-8b-instruct:free   — Meta (US), fastest, free
+ * Optional: Groq llama-3.3-70b-versatile (if GROQ_API_KEY set, used first for speed)
+ *
+ * Both primary and fallback reuse OPENROUTER_API_KEY — no new secrets needed.
  */
 
 export interface LLMEnv {
-  GROQ_API_KEY?:        string;
-  OPENROUTER_API_KEY?:  string;  // also used as itinerary LLM fallback
+  OPENROUTER_API_KEY?: string;
+  GROQ_API_KEY?:       string;  // optional: Groq hardware-accelerated path
 }
 
-// ── Groq (primary) ────────────────────────────────────────────────────────────
-
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
+const OR_PRIMARY  = 'meta-llama/llama-3.3-70b-instruct:free';
+const OR_FALLBACK = 'meta-llama/llama-3.1-8b-instruct:free';
+const GROQ_MODEL  = 'llama-3.3-70b-versatile';
 
 interface OpenAIChatResponse {
   choices: Array<{ message: { content: string }; finish_reason: string }>;
+  error?:  { message: string; code?: string };
 }
+
+// ── OpenRouter client ─────────────────────────────────────────────────────────
+
+export class OpenRouterLLMClient {
+  private readonly base = 'https://openrouter.ai/api/v1';
+
+  constructor(private readonly key: string) {}
+
+  async complete(
+    prompt: string,
+    model: string,
+    maxTokens = 6000,
+    temperature = 0.7
+  ): Promise<string> {
+    const res = await globalThis.fetch(`${this.base}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${this.key}`,
+        'Content-Type':  'application/json',
+        'HTTP-Referer':  'https://koreaplus-lifes.com',
+        'X-Title':       'KoreaPlus Itinerary Builder',
+      },
+      body: JSON.stringify({
+        model,
+        messages:   [{ role: 'user', content: prompt }],
+        max_tokens: maxTokens,
+        temperature,
+      }),
+      signal: AbortSignal.timeout(55_000),
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(`OpenRouter [${model}] ${res.status}: ${body.slice(0, 180)}`);
+    }
+    const data = await res.json() as OpenAIChatResponse;
+    if (data.error) throw new Error(`OpenRouter error: ${data.error.message}`);
+    const content = data.choices?.[0]?.message?.content ?? '';
+    if (!content) throw new Error('OpenRouter returned empty content');
+    return content;
+  }
+}
+
+// ── Optional Groq client (hardware-accelerated) ───────────────────────────────
 
 export class GroqClient {
   private readonly base = 'https://api.groq.com/openai/v1';
@@ -32,9 +78,9 @@ export class GroqClient {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${this.key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: GROQ_MODEL,
-        messages: [{ role: 'user', content: prompt }],
-        max_tokens: maxTokens,
+        model:           GROQ_MODEL,
+        messages:        [{ role: 'user', content: prompt }],
+        max_tokens:      maxTokens,
         temperature,
         response_format: { type: 'json_object' },
       }),
@@ -42,52 +88,14 @@ export class GroqClient {
     });
     if (!res.ok) {
       const body = await res.text();
-      throw new Error(`Groq ${res.status}: ${body.slice(0, 200)}`);
+      throw new Error(`Groq ${res.status}: ${body.slice(0, 180)}`);
     }
     const data = await res.json() as OpenAIChatResponse;
-    return data.choices[0]?.message?.content ?? '';
+    return data.choices?.[0]?.message?.content ?? '';
   }
 }
 
-// ── OpenRouter free fallback ──────────────────────────────────────────────────
-// Uses the same OPENROUTER_API_KEY already configured for the chatbot.
-// llama-3.3-70b-instruct:free — Meta (US), identical model family to Groq primary.
-// No JSON mode param needed; JSON enforcement is handled via prompt wording.
-
-const OR_FALLBACK_MODEL = 'meta-llama/llama-3.3-70b-instruct:free';
-
-export class OpenRouterLLMClient {
-  private readonly base = 'https://openrouter.ai/api/v1';
-
-  constructor(private readonly key: string) {}
-
-  async complete(prompt: string, maxTokens = 6000, temperature = 0.7): Promise<string> {
-    const res = await globalThis.fetch(`${this.base}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Authorization':   `Bearer ${this.key}`,
-        'Content-Type':    'application/json',
-        'HTTP-Referer':    'https://koreaplus-lifes.com',
-        'X-Title':         'KoreaPlus Itinerary Builder',
-      },
-      body: JSON.stringify({
-        model: OR_FALLBACK_MODEL,
-        messages: [{ role: 'user', content: prompt }],
-        max_tokens: maxTokens,
-        temperature,
-      }),
-      signal: AbortSignal.timeout(55_000),
-    });
-    if (!res.ok) {
-      const body = await res.text();
-      throw new Error(`OpenRouter ${res.status}: ${body.slice(0, 200)}`);
-    }
-    const data = await res.json() as OpenAIChatResponse;
-    return data.choices[0]?.message?.content ?? '';
-  }
-}
-
-// ── Unified call with fallback ────────────────────────────────────────────────
+// ── Unified call: Groq (optional) → OR 70B → OR 8B ───────────────────────────
 
 export async function callLLM(
   prompt: string,
@@ -95,21 +103,33 @@ export async function callLLM(
   maxTokens = 6000,
   temperature = 0.7
 ): Promise<string> {
-  // 1. Try Groq (fastest, purpose-built inference hardware)
+  // 0. Groq (optional — fastest hardware inference, if key configured)
   if (env.GROQ_API_KEY) {
     try {
       return await new GroqClient(env.GROQ_API_KEY).complete(prompt, maxTokens, temperature);
     } catch (err) {
-      console.error('[Groq] failed, falling back to OpenRouter:', String(err).slice(0, 120));
+      console.error('[Groq] failed:', String(err).slice(0, 100));
     }
   }
-  // 2. Fallback: OpenRouter free tier (same model, reuses existing key)
-  if (env.OPENROUTER_API_KEY) {
-    try {
-      return await new OpenRouterLLMClient(env.OPENROUTER_API_KEY).complete(prompt, maxTokens, temperature);
-    } catch (err) {
-      console.error('[OpenRouter fallback] also failed:', String(err).slice(0, 120));
-    }
+
+  if (!env.OPENROUTER_API_KEY) {
+    throw new Error('OPENROUTER_API_KEY not configured');
   }
-  throw new Error('No LLM available — configure GROQ_API_KEY (primary) or OPENROUTER_API_KEY (fallback)');
+  const or = new OpenRouterLLMClient(env.OPENROUTER_API_KEY);
+
+  // 1. Primary: llama-3.3-70b (capable enough for complex itinerary JSON)
+  try {
+    return await or.complete(prompt, OR_PRIMARY, maxTokens, temperature);
+  } catch (err) {
+    console.error('[OR 70B] failed:', String(err).slice(0, 100));
+  }
+
+  // 2. Fallback: llama-3.1-8b (fastest, lighter, may produce shorter output)
+  try {
+    return await or.complete(prompt, OR_FALLBACK, Math.min(maxTokens, 4096), temperature);
+  } catch (err) {
+    console.error('[OR 8B] failed:', String(err).slice(0, 100));
+  }
+
+  throw new Error('All LLM providers failed');
 }
