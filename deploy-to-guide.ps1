@@ -11,54 +11,110 @@ $PEM_KEY = "C:\Users\juksu\Documents\blog\koreaplus-lifes\LightsailDefaultKey-us
 $REMOTE_USER = "bitnami"
 $REMOTE_DIR = "/opt/bitnami/wordpress/guide"
 $LOCAL_DIR = "C:\Users\juksu\koreaplus-webapp"
-$FILES = @(
-    "index.html", "style.css", "app.js", "data.js",
+
+$ROOT_FILES = @(
+    # Core
+    "index.html", "style.css", "app.js", "data.js", "config.js",
     # Phase 2 shared
-    "config.js", "hub-styles.css", "sitemap.xml",
+    "hub-styles.css", "sitemap.xml", "robots.txt",
     # Hub pages
-    "festivals.html", "culture.html", "temples.html", "nightviews.html", "api-test.html",
-    # Phase 3
-    "plan.html", "plan-styles.css"
+    "festivals.html", "culture.html", "temples.html", "nightviews.html",
+    # Phase 3 - Planner
+    "plan.html", "plan-styles.css",
+    # Phase 5 - PWA + Legal
+    "manifest.json", "sw.js", "theme.css",
+    "about.html", "privacy.html", "terms.html", "contact.html"
 )
+
 $MODULE_FILES = @(
     "modules/api-client.js",
     "modules/dashboard.js",
     "modules/week-section.js",
-    "modules/planner.js"
+    "modules/planner.js",
+    # Phase 5 modules
+    "modules/i18n.js",
+    "modules/theme.js",
+    "modules/search.js",
+    "modules/analytics.js",
+    "modules/header.js"
 )
 
-Write-Host "Deploying KoreaPlus Guide to $ServerIP..." -ForegroundColor Cyan
+$MESSAGE_FILES = @(
+    "messages/en.json",
+    "messages/ko.json",
+    "messages/ja.json",
+    "messages/zh.json",
+    "messages/es.json"
+)
 
-# Create /guide directory on server
-Write-Host "Creating /guide directory..." -ForegroundColor Yellow
-ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" "mkdir -p $REMOTE_DIR && chmod 755 $REMOTE_DIR"
+$ICON_FILES = @(
+    "icons/icon.svg"
+)
+
+Write-Host "Deploying KoreaPlus Guide (Phase 5) to $ServerIP..." -ForegroundColor Cyan
+
+# Create remote directories
+Write-Host "Creating remote directories..." -ForegroundColor Yellow
+ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" `
+    "mkdir -p $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons && chmod 755 $REMOTE_DIR $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons"
 
 # Upload root files
-foreach ($file in $FILES) {
-    Write-Host "Uploading $file..." -ForegroundColor Yellow
+Write-Host "`nUploading root files..." -ForegroundColor Yellow
+foreach ($file in $ROOT_FILES) {
+    Write-Host "  $file" -ForegroundColor DarkYellow
     scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$LOCAL_DIR\$file" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/"
 }
 
-# Create modules directory and upload module files
-Write-Host "Creating modules directory..." -ForegroundColor Yellow
-ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" "mkdir -p $REMOTE_DIR/modules && chmod 755 $REMOTE_DIR/modules"
+# Upload module files
+Write-Host "`nUploading modules..." -ForegroundColor Yellow
 foreach ($file in $MODULE_FILES) {
-    Write-Host "Uploading $file..." -ForegroundColor Yellow
+    Write-Host "  $file" -ForegroundColor DarkYellow
     $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
     scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/modules/"
 }
 
-# Set permissions
-Write-Host "Setting file permissions..." -ForegroundColor Yellow
-ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" "chmod 644 $REMOTE_DIR/*.html $REMOTE_DIR/*.css $REMOTE_DIR/*.js $REMOTE_DIR/*.xml $REMOTE_DIR/modules/*.js"
+# Upload message files
+Write-Host "`nUploading i18n messages..." -ForegroundColor Yellow
+foreach ($file in $MESSAGE_FILES) {
+    Write-Host "  $file" -ForegroundColor DarkYellow
+    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
+    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/messages/"
+}
+
+# Upload icon files
+Write-Host "`nUploading icons..." -ForegroundColor Yellow
+foreach ($file in $ICON_FILES) {
+    Write-Host "  $file" -ForegroundColor DarkYellow
+    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
+    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/icons/"
+}
+
+# Set file permissions
+Write-Host "`nSetting permissions..." -ForegroundColor Yellow
+ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" @"
+  find $REMOTE_DIR -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.json" -o -name "*.xml" -o -name "*.txt" -o -name "*.svg" | xargs chmod 644 2>/dev/null
+  echo "Permissions set."
+"@
 
 Write-Host ""
-Write-Host "Done! Files deployed:" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/festivals.html" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/culture.html" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/temples.html" -ForegroundColor Green
-Write-Host "  https://koreaplus-lifes.com/guide/nightviews.html" -ForegroundColor Green
+Write-Host "Done! Phase 5 deployed:" -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/"         -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/plan.html"  -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/about.html" -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/privacy.html" -ForegroundColor Green
+Write-Host "  https://koreaplus-lifes.com/guide/contact.html" -ForegroundColor Green
 Write-Host ""
-Write-Host "NOTE: If the page returns a 404, add this rule to your .htaccess:" -ForegroundColor Yellow
-Write-Host '  RewriteCond %{REQUEST_URI} !^/guide/'
+Write-Host "Phase 5 Features:" -ForegroundColor Cyan
+Write-Host "  PWA  : manifest.json + sw.js + icon.svg"       -ForegroundColor White
+Write-Host "  Theme: dark/light toggle + font size 3-step"   -ForegroundColor White
+Write-Host "  i18n : EN/KO/JA/ZH/ES language switcher"       -ForegroundColor White
+Write-Host "  Search: Fuse.js fuzzy search + Cmd+K"          -ForegroundColor White
+Write-Host "  Analytics: GA4 + Clarity (consent-gated)"      -ForegroundColor White
+Write-Host "  Legal: Privacy, Terms, Contact, About"         -ForegroundColor White
+Write-Host ""
+Write-Host "NEXT STEPS:" -ForegroundColor Yellow
+Write-Host "  1. Set GA4 ID: edit modules/analytics.js, set GA4_ID = 'G-YOUR_ID'"
+Write-Host "  2. Set Clarity ID: edit modules/analytics.js, set CLARITY_ID = 'your_id'"
+Write-Host "  3. Set Formspree ID: edit contact.html, replace YOUR_FORM_ID"
+Write-Host "  4. Test PWA install: open Chrome DevTools > Application > Manifest"
+Write-Host "  5. Run PageSpeed: https://pagespeed.web.dev/?url=https://koreaplus-lifes.com/guide/"

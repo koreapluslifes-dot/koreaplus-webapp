@@ -9,6 +9,14 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://koreaplus-lifes.com/guide/">
 
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KoreaPlus">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+
   <meta property="og:title" content="Korea Travel Guide 2025 | Everything About Korea | KoreaPlus">
   <meta property="og:description" content="Your complete AI-powered guide to South Korea — food, travel, K-beauty, K-pop, transport & culture. 80+ topics, interactive map.">
   <meta property="og:url" content="https://koreaplus-lifes.com/guide/">
@@ -32,6 +40,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Theme system (apply before render to avoid flash) -->
+  <link rel="stylesheet" href="theme.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem('kp_theme')||'dark';
+      var f=localStorage.getItem('kp_fontsize')||'md';
+      if(t==='light') document.documentElement.classList.add('light');
+      document.documentElement.classList.add('font-'+f);
+    })();
+  </script>
+
   <script src="config.js"></script>
   <link rel="stylesheet" href="style.css?v=7">
 </head>
@@ -44,23 +64,31 @@
       <span class="logo-flag">🇰🇷</span>
       <span class="logo-text">Korea<strong>Plus</strong></span>
     </a>
-    <nav class="nav" id="main-nav">
-      <button class="nav-btn" data-cat="food">🍜 Food</button>
-      <button class="nav-btn" data-cat="travel">✈️ Travel</button>
-      <button class="nav-btn" data-cat="transport">🚄 Transport</button>
-      <button class="nav-btn" data-cat="companies">🏢 Companies</button>
-      <button class="nav-btn" data-cat="kbeauty">💄 K-Beauty</button>
-      <button class="nav-btn" data-cat="kpop">🎤 K-Pop</button>
-      <button class="nav-btn" data-cat="shopping">🛍️ Shopping</button>
-      <button class="nav-btn" data-cat="history">📜 History</button>
-      <span class="nav-sep">|</span>
-      <a class="nav-btn hub-link" href="festivals.html">📅 Festivals</a>
-      <a class="nav-btn hub-link" href="culture.html">🏛️ Culture</a>
-      <a class="nav-btn hub-link" href="temples.html">🛕 Temples</a>
-      <a class="nav-btn hub-link" href="nightviews.html">🌃 Night Views</a>
-      <a class="nav-btn hub-link" href="plan.html" style="background:rgba(214,34,70,.12);color:var(--red);font-weight:700">🗺️ Plan Trip</a>
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+      <button class="nav-btn" data-cat="food" data-i18n="nav.food">🍜 Food</button>
+      <button class="nav-btn" data-cat="travel" data-i18n="nav.travel">✈️ Travel</button>
+      <button class="nav-btn" data-cat="transport" data-i18n="nav.transport">🚄 Transport</button>
+      <button class="nav-btn" data-cat="companies" data-i18n="nav.companies">🏢 Companies</button>
+      <button class="nav-btn" data-cat="kbeauty" data-i18n="nav.kbeauty">💄 K-Beauty</button>
+      <button class="nav-btn" data-cat="kpop" data-i18n="nav.kpop">🎤 K-Pop</button>
+      <button class="nav-btn" data-cat="shopping" data-i18n="nav.shopping">🛍️ Shopping</button>
+      <button class="nav-btn" data-cat="history" data-i18n="nav.history">📜 History</button>
+      <span class="nav-sep" aria-hidden="true">|</span>
+      <a class="nav-btn hub-link" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
+      <a class="nav-btn hub-link" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
+      <a class="nav-btn hub-link" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
+      <a class="nav-btn hub-link" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
+      <a class="nav-btn hub-link" href="plan.html" style="background:rgba(214,34,70,.12);color:var(--red);font-weight:700" data-i18n="nav.plan">🗺️ Plan Trip</a>
     </nav>
-    <button class="ai-btn" id="ai-open-btn">💬 AI Guide</button>
+    <!-- Search, theme, lang, AI controls -->
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+      <button class="kp-search-btn" aria-label="Search" data-action="search" data-i18n-aria="search.placeholder">
+        🔍 <span class="search-shortcut">⌘K</span>
+      </button>
+      <button class="kp-theme-btn" id="main-theme-btn" aria-label="Toggle theme">☀️</button>
+      <div id="main-lang-mount"></div>
+      <button class="ai-btn" id="ai-open-btn" data-i18n="nav.ai">💬 AI Guide</button>
+    </div>
   </div>
 </header>
 
@@ -314,17 +342,48 @@
   </div>
 </section>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand"><span>🇰🇷</span><strong>KoreaPlus-Lifes.com</strong></div>
-    <p>Your complete guide to everything Korea</p>
+    <p data-i18n="footer.tagline">Your complete guide to everything Korea</p>
     <div class="footer-links">
-      <a href="https://koreaplus-lifes.com">Home</a>
-      <a href="https://koreaplus-lifes.com/about">About</a>
-      <a href="https://koreaplus-lifes.com/contact">Contact</a>
+      <a href="https://koreaplus-lifes.com" data-i18n="footer.home">Home</a>
+      <a href="about.html" data-i18n="footer.about">About</a>
+      <a href="contact.html" data-i18n="footer.contact">Contact</a>
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+      <a href="terms.html" data-i18n="footer.terms">Terms</a>
     </div>
+    <p style="margin-top:12px;font-size:11px;opacity:.4">© 2025 KoreaPlus-Lifes.com · Powered by Meta Llama 3.3 via OpenRouter</p>
   </div>
 </footer>
+
+<!-- Cookie consent banner -->
+<div id="kp-cookie-banner" class="kp-cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite">
+  <p class="kp-cookie-text">
+    We use cookies for analytics. See our <a href="privacy.html" data-i18n="cookie.privacy">Privacy Policy</a>.
+  </p>
+  <div class="kp-cookie-btns">
+    <button id="kp-cookie-accept" class="kp-cookie-accept" data-i18n="cookie.accept">Accept</button>
+    <button id="kp-cookie-decline" class="kp-cookie-decline" data-i18n="cookie.decline">Decline</button>
+  </div>
+</div>
+
+<!-- PWA install prompt -->
+<div id="kp-install-prompt" class="kp-install-prompt" aria-label="Install app">
+  <button class="kp-install-close" id="kp-install-close" aria-label="Close">×</button>
+  <span class="kp-install-icon" aria-hidden="true">🇰🇷</span>
+  <div class="kp-install-body">
+    <div class="kp-install-title" data-i18n="install.title">Add to Home Screen</div>
+    <div class="kp-install-sub" data-i18n="install.sub">Get the full app experience — works offline too</div>
+    <div class="kp-install-btns">
+      <button class="kp-install-yes" id="kp-install-yes" data-i18n="install.yes">Install</button>
+      <button class="kp-install-no" id="kp-install-no" data-i18n="install.no">Not now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="kp-toast" class="kp-toast" role="status" aria-live="polite"></div>
 
 <script src="data.js?v=3"></script>
 <script src="app.js?v=10"></script>
@@ -332,5 +391,50 @@
 <script src="modules/api-client.js"></script>
 <script src="modules/dashboard.js"></script>
 <script src="modules/week-section.js"></script>
+
+<!-- Phase 5: Theme, i18n, Search, Analytics -->
+<script src="modules/theme.js"></script>
+<script src="modules/i18n.js"></script>
+<script src="modules/search.js"></script>
+<script src="modules/analytics.js"></script>
+
+<script>
+  // Service Worker registration
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/guide/sw.js').catch(() => {});
+    });
+  }
+
+  // Wire lang switcher into main nav
+  document.addEventListener('DOMContentLoaded', function () {
+    const mount = document.getElementById('main-lang-mount');
+    if (mount && window.kpI18n) {
+      window.kpI18n.renderSwitcher(mount);
+    }
+
+    // Share page buttons (social share)
+    document.querySelectorAll('[data-share]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const url  = this.dataset.shareUrl || location.href;
+        const text = this.dataset.shareText || document.title;
+        if (navigator.share) {
+          navigator.share({ title: text, url }).catch(() => {});
+        } else {
+          navigator.clipboard?.writeText(url).then(() => showToast('✓ Copied!'));
+        }
+      });
+    });
+  });
+
+  function showToast(msg, ms = 2500) {
+    const t = document.getElementById('kp-toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), ms);
+  }
+  window.kpShowToast = showToast;
+</script>
 </body>
 </html>

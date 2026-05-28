@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | KoreaPlus</title>
+  <meta name="description" content="Contact the KoreaPlus team — feedback, bug reports, or partnership inquiries for Korea's AI travel guide.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/contact.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="modules/theme.js"></script>
+  <style>
+    .contact-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
+      background: var(--bg); border: 1px solid var(--border2); color: var(--text);
+      font-size: 14px; font-family: var(--font); outline: none; transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+    .form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .form-select { appearance: none; cursor: pointer; }
+    .form-btn {
+      padding: 11px 28px; background: var(--accent); color: #fff; border: none;
+      border-radius: 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.15s;
+    }
+    .form-btn:hover { opacity: 0.85; }
+    .form-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-success { display: none; text-align: center; padding: 28px; color: var(--green); }
+    .form-error  { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Site navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+    <a class="hub-nav-link" href="index.html">🏠 Home</a>
+    <a class="hub-nav-link" href="plan.html">🗺️ Plan Trip</a>
+    <a class="hub-nav-link" href="about.html">ℹ️ About</a>
+    <a class="hub-nav-link hub-nav-link active" href="contact.html">✉️ Contact</a>
+  </div>
+  <button class="kp-theme-btn" aria-label="Toggle theme">☀️</button>
+</nav>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">Get in Touch</div>
+  <h1>Contact KoreaPlus</h1>
+  <p>Bug report, feedback, or just want to share your Korea trip story? We'd love to hear from you.</p>
+</div>
+
+<main class="hub-content" style="max-width:680px">
+
+  <!-- Quick topics -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:32px">
+    <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;cursor:pointer" onclick="document.getElementById('subject').value='Bug report'">
+      <div style="font-size:24px;margin-bottom:6px">🐛</div>
+      <div style="font-size:13px;font-weight:600;color:var(--text)">Bug Report</div>
+    </div>
+    <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;cursor:pointer" onclick="document.getElementById('subject').value='Feature request'">
+      <div style="font-size:24px;margin-bottom:6px">💡</div>
+      <div style="font-size:13px;font-weight:600;color:var(--text)">Feature Request</div>
+    </div>
+    <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;cursor:pointer" onclick="document.getElementById('subject').value='Partnership inquiry'">
+      <div style="font-size:24px;margin-bottom:6px">🤝</div>
+      <div style="font-size:13px;font-weight:600;color:var(--text)">Partnership</div>
+    </div>
+    <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;cursor:pointer" onclick="document.getElementById('subject').value='Privacy request'">
+      <div style="font-size:24px;margin-bottom:6px">🔒</div>
+      <div style="font-size:13px;font-weight:600;color:var(--text)">Privacy Request</div>
+    </div>
+  </div>
+
+  <!-- Contact form (Formspree) -->
+  <!-- Replace YOUR_FORM_ID with your actual Formspree form ID (formspree.io) -->
+  <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <h2 style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:20px">Send a Message</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="form-group">
+        <label class="form-label" for="name">Your Name <span style="color:var(--red)">*</span></label>
+        <input class="form-input" type="text" id="name" name="name" required placeholder="Jane Smith" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address <span style="color:var(--red)">*</span></label>
+        <input class="form-input" type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="subject">Subject</label>
+      <input class="form-input" type="text" id="subject" name="subject" placeholder="e.g. Bug report, feature request…">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="message">Message <span style="color:var(--red)">*</span></label>
+      <textarea class="form-textarea" id="message" name="message" required placeholder="Describe your question, bug, or feedback in detail…"></textarea>
+    </div>
+
+    <!-- honeypot anti-spam -->
+    <input type="text" name="_gotcha" style="display:none" aria-hidden="true">
+    <input type="hidden" name="_subject" value="KoreaPlus Contact Form">
+
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <button class="form-btn" type="submit" id="submit-btn">Send Message ✉️</button>
+      <span style="font-size:12px;color:var(--text3)">We aim to reply within 48 hours</span>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <div style="font-size:40px;margin-bottom:12px">✅</div>
+      <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px">Message sent!</div>
+      <div style="font-size:14px;color:var(--text2)">Thanks for reaching out. We'll get back to you within 48 hours.</div>
+    </div>
+  </form>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        const res = await fetch(this.action, {
+          method: 'POST',
+          body: new FormData(this),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (res.ok) {
+          this.querySelector('.form-success').style.display = 'block';
+          this.querySelectorAll('.form-group, .form-btn, [style*="gap"]').forEach(el => { if (!el.classList.contains('form-success')) el.style.display = 'none'; });
+        } else {
+          btn.textContent = 'Send failed — try again';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Send failed — try again';
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+  <div style="border-top:1px solid var(--border);padding-top:24px;margin-top:40px;display:flex;gap:16px;flex-wrap:wrap">
+    <a href="privacy.html" style="color:var(--text2);font-size:13px;text-decoration:none">Privacy Policy</a>
+    <a href="terms.html"   style="color:var(--text2);font-size:13px;text-decoration:none">Terms of Service</a>
+    <a href="about.html"   style="color:var(--text2);font-size:13px;text-decoration:none">About</a>
+    <a href="index.html"   style="color:var(--text2);font-size:13px;text-decoration:none">← Back to Guide</a>
+    <span style="color:var(--text3);font-size:13px;margin-left:auto">© 2025 KoreaPlus-Lifes.com</span>
+  </div>
+</main>
+
+</body>
+</html>

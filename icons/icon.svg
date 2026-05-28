@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#000F2E"/>
+  <!-- Red circle (Korean red) -->
+  <circle cx="256" cy="230" r="185" fill="#C8102E"/>
+  <!-- White K -->
+  <text x="200" y="300" font-family="Arial Black,sans-serif" font-size="180" font-weight="900" text-anchor="middle" fill="white">K</text>
+  <!-- White + (plus cross) -->
+  <rect x="318" y="148" width="36" height="140" rx="18" fill="white"/>
+  <rect x="248" y="218" width="136" height="36" rx="18" fill="white"/>
+  <!-- Bottom wordmark -->
+  <text x="256" y="466" font-family="Arial,sans-serif" font-size="54" font-weight="700" text-anchor="middle" fill="rgba(255,255,255,0.55)" letter-spacing="6">PLUS</text>
+</svg>

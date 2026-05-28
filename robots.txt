@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /guide/
+Allow: /guide/index.html
+Allow: /guide/plan.html
+Allow: /guide/festivals.html
+Allow: /guide/culture.html
+Allow: /guide/temples.html
+Allow: /guide/nightviews.html
+Allow: /guide/about.html
+Allow: /guide/contact.html
+
+Disallow: /guide/api-test.html
+Disallow: /guide/privacy.html
+Disallow: /guide/terms.html
+
+Sitemap: https://koreaplus-lifes.com/guide/sitemap.xml

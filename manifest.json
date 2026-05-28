@@ -1,0 +1,54 @@
+{
+  "name": "KoreaPlus Guide",
+  "short_name": "KoreaPlus",
+  "description": "AI-powered travel guide to South Korea — food, culture, K-pop, K-beauty & AI itinerary builder",
+  "start_url": "/guide/",
+  "scope": "/guide/",
+  "display": "standalone",
+  "background_color": "#000406",
+  "theme_color": "#000406",
+  "orientation": "any",
+  "lang": "en",
+  "categories": ["travel", "lifestyle", "entertainment"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "KoreaPlus Korea Travel Guide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Plan My Trip",
+      "short_name": "Plan Trip",
+      "description": "AI-powered Korea itinerary builder",
+      "url": "/guide/plan.html",
+      "icons": [{ "src": "icons/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Festivals",
+      "short_name": "Festivals",
+      "description": "Korea festivals & events calendar",
+      "url": "/guide/festivals.html",
+      "icons": [{ "src": "icons/icon.svg", "sizes": "any" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
