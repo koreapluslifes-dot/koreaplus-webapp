@@ -36,23 +36,9 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           command: deploy src/worker.ts
-          secrets: |
-            OPENROUTER_API_KEY
-            GOOGLE_PLACES_KEY
-            TOUR_API_KEY
-            KOPIS_API_KEY
-            KMA_API_KEY
-            AIRKOREA_API_KEY
-            SEOUL_OPEN_DATA_KEY
-            EXCHANGE_RATE_KEY
-            GROQ_API_KEY
-        env:
-          OPENROUTER_API_KEY:    ${{ secrets.OPENROUTER_API_KEY }}
-          GOOGLE_PLACES_KEY:     ${{ secrets.GOOGLE_PLACES_KEY }}
-          TOUR_API_KEY:          ${{ secrets.TOUR_API_KEY }}
-          KOPIS_API_KEY:         ${{ secrets.KOPIS_API_KEY }}
-          KMA_API_KEY:           ${{ secrets.KMA_API_KEY }}
-          AIRKOREA_API_KEY:      ${{ secrets.AIRKOREA_API_KEY }}
-          SEOUL_OPEN_DATA_KEY:   ${{ secrets.SEOUL_OPEN_DATA_KEY }}
-          EXCHANGE_RATE_KEY:     ${{ secrets.EXCHANGE_RATE_KEY }}
-          GROQ_API_KEY:          ${{ secrets.GROQ_API_KEY }}
+        # NOTE: API secrets are managed separately via `wrangler secret put`.
+        # Existing secrets on the Worker persist across code deploys.
+        # When new keys are issued, register via:
+        #   npx wrangler secret put TOUR_API_KEY   (then paste value)
+        #   npx wrangler secret put KOPIS_API_KEY
+        #   etc.
