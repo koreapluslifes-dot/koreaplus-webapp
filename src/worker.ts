@@ -29,7 +29,8 @@ export interface WorkerEnv extends CacheEnv, LLMEnv {
   KOPIS_API_KEY:          string;
   KMA_API_KEY:            string;
   AIRKOREA_API_KEY:       string;
-  SEOUL_OPEN_DATA_KEY:    string;
+  SEOUL_OPEN_DATA_KEY:    string;   // 일반 인증키 (따릉이 등)
+  SEOUL_SUBWAY_KEY:       string;   // 실시간 지하철 인증키
   EXCHANGE_RATE_KEY:      string;
   // Phase 3: GROQ_API_KEY (primary LLM). Fallback reuses OPENROUTER_API_KEY above.
 }

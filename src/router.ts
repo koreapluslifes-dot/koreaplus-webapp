@@ -216,8 +216,9 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
   // ── GET /api/subway ───────────────────────────────────────────────────────
   if (request.method === 'GET' && path.endsWith('/api/subway')) {
     const station = qp(url, 'station', '강남');
-    if (!env.SEOUL_OPEN_DATA_KEY) return errorResponse('SEOUL_OPEN_DATA_KEY not configured', 503);
-    const client = new TransitClient(env.SEOUL_OPEN_DATA_KEY);
+    const subwayKey = env.SEOUL_SUBWAY_KEY || env.SEOUL_OPEN_DATA_KEY;
+    if (!subwayKey) return errorResponse('SEOUL_SUBWAY_KEY not configured', 503);
+    const client = new TransitClient(subwayKey);
     try {
       // 30-second cache — real-time data
       const { data, cached } = await withCache(
