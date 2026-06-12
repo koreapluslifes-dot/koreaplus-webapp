@@ -202,7 +202,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 .mp-kr{font-size:13px;color:var(--gold);margin-top:3px;display:block;font-weight:600}
 .mp-close{
   background:var(--bg3);border:1px solid var(--border);color:var(--text3);
-  width:32px;height:32px;border-radius:8px;font-size:14px;flex-shrink:0;
+  width:40px;height:40px;border-radius:10px;font-size:15px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;transition:all 0.2s;
 }
 .mp-close:hover{background:var(--red);color:#fff;border-color:var(--red)}
@@ -258,7 +258,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 .chat-status{font-size:11px;color:#16a34a;display:block;margin-top:1px}
 .chat-close{
   background:var(--bg3);border:1px solid var(--border);color:var(--text3);
-  width:30px;height:30px;border-radius:8px;font-size:13px;
+  width:40px;height:40px;border-radius:10px;font-size:15px;
   display:flex;align-items:center;justify-content:center;transition:all 0.2s;
 }
 .chat-close:hover{background:var(--red);color:#fff;border-color:var(--red)}
@@ -534,8 +534,8 @@ body.kp-cookie-open .chat-fab{bottom:118px}
   border-radius:6px;padding:2px 8px;
 }
 .dp-close{
-  position:absolute;top:18px;right:18px;
-  width:34px;height:34px;border-radius:8px;
+  position:absolute;top:14px;right:14px;
+  width:40px;height:40px;border-radius:10px;
   background:var(--bg2);border:1px solid var(--border);color:var(--text2);
   font-size:14px;display:flex;align-items:center;justify-content:center;
   transition:all 0.2s;
@@ -615,4 +615,10 @@ body.kp-cookie-open .chat-fab{bottom:118px}
 @media(max-width:600px){
   .detail-panel{width:100%;right:-100%}
   .dp-title{font-size:18px}
+}
+
+/* Final override (must sit after the base .dp-close/.mp-close definitions):
+   comfortable close buttons on small screens & touch devices */
+@media(max-width:768px),(pointer:coarse){
+  .dp-close,.mp-close,.chat-close{width:42px !important;height:42px !important;font-size:16px}
 }
