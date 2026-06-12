@@ -82,6 +82,14 @@
 .seo-cta a.primary { background: var(--red, #D62246); color: #fff; }
 .seo-cta a.ghost { background: var(--surface, rgba(255,255,255,.06)); color: var(--text, #fff); border: 1px solid var(--border, rgba(255,255,255,.15)); }
 
+/* Comparison table */
+.seo-tbl { width: 100%; border-collapse: collapse; margin: 8px 0 24px; font-size: 14px; }
+.seo-tbl th, .seo-tbl td { padding: 11px 14px; border: 1px solid var(--border, rgba(255,255,255,.1)); text-align: left; vertical-align: top; }
+.seo-tbl th { color: var(--text, #fff); font-weight: 700; background: var(--surface, rgba(255,255,255,.05)); white-space: nowrap; }
+.seo-tbl td { color: var(--text2, #ccc); line-height: 1.55; }
+.seo-tbl tr:first-child th, .seo-tbl tr:first-child td { background: rgba(214,34,70,.12); color: var(--text, #fff); font-weight: 800; }
+@media (max-width: 560px) { .seo-tbl { font-size: 12.5px; } .seo-tbl th, .seo-tbl td { padding: 8px 9px; } }
+
 /* AdSense container — reserved height prevents layout shift (CLS) */
 .seo-ad { margin: 36px 0 8px; min-height: 250px; display: flex; align-items: center; justify-content: center; }
 .seo-ad .adsbygoogle { width: 100%; }
