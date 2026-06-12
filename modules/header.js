@@ -93,12 +93,13 @@
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-label', 'Cookie consent');
     banner.innerHTML =
-      '<p class="kp-cookie-text">We use cookies for analytics. See our <a href="/guide/privacy.html">Privacy Policy</a>.</p>' +
+      '<p class="kp-cookie-text"><span data-i18n="cookie.msg">We use cookies for analytics. See our</span> <a href="/guide/privacy.html" data-i18n="cookie.privacy">Privacy Policy</a>.</p>' +
       '<div class="kp-cookie-btns">' +
-        '<button id="kp-cookie-accept" class="kp-cookie-accept">Accept</button>' +
-        '<button id="kp-cookie-decline" class="kp-cookie-decline">Decline</button>' +
+        '<button id="kp-cookie-accept" class="kp-cookie-accept" data-i18n="cookie.accept">Accept</button>' +
+        '<button id="kp-cookie-decline" class="kp-cookie-decline" data-i18n="cookie.decline">Decline</button>' +
       '</div>';
     document.body.appendChild(banner);
+    document.body.classList.add('kp-cookie-open');
   }
 
   function injectSearchModal() {

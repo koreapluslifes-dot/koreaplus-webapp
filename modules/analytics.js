@@ -26,6 +26,7 @@
   function hideBanner() {
     const b = document.getElementById('kp-cookie-banner');
     if (b) b.classList.add('hidden');
+    document.body.classList.remove('kp-cookie-open');
   }
 
   // ── Load GA4 ────────────────────────────────────────────────────────────────

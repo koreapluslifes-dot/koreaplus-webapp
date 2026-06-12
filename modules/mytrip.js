@@ -216,7 +216,14 @@ html.light .kp-save-btn{background:rgba(0,0,0,.05)}
 .kp-tp-foot button:hover{border-color:#D62246;color:#D62246}
 .kp-trip-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:#1e2a3a;color:#fff;border-radius:22px;padding:10px 20px;font-size:13px;font-weight:600;z-index:99999;transition:transform .3s;box-shadow:0 8px 30px rgba(0,0,0,.4)}
 .kp-trip-toast.show{transform:translateX(-50%) translateY(0)}
-@media(max-width:520px){.kp-trip-panel{width:100%}}
+@media(max-width:768px){.kp-trip-panel{width:100%}}
+@media(pointer:coarse){
+  .kp-save-btn{width:42px;height:42px;font-size:17px}
+  .kp-tp-close{width:42px;height:42px}
+  .kp-chk .del{font-size:17px;padding:8px 10px}
+  .kp-mini{padding:9px 14px;font-size:12px}
+}
+.kp-tp-body{overscroll-behavior:contain}
 `;
     const s = document.createElement('style');
     s.id = 'kp-trip-styles'; s.textContent = css;
@@ -270,10 +277,12 @@ html.light .kp-save-btn{background:rgba(0,0,0,.05)}
     render();
     document.getElementById('kp-trip-panel').classList.add('open');
     document.getElementById('kp-trip-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
   function closePanel() {
     document.getElementById('kp-trip-panel')?.classList.remove('open');
     document.getElementById('kp-trip-backdrop')?.classList.remove('open');
+    document.body.style.overflow = '';
   }
 
   function refreshOpenTab(tab) {

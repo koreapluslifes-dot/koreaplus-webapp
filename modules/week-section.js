@@ -4,6 +4,7 @@
  * Depends on: modules/api-client.js
  */
 (function () {
+  const t = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
   function init() {
     if (!window.KPApi) { setTimeout(init, 100); return; }
 
@@ -22,24 +23,24 @@
     const end   = window.KPApi.futureDateKST(6);
     el.innerHTML = `
       <div class="week-header">
-        <h2>Happening This Week in Korea</h2>
+        <h2>${t('week.title','Happening This Week in Korea')}</h2>
         <span class="week-date-range">${window.KPApi.fmtDate(today)} – ${window.KPApi.fmtDate(end)}</span>
-        <a href="festivals.html" style="margin-left:auto;font-size:11px;color:rgba(116,185,255,0.8);text-decoration:none;">All events →</a>
+        <a href="festivals.html" style="margin-left:auto;font-size:11px;color:rgba(116,185,255,0.8);text-decoration:none;">${t('week.all','All events →')}</a>
       </div>
       <div class="week-carousel-wrap" id="week-scroll">
         <div class="week-carousel" id="week-items">
           <div class="week-card weather-mini-card" id="week-weather-card">
             <div class="week-card-thumb-ph" style="height:90px;font-size:24px;">🌡️</div>
             <div class="week-card-body" style="padding:8px 12px">
-              <div class="week-card-type">Seoul Weather</div>
-              <div id="week-weather-text" class="kpd-loading" style="font-size:11px;color:rgba(255,255,255,0.4)">Loading…</div>
+              <div class="week-card-type">${t('dash.weather','Seoul Weather')}</div>
+              <div id="week-weather-text" class="kpd-loading" style="font-size:11px;color:rgba(255,255,255,0.4)">${t('dash.loading','Loading…')}</div>
             </div>
           </div>
           <div class="week-card weather-mini-card" id="week-aqi-card">
             <div class="week-card-thumb-ph" style="height:90px;font-size:24px;">💨</div>
             <div class="week-card-body" style="padding:8px 12px">
-              <div class="week-card-type">Air Quality</div>
-              <div id="week-aqi-text" class="kpd-loading" style="font-size:11px;color:rgba(255,255,255,0.4)">Loading…</div>
+              <div class="week-card-type">${t('week.aqi','Air Quality')}</div>
+              <div id="week-aqi-text" class="kpd-loading" style="font-size:11px;color:rgba(255,255,255,0.4)">${t('dash.loading','Loading…')}</div>
             </div>
           </div>
         </div>
@@ -81,7 +82,7 @@
       if (aqi.status === 'fulfilled') {
         const a = aqi.value;
         const grade = a.khaiGrade ?? a.pm25Grade ?? 'unknown';
-        const labels = { good:'Good 🟢', moderate:'Moderate 🟡', unhealthy:'Unhealthy 🟠', veryUnhealthy:'Very Bad 🔴', unknown:'N/A' };
+        const labels = { good:t('air.good','Good 🟢'), moderate:t('air.moderate','Moderate 🟡'), unhealthy:t('air.unhealthy','Unhealthy 🟠'), veryUnhealthy:t('air.veryBad','Very Bad 🔴'), unknown:'N/A' };
         document.getElementById('week-aqi-text').innerHTML =
           `<strong style="font-size:14px;color:#fff">${labels[grade] || grade}</strong><br>PM2.5: ${a.pm25 ?? '—'} μg/m³<br>PM10: ${a.pm10 ?? '—'} μg/m³`;
       }
@@ -106,7 +107,7 @@
       if (!festivals.length && !shows.length) {
         const empty = document.createElement('div');
         empty.className = 'week-card';
-        empty.innerHTML = '<div class="week-card-body"><div class="week-card-type">This Week</div><div class="week-card-name" style="color:rgba(255,255,255,0.4);font-size:11px">No events found for this week. Check back soon!</div></div>';
+        empty.innerHTML = `<div class="week-card-body"><div class="week-card-type">${t('week.title','This Week')}</div><div class="week-card-name" style="color:rgba(255,255,255,0.4);font-size:11px">${t('week.none','No events found for this week. Check back soon!')}</div></div>`;
         container.appendChild(empty);
       }
     } catch (err) {
@@ -126,7 +127,7 @@
         ? `<img class="week-card-thumb" src="${thumb}" alt="${f.nameEn || ''}" loading="lazy" onerror="this.style.display='none'">`
         : `<div class="week-card-thumb-ph">🎪</div>`}
       <div class="week-card-body">
-        <div class="week-card-type">Festival</div>
+        <div class="week-card-type">${t('week.festival','Festival')}</div>
         <div class="week-card-name">${f.nameEn || f.nameKo || 'Festival'}</div>
         <div class="week-card-date">${date || ''} · ${loc}</div>
       </div>`;
@@ -149,6 +150,12 @@
       </div>`;
     return el;
   }
+
+  // Language change -> rebuild the strip (data comes from in-memory cache, so it's instant)
+  document.addEventListener('kp:langchange', () => {
+    document.getElementById('week-section')?.remove();
+    init();
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

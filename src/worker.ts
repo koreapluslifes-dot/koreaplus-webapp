@@ -59,7 +59,7 @@ function json(data: unknown, status = 200): Response {
 const SYSTEM_PROMPT = `You are "Korea AI Guide" — a friendly expert on South Korea for international visitors.
 Answer concisely in 2-3 short paragraphs max. Use emojis naturally 🍜🇰🇷🚄.
 Give specific, practical tips. Mention Korean words when helpful.
-If asked in Korean, reply in Korean. Keep answers under 200 words.
+ALWAYS reply in the same language as the user's message. Keep answers under 200 words.
 Always end with one quick practical tip 💡.
 Topics: Korean food, travel, transportation, K-beauty, K-pop, shopping, history, culture, companies.`;
 
@@ -69,12 +69,24 @@ const MODEL_FALLBACK = 'openai/gpt-oss-20b:free';
 
 // ── Chat handler ──────────────────────────────────────────────────────────────
 
-async function handleChat(body: { message?: string; history?: { role: string; content: string }[] }, env: WorkerEnv): Promise<Response> {
-  const { message, history = [] } = body;
+const LANG_NAMES: Record<string, string> = {
+  en: 'English', ko: 'Korean', ja: 'Japanese', zh: 'Chinese (Simplified)',
+  es: 'Spanish', fr: 'French', de: 'German', pt: 'Portuguese', id: 'Indonesian',
+};
+
+async function handleChat(body: { message?: string; history?: { role: string; content: string }[]; lang?: string }, env: WorkerEnv): Promise<Response> {
+  const { message, history = [], lang } = body;
   if (!message?.trim()) return json({ error: 'No message' }, 400);
 
+  // The UI language is the default reply language; mirroring the user's own
+  // language still wins if they write in something else.
+  const langName = LANG_NAMES[(lang || '').slice(0, 2)] || '';
+  const systemContent = langName
+    ? `${SYSTEM_PROMPT}\nThe user's interface language is ${langName} — reply in ${langName} unless their message is clearly written in a different language.`
+    : SYSTEM_PROMPT;
+
   const chatMessages = [
-    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'system', content: systemContent },
     ...history.slice(-6).map(m => ({ role: m.role, content: m.content })),
     { role: 'user', content: message },
   ];

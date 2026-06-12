@@ -4,6 +4,7 @@
  * Depends on: modules/api-client.js
  */
 (function () {
+  const t = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
   function init() {
     if (!window.KPApi) { setTimeout(init, 100); return; }
     const widget = buildWidget();
@@ -18,7 +19,7 @@
     el.id = 'kp-dashboard';
     el.innerHTML = `
       <div class="kpd-header" id="kpd-header">
-        <div class="kpd-header-left">🇰🇷 Korea Now</div>
+        <div class="kpd-header-left">${t('dash.title','🇰🇷 Korea Now')}</div>
         <div class="kpd-controls">
           <button class="kpd-ctrl-btn" id="kpd-refresh-btn" title="Refresh" onclick="event.stopPropagation()">↻</button>
           <button class="kpd-ctrl-btn" id="kpd-toggle-btn" title="Collapse">−</button>
@@ -26,21 +27,21 @@
       </div>
       <div class="kpd-body" id="kpd-body">
         <div class="kpd-section">
-          <div class="kpd-section-label">Seoul Time (KST)</div>
+          <div class="kpd-section-label" data-kpd="dash.time">${t('dash.time','Seoul Time (KST)')}</div>
           <div class="kpd-clock" id="kpd-clock">--:--:--</div>
           <div class="kpd-clock-sub" id="kpd-clock-sub">—</div>
         </div>
         <div class="kpd-section">
-          <div class="kpd-section-label">Seoul Weather</div>
-          <div id="kpd-weather"><span class="kpd-loading">Loading…</span></div>
+          <div class="kpd-section-label" data-kpd="dash.weather">${t('dash.weather','Seoul Weather')}</div>
+          <div id="kpd-weather"><span class="kpd-loading">${t('dash.loading','Loading…')}</span></div>
         </div>
         <div class="kpd-section">
-          <div class="kpd-section-label">Exchange Rates (→ KRW)</div>
-          <div id="kpd-rates"><span class="kpd-loading">Loading…</span></div>
+          <div class="kpd-section-label" data-kpd="dash.rates">${t('dash.rates','Exchange Rates (→ KRW)')}</div>
+          <div id="kpd-rates"><span class="kpd-loading">${t('dash.loading','Loading…')}</span></div>
         </div>
         <div class="kpd-section">
-          <div class="kpd-section-label">Active Events</div>
-          <div id="kpd-events"><span class="kpd-loading">Loading…</span></div>
+          <div class="kpd-section-label" data-kpd="dash.events">${t('dash.events','Active Events')}</div>
+          <div id="kpd-events"><span class="kpd-loading">${t('dash.loading','Loading…')}</span></div>
         </div>
       </div>`;
 
@@ -104,7 +105,7 @@
         window.KPApi.getAqi('Seoul').catch(() => null),
       ]);
       const aqiGrade = a?.khaiGrade ?? a?.pm25Grade ?? 'unknown';
-      const aqiLabel = { good:'Good 🟢', moderate:'Moderate 🟡', unhealthy:'Unhealthy 🟠', veryUnhealthy:'Very Bad 🔴', unknown:'—' }[aqiGrade] ?? '—';
+      const aqiLabel = { good:t('air.good','Good 🟢'), moderate:t('air.moderate','Moderate 🟡'), unhealthy:t('air.unhealthy','Unhealthy 🟠'), veryUnhealthy:t('air.veryBad','Very Bad 🔴'), unknown:'—' }[aqiGrade] ?? '—';
       const pm25 = a?.pm25 != null ? `PM2.5 ${a.pm25}μg` : '';
 
       el.innerHTML = `
@@ -116,10 +117,10 @@
           </div>
         </div>
         <div class="aqi-grade aqi-${aqiGrade}" style="margin-top:6px">
-          Air: ${aqiLabel} ${pm25 ? `· ${pm25}` : ''}
+          ${t('air.label','Air')}: ${aqiLabel} ${pm25 ? `· ${pm25}` : ''}
         </div>`;
     } catch {
-      el.innerHTML = '<span class="kpd-loading">Weather unavailable</span>';
+      el.innerHTML = `<span class="kpd-loading">${t('dash.wUnavail','Weather unavailable')}</span>`;
     }
   }
 
@@ -148,7 +149,7 @@
       }).join('');
       el.innerHTML = rows || '<span class="kpd-loading">N/A</span>';
     } catch {
-      el.innerHTML = '<span class="kpd-loading">Rates unavailable</span>';
+      el.innerHTML = `<span class="kpd-loading">${t('dash.rUnavail','Rates unavailable')}</span>`;
     }
   }
 
@@ -160,13 +161,23 @@
       const result = await window.KPApi.getFestivals({ from: today, to: today });
       const count = result?.total ?? (Array.isArray(result) ? result.length : (result?.festivals?.length ?? 0));
       el.innerHTML = `
-        <div class="kpd-events-count">${count} festival${count !== 1 ? 's' : ''} today</div>
-        <div class="kpd-events-sub">across South Korea</div>
-        <a class="kpd-link" href="festivals.html">View festival calendar →</a>`;
+        <div class="kpd-events-count">${count} ${t('dash.fest','festivals today')}</div>
+        <div class="kpd-events-sub">${t('dash.across','across South Korea')}</div>
+        <a class="kpd-link" href="festivals.html">${t('dash.viewCal','View festival calendar →')}</a>`;
     } catch {
-      el.innerHTML = '<a class="kpd-link" href="festivals.html">Festival calendar →</a>';
+      el.innerHTML = `<a class="kpd-link" href="festivals.html">${t('dash.viewCal','View festival calendar →')}</a>`;
     }
   }
+
+  // Re-localize labels + data text when the language changes
+  document.addEventListener('kp:langchange', () => {
+    const w = document.getElementById('kp-dashboard');
+    if (!w) return;
+    const left = w.querySelector('.kpd-header-left');
+    if (left) left.textContent = t('dash.title', '🇰🇷 Korea Now');
+    w.querySelectorAll('[data-kpd]').forEach(elm => { elm.textContent = t(elm.dataset.kpd, elm.textContent); });
+    loadData();
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

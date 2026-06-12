@@ -438,22 +438,54 @@ button{cursor:pointer;border:none;font-family:inherit}
   .mv-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
-  .nav{display:none}
-  .map-hero{height:calc(100svh - 60px)}
+  /* Mobile header: 2 rows — controls on top, FULL nav as a swipeable strip below.
+     (Previously .nav{display:none} stripped ALL hub navigation on phones.) */
+  .header-inner{flex-wrap:wrap;height:auto;padding:6px 12px;gap:6px;row-gap:0}
+  .nav{order:10;flex-basis:100%;padding:4px 0 8px;-webkit-overflow-scrolling:touch}
+  .nav-btn{padding:8px 12px;font-size:12.5px}
+  .nav-sep{display:none}
+  .search-shortcut{display:none}
+  .ai-btn{display:none} /* duplicate affordance — chat FAB stays visible */
+  .kp-mt-btn .lbl{display:none} /* icon + badge only */
+  .map-hero{height:calc(100svh - 104px);margin-top:104px}
   .map-hero-overlay{padding:20px;max-width:100%}
   .hero-title{font-size:34px}
   .map-panel{width:100vw;right:-100vw}
-  .chatbot{width:calc(100vw - 32px);right:16px}
+  .detail-panel{width:100%;right:-100%}
+  .chatbot{width:calc(100vw - 32px);right:16px;max-height:calc(100svh - 110px);bottom:90px}
   .chat-fab{right:16px;bottom:16px}
   .content-grid{grid-template-columns:repeat(2,1fr)}
   .mv-grid{grid-template-columns:1fr}
   .bucket-grid{grid-template-columns:1fr}
   .bucket-section{margin:0 -24px}
+  /* Touch targets — guaranteed on small screens (pointer:coarse can't be
+     relied on in every webview/emulator) */
+  .card-detail-btn,.card-map-btn{min-height:44px;padding:12px}
+  .city-pill{min-height:44px}
+  .dp-close,.mp-close,.chat-close{width:42px;height:42px}
+  .chat-quick button{padding:10px 14px;font-size:13px}
 }
 @media(max-width:480px){
   .content-grid{grid-template-columns:1fr}
   .hero-title{font-size:28px}
 }
+
+/* ===== TOUCH ERGONOMICS (coarse pointers = phones/tablets) ===== */
+@media(pointer:coarse){
+  .card-detail-btn,.card-map-btn{min-height:44px;padding:12px}
+  .card-actions{gap:10px}
+  .city-pill{min-height:44px;padding:11px 18px}
+  .chat-quick button{padding:10px 14px;font-size:13px}
+  .dp-close,.mp-close,.chat-close{width:42px;height:42px}
+  .kp-search-btn,.kp-theme-btn,.kp-lang-btn,.kp-mt-btn{min-height:40px}
+}
+/* Scrollability cue: fade the right edge of the city-pill strip */
+.city-pills{-webkit-mask-image:linear-gradient(90deg,#000 90%,transparent);mask-image:linear-gradient(90deg,#000 90%,transparent)}
+/* Panel scroll containment — stop scroll chaining to the page behind */
+.mp-body,.dp-body,.chat-messages{overscroll-behavior:contain}
+/* Chat FAB dodges the cookie banner so it stays tappable on first visit */
+body.kp-cookie-open .chat-fab{bottom:118px}
+@media(max-width:768px){ body.kp-cookie-open .chat-fab{bottom:128px} }
 
 /* ===== CARD IMPROVEMENTS ===== */
 .card{cursor:pointer}

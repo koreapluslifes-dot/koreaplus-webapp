@@ -166,7 +166,7 @@
     if (!query.trim()) {
       const recent = getRecent();
       if (!recent.length) {
-        resultsEl.innerHTML = '<div class="kp-search-empty">Start typing to search</div>';
+        resultsEl.innerHTML = `<div class="kp-search-empty">${window.kpI18n?.t('search.type') || 'Start typing to search'}</div>`;
         return;
       }
       const label = document.createElement('div');
@@ -186,7 +186,7 @@
     }
 
     if (!fuseLoaded) {
-      resultsEl.innerHTML = '<div class="kp-search-empty">Loading…</div>';
+      resultsEl.innerHTML = `<div class="kp-search-empty">${window.kpI18n?.t('dash.loading') || 'Loading…'}</div>`;
       return;
     }
 
@@ -198,7 +198,7 @@
 
     const label = document.createElement('div');
     label.className = 'kp-search-section';
-    label.textContent = 'Results';
+    label.textContent = window.kpI18n?.t('search.results') || 'Results';
     resultsEl.appendChild(label);
     results.forEach(r => resultsEl.appendChild(renderItem(r.item)));
   }

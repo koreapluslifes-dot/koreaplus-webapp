@@ -50,7 +50,8 @@ function initMap() {
   }
 
   const svg = el('svg',{viewBox:`0 0 ${W} ${H}`,preserveAspectRatio:'xMidYMid slice'});
-  svg.style.cssText = 'width:100%;height:100%;display:block;cursor:grab;touch-action:none;';
+  // pan-y: vertical swipes scroll the PAGE; map drag engages only when zoomed in
+  svg.style.cssText = 'width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y pinch-zoom;';
   const defs = el('defs',{},svg);
 
   // Gradients & filters
@@ -240,7 +241,7 @@ function initMap() {
   let lastD=0;
   mapEl.addEventListener('touchstart',e=>{
     if(e.touches.length===2) lastD=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-    else if(e.touches.length===1){isDrag=true;dragX=e.touches[0].clientX;dragY=e.touches[0].clientY;}
+    else if(e.touches.length===1 && zoom>1){isDrag=true;dragX=e.touches[0].clientX;dragY=e.touches[0].clientY;}
   },{passive:true});
   mapEl.addEventListener('touchmove',e=>{
     if(e.touches.length===2){
@@ -284,9 +285,9 @@ function initMap() {
   function showPanel(city) {
     const spots = CITY_SPOTS[city.name] || [];
     panel.innerHTML = `
-      <button id="pClose" style="position:absolute;top:12px;right:14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);font-size:13px;width:24px;height:24px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
+      <button id="pClose" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:15px;width:40px;height:40px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
       <div style="font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.01em;padding-right:28px;">${city.name}</div>
-      <div style="font-size:11px;color:${city.color};margin-bottom:14px;letter-spacing:0.04em;">${city.kr} &nbsp;·&nbsp; Top Attractions</div>
+      <div style="font-size:11px;color:${city.color};margin-bottom:14px;letter-spacing:0.04em;">${city.kr} &nbsp;·&nbsp; ${window.kpI18n?.t('city.top') || 'Top Attractions'}</div>
       <div style="border-top:1px solid rgba(255,255,255,0.06);"></div>
       ${spots.map((s,i)=>`
         <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05);${i===spots.length-1?'border-bottom:none':''}">
@@ -298,7 +299,7 @@ function initMap() {
         </div>`).join('')}
       <div style="padding-top:12px;">
         <button id="pAsk" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);font-size:10px;padding:8px 12px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;transition:background 0.2s;">
-          💬 Ask AI Guide about ${city.name}
+          ${window.kpI18n?.t('chat.askCity') || '💬 Ask AI Guide about'} ${city.name}
         </button>
       </div>`;
     panel.style.transform = 'translateX(0)';
@@ -306,9 +307,10 @@ function initMap() {
     panel.querySelector('#pAsk').onmouseenter = e=>e.target.style.background='rgba(255,255,255,0.1)';
     panel.querySelector('#pAsk').onmouseleave = e=>e.target.style.background='rgba(255,255,255,0.05)';
     panel.querySelector('#pAsk').onclick = ()=>{
-      const inp = document.getElementById('ai-input') || document.querySelector('.ai-input, [name="ai-input"], input[placeholder*="Ask"]');
-      if(inp){ inp.value=`Tell me about the top attractions in ${city.name}, Korea`; inp.focus(); }
-      document.querySelector('.ai-panel, #ai-section, [id*="ai"]')?.scrollIntoView({behavior:'smooth',block:'start'});
+      const q = (window.kpI18n?.t('chat.q.city') || 'Tell me about the top attractions in {city}, Korea').replace('{city}', city.name);
+      hidePanel();
+      if (typeof sendQuick === 'function') sendQuick(q);
+      else { openChat(); const inp = document.getElementById('chat-input'); if (inp) { inp.value = q; inp.focus(); } }
     };
   }
 
@@ -337,6 +339,7 @@ function initMap() {
   CITIES_MAP.forEach(city=>{
     const [cx,cy]=ll(city.lat,city.lng);
     const g=el('g',{class:'city-dot',style:'cursor:pointer'},svg);
+    el('circle',{cx,cy,r:22,fill:'transparent','pointer-events':'all'},g); // touch hit area
     el('circle',{cx,cy,r:city.r*2.3,fill:'none',stroke:city.color,'stroke-width':'1.2',class:'city-pulse',opacity:'0.7'},g);
     el('circle',{cx,cy,r:city.r,fill:city.color,filter:'url(#glow)'},g);
     el('circle',{cx,cy,r:city.r*0.4,fill:'#fffaf0'},g);
@@ -375,8 +378,8 @@ function initMap() {
   });
 
   // Zoom hint
-  const hint=el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint.textContent='scroll';
-  const hint2=el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint2.textContent='to zoom';
+  const hint=el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint.textContent=window.kpI18n?.t('map.hint1')||'scroll';
+  const hint2=el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint2.textContent=window.kpI18n?.t('map.hint2')||'to zoom';
   mapEl.addEventListener('wheel',()=>{hint.remove();hint2.remove();},{once:true,passive:true});
 
   mapEl.appendChild(svg);
@@ -408,7 +411,7 @@ function renderGrid(cat) {
   grid.innerHTML = items.map((item, i) => {
     const d = JSON.stringify(item).replace(/'/g, '&#39;');
     return `
-      <div class="card" style="animation-delay:${i * 0.045}s" data-item='${d}' tabindex="0" role="button" aria-label="Learn about ${item.name}">
+      <div class="card" style="animation-delay:${i * 0.045}s" data-item='${d}' tabindex="0" role="button" aria-label="${i18n('card.learn') === 'card.learn' ? 'Learn about' : i18n('card.learn')} ${item.name}">
         <span class="card-emoji">${item.emoji}</span>
         <div class="card-name">${item.name}</div>
         <div class="card-kr">${item.kr} &nbsp;·&nbsp; ${item.region}</div>
@@ -466,6 +469,7 @@ function openMapPanel(item) {
   document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.loading') || 'Loading reviews...'}</div>`;
   panel.classList.add('open');
   backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
 
   const gmapFrame = document.getElementById('gmap');
   const q = encodeURIComponent(item.mapQ || item.name + ' Korea');
@@ -498,7 +502,7 @@ async function fetchPlaceDetails(query) {
     if (data.rating) renderPlaceDetails(data);
     else document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.no_reviews') || 'No ratings found'}</div>`;
   } catch {
-    document.getElementById('mp-reviews').innerHTML = '<div class="mp-no-reviews">📍 Open Google Maps to see reviews</div>';
+    document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.no_reviews') || 'No reviews available yet'}</div>`;
   }
 }
 
@@ -507,7 +511,7 @@ function renderPlaceDetails(data) {
   document.getElementById('mp-rating').innerHTML = `
     <span class="mp-stars">${stars}</span>
     <span class="mp-score">${data.rating?.toFixed(1) || '—'}</span>
-    <span class="mp-count">(${(data.userRatingsTotal || 0).toLocaleString()} reviews)</span>`;
+    <span class="mp-count">(${(data.userRatingsTotal || 0).toLocaleString()} ${window.kpI18n?.t('dp.reviews') || 'reviews'})</span>`;
 
   const reviewsEl = document.getElementById('mp-reviews');
   if (data.reviews?.length) {
@@ -527,6 +531,7 @@ function initMapPanel() {
   const close = () => {
     document.getElementById('map-panel').classList.remove('open');
     document.getElementById('mp-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
   };
   document.getElementById('mp-close')?.addEventListener('click', close);
   document.getElementById('mp-backdrop')?.addEventListener('click', close);
@@ -572,11 +577,11 @@ async function sendMessage(text) {
     const res = await fetch(`${WORKER_URL}/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text, history: chatHistory.slice(-8) }),
+      body: JSON.stringify({ message: text, history: chatHistory.slice(-8), lang: window.kpI18n?.getLang?.() || 'en' }),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    const reply = data.reply || 'Sorry, no response received. Please try again.';
+    const reply = data.reply || (window.kpI18n?.t('chat.err') || '⚠️ AI temporarily unavailable. Please try again.');
     typingEl?.remove();
     addMsg('assistant', reply
       .replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -586,7 +591,7 @@ async function sendMessage(text) {
     chatHistory.push({ role: 'assistant', content: reply });
   } catch (err) {
     typingEl?.remove();
-    addMsg('assistant', `⚠️ AI temporarily unavailable. Please try again. (${err.message})`);
+    addMsg('assistant', window.kpI18n?.t('chat.err') || '⚠️ AI temporarily unavailable. Please try again.');
   } finally {
     isThinking = false;
   }
@@ -595,6 +600,14 @@ async function sendMessage(text) {
 function sendQuick(text) { openChat(); setTimeout(() => sendMessage(text), 80); }
 
 function initChat() {
+  // Quick chips: resolve the question in the CURRENT language at click time
+  document.querySelectorAll('#chat-quick [data-qkey]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const k = btn.dataset.qkey;
+      const q = window.kpI18n?.t(k);
+      sendQuick(q && q !== k ? q : btn.textContent.trim());
+    });
+  });
   document.getElementById('chat-fab')?.addEventListener('click', openChat);
   document.getElementById('chat-close')?.addEventListener('click', closeChat);
   document.getElementById('ai-open-btn')?.addEventListener('click', openChat);

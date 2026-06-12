@@ -79,7 +79,7 @@
   </script>
 
   <script src="config.js"></script>
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
   <link rel="stylesheet" href="hub-styles.css">
@@ -334,10 +334,10 @@
     </div>
   </div>
   <div class="chat-quick" id="chat-quick">
-    <button onclick="sendQuick('Best Korean foods to try as a first-timer?')" data-i18n="chat.quick.food">🍜 Best foods</button>
-    <button onclick="sendQuick('Top places to visit in Korea?')" data-i18n="chat.quick.visit">✈️ Must-visit</button>
-    <button onclick="sendQuick('How to use Seoul subway?')" data-i18n="chat.quick.subway">🚇 Subway tips</button>
-    <button onclick="sendQuick('K-beauty skincare routine tips?')" data-i18n="chat.quick.kbeauty">💄 K-Beauty</button>
+    <button data-qkey="chat.q.food" data-i18n="chat.quick.food">🍜 Best foods</button>
+    <button data-qkey="chat.q.visit" data-i18n="chat.quick.visit">✈️ Must-visit</button>
+    <button data-qkey="chat.q.subway" data-i18n="chat.quick.subway">🚇 Subway tips</button>
+    <button data-qkey="chat.q.kbeauty" data-i18n="chat.quick.kbeauty">💄 K-Beauty</button>
   </div>
   <div class="chat-input-row">
     <input type="text" id="chat-input" placeholder="Ask about Korea..." data-i18n-placeholder="chat.placeholder" autocomplete="off">
@@ -468,6 +468,7 @@
 
 <!-- Cookie consent banner -->
 <div id="kp-cookie-banner" class="kp-cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite">
+<script>document.body.classList.add('kp-cookie-open');</script>
   <p class="kp-cookie-text">
     We use cookies for analytics. See our <a href="privacy.html" data-i18n="cookie.privacy">Privacy Policy</a>.
   </p>
@@ -485,7 +486,7 @@
 <script src="detail-data.js?v=3"></script>
 <script src="modules/mytrip.js?v=2"></script>
 <script src="detail-panel.js?v=4"></script>
-<script src="app.js?v=13"></script>
+<script src="app.js?v=14"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/dashboard.js"></script>
 <script src="modules/week-section.js"></script>
@@ -519,7 +520,7 @@
         if (navigator.share) {
           navigator.share({ title: text, url }).catch(() => {});
         } else {
-          navigator.clipboard?.writeText(url).then(() => showToast('✓ Copied!'));
+          navigator.clipboard?.writeText(url).then(() => showToast(window.kpI18n?.t('share.copied') || '✓ Copied!'));
         }
       });
     });
