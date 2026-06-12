@@ -614,6 +614,7 @@ function initMapPanel() {
 let chatHistory = [], isThinking = false;
 
 const CHAT_CAPS = [
+  { builder: true,         lkey: 'tb.menu' },
   { qkey: 'chat.q.itin',   lkey: 'chat.quick.itin',   link: { href: 'plan.html',                          labelKey: 'chat.link.planner' } },
   { qkey: 'chat.q.food',   lkey: 'chat.quick.food' },
   { qkey: 'chat.q.visit',  lkey: 'chat.quick.visit' },
@@ -637,6 +638,7 @@ function showChatMenu() {
   div.querySelectorAll('.chat-menu-chip').forEach(btn => {
     btn.addEventListener('click', () => {
       const c = CHAT_CAPS[+btn.dataset.cap];
+      if (c.builder) { startTripBuilder(); return; }
       const q = t(c.qkey, c.qkey);
       const follow = c.link ? { href: c.link.href, label: t(c.link.labelKey, c.link.labelKey) } : null;
       sendMessage(q, follow);
@@ -723,11 +725,199 @@ function addLinkCard(href, label) {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
+
+/* ═══════════════════════════════════════════════════════
+   CONVERSATIONAL TRIP BUILDER
+   Chip-driven slot filling inside the chat → /api/plan →
+   summary card with Save (My Trip) / Share (/i/{id}) / Open.
+   Typed messages still flow to the normal LLM chat, so users
+   can refine the generated plan conversationally afterwards.
+═══════════════════════════════════════════════════════ */
+const TB = { active: false, slots: {} };
+const tbT = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
+
+function tbBotMsg(html) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg assistant';
+  div.innerHTML = `<div class="msg-bubble">${html}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+function tbUserEcho(text) { addMsg('user', text.replace(/</g, '&lt;')); }
+
+function tbChips(items, onPick, multi) {
+  // items: [{id,label}] — renders inside a bot bubble; multi adds Done chip
+  const picked = new Set();
+  const html = `<div class="chat-menu-chips">${items.map(it =>
+    `<button class="chat-menu-chip" data-id="${it.id}">${it.label}</button>`).join('')}
+    ${multi ? `<button class="chat-menu-chip tb-done" data-id="__done">${tbT('tb.theme.done', '✅ Done')}</button>` : ''}</div>`;
+  const bubble = tbBotMsg(html);
+  bubble.querySelectorAll('.chat-menu-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      if (multi && id !== '__done') {
+        picked.has(id) ? picked.delete(id) : picked.add(id);
+        btn.classList.toggle('sel', picked.has(id));
+        return;
+      }
+      // lock this chip row
+      bubble.querySelectorAll('.chat-menu-chip').forEach(b => { b.disabled = true; b.style.opacity = .45; });
+      if (multi) {
+        if (!picked.size) picked.add('food');
+        const labels = items.filter(i => picked.has(i.id)).map(i => i.label).join(', ');
+        tbUserEcho(labels);
+        onPick([...picked]);
+      } else {
+        tbUserEcho(btn.textContent.trim());
+        onPick(id);
+      }
+    });
+  });
+}
+
+function startTripBuilder() {
+  openChat();
+  if (TB.active) return;
+  TB.active = true; TB.slots = {};
+  tbBotMsg(tbT('tb.intro', "Let's design your Korea trip together!"));
+  tbAskDays();
+}
+
+function tbAskDays() {
+  tbBotMsg(tbT('tb.q.days', 'How many days will you stay?'));
+  const dl = n => tbT('tb.days.n', '{n} days').replace('{n}', n);
+  tbChips([3, 5, 7, 10].map(n => ({ id: String(n), label: dl(n) })), id => {
+    TB.slots.days = +id; tbAskParty();
+  });
+}
+function tbAskParty() {
+  tbBotMsg(tbT('tb.q.party', "Who are you traveling with?"));
+  tbChips([
+    { id: 'solo',   label: tbT('tb.party.solo', '🧳 Solo') },
+    { id: 'couple', label: tbT('tb.party.couple', '💑 Couple') },
+    { id: 'family', label: tbT('tb.party.family', '👨‍👩‍👧 Family') },
+    { id: 'group',  label: tbT('tb.party.group', '👥 Friends') },
+  ], id => {
+    TB.slots.party = id;
+    // 틈틈이 추가 제안 — 동행 맞춤 팁
+    if (id === 'family') tbBotMsg(tbT('tb.tip.family', "💡 I'll keep days relaxed and kid-friendly."));
+    if (id === 'couple') tbBotMsg(tbT('tb.tip.couple', "💡 I'll weave in a romantic night view."));
+    tbAskTheme();
+  });
+}
+function tbAskTheme() {
+  tbBotMsg(tbT('tb.q.theme', 'Pick all you like, then Done 👇'));
+  const ints = ['kpop','food','history','nature','shopping','nightlife','wellness','temples'];
+  tbChips(ints.map(i => ({ id: i, label: tbT('tb.int.' + i, i) })), ids => {
+    TB.slots.interests = ids; tbAskBase();
+  }, true);
+}
+function tbAskBase() {
+  tbBotMsg(tbT('tb.q.base', 'Where will you be based?'));
+  tbChips([
+    { id: 'ICN', label: tbT('tb.base.seoul', '🏯 Seoul') },
+    { id: 'PUS', label: tbT('tb.base.busan', '🌊 Busan') },
+    { id: 'CJU', label: tbT('tb.base.jeju', '🌋 Jeju') },
+  ], id => { TB.slots.airport = id; tbAskBudget(); });
+}
+function tbAskBudget() {
+  tbBotMsg(tbT('tb.q.budget', 'Your daily budget per person?'));
+  tbChips([
+    { id: 'budget',  label: tbT('tb.bud.budget', '💰 ~$50') },
+    { id: 'mid',     label: tbT('tb.bud.mid', '💳 ~$100') },
+    { id: 'comfort', label: tbT('tb.bud.comfort', '🏨 ~$200') },
+    { id: 'luxury',  label: tbT('tb.bud.luxury', '💎 $300+') },
+  ], id => { TB.slots.budget = id; tbGenerate(); });
+}
+
+async function tbGenerate() {
+  const wait = tbBotMsg(`${tbT('tb.building', '✨ Building your plan…')}<div class="typing-dots" style="margin-top:8px"><span></span><span></span><span></span></div>`);
+  const start = new Date(Date.now() + 21 * 86400000); // 3 weeks out
+  // worker's daysBetween = date diff, so a {days}-day plan needs end = start + days
+  const end = new Date(start.getTime() + TB.slots.days * 86400000);
+  const iso = d => d.toISOString().slice(0, 10);
+  const inputs = {
+    arrival: iso(start), departure: iso(end), airport: TB.slots.airport,
+    interests: TB.slots.interests, pace: 'balanced', budget: TB.slots.budget,
+    travelers: TB.slots.party, ageGroups: ['20s'], specialNeeds: [], mode: 'foreigner',
+  };
+  try {
+    const res = await fetch(`${WORKER_URL}/api/plan`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(inputs),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.itinerary) throw new Error(data.error || 'failed');
+    wait.remove();
+    tbShowResult(data.itinerary, inputs);
+  } catch (e) {
+    wait.remove();
+    tbBotMsg(tbT('tb.fail', 'Hit the daily limit — use the full planner:'));
+    addLinkCard('plan.html', tbT('chat.link.planner', '🗺️ Open the AI Trip Planner'));
+    TB.active = false;
+  }
+}
+
+function tbShowResult(itin, inputs) {
+  TB.itin = itin; TB.inputs = inputs;
+  const days = (itin.days || []).length || TB.slots.days;
+  const stops = (itin.days || []).reduce((n, d) =>
+    n + ['morning', 'afternoon', 'evening'].reduce((m, s) => m + ((d[s] || []).length), 0), 0);
+  const esc = s => String(s || '').replace(/</g, '&lt;');
+  const hl = (itin.highlights || []).slice(0, 3).map(h => `<li>${esc(h)}</li>`).join('');
+  const d1 = (itin.days || [])[0];
+  const d1names = d1 ? ['morning', 'afternoon'].flatMap(s => (d1[s] || []).slice(0, 2)).map(p => esc(p.name)).slice(0, 3).join(' → ') : '';
+  tbBotMsg(`
+    <div class="tb-card">
+      <div class="tb-title">${tbT('tb.done', '🎉 Your plan is ready!').replace('{d}', days).replace('{n}', stops)}</div>
+      <div class="tb-name">${esc(itin.title || 'Korea Itinerary')}</div>
+      ${hl ? `<ul class="tb-hl">${hl}</ul>` : ''}
+      ${d1names ? `<div class="tb-d1">Day 1 · ${d1names}…</div>` : ''}
+      <div class="tb-actions">
+        <button id="tb-save">${tbT('tb.save', '💾 Save')}</button>
+        <button id="tb-share">${tbT('tb.share', '🔗 Share')}</button>
+        <a id="tb-open" href="plan.html">${tbT('tb.open', '📄 Open full plan')}</a>
+      </div>
+    </div>`);
+  // 전체 플랜을 플래너 페이지가 그대로 읽도록 저장
+  try { localStorage.setItem('kp_itinerary', JSON.stringify({ itinerary: itin, inputs, savedAt: Date.now() })); } catch {}
+  document.getElementById('tb-save').addEventListener('click', () => {
+    if (window.kpTrip) { kpTrip.saveItinerary(itin, inputs); tbBotMsg(tbT('tb.saved', '💾 Saved!')); }
+  });
+  document.getElementById('tb-share').addEventListener('click', async () => {
+    const btn = document.getElementById('tb-share');
+    btn.disabled = true;
+    try {
+      const r = await fetch(`${WORKER_URL}/api/plan/share`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ itinerary: itin }),
+      });
+      const d = await r.json();
+      if (!d.id) throw 0;
+      const url = `${WORKER_URL}/i/${d.id}`;
+      try { await navigator.clipboard.writeText(url); } catch {}
+      tbBotMsg(tbT('tb.shared', '🔗 Link copied!'));
+      addLinkCard(url, url.replace('https://', ''));
+    } catch { tbBotMsg('⚠️'); }
+    btn.disabled = false;
+  });
+  // 후속 수정 안내 + LLM 문맥 주입(타이핑으로 일정 다듬기 가능)
+  tbBotMsg(tbT('tb.refine', 'Want tweaks? Just tell me ✍️'));
+  const outline = (itin.days || []).map((d, i) =>
+    `Day ${i + 1}: ` + ['morning', 'afternoon', 'evening'].flatMap(s => (d[s] || []).map(p => p.name)).join(', ')
+  ).join(' | ');
+  chatHistory.push({ role: 'assistant', content: `[Itinerary "${itin.title}" created] ${outline}`.slice(0, 900) });
+  TB.active = false;
+}
+
 function initChat() {
   // Quick chips: resolve the question in the CURRENT language at click time
   document.querySelectorAll('#chat-quick [data-qkey]').forEach(btn => {
     btn.addEventListener('click', () => {
       const k = btn.dataset.qkey;
+      if (k === 'tb') { startTripBuilder(); return; }
       const q = window.kpI18n?.t(k);
       sendQuick(q && q !== k ? q : btn.textContent.trim());
     });

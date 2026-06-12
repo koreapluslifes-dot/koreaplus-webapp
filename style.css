@@ -671,3 +671,20 @@ body.kp-cookie-open .chat-tease{bottom:190px}
   color:var(--gold);font-size:12.5px;font-weight:700;text-decoration:none;transition:all .15s;
 }
 .chat-link-card:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+
+/* ===== TRIP BUILDER (in-chat) ===== */
+.chat-menu-chip.sel{background:var(--red);color:#fff;border-color:var(--red)}
+.chat-menu-chip.tb-done{background:rgba(200,151,58,0.1);border-color:rgba(200,151,58,0.4);color:var(--gold)}
+.tb-card{min-width:200px}
+.tb-title{font-size:13px;font-weight:800;margin-bottom:6px}
+.tb-name{font-size:14.5px;font-weight:800;color:var(--red);margin-bottom:8px}
+.tb-hl{margin:0 0 8px;padding-left:17px;font-size:12px;line-height:1.6}
+.tb-d1{font-size:11.5px;color:var(--text3);margin-bottom:11px}
+.tb-actions{display:flex;flex-wrap:wrap;gap:7px}
+.tb-actions button,.tb-actions a{
+  padding:9px 13px;border-radius:14px;font-size:12px;font-weight:700;border:none;
+  background:var(--red);color:#fff;text-decoration:none;cursor:pointer;transition:opacity .15s;
+}
+.tb-actions button:hover,.tb-actions a:hover{opacity:.85}
+.tb-actions #tb-share{background:var(--bg2);color:var(--text);border:1px solid var(--border)}
+.tb-actions #tb-open{background:rgba(200,151,58,0.12);color:var(--gold);border:1px solid rgba(200,151,58,0.4)}
