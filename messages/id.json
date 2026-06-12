@@ -156,9 +156,12 @@
   "week.festival": "Festival",
   "week.none": "Tidak ada acara pekan ini. Cek lagi nanti!",
   "city.top": "Atraksi Utama",
-  "map.hint1": "gulir",
+  "map.hint1": "Ctrl + gulir",
   "map.hint2": "utk zoom",
   "search.type": "Ketik untuk mencari",
   "search.results": "Hasil",
-  "card.learn": "Pelajari tentang"
+  "card.learn": "Pelajari tentang",
+  "mp.festivals": "🎪 Festival & acara terdekat",
+  "mp.related": "🧭 Jelajahi area ini",
+  "mp.noFest": "Tidak ada acara saat ini"
 }

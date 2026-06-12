@@ -137,13 +137,10 @@
     const rawQ = item.mapQ || item.name + ' Korea';
     const mapQ = encodeURIComponent(rawQ);
     const key  = window.MAPS_KEY;
+    // Keyless Google embed — real map with no API key needed.
     const mapEmbed = (key && key.length > 10)
       ? `<iframe src="https://www.google.com/maps/embed/v1/search?key=${key}&q=${mapQ}&zoom=14&language=en&region=KR" allowfullscreen loading="lazy"></iframe>`
-      : `<a class="dp-map-placeholder" href="https://www.google.com/maps/search/${mapQ}" target="_blank" rel="noopener">
-           <span class="dp-mp-pin">📍</span>
-           <span class="dp-mp-name">${esc(item.name)}</span>
-           <span class="dp-mp-cta">${tr('dp.tapMap', 'Tap to view on the map ↗')}</span>
-         </a>`;
+      : `<iframe src="https://maps.google.com/maps?q=${mapQ}&z=14&hl=en&output=embed" allowfullscreen loading="lazy" title="Map"></iframe>`;
 
     html += `<div class="dp-section dp-map-section">
       <div class="dp-section-title">${tr('dp.location', '🗺️ Location & Maps')}</div>
@@ -166,6 +163,7 @@
     document.getElementById('detail-panel').classList.add('open');
     document.getElementById('detail-backdrop').classList.add('open');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('kp-modal-open');
 
     /* Also fetch Google Place reviews into panel */
     fetchReviews(item.mapQ || item.name + ' Korea');
@@ -216,6 +214,7 @@
     document.getElementById('detail-panel')?.classList.remove('open');
     document.getElementById('detail-backdrop')?.classList.remove('open');
     document.body.style.overflow = '';
+    document.body.classList.remove('kp-modal-open');
   }
 
   /* Re-render with new section labels when the language changes. */

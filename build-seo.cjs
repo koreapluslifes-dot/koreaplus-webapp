@@ -596,7 +596,10 @@ function buildPlace(it) {
   if (d.howto && d.howto.length) body += `<h2>How to Experience ${esc(it.name)}</h2><ol class="steps">${d.howto.map(s => `<li>${esc(s)}</li>`).join('')}</ol>`;
   if (d.price && (d.price.range || d.price.note)) body += `<h2>💰 Price & Budget</h2><div class="seo-pricebox">${d.price.range ? `<div class="range">${esc(d.price.range)}</div>` : ''}${d.price.note ? `<div class="note">${esc(d.price.note)}</div>` : ''}</div>`;
   if (d.tips && d.tips.length) body += `<h2>💡 Insider Tips</h2><ul class="tips">${d.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
-  body += `<h2>🗺️ Location & Maps</h2><p>Find <strong>${esc(it.name)}</strong> and get directions:</p>${mapsHtml(it.mapQ || it.name + ' Korea')}`;
+  const mq = enc(it.mapQ || it.name + ' Korea');
+  body += `<h2>🗺️ Location & Maps</h2>
+    <div class="seo-map-frame"><iframe src="https://maps.google.com/maps?q=${mq}&z=14&hl=en&output=embed" loading="lazy" title="${esc(it.name)} map"></iframe></div>
+    ${mapsHtml(it.mapQ || it.name + ' Korea')}`;
   if (d.links && d.links.length) body += `<h2>🔗 Useful Links</h2><div class="seo-links">${d.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>`;
 
   // related (same category)

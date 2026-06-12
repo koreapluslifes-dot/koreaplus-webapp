@@ -215,6 +215,7 @@ function initMap() {
   });
 
   mapEl.addEventListener('wheel',e=>{
+    if(!e.ctrlKey && !e.metaKey) return; // plain scroll = page scroll (Ctrl+wheel zooms)
     e.preventDefault();
     const rect=svg.getBoundingClientRect();
     const mx=(e.clientX-rect.left)/rect.width*W, my=(e.clientY-rect.top)/rect.height*H;
@@ -470,16 +471,18 @@ function openMapPanel(item) {
   panel.classList.add('open');
   backdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('kp-modal-open');
 
   const gmapFrame = document.getElementById('gmap');
   const q = encodeURIComponent(item.mapQ || item.name + ' Korea');
-  if (MAPS_KEY && MAPS_KEY !== 'YOUR_GOOGLE_MAPS_API_KEY') {
-    gmapFrame.innerHTML = `<iframe src="https://www.google.com/maps/embed/v1/search?key=${MAPS_KEY}&q=${q}&zoom=14&language=en&region=KR" allowfullscreen loading="lazy"></iframe>`;
-    fetchPlaceDetails(item.mapQ || item.name + ' Korea');
-  } else {
-    gmapFrame.innerHTML = `<div class="gmap-loading">📍 Add your Google Maps API key in index.html to enable the map preview</div>`;
-    document.getElementById('mp-reviews').innerHTML = '<div class="mp-no-reviews">Add Google Maps API key to see ratings & reviews</div>';
-  }
+  // Keyless Google embed — a real interactive map with NO API key required.
+  // (If a premium embed key is configured, use it for the nicer tiles.)
+  const src = (MAPS_KEY && MAPS_KEY !== 'YOUR_GOOGLE_MAPS_API_KEY')
+    ? `https://www.google.com/maps/embed/v1/search?key=${MAPS_KEY}&q=${q}&zoom=14&language=en&region=KR`
+    : `https://maps.google.com/maps?q=${q}&z=14&hl=en&output=embed`;
+  gmapFrame.innerHTML = `<iframe src="${src}" allowfullscreen loading="lazy" title="Map"></iframe>`;
+  fetchPlaceDetails(item.mapQ || item.name + ' Korea');
+  loadMapExtras(item);
 
   document.getElementById('mp-directions').href = `https://www.google.com/maps/dir/?api=1&destination=${q}`;
   document.getElementById('mp-gmaps').href = `https://www.google.com/maps/search/${q}`;
@@ -527,11 +530,81 @@ function renderPlaceDetails(data) {
   }
 }
 
+/* Composite extras for the map panel: live festivals + related places
+   from our own data, so the panel is a mini local hub — not just a map. */
+function loadMapExtras(item) {
+  const box = document.getElementById('mp-extra');
+  if (!box) return;
+  const t = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
+  const esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const region = String(item.region || '');
+  const cityHit = (typeof CITIES !== 'undefined' ? CITIES : []).find(c => region.includes(c.name) || (item.mapQ || '').includes(c.name));
+  const city = cityHit ? cityHit.name : 'Seoul';
+
+  // Related: same-region items across all categories (tap → full detail)
+  let related = [];
+  if (typeof KOREA_DATA !== 'undefined') {
+    for (const [cat, items] of Object.entries(KOREA_DATA)) {
+      for (const it of items) {
+        if (it.name === item.name) continue;
+        if ((it.region || '').includes(region) || (region && (it.region || '').includes(city)) || (it.mapQ || '').includes(city)) {
+          related.push({ ...it, cat });
+        }
+      }
+    }
+  }
+  if (related.length < 3 && typeof KOREA_DATA !== 'undefined') {
+    related = related.concat(KOREA_DATA.travel.filter(x => x.name !== item.name).map(x => ({ ...x, cat: 'travel' })));
+  }
+  related = related.slice(0, 6);
+
+  let html = '';
+  if (related.length) {
+    html += `<div class="mp-sec-title">${t('mp.related', '🧭 Explore more in this area')}</div>
+      <div class="mp-chips">${related.map((r, i) =>
+        `<button class="mp-chip" data-rel="${i}">${r.emoji} ${esc(r.name)}</button>`).join('')}</div>`;
+  }
+  html += `<div class="mp-sec-title">${t('mp.festivals', '🎪 Festivals & events nearby')}</div>
+    <div id="mp-fest"><div class="mp-no-reviews">${t('dash.loading', 'Loading…')}</div></div>`;
+  box.innerHTML = html;
+
+  box.querySelectorAll('.mp-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const r = related[+btn.dataset.rel];
+      document.getElementById('mp-close')?.click();
+      if (window.kpDetail) kpDetail.open(r);
+    });
+  });
+
+  const fest = document.getElementById('mp-fest');
+  if (window.KPApi) {
+    // City filter first; TourAPI's per-city tagging is sparse, so fall back
+    // to the nationwide list rather than showing an empty section.
+    KPApi.getFestivals({ city })
+      .then(d => {
+        const l = (d.festivals || d || []);
+        return l.length ? l : KPApi.getFestivals({}).then(d2 => (d2.festivals || d2 || []));
+      })
+      .then(listAll => {
+      const list = listAll.slice(0, 3);
+      if (!list.length) { fest.innerHTML = `<div class="mp-no-reviews">${t('mp.noFest', 'No events found right now')}</div>`; return; }
+      fest.innerHTML = list.map(f => `
+        <a class="mp-fest-row" href="festivals.html">
+          <span class="mf-name">${esc(f.nameEn || f.nameKo)}</span>
+          <span class="mf-date">${KPApi.fmtDateRange(f.eventStartDate || f.startDate, f.eventEndDate || f.endDate)}</span>
+        </a>`).join('');
+    }).catch(() => { fest.innerHTML = `<div class="mp-no-reviews">${t('mp.noFest', 'No events found right now')}</div>`; });
+  } else {
+    fest.innerHTML = `<a class="mp-fest-row" href="festivals.html"><span class="mf-name">📅 Festival calendar</span></a>`;
+  }
+}
+
 function initMapPanel() {
   const close = () => {
     document.getElementById('map-panel').classList.remove('open');
     document.getElementById('mp-backdrop').classList.remove('open');
     document.body.style.overflow = '';
+    document.body.classList.remove('kp-modal-open');
   };
   document.getElementById('mp-close')?.addEventListener('click', close);
   document.getElementById('mp-backdrop')?.addEventListener('click', close);
@@ -540,8 +613,8 @@ function initMapPanel() {
 /* ===== AI CHATBOT ===== */
 let chatHistory = [], isThinking = false;
 
-function openChat() { document.getElementById('chatbot')?.classList.add('open'); }
-function closeChat() { document.getElementById('chatbot')?.classList.remove('open'); }
+function openChat() { document.getElementById('chatbot')?.classList.add('open'); document.body.classList.add('kp-modal-open'); }
+function closeChat() { document.getElementById('chatbot')?.classList.remove('open'); document.body.classList.remove('kp-modal-open'); }
 
 function addMsg(role, html) {
   const msgs = document.getElementById('chat-messages');

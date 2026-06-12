@@ -156,9 +156,12 @@
   "week.festival": "축제",
   "week.none": "이번 주 행사를 찾지 못했어요. 곧 다시 확인해 주세요!",
   "city.top": "주요 명소",
-  "map.hint1": "스크롤로",
-  "map.hint2": "확대",
+  "map.hint1": "Ctrl + 스크롤",
+  "map.hint2": "으로 확대",
   "search.type": "검색어를 입력하세요",
   "search.results": "검색 결과",
-  "card.learn": "자세히 보기:"
+  "card.learn": "자세히 보기:",
+  "mp.festivals": "🎪 주변 축제·행사",
+  "mp.related": "🧭 이 지역 더 둘러보기",
+  "mp.noFest": "지금은 진행 중인 행사가 없어요"
 }

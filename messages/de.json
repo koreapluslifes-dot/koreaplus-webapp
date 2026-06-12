@@ -156,9 +156,12 @@
   "week.festival": "Festival",
   "week.none": "Keine Events diese Woche. Schau bald wieder vorbei!",
   "city.top": "Top-Sehenswürdigkeiten",
-  "map.hint1": "scrollen",
+  "map.hint1": "Strg + Scrollen",
   "map.hint2": "zum Zoomen",
   "search.type": "Tippen zum Suchen",
   "search.results": "Ergebnisse",
-  "card.learn": "Mehr über"
+  "card.learn": "Mehr über",
+  "mp.festivals": "🎪 Festivals & Events in der Nähe",
+  "mp.related": "🧭 Mehr in dieser Gegend",
+  "mp.noFest": "Derzeit keine Events"
 }

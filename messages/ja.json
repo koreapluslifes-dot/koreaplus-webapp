@@ -156,9 +156,12 @@
   "week.festival": "祭り",
   "week.none": "今週のイベントは見つかりませんでした。また確認してください！",
   "city.top": "主な観光スポット",
-  "map.hint1": "スクロールで",
-  "map.hint2": "ズーム",
+  "map.hint1": "Ctrl + スクロール",
+  "map.hint2": "でズーム",
   "search.type": "入力して検索",
   "search.results": "検索結果",
-  "card.learn": "詳しく見る:"
+  "card.learn": "詳しく見る:",
+  "mp.festivals": "🎪 周辺の祭り・イベント",
+  "mp.related": "🧭 このエリアをもっと見る",
+  "mp.noFest": "現在開催中のイベントはありません"
 }

@@ -278,11 +278,13 @@ html.light .kp-save-btn{background:rgba(0,0,0,.05)}
     document.getElementById('kp-trip-panel').classList.add('open');
     document.getElementById('kp-trip-backdrop').classList.add('open');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('kp-modal-open');
   }
   function closePanel() {
     document.getElementById('kp-trip-panel')?.classList.remove('open');
     document.getElementById('kp-trip-backdrop')?.classList.remove('open');
     document.body.style.overflow = '';
+    document.body.classList.remove('kp-modal-open');
   }
 
   function refreshOpenTab(tab) {

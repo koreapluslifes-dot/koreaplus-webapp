@@ -156,9 +156,12 @@
   "week.festival": "节庆",
   "week.none": "本周暂无活动，敬请期待！",
   "city.top": "主要景点",
-  "map.hint1": "滚动",
+  "map.hint1": "Ctrl + 滚动",
   "map.hint2": "缩放",
   "search.type": "输入关键词搜索",
   "search.results": "搜索结果",
-  "card.learn": "了解更多："
+  "card.learn": "了解更多：",
+  "mp.festivals": "🎪 附近节庆活动",
+  "mp.related": "🧭 探索这个地区",
+  "mp.noFest": "当前没有进行中的活动"
 }
