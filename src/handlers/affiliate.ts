@@ -15,7 +15,7 @@
  *   IMPACT_ACCOUNT_SID   — Impact publisher Account SID
  *   IMPACT_AUTH_TOKEN    — Impact API Auth Token
  *   IMPACT_PROGRAMS      — JSON map of brandKey → ProgramId,
- *                          e.g. {"klook":"1234","airalo":"5678","tripcom":"9012","kkday":"3456"}
+ *                          e.g. {"klook":"1234","tripcom":"9012","kkday":"3456"}
  *   IMPACT_PROPERTY_ID   — (optional) MediaPartnerPropertyId if your account has several
  */
 
@@ -33,7 +33,7 @@ interface Brand { brand: string; icon: string; key: string; deep: (q: string) =>
 const BRANDS: Record<string, Brand> = {
   klook:   { key: 'klook',   brand: 'Klook',   icon: '🎟️', deep: q => `https://www.klook.com/search/?query=${q}` },
   kkday:   { key: 'kkday',   brand: 'KKday',   icon: '🚌', deep: q => `https://www.kkday.com/en/product/productlist?keyword=${q}` },
-  airalo:  { key: 'airalo',  brand: 'Airalo',  icon: '📶', deep: () => 'https://www.airalo.com/south-korea-esim' },
+  agoda:   { key: 'agoda',   brand: 'Agoda',   icon: '🛏️', deep: () => 'https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=-1&hl=en-us&city=14690' },
   // Trip.com fallback links carry the live affiliate IDs (Trip.com Partners),
   // so hotel clicks monetize even before Impact program approval.
   tripcom: { key: 'tripcom', brand: 'Trip.com', icon: '🏨', deep: q => `https://www.trip.com/global-search/searchlist/search/?keyword=${q}&Allianceid=8536795&SID=317779078&trip_sub1=kp_api` },
@@ -50,29 +50,29 @@ function pickOffers(city: string, cat: string, q: string): OfferSpec[] {
       { b: BRANDS.klook,   label: `${c} Food Tours`,      q: enc(`${c} food tour`) },
       { b: BRANDS.kkday,   label: 'Cooking Classes',      q: enc(`korea cooking class`) },
       { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-      { b: BRANDS.airalo,  label: 'Korea eSIM',           q: '' },
+      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
     ],
     transport: [
       { b: BRANDS.klook,   label: 'Korea Rail Pass',      q: enc('korea rail pass') },
       { b: BRANDS.klook,   label: 'AREX / Transfers',     q: enc(`${q || 'AREX incheon airport'}`) },
-      { b: BRANDS.airalo,  label: 'Korea eSIM',           q: '' },
+      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
       { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
     ],
     hotel: [
       { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
       { b: BRANDS.klook,   label: `${c} Activities`,      q: enc(`${c}`) },
-      { b: BRANDS.airalo,  label: 'Korea eSIM',           q: '' },
+      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
       { b: BRANDS.kkday,   label: `${c} Day Trips`,       q: enc(`${c} day trip`) },
     ],
     kbeauty: [
       { b: BRANDS.klook,   label: 'Spa & Beauty',         q: enc(`${c} spa massage`) },
       { b: BRANDS.klook,   label: `${c} Activities`,      q: enc(`${c}`) },
       { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-      { b: BRANDS.airalo,  label: 'Korea eSIM',           q: '' },
+      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
     ],
     esim: [
-      { b: BRANDS.airalo,  label: 'Korea eSIM',           q: '' },
       { b: BRANDS.klook,   label: 'SIM & WiFi Pickup',    q: enc('korea sim wifi') },
+      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
       { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
       { b: BRANDS.kkday,   label: `${c} Tours`,           q: enc(`${c}`) },
     ],
@@ -83,7 +83,7 @@ function pickOffers(city: string, cat: string, q: string): OfferSpec[] {
     { b: BRANDS.klook,   label: `${c} Tours & Tickets`, q: enc(q ? `${q}` : `${c}`) },
     { b: BRANDS.kkday,   label: `${c} Day Trips`,       q: enc(`${c} day trip`) },
     { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-    { b: BRANDS.airalo,  label: 'Korea eSIM',           q: '' },
+    { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
   ];
 }
 

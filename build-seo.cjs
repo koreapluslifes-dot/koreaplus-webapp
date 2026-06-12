@@ -69,17 +69,18 @@ const CAT_SLUG = {
 // GetYourGuide (day trips). Fill your IDs below; links appear on every guide.
 // ── Trip.com affiliate (LIVE — Trip.com Partners 계정 연동) ─────────
 const TRIP_AID = 'Allianceid=8536795&SID=317779078';
+// Agoda partner text link (제공받은 링크 그대로 — cid 갱신 시 여기만 교체)
+const AGODA_URL = 'https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=-1&hl=en-us&city=14690';
 const AFFILIATES = {
-  klook:        { label: 'Tours & Tickets', brand: 'Klook',        icon: '🎟️', url: 'https://www.klook.com/?aid=YOUR_KLOOK_AID' },
-  tripcom:      { label: 'Hotels',          brand: 'Trip.com',     icon: '🏨', url: `https://www.trip.com/?${TRIP_AID}&trip_sub1=kp_block` },
-  airalo:       { label: 'eSIM Data',       brand: 'Airalo',       icon: '📶', url: 'https://www.airalo.com/?ref=YOUR_AIRALO_REF' },
-  getyourguide: { label: 'Day Trips',       brand: 'GetYourGuide', icon: '🚌', url: 'https://www.getyourguide.com/?partner_id=YOUR_GYG_ID' },
+  klook:   { label: 'Tours & Tickets', brand: 'Klook',    icon: '🎟️', url: 'https://www.klook.com/?aid=YOUR_KLOOK_AID' },
+  tripcom: { label: 'Hotels',          brand: 'Trip.com', icon: '🏨', url: `https://www.trip.com/?${TRIP_AID}&trip_sub1=kp_block` },
+  agoda:   { label: 'Hotel Deals',     brand: 'Agoda',    icon: '🛏️', url: AGODA_URL },
 };
 
 // Trip.com dynamic hotel banners (300×250) — generate per-city in the
 // Partners dashboard and register the banner id here. Pages for cities
 // without a banner simply render nothing.
-const TRIP_BANNERS = { Seoul: 'DB17873403' };
+const TRIP_BANNERS = { Seoul: 'DB17873403', Busan: 'DB17873718', Jeju: 'DB17873732' };
 const tripBanner = (city, sub = 'kp') => {
   const id = TRIP_BANNERS[city];
   if (!id) return '';
