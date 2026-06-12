@@ -79,7 +79,7 @@
   </script>
 
   <script src="config.js"></script>
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=14">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
   <link rel="stylesheet" href="hub-styles.css">
@@ -335,10 +335,12 @@
     </div>
   </div>
   <div class="chat-quick" id="chat-quick">
+    <button data-qkey="chat.q.itin" data-i18n="chat.quick.itin">🗺️ Plan my trip</button>
     <button data-qkey="chat.q.food" data-i18n="chat.quick.food">🍜 Best foods</button>
     <button data-qkey="chat.q.visit" data-i18n="chat.quick.visit">✈️ Must-visit</button>
     <button data-qkey="chat.q.subway" data-i18n="chat.quick.subway">🚇 Subway tips</button>
     <button data-qkey="chat.q.kbeauty" data-i18n="chat.quick.kbeauty">💄 K-Beauty</button>
+    <button data-qkey="chat.q.visa" data-i18n="chat.quick.visa">🛂 Visa / K-ETA</button>
   </div>
   <div class="chat-input-row">
     <input type="text" id="chat-input" placeholder="Ask about Korea..." data-i18n-placeholder="chat.placeholder" autocomplete="off">
@@ -487,7 +489,7 @@
 <script src="detail-data.js?v=3"></script>
 <script src="modules/mytrip.js?v=2"></script>
 <script src="detail-panel.js?v=5"></script>
-<script src="app.js?v=15"></script>
+<script src="app.js?v=16"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/dashboard.js"></script>
 <script src="modules/week-section.js"></script>

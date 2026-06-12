@@ -613,7 +613,44 @@ function initMapPanel() {
 /* ===== AI CHATBOT ===== */
 let chatHistory = [], isThinking = false;
 
-function openChat() { document.getElementById('chatbot')?.classList.add('open'); document.body.classList.add('kp-modal-open'); }
+const CHAT_CAPS = [
+  { qkey: 'chat.q.itin',   lkey: 'chat.quick.itin',   link: { href: 'plan.html',                          labelKey: 'chat.link.planner' } },
+  { qkey: 'chat.q.food',   lkey: 'chat.quick.food' },
+  { qkey: 'chat.q.visit',  lkey: 'chat.quick.visit' },
+  { qkey: 'chat.q.budget', lkey: 'chat.quick.budget', link: { href: 'currency.html',                      labelKey: 'chat.link.budget' } },
+  { qkey: 'chat.q.visa',   lkey: 'chat.quick.visa',   link: { href: 'guide/korea-visa-k-eta-guide.html',  labelKey: 'chat.link.visa' } },
+];
+
+function showChatMenu() {
+  const msgs = document.getElementById('chat-messages');
+  if (!msgs || document.getElementById('chat-menu')) return;
+  const t = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
+  const div = document.createElement('div');
+  div.className = 'chat-msg assistant';
+  div.id = 'chat-menu';
+  div.innerHTML = `<div class="msg-bubble">
+    <div class="chat-menu-title">${t('chat.menu.title', "Here's what I can do — tap one to try 👇")}</div>
+    <div class="chat-menu-chips">${CHAT_CAPS.map((c, i) =>
+      `<button class="chat-menu-chip" data-cap="${i}">${t(c.lkey, c.lkey)}</button>`).join('')}</div>
+  </div>`;
+  msgs.appendChild(div);
+  div.querySelectorAll('.chat-menu-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const c = CHAT_CAPS[+btn.dataset.cap];
+      const q = t(c.qkey, c.qkey);
+      const follow = c.link ? { href: c.link.href, label: t(c.link.labelKey, c.link.labelKey) } : null;
+      sendMessage(q, follow);
+    });
+  });
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function openChat() {
+  document.getElementById('chatbot')?.classList.add('open');
+  document.body.classList.add('kp-modal-open');
+  hideChatTease();
+  showChatMenu();
+}
 function closeChat() { document.getElementById('chatbot')?.classList.remove('open'); document.body.classList.remove('kp-modal-open'); }
 
 function addMsg(role, html) {
@@ -638,7 +675,7 @@ function addTyping() {
   return div;
 }
 
-async function sendMessage(text) {
+async function sendMessage(text, followLink) {
   if (!text.trim() || isThinking) return;
   isThinking = true;
   const input = document.getElementById('chat-input');
@@ -662,6 +699,7 @@ async function sendMessage(text) {
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     );
     chatHistory.push({ role: 'assistant', content: reply });
+    if (followLink) addLinkCard(followLink.href, followLink.label);
   } catch (err) {
     typingEl?.remove();
     addMsg('assistant', window.kpI18n?.t('chat.err') || '⚠️ AI temporarily unavailable. Please try again.');
@@ -670,7 +708,20 @@ async function sendMessage(text) {
   }
 }
 
-function sendQuick(text) { openChat(); setTimeout(() => sendMessage(text), 80); }
+function sendQuick(text, followLink) { openChat(); setTimeout(() => sendMessage(text, followLink), 80); }
+
+/* In-chat link card — the bot's reply gets a tappable recommendation
+   (planner / visa guide / budget calculator) right under it. */
+function addLinkCard(href, label) {
+  const msgs = document.getElementById('chat-messages');
+  if (!msgs) return;
+  const a = document.createElement('a');
+  a.className = 'chat-link-card';
+  a.href = href;
+  a.textContent = label;
+  msgs.appendChild(a);
+  msgs.scrollTop = msgs.scrollHeight;
+}
 
 function initChat() {
   // Quick chips: resolve the question in the CURRENT language at click time
@@ -688,6 +739,37 @@ function initChat() {
   const input = document.getElementById('chat-input');
   document.getElementById('chat-send')?.addEventListener('click', () => sendMessage(input?.value || ''));
   input?.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(input.value); });
+}
+
+/* ===== PROACTIVE CHAT TEASER ===== */
+function hideChatTease() {
+  document.getElementById('chat-tease')?.remove();
+}
+
+function initChatTease() {
+  try { if (sessionStorage.getItem('kpTeased')) return; } catch {}
+  setTimeout(() => {
+    if (document.getElementById('chatbot')?.classList.contains('open')) return;
+    const t = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
+    const el = document.createElement('div');
+    el.id = 'chat-tease';
+    el.className = 'chat-tease';
+    el.setAttribute('role', 'dialog');
+    el.innerHTML = `
+      <button class="ct-close" aria-label="Close">✕</button>
+      <div class="ct-ava">🤖</div>
+      <div class="ct-body">
+        <div class="ct-hi">${t('tease.hi', '👋 Planning a Korea trip?')}</div>
+        <div class="ct-sub">${t('tease.sub', "I'm your free AI guide — ask me anything.")}</div>
+        <button class="ct-cta">${t('tease.cta', 'Ask me anything')} →</button>
+      </div>`;
+    document.body.appendChild(el);
+    try { sessionStorage.setItem('kpTeased', '1'); } catch {}
+    setTimeout(() => el.classList.add('show'), 60); // rAF stalls in background tabs
+    el.querySelector('.ct-close').addEventListener('click', e => { e.stopPropagation(); hideChatTease(); });
+    el.querySelector('.ct-cta').addEventListener('click', openChat);
+    el.querySelector('.ct-body').addEventListener('click', openChat);
+  }, 2500);
 }
 
 /* ===== SCROLL REVEAL ===== */
@@ -717,6 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMapPanel();
   renderGrid('food');
   initChat();
+  initChatTease();
   initHeader();
   initScrollReveal();
 

@@ -163,5 +163,18 @@
   "card.learn": "Mehr über",
   "mp.festivals": "🎪 Festivals & Events in der Nähe",
   "mp.related": "🧭 Mehr in dieser Gegend",
-  "mp.noFest": "Derzeit keine Events"
+  "mp.noFest": "Derzeit keine Events",
+  "tease.hi": "👋 Planst du eine Korea-Reise?",
+  "tease.sub": "Ich bin dein kostenloser KI-Guide — Essen, Routen, Visa…",
+  "tease.cta": "Frag mich",
+  "chat.menu.title": "Das kann ich — tippe zum Ausprobieren 👇",
+  "chat.quick.itin": "🗺️ Plane meine Reise",
+  "chat.quick.visa": "🛂 Visum / K-ETA",
+  "chat.quick.budget": "💰 Reisebudget",
+  "chat.q.itin": "Erstelle mir eine 5-Tage-Korea-Route für Erstbesucher, Tag für Tag.",
+  "chat.q.visa": "Brauche ich ein Visum oder K-ETA für Korea?",
+  "chat.q.budget": "Was kostet eine Woche Korea pro Person?",
+  "chat.link.planner": "🗺️ Kompletten Plan im KI-Planer erstellen",
+  "chat.link.visa": "🛂 Den kompletten Visum-Guide lesen",
+  "chat.link.budget": "💱 Budget-Rechner öffnen"
 }

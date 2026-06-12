@@ -163,5 +163,18 @@
   "card.learn": "자세히 보기:",
   "mp.festivals": "🎪 주변 축제·행사",
   "mp.related": "🧭 이 지역 더 둘러보기",
-  "mp.noFest": "지금은 진행 중인 행사가 없어요"
+  "mp.noFest": "지금은 진행 중인 행사가 없어요",
+  "tease.hi": "👋 한국 여행 준비 중이세요?",
+  "tease.sub": "무료 AI 가이드예요 — 음식·일정·비자, 뭐든 물어보세요.",
+  "tease.cta": "무엇이든 물어보기",
+  "chat.menu.title": "제가 할 수 있는 것들이에요 — 눌러서 바로 시험해 보세요 👇",
+  "chat.quick.itin": "🗺️ 일정 짜줘",
+  "chat.quick.visa": "🛂 비자/K-ETA",
+  "chat.quick.budget": "💰 여행 예산",
+  "chat.q.itin": "처음 가는 한국 5일 일정을 하루씩 짜줘.",
+  "chat.q.visa": "한국 여행에 비자나 K-ETA가 필요해?",
+  "chat.q.budget": "한국 일주일 여행 1인 예산이 얼마나 들어?",
+  "chat.link.planner": "🗺️ AI 플래너로 전체 일정 만들기",
+  "chat.link.visa": "🛂 비자·K-ETA 전체 가이드 보기",
+  "chat.link.budget": "💱 실시간 예산 계산기 열기"
 }

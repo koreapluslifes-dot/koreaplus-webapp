@@ -163,5 +163,18 @@
   "card.learn": "Pelajari tentang",
   "mp.festivals": "🎪 Festival & acara terdekat",
   "mp.related": "🧭 Jelajahi area ini",
-  "mp.noFest": "Tidak ada acara saat ini"
+  "mp.noFest": "Tidak ada acara saat ini",
+  "tease.hi": "👋 Merencanakan perjalanan ke Korea?",
+  "tease.sub": "Saya panduan AI gratis Anda — kuliner, rute, visa…",
+  "tease.cta": "Tanya apa saja",
+  "chat.menu.title": "Ini yang bisa saya lakukan — ketuk untuk coba 👇",
+  "chat.quick.itin": "🗺️ Susun rencana saya",
+  "chat.quick.visa": "🛂 Visa / K-ETA",
+  "chat.quick.budget": "💰 Anggaran",
+  "chat.q.itin": "Buatkan itinerari Korea 5 hari untuk pemula, hari per hari.",
+  "chat.q.visa": "Apakah saya perlu visa atau K-ETA ke Korea?",
+  "chat.q.budget": "Berapa biaya seminggu di Korea per orang?",
+  "chat.link.planner": "🗺️ Buat rencana lengkap di Perencana AI",
+  "chat.link.visa": "🛂 Baca panduan lengkap Visa & K-ETA",
+  "chat.link.budget": "💱 Buka kalkulator anggaran"
 }

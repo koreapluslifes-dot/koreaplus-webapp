@@ -163,5 +163,18 @@
   "card.learn": "詳しく見る:",
   "mp.festivals": "🎪 周辺の祭り・イベント",
   "mp.related": "🧭 このエリアをもっと見る",
-  "mp.noFest": "現在開催中のイベントはありません"
+  "mp.noFest": "現在開催中のイベントはありません",
+  "tease.hi": "👋 韓国旅行をご計画中ですか？",
+  "tease.sub": "無料AIガイドです — グルメ・旅程・ビザ、何でもどうぞ。",
+  "tease.cta": "何でも聞いてみる",
+  "chat.menu.title": "私ができることはこちら — タップしてお試しください 👇",
+  "chat.quick.itin": "🗺️ 旅程を作って",
+  "chat.quick.visa": "🛂 ビザ/K-ETA",
+  "chat.quick.budget": "💰 旅行予算",
+  "chat.q.itin": "初めての韓国5日間の旅程を日ごとに作って。",
+  "chat.q.visa": "韓国旅行にビザやK-ETAは必要？",
+  "chat.q.budget": "韓国1週間の旅行は1人いくらかかる？",
+  "chat.link.planner": "🗺️ AIプランナーで完全な旅程を作る",
+  "chat.link.visa": "🛂 ビザ・K-ETA完全ガイドを見る",
+  "chat.link.budget": "💱 リアルタイム予算計算機を開く"
 }

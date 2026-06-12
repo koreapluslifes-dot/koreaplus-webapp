@@ -163,5 +163,18 @@
   "card.learn": "了解更多：",
   "mp.festivals": "🎪 附近节庆活动",
   "mp.related": "🧭 探索这个地区",
-  "mp.noFest": "当前没有进行中的活动"
+  "mp.noFest": "当前没有进行中的活动",
+  "tease.hi": "👋 正在计划韩国之旅？",
+  "tease.sub": "我是您的免费AI向导 — 美食、行程、签证都能问。",
+  "tease.cta": "随便问问",
+  "chat.menu.title": "我能帮你做这些 — 点一下试试 👇",
+  "chat.quick.itin": "🗺️ 帮我排行程",
+  "chat.quick.visa": "🛂 签证/K-ETA",
+  "chat.quick.budget": "💰 旅行预算",
+  "chat.q.itin": "帮我安排第一次去韩国的5天逐日行程。",
+  "chat.q.visa": "去韩国需要签证或K-ETA吗？",
+  "chat.q.budget": "韩国一周旅行人均要花多少钱？",
+  "chat.link.planner": "🗺️ 用AI规划器生成完整行程",
+  "chat.link.visa": "🛂 查看签证与K-ETA完整指南",
+  "chat.link.budget": "💱 打开实时预算计算器"
 }

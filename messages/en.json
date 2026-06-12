@@ -163,5 +163,18 @@
   "card.learn": "Learn about",
   "mp.festivals": "🎪 Festivals & events nearby",
   "mp.related": "🧭 Explore more in this area",
-  "mp.noFest": "No events found right now"
+  "mp.noFest": "No events found right now",
+  "tease.hi": "👋 Planning a Korea trip?",
+  "tease.sub": "I'm your free AI guide — food, itineraries, visas, anything.",
+  "tease.cta": "Ask me anything",
+  "chat.menu.title": "Here's what I can do — tap one to try 👇",
+  "chat.quick.itin": "🗺️ Plan my trip",
+  "chat.quick.visa": "🛂 Visa / K-ETA",
+  "chat.quick.budget": "💰 Trip budget",
+  "chat.q.itin": "Plan me a 5-day first-time Korea itinerary, day by day.",
+  "chat.q.visa": "Do I need a visa or K-ETA to visit Korea?",
+  "chat.q.budget": "How much does a 1-week Korea trip cost per person?",
+  "chat.link.planner": "🗺️ Build a full plan in the AI Planner",
+  "chat.link.visa": "🛂 Read the full Visa & K-ETA guide",
+  "chat.link.budget": "💱 Open the live budget calculator"
 }
