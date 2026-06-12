@@ -95,7 +95,7 @@ export class AirQualityClient {
   private readonly key: string;
 
   constructor(serviceKey: string) {
-    this.key = serviceKey;
+    this.key = serviceKey.trim(); // strip stray BOM/whitespace from pasted secret
   }
 
   private url(endpoint: string, params: Record<string, string | number>): string {

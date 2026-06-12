@@ -1,5 +1,5 @@
-/* KoreaPlus Service Worker — v3 */
-const CACHE = 'kp-v3';
+/* KoreaPlus Service Worker — v5 */
+const CACHE = 'kp-v5';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -12,8 +12,10 @@ const PRECACHE = [
   BASE + '/config.js',
   BASE + '/app.js',
   BASE + '/data.js',
+  BASE + '/detail-data.js',
+  BASE + '/detail-panel.js',
   BASE + '/manifest.json',
-  BASE + '/icons/icon.svg',
+  BASE + '/icons/kplus.svg',
   BASE + '/plan.html',
   BASE + '/festivals.html',
   BASE + '/culture.html',
@@ -40,18 +42,35 @@ const PRECACHE = [
   BASE + '/modules/theme.js',
   BASE + '/modules/search.js',
   BASE + '/modules/analytics.js',
+  BASE + '/modules/header.js',
+  BASE + '/modules/mytrip.js',
+  BASE + '/modules/affiliate.js',
+  BASE + '/seo.css',
+  BASE + '/explore.html',
   BASE + '/messages/en.json',
   BASE + '/messages/ko.json',
   BASE + '/messages/ja.json',
   BASE + '/messages/zh.json',
   BASE + '/messages/es.json',
+  BASE + '/messages/fr.json',
+  BASE + '/messages/de.json',
+  BASE + '/messages/pt.json',
+  BASE + '/messages/id.json',
 ];
 
 // ── Install: pre-cache all static assets ─────────────────────────────────────
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE)
-      .then(cache => cache.addAll(PRECACHE.map(p => new Request(p, { cache: 'reload' }))))
+      // Cache each asset individually so one missing file (e.g. gitignored
+      // config.js) never aborts the whole install (addAll is atomic).
+      .then(cache => Promise.allSettled(
+        PRECACHE.map(p =>
+          fetch(new Request(p, { cache: 'reload' }))
+            .then(res => res.ok ? cache.put(p, res) : null)
+            .catch(() => null)
+        )
+      ))
       .then(() => self.skipWaiting())
   );
 });
@@ -76,6 +95,8 @@ self.addEventListener('fetch', event => {
   if (url.hostname.includes('googleapis.com')) return; // Google Maps / Places
   if (url.hostname.includes('openrouter.ai')) return;  // LLM
   if (url.hostname.includes('fonts.googleapis')) return;
+  if (url.hostname.includes('googlesyndication.com')) return; // AdSense
+  if (url.hostname.includes('doubleclick.net')) return;       // AdSense aux
 
   // Cache-first for same-origin assets
   if (url.origin === self.location.origin) {

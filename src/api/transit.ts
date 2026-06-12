@@ -93,7 +93,7 @@ export class TransitClient {
   private readonly key: string;
 
   constructor(seoulApiKey: string) {
-    this.key = seoulApiKey;
+    this.key = seoulApiKey.trim(); // strip stray BOM/whitespace from pasted secret
   }
 
   /**

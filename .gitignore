@@ -4,3 +4,17 @@ config.local.js
 .env
 .env.local
 *.pem
+
+# Local tooling state (per-machine)
+.claude/
+.wrangler/
+
+# Generated SEO output — rebuild with: node build-seo.cjs
+places/
+guide/
+itinerary/
+blog/
+ja/
+zh/
+explore.html
+kp7e3f1c9a2b5d48069e3f1c9a2b5d48.txt

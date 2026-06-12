@@ -39,7 +39,7 @@ export class ExchangeClient {
   private readonly key: string;
 
   constructor(apiKey: string) {
-    this.key = apiKey;
+    this.key = apiKey.trim(); // strip stray BOM/whitespace from pasted secret
   }
 
   /**

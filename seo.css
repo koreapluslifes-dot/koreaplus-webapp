@@ -1,0 +1,107 @@
+/* ══════════════════════════════════════════════════════════════════
+   KoreaPlus — SEO landing/place page styles
+   Loaded on auto-generated content pages (places, guides, itineraries).
+   Pairs with hub-styles.css + theme.css.
+   ══════════════════════════════════════════════════════════════════ */
+
+.seo-wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* Breadcrumb */
+.seo-bc { font-size: 12.5px; color: var(--text3, #9aa); padding: 16px 0 4px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.seo-bc a { color: var(--accent2, #74b9ff); text-decoration: none; }
+.seo-bc a:hover { text-decoration: underline; }
+.seo-bc span { opacity: .5; }
+
+/* Hero */
+.seo-hero { padding: 14px 0 22px; border-bottom: 1px solid var(--border, rgba(255,255,255,.08)); margin-bottom: 26px; }
+.seo-hero .emoji { font-size: 50px; line-height: 1; display: block; margin-bottom: 12px; }
+.seo-hero h1 { font-size: clamp(26px, 4.5vw, 40px); font-weight: 900; line-height: 1.12; color: var(--text, #fff); margin: 0 0 8px; letter-spacing: -.01em; }
+.seo-hero .kr { font-size: 16px; color: var(--gold, #C8973A); font-weight: 700; }
+.seo-hero .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.seo-badge { font-size: 12px; font-weight: 600; color: var(--text2, #bbb); background: var(--surface, rgba(255,255,255,.05)); border: 1px solid var(--border, rgba(255,255,255,.1)); border-radius: 20px; padding: 4px 12px; }
+.seo-badge.region { color: var(--accent2, #74b9ff); border-color: rgba(116,185,255,.3); }
+
+/* Article body */
+.seo-body { font-size: 16px; line-height: 1.8; color: var(--text2, #d2d2d2); }
+.seo-body .lead { font-size: 18px; line-height: 1.75; color: var(--text, #f0f0f0); padding: 18px 22px; background: var(--surface, rgba(255,255,255,.04)); border-left: 3px solid var(--red, #D62246); border-radius: 12px; margin-bottom: 28px; }
+.seo-body h2 { font-size: 22px; font-weight: 800; color: var(--text, #fff); margin: 36px 0 14px; letter-spacing: -.01em; }
+.seo-body h3 { font-size: 17px; font-weight: 700; color: var(--text, #fff); margin: 24px 0 10px; }
+.seo-body p { margin: 0 0 16px; }
+.seo-body ul, .seo-body ol { margin: 0 0 20px; padding-left: 22px; }
+.seo-body li { margin-bottom: 9px; }
+.seo-body ol.steps li::marker { color: var(--red, #D62246); font-weight: 800; }
+.seo-body ul.tips { list-style: none; padding-left: 0; }
+.seo-body ul.tips li { padding-left: 26px; position: relative; }
+.seo-body ul.tips li::before { content: '💡'; position: absolute; left: 0; }
+
+.seo-pricebox { background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); border-left: 3px solid var(--gold, #C8973A); border-radius: 12px; padding: 16px 20px; margin: 0 0 24px; }
+.seo-pricebox .range { font-size: 24px; font-weight: 900; color: var(--text, #fff); }
+.seo-pricebox .note { font-size: 14px; color: var(--text2, #bbb); margin-top: 4px; }
+
+.seo-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 8px; }
+.seo-links a { font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 10px; background: var(--surface, rgba(255,255,255,.05)); border: 1px solid var(--border, rgba(255,255,255,.1)); color: var(--text2, #ccc); text-decoration: none; }
+.seo-links a:hover { border-color: var(--red, #D62246); color: var(--red, #D62246); }
+
+/* Maps row */
+.seo-maps { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 8px; }
+.seo-maps a { flex: 1 1 calc(50% - 5px); text-align: center; font-size: 13px; font-weight: 600; padding: 11px; border-radius: 10px; text-decoration: none; border: 1px solid var(--border, rgba(255,255,255,.12)); color: var(--text2, #ccc); background: var(--surface, rgba(255,255,255,.04)); }
+.seo-maps a.primary { background: var(--red, #D62246); color: #fff; border-color: var(--red, #D62246); }
+
+/* Related / list cards */
+.seo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 16px 0 8px; }
+.seo-card { display: block; padding: 16px; border-radius: 14px; background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); text-decoration: none; transition: all .18s; }
+.seo-card:hover { border-color: var(--red, #D62246); transform: translateY(-2px); }
+.seo-card .ce { font-size: 26px; }
+.seo-card .cn { font-size: 15px; font-weight: 700; color: var(--text, #fff); margin: 8px 0 3px; }
+.seo-card .ck { font-size: 12px; color: var(--gold, #C8973A); }
+.seo-card .cd { font-size: 13px; color: var(--text2, #bbb); line-height: 1.5; margin-top: 6px; }
+
+/* Itinerary day blocks */
+.seo-day { border: 1px solid var(--border, rgba(255,255,255,.1)); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; background: var(--surface, rgba(255,255,255,.03)); }
+.seo-day .dh { font-size: 18px; font-weight: 800; color: var(--text, #fff); margin-bottom: 4px; }
+.seo-day .ds { font-size: 13px; color: var(--accent2, #74b9ff); margin-bottom: 14px; }
+.seo-slot { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border, rgba(255,255,255,.06)); }
+.seo-slot:first-of-type { border-top: none; }
+.seo-slot .si { font-size: 22px; flex-shrink: 0; }
+.seo-slot .st { font-size: 11px; font-weight: 700; color: var(--text3, #999); text-transform: uppercase; letter-spacing: .05em; }
+.seo-slot .sn { font-size: 15px; font-weight: 700; color: var(--text, #fff); }
+.seo-slot .sd { font-size: 13px; color: var(--text2, #bbb); line-height: 1.55; margin-top: 3px; }
+
+/* FAQ */
+.seo-faq { margin-top: 8px; }
+.seo-faq details { border: 1px solid var(--border, rgba(255,255,255,.1)); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; background: var(--surface, rgba(255,255,255,.03)); }
+.seo-faq summary { font-size: 15px; font-weight: 700; color: var(--text, #fff); cursor: pointer; }
+.seo-faq details p { font-size: 14px; color: var(--text2, #bbb); line-height: 1.7; margin: 12px 0 0; }
+
+/* CTA */
+.seo-cta { margin: 40px 0 0; padding: 28px 24px; border-radius: 18px; text-align: center; background: linear-gradient(135deg, rgba(214,34,70,.14), rgba(200,151,58,.1)); border: 1px solid var(--border, rgba(255,255,255,.1)); }
+.seo-cta h2 { font-size: 22px; font-weight: 900; color: var(--text, #fff); margin: 0 0 8px; }
+.seo-cta p { font-size: 14px; color: var(--text2, #ccc); margin: 0 0 18px; }
+.seo-cta .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.seo-cta a { font-size: 14px; font-weight: 700; padding: 12px 24px; border-radius: 24px; text-decoration: none; }
+.seo-cta a.primary { background: var(--red, #D62246); color: #fff; }
+.seo-cta a.ghost { background: var(--surface, rgba(255,255,255,.06)); color: var(--text, #fff); border: 1px solid var(--border, rgba(255,255,255,.15)); }
+
+/* AdSense container — reserved height prevents layout shift (CLS) */
+.seo-ad { margin: 36px 0 8px; min-height: 250px; display: flex; align-items: center; justify-content: center; }
+.seo-ad .adsbygoogle { width: 100%; }
+
+/* Affiliate / booking block */
+.seo-aff { margin: 30px 0; padding: 20px 22px; border-radius: 16px; background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); }
+.seo-aff .aff-label { font-size: 14px; font-weight: 800; color: var(--text, #fff); margin-bottom: 14px; }
+.seo-aff .aff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.seo-aff .aff-grid a { display: flex; flex-direction: column; gap: 2px; padding: 13px 15px; border-radius: 11px; background: var(--bg2, rgba(255,255,255,.03)); border: 1px solid var(--border, rgba(255,255,255,.1)); text-decoration: none; transition: all .16s; }
+.seo-aff .aff-grid a:hover { border-color: var(--red, #D62246); transform: translateY(-2px); }
+.seo-aff .aff-grid a strong { font-size: 14px; font-weight: 700; color: var(--text, #fff); }
+.seo-aff .aff-grid a span { font-size: 11.5px; color: var(--text3, #999); }
+.seo-aff .aff-disc { font-size: 11px; color: var(--text3, #888); margin-top: 12px; }
+
+/* Section list (explore hub) */
+.seo-secttitle { font-size: 20px; font-weight: 800; color: var(--text, #fff); margin: 34px 0 14px; }
+.seo-linklist { display: flex; flex-wrap: wrap; gap: 8px; }
+.seo-linklist a { font-size: 13px; padding: 7px 14px; border-radius: 20px; background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); color: var(--text2, #ccc); text-decoration: none; }
+.seo-linklist a:hover { border-color: var(--red, #D62246); color: var(--red, #D62246); }
+
+@media (max-width: 600px) {
+  .seo-maps a { flex: 1 1 100%; }
+}

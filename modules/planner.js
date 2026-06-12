@@ -700,7 +700,13 @@ function saveToStorage() {
   if (!S.itinerary) return;
   try {
     localStorage.setItem('kp_itinerary', JSON.stringify({ itinerary: S.itinerary, inputs: S.inputs, savedAt: Date.now() }));
-    toast('💾 Itinerary saved to this browser!');
+    // Also add to the "My Trip" multi-itinerary collection (if available)
+    if (window.kpTrip) {
+      window.kpTrip.saveItinerary(S.itinerary, S.inputs);
+      toast('💾 Saved to My Trip — open 💼 to view all itineraries!');
+    } else {
+      toast('💾 Itinerary saved to this browser!');
+    }
   } catch { toast('Could not save — storage full'); }
 }
 
@@ -727,9 +733,10 @@ async function shareItinerary() {
     });
     const data = await res.json();
     if (data.id) {
-      const url = `${location.origin}${location.pathname}?share=${data.id}`;
+      // Public, shareable + crawlable itinerary page
+      const url = data.url || `${window.WORKER_URL}/i/${data.id}`;
       await navigator.clipboard.writeText(url);
-      toast(`🔗 Share link copied! Valid 30 days.`);
+      toast(`🔗 Public link copied — anyone can view your itinerary!`);
     } else {
       // Fallback: encode itinerary in URL as compressed base64
       fallbackShare();

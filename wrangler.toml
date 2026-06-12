@@ -1,14 +1,13 @@
-name = "koreaplus-ai"
+# Deploys to koreaplus-webapp — the worker the frontend (config.js WORKER_URL)
+# actually calls. Keys (incl. groq_api_key) live on this worker.
+name = "koreaplus-webapp"
 main = "src/worker.ts"
 compatibility_date = "2024-11-01"
 
-# ─── Cloudflare Workers KV (persistent cache across datacenters) ────────────
-# Create namespace: npx wrangler kv:namespace create CACHE_KV
-# Then fill in the id values below and uncomment.
-# [[kv_namespaces]]
-# binding = "CACHE_KV"
-# id = "YOUR_KV_NAMESPACE_ID_HERE"
-# preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID_HERE"
+# ─── Cloudflare Workers KV — cache, rate-limit & shared-itinerary storage ───
+[[kv_namespaces]]
+binding = "CACHE_KV"
+id = "c31e411152504ef896ce587132c12339"
 
 # ─── Cron Triggers (optional: auto-refresh exchange rates daily) ────────────
 # [triggers]

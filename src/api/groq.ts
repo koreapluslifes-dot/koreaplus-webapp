@@ -14,10 +14,22 @@
 export interface LLMEnv {
   OPENROUTER_API_KEY?: string;
   GROQ_API_KEY?:       string;  // optional: Groq hardware-accelerated path
+  groq_api_key?:       string;  // accept lowercase secret name too (case-sensitive on CF)
+}
+
+/** Resolve the Groq key regardless of secret-name casing, trimmed of stray BOM/whitespace. */
+export function groqKey(env: LLMEnv): string {
+  return (env.GROQ_API_KEY || env.groq_api_key || '').trim();
 }
 
 const OR_PRIMARY  = 'meta-llama/llama-3.3-70b-instruct:free';
-const OR_FALLBACK = 'meta-llama/llama-3.1-8b-instruct:free';
+// 3.1-8b:free was removed from OpenRouter (404 "No endpoints found").
+// 3.2-3b:free is the proven-working free model (same one /chat uses).
+const OR_FALLBACK = 'meta-llama/llama-3.2-3b-instruct:free';
+// Meta Llama 3.3 70B Versatile — the itinerary request is large (long prompt +
+// up to 6000 output tokens). On Groq's free tier 70B has a HIGHER per-minute
+// token limit (12,000 TPM) than 8B-instant (6,000 TPM), so the big request fits
+// here where 8B returns 413 "request too large". (Chat uses 8B — small + fast.)
 const GROQ_MODEL  = 'llama-3.3-70b-versatile';
 
 interface OpenAIChatResponse {
@@ -104,9 +116,10 @@ export async function callLLM(
   temperature = 0.7
 ): Promise<string> {
   // 0. Groq (optional — fastest hardware inference, if key configured)
-  if (env.GROQ_API_KEY) {
+  const gk = groqKey(env);
+  if (gk) {
     try {
-      return await new GroqClient(env.GROQ_API_KEY).complete(prompt, maxTokens, temperature);
+      return await new GroqClient(gk).complete(prompt, maxTokens, temperature);
     } catch (err) {
       console.error('[Groq] failed:', String(err).slice(0, 100));
     }
@@ -115,7 +128,7 @@ export async function callLLM(
   if (!env.OPENROUTER_API_KEY) {
     throw new Error('OPENROUTER_API_KEY not configured');
   }
-  const or = new OpenRouterLLMClient(env.OPENROUTER_API_KEY);
+  const or = new OpenRouterLLMClient(env.OPENROUTER_API_KEY.trim());
 
   // 1. Primary: llama-3.3-70b (capable enough for complex itinerary JSON)
   try {

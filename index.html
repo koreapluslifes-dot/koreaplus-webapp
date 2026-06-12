@@ -9,13 +9,28 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://koreaplus-lifes.com/guide/">
 
+  <!-- hreflang — multilingual SEO for 9 languages -->
+  <link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/">
+  <link rel="alternate" hreflang="en"    href="https://koreaplus-lifes.com/guide/">
+  <link rel="alternate" hreflang="ko"    href="https://koreaplus-lifes.com/guide/?lang=ko">
+  <link rel="alternate" hreflang="ja"    href="https://koreaplus-lifes.com/guide/?lang=ja">
+  <link rel="alternate" hreflang="zh-CN" href="https://koreaplus-lifes.com/guide/?lang=zh">
+  <link rel="alternate" hreflang="es"    href="https://koreaplus-lifes.com/guide/?lang=es">
+  <link rel="alternate" hreflang="fr"    href="https://koreaplus-lifes.com/guide/?lang=fr">
+  <link rel="alternate" hreflang="de"    href="https://koreaplus-lifes.com/guide/?lang=de">
+  <link rel="alternate" hreflang="pt-BR" href="https://koreaplus-lifes.com/guide/?lang=pt">
+  <link rel="alternate" hreflang="id"    href="https://koreaplus-lifes.com/guide/?lang=id">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="icons/kplus.svg">
+  <link rel="shortcut icon" href="icons/kplus.svg">
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#000406">
+  <meta name="theme-color" content="#0c1829">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="KoreaPlus">
-  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/kplus.svg">
 
   <meta property="og:title" content="Korea Travel Guide 2025 | Everything About Korea | KoreaPlus">
   <meta property="og:description" content="Your complete AI-powered guide to South Korea — food, travel, K-beauty, K-pop, transport & culture. 80+ topics, interactive map.">
@@ -23,6 +38,15 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
   <meta property="og:site_name" content="KoreaPlus-Lifes">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ko_KR">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="id_ID">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Korea Travel Guide 2025 | KoreaPlus">
   <meta name="twitter:description" content="AI-powered Korea guide: food, travel, K-beauty, K-pop & more. Interactive real map included.">
@@ -39,6 +63,8 @@
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://koreaplus-webapp.jeybeeicon.workers.dev">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Theme system (apply before render to avoid flash) -->
@@ -53,7 +79,10 @@
   </script>
 
   <script src="config.js"></script>
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=10">
+  <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
+       to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
+  <link rel="stylesheet" href="hub-styles.css">
 </head>
 <body>
 
@@ -87,6 +116,8 @@
       <a class="nav-btn hub-link" href="kdrama-locations.html">🎬 K-Drama</a>
       <a class="nav-btn hub-link" href="menu-translator.html">📷 Menu</a>
       <a class="nav-btn hub-link" href="subway.html">🚇 Subway</a>
+      <a class="nav-btn hub-link" href="explore.html">🧭 Explore</a>
+      <a class="nav-btn hub-link" href="blog/index.html">📰 Blog</a>
       <a class="nav-btn hub-link" href="plan.html" style="background:rgba(214,34,70,.12);color:var(--red);font-weight:700" data-i18n="nav.plan">🗺️ Plan Trip</a>
     </nav>
     <!-- Search, theme, lang, AI controls -->
@@ -105,15 +136,14 @@
 <section class="map-hero">
   <div id="korea-map"></div>
   <div class="map-hero-overlay">
-    <div class="hero-badge">🇰🇷 Land of Morning Calm · 대한민국</div>
+    <div class="hero-badge" data-i18n="hero.badge">🇰🇷 Land of Morning Calm · 대한민국</div>
     <h1 class="hero-title">
-      Everything About Korea
-      <span class="kr">한국의 모든 것</span>
+      <span data-i18n="hero.title">Everything About Korea</span>
     </h1>
-    <p class="hero-sub">Food · Travel · K-Beauty · K-Pop · Shopping · History</p>
+    <p class="hero-sub" data-i18n="hero.sub">Food · Travel · K-Beauty · K-Pop · Shopping · History</p>
     <div class="hero-btns">
-      <button class="hero-cta primary" data-cat="food">Explore Korea ↓</button>
-      <button class="hero-cta outline" id="hero-ai-btn">💬 AI Guide</button>
+      <button class="hero-cta primary" data-cat="food" data-i18n="hero.explore">Explore Korea ↓</button>
+      <button class="hero-cta outline" id="hero-ai-btn" data-i18n="hero.ai">💬 AI Guide</button>
     </div>
   </div>
   <div class="map-bottom">
@@ -126,33 +156,33 @@
 <!-- Categories -->
 <section class="categories-section" id="categories-section">
   <div class="section-header">
-    <h2 class="section-title">Discover Korea</h2>
-    <p class="section-sub">한국의 모든 것을 탐색하세요 — 8 categories, 80+ topics</p>
+    <h2 class="section-title" data-i18n="discover.title">Discover Korea</h2>
+    <p class="section-sub" data-i18n="discover.sub">한국의 모든 것을 탐색하세요 — 8 categories, 80+ topics</p>
   </div>
   <div class="cat-tabs" id="cat-tabs">
     <button class="cat-tab active" data-cat="food">
-      <span class="tab-icon">🍜</span><span class="tab-en">Food</span><span class="tab-kr">음식</span>
+      <span class="tab-icon">🍜</span><span class="tab-en" data-i18n="cat.food">Food</span>
     </button>
     <button class="cat-tab" data-cat="travel">
-      <span class="tab-icon">✈️</span><span class="tab-en">Travel</span><span class="tab-kr">여행지</span>
+      <span class="tab-icon">✈️</span><span class="tab-en" data-i18n="cat.travel">Travel</span>
     </button>
     <button class="cat-tab" data-cat="transport">
-      <span class="tab-icon">🚄</span><span class="tab-en">Transport</span><span class="tab-kr">교통</span>
+      <span class="tab-icon">🚄</span><span class="tab-en" data-i18n="cat.transport">Transport</span>
     </button>
     <button class="cat-tab" data-cat="companies">
-      <span class="tab-icon">🏢</span><span class="tab-en">Companies</span><span class="tab-kr">기업</span>
+      <span class="tab-icon">🏢</span><span class="tab-en" data-i18n="cat.companies">Companies</span>
     </button>
     <button class="cat-tab" data-cat="kbeauty">
-      <span class="tab-icon">💄</span><span class="tab-en">K-Beauty</span><span class="tab-kr">뷰티</span>
+      <span class="tab-icon">💄</span><span class="tab-en" data-i18n="cat.kbeauty">K-Beauty</span>
     </button>
     <button class="cat-tab" data-cat="kpop">
-      <span class="tab-icon">🎤</span><span class="tab-en">K-Pop</span><span class="tab-kr">K팝</span>
+      <span class="tab-icon">🎤</span><span class="tab-en" data-i18n="cat.kpop">K-Pop</span>
     </button>
     <button class="cat-tab" data-cat="shopping">
-      <span class="tab-icon">🛍️</span><span class="tab-en">Shopping</span><span class="tab-kr">쇼핑</span>
+      <span class="tab-icon">🛍️</span><span class="tab-en" data-i18n="cat.shopping">Shopping</span>
     </button>
     <button class="cat-tab" data-cat="history">
-      <span class="tab-icon">📜</span><span class="tab-en">History</span><span class="tab-kr">역사</span>
+      <span class="tab-icon">📜</span><span class="tab-en" data-i18n="cat.history">History</span>
     </button>
   </div>
   <div class="content-grid" id="content-grid"></div>
@@ -161,9 +191,9 @@
 <!-- Must-Visit Korea Section -->
 <section class="mv-section" id="must-visit">
   <div class="mv-header reveal">
-    <div class="mv-eyebrow">꼭 가봐야 할 곳</div>
-    <h2 class="mv-title">Must-Visit <em>Korea</em></h2>
-    <p class="mv-sub">Iconic landmarks and hidden gems — scroll to explore the best of 대한민국</p>
+    <div class="mv-eyebrow" data-i18n="mustvisit.eyebrow">꼭 가봐야 할 곳</div>
+    <h2 class="mv-title"><span data-i18n="mustvisit.title">Must-Visit</span> <em>Korea</em></h2>
+    <p class="mv-sub" data-i18n="mustvisit.sub">Iconic landmarks and hidden gems — scroll to explore the best of 대한민국</p>
   </div>
 
   <div class="mv-grid">
@@ -242,9 +272,9 @@
 
   <div class="bucket-section">
     <div class="bucket-header reveal">
-      <div class="mv-eyebrow" style="color:var(--gold)">버킷리스트</div>
-      <h3 class="bucket-title">Korea Bucket List</h3>
-      <p class="bucket-sub">12 experiences every Korea traveler must have</p>
+      <div class="mv-eyebrow" style="color:var(--gold)" data-i18n="bucket.eyebrow">버킷리스트</div>
+      <h3 class="bucket-title" data-i18n="bucket.title">Korea Bucket List</h3>
+      <p class="bucket-sub" data-i18n="bucket.sub">12 experiences every Korea traveler must have</p>
     </div>
     <div class="bucket-grid">
       <div class="bucket-item reveal" style="--mv-delay:0s"><span class="bucket-num">01</span><span class="bucket-icon">🌅</span><div class="bucket-text"><strong>Watch sunrise at Seongsan Ilchulbong</strong><span class="bucket-kr">성산일출봉 일출</span></div></div>
@@ -277,8 +307,10 @@
     <div class="mp-rating" id="mp-rating"></div>
     <div class="mp-reviews" id="mp-reviews"></div>
     <div class="mp-actions">
-      <a id="mp-directions" class="mp-btn primary" href="#" target="_blank">📍 Get Directions</a>
-      <a id="mp-gmaps" class="mp-btn" href="#" target="_blank">🗺️ Open in Google Maps</a>
+      <a id="mp-directions" class="mp-btn primary" href="#" target="_blank" data-i18n="mp.directions">📍 Get Directions</a>
+      <a id="mp-gmaps" class="mp-btn" href="#" target="_blank" data-i18n="mp.openmaps">🗺️ Google Maps</a>
+      <a id="mp-naver" class="mp-btn" href="#" target="_blank" rel="noopener">🟢 Naver Map</a>
+      <a id="mp-kakao" class="mp-btn" href="#" target="_blank" rel="noopener">🟡 Kakao Map</a>
     </div>
   </div>
 </div>
@@ -290,25 +322,25 @@
     <div class="chat-title">
       <div class="chat-avatar">🤖</div>
       <div>
-        <strong>Korea AI Guide</strong>
-        <span class="chat-status">● Online · Llama 3.3</span>
+        <strong data-i18n="chat.title">Korea AI Guide</strong>
+        <span class="chat-status" data-i18n="chat.status">● Online · Llama 3.3</span>
       </div>
     </div>
     <button class="chat-close" id="chat-close">✕</button>
   </div>
   <div class="chat-messages" id="chat-messages">
     <div class="chat-msg assistant">
-      <div class="msg-bubble">👋 안녕하세요! I'm your Korea AI Guide.<br><br>Ask me anything about Korean food, travel, culture, language, or planning your trip! 🇰🇷</div>
+      <div class="msg-bubble" data-i18n-html="chat.greeting">👋 안녕하세요! I'm your Korea AI Guide.<br><br>Ask me anything about Korean food, travel, culture, language, or planning your trip! 🇰🇷</div>
     </div>
   </div>
   <div class="chat-quick" id="chat-quick">
-    <button onclick="sendQuick('Best Korean foods to try as a first-timer?')">🍜 Best foods</button>
-    <button onclick="sendQuick('Top places to visit in Korea?')">✈️ Must-visit</button>
-    <button onclick="sendQuick('How to use Seoul subway?')">🚇 Subway tips</button>
-    <button onclick="sendQuick('K-beauty skincare routine tips?')">💄 K-Beauty</button>
+    <button onclick="sendQuick('Best Korean foods to try as a first-timer?')" data-i18n="chat.quick.food">🍜 Best foods</button>
+    <button onclick="sendQuick('Top places to visit in Korea?')" data-i18n="chat.quick.visit">✈️ Must-visit</button>
+    <button onclick="sendQuick('How to use Seoul subway?')" data-i18n="chat.quick.subway">🚇 Subway tips</button>
+    <button onclick="sendQuick('K-beauty skincare routine tips?')" data-i18n="chat.quick.kbeauty">💄 K-Beauty</button>
   </div>
   <div class="chat-input-row">
-    <input type="text" id="chat-input" placeholder="Ask about Korea..." autocomplete="off">
+    <input type="text" id="chat-input" placeholder="Ask about Korea..." data-i18n-placeholder="chat.placeholder" autocomplete="off">
     <button id="chat-send">➤</button>
   </div>
 </div>
@@ -346,7 +378,75 @@
     <p>Korea's history spans 5,000 years — from ancient Gojoseon through the Three Kingdoms period, the Goryeo Dynasty that gave Korea its English name, and the 500-year Joseon Dynasty that built Seoul's palaces and created the Hangul alphabet. The 20th century brought Japanese colonial rule (1910–1945), the devastating Korean War (1950–1953), and one of history's most remarkable economic rises. Today's <em>Hallyu</em> (Korean Wave) — K-pop, K-drama, K-food, K-beauty — represents Korea's extraordinary soft power on the world stage.</p>
 
     <div class="seo-cta">
-      <p>🤖 <strong>Have a question about Korea?</strong> Use our free AI Guide above — powered by Meta Llama 3.3, it answers anything about Korean food, travel, culture, language, and planning your trip in seconds.</p>
+      <p>🤖 <strong data-i18n="seo.cta">Have a question about Korea?</strong> <span data-i18n="seo.cta.sub">Use our free AI Guide above — powered by Meta Llama 3.3, it answers anything about Korean food, travel, culture, language, and planning your trip in seconds.</span></p>
+    </div>
+
+    <!-- AdSense — single responsive unit (koreaplus-life-webapp) -->
+    <div style="margin:32px 0 0;min-height:250px;display:flex;align-items:center;justify-content:center">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle" style="display:block;width:100%"
+           data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"
+           data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+</section>
+
+<!-- Popular guides — internal links for discovery & SEO -->
+<style>
+  .popular-guides a{color:var(--text2);text-decoration:none;transition:color .15s}
+  .popular-guides a:hover{color:var(--red)}
+  .popular-guides li a{border-bottom:1px solid transparent}
+  .popular-guides li a:hover{border-bottom-color:var(--red)}
+</style>
+<section class="popular-guides" aria-label="Popular Korea guides" style="max-width:1100px;margin:0 auto;padding:48px 24px 8px">
+  <h2 style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:6px">Popular Korea Travel Guides</h2>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:22px">Hand-picked guides, itineraries and tips — <a href="explore.html" style="color:var(--red);font-weight:600">browse all 110+ guides →</a></p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+    <div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">🗺️ Itineraries</h3>
+      <ul style="list-style:none;padding:0;line-height:2;font-size:14px">
+        <li><a href="itinerary/seoul-3-day-itinerary.html">3-Day Seoul Itinerary</a></li>
+        <li><a href="itinerary/seoul-5-day-itinerary.html">5-Day Seoul Itinerary</a></li>
+        <li><a href="itinerary/busan-3-day-itinerary.html">3-Day Busan Itinerary</a></li>
+        <li><a href="itinerary/jeju-3-day-itinerary.html">3-Day Jeju Itinerary</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">📍 City Guides</h3>
+      <ul style="list-style:none;padding:0;line-height:2;font-size:14px">
+        <li><a href="guide/things-to-do-in-seoul.html">Things to Do in Seoul</a></li>
+        <li><a href="guide/things-to-do-in-busan.html">Things to Do in Busan</a></li>
+        <li><a href="guide/things-to-do-in-jeju.html">Things to Do in Jeju</a></li>
+        <li><a href="guide/things-to-do-in-gyeongju.html">Things to Do in Gyeongju</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">🍜 By Topic</h3>
+      <ul style="list-style:none;padding:0;line-height:2;font-size:14px">
+        <li><a href="guide/best-korean-food.html">Best Korean Food</a></li>
+        <li><a href="guide/best-places-to-visit-in-korea.html">Best Places to Visit</a></li>
+        <li><a href="guide/k-beauty-guide.html">K-Beauty Guide</a></li>
+        <li><a href="guide/best-shopping-in-korea.html">Best Shopping in Korea</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">📅 When to Visit</h3>
+      <ul style="list-style:none;padding:0;line-height:2;font-size:14px">
+        <li><a href="guide/korea-in-april.html">Korea in April (Cherry Blossom)</a></li>
+        <li><a href="guide/korea-in-october.html">Korea in October (Foliage)</a></li>
+        <li><a href="guide/korea-in-july.html">Korea in July (Summer)</a></li>
+        <li><a href="guide/korea-in-december.html">Korea in December (Winter)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">📰 Travel Tips</h3>
+      <ul style="list-style:none;padding:0;line-height:2;font-size:14px">
+        <li><a href="guide/korea-visa-k-eta-guide.html">Visa & K-ETA Guide</a></li>
+        <li><a href="blog/is-korea-expensive.html">Is Korea Expensive?</a></li>
+        <li><a href="blog/korea-travel-tips-first-time.html">21 First-Timer Tips</a></li>
+        <li><a href="blog/index.html" style="color:var(--red);font-weight:600">All articles →</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -377,26 +477,15 @@
   </div>
 </div>
 
-<!-- PWA install prompt -->
-<div id="kp-install-prompt" class="kp-install-prompt" aria-label="Install app">
-  <button class="kp-install-close" id="kp-install-close" aria-label="Close">×</button>
-  <span class="kp-install-icon" aria-hidden="true">🇰🇷</span>
-  <div class="kp-install-body">
-    <div class="kp-install-title" data-i18n="install.title">Add to Home Screen</div>
-    <div class="kp-install-sub" data-i18n="install.sub">Get the full app experience — works offline too</div>
-    <div class="kp-install-btns">
-      <button class="kp-install-yes" id="kp-install-yes" data-i18n="install.yes">Install</button>
-      <button class="kp-install-no" id="kp-install-no" data-i18n="install.no">Not now</button>
-    </div>
-  </div>
-</div>
 
 <!-- Toast notification -->
 <div id="kp-toast" class="kp-toast" role="status" aria-live="polite"></div>
 
 <script src="data.js?v=3"></script>
-<script src="app.js?v=10"></script>
-<link rel="stylesheet" href="hub-styles.css">
+<script src="detail-data.js?v=3"></script>
+<script src="modules/mytrip.js?v=2"></script>
+<script src="detail-panel.js?v=4"></script>
+<script src="app.js?v=13"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/dashboard.js"></script>
 <script src="modules/week-section.js"></script>

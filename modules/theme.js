@@ -73,26 +73,6 @@
     updateFontBtns();
   }
 
-  // PWA install prompt
-  let deferredPrompt = null;
-  let visitCount = parseInt(localStorage.getItem('kp_visits') || '0') + 1;
-  localStorage.setItem('kp_visits', visitCount);
-
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    deferredPrompt = e;
-    // Show after 3rd visit or 25 seconds on plan page
-    const isPlanner = location.pathname.includes('plan');
-    const delay = (isPlanner || visitCount >= 3) ? 25_000 : 60_000;
-    setTimeout(showInstallPrompt, delay);
-  });
-
-  function showInstallPrompt() {
-    if (!deferredPrompt) return;
-    const p = document.getElementById('kp-install-prompt');
-    if (p) p.classList.add('visible');
-  }
-
   window.kpTheme = { toggleTheme, setFont, renderControls };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -103,18 +83,5 @@
     updateThemeIcon();
     updateFontBtns();
 
-    // Install prompt actions
-    const installYes = document.getElementById('kp-install-yes');
-    const installNo  = document.getElementById('kp-install-no');
-    const installClose = document.getElementById('kp-install-close');
-
-    installYes?.addEventListener('click', () => {
-      deferredPrompt?.prompt();
-      deferredPrompt = null;
-      document.getElementById('kp-install-prompt')?.classList.remove('visible');
-    });
-    [installNo, installClose].forEach(el => el?.addEventListener('click', () => {
-      document.getElementById('kp-install-prompt')?.classList.remove('visible');
-    }));
   });
 })();

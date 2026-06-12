@@ -45,7 +45,6 @@
   document.addEventListener('DOMContentLoaded', function () {
     injectNavControls();
     injectCookieBanner();
-    injectInstallPrompt();
     injectSearchModal();
     loadModules();
   });
@@ -102,25 +101,6 @@
     document.body.appendChild(banner);
   }
 
-  function injectInstallPrompt() {
-    const p = document.createElement('div');
-    p.id = 'kp-install-prompt';
-    p.className = 'kp-install-prompt';
-    p.setAttribute('aria-label', 'Install app prompt');
-    p.innerHTML =
-      '<button class="kp-install-close" id="kp-install-close" aria-label="Close">×</button>' +
-      '<span class="kp-install-icon">🇰🇷</span>' +
-      '<div class="kp-install-body">' +
-        '<div class="kp-install-title">Add to Home Screen</div>' +
-        '<div class="kp-install-sub">Use KoreaPlus like an app — works offline</div>' +
-        '<div class="kp-install-btns">' +
-          '<button class="kp-install-yes" id="kp-install-yes">Install</button>' +
-          '<button class="kp-install-no" id="kp-install-no">Not now</button>' +
-        '</div>' +
-      '</div>';
-    document.body.appendChild(p);
-  }
-
   function injectSearchModal() {
     // Search modal is created by modules/search.js; just ensure the overlay placeholder exists
   }
@@ -128,7 +108,7 @@
   function loadModules() {
     const base = '/guide/modules/';
     // Load in order: theme.js, i18n.js, search.js, analytics.js
-    const scripts = ['theme.js', 'i18n.js', 'search.js', 'analytics.js'];
+    const scripts = ['theme.js', 'i18n.js', 'search.js', 'analytics.js', 'mytrip.js'];
 
     let chain = Promise.resolve();
     scripts.forEach(s => {

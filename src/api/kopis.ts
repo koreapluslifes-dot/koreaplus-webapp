@@ -52,7 +52,7 @@ export class KopisClient {
   private readonly key: string;
 
   constructor(apiKey: string) {
-    this.key = apiKey;
+    this.key = apiKey.trim(); // strip stray BOM/whitespace from pasted secret
   }
 
   private url(endpoint: string, params: Record<string, string | number>): string {

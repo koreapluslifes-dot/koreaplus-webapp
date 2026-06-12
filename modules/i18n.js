@@ -1,20 +1,29 @@
-/* KoreaPlus i18n Module — 5 languages */
+/* KoreaPlus i18n Module — 9 languages */
 (function () {
-  const SUPPORTED = ['en', 'ko', 'ja', 'zh', 'es'];
+  const SUPPORTED = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
   const LABELS = {
     en: { flag: '🇺🇸', name: 'English' },
     ko: { flag: '🇰🇷', name: '한국어' },
     ja: { flag: '🇯🇵', name: '日本語' },
     zh: { flag: '🇨🇳', name: '中文' },
     es: { flag: '🇪🇸', name: 'Español' },
+    fr: { flag: '🇫🇷', name: 'Français' },
+    de: { flag: '🇩🇪', name: 'Deutsch' },
+    pt: { flag: '🇧🇷', name: 'Português' },
+    id: { flag: '🇮🇩', name: 'Indonesia' },
   };
 
   let lang = 'en';
   const cache = {};
 
   function detect() {
+    // 1. URL param (?lang=XX) — enables hreflang SEO targeting
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    if (urlLang && SUPPORTED.includes(urlLang)) return urlLang;
+    // 2. localStorage persisted choice
     const saved = localStorage.getItem('kp_lang');
     if (saved && SUPPORTED.includes(saved)) return saved;
+    // 3. Browser language
     const nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
     return SUPPORTED.includes(nav) ? nav : 'en';
   }
@@ -22,9 +31,12 @@
   async function loadMessages(l) {
     if (cache[l]) return cache[l];
     try {
-      const base = document.querySelector('base')?.href || '/guide/';
+      // Relative path: resolves correctly whether the app is served at
+      // /guide/ (production) or at the site root (local dev) — no hardcode.
+      const base = document.querySelector('base')?.href || '';
       const url  = base + 'messages/' + l + '.json';
       const r    = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
       cache[l]   = await r.json();
     } catch {
       cache[l] = cache['en'] || {};
@@ -37,10 +49,15 @@
   }
 
   function applyTranslations() {
-    // data-i18n elements (text content)
+    // data-i18n — textContent replacement
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const val = t(el.dataset.i18n);
       if (val) el.textContent = val;
+    });
+    // data-i18n-html — innerHTML replacement (newlines → <br>)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const val = t(el.dataset.i18nHtml);
+      if (val) el.innerHTML = val.replace(/\n/g, '<br>');
     });
     // data-i18n-placeholder
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
@@ -66,12 +83,26 @@
     });
     // Update <html lang>
     document.documentElement.lang = lang;
+    // Update <html dir> for RTL languages (none currently, but future-proof)
+    document.documentElement.dir = 'ltr';
+    // Notify dynamic modules (My Trip panel, detail panel, etc.) to relabel.
+    try { document.dispatchEvent(new CustomEvent('kp:langchange', { detail: { lang } })); } catch {}
   }
 
   async function switchLang(l) {
     if (!SUPPORTED.includes(l)) return;
     lang = l;
     localStorage.setItem('kp_lang', l);
+    // Update URL param so hreflang works correctly
+    try {
+      const url = new URL(location.href);
+      if (l === 'en') {
+        url.searchParams.delete('lang');
+      } else {
+        url.searchParams.set('lang', l);
+      }
+      history.replaceState({}, '', url);
+    } catch {}
     await loadMessages(l);
     applyTranslations();
     // Close dropdown
@@ -103,7 +134,7 @@
       opt.dataset.lang = l;
       opt.setAttribute('role', 'option');
       opt.innerHTML = '<span class="lang-flag">' + LABELS[l].flag + '</span><span class="lang-name">' + LABELS[l].name + '</span>';
-      opt.addEventListener('click', () => switchLang(l));
+      opt.addEventListener('click', () => window.kpI18n.switchLang(l));
       dropdown.appendChild(opt);
     });
 
@@ -123,7 +154,7 @@
     applyTranslations();
   }
 
-  window.kpI18n = { init, switchLang, renderSwitcher, t };
+  window.kpI18n = { init, switchLang, renderSwitcher, t, getLang: () => lang };
 
   // Auto-init on DOM ready
   if (document.readyState === 'loading') {

@@ -74,7 +74,7 @@ export class TourApiClient {
   private readonly key: string;
 
   constructor(serviceKey: string) {
-    this.key = serviceKey;
+    this.key = serviceKey.trim(); // strip stray BOM/whitespace from pasted secret
   }
 
   /**
@@ -152,7 +152,6 @@ export class TourApiClient {
       pageNo: opts.page ?? 1,
       areaCode,
       arrange: 'Q', // sorted by popularity
-      listYN: 'Y',
     };
     if (contentTypeId) params.contentTypeId = contentTypeId;
 
@@ -182,7 +181,6 @@ export class TourApiClient {
       pageNo: opts.page ?? 1,
       eventStartDate: opts.eventStartDate,
       arrange: 'A', // sorted by date
-      listYN: 'Y',
     };
     if (opts.eventEndDate) params.eventEndDate = opts.eventEndDate;
     if (opts.city) params.areaCode = AREA_CODES[opts.city] ?? 1;
@@ -231,7 +229,6 @@ export class TourApiClient {
       mapY: opts.lat,
       radius: opts.radius ?? 5000,
       arrange: 'S', // sorted by distance
-      listYN: 'Y',
     };
     if (contentTypeId) params.contentTypeId = contentTypeId;
 

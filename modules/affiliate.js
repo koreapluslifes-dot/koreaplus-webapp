@@ -1,0 +1,93 @@
+/* ══════════════════════════════════════════════════════════════════
+   KoreaPlus — context-matched affiliate offers (Impact.com via Worker)
+
+   Static pages ship a fallback .seo-aff block with a data-aff context
+   attribute. This module:
+     1. fetches /api/aff?city=&cat=&q=  (Impact tracking links, KV-cached)
+     2. swaps the block's links in place (graceful: fetch fails → static
+        fallback links simply remain)
+     3. on long articles, clones a compact offer strip after the 2nd <h2>
+        (better viewport coverage than a single bottom block)
+     4. tracks clicks via kpAnalytics (GA4 event: aff_click)
+   ══════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var WORKER = (typeof window !== 'undefined' && window.WORKER_URL) ||
+    'https://koreaplus-webapp.jeybeeicon.workers.dev';
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function track(brand, ctx, placement) {
+    try {
+      if (window.kpAnalytics) {
+        window.kpAnalytics.track('aff_click', { brand: brand, cat: ctx.cat || '', city: ctx.city || '', placement: placement });
+      }
+    } catch (e) { /* analytics is best-effort */ }
+  }
+
+  function renderGrid(grid, offers, ctx, placement) {
+    grid.innerHTML = offers.map(function (o) {
+      return '<a href="' + esc(o.url) + '" target="_blank" rel="sponsored noopener" data-aff-brand="' + esc(o.brand) + '">' +
+        '<strong>' + o.icon + ' ' + esc(o.label) + '</strong><span>' + esc(o.brand) + '</span></a>';
+    }).join('');
+    grid.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { track(a.dataset.affBrand, ctx, placement); });
+    });
+  }
+
+  function upgrade() {
+    var blocks = document.querySelectorAll('.seo-aff[data-aff]');
+    if (!blocks.length) return;
+
+    var ctx = {};
+    try { ctx = JSON.parse(blocks[0].dataset.aff || '{}'); } catch (e) { /* keep {} */ }
+
+    var qs = new URLSearchParams({ city: ctx.city || '', cat: ctx.cat || '', q: ctx.q || '' });
+    fetch(WORKER + '/api/aff?' + qs.toString())
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (data) {
+        if (!data.offers || !data.offers.length) return;
+
+        blocks.forEach(function (block) {
+          var grid = block.querySelector('.aff-grid');
+          if (grid) renderGrid(grid, data.offers, ctx, 'bottom');
+        });
+
+        insertInline(blocks[0], data.offers, ctx);
+      })
+      .catch(function () { /* static fallback links remain — nothing to do */ });
+  }
+
+  /* Long article → clone a compact strip after the 2nd <h2> (skip if an
+     aff block is already visible in the first two viewports). */
+  function insertInline(sourceBlock, offers, ctx) {
+    var body = document.querySelector('.seo-body');
+    if (!body || body.scrollHeight < 2400) return;
+    var h2s = body.querySelectorAll('h2');
+    if (h2s.length < 4) return;
+    var anchor = h2s[1];
+    if (!anchor || anchor.closest('.seo-aff')) return;
+    // don't double up if the existing block is already near this point
+    if (Math.abs(sourceBlock.offsetTop - anchor.offsetTop) < 1200) return;
+
+    var clone = sourceBlock.cloneNode(true);
+    clone.removeAttribute('data-aff');
+    clone.style.margin = '26px 0';
+    var label = clone.querySelector('.aff-label');
+    if (label) label.textContent = '🎫 Quick bookings for this guide';
+    var grid = clone.querySelector('.aff-grid');
+    if (grid) renderGrid(grid, offers, ctx, 'inline');
+    anchor.parentNode.insertBefore(clone, anchor);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', upgrade);
+  } else {
+    upgrade();
+  }
+})();

@@ -126,9 +126,10 @@
     if (hasConsent()) {
       hideBanner();
       loadVendors();
-    } else if (!wasDeclined()) {
-      // Show banner — already visible by default in HTML
+    } else if (wasDeclined()) {
+      hideBanner();
     }
+    // else: show banner — already visible by default in HTML
     wireAutoEvents();
   }
 

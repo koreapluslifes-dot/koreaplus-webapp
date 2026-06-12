@@ -13,7 +13,8 @@
  */
 
 import { handleApiRoute } from './router.ts';
-import { handlePlanRequest, handleSharePost, handleShareGet } from './handlers/planner.ts';
+import { handlePlanRequest, handleSharePost, handleShareGet, handleShareHtml } from './handlers/planner.ts';
+import { handleAffiliate } from './handlers/affiliate.ts';
 import { handleMenuTranslate } from './handlers/translator.ts';
 import type { CacheEnv } from './cache.ts';
 import type { LLMEnv } from './api/groq.ts';
@@ -33,6 +34,11 @@ export interface WorkerEnv extends CacheEnv, LLMEnv {
   SEOUL_SUBWAY_KEY:       string;   // 실시간 지하철 인증키
   EXCHANGE_RATE_KEY:      string;
   // Phase 3: GROQ_API_KEY (primary LLM). Fallback reuses OPENROUTER_API_KEY above.
+  // Impact.com affiliate (all optional — /api/aff falls back to plain links)
+  IMPACT_ACCOUNT_SID?:    string;
+  IMPACT_AUTH_TOKEN?:     string;
+  IMPACT_PROGRAMS?:       string;   // JSON: {"klook":"1234","airalo":"5678",...}
+  IMPACT_PROPERTY_ID?:    string;
 }
 
 const CORS = {
@@ -67,16 +73,50 @@ async function handleChat(body: { message?: string; history?: { role: string; co
   const { message, history = [] } = body;
   if (!message?.trim()) return json({ error: 'No message' }, 400);
 
-  const messages = [
+  const chatMessages = [
+    { role: 'system', content: SYSTEM_PROMPT },
     ...history.slice(-6).map(m => ({ role: m.role, content: m.content })),
     { role: 'user', content: message },
   ];
 
+  type ChatResp = { choices?: { message?: { content?: string } }[] };
+  const extract = (data: ChatResp) => data.choices?.[0]?.message?.content?.trim() || '';
+
+  // 1. Groq first (Meta llama-3.1-8b-instant — fast, generous free tier).
+  //    Accept either GROQ_API_KEY or groq_api_key (CF secret names are case-sensitive).
+  const gk = (env.GROQ_API_KEY || env.groq_api_key || '').trim();
+  if (gk) {
+    try {
+      const res = await globalThis.fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${gk}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'llama-3.1-8b-instant',
+          max_tokens: 320,
+          temperature: 0.6,
+          messages: chatMessages,
+        }),
+        signal: AbortSignal.timeout(25_000),
+      });
+      if (res.ok) {
+        const reply = extract(await res.json() as ChatResp);
+        if (reply) return json({ reply });
+        console.error('[Groq chat] ok but empty content');
+      } else {
+        console.error(`[Groq chat] HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
+      }
+    } catch (e) { console.error('[Groq chat] threw:', String(e).slice(0, 150)); }
+  }
+
+  // 2. OpenRouter fallback
   const callOpenRouter = async (model: string) =>
     globalThis.fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${env.OPENROUTER_API_KEY?.trim()}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://koreaplus-lifes.com',
         'X-Title': 'KoreaPlus AI Guide',
@@ -85,15 +125,14 @@ async function handleChat(body: { message?: string; history?: { role: string; co
         model,
         max_tokens: 220,
         temperature: 0.6,
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+        messages: chatMessages,
       }),
     });
 
   try {
     let res = await callOpenRouter(MODEL_PRIMARY);
     if (!res.ok) res = await callOpenRouter(MODEL_FALLBACK);
-    const data = await res.json() as { choices?: { message?: { content?: string } }[] };
-    const reply = data.choices?.[0]?.message?.content ?? 'No response.';
+    const reply = extract(await res.json() as ChatResp) || 'No response.';
     return json({ reply });
   } catch {
     return json({ reply: '⚠️ AI temporarily unavailable. Please try again in a moment.' });
@@ -158,9 +197,31 @@ export default {
 
     // ── GET routes ────────────────────────────────────────────────────────
     if (request.method === 'GET') {
-      // Shared itinerary retrieval
+      // Public, crawlable HTML page for a shared itinerary:  /i/{id}
+      const htmlMatch = path.match(/\/i\/([a-f0-9]{24})$/);
+      if (htmlMatch) return handleShareHtml(htmlMatch[1], env, request);
+
+      // Shared itinerary retrieval (JSON, for the app)
       const shareMatch = path.match(/\/api\/plan\/share\/([a-f0-9]{24})$/);
       if (shareMatch) return handleShareGet(shareMatch[1], env);
+
+      // Context-matched affiliate offers (Impact.com, fallback-safe)
+      if (path.endsWith('/api/aff')) return handleAffiliate(request, env);
+
+      // Sitemap of public shared itineraries (/i/{id}) so they get indexed
+      if (path.endsWith('/i-sitemap.xml')) {
+        const origin = url.origin;
+        let entries = '';
+        if (env.CACHE_KV) {
+          const list = await env.CACHE_KV.list({ prefix: 'share:', limit: 1000 });
+          const today = new Date().toISOString().slice(0, 10);
+          entries = list.keys.map(k =>
+            `  <url><loc>${origin}/i/${k.name.slice(6)}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`
+          ).join('\n');
+        }
+        const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>`;
+        return new Response(xml, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600', 'Access-Control-Allow-Origin': '*' } });
+      }
 
       const apiResponse = await handleApiRoute(request, env);
       if (apiResponse) return apiResponse;

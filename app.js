@@ -388,7 +388,7 @@ function initMap() {
     CITIES_MAP.forEach(city=>{
       const btn=document.createElement('button');
       btn.className='city-pill'; btn.dataset.name=city.name;
-      btn.innerHTML=`<span class="pill-dot" style="background:${city.color}"></span>${city.name}<span class="pill-kr"> ${city.kr}</span>`;
+      btn.innerHTML=`<span class="pill-dot" style="background:${city.color}"></span>${city.name}`;
       btn.addEventListener('click',()=>{
         document.querySelectorAll('.city-pill').forEach(p=>p.classList.remove('active'));
         btn.classList.add('active');
@@ -403,24 +403,39 @@ function initMap() {
 function renderGrid(cat) {
   const grid = document.getElementById('content-grid');
   if (!grid) return;
+  const i18n = k => window.kpI18n?.t(k) || k;
   const items = KOREA_DATA[cat] || [];
   grid.innerHTML = items.map((item, i) => {
-    const d = JSON.stringify({ name: item.name, kr: item.kr, mapQ: item.mapQ }).replace(/'/g, '&#39;');
+    const d = JSON.stringify(item).replace(/'/g, '&#39;');
     return `
-      <div class="card" style="animation-delay:${i * 0.045}s">
+      <div class="card" style="animation-delay:${i * 0.045}s" data-item='${d}' tabindex="0" role="button" aria-label="Learn about ${item.name}">
         <span class="card-emoji">${item.emoji}</span>
         <div class="card-name">${item.name}</div>
         <div class="card-kr">${item.kr} &nbsp;·&nbsp; ${item.region}</div>
         <div class="card-desc">${item.desc}</div>
         <div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-        <button class="card-map-btn" data-item='${d}'>📍 View on Map &amp; Reviews</button>
+        <div class="card-actions">
+          <button class="card-detail-btn" data-item='${d}'>${i18n('card.fullguide') || '📖 Full Guide →'}</button>
+          <button class="card-map-btn" data-item='${d}'>${i18n('card.map') || '📍 Map'}</button>
+          ${window.kpTrip ? kpTrip.heartHTML({ name: item.name }) : ''}
+        </div>
       </div>`;
   }).join('');
 
-  grid.querySelectorAll('.card-map-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      try { openMapPanel(JSON.parse(btn.dataset.item)); } catch {}
+  grid.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.classList.contains('card-map-btn')) {
+        e.stopPropagation();
+        try { openMapPanel(JSON.parse(e.target.dataset.item)); } catch {}
+        return;
+      }
+      try { if (window.kpDetail) kpDetail.open(JSON.parse(card.dataset.item)); } catch {}
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        try { if (window.kpDetail) kpDetail.open(JSON.parse(card.dataset.item)); } catch {}
+      }
     });
   });
 }
@@ -448,7 +463,7 @@ function openMapPanel(item) {
   document.getElementById('mp-title').textContent = item.name;
   document.getElementById('mp-kr').textContent = item.kr;
   document.getElementById('mp-rating').innerHTML = '';
-  document.getElementById('mp-reviews').innerHTML = '<div class="mp-no-reviews">Loading reviews...</div>';
+  document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.loading') || 'Loading reviews...'}</div>`;
   panel.classList.add('open');
   backdrop.classList.add('open');
 
@@ -464,6 +479,10 @@ function openMapPanel(item) {
 
   document.getElementById('mp-directions').href = `https://www.google.com/maps/dir/?api=1&destination=${q}`;
   document.getElementById('mp-gmaps').href = `https://www.google.com/maps/search/${q}`;
+  const naver = document.getElementById('mp-naver');
+  const kakao = document.getElementById('mp-kakao');
+  if (naver) naver.href = `https://map.naver.com/p/search/${q}`;
+  if (kakao) kakao.href = `https://map.kakao.com/?q=${q}`;
 }
 
 async function fetchPlaceDetails(query) {
@@ -477,7 +496,7 @@ async function fetchPlaceDetails(query) {
     if (!res.ok) throw new Error('fetch failed');
     const data = await res.json();
     if (data.rating) renderPlaceDetails(data);
-    else document.getElementById('mp-reviews').innerHTML = '<div class="mp-no-reviews">No ratings found</div>';
+    else document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.no_reviews') || 'No ratings found'}</div>`;
   } catch {
     document.getElementById('mp-reviews').innerHTML = '<div class="mp-no-reviews">📍 Open Google Maps to see reviews</div>';
   }
@@ -500,7 +519,7 @@ function renderPlaceDetails(data) {
         <div class="mp-review-time">${r.relativeTime}</div>
       </div>`).join('');
   } else {
-    reviewsEl.innerHTML = '<div class="mp-no-reviews">No reviews available yet</div>';
+    reviewsEl.innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.no_reviews') || 'No reviews available yet'}</div>`;
   }
 }
 
@@ -614,4 +633,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initChat();
   initHeader();
   initScrollReveal();
+
+  // Re-render grid when language changes so card button text updates
+  const origSwitch = window.kpI18n?.switchLang;
+  if (origSwitch) {
+    const activeCatEl = () => document.querySelector('.cat-tab.active')?.dataset.cat || 'food';
+    window.kpI18n.switchLang = async function (l) {
+      await origSwitch.call(window.kpI18n, l);
+      renderGrid(activeCatEl());
+    };
+  }
 });

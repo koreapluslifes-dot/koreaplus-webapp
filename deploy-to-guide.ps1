@@ -15,6 +15,8 @@ $LOCAL_DIR = "C:\Users\juksu\koreaplus-webapp"
 $ROOT_FILES = @(
     # Core
     "index.html", "style.css", "app.js", "data.js", "config.js",
+    # Phase 7 - rich detail panel + My Trip
+    "detail-data.js", "detail-panel.js",
     # Phase 2 shared
     "hub-styles.css", "sitemap.xml", "robots.txt",
     # Hub pages
@@ -39,7 +41,9 @@ $MODULE_FILES = @(
     "modules/theme.js",
     "modules/search.js",
     "modules/analytics.js",
-    "modules/header.js"
+    "modules/header.js",
+    # Phase 7 - My Trip personal record system
+    "modules/mytrip.js"
 )
 
 $MESSAGE_FILES = @(
@@ -47,10 +51,16 @@ $MESSAGE_FILES = @(
     "messages/ko.json",
     "messages/ja.json",
     "messages/zh.json",
-    "messages/es.json"
+    "messages/es.json",
+    # Phase 7 - 4 additional languages (9 total)
+    "messages/fr.json",
+    "messages/de.json",
+    "messages/pt.json",
+    "messages/id.json"
 )
 
 $ICON_FILES = @(
+    "icons/kplus.svg",
     "icons/icon.svg"
 )
 
