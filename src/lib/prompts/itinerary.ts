@@ -20,6 +20,7 @@ export interface ItineraryInputs {
   budget:       'budget' | 'mid' | 'comfort' | 'luxury';
   specialNeeds: string[]; // 'vegetarian' | 'halal' | 'english' | 'wheelchair'
   mode:         'local' | 'foreigner';
+  lang?:        string;   // UI language code (en/ko/ja/zh/es/fr/de/pt/id) — prose language of the plan
 }
 
 export interface CandidatePlace {
@@ -53,6 +54,16 @@ const TRAVELER_DESC: Record<string, string> = {
   family: 'Family with children (2–4 people)',
   group:  'Group of friends (5+ people)',
 };
+
+const LANG_NAMES: Record<string, string> = {
+  en: 'English', ko: 'Korean', ja: 'Japanese', zh: 'Simplified Chinese',
+  es: 'Spanish', fr: 'French', de: 'German', pt: 'Portuguese', id: 'Indonesian',
+};
+
+/** Prose-language rule: plans read in the traveler's UI language; names stay bilingual. */
+function langName(inputs: ItineraryInputs): string {
+  return LANG_NAMES[(inputs.lang || 'en').slice(0, 2)] || 'English';
+}
 
 const AIRPORT_DESC: Record<string, string> = {
   ICN: 'Incheon International Airport (ICN) — near Seoul/Incheon',
@@ -132,8 +143,12 @@ export function buildDraftPrompt(
   }
   const dateList = dates.map((d, i) => `Day ${i + 1}: ${d} (${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(d).getDay()]})`).join('\n');
 
+  // The draft must already be in the target language: the polish pass usually
+  // cannot run right after the draft (both calls in one minute exceed the
+  // 70B model's TPM budget), so the draft is what most users actually get.
+  const ln = langName(inputs);
   return `You are Korea's top travel planner. Generate a ${days}-day Korea itinerary as JSON.
-
+${ln !== 'English' ? `\nOUTPUT LANGUAGE: write every descriptive string (title, summary, highlights, theme, description, insiderTip, tip, dayTip, routeReason, travelToNext.instruction) in natural native ${ln}. Keep "name" in English, "nameKr" in Korean, and all JSON keys in English. Fill every field with real content — never leave a string empty.\n` : ''}
 TRAVELER PROFILE:
 - Type: ${TRAVELER_DESC[inputs.travelers] ?? inputs.travelers}
 - Ages: ${inputs.ageGroups.join(', ')}
@@ -152,7 +167,9 @@ ${candidateJson}
 
 MANDATORY RULES:
 1. Return ONLY valid JSON — zero preamble, zero markdown, zero explanation.
-2. Write ALL text in natural native English. No Konglish. No "This is a must-visit."
+2. ${langName(inputs) === 'English'
+    ? 'Write ALL text in natural native English. No Konglish. No "This is a must-visit."'
+    : `Write ALL descriptive prose in natural native ${langName(inputs)} as stated above. No filler like "This is a must-visit."`}
 3. Every insiderTip must name specifics: subway exit number, dish name, price range, exact photo spot.
 4. Cluster geographically close places on the same day (minimize cross-city commutes).
 5. Day 1 must start near ${AIRPORT_DESC[inputs.airport]}.
@@ -161,7 +178,7 @@ MANDATORY RULES:
 8. Monday-closed venues (National Museum, most government museums): NEVER schedule on Monday.
 9. Temple, palace, outdoor market hours: most open 09:00–18:00.
 10. Non-meal spots per day: exactly ${paceLabel.spots}.
-11. Each PlaceObject MUST have: id, name, nameKr, category, address, lat, lng, duration (minutes), cost, description (3–4 sentences), insiderTip, openHours, closedOn (or null), travelToNext.
+11. Each PlaceObject MUST have: id, name, nameKr, category, address, lat, lng, duration (minutes), cost, description (${langName(inputs) === 'English' ? '3–4 sentences' : '1–2 concise sentences'}), insiderTip${langName(inputs) === 'English' ? '' : ' (1 short sentence)'}, openHours, closedOn (or null), travelToNext.
 
 ${GOOD_EXAMPLE}
 ${BAD_EXAMPLE}
@@ -192,8 +209,9 @@ OUTPUT SCHEMA (return only this JSON, nothing else):
 // ── Polish prompt (Pass 2) ────────────────────────────────────────────────────
 
 export function buildPolishPrompt(draftJson: string, inputs: ItineraryInputs): string {
-  return `You are a Lonely Planet senior editor. Polish this Korea itinerary JSON.
-
+  const pl = langName(inputs);
+  return `You are a Lonely Planet senior editor${pl !== 'English' ? ` and a professional ${pl} travel writer` : ''}. Polish this Korea itinerary JSON.
+${pl !== 'English' ? `\n⚠️ OUTPUT LANGUAGE: ${pl}. Translate and rewrite ALL descriptive prose (title, summary, highlights, theme, description, insiderTip, tip, dayTip, routeReason, travelToNext.instruction) into natural native ${pl}. Keep "name" in English and "nameKr" in Korean. Keep all JSON keys in English.\n` : ''}
 POLISH RULES:
 1. Return ONLY valid JSON — same schema, same structure. Do NOT change place names, dates, or lat/lng.
 2. Upgrade descriptions to Lonely Planet quality: vivid, specific, reads like an excited local friend.
@@ -204,6 +222,9 @@ POLISH RULES:
 7. Keep tone warm and knowledgeable — like a Korean friend who loves showing their country off.
 8. Fix any Konglish, awkward phrasing, or generic statements.
 9. Special requirements must be reflected in all food recommendations: ${inputs.specialNeeds.join(', ') || 'none'}.
+10. ${langName(inputs) === 'English'
+    ? 'All prose stays in natural native English.'
+    : `All descriptive prose MUST remain in natural native ${langName(inputs)} (place "name" stays English, "nameKr" stays Korean). If the draft contains English prose, translate it.`}
 
 DRAFT TO POLISH:
 ${draftJson}

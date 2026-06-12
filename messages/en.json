@@ -215,5 +215,8 @@
   "tb.saved": "💾 Saved! Open 💼 My Trip anytime.",
   "tb.shared": "🔗 Share link copied — valid 30 days!",
   "tb.fail": "😅 The builder hit a limit (3 free plans/day). You can still use the full planner:",
-  "tb.refine": "Want tweaks? Just tell me — e.g. \"more street food on day 2\" or \"swap shopping for a palace\" ✍️"
+  "tb.refine": "Want tweaks? Just tell me — e.g. \"more street food on day 2\" or \"swap shopping for a palace\" ✍️",
+  "dp.fullpage": "Open full guide page",
+  "tb.day1": "Day 1",
+  "tb.untitled": "Korea Itinerary"
 }

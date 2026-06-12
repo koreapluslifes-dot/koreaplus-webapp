@@ -215,5 +215,8 @@
   "tb.saved": "💾 Gespeichert! Jederzeit in 💼 Meine Reise.",
   "tb.shared": "🔗 Link kopiert — 30 Tage gültig!",
   "tb.fail": "😅 Limit erreicht (3 Pläne/Tag). Der volle Planer geht weiter:",
-  "tb.refine": "Änderungen? Sag's einfach — z. B. „mehr Streetfood an Tag 2\" ✍️"
+  "tb.refine": "Änderungen? Sag's einfach — z. B. „mehr Streetfood an Tag 2\" ✍️",
+  "dp.fullpage": "Vollständige Guide-Seite öffnen",
+  "tb.day1": "Tag 1",
+  "tb.untitled": "Korea-Reiseplan"
 }

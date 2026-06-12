@@ -378,9 +378,11 @@ function initMap() {
     el('circle',{cx:ax,cy:ay,r:2,fill:'rgba(255,230,140,0.75)'},ag);
   });
 
-  // Zoom hint
-  const hint=el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint.textContent=window.kpI18n?.t('map.hint1')||'scroll';
-  const hint2=el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint2.textContent=window.kpI18n?.t('map.hint2')||'to zoom';
+  // Zoom hint (data-i18n so applyTranslations repairs the boot-time raw key)
+  const hint=el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint.setAttribute('data-i18n','map.hint1');
+  const hv=window.kpI18n?.t('map.hint1'); hint.textContent=(hv&&hv!=='map.hint1')?hv:'Ctrl + scroll';
+  const hint2=el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint2.setAttribute('data-i18n','map.hint2');
+  const hv2=window.kpI18n?.t('map.hint2'); hint2.textContent=(hv2&&hv2!=='map.hint2')?hv2:'to zoom';
   mapEl.addEventListener('wheel',()=>{hint.remove();hint2.remove();},{once:true,passive:true});
 
   mapEl.appendChild(svg);
@@ -407,20 +409,20 @@ function initMap() {
 function renderGrid(cat) {
   const grid = document.getElementById('content-grid');
   if (!grid) return;
-  const i18n = k => window.kpI18n?.t(k) || k;
+  const i18n = (k, fb) => { const v = window.kpI18n?.t(k); return (!v || v === k) ? (fb || k) : v; };
   const items = KOREA_DATA[cat] || [];
   grid.innerHTML = items.map((item, i) => {
     const d = JSON.stringify(item).replace(/'/g, '&#39;');
     return `
-      <div class="card" style="animation-delay:${i * 0.045}s" data-item='${d}' tabindex="0" role="button" aria-label="${i18n('card.learn') === 'card.learn' ? 'Learn about' : i18n('card.learn')} ${item.name}">
+      <div class="card" style="animation-delay:${i * 0.045}s" data-item='${d}' tabindex="0" role="button" aria-label="${i18n('card.learn', 'Learn about')} ${item.name}">
         <span class="card-emoji">${item.emoji}</span>
         <div class="card-name">${item.name}</div>
         <div class="card-kr">${item.kr} &nbsp;·&nbsp; ${item.region}</div>
         <div class="card-desc">${item.desc}</div>
         <div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
         <div class="card-actions">
-          <button class="card-detail-btn" data-item='${d}'>${i18n('card.fullguide') || '📖 Full Guide →'}</button>
-          <button class="card-map-btn" data-item='${d}'>${i18n('card.map') || '📍 Map'}</button>
+          <button class="card-detail-btn" data-item='${d}'>${i18n('card.fullguide', '📖 Full Guide →')}</button>
+          <button class="card-map-btn" data-item='${d}'>${i18n('card.map', '📍 Map')}</button>
           ${window.kpTrip ? kpTrip.heartHTML({ name: item.name }) : ''}
         </div>
       </div>`;
@@ -647,6 +649,19 @@ function showChatMenu() {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
+/* Re-localize the capability menu in place after a language switch */
+function refreshChatMenu() {
+  const div = document.getElementById('chat-menu');
+  if (!div) return;
+  const t = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
+  const title = div.querySelector('.chat-menu-title');
+  if (title) title.textContent = t('chat.menu.title', "Here's what I can do — tap one to try 👇");
+  div.querySelectorAll('.chat-menu-chip').forEach(btn => {
+    const c = CHAT_CAPS[+btn.dataset.cap];
+    if (c) btn.textContent = t(c.lkey, c.lkey);
+  });
+}
+
 function openChat() {
   document.getElementById('chatbot')?.classList.add('open');
   document.body.classList.add('kp-modal-open');
@@ -842,6 +857,7 @@ async function tbGenerate() {
     arrival: iso(start), departure: iso(end), airport: TB.slots.airport,
     interests: TB.slots.interests, pace: 'balanced', budget: TB.slots.budget,
     travelers: TB.slots.party, ageGroups: ['20s'], specialNeeds: [], mode: 'foreigner',
+    lang: window.kpI18n?.getLang?.() || 'en',
   };
   try {
     const res = await fetch(`${WORKER_URL}/api/plan`, {
@@ -872,9 +888,9 @@ function tbShowResult(itin, inputs) {
   tbBotMsg(`
     <div class="tb-card">
       <div class="tb-title">${tbT('tb.done', '🎉 Your plan is ready!').replace('{d}', days).replace('{n}', stops)}</div>
-      <div class="tb-name">${esc(itin.title || 'Korea Itinerary')}</div>
+      <div class="tb-name">${esc(itin.title || tbT('tb.untitled', 'Korea Itinerary'))}</div>
       ${hl ? `<ul class="tb-hl">${hl}</ul>` : ''}
-      ${d1names ? `<div class="tb-d1">Day 1 · ${d1names}…</div>` : ''}
+      ${d1names ? `<div class="tb-d1">${tbT('tb.day1', 'Day 1')} · ${d1names}…</div>` : ''}
       <div class="tb-actions">
         <button id="tb-save">${tbT('tb.save', '💾 Save')}</button>
         <button id="tb-share">${tbT('tb.share', '🔗 Share')}</button>
@@ -993,13 +1009,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initScrollReveal();
 
-  // Re-render grid when language changes so card button text updates
-  const origSwitch = window.kpI18n?.switchLang;
-  if (origSwitch) {
-    const activeCatEl = () => document.querySelector('.cat-tab.active')?.dataset.cat || 'food';
-    window.kpI18n.switchLang = async function (l) {
-      await origSwitch.call(window.kpI18n, l);
-      renderGrid(activeCatEl());
-    };
-  }
+  // Re-render i18n-dependent dynamic UI on language change. This event also
+  // fires once after the initial async message load, repairing the boot-time
+  // render that happens before messages/*.json arrives.
+  document.addEventListener('kp:langchange', () => {
+    renderGrid(activeCat);
+    refreshChatMenu();
+  });
 });

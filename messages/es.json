@@ -215,5 +215,8 @@
   "tb.saved": "💾 ¡Guardado! Ábrelo en 💼 Mi viaje.",
   "tb.shared": "🔗 ¡Enlace copiado — válido 30 días!",
   "tb.fail": "😅 Límite alcanzado (3 planes/día). El planificador completo sigue disponible:",
-  "tb.refine": "¿Cambios? Solo dímelo — p. ej. \"más comida callejera el día 2\" ✍️"
+  "tb.refine": "¿Cambios? Solo dímelo — p. ej. \"más comida callejera el día 2\" ✍️",
+  "dp.fullpage": "Abrir la guía completa",
+  "tb.day1": "Día 1",
+  "tb.untitled": "Itinerario de Corea"
 }

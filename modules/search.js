@@ -8,7 +8,7 @@
   const INDEX = [
     // Pages
     { title: 'AI Itinerary Builder', sub: 'Create your personalized Korea trip plan', icon: '🗺️', tag: 'Tool', url: 'plan.html' },
-    { title: 'Korea Festivals 2025', sub: 'Events, cultural festivals & seasonal highlights', icon: '📅', tag: 'Page', url: 'festivals.html' },
+    { title: 'Korea Festivals 2026', sub: 'Events, cultural festivals & seasonal highlights', icon: '📅', tag: 'Page', url: 'festivals.html' },
     { title: 'Korean Culture', sub: 'Hanbok, jjimjilbang, norebang, traditional customs', icon: '🏛️', tag: 'Page', url: 'culture.html' },
     { title: 'Korean Temples', sub: 'Buddhist temples, temple stays, mountain retreats', icon: '🛕', tag: 'Page', url: 'temples.html' },
     { title: 'Korea Night Views', sub: 'Best nightscapes in Seoul, Busan and beyond', icon: '🌃', tag: 'Page', url: 'nightviews.html' },

@@ -57,6 +57,7 @@ function daysBetween(a: string, b: string): number {
 
 function inputHash(inputs: ItineraryInputs): string {
   const raw = [
+    'v2', // prompt-strategy version salt — bump to invalidate stale cached plans
     inputs.airport,
     daysBetween(inputs.arrival, inputs.departure),
     [...inputs.interests].sort().join(','),
@@ -65,6 +66,7 @@ function inputHash(inputs: ItineraryInputs): string {
     inputs.mode,
     inputs.travelers,
     [...inputs.specialNeeds].sort().join(','),
+    (inputs.lang || 'en').slice(0, 2),
   ].join('|');
   // Simple djb2-like hash → hex string
   let h = 5381;
@@ -237,13 +239,23 @@ export async function handlePlanRequest(request: Request, env: WorkerEnv, client
   const arrivalDate = new Date(inputs.arrival);
   const draftPrompt = buildDraftPrompt(inputs, candidates, days, arrivalDate);
 
-  // Draft LLM call
+  // Draft LLM call — non-English prose needs token headroom (ja/zh ≈ 2× tokens)
+  const isEn = (inputs.lang || 'en').slice(0, 2) === 'en';
   let itinerary: Record<string, unknown>;
   try {
-    const draftRaw = await callLLM(draftPrompt, env, 6000, 0.75);
+    const draftRaw = await callLLM(draftPrompt, env, isEn ? 6000 : 8000, 0.75);
     itinerary = safeParseJSON(draftRaw) as Record<string, unknown>;
   } catch (err) {
     return corsJson({ error: 'Itinerary generation failed', detail: String(err).slice(0, 200) }, 503);
+  }
+
+  // Quality gate: tiny fallback models sometimes return a schema skeleton with
+  // empty strings. Reject it instead of caching garbage.
+  const slots = ((itinerary.days as DaySlot[] | undefined) || [])
+    .flatMap(d => [...(d.morning || []), ...(d.afternoon || []), ...(d.evening || [])]) as Array<{ description?: string }>;
+  const emptyDesc = slots.filter(p => !String(p.description || '').trim()).length;
+  if (!slots.length || emptyDesc > slots.length / 2) {
+    return corsJson({ error: 'Itinerary generation degraded', detail: 'The AI returned an incomplete plan. Please try again in a minute.' }, 503);
   }
 
   // Route optimisation
@@ -252,7 +264,9 @@ export async function handlePlanRequest(request: Request, env: WorkerEnv, client
   // Polish pass (lower temperature for editorial quality)
   try {
     const polishPrompt = buildPolishPrompt(JSON.stringify(itinerary, null, 2), inputs);
-    const polishedRaw = await callLLM(polishPrompt, env, 6000, 0.3);
+    // Non-English prose (ja/zh/ko especially) consumes ~2× the tokens — give headroom
+    const polishMax = (inputs.lang || 'en').slice(0, 2) === 'en' ? 6000 : 7500;
+    const polishedRaw = await callLLM(polishPrompt, env, polishMax, 0.3);
     const polished = safeParseJSON(polishedRaw) as Record<string, unknown>;
     // Only adopt polish if it has the expected structure
     if (polished && typeof polished === 'object' && Array.isArray((polished as { days?: unknown }).days)) {
@@ -395,11 +409,21 @@ function renderItineraryHTML(it: Itin, id: string, origin: string): string {
 ${(it.highlights && it.highlights.length) ? `<h2>✨ Trip Highlights</h2><ul>${it.highlights.map(h => `<li>${escH(h)}</li>`).join('')}</ul>` : ''}
 <h2>📅 Day-by-Day Plan</h2>
 ${daysHtml}
+<h2>🧭 Keep planning your Korea trip</h2>
+<div class="seo-linklist">
+<a href="${SITE}/explore.html">🧭 All Korea guides</a>
+<a href="${SITE}/itinerary/first-time-korea-7-day-itinerary.html">🧳 7-Day First-Timer Itinerary</a>
+<a href="${SITE}/guide/things-to-do-in-seoul.html">🗺️ Things to Do in Seoul</a>
+<a href="${SITE}/guide/korea-visa-k-eta-guide.html">🛂 Visa &amp; K-ETA Guide</a>
+<a href="${SITE}/phrases.html">💬 Survival Korean Phrases</a>
+<a href="${SITE}/blog/index.html">📰 Korea Travel Blog</a>
+</div>
 <div class="seo-cta"><h2>Want your own Korea itinerary?</h2><p>Build a free, personalized day-by-day plan with AI in 30 seconds.</p>
 <div class="btns"><a class="primary" href="${SITE}/plan.html">🗺️ Build My Free Itinerary</a><a class="ghost" href="${SITE}/index.html">💬 Ask the AI Guide</a></div></div>
 </article></main>
 <footer class="footer" style="text-align:center;padding:40px 20px;border-top:1px solid var(--border,rgba(255,255,255,.08));margin-top:40px">
-<p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p></footer>
+<p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
+<p style="font-size:12px;margin-top:10px"><a href="${SITE}/index.html" style="color:var(--text2,#aaa)">Home</a> · <a href="${SITE}/explore.html" style="color:var(--text2,#aaa)">Explore</a> · <a href="${SITE}/plan.html" style="color:var(--text2,#aaa)">AI Planner</a> · <a href="${SITE}/festivals.html" style="color:var(--text2,#aaa)">Festivals</a> · <a href="${SITE}/blog/index.html" style="color:var(--text2,#aaa)">Blog</a></p></footer>
 </body></html>`;
 }
 

@@ -112,7 +112,7 @@
     if (!itinerary) return;
     S.itineraries.unshift({
       id: uid(),
-      title: itinerary.title || 'Korea Itinerary',
+      title: itinerary.title || tr('tb.untitled', 'Korea Itinerary'),
       summary: itinerary.summary || '',
       days: Array.isArray(itinerary.days) ? itinerary.days.length : (itinerary.dayCount || 0),
       itinerary, inputs: inputs || null, at: Date.now(),

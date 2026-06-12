@@ -120,6 +120,26 @@ const STAY = [
   ]},
 ];
 
+// City itineraries that actually get generated (city × days) — hoisted so
+// every builder can link only to pages that exist.
+const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
+
+// "Keep planning {city}" cross-cluster links — emits links only to pages this
+// generator writes. excludeUrl drops the current page from its own list.
+function cityClusterLinks(cityName, excludeUrl) {
+  const cs = slug(cityName);
+  const links = [];
+  for (const [cn, days] of ITIN) if (cn === cityName) links.push([`itinerary/${cs}-${days}-day-itinerary.html`, `🗺️ ${days}-Day ${cityName} Itinerary`]);
+  if (STAY.some(s => s.city === cityName)) links.push([`guide/where-to-stay-in-${cs}.html`, `🏨 Where to Stay in ${cityName}`]);
+  links.push([`guide/best-food-in-${cs}.html`, `🍜 Best Food in ${cityName}`]);
+  for (const n of NEIGHBORHOODS.filter(x => x.city === cityName)) links.push([`guide/${slug(n.name)}-${slug(n.city)}-guide.html`, `${n.emoji} ${n.name} Guide`]);
+  links.push([`guide/things-to-do-in-${cs}.html`, `📍 Things to Do in ${cityName}`]);
+  const ex = String(excludeUrl || '').replace(BASEP, '');
+  const final = links.filter(([h]) => h !== ex);
+  if (!final.length) return '';
+  return `<h2>🔗 Keep planning ${esc(cityName)}</h2><div class="seo-linklist">${final.map(([h, l]) => `<a href="${h}">${esc(l)}</a>`).join('')}</div>`;
+}
+
 // ── L10N — Japanese & Chinese (top-2 inbound markets) for month/visa pages ──
 const L10N = {
   ja: {
@@ -505,6 +525,18 @@ ${body}
     <a href="plan.html" style="color:var(--accent2,#74b9ff)">Plan a Trip</a> ·
     <a href="about.html" style="color:var(--accent2,#74b9ff)">About</a>
   </p>
+  <p style="font-size:11px;color:var(--text3,#888);margin-top:6px">
+    <a href="festivals.html" style="color:var(--text2,#aaa)">Festivals</a> ·
+    <a href="seasons.html" style="color:var(--text2,#aaa)">Seasons</a> ·
+    <a href="temples.html" style="color:var(--text2,#aaa)">Temples</a> ·
+    <a href="culture.html" style="color:var(--text2,#aaa)">Culture</a> ·
+    <a href="nightviews.html" style="color:var(--text2,#aaa)">Night Views</a> ·
+    <a href="kdrama-locations.html" style="color:var(--text2,#aaa)">K-Drama Spots</a> ·
+    <a href="subway.html" style="color:var(--text2,#aaa)">Subway</a> ·
+    <a href="menu-translator.html" style="color:var(--text2,#aaa)">Menu Translator</a> ·
+    <a href="etiquette.html" style="color:var(--text2,#aaa)">Etiquette</a> ·
+    <a href="emergency.html" style="color:var(--text2,#aaa)">Emergency</a>
+  </p>
 </footer>
 </body>
 </html>`;
@@ -531,7 +563,7 @@ function faqLD(qa) {
 function bcHtml(trail) {
   return `<nav class="seo-bc" aria-label="Breadcrumb">` +
     trail.map((t, i) => (i < trail.length - 1
-      ? `<a href="${t.url.replace(BASEP, '')}">${esc(t.name)}</a><span>›</span>`
+      ? `<a href="${t.url.replace(BASEP, '') || 'index.html'}">${esc(t.name)}</a><span>›</span>`
       : `<span style="color:var(--text2,#bbb)">${esc(t.name)}</span>`)).join('') + `</nav>`;
 }
 const ctaHtml = (heading, sub) => `
@@ -602,9 +634,15 @@ function buildPlace(it) {
     ${mapsHtml(it.mapQ || it.name + ' Korea')}`;
   if (d.links && d.links.length) body += `<h2>🔗 Useful Links</h2><div class="seo-links">${d.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>`;
 
-  // related (same category)
-  const related = ALL.filter(x => x.cat === it.cat && x.slug !== it.slug).slice(0, 4);
+  // related (same category) — window rotates around this item's own position
+  // so the whole category gets internal-link equity, not just the first 4
+  const catPeers = ALL.filter(x => x.cat === it.cat);
+  const selfIdx = Math.max(0, catPeers.findIndex(x => x.slug === it.slug));
+  const peers = catPeers.filter(x => x.slug !== it.slug);
+  const related = peers.length ? [0, 1, 2, 3].map(k => peers[(selfIdx + k) % peers.length]).filter((x, i, a) => a.indexOf(x) === i) : [];
   if (related.length) body += `<h2>More ${esc(cm.label)} in Korea</h2><div class="seo-grid">${related.map(cardHtml).join('')}</div>`;
+  const cityMatch = CITIES.find(c => (it.region || '').toLowerCase().includes(c.name.toLowerCase()));
+  if (cityMatch) body += `<div class="seo-linklist"><a href="guide/things-to-do-in-${slug(cityMatch.name)}.html">📍 Things to Do in ${esc(cityMatch.name)}</a><a href="guide/best-food-in-${slug(cityMatch.name)}.html">🍜 Best Food in ${esc(cityMatch.name)}</a></div>`;
 
   // FAQ
   const qa = [
@@ -657,6 +695,7 @@ function buildCategory(cat) {
   body += `<p class="lead">${esc(desc)}</p>`;
   body += `<p>Korea offers world-class ${esc(cm.label.toLowerCase())} for every traveler. Below are ${items.length} hand-picked ${esc(cm.noun)}s with practical tips, prices and locations — tap any to open the full guide.</p>`;
   body += `<div class="seo-grid">${items.map(cardHtml).join('')}</div>`;
+  body += `<h2>🧭 Explore more</h2><div class="seo-linklist">${Object.keys(CAT_META).filter(c => c !== cat).map(c => `<a href="guide/${CAT_SLUG[c]}.html">${CAT_META[c].icon} ${esc(CAT_META[c].label)}</a>`).join('')}${cat === 'food' ? CITIES.slice(0, 4).map(c => `<a href="guide/best-food-in-${slug(c.name)}.html">🍜 Food in ${esc(c.name)}</a>`).join('') : ''}</div>`;
   body += ctaHtml('Turn this list into a trip', `Get a free AI itinerary featuring the best of Korean ${cm.label.toLowerCase()}.`);
 
   const itemList = {
@@ -691,8 +730,10 @@ function buildCity(city) {
   body += `<p class="lead">${esc(city.name)} (${esc(city.kr)}) is one of Korea's must-visit destinations. Here's everything to see, eat and experience — with insider tips and maps.</p>`;
   if (sights.length) { body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${sights.slice(0, 8).map(cardHtml).join('')}</div>`; }
   if (food.length) { body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${food.slice(0, 6).map(cardHtml).join('')}</div>`; }
+  body += cityClusterLinks(city.name, url);
+  const hasItin = ITIN.some(([cn]) => cn === city.name);
   const qa = [
-    [`How many days do you need in ${city.name}?`, `Most travelers spend 2–3 days in ${city.name} to cover the highlights. See our day-by-day itinerary for a ready-made plan.`],
+    [`How many days do you need in ${city.name}?`, `Most travelers spend 2–3 days in ${city.name} to cover the highlights.${hasItin ? ' See our day-by-day itinerary above for a ready-made plan.' : ''}`],
     [`Is ${city.name} worth visiting?`, `Yes — ${city.name} offers ${pool.slice(0,3).map(i=>i.name).join(', ')} and much more, making it one of Korea's top destinations.`],
     [`How do I get to ${city.name}?`, `${city.name === 'Seoul' || city.name === 'Incheon' ? 'Fly into Incheon (ICN) airport, then use the AREX train or metro.' : `Take the KTX bullet train or an express bus from Seoul to reach ${city.name} comfortably.`}`],
   ];
@@ -743,6 +784,9 @@ function buildItinerary(city, days, pool) {
     [`What's the best way to get around ${city.name}?`, `Get a T-money card and use the metro and buses. Use KakaoMap or Naver Map for directions — Google Maps is limited in Korea.`],
   ];
   body += tripBanner(city.name, 'kp_itin');
+  body += cityClusterLinks(city.name, url);
+  const themeRel = THEMES.slice(0, 4).map(x => `<a href="itinerary/${x.slug}.html">${x.emoji} ${esc(x.h1.split('(')[0].trim())}</a>`).join('');
+  body += `<h2>🗺️ More Korea itineraries</h2><div class="seo-linklist">${themeRel}</div>`;
   body += `<h2>❓ ${esc(city.name)} Itinerary FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml(`🎫 Book your ${city.name} trip`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml('Customize this itinerary', `Tweak days, pace and budget — our AI rebuilds your ${city.name} plan instantly.`);
@@ -790,6 +834,9 @@ function buildMonth(m, idx) {
   body += `<h2>🧳 What to Wear</h2><p>${esc(wear)}.</p>`;
   body += `<h2>🎉 Top Things to Do in ${esc(name)}</h2><p>${esc(events)}.</p>`;
   body += `<h2>📅 Live Events</h2><p>See what's on right now — Korea's festival calendar updates automatically with real-time data.</p><div class="seo-links"><a href="festivals.html">📅 Korea Festival Calendar ↗</a><a href="seasons.html">🌸 Cherry Blossom & Foliage Forecast ↗</a></div>`;
+  const prevM = MONTHS[(idx + 11) % 12][0], nextM = MONTHS[(idx + 1) % 12][0];
+  const season4 = SEASONS4.find(s => s.mi.includes(idx));
+  body += `<h2>🧭 More timing guides</h2><div class="seo-linklist"><a href="guide/korea-in-${prevM.toLowerCase()}.html">← Korea in ${prevM}</a>${season4 ? `<a href="guide/korea-in-${season4.slug}.html">${season4.emoji} Korea in ${season4.name}</a>` : ''}<a href="guide/korea-in-${nextM.toLowerCase()}.html">Korea in ${nextM} →</a><a href="faq/best-time-to-visit-korea.html">🗓️ Best Time to Visit Korea</a></div>`;
   const qa = [
     [`Is ${name} a good time to visit Korea?`, `${why}. Expect ${weather.toLowerCase()}.`],
     [`What should I pack for Korea in ${name}?`, `${wear}.`],
@@ -822,6 +869,10 @@ function buildMonthL10n(idx, lang) {
   body += `<h2>${esc(tw.wearH)}</h2><p>${esc(wear)}。</p>`;
   body += `<h2>${esc(tw.doH)}</h2><p>${esc(events)}。</p>`;
   body += `<h2>${esc(tw.evH)}</h2><p>${esc(tw.evP)}</p><div class="seo-links"><a href="festivals.html">📅 Festival Calendar ↗</a><a href="seasons.html">🌸 Cherry Blossom & Foliage ↗</a></div>`;
+  // Intra-language month navigator — keeps ja/zh/es visitors inside their language cluster
+  const moreH = { ja: '📅 他の月の韓国旅行ガイド', zh: '📅 其他月份韩国攻略', es: '📅 Corea mes a mes' }[lang];
+  const sibMonths = MONTHS.map((m, i) => i === idx ? '' : `<a href="${L.dir}/korea-in-${m[0].toLowerCase()}.html">${m[1]} ${esc(L.months[i][0])}</a>`).join('');
+  body += `<h2>${moreH}</h2><div class="seo-linklist">${sibMonths}<a href="${L.dir}/korea-visa-k-eta-guide.html">🛂 ${esc(L.visa.h1)}</a></div>`;
   const qa = [[tw.q1(nameL), `${why}。${weather}。`], [tw.q2(nameL), `${wear}。`]];
   body += `<h2>${esc(tw.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += `<div class="seo-cta"><h2>${esc(tw.ctaH)}</h2><p>${esc(tw.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English version</a></div></div>`;
@@ -845,6 +896,9 @@ function buildVisaL10n(lang) {
   for (const [h, html] of V.sections) body += `<h2>${h}</h2>${html.startsWith('<') ? html : `<p>${html}</p>`}`;
   body += `<div class="seo-links"><a href="https://www.k-eta.go.kr/" target="_blank" rel="noopener">🌐 K-ETA Official ↗</a></div>`;
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${V.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  // Intra-language month links — visa page doubles as the locale's mini-hub
+  const bestH = { ja: '📅 ベストシーズンを探す', zh: '📅 选择最佳出行月份', es: '📅 ¿Cuándo viajar a Corea?' }[lang];
+  body += `<h2>${bestH}</h2><div class="seo-linklist">${MONTHS.map((m, i) => `<a href="${L.dir}/korea-in-${m[0].toLowerCase()}.html">${m[1]} ${esc(L.months[i][0])}</a>`).join('')}</div>`;
   body += `<div class="seo-cta"><h2>${esc(V.ctaH)}</h2><p>${esc(V.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English version</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">🛂</span><h1>${esc(V.h1)}</h1><div class="meta"><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: V.h1, description: V.desc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
@@ -865,8 +919,10 @@ function buildBlogPost(p) {
   body += p.body;
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${p.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml('🎫 Plan & book your Korea trip', { city: 'Seoul', cat: p.slug.includes('sim') ? 'esim' : 'general', q: '' });
-  // related posts
-  const rel = BLOG.filter(b => b.slug !== p.slug).slice(0, 3);
+  // related posts — rotate by this post's own index so every post gets links
+  const pi = Math.max(0, BLOG.findIndex(b => b.slug === p.slug));
+  const blogPeers = BLOG.filter(b => b.slug !== p.slug);
+  const rel = [0, 1, 2].map(k => blogPeers[(pi + k) % blogPeers.length]).filter((x, i, a) => a.indexOf(x) === i);
   body += `<h2>📰 More from the blog</h2><div class="seo-linklist">${rel.map(b => `<a href="blog/${b.slug}.html">${b.emoji} ${esc(b.h1)}</a>`).join('')}</div>`;
   body += ctaHtml('Ready to plan your Korea trip?', 'Build a free day-by-day itinerary with AI in seconds.');
   const hero = `<header class="seo-hero"><span class="emoji">${p.emoji}</span><h1>${esc(p.h1)}</h1><div class="meta"><span class="seo-badge">Updated ${p.date}</span><span class="seo-badge region">Travel Tips</span></div></header>`;
@@ -906,11 +962,13 @@ function buildExplore(urls) {
   const section = (t, list) => `<h2 class="seo-secttitle">${t}</h2><div class="seo-linklist">${list.join('')}</div>`;
   body += section('✈️ Travel Basics', [`<a href="guide/korea-visa-k-eta-guide.html">🛂 Visa & K-ETA Guide</a>`, ...(urls.stays || []).map(u => `<a href="${u.replace(BASEP, '')}">🏨 ${esc(u.split('/').pop().replace(/-/g, ' ').replace('.html', '').replace(/\b\w/g, m => m.toUpperCase()))}</a>`)]);
   body += section('📰 Blog', BLOG.map(p => `<a href="blog/${p.slug}.html">${p.emoji} ${esc(p.h1.split(/[:?(]/)[0].trim())}</a>`));
-  body += section('🌏 日本語 / 中文 / Español', [
-    `<a href="ja/korea-visa-k-eta-guide.html">🇯🇵 ビザ & K-ETA</a>`, `<a href="ja/korea-in-april.html">🇯🇵 4月の韓国</a>`, `<a href="ja/korea-in-october.html">🇯🇵 10月の韓国</a>`,
-    `<a href="zh/korea-visa-k-eta-guide.html">🇨🇳 签证 & K-ETA</a>`, `<a href="zh/korea-in-april.html">🇨🇳 4月韩国攻略</a>`, `<a href="zh/korea-in-october.html">🇨🇳 10月韩国攻略</a>`,
-    `<a href="es/korea-visa-k-eta-guide.html">🇪🇸 Visado & K-ETA</a>`, `<a href="es/korea-in-april.html">🇪🇸 Corea en abril</a>`, `<a href="es/korea-in-october.html">🇪🇸 Corea en octubre</a>`,
-  ]);
+  // All 13 localized pages per language, generated programmatically so new
+  // locale pages are never dropped from the index
+  const FLAGS = { ja: '🇯🇵', zh: '🇨🇳', es: '🇪🇸' };
+  body += section('🌏 日本語 / 中文 / Español', LOCALES.flatMap(l => [
+    `<a href="${l}/korea-visa-k-eta-guide.html">${FLAGS[l]} ${esc(L10N[l].visa.h1)}</a>`,
+    ...MONTHS.map((m, i) => `<a href="${l}/korea-in-${m[0].toLowerCase()}.html">${FLAGS[l]} ${esc(L10N[l].months[i][0])}</a>`),
+  ]));
   body += section('🍜 By Topic', Object.keys(CAT_META).map(c => `<a href="guide/${CAT_SLUG[c]}.html">${CAT_META[c].icon} ${esc(CAT_META[c].label)}</a>`));
   body += section('📍 City Guides', CITIES.map(c => `<a href="guide/things-to-do-in-${slug(c.name)}.html">📍 ${esc(c.name)}</a>`));
   if (urls.neighborhoods && urls.neighborhoods.length) body += section('🏘️ Seoul Neighborhoods', NEIGHBORHOODS.map(n => `<a href="guide/${slug(n.name)}-${slug(n.city)}-guide.html">${n.emoji} ${esc(n.name)}</a>`));
@@ -981,6 +1039,7 @@ function buildNeighborhood(n) {
     [`How do I get to ${n.name}?`, n.getto],
   ];
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += cityClusterLinks(n.city, url);
   body += affHtml(`🎫 Book ${n.city} experiences`, { city: n.city, cat: 'travel', q: n.name });
   body += ctaHtml(`Add ${n.name} to your trip`, `Build a free ${n.city} itinerary that includes ${n.name}.`);
   const hero = `<header class="seo-hero"><span class="emoji">${n.emoji}</span><h1>${esc(n.name)}</h1><div class="kr">${esc(n.kr)} · ${esc(n.city)}</div><div class="meta"><span class="seo-badge region">${esc(n.city)}</span></div></header>`;
@@ -1001,7 +1060,12 @@ function buildStay(s) {
   let body = bcHtml(trail);
   body += `<p class="lead">Choosing the right area makes ${esc(s.city)} far easier to explore. Here are the best neighborhoods to stay in, by travel style.</p>`;
   body += `<h2>🏨 Best Areas to Stay in ${esc(s.city)}</h2>`;
-  s.areas.forEach(([area, why]) => { body += `<h3>${esc(area)}</h3><p>${esc(why)}</p>`; });
+  s.areas.forEach(([area, why]) => {
+    // Link the matching neighborhood guide when one exists (split handles "Insadong / Jongno")
+    const nb = NEIGHBORHOODS.find(x => x.city === s.city && area.toLowerCase().split(/[\s/]+/).includes(x.name.toLowerCase()));
+    const href = nb ? `guide/${slug(nb.name)}-${slug(nb.city)}-guide.html` : null;
+    body += `<h3>${href ? `<a href="${href}">${esc(area)}</a>` : esc(area)}</h3><p>${esc(why)}${href ? ` <a href="${href}">Full ${esc(nb.name)} guide →</a>` : ''}</p>`;
+  });
   body += tripBanner(s.city, 'kp_stay');
   body += affHtml(`🏨 Find ${s.city} hotels & stays`, { city: s.city, cat: 'hotel', q: '' });
   const qa = [
@@ -1009,6 +1073,7 @@ function buildStay(s) {
     [`Where should I stay in ${s.city} on a budget?`, s.areas.find(a => /budget|affordable/i.test(a[1])) ? s.areas.find(a => /budget|affordable/i.test(a[1])).join(' — ') : `${s.areas[1] ? s.areas[1].join(' — ') : s.areas[0].join(' — ')}`],
   ];
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += cityClusterLinks(s.city, url);
   body += ctaHtml(`Planning ${s.city}?`, `Get a free AI ${s.city} itinerary to match your base.`);
   const hero = `<header class="seo-hero"><span class="emoji">🏨</span><h1>${esc('Where to Stay in ' + s.city)}</h1><div class="kr">${esc(s.kr)}</div><div class="meta"><span class="seo-badge region">${s.areas.length} areas</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
@@ -1186,6 +1251,11 @@ function buildTheme(t) {
   }
   body += tripBanner('Seoul', 'kp_theme');
   body += `<h2>💡 Tips for this route</h2><ul class="tips">${t.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  // Related itineraries — rotate by this theme's index so links spread evenly
+  const ti = Math.max(0, THEMES.findIndex(x => x.slug === t.slug));
+  const themePeers = THEMES.filter(x => x.slug !== t.slug);
+  const themeRel = [0, 1, 2, 3, 4].map(k => themePeers[(ti + k) % themePeers.length]).filter((x, i, a) => a.indexOf(x) === i);
+  body += `<h2>🗺️ More Korea itineraries</h2><div class="seo-linklist">${themeRel.map(x => `<a href="itinerary/${x.slug}.html">${x.emoji} ${esc(x.h1.split('(')[0].trim())}</a>`).join('')}<a href="itinerary/seoul-3-day-itinerary.html">🗺️ 3-Day Seoul Itinerary</a></div>`;
   const qa = [
     [`Is this ${t.days}-day plan realistic?`, `Yes — it averages 2–3 main stops plus meals per day, the pace most travelers find comfortable. Rebuild it with your own dates in our free AI planner.`],
     ['Can I customize this itinerary?', 'Absolutely — open the AI Trip Planner, pick your dates, interests and pace, and it rebuilds the route in seconds.'],
@@ -1312,8 +1382,7 @@ for (const it of ALL) out.places.push(buildPlace(it));
 for (const cat of Object.keys(KOREA_DATA)) out.categories.push(buildCategory(cat));
 const cityPools = {};
 for (const c of CITIES) { const r = buildCity(c); out.cities.push(r.url); cityPools[c.name] = r.pool; }
-// itineraries: top cities with enough data
-const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
+// itineraries: top cities with enough data (ITIN hoisted to the constants section)
 for (const [cn, days] of ITIN) {
   const city = CITIES.find(c => c.name === cn);
   const pool = cityPools[cn] && cityPools[cn].length >= 3 ? cityPools[cn] : ALL.filter(i => i.cat === 'travel' || i.cat === 'food');
