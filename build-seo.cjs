@@ -67,11 +67,29 @@ const CAT_SLUG = {
 // ── Affiliate config — replace the IDs, rebuild, redeploy ───────────
 // Sign up: Klook & KKday (tours), Agoda (hotels), Airalo (eSIM),
 // GetYourGuide (day trips). Fill your IDs below; links appear on every guide.
+// ── Trip.com affiliate (LIVE — Trip.com Partners 계정 연동) ─────────
+const TRIP_AID = 'Allianceid=8536795&SID=317779078';
 const AFFILIATES = {
   klook:        { label: 'Tours & Tickets', brand: 'Klook',        icon: '🎟️', url: 'https://www.klook.com/?aid=YOUR_KLOOK_AID' },
-  agoda:        { label: 'Hotels',          brand: 'Agoda',        icon: '🏨', url: 'https://www.agoda.com/?cid=YOUR_AGODA_CID' },
+  tripcom:      { label: 'Hotels',          brand: 'Trip.com',     icon: '🏨', url: `https://www.trip.com/?${TRIP_AID}&trip_sub1=kp_block` },
   airalo:       { label: 'eSIM Data',       brand: 'Airalo',       icon: '📶', url: 'https://www.airalo.com/?ref=YOUR_AIRALO_REF' },
   getyourguide: { label: 'Day Trips',       brand: 'GetYourGuide', icon: '🚌', url: 'https://www.getyourguide.com/?partner_id=YOUR_GYG_ID' },
+};
+
+// Trip.com dynamic hotel banners (300×250) — generate per-city in the
+// Partners dashboard and register the banner id here. Pages for cities
+// without a banner simply render nothing.
+const TRIP_BANNERS = { Seoul: 'DB17873403' };
+const tripBanner = (city, sub = 'kp') => {
+  const id = TRIP_BANNERS[city];
+  if (!id) return '';
+  return `
+<div class="seo-banner">
+  <span class="seo-banner-label">Ad · Trip.com ${esc(city)} hotels</span>
+  <iframe loading="lazy" title="Trip.com ${esc(city)} hotel deals"
+    src="https://www.trip.com/partners/ad/${id}?${TRIP_AID}&trip_sub1=${sub}"
+    style="width:300px;height:250px;border:none" frameborder="0" scrolling="no"></iframe>
+</div>`;
 };
 
 // Curated extra content (not in KOREA_DATA) — high-search-volume guides
@@ -674,6 +692,7 @@ function buildCity(city) {
     [`Is ${city.name} worth visiting?`, `Yes — ${city.name} offers ${pool.slice(0,3).map(i=>i.name).join(', ')} and much more, making it one of Korea's top destinations.`],
     [`How do I get to ${city.name}?`, `${city.name === 'Seoul' || city.name === 'Incheon' ? 'Fly into Incheon (ICN) airport, then use the AREX train or metro.' : `Take the KTX bullet train or an express bus from Seoul to reach ${city.name} comfortably.`}`],
   ];
+  body += tripBanner(city.name, 'kp_city');
   body += `<h2>❓ ${esc(city.name)} Travel FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml(`🎫 Book ${city.name} tours, hotels & essentials`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
@@ -719,6 +738,7 @@ function buildItinerary(city, days, pool) {
     [`How much does a ${days}-day ${city.name} trip cost?`, `Budget travelers can do ${city.name} for about $50–70/day; mid-range around $120/day including food, transport and attractions.`],
     [`What's the best way to get around ${city.name}?`, `Get a T-money card and use the metro and buses. Use KakaoMap or Naver Map for directions — Google Maps is limited in Korea.`],
   ];
+  body += tripBanner(city.name, 'kp_itin');
   body += `<h2>❓ ${esc(city.name)} Itinerary FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml(`🎫 Book your ${city.name} trip`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml('Customize this itinerary', `Tweak days, pace and budget — our AI rebuilds your ${city.name} plan instantly.`);
@@ -978,6 +998,7 @@ function buildStay(s) {
   body += `<p class="lead">Choosing the right area makes ${esc(s.city)} far easier to explore. Here are the best neighborhoods to stay in, by travel style.</p>`;
   body += `<h2>🏨 Best Areas to Stay in ${esc(s.city)}</h2>`;
   s.areas.forEach(([area, why]) => { body += `<h3>${esc(area)}</h3><p>${esc(why)}</p>`; });
+  body += tripBanner(s.city, 'kp_stay');
   body += affHtml(`🏨 Find ${s.city} hotels & stays`, { city: s.city, cat: 'hotel', q: '' });
   const qa = [
     [`What is the best area to stay in ${s.city} for first-timers?`, `${s.areas[0][0]} — ${s.areas[0][1]}`],
@@ -1159,6 +1180,7 @@ function buildTheme(t) {
     if (dn) body += slotHtml('🌙', 'Dinner', dn);
     body += `</div>`;
   }
+  body += tripBanner('Seoul', 'kp_theme');
   body += `<h2>💡 Tips for this route</h2><ul class="tips">${t.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
   const qa = [
     [`Is this ${t.days}-day plan realistic?`, `Yes — it averages 2–3 main stops plus meals per day, the pace most travelers find comfortable. Rebuild it with your own dates in our free AI planner.`],

@@ -34,7 +34,9 @@ const BRANDS: Record<string, Brand> = {
   klook:   { key: 'klook',   brand: 'Klook',   icon: '🎟️', deep: q => `https://www.klook.com/search/?query=${q}` },
   kkday:   { key: 'kkday',   brand: 'KKday',   icon: '🚌', deep: q => `https://www.kkday.com/en/product/productlist?keyword=${q}` },
   airalo:  { key: 'airalo',  brand: 'Airalo',  icon: '📶', deep: () => 'https://www.airalo.com/south-korea-esim' },
-  tripcom: { key: 'tripcom', brand: 'Trip.com', icon: '🏨', deep: q => `https://www.trip.com/global-search/searchlist/search/?keyword=${q}` },
+  // Trip.com fallback links carry the live affiliate IDs (Trip.com Partners),
+  // so hotel clicks monetize even before Impact program approval.
+  tripcom: { key: 'tripcom', brand: 'Trip.com', icon: '🏨', deep: q => `https://www.trip.com/global-search/searchlist/search/?keyword=${q}&Allianceid=8536795&SID=317779078&trip_sub1=kp_api` },
 };
 
 interface OfferSpec { b: Brand; label: string; q: string }
