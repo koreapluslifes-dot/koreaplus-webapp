@@ -382,3 +382,17 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   .kp-pnav.kp-open .kp-pnav-backdrop { opacity:1; pointer-events:auto; }
   body.kp-nav-open { overflow:hidden; }
 }
+
+/* ── Dashboard: LIVE badge + 3-day forecast strip ───────────────────── */
+.kpd-live { display:inline-flex; align-items:center; gap:4px; font-size:9px; font-weight:800; letter-spacing:.06em; color:#34d399; }
+.kpd-live-dot { width:6px; height:6px; border-radius:50%; background:#34d399; box-shadow:0 0 0 0 rgba(52,211,153,.6); animation:kpdPulse 1.8s infinite; }
+@keyframes kpdPulse { 0%{box-shadow:0 0 0 0 rgba(52,211,153,.55)} 70%{box-shadow:0 0 0 6px rgba(52,211,153,0)} 100%{box-shadow:0 0 0 0 rgba(52,211,153,0)} }
+.kpd-fc-label { font-size:10px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:.05em; margin:10px 0 6px; }
+.kpd-fc { display:flex; gap:6px; }
+.kpd-fc-day { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; padding:7px 4px; border-radius:10px; background:var(--surface); border:1px solid var(--border); }
+.kpd-fc-dow { font-size:10px; font-weight:700; color:var(--text2); }
+.kpd-fc-emoji { font-size:17px; line-height:1; }
+.kpd-fc-temp { font-size:11px; color:var(--text2); }
+.kpd-fc-temp b { color:var(--text); }
+.kpd-fc-pop { font-size:9px; color:var(--accent2); }
+@media (prefers-reduced-motion: reduce) { .kpd-live-dot { animation:none; } }

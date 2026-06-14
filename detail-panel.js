@@ -75,7 +75,21 @@
     return _ddPromise;
   }
 
+  // Track viewed places for the home "Recently viewed" rail (retention).
+  function trackView(item) {
+    if (!item || !item.name) return;
+    try {
+      const rec = { name: item.name, kr: item.kr || '', emoji: item.emoji || '📍', region: item.region || '', cat: item.cat || '', at: Date.now() };
+      let list = JSON.parse(localStorage.getItem('kp_viewed_v1') || '[]');
+      list = list.filter(x => x && x.name !== rec.name);
+      list.unshift(rec);
+      localStorage.setItem('kp_viewed_v1', JSON.stringify(list.slice(0, 12)));
+      document.dispatchEvent(new CustomEvent('kp:viewed'));
+    } catch {}
+  }
+
   function open(item) {
+    trackView(item);
     if (window.DETAIL_DATA) { renderOpen(item); return; }
     // Open immediately with a loading state, then render once data arrives.
     createShell();

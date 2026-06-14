@@ -379,5 +379,12 @@
   "kpop.funnel.merch": "アルバム & グッズ",
   "kpop.funnel.merch.sub": "ペンライト、トレカ",
   "kpop.funnel.disc": "一部のリンクはアフィリエイトリンクです。追加費用なしで KoreaPlus の運営を支えます。",
-  "kpop.explore.title": "K-カルチャーをもっと見る"
+  "kpop.explore.title": "K-カルチャーをもっと見る",
+  "retain.welcomeBack": "おかえりなさい！",
+  "retain.continuePlan": "プランを続ける",
+  "retain.savedCount": "保存済み {n}件",
+  "retain.openTrip": "マイトリップを開く",
+  "retain.recentTitle": "🕘 最近見た項目",
+  "dash.forecast3d": "3日間予報",
+  "dash.live": "ライブ"
 }

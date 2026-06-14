@@ -379,5 +379,12 @@
   "kpop.funnel.merch": "앨범 & 굿즈",
   "kpop.funnel.merch.sub": "응원봉, 포토카드",
   "kpop.funnel.disc": "일부 링크는 제휴 링크로, 추가 비용 없이 KoreaPlus 운영에 도움이 됩니다.",
-  "kpop.explore.title": "K-컬처 더 둘러보기"
+  "kpop.explore.title": "K-컬처 더 둘러보기",
+  "retain.welcomeBack": "다시 오신 걸 환영합니다!",
+  "retain.continuePlan": "여행 계획 이어가기",
+  "retain.savedCount": "저장한 항목 {n}개",
+  "retain.openTrip": "내 여행 열기",
+  "retain.recentTitle": "🕘 최근 본 항목",
+  "dash.forecast3d": "3일 예보",
+  "dash.live": "실시간"
 }

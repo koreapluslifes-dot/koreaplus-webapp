@@ -1020,6 +1020,54 @@ function initHeader() {
   });
 }
 
+/* ===== RETENTION: welcome-back + recently-viewed ===== */
+let _kpVisits = 0;
+function initVisits() {
+  try { _kpVisits = (parseInt(localStorage.getItem('kp_visits') || '0', 10) || 0) + 1;
+    localStorage.setItem('kp_visits', String(_kpVisits)); } catch { _kpVisits = 1; }
+}
+function renderRetain() {
+  const host = document.getElementById('kp-retain');
+  if (!host) return;
+  const tt = (k, fb) => { const v = window.kpI18n?.t(k); return (v && v !== k) ? v : fb; };
+  let html = '';
+
+  // Welcome-back strip — only for returning visitors with saved activity.
+  let saved = 0, itin = null;
+  try { saved = (window.kpTrip?.counts?.() || {}).total || 0; } catch {}
+  try { itin = JSON.parse(localStorage.getItem('kp_itinerary') || 'null'); } catch {}
+  if (_kpVisits >= 2 && (saved > 0 || itin)) {
+    const cards = [];
+    if (itin && itin.itinerary) {
+      const title = String(itin.itinerary.title || tt('plan.result.title', 'Your Korea Itinerary')).slice(0, 40);
+      cards.push(`<a class="kp-rt-card" href="plan.html"><span class="ic">🗺️</span><span>${tt('retain.continuePlan', 'Continue your plan')}<span class="sub">${title.replace(/</g, '&lt;')}</span></span></a>`);
+    }
+    if (saved > 0) {
+      cards.push(`<button class="kp-rt-card" data-rt-open="trips"><span class="ic">❤️</span><span>${tt('retain.savedCount', '{n} saved items').replace('{n}', saved)}<span class="sub">${tt('retain.openTrip', 'Open My Trip')}</span></span></button>`);
+    }
+    if (cards.length) {
+      html += `<div class="kp-rt-welcome"><div class="kp-rt-hi">👋 ${tt('retain.welcomeBack', 'Welcome back!')}</div><div class="kp-rt-cards">${cards.join('')}</div></div>`;
+    }
+  }
+
+  // Recently-viewed rail.
+  let viewed = [];
+  try { viewed = JSON.parse(localStorage.getItem('kp_viewed_v1') || '[]'); } catch {}
+  viewed = (viewed || []).filter(v => v && v.name).slice(0, 12);
+  if (viewed.length) {
+    const chips = viewed.map((v, i) => `<button class="kp-rv-chip" data-rv="${i}"><span class="rv-emoji">${v.emoji || '📍'}</span><span class="rv-name">${String(v.name).replace(/</g, '&lt;')}</span></button>`).join('');
+    html += `<div class="kp-rv"><div class="kp-rv-title">${tt('retain.recentTitle', '🕘 Recently viewed')}</div><div class="kp-rv-rail">${chips}</div></div>`;
+  }
+
+  host.innerHTML = html;
+
+  // Wire interactions.
+  host.querySelectorAll('[data-rt-open]').forEach(b =>
+    b.addEventListener('click', () => { try { window.kpTrip?.open?.(b.dataset.rtOpen); } catch {} }));
+  host.querySelectorAll('.kp-rv-chip').forEach(b =>
+    b.addEventListener('click', () => { const v = viewed[+b.dataset.rv]; if (v && window.kpDetail) { try { kpDetail.open(v); } catch {} } }));
+}
+
 /* ===== BOOT ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initMap();
@@ -1030,6 +1078,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initChatTease();
   initHeader();
   initScrollReveal();
+  initVisits();
+  renderRetain();
+
+  // Refresh the recently-viewed rail whenever a place is opened.
+  document.addEventListener('kp:viewed', renderRetain);
 
   // Re-render i18n-dependent dynamic UI on language change. This event also
   // fires once after the initial async message load, repairing the boot-time
@@ -1037,5 +1090,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('kp:langchange', () => {
     renderGrid(activeCat);
     refreshChatMenu();
+    renderRetain();
   });
 });

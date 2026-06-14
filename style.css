@@ -695,3 +695,21 @@ body.kp-cookie-open .chat-tease{bottom:190px}
   @media (max-width:768px){ .chat-fab { bottom: calc(16px + env(safe-area-inset-bottom)); } }
   .kp-cookie-banner { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
 }
+
+/* ── Retention: welcome-back + recently-viewed (home) ───────────────── */
+.kp-retain:empty { display:none; }
+.kp-retain { max-width:1280px; margin:0 auto; padding:18px 20px 0; display:flex; flex-direction:column; gap:14px; }
+.kp-rt-welcome { background:linear-gradient(135deg,rgba(214,34,70,.10),rgba(116,185,255,.08)); border:1px solid var(--border2); border-radius:16px; padding:14px 16px; }
+.kp-rt-hi { font-size:13px; font-weight:800; color:var(--text); margin-bottom:10px; }
+.kp-rt-cards { display:flex; flex-wrap:wrap; gap:10px; }
+.kp-rt-card { display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; background:var(--surface); border:1px solid var(--border); color:var(--text); text-decoration:none; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; transition:border-color .15s,background .15s; }
+.kp-rt-card:hover { border-color:rgba(116,185,255,.45); background:rgba(116,185,255,.07); }
+.kp-rt-card .ic { font-size:20px; }
+.kp-rt-card .sub { display:block; font-size:11px; font-weight:500; color:var(--text2); margin-top:2px; }
+.kp-rv-title { font-size:12px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
+.kp-rv-rail { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding-bottom:4px; }
+.kp-rv-rail::-webkit-scrollbar { display:none; }
+.kp-rv-chip { flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; padding:8px 13px; border-radius:22px; background:var(--surface); border:1px solid var(--border); color:var(--text); font-size:13px; font-weight:600; white-space:nowrap; cursor:pointer; font-family:inherit; transition:border-color .15s,background .15s; }
+.kp-rv-chip:hover { border-color:rgba(116,185,255,.45); background:rgba(116,185,255,.07); }
+.kp-rv-chip .rv-emoji { font-size:16px; }
+@media (max-width:768px){ .kp-retain { padding:14px 16px 0; } }

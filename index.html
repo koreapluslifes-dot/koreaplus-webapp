@@ -79,10 +79,10 @@
   </script>
 
   <script src="config.js"></script>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=17">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
-  <link rel="stylesheet" href="hub-styles.css?v=5">
+  <link rel="stylesheet" href="hub-styles.css?v=6">
 </head>
 <body>
 <a href="#main" class="kp-skip" data-i18n="a11y.skip">Skip to content</a>
@@ -183,6 +183,10 @@
 </section>
 
 <div id="week-anchor"></div>
+
+<!-- Returning-visitor retention: welcome-back strip + recently-viewed rail
+     (populated by app.js from localStorage; hidden when empty) -->
+<section id="kp-retain" class="kp-retain" aria-label="Your activity"></section>
 
 <!-- Categories -->
 <section class="categories-section" id="categories-section">
@@ -512,11 +516,11 @@
 
 <script src="data.js?v=3"></script>
 <script src="modules/mytrip.js?v=3"></script>
-<script src="detail-panel.js?v=6"></script>
-<script src="app.js?v=19"></script>
+<script src="detail-panel.js?v=7"></script>
+<script src="app.js?v=20"></script>
 <script src="modules/nav.js?v=3"></script>
 <script src="modules/api-client.js"></script>
-<script src="modules/dashboard.js"></script>
+<script src="modules/dashboard.js?v=2"></script>
 <script src="modules/week-section.js"></script>
 
 <!-- Phase 5: Theme, i18n, Search, Analytics -->

@@ -379,5 +379,12 @@
   "kpop.funnel.merch": "Albums & Merch",
   "kpop.funnel.merch.sub": "Lightsticks, photocards",
   "kpop.funnel.disc": "Some links are affiliate links — they help keep KoreaPlus free, at no extra cost to you.",
-  "kpop.explore.title": "Keep Exploring K-Culture"
+  "kpop.explore.title": "Keep Exploring K-Culture",
+  "retain.welcomeBack": "¡Bienvenido de nuevo!",
+  "retain.continuePlan": "Continúa tu plan",
+  "retain.savedCount": "{n} guardados",
+  "retain.openTrip": "Abrir Mi viaje",
+  "retain.recentTitle": "🕘 Vistos recientemente",
+  "dash.forecast3d": "Pronóstico 3 días",
+  "dash.live": "EN VIVO"
 }
