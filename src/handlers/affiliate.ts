@@ -102,8 +102,17 @@ interface AgodaResult {
 }
 
 async function liveCards(env: WorkerEnv, city: string, lang: string): Promise<Offer[] | null> {
-  const apiKey = (env.AGODA_API_KEY || '').trim();
-  const siteId = (env.AGODA_SITE_ID || AGODA_CID).trim();
+  // Accept either a bare API key, or the combined "siteId:apiKey" string (the
+  // exact value Agoda's portal shows for the Authorization header) — split it.
+  const raw = (env.AGODA_API_KEY || '').trim();
+  if (!raw) return null;
+  let siteId = (env.AGODA_SITE_ID || AGODA_CID).trim();
+  let apiKey = raw;
+  if (raw.includes(':')) {
+    const i = raw.indexOf(':');
+    siteId = raw.slice(0, i).trim() || siteId;
+    apiKey = raw.slice(i + 1).trim();
+  }
   if (!apiKey) return null;
 
   let ids = AGODA_CITY_ID;
@@ -140,8 +149,9 @@ async function liveCards(env: WorkerEnv, city: string, lang: string): Promise<Of
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(8_000),
     });
-    if (!res.ok) { console.error(`[Agoda] HTTP ${res.status}`); return null; }
-    const data = await res.json() as { results?: AgodaResult[]; error?: { message?: string } };
+    if (!res.ok) { console.error(`[Agoda] HTTP ${res.status}: ${(await res.text()).slice(0, 160)}`); return null; }
+    const data = await res.json() as { results?: AgodaResult[]; error?: { message?: string; id?: number } };
+    if (data.error) console.error(`[Agoda] api error ${data.error.id}: ${data.error.message}`);
     if (!data.results || !data.results.length) return null;
 
     const t = L[lang] || L.en;
