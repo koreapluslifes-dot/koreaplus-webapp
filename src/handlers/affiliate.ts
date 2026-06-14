@@ -41,8 +41,10 @@ const AGODA_SLUG: Record<string, string> = {
 // listed here can return live price cards; everything else uses deep links.
 // Confirm/extend in the Agoda partner portal or via AGODA_CITY_IDS env override
 // — a wrong id just yields no results and falls back, so it never breaks.
+// Agoda numeric cityIds (same as the agoda.com /city/<slug> "city=" param,
+// verified against the live Long Tail API). Public values, not secret.
 const AGODA_CITY_ID: Record<string, number> = {
-  Seoul: 14690, // from the partner's own Agoda link (partnersearch city=14690)
+  Seoul: 14690, Busan: 17172, Jeju: 16901, Incheon: 17234, Gyeongju: 17179, Jeonju: 17831,
 };
 const AGODA_HL: Record<string, string> = {
   en: 'en-us', ko: 'ko-kr', ja: 'ja-jp', zh: 'zh-cn', es: 'es-es',
