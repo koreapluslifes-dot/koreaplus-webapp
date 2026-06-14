@@ -30,7 +30,9 @@ $ROOT_FILES = @(
     "emergency.html", "phrases.html", "currency.html", "etiquette.html",
     "seasons.html", "kdrama-locations.html", "menu-translator.html", "subway.html",
     # K-Pop vertical
-    "kpop.html", "kpop-data.js", "seo.css"
+    "kpop.html", "kpop-data.js", "seo.css",
+    # K-Beauty vertical
+    "kbeauty.html", "kbeauty-data.js"
 )
 
 $MODULE_FILES = @(
@@ -52,7 +54,15 @@ $MODULE_FILES = @(
     "modules/affiliate.js",
     # K-Pop vertical
     "modules/kpop.js",
-    "modules/kpop-sharecard.js"
+    "modules/kpop-sharecard.js",
+    # K-Beauty vertical
+    "modules/kbeauty.js",
+    "modules/kbeauty-sharecard.js"
+)
+
+# Static data assets (bundled JSON, etc.) served under /guide/assets/
+$ASSET_FILES = @(
+    "assets/cosing-ingredients.json"
 )
 
 $MESSAGE_FILES = @(
@@ -78,7 +88,7 @@ Write-Host "Deploying KoreaPlus Guide (Phase 5) to $ServerIP..." -ForegroundColo
 # Create remote directories
 Write-Host "Creating remote directories..." -ForegroundColor Yellow
 ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" `
-    "mkdir -p $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons && chmod 755 $REMOTE_DIR $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons"
+    "mkdir -p $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons $REMOTE_DIR/assets && chmod 755 $REMOTE_DIR $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons $REMOTE_DIR/assets"
 
 # Upload root files
 Write-Host "`nUploading root files..." -ForegroundColor Yellow
@@ -93,6 +103,14 @@ foreach ($file in $MODULE_FILES) {
     Write-Host "  $file" -ForegroundColor DarkYellow
     $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
     scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/modules/"
+}
+
+# Upload static data assets
+Write-Host "`nUploading assets..." -ForegroundColor Yellow
+foreach ($file in $ASSET_FILES) {
+    Write-Host "  $file" -ForegroundColor DarkYellow
+    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
+    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/assets/"
 }
 
 # Upload message files

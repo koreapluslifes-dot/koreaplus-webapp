@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v18';
+const CACHE = 'kp-v19';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -35,11 +35,16 @@ const PRECACHE = [
   BASE + '/kdrama-locations.html',
   BASE + '/kpop.html',
   BASE + '/kpop-data.js',
+  BASE + '/kbeauty.html',
+  BASE + '/kbeauty-data.js',
+  BASE + '/assets/cosing-ingredients.json',
   BASE + '/menu-translator.html',
   BASE + '/subway.html',
   BASE + '/modules/api-client.js',
   BASE + '/modules/kpop.js',
   BASE + '/modules/kpop-sharecard.js',
+  BASE + '/modules/kbeauty.js',
+  BASE + '/modules/kbeauty-sharecard.js',
   BASE + '/modules/dashboard.js',
   BASE + '/modules/week-section.js',
   BASE + '/modules/planner.js',

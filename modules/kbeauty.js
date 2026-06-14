@@ -1,0 +1,515 @@
+/* modules/kbeauty.js — K-Beauty hub renderer.
+   Renders fully from the manual tier (window.KBEAUTY_*) with ZERO API keys,
+   then progressively enriches via the Worker (/api/kbeauty/*) when reachable
+   (live AliExpress shop grid, Wikidata brand bios). Personalization (skin type,
+   concerns, brand follows, shelf) persists in localStorage. Loaded last. */
+(function () {
+  'use strict';
+  const $  = (s, r = document) => (r || document).querySelector(s);
+  const $$ = (s, r = document) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+
+  const SKINTYPES   = window.KBEAUTY_SKINTYPES   || [];
+  const QUIZ        = window.KBEAUTY_QUIZ         || [];
+  const CONCERNS    = window.KBEAUTY_CONCERNS     || [];
+  const ROUTINE     = window.KBEAUTY_ROUTINE      || [];
+  const INGREDIENTS = window.KBEAUTY_INGREDIENTS  || [];
+  const CHECKABLE   = window.KBEAUTY_CHECKABLE    || [];
+  const CONFLICTS   = window.KBEAUTY_CONFLICTS    || [];
+  const BRANDS      = window.KBEAUTY_BRANDS       || [];
+  const GLOSSARY    = window.KBEAUTY_GLOSSARY     || [];
+  const TRENDS      = window.KBEAUTY_TRENDS       || [];
+  const FORECAST    = window.KBEAUTY_FORECAST     || {};
+  const SHOP        = window.KBEAUTY_SHOP         || { aliSeeds:{}, retailers:[] };
+  const API = window.KPApi || null;
+
+  const ING_BY_ID = Object.fromEntries(INGREDIENTS.map(i => [i.id, i]));
+  const CONCERN_BY_ID = Object.fromEntries(CONCERNS.map(c => [c.id, c]));
+
+  const SKIN_KEY = 'kp_kbeauty_skin', CONCERN_KEY = 'kp_kbeauty_concerns', FOLLOW_KEY = 'kp_kbeauty_follow';
+
+  const lang = (localStorage.getItem('kp_lang') || (navigator.language || 'en').slice(0, 2) || 'en').toLowerCase();
+
+  // ── Mini i18n for JS-generated labels (chrome uses data-i18n via i18n.js) ──
+  const STR = {
+    en: { result:'Your skin type', retake:'Retake', best:'Best for', pairs:'Pairs with', avoid:'Be careful with', preg:'Pregnancy', pregSafe:'Generally fine', pregCaution:'Ask your doctor', time:'Use', am:'AM', pm:'PM', both:'AM & PM', shop:'Shop this step', shopFor:'Shop', loading:'Loading…', shopEmpty:'Live shopping lights up here. Meanwhile, browse our authentic retailers below.', selectActives:'Select 2+ actives to check.', allSafe:'No conflicts — these play nicely together. 🎉', followToast:'Added to favourites ★', unfollowToast:'Removed', known:'Known for', tier:'Tier', vegan:'Vegan', mens:'Men-friendly', bioSoon:'Loading profile…', readMore:'Learn more', decNone:'No ingredients recognized — check the spelling or paste the full INCI list.', decFound:'recognized', priceFrom:'from', shelfEmpty:'Take the quiz and pick concerns — your shelf builds itself.', yourRoutine:'Your routine', sources:'Always patch-test new actives.' },
+    ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.' },
+    ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。' },
+  };
+  const t = (k) => (STR[lang] && STR[lang][k]) || STR.en[k] || k;
+
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  const toast = (msg) => {
+    let el = $('#kb-toast');
+    if (!el) { el = document.createElement('div'); el.id = 'kb-toast'; el.style.cssText = 'position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none'; document.body.appendChild(el); }
+    el.textContent = msg; el.style.opacity = '1';
+    clearTimeout(el._tm); el._tm = setTimeout(() => { el.style.opacity = '0'; }, 1800);
+  };
+
+  // ── State helpers ──────────────────────────────────────────────────────────
+  const getSkin = () => { try { return localStorage.getItem(SKIN_KEY) || ''; } catch { return ''; } };
+  const setSkin = (id) => { try { localStorage.setItem(SKIN_KEY, id); } catch {} };
+  const getConcerns = () => { try { return new Set(JSON.parse(localStorage.getItem(CONCERN_KEY) || '[]')); } catch { return new Set(); } };
+  const setConcerns = (s) => { try { localStorage.setItem(CONCERN_KEY, JSON.stringify([...s])); } catch {} };
+  const getFollows = () => { try { return new Set(JSON.parse(localStorage.getItem(FOLLOW_KEY) || '[]')); } catch { return new Set(); } };
+  const setFollows = (s) => { try { localStorage.setItem(FOLLOW_KEY, JSON.stringify([...s])); } catch {} };
+
+  // ── Seasonal forecast (zero-key) ────────────────────────────────────────────
+  function currentSeason() {
+    const m = new Date().getMonth() + 1; // northern hemisphere (Korea-centric)
+    if (m >= 3 && m <= 5) return 'spring';
+    if (m >= 6 && m <= 8) return 'summer';
+    if (m >= 9 && m <= 11) return 'autumn';
+    return 'winter';
+  }
+  function renderForecast() {
+    const box = $('#kb-forecast-strip'); if (!box) return;
+    const f = FORECAST[currentSeason()]; if (!f) { box.innerHTML = ''; return; }
+    box.innerHTML = `<div class="kb-forecast">
+      <div class="fc-emoji">${f.emoji || '🌤️'}</div>
+      <div>
+        <div class="fc-head">${esc(f.headline)}</div>
+        <ul class="fc-tips">${(f.tips || []).map(tp => `<li>${esc(tp)}</li>`).join('')}</ul>
+      </div>
+    </div>`;
+  }
+
+  // ── Skin-type quiz ──────────────────────────────────────────────────────────
+  const quizAnswers = {};
+  function renderQuiz() {
+    const box = $('#kb-quiz-box'); if (!box) return;
+    const skin = getSkin();
+    if (skin) { renderResult(skin); return; }
+    box.innerHTML = `<div class="kb-quiz">
+      ${QUIZ.map((q, qi) => `<div class="kb-q" data-q="${qi}">
+        <div class="kb-q-text">${qi + 1}. ${esc(q.q)}</div>
+        <div class="kb-opts">${q.options.map((o, oi) => `<button class="kb-opt" data-q="${qi}" data-o="${oi}">${esc(o.label)}</button>`).join('')}</div>
+      </div>`).join('')}
+      <button class="kb-quiz-cta" id="kb-quiz-submit" disabled>${esc(seeResultLabel())}</button>
+    </div>`;
+    $$('.kb-opt', box).forEach(b => b.addEventListener('click', () => {
+      const qi = +b.dataset.q;
+      $$(`.kb-opt[data-q="${qi}"]`, box).forEach(x => x.classList.remove('sel'));
+      b.classList.add('sel');
+      quizAnswers[qi] = +b.dataset.o;
+      const submit = $('#kb-quiz-submit'); if (submit) submit.disabled = Object.keys(quizAnswers).length < QUIZ.length;
+    }));
+    const submit = $('#kb-quiz-submit');
+    if (submit) submit.addEventListener('click', () => {
+      const scores = {};
+      QUIZ.forEach((q, qi) => {
+        const sc = q.options[quizAnswers[qi]] && q.options[quizAnswers[qi]].score || {};
+        for (const k in sc) scores[k] = (scores[k] || 0) + sc[k];
+      });
+      let best = 'combination', max = -1;
+      for (const k in scores) if (scores[k] > max) { max = scores[k]; best = k; }
+      setSkin(best); renderResult(best); refreshPersonalized();
+      try { document.getElementById('kb-quiz').scrollIntoView({ behavior:'smooth', block:'start' }); } catch {}
+    });
+  }
+  function seeResultLabel() { return lang === 'ko' ? '결과 보기' : lang === 'ja' ? '結果を見る' : 'See my result'; }
+  function renderResult(skinId) {
+    const box = $('#kb-quiz-box'); if (!box) return;
+    const st = SKINTYPES.find(s => s.id === skinId) || SKINTYPES[0]; if (!st) return;
+    box.innerHTML = `<div class="kb-result">
+      <div class="r-emoji">${st.emoji || '✨'}</div>
+      <div>
+        <div class="r-name">${t('result')}: ${esc(st.name)}</div>
+        <div class="r-desc">${esc(st.desc)}</div>
+      </div>
+      <button class="r-reset" id="kb-retake">↻ ${esc(t('retake'))}</button>
+    </div>`;
+    const rt = $('#kb-retake');
+    if (rt) rt.addEventListener('click', () => { try { localStorage.removeItem(SKIN_KEY); } catch {} for (const k in quizAnswers) delete quizAnswers[k]; renderQuiz(); refreshPersonalized(); });
+    showShareFab();
+  }
+
+  // ── Concern selector ────────────────────────────────────────────────────────
+  function renderConcerns() {
+    const grid = $('#kb-concern-grid'); if (!grid) return;
+    const sel = getConcerns();
+    grid.innerHTML = CONCERNS.map(c => `<button class="kb-concern${sel.has(c.id) ? ' sel' : ''}" data-c="${esc(c.id)}">
+      <div class="c-emoji">${c.emoji || '🎯'}</div>
+      <div class="c-name">${esc(c.name)}</div>
+      <div class="c-desc">${esc(c.desc)}</div>
+    </button>`).join('');
+    $$('.kb-concern', grid).forEach(b => b.addEventListener('click', () => {
+      const s = getConcerns(); const id = b.dataset.c;
+      if (s.has(id)) s.delete(id); else s.add(id);
+      setConcerns(s); b.classList.toggle('sel');
+      refreshPersonalized(); showShareFab();
+    }));
+  }
+
+  // ── Routine builder ─────────────────────────────────────────────────────────
+  let routineTime = 'am';
+  function renderRoutine() {
+    const box = $('#kb-routine-steps'); if (!box) return;
+    const steps = ROUTINE.filter(s => s.time === routineTime || s.time === 'both')
+      .slice().sort((a, b) => a.step - b.step);
+    box.innerHTML = steps.map((s, i) => `<div class="kb-step${s.optional ? ' is-opt' : ''}">
+      <div class="kb-step-no">${i + 1}</div>
+      <div class="kb-step-b">
+        <div class="kb-step-name"><span class="st-emoji">${s.emoji || ''}</span>${esc(s.name)}<span class="kb-step-freq">${esc(s.freq || '')}</span></div>
+        <div class="kb-step-desc">${esc(s.desc)}</div>
+        <div class="kb-step-lay">↳ ${esc(s.layering || '')}</div>
+        <button class="kb-step-shop" data-seed="${esc(stepSeed(s))}">🛍️ ${esc(t('shop'))}</button>
+      </div>
+    </div>`).join('');
+    $$('.kb-step-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+  function stepSeed(s) {
+    const seeds = SHOP.aliSeeds || {};
+    if (s.id === 'sunscreen') return seeds.suncare || seeds.general || 'korean sunscreen';
+    if (s.id === 'oilcleanse' || s.id === 'watercleanse') return seeds.cleanser || seeds.general || 'korean cleanser';
+    // bias by first concern if any
+    const c = [...getConcerns()][0];
+    if (c && seeds[c]) return seeds[c];
+    return seeds.general || 'korean skincare';
+  }
+
+  // ── Ingredient encyclopedia + decoder ───────────────────────────────────────
+  function renderIngredients() {
+    const grid = $('#kb-ing-grid'); if (!grid) return;
+    const concerns = getConcerns();
+    // sort: matches your concerns first, then stars
+    const list = INGREDIENTS.slice().sort((a, b) => {
+      const am = a.bestFor && a.bestFor.some(x => concerns.has(x)) ? 1 : 0;
+      const bm = b.bestFor && b.bestFor.some(x => concerns.has(x)) ? 1 : 0;
+      return (bm - am) || ((b.star ? 1 : 0) - (a.star ? 1 : 0));
+    });
+    grid.innerHTML = list.map(i => {
+      const match = i.bestFor && i.bestFor.some(x => concerns.has(x));
+      return `<div class="kb-ing" data-ing="${esc(i.id)}">
+        ${i.star ? '<span class="i-star">⭐</span>' : ''}
+        <div class="i-emoji">${i.emoji || '🧪'}</div>
+        <div class="i-name">${esc(i.name)}</div>
+        <div class="i-ko">${esc(i.korean || '')}</div>
+        ${match ? `<span class="i-tag">✓ ${esc((CONCERN_BY_ID[[...concerns].find(x => i.bestFor.includes(x))] || {}).name || '')}</span>` : ''}
+      </div>`;
+    }).join('');
+    $$('.kb-ing', grid).forEach(c => c.addEventListener('click', () => openIngredient(c.dataset.ing)));
+  }
+
+  function openIngredient(id) {
+    const i = ING_BY_ID[id]; if (!i) return;
+    const bg = $('#kb-modal-bg'), box = $('#kb-modal'); if (!bg || !box) return;
+    const conc = (i.bestFor || []).map(c => (CONCERN_BY_ID[c] || {}).name).filter(Boolean).join(' · ');
+    const pairs = (i.pairsWith || []).map(p => (ING_BY_ID[p] || {}).name).filter(Boolean).join(', ');
+    const avoid = (i.avoidWith || []).map(p => (ING_BY_ID[p] || {}).name).filter(Boolean).join(', ');
+    const pregTxt = i.preg === 'caution' ? t('pregCaution') : t('pregSafe');
+    box.innerHTML = `<button class="kb-modal-x" data-close aria-label="Close">✕</button>
+      <div style="text-align:center"><div class="km-emoji">${i.emoji || '🧪'}</div>
+        <div class="km-name">${esc(i.name)}</div><div class="km-ko">${esc(i.korean || '')}</div></div>
+      <div class="km-bio">${esc(i.explainer || '')}</div>
+      ${(i.benefits && i.benefits.length) ? `<div class="km-list">${i.benefits.map(b => '✔️ ' + esc(b)).join('<br>')}</div>` : ''}
+      <div class="km-facts">
+        ${conc ? `<span class="km-fact">🎯 ${esc(t('best'))}: ${esc(conc)}</span>` : ''}
+        <span class="km-fact">🕒 ${esc(t('time'))}: ${esc(i.time === 'am' ? t('am') : i.time === 'pm' ? t('pm') : t('both'))}</span>
+        <span class="km-fact">🤰 ${esc(t('preg'))}: ${esc(pregTxt)}</span>
+      </div>
+      ${pairs ? `<div class="km-list"><b>💚 ${esc(t('pairs'))}:</b> ${esc(pairs)}</div>` : ''}
+      ${avoid ? `<div class="km-list"><b>⚠️ ${esc(t('avoid'))}:</b> ${esc(avoid)}</div>` : ''}
+      <div class="km-links"><button class="km-link primary" data-seed="${esc((SHOP.aliSeeds || {}).general || 'korean skincare')} ${esc(i.name)}">🛍️ ${esc(t('shopFor'))} ${esc(i.name)}</button></div>`;
+    bg.classList.add('open'); document.body.style.overflow = 'hidden';
+    const shopBtn = box.querySelector('[data-seed]');
+    if (shopBtn) shopBtn.addEventListener('click', () => { loadShop(shopBtn.dataset.seed); closeModal(); jumpTo('#kb-shop'); });
+  }
+
+  // Ingredient-list decoder (client-side against bundled cosing JSON + heroes)
+  let COSING = null;
+  const SYNONYMS = { 'aqua':'water', 'water (aqua)':'water', 'vitamin c':'ascorbic acid', 'vitamin b3':'niacinamide', 'niacin':'niacinamide', 'snail mucin':'snail secretion filtrate', 'cica':'centella asiatica extract', 'centella':'centella asiatica extract', 'b5':'panthenol', 'pro-vitamin b5':'panthenol', 'ha':'hyaluronic acid', 'vitamin e':'tocopherol', 'green tea':'camellia sinensis leaf extract', 'pdrn':'polydeoxyribonucleotide' };
+  async function loadCosing() {
+    if (COSING) return COSING;
+    try {
+      const base = document.querySelector('base')?.href || '';
+      const r = await fetch(base + 'assets/cosing-ingredients.json');
+      const j = await r.json();
+      COSING = j.ingredients || j || {};
+    } catch { COSING = {}; }
+    return COSING;
+  }
+  function normToken(raw) {
+    return String(raw || '')
+      .toLowerCase()
+      .replace(/\([^)]*\)/g, ' ')      // drop parentheticals
+      .replace(/[\d.]+%/g, ' ')          // drop percentages
+      .replace(/[*•·\[\]{}"]/g, ' ')
+      .replace(/\b(and|extract powder)\b/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+  function lookupIngredient(map, tok) {
+    if (!tok) return null;
+    let key = SYNONYMS[tok] || tok;
+    if (map[key]) return { key, ...map[key] };
+    // substring: token contains a known key or vice-versa (longest match wins)
+    let best = null;
+    for (const k in map) {
+      if (k.length < 4) continue;
+      if (key.includes(k) || k.includes(key)) {
+        if (!best || k.length > best.length) best = k;
+      }
+    }
+    return best ? { key: best, ...map[best] } : null;
+  }
+  const FLAG_LABELS = {
+    fragrance: { cls:'warn', txt:'Fragrance' }, allergen: { cls:'warn', txt:'Allergen' },
+    'alcohol-drying': { cls:'warn', txt:'Drying alcohol' }, 'comedogenic-risk': { cls:'warn', txt:'May clog' },
+    'pregnancy-caution': { cls:'warn', txt:'Pregnancy caution' }, 'sun-sensitizing': { cls:'warn', txt:'Use SPF' },
+    'sensitive-skin-caution': { cls:'warn', txt:'Sensitive caution' }, 'animal-derived': { cls:'note', txt:'Animal-derived' },
+    'vegan-uncertain': { cls:'note', txt:'Not vegan?' }, hero: { cls:'good', txt:'★ Hero' },
+  };
+  async function runDecoder() {
+    const input = $('#kb-decoder-input'), out = $('#kb-decoded'); if (!input || !out) return;
+    out.innerHTML = `<div class="kb-loading"><div class="kb-spin"></div>${esc(t('loading'))}</div>`;
+    const map = await loadCosing();
+    const tokens = input.value.split(/[,\n;]+/).map(normToken).filter(Boolean);
+    if (!tokens.length) { out.innerHTML = `<div class="kb-empty">${esc(t('decNone'))}</div>`; return; }
+    let found = 0;
+    const rows = tokens.slice(0, 60).map(tok => {
+      const hit = lookupIngredient(map, tok);
+      if (!hit) return `<div class="kb-dec-row miss"><div class="kb-dec-name">${esc(tok)}</div></div>`;
+      found++;
+      const flags = (hit.flags || []).map(f => { const L = FLAG_LABELS[f]; return L ? `<span class="kb-flag ${L.cls}">${esc(L.txt)}</span>` : ''; }).join('');
+      return `<div class="kb-dec-row">
+        <div style="min-width:0;flex:1">
+          <div class="kb-dec-name">${esc(hit.name || tok)} <span class="kb-dec-fn">${esc(hit.fn || '')}</span></div>
+          <div class="kb-dec-desc">${esc(hit.desc || '')}</div>
+          ${flags ? `<div class="kb-dec-flags">${flags}</div>` : ''}
+        </div></div>`;
+    }).join('');
+    out.innerHTML = `<div class="kb-sec-sub" style="margin-bottom:4px">${found}/${tokens.length} ${esc(t('decFound'))} · ${esc(t('sources'))}</div>${rows}`;
+  }
+
+  // ── What-not-to-mix checker ─────────────────────────────────────────────────
+  const picked = new Set();
+  function conflictVerdict(a, b) {
+    const hit = CONFLICTS.find(c => (c.a === a && c.b === b) || (c.a === b && c.b === a));
+    return hit || { verdict:'safe', reason:'No known conflict — generally fine to use together.' };
+  }
+  function renderPicker() {
+    const bar = $('#kb-pick'); if (!bar) return;
+    bar.innerHTML = CHECKABLE.map(id => {
+      const ing = ING_BY_ID[id] || { name:id };
+      return `<button class="kb-pick-chip${picked.has(id) ? ' on' : ''}" data-pick="${esc(id)}">${esc(ing.emoji || '')} ${esc(ing.name || id)}</button>`;
+    }).join('');
+    $$('.kb-pick-chip', bar).forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.pick; if (picked.has(id)) picked.delete(id); else picked.add(id);
+      b.classList.toggle('on'); renderVerdicts();
+    }));
+  }
+  function renderVerdicts() {
+    const box = $('#kb-verdicts'); if (!box) return;
+    const ids = [...picked];
+    if (ids.length < 2) { box.innerHTML = `<div class="kb-empty">${esc(t('selectActives'))}</div>`; return; }
+    const out = [];
+    for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {
+      const v = conflictVerdict(ids[i], ids[j]);
+      if (v.verdict === 'safe' && !CONFLICTS.find(c => (c.a === ids[i] && c.b === ids[j]) || (c.a === ids[j] && c.b === ids[i]))) continue; // skip silent safes
+      out.push({ a: ids[i], b: ids[j], ...v });
+    }
+    const ic = { safe:'✅', caution:'⚠️', avoid:'⛔' };
+    if (!out.length) { box.innerHTML = `<div class="kb-verdict safe"><div class="v-ic">🎉</div><div><div class="v-reason">${esc(t('allSafe'))}</div></div></div>`; return; }
+    out.sort((p, q) => ({ avoid:0, caution:1, safe:2 })[p.verdict] - ({ avoid:0, caution:1, safe:2 })[q.verdict]);
+    box.innerHTML = out.map(v => `<div class="kb-verdict ${v.verdict}">
+      <div class="v-ic">${ic[v.verdict]}</div>
+      <div><div class="v-pair">${esc((ING_BY_ID[v.a] || {}).name || v.a)} + ${esc((ING_BY_ID[v.b] || {}).name || v.b)}</div>
+      <div class="v-reason">${esc(v.reason)}</div></div></div>`).join('');
+  }
+
+  // ── Brand directory ─────────────────────────────────────────────────────────
+  let brandTier = 'all';
+  function renderBrands() {
+    const grid = $('#kb-brand-grid'); if (!grid) return;
+    const follows = getFollows();
+    let list = BRANDS.slice();
+    if (brandTier !== 'all') list = list.filter(b => b.tier === brandTier);
+    list.sort((a, b) => (follows.has(b.id) - follows.has(a.id)));
+    grid.innerHTML = list.map(b => `<div class="kb-brand${follows.has(b.id) ? ' followed' : ''}" data-brand="${esc(b.id)}">
+      <button class="b-follow" data-follow="${esc(b.id)}" aria-label="Follow ${esc(b.name)}">${follows.has(b.id) ? '★' : '☆'}</button>
+      <div class="b-emoji">${b.emoji || '🏷️'}</div>
+      <div class="b-name">${esc(b.name)}</div>
+      <div class="b-ko">${esc(b.korean || '')}</div>
+      <div class="b-known">${esc(b.knownFor || '')}</div>
+      <span class="b-tier">${esc(b.tier)}</span>
+    </div>`).join('');
+    $$('.b-follow', grid).forEach(b => b.addEventListener('click', (ev) => { ev.stopPropagation(); toggleFollow(b.dataset.follow); }));
+    $$('.kb-brand', grid).forEach(c => c.addEventListener('click', () => openBrand(c.dataset.brand)));
+  }
+  function toggleFollow(id) {
+    const f = getFollows();
+    if (f.has(id)) { f.delete(id); toast(t('unfollowToast')); } else { f.add(id); toast(t('followToast')); }
+    setFollows(f); renderBrands();
+  }
+  function openBrand(id) {
+    const b = BRANDS.find(x => x.id === id); if (!b) return;
+    const bg = $('#kb-modal-bg'), box = $('#kb-modal'); if (!bg || !box) return;
+    const tags = [];
+    if (b.vegan) tags.push(`🌱 ${t('vegan')}`);
+    if (b.men) tags.push(`🧔 ${t('mens')}`);
+    box.innerHTML = `<button class="kb-modal-x" data-close aria-label="Close">✕</button>
+      <div style="text-align:center"><div class="km-emoji">${b.emoji || '🏷️'}</div>
+        <div class="km-name">${esc(b.name)}</div><div class="km-ko">${esc(b.korean || '')}</div></div>
+      <div class="km-facts">
+        <span class="km-fact">${esc(t('tier'))}: ${esc(b.tier)}</span>
+        ${tags.map(x => `<span class="km-fact">${esc(x)}</span>`).join('')}
+      </div>
+      <div class="km-list"><b>${esc(t('known'))}:</b> ${esc(b.knownFor || '')}</div>
+      ${(b.hero && b.hero.length) ? `<div class="km-list"><b>⭐</b> ${esc(b.hero.join(' · '))}</div>` : ''}
+      <div class="km-bio" id="kb-brand-bio">${b.wikidataId ? `<span style="opacity:.6">${esc(t('bioSoon'))}</span>` : ''}</div>
+      <div class="km-links"><button class="km-link primary" data-seed="${esc(b.name)} korean skincare">🛍️ ${esc(t('shopFor'))} ${esc(b.name)}</button></div>`;
+    bg.classList.add('open'); document.body.style.overflow = 'hidden';
+    const shopBtn = box.querySelector('[data-seed]');
+    if (shopBtn) shopBtn.addEventListener('click', () => { loadShop(shopBtn.dataset.seed); closeModal(); jumpTo('#kb-shop'); });
+    if (b.wikidataId && API && API.getKbeautyBio) {
+      API.getKbeautyBio(b.wikidataId, lang).then(d => {
+        if (!d || !d.bio) { const el = $('#kb-brand-bio'); if (el) el.innerHTML = ''; return; }
+        const el = $('#kb-brand-bio'); if (!el) return;
+        el.innerHTML = esc(d.bio) + (d.wikipediaUrl ? ` <a href="${esc(d.wikipediaUrl)}" target="_blank" rel="noopener">↗</a>` : '');
+      }).catch(() => { const el = $('#kb-brand-bio'); if (el) el.innerHTML = ''; });
+    }
+  }
+
+  // ── Glossary ────────────────────────────────────────────────────────────────
+  function renderGlossary() {
+    const box = $('#kb-gloss'); if (!box) return;
+    box.innerHTML = GLOSSARY.map(g => `<details>
+      <summary>${esc(g.term)}<span class="g-ko">${esc(g.korean || '')}</span></summary>
+      <p>${esc(g.def)}</p>
+    </details>`).join('');
+  }
+
+  // ── Shop (live AliExpress grid; degrades to retailers) ──────────────────────
+  let lastSeed = '';
+  function renderRetailers() {
+    const box = $('#kb-retailers'); if (!box) return;
+    box.innerHTML = (SHOP.retailers || []).map(r => {
+      const href = r.url ? ` href="${esc(r.url)}" target="_blank" rel="sponsored noopener"` : '';
+      const tag = r.url ? 'a' : 'div';
+      return `<${tag} class="kb-retailer"${href}>
+        <div class="rt-name">${esc(r.emoji || '')} ${esc(r.name)}</div>
+        <div class="rt-note">${esc(r.note || '')}</div>
+        ${r.url ? `<span class="rt-cta">${esc(r.cta || 'Shop')} →</span>` : ''}
+      </${tag}>`;
+    }).join('');
+  }
+  async function loadShop(seed) {
+    const grid = $('#kb-shop-grid'); if (!grid) return;
+    seed = seed || (SHOP.aliSeeds || {}).general || 'korean skincare';
+    if (seed === lastSeed && grid.dataset.loaded === '1') return;
+    lastSeed = seed;
+    grid.innerHTML = `<div class="kb-loading" style="grid-column:1/-1"><div class="kb-spin"></div>${esc(t('loading'))}</div>`;
+    if (!API || !API.getKbeautyProducts) { grid.innerHTML = `<div class="kb-empty" style="grid-column:1/-1">${esc(t('shopEmpty'))}</div>`; return; }
+    try {
+      const items = await API.getKbeautyProducts(seed, lang);
+      if (!Array.isArray(items) || !items.length) throw new Error('empty');
+      grid.dataset.loaded = '1';
+      grid.innerHTML = items.slice(0, 12).map(p => `<a class="kb-prod" href="${esc(p.url || '#')}" target="_blank" rel="sponsored noopener">
+        ${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">` : ''}
+        <div class="p-body"><div class="p-title">${esc(p.title || '')}</div>
+        ${p.price ? `<div class="p-price">${esc(t('priceFrom'))} ${esc(p.price)}</div>` : ''}</div>
+      </a>`).join('');
+    } catch {
+      grid.innerHTML = `<div class="kb-empty" style="grid-column:1/-1">${esc(t('shopEmpty'))}</div>`;
+    }
+  }
+
+  // ── Build-your-shelf funnel ─────────────────────────────────────────────────
+  function renderShelf() {
+    const box = $('#kb-shelf-list'); if (!box) return;
+    const skin = getSkin(); const concerns = [...getConcerns()];
+    if (!skin && !concerns.length) { box.innerHTML = `<div class="kb-shelf-item">${esc(t('shelfEmpty'))}</div>`; return; }
+    const essentials = ROUTINE.filter(s => !s.optional).sort((a, b) => a.step - b.step);
+    const items = essentials.map(s => `<div class="kb-shelf-item">${s.emoji || '•'} ${esc(s.name)}</div>`);
+    box.innerHTML = items.join('');
+    // seed the shop CTA by primary concern
+    const cta = $('#kb-shelf-cta');
+    if (cta) cta.addEventListener('click', () => { const c = concerns[0]; loadShop((SHOP.aliSeeds || {})[c] || (SHOP.aliSeeds || {}).general); }, { once:true });
+  }
+
+  // ── Share fab ───────────────────────────────────────────────────────────────
+  function showShareFab() {
+    const fab = $('#kb-share-fab'); if (!fab) return;
+    if (getSkin() || getConcerns().size) fab.hidden = false;
+  }
+
+  // ── Modal / filters / personalization ───────────────────────────────────────
+  function closeModal() { const bg = $('#kb-modal-bg'); if (bg) bg.classList.remove('open'); document.body.style.overflow = ''; }
+  function jumpTo(sel) { try { document.querySelector(sel).scrollIntoView({ behavior:'smooth', block:'start' }); } catch {} }
+  function refreshPersonalized() { renderIngredients(); renderRoutine(); renderShelf(); }
+
+  function renderTicker() {
+    const wrap = $('#kb-ticker-wrap'), rail = $('#kb-ticker'); if (!rail) return;
+    const items = TRENDS.map(tr => ({ kind: tr.emoji || '✨', text: tr.title, val: '' }));
+    if (!items.length) return;
+    const html = items.map(it => `<span class="tk-item"><span class="tk-kind">${it.kind}</span>${esc(it.text)}</span>`).join('');
+    rail.innerHTML = html + html;
+    if (wrap) wrap.hidden = false;
+  }
+
+  function wireFilters() {
+    const bar = $('#kb-filters'); if (!bar) return;
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-shop':['kb-shop','kb-shelf'] };
+    $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
+      $$('.filter-chip', bar).forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const tg = chip.dataset.target;
+      const show = tg === 'all' ? null : (map[tg] || [tg]);
+      $$('.kb-sec').forEach(sec => { sec.style.display = (!show || show.includes(sec.id)) ? '' : 'none'; });
+      const shelf = $('#kb-shelf'); if (shelf) shelf.style.display = (!show || show.includes('kb-shop')) ? '' : 'none';
+    }));
+  }
+
+  // ── Boot ───────────────────────────────────────────────────────────────────
+  function boot() {
+    renderForecast();
+    renderQuiz();
+    renderConcerns();
+    renderRoutine();
+    renderIngredients();
+    renderPicker(); renderVerdicts();
+    renderBrands();
+    renderGlossary();
+    renderRetailers();
+    renderShelf();
+    renderTicker();
+    wireFilters();
+    showShareFab();
+
+    // routine tabs
+    $$('#kb-routine-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {
+      $$('#kb-routine-tabs .kb-tab').forEach(x => x.classList.remove('active'));
+      tab.classList.add('active'); routineTime = tab.dataset.time; renderRoutine();
+    }));
+    // brand tier tabs
+    $$('#kb-brand-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {
+      $$('#kb-brand-tabs .kb-tab').forEach(x => x.classList.remove('active'));
+      tab.classList.add('active'); brandTier = tab.dataset.tier; renderBrands();
+    }));
+    // decoder
+    const decBtn = $('#kb-decoder-btn'); if (decBtn) decBtn.addEventListener('click', runDecoder);
+    // share
+    const fab = $('#kb-share-fab');
+    if (fab) fab.addEventListener('click', () => {
+      if (!window.KbeautyShareCard) return;
+      const st = SKINTYPES.find(s => s.id === getSkin()) || {};
+      const concerns = [...getConcerns()].map(c => (CONCERN_BY_ID[c] || {}).name).filter(Boolean);
+      window.KbeautyShareCard.generate({ skinType: st.name || '', skinEmoji: st.emoji || '💄', concerns, steps: ROUTINE.filter(s => !s.optional).length });
+    });
+    // modal close
+    const bg = $('#kb-modal-bg');
+    if (bg) {
+      bg.addEventListener('click', (e) => { if (e.target === bg || e.target.hasAttribute('data-close')) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    }
+    // lazy-load the shop grid when it scrolls into view (saves a worker call on load)
+    const shopSec = $('#kb-shop');
+    if (shopSec && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((ents) => { ents.forEach(e => { if (e.isIntersecting) { loadShop(stepSeed({ id:'' })); io.disconnect(); } }); }, { rootMargin:'200px' });
+      io.observe(shopSec);
+    }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();

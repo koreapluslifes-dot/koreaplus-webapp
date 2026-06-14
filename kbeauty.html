@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-Beauty Guide: Korean Skincare Routine, Ingredients & Brands | KoreaPlus</title>
+  <meta name="description" content="The world's K-beauty hub — take the skin-type quiz, build your AM/PM Korean skincare routine, decode any ingredient list, check what not to mix, explore brands by tier and shop authentic K-beauty. Dermatologist-informed, in 9 languages.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/kbeauty.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="icon" type="image/svg+xml" href="icons/kplus.svg">
+  <link rel="apple-touch-icon" href="icons/kplus.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="K-Beauty Guide — Korean Skincare Routine, Ingredients & Brands">
+  <meta property="og:description" content="Skin-type quiz, AM/PM routine builder, ingredient decoder, what-not-to-mix checker, brand directory & authentic shopping. Your complete K-beauty hub, in your language.">
+  <meta property="og:url" content="https://koreaplus-lifes.com/guide/kbeauty.html">
+  <meta property="og:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css?v=5">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="seo.css">
+  <script src="modules/header.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Beauty Guide — Korean Skincare Routine, Ingredients & Brands","url":"https://koreaplus-lifes.com/guide/kbeauty.html","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-beauty (Korean skincare & cosmetics)"},"description":"Korean skincare routine builder, ingredient decoder, brand directory and shopping guide."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"What is the Korean skincare routine order?","acceptedAnswer":{"@type":"Answer","text":"The classic K-beauty order is: oil cleanser (PM), water cleanser, exfoliant (1–3×/week PM), hydrating toner, essence, serum/ampoule, sheet mask (optional), eye cream, moisturizer, and sunscreen in the morning. Apply thinnest to thickest."}},
+    {"@type":"Question","name":"What ingredients should you not mix in skincare?","acceptedAnswer":{"@type":"Answer","text":"Generally avoid layering retinol with AHAs/BHAs the same night, and use vitamin C in the morning and retinol at night. Niacinamide and vitamin C together is a debunked myth — they pair well. Use our What-Not-To-Mix checker for any combination."}},
+    {"@type":"Question","name":"Why is Korean sunscreen so popular?","acceptedAnswer":{"@type":"Answer","text":"Korean sunscreens are famous for elegant, lightweight textures with no white cast and high UVA protection (PA++++), making daily SPF 50+ comfortable to wear."}}
+  ]}
+  </script>
+  <style>
+    /* ── K-Beauty hub components (CSS vars from theme.css) ──────────────────── */
+    :root { --kb1:#e84a8a; --kb2:#c77dff; --kb-soft:rgba(232,74,138,.10); }
+
+    .kb-ticker-wrap { position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--border); overflow:hidden; }
+    .kb-ticker { display:flex; gap:28px; white-space:nowrap; padding:9px 16px; will-change:transform; animation:kb-marquee 46s linear infinite; }
+    .kb-ticker:hover { animation-play-state:paused; }
+    @keyframes kb-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .tk-item { display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; color:var(--text2); }
+    .tk-item .tk-kind { font-size:13px; }
+    .tk-item .tk-val  { color:var(--kb1); font-weight:800; }
+    @media (prefers-reduced-motion:reduce){ .kb-ticker{ animation:none; overflow-x:auto } }
+
+    .filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 22px; align-items:center; }
+    .filter-chip { padding:6px 15px; border-radius:20px; font-size:13px; font-weight:700; cursor:pointer; border:2px solid var(--border); background:var(--surface); color:var(--text2); transition:all .15s; }
+    .filter-chip:hover { border-color:var(--border2); color:var(--text); }
+    .filter-chip.active { border-color:var(--kb1); color:var(--kb1); background:var(--kb-soft); }
+
+    .kb-sec { margin:34px 0; scroll-margin-top:64px; }
+    .kb-sec-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+    .kb-sec-title { font-size:19px; font-weight:900; color:var(--text); }
+    .kb-sec-sub { font-size:12.5px; color:var(--text3); }
+
+    /* Forecast strip */
+    .kb-forecast { display:flex; gap:14px; align-items:flex-start; background:linear-gradient(135deg,var(--kb-soft),rgba(199,125,255,.08)); border:1px solid var(--border); border-radius:16px; padding:16px 18px; }
+    .kb-forecast .fc-emoji { font-size:34px; line-height:1; }
+    .kb-forecast .fc-head { font-size:15px; font-weight:900; color:var(--text); }
+    .kb-forecast .fc-tips { margin:8px 0 0; padding:0; list-style:none; display:grid; gap:5px; }
+    .kb-forecast .fc-tips li { font-size:12.5px; color:var(--text2); padding-left:18px; position:relative; }
+    .kb-forecast .fc-tips li::before { content:'•'; color:var(--kb1); position:absolute; left:4px; font-weight:900; }
+
+    /* Quiz */
+    .kb-quiz { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:20px; }
+    .kb-q { margin-bottom:16px; }
+    .kb-q-text { font-size:14px; font-weight:800; color:var(--text); margin-bottom:9px; }
+    .kb-opts { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; }
+    .kb-opt { text-align:left; padding:10px 13px; border-radius:11px; border:2px solid var(--border); background:var(--bg); color:var(--text2); font-size:12.5px; font-weight:600; cursor:pointer; transition:all .15s; }
+    .kb-opt:hover { border-color:var(--border2); }
+    .kb-opt.sel { border-color:var(--kb1); color:var(--kb1); background:var(--kb-soft); }
+    .kb-quiz-cta { margin-top:6px; font-size:14px; font-weight:800; padding:11px 18px; border-radius:12px; border:none; cursor:pointer; color:#fff; background:linear-gradient(135deg,var(--kb1),var(--kb2)); }
+    .kb-quiz-cta[disabled] { opacity:.45; cursor:not-allowed; }
+    .kb-result { display:flex; align-items:center; gap:14px; background:var(--bg); border:1px dashed var(--kb1); border-radius:13px; padding:14px 16px; margin-top:6px; }
+    .kb-result .r-emoji { font-size:36px; }
+    .kb-result .r-name { font-size:17px; font-weight:900; color:var(--text); }
+    .kb-result .r-desc { font-size:12.5px; color:var(--text2); margin-top:2px; }
+    .kb-result .r-reset { margin-left:auto; font-size:11px; font-weight:700; color:var(--text3); background:none; border:1px solid var(--border); border-radius:18px; padding:5px 11px; cursor:pointer; }
+
+    /* Concern chips */
+    .kb-concern-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+    .kb-concern { text-align:left; background:var(--surface); border:2px solid var(--border); border-radius:13px; padding:13px; cursor:pointer; transition:all .15s; }
+    .kb-concern:hover { border-color:var(--border2); transform:translateY(-1px); }
+    .kb-concern.sel { border-color:var(--kb1); background:var(--kb-soft); }
+    .kb-concern .c-emoji { font-size:22px; }
+    .kb-concern .c-name { font-size:13.5px; font-weight:800; color:var(--text); margin-top:5px; }
+    .kb-concern .c-desc { font-size:11px; color:var(--text3); margin-top:3px; line-height:1.4; }
+
+    /* Routine builder */
+    .kb-tabs { display:inline-flex; gap:4px; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:4px; margin-bottom:14px; }
+    .kb-tab { padding:7px 18px; border-radius:9px; border:none; background:none; color:var(--text2); font-size:13px; font-weight:800; cursor:pointer; }
+    .kb-tab.active { background:linear-gradient(135deg,var(--kb1),var(--kb2)); color:#fff; }
+    .kb-steps { display:grid; gap:10px; }
+    .kb-step { display:flex; gap:13px; background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:13px 15px; position:relative; }
+    .kb-step.is-opt { border-style:dashed; }
+    .kb-step-no { width:30px; height:30px; flex-shrink:0; border-radius:50%; background:linear-gradient(135deg,var(--kb1),var(--kb2)); color:#fff; font-weight:900; font-size:13px; display:flex; align-items:center; justify-content:center; }
+    .kb-step-b { min-width:0; flex:1; }
+    .kb-step-name { font-size:14px; font-weight:800; color:var(--text); }
+    .kb-step-name .st-emoji { margin-right:5px; }
+    .kb-step-freq { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; color:var(--kb1); margin-left:7px; }
+    .kb-step-desc { font-size:12px; color:var(--text2); margin-top:3px; line-height:1.5; }
+    .kb-step-lay { font-size:11px; color:var(--text3); margin-top:4px; }
+    .kb-step-shop { margin-top:8px; font-size:11.5px; font-weight:700; color:var(--kb1); background:var(--kb-soft); border:1px solid var(--border); border-radius:9px; padding:6px 11px; cursor:pointer; display:inline-flex; gap:5px; align-items:center; }
+
+    /* Ingredient grid */
+    .kb-ing-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; }
+    .kb-ing { background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:13px 11px; text-align:center; cursor:pointer; transition:all .15s; position:relative; }
+    .kb-ing:hover { border-color:var(--kb1); transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.14); }
+    .kb-ing .i-emoji { font-size:26px; }
+    .kb-ing .i-name { font-size:12.5px; font-weight:800; color:var(--text); margin-top:6px; line-height:1.25; }
+    .kb-ing .i-ko { font-size:10px; color:var(--text3); }
+    .kb-ing .i-star { position:absolute; top:8px; right:9px; font-size:11px; }
+    .kb-ing .i-tag { display:inline-block; margin-top:6px; font-size:9.5px; font-weight:700; color:var(--kb2); background:rgba(199,125,255,.12); border-radius:14px; padding:2px 8px; }
+
+    /* Decoder */
+    .kb-tool { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px; margin-top:14px; }
+    .kb-tool-h { font-size:14px; font-weight:800; color:var(--text); margin-bottom:5px; }
+    .kb-tool-sub { font-size:12px; color:var(--text3); margin-bottom:10px; }
+    .kb-tool textarea { width:100%; min-height:74px; resize:vertical; border:1px solid var(--border); border-radius:11px; background:var(--bg); color:var(--text); padding:11px; font-size:12.5px; font-family:inherit; }
+    .kb-tool-btn { margin-top:9px; font-size:13px; font-weight:800; padding:9px 16px; border-radius:11px; border:none; color:#fff; background:linear-gradient(135deg,var(--kb1),var(--kb2)); cursor:pointer; }
+    .kb-decoded { margin-top:12px; display:grid; gap:7px; }
+    .kb-dec-row { display:flex; gap:10px; align-items:flex-start; background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:9px 11px; }
+    .kb-dec-row.miss { opacity:.6; }
+    .kb-dec-name { font-size:12.5px; font-weight:800; color:var(--text); min-width:0; }
+    .kb-dec-fn { font-size:10px; font-weight:700; color:var(--kb2); text-transform:uppercase; letter-spacing:.02em; }
+    .kb-dec-desc { font-size:11.5px; color:var(--text2); margin-top:2px; line-height:1.45; }
+    .kb-dec-flags { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px; }
+    .kb-flag { font-size:9px; font-weight:800; text-transform:uppercase; padding:2px 7px; border-radius:12px; }
+    .kb-flag.warn { background:rgba(234,74,74,.14); color:#ff6b6b; }
+    .kb-flag.note { background:rgba(232,74,138,.12); color:var(--kb1); }
+    .kb-flag.good { background:rgba(34,197,94,.14); color:#22c55e; }
+
+    /* Conflict checker */
+    .kb-pick { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:12px; }
+    .kb-pick-chip { padding:6px 13px; border-radius:18px; font-size:12px; font-weight:700; cursor:pointer; border:2px solid var(--border); background:var(--surface); color:var(--text2); }
+    .kb-pick-chip.on { border-color:var(--kb1); color:var(--kb1); background:var(--kb-soft); }
+    .kb-verdicts { display:grid; gap:8px; }
+    .kb-verdict { display:flex; gap:11px; align-items:flex-start; border:1px solid var(--border); border-radius:11px; padding:11px 13px; background:var(--surface); }
+    .kb-verdict .v-ic { font-size:18px; }
+    .kb-verdict .v-pair { font-size:13px; font-weight:800; color:var(--text); }
+    .kb-verdict .v-reason { font-size:11.5px; color:var(--text2); margin-top:2px; line-height:1.45; }
+    .kb-verdict.safe   { border-color:rgba(34,197,94,.4); }
+    .kb-verdict.caution{ border-color:rgba(245,158,11,.45); }
+    .kb-verdict.avoid  { border-color:rgba(234,74,74,.5); }
+
+    /* Brands */
+    .kb-brand-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:11px; }
+    .kb-brand { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px 13px; text-align:center; cursor:pointer; transition:all .15s; position:relative; }
+    .kb-brand:hover { border-color:var(--border2); transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,.16); }
+    .kb-brand .b-emoji { font-size:28px; }
+    .kb-brand .b-name { font-size:13.5px; font-weight:900; color:var(--text); margin-top:7px; }
+    .kb-brand .b-ko { font-size:10.5px; color:var(--text3); }
+    .kb-brand .b-known { font-size:10.5px; color:var(--text2); margin-top:5px; line-height:1.4; }
+    .kb-brand .b-tier { display:inline-block; margin-top:7px; font-size:9px; font-weight:800; text-transform:uppercase; border-radius:14px; padding:2px 9px; background:rgba(199,125,255,.12); color:var(--kb2); }
+    .kb-brand .b-follow { position:absolute; top:9px; right:9px; font-size:15px; background:none; border:none; cursor:pointer; opacity:.4; }
+    .kb-brand.followed .b-follow { opacity:1; }
+
+    /* Glossary */
+    .kb-gloss { display:grid; gap:8px; }
+    .kb-gloss details { background:var(--surface); border:1px solid var(--border); border-radius:11px; padding:11px 14px; }
+    .kb-gloss summary { font-size:13.5px; font-weight:800; color:var(--text); cursor:pointer; list-style:none; }
+    .kb-gloss summary::-webkit-details-marker { display:none; }
+    .kb-gloss summary .g-ko { font-size:11px; color:var(--text3); font-weight:600; margin-left:7px; }
+    .kb-gloss p { font-size:12.5px; color:var(--text2); line-height:1.55; margin:8px 0 0; }
+
+    /* Shop grid (live AliExpress; seller-listing photos allowed) */
+    .kb-shop-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:11px; }
+    .kb-prod { display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border); border-radius:13px; overflow:hidden; text-decoration:none; transition:all .15s; }
+    .kb-prod:hover { border-color:var(--kb1); transform:translateY(-2px); }
+    .kb-prod img { width:100%; aspect-ratio:1/1; object-fit:cover; background:var(--bg); }
+    .kb-prod .p-body { padding:9px 10px; }
+    .kb-prod .p-title { font-size:11.5px; font-weight:700; color:var(--text); line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .kb-prod .p-price { font-size:13px; font-weight:900; color:var(--kb1); margin-top:5px; }
+    .kb-retailers { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin-top:14px; }
+    .kb-retailer { display:block; background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:13px 14px; text-decoration:none; transition:all .15s; }
+    .kb-retailer:hover { border-color:var(--kb1); transform:translateY(-1px); }
+    .kb-retailer .rt-name { font-size:14px; font-weight:800; color:var(--text); }
+    .kb-retailer .rt-note { font-size:11px; color:var(--text3); margin-top:3px; line-height:1.4; }
+    .kb-retailer .rt-cta { display:inline-block; margin-top:8px; font-size:11px; font-weight:800; color:var(--kb1); }
+
+    /* Shelf funnel */
+    .funnel { background:linear-gradient(135deg,var(--kb-soft),rgba(199,125,255,.08)); border:1px solid var(--border); border-radius:16px; padding:20px; margin:30px 0; }
+    .kb-shelf-list { display:grid; gap:7px; margin:12px 0; }
+    .kb-shelf-item { display:flex; gap:9px; align-items:center; font-size:12.5px; color:var(--text2); background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:8px 12px; }
+    .kb-shelf-cta { display:inline-flex; gap:7px; align-items:center; font-size:14px; font-weight:800; padding:11px 20px; border-radius:12px; border:none; color:#fff; background:linear-gradient(135deg,var(--kb1),var(--kb2)); cursor:pointer; text-decoration:none; }
+    .funnel-disc { font-size:10px; color:var(--text3); margin-top:12px; }
+
+    /* States, modal, share button */
+    .kb-empty, .kb-loading { padding:24px; text-align:center; color:var(--text3); font-size:13px; background:var(--surface); border:1px dashed var(--border); border-radius:13px; }
+    .kb-spin { width:22px; height:22px; border:3px solid var(--border); border-top-color:var(--kb1); border-radius:50%; animation:kbspin .8s linear infinite; margin:0 auto 10px; }
+    @keyframes kbspin { to{ transform:rotate(360deg) } }
+    .kb-modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:200; display:none; align-items:center; justify-content:center; padding:18px; }
+    .kb-modal-bg.open { display:flex; }
+    .kb-modal { background:var(--surface); border:1px solid var(--border); border-radius:18px; max-width:480px; width:100%; max-height:88vh; overflow:auto; padding:22px; position:relative; }
+    .kb-modal-x { position:absolute; top:12px; right:12px; width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:var(--bg); color:var(--text2); font-size:16px; cursor:pointer; }
+    .km-emoji { font-size:42px; } .km-name { font-size:22px; font-weight:900; color:var(--text); margin-top:4px; } .km-ko { font-size:13px; color:var(--text3); }
+    .km-facts { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0; }
+    .km-fact { font-size:11px; color:var(--text2); background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:5px 10px; }
+    .km-bio { font-size:13px; color:var(--text2); line-height:1.6; margin:12px 0; } .km-bio a { color:var(--kb1); }
+    .km-list { font-size:12.5px; color:var(--text2); line-height:1.7; margin:8px 0; }
+    .km-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .km-link { font-size:12px; font-weight:700; text-decoration:none; padding:8px 13px; border-radius:10px; border:1px solid var(--border); color:var(--text); background:var(--bg); cursor:pointer; }
+    .km-link.primary { background:linear-gradient(135deg,var(--kb1),var(--kb2)); color:#fff; border-color:transparent; }
+    .kb-share-fab { position:fixed; right:18px; bottom:20px; z-index:120; font-size:13px; font-weight:800; padding:12px 18px; border-radius:30px; border:none; color:#fff; background:linear-gradient(135deg,var(--kb1),var(--kb2)); box-shadow:0 8px 24px rgba(232,74,138,.4); cursor:pointer; }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+  <div class="kp-pnav">
+    <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
+    <div class="kp-pnav-items">
+      <a class="kp-pnav-link" href="index.html#categories-section" data-i18n="nav.explore">Explore</a>
+      <div class="kp-pnav-drop">
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.guides">Guides</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <div class="kp-pnav-menu" role="menu">
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.discover">Discover</div>
+            <a role="menuitem" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
+            <a role="menuitem" href="seasons.html" data-i18n="nav.seasons">🌸 Seasons</a>
+            <a role="menuitem" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
+            <a role="menuitem" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
+            <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
+            <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
+            <a role="menuitem" href="kpop.html" data-i18n="nav.kpop">🎤 K-Pop</a>
+            <a role="menuitem" href="kbeauty.html" data-i18n="nav.kbeauty" aria-current="page">💄 K-Beauty</a>
+          </div>
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
+            <a role="menuitem" href="phrases.html" data-i18n="nav.phrases">🗣️ Phrases</a>
+            <a role="menuitem" href="currency.html" data-i18n="nav.currency">💱 Currency</a>
+            <a role="menuitem" href="subway.html" data-i18n="nav.subway">🚇 Subway</a>
+            <a role="menuitem" href="menu-translator.html" data-i18n="nav.menu">📷 Menu</a>
+            <a role="menuitem" href="etiquette.html" data-i18n="nav.etiquette">🎎 Etiquette</a>
+            <a role="menuitem" href="emergency.html" data-i18n="nav.emergency">🆘 Emergency</a>
+          </div>
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.more">More</div>
+            <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
+            <a role="menuitem" href="blog/index.html" data-i18n="nav.blog">📰 Blog</a>
+          </div>
+        </div>
+      </div>
+      <div class="kp-pnav-drop">
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.whereto">Where to Go</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <div class="kp-pnav-menu" role="menu">
+          <div class="kp-pnav-group" role="group">
+            <a role="menuitem" href="guide/things-to-do-in-seoul.html" data-i18n="nav.city.seoul">📍 Seoul</a>
+            <a role="menuitem" href="guide/things-to-do-in-busan.html" data-i18n="nav.city.busan">📍 Busan</a>
+            <a role="menuitem" href="guide/things-to-do-in-jeju.html" data-i18n="nav.city.jeju">📍 Jeju</a>
+            <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
+            <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
+            <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
+            <a role="menuitem" class="kp-pnav-all" href="explore.html" data-i18n="nav.alldest">🗺️ All destinations</a>
+          </div>
+        </div>
+      </div>
+      <a class="kp-pnav-cta" href="plan.html" data-i18n="nav.plan">🗺️ Plan Trip</a>
+    </div>
+  </div>
+</div>
+</nav>
+
+<!-- Trends ticker — populated by modules/kbeauty.js -->
+<div class="kb-ticker-wrap" id="kb-ticker-wrap" hidden>
+  <div class="kb-ticker" id="kb-ticker"></div>
+</div>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag">💄 <span data-i18n="kbeauty.hero.tag">Skincare · Ingredients · Brands · Shopping</span></div>
+  <h1 data-i18n="kbeauty.hero.title">💄 K-Beauty, Decoded</h1>
+  <p data-i18n="kbeauty.hero.sub">Find your skin type, build your Korean routine, decode any ingredient, and shop authentic — everything K-beauty, in your language.</p>
+</div>
+
+<main class="hub-content" style="max-width:1100px">
+
+  <div class="filter-bar" id="kb-filters">
+    <button class="filter-chip active" data-target="all" data-i18n="kbeauty.filter.all">✨ All</button>
+    <button class="filter-chip" data-target="kb-quiz" data-i18n="kbeauty.filter.quiz">🪞 My Skin</button>
+    <button class="filter-chip" data-target="kb-routine" data-i18n="kbeauty.filter.routine">🧴 Routine</button>
+    <button class="filter-chip" data-target="kb-ingredients" data-i18n="kbeauty.filter.ingredients">🧪 Ingredients</button>
+    <button class="filter-chip" data-target="kb-brands" data-i18n="kbeauty.filter.brands">🏷️ Brands</button>
+    <button class="filter-chip" data-target="kb-shop" data-i18n="kbeauty.filter.shop">🛍️ Shop</button>
+  </div>
+
+  <!-- Seasonal skin forecast (zero-key static; live UV is a future upgrade) -->
+  <section class="kb-sec" id="kb-forecast">
+    <div id="kb-forecast-strip"></div>
+  </section>
+
+  <!-- Skin-type quiz -->
+  <section class="kb-sec" id="kb-quiz">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.quiz.title">🪞 What's your skin type?</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.quiz.sub">A 30-second quiz personalizes everything below</div>
+    </div>
+    <div id="kb-quiz-box"></div>
+  </section>
+
+  <!-- Concern selector -->
+  <section class="kb-sec" id="kb-concerns">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.concerns.title">🎯 What do you want to work on?</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.concerns.sub">Pick your concerns — we'll tailor ingredients & products</div>
+    </div>
+    <div id="kb-concern-grid" class="kb-concern-grid"></div>
+  </section>
+
+  <!-- Routine builder -->
+  <section class="kb-sec" id="kb-routine">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.routine.title">🧴 Your Korean routine</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.routine.sub">The canonical steps — thinnest to thickest</div>
+    </div>
+    <div class="kb-tabs" id="kb-routine-tabs">
+      <button class="kb-tab active" data-time="am" data-i18n="kbeauty.routine.am">☀️ Morning</button>
+      <button class="kb-tab" data-time="pm" data-i18n="kbeauty.routine.pm">🌙 Night</button>
+    </div>
+    <div id="kb-routine-steps" class="kb-steps"></div>
+  </section>
+
+  <!-- Ingredient encyclopedia + decoder -->
+  <section class="kb-sec" id="kb-ingredients">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.ingredients.title">🧪 Ingredient encyclopedia</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.ingredients.sub">Tap any hero ingredient — or decode a full label below</div>
+    </div>
+    <div id="kb-ing-grid" class="kb-ing-grid"></div>
+    <div class="kb-tool">
+      <div class="kb-tool-h" data-i18n="kbeauty.decoder.title">🔍 Ingredient list decoder</div>
+      <div class="kb-tool-sub" data-i18n="kbeauty.decoder.sub">Paste a product's ingredient list (INCI) and we'll explain each one in plain language.</div>
+      <textarea id="kb-decoder-input" data-i18n-placeholder="kbeauty.decoder.ph" placeholder="e.g. Water, Glycerin, Niacinamide, Snail Secretion Filtrate, Centella Asiatica Extract, Butylene Glycol…"></textarea>
+      <button class="kb-tool-btn" id="kb-decoder-btn" data-i18n="kbeauty.decoder.btn">Decode ingredients</button>
+      <div id="kb-decoded" class="kb-decoded"></div>
+    </div>
+  </section>
+
+  <!-- What not to mix -->
+  <section class="kb-sec" id="kb-conflicts">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.conflicts.title">⚗️ What NOT to mix</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.conflicts.sub">Select the actives you use — we'll flag risky combos</div>
+    </div>
+    <div id="kb-pick" class="kb-pick"></div>
+    <div id="kb-verdicts" class="kb-verdicts"></div>
+  </section>
+
+  <!-- Brand directory -->
+  <section class="kb-sec" id="kb-brands">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.brands.title">🏷️ Brands by tier</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.brands.sub">From Olive Young value to hanbang luxury</div>
+    </div>
+    <div class="kb-tabs" id="kb-brand-tabs">
+      <button class="kb-tab active" data-tier="all" data-i18n="kbeauty.brands.all">All</button>
+      <button class="kb-tab" data-tier="drugstore" data-i18n="kbeauty.brands.drugstore">💸 Value</button>
+      <button class="kb-tab" data-tier="mid" data-i18n="kbeauty.brands.mid">⭐ Derma</button>
+      <button class="kb-tab" data-tier="luxury" data-i18n="kbeauty.brands.luxury">👑 Luxury</button>
+    </div>
+    <div id="kb-brand-grid" class="kb-brand-grid"></div>
+  </section>
+
+  <!-- Glossary -->
+  <section class="kb-sec" id="kb-glossary">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.glossary.title">📖 K-beauty glossary</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.glossary.sub">Essence vs serum, glass skin, slugging & more</div>
+    </div>
+    <div id="kb-gloss" class="kb-gloss"></div>
+  </section>
+
+  <!-- Shop (live AliExpress grid + curated retailers) -->
+  <section class="kb-sec" id="kb-shop">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.shop.title">🛍️ Shop authentic K-beauty</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.shop.sub">Localized picks · official brand stores</div>
+    </div>
+    <div id="kb-shop-grid" class="kb-shop-grid"></div>
+    <div id="kb-retailers" class="kb-retailers"></div>
+    <div class="funnel-disc" id="kb-shop-disc" data-i18n="kbeauty.shop.disc">Some links are affiliate links — they help keep KoreaPlus free, at no extra cost to you. We only suggest authentic K-beauty retailers.</div>
+  </section>
+
+  <!-- Build your shelf funnel -->
+  <section class="funnel" id="kb-shelf">
+    <div class="kb-sec-title" data-i18n="kbeauty.shelf.title">🧺 Build your shelf</div>
+    <div class="kb-sec-sub" data-i18n="kbeauty.shelf.sub">Your routine, ready to shop in one place.</div>
+    <div id="kb-shelf-list" class="kb-shelf-list"></div>
+    <a class="kb-shelf-cta" id="kb-shelf-cta" href="#kb-shop">🛒 <span data-i18n="kbeauty.shelf.cta">Shop your routine</span></a>
+    <div class="funnel-disc" data-i18n="kbeauty.shop.disc">Some links are affiliate links — they help keep KoreaPlus free, at no extra cost to you. We only suggest authentic K-beauty retailers.</div>
+  </section>
+
+  <!-- Keep exploring -->
+  <section class="hub-explore">
+    <h2 class="hub-explore-title" data-i18n="kbeauty.explore.title">Keep Exploring K-Culture</h2>
+    <div class="hub-explore-grid">
+      <a class="hub-explore-card" href="guide/k-beauty-guide.html"><span class="ic">💄</span><span>K-Beauty Shopping<span class="sub">Where to buy in Korea</span></span></a>
+      <a class="hub-explore-card" href="guide/best-shopping-in-korea.html"><span class="ic">🛍️</span><span>Best Shopping<span class="sub">Myeongdong & more</span></span></a>
+      <a class="hub-explore-card" href="kpop.html"><span class="ic">🎤</span><span>K-Pop Now<span class="sub">Charts & comebacks</span></span></a>
+      <a class="hub-explore-card" href="culture.html"><span class="ic">🏛️</span><span>Korean Culture<span class="sub">Traditions & today</span></span></a>
+      <a class="hub-explore-card" href="menu-translator.html"><span class="ic">📷</span><span>Menu Translator<span class="sub">Scan & translate</span></span></a>
+      <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub">Free personalized itinerary</span></span></a>
+    </div>
+  </section>
+
+  <!-- AdSense — single responsive unit -->
+  <div style="margin:36px auto 12px;max-width:880px;min-height:250px;display:flex;align-items:center;justify-content:center;padding:0 16px">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle" style="display:block;width:100%"
+         data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"
+         data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+</main>
+
+<!-- Detail modal (ingredient / brand) -->
+<div class="kb-modal-bg" id="kb-modal-bg" role="dialog" aria-modal="true" aria-label="Details">
+  <div class="kb-modal" id="kb-modal"></div>
+</div>
+
+<!-- Share routine / skin type -->
+<button class="kb-share-fab" id="kb-share-fab" hidden>📤 <span data-i18n="kbeauty.share">Share my skin</span></button>
+
+<script src="config.js" onerror="void 0"></script>
+<script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
+<script src="kbeauty-data.js"></script>
+<script src="modules/api-client.js"></script>
+<script src="modules/kbeauty-sharecard.js"></script>
+<script src="modules/kbeauty.js"></script>
+</body>
+</html>

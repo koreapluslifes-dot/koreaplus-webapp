@@ -47,6 +47,13 @@
       "description": "Korea festivals & events calendar",
       "url": "/guide/festivals.html",
       "icons": [{ "src": "icons/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "K-Beauty Hub",
+      "short_name": "K-Beauty",
+      "description": "Korean skincare routine, ingredient decoder & brands",
+      "url": "/guide/kbeauty.html",
+      "icons": [{ "src": "icons/icon.svg", "sizes": "any" }]
     }
   ],
   "related_applications": [],

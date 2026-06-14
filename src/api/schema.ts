@@ -20,7 +20,9 @@ export type PlaceCategory =
 export type DataSource =
   | 'tourapi' | 'kopis' | 'culture_go' | 'seoul' | 'manual'
   // K-Pop vertical sources
-  | 'spotify' | 'youtube' | 'itunes' | 'newsdata' | 'wikidata' | 'ticketmaster' | 'lastfm' | 'kpop';
+  | 'spotify' | 'youtube' | 'itunes' | 'newsdata' | 'wikidata' | 'ticketmaster' | 'lastfm' | 'kpop'
+  // K-Beauty vertical sources
+  | 'aliexpress' | 'kbeauty';
 
 /** Normalized place entity — used across TourAPI, KOPIS, culture.go.kr */
 export interface Place {
@@ -268,6 +270,17 @@ export interface KpopConcert {
   url?: string;                // ticket / affiliate deep link
   image?: string;
   source: DataSource;
+}
+
+// ── K-Beauty vertical ──────────────────────────────────────────────────────────
+
+/** A shoppable product (AliExpress affiliate — pre-tracked promotion link). */
+export interface BeautyProduct {
+  title: string;
+  image?: string;       // seller-listing image (AliExpress CDN) — not a brand press photo
+  price?: string;       // formatted, e.g. "$12.30"
+  currency?: string;
+  url: string;          // tracked promotion_link
 }
 
 // ── API Response Envelope ────────────────────────────────────────────────────

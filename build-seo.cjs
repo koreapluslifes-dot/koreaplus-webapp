@@ -485,6 +485,7 @@ const PRIMARY_NAV = `
             <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
             <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
             <a role="menuitem" href="kpop.html" data-i18n="nav.kpop">🎤 K-Pop</a>
+            <a role="menuitem" href="kbeauty.html" data-i18n="nav.kbeauty">💄 K-Beauty</a>
           </div>
           <div class="kp-pnav-group" role="group">
             <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
@@ -1474,14 +1475,14 @@ fs.writeFileSync(path.join(OUT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 // ── Sitemap ─────────────────────────────────────────────────────────
 const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html', 'temples.html', 'nightviews.html',
   'emergency.html', 'phrases.html', 'currency.html', 'etiquette.html', 'seasons.html', 'kdrama-locations.html',
-  'kpop.html',
+  'kpop.html', 'kbeauty.html',
   'menu-translator.html', 'subway.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
 const urlEntry = (loc, pri, freq) => `  <url>\n    <loc>${ORIGIN}${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
 let sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 sm += urlEntry(BASEP, '1.0', 'daily');
 LANGS.forEach(l => sm += `\n` + urlEntry(`${BASEP}?lang=${l}`, '0.8', 'weekly'));
-STATIC.slice(1).forEach(p => sm += `\n` + urlEntry(BASEP + p, p === 'kpop.html' ? '0.9' : '0.8', p === 'kpop.html' ? 'daily' : 'weekly'));
+STATIC.slice(1).forEach(p => { const hot = (p === 'kpop.html' || p === 'kbeauty.html'); sm += `\n` + urlEntry(BASEP + p, hot ? '0.9' : '0.8', hot ? 'daily' : 'weekly'); });
 [...out.categories, ...out.cities, out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.blog.forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.neighborhoods.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
@@ -1506,6 +1507,10 @@ let llms = `# KoreaPlus — Korea Travel Guide
 - [Explore all guides](${ORIGIN}${BASEP}explore.html)
 - [Free AI Itinerary Planner](${ORIGIN}${BASEP}plan.html)
 - [Visa & K-ETA Guide](${ORIGIN}${BASEP}guide/korea-visa-k-eta-guide.html)
+
+## Featured Hubs
+- [K-Beauty Hub — skin-type quiz, Korean skincare routine builder, ingredient decoder & brands](${ORIGIN}${BASEP}kbeauty.html)
+- [K-Pop Hub — real-time charts, comebacks & idol profiles](${ORIGIN}${BASEP}kpop.html)
 
 ## Itineraries
 ${[...out.itineraries].map(u => `- [${u.split('/').pop().replace('.html','').replace(/-/g,' ')}](${ORIGIN}${u})`).join('\n')}

@@ -38,6 +38,8 @@ import { SpotifyClient } from './api/spotify.ts';
 import { YoutubeClient } from './api/youtube.ts';
 import { NewsdataClient } from './api/newsdata.ts';
 import { TicketmasterClient } from './api/ticketmaster.ts';
+// K-Beauty vertical client
+import { AliExpressClient } from './api/aliexpress.ts';
 import { withCache } from './cache.ts';
 import type { ApiResponse, TickerItem, KpopArtist, DataSource } from './api/schema.ts';
 import type { WorkerEnv } from './worker.ts';
@@ -450,6 +452,53 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
     }
   }
 
+  // ════════════════════════════════════════════════════════════════════════
+  // K-BEAUTY VERTICAL  (/api/kbeauty/*)
+  // bio = zero-key (Wikidata). products = AliExpress affiliate (server-side
+  // HMAC); returns [] when ALI_APP_* secrets are absent, so the frontend shows
+  // its curated retailer strip instead of erroring — same graceful pattern.
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── GET /api/kbeauty/products ──────────────────────────────────────────────
+  // AliExpress affiliate grid, geo-localized. ?q=korean+skincare&lang=ko
+  if (request.method === 'GET' && path.endsWith('/api/kbeauty/products')) {
+    const q = qp(url, 'q') || 'korean skincare';
+    const lang = qp(url, 'lang', 'en');
+    const country = (((request as unknown) as { cf?: { country?: string } }).cf?.country) || '';
+    if (!env.ALI_APP_KEY || !env.ALI_APP_SECRET) {
+      // No creds → empty grid (frontend falls back to curated retailers).
+      return jsonResponse({ data: [], cached: false, source: 'aliexpress' });
+    }
+    const client = new AliExpressClient(env.ALI_APP_KEY, env.ALI_APP_SECRET);
+    try {
+      const { data, cached, cacheAgeSeconds } = await withCache(
+        env, `kbeauty:products:${lang}:${country || 'XX'}:${q.toLowerCase()}`, 43200,
+        () => client.searchProducts(q, lang, country),
+      );
+      return jsonResponse({ data, cached, cacheAgeSeconds, source: 'aliexpress' });
+    } catch (e) {
+      return errorResponse(`Products fetch failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── GET /api/kbeauty/bio ───────────────────────────────────────────────────
+  // Brand bio via Wikidata + Wikipedia (NO key). ?qid=Q..&lang=ko
+  if (request.method === 'GET' && path.endsWith('/api/kbeauty/bio')) {
+    const qid = qp(url, 'qid');
+    const lang = qp(url, 'lang', 'en');
+    if (!qid) return errorResponse('qid required', 400);
+    const client = new WikidataClient();
+    try {
+      const { data, cached } = await withCache(
+        env, `kbeauty:bio:${qid}:${lang}`, 86400,
+        () => client.getBio(qid, lang),
+      );
+      return jsonResponse({ data, cached, source: 'wikidata' });
+    } catch (e) {
+      return errorResponse(`Bio fetch failed: ${(e as Error).message}`);
+    }
+  }
+
   // ── GET /api/health ───────────────────────────────────────────────────────
   if (request.method === 'GET' && path.endsWith('/api/health')) {
     const services: Record<string, boolean> = {
@@ -472,8 +521,13 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
       newsdata:     !!env.NEWSDATA_API_KEY,
       ticketmaster: !!env.TICKETMASTER_API_KEY,
     };
+    // K-Beauty sources: wikidata needs no key (always live); aliexpress is optional.
+    const kbeauty: Record<string, boolean> = {
+      wikidata:   true,
+      aliexpress: !!(env.ALI_APP_KEY && env.ALI_APP_SECRET),
+    };
     return jsonResponse(
-      { data: { services, kpop, allConfigured }, cached: false, source: 'worker' },
+      { data: { services, kpop, kbeauty, allConfigured }, cached: false, source: 'worker' },
       allConfigured ? 200 : 206,
     );
   }

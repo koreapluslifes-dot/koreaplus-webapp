@@ -46,6 +46,11 @@ export interface WorkerEnv extends CacheEnv, LLMEnv {
   NEWSDATA_API_KEY?:      string;   // real-time 근황/news feed
   TICKETMASTER_API_KEY?:  string;   // global concert/tour dates
   LASTFM_API_KEY?:        string;   // (P2) supplementary popularity signal
+  // ── K-Beauty vertical (optional) ──────────────────────────────────────────
+  // Wikidata bio needs NO key. AliExpress affiliate grid lights up when these
+  // are set (reuse app_key 536770 from the sibling apps; tracking_id 'koreaplus').
+  ALI_APP_KEY?:           string;   // AliExpress Portals app key
+  ALI_APP_SECRET?:        string;   // AliExpress Portals app secret (HMAC signing)
 }
 
 const CORS = {

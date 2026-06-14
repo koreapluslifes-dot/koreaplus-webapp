@@ -106,6 +106,15 @@
     getAff: (city, cat, q = '') =>
       kpFetch(`/api/aff?city=${encodeURIComponent(city)}&cat=${cat}&q=${encodeURIComponent(q)}`, 60 * 60_000),
 
+    // ── K-Beauty vertical ─────────────────────────────────────────────────────
+    // Live AliExpress product grid (server-side HMAC-signed; seller-listing
+    // photos allowed). Returns [] gracefully when ALI_APP_SECRET is unset.
+    getKbeautyProducts: (q = 'korean skincare', lang = '') =>
+      kpFetch(`/api/kbeauty/products?q=${encodeURIComponent(q)}${lang ? `&lang=${lang}` : ''}`, 12 * 3600_000), // 12 hr
+    // Zero-key 9-language brand bio via Wikidata.
+    getKbeautyBio: (qid, lang = 'en') =>
+      kpFetch(`/api/kbeauty/bio?qid=${encodeURIComponent(qid)}&lang=${lang}`, 24 * 3600_000),
+
     todayKST,
     futureDateKST,
 
