@@ -20,6 +20,7 @@
   const TRENDS      = window.KBEAUTY_TRENDS       || [];
   const FORECAST    = window.KBEAUTY_FORECAST     || {};
   const SHOP        = window.KBEAUTY_SHOP         || { aliSeeds:{}, retailers:[] };
+  const MENS        = window.KBEAUTY_MENS         || null;
   const API = window.KPApi || null;
 
   const ING_BY_ID = Object.fromEntries(INGREDIENTS.map(i => [i.id, i]));
@@ -144,6 +145,22 @@
   let routineTime = 'am';
   function renderRoutine() {
     const box = $('#kb-routine-steps'); if (!box) return;
+    // Men's simplified preset (an under-served, fast-growing K-beauty segment)
+    if (routineTime === 'mens' && MENS) {
+      box.innerHTML = `<div class="kb-step" style="border-style:dashed">
+          <div class="kb-step-no">${MENS.emoji || '🧔'}</div>
+          <div class="kb-step-b"><div class="kb-step-name">${esc(MENS.title || '')}</div>
+          <div class="kb-step-desc">${esc(MENS.desc || '')}</div></div>
+        </div>` + (MENS.steps || []).map((s, i) => `<div class="kb-step">
+          <div class="kb-step-no">${i + 1}</div>
+          <div class="kb-step-b">
+            <div class="kb-step-name"><span class="st-emoji">${s.emoji || ''}</span>${esc(s.name)}</div>
+            <div class="kb-step-desc">${esc(s.note || '')}</div>
+            <button class="kb-step-shop" data-seed="${esc((SHOP.aliSeeds || {}).general || 'korean skincare')} men">🛍️ ${esc(t('shop'))}</button>
+          </div></div>`).join('');
+      $$('.kb-step-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+      return;
+    }
     const steps = ROUTINE.filter(s => s.time === routineTime || s.time === 'both')
       .slice().sort((a, b) => a.step - b.step);
     box.innerHTML = steps.map((s, i) => `<div class="kb-step${s.optional ? ' is-opt' : ''}">

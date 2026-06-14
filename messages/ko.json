@@ -429,5 +429,12 @@
   "kbeauty.shelf.sub": "내 루틴을 한 곳에서 바로 쇼핑하세요.",
   "kbeauty.shelf.cta": "내 루틴 쇼핑하기",
   "kbeauty.explore.title": "K-컬처 더 둘러보기",
-  "kbeauty.share": "내 피부 공유"
+  "kbeauty.share": "내 피부 공유",
+  "kpop.hero.stat.artists": "아티스트",
+  "kpop.hero.stat.langs": "개 언어",
+  "kpop.hero.stat.next": "다음 컴백",
+  "kpop.ticker.label": "K-pop 실시간: 컴백 예정 및 라이브 차트",
+  "kpop.sec.concerts.title": "🎫 예정된 콘서트",
+  "kpop.sec.concerts.sub": "내 주변 월드투어 일정",
+  "kbeauty.routine.mens": "🧔 남성"
 }
