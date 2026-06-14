@@ -69,7 +69,11 @@ const L: Record<string, { hotels: (c: string) => string; deals: (c: string) => s
   id: { hotels: c => `🛏️ Hotel di ${c}`,  deals: c => `🏨 Penawaran ${c}`,   from: 'mulai' },
 };
 
-interface Offer { brand: string; icon: string; label: string; url: string; price?: string; img?: string }
+interface Offer {
+  brand: string; icon: string; label: string; url: string;
+  price?: string; img?: string;
+  name?: string; was?: string; discount?: number; star?: number; review?: number;
+}
 
 function deepOffers(city: string, lang: string): Offer[] {
   const t = L[lang] || L.en;
@@ -92,8 +96,9 @@ function isoPlus(days: number): string {
 }
 
 interface AgodaResult {
-  hotelName?: string; dailyRate?: number; currency?: string; starRating?: number;
-  reviewScore?: number; landingURL?: string; imageURL?: string;
+  hotelName?: string; dailyRate?: number; crossedOutRate?: number; discountPercentage?: number;
+  currency?: string; starRating?: number; reviewScore?: number; reviewCount?: number;
+  landingURL?: string; imageURL?: string;
 }
 
 async function liveCards(env: WorkerEnv, city: string, lang: string): Promise<Offer[] | null> {
@@ -141,13 +146,18 @@ async function liveCards(env: WorkerEnv, city: string, lang: string): Promise<Of
 
     const t = L[lang] || L.en;
     const offers: Offer[] = data.results.slice(0, 4).map(r => {
-      const price = (r.dailyRate != null) ? `${t.from} $${Math.round(r.dailyRate)}` : '';
-      const star = r.reviewScore ? ` · ⭐${r.reviewScore}` : '';
+      const name = (r.hotelName || 'Hotel').slice(0, 48);
       return {
         brand: 'Agoda', icon: '🏨',
-        label: `${(r.hotelName || 'Hotel').slice(0, 42)}${star}`,
+        label: name,                                   // back-compat
+        name,
         url: r.landingURL || deepLink(city, lang),
-        price, img: r.imageURL || '',
+        img: r.imageURL || '',
+        price: (r.dailyRate != null) ? `${t.from} $${Math.round(r.dailyRate)}` : '',
+        was: (r.crossedOutRate != null && r.crossedOutRate > (r.dailyRate || 0)) ? `$${Math.round(r.crossedOutRate)}` : '',
+        discount: (r.discountPercentage && r.discountPercentage >= 5) ? Math.round(r.discountPercentage) : 0,
+        star: r.starRating || 0,
+        review: r.reviewScore || 0,
       };
     });
     if (env.CACHE_KV) await env.CACHE_KV.put(cacheKey, JSON.stringify(offers), { expirationTtl: 6 * 3600 }).catch(() => {});

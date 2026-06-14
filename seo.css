@@ -122,3 +122,17 @@
 /* Keyless Google map embed on place pages */
 .seo-map-frame { height: 280px; border-radius: 14px; overflow: hidden; margin: 4px 0 14px; border: 1px solid var(--border, rgba(255,255,255,.1)); background: var(--surface, rgba(255,255,255,.03)); }
 .seo-map-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* ── Live Agoda hotel cards (dynamic, from Long Tail API via /api/aff) ── */
+.seo-aff .aff-grid.aff-grid-rich { grid-template-columns: repeat(2, 1fr); }
+.aff-rich { display: flex; flex-direction: column; padding: 0 !important; overflow: hidden; }
+.aff-rich-img { width: 100%; height: 124px; object-fit: cover; background: var(--bg3, #0d1628); display: block; }
+.aff-rich-body { padding: 9px 12px 11px; display: flex; flex-direction: column; gap: 3px; }
+.aff-rich-name { font-size: 13px; font-weight: 700; color: var(--text, #fff); line-height: 1.25; }
+.aff-rich-meta { font-size: 11px; color: var(--text2, #9aa7b8); }
+.aff-rich-price { font-size: 13px; color: var(--text, #fff); }
+.aff-rich-price s { color: var(--text3, #888); font-size: 11px; margin-right: 2px; }
+.aff-rich-price b { color: #ff6b81; }
+.aff-rich-price em { color: #34d399; font-style: normal; font-weight: 800; font-size: 11px; }
+.aff-rich-brand { font-size: 10px; color: var(--text3, #888); margin-top: 1px; }
+@media (max-width: 420px) { .seo-aff .aff-grid.aff-grid-rich { grid-template-columns: 1fr; } }

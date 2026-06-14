@@ -562,7 +562,7 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="seo.css">
 <script src="modules/header.js"></script>
-<script defer src="modules/affiliate.js?v=2"></script>
+<script defer src="modules/affiliate.js?v=3"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
 ${schemas.map(jsonld).join('\n')}
 </head>

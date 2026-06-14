@@ -31,8 +31,30 @@
     } catch (e) { /* analytics is best-effort */ }
   }
 
+  function richCard(o) {
+    var rev = o.review ? '⭐ ' + o.review : '';
+    var stars = o.star ? '★'.repeat(Math.max(0, Math.min(5, Math.round(o.star)))) : '';
+    var meta = [rev, stars].filter(Boolean).join(' · ');
+    var price = '';
+    if (o.price) {
+      price = (o.was ? '<s>' + esc(o.was) + '</s> ' : '') + '<b>' + esc(o.price) + '</b>' +
+        (o.discount ? ' <em>-' + o.discount + '%</em>' : '');
+    }
+    return '<a class="aff-rich" href="' + esc(o.url) + '" target="_blank" rel="sponsored noopener" data-aff-brand="' + esc(o.brand) + '">' +
+      (o.img ? '<img class="aff-rich-img" src="' + esc(o.img) + '" alt="" loading="lazy">' : '') +
+      '<span class="aff-rich-body">' +
+        '<span class="aff-rich-name">' + esc(o.name || o.label) + '</span>' +
+        (meta ? '<span class="aff-rich-meta">' + meta + '</span>' : '') +
+        (price ? '<span class="aff-rich-price">' + price + '</span>' : '') +
+        '<span class="aff-rich-brand">🏨 Agoda</span>' +
+      '</span></a>';
+  }
+
   function renderGrid(grid, offers, ctx, placement) {
+    var rich = offers.some(function (o) { return o.img; });
+    grid.classList.toggle('aff-grid-rich', rich);
     grid.innerHTML = offers.map(function (o) {
+      if (o.img) return richCard(o);
       var sub = o.price ? esc(o.price) + ' · ' + esc(o.brand) : esc(o.brand);
       return '<a href="' + esc(o.url) + '" target="_blank" rel="sponsored noopener" data-aff-brand="' + esc(o.brand) + '">' +
         '<strong>' + (o.icon || '🏨') + ' ' + esc(o.label) + '</strong><span>' + sub + '</span></a>';
