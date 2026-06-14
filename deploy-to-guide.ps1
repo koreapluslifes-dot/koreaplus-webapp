@@ -30,7 +30,7 @@ $ROOT_FILES = @(
     "emergency.html", "phrases.html", "currency.html", "etiquette.html",
     "seasons.html", "kdrama-locations.html", "menu-translator.html", "subway.html",
     # K-Pop vertical
-    "kpop.html", "kpop-data.js", "seo.css",
+    "kpop.html", "kpop.css", "kpop-data.js", "seo.css",
     # K-Beauty vertical
     "kbeauty.html", "kbeauty-data.js"
 )
@@ -62,7 +62,17 @@ $MODULE_FILES = @(
 
 # Static data assets (bundled JSON, etc.) served under /guide/assets/
 $ASSET_FILES = @(
-    "assets/cosing-ingredients.json"
+    "assets/cosing-ingredients.json",
+    # K-Beauty per-language content overlays (localized data tier)
+    "assets/kbeauty-content.en.json",
+    "assets/kbeauty-content.ko.json",
+    "assets/kbeauty-content.ja.json",
+    "assets/kbeauty-content.zh.json",
+    "assets/kbeauty-content.es.json",
+    "assets/kbeauty-content.fr.json",
+    "assets/kbeauty-content.de.json",
+    "assets/kbeauty-content.pt.json",
+    "assets/kbeauty-content.id.json"
 )
 
 $MESSAGE_FILES = @(

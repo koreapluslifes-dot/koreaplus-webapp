@@ -8,27 +8,67 @@
   const $  = (s, r = document) => (r || document).querySelector(s);
   const $$ = (s, r = document) => Array.prototype.slice.call((r || document).querySelectorAll(s));
 
-  const SKINTYPES   = window.KBEAUTY_SKINTYPES   || [];
-  const QUIZ        = window.KBEAUTY_QUIZ         || [];
-  const CONCERNS    = window.KBEAUTY_CONCERNS     || [];
-  const ROUTINE     = window.KBEAUTY_ROUTINE      || [];
-  const INGREDIENTS = window.KBEAUTY_INGREDIENTS  || [];
-  const CHECKABLE   = window.KBEAUTY_CHECKABLE    || [];
-  const CONFLICTS   = window.KBEAUTY_CONFLICTS    || [];
-  const BRANDS      = window.KBEAUTY_BRANDS       || [];
-  const GLOSSARY    = window.KBEAUTY_GLOSSARY     || [];
-  const TRENDS      = window.KBEAUTY_TRENDS       || [];
-  const FORECAST    = window.KBEAUTY_FORECAST     || {};
-  const SHOP        = window.KBEAUTY_SHOP         || { aliSeeds:{}, retailers:[] };
-  const MENS        = window.KBEAUTY_MENS         || null;
+  // Data tier (English source of truth). These become `let` because the content
+  // is localized in place at boot from the per-language overlay (see localizeData).
+  let SKINTYPES   = window.KBEAUTY_SKINTYPES   || [];
+  let QUIZ        = window.KBEAUTY_QUIZ         || [];
+  let CONCERNS    = window.KBEAUTY_CONCERNS     || [];
+  let ROUTINE     = window.KBEAUTY_ROUTINE      || [];
+  let INGREDIENTS = window.KBEAUTY_INGREDIENTS  || [];
+  const CHECKABLE = window.KBEAUTY_CHECKABLE    || [];
+  let CONFLICTS   = window.KBEAUTY_CONFLICTS    || [];
+  let BRANDS      = window.KBEAUTY_BRANDS       || [];
+  let GLOSSARY    = window.KBEAUTY_GLOSSARY     || [];
+  let TRENDS      = window.KBEAUTY_TRENDS       || [];
+  let FORECAST    = window.KBEAUTY_FORECAST     || {};
+  let SHOP        = window.KBEAUTY_SHOP         || { aliSeeds:{}, retailers:[] };
+  let MENS        = window.KBEAUTY_MENS         || null;
   const API = window.KPApi || null;
 
-  const ING_BY_ID = Object.fromEntries(INGREDIENTS.map(i => [i.id, i]));
-  const CONCERN_BY_ID = Object.fromEntries(CONCERNS.map(c => [c.id, c]));
+  let ING_BY_ID = Object.fromEntries(INGREDIENTS.map(i => [i.id, i]));
+  let CONCERN_BY_ID = Object.fromEntries(CONCERNS.map(c => [c.id, c]));
+
+  // ── Per-language CONTENT overlay ────────────────────────────────────────────
+  // chrome (buttons/titles) is localized via data-i18n; the DATA content
+  // (ingredient explainers, routine steps, concerns, glossary…) is localized
+  // here from assets/kbeauty-content.<lang>.json (English fallback per key).
+  let CONTENT = {};
+  async function loadContent() {
+    if (lang === 'en') return;
+    try {
+      const base = document.querySelector('base')?.href || '';
+      const r = await fetch(base + 'assets/kbeauty-content.' + lang + '.json', { cache: 'force-cache' });
+      if (r.ok) CONTENT = await r.json() || {};
+    } catch { /* keep English */ }
+  }
+  const cx = (key, fallback) => (CONTENT && CONTENT[key]) || fallback;
+  function localizeData() {
+    if (!CONTENT || !Object.keys(CONTENT).length) return; // en or load failed → English
+    SKINTYPES   = SKINTYPES.map(s => ({ ...s, name: cx(`skin.${s.id}.name`, s.name), desc: cx(`skin.${s.id}.desc`, s.desc) }));
+    CONCERNS    = CONCERNS.map(c => ({ ...c, name: cx(`concern.${c.id}.name`, c.name), desc: cx(`concern.${c.id}.desc`, c.desc), tip: cx(`concern.${c.id}.tip`, c.tip), avoid: cx(`concern.${c.id}.avoid`, c.avoid) }));
+    ROUTINE     = ROUTINE.map(s => ({ ...s, name: cx(`routine.${s.id}.name`, s.name), desc: cx(`routine.${s.id}.desc`, s.desc), layering: cx(`routine.${s.id}.layering`, s.layering), freq: cx(`routine.${s.id}.freq`, s.freq) }));
+    INGREDIENTS = INGREDIENTS.map(i => ({ ...i, name: cx(`ing.${i.id}.name`, i.name), explainer: cx(`ing.${i.id}.explainer`, i.explainer), benefits: (i.benefits || []).map((b, n) => cx(`ing.${i.id}.benefit.${n}`, b)) }));
+    GLOSSARY    = GLOSSARY.map((g, i) => ({ ...g, term: cx(`gloss.${i}.term`, g.term), def: cx(`gloss.${i}.def`, g.def) }));
+    TRENDS      = TRENDS.map(t2 => ({ ...t2, title: cx(`trend.${t2.id}.title`, t2.title), blurb: cx(`trend.${t2.id}.blurb`, t2.blurb) }));
+    BRANDS      = BRANDS.map(b => ({ ...b, knownFor: cx(`brand.${b.id}.knownFor`, b.knownFor) }));
+    QUIZ        = QUIZ.map(q => ({ ...q, q: cx(`quiz.${q.id}.q`, q.q), options: q.options.map((o, n) => ({ ...o, label: cx(`quiz.${q.id}.opt.${n}`, o.label) })) }));
+    CONFLICTS   = CONFLICTS.map((c, i) => ({ ...c, reason: cx(`conflict.${i}.reason`, c.reason) }));
+    if (MENS) MENS = { ...MENS, title: cx('mens.title', MENS.title), desc: cx('mens.desc', MENS.desc), steps: (MENS.steps || []).map((s, n) => ({ ...s, name: cx(`mens.step.${n}.name`, s.name), note: cx(`mens.step.${n}.note`, s.note) })) };
+    FORECAST    = Object.fromEntries(Object.entries(FORECAST).map(([k, f]) => [k, { ...f, headline: cx(`forecast.${k}.headline`, f.headline), tips: (f.tips || []).map((tp, n) => cx(`forecast.${k}.tip.${n}`, tp)) }]));
+    if (SHOP && SHOP.retailers) SHOP = { ...SHOP, disclosure: cx('shop.disclosure', SHOP.disclosure), retailers: SHOP.retailers.map(r => ({ ...r, note: cx(`shop.retailer.${r.id}.note`, r.note), cta: cx(`shop.retailer.${r.id}.cta`, r.cta) })) };
+    ING_BY_ID = Object.fromEntries(INGREDIENTS.map(i => [i.id, i]));
+    CONCERN_BY_ID = Object.fromEntries(CONCERNS.map(c => [c.id, c]));
+  }
 
   const SKIN_KEY = 'kp_kbeauty_skin', CONCERN_KEY = 'kp_kbeauty_concerns', FOLLOW_KEY = 'kp_kbeauty_follow';
 
-  const lang = (localStorage.getItem('kp_lang') || (navigator.language || 'en').slice(0, 2) || 'en').toLowerCase();
+  // Language resolution mirrors modules/i18n.js detect(): URL ?lang= wins (so
+  // hreflang'd /kbeauty.html?lang=xx pages serve matching content), then the
+  // saved choice, then the browser language.
+  const _SUPPORTED = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+  const _urlLang = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+  const lang = (_SUPPORTED.includes(_urlLang) ? _urlLang
+    : (localStorage.getItem('kp_lang') || (navigator.language || 'en').slice(0, 2) || 'en')).toLowerCase();
 
   // ── Mini i18n for JS-generated labels (chrome uses data-i18n via i18n.js) ──
   const STR = {
@@ -36,12 +76,12 @@
     ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.' },
     ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。' },
   };
-  const t = (k) => (STR[lang] && STR[lang][k]) || STR.en[k] || k;
+  const t = (k) => (CONTENT && CONTENT['ui.' + k]) || (STR[lang] && STR[lang][k]) || STR.en[k] || k;
 
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   const toast = (msg) => {
     let el = $('#kb-toast');
-    if (!el) { el = document.createElement('div'); el.id = 'kb-toast'; el.style.cssText = 'position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none'; document.body.appendChild(el); }
+    if (!el) { el = document.createElement('div'); el.id = 'kb-toast'; el.setAttribute('role', 'status'); el.setAttribute('aria-live', 'polite'); el.style.cssText = 'position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none'; document.body.appendChild(el); }
     el.textContent = msg; el.style.opacity = '1';
     clearTimeout(el._tm); el._tm = setTimeout(() => { el.style.opacity = '0'; }, 1800);
   };
@@ -128,8 +168,8 @@
   function renderConcerns() {
     const grid = $('#kb-concern-grid'); if (!grid) return;
     const sel = getConcerns();
-    grid.innerHTML = CONCERNS.map(c => `<button class="kb-concern${sel.has(c.id) ? ' sel' : ''}" data-c="${esc(c.id)}">
-      <div class="c-emoji">${c.emoji || '🎯'}</div>
+    grid.innerHTML = CONCERNS.map(c => `<button class="kb-concern${sel.has(c.id) ? ' sel' : ''}" data-c="${esc(c.id)}" aria-pressed="${sel.has(c.id) ? 'true' : 'false'}">
+      <div class="c-emoji" aria-hidden="true">${c.emoji || '🎯'}</div>
       <div class="c-name">${esc(c.name)}</div>
       <div class="c-desc">${esc(c.desc)}</div>
     </button>`).join('');
@@ -137,6 +177,7 @@
       const s = getConcerns(); const id = b.dataset.c;
       if (s.has(id)) s.delete(id); else s.add(id);
       setConcerns(s); b.classList.toggle('sel');
+      b.setAttribute('aria-pressed', b.classList.contains('sel') ? 'true' : 'false');
       refreshPersonalized(); showShareFab();
     }));
   }
@@ -196,15 +237,19 @@
     });
     grid.innerHTML = list.map(i => {
       const match = i.bestFor && i.bestFor.some(x => concerns.has(x));
-      return `<div class="kb-ing" data-ing="${esc(i.id)}">
-        ${i.star ? '<span class="i-star">⭐</span>' : ''}
-        <div class="i-emoji">${i.emoji || '🧪'}</div>
+      return `<div class="kb-ing" data-ing="${esc(i.id)}" role="button" tabindex="0" aria-label="${esc(i.name)}">
+        ${i.star ? '<span class="i-star" aria-hidden="true">⭐</span>' : ''}
+        <div class="i-emoji" aria-hidden="true">${i.emoji || '🧪'}</div>
         <div class="i-name">${esc(i.name)}</div>
         <div class="i-ko">${esc(i.korean || '')}</div>
         ${match ? `<span class="i-tag">✓ ${esc((CONCERN_BY_ID[[...concerns].find(x => i.bestFor.includes(x))] || {}).name || '')}</span>` : ''}
       </div>`;
     }).join('');
-    $$('.kb-ing', grid).forEach(c => c.addEventListener('click', () => openIngredient(c.dataset.ing)));
+    $$('.kb-ing', grid).forEach(c => {
+      const open = () => openIngredient(c.dataset.ing);
+      c.addEventListener('click', open);
+      c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    });
   }
 
   function openIngredient(id) {
@@ -227,7 +272,7 @@
       ${pairs ? `<div class="km-list"><b>💚 ${esc(t('pairs'))}:</b> ${esc(pairs)}</div>` : ''}
       ${avoid ? `<div class="km-list"><b>⚠️ ${esc(t('avoid'))}:</b> ${esc(avoid)}</div>` : ''}
       <div class="km-links"><button class="km-link primary" data-seed="${esc((SHOP.aliSeeds || {}).general || 'korean skincare')} ${esc(i.name)}">🛍️ ${esc(t('shopFor'))} ${esc(i.name)}</button></div>`;
-    bg.classList.add('open'); document.body.style.overflow = 'hidden';
+    openModalA11y();
     const shopBtn = box.querySelector('[data-seed]');
     if (shopBtn) shopBtn.addEventListener('click', () => { loadShop(shopBtn.dataset.seed); closeModal(); jumpTo('#kb-shop'); });
   }
@@ -308,11 +353,11 @@
     const bar = $('#kb-pick'); if (!bar) return;
     bar.innerHTML = CHECKABLE.map(id => {
       const ing = ING_BY_ID[id] || { name:id };
-      return `<button class="kb-pick-chip${picked.has(id) ? ' on' : ''}" data-pick="${esc(id)}">${esc(ing.emoji || '')} ${esc(ing.name || id)}</button>`;
+      return `<button class="kb-pick-chip${picked.has(id) ? ' on' : ''}" data-pick="${esc(id)}" aria-pressed="${picked.has(id) ? 'true' : 'false'}"><span aria-hidden="true">${esc(ing.emoji || '')}</span> ${esc(ing.name || id)}</button>`;
     }).join('');
     $$('.kb-pick-chip', bar).forEach(b => b.addEventListener('click', () => {
       const id = b.dataset.pick; if (picked.has(id)) picked.delete(id); else picked.add(id);
-      b.classList.toggle('on'); renderVerdicts();
+      b.classList.toggle('on'); b.setAttribute('aria-pressed', b.classList.contains('on') ? 'true' : 'false'); renderVerdicts();
     }));
   }
   function renderVerdicts() {
@@ -326,10 +371,10 @@
       out.push({ a: ids[i], b: ids[j], ...v });
     }
     const ic = { safe:'✅', caution:'⚠️', avoid:'⛔' };
-    if (!out.length) { box.innerHTML = `<div class="kb-verdict safe"><div class="v-ic">🎉</div><div><div class="v-reason">${esc(t('allSafe'))}</div></div></div>`; return; }
+    if (!out.length) { box.innerHTML = `<div class="kb-verdict safe"><div class="v-ic" aria-hidden="true">🎉</div><div><div class="v-reason">${esc(t('allSafe'))}</div></div></div>`; return; }
     out.sort((p, q) => ({ avoid:0, caution:1, safe:2 })[p.verdict] - ({ avoid:0, caution:1, safe:2 })[q.verdict]);
     box.innerHTML = out.map(v => `<div class="kb-verdict ${v.verdict}">
-      <div class="v-ic">${ic[v.verdict]}</div>
+      <div class="v-ic" aria-hidden="true">${ic[v.verdict]}</div>
       <div><div class="v-pair">${esc((ING_BY_ID[v.a] || {}).name || v.a)} + ${esc((ING_BY_ID[v.b] || {}).name || v.b)}</div>
       <div class="v-reason">${esc(v.reason)}</div></div></div>`).join('');
   }
@@ -342,16 +387,20 @@
     let list = BRANDS.slice();
     if (brandTier !== 'all') list = list.filter(b => b.tier === brandTier);
     list.sort((a, b) => (follows.has(b.id) - follows.has(a.id)));
-    grid.innerHTML = list.map(b => `<div class="kb-brand${follows.has(b.id) ? ' followed' : ''}" data-brand="${esc(b.id)}">
-      <button class="b-follow" data-follow="${esc(b.id)}" aria-label="Follow ${esc(b.name)}">${follows.has(b.id) ? '★' : '☆'}</button>
-      <div class="b-emoji">${b.emoji || '🏷️'}</div>
+    grid.innerHTML = list.map(b => `<div class="kb-brand${follows.has(b.id) ? ' followed' : ''}" data-brand="${esc(b.id)}" role="button" tabindex="0" aria-label="${esc(b.name)}">
+      <button class="b-follow" data-follow="${esc(b.id)}" aria-pressed="${follows.has(b.id) ? 'true' : 'false'}" aria-label="${follows.has(b.id) ? 'Unfollow' : 'Follow'} ${esc(b.name)}">${follows.has(b.id) ? '★' : '☆'}</button>
+      <div class="b-emoji" aria-hidden="true">${b.emoji || '🏷️'}</div>
       <div class="b-name">${esc(b.name)}</div>
       <div class="b-ko">${esc(b.korean || '')}</div>
       <div class="b-known">${esc(b.knownFor || '')}</div>
       <span class="b-tier">${esc(b.tier)}</span>
     </div>`).join('');
     $$('.b-follow', grid).forEach(b => b.addEventListener('click', (ev) => { ev.stopPropagation(); toggleFollow(b.dataset.follow); }));
-    $$('.kb-brand', grid).forEach(c => c.addEventListener('click', () => openBrand(c.dataset.brand)));
+    $$('.kb-brand', grid).forEach(c => {
+      const open = () => openBrand(c.dataset.brand);
+      c.addEventListener('click', (e) => { if (e.target.closest('.b-follow')) return; open(); });
+      c.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.b-follow')) { e.preventDefault(); open(); } });
+    });
   }
   function toggleFollow(id) {
     const f = getFollows();
@@ -375,7 +424,7 @@
       ${(b.hero && b.hero.length) ? `<div class="km-list"><b>⭐</b> ${esc(b.hero.join(' · '))}</div>` : ''}
       <div class="km-bio" id="kb-brand-bio">${b.wikidataId ? `<span style="opacity:.6">${esc(t('bioSoon'))}</span>` : ''}</div>
       <div class="km-links"><button class="km-link primary" data-seed="${esc(b.name)} korean skincare">🛍️ ${esc(t('shopFor'))} ${esc(b.name)}</button></div>`;
-    bg.classList.add('open'); document.body.style.overflow = 'hidden';
+    openModalA11y();
     const shopBtn = box.querySelector('[data-seed]');
     if (shopBtn) shopBtn.addEventListener('click', () => { loadShop(shopBtn.dataset.seed); closeModal(); jumpTo('#kb-shop'); });
     if (b.wikidataId && API && API.getKbeautyBio) {
@@ -451,7 +500,20 @@
   }
 
   // ── Modal / filters / personalization ───────────────────────────────────────
-  function closeModal() { const bg = $('#kb-modal-bg'); if (bg) bg.classList.remove('open'); document.body.style.overflow = ''; }
+  let _modalOpener = null;
+  function openModalA11y() {
+    const bg = $('#kb-modal-bg'), box = $('#kb-modal'); if (!bg || !box) return;
+    _modalOpener = document.activeElement;
+    const h = box.querySelector('.km-name'); if (h) { h.id = 'kb-modal-title'; bg.setAttribute('aria-labelledby', 'kb-modal-title'); }
+    box.setAttribute('tabindex', '-1');
+    openModalA11y();
+    try { box.focus(); } catch {}
+  }
+  function closeModal() {
+    const bg = $('#kb-modal-bg'); if (bg) bg.classList.remove('open');
+    document.body.style.overflow = '';
+    if (_modalOpener && _modalOpener.focus) { try { _modalOpener.focus(); } catch {} _modalOpener = null; }
+  }
   function jumpTo(sel) { try { document.querySelector(sel).scrollIntoView({ behavior:'smooth', block:'start' }); } catch {} }
   function refreshPersonalized() { renderIngredients(); renderRoutine(); renderShelf(); }
 
@@ -468,8 +530,8 @@
     const bar = $('#kb-filters'); if (!bar) return;
     const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
-      $$('.filter-chip', bar).forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
+      $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+      chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
       const tg = chip.dataset.target;
       const show = tg === 'all' ? null : (map[tg] || [tg]);
       $$('.kb-sec').forEach(sec => { sec.style.display = (!show || show.includes(sec.id)) ? '' : 'none'; });
@@ -478,7 +540,9 @@
   }
 
   // ── Boot ───────────────────────────────────────────────────────────────────
-  function boot() {
+  async function boot() {
+    await loadContent();   // per-language content overlay (English fallback)
+    localizeData();
     renderForecast();
     renderQuiz();
     renderConcerns();
@@ -495,13 +559,13 @@
 
     // routine tabs
     $$('#kb-routine-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {
-      $$('#kb-routine-tabs .kb-tab').forEach(x => x.classList.remove('active'));
-      tab.classList.add('active'); routineTime = tab.dataset.time; renderRoutine();
+      $$('#kb-routine-tabs .kb-tab').forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected', 'true'); routineTime = tab.dataset.time; renderRoutine();
     }));
     // brand tier tabs
     $$('#kb-brand-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {
-      $$('#kb-brand-tabs .kb-tab').forEach(x => x.classList.remove('active'));
-      tab.classList.add('active'); brandTier = tab.dataset.tier; renderBrands();
+      $$('#kb-brand-tabs .kb-tab').forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected', 'true'); brandTier = tab.dataset.tier; renderBrands();
     }));
     // decoder
     const decBtn = $('#kb-decoder-btn'); if (decBtn) decBtn.addEventListener('click', runDecoder);
@@ -517,7 +581,17 @@
     const bg = $('#kb-modal-bg');
     if (bg) {
       bg.addEventListener('click', (e) => { if (e.target === bg || e.target.hasAttribute('data-close')) closeModal(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+      document.addEventListener('keydown', (e) => {
+        if (!bg.classList.contains('open')) return;
+        if (e.key === 'Escape') { closeModal(); return; }
+        if (e.key === 'Tab') {
+          const f = $$('button, a[href], textarea, [tabindex]:not([tabindex="-1"])', $('#kb-modal')).filter(el => !el.disabled && el.offsetParent !== null);
+          if (!f.length) return;
+          const first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
     }
     // lazy-load the shop grid when it scrolls into view (saves a worker call on load)
     const shopSec = $('#kb-shop');

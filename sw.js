@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v21';
+const CACHE = 'kp-v22';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -39,6 +39,14 @@ const PRECACHE = [
   BASE + '/kbeauty.html',
   BASE + '/kbeauty-data.js',
   BASE + '/assets/cosing-ingredients.json',
+  BASE + '/assets/kbeauty-content.ko.json',
+  BASE + '/assets/kbeauty-content.ja.json',
+  BASE + '/assets/kbeauty-content.zh.json',
+  BASE + '/assets/kbeauty-content.es.json',
+  BASE + '/assets/kbeauty-content.fr.json',
+  BASE + '/assets/kbeauty-content.de.json',
+  BASE + '/assets/kbeauty-content.pt.json',
+  BASE + '/assets/kbeauty-content.id.json',
   BASE + '/menu-translator.html',
   BASE + '/subway.html',
   BASE + '/modules/api-client.js',
