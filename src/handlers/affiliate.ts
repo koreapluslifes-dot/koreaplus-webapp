@@ -123,7 +123,7 @@ async function liveCards(env: WorkerEnv, city: string, lang: string): Promise<Of
   if (!cityId) return null;
 
   const checkIn = isoPlus(30), checkOut = isoPlus(31);
-  const cacheKey = `agoda:${cityId}:${lang}:${checkIn}:${djb2(siteId)}`;
+  const cacheKey = `agoda:v2:${cityId}:${lang}:${checkIn}:${djb2(siteId)}`;
   if (env.CACHE_KV) {
     const hit = await env.CACHE_KV.get(cacheKey);
     if (hit) { try { return JSON.parse(hit) as Offer[]; } catch { /* refetch */ } }
@@ -163,8 +163,8 @@ async function liveCards(env: WorkerEnv, city: string, lang: string): Promise<Of
         brand: 'Agoda', icon: '🏨',
         label: name,                                   // back-compat
         name,
-        url: r.landingURL || deepLink(city, lang),
-        img: r.imageURL || '',
+        url: (r.landingURL || deepLink(city, lang)).replace(/^http:/, 'https:'),
+        img: (r.imageURL || '').replace(/^http:/, 'https:'),  // avoid mixed-content block on HTTPS
         price: (r.dailyRate != null) ? `${t.from} $${Math.round(r.dailyRate)}` : '',
         was: (r.crossedOutRate != null && r.crossedOutRate > (r.dailyRate || 0)) ? `$${Math.round(r.crossedOutRate)}` : '',
         discount: (r.discountPercentage && r.discountPercentage >= 5) ? Math.round(r.discountPercentage) : 0,
@@ -189,5 +189,8 @@ export async function handleAffiliate(request: Request, env: WorkerEnv): Promise
   const live = await liveCards(env, city, lang);
   const offers = (live && live.length) ? live : deepOffers(city, lang);
 
-  return new Response(JSON.stringify({ offers, ctx: { city }, src: live ? 'api' : 'link' }), { headers: CORS });
+  // Cache real API cards for an hour; cache deep-link fallbacks only briefly so
+  // a transient fallback never sticks at the edge (recovers to live cards fast).
+  const headers = { ...CORS, 'Cache-Control': live ? 'public, max-age=3600' : 'public, max-age=60' };
+  return new Response(JSON.stringify({ offers, ctx: { city }, src: live ? 'api' : 'link' }), { headers });
 }

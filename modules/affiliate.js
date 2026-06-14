@@ -73,7 +73,7 @@
     var lang = blocks[0].getAttribute('data-aff-lang') ||
       (window.kpI18n && window.kpI18n.getLang && window.kpI18n.getLang()) || 'en';
 
-    var qs = new URLSearchParams({ city: ctx.city || '', cat: ctx.cat || '', q: ctx.q || '', lang: lang });
+    var qs = new URLSearchParams({ city: ctx.city || '', cat: ctx.cat || '', q: ctx.q || '', lang: lang, v: '4' });
     fetch(WORKER + '/api/aff?' + qs.toString())
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (data) {

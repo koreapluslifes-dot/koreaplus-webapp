@@ -561,9 +561,9 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=2">
+<link rel="stylesheet" href="seo.css?v=3">
 <script src="modules/header.js"></script>
-<script defer src="modules/affiliate.js?v=3"></script>
+<script defer src="modules/affiliate.js?v=4"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
 ${schemas.map(jsonld).join('\n')}
 </head>
@@ -574,16 +574,16 @@ ${schemas.map(jsonld).join('\n')}
 </nav>
 <main class="seo-wrap">
 ${hero}
+<!-- AdSense — compact horizontal unit, upper placement (after hero) -->
+<div class="seo-ad seo-ad-top">
+  <ins class="adsbygoogle" style="display:block"
+       data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"
+       data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 <article class="seo-body">
 ${body}
 </article>
-<!-- AdSense — single responsive unit per page (koreaplus-life-webapp) -->
-<div class="seo-ad">
-  <ins class="adsbygoogle" style="display:block"
-       data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"
-       data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
 </main>
 <footer class="footer" role="contentinfo" style="text-align:center;padding:40px 20px;border-top:1px solid var(--border,rgba(255,255,255,.08));margin-top:40px">
   <p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
