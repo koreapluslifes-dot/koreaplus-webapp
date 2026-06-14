@@ -436,5 +436,18 @@
   "kpop.ticker.label": "K-pop 실시간: 컴백 예정 및 라이브 차트",
   "kpop.sec.concerts.title": "🎫 예정된 콘서트",
   "kpop.sec.concerts.sub": "내 주변 월드투어 일정",
-  "kbeauty.routine.mens": "🧔 남성"
+  "kbeauty.routine.mens": "🧔 남성",
+  "guides.keepExploring": "한국 더 둘러보기",
+  "ph.hero.tag": "한국어",
+  "ph.hero.h1": "🗣️ 서바이벌 한국어",
+  "ph.hero.sub": "모든 상황을 위한 필수 표현 — 🔊로 듣고, 👁️로 전체화면에서 현지인에게 보여주세요",
+  "cur.hero.tag": "환전 & 예산",
+  "cur.hero.h1": "💱 한국 환율 가이드",
+  "cur.hero.sub": "실시간 원화 환율 + 여행자를 위한 실제 물가 비교",
+  "sub.hero.tag": "실시간 교통",
+  "sub.hero.h1": "🚇 서울 지하철 실시간 정보",
+  "sub.hero.sub": "영어로 보는 실시간 열차 도착 — 서울 지하철역을 입력하면 다음 열차를 확인하세요",
+  "menu.hero.tag": "AI 번역",
+  "menu.hero.h1": "📷 한국 메뉴 번역기",
+  "menu.hero.sub": "한국 메뉴 사진을 찍으면 — OCR이 글자를 읽고, AI가 각 음식을 설명·알레르기 정보와 함께 번역합니다"
 }

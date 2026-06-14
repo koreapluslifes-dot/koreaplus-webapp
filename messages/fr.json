@@ -436,5 +436,18 @@
   "kpop.ticker.label": "K-pop now: upcoming comebacks and live chart",
   "kpop.sec.concerts.title": "🎫 Upcoming Concerts",
   "kpop.sec.concerts.sub": "World-tour dates near you",
-  "kbeauty.routine.mens": "🧔 Homme"
+  "kbeauty.routine.mens": "🧔 Homme",
+  "guides.keepExploring": "Continuez à explorer la Corée",
+  "ph.hero.tag": "Langue coréenne",
+  "ph.hero.h1": "🗣️ Coréen de survie",
+  "ph.hero.sub": "Phrases essentielles pour chaque situation — appuyez sur 🔊 pour écouter, 👁️ pour montrer aux Coréens en plein écran",
+  "cur.hero.tag": "Finances et budget",
+  "cur.hero.h1": "💱 Guide de la monnaie coréenne",
+  "cur.hero.sub": "Taux de change du KRW en direct + comparaisons de prix réels pour les voyageurs",
+  "sub.hero.tag": "Transports en direct",
+  "sub.hero.h1": "🚇 Métro de Séoul en direct",
+  "sub.hero.sub": "Arrivées des trains en temps réel en anglais — tapez une station du métro de Séoul pour voir les prochains trains",
+  "menu.hero.tag": "Traduction par IA",
+  "menu.hero.h1": "📷 Traducteur de menus coréens",
+  "menu.hero.sub": "Photographiez n'importe quel menu coréen — l'OCR lit le texte, l'IA traduit chaque plat avec descriptions et allergènes"
 }
