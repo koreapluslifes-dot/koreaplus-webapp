@@ -558,7 +558,7 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hub-styles.css?v=6">
+<link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="seo.css">
 <script src="modules/header.js"></script>
