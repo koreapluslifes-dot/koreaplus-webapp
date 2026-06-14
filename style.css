@@ -711,3 +711,12 @@ body.kp-cookie-open .chat-tease{bottom:190px}
 .kp-rv-chip:hover { border-color:rgba(116,185,255,.45); background:rgba(116,185,255,.07); }
 .kp-rv-chip .rv-emoji { font-size:16px; }
 @media (max-width:768px){ .kp-retain { padding:14px 16px 0; } }
+
+/* ── Mobile "Show more" truncation for Must-Visit / Bucket List ──────── */
+.kp-showmore{display:none}
+@media(max-width:768px){
+  .kp-showmore{display:block;margin:6px auto 4px;padding:11px 24px;border-radius:24px;background:var(--surface);border:1px solid var(--border2);color:var(--text);font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .kp-showmore:hover{border-color:var(--red);color:var(--red)}
+  .mv-grid:not(.kp-all) .mv-card:nth-child(n+4){display:none}
+  .bucket-grid:not(.kp-all) .bucket-item:nth-child(n+7){display:none}
+}

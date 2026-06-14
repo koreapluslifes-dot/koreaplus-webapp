@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="hub-styles.css?v=8">
-  <link rel="stylesheet" href="plan-styles.css">
+  <link rel="stylesheet" href="plan-styles.css?v=2">
   <script src="config.js"></script>
   <!-- Shared header engine: theme + i18n (9 langs) + lang switcher + unified nav behavior -->
   <script src="modules/header.js"></script>
@@ -309,14 +309,20 @@
     <p id="result-summary"></p>
     <div class="result-highlights" id="result-highlights"></div>
     <div class="result-toolbar">
-      <button class="tb-btn" id="btn-new-plan" data-i18n="plan.rt.new">← New Plan</button>
-      <button class="tb-btn" id="btn-regenerate" data-i18n="plan.rt.regen">🔄 Regenerate</button>
-      <button class="tb-btn" id="btn-toggle-mode" data-i18n="plan.rt.mode">🔀 Switch Mode</button>
-      <button class="tb-btn" id="btn-save" data-i18n="plan.rt.save">💾 Save</button>
-      <button class="tb-btn" id="btn-pdf" data-i18n="plan.rt.pdf">📄 PDF</button>
       <button class="tb-btn primary" id="btn-share" data-i18n="plan.rt.share">🔗 Share</button>
-      <button class="tb-btn" id="btn-qr" data-i18n="plan.rt.qr">📱 QR Code</button>
+      <button class="tb-btn" id="btn-save" data-i18n="plan.rt.save">💾 Save</button>
+      <div class="tb-more-wrap">
+        <button class="tb-btn" id="btn-more" aria-haspopup="true" aria-expanded="false" data-i18n="plan.rt.more">⋯ More</button>
+        <div class="tb-more-menu" id="tb-more-menu">
+          <button class="tb-btn" id="btn-new-plan" data-i18n="plan.rt.new">← New Plan</button>
+          <button class="tb-btn" id="btn-regenerate" data-i18n="plan.rt.regen">🔄 Regenerate</button>
+          <button class="tb-btn" id="btn-toggle-mode" data-i18n="plan.rt.mode">🔀 Switch Mode</button>
+          <button class="tb-btn" id="btn-pdf" data-i18n="plan.rt.pdf">📄 PDF</button>
+          <button class="tb-btn" id="btn-qr" data-i18n="plan.rt.qr">📱 QR Code</button>
+        </div>
+      </div>
     </div>
+    <script>(function(){var w=document.querySelector('.tb-more-wrap');if(!w)return;var b=document.getElementById('btn-more');b.addEventListener('click',function(e){e.stopPropagation();var o=w.classList.toggle('open');b.setAttribute('aria-expanded',String(o));});document.addEventListener('click',function(){w.classList.remove('open');b.setAttribute('aria-expanded','false');});})();</script>
   </div>
 
   <!-- Day tabs -->

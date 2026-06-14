@@ -1081,6 +1081,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initVisits();
   renderRetain();
 
+  // Mobile "Show more" — reveal the truncated Must-Visit / Bucket grids.
+  document.querySelectorAll('.kp-showmore').forEach(b => b.addEventListener('click', () => {
+    const g = document.querySelector('.' + b.dataset.grid);
+    if (g) g.classList.add('kp-all');
+    b.remove();
+  }));
+
   // Refresh the recently-viewed rail whenever a place is opened.
   document.addEventListener('kp:viewed', renderRetain);
 

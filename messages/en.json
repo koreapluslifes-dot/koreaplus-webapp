@@ -449,5 +449,7 @@
   "sub.hero.sub": "Real-time train arrivals in English — type any Seoul metro station to see the next trains",
   "menu.hero.tag": "AI Translation",
   "menu.hero.h1": "📷 Korean Menu Translator",
-  "menu.hero.sub": "Take a photo of any Korean menu — OCR reads the text, AI translates every dish with descriptions and allergen info"
+  "menu.hero.sub": "Take a photo of any Korean menu — OCR reads the text, AI translates every dish with descriptions and allergen info",
+  "home.showmore": "Show more ↓",
+  "plan.rt.more": "⋯ More"
 }

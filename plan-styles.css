@@ -294,3 +294,9 @@
 .plan-page { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 .day-map { height: 100dvh; }
 .save-toast { bottom: calc(24px + env(safe-area-inset-bottom)); }
+
+/* ── Result toolbar: collapsed "⋯ More" menu (was 7 equal buttons) ───── */
+.tb-more-wrap{position:relative;display:inline-block}
+.tb-more-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2,#0d1424);border:1px solid var(--border,rgba(255,255,255,.14));border-radius:12px;padding:6px;display:none;flex-direction:column;gap:4px;z-index:50;min-width:170px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.tb-more-wrap.open .tb-more-menu{display:flex}
+.tb-more-menu .tb-btn{width:100%;justify-content:flex-start;text-align:left}

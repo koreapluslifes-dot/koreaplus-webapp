@@ -449,5 +449,7 @@
   "sub.hero.sub": "英文实时列车到站 — 输入任意首尔地铁站查看下一班列车",
   "menu.hero.tag": "AI翻译",
   "menu.hero.h1": "📷 韩国菜单翻译",
-  "menu.hero.sub": "拍下任意韩国菜单 — OCR 识别文字，AI 翻译每道菜并附说明和过敏原信息"
+  "menu.hero.sub": "拍下任意韩国菜单 — OCR 识别文字，AI 翻译每道菜并附说明和过敏原信息",
+  "home.showmore": "显示更多 ↓",
+  "plan.rt.more": "⋯ 更多"
 }

@@ -449,5 +449,7 @@
   "sub.hero.sub": "Arrivées des trains en temps réel en anglais — tapez une station du métro de Séoul pour voir les prochains trains",
   "menu.hero.tag": "Traduction par IA",
   "menu.hero.h1": "📷 Traducteur de menus coréens",
-  "menu.hero.sub": "Photographiez n'importe quel menu coréen — l'OCR lit le texte, l'IA traduit chaque plat avec descriptions et allergènes"
+  "menu.hero.sub": "Photographiez n'importe quel menu coréen — l'OCR lit le texte, l'IA traduit chaque plat avec descriptions et allergènes",
+  "home.showmore": "Voir plus ↓",
+  "plan.rt.more": "⋯ Plus"
 }
