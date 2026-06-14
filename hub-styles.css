@@ -245,8 +245,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .kpd-events-sub   { font-size: 10px; color: var(--text2); margin-top: 2px; }
 .kpd-link { color: var(--accent2); text-decoration: none; font-size: 10px; margin-top: 4px; display: inline-block; }
 .kpd-loading { font-size: 10px; color: var(--text3); font-style: italic; }
-@media (max-width: 480px) {
-  #kp-dashboard { bottom: 0; right: 0; left: 0; width: 100%; border-radius: 16px 16px 0 0; }
+/* Mobile: hide the floating "Korea Now" overlay (it covered content / piled up
+   with the chat FAB). Live data stays available on currency/seasons pages. */
+@media (max-width: 768px) {
+  #kp-dashboard { display: none !important; }
 }
 
 /* ── Modal ──────────────────────────────────────────────────────────── */

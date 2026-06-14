@@ -9,7 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="icons/kplus.svg">
 <link rel="apple-touch-icon" href="icons/kplus.svg">
 <meta name="theme-color" content="#0c1829">
-<link rel="stylesheet" href="hub-styles.css?v=7">
+<link rel="stylesheet" href="hub-styles.css?v=8">
 <link rel="stylesheet" href="theme.css">
 <script src="modules/header.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Korea Festivals Calendar","description":"Upcoming festivals in South Korea","url":"https://koreaplus-lifes.com/guide/festivals.html"}</script>
@@ -106,8 +106,8 @@
     <button class="filter-pill" data-filter="type" data-val="show">Shows</button>
 
     <div class="view-toggle">
-      <button class="view-btn active" id="btn-cal" onclick="setView('cal')">📅 Calendar</button>
-      <button class="view-btn" id="btn-list" onclick="setView('list')">☰ List</button>
+      <button class="view-btn" id="btn-cal" onclick="setView('cal')">📅 Calendar</button>
+      <button class="view-btn active" id="btn-list" onclick="setView('list')">☰ List</button>
     </div>
   </div>
 
@@ -165,13 +165,12 @@
 
 <script src="config.js"></script>
 <script src="modules/api-client.js"></script>
-<script src="modules/dashboard.js"></script>
 <script>
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const SHORT_M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 let state = {
-  view: 'cal',
+  view: 'list',
   city: '',
   type: 'all',
   year: new Date().getFullYear(),
@@ -414,8 +413,8 @@ document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); 
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  renderCalendar();
-  fetchMonthData();
+  renderCalendar();   // prepare the grid for when the user toggles to Calendar
+  setView('list');    // List-first: shows real, scannable cards immediately
 });
 </script>
 

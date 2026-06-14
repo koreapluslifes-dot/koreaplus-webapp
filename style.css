@@ -438,16 +438,13 @@ button{cursor:pointer;border:none;font-family:inherit}
   .mv-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
-  /* Mobile header: 2 rows — controls on top, FULL nav as a swipeable strip below.
-     (Previously .nav{display:none} stripped ALL hub navigation on phones.) */
-  .header-inner{flex-wrap:wrap;height:auto;padding:6px 12px;gap:6px;row-gap:0}
-  .nav{order:10;flex-basis:100%;padding:4px 0 8px;-webkit-overflow-scrolling:touch}
-  .nav-btn{padding:8px 12px;font-size:12.5px}
-  .nav-sep{display:none}
+  /* Mobile header: single 56px row. The nav is now the kp-pnav burger sheet,
+     so the old 2-row swipe strip + its 104px hero offset are gone. */
+  .header-inner{height:56px;padding:6px 12px;gap:8px}
   .search-shortcut{display:none}
   .ai-btn{display:none} /* duplicate affordance — chat FAB stays visible */
   .kp-mt-btn .lbl{display:none} /* icon + badge only */
-  .map-hero{height:calc(100svh - 104px);margin-top:104px}
+  .map-hero{height:72svh;margin-top:33px}
   .map-hero-overlay{padding:20px;max-width:100%}
   .hero-title{font-size:34px}
   .map-panel{width:100vw;right:-100vw}
@@ -652,8 +649,9 @@ body.kp-modal-open #kp-dashboard{display:none}
 .ct-close{position:absolute;top:8px;right:10px;width:26px;height:26px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);color:var(--text3);font-size:11px;display:flex;align-items:center;justify-content:center}
 body.kp-cookie-open .chat-tease{bottom:190px}
 @media(max-width:768px){
-  .chat-tease{right:12px;bottom:80px}
-  body.kp-cookie-open .chat-tease{bottom:200px}
+  /* Mobile: suppress the auto-pop chat teaser — keep only the FAB to declutter
+     the thumb zone (the teaser piled up with FAB + dashboard + cookie banner). */
+  .chat-tease{display:none!important}
 }
 
 /* ===== CHAT CAPABILITY MENU + LINK CARDS ===== */
