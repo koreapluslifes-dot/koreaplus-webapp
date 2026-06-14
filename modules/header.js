@@ -3,10 +3,8 @@
    Include once in <head> of any hub page — requires hub-styles.css + theme.css */
 (function () {
 
-  // ── Service Worker registration ─────────────────────────────────────────────
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/guide/sw.js').catch(() => {});
-  }
+  // Service Worker registration + update-toast handled by modules/pwa.js
+  // (loaded in the module chain below).
 
   // ── PWA meta tags (dynamic insert) ────────────────────────────────────────
   function addMeta(name, content, type = 'name') {
@@ -43,11 +41,28 @@
 
   // ── On DOMContentLoaded: inject controls ──────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
+    injectSkipLink();
     injectNavControls();
     injectCookieBanner();
     injectSearchModal();
     loadModules();
   });
+
+  // Skip-to-content link (WCAG 2.4.1) — site-wide via the shared header.
+  function injectSkipLink() {
+    if (!document.querySelector('.kp-skip')) {
+      const a = document.createElement('a');
+      a.href = '#main'; a.className = 'kp-skip';
+      a.setAttribute('data-i18n', 'a11y.skip');
+      a.textContent = 'Skip to content';
+      document.body.insertBefore(a, document.body.firstChild);
+    }
+    // Ensure a focusable #main landmark exists.
+    if (!document.getElementById('main')) {
+      const target = document.querySelector('main, .seo-wrap, .hub-content, #wizard, .plan-hero, .hub-hero');
+      if (target) { target.id = 'main'; target.setAttribute('tabindex', '-1'); }
+    }
+  }
 
   function injectNavControls() {
     const nav = document.querySelector('.hub-nav');
@@ -109,7 +124,7 @@
   function loadModules() {
     const base = '/guide/modules/';
     // Load in order: theme.js, i18n.js, search.js, analytics.js
-    const scripts = ['theme.js', 'i18n.js', 'search.js', 'analytics.js', 'mytrip.js', 'nav.js?v=3'];
+    const scripts = ['theme.js', 'i18n.js', 'search.js', 'analytics.js', 'mytrip.js', 'nav.js?v=3', 'pwa.js?v=1'];
 
     let chain = Promise.resolve();
     scripts.forEach(s => {

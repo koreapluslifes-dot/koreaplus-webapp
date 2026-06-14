@@ -13,8 +13,8 @@ html.light {
   --border:    rgba(0,0,0,0.10);
   --border2:   rgba(0,0,0,0.16);
   --text:      rgba(0,0,0,0.87);
-  --text2:     rgba(0,0,0,0.55);
-  --text3:     rgba(0,0,0,0.35);
+  --text2:     rgba(0,0,0,0.66);  /* raised for WCAG AA (was .55) */
+  --text3:     rgba(0,0,0,0.55);  /* raised for WCAG AA (was .35) */
   --accent:    #1a6fc4;
   --accent2:   #1a6fc4;
   --shadow:    0 4px 24px rgba(0,0,0,0.12);
@@ -236,4 +236,25 @@ html.font-lg { font-size: 115%; }
 :focus-visible {
   outline: 2px solid var(--accent2);
   outline-offset: 2px;
+}
+
+/* ── Accessibility: skip-to-content link (WCAG 2.4.1) ─────────────── */
+.kp-skip {
+  position: absolute; left: -9999px; top: 0;
+  z-index: 100000; padding: 10px 16px; border-radius: 0 0 10px 0;
+  background: var(--accent); color: #fff; font-size: 14px; font-weight: 700;
+  text-decoration: none;
+}
+.kp-skip:focus { left: 0; top: 0; position: fixed; }
+
+/* ── Accessibility: respect reduced-motion (WCAG 2.3.3) ───────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
 }

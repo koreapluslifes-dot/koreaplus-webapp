@@ -514,7 +514,7 @@ function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', a
 <html lang="${lang}">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <base href="${BASEP}">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -538,8 +538,11 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hub-styles.css?v=4">
+<link rel="stylesheet" href="hub-styles.css?v=5">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="seo.css">
 <script src="modules/header.js"></script>

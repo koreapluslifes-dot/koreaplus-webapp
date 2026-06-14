@@ -60,7 +60,37 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
   }
 
+  // detail-data.js (~187KB) is loaded on first panel open, not on page load,
+  // to keep the home page's main thread free for LCP/INP.
+  let _ddPromise = null;
+  function ensureDetailData() {
+    if (window.DETAIL_DATA) return Promise.resolve();
+    if (_ddPromise) return _ddPromise;
+    _ddPromise = new Promise(res => {
+      const s = document.createElement('script');
+      s.src = 'detail-data.js?v=3';
+      s.onload = res; s.onerror = res;
+      document.head.appendChild(s);
+    });
+    return _ddPromise;
+  }
+
   function open(item) {
+    if (window.DETAIL_DATA) { renderOpen(item); return; }
+    // Open immediately with a loading state, then render once data arrives.
+    createShell();
+    lastItem = item;
+    document.getElementById('dp-emoji').textContent = item.emoji || '';
+    document.getElementById('dp-title').textContent = item.name || '';
+    const body = document.getElementById('dp-body');
+    if (body) body.innerHTML = '<div style="padding:48px 20px;text-align:center;color:var(--text2);font-size:14px">…</div>';
+    document.getElementById('detail-panel').classList.add('open');
+    document.getElementById('detail-backdrop').classList.add('open');
+    document.body.classList.add('kp-modal-open');
+    ensureDetailData().then(() => renderOpen(item));
+  }
+
+  function renderOpen(item) {
     createShell();
     lastItem = item;
     const d = getDetail(item.name);

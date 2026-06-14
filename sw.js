@@ -1,10 +1,11 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v13';
+const CACHE = 'kp-v14';
 const BASE  = '/guide';
 
 const PRECACHE = [
   BASE + '/',
   BASE + '/index.html',
+  BASE + '/offline.html',
   BASE + '/style.css',
   BASE + '/hub-styles.css',
   BASE + '/theme.css',
@@ -45,6 +46,7 @@ const PRECACHE = [
   BASE + '/modules/header.js',
   BASE + '/modules/mytrip.js',
   BASE + '/modules/nav.js',
+  BASE + '/modules/pwa.js',
   BASE + '/modules/affiliate.js',
   BASE + '/seo.css',
   BASE + '/explore.html',
@@ -72,8 +74,14 @@ self.addEventListener('install', event => {
             .catch(() => null)
         )
       ))
-      .then(() => self.skipWaiting())
   );
+  // No skipWaiting() here — the new SW waits so modules/pwa.js can show an
+  // "update available" toast; activation happens on the SKIP_WAITING message.
+});
+
+// Allow the page (via modules/pwa.js) to trigger immediate activation.
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 // ── Activate: purge old caches ────────────────────────────────────────────────
@@ -111,8 +119,10 @@ self.addEventListener('fetch', event => {
         });
         return cached || network;
       }).catch(() => {
-        // Offline fallback: return cached index for navigation
-        if (request.mode === 'navigate') return caches.match(BASE + '/');
+        // Offline fallback: branded offline page for uncached navigations
+        if (request.mode === 'navigate') {
+          return caches.match(request) || caches.match(BASE + '/offline.html');
+        }
       })
     );
   }

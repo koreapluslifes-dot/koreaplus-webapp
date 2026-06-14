@@ -13,8 +13,8 @@
   --border:    rgba(255,255,255,0.08);
   --border2:   rgba(255,255,255,0.13);
   --text:      rgba(255,255,255,0.88);
-  --text2:     rgba(255,255,255,0.5);
-  --text3:     rgba(255,255,255,0.28);
+  --text2:     rgba(255,255,255,0.62);  /* raised for WCAG AA (was .5) */
+  --text3:     rgba(255,255,255,0.5);   /* raised for WCAG AA (was .28) */
   --accent:    #3b8eea;
   --accent2:   #74b9ff;
   --gold:      #fbbf24;
@@ -368,7 +368,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     position:fixed; top:0; right:0; height:100dvh; width:min(84vw,330px);
     flex-direction:column; align-items:stretch; gap:2px;
     background:var(--bg2,#0d1424); border-left:1px solid var(--border,rgba(255,255,255,.12));
-    padding:62px 16px 28px; overflow-y:auto; z-index:1200;
+    padding:62px 16px calc(28px + env(safe-area-inset-bottom)); overflow-y:auto; z-index:1200;
     transform:translateX(105%); transition:transform .26s ease; box-shadow:-14px 0 44px rgba(0,0,0,.55);
   }
   .kp-pnav.kp-open .kp-pnav-items { transform:translateX(0); }

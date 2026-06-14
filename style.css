@@ -688,3 +688,10 @@ body.kp-cookie-open .chat-tease{bottom:190px}
 .tb-actions button:hover,.tb-actions a:hover{opacity:.85}
 .tb-actions #tb-share{background:var(--bg2);color:var(--text);border:1px solid var(--border)}
 .tb-actions #tb-open{background:rgba(200,151,58,0.12);color:var(--gold);border:1px solid rgba(200,151,58,0.4)}
+
+/* ── Safe-area insets for fixed/bottom UI on notched devices ─────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .chat-fab { bottom: calc(24px + env(safe-area-inset-bottom)); }
+  @media (max-width:768px){ .chat-fab { bottom: calc(16px + env(safe-area-inset-bottom)); } }
+  .kp-cookie-banner { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+}

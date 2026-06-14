@@ -295,11 +295,11 @@ function initMap() {
           <span style="font-size:16px;line-height:1.4;flex-shrink:0;margin-top:1px;">${s.e}</span>
           <div>
             <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.9);line-height:1.45;">${s.n}</div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:2px;line-height:1.35;">${s.d}</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.62);margin-top:2px;line-height:1.35;">${s.d}</div>
           </div>
         </div>`).join('')}
       <div style="padding-top:12px;">
-        <button id="pAsk" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);font-size:10px;padding:8px 12px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;transition:background 0.2s;">
+        <button id="pAsk" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.78);font-size:10px;padding:8px 12px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;transition:background 0.2s;">
           ${window.kpI18n?.t('chat.askCity') || '💬 Ask AI Guide about'} ${city.name}
         </button>
       </div>`;
@@ -379,9 +379,9 @@ function initMap() {
   });
 
   // Zoom hint (data-i18n so applyTranslations repairs the boot-time raw key)
-  const hint=el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint.setAttribute('data-i18n','map.hint1');
+  const hint=el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.55)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint.setAttribute('data-i18n','map.hint1');
   const hv=window.kpI18n?.t('map.hint1'); hint.textContent=(hv&&hv!=='map.hint1')?hv:'Ctrl + scroll';
-  const hint2=el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.35)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint2.setAttribute('data-i18n','map.hint2');
+  const hint2=el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.55)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint2.setAttribute('data-i18n','map.hint2');
   const hv2=window.kpI18n?.t('map.hint2'); hint2.textContent=(hv2&&hv2!=='map.hint2')?hv2:'to zoom';
   mapEl.addEventListener('wheel',()=>{hint.remove();hint2.remove();},{once:true,passive:true});
 
@@ -463,7 +463,9 @@ function initTabs() {
 }
 
 /* ===== GOOGLE MAPS PANEL ===== */
+let _mapReturnFocus = null;
 function openMapPanel(item) {
+  _mapReturnFocus = document.activeElement;
   const panel = document.getElementById('map-panel');
   const backdrop = document.getElementById('mp-backdrop');
   document.getElementById('mp-title').textContent = item.name;
@@ -474,6 +476,7 @@ function openMapPanel(item) {
   backdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
   document.body.classList.add('kp-modal-open');
+  setTimeout(() => document.getElementById('mp-close')?.focus(), 60);
 
   const gmapFrame = document.getElementById('gmap');
   const q = encodeURIComponent(item.mapQ || item.name + ' Korea');
@@ -607,9 +610,14 @@ function initMapPanel() {
     document.getElementById('mp-backdrop').classList.remove('open');
     document.body.style.overflow = '';
     document.body.classList.remove('kp-modal-open');
+    try { _mapReturnFocus?.focus?.(); } catch {}
+    _mapReturnFocus = null;
   };
   document.getElementById('mp-close')?.addEventListener('click', close);
   document.getElementById('mp-backdrop')?.addEventListener('click', close);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('map-panel')?.classList.contains('open')) close();
+  });
 }
 
 /* ===== AI CHATBOT ===== */
@@ -662,13 +670,22 @@ function refreshChatMenu() {
   });
 }
 
+let _chatReturnFocus = null;
 function openChat() {
+  _chatReturnFocus = document.activeElement;
   document.getElementById('chatbot')?.classList.add('open');
   document.body.classList.add('kp-modal-open');
   hideChatTease();
   showChatMenu();
+  // Move focus into the dialog for keyboard + screen-reader users.
+  setTimeout(() => document.getElementById('chat-input')?.focus(), 60);
 }
-function closeChat() { document.getElementById('chatbot')?.classList.remove('open'); document.body.classList.remove('kp-modal-open'); }
+function closeChat() {
+  document.getElementById('chatbot')?.classList.remove('open');
+  document.body.classList.remove('kp-modal-open');
+  try { _chatReturnFocus?.focus?.(); } catch {}
+  _chatReturnFocus = null;
+}
 
 function addMsg(role, html) {
   const msgs = document.getElementById('chat-messages');
@@ -980,6 +997,11 @@ function initChatTease() {
 
 /* ===== SCROLL REVEAL ===== */
 function initScrollReveal() {
+  // Respect reduced-motion: show everything immediately, skip the animation.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+    return;
+  }
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {

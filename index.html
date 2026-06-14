@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Korea Travel Guide 2026 | Food, Travel, K-Beauty, K-Pop & AI Guide | KoreaPlus</title>
   <meta name="description" content="The ultimate Korea travel guide — best Korean food, top travel destinations, K-beauty tips, K-pop culture, transport, shopping & AI chatbot. Updated 2026.">
   <meta name="keywords" content="Korea travel guide, Korean food, K-beauty, K-pop, Seoul travel, Busan travel, Korea 2026, Korean culture, visit Korea, Korea tips">
@@ -79,12 +79,13 @@
   </script>
 
   <script src="config.js"></script>
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
-  <link rel="stylesheet" href="hub-styles.css?v=4">
+  <link rel="stylesheet" href="hub-styles.css?v=5">
 </head>
 <body>
+<a href="#main" class="kp-skip" data-i18n="a11y.skip">Skip to content</a>
 
 <!-- Header -->
 <header class="header" id="header">
@@ -162,7 +163,7 @@
 </header>
 
 <!-- Full-screen Real Map Hero -->
-<section class="map-hero">
+<section class="map-hero" id="main" tabindex="-1">
   <div id="korea-map"></div>
   <div class="map-hero-overlay">
     <div class="hero-badge" data-i18n="hero.badge">🇰🇷 Land of Morning Calm · 대한민국</div>
@@ -323,13 +324,13 @@
 </section>
 
 <!-- Google Maps Panel (slide-over) -->
-<div class="map-panel" id="map-panel">
+<div class="map-panel" id="map-panel" role="dialog" aria-modal="true" aria-labelledby="mp-title">
   <div class="mp-header">
     <div>
       <h3 id="mp-title">—</h3>
       <span id="mp-kr" class="mp-kr">—</span>
     </div>
-    <button class="mp-close" id="mp-close">✕</button>
+    <button class="mp-close" id="mp-close" aria-label="Close map" data-i18n-aria="a11y.map.close">✕</button>
   </div>
   <div id="gmap" class="gmap-frame"></div>
   <div class="mp-body">
@@ -347,7 +348,7 @@
 <div class="map-panel-backdrop" id="mp-backdrop"></div>
 
 <!-- AI Chatbot -->
-<div class="chatbot" id="chatbot">
+<div class="chatbot" id="chatbot" role="dialog" aria-modal="true" data-i18n-aria="chat.title" aria-label="Korea AI Guide">
   <div class="chat-header">
     <div class="chat-title">
       <div class="chat-avatar">🤖</div>
@@ -356,24 +357,18 @@
         <span class="chat-status" data-i18n="chat.status">● Online · Llama 3.3</span>
       </div>
     </div>
-    <button class="chat-close" id="chat-close">✕</button>
+    <button class="chat-close" id="chat-close" aria-label="Close chat" data-i18n-aria="a11y.chat.close">✕</button>
   </div>
   <div class="chat-messages" id="chat-messages">
     <div class="chat-msg assistant">
       <div class="msg-bubble" data-i18n-html="chat.greeting">👋 안녕하세요! I'm your Korea AI Guide.<br><br>Ask me anything about Korean food, travel, culture, language, or planning your trip! 🇰🇷</div>
     </div>
   </div>
-  <div class="chat-quick" id="chat-quick">
-    <button data-qkey="tb" data-i18n="tb.menu">✨ Build my trip by chat</button>
-    <button data-qkey="chat.q.food" data-i18n="chat.quick.food">🍜 Best foods</button>
-    <button data-qkey="chat.q.visit" data-i18n="chat.quick.visit">✈️ Must-visit</button>
-    <button data-qkey="chat.q.subway" data-i18n="chat.quick.subway">🚇 Subway tips</button>
-    <button data-qkey="chat.q.kbeauty" data-i18n="chat.quick.kbeauty">💄 K-Beauty</button>
-    <button data-qkey="chat.q.visa" data-i18n="chat.quick.visa">🛂 Visa / K-ETA</button>
-  </div>
+  <!-- Quick chips removed: the capability menu (CHAT_CAPS, shown on open and
+       re-localized on language change) is the single set of prompt seeds. -->
   <div class="chat-input-row">
     <input type="text" id="chat-input" placeholder="Ask about Korea..." data-i18n-placeholder="chat.placeholder" autocomplete="off">
-    <button id="chat-send">➤</button>
+    <button id="chat-send" aria-label="Send message" data-i18n-aria="a11y.chat.send">➤</button>
   </div>
 </div>
 
@@ -494,7 +489,7 @@
       <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
       <a href="terms.html" data-i18n="footer.terms">Terms</a>
     </div>
-    <p style="margin-top:12px;font-size:11px;opacity:.4">© 2026 KoreaPlus-Lifes.com · Powered by Meta Llama 3.3 via OpenRouter</p>
+    <p style="margin-top:12px;font-size:11px;opacity:.6">© 2026 KoreaPlus-Lifes.com · Powered by Meta Llama 3.3 via OpenRouter</p>
   </div>
 </footer>
 
@@ -515,10 +510,9 @@
 <div id="kp-toast" class="kp-toast" role="status" aria-live="polite"></div>
 
 <script src="data.js?v=3"></script>
-<script src="detail-data.js?v=3"></script>
 <script src="modules/mytrip.js?v=3"></script>
-<script src="detail-panel.js?v=5"></script>
-<script src="app.js?v=18"></script>
+<script src="detail-panel.js?v=6"></script>
+<script src="app.js?v=19"></script>
 <script src="modules/nav.js?v=3"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/dashboard.js"></script>
@@ -530,14 +524,8 @@
 <script src="modules/search.js?v=2"></script>
 <script src="modules/analytics.js"></script>
 
+<script src="modules/pwa.js?v=1"></script>
 <script>
-  // Service Worker registration
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/guide/sw.js').catch(() => {});
-    });
-  }
-
   // Wire lang switcher into main nav
   document.addEventListener('DOMContentLoaded', function () {
     const mount = document.getElementById('main-lang-mount');

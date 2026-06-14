@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Offline · KoreaPlus</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:#000406;color:rgba(255,255,255,.9);min-height:100dvh;
+    display:flex;align-items:center;justify-content:center;padding:24px;line-height:1.5}
+  .wrap{max-width:440px;width:100%;text-align:center}
+  .flag{font-size:46px}
+  h1{font-size:24px;font-weight:800;margin:14px 0 8px;color:#fff}
+  p{font-size:15px;color:rgba(255,255,255,.62);margin-bottom:24px}
+  .lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:rgba(255,255,255,.4);margin:0 0 12px}
+  .cards{display:grid;gap:10px}
+  a.card{display:flex;align-items:center;gap:13px;padding:15px 16px;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;color:#fff;text-decoration:none;font-size:15px;font-weight:600;
+    transition:border-color .15s,background .15s}
+  a.card:hover{border-color:rgba(116,185,255,.4);background:rgba(116,185,255,.07)}
+  a.card .ic{font-size:22px}
+  .retry{margin-top:22px;padding:11px 22px;border-radius:22px;border:0;cursor:pointer;
+    background:#d62246;color:#fff;font-size:14px;font-weight:700}
+  .home{display:inline-block;margin-top:16px;color:rgba(116,185,255,.9);font-size:13px;text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="flag">🇰🇷</div>
+    <h1 id="t">You're offline</h1>
+    <p id="s">No internet right now — but these essential Korea guides are saved on your device.</p>
+    <div class="lbl" id="avl">Available offline</div>
+    <div class="cards">
+      <a class="card" href="/guide/emergency.html"><span class="ic">🆘</span><span id="c1">Emergency Info</span></a>
+      <a class="card" href="/guide/phrases.html"><span class="ic">🗣️</span><span id="c2">Korean Phrases</span></a>
+      <a class="card" href="/guide/currency.html"><span class="ic">💱</span><span id="c3">Currency Converter</span></a>
+      <a class="card" href="/guide/subway.html"><span class="ic">🚇</span><span id="c4">Subway Guide</span></a>
+    </div>
+    <div><button class="retry" id="rt" onclick="location.reload()">Try again</button></div>
+    <a class="home" href="/guide/" id="hm">← Back to KoreaPlus home</a>
+  </div>
+<script>
+  // Served by the service worker before the i18n engine loads, so inline the
+  // top-3 visitor languages; everything else falls back to English.
+  var L = {
+    ko:{t:"오프라인 상태입니다",s:"지금은 인터넷에 연결되어 있지 않지만, 아래 필수 한국 여행 가이드는 기기에 저장되어 있습니다.",avl:"오프라인 사용 가능",c1:"긴급 정보",c2:"한국어 회화",c3:"환율 계산기",c4:"지하철 가이드",rt:"다시 시도",hm:"← KoreaPlus 홈으로"},
+    ja:{t:"オフラインです",s:"現在インターネットに接続していませんが、以下の韓国旅行ガイドは端末に保存されています。",avl:"オフラインで利用可能",c1:"緊急情報",c2:"韓国語フレーズ",c3:"両替・通貨",c4:"地下鉄ガイド",rt:"再試行",hm:"← KoreaPlus ホームへ"},
+    zh:{t:"您已离线",s:"当前没有网络，但以下韩国旅行必备指南已保存在您的设备上。",avl:"可离线使用",c1:"紧急信息",c2:"韩语常用语",c3:"货币换算",c4:"地铁指南",rt:"重试",hm:"← 返回 KoreaPlus 主页"},
+    es:{t:"Estás sin conexión",s:"Ahora no hay internet, pero estas guías esenciales de Corea están guardadas en tu dispositivo.",avl:"Disponible sin conexión",c1:"Info de emergencia",c2:"Frases en coreano",c3:"Conversor de moneda",c4:"Guía de metro",rt:"Reintentar",hm:"← Volver al inicio de KoreaPlus"}
+  };
+  try {
+    var lang = (localStorage.getItem('kp_lang') || navigator.language || 'en').slice(0,2);
+    var m = L[lang];
+    if (m) { for (var id in m){ var el=document.getElementById(id); if(el) el.textContent=m[id]; } document.documentElement.lang=lang; }
+  } catch(e){}
+</script>
+</body>
+</html>
