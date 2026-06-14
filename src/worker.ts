@@ -219,6 +219,14 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, '');
 
+    // ── Pretty-URL redirects ───────────────────────────────────────────────
+    // The K-Beauty hub is served as a static file under /guide/. These give it
+    // clean shareable URLs. Registered as Worker routes on
+    // koreaplus-lifes.com/kbeauty* and /k-beauty* (CF route, separate from code).
+    if (path === '/kbeauty' || path === '/k-beauty') {
+      return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty.html' + url.search, 301);
+    }
+
     // ── GET routes ────────────────────────────────────────────────────────
     if (request.method === 'GET') {
       // Public, crawlable HTML page for a shared itinerary:  /i/{id}
