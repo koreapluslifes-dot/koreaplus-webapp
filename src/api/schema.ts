@@ -17,7 +17,10 @@ export type PlaceCategory =
   | 'food'           // 음식점 (39)
   | 'performance';   // KOPIS 공연
 
-export type DataSource = 'tourapi' | 'kopis' | 'culture_go' | 'seoul' | 'manual';
+export type DataSource =
+  | 'tourapi' | 'kopis' | 'culture_go' | 'seoul' | 'manual'
+  // K-Pop vertical sources
+  | 'spotify' | 'youtube' | 'itunes' | 'newsdata' | 'wikidata' | 'ticketmaster' | 'lastfm' | 'kpop';
 
 /** Normalized place entity — used across TourAPI, KOPIS, culture.go.kr */
 export interface Place {
@@ -163,6 +166,108 @@ export interface BikeStation {
   availableBikes: number;
   totalDocks: number;
   emptyDocks: number;
+}
+
+// ── K-Pop vertical ───────────────────────────────────────────────────────────
+
+/** Normalized artist/group profile — manual roster enriched by Spotify + Wikidata + YouTube */
+export interface KpopArtist {
+  id: string;                  // our slug id (matches kpop-data.js KPOP_ROSTER)
+  nameEn: string;
+  nameKo?: string;
+  type: 'group' | 'soloist';
+  agency?: string;
+  debut?: string;              // YYYY or YYYY-MM-DD
+  members?: string[];
+  emoji?: string;
+  image?: string;              // artist image URL (Spotify/Wikidata — never label press photos)
+  bio?: string;                // localized short bio (Wikipedia extract)
+  bioUrl?: string;             // Wikipedia source link
+  // popularity signals
+  spotifyId?: string;
+  spotifyPopularity?: number;  // 0–100
+  spotifyFollowers?: number;
+  youtubeChannelId?: string;
+  youtubeSubscribers?: number;
+  youtubeViews?: number;
+  genres?: string[];
+  sources: DataSource[];
+  updatedAt: string;
+}
+
+/** A music video / upload (YouTube) */
+export interface MusicVideo {
+  videoId: string;
+  title: string;
+  artist?: string;
+  thumbnail?: string;
+  publishedAt: string;
+  viewCount?: number;
+  likeCount?: number;
+  url: string;
+}
+
+/** A single chart position (iTunes RSS / derived) */
+export interface ChartEntry {
+  rank: number;
+  title: string;
+  artist: string;
+  artworkUrl?: string;
+  url?: string;
+  releaseDate?: string;
+  kind?: string;               // songs | albums | music-videos
+  store?: string;              // storefront code, e.g. 'kr', 'us'
+}
+
+/** A news / 근황 item (NewsData.io — title+excerpt+link only, never full body) */
+export interface NewsItem {
+  title: string;
+  excerpt?: string;
+  link: string;
+  source?: string;
+  sourceIcon?: string;
+  imageUrl?: string;
+  publishedAt?: string;
+  language?: string;
+  artists?: string[];          // matched roster ids
+  credibility?: 'confirmed' | 'reported' | 'rumor';
+}
+
+/** A scheduled comeback / release / event (manual roster, client-side countdown) */
+export interface Comeback {
+  artistId: string;
+  artist: string;
+  title: string;
+  date: string;                // YYYY-MM-DD (KST)
+  type: 'album' | 'single' | 'ep' | 'mv' | 'tour' | 'event';
+  confirmed?: boolean;
+}
+
+export type TickerKind = 'comeback' | 'chart' | 'mv' | 'news' | 'release';
+
+/** A single scrolling-ticker item on the hub */
+export interface TickerItem {
+  kind: TickerKind;
+  text: string;                // display string
+  artist?: string;
+  value?: string;              // e.g. '+2.1M', '#1', '3d 14h'
+  url?: string;
+  ts?: string;
+}
+
+/** A concert / tour date (Ticketmaster global + KOPIS for KR) */
+export interface KpopConcert {
+  id: string;
+  name: string;
+  artist?: string;
+  venue?: string;
+  city?: string;
+  country?: string;
+  date?: string;               // ISO 8601
+  onSaleDate?: string;
+  url?: string;                // ticket / affiliate deep link
+  image?: string;
+  source: DataSource;
 }
 
 // ── API Response Envelope ────────────────────────────────────────────────────

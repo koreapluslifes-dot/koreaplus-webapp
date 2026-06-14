@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-Pop Now: Comebacks, Charts & Idol News (Real-Time) | KoreaPlus</title>
+  <meta name="description" content="The world's K-pop hub — real-time charts, comeback countdowns, idol news and artist profiles for BTS, BLACKPINK, NewJeans, SEVENTEEN, Stray Kids & more. Follow your bias, then see them live and plan the trip. 9 languages.">
+  <link rel="canonical" href="https://koreaplus-lifes.com/guide/kpop.html">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000406">
+  <link rel="icon" type="image/svg+xml" href="icons/kplus.svg">
+  <link rel="apple-touch-icon" href="icons/kplus.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="K-Pop Now — Real-Time Charts, Comebacks & Idol News">
+  <meta property="og:description" content="Real-time K-pop charts, comeback countdowns and idol news. Follow your bias, see them live, plan the trip. In your language.">
+  <meta property="og:url" content="https://koreaplus-lifes.com/guide/kpop.html">
+  <meta property="og:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hub-styles.css?v=5">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="seo.css">
+  <script src="modules/header.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Pop Now — Real-Time Charts, Comebacks & Idol News","url":"https://koreaplus-lifes.com/guide/kpop.html","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-pop"},"description":"Real-time K-pop charts, comeback countdowns, idol news and artist profiles."}
+  </script>
+  <style>
+    /* ── K-Pop hub components (CSS vars from theme.css) ───────────────────── */
+    .kpop-ticker-wrap { position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--border); overflow:hidden; }
+    .kpop-ticker { display:flex; gap:28px; white-space:nowrap; padding:9px 16px; will-change:transform; animation:kpop-marquee 42s linear infinite; }
+    .kpop-ticker:hover { animation-play-state:paused; }
+    @keyframes kpop-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .tk-item { display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; color:var(--text2); }
+    .tk-item .tk-kind { font-size:11px; }
+    .tk-item .tk-val  { color:var(--accent2); font-weight:800; }
+    .tk-item.is-soon .tk-val { color:var(--accent); }
+    @media (prefers-reduced-motion:reduce){ .kpop-ticker{ animation:none; overflow-x:auto } }
+
+    .filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 22px; align-items:center; }
+    .filter-chip { padding:6px 15px; border-radius:20px; font-size:13px; font-weight:700; cursor:pointer; border:2px solid var(--border); background:var(--surface); color:var(--text2); transition:all .15s; }
+    .filter-chip:hover { border-color:var(--border2); color:var(--text); }
+    .filter-chip.active { border-color:var(--accent); color:var(--accent); background:rgba(200,16,46,.10); }
+
+    .kpop-sec { margin:34px 0; scroll-margin-top:64px; }
+    .kpop-sec-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+    .kpop-sec-title { font-size:19px; font-weight:900; color:var(--text); }
+    .kpop-sec-sub { font-size:12.5px; color:var(--text3); }
+    .kpop-live-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; margin-right:5px; box-shadow:0 0 0 0 rgba(34,197,94,.6); animation:kpop-pulse 2s infinite; vertical-align:middle; }
+    @keyframes kpop-pulse { 0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)} 70%{box-shadow:0 0 0 7px rgba(34,197,94,0)} 100%{box-shadow:0 0 0 0 rgba(34,197,94,0)} }
+
+    /* Charts */
+    .chart-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
+    .chart-row { display:flex; align-items:center; gap:11px; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:9px 12px; transition:all .15s; text-decoration:none; }
+    .chart-row:hover { border-color:var(--border2); transform:translateY(-1px); }
+    .chart-rank { font-size:15px; font-weight:900; color:var(--text3); min-width:26px; text-align:center; }
+    .chart-rank.top { color:var(--accent); }
+    .chart-art { width:46px; height:46px; border-radius:8px; object-fit:cover; background:var(--bg); flex-shrink:0; }
+    .chart-meta { min-width:0; }
+    .chart-title { font-size:13px; font-weight:800; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .chart-artist { font-size:11.5px; color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .chart-row.is-roster { border-color:rgba(200,16,46,.35); }
+    .chart-row.is-roster .chart-artist::after { content:' ★'; color:var(--accent); }
+
+    /* Countdowns */
+    .cd-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; }
+    .cd-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:15px; position:relative; overflow:hidden; }
+    .cd-card::before { content:''; position:absolute; inset:0 auto 0 0; width:4px; background:linear-gradient(180deg,var(--accent),var(--accent2)); }
+    .cd-type { font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--accent2); }
+    .cd-artist { font-size:16px; font-weight:900; color:var(--text); margin:3px 0 1px; }
+    .cd-title { font-size:12px; color:var(--text2); min-height:16px; }
+    .cd-timer { display:flex; gap:7px; margin:11px 0 12px; }
+    .cd-unit { text-align:center; }
+    .cd-num { font-size:20px; font-weight:900; color:var(--text); line-height:1; font-variant-numeric:tabular-nums; }
+    .cd-lab { font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:.05em; margin-top:3px; }
+    .cd-card.is-today .cd-num { color:var(--accent); }
+    .cd-actions { display:flex; gap:7px; }
+    .cd-share { flex:1; font-size:12px; font-weight:700; padding:7px; border-radius:9px; border:1px solid var(--border); background:var(--bg); color:var(--text2); cursor:pointer; transition:all .15s; }
+    .cd-share:hover { border-color:var(--accent); color:var(--accent); }
+
+    /* Artists */
+    .art-toggle { font-size:12px; font-weight:700; color:var(--accent2); cursor:pointer; background:none; border:none; padding:0; }
+    .art-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+    .art-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:15px 13px; text-align:center; cursor:pointer; transition:all .15s; position:relative; }
+    .art-card:hover { border-color:var(--border2); transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,.18); }
+    .art-emoji { font-size:30px; line-height:1; }
+    .art-name { font-size:14px; font-weight:900; color:var(--text); margin-top:8px; }
+    .art-ko { font-size:11px; color:var(--text3); }
+    .art-agency { font-size:10.5px; color:var(--text2); margin-top:5px; }
+    .art-fan { display:inline-block; margin-top:7px; font-size:10px; font-weight:700; color:var(--accent2); background:rgba(59,142,234,.10); border-radius:20px; padding:2px 9px; }
+    .art-follow { position:absolute; top:9px; right:9px; font-size:16px; background:none; border:none; cursor:pointer; opacity:.4; transition:all .15s; }
+    .art-follow:hover { transform:scale(1.2); }
+    .art-card.followed .art-follow { opacity:1; }
+
+    /* News */
+    .news-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:12px; }
+    .news-card { display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border); border-radius:13px; overflow:hidden; text-decoration:none; transition:all .15s; }
+    .news-card:hover { border-color:var(--border2); transform:translateY(-2px); }
+    .news-img { width:100%; height:140px; object-fit:cover; background:var(--bg); }
+    .news-body { padding:12px 13px; }
+    .news-title { font-size:13.5px; font-weight:800; color:var(--text); line-height:1.35; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .news-meta { font-size:10.5px; color:var(--text3); margin-top:7px; display:flex; gap:8px; align-items:center; }
+    .news-cred { font-size:9px; font-weight:800; text-transform:uppercase; padding:1px 6px; border-radius:4px; background:rgba(59,142,234,.12); color:var(--accent2); }
+
+    /* States */
+    .kpop-empty, .kpop-loading { padding:26px; text-align:center; color:var(--text3); font-size:13px; background:var(--surface); border:1px dashed var(--border); border-radius:13px; }
+    .kpop-spin { width:22px; height:22px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:kpspin .8s linear infinite; margin:0 auto 10px; }
+    @keyframes kpspin { to{ transform:rotate(360deg) } }
+
+    /* Modal */
+    .kpop-modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:200; display:none; align-items:center; justify-content:center; padding:18px; }
+    .kpop-modal-bg.open { display:flex; }
+    .kpop-modal { background:var(--surface); border:1px solid var(--border); border-radius:18px; max-width:480px; width:100%; max-height:88vh; overflow:auto; padding:22px; position:relative; }
+    .kpop-modal-x { position:absolute; top:12px; right:12px; width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:var(--bg); color:var(--text2); font-size:16px; cursor:pointer; }
+    .km-emoji { font-size:42px; }
+    .km-name { font-size:22px; font-weight:900; color:var(--text); margin-top:4px; }
+    .km-ko { font-size:13px; color:var(--text3); }
+    .km-facts { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0; }
+    .km-fact { font-size:11px; color:var(--text2); background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:5px 10px; }
+    .km-bio { font-size:13px; color:var(--text2); line-height:1.6; margin:12px 0; }
+    .km-bio a { color:var(--accent2); }
+    .km-members { font-size:12px; color:var(--text2); line-height:1.7; }
+    .km-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .km-link { font-size:12px; font-weight:700; text-decoration:none; padding:8px 13px; border-radius:10px; border:1px solid var(--border); color:var(--text); background:var(--bg); }
+    .km-link.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+    /* Funnel */
+    .funnel { background:linear-gradient(135deg,rgba(200,16,46,.08),rgba(59,142,234,.08)); border:1px solid var(--border); border-radius:16px; padding:20px; margin:30px 0; }
+    .funnel-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:14px; }
+    .funnel-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:14px; text-decoration:none; display:block; transition:all .15s; }
+    .funnel-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+    .funnel-ic { font-size:24px; }
+    .funnel-t { font-size:14px; font-weight:800; color:var(--text); margin-top:6px; }
+    .funnel-d { font-size:11.5px; color:var(--text3); margin-top:3px; }
+    .funnel-disc { font-size:10px; color:var(--text3); margin-top:12px; }
+  </style>
+</head>
+<body>
+
+<nav class="hub-nav" role="navigation" aria-label="Navigation">
+  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <div class="hub-nav-links">
+  <div class="kp-pnav">
+    <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
+    <div class="kp-pnav-items">
+      <a class="kp-pnav-link" href="index.html#categories-section" data-i18n="nav.explore">Explore</a>
+      <div class="kp-pnav-drop">
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.guides">Guides</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <div class="kp-pnav-menu" role="menu">
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.discover">Discover</div>
+            <a role="menuitem" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
+            <a role="menuitem" href="seasons.html" data-i18n="nav.seasons">🌸 Seasons</a>
+            <a role="menuitem" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
+            <a role="menuitem" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
+            <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
+            <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
+            <a role="menuitem" href="kpop.html" data-i18n="nav.kpop" aria-current="page">🎤 K-Pop</a>
+          </div>
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
+            <a role="menuitem" href="phrases.html" data-i18n="nav.phrases">🗣️ Phrases</a>
+            <a role="menuitem" href="currency.html" data-i18n="nav.currency">💱 Currency</a>
+            <a role="menuitem" href="subway.html" data-i18n="nav.subway">🚇 Subway</a>
+            <a role="menuitem" href="menu-translator.html" data-i18n="nav.menu">📷 Menu</a>
+            <a role="menuitem" href="etiquette.html" data-i18n="nav.etiquette">🎎 Etiquette</a>
+            <a role="menuitem" href="emergency.html" data-i18n="nav.emergency">🆘 Emergency</a>
+          </div>
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.more">More</div>
+            <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
+            <a role="menuitem" href="blog/index.html" data-i18n="nav.blog">📰 Blog</a>
+          </div>
+        </div>
+      </div>
+      <div class="kp-pnav-drop">
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.whereto">Where to Go</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <div class="kp-pnav-menu" role="menu">
+          <div class="kp-pnav-group" role="group">
+            <a role="menuitem" href="guide/things-to-do-in-seoul.html" data-i18n="nav.city.seoul">📍 Seoul</a>
+            <a role="menuitem" href="guide/things-to-do-in-busan.html" data-i18n="nav.city.busan">📍 Busan</a>
+            <a role="menuitem" href="guide/things-to-do-in-jeju.html" data-i18n="nav.city.jeju">📍 Jeju</a>
+            <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
+            <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
+            <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
+            <a role="menuitem" class="kp-pnav-all" href="explore.html" data-i18n="nav.alldest">🗺️ All destinations</a>
+          </div>
+        </div>
+      </div>
+      <a class="kp-pnav-cta" href="plan.html" data-i18n="nav.plan">🗺️ Plan Trip</a>
+    </div>
+  </div>
+</div>
+</nav>
+
+<!-- Live ticker (countdowns + chart) — populated by modules/kpop.js -->
+<div class="kpop-ticker-wrap" id="kpop-ticker-wrap" hidden>
+  <div class="kpop-ticker" id="kpop-ticker"></div>
+</div>
+
+<div class="hub-hero">
+  <div class="hub-hero-tag"><span class="kpop-live-dot"></span><span data-i18n="kpop.hero.tag">Real-time · Updated daily</span></div>
+  <h1 data-i18n="kpop.hero.title">🎤 K-Pop Now</h1>
+  <p data-i18n="kpop.hero.sub">Comebacks, charts, idol news & your bias — all in one place, in your language.</p>
+</div>
+
+<main class="hub-content" style="max-width:1100px">
+
+  <div class="filter-bar" id="kpop-filters">
+    <button class="filter-chip active" data-target="all" data-i18n="kpop.filter.all">🔥 All</button>
+    <button class="filter-chip" data-target="kpop-charts" data-i18n="kpop.filter.charts">📈 Charts</button>
+    <button class="filter-chip" data-target="kpop-countdowns" data-i18n="kpop.filter.countdowns">⏳ Comebacks</button>
+    <button class="filter-chip" data-target="kpop-artists" data-i18n="kpop.filter.artists">🎤 Artists</button>
+    <button class="filter-chip" data-target="kpop-news" data-i18n="kpop.filter.news">📰 News</button>
+  </div>
+
+  <!-- Charts (zero-key: iTunes RSS) -->
+  <section class="kpop-sec" id="kpop-charts">
+    <div class="kpop-sec-head">
+      <div class="kpop-sec-title"><span class="kpop-live-dot"></span><span data-i18n="kpop.sec.charts.title">Real-Time Charts</span></div>
+      <div class="kpop-sec-sub" data-i18n="kpop.sec.charts.sub">Top songs right now · Apple Music Korea</div>
+    </div>
+    <div id="kpop-charts-list" class="chart-list"><div class="kpop-loading"><div class="kpop-spin"></div><span data-i18n="kpop.loading">Loading…</span></div></div>
+  </section>
+
+  <!-- Comeback / anniversary countdowns (zero-key: kpop-data.js) -->
+  <section class="kpop-sec" id="kpop-countdowns">
+    <div class="kpop-sec-head">
+      <div class="kpop-sec-title" data-i18n="kpop.sec.countdowns.title">⏳ Comeback & Anniversary Countdowns</div>
+      <div class="kpop-sec-sub" data-i18n="kpop.sec.countdowns.sub">Next milestones for your favorite artists</div>
+    </div>
+    <div id="kpop-cd-grid" class="cd-grid"></div>
+  </section>
+
+  <!-- Artists / bias-follow (zero-key: kpop-data.js) -->
+  <section class="kpop-sec" id="kpop-artists">
+    <div class="kpop-sec-head">
+      <div class="kpop-sec-title" data-i18n="kpop.sec.artists.title">🎤 Artists & Groups</div>
+      <button class="art-toggle" id="art-toggle" hidden></button>
+    </div>
+    <div class="kpop-sec-sub" data-i18n="kpop.sec.artists.sub" style="margin-bottom:12px">Tap a star to follow your bias and get their updates first</div>
+    <div id="kpop-art-grid" class="art-grid"></div>
+  </section>
+
+  <!-- News (keyed: NewsData → graceful empty without key) -->
+  <section class="kpop-sec" id="kpop-news">
+    <div class="kpop-sec-head">
+      <div class="kpop-sec-title"><span class="kpop-live-dot"></span><span data-i18n="kpop.sec.news.title">Latest K-Pop News</span></div>
+      <div class="kpop-sec-sub" data-i18n="kpop.sec.news.sub">Real-time updates from across the K-pop world</div>
+    </div>
+    <div id="kpop-news-list" class="news-list"></div>
+  </section>
+
+  <!-- Concert → travel → merch funnel -->
+  <section class="funnel" id="kpop-funnel">
+    <div class="kpop-sec-title" data-i18n="kpop.funnel.title">🎫 See Them Live → Plan the Trip</div>
+    <div class="kpop-sec-sub" data-i18n="kpop.funnel.sub">Concert tickets, hotels near the venue, and fan-spot itineraries — all in one trip.</div>
+    <div class="funnel-steps" id="kpop-funnel-steps">
+      <a class="funnel-card" href="festivals.html"><div class="funnel-ic">🎫</div><div class="funnel-t" data-i18n="kpop.funnel.tickets">Concerts & Shows</div><div class="funnel-d" data-i18n="kpop.funnel.tickets.sub">Live K-pop dates & tickets</div></a>
+      <a class="funnel-card" href="plan.html"><div class="funnel-ic">✈️</div><div class="funnel-t" data-i18n="kpop.funnel.travel">Flights + Hotels</div><div class="funnel-d" data-i18n="kpop.funnel.travel.sub">Stay near the venue</div></a>
+      <a class="funnel-card" href="kdrama-locations.html"><div class="funnel-ic">📍</div><div class="funnel-t" data-i18n="kpop.funnel.spots">Fan Spots & Cafés</div><div class="funnel-d" data-i18n="kpop.funnel.spots.sub">HYBE, SM, idol cafés</div></a>
+      <a class="funnel-card" href="guide/k-pop-and-culture-guide.html"><div class="funnel-ic">🛍️</div><div class="funnel-t" data-i18n="kpop.funnel.merch">Albums & Merch</div><div class="funnel-d" data-i18n="kpop.funnel.merch.sub">Lightsticks, photocards</div></a>
+    </div>
+    <div class="funnel-disc" data-i18n="kpop.funnel.disc">Some links are affiliate links — they help keep KoreaPlus free, at no extra cost to you.</div>
+  </section>
+
+  <!-- Keep exploring -->
+  <section class="hub-explore">
+    <h2 class="hub-explore-title" data-i18n="kpop.explore.title">Keep Exploring K-Culture</h2>
+    <div class="hub-explore-grid">
+      <a class="hub-explore-card" href="guide/k-pop-and-culture-guide.html"><span class="ic">🎤</span><span>K-Pop &amp; Culture<span class="sub">Fan spots & shows</span></span></a>
+      <a class="hub-explore-card" href="itinerary/kpop-korea-4-day-itinerary.html"><span class="ic">🎵</span><span>K-Pop 4-Day Itinerary<span class="sub">HYBE, SM & more</span></span></a>
+      <a class="hub-explore-card" href="kdrama-locations.html"><span class="ic">🎬</span><span>K-Drama Locations<span class="sub">Filming spots map</span></span></a>
+      <a class="hub-explore-card" href="festivals.html"><span class="ic">🎪</span><span>Festival Calendar<span class="sub">Concerts & events</span></span></a>
+      <a class="hub-explore-card" href="culture.html"><span class="ic">🏛️</span><span>Korean Culture<span class="sub">Traditions & today</span></span></a>
+      <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my K-pop trip with AI<span class="sub">Free personalized itinerary</span></span></a>
+    </div>
+  </section>
+
+  <!-- AdSense — single responsive unit -->
+  <div style="margin:36px auto 12px;max-width:880px;min-height:250px;display:flex;align-items:center;justify-content:center;padding:0 16px">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle" style="display:block;width:100%"
+         data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"
+         data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+</main>
+
+<!-- Artist detail modal -->
+<div class="kpop-modal-bg" id="kpop-modal-bg" role="dialog" aria-modal="true" aria-label="Artist details">
+  <div class="kpop-modal" id="kpop-modal"></div>
+</div>
+
+<!-- Worker URL (config.js is gitignored on the server; fall back to the public worker) -->
+<script src="config.js" onerror="void 0"></script>
+<script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
+<script src="kpop-data.js"></script>
+<script src="modules/api-client.js"></script>
+<script src="modules/kpop-sharecard.js"></script>
+<script src="modules/kpop.js"></script>
+</body>
+</html>

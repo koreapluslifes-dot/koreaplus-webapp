@@ -1,11 +1,12 @@
 /* ══════════════════════════════════════════════════════════════════
-   KoreaPlus — context-matched affiliate offers (Impact.com via Worker)
+   KoreaPlus — Agoda affiliate offers (via Worker /api/aff)
 
-   Static pages ship a fallback .seo-aff block with a data-aff context
-   attribute. This module:
-     1. fetches /api/aff?city=&cat=&q=  (Impact tracking links, KV-cached)
+   Agoda is the only affiliate network. Static pages ship a fallback
+   .seo-aff block (Agoda cid deep link). This module:
+     1. fetches /api/aff?city=&cat=&q=&lang=  (live Agoda hotel cards when the
+        Long Tail API key is set, else cid deep links; KV-cached)
      2. swaps the block's links in place (graceful: fetch fails → static
-        fallback links simply remain)
+        Agoda fallback link simply remains)
      3. on long articles, clones a compact offer strip after the 2nd <h2>
         (better viewport coverage than a single bottom block)
      4. tracks clicks via kpAnalytics (GA4 event: aff_click)
@@ -32,8 +33,9 @@
 
   function renderGrid(grid, offers, ctx, placement) {
     grid.innerHTML = offers.map(function (o) {
+      var sub = o.price ? esc(o.price) + ' · ' + esc(o.brand) : esc(o.brand);
       return '<a href="' + esc(o.url) + '" target="_blank" rel="sponsored noopener" data-aff-brand="' + esc(o.brand) + '">' +
-        '<strong>' + o.icon + ' ' + esc(o.label) + '</strong><span>' + esc(o.brand) + '</span></a>';
+        '<strong>' + (o.icon || '🏨') + ' ' + esc(o.label) + '</strong><span>' + sub + '</span></a>';
     }).join('');
     grid.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () { track(a.dataset.affBrand, ctx, placement); });
@@ -46,8 +48,10 @@
 
     var ctx = {};
     try { ctx = JSON.parse(blocks[0].dataset.aff || '{}'); } catch (e) { /* keep {} */ }
+    var lang = blocks[0].getAttribute('data-aff-lang') ||
+      (window.kpI18n && window.kpI18n.getLang && window.kpI18n.getLang()) || 'en';
 
-    var qs = new URLSearchParams({ city: ctx.city || '', cat: ctx.cat || '', q: ctx.q || '' });
+    var qs = new URLSearchParams({ city: ctx.city || '', cat: ctx.cat || '', q: ctx.q || '', lang: lang });
     fetch(WORKER + '/api/aff?' + qs.toString())
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (data) {

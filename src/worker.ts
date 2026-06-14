@@ -34,11 +34,18 @@ export interface WorkerEnv extends CacheEnv, LLMEnv {
   SEOUL_SUBWAY_KEY:       string;   // 실시간 지하철 인증키
   EXCHANGE_RATE_KEY:      string;
   // Phase 3: GROQ_API_KEY (primary LLM). Fallback reuses OPENROUTER_API_KEY above.
-  // Impact.com affiliate (all optional — /api/aff falls back to plain links)
-  IMPACT_ACCOUNT_SID?:    string;
-  IMPACT_AUTH_TOKEN?:     string;
-  IMPACT_PROGRAMS?:       string;   // JSON: {"klook":"1234","airalo":"5678",...}
-  IMPACT_PROPERTY_ID?:    string;
+  // Agoda affiliate (only network). /api/aff falls back to cid deep links without a key.
+  AGODA_API_KEY?:         string;   // Long Tail Search API key (live hotel cards)
+  AGODA_SITE_ID?:         string;   // overrides the cid for API auth (default 1952761)
+  AGODA_CITY_IDS?:        string;   // JSON map: {"Busan":12345,"Jeju":67890}
+  // ── K-Pop vertical (all optional — each route degrades to 503 without its key) ──
+  // iTunes RSS + Wikidata need NO key. These light up the keyed enrichment:
+  YOUTUBE_API_KEY?:       string;   // MV views, channel stats (quota 10k/day)
+  SPOTIFY_CLIENT_ID?:     string;   // artist popularity/artwork (Client Credentials)
+  SPOTIFY_CLIENT_SECRET?: string;
+  NEWSDATA_API_KEY?:      string;   // real-time 근황/news feed
+  TICKETMASTER_API_KEY?:  string;   // global concert/tour dates
+  LASTFM_API_KEY?:        string;   // (P2) supplementary popularity signal
 }
 
 const CORS = {

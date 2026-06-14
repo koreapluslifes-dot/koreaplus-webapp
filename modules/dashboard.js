@@ -96,29 +96,67 @@
     ]);
   }
 
+  // Aggregate the worker's 3-hourly slots into per-day hi/lo + midday icon.
+  function agg3Day(slots) {
+    if (!Array.isArray(slots) || !slots.length) return [];
+    const byDate = new Map();
+    for (const s of slots) {
+      const d = String(s.datetime || '').slice(0, 8);          // YYYYMMDD
+      const hh = String(s.datetime || '').slice(9, 11);        // HH
+      if (!byDate.has(d)) byDate.set(d, { date: d, hi: -99, lo: 99, pop: 0, mid: null });
+      const day = byDate.get(d);
+      const tmp = Number(s.temp);
+      if (Number.isFinite(tmp)) { day.hi = Math.max(day.hi, tmp); day.lo = Math.min(day.lo, tmp); }
+      day.pop = Math.max(day.pop, Number(s.rainProb) || 0);
+      if (hh === '15' || (!day.mid && (hh === '12' || hh === '09'))) day.mid = s;
+      if (!day.mid) day.mid = s;
+    }
+    return [...byDate.values()].slice(0, 3);
+  }
+  function dowLabel(yyyymmdd) {
+    const y = +yyyymmdd.slice(0, 4), m = +yyyymmdd.slice(4, 6) - 1, d = +yyyymmdd.slice(6, 8);
+    const loc = (window.kpI18n && window.kpI18n.getLang && window.kpI18n.getLang()) || 'en';
+    try { return new Date(y, m, d).toLocaleDateString(loc, { weekday: 'short' }); }
+    catch { return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(y, m, d).getDay()]; }
+  }
+
   async function loadWeather() {
     const el = document.getElementById('kpd-weather');
     if (!el) return;
     try {
-      const [w, a] = await Promise.all([
+      const [w, a, fc] = await Promise.all([
         window.KPApi.getWeather('Seoul'),
         window.KPApi.getAqi('Seoul').catch(() => null),
+        window.KPApi.getForecast('Seoul').catch(() => null),
       ]);
       const aqiGrade = a?.khaiGrade ?? a?.pm25Grade ?? 'unknown';
       const aqiLabel = { good:t('air.good','Good 🟢'), moderate:t('air.moderate','Moderate 🟡'), unhealthy:t('air.unhealthy','Unhealthy 🟠'), veryUnhealthy:t('air.veryBad','Very Bad 🔴'), unknown:'—' }[aqiGrade] ?? '—';
       const pm25 = a?.pm25 != null ? `PM2.5 ${a.pm25}μg` : '';
 
+      const days = agg3Day(fc);
+      const fcHtml = days.length ? `
+        <div class="kpd-fc-label">${t('dash.forecast3d','3-Day Forecast')}</div>
+        <div class="kpd-fc">${days.map(d => `
+          <div class="kpd-fc-day">
+            <span class="kpd-fc-dow">${dowLabel(d.date)}</span>
+            <span class="kpd-fc-emoji">${(d.mid && d.mid.emoji) || '🌡️'}</span>
+            <span class="kpd-fc-temp"><b>${Math.round(d.hi)}°</b> ${Math.round(d.lo)}°</span>
+            ${d.pop >= 30 ? `<span class="kpd-fc-pop">💧${d.pop}%</span>` : ''}
+          </div>`).join('')}</div>` : '';
+
       el.innerHTML = `
         <div class="kpd-weather-row">
           <div class="kpd-temp">${w.conditionEmoji || '🌡️'} ${Math.round(w.temp)}°C</div>
           <div class="kpd-weather-detail">
+            <span class="kpd-live"><span class="kpd-live-dot"></span>${t('dash.live','LIVE')}</span><br>
             ${w.condition}<br>
             💧${w.humidity}% 💨${w.windSpeed}m/s
           </div>
         </div>
         <div class="aqi-grade aqi-${aqiGrade}" style="margin-top:6px">
           ${t('air.label','Air')}: ${aqiLabel} ${pm25 ? `· ${pm25}` : ''}
-        </div>`;
+        </div>
+        ${fcHtml}`;
     } catch {
       el.innerHTML = `<span class="kpd-loading">${t('dash.wUnavail','Weather unavailable')}</span>`;
     }

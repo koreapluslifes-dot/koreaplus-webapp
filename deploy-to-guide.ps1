@@ -28,7 +28,9 @@ $ROOT_FILES = @(
     "about.html", "privacy.html", "terms.html", "contact.html",
     # Phase 6 - Killer Features
     "emergency.html", "phrases.html", "currency.html", "etiquette.html",
-    "seasons.html", "kdrama-locations.html", "menu-translator.html", "subway.html"
+    "seasons.html", "kdrama-locations.html", "menu-translator.html", "subway.html",
+    # K-Pop vertical
+    "kpop.html", "kpop-data.js", "seo.css"
 )
 
 $MODULE_FILES = @(
@@ -43,7 +45,14 @@ $MODULE_FILES = @(
     "modules/analytics.js",
     "modules/header.js",
     # Phase 7 - My Trip personal record system
-    "modules/mytrip.js"
+    "modules/mytrip.js",
+    # extra runtime modules used by hub pages
+    "modules/nav.js",
+    "modules/pwa.js",
+    "modules/affiliate.js",
+    # K-Pop vertical
+    "modules/kpop.js",
+    "modules/kpop-sharecard.js"
 )
 
 $MESSAGE_FILES = @(

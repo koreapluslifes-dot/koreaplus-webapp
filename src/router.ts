@@ -16,6 +16,12 @@
  *  GET  /api/bikes               → 따릉이 availability       ?start=1&end=50
  *  GET  /api/exchange            → Exchange rates (KRW base)
  *  GET  /api/cities              → Supported city list
+ *  GET  /api/kpop/charts         → iTunes RSS chart (no key)  ?store=kr&type=songs&limit=50
+ *  GET  /api/kpop/ticker         → Live chart ticker (no key)
+ *  GET  /api/kpop/bio            → Wikidata/Wikipedia bio (no key)  ?qid=Q..&lang=ko
+ *  GET  /api/kpop/artist         → Aggregated profile  ?id=..&qid=..&spotify=..&channel=..&lang=ko
+ *  GET  /api/kpop/feed           → Real-time news (NewsData)  ?artist=NewJeans&lang=en
+ *  GET  /api/kpop/concerts       → Tour dates (Ticketmaster)  ?artist=SEVENTEEN&country=US
  *  GET  /api/health              → Health check (all services)
  */
 
@@ -25,8 +31,15 @@ import { WeatherClient } from './api/weather.ts';
 import { AirQualityClient } from './api/airquality.ts';
 import { TransitClient } from './api/transit.ts';
 import { ExchangeClient } from './api/exchange.ts';
+// K-Pop vertical clients
+import { ItunesClient, type ItunesChartType } from './api/itunes.ts';
+import { WikidataClient } from './api/wikidata.ts';
+import { SpotifyClient } from './api/spotify.ts';
+import { YoutubeClient } from './api/youtube.ts';
+import { NewsdataClient } from './api/newsdata.ts';
+import { TicketmasterClient } from './api/ticketmaster.ts';
 import { withCache } from './cache.ts';
-import type { ApiResponse } from './api/schema.ts';
+import type { ApiResponse, TickerItem, KpopArtist, DataSource } from './api/schema.ts';
 import type { WorkerEnv } from './worker.ts';
 
 const CORS_HEADERS = {
@@ -275,6 +288,168 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
     });
   }
 
+  // ════════════════════════════════════════════════════════════════════════
+  // K-POP VERTICAL  (/api/kpop/*)
+  // Zero-key routes (charts, ticker, bio) always work; keyed routes (feed,
+  // concerts) and keyed enrichment (artist) degrade gracefully when a secret
+  // is absent — identical to the weather/exchange pattern above.
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── GET /api/kpop/charts ──────────────────────────────────────────────────
+  // iTunes RSS (NO key). ?store=kr&type=songs|albums|music-videos&limit=50
+  if (request.method === 'GET' && path.endsWith('/api/kpop/charts')) {
+    const store = qp(url, 'store', 'kr');
+    const type = (qp(url, 'type', 'songs') as ItunesChartType);
+    const limit = parseInt(qp(url, 'limit', '50'));
+    const client = new ItunesClient();
+    try {
+      const { data, cached, cacheAgeSeconds } = await withCache(
+        env, `kpop:charts:${store}:${type}:${limit}`, 3600,
+        () => client.getChart({ store, type, limit }),
+      );
+      return jsonResponse({ data, cached, cacheAgeSeconds, source: 'itunes' });
+    } catch (e) {
+      return errorResponse(`Charts fetch failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── GET /api/kpop/ticker ──────────────────────────────────────────────────
+  // Zero-key scrolling ticker built from the KR chart. Client prepends its own
+  // comeback countdowns (computed from kpop-data.js) ahead of these.
+  if (request.method === 'GET' && path.endsWith('/api/kpop/ticker')) {
+    const client = new ItunesClient();
+    try {
+      const { data, cached } = await withCache(
+        env, 'kpop:ticker', 1800,
+        async (): Promise<TickerItem[]> => {
+          const chart = await client.getChart({ store: 'kr', type: 'songs', limit: 10 });
+          return chart.slice(0, 8).map((c): TickerItem => ({
+            kind: 'chart',
+            text: `${c.artist} — ${c.title}`,
+            artist: c.artist,
+            value: `#${c.rank}`,
+            url: c.url,
+          }));
+        },
+      );
+      return jsonResponse({ data, cached, source: 'itunes' });
+    } catch (e) {
+      return errorResponse(`Ticker fetch failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── GET /api/kpop/bio ─────────────────────────────────────────────────────
+  // Wikidata + Wikipedia (NO key). ?qid=Q24862373&lang=ko
+  if (request.method === 'GET' && path.endsWith('/api/kpop/bio')) {
+    const qid = qp(url, 'qid');
+    const lang = qp(url, 'lang', 'en');
+    if (!qid) return errorResponse('qid required', 400);
+    const client = new WikidataClient();
+    try {
+      const { data, cached } = await withCache(
+        env, `kpop:bio:${qid}:${lang}`, 86400,
+        () => client.getBio(qid, lang),
+      );
+      return jsonResponse({ data, cached, source: 'wikidata' });
+    } catch (e) {
+      return errorResponse(`Bio fetch failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── GET /api/kpop/artist ──────────────────────────────────────────────────
+  // Aggregated profile enrichment. ?id=newjeans&qid=Q..&spotify=..&channel=UC..&lang=ko
+  // Wikidata always; Spotify/YouTube only when their secrets exist.
+  if (request.method === 'GET' && path.endsWith('/api/kpop/artist')) {
+    const id = qp(url, 'id');
+    const qid = qp(url, 'qid');
+    const spotifyId = qp(url, 'spotify');
+    const channelId = qp(url, 'channel');
+    const lang = qp(url, 'lang', 'en');
+    if (!id) return errorResponse('id required', 400);
+    try {
+      const { data, cached } = await withCache(
+        env, `kpop:artist:${id}:${lang}`, 43200,
+        async (): Promise<Partial<KpopArtist>> => {
+          const sources: DataSource[] = [];
+          const out: Partial<KpopArtist> = { id, sources, updatedAt: new Date().toISOString() };
+          if (qid) {
+            try {
+              const bio = await new WikidataClient().getBio(qid, lang);
+              if (bio) {
+                out.bio = bio.bio;
+                out.bioUrl = bio.wikipediaUrl;
+                if (bio.image) out.image = bio.image;
+                if (bio.label) out.nameEn = bio.label;
+                sources.push('wikidata');
+              }
+            } catch { /* bio optional */ }
+          }
+          if (spotifyId && env.SPOTIFY_CLIENT_ID && env.SPOTIFY_CLIENT_SECRET) {
+            try {
+              const sp = await new SpotifyClient(env.SPOTIFY_CLIENT_ID, env.SPOTIFY_CLIENT_SECRET, env).getArtist(spotifyId);
+              out.spotifyId = spotifyId;
+              if (sp.spotifyPopularity != null) out.spotifyPopularity = sp.spotifyPopularity;
+              if (sp.spotifyFollowers != null) out.spotifyFollowers = sp.spotifyFollowers;
+              if (sp.genres) out.genres = sp.genres;
+              if (sp.image) out.image = sp.image;
+              sources.push('spotify');
+            } catch { /* spotify optional */ }
+          }
+          if (channelId && env.YOUTUBE_API_KEY) {
+            try {
+              const yt = await new YoutubeClient(env.YOUTUBE_API_KEY).getChannelStats(channelId);
+              out.youtubeChannelId = channelId;
+              out.youtubeSubscribers = yt.subscribers;
+              out.youtubeViews = yt.views;
+              sources.push('youtube');
+            } catch { /* youtube optional */ }
+          }
+          return out;
+        },
+      );
+      return jsonResponse({ data, cached, source: 'kpop' });
+    } catch (e) {
+      return errorResponse(`Artist fetch failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── GET /api/kpop/feed ────────────────────────────────────────────────────
+  // Real-time news/근황 (NewsData.io). ?artist=NewJeans&lang=en
+  if (request.method === 'GET' && path.endsWith('/api/kpop/feed')) {
+    const q = qp(url, 'artist') || qp(url, 'q');
+    const lang = qp(url, 'lang') || undefined;
+    if (!env.NEWSDATA_API_KEY) return errorResponse('NEWSDATA_API_KEY not configured', 503);
+    const client = new NewsdataClient(env.NEWSDATA_API_KEY);
+    try {
+      const { data, cached } = await withCache(
+        env, `kpop:feed:${q || 'all'}:${lang || 'any'}`, 300,
+        () => client.getNews({ q, lang }),
+      );
+      return jsonResponse({ data, cached, source: 'newsdata' });
+    } catch (e) {
+      return errorResponse(`Feed fetch failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── GET /api/kpop/concerts ────────────────────────────────────────────────
+  // Global tour dates (Ticketmaster). ?artist=SEVENTEEN&country=US
+  // For Korea shows, use the existing /api/shows (KOPIS).
+  if (request.method === 'GET' && path.endsWith('/api/kpop/concerts')) {
+    const keyword = qp(url, 'artist') || qp(url, 'keyword') || undefined;
+    const countryCode = qp(url, 'country') || undefined;
+    if (!env.TICKETMASTER_API_KEY) return errorResponse('TICKETMASTER_API_KEY not configured', 503);
+    const client = new TicketmasterClient(env.TICKETMASTER_API_KEY);
+    try {
+      const { data, cached } = await withCache(
+        env, `kpop:concerts:${keyword || 'all'}:${countryCode || 'all'}`, 21600,
+        () => client.getConcerts({ keyword, countryCode }),
+      );
+      return jsonResponse({ data, cached, source: 'ticketmaster' });
+    } catch (e) {
+      return errorResponse(`Concerts fetch failed: ${(e as Error).message}`);
+    }
+  }
+
   // ── GET /api/health ───────────────────────────────────────────────────────
   if (request.method === 'GET' && path.endsWith('/api/health')) {
     const services: Record<string, boolean> = {
@@ -288,8 +463,17 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
       exchange_rate: !!env.EXCHANGE_RATE_KEY,
     };
     const allConfigured = Object.values(services).every(Boolean);
+    // K-Pop sources: itunes + wikidata need no key (always live); the rest are optional.
+    const kpop: Record<string, boolean> = {
+      itunes:       true,
+      wikidata:     true,
+      youtube:      !!env.YOUTUBE_API_KEY,
+      spotify:      !!(env.SPOTIFY_CLIENT_ID && env.SPOTIFY_CLIENT_SECRET),
+      newsdata:     !!env.NEWSDATA_API_KEY,
+      ticketmaster: !!env.TICKETMASTER_API_KEY,
+    };
     return jsonResponse(
-      { data: { services, allConfigured }, cached: false, source: 'worker' },
+      { data: { services, kpop, allConfigured }, cached: false, source: 'worker' },
       allConfigured ? 200 : 206,
     );
   }

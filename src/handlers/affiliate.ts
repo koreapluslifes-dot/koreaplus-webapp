@@ -1,22 +1,24 @@
 /**
- * Impact.com affiliate link service.
+ * Agoda-only affiliate service. All other networks (Klook, KKday, Trip.com,
+ * Impact) have been removed — KoreaPlus monetizes exclusively via the owner's
+ * Agoda affiliate account (cid 1952761).
  *
- * GET /api/aff?city=Seoul&cat=food&q=Bibimbap
- *   → { offers: [{ brand, label, icon, url }] }
+ * GET /api/aff?city=Seoul&cat=hotel&q=&lang=en
+ *   → { offers: [{ brand:'Agoda', icon, label, url, price?, img? }] }
  *
- * Flow:
- *   1. Context (city/category/query) → candidate offers with brand deep links.
- *   2. For each offer, if Impact credentials + ProgramId are configured,
- *      create (or KV-cache) an Impact TrackingLink wrapping the deep link.
- *   3. Otherwise fall back to the plain brand URL — the site monetizes
- *      nothing but keeps working before program approvals.
+ * Two tiers, graceful:
+ *   1. Deep links (always on, no key) — city-targeted Agoda landing pages with
+ *      the cid, so every click monetizes even with JS/API off.
+ *   2. Live hotel cards (Long Tail Search API) — only when AGODA_API_KEY is set
+ *      AND the city has a known Agoda numeric cityId. Any failure (no key,
+ *      unknown city, API error, no results) silently falls back to tier 1.
  *
- * Secrets (wrangler secret put …):
- *   IMPACT_ACCOUNT_SID   — Impact publisher Account SID
- *   IMPACT_AUTH_TOKEN    — Impact API Auth Token
- *   IMPACT_PROGRAMS      — JSON map of brandKey → ProgramId,
- *                          e.g. {"klook":"1234","tripcom":"9012","kkday":"3456"}
- *   IMPACT_PROPERTY_ID   — (optional) MediaPartnerPropertyId if your account has several
+ * Secret (wrangler secret put AGODA_API_KEY):
+ *   AGODA_API_KEY  — the Long Tail Search API key paired with the site id (cid).
+ * Optional vars:
+ *   AGODA_SITE_ID     — overrides the cid used for API auth (default 1952761)
+ *   AGODA_CITY_IDS    — JSON map to add/override Agoda cityIds, e.g.
+ *                       {"Busan":12345,"Jeju":67890}
  */
 
 import type { WorkerEnv } from '../worker.ts';
@@ -24,115 +26,134 @@ import type { WorkerEnv } from '../worker.ts';
 const CORS = {
   'Access-Control-Allow-Origin': '*',
   'Content-Type': 'application/json',
-  // Edge/browser cache one hour — link URLs are stable thanks to KV caching.
   'Cache-Control': 'public, max-age=3600',
 };
 
-// ── Brand registry (fallback URL builders take an encoded query) ────────────
-interface Brand { brand: string; icon: string; key: string; deep: (q: string) => string }
-const BRANDS: Record<string, Brand> = {
-  klook:   { key: 'klook',   brand: 'Klook',   icon: '🎟️', deep: q => `https://www.klook.com/search/?query=${q}` },
-  kkday:   { key: 'kkday',   brand: 'KKday',   icon: '🚌', deep: q => `https://www.kkday.com/en/product/productlist?keyword=${q}` },
-  agoda:   { key: 'agoda',   brand: 'Agoda',   icon: '🛏️', deep: () => 'https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=-1&hl=en-us&city=14690' },
-  // Trip.com fallback links carry the live affiliate IDs (Trip.com Partners),
-  // so hotel clicks monetize even before Impact program approval.
-  tripcom: { key: 'tripcom', brand: 'Trip.com', icon: '🏨', deep: q => `https://www.trip.com/global-search/searchlist/search/?keyword=${q}&Allianceid=8536795&SID=317779078&trip_sub1=kp_api` },
+const AGODA_CID = '1952761';
+const AGODA_ENDPOINT = 'https://affiliateapi7643.agoda.com/affiliateservice/lt_v1';
+
+// Agoda canonical city landing-page slugs (deep-link tier — always works).
+const AGODA_SLUG: Record<string, string> = {
+  Seoul: 'seoul-kr', Busan: 'busan-kr', Jeju: 'jeju-kr', Incheon: 'incheon-kr',
+  Gyeongju: 'gyeongju-kr', Jeonju: 'jeonju-kr', Andong: 'andong-kr', Yeosu: 'yeosu-kr',
+};
+// Agoda numeric cityId for Long Tail city search (live-card tier). Only cities
+// listed here can return live price cards; everything else uses deep links.
+// Confirm/extend in the Agoda partner portal or via AGODA_CITY_IDS env override
+// — a wrong id just yields no results and falls back, so it never breaks.
+const AGODA_CITY_ID: Record<string, number> = {
+  Seoul: 14690, // from the partner's own Agoda link (partnersearch city=14690)
+};
+const AGODA_HL: Record<string, string> = {
+  en: 'en-us', ko: 'ko-kr', ja: 'ja-jp', zh: 'zh-cn', es: 'es-es',
+  fr: 'fr-fr', de: 'de-de', pt: 'pt-br', id: 'id-id',
 };
 
-interface OfferSpec { b: Brand; label: string; q: string }
+function deepLink(city: string, lang: string): string {
+  const slug = AGODA_SLUG[city];
+  const path = slug ? `city/${slug}.html` : 'country/south-korea.html';
+  const hl = AGODA_HL[lang] ? `&hl=${AGODA_HL[lang]}` : '';
+  return `https://www.agoda.com/${path}?cid=${AGODA_CID}${hl}`;
+}
 
-/** Context → ordered offer candidates (max 4 rendered). */
-function pickOffers(city: string, cat: string, q: string): OfferSpec[] {
-  const c = city || 'Seoul';
-  const enc = encodeURIComponent;
-  const base: Record<string, OfferSpec[]> = {
-    food: [
-      { b: BRANDS.klook,   label: `${c} Food Tours`,      q: enc(`${c} food tour`) },
-      { b: BRANDS.kkday,   label: 'Cooking Classes',      q: enc(`korea cooking class`) },
-      { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
-    ],
-    transport: [
-      { b: BRANDS.klook,   label: 'Korea Rail Pass',      q: enc('korea rail pass') },
-      { b: BRANDS.klook,   label: 'AREX / Transfers',     q: enc(`${q || 'AREX incheon airport'}`) },
-      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
-      { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-    ],
-    hotel: [
-      { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-      { b: BRANDS.klook,   label: `${c} Activities`,      q: enc(`${c}`) },
-      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
-      { b: BRANDS.kkday,   label: `${c} Day Trips`,       q: enc(`${c} day trip`) },
-    ],
-    kbeauty: [
-      { b: BRANDS.klook,   label: 'Spa & Beauty',         q: enc(`${c} spa massage`) },
-      { b: BRANDS.klook,   label: `${c} Activities`,      q: enc(`${c}`) },
-      { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
-    ],
-    esim: [
-      { b: BRANDS.klook,   label: 'SIM & WiFi Pickup',    q: enc('korea sim wifi') },
-      { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
-      { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-      { b: BRANDS.kkday,   label: `${c} Tours`,           q: enc(`${c}`) },
-    ],
-  };
-  if (base[cat]) return base[cat];
-  // default: travel / shopping / kpop / history / general
+// Localized labels for the deep-link offers.
+const L: Record<string, { hotels: (c: string) => string; deals: (c: string) => string; from: string }> = {
+  en: { hotels: c => `🛏️ ${c} Hotels`,   deals: c => `🏨 Best ${c} deals`,  from: 'from' },
+  ko: { hotels: c => `🛏️ ${c} 호텔`,     deals: c => `🏨 ${c} 최저가`,      from: '최저' },
+  ja: { hotels: c => `🛏️ ${c}のホテル`,   deals: c => `🏨 ${c}のお得な宿`,    from: '〜' },
+  zh: { hotels: c => `🛏️ ${c}酒店`,       deals: c => `🏨 ${c}超值优惠`,      from: '起' },
+  es: { hotels: c => `🛏️ Hoteles en ${c}`, deals: c => `🏨 Ofertas en ${c}`, from: 'desde' },
+  fr: { hotels: c => `🛏️ Hôtels à ${c}`,  deals: c => `🏨 Offres à ${c}`,    from: 'dès' },
+  de: { hotels: c => `🛏️ Hotels in ${c}`, deals: c => `🏨 ${c} Angebote`,    from: 'ab' },
+  pt: { hotels: c => `🛏️ Hotéis em ${c}`, deals: c => `🏨 Ofertas em ${c}`,  from: 'a partir de' },
+  id: { hotels: c => `🛏️ Hotel di ${c}`,  deals: c => `🏨 Penawaran ${c}`,   from: 'mulai' },
+};
+
+interface Offer { brand: string; icon: string; label: string; url: string; price?: string; img?: string }
+
+function deepOffers(city: string, lang: string): Offer[] {
+  const t = L[lang] || L.en;
+  const url = deepLink(city, lang);
   return [
-    { b: BRANDS.klook,   label: `${c} Tours & Tickets`, q: enc(q ? `${q}` : `${c}`) },
-    { b: BRANDS.kkday,   label: `${c} Day Trips`,       q: enc(`${c} day trip`) },
-    { b: BRANDS.tripcom, label: `${c} Hotels`,          q: enc(`${c} hotel`) },
-    { b: BRANDS.agoda,   label: 'Hotel Deals (Agoda)',  q: '' },
+    { brand: 'Agoda', icon: '🏨', label: t.hotels(city), url },
+    { brand: 'Agoda', icon: '🛏️', label: t.deals(city),  url: url + '&sort=priceasc' },
   ];
 }
 
-// ── Impact TrackingLinks API (with KV cache) ────────────────────────────────
+// ── Long Tail Search API (live hotel cards, optional) ───────────────────────
 function djb2(s: string): string {
   let h = 5381;
   for (let i = 0; i < s.length; i++) h = (h * 33 ^ s.charCodeAt(i)) >>> 0;
   return h.toString(16);
 }
 
-async function impactLink(env: WorkerEnv, programId: string, deepLink: string): Promise<string | null> {
-  const sid = (env.IMPACT_ACCOUNT_SID || '').trim();
-  const tok = (env.IMPACT_AUTH_TOKEN || '').trim();
-  if (!sid || !tok || !programId) return null;
+function isoPlus(days: number): string {
+  return new Date(Date.now() + days * 86_400_000).toISOString().slice(0, 10);
+}
 
-  const cacheKey = `aff:${programId}:${djb2(deepLink)}`;
+interface AgodaResult {
+  hotelName?: string; dailyRate?: number; currency?: string; starRating?: number;
+  reviewScore?: number; landingURL?: string; imageURL?: string;
+}
+
+async function liveCards(env: WorkerEnv, city: string, lang: string): Promise<Offer[] | null> {
+  const apiKey = (env.AGODA_API_KEY || '').trim();
+  const siteId = (env.AGODA_SITE_ID || AGODA_CID).trim();
+  if (!apiKey) return null;
+
+  let ids = AGODA_CITY_ID;
+  try { if (env.AGODA_CITY_IDS) ids = { ...ids, ...JSON.parse(env.AGODA_CITY_IDS) }; } catch { /* ignore */ }
+  const cityId = ids[city];
+  if (!cityId) return null;
+
+  const checkIn = isoPlus(30), checkOut = isoPlus(31);
+  const cacheKey = `agoda:${cityId}:${lang}:${checkIn}:${djb2(siteId)}`;
   if (env.CACHE_KV) {
     const hit = await env.CACHE_KV.get(cacheKey);
-    if (hit) return hit;
+    if (hit) { try { return JSON.parse(hit) as Offer[]; } catch { /* refetch */ } }
   }
 
-  try {
-    const params = new URLSearchParams({ Type: 'Regular', DeepLink: deepLink });
-    if (env.IMPACT_PROPERTY_ID) params.set('MediaPartnerPropertyId', env.IMPACT_PROPERTY_ID.trim());
-    const res = await globalThis.fetch(
-      `https://api.impact.com/Mediapartners/${sid}/Programs/${programId}/TrackingLinks`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Basic ' + btoa(`${sid}:${tok}`),
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: params.toString(),
-        signal: AbortSignal.timeout(8_000),
+  const body = {
+    criteria: {
+      additional: {
+        currency: 'USD', discountOnly: false, language: AGODA_HL[lang] || 'en-us',
+        maxResult: 4, minimumReviewScore: 0, minimumStarRating: 0,
+        occupancy: { numberOfAdult: 2, numberOfChildren: 0 }, sortBy: 'PriceAsc',
       },
-    );
-    if (!res.ok) {
-      console.error(`[Impact] ${programId} HTTP ${res.status}: ${(await res.text()).slice(0, 120)}`);
-      return null;
-    }
-    const data = await res.json() as { TrackingURL?: string; trackingUrl?: string };
-    const url = data.TrackingURL || data.trackingUrl || null;
-    if (url && env.CACHE_KV) {
-      await env.CACHE_KV.put(cacheKey, url, { expirationTtl: 7 * 86400 }).catch(() => {});
-    }
-    return url;
+      checkInDate: checkIn, checkOutDate: checkOut, cityId,
+    },
+  };
+
+  try {
+    const res = await globalThis.fetch(AGODA_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Authorization': `${siteId}:${apiKey}`,
+        'Accept-Encoding': 'gzip,deflate',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(8_000),
+    });
+    if (!res.ok) { console.error(`[Agoda] HTTP ${res.status}`); return null; }
+    const data = await res.json() as { results?: AgodaResult[]; error?: { message?: string } };
+    if (!data.results || !data.results.length) return null;
+
+    const t = L[lang] || L.en;
+    const offers: Offer[] = data.results.slice(0, 4).map(r => {
+      const price = (r.dailyRate != null) ? `${t.from} $${Math.round(r.dailyRate)}` : '';
+      const star = r.reviewScore ? ` · ⭐${r.reviewScore}` : '';
+      return {
+        brand: 'Agoda', icon: '🏨',
+        label: `${(r.hotelName || 'Hotel').slice(0, 42)}${star}`,
+        url: r.landingURL || deepLink(city, lang),
+        price, img: r.imageURL || '',
+      };
+    });
+    if (env.CACHE_KV) await env.CACHE_KV.put(cacheKey, JSON.stringify(offers), { expirationTtl: 6 * 3600 }).catch(() => {});
+    return offers;
   } catch (e) {
-    console.error('[Impact] threw:', String(e).slice(0, 120));
+    console.error('[Agoda] threw:', String(e).slice(0, 120));
     return null;
   }
 }
@@ -141,18 +162,10 @@ async function impactLink(env: WorkerEnv, programId: string, deepLink: string): 
 export async function handleAffiliate(request: Request, env: WorkerEnv): Promise<Response> {
   const u = new URL(request.url);
   const city = (u.searchParams.get('city') || 'Seoul').slice(0, 40);
-  const cat = (u.searchParams.get('cat') || 'general').slice(0, 20);
-  const q = (u.searchParams.get('q') || '').slice(0, 60);
+  const lang = (u.searchParams.get('lang') || 'en').slice(0, 2);
 
-  let programs: Record<string, string> = {};
-  try { programs = JSON.parse(env.IMPACT_PROGRAMS || '{}'); } catch { /* keep empty */ }
+  const live = await liveCards(env, city, lang);
+  const offers = (live && live.length) ? live : deepOffers(city, lang);
 
-  const specs = pickOffers(city, cat, q).slice(0, 4);
-  const offers = await Promise.all(specs.map(async s => {
-    const deep = s.b.deep(s.q);
-    const tracked = await impactLink(env, programs[s.b.key] || '', deep);
-    return { brand: s.b.brand, icon: s.b.icon, label: s.label, url: tracked || deep, tracked: !!tracked };
-  }));
-
-  return new Response(JSON.stringify({ offers, ctx: { city, cat } }), { headers: CORS });
+  return new Response(JSON.stringify({ offers, ctx: { city }, src: live ? 'api' : 'link' }), { headers: CORS });
 }

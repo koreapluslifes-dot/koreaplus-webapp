@@ -85,6 +85,27 @@
     getSubway:    (station)       => kpFetch(`/api/subway?station=${encodeURIComponent(station)}`, 30_000),
     getBikes:     (lat, lng)      => kpFetch(`/api/bikes?lat=${lat}&lng=${lng}`, 120_000),
 
+    // ── K-Pop vertical ──────────────────────────────────────────────────────
+    getKpopCharts: (store = 'kr', type = 'songs') =>
+      kpFetch(`/api/kpop/charts?store=${store}&type=${type}&limit=50`, 60 * 60_000),     // 1 hr
+    getKpopTicker: () => kpFetch('/api/kpop/ticker', 30 * 60_000),                        // 30 min
+    getKpopBio:    (qid, lang = 'en') =>
+      kpFetch(`/api/kpop/bio?qid=${encodeURIComponent(qid)}&lang=${lang}`, 24 * 3600_000),
+    getKpopArtist(opts = {}) {
+      const p = new URLSearchParams({ id: opts.id || '' });
+      if (opts.qid)     p.set('qid', opts.qid);
+      if (opts.spotify) p.set('spotify', opts.spotify);
+      if (opts.channel) p.set('channel', opts.channel);
+      if (opts.lang)    p.set('lang', opts.lang);
+      return kpFetch(`/api/kpop/artist?${p.toString()}`, 12 * 3600_000);
+    },
+    getKpopFeed: (artist = '', lang = '') =>
+      kpFetch(`/api/kpop/feed?artist=${encodeURIComponent(artist)}${lang ? `&lang=${lang}` : ''}`, 5 * 60_000),
+    getKpopConcerts: (artist = '', country = '') =>
+      kpFetch(`/api/kpop/concerts?artist=${encodeURIComponent(artist)}${country ? `&country=${country}` : ''}`, 6 * 3600_000),
+    getAff: (city, cat, q = '') =>
+      kpFetch(`/api/aff?city=${encodeURIComponent(city)}&cat=${cat}&q=${encodeURIComponent(q)}`, 60 * 60_000),
+
     todayKST,
     futureDateKST,
 

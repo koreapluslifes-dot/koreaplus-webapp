@@ -64,34 +64,49 @@ const CAT_SLUG = {
   shopping: 'best-shopping-in-korea', history: 'korean-history-guide',
 };
 
-// ── Affiliate config — replace the IDs, rebuild, redeploy ───────────
-// Sign up: Klook & KKday (tours), Agoda (hotels), Airalo (eSIM),
-// GetYourGuide (day trips). Fill your IDs below; links appear on every guide.
-// ── Trip.com affiliate (LIVE — Trip.com Partners 계정 연동) ─────────
-const TRIP_AID = 'Allianceid=8536795&SID=317779078';
-// Agoda partner text link (제공받은 링크 그대로 — cid 갱신 시 여기만 교체)
-const AGODA_URL = 'https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=-1&hl=en-us&city=14690';
-const AFFILIATES = {
-  klook:   { label: 'Tours & Tickets', brand: 'Klook',    icon: '🎟️', url: 'https://www.klook.com/?aid=YOUR_KLOOK_AID' },
-  tripcom: { label: 'Hotels',          brand: 'Trip.com', icon: '🏨', url: `https://www.trip.com/?${TRIP_AID}&trip_sub1=kp_block` },
-  agoda:   { label: 'Hotel Deals',     brand: 'Agoda',    icon: '🛏️', url: AGODA_URL },
+// ── Affiliate config — Agoda only ───────────────────────────────────
+// Single affiliate partner: Agoda (hotels). The CID below is the public
+// affiliate site id; it earns commission on every deep link. Live hotel
+// cards (with real prices) are layered on at runtime by the Worker's
+// /api/aff endpoint, which calls the Agoda Long Tail Search API with the
+// secret API key. If the Worker/API is unavailable, the static cid deep
+// link below still monetizes — so every page works with or without JS.
+const AGODA_CID = '1952761';
+// Agoda canonical city landing pages (slug verified) → city-targeted deep
+// links. Unknown cities fall back to the South-Korea country page.
+const AGODA_CITY = {
+  Seoul: 'seoul-kr', Busan: 'busan-kr', Jeju: 'jeju-kr', Incheon: 'incheon-kr',
+  Gyeongju: 'gyeongju-kr', Jeonju: 'jeonju-kr', Andong: 'andong-kr', Yeosu: 'yeosu-kr',
 };
-
-// Trip.com dynamic hotel banners (300×250) — generate per-city in the
-// Partners dashboard and register the banner id here. Pages for cities
-// without a banner simply render nothing.
-const TRIP_BANNERS = { Seoul: 'DB17873403', Busan: 'DB17873718', Jeju: 'DB17873732' };
-const tripBanner = (city, sub = 'kp') => {
-  const id = TRIP_BANNERS[city];
-  if (!id) return '';
+const AGODA_HL = { en: '', ja: 'ja-jp', zh: 'zh-cn', es: 'es-es' };
+function agodaUrl(city, lang = 'en') {
+  const c = AGODA_CITY[city];
+  const pathPart = c ? `city/${c}.html` : 'country/south-korea.html';
+  const hl = AGODA_HL[lang] ? `&hl=${AGODA_HL[lang]}` : '';
+  return `https://www.agoda.com/${pathPart}?cid=${AGODA_CID}${hl}`;
+}
+// Localized copy for the affiliate block (en + the 3 site languages).
+const AFF_T = {
+  en: { label: c => `🏨 Where to stay in ${c}`,        cta: c => `🛏️ ${c} Hotels & Stays`, sub: 'Agoda · compare best-price deals', disc: 'Affiliate link — we may earn a small commission at no extra cost to you. It helps keep KoreaPlus free.' },
+  ja: { label: () => '🏨 韓国のホテルを探す',            cta: () => '🛏️ 韓国のホテル・宿泊',   sub: 'Agoda · お得な料金を比較',        disc: 'アフィリエイトリンク — ご予約で当サイトに少額の手数料が入ることがあります（追加料金はかかりません）。KoreaPlus の運営に役立ちます。' },
+  zh: { label: () => '🏨 寻找韩国酒店',                 cta: () => '🛏️ 韩国酒店与住宿',       sub: 'Agoda · 比较最优价格',           disc: '联盟链接 — 通过预订我们可能获得少量佣金（您无需支付额外费用），这有助于 KoreaPlus 保持免费。' },
+  es: { label: () => '🏨 Dónde alojarte en Corea',     cta: () => '🛏️ Hoteles y alojamiento', sub: 'Agoda · compara las mejores ofertas', disc: 'Enlace de afiliado — podríamos ganar una pequeña comisión sin coste adicional para ti. Ayuda a mantener KoreaPlus gratis.' },
+};
+// One tasteful Agoda hotel block. data-aff lets modules/affiliate.js swap in
+// live hotel cards (real prices via the Worker) when available.
+function affBlock({ city = 'Seoul', cat = 'hotel', q = '', lang = 'en' } = {}) {
+  const T = AFF_T[lang] || AFF_T.en;
+  const url = agodaUrl(city, lang);
   return `
-<div class="seo-banner">
-  <span class="seo-banner-label">Ad · Trip.com ${esc(city)} hotels</span>
-  <iframe loading="lazy" title="Trip.com ${esc(city)} hotel deals"
-    src="https://www.trip.com/partners/ad/${id}?${TRIP_AID}&trip_sub1=${sub}"
-    style="width:300px;height:250px;border:none" frameborder="0" scrolling="no"></iframe>
+<div class="seo-aff" data-aff="${esc(JSON.stringify({ city, cat, q }))}" data-aff-lang="${lang}">
+  <div class="aff-label">${T.label(city)}</div>
+  <div class="aff-grid">
+    <a href="${esc(url)}" target="_blank" rel="sponsored noopener" data-aff-brand="Agoda">
+      <strong>${T.cta(city)}</strong><span>${T.sub}</span></a>
+  </div>
+  <div class="aff-disc">${T.disc}</div>
 </div>`;
-};
+}
 
 // Curated extra content (not in KOREA_DATA) — high-search-volume guides
 const NEIGHBORHOODS = [
@@ -469,6 +484,7 @@ const PRIMARY_NAV = `
             <a role="menuitem" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
             <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
             <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
+            <a role="menuitem" href="kpop.html" data-i18n="nav.kpop">🎤 K-Pop</a>
           </div>
           <div class="kp-pnav-group" role="group">
             <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
@@ -641,21 +657,16 @@ const mapsHtml = q => {
     <a href="https://map.kakao.com/?q=${e}" target="_blank" rel="noopener">🟡 Kakao Map</a>
   </div>`;
 };
-// ctx: { city, cat, q } — embedded as data-aff so modules/affiliate.js can
-// swap in context-matched Impact tracking links at runtime. The static links
-// below are the no-JS / pre-approval fallback.
+// region string → best-matching city name (for city-targeted Agoda links).
 const ctxCity = region => {
   const r = String(region || '');
   const hit = CITIES.find(c => r.includes(c.name));
   return hit ? hit.name : 'Seoul';
 };
-const affHtml = (label = '🎫 Book your Korea trip', ctx = { city: 'Seoul', cat: 'general', q: '' }) => `
-<div class="seo-aff" data-aff="${esc(JSON.stringify(ctx))}">
-  <div class="aff-label">${label}</div>
-  <div class="aff-grid">${Object.values(AFFILIATES).map(a =>
-    `<a href="${esc(a.url)}" target="_blank" rel="sponsored noopener"><strong>${a.icon} ${esc(a.label)}</strong><span>${esc(a.brand)}</span></a>`).join('')}</div>
-  <div class="aff-disc">Affiliate links — we may earn a small commission at no extra cost to you. It helps keep KoreaPlus free.</div>
-</div>`;
+// English content pages call affHtml(label, ctx). The label arg is kept for
+// call-site compatibility but the block now renders an on-brand Agoda hotel
+// CTA derived from ctx.city, so copy stays sensible everywhere.
+const affHtml = (_label, ctx = {}) => affBlock({ city: ctx.city || 'Seoul', cat: ctx.cat || 'hotel', q: ctx.q || '', lang: 'en' });
 
 // ══════════════════════════════════════════════════════════════════
 // 1) PLACE PAGES (90)
@@ -788,7 +799,6 @@ function buildCity(city) {
     [`Is ${city.name} worth visiting?`, `Yes — ${city.name} offers ${pool.slice(0,3).map(i=>i.name).join(', ')} and much more, making it one of Korea's top destinations.`],
     [`How do I get to ${city.name}?`, `${city.name === 'Seoul' || city.name === 'Incheon' ? 'Fly into Incheon (ICN) airport, then use the AREX train or metro.' : `Take the KTX bullet train or an express bus from Seoul to reach ${city.name} comfortably.`}`],
   ];
-  body += tripBanner(city.name, 'kp_city');
   body += `<h2>❓ ${esc(city.name)} Travel FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml(`🎫 Book ${city.name} tours, hotels & essentials`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
@@ -834,7 +844,6 @@ function buildItinerary(city, days, pool) {
     [`How much does a ${days}-day ${city.name} trip cost?`, `Budget travelers can do ${city.name} for about $50–70/day; mid-range around $120/day including food, transport and attractions.`],
     [`What's the best way to get around ${city.name}?`, `Get a T-money card and use the metro and buses. Use KakaoMap or Naver Map for directions — Google Maps is limited in Korea.`],
   ];
-  body += tripBanner(city.name, 'kp_itin');
   body += cityClusterLinks(city.name, url);
   const themeRel = THEMES.slice(0, 4).map(x => `<a href="itinerary/${x.slug}.html">${x.emoji} ${esc(x.h1.split('(')[0].trim())}</a>`).join('');
   body += `<h2>🗺️ More Korea itineraries</h2><div class="seo-linklist">${themeRel}</div>`;
@@ -1117,7 +1126,6 @@ function buildStay(s) {
     const href = nb ? `guide/${slug(nb.name)}-${slug(nb.city)}-guide.html` : null;
     body += `<h3>${href ? `<a href="${href}">${esc(area)}</a>` : esc(area)}</h3><p>${esc(why)}${href ? ` <a href="${href}">Full ${esc(nb.name)} guide →</a>` : ''}</p>`;
   });
-  body += tripBanner(s.city, 'kp_stay');
   body += affHtml(`🏨 Find ${s.city} hotels & stays`, { city: s.city, cat: 'hotel', q: '' });
   const qa = [
     [`What is the best area to stay in ${s.city} for first-timers?`, `${s.areas[0][0]} — ${s.areas[0][1]}`],
@@ -1300,7 +1308,6 @@ function buildTheme(t) {
     if (dn) body += slotHtml('🌙', 'Dinner', dn);
     body += `</div>`;
   }
-  body += tripBanner('Seoul', 'kp_theme');
   body += `<h2>💡 Tips for this route</h2><ul class="tips">${t.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
   // Related itineraries — rotate by this theme's index so links spread evenly
   const ti = Math.max(0, THEMES.findIndex(x => x.slug === t.slug));
@@ -1467,13 +1474,14 @@ fs.writeFileSync(path.join(OUT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 // ── Sitemap ─────────────────────────────────────────────────────────
 const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html', 'temples.html', 'nightviews.html',
   'emergency.html', 'phrases.html', 'currency.html', 'etiquette.html', 'seasons.html', 'kdrama-locations.html',
+  'kpop.html',
   'menu-translator.html', 'subway.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
 const urlEntry = (loc, pri, freq) => `  <url>\n    <loc>${ORIGIN}${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
 let sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 sm += urlEntry(BASEP, '1.0', 'daily');
 LANGS.forEach(l => sm += `\n` + urlEntry(`${BASEP}?lang=${l}`, '0.8', 'weekly'));
-STATIC.slice(1).forEach(p => sm += `\n` + urlEntry(BASEP + p, '0.8', 'weekly'));
+STATIC.slice(1).forEach(p => sm += `\n` + urlEntry(BASEP + p, p === 'kpop.html' ? '0.9' : '0.8', p === 'kpop.html' ? 'daily' : 'weekly'));
 [...out.categories, ...out.cities, out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.blog.forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.neighborhoods.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
