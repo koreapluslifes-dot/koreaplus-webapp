@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v12';
+const CACHE = 'kp-v13';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -44,6 +44,7 @@ const PRECACHE = [
   BASE + '/modules/analytics.js',
   BASE + '/modules/header.js',
   BASE + '/modules/mytrip.js',
+  BASE + '/modules/nav.js',
   BASE + '/modules/affiliate.js',
   BASE + '/seo.css',
   BASE + '/explore.html',

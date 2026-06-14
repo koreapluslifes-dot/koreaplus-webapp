@@ -109,7 +109,7 @@
   function loadModules() {
     const base = '/guide/modules/';
     // Load in order: theme.js, i18n.js, search.js, analytics.js
-    const scripts = ['theme.js', 'i18n.js', 'search.js', 'analytics.js', 'mytrip.js'];
+    const scripts = ['theme.js', 'i18n.js', 'search.js', 'analytics.js', 'mytrip.js', 'nav.js?v=3'];
 
     let chain = Promise.resolve();
     scripts.forEach(s => {

@@ -449,6 +449,61 @@ for (const [cat, items] of Object.entries(KOREA_DATA))
   for (const it of items) ALL.push({ ...it, cat, slug: slug(it.name) });
 const bySlug = Object.fromEntries(ALL.map(i => [i.slug, i]));
 
+// ── Unified primary nav (kp-pnav) — same simplified 3-bucket nav as the
+// homepage/hub pages. Hrefs are root-relative to <base href="/guide/">, so
+// they resolve identically from any generated subdirectory. Localized via
+// data-i18n + header.js→i18n.js; behavior via nav.js (loaded by header.js).
+const PRIMARY_NAV = `
+  <div class="kp-pnav">
+    <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
+    <div class="kp-pnav-items">
+      <a class="kp-pnav-link" href="index.html#categories-section" data-i18n="nav.explore">Explore</a>
+      <div class="kp-pnav-drop">
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.guides">Guides</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <div class="kp-pnav-menu" role="menu">
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.discover">Discover</div>
+            <a role="menuitem" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
+            <a role="menuitem" href="seasons.html" data-i18n="nav.seasons">🌸 Seasons</a>
+            <a role="menuitem" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
+            <a role="menuitem" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
+            <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
+            <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
+          </div>
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
+            <a role="menuitem" href="phrases.html" data-i18n="nav.phrases">🗣️ Phrases</a>
+            <a role="menuitem" href="currency.html" data-i18n="nav.currency">💱 Currency</a>
+            <a role="menuitem" href="subway.html" data-i18n="nav.subway">🚇 Subway</a>
+            <a role="menuitem" href="menu-translator.html" data-i18n="nav.menu">📷 Menu</a>
+            <a role="menuitem" href="etiquette.html" data-i18n="nav.etiquette">🎎 Etiquette</a>
+            <a role="menuitem" href="emergency.html" data-i18n="nav.emergency">🆘 Emergency</a>
+          </div>
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.more">More</div>
+            <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
+            <a role="menuitem" href="blog/index.html" data-i18n="nav.blog">📰 Blog</a>
+          </div>
+        </div>
+      </div>
+      <div class="kp-pnav-drop">
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.whereto">Where to Go</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <div class="kp-pnav-menu" role="menu">
+          <div class="kp-pnav-group" role="group">
+            <a role="menuitem" href="guide/things-to-do-in-seoul.html" data-i18n="nav.city.seoul">📍 Seoul</a>
+            <a role="menuitem" href="guide/things-to-do-in-busan.html" data-i18n="nav.city.busan">📍 Busan</a>
+            <a role="menuitem" href="guide/things-to-do-in-jeju.html" data-i18n="nav.city.jeju">📍 Jeju</a>
+            <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
+            <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
+            <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
+            <a role="menuitem" class="kp-pnav-all" href="explore.html" data-i18n="nav.alldest">🗺️ All destinations</a>
+          </div>
+        </div>
+      </div>
+      <a class="kp-pnav-cta" href="plan.html" data-i18n="nav.plan">🗺️ Plan Trip</a>
+    </div>
+  </div>`;
+
 // ── Master template ─────────────────────────────────────────────────
 // lang: page language code. alts: [{lang,url}] other-language versions
 // (hreflang cluster; x-default points at the English URL).
@@ -484,7 +539,7 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <meta name="twitter:description" content="${esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hub-styles.css">
+<link rel="stylesheet" href="hub-styles.css?v=4">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="seo.css">
 <script src="modules/header.js"></script>
@@ -495,14 +550,7 @@ ${schemas.map(jsonld).join('\n')}
 <body>
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
   <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
-  <div class="hub-nav-links">
-    <a class="hub-nav-link" href="index.html">🏠 Home</a>
-    <a class="hub-nav-link" href="explore.html">🧭 Explore</a>
-    <a class="hub-nav-link" href="blog/index.html">📰 Blog</a>
-    <a class="hub-nav-link" href="plan.html">🗺️ Plan Trip</a>
-    <a class="hub-nav-link" href="phrases.html">💬 Phrases</a>
-    <a class="hub-nav-link" href="currency.html">💱 Currency</a>
-  </div>
+  <div class="hub-nav-links">${PRIMARY_NAV}</div>
 </nav>
 <main class="seo-wrap">
 ${hero}

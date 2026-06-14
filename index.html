@@ -82,7 +82,7 @@
   <link rel="stylesheet" href="style.css?v=15">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
-  <link rel="stylesheet" href="hub-styles.css?v=2">
+  <link rel="stylesheet" href="hub-styles.css?v=4">
 </head>
 <body>
 
@@ -94,31 +94,60 @@
       <span class="logo-text">Korea<strong>Plus</strong></span>
     </a>
     <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
-      <button class="nav-btn" data-cat="food" data-i18n="nav.food">🍜 Food</button>
-      <button class="nav-btn" data-cat="travel" data-i18n="nav.travel">✈️ Travel</button>
-      <button class="nav-btn" data-cat="transport" data-i18n="nav.transport">🚄 Transport</button>
-      <button class="nav-btn" data-cat="companies" data-i18n="nav.companies">🏢 Companies</button>
-      <button class="nav-btn" data-cat="kbeauty" data-i18n="nav.kbeauty">💄 K-Beauty</button>
-      <button class="nav-btn" data-cat="kpop" data-i18n="nav.kpop">🎤 K-Pop</button>
-      <button class="nav-btn" data-cat="shopping" data-i18n="nav.shopping">🛍️ Shopping</button>
-      <button class="nav-btn" data-cat="history" data-i18n="nav.history">📜 History</button>
-      <span class="nav-sep" aria-hidden="true">|</span>
-      <a class="nav-btn hub-link" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
-      <a class="nav-btn hub-link" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
-      <a class="nav-btn hub-link" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
-      <a class="nav-btn hub-link" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
-      <span class="nav-sep" aria-hidden="true">|</span>
-      <a class="nav-btn hub-link" href="emergency.html">🆘 Emergency</a>
-      <a class="nav-btn hub-link" href="phrases.html">🗣️ Phrases</a>
-      <a class="nav-btn hub-link" href="currency.html">💱 Currency</a>
-      <a class="nav-btn hub-link" href="etiquette.html">🎎 Etiquette</a>
-      <a class="nav-btn hub-link" href="seasons.html">🌸 Seasons</a>
-      <a class="nav-btn hub-link" href="kdrama-locations.html">🎬 K-Drama</a>
-      <a class="nav-btn hub-link" href="menu-translator.html">📷 Menu</a>
-      <a class="nav-btn hub-link" href="subway.html">🚇 Subway</a>
-      <a class="nav-btn hub-link" href="explore.html">🧭 Explore</a>
-      <a class="nav-btn hub-link" href="blog/index.html">📰 Blog</a>
-      <a class="nav-btn hub-link" href="plan.html" style="background:rgba(214,34,70,.12);color:var(--red);font-weight:700" data-i18n="nav.plan">🗺️ Plan Trip</a>
+      <!-- Unified primary nav: 3 buckets + Plan CTA. Markup mirrored on hub
+           pages (see modules/header.js). Behavior: modules/nav.js. -->
+      <div class="kp-pnav">
+        <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
+        <div class="kp-pnav-items">
+          <a class="kp-pnav-link" href="#categories-section" data-i18n="nav.explore">Explore</a>
+
+          <div class="kp-pnav-drop">
+            <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.guides">Guides</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+            <div class="kp-pnav-menu" role="menu">
+              <div class="kp-pnav-group" role="group">
+                <div class="kp-pnav-gh" data-i18n="nav.group.discover">Discover</div>
+                <a role="menuitem" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
+                <a role="menuitem" href="seasons.html" data-i18n="nav.seasons">🌸 Seasons</a>
+                <a role="menuitem" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
+                <a role="menuitem" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
+                <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
+                <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
+              </div>
+              <div class="kp-pnav-group" role="group">
+                <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
+                <a role="menuitem" href="phrases.html" data-i18n="nav.phrases">🗣️ Phrases</a>
+                <a role="menuitem" href="currency.html" data-i18n="nav.currency">💱 Currency</a>
+                <a role="menuitem" href="subway.html" data-i18n="nav.subway">🚇 Subway</a>
+                <a role="menuitem" href="menu-translator.html" data-i18n="nav.menu">📷 Menu</a>
+                <a role="menuitem" href="etiquette.html" data-i18n="nav.etiquette">🎎 Etiquette</a>
+                <a role="menuitem" href="emergency.html" data-i18n="nav.emergency">🆘 Emergency</a>
+              </div>
+              <div class="kp-pnav-group" role="group">
+                <div class="kp-pnav-gh" data-i18n="nav.group.more">More</div>
+                <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
+                <a role="menuitem" href="blog/index.html" data-i18n="nav.blog">📰 Blog</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="kp-pnav-drop">
+            <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.whereto">Where to Go</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+            <div class="kp-pnav-menu" role="menu">
+              <div class="kp-pnav-group" role="group">
+                <a role="menuitem" href="guide/things-to-do-in-seoul.html" data-i18n="nav.city.seoul">📍 Seoul</a>
+                <a role="menuitem" href="guide/things-to-do-in-busan.html" data-i18n="nav.city.busan">📍 Busan</a>
+                <a role="menuitem" href="guide/things-to-do-in-jeju.html" data-i18n="nav.city.jeju">📍 Jeju</a>
+                <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
+                <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
+                <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
+                <a role="menuitem" class="kp-pnav-all" href="explore.html" data-i18n="nav.alldest">🗺️ All destinations</a>
+              </div>
+            </div>
+          </div>
+
+          <a class="kp-pnav-cta" href="plan.html" data-i18n="nav.plan">🗺️ Plan Trip</a>
+        </div>
+      </div>
     </nav>
     <!-- Search, theme, lang, AI controls -->
     <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
@@ -143,7 +172,7 @@
     <p class="hero-sub" data-i18n="hero.sub">Food · Travel · K-Beauty · K-Pop · Shopping · History</p>
     <div class="hero-btns">
       <button class="hero-cta primary" data-cat="food" data-i18n="hero.explore">Explore Korea ↓</button>
-      <button class="hero-cta outline" id="hero-ai-btn" data-i18n="hero.ai">💬 AI Guide</button>
+      <a class="hero-cta outline" href="plan.html" data-i18n="hero.plan">🗺️ Plan My Trip</a>
     </div>
   </div>
   <div class="map-bottom">
@@ -490,6 +519,7 @@
 <script src="modules/mytrip.js?v=3"></script>
 <script src="detail-panel.js?v=5"></script>
 <script src="app.js?v=18"></script>
+<script src="modules/nav.js?v=3"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/dashboard.js"></script>
 <script src="modules/week-section.js"></script>
