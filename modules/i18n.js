@@ -48,6 +48,21 @@
     return cache[lang]?.[key] || cache['en']?.[key] || key;
   }
 
+  // Self-canonicalize per language variant + sync og:url so hreflang is honored.
+  // Derives the base from the AUTHORED <link rel=canonical> (strips any ?lang), so
+  // a page that canonicalizes to a clean URL (e.g. /kpop) keeps that base.
+  function syncCanonical() {
+    try {
+      let c = document.querySelector('link[rel="canonical"]');
+      const authored = c ? c.href.split('?')[0] : (location.origin + location.pathname);
+      const href = (lang === 'en') ? authored : authored + '?lang=' + lang;
+      if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c); }
+      c.href = href;
+      const og = document.querySelector('meta[property="og:url"]');
+      if (og) og.setAttribute('content', href);
+    } catch {}
+  }
+
   function applyTranslations() {
     // data-i18n — textContent replacement
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -83,6 +98,8 @@
     });
     // Update <html lang>
     document.documentElement.lang = lang;
+    // Self-canonicalize + sync og:url per language (SEO: makes hreflang reciprocal)
+    syncCanonical();
     // Update <html dir> for RTL languages (none currently, but future-proof)
     document.documentElement.dir = 'ltr';
     // Notify dynamic modules (My Trip panel, detail panel, etc.) to relabel.
