@@ -1,0 +1,1925 @@
+{
+ "Seoul": {
+  "ja": {
+   "h1": "ソウル観光の決定版｜絶対に外せない見どころ完全ガイド",
+   "title": "ソウル観光ガイド｜定番スポット完全版 | KoreaPlus",
+   "metaDesc": "ソウル観光のすべてがわかる完全ガイド。景福宮・北村韓屋村・Nソウルタワー・明洞・広蔵市場など定番スポットから本場グルメ、移動のコツまで、初めてでも安心して楽しめる旅の情報を網羅。",
+   "lead": "古宮の瓦屋根と最先端の高層ビルが同じ景色に溶け込む街、ソウル。朝は静かな韓屋の路地を歩き、昼は屋台でアツアツの料理をほおばり、夜はネオン輝く繁華街やライトアップされた街並みを楽しむ——一日のなかにこれほど多彩な顔を持つ都市は珍しいでしょう。歴史と最新トレンド、自然と都会が徒歩圏内で味わえるソウルは、何度訪れても新しい発見がある旅先です。",
+   "attractions": [
+    {
+     "name": "Gyeongbokgung Palace",
+     "nameLocal": "景福宮（キョンボックン）",
+     "blurb": "朝鮮王朝の正宮として築かれた、ソウルを代表する壮麗な王宮。広大な敷地に正殿の勤政殿や池に浮かぶ慶会楼が並び、衛兵の交代儀式は必見です。韓服をまとって散策すれば、まるで時代をさかのぼったような気分が味わえます。"
+    },
+    {
+     "name": "Bukchon Hanok Village",
+     "nameLocal": "北村韓屋村（プクチョンハノクマウル）",
+     "blurb": "景福宮と昌徳宮の間に広がる、伝統家屋・韓屋が建ち並ぶ趣ある一帯。坂道の路地からは瓦屋根の連なりとその向こうの高層ビルが一望でき、古都と現代が同居するソウルらしい眺めが楽しめます。住民が暮らす地区なので静かに歩くのがマナーです。"
+    },
+    {
+     "name": "Changdeokgung Palace & Secret Garden",
+     "nameLocal": "昌徳宮と秘苑（チャンドックン・ピウォン）",
+     "blurb": "自然の地形を巧みに生かした造りが美しい、世界遺産にも登録された王宮。奥に広がる秘苑（後苑）は、池や東屋が点在する王室の庭園で、四季折々の風景がしっとりとした趣をたたえています。ソウルの宮殿のなかでも特に風情ある一つです。"
+    },
+    {
+     "name": "N Seoul Tower (Namsan Tower)",
+     "nameLocal": "Nソウルタワー（南山タワー）",
+     "blurb": "南山の頂にそびえる、ソウルのシンボル的な展望タワー。展望台からは大都会のパノラマが360度に広がり、夜景の美しさはとりわけ格別です。麓からはケーブルカーで登れ、フェンスに連なる「愛の南京錠」も人気のスポットになっています。"
+    },
+    {
+     "name": "Myeongdong",
+     "nameLocal": "明洞（ミョンドン）",
+     "blurb": "コスメショップやファッション店がひしめく、ソウル屈指のショッピング街。夕方になると通りには屋台がずらりと並び、食べ歩きグルメを求める人で大いに賑わいます。買い物も食事もまとめて楽しみたい旅行者にうってつけのエリアです。"
+    },
+    {
+     "name": "Hongdae",
+     "nameLocal": "弘大（ホンデ）",
+     "blurb": "美術系の名門・弘益大学の周辺に広がる、若者文化の発信地。個性的なカフェや雑貨店、ライブハウスが集まり、週末には路上でインディーズバンドやダンサーのパフォーマンスが繰り広げられます。ソウルの今の空気を肌で感じたいならここへ。"
+    },
+    {
+     "name": "Insadong",
+     "nameLocal": "仁寺洞（インサドン）",
+     "blurb": "骨董品店や伝統工芸の店、画廊、伝統茶屋が軒を連ねる、韓国情緒あふれる通り。お土産探しにぴったりで、路地裏の昔ながらの茶屋でひと息つくのもおすすめです。複合施設サムジキルのらせん状の建物もこの一帯の名物になっています。"
+    },
+    {
+     "name": "Gwangjang Market",
+     "nameLocal": "広蔵市場（クァンジャンシジャン）",
+     "blurb": "100年以上の歴史を誇る、ソウルでも指折りの伝統市場。ひしめく屋台ではチヂミやマヤッキンパ、ユッケなどの名物が湯気を立て、活気あふれる雰囲気のなかでローカルな味を堪能できます。本場の食の熱気を味わいたい人に外せない場所です。"
+    },
+    {
+     "name": "Dongdaemun Design Plaza (DDP)",
+     "nameLocal": "東大門デザインプラザ（DDP）",
+     "blurb": "曲線が幾重にも重なる近未来的な外観が目を引く、ザハ・ハディド設計の複合文化施設。展示やイベントが開催され、夜のライトアップも幻想的です。周辺は深夜まで営業するファッションビルが集まる東大門エリアで、夜遊びにも向いています。"
+    },
+    {
+     "name": "Han River Park",
+     "nameLocal": "漢江公園（ハンガンコンウォン）",
+     "blurb": "ソウルの中心を流れる漢江沿いに広がる、市民の憩いの場。自転車やピクニックを楽しむ人々で賑わい、川辺で味わうチキンとビールは定番の過ごし方です。遊覧船に乗れば、橋のライトアップや噴水ショーを水上から眺められます。"
+    }
+   ],
+   "food": [
+    {
+     "name": "ビビンバ",
+     "blurb": "彩り豊かなナムルや肉、卵をご飯にのせ、コチュジャンを混ぜていただく韓国を代表する一品です。"
+    },
+    {
+     "name": "サムギョプサル",
+     "blurb": "厚切りの豚バラ肉を鉄板で焼き、サンチュやエゴマの葉に包んで頬張る、みんなで囲む定番の焼肉です。"
+    },
+    {
+     "name": "ビンス（かき氷）",
+     "blurb": "ふわふわの氷に小豆や練乳、果物をたっぷりのせた韓国式かき氷で、夏の名物デザートとして親しまれています。"
+    },
+    {
+     "name": "トッポッキ",
+     "blurb": "甘辛いソースで煮込んだもちもちの餅で、明洞や弘大の屋台で気軽に味わえる国民的なおやつです。"
+    },
+    {
+     "name": "ソルロンタン",
+     "blurb": "牛骨をじっくり煮込んだ白濁スープのあっさりした滋味深い味わいで、冷えた体に染みわたる一杯です。"
+    },
+    {
+     "name": "チキン（ヤンニョムチキン）",
+     "blurb": "カリッと揚げた鶏に甘辛いタレを絡めた韓国式フライドチキンで、ビールとの相性は抜群です。"
+    }
+   ],
+   "gettingThere": "日本各地からソウルへは仁川国際空港または金浦国際空港へ直行便が多数就航しており、フライト時間も短く週末旅行にも向いています。仁川空港からは空港鉄道（A'REX）で市内中心部へスムーズにアクセスでき、金浦空港は都心に近く便利です。市内の移動は地下鉄が圧倒的に便利で、路線網が発達し案内表示も日本語に対応している駅が多く、初めてでも迷いにくいでしょう。交通系ICカードの「T-money（ティーマネー）」を一枚用意すれば、地下鉄もバスもタッチひとつで乗車でき、コンビニで気軽に購入・チャージできます。タクシーも比較的利用しやすく、配車アプリを使えば言葉に不安があっても安心です。主要な観光地は徒歩や地下鉄で回れるエリアにまとまっているので、効率よく散策できます。",
+   "tips": [
+    "古宮を訪れるなら韓服（ハンボク）をレンタルするのがおすすめ。多くの王宮では韓服着用で入場無料になる特典があり、写真映えも抜群です。",
+    "明洞や弘大の屋台は現金が便利な場面もあるため、少額の韓国ウォン現金を持っておくと安心です。",
+    "北村韓屋村は住民が暮らす生活の場なので、早朝や静かな時間帯に訪れ、大声や私有地への立ち入りは控えましょう。",
+    "地下鉄は乗り換えの徒歩距離が長い駅もあるので、ナビアプリで所要時間を確認してから動くと効率的です。"
+   ],
+   "faq": [
+    {
+     "q": "ソウル観光は何日あれば十分に楽しめますか？",
+     "a": "主要な見どころを巡るなら2〜3日あれば定番スポットをひと通り回れます。古宮巡りや市場、ショッピングに加えて漢江沿いの散策などのリラックスも楽しみたい場合は、4〜5日ほど確保するとゆったり満喫できます。"
+    },
+    {
+     "q": "日本語はどのくらい通じますか？",
+     "a": "明洞や東大門など観光客の多いエリアでは日本語が通じる店も少なくありません。地下鉄の案内表示や主要観光地の説明も日本語対応が進んでいますが、翻訳アプリを一つ用意しておくとさらに安心して旅ができます。"
+    },
+    {
+     "q": "ソウル観光のベストシーズンはいつですか？",
+     "a": "過ごしやすさで選ぶなら、紅葉が美しい秋（9〜11月頃）と、桜や新緑が楽しめる春（4〜5月頃）が特におすすめです。夏は蒸し暑く雨も多め、冬は冷え込みが厳しいため、防寒や雨具など季節に応じた準備をしておきましょう。"
+    },
+    {
+     "q": "市内の移動は地下鉄とタクシーのどちらが便利ですか？",
+     "a": "基本は路線網が充実した地下鉄が最も便利で経済的です。荷物が多いときや深夜、地下鉄駅から離れた場所へ行くときはタクシーが頼りになります。配車アプリを使えば行き先を入力でき、言葉の不安も軽減できます。"
+    }
+   ]
+  },
+  "zh": {
+   "h1": "首尔旅游攻略：必去景点、美食与实用贴士",
+   "title": "首尔旅游攻略：必去景点与美食 | KoreaPlus",
+   "metaDesc": "首尔旅游必看攻略：景福宫、北村韩屋村、南山首尔塔、明洞、弘大、广藏市场等热门景点全收录，附地道美食、交通指南与本地人贴士，助你玩转韩国首都。",
+   "lead": "首尔是一座古今交融、昼夜不息的城市——清晨在五百年王宫的飞檐下感受历史，午后钻进北村曲折的韩屋小巷，入夜则在弘大的街头表演和明洞的小吃摊间穿梭。无论你是为美食、购物、K-pop还是宫殿文化而来，这座韩国首都都能让人一来再来。这份攻略帮你把首尔最经典、最值得去的地方一次看遍。",
+   "attractions": [
+    {
+     "name": "Gyeongbokgung Palace",
+     "nameLocal": "景福宫 (경복궁)",
+     "blurb": "始建于14世纪的朝鲜王朝正宫，是首尔规模最大、最为恢弘的古宫。庄严的勤政殿与碧波映衬的庆会楼是必看亮点，每天还能在光化门前看到换岗仪式。穿上韩服入场更可免门票，与红墙青瓦合影别具韵味。"
+    },
+    {
+     "name": "Bukchon Hanok Village",
+     "nameLocal": "北村韩屋村 (북촌한옥마을)",
+     "blurb": "坐落在景福宫与昌德宫之间的山坡上，保留着大片传统韩屋。沿着起伏的石板巷往上走，灰瓦屋脊层层叠叠，远处现代天际线隐约可见，是拍摄首尔新旧交融最经典的一角。请放轻脚步，这里仍是居民区。"
+    },
+    {
+     "name": "Changdeokgung Palace & Secret Garden",
+     "nameLocal": "昌德宫与后苑 (창덕궁·후원)",
+     "blurb": "首尔五大宫中保存最完好的一座，因顺应地形而建而被列入世界文化遗产。最精华的后苑（秘苑）是一座隐于林间的王家庭园，亭台、莲池与古木错落，需随导览方可入内，春秋两季尤为动人。"
+    },
+    {
+     "name": "N Seoul Tower (Namsan)",
+     "nameLocal": "南山首尔塔 (남산서울타워)",
+     "blurb": "矗立于南山之巅，是俯瞰首尔全景的地标。可乘缆车上山，登塔将群山环抱的城市与汉江尽收眼底，入夜灯火璀璨。塔下露台挂满情侣的同心锁，是首尔最浪漫的约会胜地之一。"
+    },
+    {
+     "name": "Myeongdong",
+     "nameLocal": "明洞 (명동)",
+     "blurb": "首尔最热闹的购物与小吃天堂，化妆品店、时装店与百货林立。入夜后街头小吃摊一字排开，烤龙虾、芝士排骨、鸡蛋糕香气四溢，是采购韩妆和大快朵颐的首选之地。"
+    },
+    {
+     "name": "Hongdae",
+     "nameLocal": "弘大 (홍대)",
+     "blurb": "环绕弘益大学的青春街区，以独立音乐、街头表演和个性小店闻名。傍晚常有年轻人在街头唱跳，咖啡馆、清吧与买手店遍布巷弄，是感受首尔潮流文化与夜生活的中心。"
+    },
+    {
+     "name": "Insadong",
+     "nameLocal": "仁寺洞 (인사동)",
+     "blurb": "首尔最具传统气息的文化街，主街两旁是古董店、画廊、传统茶馆和手工艺铺。可以淘到韩纸、毛笔与陶瓷等手信，拐进岔巷还能找到藏在旧韩屋里的茶室，慢悠悠喝上一杯传统茶。"
+    },
+    {
+     "name": "Gwangjang Market",
+     "nameLocal": "广藏市场 (광장시장)",
+     "blurb": "首尔历史最悠久的传统市场之一，也是地道街头美食的圣地。现摊现做的绿豆煎饼、紫菜饭卷、生牛肉与血肠热气腾腾，挤在长凳上和当地人一起吃，是体验首尔市井烟火气的最佳方式。"
+    },
+    {
+     "name": "Dongdaemun Design Plaza (DDP)",
+     "nameLocal": "东大门设计广场 (DDP)",
+     "blurb": "由建筑大师扎哈·哈迪德设计的流线型未来建筑，是东大门时尚商圈的地标。这一带商场彻夜营业，是淘衣购物的不夜城；DDP本身则常举办设计展览，夜晚的LED玫瑰花海更是热门打卡点。"
+    },
+    {
+     "name": "Han River Parks",
+     "nameLocal": "汉江公园 (한강공원)",
+     "blurb": "汉江穿城而过，沿岸串起多座市民公园。当地人爱在这里野餐、骑行、放风筝，傍晚点一份炸鸡配啤酒，看夕阳落入江面。盘浦大桥的月光彩虹喷泉是夏夜一大景致，惬意又免费。"
+    }
+   ],
+   "food": [
+    {
+     "name": "韩式炸鸡配啤酒（炸鸡啤酒 chimaek）",
+     "blurb": "外皮酥脆、调味浓郁的韩式炸鸡配上冰镇啤酒，是首尔夜晚最经典的组合，蜂蜜蒜香与甜辣酱口味最受欢迎。"
+    },
+    {
+     "name": "韩式烤肉（烤五花肉 samgyeopsal）",
+     "blurb": "在炭火上现烤的厚切五花肉，用生菜包裹蒜片、辣酱和泡菜一同入口，是首尔三五好友聚餐的标配。"
+    },
+    {
+     "name": "部队锅（budae-jjigae）",
+     "blurb": "汇集午餐肉、香肠、泡菜、年糕与泡面的红辣锅物，热气腾腾、料足味浓，是首尔人钟爱的暖心慰藉美食。"
+    },
+    {
+     "name": "绿豆煎饼（bindaetteok）",
+     "blurb": "广藏市场的招牌小吃，将泡发的绿豆现磨成糊、煎得金黄酥脆，蘸上洋葱酱油醋最是地道。"
+    },
+    {
+     "name": "辣炒年糕（tteokbokki）",
+     "blurb": "软糯年糕裹满甜辣酱汁，是首尔街头最具代表性的平民小吃，常与鱼饼和炸物一同享用。"
+    },
+    {
+     "name": "人参鸡汤（samgyetang）",
+     "blurb": "整只嫩鸡填入糯米、人参与红枣慢炙，汤头清香滑入、补而不腻，是韩国人夏日进补、四季皆宜的经典补汤。"
+    }
+   ],
+   "gettingThere": "大多数旅客经仁川国际机场（ICN）抵达首尔，乘坐机场快线（AREX）直达首尔站约一小时，是最快捷省心的方式；金浦机场（GMP）距市区更近，也有地铁直通。市内交通首推地铁，线路四通八达、有中英文标识，几乎能到达所有景点。强烈建议购买并充值一张T-money交通卡，地铁、公交、出租车通刷，还能在便利店买东西。公交网络密集但报站多为韩语，对初到者地铁更友好；短途或夜间不便时可叫出租车或使用Kakao T打车软件。宫殿与老城区（景福宫、北村、仁寺洞）彼此相邻，步行串联即可，是最适合慢慢逛的一带。",
+   "tips": [
+    "想免费逛宫殿就穿韩服：在景福宫、昌德宫等附近租一套韩服，穿着入场可免门票，拍照也更出片。",
+    "宫殿留意休馆日：首尔各大古宫通常每周有一天闭馆（多为周一或周二），出发前先确认，以免扑空。",
+    "昌德宫后苑需提前预约：后苑（秘苑）仅限随导览参观且名额有限，旺季建议提早在线订票。",
+    "善用地铁与T-money卡：避开早晚高峰，一卡走遍地铁公交，比逐次买票方便得多，也能享受换乘优惠。"
+   ],
+   "faq": [
+    {
+     "q": "首尔旅游需要安排几天？",
+     "a": "建议至少安排3到4天。三天足以走完景福宫、北村、明洞、弘大与南山首尔塔等核心景点；若想加上汉江、江南、北汉山或近郊一日游，预留4到5天会更从容。"
+    },
+    {
+     "q": "首尔什么季节去最合适？",
+     "a": "春季（4月樱花）与秋季（10至11月红叶）气候宜人、风景最美，是公认的最佳旅游季节。夏季湿热多雨，冬季寒冷但有滑雪和灯饰，各有特色，可按喜好选择。"
+    },
+    {
+     "q": "在首尔不会韩语能顺利出行吗？",
+     "a": "完全可以。地铁站、主要景点和餐厅普遍有中英文标识，年轻人也多少能用英语沟通。备好地图导航和翻译App，再加一张T-money交通卡，自由行毫无压力。"
+    },
+    {
+     "q": "首尔的景点都需要门票吗？",
+     "a": "不少精华体验都是免费的，比如逛北村韩屋村、明洞、弘大、仁寺洞和汉江公园。景福宫、昌德宫等古宫门票也很亲民，穿韩服入场甚至可以免费。"
+    }
+   ]
+  },
+  "es": {
+   "h1": "Qué ver en Seúl: las mejores cosas que hacer",
+   "title": "Qué ver en Seúl: guía de imprescindibles | KoreaPlus",
+   "metaDesc": "Descubre qué ver en Seúl: palacios, hanok, mercados, el río Han y barrios como Hongdae o Gangnam. Guía práctica con los imprescindibles de la capital coreana.",
+   "lead": "Seúl es una ciudad que no para quieta: en una misma mañana puedes pasear entre los muros de un palacio de la dinastía Joseon y, al doblar la esquina, perderte entre rascacielos, cafeterías de diseño y tiendas de K-pop. Es una capital donde la tradición y la modernidad conviven sin esfuerzo, salpicada de montañas, atravesada por el ancho río Han y servida por uno de los metros más eficientes del mundo. Tanto si vienes atraído por la cultura coreana como por su gastronomía o sus barrios de moda, estos son los lugares que no te puedes perder.",
+   "attractions": [
+    {
+     "name": "Gyeongbokgung Palace",
+     "nameLocal": "Palacio Gyeongbokgung",
+     "blurb": "El palacio real más grande y emblemático de la dinastía Joseon, con su majestuoso salón del trono y el pabellón Gyeonghoeru sobre un estanque. No te pierdas el cambio de guardia, una ceremonia con trajes de época frente a la puerta principal Gwanghwamun."
+    },
+    {
+     "name": "Bukchon Hanok Village",
+     "nameLocal": "Aldea hanok de Bukchon",
+     "blurb": "Un laberinto de callejuelas empedradas entre casas tradicionales coreanas, las hanok, con sus tejados curvados encajados en la ladera. Encaramado entre dos palacios, ofrece algunas de las vistas más fotografiadas de la ciudad, con los rascacielos asomando al fondo."
+    },
+    {
+     "name": "Changdeokgung Palace & Secret Garden",
+     "nameLocal": "Palacio Changdeokgung y Jardín Secreto",
+     "blurb": "Patrimonio de la Humanidad por su integración ejemplar con el paisaje natural. Detrás del palacio se esconde el Huwon o Jardín Secreto, un refugio de pabellones, estanques y árboles centenarios que se visita en recorrido guiado."
+    },
+    {
+     "name": "N Seoul Tower (Namsan)",
+     "nameLocal": "Torre N de Seúl (Namsan)",
+     "blurb": "Plantada en la cima del monte Namsan, esta torre regala las mejores vistas panorámicas de la metrópoli, especialmente al atardecer. Puedes subir en el teleférico y, ya arriba, buscar los famosos candados del amor que cubren las barandillas."
+    },
+    {
+     "name": "Myeongdong",
+     "nameLocal": "Myeongdong",
+     "blurb": "El paraíso de las compras y la cosmética coreana, con calles peatonales repletas de tiendas, marcas internacionales y carteles luminosos. Al caer la tarde, sus puestos callejeros de comida lo convierten en una fiesta de aromas y sabores."
+    },
+    {
+     "name": "Hongdae",
+     "nameLocal": "Hongdae",
+     "blurb": "El barrio universitario y bohemio de Seúl, latido de la cultura indie y la vida nocturna. Aquí abundan los músicos callejeros, los cafés temáticos, las tiendas independientes y una energía joven que se prolonga hasta la madrugada."
+    },
+    {
+     "name": "Insadong",
+     "nameLocal": "Insadong",
+     "blurb": "El rincón más artístico y tradicional del centro, ideal para buscar caligrafía, cerámica, papel hanji y antigüedades. Su calle principal está llena de casas de té y galerías, perfectas para hacer una pausa cultural."
+    },
+    {
+     "name": "Gwangjang Market",
+     "nameLocal": "Mercado Gwangjang",
+     "blurb": "Uno de los mercados más antiguos y queridos de Corea, todo un templo de la comida callejera. Entre sus pasillos abarrotados podrás probar bindaetteok (tortitas de judía mungo), tteokbokki y el mítico mayak gimbap mientras te sientas codo con codo con los locales."
+    },
+    {
+     "name": "Dongdaemun Design Plaza (DDP)",
+     "nameLocal": "Plaza de Diseño de Dongdaemun (DDP)",
+     "blurb": "Una espectacular obra de la arquitecta Zaha Hadid, todo curvas plateadas y futuristas, en pleno distrito comercial de Dongdaemun. Acoge exposiciones de diseño y, alrededor, mercados de moda que no cierran en toda la noche."
+    },
+    {
+     "name": "Han River Parks",
+     "nameLocal": "Parques del río Han",
+     "blurb": "El gran pulmón al aire libre de la ciudad, con extensos parques a ambas orillas perfectos para pasear, montar en bici o hacer un pícnic con pollo frito y cerveza al estilo coreano. Al anochecer, los puentes iluminados y los rascacielos reflejados ofrecen una estampa inolvidable."
+    }
+   ],
+   "food": [
+    {
+     "name": "Bibimbap",
+     "blurb": "El plato coreano más reconocido: un cuenco de arroz coronado con verduras de temporada, carne, un huevo y una cucharada de pasta picante de chile que se mezcla todo antes de comer."
+    },
+    {
+     "name": "Korean BBQ (Gogigui)",
+     "blurb": "La experiencia social por excelencia, en la que asas tú mismo la carne en una parrilla en el centro de la mesa y la envuelves en hojas de lechuga con ajo y pasta de soja."
+    },
+    {
+     "name": "Tteokbokki",
+     "blurb": "Cilindros de pastel de arroz cocinados en una salsa roja, dulce y picante a la vez, una de las estrellas indiscutibles de la comida callejera de Seúl."
+    },
+    {
+     "name": "Samgyetang",
+     "blurb": "Una reconfortante sopa de pollo entero relleno de arroz glutinoso, ginseng y jujube, muy popular sobre todo en los días más calurosos del verano."
+    },
+    {
+     "name": "Naengmyeon",
+     "blurb": "Finos fideos fríos servidos en un caldo helado o con salsa picante, un alivio fresquísimo y muy apreciado durante el verano coreano."
+    },
+    {
+     "name": "Hotteok",
+     "blurb": "Un dulce de masa frita relleno de azúcar moreno fundido, miel, canela y frutos secos, que se vende calentito en los puestos de la calle."
+    }
+   ],
+   "gettingThere": "La mayoría de viajeros llegan al aeropuerto internacional de Incheon, conectado con el centro de Seúl mediante el tren exprés AREX y numerosos autobuses; el aeropuerto de Gimpo, más cercano, recibe sobre todo vuelos domésticos y de países asiáticos próximos. Una vez en la ciudad, el metro es la forma más cómoda y económica de moverse: es amplísimo, puntual y está señalizado también en inglés. Hazte con una tarjeta recargable T-money nada más llegar, ya que sirve para el metro, los autobuses urbanos e incluso muchos taxis, y te ahorrará comprar billetes sueltos. Para distancias cortas, caminar entre barrios como Insadong, Bukchon y los palacios es muy agradable, y los taxis resultan abundantes y razonables.",
+   "tips": [
+    "Si vas a visitar varios palacios, ponte un hanbok de alquiler: vestido con el traje tradicional la entrada a los principales palacios suele ser gratuita y las fotos quedan espectaculares.",
+    "Descárgate Naver Map o KakaoMap antes del viaje, ya que Google Maps funciona de forma limitada en Corea para rutas a pie y en transporte.",
+    "Muchos restaurantes y mercados funcionan mejor con efectivo, aunque la tarjeta se acepta casi en todas partes; lleva siempre algo de wones encima para los puestos callejeros.",
+    "Reserva con antelación la visita guiada al Jardín Secreto de Changdeokgung, ya que el aforo es limitado y las plazas vuelan, sobre todo en temporada alta."
+   ],
+   "faq": [
+    {
+     "q": "¿Cuántos días hacen falta para ver Seúl?",
+     "a": "Con tres o cuatro días completos puedes cubrir los grandes imprescindibles: los palacios, Bukchon, la torre Namsan, los principales mercados y un par de barrios como Hongdae o Gangnam. Si dispones de cinco o más días, podrás añadir excursiones a la montaña Bukhansan, los parques del río Han o algún día fuera de la ciudad."
+    },
+    {
+     "q": "¿Cuál es la mejor época para visitar Seúl?",
+     "a": "La primavera (de abril a mayo), con la floración de los cerezos, y el otoño (de septiembre a noviembre), con los colores del follaje, son las estaciones más agradables y bonitas. El verano es caluroso y húmedo, con época de lluvias, y el invierno puede ser muy frío, aunque tiene su encanto con menos turistas."
+    },
+    {
+     "q": "¿Es fácil moverse por Seúl sin saber coreano?",
+     "a": "Sí. El metro y muchas señales están en inglés, las aplicaciones de mapas locales ofrecen indicaciones claras y en las zonas turísticas suele haber personal que se desenvuelve en inglés. Llevar el nombre de tu destino escrito en coreano siempre ayuda con los taxistas."
+    },
+    {
+     "q": "¿Necesito visado para viajar a Corea del Sur?",
+     "a": "Los ciudadanos españoles pueden entrar como turistas sin visado para estancias cortas, aunque conviene comprobar antes del viaje si es necesario tramitar la autorización electrónica K-ETA, ya que los requisitos cambian con cierta frecuencia. Revisa siempre la información oficial actualizada antes de volar."
+    }
+   ]
+  }
+ },
+ "Busan": {
+  "ja": {
+   "h1": "釜山の観光スポット完全ガイド",
+   "title": "釜山観光 おすすめスポット完全ガイド | KoreaPlus",
+   "metaDesc": "韓国第二の都市・釜山の観光ガイド。海雲台ビーチや甘川文化村、海東龍宮寺、チャガルチ市場など人気スポットと名物グルメ、アクセス、現地のコツを地元目線で紹介します。",
+   "lead": "韓国南端の港町・釜山(プサン)は、青い海と山あいの街並み、そして活気あふれる市場が一度に楽しめる魅力的な街です。海雲台や広安里のビーチでのんびり過ごし、カラフルな甘川文化村を散歩し、新鮮な海の幸に舌鼓を打つ——ソウルとはまったく違う、おおらかで開放的な空気が流れています。福岡から船や飛行機で気軽に行けるアクセスの良さも、日本人旅行者に長く愛される理由です。",
+   "attractions": [
+    {
+     "name": "Haeundae Beach",
+     "nameLocal": "海雲台ビーチ(ヘウンデ)",
+     "blurb": "釜山を代表する白砂のビーチで、弧を描く海岸線の背後に高層ビルが立ち並ぶ景色は釜山らしさそのもの。夏は海水浴客でにぎわい、近くにはマーケットや展望スポット、温泉も点在しています。"
+    },
+    {
+     "name": "Gamcheon Culture Village",
+     "nameLocal": "甘川文化村(カムチョン)",
+     "blurb": "山の斜面にパステルカラーの家々が階段状に連なり、「韓国のマチュピチュ」とも呼ばれる人気エリア。路地のあちこちにアート作品やフォトスポットが隠れていて、坂道を上るほどに港と街並みの絶景が広がります。"
+    },
+    {
+     "name": "Gwangalli Beach & Gwangan Bridge",
+     "nameLocal": "広安里ビーチと広安大橋(クァンアンリ)",
+     "blurb": "海の向こうに架かる広安大橋を望むビーチで、夜になると橋がライトアップされロマンチックな雰囲気に。海沿いにはおしゃれなカフェやバーが並び、夕暮れから夜にかけての散歩に最適です。"
+    },
+    {
+     "name": "Haedong Yonggungsa Temple",
+     "nameLocal": "海東龍宮寺(ヘドンヨングンサ)",
+     "blurb": "海に突き出た岩場に建つ珍しい寺院で、波しぶきと潮の香りに包まれながら参拝できます。内陸の山寺が多い韓国では貴重な「海辺のお寺」で、日の出スポットとしても親しまれています。"
+    },
+    {
+     "name": "Jagalchi Fish Market",
+     "nameLocal": "チャガルチ市場",
+     "blurb": "韓国最大級の海産物市場で、釜山の食文化の中心地。威勢のいい掛け声が飛び交う活気ある雰囲気の中、その場で選んだ新鮮な魚介を刺身や鍋で味わえます。"
+    },
+    {
+     "name": "Beomeosa Temple",
+     "nameLocal": "梵魚寺(ポモサ)",
+     "blurb": "金井山(クムジョンサン)のふもとに広がる、釜山を代表する古刹。市街地の喧騒から離れた静かな山あいにあり、立派な伽藍と紅葉や新緑の自然が調和した、心が落ち着く名刹です。"
+    },
+    {
+     "name": "Taejongdae",
+     "nameLocal": "太宗台(テジョンデ)",
+     "blurb": "影島(ヨンド)の南端にある景勝地で、断崖絶壁と松林、青い海が織りなすダイナミックな景観が魅力。園内を巡る周遊列車に乗れば、灯台や展望台、岩場の絶景ポイントを効率よく回れます。"
+    },
+    {
+     "name": "Songdo Skywalk & Cable Car",
+     "nameLocal": "松島スカイウォークとケーブルカー(ソンド)",
+     "blurb": "海の上に延びる遊歩道スカイウォークと、海峡をまたぐケーブルカーで知られる人気エリア。足元に広がる海を眺めながら歩く爽快感と、空中からのパノラマ絶景の両方が楽しめます。"
+    },
+    {
+     "name": "BIFF Square",
+     "nameLocal": "BIFF広場(ビフ広場)",
+     "blurb": "釜山国際映画祭にちなんで名付けられた繁華街で、地面には映画スターの手形が並びます。屋台グルメの宝庫としても有名で、名物のシアホットクをはじめ食べ歩きが楽しいエリアです。"
+    },
+    {
+     "name": "Gukje Market",
+     "nameLocal": "国際市場(クッチェ市場)",
+     "blurb": "戦後から続く釜山屈指の伝統市場で、衣料品から雑貨、食料品まで何でも揃う巨大なエリア。映画の舞台にもなった庶民的な雰囲気の中、路地裏の食堂でローカルグルメを味わうのもおすすめです。"
+    }
+   ],
+   "food": [
+    {
+     "name": "デジクッパ(豚肉のスープご飯)",
+     "blurb": "豚骨をじっくり煮込んだ白濁スープにご飯を入れて食べる釜山のソウルフードで、薬味やアミの塩辛で好みの味に調えながらいただきます。"
+    },
+    {
+     "name": "ミルミョン(小麦冷麺)",
+     "blurb": "そば粉の代わりに小麦粉を使ったコシのある冷麺で、戦後の釜山で生まれたご当地麺として今も地元で愛されています。"
+    },
+    {
+     "name": "シアホットク(種入りホットク)",
+     "blurb": "外はカリッ、中はとろりと甘い生地に、ナッツや種をたっぷり詰めた釜山名物の屋台スイーツで、BIFF広場の定番おやつです。"
+    },
+    {
+     "name": "フェ(刺身)",
+     "blurb": "チャガルチ市場をはじめ港町・釜山ならではの新鮮な刺身は、コチュジャン酢やサンチュに包んで味わうのが韓国流です。"
+    },
+    {
+     "name": "コムジャンオ(ヌタウナギの炭火焼き)",
+     "blurb": "プリッとした食感のヌタウナギを香ばしく炭火で焼き上げる海辺の名物で、ピリ辛だれと一緒にお酒のお供に最適です。"
+    },
+    {
+     "name": "ナッコプセ(タコ・ホルモン・エビの鍋)",
+     "blurb": "タコ、ホルモン、エビを真っ赤なピリ辛だれで煮込んだ釜山発祥の鍋料理で、シメの炒めご飯まで楽しめるボリューム満点の一品です。"
+    }
+   ],
+   "gettingThere": "釜山へは、日本からなら金海(キメ)国際空港への直行便が福岡・大阪・東京などから就航しており、空港から市内へは軽電鉄(BGL)と地下鉄を乗り継いでアクセスできます。福岡からは高速船(ビートル・クイーンビートル)で港へ渡るルートも人気です。ソウルからはKTX(高速鉄道)で釜山駅まで結ばれており、車窓を楽しみながら移動できます。市内観光には地下鉄が便利で、海雲台・西面(ソミョン)・南浦洞(ナンポドン)など主要エリアを網羅しています。交通カード(T-money)を一枚用意しておけば、地下鉄もバスもスムーズに乗り降りでき、坂の多い甘川文化村などへはバスやタクシーを組み合わせると効率的です。",
+   "tips": [
+    "甘川文化村や太宗台、海東龍宮寺など見どころが市内各所に点在しているため、エリアごとにまとめて回ると移動のロスが少なく効率的です。",
+    "甘川文化村は坂道と階段が多いので、歩きやすいスニーカーで訪れるのがおすすめです。",
+    "海雲台や広安里の夜景は釜山旅行のハイライト。夕方から夜にかけてビーチ沿いを散策する時間を確保しておきましょう。",
+    "週末や繁忙期は人気スポットや市場が混み合うので、刺身やグルメを目当てにするなら早めの時間帯を狙うと快適です。"
+   ],
+   "faq": [
+    {
+     "q": "釜山観光は何日あれば十分ですか?",
+     "a": "主要な見どころを巡るなら2〜3日が目安です。海辺のビーチや市場、甘川文化村などを無理なく回れます。寺院や近郊エリアまで足を延ばしたい場合は、もう1日加えるとゆったり楽しめます。"
+    },
+    {
+     "q": "釜山とソウル、どちらがおすすめですか?",
+     "a": "初めての韓国で都市の活気やショッピングを重視するならソウル、海と自然、のんびりした港町の雰囲気やグルメを楽しみたいなら釜山がおすすめです。KTXで結ばれているので、両方を組み合わせる旅も人気です。"
+    },
+    {
+     "q": "日本から釜山へはどうやって行けますか?",
+     "a": "福岡・大阪・東京などから金海国際空港への直行便が出ています。さらに福岡からは高速船で海路で渡ることもでき、フェリー旅ならではの雰囲気も楽しめます。"
+    },
+    {
+     "q": "釜山旅行のベストシーズンはいつですか?",
+     "a": "過ごしやすいのは気候の安定した春と秋で、観光や散策に最適です。ビーチで海水浴を楽しみたいなら夏、人混みを避けて落ち着いて巡りたいなら春・秋の平日が狙い目です。"
+    }
+   ]
+  },
+  "zh": {
+   "h1": "釜山旅游攻略：必去景点与美食全指南",
+   "title": "釜山旅游：必去景点与美食攻略 | KoreaPlus",
+   "metaDesc": "釜山旅游怎么玩？这份攻略带你逛海云台海滩、甘川文化村、海东龙宫寺、札嘎其市场，吃地道猪肉汤饭与生鱼片，玩转韩国第一海港城市。",
+   "lead": "釜山是韩国第二大城市，也是最迷人的海港都市。这里既有蜿蜒的海岸线、金色沙滩和跨海大桥，也有山坡上层层叠叠的彩色村落与香火缭绕的海边古刹。比起首尔的快节奏，釜山多了一份悠闲的海风味道——白天逛市场、吃海鲜，傍晚在广安里看灯光与跨海大桥相映，这座城市总能让人慢下来。",
+   "attractions": [
+    {
+     "name": "Haeundae Beach",
+     "nameLocal": "海云台海滩 (해운대해수욕장)",
+     "blurb": "海云台是釜山最负盛名的海滩，洁白的细沙绵延一公里多，背后是高耸的现代化高楼天际线。夏天这里人潮如织，沿岸的咖啡馆和海鲜餐厅一家挨着一家，是感受釜山海滨活力的首选之地。"
+    },
+    {
+     "name": "Gamcheon Culture Village",
+     "nameLocal": "甘川文化村 (감천문화마을)",
+     "blurb": "依山而建的甘川文化村被誉为\"釜山的圣托里尼\"，五颜六色的房屋顺着山坡层层叠叠铺展开来。狭窄的巷弄里藏着壁画、艺术装置和文创小店，登高俯瞰整片彩色村落，是釜山最上镜的角落之一。"
+    },
+    {
+     "name": "Haedong Yonggungsa Temple",
+     "nameLocal": "海东龙宫寺 (해동용궁사)",
+     "blurb": "不同于大多建在深山里的寺庙，海东龙宫寺直接坐落在海边的礁石之上，海浪拍打着崖壁，殿宇与大海相依。沿着石阶走到临海的观音像前，听涛声、看日出，是釜山极具灵气的一处胜景。"
+    },
+    {
+     "name": "Gwangalli Beach",
+     "nameLocal": "广安里海滩 (광안리해수욕장)",
+     "blurb": "广安里以横跨海湾的广安大桥而闻名，入夜后大桥亮起绚丽灯光，与海面交相辉映，浪漫至极。沙滩沿岸聚集着大量酒吧、咖啡馆和餐厅，是釜山年轻人最爱的夜生活与看海地标。"
+    },
+    {
+     "name": "Jagalchi Fish Market",
+     "nameLocal": "札嘎其鱼市场 (자갈치시장)",
+     "blurb": "札嘎其是韩国最大的海鲜市场，空气里满是大海的气息。一楼摊位上摆满了刚捕捞上岸的鱼虾贝类，挑好食材便能拿到楼上的餐馆即点即做，生鱼片和烤鱼新鲜得让人难忘。"
+    },
+    {
+     "name": "Taejongdae",
+     "nameLocal": "太宗台 (태종대)",
+     "blurb": "太宗台是影岛南端的一处海岸悬崖公园，茂密的松林沿着陡峭的崖壁延伸到海边。乘坐园内的环游小火车,在观景台远眺壮阔的海景与灯塔，天气晴朗时甚至能望见远处的对马岛轮廓。"
+    },
+    {
+     "name": "Beomeosa Temple",
+     "nameLocal": "梵鱼寺 (범어사)",
+     "blurb": "梵鱼寺隐于金井山的密林之中，是釜山最重要的千年古刹之一。古朴的木构殿宇、苍翠的山林与潺潺溪流构成一方清净天地，远离市区喧嚣，是体验韩国佛教文化与登山的好去处。"
+    },
+    {
+     "name": "Songdo Skywalk",
+     "nameLocal": "松岛云端散步道 (송도구름산책로)",
+     "blurb": "松岛海上散步道是一条蜿蜒伸入海面的玻璃栈桥，脚下便是翻涌的浪花，惊险又畅快。这里还连接着跨海缆车，可以从空中俯瞰松岛海滩与海岸线，是釜山老牌海水浴场的新晋打卡点。"
+    },
+    {
+     "name": "Gukje Market",
+     "nameLocal": "国际市场 (국제시장)",
+     "blurb": "国际市场是釜山最具烟火气的传统市场，纵横交错的巷子里售卖着服饰、杂货、小吃和各类生活用品。这里也是同名经典韩国电影的取景地，逛累了不妨坐下来尝一碗热腾腾的市场小吃。"
+    },
+    {
+     "name": "BIFF Square",
+     "nameLocal": "BIFF广场 (BIFF광장)",
+     "blurb": "BIFF广场因釜山国际电影节而得名，地上嵌着众多电影人的手印星光大道。这条街区聚集了密密麻麻的街头小吃摊，尤其以糖饼最为出名，是边逛边吃、感受釜山街头活力的热闹去处。"
+    }
+   ],
+   "food": [
+    {
+     "name": "猪肉汤饭 (돼지국밥)",
+     "blurb": "釜山最具代表性的平民美食，用猪骨慢炖出乳白浓汤，配上软嫩猪肉与米饭，加点韭菜和虾酱调味，一碗下肚暖胃又满足。"
+    },
+    {
+     "name": "生鱼片 (회)",
+     "blurb": "靠海的釜山海鲜极其新鲜，在札嘎其市场现挑现切的生鱼片肉质弹滑鲜甜，蘸上辣酱或包生菜吃别有风味。"
+    },
+    {
+     "name": "蜜糖煎饼 (씨앗호떡)",
+     "blurb": "釜山街头的招牌小吃，外皮煎得金黄酥脆，里面包着红糖与各种坚果籽，咬下去香甜爆浆，冬天捧在手里最是幸福。"
+    },
+    {
+     "name": "麦面 (밀면)",
+     "blurb": "釜山特有的冷面，以小麦粉制成劲道的面条，浇上爽口的冷汤或拌入酸辣酱，是当地人夏天消暑的心头好。"
+    },
+    {
+     "name": "鱼糕 (어묵)",
+     "blurb": "釜山以鱼糕闻名全韩，街边热汤里煮着各式鱼糕串，鲜香弹牙，配上一杯暖汤，是逛街途中最暖心的小食。"
+    },
+    {
+     "name": "豆浆面 (콩국수)",
+     "blurb": "用研磨豆浆做汤底的清爽面食，乳白浓郁、口感顺滑，是夏季清淡解腻的地道选择。"
+    }
+   ],
+   "gettingThere": "从首尔前往釜山最方便的方式是乘坐KTX高铁，全程约两个半小时即可抵达釜山站，舒适又快捷；预算有限的话也可选择高速巴士或国内航班飞往金海国际机场。釜山市内交通以地铁为主，覆盖海云台、南浦洞、西面等主要旅游区域，线路清晰、指示牌均有中文，非常适合自由行。购买一张交通卡（T-money或Cashbee）便能畅行地铁与公交，部分热门景点如海东龙宫寺、甘川文化村则需在地铁站换乘公交或出租车前往。由于釜山地形多山、景点沿海岸分散，合理规划路线、善用地铁加公交的组合最为省时省力。",
+   "tips": [
+    "釜山景点多依山傍海，台阶和坡道很多，建议穿一双舒适好走的鞋。",
+    "南浦洞（札嘎其、国际市场、BIFF广场）景点集中且互相步行可达，适合安排在同一天游览。",
+    "广安里和海云台的夜景最美，傍晚去看广安大桥亮灯能拍出绝佳照片。",
+    "前往海东龙宫寺、甘川文化村等景点需换乘公交，出行前用地图App查好路线可省去不少周折。"
+   ],
+   "faq": [
+    {
+     "q": "釜山旅游安排几天比较合适？",
+     "a": "建议安排3到4天。两天可以玩遍海云台、广安里、南浦洞商圈和甘川文化村等核心景点，多出的时间则可前往海东龙宫寺、太宗台或梵鱼寺，节奏会更从容，也能更深入地体验釜山的海港风情。"
+    },
+    {
+     "q": "釜山和首尔哪个更值得去？",
+     "a": "两座城市风格迥异。首尔是繁华的首都，购物、宫殿和都市景观丰富；釜山则以海滩、海鲜和悠闲的海港氛围取胜。如果时间充裕，乘KTX把两座城市串联起来游玩是最理想的选择。"
+    },
+    {
+     "q": "什么季节去釜山最好？",
+     "a": "春季（四五月）和秋季（九十月）气候宜人、风景最美，最适合出游。夏天是海滩旺季但人多炎热，冬天相对清冷却也别有一番宁静的海滨韵味。"
+    },
+    {
+     "q": "在釜山自由行需要会韩语吗？",
+     "a": "基本不需要。地铁站、主要景点和旅游区的指示牌多设有中文或英文标识，热门餐厅也常备图片菜单。提前下载好地图与翻译App，自由行会非常顺畅。"
+    }
+   ]
+  },
+  "es": {
+   "h1": "Qué ver en Busan: las mejores cosas que hacer",
+   "title": "Qué ver en Busan: guía completa | KoreaPlus",
+   "metaDesc": "Descubre qué ver en Busan: playas como Haeundae, el pueblo de Gamcheon, el mercado de Jagalchi y templos junto al mar. Guía con consejos y mapa de imprescindibles.",
+   "lead": "Busan es la gran ciudad costera de Corea del Sur, un lugar donde los rascacielos se asoman al mar y los templos se aferran a los acantilados. Aquí se mezclan playas urbanas de arena dorada, mercados de pescado bulliciosos y barrios de colores trepando por las laderas. Si Seúl es el corazón frenético del país, Busan es su alma marinera: relajada, luminosa y sorprendentemente bonita en cada esquina.",
+   "attractions": [
+    {
+     "name": "Haeundae Beach",
+     "nameLocal": "Playa de Haeundae",
+     "blurb": "La playa más famosa de Corea del Sur, un arco de arena clara flanqueado por rascacielos y cafeterías. Es el corazón veraniego de Busan y un paseo precioso a cualquier hora del año."
+    },
+    {
+     "name": "Gamcheon Culture Village",
+     "nameLocal": "Pueblo Cultural de Gamcheon",
+     "blurb": "Un laberinto de casitas multicolores escalonadas por la ladera, lleno de murales, callejones estrechos y pequeñas galerías. Apodado el 'Santorini coreano', ofrece vistas inolvidables sobre los tejados de mil tonos."
+    },
+    {
+     "name": "Haedong Yonggungsa Temple",
+     "nameLocal": "Templo Haedong Yonggungsa",
+     "blurb": "Uno de los pocos templos budistas de Corea construido junto al mar, con sus pabellones encaramados sobre las rocas y las olas rompiendo a sus pies. Al amanecer, con la luz dorada sobre el agua, resulta sencillamente mágico."
+    },
+    {
+     "name": "Gwangalli Beach",
+     "nameLocal": "Playa de Gwangalli",
+     "blurb": "Una playa rodeada de bares y restaurantes con vistas al espectacular puente Gwangan. De noche, el puente se ilumina y se refleja en el mar, creando una de las estampas más fotografiadas de la ciudad."
+    },
+    {
+     "name": "Jagalchi Fish Market",
+     "nameLocal": "Mercado de Pescado de Jagalchi",
+     "blurb": "El mayor mercado de marisco de Corea, donde las vendedoras pregonan capturas recién llegadas entre acuarios rebosantes. Puedes elegir tu pescado abajo y comerlo cocinado al momento en los puestos de arriba."
+    },
+    {
+     "name": "Taejongdae",
+     "nameLocal": "Taejongdae",
+     "blurb": "Un parque costero de acantilados escarpados, bosques densos y un faro blanco asomado al océano. Los senderos y el trenecito turístico recorren miradores con vistas abiertas al mar abierto y, en días claros, a islas lejanas."
+    },
+    {
+     "name": "Beomeosa Temple",
+     "nameLocal": "Templo Beomeosa",
+     "blurb": "Un sereno templo de montaña a los pies del monte Geumjeong, rodeado de bosque y arquitectura tradicional de siglos. Es uno de los grandes centros del budismo coreano y un remanso de calma lejos del bullicio urbano."
+    },
+    {
+     "name": "Gukje Market",
+     "nameLocal": "Mercado de Gukje",
+     "blurb": "Un enorme mercado tradicional nacido tras la guerra, con callejones repletos de ropa, baratijas y, sobre todo, puestos de comida callejera. Es el lugar ideal para perderse y probar bocados típicos de Busan."
+    },
+    {
+     "name": "Songdo Skywalk",
+     "nameLocal": "Pasarela de Cristal de Songdo",
+     "blurb": "Una pasarela que se adentra en el mar con tramos de suelo de cristal, perfecta para caminar literalmente sobre las olas. Cerca está el teleférico marítimo de Songdo, con vistas panorámicas de la bahía."
+    },
+    {
+     "name": "BIFF Square",
+     "nameLocal": "Plaza BIFF",
+     "blurb": "El epicentro del Festival Internacional de Cine de Busan, una animada zona peatonal con cines, tiendas y famosos puestos callejeros. Es el sitio perfecto para probar el ssiat hotteok, el dulce relleno de semillas típico de aquí."
+    }
+   ],
+   "food": [
+    {
+     "name": "Dwaeji gukbap (sopa de cerdo con arroz)",
+     "blurb": "El plato más emblemático de Busan: un caldo lechoso de cerdo con arroz, que se condimenta al gusto y reconforta a cualquier hora."
+    },
+    {
+     "name": "Milmyeon (fideos fríos de trigo)",
+     "blurb": "Una versión local de los fideos fríos coreanos, nacida en Busan tras la guerra, ideal para combatir el calor del verano."
+    },
+    {
+     "name": "Ssiat hotteok",
+     "blurb": "La estrella dulce de la comida callejera de Busan: una tortita frita y crujiente rellena de azúcar moreno y una mezcla de semillas tostadas."
+    },
+    {
+     "name": "Eomuk (pastel de pescado)",
+     "blurb": "Brochetas de pasta de pescado servidas en caldo caliente, una delicia callejera por la que Busan es famosa en toda Corea."
+    },
+    {
+     "name": "Hoe (pescado crudo)",
+     "blurb": "Pescado fresquísimo cortado al estilo coreano, que se prueba en su máxima expresión en el mercado de Jagalchi y junto a las playas."
+    }
+   ],
+   "gettingThere": "Busan está muy bien conectada con Seúl mediante el tren de alta velocidad KTX, que cubre el trayecto en poco más de dos horas y media y deja en plena ciudad. También cuenta con aeropuerto internacional (Gimhae), con vuelos a distintos puntos de Asia. Una vez allí, lo más cómodo es moverse en metro: la red es amplia, señalizada en inglés y conecta los principales puntos de interés, aunque algunos lugares como el templo Haedong Yonggungsa o el pueblo de Gamcheon requieren combinar metro con autobús o un trayecto corto en taxi. Conviene hacerse con una tarjeta de transporte recargable (tipo T-money o Cashbee) para usarla en metro, autobús y taxi sin complicaciones.",
+   "tips": [
+    "Madruga para visitar el templo Haedong Yonggungsa: con el amanecer sobre el mar y sin multitudes, la experiencia es incomparable.",
+    "Reserva el atardecer para Gwangalli y quédate a ver cómo se ilumina el puente Gwangan; los bares de la playa tienen vistas privilegiadas.",
+    "Lleva calzado cómodo para Gamcheon: el pueblo es todo cuestas y escaleras, pero cada rincón merece la subida.",
+    "Hazte con una tarjeta de transporte recargable nada más llegar; te ahorrará tiempo en metro, autobús y taxi por toda la ciudad."
+   ],
+   "faq": [
+    {
+     "q": "¿Cuántos días se necesitan para ver Busan?",
+     "a": "Con tres días completos puedes cubrir lo esencial sin agobios: un día para las playas (Haeundae y Gwangalli), otro para los templos junto al mar y la zona de montaña, y un tercero para Gamcheon, los mercados y el centro. Si dispones de más tiempo, podrás añadir Taejongdae, Songdo y excursiones cercanas con calma."
+    },
+    {
+     "q": "¿Cuál es la mejor época para visitar Busan?",
+     "a": "La primavera y el otoño son ideales, con temperaturas suaves y cielos despejados; el otoño regala además colores preciosos en los parques. El verano es la temporada de playa por excelencia, pero hace calor, humedad y mucha gente. El invierno es frío pero más tranquilo y suele ofrecer días soleados perfectos para pasear por la costa."
+    },
+    {
+     "q": "¿Merece la pena ir a Busan desde Seúl?",
+     "a": "Sin duda. El KTX une ambas ciudades en menos de tres horas, así que es perfectamente viable como escapada de un par de días o incluso como excursión larga. Busan ofrece un ambiente completamente distinto al de Seúl: mar, playas, templos costeros y un ritmo más relajado que compensa de sobra el viaje."
+    },
+    {
+     "q": "¿Es fácil moverse por Busan sin saber coreano?",
+     "a": "Sí. El metro está señalizado en inglés y es muy intuitivo, y las principales atracciones turísticas suelen tener indicaciones también en inglés. Para los lugares peor comunicados por metro, las apps de mapas locales y el taxi (asequible y abundante) resuelven cualquier desplazamiento sin necesidad de hablar coreano."
+    }
+   ]
+  }
+ },
+ "Gyeongju": {
+  "es": {
+   "h1": "Qué ver en Gyeongju: las mejores cosas que hacer",
+   "title": "Qué ver en Gyeongju: guía completa | KoreaPlus",
+   "metaDesc": "Descubre qué ver en Gyeongju, la antigua capital del reino de Silla: templos, túmulos reales, observatorios milenarios y la mejor gastronomía coreana.",
+   "lead": "Conocida como \"el museo sin paredes\", Gyeongju fue durante casi mil años la capital del reino de Silla, y todavía hoy guarda ese esplendor a flor de tierra. Aquí los túmulos reales se elevan entre los parques, los templos budistas se esconden en las montañas y los observatorios de piedra siguen mirando al cielo desde hace catorce siglos. Es uno de esos destinos en los que basta pasear para sentir que caminas sobre la historia de Corea.",
+   "attractions": [
+    {
+     "name": "Bulguksa Temple",
+     "nameLocal": "Templo de Bulguksa",
+     "blurb": "Joya del budismo coreano y Patrimonio de la Humanidad, este templo en la ladera del monte Toham deslumbra por sus terrazas de piedra, sus puentes-escalera y sus dos célebres pagodas, Dabotap y Seokgatap. Es la imagen por excelencia de la arquitectura de la dinastía Silla."
+    },
+    {
+     "name": "Seokguram Grotto",
+     "nameLocal": "Gruta de Seokguram",
+     "blurb": "En lo alto del monte Toham, esta gruta artificial alberga una imponente estatua de Buda tallada en granito que contempla serena el horizonte del mar del Este. Considerada una obra maestra del arte budista asiático, comparte el reconocimiento de la UNESCO con Bulguksa."
+    },
+    {
+     "name": "Daereungwon Tumuli Park",
+     "nameLocal": "Parque de túmulos de Daereungwon",
+     "blurb": "Un conjunto de enormes montículos verdes que cubren las tumbas de reyes y nobles de Silla. En la Tumba del Caballo Celestial (Cheonmachong) se puede entrar y ver de cerca los tesoros que albergaba, mientras que las suaves colinas funerarias crean uno de los paisajes más fotografiados de la ciudad."
+    },
+    {
+     "name": "Cheomseongdae Observatory",
+     "nameLocal": "Observatorio de Cheomseongdae",
+     "blurb": "Esta elegante torre de piedra del siglo VII está considerada el observatorio astronómico en pie más antiguo de Asia oriental. Su silueta cilíndrica, construida con cientos de bloques cuidadosamente colocados, se alza sobre las praderas del centro histórico y es todo un símbolo de Gyeongju."
+    },
+    {
+     "name": "Donggung Palace & Wolji Pond",
+     "nameLocal": "Palacio de Donggung y estanque de Wolji (Anapji)",
+     "blurb": "Antiguo palacio secundario y jardín de recreo de los príncipes de Silla, este conjunto de pabellones junto a un estanque artificial regala una de las estampas nocturnas más bellas de Corea, cuando los edificios iluminados se reflejan en el agua en calma."
+    },
+    {
+     "name": "Gyeongju National Museum",
+     "nameLocal": "Museo Nacional de Gyeongju",
+     "blurb": "El mejor lugar para entender el legado de Silla, con coronas de oro, joyas, cerámica y la imponente campana de bronce del rey Seongdeok, una de las mayores y más sonoras del mundo. Sus jardines al aire libre exhiben pagodas y esculturas budistas."
+    },
+    {
+     "name": "Woljeonggyo Bridge",
+     "nameLocal": "Puente de Woljeonggyo",
+     "blurb": "Reconstrucción de un majestuoso puente de madera cubierto de la época de Silla, que cruza el río Namcheon con sus tejados curvados y sus farolillos. Al atardecer y de noche, iluminado y reflejado en el agua, se convierte en un escenario de cuento."
+    },
+    {
+     "name": "Yangdong Folk Village",
+     "nameLocal": "Aldea folclórica de Yangdong",
+     "blurb": "Patrimonio de la Humanidad, esta aldea de clanes conserva intactas las casas tradicionales de la nobleza confuciana (yangban) de la dinastía Joseon. Pasear entre sus residencias de tejado de teja y sus casas de campesinos con techo de paja es viajar varios siglos atrás."
+    },
+    {
+     "name": "Gyeongju Gyochon Traditional Village",
+     "nameLocal": "Aldea tradicional de Gyochon",
+     "blurb": "En pleno centro histórico, este pequeño barrio conserva la casa solariega de la célebre familia Choi, conocida por su riqueza y su filantropía durante siglos. Es perfecta para probar el licor tradicional de la zona y combinarla con el cercano puente de Woljeonggyo."
+    },
+    {
+     "name": "Bunhwangsa Temple",
+     "nameLocal": "Templo de Bunhwangsa",
+     "blurb": "Hogar de la pagoda de piedra más antigua de Silla, construida imitando los ladrillos y custodiada por figuras guardianas en sus puertas. Modesto pero cargado de historia, es una parada serena cerca del centro y de Cheomseongdae."
+    }
+   ],
+   "food": [
+    {
+     "name": "Gyeongju ppang (pan de Gyeongju)",
+     "blurb": "El recuerdo dulce más famoso de la ciudad: un bollito tierno relleno de pasta de judía roja, perfecto para llevar a casa."
+    },
+    {
+     "name": "Ssambap",
+     "blurb": "Un festín de pequeños platos y hojas frescas con las que envolver arroz, carne y guarniciones a tu gusto, todo un clásico de Gyeongju."
+    },
+    {
+     "name": "Hwangnam ppang",
+     "blurb": "La variante original del pan de Gyeongju, nacida en el barrio de Hwangnam, con su característico estampado de hojas en la corteza."
+    },
+    {
+     "name": "Beopju (licor tradicional)",
+     "blurb": "El refinado vino de arroz de la familia Choi, elaborado en Gyeongju según una receta transmitida durante generaciones."
+    },
+    {
+     "name": "Haejangguk",
+     "blurb": "Un reconfortante caldo de hueso y verduras ideal para entrar en calor tras una jornada caminando entre túmulos y templos."
+    },
+    {
+     "name": "Memil-guksu (fideos de trigo sarraceno)",
+     "blurb": "Fideos suaves y ligeros, servidos fríos o en caldo, muy apreciados en la zona durante los meses cálidos."
+    }
+   ],
+   "gettingThere": "Gyeongju está estupendamente comunicada con el resto del país gracias al tren de alta velocidad KTX, que llega a la estación de Singyeongju en poco más de dos horas desde Seúl y en menos de media hora desde Busan. Desde esa estación, situada a las afueras, hay autobuses urbanos y taxis que enlazan con el centro histórico. Una vez en la ciudad, muchos de los grandes atractivos del centro, como Cheomseongdae, Daereungwon o Wolji, están tan cerca unos de otros que se recorren a pie o en bicicleta, una de las formas más agradables de descubrir Gyeongju. Para los lugares algo más alejados, como Bulguksa, Seokguram o la aldea de Yangdong, lo más práctico es la red de autobuses urbanos o un taxi, ya que se encuentran a las afueras y en zonas de montaña.",
+   "tips": [
+    "Reserva la visita a Donggung y Wolji para el final del día: de noche, con los pabellones iluminados reflejándose en el estanque, la estampa es inolvidable.",
+    "Alquila una bicicleta para moverte por el centro histórico; las distancias entre Cheomseongdae, los túmulos y Wolji son cortas y el terreno es llano.",
+    "Bulguksa y Seokguram están en la misma montaña pero no pegados; planifica el trayecto entre ambos para no quedarte corto de tiempo.",
+    "Si viajas en primavera, los cerezos en flor alrededor de los túmulos y el lago Bomun convierten Gyeongju en uno de los lugares más bonitos de Corea."
+   ],
+   "faq": [
+    {
+     "q": "¿Cuántos días hacen falta para ver Gyeongju?",
+     "a": "Con dos días completos puedes cubrir lo esencial: dedica una jornada al centro histórico (Daereungwon, Cheomseongdae, Wolji, el Museo Nacional y Woljeonggyo) y otra a la montaña, con Bulguksa y Seokguram. Si quieres añadir la aldea de Yangdong o disfrutar con más calma, un tercer día viene de maravilla."
+    },
+    {
+     "q": "¿Se puede visitar Gyeongju en una excursión de un día desde Busan o Seúl?",
+     "a": "Desde Busan sí es muy factible, ya que el KTX tarda menos de media hora y permite ver lo principal en una jornada intensa. Desde Seúl es posible pero exigente: el viaje ronda las dos horas por trayecto, así que merece la pena pernoctar para aprovecharlo bien."
+    },
+    {
+     "q": "¿Cuál es la mejor época para visitar Gyeongju?",
+     "a": "La primavera, por los cerezos en flor, y el otoño, por el follaje rojizo y dorado de los arces, son las estaciones más espectaculares. El invierno es frío pero tranquilo, y el verano resulta caluroso y húmedo, aunque los atardeceres junto al agua compensan el calor."
+    },
+    {
+     "q": "¿Es Gyeongju un destino cómodo para moverse a pie?",
+     "a": "El centro histórico es ideal para caminar o pedalear, ya que los principales atractivos están muy próximos entre sí. Para los puntos de la periferia, como Bulguksa, Seokguram o Yangdong, conviene usar los autobuses urbanos o un taxi, pues quedan a cierta distancia."
+    }
+   ]
+  },
+  "ja": {
+   "h1": "慶州（キョンジュ）の見どころ完全ガイド ― 屋根のない博物館で千年の新羅を歩く",
+   "title": "慶州の観光スポット完全ガイド | KoreaPlus",
+   "metaDesc": "新羅千年の都・慶州（キョンジュ）の必見スポットを日本人旅行者向けに厳選。仏国寺や石窟庵、大陵苑、瞻星台から名物グルメ・アクセスまで、現地ライターが網羅的に解説します。",
+   "lead": "慶州（キョンジュ）は、千年にわたって新羅王国の都として栄えた韓国屈指の歴史都市です。市内のいたるところに古墳や寺院、石塔が点在し、「屋根のない博物館」とも呼ばれています。世界遺産に登録された仏国寺や石窟庵をはじめ、芝生に包まれた王陵が並ぶ大陵苑、東アジア最古とされる天文台・瞻星台など、教科書で見た新羅文化を実際に肌で感じられるのが魅力。慶州ならではの伝統菓子やグルメも豊富です。このガイドでは、現地在住の視点から外せない見どころと食、移動のコツまでをまとめました。",
+   "attractions": [
+    {
+     "name": "Bulguksa Temple",
+     "nameLocal": "불국사",
+     "blurb": "新羅仏教芸術の最高傑作とされる古刹で、石窟庵とともに1995年にユネスコ世界遺産へ登録されました。境内には国宝に指定された多宝塔（タボタプ）と釈迦塔（ソッカタプ）という二基の石塔が向かい合って立ち、青雲橋・白雲橋の石段とともに統一新羅期の高い技術を今に伝えています。慶州観光の象徴ともいえる存在で、まず訪れたい一か所です。"
+    },
+    {
+     "name": "Seokguram Grotto",
+     "nameLocal": "석굴암",
+     "blurb": "仏国寺の背後にそびえる吐含山（トハムサン）の中腹に築かれた人工の石窟寺院です。花崗岩を組み上げたドーム天井の内部に、本尊の釈迦如来坐像が東の海を向いて静かに鎮座しています。緻密な石組みと均整のとれた仏像表現は新羅彫刻の頂点とされ、仏国寺と並ぶ世界遺産。早朝に訪れると荘厳な空気を独り占めできます。"
+    },
+    {
+     "name": "Daereungwon Tumuli Park",
+     "nameLocal": "대릉원",
+     "blurb": "新羅の王や貴族を葬った大型古墳が、なだらかな丘のように連なる広大な古墳公園です。なかでも天馬塚（チョンマチョン）は内部が公開されており、出土した白樺の泥障に描かれた天馬の絵にちなんで名づけられました。芝生に覆われた古墳と松林が織りなす風景は写真映えも抜群で、慶州を代表する散策スポットとして人気です。"
+    },
+    {
+     "name": "Cheomseongdae Observatory",
+     "nameLocal": "첨성대",
+     "blurb": "7世紀の善徳（ソンドク）女王の時代に築かれたとされる、東アジア現存最古の天文台です。徳利のような曲線を描く石積みの塔で、使われた石は一年の日数にちなむ約365個と伝えられます。周囲は広々とした芝生広場になっており、季節の花々とともに眺められるのも魅力。夜にはライトアップされ、昼とは違う幻想的な姿を見せます。"
+    },
+    {
+     "name": "Donggung Palace and Wolji Pond (Anapji)",
+     "nameLocal": "동궁과 월지(안압지)",
+     "blurb": "統一新羅の離宮と人工池からなる庭園遺跡で、かつては雁鴨池（アナプチ）とも呼ばれてきました。復元された楼閣が水面に映り込む光景は慶州随一の絶景。とりわけ日没後のライトアップは美しく、池に映る建物のシルエットを目当てに多くの旅行者が夜に集まります。慶州で夜景を楽しむなら外せない場所です。"
+    },
+    {
+     "name": "Gyeongju National Museum",
+     "nameLocal": "국립경주박물관",
+     "blurb": "新羅の歴史と文化を体系的に学べる国立博物館で、慶州各地から出土した金冠や装身具などの名品を数多く所蔵しています。屋外には韓国を代表する梵鐘「聖徳大王神鍾（ソンドクテワンシンジョン）」、通称エミレの鐘が展示され、その壮大さに圧倒されます。各遺跡を巡る前後に立ち寄ると、慶州全体の理解が一段と深まります。"
+    },
+    {
+     "name": "Woljeonggyo Bridge",
+     "nameLocal": "월정교",
+     "blurb": "統一新羅期に月城（ウォルソン）と南山（ナムサン）を結んでいたとされる木造橋で、長年の研究を経て2018年に復元・公開されました。瓦屋根を載せた楼門と長い橋廊が特徴で、韓国最大級の木造橋として知られます。とりわけ日が暮れてからのライトアップは見事で、川面に映る橋の姿は慶州の新たな夜景名所となっています。"
+    },
+    {
+     "name": "Yangdong Folk Village",
+     "nameLocal": "양동마을",
+     "blurb": "朝鮮時代の伝統的な暮らしを今に残す氏族村で、2010年にユネスコ世界遺産（韓国の歴史村）に登録されました。瓦屋根の両班屋敷から茅葺きの民家、書院までが丘陵地に点在し、築二百年を超える家屋も少なくありません。実際に人が暮らす生きた村で、ゆったりと歩きながら往時の韓国の村落風景を味わえます。市街地からはやや離れています。"
+    },
+    {
+     "name": "Gyeongju Gyochon Traditional Village",
+     "nameLocal": "경주 교촌마을",
+     "blurb": "瞻星台や月精橋のすぐ近くに広がる、伝統韓屋が建ち並ぶ村です。代々続く名家として知られる慶州崔氏（チェ氏）の古宅が中心で、塀沿いの落ち着いた路地を散策できます。伝統酒や工芸の体験、韓服のレンタルも楽しめ、月精橋やレンタサイクルでの古墳巡りと組み合わせやすい立地。半日の市内散策にぴったりです。"
+    }
+   ],
+   "food": [
+    {
+     "name": "Hwangnam-ppang (황남빵)",
+     "blurb": "1939年創業と伝わる慶州を代表する銘菓で、薄い生地にたっぷりの粒あんを包んで焼き上げた小ぶりの饅頭です。表面に菊の花の模様が押されているのが特徴。大陵苑周辺や皇理団（ファンリダン）通りに店が多く、できたての温かいものはお土産にも自分用にも人気の定番です。"
+    },
+    {
+     "name": "Ssambap (쌈밥)",
+     "blurb": "新鮮な葉野菜にご飯やおかずを包んで食べる、慶州を代表する定食です。大陵苑近くには「쌈밥（ssambap）通り」があり、自家製の味噌で作るテンジャンチゲ（味噌チゲ）とともに、二十品以上もの小皿が一度に並ぶ豪華な膳が名物。慶州でしっかり食事をとりたいときの王道です。"
+    },
+    {
+     "name": "Gyeongju Beopju (경주법주)",
+     "blurb": "もち米を用いて醸す慶州伝統の清酒で、長い歴史を持つ地酒として知られます。透き通った琥珀色とまろやかな口当たりが特徴で、韓国の無形文化財にも認められた由緒ある酒。ssambap（쌈밥）など慶州の伝統料理と合わせて、ゆっくり味わうのがおすすめです。"
+    },
+    {
+     "name": "Bomun-style Hanjeongsik (보문 일대 한정식)",
+     "blurb": "リゾート地として整備された普門（ボムン）湖一帯に多い、韓定食のコースです。季節の山菜やナムル、焼き物、チゲなど多彩なおかずが膳いっぱいに並び、慶州らしい上品な味わいを一度に楽しめます。観光の合間に少し贅沢な食事をとりたいときに向いています。"
+    },
+    {
+     "name": "Kongguk (콩국)",
+     "blurb": "大豆をすりつぶして作る、慶州周辺で親しまれてきた豆のスープ料理です。やさしく素朴な大豆の風味が身上で、夏には冷たく仕立てた冷製でも供されます。きらびやかな宮廷文化のイメージとは対照的な、地元の家庭的な味として一度試したい一品です。"
+    }
+   ],
+   "gettingThere": "ソウルからはSRTまたはKTX（高速鉄道）の利用が最も便利で、「新慶州（シンギョンジュ）駅」までおおむね2時間前後で到着します。新慶州駅は市街地や主要遺跡からやや離れているため、駅前から市内行きのバスやタクシーに乗り換えるとスムーズです。釜山（プサン）方面からも高速鉄道や市外バスでアクセスでき、日帰りや一泊の小旅行に適しています。市内の見どころは比較的まとまっていますが、仏国寺・石窟庵は山手にあり、両東（ヤンドン）村は郊外に位置するため、路線バスやタクシー、レンタサイクルを上手に組み合わせると効率よく回れます。",
+   "tips": [
+    "瞻星台・大陵苑・東宮と月池は比較的近い範囲にまとまっているため、まとめて徒歩やレンタサイクルで巡ると効率的です。",
+    "東宮と月池や月精橋は日没後のライトアップが見どころなので、夕方から夜にかけて訪れる時間を確保しておくのがおすすめです。",
+    "仏国寺と石窟庵は同じ吐含山の山手にあり、路線バスでつないで合わせて参拝するのが定番ルートです。",
+    "黄南（ファンナム）パンなどの銘菓は店によって行列ができることもあるため、人気店は時間に余裕をもって立ち寄りましょう。"
+   ],
+   "faq": [
+    {
+     "q": "慶州観光は何日くらい必要ですか？",
+     "a": "市街地に集まる瞻星台・大陵苑・東宮と月池などは一日でも十分に巡れますが、仏国寺・石窟庵や郊外の両東村まで含めるなら一泊二日以上が理想です。夜景まで楽しむなら宿泊をおすすめします。"
+    },
+    {
+     "q": "慶州はソウルから日帰りできますか？",
+     "a": "高速鉄道を使えば片道およそ2時間で、新慶州駅まで到着します。市街地の主要スポットに絞れば日帰りも可能ですが、移動と見学に追われがちなので、ゆとりを持つなら一泊が安心です。"
+    },
+    {
+     "q": "慶州で必ず食べたい名物は何ですか？",
+     "a": "粒あんを包んだ伝統菓子の황남빵（hwangnam-ppang／황남빵）と、小皿がずらりと並ぶ쌈밥（ssambap）が二大名物です。伝統酒の경주법주（Gyeongju beopju）も合わせて味わうと、慶州らしさをより堪能できます。"
+    },
+    {
+     "q": "市内の移動はどうするのが便利ですか？",
+     "a": "市街地の遺跡群は徒歩やレンタサイクルで回りやすく、山手の仏国寺・石窟庵や郊外の両東村は路線バスやタクシーが便利です。目的地に応じて手段を使い分けると効率よく観光できます。"
+    }
+   ]
+  },
+  "zh": {
+   "h1": "庆州必游：千年新罗古都的8大景点与地道美食",
+   "title": "庆州旅游攻略：8大必游景点与美食 | KoreaPlus",
+   "metaDesc": "庆州自由行完整指南：佛国寺、石窟庵、大陵苑、瞻星台、东宫与月池等新罗古都必游景点，搭配黄南面包、包饭、庆州法酒等地道美食，附交通与实用贴士。",
+   "lead": "庆州被誉为\"没有围墙的博物馆\"，作为新罗王朝近千年的都城，整座城市散落着王陵、佛寺、石塔与古宫遗迹。这里没有高楼林立的喧嚣，取而代之的是绿草覆盖的古坟、倒映在月池中的楼阁，以及山间静默千年的石佛。无论你想追寻韩国最古老的世界文化遗产，还是只是想在古都的慢节奏中骑车闲逛，庆州都能给你一段穿越时光的旅程。这份指南整理了庆州不可错过的8大景点、真正具有地方特色的美食，以及交通与游玩的实用建议。",
+   "attractions": [
+    {
+     "name": "Bulguksa Temple",
+     "nameLocal": "불국사",
+     "blurb": "庆州最负盛名的古刹，与石窟庵共同列入联合国教科文组织世界文化遗产。寺内的释迦塔与多宝塔是新罗石塔艺术的巅峰之作，青云桥、白云桥等石造结构展现了新罗工匠的精湛技艺。依山而建的伽蓝布局庄严肃穆，是体验韩国佛教文化的首选之地。"
+    },
+    {
+     "name": "Seokguram Grotto",
+     "nameLocal": "석굴암",
+     "blurb": "坐落于吐含山山腰的人工石窟，与佛国寺同属世界文化遗产。窟内供奉一尊以花岗岩雕成的本尊佛坐像，神态安详,周壁环绕菩萨与天王浮雕，被视为东亚佛教雕刻的杰作。清晨佛像面朝东海方向，意境深远，需从佛国寺一带换乘前往。"
+    },
+    {
+     "name": "Daereungwon Tumuli Park",
+     "nameLocal": "대릉원",
+     "blurb": "庆州市中心规模最大的新罗古坟群，绿草如茵的圆形封土墓连绵起伏，景象独特。园内的天马冢已开放内部供参观，出土的天马图障泥而得名；皇南大冢则为南北相连的双墓。漫步其间，仿佛走进新罗王族的安息之地，是庆州最具代表性的风景。"
+    },
+    {
+     "name": "Cheomseongdae Observatory",
+     "nameLocal": "첨성대",
+     "blurb": "建于新罗善德女王时期的天文台，被认为是东亚现存最古老的天文观测建筑之一。瓶状的石砌塔身由数百块花岗岩层层垒砌而成，造型简洁而蕴含天文寓意。它就矗立在大陵苑附近的草坪上，傍晚亮灯后尤为优美，是庆州的标志性符号。"
+    },
+    {
+     "name": "Donggung Palace & Wolji Pond (Anapji)",
+     "nameLocal": "동궁과 월지 (안압지)",
+     "blurb": "新罗的离宫与人工湖遗址，旧称雁鸭池。临水而建的楼阁在夜晚灯火通明，倒映于平静的池面，是庆州最美的夜景之一。园区出土了大量新罗时期的珍贵文物。建议傍晚前往，既能欣赏黄昏，又能看到入夜后的灯光倒影。"
+    },
+    {
+     "name": "Gyeongju National Museum",
+     "nameLocal": "국립경주박물관",
+     "blurb": "收藏新罗文化精华的国立博物馆，馆藏包括金冠、金腰带等出土国宝。庭院中陈列的圣德大王神钟（又称'奉德寺钟'）是韩国现存最大的古钟，钟声悠远而传奇。这里是理解庆州各处遗迹历史背景的最佳起点，适合在游览景点前后参观。"
+    },
+    {
+     "name": "Woljeonggyo Bridge",
+     "nameLocal": "월정교",
+     "blurb": "依据新罗史料考证复原的木造廊桥，横跨于南川之上。桥上设有覆瓦的楼阁式廊道，气势恢宏。白天可走过古桥感受新罗气派，入夜后桥身亮灯，与水中倒影相映成趣，是近年庆州人气极高的夜间拍照地点。"
+    },
+    {
+     "name": "Yangdong Folk Village",
+     "nameLocal": "양동마을",
+     "blurb": "位于庆州市郊的朝鲜时代两班村落，已列入世界文化遗产。村中保存着大量传统瓦房与草房，依山坡而建，至今仍有居民生活其中。漫步石墙小巷间，可一窥朝鲜时代士族家族的生活样貌，是体验韩国传统民居的绝佳去处。"
+    }
+   ],
+   "food": [
+    {
+     "name": "黄南面包（황남빵）",
+     "blurb": "庆州最具代表性的伴手礼点心，一种皮薄馅满的红豆馅小饼，表面常压有花纹。源自庆州黄南洞一带，口感绵密香甜，趁热吃尤为美味，是几乎人手一盒的庆州特产。"
+    },
+    {
+     "name": "庆州包饭（쌈밥）",
+     "blurb": "以各式新鲜蔬菜叶包裹米饭、酱料与小菜一起食用的定食，庆州教村（校洞）一带尤为有名。一桌摆满琳琅满目的小菜，丰盛又健康，是当地最受欢迎的代表餐食之一。"
+    },
+    {
+     "name": "庆州法酒（경주법주）",
+     "blurb": "庆州校洞崔氏家族世代相传的传统米酒，被指定为韩国国家级无形文化遗产。以糯米与酒曲酿造，酒色清亮、口感醇厚回甘，是当地待客的名酒，可在校洞一带购得。"
+    },
+    {
+     "name": "韩定食（한정식）",
+     "blurb": "韩国传统的多碟套餐，在庆州常以当地食材入菜，一次可品尝到汤、烤物及数十种小菜。摆盘讲究、菜式丰富，适合想一餐尝遍韩式风味的旅客。"
+    },
+    {
+     "name": "校洞麦芽糖与麦芽糖稀（교촌 엿·조청）",
+     "blurb": "庆州校洞一带的传统手工甜食，以麦芽（엿기름）熬制谷物提取麦芽糖而成。熬得浓稠未凝固的是'조청'糖稀，进一步熬干凝固便成'엿'麦芽糖块，香甜质朴，是古法相传的乡土味道。"
+    }
+   ],
+   "gettingThere": "从首尔出发，最便捷的方式是搭乘KTX高铁至新庆州站（신경주역），车程约两小时，再换乘公交或出租车前往市区景点。从釜山方向亦可乘火车或长途巴士抵达。庆州市区主要景点（大陵苑、瞻星台、东宫与月池等）相距不远，适合步行或骑共享单车串联游览；前往佛国寺、石窟庵、良洞民俗村等近郊景点则可乘坐市内公交，班次较为密集。由于景点分布较散，租车或包车自驾也是省时的选择。",
+   "tips": [
+    "市中心的大陵苑、瞻星台、东宫与月池、月精桥彼此邻近，可规划成一条步行或骑行路线一次走完。",
+    "东宫与月池、月精桥的夜景最为出名，建议安排在傍晚到入夜时段前往，避开正午烈日。",
+    "佛国寺与石窟庵位于近郊吐含山，两者需另行换乘，建议预留半天时间一并游览。",
+    "庆州春季的樱花与秋季的银杏、枫叶景色尤其迷人，古坟与古寺在不同季节各有风情。"
+   ],
+   "faq": [
+    {
+     "q": "在庆州游玩需要安排几天比较合适？",
+     "a": "市中心的古坟、瞻星台与东宫月池等景点步行一天即可走完精华；若想加上佛国寺、石窟庵与良洞民俗村等近郊景点，建议安排两天一夜，行程会更从容。"
+    },
+    {
+     "q": "庆州景点之间该怎么往返？",
+     "a": "市区核心景点彼此相邻，适合步行或骑共享单车。前往佛国寺、石窟庵、良洞民俗村等近郊景点可乘坐市内公交，自驾或包车则更省时灵活。"
+    },
+    {
+     "q": "到庆州一定要尝试哪些地道美食？",
+     "a": "庆州最具地方特色的是黄南面包、校洞一带的包饭与韩定食，以及崔氏家族世代相传、被列为无形文化遗产的庆州法酒，还有校洞传统的麦芽糖甜食。"
+    },
+    {
+     "q": "佛国寺和石窟庵是同一个地方吗？",
+     "a": "不是。两者同属世界文化遗产、都位于吐含山一带，但分处不同位置：佛国寺是依山而建的寺院，石窟庵则是山腰上的人工石窟，从佛国寺需另行换乘前往。"
+    }
+   ]
+  }
+ },
+ "Jeonju": {
+  "ja": {
+   "h1": "全州（チョンジュ）観光｜韓屋村・ビビンバ・グルメの旅",
+   "title": "全州観光ガイド｜韓屋村と本場ビビンバ | KoreaPlus",
+   "metaDesc": "全州（チョンジュ）観光の完全ガイド。700軒以上の韓屋が並ぶ韓屋村、慶基殿、ビビンバ発祥の味、南部市場の夜市、マッコリ横丁まで。見どころとグルメ、行き方を日本語でわかりやすく紹介します。",
+   "lead": "韓国南西部・全羅北道の中心都市、全州（チョンジュ）は「韓国の食の都」として知られる古都です。朝鮮王朝（李氏朝鮮）発祥の地でもあり、瓦屋根の韓屋が連なる韓屋村を歩けば、時代がそのまま残ったような風情に出会えます。本場のビビンバや屋台グルメ、マッコリ横丁での一杯まで、味わい尽くす旅にぴったりの街です。",
+   "attractions": [
+    {
+     "name": "Jeonju Hanok Village",
+     "nameLocal": "全州韓屋村（チョンジュ・ハノクマウル）",
+     "blurb": "700軒以上の伝統家屋・韓屋が密集する全州随一のエリア。反り返った瓦屋根の街並みを散策しながら、韓服をレンタルして写真を撮るのが定番の楽しみ方です。カフェや工房、グルメ店も軒を連ね、一日歩いても飽きません。"
+    },
+    {
+     "name": "Gyeonggijeon Shrine",
+     "nameLocal": "慶基殿（キョンギジョン）",
+     "blurb": "朝鮮王朝の創始者・李成桂（太祖）の御真影（肖像画）を祀る由緒ある祠堂。竹林や古木に囲まれた静かな境内は、韓屋村の喧騒を忘れさせてくれます。歴史ドラマのロケ地としても知られる絵になるスポットです。"
+    },
+    {
+     "name": "Jeondong Catholic Cathedral",
+     "nameLocal": "殿洞聖堂（チョンドンソンダン）",
+     "blurb": "ロマネスク様式とビザンチン様式が融合した美しい赤レンガの教会。韓屋村のすぐそばに建ち、瓦屋根の街並みと洋風建築のコントラストが印象的です。韓国でも有数の歴史を持つ教会建築として親しまれています。"
+    },
+    {
+     "name": "Omokdae",
+     "nameLocal": "梧木台（オモクテ）",
+     "blurb": "韓屋村を見下ろす小高い丘にある展望スポット。瓦屋根が幾重にも連なる街並みを一望でき、特に夕暮れ時の眺めは格別です。太祖・李成桂ゆかりの地としても伝えられています。"
+    },
+    {
+     "name": "Nambu Night Market",
+     "nameLocal": "南部市場 夜市（ナンブシジャン・ヤシ）",
+     "blurb": "昼間は伝統的な常設市場、夜になると屋台がずらりと並ぶ人気のナイトマーケットに変わります。各国の料理や創作グルメの食べ歩きが楽しめ、地元の人と観光客でにぎわう活気あふれる空間です。"
+    },
+    {
+     "name": "Makgeolli Alley",
+     "nameLocal": "マッコリ横丁（マッコリゴルモク）",
+     "blurb": "マッコリを一壺頼むと、所狭しと並ぶおつまみ（アンジュ）が次々に運ばれてくる全州ならではの飲み文化。三川洞や西新洞などにマッコリ酒場が集まり、にぎやかに杯を交わす夜の名物です。"
+    },
+    {
+     "name": "Jaman Mural Village",
+     "nameLocal": "梓満（チャマン）壁画村",
+     "blurb": "韓屋村の裏手、丘の斜面に広がる小さな路地に色とりどりの壁画が描かれた村。人気キャラクターやアートが点在し、坂道を上りながら写真を撮るのが楽しいフォトジェニックなエリアです。"
+    },
+    {
+     "name": "Jeonju Hanji Museum",
+     "nameLocal": "全州韓紙（ハンジ）工房・博物館",
+     "blurb": "全州は古くから上質な伝統手漉き紙「韓紙（ハンジ）」の産地として有名。工房や博物館では紙漉きの工程を学べるほか、韓紙を使った小物作りなどの体験もでき、旅の思い出づくりにぴったりです。"
+    },
+    {
+     "name": "Pungnammun Gate",
+     "nameLocal": "豊南門（プンナムン）",
+     "blurb": "かつて全州を囲んでいた城郭の南門で、現存する貴重な楼門。重厚な石造りの基壇の上に瓦屋根の楼閣がそびえ、ロータリーの中心に堂々と建つ姿は街のシンボルとなっています。"
+    },
+    {
+     "name": "Jeonju Hyanggyo Confucian School",
+     "nameLocal": "全州郷校（チョンジュ・ヒャンギョ）",
+     "blurb": "朝鮮時代に儒学を教えた地方教育機関の跡。樹齢数百年の大イチョウが立ち並ぶ境内は、秋になると黄金色に染まり圧巻です。歴史ドラマのロケ地としても人気で、静かに歴史を感じられる場所です。"
+    }
+   ],
+   "food": [
+    {
+     "name": "全州ビビンバ（チョンジュ・ビビンバ）",
+     "blurb": "色とりどりのナムルや黄身、コチュジャンを真鍮の器に美しく盛り付けた、全州が誇る発祥の地の味。"
+    },
+    {
+     "name": "コンナムルクッパ（豆もやしクッパ）",
+     "blurb": "シャキシャキの豆もやしが入ったあっさり熱々のスープご飯で、二日酔いの朝にも地元で愛される定番です。"
+    },
+    {
+     "name": "全州マッコリ",
+     "blurb": "一壺頼めば豪華なおつまみがずらりと並ぶ、全州ならではの飲み文化を象徴する濁り酒です。"
+    },
+    {
+     "name": "PNB チョコパイ",
+     "blurb": "全州発祥の老舗ベーカリーが作る生クリーム入りチョコパイで、お土産としても大人気の銘菓です。"
+    },
+    {
+     "name": "ピンデトック（緑豆チヂミ）",
+     "blurb": "すりつぶした緑豆を香ばしく焼き上げた素朴なチヂミで、南部市場の屋台でマッコリと一緒に味わえます。"
+    },
+    {
+     "name": "コギャンイ（屋台の食べ歩きグルメ）",
+     "blurb": "南部市場の夜市で出会える串焼きや創作料理など、食べ歩きにぴったりの多彩な屋台フードです。"
+    }
+   ],
+   "gettingThere": "ソウルからは龍山（ヨンサン）駅発のKTX（高速鉄道）が便利で、全州駅まで乗り換えなしでアクセスできます。所要時間が短く、本数も多いので日帰りも可能です。高速バスを利用する場合は、ソウルの高速バスターミナルから全州行きが頻発しています。全州駅や市外バスターミナルから韓屋村までは少し距離があるため、市内バスかタクシーを利用しましょう。観光の中心となる韓屋村エリアは徒歩で十分まわれるほどコンパクトで、慶基殿・殿洞聖堂・梧木台などの主要スポットも歩いて移動できます。少し離れた場所へはタクシーが手軽で、市内なら比較的リーズナブルに利用できます。",
+   "tips": [
+    "韓屋村では韓服（ハンボク）のレンタル店が多数あり、衣装をまとって街並みを歩けば写真映えも抜群。レンタル中は無料で入れる施設もあります。",
+    "見どころが密集する韓屋村は歩く時間が長くなるので、履き慣れたスニーカーがおすすめ。坂道のある梧木台や壁画村もあります。",
+    "マッコリ横丁は一壺頼むと大量のおつまみが付いてくるため、空腹で行くのが正解。少人数なら頼みすぎに注意しましょう。",
+    "南部市場の夜市は曜日によって開催状況が変わることがあるので、屋台の活気を楽しみたいなら夜の時間帯を狙って訪れましょう。"
+   ],
+   "faq": [
+    {
+     "q": "ソウルから全州へは日帰りで行けますか？",
+     "a": "はい、可能です。龍山駅からKTXを使えば乗り換えなしで全州駅にアクセスでき、移動時間も比較的短いため、朝に出発すれば韓屋村の散策やグルメを十分楽しんで日帰りできます。ただし夜市やマッコリ横丁まで味わうなら一泊するのもおすすめです。"
+    },
+    {
+     "q": "全州観光はどのくらいの滞在日数が目安ですか？",
+     "a": "主要な見どころが韓屋村に集中しているため、駆け足なら半日〜1日でも回れます。ただし韓服体験、夜市、マッコリ横丁、韓紙工房での体験などをじっくり楽しむなら、1泊2日の滞在がゆったりしておすすめです。"
+    },
+    {
+     "q": "全州で必ず食べるべきグルメは何ですか？",
+     "a": "まずは発祥の地である本場の全州ビビンバは外せません。さらに豆もやしのクッパ（コンナムルクッパ）、おつまみが豪華に付く全州マッコリ、お土産に人気のPNBチョコパイもぜひ味わってみてください。"
+    },
+    {
+     "q": "韓屋村はどうやって移動すればいいですか？",
+     "a": "韓屋村エリアはコンパクトで、慶基殿・殿洞聖堂・梧木台などの主要スポットは徒歩でまわれます。全州駅やバスターミナルから韓屋村までは距離があるので、市内バスかタクシーを利用すると便利です。"
+    }
+   ]
+  },
+  "zh": {
+   "attractions": [
+    {
+     "name": "Jeonju Hanok Village",
+     "nameLocal": "全州韩屋村",
+     "blurb": "七百多栋传统韩屋黑瓦飞檐鳞次栉比，铺着灰瓦的屋顶在巷弄间连绵起伏，是韩国规模最大、保存最完整的韩屋聚落。穿一身韩服漫步石板小巷，转角便是茶馆、工坊与小吃摊，处处都是出片的好景。"
+    },
+    {
+     "name": "Gyeonggijeon Shrine",
+     "nameLocal": "庆基殿",
+     "blurb": "始建于朝鲜王朝初期，供奉太祖李成桂的御真（画像），是全州作为李氏王朝发祥地的象征。殿内古木参天、庭院幽静，红墙绿瓦衬着竹林，是韩屋村里最具历史厚重感的一处。"
+    },
+    {
+     "name": "Jeondong Catholic Cathedral",
+     "nameLocal": "殿洞圣堂",
+     "blurb": "罗马拜占庭风格的红砖教堂，圆顶与彩窗在韩屋群中格外醒目，建于韩国天主教殉道者就义之地。庄严肃穆又浪漫，与一墙之隔的庆基殿东西辉映，是全州最经典的合影机位。"
+    },
+    {
+     "name": "Omokdae",
+     "nameLocal": "梧木台",
+     "blurb": "位于韩屋村东侧的小山丘，相传李成桂大败倭寇后曾在此设宴庆功。登上观景台，整片韩屋村的黑瓦海尽收眼底，黄昏时分屋顶染上暖光，是俯瞰全州的最佳视角。"
+    },
+    {
+     "name": "Nambu Night Market",
+     "nameLocal": "南部市场夜市",
+     "blurb": "白天是百年历史的传统市场，每逢周末夜晚摇身变为人气夜市。狭长的过道两旁挤满创意小吃摊，烟火气十足，从韩式炸物到各国风味一路吃过去，是体验全州市井烟火的去处。"
+    },
+    {
+     "name": "Jaman Mural Village",
+     "nameLocal": "慈满壁画村",
+     "blurb": "梧木台后山的小村落，斜坡上的旧屋墙面绘满了卡通与童话主题的彩绘。沿着蜿蜒小路边走边找隐藏的涂鸦，咖啡馆与文创小店点缀其间，是年轻人最爱的拍照打卡地。"
+    },
+    {
+     "name": "Pungnammun Gate",
+     "nameLocal": "丰南门",
+     "blurb": "全州古城仅存的南城门，朝鲜时代全州府城的正门，双层楼阁式城门巍然矗立于市中心的环岛之中。作为城市的地标，它见证了全州数百年的变迁，夜晚灯光亮起更显古韵。"
+    },
+    {
+     "name": "Jeonju Hyanggyo",
+     "nameLocal": "全州乡校",
+     "blurb": "朝鲜时代的官立儒学学堂，红墙黛瓦、古朴清幽。院内几株数百年的高大银杏古树，每到深秋满地金黄，是全州最美的赏银杏圣地，也常被选作古装剧的取景地。"
+    },
+    {
+     "name": "Hanji Crafts (Jeonju Hanji)",
+     "nameLocal": "全州韩纸工坊",
+     "blurb": "全州自古以盛产优质韩纸闻名，纤维细腻、韧性十足，曾是进献朝廷的贡品。在韩屋村的各家工坊里，可亲手体验抄纸、制作韩纸团扇或灯笼，把这门千年手艺带回家。"
+    },
+    {
+     "name": "Jeonju Makgeolli Alley",
+     "nameLocal": "全州马格利酒一条街",
+     "blurb": "全州的马格利（米酒）文化别具一格，点一壶酒便会附赠满满一桌下酒小菜，越往后续酒、菜越丰盛。三川洞、西新洞等酒街里坐满本地食客，是感受全州夜生活与人情味的好地方。"
+    }
+   ],
+   "food": [
+    {
+     "name": "Jeonju Bibimbap",
+     "blurb": "全州拌饭是这座城市的灵魂美食，黄铜碗里铺满数十种时令野菜、黄豆芽、生牛肉与黄澄澄的鸡蛋，淋上特制辣椒酱拌匀，色香味俱全。"
+    },
+    {
+     "name": "Kongnamul Gukbap",
+     "blurb": "豆芽汤泡饭是全州人钟爱的醒酒早餐，清爽的黄豆芽汤浇在米饭上，配一勺虾酱与辣椒，鲜辣暖胃。"
+    },
+    {
+     "name": "Choco Pie (PNB)",
+     "blurb": "全州老字号风味堂（PNB）的招牌巧克力派，外层巧克力包裹柔软蛋糕与奶油夹心，是几乎人手一盒的伴手礼。"
+    },
+    {
+     "name": "Makgeolli",
+     "blurb": "乳白微甜的全州马格利米酒，点一壶便附赠一整桌下酒菜，是体验当地饮食文化绕不开的一环。"
+    },
+    {
+     "name": "Bean Sprout Bibimbap & Yukhoe",
+     "blurb": "全州拌饭常搭配新鲜生拌牛肉（육회），口感软嫩、入口即化，与拌饭一同享用是地道吃法。"
+    },
+    {
+     "name": "Street Food at Nambu Market",
+     "blurb": "南部市场夜市里的文化小吃琳琅满目，从巨型炸物、烤串到创意饭团，边逛边吃最能体会全州的市井风味。"
+    }
+   ],
+   "gettingThere": "从首尔出发，最便捷的方式是在龙山站乘坐KTX高铁前往全州站，车程约一个半到两小时；龙山站也有较慢的无穷花号普通列车直达。坐高速巴士则从首尔高速巴士客运站发车，约两个半到三小时抵达全州高速巴士客运站。无论火车还是巴士，到达后从车站到韩屋村都还有一段距离，可乘坐市内公交或出租车前往。全州市区面积不大，韩屋村、庆基殿、殿洞圣堂、梧木台等核心景点都集中在步行可达的范围内，最适合用一双舒服的鞋慢慢逛；前往南部市场、乡校等稍远的地方，搭公交或打车都很方便。",
+   "tips": [
+    "韩屋村内有许多韩服租赁店，穿韩服游览不仅拍照好看，进入庆基殿等部分景点还可免门票，性价比很高。",
+    "全州是著名的美食之都，建议空着肚子来，把拌饭、豆芽汤饭、马格利和各色小吃留足胃口分多次品尝。",
+    "点马格利酒时通常会附赠满满一桌下酒菜，两三人同行点一两壶最划算，切忌一开始就点太多。",
+    "韩屋村周末与节假日人潮汹涌，想拍到清净的巷弄美照，建议清晨早起或选在平日前往。"
+   ],
+   "faq": [
+    {
+     "q": "去全州旅游安排几天比较合适？",
+     "a": "全州的核心景点集中在韩屋村一带，紧凑游玩一整天即可逛完主要景点。若想悠闲体验韩服、手作、美食与夜市，并顺道探访周边城市，建议安排两天一晚，住在韩屋民宿里更有韵味。"
+    },
+    {
+     "q": "从首尔怎么去全州最方便？",
+     "a": "最快是从龙山站乘KTX高铁，约一个半到两小时直达全州站；也可从首尔高速巴士客运站搭乘高速巴士，约两个半到三小时。火车更快更稳，巴士班次多、票价相对便宜，可按需选择。"
+    },
+    {
+     "q": "全州韩屋村值得专程去吗？",
+     "a": "非常值得。它是韩国规模最大、保存最完整的传统韩屋聚落，集历史古迹、韩服体验、特色美食与文创小店于一体，与一般商业化的仿古街区不同，浓厚的传统氛围让它成为韩国国内游客也极爱的目的地。"
+    },
+    {
+     "q": "全州最不能错过的美食是什么？",
+     "a": "首推全州拌饭（비빔밥），这里正是石锅拌饭的发源地之一，黄铜碗里的拌饭用料讲究、风味正宗。此外豆芽汤泡饭、配满桌小菜的马格利米酒，以及南部市场夜市的各色小吃也都不容错过。"
+    }
+   ],
+   "h1": "全州旅游攻略：必去景点与美食全指南",
+   "title": "全州旅游攻略：必去景点与美食 | KoreaPlus",
+   "metaDesc": "全州旅游全攻略！带你逛韩国最大的全州韩屋村、庆基殿、殿洞圣堂与梧木台，品正宗全州拌饭、豆芽汤饭与马格利米酒，附交通方式与实用贴士，玩转韩国美食之都。",
+   "lead": "全州是韩国全罗北道的古都，朝鲜王朝的发祥地，也是名副其实的\"美食之都\"。这里拥有全国规模最大的传统韩屋村，七百多栋黑瓦韩屋连成一片，穿上韩服漫步其间仿佛穿越回旧时光。从石锅拌饭的发源地到香甜的马格利米酒，从庄严的古殿到热闹的夜市，全州把历史底蕴与市井烟火完美融合，是一座越逛越有味道的慢节奏小城。"
+  },
+  "es": {
+   "h1": "Qué ver y hacer en Jeonju: guía completa",
+   "title": "Qué hacer en Jeonju: guía esencial | KoreaPlus",
+   "metaDesc": "Descubre qué hacer en Jeonju: la cuna del bibimbap, el pueblo hanok, el santuario Gyeonggijeon, callejones de makgeolli, hanji y el Mercado Nocturno Nambu.",
+   "lead": "Jeonju es la capital gastronómica de Corea y un viaje al pasado entre tejados curvos de teja tradicional. Aquí nació el bibimbap, se conserva el mayor pueblo hanok del país y se elabora el legendario papel hanji. Pasear por sus callejones de casas tradicionales, probar makgeolli en sus tabernas y descubrir santuarios centenarios convierten a Jeonju en una de las escapadas más auténticas de Corea del Sur. A continuación encontrarás las visitas imprescindibles, qué comer y consejos prácticos para aprovechar tu viaje al máximo.",
+   "attractions": [
+    {
+     "name": "Jeonju Hanok Village",
+     "nameLocal": "전주한옥마을",
+     "blurb": "El corazón de Jeonju: más de 700 casas tradicionales hanok de tejados curvos agrupadas en un barrio peatonal. Se recorre a pie, perdiéndose entre callejuelas, talleres artesanos, casas de té y puestos de comida callejera. Muchos viajeros alquilan un hanbok para pasear y fotografiarse entre la arquitectura histórica."
+    },
+    {
+     "name": "Gyeonggijeon Shrine",
+     "nameLocal": "경기전",
+     "blurb": "Santuario construido en 1410 para custodiar el retrato del rey Taejo, fundador de la dinastía Joseon. Sus pabellones de madera, los muros de piedra y un sereno bosque de bambú lo convierten en uno de los rincones más fotogénicos de la ciudad y en una clase de historia coreana al aire libre."
+    },
+    {
+     "name": "Jeondong Catholic Cathedral",
+     "nameLocal": "전동성당",
+     "blurb": "Una de las iglesias más bellas de Corea, de ladrillo rojo y cúpulas bizantinas, levantada a comienzos del siglo XX sobre el lugar donde fueron martirizados los primeros católicos coreanos. Su mezcla de estilos románico y bizantino contrasta de forma sorprendente con los tejados hanok que la rodean."
+    },
+    {
+     "name": "Nambu Night Market",
+     "nameLocal": "남부야시장",
+     "blurb": "El mercado tradicional de Jeonju cobra vida al caer la noche con decenas de puestos de comida callejera. Es el lugar ideal para picotear entre la multitud, probar especialidades locales como la pi-sundae y empaparse del ambiente más animado y popular de la ciudad."
+    },
+    {
+     "name": "Omokdae",
+     "nameLocal": "오목대",
+     "blurb": "Pabellón situado en una pequeña colina con vistas panorámicas sobre los tejados del pueblo hanok. Aquí, según la tradición, el general Yi Seong-gye celebró una victoria antes de fundar la dinastía Joseon. Es el mejor mirador para contemplar Jeonju, sobre todo al atardecer."
+    },
+    {
+     "name": "Jaman Mural Village",
+     "nameLocal": "자만벽화마을",
+     "blurb": "Un pintoresco barrio en ladera, junto a Omokdae, donde las paredes de las casas se han cubierto de coloridos murales y grafitis artísticos. Sus callejones empinados, cafeterías escondidas y rincones llenos de color lo convierten en un paseo relajado y muy fotogénico."
+    },
+    {
+     "name": "Jeonju Hanji Museum",
+     "nameLocal": "전주한지박물관",
+     "blurb": "Jeonju es famosa por el hanji, el tradicional papel coreano hecho a mano con corteza de morera. Este museo muestra su historia, sus usos y el minucioso proceso de elaboración, y en varios talleres del pueblo hanok puedes incluso crear tu propia pieza de papel artesanal."
+    },
+    {
+     "name": "Jeonju Hyanggyo",
+     "nameLocal": "전주향교",
+     "blurb": "Antigua escuela confuciana rodeada de imponentes ginkgos centenarios que en otoño se tiñen de un dorado espectacular. Sus tranquilos patios y pabellones de madera ofrecen un remanso de paz y un retrato fiel de la educación tradicional en la época Joseon."
+    },
+    {
+     "name": "Jeonjucheon Stream",
+     "nameLocal": "전주천",
+     "blurb": "Riachuelo que bordea el pueblo hanok, con senderos y puentes ideales para pasear o montar en bici. Sus orillas verdes, las garzas y el discurrir tranquilo del agua ofrecen un respiro natural a pocos pasos del bullicio del centro histórico."
+    },
+    {
+     "name": "Deokjin Park",
+     "nameLocal": "덕진공원",
+     "blurb": "Parque conocido por su gran estanque cubierto de flores de loto, que florecen de forma espectacular en verano. Un puente peatonal cruza el lago y los pabellones tradicionales lo convierten en un lugar muy querido por los habitantes de Jeonju para pasear y relajarse."
+    }
+   ],
+   "food": [
+    {
+     "name": "Bibimbap de Jeonju",
+     "blurb": "El plato más emblemático de la ciudad, considerada su cuna. Un cuenco de arroz coronado con verduras de temporada, carne de ternera, huevo y gochujang, servido en muchos restaurantes en una vasija de latón. La versión de Jeonju destaca por la calidad de sus ingredientes y su cuidada presentación."
+    },
+    {
+     "name": "Kongnamul-gukbap",
+     "blurb": "Reconfortante sopa de arroz con brotes de soja, ligeramente picante y muy popular como desayuno o remedio para la resaca. Se sirve hirviendo en una olla de barro, a menudo acompañada de huevo y arroz, y es todo un clásico de la cocina local de Jeonju."
+    },
+    {
+     "name": "Pi-sundae",
+     "blurb": "Morcilla coreana típica del Mercado Nocturno Nambu, elaborada con tripa rellena de sangre, fideos de batata y verduras. Es uno de los bocados callejeros más sabrosos y auténticos que se pueden probar en los puestos del mercado de la ciudad."
+    },
+    {
+     "name": "Makgeolli",
+     "blurb": "Vino de arroz turbio y refrescante que en Jeonju se disfruta en los célebres callejones del makgeolli (막걸리 골목). Al pedir una tetera, llega acompañada de una generosa variedad de platillos que van renovándose: una experiencia social tan deliciosa como económica."
+    },
+    {
+     "name": "Choco pie de Jeonju (PNB)",
+     "blurb": "La famosa pastelería PNB elabora una versión artesanal del choco pie, con bizcocho esponjoso, relleno cremoso y cobertura de chocolate. Se ha convertido en el souvenir comestible más popular de la ciudad y en una parada obligada para los golosos."
+    },
+    {
+     "name": "Hanjeongsik",
+     "blurb": "Banquete tradicional coreano formado por decenas de pequeños platos servidos a la vez: guisos, verduras, pescados, encurtidos y mucho más. En Jeonju alcanza una de sus expresiones más generosas y refinadas, ideal para descubrir la riqueza de la cocina local en una sola comida."
+    }
+   ],
+   "gettingThere": "Jeonju está muy bien conectada con Seúl. La opción más rápida es el tren bala KTX desde la estación de Yongsan hasta la estación de Jeonju, un trayecto cómodo de poco más de hora y media. También circulan trenes convencionales más económicos. Como alternativa, los autobuses exprés salen con frecuencia desde la terminal de Seúl (Express Bus Terminal) y tardan algo menos de tres horas. Desde la estación o la terminal de autobuses de Jeonju, el pueblo hanok queda a un corto trayecto en autobús urbano o taxi. Una vez en el centro histórico, todo se recorre fácilmente a pie.",
+   "tips": [
+    "Alquila un hanbok en el pueblo hanok: además de conseguir fotos preciosas, muchos lugares ofrecen entrada gratuita o con descuento si vas vestido con el traje tradicional.",
+    "Visita el pueblo hanok entre semana y a primera hora de la mañana para evitar las multitudes y disfrutar de sus callejones con calma.",
+    "Reserva la noche para el Mercado Nocturno Nambu: es cuando despliega todo su ambiente y la mejor oferta de comida callejera.",
+    "Lleva calzado cómodo: las calles del pueblo hanok y las cuestas hacia Omokdae y el barrio de murales se recorren mejor a pie."
+   ],
+   "faq": [
+    {
+     "q": "¿Cuántos días se necesitan para visitar Jeonju?",
+     "a": "Con uno o dos días se cubren los imprescindibles. Una jornada basta para recorrer el pueblo hanok, el santuario Gyeonggijeon y la catedral de Jeondong, pero pernoctar en un alojamiento hanok y disfrutar del Mercado Nocturno Nambu permite vivir la ciudad con mucha más calma."
+    },
+    {
+     "q": "¿Por qué es famosa Jeonju?",
+     "a": "Jeonju es la capital gastronómica de Corea y la cuna del bibimbap. También destaca por conservar el mayor pueblo de casas tradicionales hanok del país, por su papel artesanal hanji y por su rica herencia histórica vinculada a la dinastía Joseon."
+    },
+    {
+     "q": "¿Cómo se llega a Jeonju desde Seúl?",
+     "a": "La forma más rápida es el tren KTX desde la estación de Yongsan, con un trayecto de algo más de hora y media. También hay autobuses exprés desde la terminal de Seúl que tardan cerca de tres horas y suelen ser más económicos."
+    },
+    {
+     "q": "¿Merece la pena alojarse en una casa hanok?",
+     "a": "Sí. Dormir en un hanok tradicional es una de las experiencias más especiales de Jeonju. Estas casas de madera y suelo radiante ondol te sumergen en la atmósfera histórica del barrio y te permiten disfrutar del pueblo hanok temprano, antes de que lleguen los visitantes del día."
+    }
+   ]
+  }
+ },
+ "Incheon": {
+  "zh": {
+   "h1": "仁川旅游攻略：8大必去景点、美食与交通全指南",
+   "title": "仁川旅游攻略：必去景点+美食 | KoreaPlus",
+   "metaDesc": "仁川旅游怎么玩？这份攻略带你逛唐人街、松岛中央公园、月尾岛与开港场老街，吃地道炸酱面与新浦市场小吃，附交通与实用贴士，从仁川机场轻松出发。",
+   "lead": "仁川是大多数游客踏上韩国的第一站，却常被当成\"机场过境地\"匆匆错过。其实这座海港城市既有韩国唯一的华侨唐人街和炸酱面发源地，也有未来感十足的松岛新城与怀旧的开港场老街。无论你是想在转机间隙就近一游，还是专程来一趟海边漫步与美食之旅，仁川都能给你惊喜。",
+   "attractions": [
+    {
+     "name": "Incheon Chinatown",
+     "nameLocal": "仁川唐人街 (인천 차이나타운)",
+     "blurb": "这里是韩国规模最大、历史最悠久的华侨聚居区，红墙金字的牌楼、壁画长廊与中式餐馆林立。作为韩式炸酱面的发源地，几乎每家老字号都打着\"元祖\"招牌，是吃货与拍照爱好者的必访之地。"
+    },
+    {
+     "name": "Songdo Central Park",
+     "nameLocal": "松岛中央公园 (송도 센트럴파크)",
+     "blurb": "松岛国际新城的核心绿地，以一条引入海水的人工运河为轴，两岸是造型前卫的摩天大楼群。你可以租一艘月光游船或水上脚踏船,在玻璃幕墙的倒影间穿行，傍晚的灯光夜景尤其出片。"
+    },
+    {
+     "name": "Wolmido Island",
+     "nameLocal": "月尾岛 (월미도)",
+     "blurb": "与陆地相连的海滨小岛，沿海建有一圈\"月尾文化街\"木栈道，海风、海鸥与停泊的渔船构成经典的港口风情。岛上还有复古游乐园与各式海鲜餐厅，是韩国人周末看海、坐摩天轮的休闲去处。"
+    },
+    {
+     "name": "Open Port Area (Modern History Street)",
+     "nameLocal": "开港场近代历史文化街 (개항장 거리)",
+     "blurb": "仁川是韩国最早对外开埠的港口之一，这片街区完整保留了日式与西洋风格的旧银行、洋行和领事馆建筑。漫步在石板路上，仿佛穿越回十九世纪末的开港年代，沿途多家老建筑已改造成博物馆与文艺咖啡馆。"
+    },
+    {
+     "name": "Sinpo International Market",
+     "nameLocal": "新浦国际市场 (신포국제시장)",
+     "blurb": "仁川最具人气的传统市场，以\"新浦炸鸡\"和现包现蒸的鸡蛋糕\"鸡蛋面包\"闻名全国。市场内小吃摊与杂货铺密集，烟火气十足，是体验本地人日常与边逛边吃的绝佳地点。"
+    },
+    {
+     "name": "Jayu Park",
+     "nameLocal": "自由公园 (자유공원)",
+     "blurb": "建于山丘之上的韩国第一座西式公园，登顶可俯瞰仁川港的繁忙码头与起重机群。园内古木参天，春日樱花、秋日红叶各有韵味，与山下的唐人街、开港场老街步行可达，适合串联同游。"
+    },
+    {
+     "name": "Ganghwa Island",
+     "nameLocal": "江华岛 (강화도)",
+     "blurb": "仁川近郊的历史名岛，散布着史前支石墓群（世界文化遗产）、传统山寺与守卫汉江口的古炮台。岛上还有韩国著名的人参与花纹席特产，是远离都市喧嚣、深入韩国古史的一日游好选择。"
+    },
+    {
+     "name": "Incheon International Airport",
+     "nameLocal": "仁川国际机场 (인천국제공항)",
+     "blurb": "连续多年被评为全球最佳机场之一，本身就是一处值得逛的目的地。航站楼内设有韩国传统文化体验馆、室内花园与免税购物区，转机旅客还能参加免费的市区游览，让候机时间也不虚度。"
+    }
+   ],
+   "food": [
+    {
+     "name": "炸酱面 (자장면)",
+     "blurb": "诞生于仁川唐人街的国民面食，浓稠的黑色春酱裹着筋道的面条与肉丁洋葱，来仁川必吃的一碗\"元祖\"味道。"
+    },
+    {
+     "name": "新浦炸鸡 (신포닭강정)",
+     "blurb": "新浦市场的招牌名物，整块去骨炸鸡裹上甜辣酱汁，外脆里嫩、酸甜开胃，常常需要排队购买。"
+    },
+    {
+     "name": "鸡蛋面包 (계란빵)",
+     "blurb": "市场街头的暖心小吃，松软面包里嵌着一整颗烤蛋，咸甜交织，是边逛边吃的经典选择。"
+    },
+    {
+     "name": "刀切面 (칼국수)",
+     "blurb": "仁川海港盛产蛤蜊，用大量蛤蜊熬出的鲜汤手切面清爽鲜美，是当地人钟爱的家常暖食。"
+    },
+    {
+     "name": "生鱼片与海鲜 (회·해산물)",
+     "blurb": "月尾岛与沿海一带的海鲜餐厅可吃到当日鲜捞的生鱼片、烤贝与辣炖海鲜锅，海风佐餐别有风味。"
+    },
+    {
+     "name": "糖三角·中式点心 (공갈빵)",
+     "blurb": "唐人街特有的中华甜点，外壳烤得金黄酥脆、内里中空，咬下满口焦糖香气，是边走边吃的人气零嘴。"
+    }
+   ],
+   "gettingThere": "仁川与首尔之间交通极为便利。从仁川国际机场可乘坐机场快线（AREX）直达市区或首尔站，再换乘地铁前往各景点；首尔出发的游客则可搭乘首尔地铁1号线一路坐到仁川站，出站即是唐人街与开港场老街，无需换乘。前往松岛新城可乘坐仁川地铁1号线，月尾岛则可从仁川站换乘当地观光月尾海上列车（一条小型高架轨道）或步行前往。市区内景点多沿地铁线分布，搭配公交与步行即可轻松串联；若计划前往江华岛，则建议从仁川或首尔西部乘坐长途巴士，约一小时左右可达。建议办一张T-money交通卡，地铁、公交、便利店通用，全程刷卡更省心。",
+   "tips": [
+    "唐人街、开港场老街、自由公园和新浦市场彼此步行可达，可安排成半天的徒步路线一次逛完，省去往返奔波。",
+    "如果只是在仁川机场转机，停留时间较长可报名机场提供的免费市区观光团，短则一两小时即可游唐人街或松岛，行李可寄存在机场。",
+    "周末与韩国节假日的月尾岛、唐人街人潮拥挤，想拍空镜或避开排队，建议安排在工作日上午前往。",
+    "松岛中央公园白天看建筑、傍晚看夜景各有不同风味，若时间允许可待到日落后欣赏运河两岸的灯光倒影。"
+   ],
+   "faq": [
+    {
+     "q": "仁川值得专门安排时间游玩吗，还是只把它当作机场过境地？",
+     "a": "仁川绝对值得停留至少半天到一天。这里有韩国唯一的华侨唐人街和炸酱面发源地、未来感十足的松岛新城、怀旧的开港场老街和海滨月尾岛，景点集中、各具特色，远比单纯转机更有看头。"
+    },
+    {
+     "q": "从仁川机场怎么去市区景点？",
+     "a": "出机场后可乘坐机场快线（AREX）前往市区，或换乘地铁。前往唐人街、开港场一带最方便的方式是搭乘首尔地铁1号线到终点仁川站，出站即到；松岛则乘仁川地铁1号线即可抵达。"
+    },
+    {
+     "q": "在仁川待半天或一天，怎么安排路线最顺？",
+     "a": "若只有半天，推荐把仁川站周边的唐人街、自由公园、开港场老街和新浦市场连成一条徒步线，边走边吃；若有一整天，可再加上松岛中央公园看现代建筑与夜景，或乘车前往月尾岛看海。"
+    },
+    {
+     "q": "仁川一定要尝的美食是什么？",
+     "a": "首推唐人街的元祖炸酱面，这是这道国民面食在韩国的发源地；此外还有新浦市场的甜辣炸鸡、夹整颗蛋的鸡蛋面包、蛤蜊刀切面，以及月尾岛沿海的新鲜海鲜。"
+    }
+   ]
+  },
+  "ja": {
+   "h1": "仁川（インチョン）でやるべきこと完全ガイド",
+   "title": "仁川の観光・グルメ完全ガイド | KoreaPlus",
+   "metaDesc": "仁川（인천）のおすすめ観光スポットとご当地グルメを地元目線で紹介。チャイナタウン、松島セントラルパーク、月尾島、開港場、新浦市場、自由公園、江華島まで。仁川空港の玄関口で楽しむ旅のヒント満載。",
+   "lead": "仁川（인천）は、多くの旅行者が「空港」としてしか通り過ぎない街ですが、実はソウルからわずか1時間ほどで行ける、韓国でも指折りの食と歴史の港町です。韓国最大の中華街でジャージャー麺発祥の物語に触れ、開港場の近代建築をそぞろ歩き、未来都市・松島のセントラルパークで水辺を散策する——そんな新旧が同居する旅がここでは叶います。仁川国際空港（ICN）に着いたその日から、あるいは帰国前の半日でも十分に楽しめる、地元目線のスポットとグルメをまとめました。",
+   "attractions": [
+    {
+     "name": "Incheon Chinatown",
+     "nameLocal": "인천 차이나타운",
+     "blurb": "韓国最大級の中華街。19世紀末の開港とともに山東省からの華僑が住み着いた歴史ある一画で、真っ赤な牌楼（門）をくぐると赤と金で彩られた坂道が広がります。ジャージャー麺（짜장면）の老舗や中華菓子の店が軒を連ね、壁には『三国志』をモチーフにした壁画も。仁川観光の起点として外せない場所です。"
+    },
+    {
+     "name": "Jjajangmyeon Museum (Gonghwachun)",
+     "nameLocal": "짜장면박물관 (공화춘 共和春)",
+     "blurb": "チャイナタウンの一角にある、ジャージャー麺（짜장면）誕生の地。ここはかつての名店「共和春（공화춘）」の建物を保存・改装した博物館で、韓国式ジャージャー麺がこの店で生まれたとされる歴史を当時の厨房や食器とともに伝えています。月餅の店ではなく、あくまで「짜장면発祥の店」を記念する施設という点が見どころです。"
+    },
+    {
+     "name": "Songdo Central Park",
+     "nameLocal": "송도 센트럴파크",
+     "blurb": "海水を引き込んだ運河が走る、近未来都市・松島国際都市のシンボル公園。ガラス張りの高層ビルに囲まれた水辺で、水上タクシーやカヤックを楽しんだり、芝生でのんびりしたり。夕暮れ時のライトアップは特にフォトジェニックで、SF映画のような景観を散歩できます。チャイナタウン側の旧市街とは対照的な「新しい仁川」を体感できる場所です。"
+    },
+    {
+     "name": "Wolmido",
+     "nameLocal": "월미도",
+     "blurb": "海風が心地よい港の行楽地。海沿いの遊歩道（文化通り）には海鮮料理店やカフェが並び、観覧船での湾内クルーズや昔ながらの遊園地が楽しめます。月尾海列車（モノレール）で島をぐるりと一周すれば、港と街並みを一望。なお永興島（영흥도）方面へのフェリーは大阜島など別の船着き場が起点になることが多いので、行き先によっては事前に出発港の確認をおすすめします。"
+    },
+    {
+     "name": "Open Port Area",
+     "nameLocal": "개항장 거리",
+     "blurb": "チャイナタウンに隣接する、開港期（19世紀末〜20世紀初頭）の近代建築が残るレトロな街区。旧日本・清国の租界の境界だった石段や、旧銀行を改装した近代建築博物館、赤レンガの建物などが点在し、ゆっくり歩くだけで時代の重なりを感じられます。カフェやギャラリーも増え、散策とフォトスポット巡りに最適です。"
+    },
+    {
+     "name": "Sinpo International Market",
+     "nameLocal": "신포국제시장",
+     "blurb": "100年以上の歴史を持つ仁川の台所。開港当時から外国人と地元の人が買い物に集った市場で、今も活気あふれる屋台が並びます。仁川名物の新浦タッカンジョン（甘辛い揚げ鶏）や、揚げまんじゅう、各種総菜が食べ歩きの定番。地元の暮らしと味を一度に味わえる、グルメ好きには外せないスポットです。"
+    },
+    {
+     "name": "Jayu Park",
+     "nameLocal": "자유공원",
+     "blurb": "1888年に開園した韓国初の西洋式公園。チャイナタウンと開港場の高台に位置し、仁川港と海を見下ろす絶景が広がります。春は桜の名所としても知られ、園内にはマッカーサー将軍の銅像も。坂を上った先のベンチで港の眺めを楽しめば、街歩きの休憩にもぴったりです。"
+    },
+    {
+     "name": "Ganghwa Island",
+     "nameLocal": "강화도",
+     "blurb": "仁川の北西に浮かぶ、歴史と自然の島。先史時代の支石墓（ユネスコ世界遺産）や、高麗時代の山城、海を望む寺院など、韓国の歴史が幾重にも積み重なっています。のどかな田園風景や干潟、地元産の朝鮮人参や江華特産のヨモギも有名。市街地の喧騒を離れて、半日〜1日かけてゆったり巡りたいエリアです。"
+    },
+    {
+     "name": "Incheon International Airport",
+     "nameLocal": "인천국제공항",
+     "blurb": "韓国の空の玄関口にして、世界有数のサービスを誇る巨大ハブ空港。乗り継ぎや出発前の時間を持て余すことがないほど、屋内庭園、韓国文化体験コーナー、ショッピングや飲食店が充実しています。ソウル方面へはAREX（空港鉄道）で直結。市内中心部とも近く、到着・出発日に仁川観光を組み込みやすいのが大きな魅力です。"
+    }
+   ],
+   "food": [
+    {
+     "name": "ジャージャー麺（짜장면 / チャジャンミョン）",
+     "blurb": "仁川チャイナタウン発祥とされる、韓国を代表する中華系グルメ。黒いチュンジャン（甜麺醤系の黒味噌）で炒めた具と太麺を豪快に混ぜていただく、甘めでコクのある一杯です。発祥の地である共和春（공화춘）の建物は現在ジャージャー麺博物館になっており、本場のチャイナタウンで食べる味は格別。仁川に来たらまず外せない一品です。"
+    },
+    {
+     "name": "月餅（월병 / ウォルビョン・複来春 복래춘）",
+     "blurb": "チャイナタウンで味わいたい中華菓子・月餅（월병）。豆あんやナッツを詰めて焼き上げた伝統の焼き菓子で、お茶うけにもお土産にもぴったりです。中でも複来春（복래춘 ボンネチュン）は、チャイナタウンの老舗の月餅・中華菓子店として知られています。ジャージャー麺で食事をしたあとの甘い〆や手土産にどうぞ。"
+    },
+    {
+     "name": "新浦タッカンジョン（신포 닭강정）",
+     "blurb": "新浦国際市場の名物として全国区になった、甘辛い韓国式フライドチキン。カリッと二度揚げした鶏肉を、甘さと辛さのバランスがよいタレでたっぷり絡めた一品で、冷めても美味しいのが特徴。市場で揚げたてを買って食べ歩いたり、お土産に持ち帰る人も多い、仁川を代表するご当地グルメです。"
+    },
+    {
+     "name": "コンガルパン（공갈빵）",
+     "blurb": "チャイナタウンの食べ歩き定番、中が空洞になった大きな揚げ焼きの甘いパン。「공갈（中身がない・ふくらまし）」の名のとおり、外はパリッと香ばしく中は空っぽで、ほんのり甘い素朴な味わいです。手のひらほどの大きさで気軽につまめるので、街歩きのおやつにぴったりです。"
+    },
+    {
+     "name": "セウカン（새우깡）",
+     "blurb": "韓国の国民的えびスナック。月尾島や港のフェリーではカモメに与える「カモメの餌」としても有名で、デッキでスナックを差し出すとカモメが寄ってくる光景は港町ならではの体験です。もちろんおやつとしてもサクサクの食感とえびの香ばしさが楽しめる、旅のお供にうれしい一品です。"
+    },
+    {
+     "name": "海鮮料理（회・조개구이）",
+     "blurb": "港町・仁川ならではの新鮮な海の幸。月尾島の海沿いや沿岸部の食堂では、刺身（회 フェ）や貝の網焼き（조개구이）など、その日水揚げされた魚介を堪能できます。潮風を感じながら味わう海鮮は、内陸のソウルでは得られない仁川旅行の醍醐味です。"
+    }
+   ],
+   "gettingThere": "仁川へはソウルから非常にアクセスしやすく、ソウル駅などから地下鉄1号線に乗れば、乗り換えなしでチャイナタウン最寄りの「仁川（インチョン）駅」まで行けます。チャイナタウン、開港場、自由公園、新浦市場はいずれも徒歩圏内にまとまっているので、まずこのエリアを徒歩で巡るのが効率的です。松島セントラルパークへは仁川地下鉄1号線「セントラルパーク駅」が便利。月尾島へは仁川駅からバスやタクシーですぐです。仁川国際空港（ICN）に到着・出発する日に旧市街観光を組み込むと、時間を有効に使えます。江華島は市街地から少し離れているため、長距離バスやレンタカーの利用が現実的です。",
+   "tips": [
+    "チャイナタウン・開港場・自由公園・新浦市場は徒歩で回れる距離にまとまっているので、まずこの旧市街エリアを1つのまとまりとして散策すると効率的です。",
+    "ジャージャー麺発祥の共和春（현 짜장면博物館）と、月餅の老舗・複来春（복래춘）は別の店なので混同しないように。食事は麺の店で、甘いお土産は月餅店で、と使い分けると楽しめます。",
+    "市場や食べ歩きの屋台は現金のみの店も残っているので、ある程度の現金を用意しておくと安心です。",
+    "永興島方面など島へ渡るフェリーは、出発する船着き場が行き先によって異なります。月尾島から出るとは限らないため、訪問前に出発港と時刻を確認しておきましょう。"
+   ],
+   "faq": [
+    {
+     "q": "仁川観光にはどれくらいの日数が必要ですか？",
+     "a": "チャイナタウン、開港場、新浦市場、自由公園といった旧市街の見どころは半日〜1日で十分に回れます。松島セントラルパークや月尾島、さらに江華島まで足を延ばすなら、1泊2日ほど取るとゆったり楽しめます。"
+    },
+    {
+     "q": "ジャージャー麺は本当に仁川が発祥なのですか？",
+     "a": "はい。韓国式ジャージャー麺（짜장면）は、仁川チャイナタウンの中華料理店「共和春（공화춘）」で生まれたとされています。現在その建物はジャージャー麺博物館として公開され、誕生の歴史を展示で知ることができます。"
+    },
+    {
+     "q": "仁川空港の乗り継ぎ時間でも観光できますか？",
+     "a": "短い乗り継ぎなら空港内の文化体験コーナーや庭園で過ごすのがおすすめです。半日以上の余裕があれば、空港鉄道（AREX）と地下鉄でチャイナタウンや松島まで出て、ジャージャー麺を食べて戻ることも十分可能です。"
+    },
+    {
+     "q": "仁川で必ず食べるべきものは何ですか？",
+     "a": "まずはチャイナタウンのジャージャー麺（짜장면）、そして新浦市場の甘辛いタッカンジョン（닭강정）は外せません。食べ歩きにはコンガルパン（공갈빵）、お土産には複来春（복래춘）の月餅（월병）もおすすめです。"
+    }
+   ]
+  },
+  "es": {
+   "h1": "Qué ver y hacer en Incheon: la puerta de entrada a Corea",
+   "title": "Qué hacer en Incheon: guía completa | KoreaPlus",
+   "metaDesc": "Descubre qué ver y hacer en Incheon: el Barrio Chino, Songdo Central Park, Wolmido, Ganghwa y la cuna del jjajangmyeon. Guía práctica y atemporal de Corea.",
+   "lead": "Para la mayoría de viajeros, Incheon (인천) es lo primero que pisan al llegar a Corea, pero merece mucho más que una escala camino de Seúl. Aquí nació el jjajangmyeon, late el único Barrio Chino oficial del país y conviven una ciudad-jardín futurista sobre terreno ganado al mar, callejones portuarios con historia y una isla salpicada de dólmenes milenarios. Esta guía atemporal reúne las visitas imprescindibles y los sabores reales de Incheon para que aproveches desde una larga escala en el aeropuerto hasta una escapada de varios días.",
+   "attractions": [
+    {
+     "name": "Incheon Chinatown",
+     "nameLocal": "인천 차이나타운",
+     "blurb": "El único Barrio Chino oficial de Corea, nacido en 1883 junto al puerto abierto. Sus calles de portales rojos, escaleras pintadas con murales del Romance de los Tres Reinos y faroles colgantes son la cuna del jjajangmyeon. Imprescindible pasear sin prisa, fotografiar el gran arco paifang y entrar en un restaurante chino-coreano centenario."
+    },
+    {
+     "name": "Songdo Central Park",
+     "nameLocal": "송도 센트럴파크",
+     "blurb": "El corazón verde de Songdo, el distrito-ciudad inteligente levantado sobre terreno ganado al mar. Su seña de identidad es un canal de agua salada que cruza el parque, navegable en taxi acuático o en barca de pedales, con rascacielos de cristal como telón de fondo. Ideal al atardecer y perfecto si tienes una primera o última jornada cerca del aeropuerto."
+    },
+    {
+     "name": "Wolmido",
+     "nameLocal": "월미도",
+     "blurb": "Una pequeña isla costera unida a tierra, célebre por su paseo marítimo de madera, sus puestos de marisco y un parque de atracciones de toda la vida con la famosa noria. Desde aquí salen ferris cortos a islas cercanas y se contemplan unas puestas de sol sobre el mar del Oeste muy queridas por los coreanos."
+    },
+    {
+     "name": "Open Port Area",
+     "nameLocal": "인천 개항장 거리",
+     "blurb": "El barrio del puerto abierto, donde Corea se asomó al mundo a finales del siglo XIX. Conserva antiguos bancos y consulados de estilo japonés y occidental, hoy convertidos en museos y cafeterías. Pasear por sus calles empedradas es como recorrer un museo al aire libre de la era de la apertura, a un paso del Barrio Chino."
+    },
+    {
+     "name": "Sinpo International Market",
+     "nameLocal": "신포국제시장",
+     "blurb": "Mercado tradicional con más de un siglo de historia y uno de los grandes templos de la comida callejera de Incheon. Famosísimo por su dakgangjeong (pollo frito crujiente y glaseado), reúne además puestos de dumplings, frituras y repostería coreana. El ambiente y los aromas lo convierten en parada obligada para comer bien y barato."
+    },
+    {
+     "name": "Jayu Park",
+     "nameLocal": "자유공원",
+     "blurb": "El primer parque de estilo occidental de Corea, abierto en 1888 sobre una colina junto al puerto. Entre arboledas y senderos tranquilos ofrece miradores con vistas panorámicas al mar, a las grúas del puerto y a los tejados del Barrio Chino. Es un descanso verde perfecto tras recorrer el barrio del puerto abierto, especialmente bonito en primavera."
+    },
+    {
+     "name": "Ganghwa Island",
+     "nameLocal": "강화도",
+     "blurb": "Una isla cargada de historia al noroeste de Incheon, célebre por sus campos de dólmenes prehistóricos declarados Patrimonio de la Humanidad por la Unesco. Suma fortalezas costeras, antiguos templos de la época Goryeo y paisajes rurales serenos. Una excursión de un día que combina arqueología, espiritualidad y naturaleza lejos de las multitudes."
+    },
+    {
+     "name": "Incheon International Airport",
+     "nameLocal": "인천국제공항",
+     "blurb": "Mucho más que un aeropuerto: repetidamente reconocido entre los mejores del mundo, esconde jardines interiores, espectáculos de cultura tradicional, spa, salas de descanso y actividades para esperas largas. En escalas prolongadas puedes apuntarte a un tour de tránsito gratuito para conocer la ciudad de Incheon sin pasar por inmigración formal de larga estancia."
+    },
+    {
+     "name": "Open Port Museums",
+     "nameLocal": "인천개항박물관",
+     "blurb": "Conjunto de pequeños museos instalados en los edificios bancarios y comerciales de la era del puerto abierto. Explican con objetos y fotografías cómo llegaron a Corea el ferrocarril, el telégrafo, la moneda moderna y los primeros productos importados. Una visita breve y muy didáctica para entender por qué Incheon fue la ventana del país al exterior."
+    }
+   ],
+   "food": [
+    {
+     "name": "Jjajangmyeon (짜장면)",
+     "blurb": "El plato más icónico de Incheon y, posiblemente, de toda Corea: fideos gruesos bañados en una densa salsa negra de pasta de judía con cerdo y verdura picada. Nació precisamente en el Barrio Chino de Incheon a manos de inmigrantes chinos a comienzos del siglo XX. Mézclalo bien antes de comer y acompáñalo con rábano amarillo encurtido."
+    },
+    {
+     "name": "Dakgangjeong del Mercado Sinpo (신포닭강정)",
+     "blurb": "La especialidad estrella del Mercado Internacional de Sinpo: trozos de pollo frito doblemente, ultracrujientes y bañados en una salsa dulce y ligeramente picante. Se compran por raciones en caja para llevar y suele haber cola. Un bocado adictivo, perfecto para comer paseando por el mercado."
+    },
+    {
+     "name": "Gonggal-ppang (공갈빵)",
+     "blurb": "Un pan dulce frito típico del Barrio Chino, hueco y vacío por dentro: su propio nombre significa literalmente 'pan farsante' o 'pan engaño', porque parece relleno pero está completamente hueco. Es crujiente por fuera, ligeramente dulce y aromatizado a menudo con sésamo. No es un dumpling ni lleva relleno: es una golosina aireada que se rompe de un bocado."
+    },
+    {
+     "name": "Wolbyeong de Bokraechun (복래춘 월병)",
+     "blurb": "Pastelitos de luna (mooncakes) al estilo chino-coreano, herencia de la repostería del Barrio Chino. La histórica pastelería Bokraechun es famosa por estos dulces de masa fina rellenos de pasta dulce, una reliquia comestible de la tradición pastelera que llegó con los inmigrantes chinos a Incheon."
+    },
+    {
+     "name": "Jjamppong (짬뽕)",
+     "blurb": "El compañero picante del jjajangmyeon en todo restaurante chino-coreano: una sopa de fideos de caldo rojo intenso cargada de marisco, calamar y verduras. En Incheon, junto al mar y al Barrio Chino, es donde mejor entiende su origen y su frescura. Si dudas entre fideos negros o sopa picante, pide el set combinado y prueba los dos."
+    }
+   ],
+   "gettingThere": "Incheon está perfectamente conectada con Seúl y, por supuesto, con su propio aeropuerto internacional. Desde el aeropuerto de Incheon (ICN), el tren AREX llega al centro de Seúl en algo menos de una hora; para el Barrio Chino lo más cómodo es la Línea 1 del metro, que enlaza Seúl directamente (sin transbordos) con la estación de Incheon —final de la línea—, justo a la entrada del barrio. Hazte con una tarjeta T-money en cualquier conveniencia (GS25, CU) y la usarás en metro, autobuses y la mayoría de taxis. Para llegar a la isla de Ganghwa lo más cómodo es un autobús desde Incheon, y a islas costeras como Wolmido o las próximas a la costa se accede a pie o en breves trayectos en ferri.",
+   "tips": [
+    "Si tienes una escala larga en el aeropuerto, aprovecha el tour de tránsito gratuito o acércate al Barrio Chino: el metro lo conecta con la ciudad y vuelves con tiempo de sobra.",
+    "Recorre juntos el Barrio Chino, el barrio del puerto abierto y Jayu Park: están a pocos minutos a pie unos de otros y forman el casco histórico más interesante de Incheon.",
+    "Ve al Mercado de Sinpo con hambre y prueba el dakgangjeong recién hecho; llévatelo en caja para comer mientras paseas entre los puestos.",
+    "Reserva un día entero para la isla de Ganghwa: combinar los dólmenes Unesco con sus templos y fortalezas costeras requiere tiempo y se disfruta sin prisas."
+   ],
+   "faq": [
+    {
+     "q": "¿Merece la pena visitar Incheon o es solo el aeropuerto?",
+     "a": "Merece mucho la pena. Más allá del aeropuerto, Incheon ofrece el único Barrio Chino oficial de Corea, la cuna del jjajangmyeon, el barrio histórico del puerto abierto, el moderno parque de Songdo con su canal de agua salada y la isla de Ganghwa con sus dólmenes Unesco. Es perfecta tanto para una escala larga como para una escapada de uno o dos días desde Seúl."
+    },
+    {
+     "q": "¿Qué es exactamente el gonggal-ppang?",
+     "a": "Es un pan dulce frito típico del Barrio Chino de Incheon que está completamente hueco por dentro. Su nombre significa literalmente 'pan engaño' o 'pan farsante', porque parece relleno pero no lo está: es crujiente, aireado y ligeramente dulce. No es un dumpling ni lleva relleno alguno; es una golosina que se rompe de un bocado, distinta del mandu."
+    },
+    {
+     "q": "¿Dónde se come el mejor jjajangmyeon en Incheon?",
+     "a": "En el Barrio Chino, donde nació el plato a comienzos del siglo XX gracias a los inmigrantes chinos. Allí encontrarás restaurantes chino-coreanos centenarios que sirven la versión más auténtica. Acompáñalo con jjamppong, la sopa de marisco picante, pidiendo el set combinado para probar los dos."
+    },
+    {
+     "q": "¿Cómo llego desde el aeropuerto de Incheon a la ciudad de Incheon?",
+     "a": "Toma la Línea 1 del metro hasta la estación de Incheon, situada a la entrada del Barrio Chino; el trayecto desde el aeropuerto ronda una hora. Para ir a Seúl, el tren AREX llega al centro en algo menos de una hora. Cómprate una tarjeta T-money en cualquier tienda de conveniencia para pagar el transporte público fácilmente."
+    }
+   ]
+  }
+ },
+ "Jeju": {
+  "ja": {
+   "h1": "済州島でやりたいこと完全ガイド：絶景・自然・海女文化を味わう旅",
+   "title": "済州島の観光ガイド｜やりたいこと厳選 | KoreaPlus",
+   "metaDesc": "韓国・済州島のおすすめ観光スポットとご当地グルメを地元目線で厳選。城山日出峰やハルラ山、万丈窟、海女文化、黒豚やアワビ料理まで、旅の計画に役立つ実用ガイド。",
+   "lead": "韓国本土の南、青い海に浮かぶ火山島・済州（チェジュ）。世界自然遺産に登録された雄大な火山地形と、どこまでも続く海岸線、そして海に潜って暮らしを営む「海女（ヘニョ）」の文化が、ほかのどこにもない島時間をつくり出しています。朝日に染まる火口、地底へと続く溶岩洞窟、椿が咲き乱れる丘、足元から立ちのぼる潮の香り——。このガイドでは、初めての済州でも、二度目三度目の済州でも満足できる、本物の見どころと味を地元の視点で厳選しました。レンタカーでもバスでも、自分のペースで島を巡る旅の参考にしてください。",
+   "attractions": [
+    {
+     "name": "Seongsan Ilchulbong (Sunrise Peak)",
+     "nameLocal": "성산일출봉",
+     "blurb": "海から噴き出した火山活動でできた巨大な凝灰岩の丘で、ユネスコ世界自然遺産。頂上には直径約600メートルの巨大な火口が広がり、緑のクレーターを縁取る切り立った岩壁が王冠のように海へ突き出します。名前の通り「日の出の峰」で、早朝に登れば水平線から昇る朝日が火口を黄金色に染める済州随一の絶景。麓では海女の実演が行われることもあります。"
+    },
+    {
+     "name": "Hallasan",
+     "nameLocal": "한라산",
+     "blurb": "標高1,947メートル、韓国最高峰にして済州島そのものを形づくった休火山。島のどこからでも望めるシンボルで、山頂の火口湖「白鹿潭（ペンノクタム）」を目指す登山道が整備されています。季節ごとに表情を変え、春のツツジ、夏の深い緑、秋の紅葉、冬の樹氷と雪景色まで楽しめます。本格登山が難しい人でも、中腹までの森林トレイルなら気軽に火山の自然を体感できます。"
+    },
+    {
+     "name": "Manjanggul Lava Tube",
+     "nameLocal": "만장굴",
+     "blurb": "火山の溶岩が流れ出してできた、世界有数の規模を誇る溶岩洞窟。ユネスコ世界自然遺産「済州火山島と溶岩洞窟群」の中核で、一般公開区間を歩くと、溶岩の流れが固まった天井や壁、洞窟内に立つ高さ約7.6メートルの巨大な溶岩石柱を間近に見られます。年間を通して涼しく、地球の鼓動を感じる地底散歩。歩きやすい靴と上着があると安心です。"
+    },
+    {
+     "name": "Cheonjeyeon Waterfall",
+     "nameLocal": "천제연폭포",
+     "blurb": "「天帝の淵」を意味する、三段に連なる美しい滝。鬱蒼とした亜熱帯の森を縫う遊歩道を歩きながら、上段・中段・下段とそれぞれ趣の異なる滝壺を巡れます。仙女が舞い降りたという伝説が残り、谷にかかる七仙女橋からの眺めも見どころ。緑に包まれた渓谷の涼やかな空気は、暑い季節の散策にぴったりです。"
+    },
+    {
+     "name": "Jeongbang Waterfall",
+     "nameLocal": "정방폭포",
+     "blurb": "断崖から直接海へと水が落ちる、アジアでも珍しい「海に注ぐ滝」。轟音とともに白いしぶきを上げて青い海面へ落下する光景は迫力満点で、晴れた日には水しぶきに虹がかかることもあります。岩場まで降りて間近で滝を見上げられるのも魅力。西帰浦（ソギポ）の市街地からも近く、海と滝を同時に味わえる名所です。"
+    },
+    {
+     "name": "Udo Island",
+     "nameLocal": "우도",
+     "blurb": "城山港からフェリーで渡る、牛が寝そべる姿に似た小さな離島。サンゴのかけらが砕けてできた白い「西浜（ソビン）白沙」のビーチや、丘の上の灯台、のどかな菜の花畑が広がり、自転車や電動カートでのんびり一周できます。海女が素潜りで獲る新鮮な海の幸も名物。済州本島とはまた違う、ゆったりとした島時間が流れています。"
+    },
+    {
+     "name": "Hyeopjae Beach",
+     "nameLocal": "협재해변",
+     "blurb": "済州西部を代表する、エメラルドグリーンの遠浅ビーチ。きめ細かい白砂と透明度の高い海が美しく、沖に浮かぶ無人島・飛揚島（ピヤンド）を望む構図は写真映え抜群。遠浅で波も穏やかなため、家族連れの海水浴にも人気です。隣接する松林ではキャンプも楽しめ、夕暮れ時には海に沈む夕日が空を染め上げます。"
+    },
+    {
+     "name": "Jeju Olle Trail",
+     "nameLocal": "제주올레길",
+     "blurb": "海岸線や村、丘や林を縫って島をぐるりと結ぶ長距離トレイルの総称。「オルレ」とは済州方言で「家へと続く細道」を意味し、20以上のコースに分かれています。青いリボンと矢印の道標をたどれば、観光地化されていない素朴な漁村や畑、岬の絶景に出会えるのが醍醐味。体力や時間に合わせて、一区間だけ歩くのもおすすめです。"
+    },
+    {
+     "name": "Camellia Hill",
+     "nameLocal": "카멜리아힐",
+     "blurb": "世界各地から集めた数百種の椿が植えられた、東洋最大級の椿のテーマガーデン。冬から早春にかけて咲き誇る色とりどりの椿が一面を彩り、敷地内には温室や散策路、ヤシの並木道などフォトジェニックなスポットが点在します。椿の季節以外も、アジサイやススキなど四季折々の花や緑が楽しめ、静かに花と向き合える癒やしの場所です。"
+    },
+    {
+     "name": "Seopjikoji",
+     "nameLocal": "섭지코지",
+     "blurb": "海に細長く突き出した岬で、草原と断崖、青い海が織りなすドラマチックな景観が広がります。岬の先には白い灯台が立ち、春には一面に菜の花が咲いて黄色いじゅうたんを敷いたよう。城山日出峰を望む絶好のビューポイントでもあり、数々のドラマや映画のロケ地としても知られています。海風を感じながらの散策が心地よい場所です。"
+    }
+   ],
+   "food": [
+    {
+     "name": "전복돌솥밥 (jeonbok-dolsotbap)",
+     "blurb": "熱々の石鍋で炊き上げるアワビの炊き込みご飯。海女が素潜りで獲る新鮮なアワビと、その肝（わた）を一緒に炊き込むことで、磯の香りとほのかな緑色がご飯全体に移ります。食べ終わりは石鍋の底にできるおこげに湯を注いでお茶漬け風に。済州の海の恵みを存分に味わえる、島を代表する一皿です。"
+    },
+    {
+     "name": "흑돼지 (heukdwaeji / 黒豚BBQ)",
+     "blurb": "済州島で育つ在来種の黒豚を炭火で焼く、島いちばんのごちそう。きめ細かい脂と濃厚なうまみが特徴で、分厚く切った肉を香ばしく焼き上げます。塩やコチュジャン系のタレ、刻みネギを添え、サンチュやエゴマの葉で包んでいただくのが定番。済州市内の「黒豚通り」など専門店が集まるエリアで味わうのが王道です。"
+    },
+    {
+     "name": "고기국수 (gogi-guksu)",
+     "blurb": "豚骨をじっくり煮出した白濁スープに、コシのある小麦麺を合わせた済州だけのご当地麺。茹でた豚肉のスライスをたっぷりのせ、刻みネギや薬味を添えていただきます。あっさりしながらもコク深い味わいで、地元の人にとっては日常のソウルフード。そばではなく小麦の麺を使うのが特徴で、済州各地の麺専門店で楽しめます。"
+    },
+    {
+     "name": "옥돔구이 (okdom-gui / アマダイの塩焼き)",
+     "blurb": "済州近海で獲れる高級魚アマダイ（赤甘鯛）を干してから焼き上げた、上品な塩焼き。淡白で繊細な白身に程よく脂がのり、皮はぱりっと香ばしく仕上がります。古くから贈答品にも使われてきた済州の名産で、定食の主役としてご飯との相性も抜群。素材本来の味を生かしたシンプルな調理が魅力です。"
+    },
+    {
+     "name": "갈치조림・갈치국 (galchi-jorim / galchi-guk / タチウオ料理)",
+     "blurb": "済州を代表する魚・タチウオ（カルチ）を使った郷土料理。大根やかぼちゃと一緒にピリ辛に煮込む「カルチジョリム」は、ご飯が進む濃いめの味付け。一方「カルチグク」は、新鮮なタチウオを青菜と共にあっさり煮た澄まし汁仕立てで、鮮度の高い済州ならではの一品です。ふっくらした身の食感を楽しめます。"
+    },
+    {
+     "name": "한치 (hanchi / ケンサキイカ)",
+     "blurb": "済州の夏を代表する柔らかなイカ。コリコリとした歯ごたえと上品な甘みが特徴で、新鮮なものは刺身（フェ）で、また天日干しにして炙ったり、しゃぶしゃぶや麺に入れたりとさまざまに味わえます。漁の最盛期には港町に独特の活気が生まれ、旬の海の味覚として地元でも愛されています。"
+    }
+   ],
+   "gettingThere": "済州島へは飛行機が基本です。ソウル（金浦・仁川）や釜山（金海）をはじめ、韓国各地の都市から済州国際空港への便が頻繁に運航しており、所要時間は概ね1時間前後。日本や近隣アジア諸国からの直行便がある時期もあります。空港は済州市の中心部に近く、市内や主要エリアへのアクセスも良好です。島内の移動はレンタカーが最も自由度が高く、海岸沿いのドライブそのものが旅の楽しみになります。運転をしない場合は、空港と主要観光地を結ぶ路線バスや、空港・港・ホテルを結ぶリムジンバスが利用でき、配車アプリでのタクシー手配も便利です。離島の牛島（ウド）へは城山港などからフェリーで渡ります。",
+   "tips": [
+    "天候が変わりやすい島なので、薄手の上着やレインウェアを一枚用意しておくと安心。ハルラ山や溶岩洞窟は夏でもひんやりするため、羽織るものがあると快適です。",
+    "城山日出峰の名物である日の出を狙うなら、日の出時刻の少し前に登り始めるのがおすすめ。頂上までは階段が続くので、歩きやすい靴で向かいましょう。",
+    "見どころが島全体に点在しているため、滞在は「東部」「西部」など方面ごとにまとめて巡ると効率的。移動時間を考えて1日2〜3カ所に絞るとゆとりある旅になります。",
+    "海女が獲る新鮮な海の幸は、漁港の近くや海女が直接営む店で味わうのが格別。アワビや旬のイカなど、その日に揚がったものを楽しんでみてください。"
+   ],
+   "faq": [
+    {
+     "q": "済州島の観光には何日くらい必要ですか？",
+     "a": "主要な見どころを一通り巡るなら3〜4日が目安です。島は意外と広く、東部・西部・南部に見どころが分かれているため、2日では駆け足になりがち。ハルラ山の登山やオルレ歩き、離島の牛島まで足を延ばしたい場合は、5日ほどあるとゆったり楽しめます。"
+    },
+    {
+     "q": "車がなくても観光できますか？",
+     "a": "可能です。空港と主要観光地を結ぶ路線バスやリムジンバスが整備されており、配車アプリでタクシーも手配できます。ただし便数の少ない路線もあるため、バス利用の場合は時刻を事前に確認し、行き先を絞って計画するとスムーズです。自由に島を巡りたいならレンタカーが便利です。"
+    },
+    {
+     "q": "済州島でいちばん人気の食べ物は何ですか？",
+     "a": "在来種の黒豚（フッテジ）を炭火で焼くBBQが島いちばんの名物です。ほかにも、豚骨スープと小麦麺の「コギグクス」、海女が獲るアワビを使った石鍋ご飯「チョンボクトルソッパ」、タチウオ料理など、海の幸と豚肉の両方が充実しているのが済州グルメの魅力です。"
+    },
+    {
+     "q": "海女（ヘニョ）の文化はどこで見られますか？",
+     "a": "城山日出峰の麓や牛島、各地の漁港周辺などで、海女が素潜り漁を行う様子や実演を見られることがあります。彼女たちが獲ったアワビやサザエ、イカなどはその場で味わえることも多く、済州ならではの食と文化を同時に体験できます。"
+    }
+   ]
+  },
+  "zh": {
+   "h1": "济州岛旅游攻略：必去景点、美食与实用贴士",
+   "title": "济州岛旅游攻略：景点·美食·贴士 | KoreaPlus",
+   "metaDesc": "济州岛（제주）完整旅游攻略：城山日出峰、汉拿山、万丈窟、天帝渊瀑布、牛岛、挾才海水浴场，以及黑猪肉烤肉、烤红马头鱼、鲍鱼粥等地道美食与海女文化、交通实用贴士。",
+   "lead": "济州岛（제주）是韩国最南端的火山岛，也是公认的度假天堂。这里有联合国教科文组织认证的火山地貌、海蚀绝壁、绵延的海岸步道，还有世代潜水采集海产的海女文化。从拔地而起的城山日出峰到韩国最高峰汉拿山，从地下熔岩洞窟到碧蓝的离岛牛岛，这份攻略带你一次看遍济州必去景点、必尝美食与避坑贴士。",
+   "attractions": [
+    {
+     "name": "Seongsan Ilchulbong (Sunrise Peak)",
+     "nameLocal": "성산일출봉",
+     "blurb": "济州东端拔海而起的火山口巨岩，约五千年前海底喷发形成，被列入联合国教科文组织世界自然遗产。沿石阶约二十分钟登顶，碗状火山口与无垠大海尽收眼底，这里也是岛上最负盛名的观日出胜地，清晨的光线尤其震撼。"
+    },
+    {
+     "name": "Hallasan",
+     "nameLocal": "한라산",
+     "blurb": "海拔1947米的休眠火山，是韩国最高峰，也是整座济州岛的中心。山顶白鹿潭火山口湖时常云雾缭绕；城板岳、观音寺等数条登山路线四季风景各异，春有杜鹃、秋有红叶、冬有雪原。登顶路线耗时较长，建议清晨出发、量力而行。"
+    },
+    {
+     "name": "Manjanggul Lava Tube",
+     "nameLocal": "만장굴",
+     "blurb": "世界知名的大型熔岩洞窟，同样属于世界自然遗产的一部分。开放参观的一段约一公里，洞内常年凉爽，可见熔岩石柱、熔岩流痕与石钟乳，尽头矗立着高约七米的巨型熔岩石柱，是地质爱好者与亲子游的热门去处。"
+    },
+    {
+     "name": "Cheonjeyeon Waterfall",
+     "nameLocal": "천제연폭포",
+     "blurb": "位于西归浦中文一带的三段式瀑布，意为“天帝之渊”，传说仙女曾在此沐浴。林荫栈道串起三级瀑布与碧绿水潭，沿途跨过造型优美的仙临桥，绿意葱茏、水声潺潺，是避暑纳凉、悠闲漫步的好地方。"
+    },
+    {
+     "name": "Jeongbang Waterfall",
+     "nameLocal": "정방폭포",
+     "blurb": "西归浦市区附近的临海瀑布，水流直接跌入大海，是亚洲少见的“海岸瀑布”之一。站在岩岸近距离仰望飞瀑入海、水雾扑面，气势磅礴，与天帝渊瀑布的幽静形成鲜明对比，可一并安排。"
+    },
+    {
+     "name": "Udo Island",
+     "nameLocal": "우도",
+     "blurb": "从城山港乘渡轮约十几分钟即达的离岛，因形似一头卧牛而得名。岛上以白沙滩、珊瑚沙海岸和田园风光著称，可租电瓶车或自行车环岛慢游，途中还能遇见海女下海采捞的身影，是济州“岛中之岛”的代表。"
+    },
+    {
+     "name": "Hyeopjae Beach",
+     "nameLocal": "협재해수욕장",
+     "blurb": "济州西部最美的海滩之一，雪白细沙配上碧绿浅海，远眺可见对面的飞扬岛。水浅平缓、适合戏水与日落，周边咖啡馆与松林营地林立，是济州西线公认的看海打卡地。"
+    },
+    {
+     "name": "Jeju Olle Trail",
+     "nameLocal": "제주 올레길",
+     "blurb": "环绕全岛的徒步步道网络，由众多分段路线串成，沿海岸、村落、田野与小山蜿蜒延伸。每条路线以蓝橙箭头与丝带指引方向，难度不一，是用双脚深度感受济州自然与生活气息的最佳方式，挑一段半日徒步即可。"
+    },
+    {
+     "name": "Camellia Hill",
+     "nameLocal": "카멜리아힐",
+     "blurb": "济州西南部的大型山茶花主题植物园，种有数百个品种的山茶及众多花木。冬末初春山茶盛放时最为壮观，园内造景精致、四季有花，是摄影与悠闲散步的人气花园。"
+    },
+    {
+     "name": "Seopjikoji",
+     "nameLocal": "섭지코지",
+     "blurb": "济州东部伸入大海的岬角，碧海、草坡、火山岩与远处的城山日出峰构成绝美画面。海边白色灯塔、起伏的油菜花田（春季）以及多部韩剧取景地都在此，是兜风与海岸漫步的经典一站。"
+    }
+   ],
+   "food": [
+    {
+     "name": "黑猪肉烤肉（흑돼지구이）",
+     "blurb": "济州特产的黑毛猪，肉质紧实、油脂分布均匀，炭火烤至外焦里嫩，蘸上当地的“멜젓”（凤尾鱼盐渍酱）一同享用，咸鲜下饭，是来济州不可错过的招牌烤肉。"
+    },
+    {
+     "name": "烤红马头鱼（옥돔구이）",
+     "blurb": "옥돔即红马头鱼，是济州最具代表性的高级海鱼。最常见的做法是抹盐微干后碳烤（옥돔구이），鱼肉细嫩清甜、几乎无腥，常作为济州家宴与定食中的主角。"
+    },
+    {
+     "name": "鲍鱼粥（전복죽）",
+     "blurb": "用济州海女采来的新鲜鲍鱼熬煮的米粥，加入鲍鱼内脏让粥色泛绿、鲜味浓郁，鲍鱼肉切片同煮，口感软糯、温润养胃，是当地的滋补名吃。"
+    },
+    {
+     "name": "竹荚鱼汤（각재기국）",
+     "blurb": "각재기即竹荚鱼（青甘鱼一类的小海鱼），与白菜或萝卜一同清煮成汤，汤头清爽、带海鱼特有的鲜香，是济州人家常的暖胃海鱼汤。"
+    },
+    {
+     "name": "猪肉面（고기국수）",
+     "blurb": "济州独有的猪骨高汤小麦面，浓白汤底配上厚切水煮黑猪肉片与粗面条，汤鲜面滑、分量扎实，是当地最受欢迎的平民主食之一。"
+    },
+    {
+     "name": "炖带鱼 / 烤带鱼（갈치조림·갈치구이）",
+     "blurb": "济州近海盛产带鱼（갈치），肉厚味鲜。可与萝卜、辣椒酱同炖成微辣下饭的갈치조림，也可整段碳烤成咸香的갈치구이，是岛上代表性的海鲜料理。"
+    }
+   ],
+   "gettingThere": "济州岛是一座离岛，无法乘火车直达，主要通过飞机或轮渡前往。最便捷的方式是搭乘飞机：首尔金浦机场飞往济州国际机场约一小时，是全球最繁忙的航线之一，釜山、大邱等城市也有频繁航班。若想省钱或体验海上风光，可从木浦、釜山、莞岛等港口乘坐渡轮（部分为夜航船）抵达济州。岛上公共交通以巴士为主，但景点分散、班次有限，自驾租车是最自由高效的游玩方式（需备国际驾照），也可考虑包车或参加一日游。",
+   "tips": [
+    "济州天气多变、风大，海岸与山顶尤甚，四季都建议带上防风外套；登汉拿山务必查好当日开放路段与折返时间，量力而行。",
+    "岛上景点分布广、彼此相距远，自驾租车体验最佳；若不开车，建议按东线、西线分天规划，减少来回奔波。",
+    "想看海女表演与下海作业，可前往城山日出峰附近或牛岛沿岸；尊重海女工作，拍摄前先征得同意。",
+    "认准“옥돔구이（烤红马头鱼）”“각재기국（竹荚鱼汤）”等地道写法，避免与普通海鱼混淆；黑猪肉与鲍鱼粥几乎每家餐厅都有，可放心点。"
+   ],
+   "faq": [
+    {
+     "q": "济州岛适合玩几天？",
+     "a": "大多数游客安排2到3天即可玩遍主要景点。建议按东、西线分天游览：一天走城山日出峰、牛岛、涉地可支等东部，一天逛挾才海水浴场、山茶花山丘等西部，时间充裕可加一天登汉拿山或徒步偶来小路。"
+    },
+    {
+     "q": "怎么去济州岛？",
+     "a": "济州是离岛，不能坐火车直达。最快的方式是飞机，首尔金浦飞济州约一小时；想省钱或看海景，可从木浦、釜山等港口乘渡轮前往。岛内游玩以自驾租车最为方便。"
+    },
+    {
+     "q": "济州岛有哪些必尝美食？",
+     "a": "招牌是炭火黑猪肉烤肉（흑돼지）与济州独有的猪肉面（고기국수）；海鲜方面别错过烤红马头鱼（옥돔구이）、鲍鱼粥（전복죽）、竹荚鱼汤（각재기국）和带鱼料理（갈치）。"
+    },
+    {
+     "q": "济州岛值得去吗？",
+     "a": "非常值得。这里集齐了世界遗产级的火山地貌、海岸瀑布、洁白沙滩与离岛风光，还有独特的海女文化和地道美食，是韩国最具代表性的度假目的地之一。"
+    }
+   ]
+  },
+  "es": {
+   "h1": "Qué ver y hacer en Jeju",
+   "title": "Qué ver y hacer en Jeju (제주) | KoreaPlus",
+   "metaDesc": "Guía de Jeju: el pico Seongsan Ilchulbong, el Hallasan, la cueva de lava Manjanggul, las haenyeo, playas, cascadas y la mejor gastronomía de la isla.",
+   "lead": "Jeju (제주) es la mayor isla de Corea del Sur, un paraíso volcánico declarado Patrimonio de la Humanidad por la Unesco. Aquí te esperan amaneceres sobre un cráter junto al mar, senderos costeros, cuevas de lava, cascadas y las legendarias haenyeo, las buceadoras que recogen marisco a pulmón. Esta guía reúne las visitas imprescindibles, los platos que no te puedes perder y los consejos prácticos para sacarle el máximo partido a la isla en cualquier época del año.",
+   "attractions": [
+    {
+     "name": "Seongsan Ilchulbong (Sunrise Peak)",
+     "nameLocal": "성산일출봉",
+     "blurb": "Un espectacular cono volcánico que emerge del mar, formado por una erupción submarina hace miles de años. Su cráter cubierto de hierba se corona tras una subida de unos veinte minutos, y al amanecer ofrece una de las estampas más célebres de toda Corea. Patrimonio Natural de la Humanidad."
+    },
+    {
+     "name": "Hallasan",
+     "nameLocal": "한라산",
+     "blurb": "El volcán que domina la isla y el pico más alto de Corea del Sur, con un lago en el cráter de su cima. Sus rutas de senderismo atraviesan bosques, praderas de altura y paisajes que cambian por completo con cada estación. Conviene salir temprano, pues las sendas a la cumbre tienen horarios de acceso."
+    },
+    {
+     "name": "Manjanggul Lava Tube",
+     "nameLocal": "만장굴",
+     "blurb": "Uno de los tubos de lava más largos y mejor conservados del mundo, parte del Patrimonio Natural de la Unesco. Se recorre a pie un tramo de cerca de un kilómetro entre formaciones de roca volcánica, hasta llegar a una imponente columna de lava. El interior es fresco y húmedo todo el año."
+    },
+    {
+     "name": "Cheonjeyeon Waterfall",
+     "nameLocal": "천제연폭포",
+     "blurb": "Un conjunto de tres saltos de agua escalonados entre bosque frondoso, en la zona de Seogwipo. Un sendero con puentes y miradores enlaza las tres cascadas y las pozas de aguas turquesas que se forman a sus pies, en uno de los paseos más apacibles del sur de la isla."
+    },
+    {
+     "name": "Jeongbang Waterfall",
+     "nameLocal": "정방폭포",
+     "blurb": "Una de las pocas cascadas del mundo que vierte directamente al mar, cayendo desde un acantilado sobre la costa de Seogwipo. El rumor del agua, el aire salino y las rocas oscuras crean una escena inolvidable, muy fácil de visitar desde el centro de Seogwipo."
+    },
+    {
+     "name": "Udo Island",
+     "nameLocal": "우도",
+     "blurb": "Un islote frente a la costa este, al que se llega en ferry desde Seongsan. Famoso por su playa de arena de coral, sus campos de cacahuete y sus tranquilos caminos costeros, se recorre cómodamente en bici o en coche eléctrico. Aquí también verás a las haenyeo faenando junto a la orilla."
+    },
+    {
+     "name": "Hyeopjae Beach",
+     "nameLocal": "협재해변",
+     "blurb": "Una de las playas más bonitas de Jeju, de arena blanca y aguas poco profundas de un turquesa luminoso, con la isla de Biyangdo recortada en el horizonte. Ideal para un baño tranquilo en verano y para pasear junto al pinar que la bordea durante el resto del año."
+    },
+    {
+     "name": "Jeju Olle Trail",
+     "nameLocal": "올레길",
+     "blurb": "Una red de rutas de senderismo señalizadas que rodean la isla bordeando la costa, atravesando pueblos, campos y acantilados. Con decenas de tramos de distinta dificultad, basta con recorrer uno para descubrir la Jeju más auténtica, lejos de las grandes atracciones."
+    },
+    {
+     "name": "Camellia Hill",
+     "nameLocal": "카멜리아힐",
+     "blurb": "Un extenso jardín botánico dedicado a las camelias, con cientos de variedades que florecen sobre todo en invierno y comienzos de la primavera. Senderos entre arboledas, estanques y rincones floridos lo convierten en uno de los paseos más fotogénicos de la isla."
+    },
+    {
+     "name": "Seopjikoji",
+     "nameLocal": "섭지코지",
+     "blurb": "Un cabo de praderas verdes y acantilados volcánicos asomado al mar, en el extremo oriental de la isla, con vistas al Seongsan Ilchulbong. Sus senderos suaves, su faro y los campos de colza amarilla en primavera lo han hecho célebre como escenario de cine y series."
+    }
+   ],
+   "food": [
+    {
+     "name": "Heukdwaeji (cerdo negro a la parrilla)",
+     "blurb": "El plato más emblemático de Jeju: carne del cerdo negro autóctono de la isla, asada a la brasa en la mesa. La grasa, jugosa y sabrosa, se come envuelta en hojas de lechuga con ajo, salsa de soja fermentada y, a la manera local, mojada en sal con anchoa."
+    },
+    {
+     "name": "Okdom a la parrilla (besugo rojo)",
+     "blurb": "El okdom es un delicado pescado blanco, muy apreciado en Jeju. Suele servirse secado al sol y asado a la parrilla, lo que concentra su sabor, y acompañado de arroz y guarniciones. Un clásico de la cocina marinera de la isla."
+    },
+    {
+     "name": "Jeonbok-juk (gachas de oreja de mar)",
+     "blurb": "Unas reconfortantes gachas de arroz cocidas con oreja de mar (abulón), un molusco que recogen las haenyeo. De color verdoso por las vísceras del marisco y textura cremosa, son suaves, nutritivas y un buen comienzo de día en cualquier rincón de la isla."
+    },
+    {
+     "name": "Galchi (pez sable)",
+     "blurb": "El pez sable, largo y plateado, es una de las grandes joyas del mar de Jeju. Se disfruta a la parrilla, con su piel crujiente, o en un sabroso guiso picante con rábano (galchi-jorim). Su carne, blanca y tierna, tiene un sabor limpio e inconfundible."
+    },
+    {
+     "name": "Gosari-yukgaejang (sopa picante con cerdo)",
+     "blurb": "La versión de Jeju de este caldo picante se elabora con cerdo en lugar de la ternera habitual en el resto de Corea, junto con helechos (gosari). El resultado es una sopa espesa, especiada y profundamente sabrosa, tradicional de banquetes y celebraciones de la isla."
+    },
+    {
+     "name": "Hallabong (cítrico)",
+     "blurb": "El cítrico estrella de Jeju, fácil de reconocer por la protuberancia en la parte superior. Dulce, jugoso y muy aromático, se come fresco y también da lugar a zumos, chocolates y todo tipo de dulces que son el recuerdo gastronómico más típico de la isla."
+    }
+   ],
+   "gettingThere": "La forma más rápida de llegar a Jeju es en avión: desde Seúl (aeropuertos de Gimpo o Incheon) hay vuelos constantes que tardan algo más de una hora, en una de las rutas aéreas con más tráfico del mundo. También salen vuelos desde Busan, Daegu y otras ciudades coreanas. Si prefieres una opción más pausada, hay ferris desde puertos del continente como Mokpo o Wando, algunos nocturnos, que permiten llevar el coche. Una vez en la isla, el transporte público es limitado, así que lo más práctico es alquilar un coche (necesitarás el permiso de conducción internacional); también hay autobuses y taxis para moverse por las zonas principales.",
+   "tips": [
+    "Madruga para el amanecer en Seongsan Ilchulbong: es la experiencia más memorable de la isla y evitarás las aglomeraciones de media mañana.",
+    "Alquila un coche para recorrer Jeju con libertad; las atracciones están repartidas por toda la isla y el transporte público no llega cómodamente a muchas de ellas.",
+    "Lleva una chaqueta cortavientos: el tiempo en Jeju cambia rápido y suele soplar viento en la costa y en las alturas del Hallasan, incluso en días soleados.",
+    "Si quieres hacer cima en el Hallasan, comprueba antes la ruta y los horarios de acceso, ya que las sendas a la cumbre cierran a partir de cierta hora de la tarde."
+   ],
+   "faq": [
+    {
+     "q": "¿Cuántos días hacen falta para ver Jeju?",
+     "a": "Con dos o tres días puedes recorrer lo esencial: el amanecer en Seongsan Ilchulbong, el este de la isla con Udo, la cueva de Manjanggul, alguna cascada y una playa. Si quieres subir al Hallasan o caminar varios tramos del sendero Olle, reserva cuatro o cinco días."
+    },
+    {
+     "q": "¿Cuál es la mejor época para visitar Jeju?",
+     "a": "Jeju es un destino para todo el año. La primavera trae los cerezos en flor y los campos de colza; el verano es ideal para las playas; el otoño regala cielos despejados perfectos para el senderismo; y el invierno, más suave que en el continente, es la temporada de las camelias y los cítricos."
+    },
+    {
+     "q": "¿Hace falta alquilar coche en Jeju?",
+     "a": "Es muy recomendable. Las atracciones están dispersas por toda la isla y el transporte público resulta limitado. Con coche tendrás total libertad para moverte; recuerda que necesitas el permiso de conducción internacional para alquilarlo."
+    },
+    {
+     "q": "¿Qué hacen las haenyeo?",
+     "a": "Las haenyeo son buceadoras de Jeju que recogen marisco, abulón y algas a pulmón, sin equipo de oxígeno, una tradición reconocida por la Unesco. En lugares como Seongsan o la isla de Udo es habitual verlas faenar e incluso asistir a sus exhibiciones."
+    }
+   ]
+  }
+ }
+}
