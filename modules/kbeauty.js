@@ -502,6 +502,45 @@
     $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
   }
 
+  // ── Korean Sunscreen Decoder & Picker ───────────────────────────────────────
+  function renderSunscreen() {
+    const box = $('#kb-sun-box'); const S = window.KBEAUTY_SUNCARE; if (!box || !S) return;
+    const skin = getSkin();
+    const recFilter = (S.filterTypes || []).find(f => (f.bestFor || []).includes(skin));
+    const recId = recFilter ? recFilter.id : 'chemical';
+    const seedFor = (p) => `${p.brand} ${p.name} korean sunscreen`.replace(/\([^)]*\)/g, '').trim();
+    const methodSeed = { stick: 'korean sun stick spf50 reapply', cushion: 'korean sun cushion spf50 makeup', 'spray-powder': 'korean sunscreen spray spf50' };
+    box.innerHTML = `
+      <p class="gs-p">${esc(S.intro)}</p>
+      <div class="gs-block"><div class="gs-h">🏷️ Read the label</div>
+        <div class="sun-decode">${(S.decodeTable || []).map(d => `<div class="sun-dt"><div class="sun-dt-code">${d.emoji || ''} ${esc(d.code)}</div><div class="sun-dt-label">${esc(d.label)} · <span>${esc(d.measures)}</span></div><div class="sun-dt-plain">${esc(d.plain)}</div><div class="sun-dt-look">✅ ${esc(d.lookFor)}</div></div>`).join('')}</div>
+      </div>
+      <div class="gs-block"><div class="gs-h">🧴 Chemical, mineral or hybrid?${skin ? ` <span class="sun-rec">recommended for ${esc((SKINTYPES.find(s => s.id === skin) || {}).name || skin)}: ${esc(recId)}</span>` : ''}</div>
+        <div class="sun-filters">${(S.filterTypes || []).map(f => `<div class="sun-filter${f.id === recId ? ' rec' : ''}"><div class="sun-f-h">${f.emoji || ''} ${esc(f.name)} <span class="gs-ko">${esc(f.korean || '')}</span>${f.id === recId ? ' ✓' : ''}</div><div class="sun-f-how">${esc(f.how)}</div><div class="sun-f-pc"><div class="sun-pros">${(f.pros || []).map(p => '✔️ ' + esc(p)).join('<br>')}</div><div class="sun-cons">${(f.cons || []).map(c => '• ' + esc(c)).join('<br>')}</div></div><div class="sun-f-note">💡 ${esc(f.skinNote)}</div></div>`).join('')}</div>
+      </div>
+      <div class="gs-block"><div class="gs-h">⭐ Hero Korean sunscreens</div>
+        <div class="sun-picks">${(S.picks || []).map(p => `<div class="sun-pick${(p.forSkin || []).includes(skin) ? ' match' : ''}">
+          <div class="sun-p-h"><span aria-hidden="true">${p.emoji || '☀️'}</span> <b>${esc(p.brand)}</b></div>
+          <div class="sun-p-name">${esc(p.name)}</div>
+          <div class="sun-p-badges"><span class="kb-flag note">${esc(p.spf)} ${esc(p.pa)}</span><span class="kb-flag ${p.filter === 'mineral' ? 'warn' : 'good'}">${esc(p.filter)}</span>${p.noWhiteCast ? '<span class="kb-flag good">no cast</span>' : ''}${(p.forSkin || []).includes(skin) ? '<span class="kb-flag note">✓ your skin</span>' : ''}</div>
+          <div class="sun-p-blurb">${esc(p.blurb)}</div>
+          <button class="kb-step-shop sun-shop" data-seed="${esc(seedFor(p))}">🛍️ ${esc(t('shopFor'))}</button>
+        </div>`).join('')}</div>
+      </div>
+      <div class="gs-block"><div class="gs-h">✌️ ${esc(S.reapply.headline)}</div>
+        <div class="gs-principles">${(S.reapply.rules || []).map(r => `<div class="gs-card"><div class="gs-card-em">${r.emoji || ''}</div><div class="gs-card-t">${esc(r.title)}</div><div class="gs-card-b">${esc(r.text)}</div></div>`).join('')}</div>
+        <div class="sun-methods">${(S.reapply.methods || []).map(m => `<div class="sun-method"><div class="sun-m-h">${m.emoji || ''} ${esc(m.name)} <span class="gs-ko">${esc(m.korean || '')}</span></div><div class="sun-m-t">${esc(m.text)}</div>${methodSeed[m.id] ? `<button class="kb-step-shop sun-shop" data-seed="${esc(methodSeed[m.id])}">🛍️ ${esc(t('shopFor'))}</button>` : ''}</div>`).join('')}</div>
+        <p class="gs-p" style="margin-top:8px">⏱️ ${esc(S.reapply.cadence)}</p>
+      </div>
+      <div class="gs-block"><div class="gs-h">🌏 ${esc(S.koreanVsWestern.headline)}</div>
+        <div class="gs-principles">${(S.koreanVsWestern.points || []).map(p => `<div class="gs-card"><div class="gs-card-em">${p.emoji || ''}</div><div class="gs-card-t">${esc(p.title)}</div><div class="gs-card-b">${esc(p.text)}</div></div>`).join('')}</div>
+      </div>
+      <div class="gs-block"><div class="gs-h">❓ Sunscreen myths</div>
+        <div class="kb-gloss">${(S.myth || []).map(m => `<details><summary>${esc(m.q)}</summary><p>${esc(m.a)}</p></details>`).join('')}</div>
+      </div>`;
+    $$('.sun-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+
   // ── Where-to-Buy & Authenticity Hub ─────────────────────────────────────────
   let buyRegion = null;
   const BUY_EMOJI = { 'shopping-cart':'🛒', ribbon:'🎀', olive:'🫒', blossom:'🌸', 'kr-flag':'🇰🇷', tag:'🏷️', keycap:'🔢', money:'💰', printer:'🖨️', droplet:'💧', picture:'🖼️', star:'⭐', 'test-tube':'🧪' };
@@ -683,7 +722,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -703,6 +742,7 @@
     renderConcerns();
     renderRoutine();
     renderGlassSkin();
+    renderSunscreen();
     renderIngredients();
     renderPicker(); renderVerdicts();
     renderBrands();

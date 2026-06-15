@@ -360,6 +360,25 @@
     .kb-buy-checks { display:grid; gap:7px; }
     .kb-faked-list { display:flex; flex-wrap:wrap; gap:7px; margin-top:8px; }
     .kb-faked { font-size:12px; font-weight:700; color:var(--text); background:rgba(234,74,74,.10); border:1px solid rgba(234,74,74,.3); border-radius:16px; padding:5px 11px; cursor:help; }
+
+    /* ═══ Sunscreen Decoder ═══════════════════════════════════════════════════ */
+    .sun-decode { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:9px; }
+    .sun-dt { background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:11px 13px; }
+    .sun-dt-code { font-size:13px; font-weight:900; color:var(--kb1); } .sun-dt-label { font-size:11px; font-weight:700; color:var(--text); margin-top:2px; } .sun-dt-label span { color:var(--text3); font-weight:600; } .sun-dt-plain { font-size:11px; color:var(--text2); line-height:1.5; margin-top:5px; } .sun-dt-look { font-size:11px; color:#15803d; font-weight:700; margin-top:5px; } html:not(.light) .sun-dt-look { color:#4ade80; }
+    .sun-rec { font-size:10.5px; font-weight:700; color:var(--kb1); background:var(--kb-soft); border-radius:12px; padding:2px 9px; }
+    .sun-filters { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
+    .sun-filter { background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:12px; }
+    .sun-filter.rec { border-color:var(--kb1); box-shadow:inset 0 0 0 1px var(--kb1); }
+    .sun-f-h { font-size:13px; font-weight:800; color:var(--text); } .sun-f-how { font-size:11px; color:var(--text2); line-height:1.5; margin:6px 0; }
+    .sun-f-pc { display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:10.5px; line-height:1.5; } .sun-pros { color:var(--text2); } .sun-cons { color:var(--text3); } .sun-f-note { font-size:11px; color:var(--kb1); margin-top:7px; }
+    .sun-picks { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; }
+    .sun-pick { background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; flex-direction:column; }
+    .sun-pick.match { border-color:var(--kb1); }
+    .sun-p-h { font-size:12px; color:var(--text2); } .sun-p-name { font-size:12.5px; font-weight:800; color:var(--text); margin:2px 0 6px; }
+    .sun-p-badges { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:6px; } .sun-p-blurb { font-size:11px; color:var(--text2); line-height:1.5; margin-bottom:9px; }
+    .sun-pick .kb-step-shop { margin-top:auto; }
+    .sun-methods { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:9px; margin-top:10px; }
+    .sun-method { background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:11px; } .sun-m-h { font-size:12.5px; font-weight:800; color:var(--text); } .sun-m-t { font-size:11px; color:var(--text2); line-height:1.5; margin:5px 0 8px; }
   </style>
 </head>
 <body>
@@ -439,6 +458,7 @@
     <button class="filter-chip" data-target="kb-quiz" data-i18n="kbeauty.filter.quiz">🪞 My Skin</button>
     <button class="filter-chip" data-target="kb-routine" data-i18n="kbeauty.filter.routine">🧴 Routine</button>
     <button class="filter-chip" data-target="kb-glassskin" data-i18n="kbeauty.filter.glassskin">🪞 Glass Skin</button>
+    <button class="filter-chip" data-target="kb-sun" data-i18n="kbeauty.filter.sun">☀️ Sunscreen</button>
     <button class="filter-chip" data-target="kb-ingredients" data-i18n="kbeauty.filter.ingredients">🧪 Ingredients</button>
     <button class="filter-chip" data-target="kb-brands" data-i18n="kbeauty.filter.brands">🏷️ Brands</button>
     <button class="filter-chip" data-target="kb-dupes" data-i18n="kbeauty.filter.dupes">💸 Dupes</button>
@@ -486,6 +506,15 @@
   <!-- Glass Skin Method (flagship aspirational guide) -->
   <section class="kb-sec" id="kb-glassskin">
     <div id="kb-glassskin-box"></div>
+  </section>
+
+  <!-- Korean Sunscreen Decoder & Picker -->
+  <section class="kb-sec" id="kb-sun">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.sun.title">☀️ Korean sunscreen decoder</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.sun.sub">PA/SPF decoded · the right filter for your skin · no white cast</div>
+    </div>
+    <div id="kb-sun-box" aria-live="polite"></div>
   </section>
 
   <!-- Ingredient encyclopedia + decoder -->
