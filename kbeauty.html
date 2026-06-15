@@ -433,6 +433,11 @@
     .cat-tip { font-size:10.5px; color:var(--kb1); line-height:1.5; margin-bottom:9px; }
     .cat-card .cat-shop { margin-top:auto; }
     .cat-min { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:6px; } .cat-min-step { font-size:12px; font-weight:800; color:var(--text); background:var(--kb-soft); border-radius:10px; padding:6px 11px; } .cat-arrow { color:var(--text3); font-weight:900; }
+
+    /* ═══ Personalized Stack ══════════════════════════════════════════════════ */
+    .stack-summary { background:linear-gradient(135deg,var(--kb-soft),rgba(139,70,214,.08)); border:1px solid var(--border); border-radius:16px; padding:15px 17px; margin-bottom:12px; }
+    .stack-skin { display:flex; gap:13px; align-items:flex-start; } .stack-skin-em { font-size:34px; line-height:1; } .stack-skin-n { font-size:16px; font-weight:900; color:var(--text); } .stack-skin-d { font-size:12px; color:var(--text2); margin-top:2px; line-height:1.5; }
+    .stack-concerns { display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; } .stack-tag { font-size:11.5px; font-weight:700; color:var(--kb1); background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:4px 11px; }
   </style>
 </head>
 <body>
@@ -545,6 +550,15 @@
     <div id="kb-concern-grid" class="kb-concern-grid"></div>
   </section>
 
+  <!-- Personalized Stack Builder -->
+  <section class="kb-sec" id="kb-stack">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.stack.title">🎯 Your personalized stack</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.stack.sub">Your skin type + concerns → the exact routine & ingredients to shop</div>
+    </div>
+    <div id="kb-stack-box" aria-live="polite"></div>
+  </section>
+
   <!-- Routine builder -->
   <section class="kb-sec" id="kb-routine">
     <div class="kb-sec-head">
@@ -554,6 +568,7 @@
     <div class="kb-tabs" id="kb-routine-tabs" role="tablist" aria-label="Routine time">
       <button class="kb-tab active" role="tab" aria-selected="true" data-time="am" data-i18n="kbeauty.routine.am">☀️ Morning</button>
       <button class="kb-tab" role="tab" aria-selected="false" data-time="pm" data-i18n="kbeauty.routine.pm">🌙 Night</button>
+      <button class="kb-tab" role="tab" aria-selected="false" data-time="beginner" data-i18n="kbeauty.routine.beginner">🌱 Beginner</button>
       <button class="kb-tab" role="tab" aria-selected="false" data-time="mens" data-i18n="kbeauty.routine.mens">🧔 Men's</button>
     </div>
     <div id="kb-routine-steps" class="kb-steps" role="tabpanel" aria-live="polite"></div>

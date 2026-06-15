@@ -202,6 +202,16 @@
       $$('.kb-step-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
       return;
     }
+    // Beginner — the essential 5-step routine (resolves "is 10 steps too much?")
+    if (routineTime === 'beginner') {
+      const ids = ['watercleanse', 'toner', 'treatment', 'moisturizer', 'sunscreen'];
+      const bsteps = ids.map(id => ROUTINE.find(s => s.id === id)).filter(Boolean);
+      box.innerHTML = `<div class="kb-step" style="border-style:dashed"><div class="kb-step-no">🌱</div><div class="kb-step-b"><div class="kb-step-name">${esc(cx('ui.beginnerTitle', 'Beginner — the essential 5 steps'))}</div><div class="kb-step-desc">${esc(cx('ui.beginnerDesc', 'Ten steps are optional. Start with these five — a complete routine on its own.'))}</div></div></div>`
+        + bsteps.map((s, i) => `<div class="kb-step"><div class="kb-step-no">${i + 1}</div><div class="kb-step-b"><div class="kb-step-name"><span class="st-emoji">${s.emoji || ''}</span>${esc(s.name)}</div><div class="kb-step-desc">${esc(s.desc)}</div><button class="kb-step-shop" data-seed="${esc(stepSeed(s))}">🛍️ ${esc(t('shop'))}</button></div></div>`).join('')
+        + `<div class="tb-primer" style="margin-top:8px">⬆️ ${esc(cx('ui.beginnerProgress', 'Once this feels easy, add a hydrating essence, then a weekly gentle exfoliant, then a PM treatment — one new step at a time.'))}</div>`;
+      $$('.kb-step-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+      return;
+    }
     const steps = ROUTINE.filter(s => s.time === routineTime || s.time === 'both')
       .slice().sort((a, b) => a.step - b.step);
     box.innerHTML = steps.map((s, i) => `<div class="kb-step${s.optional ? ' is-opt' : ''}">
@@ -872,6 +882,32 @@
     if (cta) cta.addEventListener('click', () => { const c = concerns[0]; loadShop((SHOP.aliSeeds || {})[c] || (SHOP.aliSeeds || {}).general); }, { once:true });
   }
 
+  // ── Personalized Stack Builder (skin type + concerns → shoppable stack) ─────
+  function renderStack() {
+    const box = $('#kb-stack-box'); if (!box) return;
+    const skin = getSkin(); const concerns = [...getConcerns()];
+    if (!skin && !concerns.length) { box.innerHTML = `<div class="kb-empty">${esc(cx('ui.stackEmpty', 'Take the skin quiz and pick your concerns above — your personalized stack builds itself here.'))}</div>`; return; }
+    const st = SKINTYPES.find(s => s.id === skin);
+    let recIds = [];
+    concerns.forEach(c => { const co = CONCERN_BY_ID[c]; if (co && co.lookFor) co.lookFor.forEach(id => { if (!recIds.includes(id)) recIds.push(id); }); });
+    if (!recIds.length) recIds = INGREDIENTS.filter(i => i.star).map(i => i.id);
+    recIds = recIds.slice(0, 8);
+    const ingChips = recIds.map(id => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; }).join('');
+    const essentials = ROUTINE.filter(s => !s.optional).sort((a, b) => a.step - b.step);
+    const concernChips = concerns.map(c => { const co = CONCERN_BY_ID[c] || {}; return `<span class="stack-tag">${co.emoji || '🎯'} ${esc(co.name || c)}</span>`; }).join('');
+    const seed = (SHOP.aliSeeds || {})[concerns[0]] || (SHOP.aliSeeds || {}).general || 'korean skincare';
+    box.innerHTML = `
+      <div class="stack-summary">
+        ${st ? `<div class="stack-skin"><span class="stack-skin-em" aria-hidden="true">${st.emoji || '✨'}</span><div><div class="stack-skin-n">${esc(st.name)} ${esc(cx('ui.stackSkin', 'skin'))}</div><div class="stack-skin-d">${esc(st.desc)}</div></div></div>` : ''}
+        ${concernChips ? `<div class="stack-concerns">${concernChips}</div>` : ''}
+      </div>
+      <div class="gs-block"><div class="gs-h">🧪 ${esc(cx('ui.stackIng', 'Your key ingredients'))}</div><p class="gs-p">${esc(cx('ui.stackIngSub', 'Matched to your concerns — tap any to learn how to use it.'))}</p><div class="gs-chips">${ingChips || '<span class="gs-p">—</span>'}</div></div>
+      <div class="gs-block"><div class="gs-h">🧴 ${esc(cx('ui.stackRoutine', 'Your essential routine'))}</div><div class="kb-shelf-list">${essentials.map(s => `<div class="kb-shelf-item">${s.emoji || '•'} ${esc(s.name)}</div>`).join('')}</div></div>
+      <div class="funnel" style="margin-top:4px"><div class="kb-sec-title">🛒 ${esc(cx('ui.stackShop', 'Shop your stack'))}</div><div class="kb-sec-sub">${esc(cx('ui.stackShopSub', 'Your routine, ready to shop in one place.'))}</div><div style="margin-top:10px"><a class="kb-shelf-cta" data-seed="${esc(seed)}">🛒 ${esc(t('shopFor'))}</a></div><div class="funnel-disc">${esc((SHOP && SHOP.disclosure) || '')}</div></div>`;
+    $$('.gs-ing', box).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
+    $$('.kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+
   // ── Share fab ───────────────────────────────────────────────────────────────
   function showShareFab() {
     const fab = $('#kb-share-fab'); if (!fab) return;
@@ -895,7 +931,7 @@
     if (_modalOpener && _modalOpener.focus) { try { _modalOpener.focus(); } catch {} _modalOpener = null; }
   }
   function jumpTo(sel) { try { document.querySelector(sel).scrollIntoView({ behavior:'smooth', block:'start' }); } catch {} }
-  function refreshPersonalized() { renderIngredients(); renderRoutine(); renderShelf(); }
+  function refreshPersonalized() { renderStack(); renderIngredients(); renderRoutine(); renderShelf(); }
 
   function renderTicker() {
     const wrap = $('#kb-ticker-wrap'), rail = $('#kb-ticker'); if (!rail) return;
@@ -908,7 +944,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast','kb-stack'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -926,6 +962,7 @@
     renderForecast();
     renderQuiz();
     renderConcerns();
+    renderStack();
     renderRoutine();
     renderCategories();
     renderGlassSkin();
