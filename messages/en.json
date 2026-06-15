@@ -461,5 +461,8 @@
   "kbeauty.sec.buy.sub": "Best retailer for your country + a spot-the-fake guide",
   "kbeauty.filter.sun": "☀️ Sunscreen",
   "kbeauty.sec.sun.title": "☀️ Korean sunscreen decoder",
-  "kbeauty.sec.sun.sub": "PA/SPF decoded · the right filter for your skin · no white cast"
+  "kbeauty.sec.sun.sub": "PA/SPF decoded · the right filter for your skin · no white cast",
+  "kbeauty.filter.trouble": "🩺 Troubleshoot",
+  "kbeauty.sec.trouble.title": "🩺 Skin troubleshooter",
+  "kbeauty.sec.trouble.sub": "Purging vs breakout · barrier check · fungal-acne screen"
 }

@@ -379,6 +379,25 @@
     .sun-pick .kb-step-shop { margin-top:auto; }
     .sun-methods { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:9px; margin-top:10px; }
     .sun-method { background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:11px; } .sun-m-h { font-size:12.5px; font-weight:800; color:var(--text); } .sun-m-t { font-size:11px; color:var(--text2); line-height:1.5; margin:5px 0 8px; }
+
+    /* ═══ Skin Troubleshooter ═════════════════════════════════════════════════ */
+    .tb-primer { font-size:11.5px; color:var(--text2); line-height:1.6; background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:11px 13px; margin:8px 0; }
+    .tb-checks { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:7px; margin:8px 0; }
+    .tb-check { display:flex; gap:9px; align-items:flex-start; font-size:12px; color:var(--text2); background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:9px 11px; cursor:pointer; line-height:1.4; }
+    .tb-check input { margin-top:2px; accent-color:var(--kb1); width:16px; height:16px; flex-shrink:0; }
+    .tb-out { border:1px solid var(--border); border-radius:13px; padding:14px; margin-top:12px; background:var(--bg); }
+    .tb-out.tb-purge, .tb-out.tb-lvl-ok { border-color:rgba(34,197,94,.4); }
+    .tb-out.tb-react, .tb-out.tb-lvl-compromised { border-color:rgba(234,74,74,.5); }
+    .tb-out.tb-lvl-stressed { border-color:rgba(245,158,11,.5); }
+    .tb-out-h { font-size:15px; font-weight:900; color:var(--text); } .tb-out-head { font-size:12.5px; font-weight:700; color:var(--kb1); margin:3px 0 6px; }
+    .tb-dodont { display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; line-height:1.6; color:var(--text2); margin:9px 0; }
+    .tb-reassess { font-size:11px; color:var(--text3); font-style:italic; margin:8px 0; }
+    .tb-protocol { display:grid; gap:7px; margin:9px 0; } .tb-step { font-size:11.5px; color:var(--text2); line-height:1.5; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:9px 11px; } .tb-step b { color:var(--text); }
+    .tb-rescue { font-size:11.5px; color:var(--text2); margin:8px 0; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+    .tb-tells { font-size:11.5px; color:var(--text2); line-height:1.7; background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:11px 13px; }
+    .tb-flag-row { padding:7px 0; border-top:1px solid var(--border); } .tb-flag-row:first-of-type { border-top:none; }
+    #tb-fungal-input { width:100%; min-height:64px; resize:vertical; border:1px solid var(--border); border-radius:11px; background:var(--bg); color:var(--text); padding:11px; font-size:12.5px; font-family:inherit; }
+    @media (max-width:480px){ .tb-dodont{ grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -460,6 +479,7 @@
     <button class="filter-chip" data-target="kb-glassskin" data-i18n="kbeauty.filter.glassskin">🪞 Glass Skin</button>
     <button class="filter-chip" data-target="kb-sun" data-i18n="kbeauty.filter.sun">☀️ Sunscreen</button>
     <button class="filter-chip" data-target="kb-ingredients" data-i18n="kbeauty.filter.ingredients">🧪 Ingredients</button>
+    <button class="filter-chip" data-target="kb-trouble" data-i18n="kbeauty.filter.trouble">🩺 Troubleshoot</button>
     <button class="filter-chip" data-target="kb-brands" data-i18n="kbeauty.filter.brands">🏷️ Brands</button>
     <button class="filter-chip" data-target="kb-dupes" data-i18n="kbeauty.filter.dupes">💸 Dupes</button>
     <button class="filter-chip" data-target="kb-buy" data-i18n="kbeauty.filter.buy">🛡️ Buy Safe</button>
@@ -541,6 +561,15 @@
     </div>
     <div id="kb-pick" class="kb-pick"></div>
     <div id="kb-verdicts" class="kb-verdicts" aria-live="polite"></div>
+  </section>
+
+  <!-- Skin Troubleshooter -->
+  <section class="kb-sec" id="kb-trouble">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.trouble.title">🩺 Skin troubleshooter</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.trouble.sub">Purging vs breakout · barrier check · fungal-acne screen</div>
+    </div>
+    <div id="kb-trouble-box"></div>
   </section>
 
   <!-- Brand directory -->

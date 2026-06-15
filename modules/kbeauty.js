@@ -502,6 +502,90 @@
     $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
   }
 
+  // ── Skin Troubleshooter (purge vs breakout · barrier · fungal-acne) ─────────
+  const tbPurgeAns = {};
+  function tbIngChips(ids) { return (ids || []).map(id => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; }).join(''); }
+  function renderTroubleshooter() {
+    const box = $('#kb-trouble-box'); const META = window.KBEAUTY_TROUBLESHOOTER_META, P = window.KBEAUTY_PURGE, B = window.KBEAUTY_BARRIER, F = window.KBEAUTY_FUNGAL;
+    if (!box || !META) return;
+    box.innerHTML = `
+      <p class="gs-p">${esc(META.intro)}</p>
+      <div class="gs-block" id="tb-purge"><div class="gs-h">🔄 ${esc(P.title)}</div><p class="gs-p">${esc(P.subtitle)}</p>
+        <div class="tb-primer">${esc(P.primer)}</div>
+        <div id="tb-purge-q">${P.questions.map((q, qi) => `<div class="kb-q"><div class="kb-q-text">${qi + 1}. ${esc(q.q)}</div><div class="kb-opts">${q.options.map((o, oi) => `<button class="kb-opt" data-pq="${qi}" data-po="${oi}">${esc(o.label)}</button>`).join('')}</div></div>`).join('')}</div>
+        <button class="kb-quiz-cta" id="tb-purge-go" disabled>${esc(seeResultLabel())}</button>
+        <div id="tb-purge-out" aria-live="polite"></div>
+      </div>
+      <div class="gs-block" id="tb-barrier"><div class="gs-h">🧱 ${esc(B.title)}</div><p class="gs-p">${esc(B.subtitle)}</p>
+        <div class="tb-primer">${esc(B.primer)}</div>
+        <div id="tb-barrier-syms" class="tb-checks">${B.symptoms.map(s => `<label class="tb-check"><input type="checkbox" data-w="${s.weight}"> <span>${esc(s.label)}</span></label>`).join('')}</div>
+        <div id="tb-barrier-out" aria-live="polite"></div>
+      </div>
+      <div class="gs-block" id="tb-fungal"><div class="gs-h">🍄 ${esc(F.title)}</div><p class="gs-p">${esc(F.subtitle)}</p>
+        <div class="tb-primer">${esc(F.primer)}</div>
+        <div class="tb-tells"><b>Tell-tale signs:</b><br>• ${(F.tellTale || []).map(esc).join('<br>• ')}</div>
+        <textarea id="tb-fungal-input" class="kb-tool" style="margin-top:10px" placeholder="Paste an ingredient list to screen for common malassezia-feeding ingredients…"></textarea>
+        <button class="kb-tool-btn" id="tb-fungal-go">🍄 Screen ingredients</button>
+        <div id="tb-fungal-out" aria-live="polite"></div>
+        <p class="gs-p" style="margin-top:9px">💡 ${esc(F.safeHelpers)}</p>
+      </div>
+      <div class="funnel-disc">${esc(META.disclaimer)}</div>`;
+    // Purge quiz
+    $$('#tb-purge-q .kb-opt', box).forEach(b => b.addEventListener('click', () => {
+      const qi = +b.dataset.pq; $$(`#tb-purge-q .kb-opt[data-pq="${qi}"]`, box).forEach(x => x.classList.remove('sel'));
+      b.classList.add('sel'); tbPurgeAns[qi] = +b.dataset.po;
+      const go = $('#tb-purge-go'); if (go) go.disabled = Object.keys(tbPurgeAns).length < P.questions.length;
+    }));
+    const pgo = $('#tb-purge-go');
+    if (pgo) pgo.addEventListener('click', () => {
+      const sc = { purge: 0, react: 0, barrier: 0, fungal: 0 };
+      P.questions.forEach((q, qi) => { const o = q.options[tbPurgeAns[qi]]; if (o && o.score) for (const k in o.score) sc[k] = (sc[k] || 0) + o.score[k]; });
+      const out = $('#tb-purge-out'); if (!out) return;
+      if (sc.fungal >= 3) { out.innerHTML = `<div class="tb-out"><div class="tb-out-h">🍄 This could be fungal acne</div><div class="gs-card-b">Tiny, uniform, itchy bumps point to malassezia rather than purging or a normal reaction — run the Fungal-Acne screen below.</div></div>`; jumpTo('#tb-fungal'); return; }
+      const key = (sc.barrier >= 2 && sc.barrier > sc.purge) ? 'react' : (sc.purge >= sc.react ? 'purge' : 'react');
+      const o = P.outcomes[key]; if (!o) return;
+      out.innerHTML = `<div class="tb-out tb-${key}"><div class="tb-out-h">${o.emoji} ${esc(o.verdict)}</div><div class="tb-out-head">${esc(o.headline)}</div><div class="gs-card-b">${esc(o.body)}</div>
+        <div class="tb-dodont"><div><b>✅ Do</b><br>${(o.do || []).map(x => '• ' + esc(x)).join('<br>')}</div><div><b>🚫 Don't</b><br>${(o.dont || []).map(x => '• ' + esc(x)).join('<br>')}</div></div>
+        <div class="gs-chips">${tbIngChips(o.ingredientIds)}</div>
+        <div class="tb-reassess">↻ ${esc(o.reassess || '')}</div>
+        <button class="kb-step-shop tb-shop" data-seed="${esc((SHOP.aliSeeds || {})[o.shopSeed] || 'korean barrier repair')}">🛍️ ${esc(t('shopFor'))}</button></div>`;
+      $$('.gs-ing', out).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
+      $$('.tb-shop', out).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+    });
+    // Barrier checklist
+    const recompute = () => {
+      let sum = 0; $$('#tb-barrier-syms input:checked', box).forEach(c => sum += +c.dataset.w);
+      const lv = (B.levels || []).find(l => sum >= l.min && sum <= l.max) || B.levels[0];
+      const out = $('#tb-barrier-out'); if (!out || !lv) return;
+      const brands = (B.rescueBrands || []).map(rb => { const br = BRANDS.find(x => x.id === rb.id) || {}; return `<span class="kb-faked" style="background:var(--kb-soft);border-color:var(--border)" title="${esc(rb.note)}">${br.emoji || '🏷️'} ${esc(br.name || rb.id)}</span>`; }).join('');
+      out.innerHTML = `<div class="tb-out tb-lvl-${lv.id}"><div class="tb-out-h">${lv.emoji} ${esc(lv.verdict)}</div><div class="tb-out-head">${esc(lv.headline)}</div><div class="gs-card-b">${esc(lv.body)}</div>
+        <div class="tb-protocol">${(lv.protocol || []).map(s => `<div class="tb-step"><b>${s.step}. ${esc(s.title)}</b> — ${esc(s.detail)}${s.ingredientIds && s.ingredientIds.length ? `<div class="gs-chips">${tbIngChips(s.ingredientIds)}</div>` : ''}</div>`).join('')}</div>
+        ${lv.reintroduce ? `<div class="tb-reassess">↻ ${esc(lv.reintroduce)}</div>` : ''}
+        <div class="tb-rescue"><b>🛟 Gentle barrier rescuers:</b> ${brands}</div>
+        <button class="kb-step-shop tb-shop" data-seed="${esc((SHOP.aliSeeds || {})[lv.shopSeed] || 'korean barrier repair')}">🛍️ ${esc(t('shopFor'))}</button></div>`;
+      $$('.gs-ing', out).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
+      $$('.tb-shop', out).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+    };
+    $$('#tb-barrier-syms input', box).forEach(c => c.addEventListener('change', recompute));
+    // Fungal screener
+    const fgo = $('#tb-fungal-go');
+    if (fgo) fgo.addEventListener('click', () => {
+      const inp = $('#tb-fungal-input'), out = $('#tb-fungal-out'); if (!inp || !out) return;
+      const tokens = inp.value.split(/[,\n;]+/).map(normToken).filter(Boolean);
+      if (!tokens.length) { out.innerHTML = `<div class="kb-empty">Paste an ingredient list above.</div>`; return; }
+      const flagged = [];
+      const inciMap = {}; for (const fam in (F.flagInci || {})) for (const x of F.flagInci[fam]) inciMap[x] = fam;
+      const pats = (F.flagPatterns || []).map(p => ({ family: p.family, re: new RegExp(p.regex, 'i') }));
+      tokens.forEach(tok => {
+        let fam = inciMap[tok];
+        if (!fam) { const hit = pats.find(p => p.re.test(tok)); if (hit) fam = hit.family; }
+        if (fam) flagged.push({ tok, fam });
+      });
+      if (!flagged.length) { out.innerHTML = `<div class="tb-out tb-purge"><div class="gs-card-b">✅ ${esc(F.decoderEmptyAllSafe)}</div></div>`; return; }
+      out.innerHTML = `<div class="tb-out tb-react"><div class="tb-out-h">🍄 ${flagged.length} possible feeder${flagged.length > 1 ? 's' : ''} flagged</div>${flagged.map(f => `<div class="tb-flag-row"><b>${esc(f.tok)}</b> <span class="kb-flag warn">${esc(f.fam)}</span><div class="gs-card-b">${esc((F.explainerByFamily || {})[f.fam] || '')}</div></div>`).join('')}<div class="tb-reassess">${esc(F.safeNote)} — ${esc(F.decoderModeHint)}</div></div>`;
+    });
+  }
+
   // ── Korean Sunscreen Decoder & Picker ───────────────────────────────────────
   function renderSunscreen() {
     const box = $('#kb-sun-box'); const S = window.KBEAUTY_SUNCARE; if (!box || !S) return;
@@ -722,7 +806,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -745,6 +829,7 @@
     renderSunscreen();
     renderIngredients();
     renderPicker(); renderVerdicts();
+    renderTroubleshooter();
     renderBrands();
     renderGlossary();
     renderDupes();

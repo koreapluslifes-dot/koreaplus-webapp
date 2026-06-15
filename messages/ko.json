@@ -461,5 +461,8 @@
   "kbeauty.sec.buy.sub": "내 국가에 맞는 최적 판매처 + 가짜 구별법",
   "kbeauty.filter.sun": "☀️ 선크림",
   "kbeauty.sec.sun.title": "☀️ 한국 선크림 디코더",
-  "kbeauty.sec.sun.sub": "PA/SPF 해독 · 내 피부에 맞는 자차 · 백탁 없음"
+  "kbeauty.sec.sun.sub": "PA/SPF 해독 · 내 피부에 맞는 자차 · 백탁 없음",
+  "kbeauty.filter.trouble": "🩺 트러블 진단",
+  "kbeauty.sec.trouble.title": "🩺 스킨 트러블슈터",
+  "kbeauty.sec.trouble.sub": "퍼징 vs 트러블 · 장벽 체크 · 곰팡이성 여드름 스크린"
 }
