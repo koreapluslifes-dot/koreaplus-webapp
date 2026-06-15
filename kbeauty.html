@@ -398,6 +398,19 @@
     .tb-flag-row { padding:7px 0; border-top:1px solid var(--border); } .tb-flag-row:first-of-type { border-top:none; }
     #tb-fungal-input { width:100%; min-height:64px; resize:vertical; border:1px solid var(--border); border-radius:11px; background:var(--bg); color:var(--text); padding:11px; font-size:12.5px; font-family:inherit; }
     @media (max-width:480px){ .tb-dodont{ grid-template-columns:1fr; } }
+
+    /* ═══ Bestsellers & Trend Tracker ═════════════════════════════════════════ */
+    .bs-legend { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
+    .bs-leg { cursor:help; }
+    .bs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:11px; }
+    .bs-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px; display:flex; flex-direction:column; }
+    .bs-top { display:flex; align-items:center; gap:9px; }
+    .bs-rank { font-size:13px; font-weight:900; color:var(--kb1); background:var(--kb-soft); border-radius:9px; padding:3px 9px; flex-shrink:0; }
+    .bs-em { font-size:24px; } .bs-tt { min-width:0; } .bs-brand { font-size:11px; color:var(--text3); font-weight:700; } .bs-name { font-size:13px; font-weight:800; color:var(--text); line-height:1.3; }
+    .bs-badges { margin:8px 0 6px; } .bs-what { font-size:11.5px; color:var(--text2); line-height:1.5; }
+    .bs-line { font-size:11px; color:var(--text2); line-height:1.55; margin-top:7px; } .bs-line b { color:var(--text); }
+    .bs-evidence { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:8px 10px; }
+    .bs-foot { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:9px; } .bs-foot .bs-shop { margin-left:auto; }
   </style>
 </head>
 <body>
@@ -483,6 +496,7 @@
     <button class="filter-chip" data-target="kb-brands" data-i18n="kbeauty.filter.brands">🏷️ Brands</button>
     <button class="filter-chip" data-target="kb-dupes" data-i18n="kbeauty.filter.dupes">💸 Dupes</button>
     <button class="filter-chip" data-target="kb-buy" data-i18n="kbeauty.filter.buy">🛡️ Buy Safe</button>
+    <button class="filter-chip" data-target="kb-board" data-i18n="kbeauty.filter.board">🔥 Trending</button>
     <button class="filter-chip" data-target="kb-shop" data-i18n="kbeauty.filter.shop">🛍️ Shop</button>
   </div>
 
@@ -614,6 +628,15 @@
       <div class="kb-sec-sub" data-i18n="kbeauty.sec.buy.sub">Best retailer for your country + a spot-the-fake guide</div>
     </div>
     <div id="kb-buy-box" aria-live="polite"></div>
+  </section>
+
+  <!-- Bestsellers & 2026 Trend Tracker -->
+  <section class="kb-sec" id="kb-board">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.board.title">🔥 Trending now & 2026 tracker</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.board.sub">Olive Young best-sellers & viral picks — with an honest 'worth it?' verdict</div>
+    </div>
+    <div id="kb-board-box" aria-live="polite"></div>
   </section>
 
   <!-- Shop (live AliExpress grid + curated retailers) -->

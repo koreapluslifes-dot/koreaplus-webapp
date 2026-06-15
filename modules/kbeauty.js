@@ -502,6 +502,40 @@
     $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
   }
 
+  // ── Bestsellers & Trend Tracker (viral 'worth it?' board) ───────────────────
+  let boardTag = 'all';
+  function renderBestsellers() {
+    const box = $('#kb-board-box'); const BS = window.KBEAUTY_BESTSELLERS; const CFG = window.KBEAUTY_BOARD_CONFIG;
+    if (!box || !BS || !CFG) return;
+    const items = (BS.items || []).filter(it => boardTag === 'all' || it.tag === boardTag);
+    const pills = (CFG.filters || []).map(f => `<button class="kb-pick-chip${f.id === boardTag ? ' on' : ''}" data-bt="${esc(f.id)}" aria-pressed="${f.id === boardTag}">${f.emoji || ''} ${esc(f.label)}</button>`).join('');
+    const legend = Object.keys(CFG.verdicts || {}).map(k => { const v = CFG.verdicts[k]; return `<span class="bs-leg kb-flag ${v.cls}" title="${esc(v.tip)}">${v.emoji} ${esc(v.label)}</span>`; }).join('');
+    const cards = items.map(it => {
+      const v = (CFG.verdicts || {})[it.verdict] || { emoji: '', label: it.verdict, cls: 'note', tip: '' };
+      const chips = (it.ingredient || []).map(id => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; }).join('');
+      return `<div class="bs-card">
+        <div class="bs-top"><span class="bs-rank">#${it.rank}</span><span class="bs-em" aria-hidden="true">${it.emoji || '✨'}</span><div class="bs-tt"><div class="bs-brand">${esc(it.brand)}</div><div class="bs-name">${esc(it.name)}</div></div></div>
+        <div class="bs-badges"><span class="kb-flag ${v.cls}" title="${esc(v.tip)}">${v.emoji} ${esc(v.label)}</span></div>
+        <div class="bs-what">${esc(it.whatItIs)}</div>
+        <div class="bs-line bs-viral">🔥 <b>Viral for:</b> ${esc(it.viralFor)}</div>
+        <div class="bs-line bs-evidence">🔬 <b>The honest read:</b> ${esc(it.evidence)}</div>
+        <div class="bs-line bs-worth">💬 <b>Worth it?</b> ${esc(it.worthIt)}</div>
+        <div class="bs-foot">${chips}<button class="kb-step-shop bs-shop" data-seed="${esc(it.aliSeed || '')}">🛍️ ${esc(t('shopFor'))}</button></div>
+      </div>`;
+    }).join('');
+    box.innerHTML = `
+      <div class="kb-pick" id="kb-board-pills">${pills}</div>
+      <div class="bs-legend">${legend}</div>
+      <div class="bs-grid">${cards}</div>
+      <div style="margin-top:12px"><a class="kb-shelf-cta" data-seed="${esc(CFG.shopAllSeed || 'korean skincare bestseller')}">🛒 ${esc(t('shopFor'))}</a></div>
+      <div class="funnel-disc">${esc(CFG.disclosure || '')}</div>`;
+    $$('#kb-board-pills .kb-pick-chip', box).forEach(b => b.addEventListener('click', () => {
+      boardTag = b.dataset.bt; renderBestsellers();
+    }));
+    $$('.gs-ing', box).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
+    $$('.bs-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+
   // ── Skin Troubleshooter (purge vs breakout · barrier · fungal-acne) ─────────
   const tbPurgeAns = {};
   function tbIngChips(ids) { return (ids || []).map(id => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; }).join(''); }
@@ -806,7 +840,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -834,6 +868,7 @@
     renderGlossary();
     renderDupes();
     renderBuy(); detectBuyRegion();
+    renderBestsellers();
     renderRetailers();
     renderShelf();
     renderTicker();
