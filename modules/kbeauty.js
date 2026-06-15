@@ -502,6 +502,38 @@
     $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
   }
 
+  // ── Snail Mucin Hero Guide (explainer + roundup) ────────────────────────────
+  function renderSnail() {
+    const box = $('#kb-snail-box'); const S = window.KBEAUTY_SNAIL; if (!box || !S) return;
+    const stName = (id) => (SKINTYPES.find(s => s.id === id) || {}).name || id;
+    const stEmoji = (id) => (SKINTYPES.find(s => s.id === id) || {}).emoji || '';
+    const pairChips = (S.pairs.loves || []).map(id => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; }).join('');
+    box.innerHTML = `
+      <div class="gs-hero"><div class="gs-kicker">${esc(S.eyebrow)}</div>
+        <div class="kb-sec-title" style="font-size:21px;margin:4px 0">${S.emoji} ${esc(S.title)}</div>
+        <p class="gs-sub">${esc(S.tagline)}</p></div>
+      <div class="gs-block"><div class="gs-h">${esc(S.what.headline)}</div><p class="gs-p">${esc(S.what.body)}</p>
+        <div class="gs-layers">${(S.what.molecules || []).map(m => `<div class="gs-layer"><div class="gs-layer-h">${esc(m.name)}</div><div class="gs-layer-n">${esc(m.role)}</div></div>`).join('')}</div></div>
+      <div class="gs-block"><div class="gs-h">${esc(S.hypeCheck.headline)} <span class="kb-flag note">${esc(S.hypeCheck.verdictBadge)}</span></div>
+        <div class="tb-dodont"><div><b>✅ The real deal</b><br>${(S.hypeCheck.real || []).map(x => '• ' + esc(x)).join('<br>')}</div><div><b>⚠️ The overclaim</b><br>${(S.hypeCheck.hype || []).map(x => '• ' + esc(x)).join('<br>')}</div></div>
+        <div class="gs-warn" style="color:var(--kb1);background:var(--kb-soft);border-color:var(--border)">${esc(S.hypeCheck.bottomLine)}</div></div>
+      <div class="gs-block"><div class="gs-h">${esc(S.howToUse.headline)}</div>
+        <div class="gs-principles">${(S.howToUse.steps || []).map(s => `<div class="gs-card"><div class="gs-card-em">${s.emoji || ''}</div><div class="gs-card-t">${s.n}. ${esc(s.title)}</div><div class="gs-card-b">${esc(s.text)}</div></div>`).join('')}</div>
+        <p class="gs-p" style="margin-top:8px">📍 <b>Where:</b> ${esc(S.howToUse.layeringPosition)}</p>
+        <div class="tb-primer">🧪 ${esc(S.howToUse.patchTest)}</div></div>
+      <div class="gs-block"><div class="gs-h">${esc(S.suitability.headline)}</div>
+        <div class="gs-layers">${(S.suitability.great || []).map(g => `<div class="gs-layer active"><div class="gs-layer-h">${stEmoji(g.skin)} ${esc(stName(g.skin))} ✓</div><div class="gs-layer-n">${esc(g.why)}</div></div>`).join('')}${(S.suitability.watchOuts || []).map(g => `<div class="gs-layer"><div class="gs-layer-h">⚠️ ${esc(g.skin)}</div><div class="gs-layer-n">${esc(g.why)}</div></div>`).join('')}</div>
+        <div class="tb-primer">🌱 <b>Vegan?</b> ${esc(S.suitability.vegan)}</div></div>
+      <div class="gs-block"><div class="gs-h">${esc(S.pairs.headline)}</div><div class="gs-chips">${pairChips}</div><p class="gs-p" style="margin-top:7px">${esc(S.pairs.note)}</p></div>
+      <div class="gs-block"><div class="gs-h">${esc(S.compare.headline)}</div><p class="gs-p">${esc(S.compare.subhead)}</p>
+        <div class="snail-grid">${(S.compare.picks || []).map(p => `<div class="snail-pick"><div class="snail-rank">${esc(p.rank)}</div><div class="snail-h">${p.emoji || ''} <b>${esc(p.brand)}</b> <span class="gs-ko">${esc(p.brandKo || '')}</span></div><div class="snail-prod">${esc(p.product)}</div><div class="snail-meta">${esc(p.format)} · ${esc(p.mucin)}</div><div class="snail-vibe">${esc(p.vibe)}</div><div class="snail-tags">${(p.tags || []).map(tg => `<span class="snail-tag">${esc(tg)}</span>`).join('')}</div><button class="kb-step-shop snail-shop" data-seed="${esc(p.aliSeed)}">🛍️ ${esc(p.priceBand || '')} ${esc(t('shopFor'))}</button></div>`).join('')}</div>
+        <p class="gs-disc">${esc(S.compare.tableNote)}</p></div>
+      <div class="gs-block"><div class="gs-h">❓ FAQ</div><div class="kb-gloss">${(S.faq || []).map(f => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}</div></div>
+      <div class="funnel-disc">${esc(S.disclaimer)}</div>`;
+    $$('.gs-ing', box).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
+    $$('.snail-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+
   // ── Bestsellers & Trend Tracker (viral 'worth it?' board) ───────────────────
   let boardTag = 'all';
   function renderBestsellers() {
@@ -840,7 +872,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -862,6 +894,7 @@
     renderGlassSkin();
     renderSunscreen();
     renderIngredients();
+    renderSnail();
     renderPicker(); renderVerdicts();
     renderTroubleshooter();
     renderBrands();
