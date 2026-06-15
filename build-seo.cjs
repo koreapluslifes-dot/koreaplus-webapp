@@ -36,6 +36,9 @@ const { KOREA_DATA, CITIES, DETAIL } = loadData();
 // build still works without it.
 let CITY_L10N = {};
 try { CITY_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'city-l10n.json'), 'utf8')); } catch { /* none yet */ }
+// Localized blog translations. Shape: { "<slug>": { ja:{h1,title,metaDesc,body,faq[]}, zh:{}, es:{} } }
+let BLOG_L10N = {};
+try { BLOG_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'blog-l10n.json'), 'utf8')); } catch { /* none yet */ }
 
 // ── Helpers ─────────────────────────────────────────────────────────
 const slug = s => String(s).toLowerCase()
@@ -1085,7 +1088,49 @@ function buildBlogPost(p) {
   body += ctaHtml('Ready to plan your Korea trip?', 'Build a free day-by-day itinerary with AI in seconds.');
   const hero = `<header class="seo-hero"><span class="emoji">${p.emoji}</span><h1>${esc(p.h1)}</h1><div class="meta"><span class="seo-badge">Updated ${p.date}</span><span class="seo-badge region">Travel Tips</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.h1, description: p.desc, datePublished: p.date, dateModified: p.date, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
-  writePage(`blog/${p.slug}.html`, shell({ url, title, desc: p.desc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(p.faq)], hero, body }));
+  // hreflang → localized blog posts where they exist (reciprocal)
+  const alts = LOCALES.filter(l => BLOG_L10N[p.slug] && BLOG_L10N[p.slug][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/blog/${p.slug}.html` }));
+  writePage(`blog/${p.slug}.html`, shell({ url, title, desc: p.desc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(p.faq)], hero, body, alts }));
+  return url;
+}
+// Localized blog post (ja/zh/es) — faithful translation, hreflang'd to EN + siblings.
+const BLOG_UI = {
+  ja: { faqH: '❓ よくある質問', moreH: '📰 ブログの関連記事', ctaH: '韓国旅行を計画しましょう', ctaP: 'AIが30秒で無料の旅程を作成します。', planBtn: '🗺️ 無料で旅程を作成', enBtn: '🇬🇧 English', badge: '旅のヒント' },
+  zh: { faqH: '❓ 常见问题', moreH: '📰 更多博客文章', ctaH: '开始规划你的韩国之旅', ctaP: 'AI 30秒免费生成逐日行程。', planBtn: '🗺️ 免费生成行程', enBtn: '🇬🇧 English', badge: '旅行贴士' },
+  es: { faqH: '❓ Preguntas frecuentes', moreH: '📰 Más del blog', ctaH: '¿Listo para planear tu viaje a Corea?', ctaP: 'Crea un itinerario diario gratis con IA.', planBtn: '🗺️ Crear itinerario gratis', enBtn: '🇬🇧 English', badge: 'Consejos de viaje' },
+};
+// Some translators return the body with tags entity-encoded (&lt;p&gt;). Decode
+// only when that's detected, so genuinely raw HTML is left untouched.
+function decodeIfEncoded(s) {
+  s = String(s || '');
+  if (!/&lt;(p|div|h2|h3|ul|ol|li|strong|em|a|br)\b/i.test(s)) return s;
+  return s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+}
+function buildBlogPostL10n(slug, lang) {
+  const byLang = BLOG_L10N[slug]; const t = byLang && byLang[lang];
+  if (!t) return null;
+  const L = L10N[lang]; const dir = L.dir; const ui = BLOG_UI[lang];
+  const en = BLOG.find(b => b.slug === slug) || {};
+  const url = `${BASEP}${dir}/blog/${slug}.html`;
+  const enUrl = `${BASEP}blog/${slug}.html`;
+  const trail = [{ name: 'Home', url: BASEP }, { name: t.h1, url }];
+  let body = bcHtml(trail);
+  body += decodeIfEncoded(t.body);
+  const qa = (t.faq || []).map(x => Array.isArray(x) ? x : [x.q, x.a]);
+  body += `<h2>${esc(ui.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += affBlock({ city: 'Seoul', cat: slug.includes('sim') ? 'esim' : 'general', q: '', lang });
+  // localized sibling posts
+  const pi = Math.max(0, BLOG.findIndex(b => b.slug === slug));
+  const peers = BLOG.filter(b => b.slug !== slug);
+  const rel = [0, 1, 2].map(k => peers[(pi + k) % peers.length]).filter((x, i, a) => a.indexOf(x) === i)
+    .filter(b => BLOG_L10N[b.slug] && BLOG_L10N[b.slug][lang]);
+  if (rel.length) body += `<h2>${esc(ui.moreH)}</h2><div class="seo-linklist">${rel.map(b => `<a href="${dir}/blog/${b.slug}.html">${b.emoji} ${esc(BLOG_L10N[b.slug][lang].h1)}</a>`).join('')}</div>`;
+  body += `<div class="seo-cta"><h2>${esc(ui.ctaH)}</h2><p>${esc(ui.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
+  const hero = `<header class="seo-hero"><span class="emoji">${en.emoji || '📰'}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">2026</span><span class="seo-badge region">${esc(ui.badge)}</span></div></header>`;
+  const article = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: t.h1, description: t.metaDesc, inLanguage: lang, datePublished: en.date || TODAY, dateModified: en.date || TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  const alts = [{ lang: 'en', url: enUrl },
+    ...LOCALES.filter(l => l !== lang && BLOG_L10N[slug] && BLOG_L10N[slug][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/blog/${slug}.html` }))];
+  writePage(`${dir}/blog/${slug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts }));
   return url;
 }
 function buildBlogIndex() {
@@ -1673,6 +1718,11 @@ out.cityL10n = [];
 for (const cityName of Object.keys(CITY_L10N)) {
   for (const lang of LOCALES) { const u = buildCityL10n(cityName, lang); if (u) out.cityL10n.push(u); }
 }
+// Localized blog posts (ja/zh/es) — faithful translations (blog-l10n.json)
+out.blogL10n = [];
+for (const slug of Object.keys(BLOG_L10N)) {
+  for (const lang of LOCALES) { const u = buildBlogPostL10n(slug, lang); if (u) out.blogL10n.push(u); }
+}
 // Blog
 out.blog = BLOG.map(buildBlogPost);
 out.blogIndex = buildBlogIndex();
@@ -1708,6 +1758,7 @@ out.months.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.faqL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.cityL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
+(out.blogL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));
 [...out.compare, ...out.seasonal].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 [...out.faq, ...out.cityfood].forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
@@ -1766,7 +1817,7 @@ ${rssItems}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'blog/feed.xml'), rss);
 
-const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
+const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + (out.blogL10n || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
 console.log(`✅ Generated ${total} SEO pages:`);
 console.log(`   places:        ${out.places.length}`);
 console.log(`   categories:    ${out.categories.length}`);
@@ -1776,6 +1827,7 @@ console.log(`   months (EN):   ${out.months.length}`);
 console.log(`   l10n month+visa: ${out.l10n.length}`);
 console.log(`   l10n faq (ja/zh/es): ${(out.faqL10n || []).length}`);
 console.log(`   l10n city guides:    ${(out.cityL10n || []).length}`);
+console.log(`   l10n blog posts:     ${(out.blogL10n || []).length}`);
 console.log(`   blog:          ${out.blog.length} + index`);
 console.log(`   neighborhoods: ${out.neighborhoods.length}`);
 console.log(`   where-to-stay: ${out.stays.length}`);
