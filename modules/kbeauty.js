@@ -502,6 +502,42 @@
     $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
   }
 
+  // ── Product-Category Explainer (toner vs essence vs serum…) ─────────────────
+  function renderCategories() {
+    const box = $('#kb-categories-box'); const C = window.KBEAUTY_CATEGORIES; if (!box || !C) return;
+    const needCls = { essential: 'good', recommended: 'note', optional: '' };
+    const needLbl = { essential: C.verdict.essentialLabel, recommended: C.verdict.recommendedLabel, optional: C.verdict.optionalLabel };
+    const seedOf = (k, name) => (SHOP.aliSeeds || {})[k] || ('korean ' + name);
+    const items = (C.items || []).slice().sort((a, b) => a.thickness - b.thickness);
+    const cards = items.map(it => {
+      const dots = '●'.repeat(it.thickness) + '○'.repeat(Math.max(0, 6 - it.thickness));
+      const nc = needCls[it.need]; const badge = nc === '' ? `<span class="cat-need opt">${esc(needLbl[it.need])}</span>` : `<span class="kb-flag ${nc}">${esc(needLbl[it.need])}</span>`;
+      return `<div class="cat-card">
+        <div class="cat-h"><span class="cat-em" aria-hidden="true">${it.emoji || ''}</span><b>${esc(it.name)}</b> <span class="gs-ko">${esc(it.korean || '')}</span> ${badge}</div>
+        <div class="cat-scale" title="${esc(C.scaleLabel)}"><span class="cat-dots">${dots}</span> ${esc(it.texture)}</div>
+        <div class="cat-job">${esc(it.job)}</div>
+        <div class="cat-rows"><div>🌍 ${esc(it.westernEquiv)}</div><div>📍 ${esc(it.routinePosition)}</div></div>
+        <div class="cat-why">✅ ${esc(it.needWhy)}</div>
+        <div class="cat-skip">⏭️ <b>Skip if:</b> ${esc(it.skipIf)}</div>
+        <div class="cat-tip">💡 ${esc(it.tip)}</div>
+        <button class="kb-step-shop cat-shop" data-seed="${esc(seedOf(it.aliSeedKey, it.name))}">🛍️ ${esc(t('shopFor'))}</button>
+      </div>`;
+    }).join('');
+    const dc = C.doubleCleanse;
+    box.innerHTML = `
+      <p class="gs-p">${esc(C.intro)}</p>
+      <div class="cat-grid">${cards}</div>
+      <div class="gs-block" style="margin-top:14px"><div class="gs-h">✅ ${esc(C.minimalRoutine.title)}</div><p class="gs-p">${esc(C.minimalRoutine.body)}</p><div class="cat-min">${(C.minimalRoutine.steps || []).map(s => `<span class="cat-min-step">${esc(s)}</span>`).join('<span class="cat-arrow">→</span>')}</div></div>
+      <div class="gs-block"><div class="gs-h">🫗 ${esc(dc.title)} <span class="gs-ko">${esc(dc.korean || '')}</span></div><p class="gs-p">${esc(dc.subtitle)}</p><p class="gs-p">${esc(dc.what)}</p>
+        <div class="gs-principles">${(dc.steps || []).map(s => `<div class="gs-card"><div class="gs-card-em">${s.emoji || ''}</div><div class="gs-card-t">${s.n}. ${esc(s.title)}</div><div class="gs-card-b">${esc(s.body)}</div></div>`).join('')}</div>
+        <div class="cat-why"><b>${esc(dc.whyTitle)}</b> ${esc(dc.why)}</div>
+        <div class="tb-primer"><b>${esc(dc.breakoutsTitle)}</b> ${esc(dc.breakouts)}</div>
+        <div class="tb-dodont"><div><b>✅ ${esc(dc.doTitle)}</b><br>${(dc.dos || []).map(x => '• ' + esc(x)).join('<br>')}</div><div><b>🚫</b><br>${(dc.donts || []).map(x => '• ' + esc(x)).join('<br>')}</div></div>
+        <button class="kb-step-shop cat-shop" data-seed="${esc(seedOf('oilcleanse', 'cleansing oil and low ph cleanser'))}">🛍️ ${esc(dc.ctaLabel)}</button>
+        <div class="funnel-disc">${esc(dc.ctaNote)}</div></div>`;
+    $$('.cat-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+
   // ── Snail Mucin Hero Guide (explainer + roundup) ────────────────────────────
   function renderSnail() {
     const box = $('#kb-snail-box'); const S = window.KBEAUTY_SNAIL; if (!box || !S) return;
@@ -872,7 +908,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -891,6 +927,7 @@
     renderQuiz();
     renderConcerns();
     renderRoutine();
+    renderCategories();
     renderGlassSkin();
     renderSunscreen();
     renderIngredients();

@@ -419,6 +419,20 @@
     .snail-h { font-size:13px; color:var(--text); margin-top:7px; } .snail-prod { font-size:12.5px; font-weight:800; color:var(--text); margin-top:3px; line-height:1.3; } .snail-meta { font-size:10.5px; color:var(--text3); margin-top:4px; } .snail-vibe { font-size:11px; color:var(--text2); line-height:1.5; margin:7px 0; }
     .snail-tags { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:9px; } .snail-tag { font-size:9.5px; font-weight:700; color:var(--kb2); background:rgba(139,70,214,.10); border-radius:10px; padding:2px 7px; }
     .snail-pick .snail-shop { margin-top:auto; }
+
+    /* ═══ Category Explainer ══════════════════════════════════════════════════ */
+    .cat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:11px; }
+    .cat-card { background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:13px; display:flex; flex-direction:column; }
+    .cat-h { display:flex; align-items:center; flex-wrap:wrap; gap:6px; } .cat-em { font-size:19px; } .cat-h b { font-size:13px; color:var(--text); }
+    .cat-need { font-size:9.5px; font-weight:800; border-radius:12px; padding:2px 8px; } .cat-need.opt { background:var(--bg); color:var(--text3); border:1px solid var(--border); }
+    .cat-scale { font-size:11px; color:var(--text3); margin:6px 0; } .cat-dots { color:var(--kb1); letter-spacing:1px; }
+    .cat-job { font-size:11.5px; color:var(--text2); line-height:1.5; }
+    .cat-rows { font-size:10.5px; color:var(--text3); margin:7px 0; display:grid; gap:2px; }
+    .cat-why { font-size:11px; color:var(--text2); line-height:1.5; margin-bottom:5px; } .cat-why b { color:var(--text); }
+    .cat-skip { font-size:10.5px; color:var(--text3); line-height:1.5; margin-bottom:5px; }
+    .cat-tip { font-size:10.5px; color:var(--kb1); line-height:1.5; margin-bottom:9px; }
+    .cat-card .cat-shop { margin-top:auto; }
+    .cat-min { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:6px; } .cat-min-step { font-size:12px; font-weight:800; color:var(--text); background:var(--kb-soft); border-radius:10px; padding:6px 11px; } .cat-arrow { color:var(--text3); font-weight:900; }
   </style>
 </head>
 <body>
@@ -543,6 +557,15 @@
       <button class="kb-tab" role="tab" aria-selected="false" data-time="mens" data-i18n="kbeauty.routine.mens">🧔 Men's</button>
     </div>
     <div id="kb-routine-steps" class="kb-steps" role="tabpanel" aria-live="polite"></div>
+  </section>
+
+  <!-- Product-Category Explainer (toner vs essence vs serum…) -->
+  <section class="kb-sec" id="kb-categories">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.cat.title">🧩 Toner vs essence vs serum?</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.cat.sub">What each product does, thinnest→thickest — and which you can skip</div>
+    </div>
+    <div id="kb-categories-box"></div>
   </section>
 
   <!-- Glass Skin Method (flagship aspirational guide) -->
