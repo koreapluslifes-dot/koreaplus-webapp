@@ -502,6 +502,44 @@
     $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
   }
 
+  // ── Korean Dupe Finder ──────────────────────────────────────────────────────
+  let dupeCat = 'all';
+  function renderDupes() {
+    const box = $('#kb-dupes-grid'); const META = window.KBEAUTY_DUPES_META; const DUPES = window.KBEAUTY_DUPES || [];
+    if (!box || !META) return;
+    const cats = $('#kb-dupes-cats');
+    if (cats && !cats.dataset.done) {
+      cats.innerHTML = (META.categories || []).map(c => `<button class="kb-pick-chip${c.id === dupeCat ? ' on' : ''}" data-cat="${esc(c.id)}" aria-pressed="${c.id === dupeCat}">${c.emoji || ''} ${esc(c.name)}</button>`).join('');
+      cats.dataset.done = '1';
+      $$('.kb-pick-chip', cats).forEach(b => b.addEventListener('click', () => {
+        dupeCat = b.dataset.cat;
+        $$('.kb-pick-chip', cats).forEach(x => { const on = x.dataset.cat === dupeCat; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+        renderDupes();
+      }));
+    }
+    const list = DUPES.filter(d => dupeCat === 'all' || d.category === dupeCat);
+    const matchTxt = { high: '✓✓ Strong match', medium: '✓ Good match', low: '~ Loose match' };
+    box.innerHTML = list.map(d => {
+      const chips = (d.heroIngredientIds || []).map(id => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; }).join('');
+      return `<div class="kb-dupe">
+        <div class="dupe-row">
+          <div class="dupe-side"><div class="dupe-em" aria-hidden="true">${d.referenceEmoji || '🌐'}</div><div class="dupe-info"><div class="dupe-name">${esc(d.reference)}</div><div class="dupe-role">${esc(d.referenceRole || '')}</div><div class="dupe-band">${esc(d.referenceBand || '')}</div></div></div>
+          <div class="dupe-arrow"><span aria-hidden="true">→</span>${d.save ? `<span class="dupe-save">${esc(d.save)}</span>` : ''}</div>
+          <div class="dupe-side alt"><div class="dupe-em" aria-hidden="true">${d.altEmoji || '🇰🇷'}</div><div class="dupe-info"><div class="dupe-name">${esc(d.altName)}</div><div class="dupe-band band-alt">${esc(d.altBand || '')}</div></div></div>
+        </div>
+        <div class="dupe-why"><b>≈ ${esc(d.sharedHero || '')}</b> — ${esc(d.whyComparable || '')}</div>
+        <div class="dupe-foot">
+          <span class="dupe-match m-${esc(d.matchStrength || 'medium')}">${esc(matchTxt[d.matchStrength] || matchTxt.medium)}</span>
+          ${chips}
+          <button class="kb-step-shop dupe-shop" data-seed="${esc(d.aliSeed || '')}">🛍️ ${esc(t('shopFor'))}</button>
+        </div>
+      </div>`;
+    }).join('');
+    $$('.gs-ing', box).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
+    $$('.dupe-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+    const disc = $('#kb-dupes-disc'); if (disc) disc.textContent = META.disclaimer || '';
+  }
+
   // ── Shop (live AliExpress grid; degrades to retailers) ──────────────────────
   let lastSeed = '';
   function renderRetailers() {
@@ -586,7 +624,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -610,6 +648,7 @@
     renderPicker(); renderVerdicts();
     renderBrands();
     renderGlossary();
+    renderDupes();
     renderRetailers();
     renderShelf();
     renderTicker();

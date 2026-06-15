@@ -452,5 +452,8 @@
   "menu.hero.sub": "Take a photo of any Korean menu — OCR reads the text, AI translates every dish with descriptions and allergen info",
   "home.showmore": "Show more ↓",
   "plan.rt.more": "⋯ More",
-  "kbeauty.filter.glassskin": "🪞 Glass Skin"
+  "kbeauty.filter.glassskin": "🪞 Glass Skin",
+  "kbeauty.filter.dupes": "💸 Dupes",
+  "kbeauty.sec.dupes.title": "💸 Korean dupe finder",
+  "kbeauty.sec.dupes.sub": "The cheaper Korean equivalent of famous Western heroes"
 }
