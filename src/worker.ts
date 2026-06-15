@@ -219,12 +219,36 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, '');
 
-    // ── Pretty-URL redirects ───────────────────────────────────────────────
-    // The K-Beauty hub is served as a static file under /guide/. These give it
-    // clean shareable URLs. Registered as Worker routes on
-    // koreaplus-lifes.com/kbeauty* and /k-beauty* (CF route, separate from code).
-    if (path === '/kbeauty' || path === '/k-beauty') {
-      return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty.html' + url.search, 301);
+    // ── Pretty-URL serving ─────────────────────────────────────────────────
+    // The K-Beauty hub is a static file under /guide/. We serve it at the clean
+    // /kbeauty URL by PROXYING the origin file (not redirecting) so the address
+    // bar stays /kbeauty. A <base href="/guide/"> is injected so the page's
+    // relative asset/nav paths still resolve against /guide/ where the app lives.
+    // Registered as Worker routes on koreaplus-lifes.com/kbeauty* and /k-beauty*.
+    if (path === '/k-beauty') {
+      return Response.redirect('https://koreaplus-lifes.com/kbeauty' + url.search, 301);
+    }
+    if (path === '/kbeauty') {
+      try {
+        const originResp = await fetch('https://koreaplus-lifes.com/guide/kbeauty.html', {
+          cf: { cacheTtl: 300, cacheEverything: true },
+          headers: { accept: 'text/html' },
+        });
+        if (!originResp.ok) throw new Error('origin ' + originResp.status);
+        let html = await originResp.text();
+        // Inject <base> right after <head> so relative URLs resolve to /guide/.
+        html = html.replace(/<head(\s[^>]*)?>/i, (m) => `${m}\n<base href="/guide/">`);
+        return new Response(html, {
+          headers: {
+            'content-type': 'text/html; charset=utf-8',
+            'cache-control': 'public, max-age=300',
+            'x-served-by': 'kbeauty-pretty-url',
+          },
+        });
+      } catch {
+        // Graceful fallback to the canonical file if the proxy fetch fails.
+        return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty.html' + url.search, 302);
+      }
     }
 
     // ── GET routes ────────────────────────────────────────────────────────

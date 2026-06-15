@@ -909,9 +909,14 @@
     const essentials = ROUTINE.filter(s => !s.optional).sort((a, b) => a.step - b.step);
     const items = essentials.map(s => `<div class="kb-shelf-item">${s.emoji || '•'} ${esc(s.name)}</div>`);
     box.innerHTML = items.join('');
-    // seed the shop CTA by primary concern
+    // seed the shop CTA by primary concern (JS scroll — no href fragment, so the
+    // clean /kbeauty URL with <base href="/guide/"> isn't navigated away)
     const cta = $('#kb-shelf-cta');
-    if (cta) cta.addEventListener('click', () => { const c = concerns[0]; loadShop((SHOP.aliSeeds || {})[c] || (SHOP.aliSeeds || {}).general); }, { once:true });
+    if (cta) {
+      const go = () => { const c = concerns[0]; loadShop((SHOP.aliSeeds || {})[c] || (SHOP.aliSeeds || {}).general); jumpTo('#kb-shop'); };
+      cta.addEventListener('click', go, { once: true });
+      cta.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }, { once: true });
+    }
   }
 
   // ── Personalized Stack Builder (skin type + concerns → shoppable stack) ─────
