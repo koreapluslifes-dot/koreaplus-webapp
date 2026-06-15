@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v32';
+const CACHE = 'kp-v33';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -95,8 +95,11 @@ self.addEventListener('install', event => {
         )
       ))
   );
-  // No skipWaiting() here — the new SW waits so modules/pwa.js can show an
-  // "update available" toast; activation happens on the SKIP_WAITING message.
+  // Activate the new SW immediately (don't wait for all tabs to close) so
+  // content/code updates apply on the next visit without the user having to
+  // click the "update available" toast. modules/pwa.js reloads once on
+  // controllerchange (guarded against loops) to swap in the fresh assets.
+  self.skipWaiting();
 });
 
 // Allow the page (via modules/pwa.js) to trigger immediate activation.
