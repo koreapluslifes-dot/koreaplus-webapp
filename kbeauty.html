@@ -294,6 +294,36 @@
       .filter-chip, .kb-tab, .kb-pick-chip, .kb-concern, .kb-ing, .kb-brand, .kb-opt, .kb-retailer, .kb-prod, .kb-step { transition:none; }
       .kb-quiz-cta:hover, .kb-tool-btn:hover, .kb-shelf-cta:hover, .km-link.primary:hover, .kb-ing:hover, .kb-brand:hover { transform:none; }
     }
+
+    /* ═══ Glass Skin Method ═══════════════════════════════════════════════════ */
+    .gs-ko { font-size:12px; color:var(--text3); font-weight:600; }
+    .gs-hero { background:linear-gradient(135deg,var(--kb-soft),rgba(139,70,214,.08)); border:1px solid var(--border); border-radius:16px; padding:16px 18px; margin-bottom:14px; }
+    .gs-kicker { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--kb1); }
+    .gs-sub { font-size:13px; color:var(--text2); line-height:1.6; margin:7px 0 0; }
+    .gs-disc { font-size:11px; color:var(--text3); line-height:1.5; margin:8px 0 0; font-style:italic; }
+    .gs-principles { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; margin-bottom:18px; }
+    .gs-card { background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:13px; }
+    .gs-card-em { font-size:22px; } .gs-card-t { font-size:13.5px; font-weight:800; color:var(--text); margin-top:5px; } .gs-card-b { font-size:11.5px; color:var(--text2); line-height:1.5; margin-top:4px; }
+    .gs-block { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px 18px; margin-bottom:14px; }
+    .gs-h { font-size:16px; font-weight:900; color:var(--text); margin-bottom:7px; }
+    .gs-p { font-size:12.5px; color:var(--text2); line-height:1.6; margin:0 0 8px; }
+    .gs-warn { font-size:12px; color:#d62828; background:rgba(234,74,74,.10); border:1px solid rgba(234,74,74,.3); border-radius:10px; padding:9px 12px; margin:8px 0; line-height:1.5; }
+    html:not(.light) .gs-warn { color:#ff8585; }
+    .gs-layers { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:9px; margin:10px 0; }
+    .gs-layer { background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:10px 12px; }
+    .gs-layer.active { border-color:var(--kb1); box-shadow:inset 0 0 0 1px var(--kb1); background:var(--kb-soft); }
+    .gs-layer-h { font-size:12.5px; font-weight:800; color:var(--text); } .gs-layer-h b { color:var(--kb1); } .gs-layer-n { font-size:11px; color:var(--text3); line-height:1.45; margin-top:3px; }
+    .gs-mistakes { font-size:11.5px; color:var(--text2); line-height:1.7; background:var(--bg); border:1px dashed var(--border); border-radius:11px; padding:11px 13px; margin-top:8px; }
+    .gs-chips { display:inline-flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+    .gs-ing { font-size:11px; font-weight:700; color:var(--kb2); background:rgba(139,70,214,.10); border:1px solid var(--border); border-radius:16px; padding:4px 10px; cursor:pointer; }
+    .gs-ing:hover { border-color:var(--kb2); }
+    .gs-group { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:8px 0; border-top:1px solid var(--border); }
+    .gs-group:first-of-type { border-top:none; } .gs-group-l { font-size:12.5px; font-weight:800; color:var(--text); min-width:130px; }
+    .gs-timeline { display:grid; gap:9px; margin:8px 0; }
+    .gs-stage { display:grid; grid-template-columns:90px 1fr; gap:12px; align-items:start; background:var(--bg); border:1px solid var(--border); border-radius:11px; padding:11px 13px; }
+    .gs-stage-when { font-size:12px; font-weight:800; color:var(--kb1); } .gs-stage-h { font-size:13px; font-weight:800; color:var(--text); } .gs-stage-b { font-size:11.5px; color:var(--text2); line-height:1.5; margin-top:3px; grid-column:2; }
+    .gs-shelf { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    @media (max-width:480px){ .gs-stage{ grid-template-columns:1fr; } .gs-stage-b{ grid-column:1; } }
   </style>
 </head>
 <body>
@@ -372,6 +402,7 @@
     <button class="filter-chip active" data-target="all" data-i18n="kbeauty.filter.all">✨ All</button>
     <button class="filter-chip" data-target="kb-quiz" data-i18n="kbeauty.filter.quiz">🪞 My Skin</button>
     <button class="filter-chip" data-target="kb-routine" data-i18n="kbeauty.filter.routine">🧴 Routine</button>
+    <button class="filter-chip" data-target="kb-glassskin" data-i18n="kbeauty.filter.glassskin">🪞 Glass Skin</button>
     <button class="filter-chip" data-target="kb-ingredients" data-i18n="kbeauty.filter.ingredients">🧪 Ingredients</button>
     <button class="filter-chip" data-target="kb-brands" data-i18n="kbeauty.filter.brands">🏷️ Brands</button>
     <button class="filter-chip" data-target="kb-shop" data-i18n="kbeauty.filter.shop">🛍️ Shop</button>
@@ -412,6 +443,11 @@
       <button class="kb-tab" role="tab" aria-selected="false" data-time="mens" data-i18n="kbeauty.routine.mens">🧔 Men's</button>
     </div>
     <div id="kb-routine-steps" class="kb-steps" role="tabpanel" aria-live="polite"></div>
+  </section>
+
+  <!-- Glass Skin Method (flagship aspirational guide) -->
+  <section class="kb-sec" id="kb-glassskin">
+    <div id="kb-glassskin-box"></div>
   </section>
 
   <!-- Ingredient encyclopedia + decoder -->

@@ -445,6 +445,63 @@
     </details>`).join('');
   }
 
+  // ── Glass Skin Method (flagship aspirational guide) ─────────────────────────
+  let glassTime = 'am';
+  function renderGlassSkin() {
+    const box = $('#kb-glassskin-box'); const G = window.KBEAUTY_GLASSKIN; if (!box || !G) return;
+    const skin = getSkin();
+    const stEmoji = (id) => (SKINTYPES.find(s => s.id === id) || {}).emoji || '';
+    const stName = (id) => (SKINTYPES.find(s => s.id === id) || {}).name || id;
+    const ingChip = (id) => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; };
+    const proto = (glassTime === 'pm' ? G.protocol.pm : G.protocol.am) || [];
+    box.innerHTML = `
+      <div class="kb-sec-head"><div class="kb-sec-title">${esc(G.emoji)} ${esc(G.hero.title)} <span class="gs-ko">${esc(G.hero.korean || '')}</span></div></div>
+      <div class="gs-hero">
+        <div class="gs-kicker">${esc(G.hero.kicker)}</div>
+        <p class="gs-sub">${esc(G.hero.sub)}</p>
+        <p class="gs-disc">${esc(G.hero.disclaimer)}</p>
+      </div>
+      <div class="gs-principles">${(G.principles || []).map(p => `<div class="gs-card"><div class="gs-card-em" aria-hidden="true">${p.emoji || ''}</div><div class="gs-card-t">${esc(p.title)}</div><div class="gs-card-b">${esc(p.body)}</div></div>`).join('')}</div>
+      <div class="gs-block">
+        <div class="gs-h">${esc(G.sevenSkin.title)}</div>
+        <p class="gs-p">${esc(G.sevenSkin.what)}</p>
+        <p class="gs-p">${esc(G.sevenSkin.how)}</p>
+        <div class="gs-warn">⚠️ ${esc(G.sevenSkin.tonerType)}</div>
+        <div class="gs-layers">${(G.sevenSkin.layersBySkin || []).map(l => `<div class="gs-layer${l.skin === skin ? ' active' : ''}"><div class="gs-layer-h">${stEmoji(l.skin)} ${esc(stName(l.skin))} · <b>${esc(l.layers)}</b>${l.skin === skin ? ' ✓' : ''}</div><div class="gs-layer-n">${esc(l.note)}</div></div>`).join('')}</div>
+        <div class="gs-mistakes"><b>🚫 ${esc(t('avoid'))}</b><br>• ${(G.sevenSkin.mistakes || []).map(m => esc(m)).join('<br>• ')}</div>
+      </div>
+      <div class="gs-block">
+        <div class="gs-h">${esc(G.protocol.title)}</div>
+        <p class="gs-p">${esc(G.protocol.intro)}</p>
+        <div class="kb-tabs" id="gs-proto-tabs" role="tablist" aria-label="Glass skin protocol time">
+          <button class="kb-tab${glassTime === 'am' ? ' active' : ''}" role="tab" aria-selected="${glassTime === 'am'}" data-gt="am">☀️ ${esc(t('am'))}</button>
+          <button class="kb-tab${glassTime === 'pm' ? ' active' : ''}" role="tab" aria-selected="${glassTime === 'pm'}" data-gt="pm">🌙 ${esc(t('pm'))}</button>
+        </div>
+        <div class="kb-steps">${proto.map(s => `<div class="kb-step"><div class="kb-step-no">${s.n}</div><div class="kb-step-b"><div class="kb-step-name"><span class="st-emoji">${s.emoji || ''}</span>${esc(s.step)}</div><div class="kb-step-desc">${esc(s.why)}</div>${(s.ing && s.ing.length) ? `<div class="gs-chips">${s.ing.map(ingChip).join('')}</div>` : ''}</div></div>`).join('')}</div>
+      </div>
+      <div class="gs-block">
+        <div class="gs-h">${esc(G.ingredientStack.title)}</div>
+        <p class="gs-p">${esc(G.ingredientStack.intro)}</p>
+        ${(G.ingredientStack.groups || []).map(grp => `<div class="gs-group"><span class="gs-group-l">${grp.emoji || ''} ${esc(grp.label)}</span><span class="gs-chips">${grp.ings.map(ingChip).join('')}</span></div>`).join('')}
+      </div>
+      <div class="gs-block">
+        <div class="gs-h">${esc(G.timeline.title)}</div>
+        <p class="gs-p">${esc(G.timeline.intro)}</p>
+        <div class="gs-timeline">${(G.timeline.stages || []).map(st => `<div class="gs-stage"><div class="gs-stage-when">${st.emoji || ''} ${esc(st.when)}</div><div class="gs-stage-h">${esc(st.headline)}</div><div class="gs-stage-b">${esc(st.body)}</div></div>`).join('')}</div>
+        <p class="gs-disc">${esc(G.timeline.honestNote)}</p>
+      </div>
+      <div class="funnel" style="margin-top:18px">
+        <div class="kb-sec-title">${esc(G.shelf.title)}</div>
+        <div class="kb-sec-sub">${esc(G.shelf.intro)}</div>
+        <div class="gs-shelf">${(G.shelf.items || []).map(it => `<button class="kb-step-shop" data-seed="${esc(it.seed)}">${it.emoji || '🛍️'} ${esc(it.label)}</button>`).join('')}</div>
+        <div style="margin-top:10px"><a class="kb-shelf-cta" data-seed="${esc(G.shelf.bundleSeed)}">🛒 ${esc(t('shopFor'))}</a></div>
+        <div class="funnel-disc">${esc((SHOP && SHOP.disclosure) || '')}</div>
+      </div>`;
+    $$('#gs-proto-tabs .kb-tab', box).forEach(tab => tab.addEventListener('click', () => { glassTime = tab.dataset.gt; renderGlassSkin(); }));
+    $$('.gs-ing', box).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
+    $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+
   // ── Shop (live AliExpress grid; degrades to retailers) ──────────────────────
   let lastSeed = '';
   function renderRetailers() {
@@ -506,7 +563,8 @@
     _modalOpener = document.activeElement;
     const h = box.querySelector('.km-name'); if (h) { h.id = 'kb-modal-title'; bg.setAttribute('aria-labelledby', 'kb-modal-title'); }
     box.setAttribute('tabindex', '-1');
-    openModalA11y();
+    bg.classList.add('open');
+    document.body.style.overflow = 'hidden';
     try { box.focus(); } catch {}
   }
   function closeModal() {
@@ -528,7 +586,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -547,6 +605,7 @@
     renderQuiz();
     renderConcerns();
     renderRoutine();
+    renderGlassSkin();
     renderIngredients();
     renderPicker(); renderVerdicts();
     renderBrands();
