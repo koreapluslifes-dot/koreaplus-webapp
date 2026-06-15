@@ -60,6 +60,38 @@
     CONCERN_BY_ID = Object.fromEntries(CONCERNS.map(c => [c.id, c]));
   }
 
+  // Localize the NEW top-10 datasets (deep, path-keyed). Symmetric with the
+  // extractor in kb_extract2.cjs: only whitelisted PROSE fields are translated —
+  // product/brand names, ids, seeds, emojis, enum codes are never touched, so
+  // lookups (e.g. CFG.verdicts[item.verdict]) keep working. Renderers read
+  // window.KBEAUTY_* at render time, so reassigning the globals localizes them.
+  const NC_ALLOW = new Set(['title','sub','subtitle','subhead','tagline','eyebrow','kicker','headline','body','text','desc','blurb','why','whyComparable','sharedHero','role','job','plain','measures','label','note','authNote','priceNote','tip','finish','skinNote','how','what','vibe','evidence','worthIt','verdictBadge','bottomLine','reassess','disclaimer','scaleLabel','needWhy','skipIf','cadence','safeNote','safeHelpers','primer','intro','whyTitle','breakoutsTitle','doTitle','ctaLabel','ctaNote','decoderEmptyAllSafe','decoderModeHint','q','a','tableNote','viralFor','whatItIs','essentialLabel','recommendedLabel','optionalLabel']);
+  const NC_ALLOW_ARR = new Set(['pros','cons','do','dont','dos','donts','mistakes','highlights','tellTale','real','hype','tips','examples']);
+  const NC_SPECIAL = new Set(['explainerByFamily']);
+  function ncWalk(obj, prefix) {
+    if (!obj || typeof obj !== 'object') return;
+    for (const k in obj) {
+      const v = obj[k]; const key = prefix + '.' + k;
+      if (typeof v === 'string') { if (NC_ALLOW.has(k)) obj[k] = cx(key, v); }
+      else if (Array.isArray(v)) {
+        v.forEach((el, i) => {
+          if (typeof el === 'string') { if (NC_ALLOW_ARR.has(k)) v[i] = cx(key + '.' + i, el); }
+          else if (el && typeof el === 'object') ncWalk(el, key + '.' + i);
+        });
+      } else if (v && typeof v === 'object') {
+        if (NC_SPECIAL.has(k)) { for (const kk in v) if (typeof v[kk] === 'string') v[kk] = cx(key + '.' + kk, v[kk]); }
+        else ncWalk(v, key);
+      }
+    }
+  }
+  function localizeNewData() {
+    if (!CONTENT || !Object.keys(CONTENT).length) return; // en or load failed → English
+    ['KBEAUTY_GLASSKIN','KBEAUTY_DUPES_META','KBEAUTY_DUPES','KBEAUTY_BUY','KBEAUTY_SUNCARE','KBEAUTY_SNAIL','KBEAUTY_CATEGORIES','KBEAUTY_BESTSELLERS','KBEAUTY_BOARD_CONFIG','KBEAUTY_TROUBLESHOOTER_META','KBEAUTY_PURGE','KBEAUTY_BARRIER','KBEAUTY_FUNGAL'].forEach(name => {
+      if (!window[name]) return;
+      try { const clone = JSON.parse(JSON.stringify(window[name])); ncWalk(clone, name); window[name] = clone; } catch {}
+    });
+  }
+
   const SKIN_KEY = 'kp_kbeauty_skin', CONCERN_KEY = 'kp_kbeauty_concerns', FOLLOW_KEY = 'kp_kbeauty_follow';
 
   // Language resolution mirrors modules/i18n.js detect(): URL ?lang= wins (so
@@ -72,9 +104,9 @@
 
   // ── Mini i18n for JS-generated labels (chrome uses data-i18n via i18n.js) ──
   const STR = {
-    en: { result:'Your skin type', retake:'Retake', best:'Best for', pairs:'Pairs with', avoid:'Be careful with', preg:'Pregnancy', pregSafe:'Generally fine', pregCaution:'Ask your doctor', time:'Use', am:'AM', pm:'PM', both:'AM & PM', shop:'Shop this step', shopFor:'Shop', loading:'Loading…', shopEmpty:'Live shopping lights up here. Meanwhile, browse our authentic retailers below.', selectActives:'Select 2+ actives to check.', allSafe:'No conflicts — these play nicely together. 🎉', followToast:'Added to favourites ★', unfollowToast:'Removed', known:'Known for', tier:'Tier', vegan:'Vegan', mens:'Men-friendly', bioSoon:'Loading profile…', readMore:'Learn more', decNone:'No ingredients recognized — check the spelling or paste the full INCI list.', decFound:'recognized', priceFrom:'from', shelfEmpty:'Take the quiz and pick concerns — your shelf builds itself.', yourRoutine:'Your routine', sources:'Always patch-test new actives.' },
-    ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.' },
-    ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。' },
+    en: { result:'Your skin type', retake:'Retake', best:'Best for', pairs:'Pairs with', avoid:'Be careful with', preg:'Pregnancy', pregSafe:'Generally fine', pregCaution:'Ask your doctor', time:'Use', am:'AM', pm:'PM', both:'AM & PM', shop:'Shop this step', shopFor:'Shop', loading:'Loading…', shopEmpty:'Live shopping lights up here. Meanwhile, browse our authentic retailers below.', selectActives:'Select 2+ actives to check.', allSafe:'No conflicts — these play nicely together. 🎉', followToast:'Added to favourites ★', unfollowToast:'Removed', known:'Known for', tier:'Tier', vegan:'Vegan', mens:'Men-friendly', bioSoon:'Loading profile…', readMore:'Learn more', decNone:'No ingredients recognized — check the spelling or paste the full INCI list.', decFound:'recognized', priceFrom:'from', shelfEmpty:'Take the quiz and pick concerns — your shelf builds itself.', yourRoutine:'Your routine', sources:'Always patch-test new actives.', sponsored:'Sponsored', advertisement:'Advertisement', adAliTitle:'✨ Shop K-beauty on AliExpress', adAliSub:'Authentic Korean skincare — ships worldwide, best prices.', adAliCta:'Browse deals', adAliLoading:'Loading today’s deals…' },
+    ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.', sponsored:'스폰서', advertisement:'광고', adAliTitle:'✨ 알리익스프레스에서 K-뷰티 쇼핑', adAliSub:'정품 한국 스킨케어 — 전 세계 배송, 최저가.', adAliCta:'특가 보기', adAliLoading:'오늘의 특가 불러오는 중…' },
+    ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。', sponsored:'スポンサー', advertisement:'広告', adAliTitle:'✨ AliExpressでK-beautyを購入', adAliSub:'本物の韓国スキンケア — 世界中に配送、ベストプライス。', adAliCta:'お得を見る', adAliLoading:'本日のお得を読み込み中…' },
   };
   const t = (k) => (CONTENT && CONTENT['ui.' + k]) || (STR[lang] && STR[lang][k]) || STR.en[k] || k;
 
@@ -955,10 +987,61 @@
     }));
   }
 
+  // ── Top sponsored block (AliExpress geo strip + AdSense + Coupang for ko) ────
+  function renderTopAds() {
+    const host = $('#kb-topads'); if (!host) return;
+    const isKo = (lang === 'ko');
+    const parts = [];
+    if (isKo) parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · 쿠팡파트너스</div><div class="kb-ad-coupang" id="kb-ad-coupang"></div><div class="kb-ad-coupang-disc">이 광고는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div></div>`);
+    parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · AliExpress</div><div class="kb-ad-ali" id="kb-ad-ali"><div class="kb-empty">${esc(t('adAliLoading'))}</div></div></div>`);
+    parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('advertisement'))}</div><div class="kb-ad-adsense"><ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200" data-ad-format="auto" data-full-width-responsive="true"></ins></div></div>`);
+    host.innerHTML = parts.join('');
+    host.hidden = false;
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
+    if (isKo) injectCoupang($('#kb-ad-coupang'));
+    loadTopAli();
+  }
+  function loadTopAli() {
+    const box = $('#kb-ad-ali'); if (!box) return;
+    const seed = (SHOP.aliSeeds || {}).general || 'korean skincare';
+    const banner = () => `<div class="kb-ad-ali-banner">
+      <span class="em" aria-hidden="true">🛍️</span>
+      <div style="flex:1;min-width:150px"><div class="kb-ad-ali-t">${esc(t('adAliTitle'))}</div><div class="kb-ad-ali-s">${esc(t('adAliSub'))}</div></div>
+      <a class="kb-ad-ali-cta" id="kb-ad-ali-go">${esc(t('adAliCta'))} →</a></div>`;
+    const wireGo = () => { const g = $('#kb-ad-ali-go'); if (g) g.addEventListener('click', () => { loadShop(seed); jumpTo('#kb-shop'); }); };
+    if (!API || !API.getKbeautyProducts) { box.innerHTML = banner(); wireGo(); return; }
+    API.getKbeautyProducts(seed, lang).then(items => {
+      if (!Array.isArray(items) || !items.length) { box.innerHTML = banner(); wireGo(); return; }
+      const cards = items.slice(0, 10).map(p => `<a class="kb-ad-prod" href="${esc(p.url || '#')}" target="_blank" rel="sponsored noopener">
+        ${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">` : ''}
+        <div class="pb"><div class="pt">${esc(p.title || '')}</div>${p.price ? `<div class="pp">${esc(t('priceFrom'))} ${esc(p.price)}</div>` : ''}</div></a>`).join('');
+      box.innerHTML = `<div class="kb-ad-ali-head"><div><div class="kb-ad-ali-t">${esc(t('adAliTitle'))}</div><div class="kb-ad-ali-s">${esc(t('adAliSub'))}</div></div><a class="kb-ad-ali-cta" id="kb-ad-ali-go">${esc(t('adAliCta'))} →</a></div><div class="kb-ad-strip">${cards}</div>`;
+      wireGo();
+    }).catch(() => { box.innerHTML = banner(); wireGo(); });
+  }
+  function injectCoupang(host) {
+    if (!host || host.dataset.done) return; host.dataset.done = '1';
+    try {
+      const ifr = document.createElement('iframe');
+      ifr.style.cssText = 'width:100%;max-width:690px;height:150px;border:0;overflow:hidden;display:block;margin:0 auto';
+      ifr.setAttribute('scrolling', 'no'); ifr.setAttribute('title', 'Coupang Partners'); ifr.setAttribute('loading', 'lazy');
+      host.appendChild(ifr);
+      const d = ifr.contentWindow.document;
+      d.open();
+      d.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:hidden}</style></head><body>'
+        + '<script src="https://ads-partners.coupang.com/g.js"><\/script>'
+        + '<script>new PartnersCoupang.G({"id":996633,"trackingCode":"AF4227535","subId":null,"template":"carousel","width":"680","height":"140"});<\/script>'
+        + '</body></html>');
+      d.close();
+    } catch { /* coupang failed — leave block empty */ }
+  }
+
   // ── Boot ───────────────────────────────────────────────────────────────────
   async function boot() {
     await loadContent();   // per-language content overlay (English fallback)
     localizeData();
+    localizeNewData();     // localize the new top-10 datasets (window.KBEAUTY_*)
+    renderTopAds();        // localized AliExpress + AdSense (+ Coupang for ko)
     renderForecast();
     renderQuiz();
     renderConcerns();
