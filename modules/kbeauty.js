@@ -502,6 +502,65 @@
     $$('.kb-step-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
   }
 
+  // ── Where-to-Buy & Authenticity Hub ─────────────────────────────────────────
+  let buyRegion = null;
+  const BUY_EMOJI = { 'shopping-cart':'🛒', ribbon:'🎀', olive:'🫒', blossom:'🌸', 'kr-flag':'🇰🇷', tag:'🏷️', keycap:'🔢', money:'💰', printer:'🖨️', droplet:'💧', picture:'🖼️', star:'⭐', 'test-tube':'🧪' };
+  const BUY_HOME = { yesstyle:'https://www.yesstyle.com', oliveyoung:'https://global.oliveyoung.com', stylevana:'https://www.stylevana.com', stylekorean:'https://www.stylekorean.com' };
+  const AUTH_BADGE = { 'first-party':{ t:'First-party', c:'good' }, 'authorized':{ t:'Authorized', c:'note' }, 'verified-store':{ t:'Official store', c:'note' } };
+  const emo = (x) => BUY_EMOJI[x] || x;
+  function detectBuyRegion() {
+    const BUY = window.KBEAUTY_BUY; if (!BUY) return;
+    fetch('https://koreaplus-lifes.com/cdn-cgi/trace', { cache: 'no-store' })
+      .then(r => r.text()).then(tx => {
+        const m = tx.match(/loc=([A-Z]{2})/); const cc = m ? m[1] : '';
+        const reg = BUY.regions.find(rg => rg.members.includes(cc));
+        buyRegion = reg ? reg.id : BUY.defaultRegion; renderBuy();
+      }).catch(() => { if (!buyRegion) { buyRegion = BUY.defaultRegion; renderBuy(); } });
+  }
+  function renderBuy() {
+    const box = $('#kb-buy-box'); const BUY = window.KBEAUTY_BUY; if (!box || !BUY) return;
+    const rg = buyRegion || BUY.defaultRegion;
+    const regSel = `<label class="kb-buy-region">🌍 <select id="kb-buy-region-sel" aria-label="Your region">${BUY.regions.map(r => `<option value="${r.id}"${r.id === rg ? ' selected' : ''}>${esc(r.name)}</option>`).join('')}</select></label>`;
+    const cards = (BUY.retailers || []).map(r => {
+      const rd = r.regions[rg] || r.regions[BUY.defaultRegion] || {};
+      const ab = AUTH_BADGE[r.authenticity] || { t: r.authenticity, c: 'note' };
+      const affUrl = (BUY.affiliates && BUY.affiliates[r.affiliateUrlKey]) || '';
+      const href = affUrl || BUY_HOME[r.id] || '';
+      const isAli = r.id === 'aliexpress' ? '1' : '0';
+      return `<div class="kb-buy-card">
+        <div class="kb-buy-h"><span class="kb-buy-em" aria-hidden="true">${emo(r.emoji)}</span><span class="kb-buy-name">${esc(r.name)}</span><span class="kb-flag ${ab.c === 'good' ? 'good' : 'note'}">${esc(ab.t)}</span></div>
+        <div class="kb-buy-note">${esc(r.authNote)}</div>
+        <div class="kb-buy-rows">
+          <div><span aria-hidden="true">🚚</span> ${esc(rd.speed || '')}</div>
+          <div><span aria-hidden="true">💵</span> ${esc(rd.cost || '')} · ${esc(rd.free || '')}</div>
+          <div><span aria-hidden="true">🛃</span> ${esc(rd.customs || '')}</div>
+        </div>
+        <div class="kb-buy-best">⭐ ${esc(r.bestFor || '')}</div>
+        <button class="kb-step-shop kb-buy-cta" data-ali="${isAli}" data-href="${esc(href)}">${emo(r.emoji)} ${esc(t('shopFor'))}</button>
+      </div>`;
+    }).join('');
+    const checklist = (BUY.authChecklist || []).map(c => `<details class="gs-mistakes" style="margin:0"><summary style="font-weight:800;cursor:pointer;font-size:12.5px;color:var(--text)">${emo(c.emoji)} ${esc(c.title)}</summary><div style="margin-top:6px;color:var(--text2)">${esc(c.desc)}</div></details>`).join('');
+    const faked = (BUY.officialStores || []).filter(s => s.faked).map(s => { const b = BRANDS.find(x => x.id === s.brandId) || {}; return `<span class="kb-faked" title="${esc(s.note)}">${b.emoji || '🏷️'} ${esc(s.name)}</span>`; }).join('');
+    box.innerHTML = `
+      <div class="kb-buy-bar">${regSel}<span class="kb-buy-hint">📍 ${esc((BUY.regions.find(r => r.id === rg) || {}).name || '')} — shipping & customs shown below</span></div>
+      <div class="kb-buy-grid2">${cards}</div>
+      <div class="gs-block" style="margin-top:14px">
+        <div class="gs-h">🔍 Spot a fake — buy with confidence</div>
+        <div class="kb-buy-checks">${checklist}</div>
+      </div>
+      <div class="gs-block">
+        <div class="gs-h">⚠️ Most-counterfeited — buy official only</div>
+        <p class="gs-p">These are the most-faked K-beauty products. Buy them from the brand's official store or a first-party/authorized seller above.</p>
+        <div class="kb-faked-list">${faked}</div>
+      </div>
+      <div class="funnel-disc">${esc(BUY.disclosure || '')}</div>`;
+    const sel = $('#kb-buy-region-sel'); if (sel) sel.addEventListener('change', () => { buyRegion = sel.value; renderBuy(); });
+    $$('.kb-buy-cta', box).forEach(b => b.addEventListener('click', () => {
+      if (b.dataset.ali === '1') { loadShop('korean skincare'); jumpTo('#kb-shop'); }
+      else if (b.dataset.href) window.open(b.dataset.href, '_blank', 'noopener');
+    }));
+  }
+
   // ── Korean Dupe Finder ──────────────────────────────────────────────────────
   let dupeCat = 'all';
   function renderDupes() {
@@ -624,7 +683,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast'], 'kb-routine':['kb-routine'], 'kb-glassskin':['kb-glassskin'], 'kb-ingredients':['kb-ingredients','kb-conflicts'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -649,6 +708,7 @@
     renderBrands();
     renderGlossary();
     renderDupes();
+    renderBuy(); detectBuyRegion();
     renderRetailers();
     renderShelf();
     renderTicker();

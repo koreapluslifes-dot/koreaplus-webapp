@@ -345,6 +345,21 @@
     .dupe-match.m-low { background:var(--bg); color:var(--text3); border:1px solid var(--border); }
     .dupe-shop { margin-left:auto; }
     @media (max-width:420px){ .dupe-row{ grid-template-columns:1fr; } .dupe-arrow{ flex-direction:row; gap:8px; justify-content:center; } }
+
+    /* ═══ Where to Buy & Authenticity ═════════════════════════════════════════ */
+    .kb-buy-bar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
+    .kb-buy-region select { font-size:13px; font-weight:700; padding:9px 12px; border-radius:11px; border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer; }
+    .kb-buy-hint { font-size:11.5px; color:var(--text3); }
+    .kb-buy-grid2 { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:11px; }
+    .kb-buy-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px; display:flex; flex-direction:column; }
+    .kb-buy-h { display:flex; align-items:center; gap:7px; flex-wrap:wrap; } .kb-buy-em { font-size:20px; } .kb-buy-name { font-size:13.5px; font-weight:900; color:var(--text); }
+    .kb-buy-note { font-size:11px; color:var(--text3); line-height:1.5; margin:7px 0; }
+    .kb-buy-rows { display:grid; gap:4px; font-size:11.5px; color:var(--text2); margin-bottom:8px; }
+    .kb-buy-best { font-size:11.5px; font-weight:700; color:var(--kb1); margin-bottom:9px; }
+    .kb-buy-cta { margin-top:auto; }
+    .kb-buy-checks { display:grid; gap:7px; }
+    .kb-faked-list { display:flex; flex-wrap:wrap; gap:7px; margin-top:8px; }
+    .kb-faked { font-size:12px; font-weight:700; color:var(--text); background:rgba(234,74,74,.10); border:1px solid rgba(234,74,74,.3); border-radius:16px; padding:5px 11px; cursor:help; }
   </style>
 </head>
 <body>
@@ -427,6 +442,7 @@
     <button class="filter-chip" data-target="kb-ingredients" data-i18n="kbeauty.filter.ingredients">🧪 Ingredients</button>
     <button class="filter-chip" data-target="kb-brands" data-i18n="kbeauty.filter.brands">🏷️ Brands</button>
     <button class="filter-chip" data-target="kb-dupes" data-i18n="kbeauty.filter.dupes">💸 Dupes</button>
+    <button class="filter-chip" data-target="kb-buy" data-i18n="kbeauty.filter.buy">🛡️ Buy Safe</button>
     <button class="filter-chip" data-target="kb-shop" data-i18n="kbeauty.filter.shop">🛍️ Shop</button>
   </div>
 
@@ -531,6 +547,15 @@
     <div id="kb-dupes-cats" class="kb-pick"></div>
     <div id="kb-dupes-grid" class="kb-dupe-grid" aria-live="polite"></div>
     <div class="funnel-disc" id="kb-dupes-disc"></div>
+  </section>
+
+  <!-- Where to Buy & Authenticity Hub -->
+  <section class="kb-sec" id="kb-buy">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.buy.title">🛡️ Where to buy authentic</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.buy.sub">Best retailer for your country + a spot-the-fake guide</div>
+    </div>
+    <div id="kb-buy-box" aria-live="polite"></div>
   </section>
 
   <!-- Shop (live AliExpress grid + curated retailers) -->
