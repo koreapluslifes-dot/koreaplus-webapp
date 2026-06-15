@@ -139,6 +139,32 @@ foreach ($file in $ICON_FILES) {
     scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/icons/"
 }
 
+# Upload generated SEO pages (build-seo.cjs output) — recursive directories
+# These are NOT git-tracked; regenerate with `node build-seo.cjs` before deploying.
+$SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "ja", "zh", "es")
+$SEO_ROOT_FILES = @("explore.html", "sitemap.xml", "robots.txt", "llms.txt", "blog/feed.xml")
+Write-Host "`nUploading SEO pages (recursive dirs)..." -ForegroundColor Yellow
+foreach ($dir in $SEO_DIRS) {
+    $localPath = "$LOCAL_DIR\$dir"
+    if (Test-Path $localPath) {
+        Write-Host "  $dir/  (recursive)" -ForegroundColor DarkYellow
+        scp -i $PEM_KEY -o "StrictHostKeyChecking=no" -r "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/"
+    }
+}
+Write-Host "`nUploading SEO root files..." -ForegroundColor Yellow
+foreach ($file in $SEO_ROOT_FILES) {
+    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
+    if (Test-Path $localPath) {
+        Write-Host "  $file" -ForegroundColor DarkYellow
+        $remoteSub = if ($file -match '/') { "$REMOTE_DIR/" + ($file -replace '/[^/]+$', '') } else { $REMOTE_DIR }
+        scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${remoteSub}/"
+    }
+}
+# IndexNow key file (Bing/Naver/Yandex instant indexing)
+Get-ChildItem -Path $LOCAL_DIR -Filter "kp*.txt" -File | ForEach-Object {
+    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$($_.FullName)" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/"
+}
+
 # Set file permissions
 Write-Host "`nSetting permissions..." -ForegroundColor Yellow
 ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" @"

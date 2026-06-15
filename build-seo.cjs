@@ -108,6 +108,26 @@ function affBlock({ city = 'Seoul', cat = 'hotel', q = '', lang = 'en' } = {}) {
 </div>`;
 }
 
+// Topical city pickers — the Agoda banner should book hotels where the page is
+// about. Only Seoul/Busan/Jeju/Incheon/Gyeongju/Jeonju return LIVE price cards,
+// so non-live places map to the nearest of those six.
+function monthCity(idx) {
+  // Mar/Apr → cherry blossoms peak in the south (Jinhae/Busan); else Seoul.
+  return (idx === 2 || idx === 3) ? 'Busan' : 'Seoul';
+}
+const THEME_CITY = {
+  'first-time-korea-7-day-itinerary': 'Seoul', 'kpop-korea-4-day-itinerary': 'Seoul',
+  'korea-food-tour-5-day-itinerary': 'Seoul', 'cherry-blossom-korea-7-day-itinerary': 'Busan',
+  'autumn-korea-7-day-itinerary': 'Seoul', 'winter-korea-5-day-itinerary': 'Seoul',
+  'family-korea-7-day-itinerary': 'Seoul', 'budget-korea-7-day-itinerary': 'Seoul',
+  'luxury-korea-5-day-itinerary': 'Seoul', 'honeymoon-korea-7-day-itinerary': 'Jeju',
+};
+// FAQ pages whose intent is location-specific get a matching banner; rest → Seoul.
+const FAQ_CITY = {
+  'how-to-get-from-incheon-airport-to-seoul': 'Incheon', 'how-many-days-in-seoul': 'Seoul',
+  'when-is-cherry-blossom-season-in-korea': 'Busan', 'when-is-fall-foliage-in-korea': 'Seoul',
+};
+
 // Curated extra content (not in KOREA_DATA) — high-search-volume guides
 const NEIGHBORHOODS = [
   { name: 'Hongdae', kr: '홍대', city: 'Seoul', emoji: '🎨', known: 'youth culture, indie music, street art, nightlife', do: 'Watch free street busking, browse indie fashion, club-hop after dark, hunt K-pop merch.', eat: 'Cheap student eats, themed cafes, late-night pojangmacha (street tents).', getto: 'Hongik University Station (Line 2 / AREX), Exit 9.' },
@@ -524,6 +544,7 @@ const PRIMARY_NAV = `
 // ── Master template ─────────────────────────────────────────────────
 // lang: page language code. alts: [{lang,url}] other-language versions
 // (hreflang cluster; x-default points at the English URL).
+const OG_LOCALE = { en:'en_US', ko:'ko_KR', ja:'ja_JP', zh:'zh_CN', es:'es_ES', fr:'fr_FR', de:'de_DE', pt:'pt_BR', id:'id_ID' };
 function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [] }) {
   const canonical = ORIGIN + url;
   const xDefault = ORIGIN + ((alts.find(a => a.lang === 'en') || {}).url || url);
@@ -550,6 +571,8 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:site_name" content="KoreaPlus-Lifes">
+<meta property="og:locale" content="${OG_LOCALE[lang] || 'en_US'}">
+${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta property="og:locale:alternate" content="${OG_LOCALE[a.lang]}">`).join('\n')}
 <meta property="og:image" content="${ORIGIN}/guide/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
@@ -563,7 +586,7 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="seo.css?v=3">
 <script src="modules/header.js"></script>
-<script defer src="modules/affiliate.js?v=4"></script>
+<script defer src="modules/affiliate.js?v=5"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
 ${schemas.map(jsonld).join('\n')}
 </head>
@@ -659,10 +682,12 @@ const mapsHtml = q => {
   </div>`;
 };
 // region string → best-matching city name (for city-targeted Agoda links).
+// Cities with verified Agoda live-card coverage (mirrors AGODA_CITY_ID in the
+// Worker); unknown regions fall back to Seoul.
+const AGODA_LIVE_CITIES = ['Seoul', 'Busan', 'Jeju', 'Incheon', 'Gyeongju', 'Jeonju', 'Daegu', 'Daejeon', 'Gwangju', 'Suwon', 'Sokcho', 'Gangneung', 'Chuncheon', 'Changwon', 'Cheongju', 'Pohang', 'Andong', 'Yeosu', 'Mokpo', 'Tongyeong', 'Pyeongchang', 'Gapyeong'];
 const ctxCity = region => {
   const r = String(region || '');
-  const hit = CITIES.find(c => r.includes(c.name));
-  return hit ? hit.name : 'Seoul';
+  return AGODA_LIVE_CITIES.find(c => r.includes(c)) || 'Seoul';
 };
 // English content pages call affHtml(label, ctx). The label arg is kept for
 // call-site compatibility but the block now renders an on-brand Agoda hotel
@@ -903,6 +928,7 @@ function buildMonth(m, idx) {
     [`What should I pack for Korea in ${name}?`, `${wear}.`],
   ];
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += affHtml('🏨 Where to stay', { city: monthCity(idx), cat: 'hotel', q: '' });
   body += ctaHtml(`Planning a ${name} trip to Korea?`, `Get a free AI itinerary tailored to the season.`);
 
   const hero = `<header class="seo-hero"><span class="emoji">${icon}</span><h1>${esc('Korea in ' + name)}</h1><div class="meta"><span class="seo-badge">${esc(weather.split(',')[0])}</span><a class="seo-badge" href="ja/korea-in-${sslug}.html">🇯🇵 日本語</a><a class="seo-badge" href="zh/korea-in-${sslug}.html">🇨🇳 中文</a><a class="seo-badge" href="es/korea-in-${sslug}.html">🇪🇸 Español</a></div></header>`;
@@ -936,6 +962,7 @@ function buildMonthL10n(idx, lang) {
   body += `<h2>${moreH}</h2><div class="seo-linklist">${sibMonths}<a href="${L.dir}/korea-visa-k-eta-guide.html">🛂 ${esc(L.visa.h1)}</a></div>`;
   const qa = [[tw.q1(nameL), `${why}。${weather}。`], [tw.q2(nameL), `${wear}。`]];
   body += `<h2>${esc(tw.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += affBlock({ city: monthCity(idx), cat: 'hotel', q: '', lang });
   body += `<div class="seo-cta"><h2>${esc(tw.ctaH)}</h2><p>${esc(tw.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English version</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">${icon}</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">${esc(weather.split(/[、，,]/)[0])}</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
@@ -960,6 +987,7 @@ function buildVisaL10n(lang) {
   // Intra-language month links — visa page doubles as the locale's mini-hub
   const bestH = { ja: '📅 ベストシーズンを探す', zh: '📅 选择最佳出行月份', es: '📅 ¿Cuándo viajar a Corea?' }[lang];
   body += `<h2>${bestH}</h2><div class="seo-linklist">${MONTHS.map((m, i) => `<a href="${L.dir}/korea-in-${m[0].toLowerCase()}.html">${m[1]} ${esc(L.months[i][0])}</a>`).join('')}</div>`;
+  body += affBlock({ city: 'Seoul', cat: 'hotel', q: '', lang });
   body += `<div class="seo-cta"><h2>${esc(V.ctaH)}</h2><p>${esc(V.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English version</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">🛂</span><h1>${esc(V.h1)}</h1><div class="meta"><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: V.h1, description: V.desc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
@@ -1029,6 +1057,7 @@ function buildExplore(urls) {
   body += section('🌏 日本語 / 中文 / Español', LOCALES.flatMap(l => [
     `<a href="${l}/korea-visa-k-eta-guide.html">${FLAGS[l]} ${esc(L10N[l].visa.h1)}</a>`,
     ...MONTHS.map((m, i) => `<a href="${l}/korea-in-${m[0].toLowerCase()}.html">${FLAGS[l]} ${esc(L10N[l].months[i][0])}</a>`),
+    ...FAQS.filter(f => FAQ_L10N[l] && FAQ_L10N[l].items[f.slug]).map(f => `<a href="${l}/faq/${f.slug}.html">${FLAGS[l]} ${esc(FAQ_L10N[l].items[f.slug][0])}</a>`),
   ]));
   body += section('🍜 By Topic', Object.keys(CAT_META).map(c => `<a href="guide/${CAT_SLUG[c]}.html">${CAT_META[c].icon} ${esc(CAT_META[c].label)}</a>`));
   body += section('📍 City Guides', CITIES.map(c => `<a href="guide/things-to-do-in-${slug(c.name)}.html">📍 ${esc(c.name)}</a>`));
@@ -1043,7 +1072,7 @@ function buildExplore(urls) {
   body += section('🏯 All Places (' + ALL.length + ')', ALL.map(i => `<a href="places/${i.slug}.html">${i.emoji} ${esc(i.name)}</a>`));
   body += ctaHtml('Ready to plan?', 'Build a free, route-optimized Korea itinerary with AI.');
   const hero = `<header class="seo-hero"><span class="emoji">🧭</span><h1>Explore Korea</h1><div class="meta"><span class="seo-badge">${ALL.length}+ guides</span></div></header>`;
-  writePage('explore.html', shell({ url, title, desc, keywords: 'Korea travel guide, Korea attractions, Korea itinerary, things to do Korea', schemas: [breadcrumbLD([{ name: 'Home', url: BASEP }, { name: 'Explore', url }]), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: ORIGIN + url }], hero, body }));
+  writePage('explore.html', shell({ url, title, desc, keywords: 'Korea travel guide, Korea attractions, Korea itinerary, things to do Korea', schemas: [breadcrumbLD([{ name: 'Home', url: BASEP }, { name: 'Explore', url }]), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: ORIGIN + url }], alts: ['ko','ja','zh','es','fr','de','pt','id'].map(l => ({ lang: l, url: `${url}?lang=${l}` })), hero, body }));
   return url;
 }
 
@@ -1227,6 +1256,86 @@ const FAQS = [
     rel: [['Full cost breakdown', 'blog/is-korea-expensive.html'], ['Budget itinerary', 'itinerary/budget-korea-7-day-itinerary.html'], ['Daily budget calculator', 'currency.html']] },
 ];
 
+// Localized Q&A micro-pages (ja / zh / es) — highest-intent long-tail queries
+// per language. items keyed by EN slug → [question, answer, bodyHtml].
+const FAQ_L10N = {
+  ja: {
+    ui: { titleSuffix: '（2026）| KoreaPlus', badge: 'クイック回答', moreH: '❓ よくある質問', ctaH: '韓国旅行を計画中ですか？', ctaP: 'AIが30秒で日替わりの旅程を無料で作成します。', planBtn: '🗺️ 無料で旅程を作成', enBtn: '🇬🇧 English' },
+    items: {
+      'how-to-get-from-incheon-airport-to-seoul': ['仁川空港からソウル市内へのアクセス方法は？', 'AREX（空港鉄道）が便利です。直通列車はソウル駅まで43分（11,000ウォン）、各駅停車は約1時間（T-money利用で4,750ウォン）。リムジンバスは主要ホテル街へ直行し、タクシーは渋滞により55,000〜75,000ウォンです。', '<p>AREXの各駅停車は最もコスパが良く、弘大入口・孔徳・ソウル駅で地下鉄に接続します。荷物が多いならリムジンバス（17,000〜18,000ウォン）が明洞・江南・主要ホテル街に停車して便利。深夜はN6001/N6703の夜間バス、またはKakao Tでタクシーを利用しましょう。</p>'],
+      'best-time-to-visit-korea': ['韓国旅行のベストシーズンはいつですか？', '4〜5月と9〜11月がベストシーズンです。春は桜と穏やかな陽気、秋は澄んだ空気と紅葉が魅力。夏（7〜8月）は高温多湿で雨が多く、冬は寒いものの安く空いていてスキーにも最適です。', '<p>桜は3月下旬（南部）〜4月中旬（ソウル）が見頃。紅葉は10月中旬〜11月初旬がピークです。可能なら7月の梅雨（チャンマ）の時期は避けましょう。</p>'],
+      'do-they-speak-english-in-korea': ['韓国では英語は通じますか？', '旅行には十分通じます。地下鉄の表示や観光地のメニュー、アナウンスは多言語対応で、若い世代は基本的な英語を理解します。観光地を離れると英語は限られますが、翻訳アプリ「Papago」があれば困りません。', '<p>ホテル・空港・主要観光地はすべて英語対応。ローカルな食堂でもメニューを指差し＋翻訳アプリで問題ありません。「안녕하세요（こんにちは）」「감사합니다（ありがとう）」の二言を覚えるだけで好印象です。</p>'],
+      'do-you-tip-in-korea': ['韓国ではチップは必要ですか？', '不要です。チップの習慣はなく、レストラン・タクシー・ホテル・美容室いずれも不要。表示価格がそのまま支払額で、税込みです。余分なお金は逆に戸惑わせることもあります。', '<p>高級ホテルのサービス料は料金に含まれています。感謝を伝える最良の方法は、心のこもった「감사합니다（カムサハムニダ）」の一言です。</p>'],
+      'can-you-drink-tap-water-in-korea': ['韓国の水道水は飲めますか？', '飲めます。韓国の水道水（ソウルでは「アリス」）はWHOの飲料水基準を満たし安全です。ただし多くの地元の人は習慣的に浄水器の水やボトル水を飲みます。ボトル水はコンビニで約1,000ウォンです。', '<p>飲食店では無料の浄水（麦茶のことも）が標準で提供され、ホテル・モール・地下鉄駅には給水機が多くあり、ボトルの補給ができます。</p>'],
+      'what-power-plug-does-korea-use': ['韓国のコンセント・プラグの形状は？', '韓国は220V・60Hzで、ヨーロッパ式の丸い2本ピン（Cタイプ・Fタイプ）です。米国・英国・日本など多くの国からの旅行者は変換プラグが必要ですが、最近の電子機器の多くは220V対応で変圧器は不要です。', '<p>充電器に「100–240V」と書かれていれば、安価な変換プラグだけでOK。コンビニやダイソーで2,000〜5,000ウォンで買えます。</p>'],
+      'is-uber-available-in-korea': ['韓国でUberは使えますか？', 'Uberは現地タクシーと提携した「UT」として運行していますが、実際にはみんな「Kakao T」を使います。Kakao Tは英語対応で台数も多く、メーター料金・カード決済に対応していて、旅行者に最適です。', '<p>料金は規制されていて手頃で、ソウルの初乗りは約4,800ウォン。英語が話せるドライバーのインターナショナルタクシーは空港でも予約できます。</p>'],
+      'can-you-use-google-maps-in-korea': ['韓国でGoogleマップは使えますか？', '一部のみです。地図データの規制により、Googleマップは韓国で車・徒歩のルート案内ができず、公共交通のみ対応。代わりにNaver MapまたはKakaoMapを使いましょう。どちらも英語対応で地元情報がはるかに充実しています。', '<p>到着前にNaver MapかKakaoMapをダウンロードし、ホテルを保存しておきましょう。どちらもバスのリアルタイム到着、地下鉄の出口番号、主要駅の屋内地図に対応しています。</p>'],
+      'what-currency-does-korea-use': ['韓国の通貨は何ですか？', '韓国の通貨はウォン（KRW、₩）です。ざっくり1,000ウォン≒0.7〜0.8米ドル。クレジットカードはほぼどこでも使え、市場や屋台用に5万〜10万ウォンの現金を持つと安心です。', '<p>当サイトのリアルタイム為替コンバーターで今日のレートを確認できます。ウォンはコンビニや銀行の「Global ATM」で引き出せます。</p>'],
+      'do-i-need-cash-in-korea': ['韓国で現金は必要ですか？', 'ほぼ不要です。韓国は世界でも有数のカード社会で、屋台でもカードが使える店が増えています。伝統市場・小さな食堂・T-moneyのチャージ用に5万〜10万ウォンほど持っておけば十分です。', '<p>外国のカードはほとんどの店で使えますが、一部の国内ネット決済は韓国のカードが必要です。その場合はコンビニ現金払いや、WOWPASS・T-moneyなどのプリペイドカードが便利です。</p>'],
+      'what-apps-do-i-need-for-korea': ['韓国旅行に必要なアプリは？', '必須は4つ。Naver MapまたはKakaoMap（ナビ — Googleマップはほぼ使えない）、Papago（最強の韓国語翻訳）、Kakao T（タクシー）、Korail Talk（KTX切符）。すべて英語対応で無料です。', '<p>あると便利なもの：KakaoMapの飲食店レビュー、現地番号があればデリバリーアプリ、そして韓国の疑問に即答する当サイトのAIガイドです。</p>'],
+      'is-street-food-safe-in-korea': ['韓国の屋台料理は安全に食べられますか？', '安全です。韓国の屋台はアジアでも有数の安全さ。許可・検査を受けており、回転が速く食材も新鮮で、毎日何百万人もが食べています。回転の速い賑わう屋台を選べば間違いありません。', '<p>必食：トッポッキ、ホットク、無料スープ付きのオムク（魚のすり身）、キンパ。広蔵市場や明洞の夜の屋台が定番のスタート地点です。</p>'],
+      'is-wifi-free-in-korea': ['韓国では無料Wi-Fiは使えますか？', 'ほぼ使えます。韓国は世界最速級の無料Wi-Fiが普及していて、地下鉄・バス・カフェ・空港・広場などで利用可能。ただしホットスポット間でも地図や翻訳をシームレスに使うため、eSIMやSIMの用意がおすすめです。', '<p>無料ネットワークはどこにでもありますが、データ無制限のeSIMは10日で20〜35ドルほどと安く、すべての不便を解消します。</p>'],
+      'when-is-cherry-blossom-season-in-korea': ['韓国の桜の見頃はいつですか？', '3月下旬〜4月中旬で、南から北へ進みます。鎮海（チナエ）や釜山は3月下旬、ソウルは4月上旬。各都市の満開はわずか1週間ほどなので、予約前にその年の開花予想を確認しましょう。', '<p>名所：鎮海軍港祭（韓国最大）、ソウルの汝矣島と石村湖、慶州の普門湖。当サイトの季節ページでは毎春のリアルタイム開花予想を追えます。</p>'],
+      'when-is-fall-foliage-in-korea': ['韓国の紅葉の見頃はいつですか？', '10月中旬〜11月初旬で、北から南へ進みます。雪岳山は10月中旬、ソウル（北漢山・古宮）は10月下旬、南部の内蔵山などの寺院は11月初旬がピークです。', '<p>内蔵山、雪岳山、慶州の古墳公園が紅葉の代表的な名所。安東仮面舞祭や釜山国際映画祭と合わせるのもおすすめです。</p>'],
+      'what-is-closed-on-mondays-in-korea': ['韓国で月曜日に閉まる場所は？', 'ほとんどの博物館（国立中央博物館を含む）と昌徳宮は月曜休館です。景福宮は代わりに火曜が休み。市場・商店街・寺院は毎日開いています。', '<p>古宮はこの違いを利用して計画を：月曜は景福宮、昌徳宮は月曜以外に。月曜が祝日の場合、多くの博物館は火曜が休みになります。</p>'],
+      'how-many-days-in-seoul': ['ソウルには何日必要ですか？', '主要見どころは3〜4日でカバーできます。古宮と韓屋村、明洞と弘大、漢江の夕べ、そして日帰り（DMZや南怡島）。1週間あればKTXで釜山も加えられます。', '<p>3日なら定番ルートを、5日以上あれば江南・COEX、より多くの街歩き、2回目の日帰り旅行を追加しましょう。</p>'],
+      'can-you-wear-shorts-in-korea': ['韓国で短パンを履いても大丈夫？（服装）', '大丈夫です。都市部ではショートパンツ・スカート・カジュアルな服装はごく普通で、特に蒸し暑い夏には当たり前。控えめな服装が必要なのは寺院や王宮の儀式のみで、その際は肩と膝を隠しましょう。', '<p>韓国人はおしゃれですがカジュアル。テンプルステイでは、ゆったりした控えめな服が用意・推奨されます。冬は何より防寒重視 — おしゃれは-10℃の風には勝てません。</p>'],
+      'is-korea-safe-at-night': ['韓国は夜でも安全ですか？', '安全です。韓国は世界でも有数の夜が安全な国。深夜過ぎても通りは賑わい明るく、CCTVも密に設置され、旅行者（一人旅の女性を含む）が犯罪に遭うことは極めてまれです。', '<p>夜市、24時間カフェ、深夜まで走る地下鉄（〜0時頃）は日常の一部。繁華街では大都市並みの普通の注意があれば十分です。</p>'],
+      'how-much-is-a-trip-to-korea': ['韓国旅行の費用はどれくらい？', '航空券を除き、節約派は1日約55ドル、中級は120ドル、快適派は250ドルが目安。中級の1週間旅行なら、航空券別で800〜1,000ドルほどです。', '<p>食事はお得：9,000〜13,000ウォンで美味しい一食。交通もT-moneyで安価です。サンプル予算付きの詳しい内訳はブログをご覧ください。</p>'],
+    },
+  },
+  zh: {
+    ui: { titleSuffix: '（2026）| KoreaPlus', badge: '快速解答', moreH: '❓ 更多常见问题', ctaH: '正在计划韩国之旅吗？', ctaP: 'AI 30秒免费生成逐日行程。', planBtn: '🗺️ 免费生成行程', enBtn: '🇬🇧 English' },
+    items: {
+      'how-to-get-from-incheon-airport-to-seoul': ['从仁川机场怎么去首尔市区？', '推荐乘坐机场快线AREX：直达列车43分钟到首尔站（11,000韩元），各站停车约1小时（用T-money为4,750韩元）。机场大巴直达各大酒店区，出租车视路况约55,000–75,000韩元。', '<p>AREX各站停车性价比最高，可在弘大入口、孔德、首尔站换乘地铁。行李多时机场大巴（17,000–18,000韩元）最方便，停靠明洞、江南及多数酒店区。午夜后可乘N6001/N6703夜间巴士，或用Kakao T叫车。</p>'],
+      'best-time-to-visit-korea': ['什么时候去韩国旅游最好？', '4–5月和9–11月最佳。春天樱花盛开、气候宜人；秋天空气清爽、红叶绚烂。夏季（7–8月）炎热潮湿多雨；冬季虽冷，但价格低、人少，适合滑雪。', '<p>赏樱：3月下旬（南部）至4月中旬（首尔）。赏红叶：10月中旬至11月初为高峰。如有可能，避开7月的梅雨季（장마）。</p>'],
+      'do-they-speak-english-in-korea': ['在韩国说英语行得通吗？', '足以应付旅行：地铁标识、旅游区菜单和广播多为双语，年轻人通常能听懂基础英语。离开旅游区英语口语有限，但翻译软件Papago能补上每一处空缺。', '<p>酒店、机场和主要景点都可用英语沟通。在本地餐厅，指菜单加翻译软件即可。学会两句——안녕하세요（你好）和감사합니다（谢谢）——立刻收获好感。</p>'],
+      'do-you-tip-in-korea': ['在韩国需要给小费吗？', '不需要。给小费不属于韩国文化——餐厅、出租车、酒店、美发店都不用。看到的价格就是支付的价格，且已含税。多给钱反而可能让人困惑。', '<p>高档酒店的服务费已包含在账单中。表达谢意最好的方式是真诚地说一句감사합니다（gamsahamnida，谢谢）。</p>'],
+      'can-you-drink-tap-water-in-korea': ['韩国的自来水能喝吗？', '能喝。韩国自来水（首尔称为“Arisu/아리수”）符合世界卫生组织饮用水标准，安全可饮。不过多数当地人习惯喝过滤水或瓶装水。瓶装水在便利店约1,000韩元。', '<p>餐厅标配免费过滤水（常为大麦茶），酒店、商场和地铁站也常设免费净水机，可给水瓶续水。</p>'],
+      'what-power-plug-does-korea-use': ['韩国用什么插头和电压？', '韩国为220V、60Hz，使用欧式圆形双脚插头（C型和F型）。来自美国、英国、日本及多数亚洲地区的旅客需要转换插头；多数现代电子设备支持220V，无需变压器。', '<p>查看充电器是否标有“100–240V”——若有，只需一个便宜的转换插头，便利店或Daiso售价2,000–5,000韩元。</p>'],
+      'is-uber-available-in-korea': ['韩国能用Uber吗？', 'Uber以“UT”形式与本地出租车合作运营，但大家其实都用Kakao T。Kakao T有英文界面、司机更多、按表计价并支持刷卡，是游客最佳的叫车选择。', '<p>费用受监管且合理：首尔起步价约4,800韩元。会说英语的国际出租车也可在机场预约。</p>'],
+      'can-you-use-google-maps-in-korea': ['韩国能用谷歌地图吗？', '只能部分使用。受地图数据法规限制，谷歌地图在韩国无法提供驾车或步行导航，仅支持公共交通。请改用Naver地图或KakaoMap：均有完整英文界面，本地数据也更好。', '<p>抵达前先下载Naver地图或KakaoMap并保存酒店位置。两者都显示公交实时到站、地铁出口编号及主要车站的室内地图。</p>'],
+      'what-currency-does-korea-use': ['韩国用什么货币？', '韩国使用韩元（KRW，₩）。粗略换算：1,000韩元≈0.7–0.8美元。信用卡几乎处处可用；建议备5万–10万韩元现金用于市场和街头小吃。', '<p>用我们的实时汇率换算器查看当日汇率，并在便利店和银行的“Global ATM”取韩元。</p>'],
+      'do-i-need-cash-in-korea': ['在韩国需要带现金吗？', '基本不需要。韩国是全球最便利刷卡的国家之一，连街边摊也越来越多支持刷卡。建议备5万–10万韩元现金，用于传统市场、小餐馆和给T-money充值。', '<p>外国卡在多数店铺可用，但部分本地网站结账需要韩国卡；此时便利店现金支付或预付旅行卡（WOWPASS、T-money）会很有用。</p>'],
+      'what-apps-do-i-need-for-korea': ['去韩国需要下载哪些App？', '四个必备：Naver地图或KakaoMap（导航——谷歌地图几乎不能用）、Papago（最好的韩语翻译）、Kakao T（打车）、Korail Talk（KTX火车票）。全部有英文界面且免费。', '<p>锦上添花：KakaoMap的餐厅点评；有本地号码可用外卖App；以及我们自己的AI向导，随时解答韩国相关问题。</p>'],
+      'is-street-food-safe-in-korea': ['韩国的街头小吃能放心吃吗？', '能。韩国街头小吃是亚洲最安全的之一。摊位持证经营、定期检查，翻台快所以食材新鲜，每天数百万人在吃。生意火、翻台快的摊位最靠谱。', '<p>必尝：辣炒年糕、糖饼、配免费汤的鱼饼（오뎅）、紫菜包饭。广藏市场和明洞夜市的摊位是经典起点。</p>'],
+      'is-wifi-free-in-korea': ['韩国的WiFi免费吗？', '大体免费。韩国拥有全球最快、最普及的免费WiFi：地铁、公交、咖啡馆、机场和广场都有。不过为在热点之间无缝使用地图和翻译，建议办张eSIM或SIM卡。', '<p>免费网络随处可见，但无限流量eSIM十天仅约20–35美元，能彻底告别一切不便。</p>'],
+      'when-is-cherry-blossom-season-in-korea': ['韩国樱花季是什么时候？', '3月下旬到4月中旬，由南向北：镇海、釜山在3月下旬开放，首尔在4月初。每座城市的盛花期仅约一周，订行程前请查看当年预报。', '<p>最佳赏樱地：镇海军港节（韩国最大）、首尔汝矣岛和石村湖、庆州普门湖。每年春天，我们的季节页面会追踪实时花期预报。</p>'],
+      'when-is-fall-foliage-in-korea': ['韩国红叶季是什么时候？', '10月中旬到11月初，由北向南：雪岳山10月中旬最盛，首尔（北汉山、古宫）10月下旬，南部的内藏山等寺院在11月初。', '<p>内藏山、雪岳山和庆州的古墓公园是标志性的赏枫胜地。可与安东假面舞节或釜山国际电影节搭配同行。</p>'],
+      'what-is-closed-on-mondays-in-korea': ['韩国周一有哪些地方关门？', '大多数博物馆（包括韩国国立中央博物馆）周一闭馆，昌德宫也是。景福宫则改为周二闭馆。市场、商业街和寺庙每天开放。', '<p>可据此安排古宫：周一去景福宫，昌德宫则避开周一。若公休日恰逢周一，许多博物馆改为周二闭馆。</p>'],
+      'how-many-days-in-seoul': ['首尔需要待几天？', '三到四天即可玩遍首尔精华：古宫与韩屋村、明洞与弘大、汉江之夜，以及一次一日游（DMZ或南怡岛）。一周则可乘KTX加上釜山。', '<p>3天可走经典路线；5天以上可加上江南/COEX、更多街区和第二次一日游。</p>'],
+      'can-you-wear-shorts-in-korea': ['在韩国能穿短裤吗？（着装）', '能。在韩国城市，短裤、短裙和休闲装都很普通，尤其在闷热的夏天。唯一需要穿着得体的是寺庙和王室仪式：在那里请遮住肩膀和膝盖。', '<p>韩国人穿着时尚但随意。寺庙寄宿（templestay）会提供或要求宽松得体的衣物。冬天则以保暖为先——再时髦也敌不过-10°C的寒风。</p>'],
+      'is-korea-safe-at-night': ['韩国晚上安全吗？', '安全。韩国是全球夜间最安全的国家之一。街道过了午夜仍热闹明亮，CCTV覆盖密集，针对游客（包括独自出行的女性）的暴力犯罪极为罕见。', '<p>夜市、24小时咖啡馆和运营到约午夜的地铁都是日常的一部分。在夜生活区保持大城市应有的基本警觉即可。</p>'],
+      'how-much-is-a-trip-to-korea': ['去韩国旅游要花多少钱？', '不含机票，穷游约每天55美元，中等约120美元，舒适型约250美元。典型的一周中等行程约800–1,000美元，外加机票。', '<p>美食最划算：9,000–13,000韩元就能吃顿好的。交通用T-money也很便宜。含示例预算的完整明细见我们的博客。</p>'],
+    },
+  },
+  es: {
+    ui: { titleSuffix: ' (2026) | KoreaPlus', badge: 'Respuesta rápida', moreH: '❓ Más preguntas frecuentes', ctaH: '¿Planeando un viaje a Corea?', ctaP: 'Crea un itinerario diario gratis con IA en segundos.', planBtn: '🗺️ Crear mi itinerario gratis', enBtn: '🇬🇧 English' },
+    items: {
+      'how-to-get-from-incheon-airport-to-seoul': ['¿Cómo llego del aeropuerto de Incheon a Seúl?', 'Toma el tren AREX: el Exprés llega a la estación de Seúl en 43 minutos (11.000 ₩) y el de todas las paradas en una hora aprox. (4.750 ₩ con T-money). Los autobuses limusina van directos a las zonas de hoteles, y el taxi cuesta 55.000–75.000 ₩ según el tráfico.', '<p>El AREX de todas las paradas es la mejor relación calidad-precio y conecta con el metro en Hongik Univ., Gongdeok y la estación de Seúl. Los autobuses limusina (17.000–18.000 ₩) son ideales con equipaje voluminoso: paran en Myeongdong, Gangnam y la mayoría de zonas hoteleras. Pasada la medianoche, busca los autobuses nocturnos N6001/N6703 o pide taxi con Kakao T.</p>'],
+      'best-time-to-visit-korea': ['¿Cuál es la mejor época para visitar Corea?', 'De abril a mayo y de septiembre a noviembre. La primavera trae cerezos en flor y clima suave; el otoño, aire fresco y un follaje espectacular. El verano (julio–agosto) es caluroso, húmedo y lluvioso; el invierno es frío pero barato, tranquilo e ideal para esquiar.', '<p>Para los cerezos, apunta a finales de marzo (sur) o mediados de abril (Seúl). Para el follaje otoñal, de mediados de octubre a principios de noviembre es el punto álgido. Si puedes, evita las semanas del monzón (jangma) de julio.</p>'],
+      'do-they-speak-english-in-korea': ['¿Se habla inglés en Corea?', 'Lo suficiente para viajar con comodidad: los carteles del metro, los menús en zonas turísticas y los anuncios son bilingües, y los jóvenes suelen entender inglés básico. Fuera de las zonas turísticas el inglés hablado es limitado, pero la app de traducción Papago cubre cualquier hueco.', '<p>Hoteles, aeropuertos y atracciones principales funcionan en inglés. En restaurantes locales, señalar el menú más una app de traducción funciona perfectamente. Aprender dos frases —안녕하세요 (hola) y 감사합니다 (gracias)— gana simpatía al instante.</p>'],
+      'do-you-tip-in-korea': ['¿Se da propina en Corea?', 'No. La propina no forma parte de la cultura coreana: ni en restaurantes, taxis, hoteles o peluquerías. El precio que ves es el que pagas, e incluye impuestos. Dejar dinero extra incluso puede causar confusión.', '<p>El cargo por servicio en hoteles de lujo ya está incluido en la cuenta. La mejor forma de mostrar agradecimiento es un sincero 감사합니다 (gamsahamnida, gracias).</p>'],
+      'can-you-drink-tap-water-in-korea': ['¿Se puede beber el agua del grifo en Corea?', 'Sí: el agua del grifo coreana (llamada Arisu en Seúl) cumple las normas de la OMS y es segura. Aun así, la mayoría de los locales bebe agua filtrada o embotellada por costumbre. Una botella cuesta unos 1.000 ₩ en cualquier tienda de conveniencia.', '<p>Los restaurantes sirven agua filtrada gratis (a menudo té de cebada) por defecto, y hay purificadores gratuitos en hoteles, centros comerciales y estaciones de metro para rellenar tu botella.</p>'],
+      'what-power-plug-does-korea-use': ['¿Qué enchufe y voltaje se usa en Corea?', 'Corea usa 220V a 60Hz con enchufes redondos de dos clavijas tipo europeo (Tipo C y F). Quienes viajen desde EE. UU., Reino Unido, Japón y gran parte de Asia necesitan un adaptador; la mayoría de los aparatos modernos admiten 220V sin transformador.', '<p>Mira si tu cargador indica «100–240V»: si lo hace, solo necesitas un adaptador barato, a la venta en cualquier tienda de conveniencia o Daiso por 2.000–5.000 ₩.</p>'],
+      'is-uber-available-in-korea': ['¿Hay Uber en Corea?', 'Uber opera en Corea como «UT», en alianza con taxis locales, pero todo el mundo usa Kakao T. Kakao T tiene interfaz en inglés, más conductores, tarifa con taxímetro y pago con tarjeta, lo que lo hace la mejor opción para visitantes.', '<p>Las tarifas están reguladas y son razonables: bajada de bandera de unos 4.800 ₩ en Seúl. También puedes reservar taxis internacionales con conductores que hablan inglés en el aeropuerto.</p>'],
+      'can-you-use-google-maps-in-korea': ['¿Funciona Google Maps en Corea?', 'Solo en parte. Por la normativa sobre datos cartográficos, Google Maps no da indicaciones en coche ni a pie en Corea, solo transporte público. Usa Naver Map o KakaoMap: ambas tienen interfaz en inglés y datos locales mucho mejores.', '<p>Descarga Naver Map o KakaoMap antes de llegar y guarda tu hotel. Ambas muestran llegadas de autobús en tiempo real, números de salida del metro y mapas interiores de las estaciones principales.</p>'],
+      'what-currency-does-korea-use': ['¿Qué moneda se usa en Corea?', 'Corea del Sur usa el won (KRW, ₩). Cálculo rápido: 1.000 ₩ ≈ 0,70–0,80 USD. Se acepta tarjeta casi en todas partes; lleva 50.000–100.000 ₩ en efectivo para mercados y comida callejera.', '<p>Usa nuestro conversor de divisas en tiempo real para ver la cotización de hoy, y saca wones en los cajeros «Global ATM» de tiendas de conveniencia y bancos.</p>'],
+      'do-i-need-cash-in-korea': ['¿Necesito efectivo en Corea?', 'En general no: Corea es uno de los países más adaptados a la tarjeta del mundo, e incluso los puestos callejeros la aceptan cada vez más. Lleva 50.000–100.000 ₩ en efectivo para mercados tradicionales, pequeños comedores y recargar tu tarjeta T-money.', '<p>Las tarjetas extranjeras funcionan en la mayoría de comercios, pero algunos pagos en webs locales exigen tarjeta coreana; ahí ayudan el pago en efectivo en tiendas de conveniencia o una tarjeta prepago (WOWPASS, T-money).</p>'],
+      'what-apps-do-i-need-for-korea': ['¿Qué apps necesito para Corea?', 'Cuatro imprescindibles: Naver Map o KakaoMap (navegación, Google Maps apenas funciona), Papago (el mejor traductor de coreano), Kakao T (taxis) y Korail Talk (billetes de tren KTX). Todas tienen interfaz en inglés y son gratuitas.', '<p>Extras útiles: las reseñas de restaurantes de KakaoMap, una app de comida a domicilio si tienes número local, y nuestra propia Guía con IA para respuestas instantáneas sobre Corea.</p>'],
+      'is-street-food-safe-in-korea': ['¿Es segura la comida callejera en Corea?', 'Sí: la comida callejera coreana es de las más seguras de Asia. Los puestos tienen licencia y se inspeccionan, la rotación es rápida (comida fresca) y millones la comen a diario. Los puestos concurridos y con mucha rotación son la mejor apuesta.', '<p>Imprescindibles: tteokbokki, hotteok, eomuk (pastel de pescado) con caldo gratis y gimbap. El mercado de Gwangjang y los puestos nocturnos de Myeongdong son el punto de partida clásico.</p>'],
+      'is-wifi-free-in-korea': ['¿Es gratis el wifi en Corea?', 'En gran medida sí: Corea tiene uno de los wifis gratuitos más rápidos y extendidos del mundo (metro, autobuses, cafés, aeropuertos y plazas). Aun así, lleva una eSIM o SIM para usar mapas y traducción sin cortes entre puntos de acceso.', '<p>Las redes gratuitas están por todas partes, pero una eSIM con datos ilimitados cuesta solo 20–35 USD por 10 días y elimina toda fricción.</p>'],
+      'when-is-cherry-blossom-season-in-korea': ['¿Cuándo es la temporada de cerezos en flor en Corea?', 'De finales de marzo a mediados de abril, avanzando de sur a norte: Jinhae y Busan florecen a finales de marzo y Seúl a principios de abril. La plena floración dura solo una semana por ciudad, así que consulta la previsión anual antes de reservar.', '<p>Mejores lugares: el Festival de Jinhae Gunhangje (el mayor de Corea), Yeouido y el lago Seokchon en Seúl, y el lago Bomun en Gyeongju. Nuestra página de temporadas sigue la previsión de floración en tiempo real cada primavera.</p>'],
+      'when-is-fall-foliage-in-korea': ['¿Cuándo es la temporada de follaje otoñal en Corea?', 'De mediados de octubre a principios de noviembre, avanzando de norte a sur: Seoraksan alcanza su punto álgido a mediados de octubre, Seúl (Bukhansan, palacios) a finales de octubre, y templos del sur como Naejangsan a principios de noviembre.', '<p>Naejangsan, Seoraksan y los parques de túmulos de Gyeongju son los destinos de follaje icónicos. Combínalo con el Festival de la Danza de Máscaras de Andong o el Festival Internacional de Cine de Busan.</p>'],
+      'what-is-closed-on-mondays-in-korea': ['¿Qué cierra los lunes en Corea?', 'La mayoría de los museos (incluido el Museo Nacional de Corea) cierran los lunes, y el palacio Changdeokgung también. Gyeongbokgung cierra los martes en su lugar. Mercados, calles comerciales y templos abren a diario.', '<p>Organiza los palacios según la división: Gyeongbokgung el lunes, Changdeokgung cualquier día menos el lunes. Si un festivo cae en lunes, muchos museos cierran el martes.</p>'],
+      'how-many-days-in-seoul': ['¿Cuántos días se necesitan en Seúl?', 'Tres o cuatro días cubren lo esencial de Seúl: palacios y aldeas hanok, Myeongdong y Hongdae, una tarde en el río Han y una excursión (DMZ o la isla Nami). Una semana permite añadir Busan en KTX.', '<p>Con 3 días, sigue nuestra ruta clásica; con 5 o más, añade Gangnam/COEX, más barrios y una segunda excursión.</p>'],
+      'can-you-wear-shorts-in-korea': ['¿Se pueden llevar pantalones cortos en Corea? (Código de vestimenta)', 'Sí: pantalones cortos, faldas y ropa informal son totalmente normales en las ciudades coreanas, sobre todo en el húmedo verano. Los únicos lugares que requieren vestir con recato son templos y ceremonias reales: cubre hombros y rodillas allí.', '<p>Los coreanos visten con estilo pero informales. Para las estancias en templos se proporciona o se exige ropa holgada y discreta. En invierno, prioriza las capas de abrigo: la moda nunca gana a una sensación térmica de -10 °C.</p>'],
+      'is-korea-safe-at-night': ['¿Es seguro Corea de noche?', 'Sí: Corea es uno de los países más seguros del mundo de noche. Las calles siguen concurridas y bien iluminadas pasada la medianoche, hay mucha cobertura de cámaras y los delitos violentos contra visitantes son rarísimos, también para mujeres que viajan solas.', '<p>Los mercados nocturnos, los cafés 24 horas y el metro hasta cerca de medianoche son parte de la vida diaria. Basta con la prudencia habitual de cualquier gran ciudad en las zonas de ocio nocturno.</p>'],
+      'how-much-is-a-trip-to-korea': ['¿Cuánto cuesta un viaje a Corea?', 'Sin contar los vuelos, un viajero económico gasta unos 55 USD/día, uno de gama media 120 USD/día y uno de confort 250 USD/día. Un viaje típico de una semana de gama media ronda los 800–1.000 USD más el billete de avión.', '<p>La comida es la ganga: comidas excelentes por 9.000–13.000 ₩. El transporte es barato con T-money. Mira el desglose completo con presupuestos de ejemplo en nuestro blog.</p>'],
+    },
+  },
+};
+
 function buildFaq(f) {
   const url = `${BASEP}faq/${f.slug}.html`;
   const title = `${f.q} (2026) | KoreaPlus`;
@@ -1235,9 +1344,40 @@ function buildFaq(f) {
   body += `<p class="lead">${esc(f.a)}</p>`;
   body += f.body;
   body += `<h2>🔗 Related guides</h2><div class="seo-linklist">${f.rel.map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('')}</div>`;
+  body += affHtml('🏨 Where to stay', { city: FAQ_CITY[f.slug] || 'Seoul', cat: 'hotel', q: '' });
   body += ctaHtml('Planning a Korea trip?', 'Get a free AI-built day-by-day itinerary in 30 seconds.');
   const hero = `<header class="seo-hero"><span class="emoji">${f.emoji}</span><h1>${esc(f.q)}</h1><div class="meta"><span class="seo-badge">Quick answer</span><span class="seo-badge">2026</span></div></header>`;
-  writePage(`faq/${f.slug}.html`, shell({ url, title, desc: f.a.slice(0, 155), keywords: '', schemas: [faqLD([[f.q, f.a]]), breadcrumbLD(trail)], hero, body }));
+  // hreflang cluster → localized versions exist for every FAQ in all LOCALES
+  const alts = LOCALES.filter(l => FAQ_L10N[l] && FAQ_L10N[l].items[f.slug]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/faq/${f.slug}.html` }));
+  writePage(`faq/${f.slug}.html`, shell({ url, title, desc: f.a.slice(0, 155), keywords: '', schemas: [faqLD([[f.q, f.a]]), breadcrumbLD(trail)], hero, body, alts }));
+  return url;
+}
+
+// Localized Q&A micro-page (ja / zh / es) — translated, hreflang'd to EN + siblings.
+function buildFaqL10n(f, lang) {
+  const FL = FAQ_L10N[lang]; const L = L10N[lang];
+  const it = FL && FL.items[f.slug];
+  if (!it) return null;
+  const [q, a, bodyHtml] = it; const dir = L.dir;
+  const url = `${BASEP}${dir}/faq/${f.slug}.html`;
+  const enUrl = `${BASEP}faq/${f.slug}.html`;
+  const title = `${q}${FL.ui.titleSuffix}`;
+  const desc = a.slice(0, 155);
+  const trail = [{ name: 'Home', url: BASEP }, { name: q, url }];
+  let body = bcHtml(trail);
+  body += `<p class="lead">${esc(a)}</p>`;
+  body += bodyHtml;
+  // intra-language mesh: rotate to sibling localized FAQs + the locale visa hub
+  const idx = Math.max(0, FAQS.findIndex(x => x.slug === f.slug));
+  const sibs = [1, 2, 3, 4].map(k => FAQS[(idx + k) % FAQS.length]).filter(s => FL.items[s.slug]);
+  body += `<h2>${esc(FL.ui.moreH)}</h2><div class="seo-linklist">${sibs.map(s => `<a href="${dir}/faq/${s.slug}.html">${s.emoji} ${esc(FL.items[s.slug][0])}</a>`).join('')}<a href="${dir}/korea-visa-k-eta-guide.html">🛂 ${esc(L.visa.h1)}</a></div>`;
+  body += affBlock({ city: FAQ_CITY[f.slug] || 'Seoul', cat: 'hotel', q: '', lang });
+  body += `<div class="seo-cta"><h2>${esc(FL.ui.ctaH)}</h2><p>${esc(FL.ui.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">${esc(FL.ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(FL.ui.enBtn)}</a></div></div>`;
+  const hero = `<header class="seo-hero"><span class="emoji">${f.emoji}</span><h1>${esc(q)}</h1><div class="meta"><span class="seo-badge">${esc(FL.ui.badge)}</span><span class="seo-badge">2026</span></div></header>`;
+  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: q, description: desc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  const alts = [{ lang: 'en', url: enUrl },
+    ...LOCALES.filter(l => l !== lang && FAQ_L10N[l] && FAQ_L10N[l].items[f.slug]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/faq/${f.slug}.html` }))];
+  writePage(`${dir}/faq/${f.slug}.html`, shell({ url, title, desc, keywords: '', schemas: [faqLD([[q, a]]), breadcrumbLD(trail), article], hero, body, lang, alts }));
   return url;
 }
 
@@ -1320,7 +1460,7 @@ function buildTheme(t) {
     ['Can I customize this itinerary?', 'Absolutely — open the AI Trip Planner, pick your dates, interests and pace, and it rebuilds the route in seconds.'],
   ];
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
-  body += affHtml('🎫 Book this trip', { city: 'Seoul', cat: 'travel', q: '' });
+  body += affHtml('🎫 Book this trip', { city: THEME_CITY[t.slug] || 'Seoul', cat: 'travel', q: '' });
   body += ctaHtml('Make it yours', 'Our AI rebuilds this plan around your dates, pace and budget — free.');
   const hero = `<header class="seo-hero"><span class="emoji">${t.emoji}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">${t.days} days</span><span class="seo-badge region">Themed route</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: t.h1, description: t.desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
@@ -1425,7 +1565,7 @@ function buildSeason(s) {
   body += `<h2>🎒 ${esc(s.name)} itinerary</h2><p>Ready-made route for the season: <a href="itinerary/${s.itin}.html">see the full day-by-day plan →</a></p>`;
   const qa = [[`Is ${s.name.toLowerCase()} a good time to visit Korea?`, `Yes — ${s.hl}. See the month pages above for exact weather and events.`]];
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
-  body += affHtml('🎫 Book the season', { city: 'Seoul', cat: 'travel', q: '' });
+  body += affHtml('🎫 Book the season', { city: s.slug === 'spring' ? 'Busan' : 'Seoul', cat: 'travel', q: '' });
   body += ctaHtml(`Planning a ${s.name.toLowerCase()} trip?`, 'Get a free AI itinerary tuned to the season.');
   const hero = `<header class="seo-hero"><span class="emoji">${s.emoji}</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">3-month guide</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
@@ -1451,11 +1591,13 @@ MONTHS.forEach((m, i) => out.months.push(buildMonth(m, i)));
 out.visa = buildVisa();
 NEIGHBORHOODS.forEach(n => out.neighborhoods.push(buildNeighborhood(n)));
 STAY.forEach(s => out.stays.push(buildStay(s)));
-// Localized (ja/zh) months + visa
+// Localized (ja/zh/es) months + visa + FAQ micro-pages
 out.l10n = [];
+out.faqL10n = [];
 for (const lang of LOCALES) {
   MONTHS.forEach((_, i) => out.l10n.push(buildMonthL10n(i, lang)));
   out.l10n.push(buildVisaL10n(lang));
+  FAQS.forEach(f => { const u = buildFaqL10n(f, lang); if (u) out.faqL10n.push(u); });
 }
 // Blog
 out.blog = BLOG.map(buildBlogPost);
@@ -1475,20 +1617,22 @@ fs.writeFileSync(path.join(OUT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 // ── Sitemap ─────────────────────────────────────────────────────────
 const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html', 'temples.html', 'nightviews.html',
   'emergency.html', 'phrases.html', 'currency.html', 'etiquette.html', 'seasons.html', 'kdrama-locations.html',
-  'kpop.html', 'kbeauty.html',
+  'kbeauty.html',
   'menu-translator.html', 'subway.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
 const urlEntry = (loc, pri, freq) => `  <url>\n    <loc>${ORIGIN}${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
 let sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 sm += urlEntry(BASEP, '1.0', 'daily');
 LANGS.forEach(l => sm += `\n` + urlEntry(`${BASEP}?lang=${l}`, '0.8', 'weekly'));
-STATIC.slice(1).forEach(p => { const hot = (p === 'kpop.html' || p === 'kbeauty.html'); sm += `\n` + urlEntry(BASEP + p, hot ? '0.9' : '0.8', hot ? 'daily' : 'weekly'); });
+STATIC.slice(1).forEach(p => { const hot = (p === 'kbeauty.html'); sm += `\n` + urlEntry(BASEP + p, hot ? '0.9' : '0.8', hot ? 'daily' : 'weekly'); });
+sm += `\n` + urlEntry('/kpop', '0.9', 'daily');   // K-Pop hub: clean canonical URL (not /guide/kpop.html)
 [...out.categories, ...out.cities, out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.blog.forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.neighborhoods.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.itineraries.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.months.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
+(out.faqL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 [...out.compare, ...out.seasonal].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 [...out.faq, ...out.cityfood].forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
@@ -1547,14 +1691,15 @@ ${rssItems}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'blog/feed.xml'), rss);
 
-const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + out.blog.length + 3;
+const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
 console.log(`✅ Generated ${total} SEO pages:`);
 console.log(`   places:        ${out.places.length}`);
 console.log(`   categories:    ${out.categories.length}`);
 console.log(`   city guides:   ${out.cities.length}`);
 console.log(`   itineraries:   ${out.itineraries.length}`);
 console.log(`   months (EN):   ${out.months.length}`);
-console.log(`   l10n (ja+zh):  ${out.l10n.length}`);
+console.log(`   l10n month+visa: ${out.l10n.length}`);
+console.log(`   l10n faq (ja/zh/es): ${(out.faqL10n || []).length}`);
 console.log(`   blog:          ${out.blog.length} + index`);
 console.log(`   neighborhoods: ${out.neighborhoods.length}`);
 console.log(`   where-to-stay: ${out.stays.length}`);

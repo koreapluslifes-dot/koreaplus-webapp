@@ -17,6 +17,20 @@
   var WORKER = (typeof window !== 'undefined' && window.WORKER_URL) ||
     'https://koreaplus-webapp.jeybeeicon.workers.dev';
 
+  // Localized label for the cloned inline offer strip (data-aff-lang on static
+  // SEO pages; the static block's own heading/disclaimer are already localized).
+  var LBL = {
+    en: '🎫 Quick bookings for this guide',
+    ko: '🎫 이 가이드 추천 숙소 바로 예약',
+    ja: '🎫 このガイドのおすすめ宿をすぐ予約',
+    zh: '🎫 本攻略推荐住宿 · 一键预订',
+    es: '🎫 Reservas rápidas para esta guía',
+    fr: '🎫 Réservations rapides pour ce guide',
+    de: '🎫 Schnell buchen für diesen Guide',
+    pt: '🎫 Reservas rápidas para este guia',
+    id: '🎫 Pesan cepat untuk panduan ini'
+  };
+
   function esc(s) {
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -73,7 +87,7 @@
     var lang = blocks[0].getAttribute('data-aff-lang') ||
       (window.kpI18n && window.kpI18n.getLang && window.kpI18n.getLang()) || 'en';
 
-    var qs = new URLSearchParams({ city: ctx.city || '', cat: ctx.cat || '', q: ctx.q || '', lang: lang, v: '4' });
+    var qs = new URLSearchParams({ city: ctx.city || '', cat: ctx.cat || '', q: ctx.q || '', lang: lang, v: '5' });
     fetch(WORKER + '/api/aff?' + qs.toString())
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (data) {
@@ -84,14 +98,14 @@
           if (grid) renderGrid(grid, data.offers, ctx, 'bottom');
         });
 
-        insertInline(blocks[0], data.offers, ctx);
+        insertInline(blocks[0], data.offers, ctx, lang);
       })
       .catch(function () { /* static fallback links remain — nothing to do */ });
   }
 
   /* Long article → clone a compact strip after the 2nd <h2> (skip if an
      aff block is already visible in the first two viewports). */
-  function insertInline(sourceBlock, offers, ctx) {
+  function insertInline(sourceBlock, offers, ctx, lang) {
     var body = document.querySelector('.seo-body');
     if (!body || body.scrollHeight < 2400) return;
     var h2s = body.querySelectorAll('h2');
@@ -105,7 +119,7 @@
     clone.removeAttribute('data-aff');
     clone.style.margin = '26px 0';
     var label = clone.querySelector('.aff-label');
-    if (label) label.textContent = '🎫 Quick bookings for this guide';
+    if (label) label.textContent = LBL[lang] || LBL.en;
     var grid = clone.querySelector('.aff-grid');
     if (grid) renderGrid(grid, offers, ctx, 'inline');
     anchor.parentNode.insertBefore(clone, anchor);
