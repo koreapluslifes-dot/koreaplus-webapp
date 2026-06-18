@@ -579,5 +579,13 @@
   "kbeauty.sec.ledger.sub": "2026年のトレンドを根拠で評価 — 実証・有望・誇大を、日付と出典つきで。",
   "kbeauty.sec.radar.title": "🛰️ ソウル vs 世界トレンドレーダー",
   "kbeauty.sec.radar.sub": "各K-beautyトレンドが韓国 vs 欧米マップのどこにあり、どこへ向かい、すでに越境したか — 日付・出典つき。",
-  "kbeauty.filter.radar": "🛰️ トレンドレーダー"
+  "kbeauty.filter.radar": "🛰️ トレンドレーダー",
+  "kbeauty.sec.viral.title": "🔥 SkinTokリアリティチェック",
+  "kbeauty.sec.viral.sub": "今バズり中 — 本当に効く?主張ごとに日付・皮膚科視点の正直な判定。",
+  "kbeauty.sec.news.title": "🗞️ ビューティ科学・安全デスク",
+  "kbeauty.sec.news.sub": "成分科学・安全・規制のために注視する信頼できる情報源 — タップして自分で確認を。",
+  "kbeauty.sec.krsrc.title": "🇰🇷 注視している韓国の情報源",
+  "kbeauty.sec.krsrc.sub": "韓国トレンド判断の根拠となる韓国の小売・レビュー信号 — 手動確認・日付明記・スクレイピングなし。",
+  "kbeauty.sec.trust.title": "🛡️ 私たちの根拠 — 方法論と信頼",
+  "kbeauty.sec.trust.sub": "トレンドの読み方、根拠の評価、出典、最新性の保ち方 — そして表現・アフィリエイト方針。"
 }

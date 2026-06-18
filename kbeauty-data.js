@@ -331,6 +331,73 @@ const KBEAUTY_BESTSELLERS = {"_note":"Curated 'viral right now / Olive Young bes
 const KBEAUTY_TRENDS_PATCH = {"_note":"ADD a `verdict` ('proven'|'promising'|'mixed'|'hype') and a `science` honesty line to EACH existing KBEAUTY_TRENDS entry. Replace the current 8-item array with this enriched version (same ids/emojis/titles/blurbs preserved so existing trend.<id>.* localization keys keep working — only new fields added). The localized title/blurb continue to come from the overlay; the new `science` line gets its own overlay key trend.<id>.science.","items":[{"id":"pdrn","emoji":"🐟","title":"PDRN “Salmon DNA”","blurb":"The breakout firming active of 2026 — in serums, creams & pads.","verdict":"promising","science":"Strong as an injectable; topical-cosmetic evidence is still emerging. Expect a hydrated, plumped glow — not injectable-level firming."},{"id":"barrier","emoji":"🧱","title":"Barrier-first skincare","blurb":"Less is more: repair the barrier before piling on actives.","verdict":"proven","science":"Well-supported. A healthy barrier (ceramides, gentle care, fewer harsh actives) is the foundation of calm, resilient skin."},{"id":"microbiome","emoji":"🦠","title":"Microbiome & postbiotics","blurb":"Ferment & probiotic care to support skin’s natural balance.","verdict":"promising","science":"A genuinely active research field; ferments hydrate and feel great, but specific 'rebalances your microbiome' product claims still outpace the topical evidence."},{"id":"exosome","emoji":"🧬","title":"Exosomes & next-gen","blurb":"Lab-advanced regenerative claims move from clinics into cosmetics.","verdict":"hype","science":"Exciting science, but rigorous evidence for topical cosmetic exosomes is very limited today. Treat as a nice serum, not a clinic substitute."},{"id":"heartleaf","emoji":"🌱","title":"Heartleaf everything","blurb":"Houttuynia (어성초) is the calming hero for oily, troubled skin.","verdict":"proven","science":"A well-established soothing botanical — the 'calmer, comfier skin' result is real; the 'shrinks pores' framing is the overclaim."},{"id":"mens","emoji":"🧔","title":"Men’s K-beauty boom","blurb":"Korea leads the world in men’s skincare — simple, effective routines.","verdict":"proven","science":"Skin doesn't read gender — the same proven basics (cleanse, hydrate, SPF) work. A real, sensible market shift, not a gimmick."},{"id":"suncare","emoji":"☀️","title":"Sun-stick & reapply","blurb":"Sticks & cushions make midday SPF reapplication effortless.","verdict":"proven","science":"Reapplication is the most evidence-backed habit in skincare. Sticks/cushions help compliance — just apply enough; thin layers under-deliver SPF."},{"id":"skinimalism","emoji":"🤍","title":"Skinimalism","blurb":"Curated 4–5 step routines beat the maximalist 10-step for many.","verdict":"proven","science":"Fewer, well-chosen steps reduce irritation and improve consistency — a solid, evidence-aligned correction to product overload."}]};
 const KBEAUTY_BOARD_CONFIG = {"_note":"Drives the new board's filter pills, verdict legend, and shop-the-list CTA seed. Localize the `label` fields via overlay keys (board.tag.<id>, board.verdict.<id>).","filters":[{"id":"all","emoji":"✨","label":"All"},{"id":"viral","emoji":"🔥","label":"Viral now"},{"id":"bestseller","emoji":"🏆","label":"Best-sellers"},{"id":"next-gen","emoji":"🧬","label":"Next-gen actives"}],"sorts":[{"id":"rank","label":"Trending rank"},{"id":"popularity","label":"Most popular (live)"}],"verdicts":{"proven":{"emoji":"✅","label":"Science-backed","cls":"good","tip":"Well-supported topical effect for what it claims."},"promising":{"emoji":"🔬","label":"Promising / emerging","cls":"note","tip":"Real but emerging or limited topical evidence — calibrate expectations."},"mixed":{"emoji":"⚖️","label":"Works, but…","cls":"note","tip":"Works for many or in part — context-dependent, some claims oversold."},"hype":{"emoji":"💨","label":"More hype than proof","cls":"warn","tip":"Enjoyable/cosmetic but oversold versus the headline claims."}},"shopAllSeed":"korean skincare bestseller","disclosure":"Trending picks are curated by our team and refreshed quarterly — not paid placements or proprietary ratings. The 'worth it?' verdict is an honest read of public evidence using structure-function wording (helps/supports), never a medical claim. Some links are affiliate links at no extra cost to you."};
 
+/* ── SkinTok Reality Check (#4) — fast viral-claim vs evidence watchlist ─────*/
+const KBEAUTY_VIRALCHECK = {
+  updatedAt: '2026-06',
+  velocityLabels: { spiking:'Spiking', steady:'Steady', cooling:'Cooling' },
+  items: [
+    { id:'beef-tallow', emoji:'🥩', label:'Beef tallow', verdict:'mixed', velocity:'spiking', since:'2024', claim:'A “natural” moisturizer that beats modern creams.', science:'Rich and occlusive, so it can soften very dry skin — but there is no evidence it out-performs a formulated moisturizer, and it rates high for clogging pores.', note:'Patch-test first; best avoided on oily or breakout-prone skin.', aliSeed:'ceramide moisturizer' },
+    { id:'rice-water', emoji:'🍚', label:'Rice water', verdict:'mixed', velocity:'steady', since:'2023', claim:'A Korean secret for glass skin and brightening.', science:'A pleasant, mild humectant-and-antioxidant rinse that adds gentle hydration and glow; any “brightening” is subtle and not a substitute for proven actives.', note:'Harmless for most — keep expectations modest.', aliSeed:'rice toner' },
+    { id:'skin-flooding', emoji:'💧', label:'Skin flooding', verdict:'proven', velocity:'steady', since:'2023', claim:'Layer humectants on damp skin to “flood” it with moisture.', science:'Sound technique — humectants grab water best on damp skin, then a cream seals it in. Basically good layering with a catchy name.', note:'', aliSeed:'hyaluronic acid serum' },
+    { id:'morning-shed', emoji:'🌙', label:'Morning shed', verdict:'hype', velocity:'spiking', since:'2024', claim:'Pile on overnight layers, then peel off a “transformed” face at dawn.', science:'Mostly theatrical — overnight masks and patches do hydrate, but the dramatic reveal is a look, not a lasting skin upgrade.', note:'Heavy layering can clog or irritate some skin.', aliSeed:'overnight sleeping mask' },
+    { id:'lemon-diy', emoji:'🍋', label:'DIY lemon / vinegar acids', verdict:'hype', velocity:'steady', since:'2020', claim:'Natural acids for brightening and clearing breakouts.', science:'Risky and unreliable — DIY citrus and vinegar have an uncontrolled pH and can burn or disrupt the barrier. A formulated AHA/BHA is safer and more effective.', note:'Can cause chemical burns and sun sensitivity — skip this one.', aliSeed:'aha bha exfoliant' },
+    { id:'ice-facial', emoji:'🧊', label:'Ice facials / skin icing', verdict:'mixed', velocity:'cooling', since:'2022', claim:'De-puff and permanently shrink your pores.', science:'Temporarily de-puffs and feels refreshing; any pore “shrinking” is brief. Fine in moderation.', note:'Don’t hold ice on bare skin too long — wrap it to avoid a cold burn.', aliSeed:'ice roller face' },
+    { id:'retinol-sandwich', emoji:'🥪', label:'Retinol sandwich', verdict:'proven', velocity:'steady', since:'2023', claim:'Moisturizer–retinoid–moisturizer to cut irritation.', science:'A legitimate buffering method that genuinely improves retinoid tolerance for sensitive or new users.', note:'', aliSeed:'retinol serum' },
+    { id:'spf-contour', emoji:'🌞', label:'Sunscreen “contouring”', verdict:'hype', velocity:'spiking', since:'2024', claim:'Skip SPF on some areas to “contour” with a tan.', science:'A genuinely harmful trend — uneven sunscreen means uneven UV damage and pigmentation, the opposite of healthy skin.', note:'Always apply SPF evenly to the whole face.', aliSeed:'korean sunscreen' },
+    { id:'glazed-donut', emoji:'🍩', label:'Glazed-donut skin', verdict:'proven', velocity:'steady', since:'2022', claim:'A celebrity dewy-glow routine.', science:'Layered hydration plus a dewy finish — a real, achievable look (the same idea as glass skin).', note:'', aliSeed:'hyaluronic acid serum' },
+    { id:'porefilter', emoji:'🫧', label:'“Pore-filter” primers', verdict:'mixed', velocity:'spiking', since:'2025', claim:'Blur pores into invisibility like a filter.', science:'Silicone-style blurring primers really do soften the look of pores for the day — a cosmetic, temporary optical effect, not a change to the pores themselves.', note:'', aliSeed:'pore blurring primer' },
+  ],
+};
+
+/* ── Beauty-Science & Safety Desk (#5) — curated authoritative sources ───────
+   Honest, evergreen reference desk (real authority landing pages, link-out only)
+   rather than unverified live headlines. An optional Worker news route can layer
+   live items on top later. Source names + URLs stay original. */
+const KBEAUTY_NEWSWIRE = {
+  updatedAt: '2026-06',
+  items: [
+    { id:'aad', emoji:'🩺', source:'American Academy of Dermatology', title:'Dermatologist skin-care guidance & news', desc:'Evidence-based skin-care basics, sunscreen and ingredient guidance from US dermatologists.', url:'https://www.aad.org/news' },
+    { id:'fda', emoji:'🏛️', source:'U.S. FDA — Cosmetics', title:'Cosmetic safety, recalls & regulation', desc:'Official US cosmetic ingredient safety, labeling rules and recall alerts.', url:'https://www.fda.gov/cosmetics' },
+    { id:'cosing', emoji:'🇪🇺', source:'EU CosIng', title:'EU cosmetic ingredient database', desc:'The European Commission database of cosmetic ingredients and their regulatory status.', url:'https://ec.europa.eu/growth/tools-databases/cosing/' },
+    { id:'mfds', emoji:'🇰🇷', source:'Korea MFDS', title:'Korean cosmetics regulator (식약처)', desc:'Korea’s Ministry of Food and Drug Safety — the authority behind K-beauty product standards.', url:'https://www.mfds.go.kr/eng/index.do' },
+    { id:'pubmed', emoji:'🔬', source:'PubMed', title:'Peer-reviewed dermatology research', desc:'Search the primary biomedical literature behind any ingredient or trend claim.', url:'https://pubmed.ncbi.nlm.nih.gov/?term=cosmetic+dermatology' },
+    { id:'incidecoder', emoji:'🧪', source:'INCIDecoder', title:'Ingredient-by-ingredient breakdowns', desc:'Plain-language analysis of what each INCI ingredient does in a formula.', url:'https://incidecoder.com/' },
+  ],
+};
+
+/* ── Korea-source provenance (#8) — named, dated, never scraped ──────────────*/
+const KBEAUTY_KR_SOURCES = {
+  updatedAt: '2026-06',
+  items: [
+    { id:'oliveyoung', emoji:'🛍️', name:'Olive Young', desc:'Korea’s dominant health-and-beauty chain — its weekly best-seller rankings are the front line of the trend cycle.', url:'https://www.oliveyoung.co.kr/', lastRead:'2026-06' },
+    { id:'hwahae', emoji:'⭐', name:'Hwahae (화해)', desc:'Korea’s largest cosmetics-review app — ingredient analysis and ranked user reviews.', url:'https://www.hwahae.co.kr/', lastRead:'2026-06' },
+    { id:'naver', emoji:'🔎', name:'Naver DataLab', desc:'Search-trend signals from Korea’s leading portal — what Koreans are actually looking up.', url:'https://datalab.naver.com/', lastRead:'2026-06' },
+    { id:'musinsa', emoji:'🧴', name:'Musinsa Beauty', desc:'Fashion-forward retailer whose beauty vertical surfaces younger, trend-led launches.', url:'https://www.musinsa.com/', lastRead:'2026-06' },
+    { id:'mfds-kr', emoji:'🏛️', name:'MFDS (식약처)', desc:'Korea’s drug-and-cosmetic regulator — ingredient approvals and safety notices.', url:'https://www.mfds.go.kr/eng/index.do', lastRead:'2026-06' },
+  ],
+};
+
+/* ── Methodology & E-E-A-T Trust Center (#3) ────────────────────────────────*/
+const KBEAUTY_TRUST = {
+  updatedAt: '2026-06',
+  author: 'KoreaPlus Editorial Team',
+  items: [
+    { id:'how', title:'How we read trends', body:'We position each trend on a Korea-vs-West attention map from three inputs: Korean retailer launches and best-seller movement, search interest, and social mentions. Lifecycle stage and crossover direction are an editorial read of those signals — analysis, not a precise metric — and every card is dated so you can judge how current it is.' },
+    { id:'grade', title:'How we grade the evidence', body:'Each trend and viral claim gets one of four honest verdicts: ✅ Science-backed (well-supported), 🔬 Promising (real but emerging evidence), ⚖️ Works, but… (context-dependent or partly oversold), 💨 More hype than proof. Verdicts use cosmetic structure-function language (helps / supports / improves the appearance of) and never make medical claims.' },
+    { id:'sources', title:'Sources we rely on', body:'We cross-check against public, authoritative references — peer-reviewed research (PubMed), the American Academy of Dermatology, the EU CosIng ingredient database, and Korea’s MFDS — plus named, dated Korean retail and review signals (Olive Young, Hwahae, Naver). Links go out to the primary source so you can verify for yourself.' },
+    { id:'fresh', title:'How we stay current', body:'The radar and viral watchlist are reviewed about monthly; the evidence ledger and bestseller board about quarterly. Each section shows its own “reviewed” date, and a section quietly flags itself as “under review” when it is overdue — so the page tells you the truth about its own freshness.' },
+    { id:'claims', title:'Claims & safety policy', body:'This is general educational information, not personalized medical advice. We use structure-function wording, keep honest hedges, and flag anything risky. For a persistent or serious skin concern, see a dermatologist.' },
+    { id:'affiliate', title:'Affiliate disclosure', body:'Some links (AliExpress, Coupang and partners) are affiliate links — if you buy through them KoreaPlus may earn a small commission at no extra cost to you. Trending and verdict calls are independent of any commercial relationship and are never paid placements.' },
+  ],
+};
+
+/* ── Quarterly Trend Report (#10) — assembled from live datasets ─────────────*/
+const KBEAUTY_REPORT = {
+  quarter: '2026 Q2',
+  updatedAt: '2026-06',
+  intro: 'Our quarterly read on where K-beauty is heading: the trends gaining real momentum, the viral claims worth your time (and the ones worth skipping), and the honest evidence behind the headlines — compiled from the radar, the evidence ledger and this quarter’s reality checks.',
+};
+
 /* ── Expose for the browser (modules/kbeauty.js) and SEO builder (vm) ───────*/
 const KBEAUTY_ALL = {
   KBEAUTY_SKINTYPES, KBEAUTY_QUIZ, KBEAUTY_CONCERNS, KBEAUTY_ROUTINE,
@@ -338,6 +405,7 @@ const KBEAUTY_ALL = {
   KBEAUTY_GLOSSARY, KBEAUTY_TRENDS, KBEAUTY_FORECAST, KBEAUTY_MENS, KBEAUTY_SHOP,
   KBEAUTY_GLASSKIN, KBEAUTY_DUPES_META, KBEAUTY_DUPES, KBEAUTY_TROUBLESHOOTER_META, KBEAUTY_PURGE, KBEAUTY_BARRIER, KBEAUTY_FUNGAL, KBEAUTY_BUY, KBEAUTY_SUNCARE, KBEAUTY_SNAIL, KBEAUTY_CATEGORIES, KBEAUTY_BESTSELLERS, KBEAUTY_TRENDS_PATCH, KBEAUTY_BOARD_CONFIG,
   KBEAUTY_CITATIONS, KBEAUTY_TRENDS_REVIEWED, KBEAUTY_RADAR,
+  KBEAUTY_VIRALCHECK, KBEAUTY_NEWSWIRE, KBEAUTY_KR_SOURCES, KBEAUTY_TRUST, KBEAUTY_REPORT,
 };
 if (typeof window !== 'undefined') Object.assign(window, KBEAUTY_ALL);
 if (typeof module !== 'undefined' && module.exports) module.exports = KBEAUTY_ALL;

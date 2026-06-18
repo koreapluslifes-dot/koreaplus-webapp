@@ -579,5 +579,13 @@
   "kbeauty.sec.ledger.sub": "用证据为2026趋势评级——已证实、有潜力还是炒作——附日期与来源。",
   "kbeauty.sec.radar.title": "🛰️ 首尔 vs 世界趋势雷达",
   "kbeauty.sec.radar.sub": "每个K-beauty趋势在“韩国 vs 西方”地图上的位置、走向，以及是否已跨界——附日期与来源。",
-  "kbeauty.filter.radar": "🛰️ 趋势雷达"
+  "kbeauty.filter.radar": "🛰️ 趋势雷达",
+  "kbeauty.sec.viral.title": "🔥 SkinTok真相核查",
+  "kbeauty.sec.viral.sub": "正在爆火——到底靠不靠谱?对每个说法给出附日期、皮肤科视角的诚实判定。",
+  "kbeauty.sec.news.title": "🗞️ 美妆科学与安全台",
+  "kbeauty.sec.news.sub": "我们为成分科学、安全与法规所关注的权威来源——点击自行核实。",
+  "kbeauty.sec.krsrc.title": "🇰🇷 我们关注的韩国来源",
+  "kbeauty.sec.krsrc.sub": "支撑我们韩国趋势判断的韩国零售与评测信号——人工核对、标注日期、绝不爬取。",
+  "kbeauty.sec.trust.title": "🛡️ 我们的依据——方法与信任",
+  "kbeauty.sec.trust.sub": "我们如何解读趋势、评估证据、注明来源并保持更新——以及表述与联盟政策。"
 }

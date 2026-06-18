@@ -489,6 +489,36 @@
     .radar-c-meta { font-size:11px; color:var(--text3); line-height:1.5; margin-top:7px; }
     .radar-c-shop { margin-top:10px; }
 
+    /* ═══ SkinTok Reality Check ═══════════════════════════════════════════════ */
+    .viral-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
+    .viral-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:13px 15px; }
+    .viral-h { display:flex; align-items:center; gap:8px; } .viral-em { font-size:18px; } .viral-t { font-size:14px; font-weight:800; color:var(--text); flex:1; }
+    .viral-vel { font-size:10px; font-weight:800; border-radius:12px; padding:2px 8px; color:#fff; }
+    .vel-spike { background:#e0823a; } .vel-steady { background:#9aa0a6; } .vel-cool { background:#2f80ed; }
+    .viral-claim { font-size:12.5px; font-style:italic; color:var(--text2); margin:8px 0; line-height:1.5; }
+    .viral-card .kb-flag { margin-bottom:6px; }
+    .viral-read { font-size:12.5px; color:var(--text); line-height:1.55; }
+    .viral-note { font-size:11.5px; color:#b3541e; background:rgba(224,130,58,.1); border-radius:9px; padding:6px 9px; margin-top:7px; line-height:1.45; }
+    html.light .viral-note { color:#9c4413; }
+    .viral-meta { font-size:11px; color:var(--text3); margin-top:7px; }
+    /* ═══ News desk / Korea sources ═══════════════════════════════════════════ */
+    .news-list, .krsrc-list { display:flex; flex-direction:column; gap:8px; }
+    .news-row, .krsrc-row { display:flex; align-items:flex-start; gap:11px; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:11px 13px; text-decoration:none; color:var(--text); }
+    .news-row:hover, .krsrc-row:hover { border-color:var(--kb1); }
+    .news-em, .krsrc-em { font-size:19px; line-height:1.2; flex:none; }
+    .news-body, .krsrc-body { display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
+    .news-t, .krsrc-n { font-size:13.5px; font-weight:800; color:var(--text); }
+    .news-src { font-size:11px; font-weight:700; color:var(--kb2); }
+    .news-d, .krsrc-d { font-size:12px; color:var(--text2); line-height:1.5; }
+    .krsrc-date { font-size:10.5px; color:var(--text3); white-space:nowrap; flex:none; align-self:center; }
+    /* ═══ Trust Center ════════════════════════════════════════════════════════ */
+    .trust-by { font-size:12.5px; color:var(--text2); margin-bottom:11px; }
+    .trust-item { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:11px 14px; margin-bottom:8px; }
+    .trust-item summary { font-size:13.5px; font-weight:800; color:var(--text); cursor:pointer; }
+    .trust-b { font-size:12.5px; color:var(--text2); line-height:1.6; margin-top:8px; }
+    .trust-table { width:100%; border-collapse:collapse; font-size:12.5px; }
+    .trust-table td { padding:6px 8px; border-bottom:1px solid var(--border); color:var(--text2); } .trust-table td:last-child { text-align:right; font-weight:700; color:var(--text); white-space:nowrap; }
+
     /* ═══ Trend Evidence Ledger ═══════════════════════════════════════════════ */
     .ledger-meta { font-size:12px; color:var(--text2); margin-bottom:10px; }
     .ledger-method { color:var(--kb1); font-weight:700; cursor:pointer; }
@@ -771,6 +801,15 @@
     <div id="kb-ledger-box" aria-live="polite"></div>
   </section>
 
+  <!-- SkinTok Reality Check (#4) -->
+  <section class="kb-sec" id="kb-viral">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.viral.title">🔥 SkinTok reality check</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.viral.sub">Going viral right now — does it actually hold up? A dated, dermatologist-informed verdict on each claim.</div>
+    </div>
+    <div id="kb-viral-box" aria-live="polite"></div>
+  </section>
+
   <!-- Bestsellers & 2026 Trend Tracker -->
   <section class="kb-sec" id="kb-board">
     <div class="kb-sec-head">
@@ -813,6 +852,33 @@
     </div>
   </section>
 
+  <!-- Beauty-Science & Safety Desk (#5) -->
+  <section class="kb-sec" id="kb-news">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.news.title">🗞️ Beauty-science & safety desk</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.news.sub">The authoritative sources we monitor for ingredient science, safety and regulation — link out and verify for yourself.</div>
+    </div>
+    <div id="kb-news-box" aria-live="polite"></div>
+  </section>
+
+  <!-- Korea-source provenance (#8) -->
+  <section class="kb-sec" id="kb-krsrc">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.krsrc.title">🇰🇷 Korea sources we monitor</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.krsrc.sub">The named, dated Korean retail and review signals behind our Korea-trend calls — checked by hand, never scraped.</div>
+    </div>
+    <div id="kb-krsrc-box" aria-live="polite"></div>
+  </section>
+
+  <!-- Methodology & E-E-A-T Trust Center (#3) -->
+  <section class="kb-sec" id="kb-trust">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.trust.title">🛡️ How we know — methodology & trust</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.trust.sub">How we read trends, grade the evidence, source our calls and stay current — and our claims & affiliate policy.</div>
+    </div>
+    <div id="kb-trust-box" aria-live="polite"></div>
+  </section>
+
   <!-- AdSense — single responsive unit -->
   <div style="margin:36px auto 12px;max-width:880px;min-height:250px;display:flex;align-items:center;justify-content:center;padding:0 16px">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
@@ -833,9 +899,9 @@
 
 <script src="config.js" onerror="void 0"></script>
 <script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
-<script src="kbeauty-data.js?v=4"></script>
+<script src="kbeauty-data.js?v=5"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/kbeauty-sharecard.js"></script>
-<script src="modules/kbeauty.js?v=4"></script>
+<script src="modules/kbeauty.js?v=5"></script>
 </body>
 </html>
