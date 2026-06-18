@@ -49,7 +49,7 @@
   <link rel="stylesheet" href="seo.css">
   <script src="modules/header.js"></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Beauty Guide — Korean Skincare Routine, Ingredients & Brands","url":"https://koreaplus-lifes.com/kbeauty","inLanguage":"en","datePublished":"2026-06-14","dateModified":"2026-06-14","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-beauty (Korean skincare & cosmetics)"},"publisher":{"@type":"Organization","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/","logo":{"@type":"ImageObject","url":"https://koreaplus-lifes.com/guide/icons/kplus.svg"}},"author":{"@type":"Organization","name":"KoreaPlus Editorial"},"description":"Korean skincare routine builder, ingredient decoder, brand directory and shopping guide."}
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Beauty Guide — Korean Skincare Routine, Ingredients & Brands","url":"https://koreaplus-lifes.com/kbeauty","inLanguage":"en","datePublished":"2026-06-14","dateModified":"2026-06-18","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-beauty (Korean skincare & cosmetics)"},"publisher":{"@type":"Organization","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/","logo":{"@type":"ImageObject","url":"https://koreaplus-lifes.com/guide/icons/kplus.svg"}},"author":{"@type":"Organization","name":"KoreaPlus Editorial"},"description":"Korean skincare routine builder, ingredient decoder, brand directory and shopping guide."}
   </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -489,6 +489,21 @@
     .radar-c-meta { font-size:11px; color:var(--text3); line-height:1.5; margin-top:7px; }
     .radar-c-shop { margin-top:10px; }
 
+    /* ═══ Personalized trend toggle (#9) ══════════════════════════════════════ */
+    .trend-toggle { display:flex; gap:6px; margin-bottom:11px; flex-wrap:wrap; }
+    .trend-seg { font-size:12px; font-weight:800; border:1px solid var(--border); background:var(--surface); color:var(--text2); border-radius:18px; padding:6px 14px; cursor:pointer; }
+    .trend-seg.on { background:linear-gradient(135deg,var(--kb1),var(--kb2)); color:#fff; border-color:transparent; }
+    .trend-toggle-cta { font-size:12px; font-weight:700; color:var(--kb1); cursor:pointer; }
+    /* ═══ Channel velocity (#6) ═══════════════════════════════════════════════ */
+    .bs-channel { font-size:10.5px; font-weight:800; color:var(--text2); background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:2px 8px; }
+    .bs-moved { font-size:11.5px; color:var(--text3); }
+    /* ═══ Quarterly report (#10) ══════════════════════════════════════════════ */
+    .report-card { background:linear-gradient(135deg,var(--kb-soft),rgba(139,70,214,.07)); border:1px solid var(--border); border-radius:16px; padding:16px 18px; }
+    .report-q { font-size:12px; font-weight:800; color:var(--kb1); margin-bottom:8px; }
+    .report-intro { font-size:13px; color:var(--text); line-height:1.6; margin:0 0 12px; }
+    .report-list { margin:6px 0 0; padding-left:18px; } .report-list li { font-size:12.5px; color:var(--text2); line-height:1.6; margin-bottom:4px; }
+    #kb-report-share { margin-top:12px; }
+
     /* ═══ SkinTok Reality Check ═══════════════════════════════════════════════ */
     .viral-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
     .viral-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:13px 15px; }
@@ -810,6 +825,15 @@
     <div id="kb-viral-box" aria-live="polite"></div>
   </section>
 
+  <!-- Quarterly Trend Report + share (#10) -->
+  <section class="kb-sec" id="kb-report">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.report.title">📑 Quarterly K-beauty trend report</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.report.sub">Our dated, citable quarterly read — what's gaining momentum, what's worth skipping, and the evidence behind it. One tap to share.</div>
+    </div>
+    <div id="kb-report-box" aria-live="polite"></div>
+  </section>
+
   <!-- Bestsellers & 2026 Trend Tracker -->
   <section class="kb-sec" id="kb-board">
     <div class="kb-sec-head">
@@ -899,9 +923,9 @@
 
 <script src="config.js" onerror="void 0"></script>
 <script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
-<script src="kbeauty-data.js?v=6"></script>
+<script src="kbeauty-data.js?v=7"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/kbeauty-sharecard.js"></script>
-<script src="modules/kbeauty.js?v=6"></script>
+<script src="modules/kbeauty.js?v=7"></script>
 </body>
 </html>

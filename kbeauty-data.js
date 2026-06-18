@@ -398,6 +398,50 @@ const KBEAUTY_REPORT = {
   intro: 'Our quarterly read on where K-beauty is heading: the trends gaining real momentum, the viral claims worth your time (and the ones worth skipping), and the honest evidence behind the headlines — compiled from the radar, the evidence ledger and this quarter’s reality checks.',
 };
 
+/* ── Channel-Signal Velocity (#6) — Korean retail provenance + momentum ──────
+   Overlays the existing 16-item bestseller board. channel = Korean retail source
+   where the signal originates (proper noun, stays original). Dated snapshots — no
+   scraping. whyMoved is the localizable rationale. */
+const KBEAUTY_BESTSELLERS_VELOCITY = {
+  statusAsOf: '2026-06',
+  statusLabels: { rising:'Rising', peaking:'Peaking', cooling:'Cooling', steady:'Steady' },
+  items: {
+    'anua-heartleaf-toner':       { channel:'Olive Young', koreaNative:true, status:'rising',  whyMoved:'Still climbing Western TikTok while steady at home — the heartleaf gateway.' },
+    'boj-relief-sun':             { channel:'Olive Young', koreaNative:true, status:'peaking', whyMoved:'The global gateway K-sunscreen — at its crossover peak.' },
+    'medicube-pdrn-pink':         { channel:'Olive Young', koreaNative:true, status:'rising',  whyMoved:'Lifted fast by the PDRN “salmon DNA” wave.' },
+    'torriden-dive-in':           { channel:'Hwahae',      koreaNative:true, status:'steady',  whyMoved:'A dependable hyaluronic hydration staple, high reorder rate.' },
+    'skin1004-centella-ampoule':  { channel:'Olive Young', koreaNative:true, status:'steady',  whyMoved:'Long-running centella favorite, mature in both markets.' },
+    'numbuzin-no3-serum':         { channel:'Olive Young', koreaNative:true, status:'rising',  whyMoved:'Numbered-line buzz still building abroad.' },
+    'cosrx-snail-96':             { channel:'Hwahae',      koreaNative:true, status:'peaking', whyMoved:'The global snail benchmark — fully mainstream.' },
+    'roundlab-dokdo-toner':       { channel:'Olive Young', koreaNative:true, status:'steady',  whyMoved:'Quiet steady bestseller with loyal reorders.' },
+    'tirtir-red-cushion':         { channel:'Musinsa',     koreaNative:true, status:'peaking', whyMoved:'Shade-range virality peaked across the West.' },
+    'abib-heartleaf-pad':         { channel:'Olive Young', koreaNative:true, status:'rising',  whyMoved:'Riding the heartleaf wave alongside Anua.' },
+    'isntree-hyaluronic-toner':   { channel:'Hwahae',      koreaNative:true, status:'steady',  whyMoved:'Reliable hydrating toner, steady demand.' },
+    'mediheal-collagen-mask':     { channel:'Daiso',       koreaNative:true, status:'cooling', whyMoved:'Sheet masks softening as serums take share.' },
+    'anua-niacinamide-serum':     { channel:'Olive Young', koreaNative:true, status:'rising',  whyMoved:'The Anua halo is lifting its serum line.' },
+    'biodance-collagen-mask':     { channel:'Olive Young', koreaNative:true, status:'rising',  whyMoved:'Overnight collagen mask gone viral on social.' },
+    'skin1004-toning-toner':      { channel:'Olive Young', koreaNative:true, status:'steady',  whyMoved:'Steady centella toner companion.' },
+    'exosome-ampoule':            { channel:'Hwahae',      koreaNative:true, status:'rising',  whyMoved:'Next-gen exosome curiosity climbing fast.' },
+  },
+};
+
+/* ── Personalized Trend Feed (#9) — map radar/viral entries to concern ids ───
+   Non-translatable (ids only). Used by the "For my skin" toggle to filter the
+   radar and viral watchlist to entries relevant to the saved quiz profile. */
+const KBEAUTY_TREND_TAGS = {
+  radar: {
+    pdrn:['aging'], exosome:['aging'], barrier:['redness','dryness','sensitive'], heartleaf:['acne','redness','pores'],
+    snail:['dryness','sensitive'], microbiome:['redness','sensitive'], sunstick:['pigmentation','aging'],
+    skincycling:['aging','pores'], slugging:['dryness'], mugwort:['redness','acne'], glassskin:['dryness'],
+    skinimalism:['redness','sensitive'], glazeddonut:['dryness'], mens:[],
+  },
+  viral: {
+    'beef-tallow':['dryness'], 'rice-water':['pigmentation'], 'skin-flooding':['dryness'], 'morning-shed':[],
+    'lemon-diy':['pigmentation','acne'], 'ice-facial':['redness','pores'], 'retinol-sandwich':['aging'],
+    'spf-contour':['pigmentation'], 'glazed-donut':['dryness'], porefilter:['pores'],
+  },
+};
+
 /* ── Expose for the browser (modules/kbeauty.js) and SEO builder (vm) ───────*/
 const KBEAUTY_ALL = {
   KBEAUTY_SKINTYPES, KBEAUTY_QUIZ, KBEAUTY_CONCERNS, KBEAUTY_ROUTINE,
@@ -406,6 +450,7 @@ const KBEAUTY_ALL = {
   KBEAUTY_GLASSKIN, KBEAUTY_DUPES_META, KBEAUTY_DUPES, KBEAUTY_TROUBLESHOOTER_META, KBEAUTY_PURGE, KBEAUTY_BARRIER, KBEAUTY_FUNGAL, KBEAUTY_BUY, KBEAUTY_SUNCARE, KBEAUTY_SNAIL, KBEAUTY_CATEGORIES, KBEAUTY_BESTSELLERS, KBEAUTY_TRENDS_PATCH, KBEAUTY_BOARD_CONFIG,
   KBEAUTY_CITATIONS, KBEAUTY_TRENDS_REVIEWED, KBEAUTY_RADAR,
   KBEAUTY_VIRALCHECK, KBEAUTY_NEWSWIRE, KBEAUTY_KR_SOURCES, KBEAUTY_TRUST, KBEAUTY_REPORT,
+  KBEAUTY_BESTSELLERS_VELOCITY, KBEAUTY_TREND_TAGS,
 };
 if (typeof window !== 'undefined') Object.assign(window, KBEAUTY_ALL);
 if (typeof module !== 'undefined' && module.exports) module.exports = KBEAUTY_ALL;

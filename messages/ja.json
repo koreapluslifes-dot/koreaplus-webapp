@@ -587,5 +587,7 @@
   "kbeauty.sec.krsrc.title": "🇰🇷 注視している韓国の情報源",
   "kbeauty.sec.krsrc.sub": "韓国トレンド判断の根拠となる韓国の小売・レビュー信号 — 手動確認・日付明記・スクレイピングなし。",
   "kbeauty.sec.trust.title": "🛡️ 私たちの根拠 — 方法論と信頼",
-  "kbeauty.sec.trust.sub": "トレンドの読み方、根拠の評価、出典、最新性の保ち方 — そして表現・アフィリエイト方針。"
+  "kbeauty.sec.trust.sub": "トレンドの読み方、根拠の評価、出典、最新性の保ち方 — そして表現・アフィリエイト方針。",
+  "kbeauty.sec.report.title": "📑 四半期K-beautyトレンドレポート",
+  "kbeauty.sec.report.sub": "日付・引用可能な四半期まとめ — 勢いが上がるもの、スキップ推奨、その根拠。ワンタップ共有。"
 }

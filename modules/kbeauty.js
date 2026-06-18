@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '6';
+  const OVERLAY_VER = '7';
   async function loadContent() {
     if (lang === 'en') return;
     try {
@@ -91,7 +91,7 @@
   }
   function localizeNewData() {
     if (!CONTENT || !Object.keys(CONTENT).length) return; // en or load failed → English
-    ['KBEAUTY_GLASSKIN','KBEAUTY_DUPES_META','KBEAUTY_DUPES','KBEAUTY_BUY','KBEAUTY_SUNCARE','KBEAUTY_SNAIL','KBEAUTY_CATEGORIES','KBEAUTY_BESTSELLERS','KBEAUTY_BOARD_CONFIG','KBEAUTY_TROUBLESHOOTER_META','KBEAUTY_PURGE','KBEAUTY_BARRIER','KBEAUTY_FUNGAL','KBEAUTY_RADAR','KBEAUTY_VIRALCHECK','KBEAUTY_NEWSWIRE','KBEAUTY_KR_SOURCES','KBEAUTY_TRUST','KBEAUTY_REPORT'].forEach(name => {
+    ['KBEAUTY_GLASSKIN','KBEAUTY_DUPES_META','KBEAUTY_DUPES','KBEAUTY_BUY','KBEAUTY_SUNCARE','KBEAUTY_SNAIL','KBEAUTY_CATEGORIES','KBEAUTY_BESTSELLERS','KBEAUTY_BOARD_CONFIG','KBEAUTY_TROUBLESHOOTER_META','KBEAUTY_PURGE','KBEAUTY_BARRIER','KBEAUTY_FUNGAL','KBEAUTY_RADAR','KBEAUTY_VIRALCHECK','KBEAUTY_NEWSWIRE','KBEAUTY_KR_SOURCES','KBEAUTY_TRUST','KBEAUTY_REPORT','KBEAUTY_BESTSELLERS_VELOCITY'].forEach(name => {
       if (!window[name]) return;
       try { const clone = JSON.parse(JSON.stringify(window[name])); ncWalk(clone, name); window[name] = clone; } catch {}
     });
@@ -109,9 +109,9 @@
 
   // ── Mini i18n for JS-generated labels (chrome uses data-i18n via i18n.js) ──
   const STR = {
-    en: { result:'Your skin type', retake:'Retake', best:'Best for', pairs:'Pairs with', avoid:'Be careful with', preg:'Pregnancy', pregSafe:'Generally fine', pregCaution:'Ask your doctor', time:'Use', am:'AM', pm:'PM', both:'AM & PM', shop:'Shop this step', shopFor:'Shop', loading:'Loading…', shopEmpty:'Live shopping lights up here. Meanwhile, browse our authentic retailers below.', selectActives:'Select 2+ actives to check.', allSafe:'No conflicts — these play nicely together. 🎉', followToast:'Added to favourites ★', unfollowToast:'Removed', known:'Known for', tier:'Tier', vegan:'Vegan', mens:'Men-friendly', bioSoon:'Loading profile…', readMore:'Learn more', decNone:'No ingredients recognized — check the spelling or paste the full INCI list.', decFound:'recognized', priceFrom:'from', shelfEmpty:'Take the quiz and pick concerns — your shelf builds itself.', yourRoutine:'Your routine', sources:'Always patch-test new actives.', sponsored:'Sponsored', advertisement:'Advertisement', adAliTitle:'✨ Shop K-beauty on AliExpress', adAliSub:'Authentic Korean skincare — ships worldwide, best prices.', adAliCta:'Browse deals', adAliLoading:'Loading today’s deals…', reviewedOn:'Evidence reviewed', sources:'Sources', howWeGrade:'How we grade →', radarChartLabel:'Korea-vs-West trend map', radarQkr:'Big in Korea', radarQglobal:'Global mainstream', radarQniche:'Niche / quiet', radarQwest:'Big in the West', radarAxisWest:'Western popularity', radarSince:'Trending since', newsNote:'A curated desk of authoritative sources we monitor — tap any to read the primary source.', krSrcNote:'The named Korean sources behind our Korea-trend calls — checked, dated, never scraped.', lastRead:'last read', authoredBy:'Written & reviewed by', lastUpdatedTable:'Last updated by section', radarSecShort:'Trend radar', ledgerSecShort:'Evidence ledger', viralSecShort:'SkinTok reality check', boardSecShort:'Bestseller board' },
-    ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.', sponsored:'스폰서', advertisement:'광고', adAliTitle:'✨ 알리익스프레스에서 K-뷰티 쇼핑', adAliSub:'정품 한국 스킨케어 — 전 세계 배송, 최저가.', adAliCta:'특가 보기', adAliLoading:'오늘의 특가 불러오는 중…', reviewedOn:'근거 검토', sources:'출처', howWeGrade:'평가 기준 보기 →', radarChartLabel:'한국 vs 서구 트렌드 지도', radarQkr:'한국에서 인기', radarQglobal:'글로벌 대세', radarQniche:'틈새 / 조용', radarQwest:'서구에서 인기', radarAxisWest:'서구 인기도', radarSince:'유행 시작', newsNote:'우리가 모니터링하는 신뢰 기관 큐레이션 — 눌러서 1차 출처를 확인하세요.', krSrcNote:'한국 트렌드 판단의 근거가 된 한국 소스 — 확인·날짜표기, 스크래핑 안 함.', lastRead:'최근 확인', authoredBy:'작성·검토', lastUpdatedTable:'섹션별 최종 업데이트', radarSecShort:'트렌드 레이더', ledgerSecShort:'근거 원장', viralSecShort:'스킨톡 리얼리티 체크', boardSecShort:'베스트셀러 보드' },
-    ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。', sponsored:'スポンサー', advertisement:'広告', adAliTitle:'✨ AliExpressでK-beautyを購入', adAliSub:'本物の韓国スキンケア — 世界中に配送、ベストプライス。', adAliCta:'お得を見る', adAliLoading:'本日のお得を読み込み中…', reviewedOn:'エビデンス確認', sources:'出典', howWeGrade:'評価基準を見る →', radarChartLabel:'韓国 vs 欧米トレンドマップ', radarQkr:'韓国で人気', radarQglobal:'グローバル定番', radarQniche:'ニッチ / 静か', radarQwest:'欧米で人気', radarAxisWest:'欧米での人気度', radarSince:'流行開始', newsNote:'当サイトが注視する信頼できる情報源のキュレーション — タップで一次情報へ。', krSrcNote:'韓国トレンド判断の根拠となる韓国の情報源 — 確認・日付明記、スクレイピングなし。', lastRead:'最終確認', authoredBy:'作成・監修', lastUpdatedTable:'セクション別の最終更新', radarSecShort:'トレンドレーダー', ledgerSecShort:'エビデンス台帳', viralSecShort:'SkinTokリアリティチェック', boardSecShort:'ベストセラーボード' },
+    en: { result:'Your skin type', retake:'Retake', best:'Best for', pairs:'Pairs with', avoid:'Be careful with', preg:'Pregnancy', pregSafe:'Generally fine', pregCaution:'Ask your doctor', time:'Use', am:'AM', pm:'PM', both:'AM & PM', shop:'Shop this step', shopFor:'Shop', loading:'Loading…', shopEmpty:'Live shopping lights up here. Meanwhile, browse our authentic retailers below.', selectActives:'Select 2+ actives to check.', allSafe:'No conflicts — these play nicely together. 🎉', followToast:'Added to favourites ★', unfollowToast:'Removed', known:'Known for', tier:'Tier', vegan:'Vegan', mens:'Men-friendly', bioSoon:'Loading profile…', readMore:'Learn more', decNone:'No ingredients recognized — check the spelling or paste the full INCI list.', decFound:'recognized', priceFrom:'from', shelfEmpty:'Take the quiz and pick concerns — your shelf builds itself.', yourRoutine:'Your routine', sources:'Always patch-test new actives.', sponsored:'Sponsored', advertisement:'Advertisement', adAliTitle:'✨ Shop K-beauty on AliExpress', adAliSub:'Authentic Korean skincare — ships worldwide, best prices.', adAliCta:'Browse deals', adAliLoading:'Loading today’s deals…', reviewedOn:'Evidence reviewed', sources:'Sources', howWeGrade:'How we grade →', radarChartLabel:'Korea-vs-West trend map', radarQkr:'Big in Korea', radarQglobal:'Global mainstream', radarQniche:'Niche / quiet', radarQwest:'Big in the West', radarAxisWest:'Western popularity', radarSince:'Trending since', newsNote:'A curated desk of authoritative sources we monitor — tap any to read the primary source.', krSrcNote:'The named Korean sources behind our Korea-trend calls — checked, dated, never scraped.', lastRead:'last read', authoredBy:'Written & reviewed by', lastUpdatedTable:'Last updated by section', radarSecShort:'Trend radar', ledgerSecShort:'Evidence ledger', viralSecShort:'SkinTok reality check', boardSecShort:'Bestseller board', koreaNative:'Korea-native', myTrends:'For my skin', allTrends:'All trends', shareReport:'Share this report', quarterReport:'Quarterly trend report', topMovers:'Gaining momentum', skipList:'Worth skipping', copied:'Link copied ✓', takeQuiz:'take the skin quiz' },
+    ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.', sponsored:'스폰서', advertisement:'광고', adAliTitle:'✨ 알리익스프레스에서 K-뷰티 쇼핑', adAliSub:'정품 한국 스킨케어 — 전 세계 배송, 최저가.', adAliCta:'특가 보기', adAliLoading:'오늘의 특가 불러오는 중…', reviewedOn:'근거 검토', sources:'출처', howWeGrade:'평가 기준 보기 →', radarChartLabel:'한국 vs 서구 트렌드 지도', radarQkr:'한국에서 인기', radarQglobal:'글로벌 대세', radarQniche:'틈새 / 조용', radarQwest:'서구에서 인기', radarAxisWest:'서구 인기도', radarSince:'유행 시작', newsNote:'우리가 모니터링하는 신뢰 기관 큐레이션 — 눌러서 1차 출처를 확인하세요.', krSrcNote:'한국 트렌드 판단의 근거가 된 한국 소스 — 확인·날짜표기, 스크래핑 안 함.', lastRead:'최근 확인', authoredBy:'작성·검토', lastUpdatedTable:'섹션별 최종 업데이트', radarSecShort:'트렌드 레이더', ledgerSecShort:'근거 원장', viralSecShort:'스킨톡 리얼리티 체크', boardSecShort:'베스트셀러 보드', koreaNative:'한국 토종', myTrends:'내 피부용', allTrends:'전체 트렌드', shareReport:'리포트 공유', quarterReport:'분기 트렌드 리포트', topMovers:'상승 모멘텀', skipList:'건너뛸 만한 것', copied:'링크 복사됨 ✓', takeQuiz:'피부 퀴즈 풀기' },
+    ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。', sponsored:'スポンサー', advertisement:'広告', adAliTitle:'✨ AliExpressでK-beautyを購入', adAliSub:'本物の韓国スキンケア — 世界中に配送、ベストプライス。', adAliCta:'お得を見る', adAliLoading:'本日のお得を読み込み中…', reviewedOn:'エビデンス確認', sources:'出典', howWeGrade:'評価基準を見る →', radarChartLabel:'韓国 vs 欧米トレンドマップ', radarQkr:'韓国で人気', radarQglobal:'グローバル定番', radarQniche:'ニッチ / 静か', radarQwest:'欧米で人気', radarAxisWest:'欧米での人気度', radarSince:'流行開始', newsNote:'当サイトが注視する信頼できる情報源のキュレーション — タップで一次情報へ。', krSrcNote:'韓国トレンド判断の根拠となる韓国の情報源 — 確認・日付明記、スクレイピングなし。', lastRead:'最終確認', authoredBy:'作成・監修', lastUpdatedTable:'セクション別の最終更新', radarSecShort:'トレンドレーダー', ledgerSecShort:'エビデンス台帳', viralSecShort:'SkinTokリアリティチェック', boardSecShort:'ベストセラーボード', koreaNative:'韓国発', myTrends:'私の肌向け', allTrends:'すべてのトレンド', shareReport:'レポートを共有', quarterReport:'四半期トレンドレポート', topMovers:'勢いが上昇', skipList:'スキップ推奨', copied:'リンクをコピー ✓', takeQuiz:'肌診断を受ける' },
   };
   const t = (k) => (CONTENT && CONTENT['ui.' + k]) || (STR[lang] && STR[lang][k]) || STR.en[k] || k;
 
@@ -619,18 +619,27 @@
 
   // ── Bestsellers & Trend Tracker (viral 'worth it?' board) ───────────────────
   let boardTag = 'all';
+  let boardKoreaOnly = false;
+  const BS_STATUS_CLS = { rising:'st-rising', peaking:'st-peak', cooling:'vel-cool', steady:'st-fading' };
   function renderBestsellers() {
     const box = $('#kb-board-box'); const BS = window.KBEAUTY_BESTSELLERS; const CFG = window.KBEAUTY_BOARD_CONFIG;
     if (!box || !BS || !CFG) return;
-    const items = (BS.items || []).filter(it => boardTag === 'all' || it.tag === boardTag);
-    const pills = (CFG.filters || []).map(f => `<button class="kb-pick-chip${f.id === boardTag ? ' on' : ''}" data-bt="${esc(f.id)}" aria-pressed="${f.id === boardTag}">${f.emoji || ''} ${esc(f.label)}</button>`).join('');
+    const VEL = window.KBEAUTY_BESTSELLERS_VELOCITY || { items: {}, statusLabels: {} };
+    const vget = id => VEL.items[id] || {};
+    const items = (BS.items || []).filter(it => (boardTag === 'all' || it.tag === boardTag) && (!boardKoreaOnly || vget(it.id).koreaNative));
+    const pills = (CFG.filters || []).map(f => `<button class="kb-pick-chip${f.id === boardTag && !boardKoreaOnly ? ' on' : ''}" data-bt="${esc(f.id)}" aria-pressed="${f.id === boardTag}">${f.emoji || ''} ${esc(f.label)}</button>`).join('')
+      + `<button class="kb-pick-chip${boardKoreaOnly ? ' on' : ''}" data-korea="1" aria-pressed="${boardKoreaOnly}">🇰🇷 ${esc(t('koreaNative'))}</button>`;
     const legend = Object.keys(CFG.verdicts || {}).map(k => { const v = CFG.verdicts[k]; return `<span class="bs-leg kb-flag ${v.cls}" title="${esc(v.tip)}">${v.emoji} ${esc(v.label)}</span>`; }).join('');
     const cards = items.map(it => {
       const v = (CFG.verdicts || {})[it.verdict] || { emoji: '', label: it.verdict, cls: 'note', tip: '' };
       const chips = (it.ingredient || []).map(id => { const i = ING_BY_ID[id]; return i ? `<button class="gs-ing" data-ing="${esc(id)}">${i.emoji || ''} ${esc(i.name)}</button>` : ''; }).join('');
+      const ve = vget(it.id);
+      const statusBadge = ve.status ? `<span class="radar-pill ${BS_STATUS_CLS[ve.status] || ''}">${esc((VEL.statusLabels || {})[ve.status] || ve.status)}</span>` : '';
+      const channelChip = ve.channel ? `<span class="bs-channel">${ve.koreaNative ? '🇰🇷 ' : ''}${esc(ve.channel)}</span>` : '';
       return `<div class="bs-card">
         <div class="bs-top"><span class="bs-rank">#${it.rank}</span><span class="bs-em" aria-hidden="true">${it.emoji || '✨'}</span><div class="bs-tt"><div class="bs-brand">${esc(it.brand)}</div><div class="bs-name">${esc(it.name)}</div></div></div>
-        <div class="bs-badges"><span class="kb-flag ${v.cls}" title="${esc(v.tip)}">${v.emoji} ${esc(v.label)}</span></div>
+        <div class="bs-badges"><span class="kb-flag ${v.cls}" title="${esc(v.tip)}">${v.emoji} ${esc(v.label)}</span>${statusBadge}${channelChip}</div>
+        ${ve.whyMoved ? `<div class="bs-line bs-moved">📊 ${esc(ve.whyMoved)}</div>` : ''}
         <div class="bs-what">${esc(it.whatItIs)}</div>
         <div class="bs-line bs-viral">🔥 <b>Viral for:</b> ${esc(it.viralFor)}</div>
         <div class="bs-line bs-evidence">🔬 <b>The honest read:</b> ${esc(it.evidence)}</div>
@@ -645,7 +654,9 @@
       <div style="margin-top:12px"><a class="kb-shelf-cta" data-seed="${esc(CFG.shopAllSeed || 'korean skincare bestseller')}">🛒 ${esc(t('shopFor'))}</a></div>
       <div class="funnel-disc">${esc(CFG.disclosure || '')}</div>`;
     $$('#kb-board-pills .kb-pick-chip', box).forEach(b => b.addEventListener('click', () => {
-      boardTag = b.dataset.bt; renderBestsellers();
+      if (b.dataset.korea) { boardKoreaOnly = !boardKoreaOnly; }
+      else { boardTag = b.dataset.bt; boardKoreaOnly = false; }
+      renderBestsellers();
     }));
     $$('.gs-ing', box).forEach(b => b.addEventListener('click', () => openIngredient(b.dataset.ing)));
     $$('.bs-shop, .kb-shelf-cta', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
@@ -986,7 +997,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast','kb-stack'], 'kb-radar':['kb-radar','kb-ledger','kb-viral','kb-news','kb-krsrc','kb-trust'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board','kb-ledger'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast','kb-stack'], 'kb-radar':['kb-radar','kb-ledger','kb-viral','kb-report','kb-news','kb-krsrc','kb-trust'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board','kb-ledger'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -1030,9 +1041,26 @@
   // ── Seoul-vs-World Trend Radar (#1): Korea×West quadrant + lifecycle cards ──
   const RADAR_STAGE_CLS = { emerging:'st-emerging', rising:'st-rising', peak:'st-peak', mainstream:'st-mainstream', fading:'st-fading' };
   const RADAR_MOM_GLYPH = { up:'↑', flat:'→', down:'↓' };
+  let trendPersonal = false;
+  function personalFilter(items, kind) {
+    const concerns = [...getConcerns()];
+    if (!trendPersonal || !concerns.length) return items;
+    const tags = (window.KBEAUTY_TREND_TAGS || {})[kind] || {};
+    const f = items.filter(it => (tags[it.id] || []).some(c => concerns.includes(c)));
+    return f.length ? f : items;
+  }
+  function personalToggleHTML() {
+    const concerns = [...getConcerns()];
+    if (!concerns.length) return `<div class="trend-toggle"><a class="trend-toggle-cta" id="kb-trend-quiz">🪞 ${esc(t('myTrends'))} — ${esc(t('takeQuiz') || 'take the skin quiz')}</a></div>`;
+    return `<div class="trend-toggle"><button class="trend-seg${!trendPersonal ? ' on' : ''}" data-tp="0">${esc(t('allTrends'))}</button><button class="trend-seg${trendPersonal ? ' on' : ''}" data-tp="1">🪞 ${esc(t('myTrends'))}</button></div>`;
+  }
+  function wireTrendToggle(box) {
+    $$('.trend-seg', box).forEach(b => b.addEventListener('click', () => { trendPersonal = b.dataset.tp === '1'; renderRadar(); renderViral(); }));
+    const qz = $('#kb-trend-quiz', box); if (qz) qz.addEventListener('click', () => jumpTo('#kb-quiz'));
+  }
   function renderRadar() {
     const box = $('#kb-radar-box'); const R = window.KBEAUTY_RADAR; if (!box || !R) return;
-    const items = R.items || [];
+    const items = personalFilter(R.items || [], 'radar');
     const SL = R.stageLabels || {}, ML = R.momentumLabels || {}, CL = R.crossoverLabels || {};
     const V = (window.KBEAUTY_BOARD_CONFIG || {}).verdicts || {};
     const S = 340, P = 34, plot = S - P * 2;
@@ -1067,10 +1095,12 @@
       </div>`;
     }).join('');
     box.innerHTML = `
+      ${personalToggleHTML()}
       <div class="radar-chart-wrap">${svg}</div>
       <div class="radar-legend">${Object.keys(SL).map(k => `<span class="radar-leg ${RADAR_STAGE_CLS[k] || ''}">${esc(SL[k])}</span>`).join('')}</div>
       <div class="radar-meta-note">🛰️ ${esc(t('reviewedOn'))} ${esc(R.updatedAt || '')} · ${esc(R.methodology || '')}</div>
       <div class="radar-cards">${cards}</div>`;
+    wireTrendToggle(box);
     $$('.radar-dot', box).forEach(g => {
       const go = () => { const c = $('#kb-radar-c-' + g.dataset.i); if (c) { c.scrollIntoView({ behavior: 'smooth', block: 'center' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1200); } };
       g.addEventListener('click', go); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
@@ -1111,7 +1141,7 @@
   function renderViral() {
     const box = $('#kb-viral-box'); const D = window.KBEAUTY_VIRALCHECK; if (!box || !D) return;
     const V = (window.KBEAUTY_BOARD_CONFIG || {}).verdicts || {}; const VL = D.velocityLabels || {};
-    const cards = (D.items || []).map(it => {
+    const cards = personalFilter(D.items || [], 'viral').map(it => {
       const v = V[it.verdict] || { emoji:'', label:it.verdict, cls:'note', tip:'' };
       return `<div class="viral-card">
         <div class="viral-h"><span class="viral-em" aria-hidden="true">${it.emoji || '🔥'}</span><span class="viral-t">${esc(it.label)}</span><span class="viral-vel ${VIRAL_VEL_CLS[it.velocity] || ''}">${esc(VL[it.velocity] || it.velocity || '')}</span></div>
@@ -1160,6 +1190,45 @@
       <div class="gs-block" style="margin-top:8px"><div class="gs-h">🗓️ ${esc(t('lastUpdatedTable'))}</div><table class="trust-table"><tbody>${upd}</tbody></table></div>`;
   }
 
+  // ── Quarterly Trend Report + share (#10) ───────────────────────────────────
+  function renderReport() {
+    const box = $('#kb-report-box'); const R = window.KBEAUTY_REPORT; if (!box || !R) return;
+    const RAD = window.KBEAUTY_RADAR || { items: [] }; const VC = window.KBEAUTY_VIRALCHECK || { items: [] };
+    const CL = RAD.crossoverLabels || {};
+    const movers = (RAD.items || []).filter(it => it.momentum === 'up').slice(0, 6);
+    const skips = (VC.items || []).filter(it => it.verdict === 'hype').slice(0, 4);
+    const moverHTML = movers.map(it => `<li><b>${it.emoji || ''} ${esc(it.label)}</b> — ${esc(CL[it.crossover] || '')}</li>`).join('');
+    const skipHTML = skips.map(it => `<li><b>${it.emoji || ''} ${esc(it.label)}</b> — ${esc((it.science || '').slice(0, 90))}…</li>`).join('');
+    box.innerHTML = `
+      <div class="report-card">
+        <div class="report-q">📅 ${esc(R.quarter || '')} · 🔄 ${esc(R.updatedAt || '')}</div>
+        <p class="report-intro">${esc(R.intro || '')}</p>
+        <div class="gs-block"><div class="gs-h">📈 ${esc(t('topMovers'))}</div><ul class="report-list">${moverHTML}</ul></div>
+        <div class="gs-block"><div class="gs-h">🚫 ${esc(t('skipList'))}</div><ul class="report-list">${skipHTML}</ul></div>
+        <button class="kb-shelf-cta" id="kb-report-share">📤 ${esc(t('shareReport'))}</button>
+      </div>`;
+    const sh = $('#kb-report-share'); if (sh) sh.addEventListener('click', () => {
+      const R2 = window.KBEAUTY_REPORT || {}; const url = 'https://koreaplus-lifes.com/kbeauty' + (lang !== 'en' ? '?lang=' + lang : '');
+      const text = `${R2.quarter || ''} — ${t('quarterReport')} · KoreaPlus`;
+      if (navigator.share) { navigator.share({ title: text, text: R2.intro || text, url }).catch(() => {}); }
+      else { try { navigator.clipboard.writeText(url); toast(t('copied')); } catch {} }
+    });
+  }
+
+  // ── Per-language discoverability (#7): localized ItemList JSON-LD ───────────
+  function injectTrendSchema() {
+    try {
+      const RAD = window.KBEAUTY_RADAR || { items: [] };
+      const data = {
+        '@context': 'https://schema.org', '@type': 'ItemList',
+        name: 'K-Beauty Trend Radar — Seoul vs the World',
+        numberOfItems: (RAD.items || []).length,
+        itemListElement: (RAD.items || []).map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.label })),
+      };
+      const s = document.createElement('script'); s.type = 'application/ld+json'; s.text = JSON.stringify(data); document.head.appendChild(s);
+    } catch { /* schema is best-effort */ }
+  }
+
   // ── Boot ───────────────────────────────────────────────────────────────────
   async function boot() {
     await loadContent();   // per-language content overlay (English fallback)
@@ -1173,6 +1242,8 @@
     renderNewsdesk();      // #5 beauty-science & safety desk
     renderKrSources();     // #8 Korea-source provenance
     renderTrust();         // #3 methodology & trust center
+    renderReport();        // #10 quarterly trend report + share
+    injectTrendSchema();   // #7 localized ItemList JSON-LD
     renderQuiz();
     renderConcerns();
     renderStack();
