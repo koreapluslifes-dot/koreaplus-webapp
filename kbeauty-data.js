@@ -212,16 +212,59 @@ const KBEAUTY_GLOSSARY = [
 ];
 
 /* ── 2026 trends (cite-worthy framing; the ticker + trends feed) ────────────*/
+// Trend Evidence Ledger (#2): each trend carries a science verdict, an honest
+// structure-function read, a last-reviewed date and a citation id → KBEAUTY_CITATIONS.
+const KBEAUTY_TRENDS_REVIEWED = '2026-06';
 const KBEAUTY_TRENDS = [
-  { id:'pdrn',       emoji:'🐟', title:'PDRN “Salmon DNA”',     blurb:'The breakout firming active of 2026 — in serums, creams & pads.' },
-  { id:'barrier',    emoji:'🧱', title:'Barrier-first skincare', blurb:'Less is more: repair the barrier before piling on actives.' },
-  { id:'microbiome', emoji:'🦠', title:'Microbiome & postbiotics', blurb:'Ferment & probiotic care to support skin’s natural balance.' },
-  { id:'exosome',    emoji:'🧬', title:'Exosomes & next-gen',   blurb:'Lab-advanced regenerative claims move from clinics into cosmetics.' },
-  { id:'heartleaf',  emoji:'🌱', title:'Heartleaf everything',  blurb:'Houttuynia (어성초) is the calming hero for oily, troubled skin.' },
-  { id:'mens',       emoji:'🧔', title:'Men’s K-beauty boom',   blurb:'Korea leads the world in men’s skincare — simple, effective routines.' },
-  { id:'suncare',    emoji:'☀️', title:'Sun-stick & reapply',   blurb:'Sticks & cushions make midday SPF reapplication effortless.' },
-  { id:'skinimalism',emoji:'🤍', title:'Skinimalism',           blurb:'Curated 4–5 step routines beat the maximalist 10-step for many.' },
+  { id:'pdrn',       emoji:'🐟', title:'PDRN “Salmon DNA”',     blurb:'The breakout firming active of 2026 — in serums, creams & pads.', verdict:'promising', science:'Strong as an injectable; topical-cosmetic evidence is still emerging. Expect a hydrated, plumped glow — not injectable-level firming.', cite:'pubmed-pdrn' },
+  { id:'barrier',    emoji:'🧱', title:'Barrier-first skincare', blurb:'Less is more: repair the barrier before piling on actives.', verdict:'proven', science:'Well-supported. A healthy barrier (ceramides, gentle care, fewer harsh actives) is the foundation of calm, resilient skin.', cite:'pubmed-barrier' },
+  { id:'microbiome', emoji:'🦠', title:'Microbiome & postbiotics', blurb:'Ferment & probiotic care to support skin’s natural balance.', verdict:'promising', science:'A genuinely active research field; ferments hydrate and feel great, but specific “rebalances your microbiome” product claims still outpace the topical evidence.', cite:'pubmed-microbiome' },
+  { id:'exosome',    emoji:'🧬', title:'Exosomes & next-gen',   blurb:'Lab-advanced regenerative claims move from clinics into cosmetics.', verdict:'hype', science:'Exciting science, but rigorous evidence for topical cosmetic exosomes is very limited today. Treat as a nice serum, not a clinic substitute.', cite:'pubmed-exosome' },
+  { id:'heartleaf',  emoji:'🌱', title:'Heartleaf everything',  blurb:'Houttuynia (어성초) is the calming hero for oily, troubled skin.', verdict:'proven', science:'A well-established soothing botanical — the “calmer, comfier skin” result is real; the “shrinks pores” framing is the overclaim.', cite:'pubmed-heartleaf' },
+  { id:'mens',       emoji:'🧔', title:'Men’s K-beauty boom',   blurb:'Korea leads the world in men’s skincare — simple, effective routines.', verdict:'proven', science:'Skin doesn’t read gender — the same proven basics (cleanse, hydrate, SPF) work. A real, sensible market shift, not a gimmick.', cite:'aad-basics' },
+  { id:'suncare',    emoji:'☀️', title:'Sun-stick & reapply',   blurb:'Sticks & cushions make midday SPF reapplication effortless.', verdict:'proven', science:'Reapplication is the most evidence-backed habit in skincare. Sticks/cushions help compliance — just apply enough; thin layers under-deliver SPF.', cite:'aad-sunscreen' },
+  { id:'skinimalism',emoji:'🤍', title:'Skinimalism',           blurb:'Curated 4–5 step routines beat the maximalist 10-step for many.', verdict:'proven', science:'Fewer, well-chosen steps reduce irritation and improve consistency — a solid, evidence-aligned correction to product overload.', cite:'aad-basics' },
 ];
+// Curated, stable public authority sources for the evidence ledger. Real landing
+// pages / live DB searches only (never fabricated DOIs). Labels stay original.
+const KBEAUTY_CITATIONS = {
+  'pubmed-pdrn':       { label:'PubMed — polydeoxyribonucleotide & skin',   url:'https://pubmed.ncbi.nlm.nih.gov/?term=polydeoxyribonucleotide+skin' },
+  'pubmed-barrier':    { label:'PubMed — skin barrier & ceramides',         url:'https://pubmed.ncbi.nlm.nih.gov/?term=skin+barrier+ceramide' },
+  'pubmed-microbiome': { label:'PubMed — skin microbiome & postbiotics',    url:'https://pubmed.ncbi.nlm.nih.gov/?term=skin+microbiome+postbiotic' },
+  'pubmed-exosome':    { label:'PubMed — topical exosomes in skin',         url:'https://pubmed.ncbi.nlm.nih.gov/?term=exosome+topical+skin' },
+  'pubmed-heartleaf':  { label:'PubMed — Houttuynia cordata & skin',        url:'https://pubmed.ncbi.nlm.nih.gov/?term=houttuynia+cordata+skin' },
+  'aad-basics':        { label:'American Academy of Dermatology — skin care basics', url:'https://www.aad.org/public/everyday-care/skin-care-basics' },
+  'aad-sunscreen':     { label:'American Academy of Dermatology — sun protection',   url:'https://www.aad.org/public/everyday-care/sun-protection' },
+};
+
+/* ── Seoul-vs-World Trend Radar (#1) ────────────────────────────────────────
+   Each item is positioned on a Korea-heat × West-heat plane with a lifecycle
+   stage, a momentum direction and a crossover status. kr/we are 0-100 attention
+   heat (editorial estimate from retailer launches + search + social, dated).
+   Localizable prose: label/blurb/methodology/science (+ the *Labels enum maps). */
+const KBEAUTY_RADAR = {
+  updatedAt: '2026-06',
+  stageLabels:     { emerging:'Emerging', rising:'Rising', peak:'Peak', mainstream:'Mainstream', fading:'Fading' },
+  momentumLabels:  { up:'Heating up', flat:'Steady', down:'Cooling' },
+  crossoverLabels: { out:'Crossing out of Korea', in:'Crossing into Korea', global:'Global — both markets', koronly:'Korea-only (for now)' },
+  methodology: 'Position and stage are an editorial read of Korean retailer launches, search interest and social mentions — analysis, not a precise metric. Dated so you can judge how current it is.',
+  items: [
+    { id:'glassskin', emoji:'🪞', label:'Glass skin', stage:'mainstream', momentum:'flat', kr:78, we:90, crossover:'out', since:'2017', verdict:'proven', blurb:'The dewy, poreless “lit-from-within” look that put K-beauty on the global map.', methodology:'Mainstream worldwide; search interest plateaued as it became a default beauty goal.', science:'A real, achievable hydration-and-glow look from layered moisture + SPF — an aesthetic, not a permanent change to your skin.', aliSeed:'glass skin serum' },
+    { id:'pdrn', emoji:'🐟', label:'PDRN “Salmon DNA”', stage:'rising', momentum:'up', kr:95, we:38, crossover:'out', since:'2024', verdict:'promising', blurb:'Korea’s breakout firming active of 2025-26, racing from clinics into serums, creams and pads.', methodology:'Top of Korean retailer launches and search; Western awareness is still early — a classic crossing-out signal.', science:'Strong as an injectable; topical-cosmetic evidence is still emerging — expect a hydrated, plumped glow, not injectable-level firming.', aliSeed:'pdrn serum' },
+    { id:'exosome', emoji:'🧬', label:'Exosomes & next-gen', stage:'emerging', momentum:'up', kr:76, we:30, crossover:'out', since:'2024', verdict:'hype', blurb:'Lab-advanced regenerative claims moving from aesthetic clinics into at-home cosmetics.', methodology:'High buzz in Korean derma-clinics; cosmetic versions are only just appearing in the West.', science:'Exciting science, but rigorous evidence for topical cosmetic exosomes is very limited today — treat as a nice serum, not a clinic substitute.', aliSeed:'exosome ampoule' },
+    { id:'snail', emoji:'🐌', label:'Snail mucin', stage:'mainstream', momentum:'flat', kr:68, we:88, crossover:'out', since:'2014', verdict:'proven', blurb:'A K-beauty staple that went fully global after viral love for the COSRX essence.', methodology:'Now mainstream in the West; steady and no longer a novelty in Korea.', science:'A well-liked hydrating, comforting humectant — great for glow and dewiness; “repair” claims are softer than the marketing.', aliSeed:'snail mucin essence' },
+    { id:'heartleaf', emoji:'🌿', label:'Heartleaf (어성초)', stage:'peak', momentum:'up', kr:88, we:60, crossover:'out', since:'2022', verdict:'proven', blurb:'Houttuynia, the calming hero for oily, troubled skin — powering Anua’s global breakout.', methodology:'Peaking in Korea and accelerating in the West via viral toners — actively crossing out.', science:'A well-established soothing botanical — the calmer, comfier-skin result is real; the “shrinks pores” framing is the overclaim.', aliSeed:'heartleaf toner' },
+    { id:'barrier', emoji:'🧱', label:'Barrier-first skincare', stage:'mainstream', momentum:'flat', kr:82, we:85, crossover:'global', since:'2020', verdict:'proven', blurb:'Repair the skin barrier first, add actives later — the philosophy behind “less is more”.', methodology:'Default advice in both markets; foundational and steady rather than spiking.', science:'Well-supported. A healthy barrier (ceramides, gentle care, fewer harsh actives) is the foundation of calm, resilient skin.', aliSeed:'ceramide barrier cream' },
+    { id:'microbiome', emoji:'🦠', label:'Microbiome & postbiotics', stage:'rising', momentum:'up', kr:72, we:70, crossover:'global', since:'2021', verdict:'promising', blurb:'Ferment and postbiotic care to support the skin’s natural balance.', methodology:'Rising on both sides; product claims still run ahead of the topical evidence.', science:'A genuinely active research field; ferments hydrate and feel great, but “rebalances your microbiome” claims outpace the evidence.', aliSeed:'postbiotic essence' },
+    { id:'sunstick', emoji:'☀️', label:'Sun stick & reapply', stage:'rising', momentum:'up', kr:90, we:55, crossover:'out', since:'2022', verdict:'proven', blurb:'Sticks and cushions that make midday SPF reapplication actually happen.', methodology:'Huge in Korea; reapplication formats are now crossing into Western routines.', science:'Reapplication is the most evidence-backed habit in skincare — just apply enough; thin layers under-deliver the SPF on the label.', aliSeed:'korean sun stick' },
+    { id:'skincycling', emoji:'🔁', label:'Skin cycling', stage:'peak', momentum:'flat', kr:55, we:85, crossover:'in', since:'2022', verdict:'proven', blurb:'A West-born, dermatologist-coined 4-night rotation: exfoliate, retinoid, recover, recover.', methodology:'Originated in the US and is now filtering INTO Korean routines — a rare crossing-in.', science:'A sensible scheduling framework that reduces over-exfoliation and irritation — the method, not a product, is the point.', aliSeed:'retinol serum' },
+    { id:'slugging', emoji:'🫙', label:'Slugging', stage:'mainstream', momentum:'down', kr:50, we:80, crossover:'in', since:'2021', verdict:'mixed', blurb:'Sealing the routine with an occlusive overnight — viral on Western SkinTok.', methodology:'Peaked in the West and cooling slightly as the “not for acne-prone” nuance spreads.', science:'Genuinely helps dry, compromised barriers hold water — but can feel heavy and isn’t ideal for oily or breakout-prone skin.', aliSeed:'occlusive balm' },
+    { id:'glazeddonut', emoji:'🍩', label:'Glazed-donut skin', stage:'peak', momentum:'flat', kr:45, we:82, crossover:'in', since:'2022', verdict:'proven', blurb:'A Western, celebrity-coined reframing of the glass-skin glow.', methodology:'Big on Western social platforms; essentially a Western rename of a Korean look.', science:'Same idea as glass skin — layered hydration and a dewy finish; an aesthetic, not a skin-health metric.', aliSeed:'hyaluronic acid serum' },
+    { id:'mens', emoji:'🧔', label:'Men’s K-beauty', stage:'rising', momentum:'up', kr:85, we:50, crossover:'out', since:'2019', verdict:'proven', blurb:'Korea leads the world in men’s skincare — simple, effective and normalized.', methodology:'Mature in Korea and growing fast in Western men’s routines — crossing out.', science:'Skin doesn’t read gender — the same proven basics (cleanse, hydrate, SPF) work. A real market shift, not a gimmick.', aliSeed:'mens skincare korean' },
+    { id:'skinimalism', emoji:'🤍', label:'Skinimalism / skip-care', stage:'rising', momentum:'up', kr:68, we:75, crossover:'global', since:'2021', verdict:'proven', blurb:'Curated 4-5 step routines replacing the maximalist 10-step, on both sides of the Pacific.', methodology:'Rising globally as a correction to product overload; strong in both markets.', science:'Fewer, well-chosen steps reduce irritation and improve consistency — an evidence-aligned correction to overuse.', aliSeed:'korean skincare set' },
+    { id:'mugwort', emoji:'🌱', label:'Mugwort (쑥)', stage:'rising', momentum:'up', kr:80, we:45, crossover:'out', since:'2021', verdict:'promising', blurb:'Artemisia, the traditional hanbang soothing botanical, riding the calming-skincare wave.', methodology:'Strong in Korea and building in the West alongside heartleaf and cica — crossing out.', science:'A comforting, antioxidant-rich botanical — pleasant and soothing; specific “healing” claims outrun the topical evidence.', aliSeed:'mugwort essence' },
+  ],
+};
 
 /* ── Static seasonal "skin forecast" (zero-key; live UV is a future upgrade) ─
    Keyed by hemisphere-agnostic season — modules/kbeauty.js picks by month. */
@@ -294,6 +337,7 @@ const KBEAUTY_ALL = {
   KBEAUTY_INGREDIENTS, KBEAUTY_CHECKABLE, KBEAUTY_CONFLICTS, KBEAUTY_BRANDS,
   KBEAUTY_GLOSSARY, KBEAUTY_TRENDS, KBEAUTY_FORECAST, KBEAUTY_MENS, KBEAUTY_SHOP,
   KBEAUTY_GLASSKIN, KBEAUTY_DUPES_META, KBEAUTY_DUPES, KBEAUTY_TROUBLESHOOTER_META, KBEAUTY_PURGE, KBEAUTY_BARRIER, KBEAUTY_FUNGAL, KBEAUTY_BUY, KBEAUTY_SUNCARE, KBEAUTY_SNAIL, KBEAUTY_CATEGORIES, KBEAUTY_BESTSELLERS, KBEAUTY_TRENDS_PATCH, KBEAUTY_BOARD_CONFIG,
+  KBEAUTY_CITATIONS, KBEAUTY_TRENDS_REVIEWED, KBEAUTY_RADAR,
 };
 if (typeof window !== 'undefined') Object.assign(window, KBEAUTY_ALL);
 if (typeof module !== 'undefined' && module.exports) module.exports = KBEAUTY_ALL;

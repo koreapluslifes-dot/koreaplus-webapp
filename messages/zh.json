@@ -359,6 +359,9 @@
   "kpop.filter.countdowns": "⏳ Comebacks",
   "kpop.filter.artists": "🎤 Artists",
   "kpop.filter.news": "📰 News",
+  "kpop.filter.streaming": "🎧 听歌",
+  "kpop.sec.streaming.title": "🎧 听歌中心",
+  "kpop.sec.streaming.sub": "在哪听歌 + 每天追爱豆的小目标",
   "kpop.sec.charts.title": "Real-Time Charts",
   "kpop.sec.charts.sub": "Top songs right now · Apple Music Korea",
   "kpop.sec.countdowns.title": "⏳ Comeback & Anniversary Countdowns",
@@ -571,5 +574,10 @@
   "hub.s114": "本地人爱去的地方",
   "hub.s115": "5日美食路线",
   "hub.s116": "像本地人一样点餐",
-  "hub.s117": "实时汇率"
+  "hub.s117": "实时汇率",
+  "kbeauty.sec.ledger.title": "🔬 趋势证据档案",
+  "kbeauty.sec.ledger.sub": "用证据为2026趋势评级——已证实、有潜力还是炒作——附日期与来源。",
+  "kbeauty.sec.radar.title": "🛰️ 首尔 vs 世界趋势雷达",
+  "kbeauty.sec.radar.sub": "每个K-beauty趋势在“韩国 vs 西方”地图上的位置、走向，以及是否已跨界——附日期与来源。",
+  "kbeauty.filter.radar": "🛰️ 趋势雷达"
 }

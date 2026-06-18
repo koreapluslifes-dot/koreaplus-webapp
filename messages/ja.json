@@ -359,6 +359,9 @@
   "kpop.filter.countdowns": "⏳ カムバック",
   "kpop.filter.artists": "🎤 アーティスト",
   "kpop.filter.news": "📰 ニュース",
+  "kpop.filter.streaming": "🎧 ストリーミング",
+  "kpop.sec.streaming.title": "🎧 ストリーミングハブ",
+  "kpop.sec.streaming.sub": "どこで聴く? + 推しを毎日チェックするデイリー目標",
   "kpop.sec.charts.title": "リアルタイムチャート",
   "kpop.sec.charts.sub": "今の人気曲 · Apple Music 韓国",
   "kpop.sec.countdowns.title": "⏳ カムバック・記念日カウントダウン",
@@ -571,5 +574,10 @@
   "hub.s114": "地元の人が行く店",
   "hub.s115": "5日間のグルメルート",
   "hub.s116": "地元流に注文",
-  "hub.s117": "リアルタイム為替レート"
+  "hub.s117": "リアルタイム為替レート",
+  "kbeauty.sec.ledger.title": "🔬 トレンド・エビデンス台帳",
+  "kbeauty.sec.ledger.sub": "2026年のトレンドを根拠で評価 — 実証・有望・誇大を、日付と出典つきで。",
+  "kbeauty.sec.radar.title": "🛰️ ソウル vs 世界トレンドレーダー",
+  "kbeauty.sec.radar.sub": "各K-beautyトレンドが韓国 vs 欧米マップのどこにあり、どこへ向かい、すでに越境したか — 日付・出典つき。",
+  "kbeauty.filter.radar": "🛰️ トレンドレーダー"
 }

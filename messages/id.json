@@ -359,6 +359,9 @@
   "kpop.filter.countdowns": "⏳ Comebacks",
   "kpop.filter.artists": "🎤 Artists",
   "kpop.filter.news": "📰 News",
+  "kpop.filter.streaming": "🎧 Streaming",
+  "kpop.sec.streaming.title": "🎧 Pusat Streaming",
+  "kpop.sec.streaming.sub": "Tempat mendengarkan — plus target harian untuk mengikuti bias-mu",
   "kpop.sec.charts.title": "Real-Time Charts",
   "kpop.sec.charts.sub": "Top songs right now · Apple Music Korea",
   "kpop.sec.countdowns.title": "⏳ Comeback & Anniversary Countdowns",
@@ -571,5 +574,10 @@
   "hub.s114": "Tempat makan warga lokal",
   "hub.s115": "Rute kuliner 5 hari",
   "hub.s116": "Pesan seperti warga lokal",
-  "hub.s117": "Kurs langsung"
+  "hub.s117": "Kurs langsung",
+  "kbeauty.sec.ledger.title": "🔬 Catatan bukti tren",
+  "kbeauty.sec.ledger.sub": "Setiap tren 2026 dinilai berdasarkan bukti — terbukti, menjanjikan, atau hype — dengan tanggal dan sumber.",
+  "kbeauty.sec.radar.title": "🛰️ Radar tren Seoul vs dunia",
+  "kbeauty.sec.radar.sub": "Posisi setiap tren K-beauty di peta Korea-vs-Barat, ke mana arahnya, dan apakah sudah menyeberang — dengan tanggal dan sumber.",
+  "kbeauty.filter.radar": "🛰️ Radar Tren"
 }

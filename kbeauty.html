@@ -454,11 +454,53 @@
     /* AdSense */
     .kb-ad-adsense { padding:0 12px 10px; min-height:100px; display:flex; align-items:center; justify-content:center; }
     .kb-ad-adsense ins { width:100%; }
-    /* Coupang (KR/ko only) */
-    .kb-ad-coupang { padding:8px 8px 4px; overflow-x:auto; text-align:center; }
-    .kb-ad-coupang iframe { display:block; margin:0 auto; }
-    .kb-ad-coupang-disc { font-size:10.5px; color:var(--text3); padding:4px 12px 8px; line-height:1.45; }
     @media (max-width:520px){ .kb-ad-ali-cta { width:100%; text-align:center; } }
+
+    /* ═══ Seoul-vs-World Trend Radar ══════════════════════════════════════════ */
+    .radar-chart-wrap { display:flex; justify-content:center; }
+    .radar-svg { width:100%; max-width:360px; height:auto; font-family:inherit; }
+    .radar-bg { fill:var(--kb-soft); stroke:var(--border); rx:14; }
+    .radar-grid { stroke:var(--border); stroke-dasharray:4 4; }
+    .radar-q { fill:var(--text2); font-size:10.5px; font-weight:800; } .radar-q-dim { fill:var(--text3); }
+    .radar-axis { fill:var(--text3); font-size:10px; font-weight:700; }
+    .radar-dot circle { stroke:#fff; stroke-width:1.5; cursor:pointer; transition:transform .15s; transform-box:fill-box; transform-origin:center; }
+    .radar-dot text { fill:#fff; font-size:11px; font-weight:800; pointer-events:none; }
+    .radar-dot:hover circle, .radar-dot:focus circle { transform:scale(1.25); outline:none; }
+    .st-emerging circle, .radar-leg.st-emerging::before, .radar-pill.st-emerging, .radar-c-n.st-emerging { background:#2f80ed; } .st-emerging circle { fill:#2f80ed; }
+    .st-rising circle { fill:#27ae60; } .radar-pill.st-rising, .radar-c-n.st-rising, .radar-leg.st-rising::before { background:#27ae60; }
+    .st-peak circle { fill:var(--kb1); } .radar-pill.st-peak, .radar-c-n.st-peak, .radar-leg.st-peak::before { background:var(--kb1); }
+    .st-mainstream circle { fill:#8b46d6; } .radar-pill.st-mainstream, .radar-c-n.st-mainstream, .radar-leg.st-mainstream::before { background:#8b46d6; }
+    .st-fading circle { fill:#9aa0a6; } .radar-pill.st-fading, .radar-c-n.st-fading, .radar-leg.st-fading::before { background:#9aa0a6; }
+    .radar-legend { display:flex; flex-wrap:wrap; gap:8px 12px; justify-content:center; margin:8px 0 4px; }
+    .radar-leg { font-size:11px; font-weight:700; color:var(--text2); display:inline-flex; align-items:center; gap:5px; } .radar-leg::before { content:''; width:9px; height:9px; border-radius:50%; display:inline-block; }
+    .radar-pill, .radar-c-n { color:#fff; }
+    .radar-meta-note { font-size:11px; color:var(--text3); line-height:1.5; margin:6px 2px 12px; text-align:center; }
+    .radar-cards { display:flex; flex-direction:column; gap:10px; }
+    .radar-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:13px 15px; scroll-margin-top:80px; transition:box-shadow .3s, border-color .3s; }
+    .radar-card.flash { border-color:var(--kb1); box-shadow:0 0 0 3px var(--kb-soft); }
+    .radar-c-h { display:flex; align-items:center; gap:9px; }
+    .radar-c-n { width:22px; height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex:none; }
+    .radar-c-em { font-size:18px; line-height:1; } .radar-c-t { font-size:14.5px; font-weight:800; color:var(--text); }
+    .radar-c-pills { display:flex; flex-wrap:wrap; gap:6px; margin:9px 0; }
+    .radar-pill { font-size:10.5px; font-weight:800; border-radius:14px; padding:3px 9px; } .radar-pill.cross { background:var(--bg); color:var(--text2); border:1px solid var(--border); }
+    .radar-pill.mom-up { background:#27ae60; } .radar-pill.mom-flat { background:#9aa0a6; } .radar-pill.mom-down { background:#e0823a; }
+    .radar-c-b { font-size:13px; color:var(--text); line-height:1.55; }
+    .radar-c-sci { font-size:12px; color:var(--text2); line-height:1.55; margin-top:6px; }
+    .radar-c-meta { font-size:11px; color:var(--text3); line-height:1.5; margin-top:7px; }
+    .radar-c-shop { margin-top:10px; }
+
+    /* ═══ Trend Evidence Ledger ═══════════════════════════════════════════════ */
+    .ledger-meta { font-size:12px; color:var(--text2); margin-bottom:10px; }
+    .ledger-method { color:var(--kb1); font-weight:700; cursor:pointer; }
+    .ledger-list { display:flex; flex-direction:column; gap:9px; }
+    .ledger-row { background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:12px 14px; }
+    .ledger-h { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+    .ledger-em { font-size:19px; line-height:1; } .ledger-t { font-size:14.5px; font-weight:800; color:var(--text); flex:1; min-width:120px; }
+    .ledger-sci { font-size:12.5px; color:var(--text2); line-height:1.55; margin-top:6px; }
+    .ledger-cite { color:var(--kb1); font-weight:700; text-decoration:none; font-size:11px; vertical-align:super; }
+    .ledger-sources { margin:6px 0 0; padding-left:4px; list-style:none; display:flex; flex-direction:column; gap:5px; }
+    .ledger-sources li { font-size:11.5px; color:var(--text2); line-height:1.45; } .ledger-sources .src-n { color:var(--text3); font-weight:700; margin-right:4px; }
+    .ledger-sources a { color:var(--kb2); text-decoration:none; } .ledger-sources a:hover { text-decoration:underline; }
 
     /* ═══ Personalized Stack ══════════════════════════════════════════════════ */
     .stack-summary { background:linear-gradient(135deg,var(--kb-soft),rgba(139,70,214,.08)); border:1px solid var(--border); border-radius:16px; padding:15px 17px; margin-bottom:12px; }
@@ -538,12 +580,13 @@
 
 <main class="hub-content" style="max-width:1100px">
 
-  <!-- Sponsored — localized AliExpress + AdSense (+ Coupang Partners for KR/ko). Populated by modules/kbeauty.js -->
+  <!-- Sponsored — localized AliExpress + AdSense. Populated by modules/kbeauty.js -->
   <aside id="kb-topads" class="kb-topads" aria-label="Sponsored" hidden></aside>
 
   <div class="filter-bar" id="kb-filters">
     <button class="filter-chip active" data-target="all" data-i18n="kbeauty.filter.all">✨ All</button>
     <button class="filter-chip" data-target="kb-quiz" data-i18n="kbeauty.filter.quiz">🪞 My Skin</button>
+    <button class="filter-chip" data-target="kb-radar" data-i18n="kbeauty.filter.radar">🛰️ Trend Radar</button>
     <button class="filter-chip" data-target="kb-routine" data-i18n="kbeauty.filter.routine">🧴 Routine</button>
     <button class="filter-chip" data-target="kb-glassskin" data-i18n="kbeauty.filter.glassskin">🪞 Glass Skin</button>
     <button class="filter-chip" data-target="kb-sun" data-i18n="kbeauty.filter.sun">☀️ Sunscreen</button>
@@ -710,6 +753,24 @@
     <div id="kb-buy-box" aria-live="polite"></div>
   </section>
 
+  <!-- Seoul-vs-World Trend Radar (#1) — Korea×West lifecycle map -->
+  <section class="kb-sec" id="kb-radar">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.radar.title">🛰️ Seoul-vs-World trend radar</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.radar.sub">Where every K-beauty trend lives on the Korea-vs-West map, where it's headed, and whether it has crossed over yet — dated and sourced.</div>
+    </div>
+    <div id="kb-radar-box" aria-live="polite"></div>
+  </section>
+
+  <!-- Trend Evidence Ledger (#2) — graded, dated, sourced trend reads -->
+  <section class="kb-sec" id="kb-ledger">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.ledger.title">🔬 Trend evidence ledger</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.ledger.sub">Every 2026 trend graded by the evidence — what's proven, what's promising, what's hype — dated and sourced.</div>
+    </div>
+    <div id="kb-ledger-box" aria-live="polite"></div>
+  </section>
+
   <!-- Bestsellers & 2026 Trend Tracker -->
   <section class="kb-sec" id="kb-board">
     <div class="kb-sec-head">
@@ -772,9 +833,9 @@
 
 <script src="config.js" onerror="void 0"></script>
 <script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
-<script src="kbeauty-data.js"></script>
+<script src="kbeauty-data.js?v=4"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/kbeauty-sharecard.js"></script>
-<script src="modules/kbeauty.js?v=1"></script>
+<script src="modules/kbeauty.js?v=4"></script>
 </body>
 </html>

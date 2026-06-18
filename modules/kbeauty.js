@@ -49,7 +49,7 @@
     ROUTINE     = ROUTINE.map(s => ({ ...s, name: cx(`routine.${s.id}.name`, s.name), desc: cx(`routine.${s.id}.desc`, s.desc), layering: cx(`routine.${s.id}.layering`, s.layering), freq: cx(`routine.${s.id}.freq`, s.freq) }));
     INGREDIENTS = INGREDIENTS.map(i => ({ ...i, name: cx(`ing.${i.id}.name`, i.name), explainer: cx(`ing.${i.id}.explainer`, i.explainer), benefits: (i.benefits || []).map((b, n) => cx(`ing.${i.id}.benefit.${n}`, b)) }));
     GLOSSARY    = GLOSSARY.map((g, i) => ({ ...g, term: cx(`gloss.${i}.term`, g.term), def: cx(`gloss.${i}.def`, g.def) }));
-    TRENDS      = TRENDS.map(t2 => ({ ...t2, title: cx(`trend.${t2.id}.title`, t2.title), blurb: cx(`trend.${t2.id}.blurb`, t2.blurb) }));
+    TRENDS      = TRENDS.map(t2 => ({ ...t2, title: cx(`trend.${t2.id}.title`, t2.title), blurb: cx(`trend.${t2.id}.blurb`, t2.blurb), science: cx(`trend.${t2.id}.science`, t2.science) }));
     BRANDS      = BRANDS.map(b => ({ ...b, knownFor: cx(`brand.${b.id}.knownFor`, b.knownFor) }));
     QUIZ        = QUIZ.map(q => ({ ...q, q: cx(`quiz.${q.id}.q`, q.q), options: q.options.map((o, n) => ({ ...o, label: cx(`quiz.${q.id}.opt.${n}`, o.label) })) }));
     CONFLICTS   = CONFLICTS.map((c, i) => ({ ...c, reason: cx(`conflict.${i}.reason`, c.reason) }));
@@ -65,9 +65,9 @@
   // product/brand names, ids, seeds, emojis, enum codes are never touched, so
   // lookups (e.g. CFG.verdicts[item.verdict]) keep working. Renderers read
   // window.KBEAUTY_* at render time, so reassigning the globals localizes them.
-  const NC_ALLOW = new Set(['title','sub','subtitle','subhead','tagline','eyebrow','kicker','headline','body','text','desc','blurb','why','whyComparable','sharedHero','role','job','plain','measures','label','note','authNote','priceNote','tip','finish','skinNote','how','what','vibe','evidence','worthIt','verdictBadge','bottomLine','reassess','disclaimer','scaleLabel','needWhy','skipIf','cadence','safeNote','safeHelpers','primer','intro','whyTitle','breakoutsTitle','doTitle','ctaLabel','ctaNote','decoderEmptyAllSafe','decoderModeHint','q','a','tableNote','viralFor','whatItIs','essentialLabel','recommendedLabel','optionalLabel']);
+  const NC_ALLOW = new Set(['title','sub','subtitle','subhead','tagline','eyebrow','kicker','headline','body','text','desc','blurb','why','whyComparable','sharedHero','role','job','plain','measures','label','note','authNote','priceNote','tip','finish','skinNote','how','what','vibe','evidence','worthIt','verdictBadge','bottomLine','reassess','disclaimer','scaleLabel','needWhy','skipIf','cadence','safeNote','safeHelpers','primer','intro','whyTitle','breakoutsTitle','doTitle','ctaLabel','ctaNote','decoderEmptyAllSafe','decoderModeHint','q','a','tableNote','viralFor','whatItIs','essentialLabel','recommendedLabel','optionalLabel','methodology','science']);
   const NC_ALLOW_ARR = new Set(['pros','cons','do','dont','dos','donts','mistakes','highlights','tellTale','real','hype','tips','examples']);
-  const NC_SPECIAL = new Set(['explainerByFamily']);
+  const NC_SPECIAL = new Set(['explainerByFamily','stageLabels','momentumLabels','crossoverLabels']);
   function ncWalk(obj, prefix) {
     if (!obj || typeof obj !== 'object') return;
     for (const k in obj) {
@@ -86,7 +86,7 @@
   }
   function localizeNewData() {
     if (!CONTENT || !Object.keys(CONTENT).length) return; // en or load failed → English
-    ['KBEAUTY_GLASSKIN','KBEAUTY_DUPES_META','KBEAUTY_DUPES','KBEAUTY_BUY','KBEAUTY_SUNCARE','KBEAUTY_SNAIL','KBEAUTY_CATEGORIES','KBEAUTY_BESTSELLERS','KBEAUTY_BOARD_CONFIG','KBEAUTY_TROUBLESHOOTER_META','KBEAUTY_PURGE','KBEAUTY_BARRIER','KBEAUTY_FUNGAL'].forEach(name => {
+    ['KBEAUTY_GLASSKIN','KBEAUTY_DUPES_META','KBEAUTY_DUPES','KBEAUTY_BUY','KBEAUTY_SUNCARE','KBEAUTY_SNAIL','KBEAUTY_CATEGORIES','KBEAUTY_BESTSELLERS','KBEAUTY_BOARD_CONFIG','KBEAUTY_TROUBLESHOOTER_META','KBEAUTY_PURGE','KBEAUTY_BARRIER','KBEAUTY_FUNGAL','KBEAUTY_RADAR'].forEach(name => {
       if (!window[name]) return;
       try { const clone = JSON.parse(JSON.stringify(window[name])); ncWalk(clone, name); window[name] = clone; } catch {}
     });
@@ -104,9 +104,9 @@
 
   // ── Mini i18n for JS-generated labels (chrome uses data-i18n via i18n.js) ──
   const STR = {
-    en: { result:'Your skin type', retake:'Retake', best:'Best for', pairs:'Pairs with', avoid:'Be careful with', preg:'Pregnancy', pregSafe:'Generally fine', pregCaution:'Ask your doctor', time:'Use', am:'AM', pm:'PM', both:'AM & PM', shop:'Shop this step', shopFor:'Shop', loading:'Loading…', shopEmpty:'Live shopping lights up here. Meanwhile, browse our authentic retailers below.', selectActives:'Select 2+ actives to check.', allSafe:'No conflicts — these play nicely together. 🎉', followToast:'Added to favourites ★', unfollowToast:'Removed', known:'Known for', tier:'Tier', vegan:'Vegan', mens:'Men-friendly', bioSoon:'Loading profile…', readMore:'Learn more', decNone:'No ingredients recognized — check the spelling or paste the full INCI list.', decFound:'recognized', priceFrom:'from', shelfEmpty:'Take the quiz and pick concerns — your shelf builds itself.', yourRoutine:'Your routine', sources:'Always patch-test new actives.', sponsored:'Sponsored', advertisement:'Advertisement', adAliTitle:'✨ Shop K-beauty on AliExpress', adAliSub:'Authentic Korean skincare — ships worldwide, best prices.', adAliCta:'Browse deals', adAliLoading:'Loading today’s deals…' },
-    ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.', sponsored:'스폰서', advertisement:'광고', adAliTitle:'✨ 알리익스프레스에서 K-뷰티 쇼핑', adAliSub:'정품 한국 스킨케어 — 전 세계 배송, 최저가.', adAliCta:'특가 보기', adAliLoading:'오늘의 특가 불러오는 중…' },
-    ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。', sponsored:'スポンサー', advertisement:'広告', adAliTitle:'✨ AliExpressでK-beautyを購入', adAliSub:'本物の韓国スキンケア — 世界中に配送、ベストプライス。', adAliCta:'お得を見る', adAliLoading:'本日のお得を読み込み中…' },
+    en: { result:'Your skin type', retake:'Retake', best:'Best for', pairs:'Pairs with', avoid:'Be careful with', preg:'Pregnancy', pregSafe:'Generally fine', pregCaution:'Ask your doctor', time:'Use', am:'AM', pm:'PM', both:'AM & PM', shop:'Shop this step', shopFor:'Shop', loading:'Loading…', shopEmpty:'Live shopping lights up here. Meanwhile, browse our authentic retailers below.', selectActives:'Select 2+ actives to check.', allSafe:'No conflicts — these play nicely together. 🎉', followToast:'Added to favourites ★', unfollowToast:'Removed', known:'Known for', tier:'Tier', vegan:'Vegan', mens:'Men-friendly', bioSoon:'Loading profile…', readMore:'Learn more', decNone:'No ingredients recognized — check the spelling or paste the full INCI list.', decFound:'recognized', priceFrom:'from', shelfEmpty:'Take the quiz and pick concerns — your shelf builds itself.', yourRoutine:'Your routine', sources:'Always patch-test new actives.', sponsored:'Sponsored', advertisement:'Advertisement', adAliTitle:'✨ Shop K-beauty on AliExpress', adAliSub:'Authentic Korean skincare — ships worldwide, best prices.', adAliCta:'Browse deals', adAliLoading:'Loading today’s deals…', reviewedOn:'Evidence reviewed', sources:'Sources', howWeGrade:'How we grade →', radarChartLabel:'Korea-vs-West trend map', radarQkr:'Big in Korea', radarQglobal:'Global mainstream', radarQniche:'Niche / quiet', radarQwest:'Big in the West', radarAxisWest:'Western popularity', radarSince:'Trending since' },
+    ko: { result:'내 피부 타입', retake:'다시하기', best:'추천 고민', pairs:'잘 맞는 성분', avoid:'주의 조합', preg:'임신 중', pregSafe:'일반적으로 무난', pregCaution:'의사와 상담', time:'사용', am:'아침', pm:'밤', both:'아침·밤', shop:'이 단계 쇼핑', shopFor:'쇼핑', loading:'불러오는 중…', shopEmpty:'실시간 쇼핑이 곧 표시됩니다. 아래 정품 판매처를 둘러보세요.', selectActives:'2개 이상 성분을 선택하세요.', allSafe:'충돌 없음 — 함께 써도 괜찮아요. 🎉', followToast:'즐겨찾기에 추가 ★', unfollowToast:'삭제됨', known:'대표', tier:'등급', vegan:'비건', mens:'남성 추천', bioSoon:'프로필 불러오는 중…', readMore:'자세히', decNone:'인식된 성분이 없어요 — 철자를 확인하거나 전체 성분표를 붙여넣어 보세요.', decFound:'개 인식됨', priceFrom:'부터', shelfEmpty:'퀴즈를 풀고 고민을 선택하면 선반이 자동으로 채워져요.', yourRoutine:'내 루틴', sources:'새 활성성분은 항상 패치테스트하세요.', sponsored:'스폰서', advertisement:'광고', adAliTitle:'✨ 알리익스프레스에서 K-뷰티 쇼핑', adAliSub:'정품 한국 스킨케어 — 전 세계 배송, 최저가.', adAliCta:'특가 보기', adAliLoading:'오늘의 특가 불러오는 중…', reviewedOn:'근거 검토', sources:'출처', howWeGrade:'평가 기준 보기 →', radarChartLabel:'한국 vs 서구 트렌드 지도', radarQkr:'한국에서 인기', radarQglobal:'글로벌 대세', radarQniche:'틈새 / 조용', radarQwest:'서구에서 인기', radarAxisWest:'서구 인기도', radarSince:'유행 시작' },
+    ja: { result:'あなたの肌タイプ', retake:'やり直す', best:'おすすめの悩み', pairs:'相性の良い成分', avoid:'注意の組合せ', preg:'妊娠中', pregSafe:'おおむね問題なし', pregCaution:'医師に相談', time:'使用', am:'朝', pm:'夜', both:'朝・夜', shop:'このステップを探す', shopFor:'探す', loading:'読み込み中…', shopEmpty:'ライブショッピングはここに表示されます。下の正規販売店もどうぞ。', selectActives:'2つ以上の成分を選択。', allSafe:'問題なし — 一緒に使えます。🎉', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', known:'代表', tier:'グレード', vegan:'ヴィーガン', mens:'メンズ可', bioSoon:'プロフィール読み込み中…', readMore:'詳しく', decNone:'認識された成分がありません — スペルを確認するか全成分を貼り付けてください。', decFound:'件認識', priceFrom:'〜', shelfEmpty:'診断と悩みを選ぶと棚が自動で埋まります。', yourRoutine:'あなたのルーティン', sources:'新しい成分は必ずパッチテストを。', sponsored:'スポンサー', advertisement:'広告', adAliTitle:'✨ AliExpressでK-beautyを購入', adAliSub:'本物の韓国スキンケア — 世界中に配送、ベストプライス。', adAliCta:'お得を見る', adAliLoading:'本日のお得を読み込み中…', reviewedOn:'エビデンス確認', sources:'出典', howWeGrade:'評価基準を見る →', radarChartLabel:'韓国 vs 欧米トレンドマップ', radarQkr:'韓国で人気', radarQglobal:'グローバル定番', radarQniche:'ニッチ / 静か', radarQwest:'欧米で人気', radarAxisWest:'欧米での人気度', radarSince:'流行開始' },
   };
   const t = (k) => (CONTENT && CONTENT['ui.' + k]) || (STR[lang] && STR[lang][k]) || STR.en[k] || k;
 
@@ -981,7 +981,7 @@
 
   function wireFilters() {
     const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast','kb-stack'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board'], 'kb-shop':['kb-shop','kb-shelf'] };
+    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast','kb-stack'], 'kb-radar':['kb-radar','kb-ledger'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board','kb-ledger'], 'kb-shop':['kb-shop','kb-shelf'] };
     $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
       $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
       chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
@@ -992,18 +992,15 @@
     }));
   }
 
-  // ── Top sponsored block (AliExpress geo strip + AdSense + Coupang for ko) ────
+  // ── Top sponsored block (localized AliExpress geo strip + AdSense) ───────────
   function renderTopAds() {
     const host = $('#kb-topads'); if (!host) return;
-    const isKo = (lang === 'ko');
     const parts = [];
-    if (isKo) parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · 쿠팡파트너스</div><div class="kb-ad-coupang" id="kb-ad-coupang"></div><div class="kb-ad-coupang-disc">이 광고는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div></div>`);
     parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · AliExpress</div><div class="kb-ad-ali" id="kb-ad-ali"><div class="kb-empty">${esc(t('adAliLoading'))}</div></div></div>`);
     parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('advertisement'))}</div><div class="kb-ad-adsense"><ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200" data-ad-format="auto" data-full-width-responsive="true"></ins></div></div>`);
     host.innerHTML = parts.join('');
     host.hidden = false;
     try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
-    if (isKo) injectCoupang($('#kb-ad-coupang'));
     loadTopAli();
   }
   function loadTopAli() {
@@ -1024,21 +1021,84 @@
       wireGo();
     }).catch(() => { box.innerHTML = banner(); wireGo(); });
   }
-  function injectCoupang(host) {
-    if (!host || host.dataset.done) return; host.dataset.done = '1';
-    try {
-      const ifr = document.createElement('iframe');
-      ifr.style.cssText = 'width:100%;max-width:690px;height:150px;border:0;overflow:hidden;display:block;margin:0 auto';
-      ifr.setAttribute('scrolling', 'no'); ifr.setAttribute('title', 'Coupang Partners'); ifr.setAttribute('loading', 'lazy');
-      host.appendChild(ifr);
-      const d = ifr.contentWindow.document;
-      d.open();
-      d.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:hidden}</style></head><body>'
-        + '<script src="https://ads-partners.coupang.com/g.js"><\/script>'
-        + '<script>new PartnersCoupang.G({"id":996633,"trackingCode":"AF4227535","subId":null,"template":"carousel","width":"680","height":"140"});<\/script>'
-        + '</body></html>');
-      d.close();
-    } catch { /* coupang failed — leave block empty */ }
+
+  // ── Seoul-vs-World Trend Radar (#1): Korea×West quadrant + lifecycle cards ──
+  const RADAR_STAGE_CLS = { emerging:'st-emerging', rising:'st-rising', peak:'st-peak', mainstream:'st-mainstream', fading:'st-fading' };
+  const RADAR_MOM_GLYPH = { up:'↑', flat:'→', down:'↓' };
+  function renderRadar() {
+    const box = $('#kb-radar-box'); const R = window.KBEAUTY_RADAR; if (!box || !R) return;
+    const items = R.items || [];
+    const SL = R.stageLabels || {}, ML = R.momentumLabels || {}, CL = R.crossoverLabels || {};
+    const V = (window.KBEAUTY_BOARD_CONFIG || {}).verdicts || {};
+    const S = 340, P = 34, plot = S - P * 2;
+    const X = we => P + (we / 100) * plot;
+    const Y = kr => (S - P) - (kr / 100) * plot;
+    const mid = X(50), midY = Y(50);
+    const dots = items.map((it, i) => {
+      const cx2 = X(it.we).toFixed(1), cy = Y(it.kr).toFixed(1), cls = RADAR_STAGE_CLS[it.stage] || 'st-rising';
+      return `<g class="radar-dot ${cls}" data-i="${i}" tabindex="0" role="button" aria-label="${esc(it.label)}"><circle cx="${cx2}" cy="${cy}" r="11"/><text x="${cx2}" y="${(+cy + 4).toFixed(1)}" text-anchor="middle">${i + 1}</text></g>`;
+    }).join('');
+    const svg = `<svg viewBox="0 0 ${S} ${S}" class="radar-svg" role="img" aria-label="${esc(t('radarChartLabel'))}">
+      <rect x="${P}" y="${P}" width="${plot}" height="${plot}" class="radar-bg"/>
+      <line x1="${mid}" y1="${P}" x2="${mid}" y2="${S - P}" class="radar-grid"/>
+      <line x1="${P}" y1="${midY}" x2="${S - P}" y2="${midY}" class="radar-grid"/>
+      <text x="${(P + plot * 0.25).toFixed(0)}" y="${P + 15}" class="radar-q" text-anchor="middle">🇰🇷 ${esc(t('radarQkr'))}</text>
+      <text x="${(P + plot * 0.75).toFixed(0)}" y="${P + 15}" class="radar-q" text-anchor="middle">🌍 ${esc(t('radarQglobal'))}</text>
+      <text x="${(P + plot * 0.25).toFixed(0)}" y="${S - P - 7}" class="radar-q radar-q-dim" text-anchor="middle">${esc(t('radarQniche'))}</text>
+      <text x="${(P + plot * 0.75).toFixed(0)}" y="${S - P - 7}" class="radar-q" text-anchor="middle">🌎 ${esc(t('radarQwest'))}</text>
+      ${dots}
+      <text x="${S / 2}" y="${S - 6}" class="radar-axis" text-anchor="middle">${esc(t('radarAxisWest'))} →</text>
+    </svg>`;
+    const cards = items.map((it, i) => {
+      const v = V[it.verdict] || { emoji: '', label: it.verdict, cls: 'note', tip: '' };
+      const cls = RADAR_STAGE_CLS[it.stage] || '';
+      return `<div class="radar-card" id="kb-radar-c-${i}">
+        <div class="radar-c-h"><span class="radar-c-n ${cls}">${i + 1}</span><span class="radar-c-em" aria-hidden="true">${it.emoji || '✨'}</span><span class="radar-c-t">${esc(it.label)}</span></div>
+        <div class="radar-c-pills"><span class="radar-pill ${cls}">${esc(SL[it.stage] || it.stage)}</span><span class="radar-pill mom-${it.momentum}">${RADAR_MOM_GLYPH[it.momentum] || ''} ${esc(ML[it.momentum] || it.momentum)}</span><span class="radar-pill cross">${esc(CL[it.crossover] || it.crossover)}</span><span class="kb-flag ${v.cls}" title="${esc(v.tip)}">${v.emoji} ${esc(v.label)}</span></div>
+        <div class="radar-c-b">${esc(it.blurb)}</div>
+        <div class="radar-c-sci">🔬 ${esc(it.science)}</div>
+        <div class="radar-c-meta">📅 ${esc(t('radarSince'))} ${esc(it.since)} · 🛰️ ${esc(it.methodology)}</div>
+        <button class="kb-step-shop radar-c-shop" data-seed="${esc(it.aliSeed || 'korean skincare')}">🛒 ${esc(t('shopFor'))}</button>
+      </div>`;
+    }).join('');
+    box.innerHTML = `
+      <div class="radar-chart-wrap">${svg}</div>
+      <div class="radar-legend">${Object.keys(SL).map(k => `<span class="radar-leg ${RADAR_STAGE_CLS[k] || ''}">${esc(SL[k])}</span>`).join('')}</div>
+      <div class="radar-meta-note">🛰️ ${esc(t('reviewedOn'))} ${esc(R.updatedAt || '')} · ${esc(R.methodology || '')}</div>
+      <div class="radar-cards">${cards}</div>`;
+    $$('.radar-dot', box).forEach(g => {
+      const go = () => { const c = $('#kb-radar-c-' + g.dataset.i); if (c) { c.scrollIntoView({ behavior: 'smooth', block: 'center' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1200); } };
+      g.addEventListener('click', go); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    $$('.radar-c-shop', box).forEach(b => b.addEventListener('click', () => { loadShop(b.dataset.seed); jumpTo('#kb-shop'); }));
+  }
+
+  // ── Trend Evidence Ledger (#2): graded, dated, sourced trend reads ──────────
+  function renderLedger() {
+    const box = $('#kb-ledger-box'); if (!box) return;
+    const V = (window.KBEAUTY_BOARD_CONFIG || {}).verdicts || {};
+    const CITES = window.KBEAUTY_CITATIONS || {};
+    const reviewed = window.KBEAUTY_TRENDS_REVIEWED || '';
+    const used = {}; const order = [];
+    const rows = TRENDS.map(tr => {
+      const v = V[tr.verdict] || { emoji: '', label: tr.verdict, cls: 'note', tip: '' };
+      let sup = '';
+      if (tr.cite && CITES[tr.cite]) {
+        if (!(tr.cite in used)) { order.push(tr.cite); used[tr.cite] = order.length; }
+        sup = `<a class="ledger-cite" href="#kb-ledger-src-${esc(tr.cite)}">[${used[tr.cite]}]</a>`;
+      }
+      return `<div class="ledger-row">
+        <div class="ledger-h"><span class="ledger-em" aria-hidden="true">${tr.emoji || '✨'}</span><span class="ledger-t">${esc(tr.title)}</span><span class="kb-flag ${v.cls}" title="${esc(v.tip)}">${v.emoji} ${esc(v.label)}</span></div>
+        <div class="ledger-sci">${esc(tr.science || tr.blurb || '')} ${sup}</div>
+      </div>`;
+    }).join('');
+    const sources = order.map((cid, i) => { const c = CITES[cid]; return `<li id="kb-ledger-src-${esc(cid)}"><span class="src-n">[${i + 1}]</span> <a href="${esc(c.url)}" target="_blank" rel="nofollow noopener">${esc(c.label)} ↗</a></li>`; }).join('');
+    box.innerHTML = `
+      <div class="ledger-meta">🔬 ${esc(t('reviewedOn'))} ${esc(reviewed)} · <a class="ledger-method" id="kb-ledger-method" role="button" tabindex="0">${esc(t('howWeGrade'))}</a></div>
+      <div class="ledger-list">${rows}</div>
+      <div class="gs-block" style="margin-top:8px"><div class="gs-h">📚 ${esc(t('sources'))}</div><ol class="ledger-sources">${sources}</ol></div>
+      <div class="funnel-disc">${esc((window.KBEAUTY_BOARD_CONFIG || {}).disclosure || '')}</div>`;
+    const m = $('#kb-ledger-method'); if (m) m.addEventListener('click', () => jumpTo('#kb-trust'));
   }
 
   // ── Boot ───────────────────────────────────────────────────────────────────
@@ -1046,8 +1106,10 @@
     await loadContent();   // per-language content overlay (English fallback)
     localizeData();
     localizeNewData();     // localize the new top-10 datasets (window.KBEAUTY_*)
-    renderTopAds();        // localized AliExpress + AdSense (+ Coupang for ko)
+    renderTopAds();        // localized AliExpress + AdSense
     renderForecast();
+    renderRadar();         // #1 Seoul-vs-World trend radar
+    renderLedger();        // #2 trend evidence ledger
     renderQuiz();
     renderConcerns();
     renderStack();

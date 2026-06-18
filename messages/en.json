@@ -359,6 +359,9 @@
   "kpop.filter.countdowns": "⏳ Comebacks",
   "kpop.filter.artists": "🎤 Artists",
   "kpop.filter.news": "📰 News",
+  "kpop.filter.streaming": "🎧 Streaming",
+  "kpop.sec.streaming.title": "🎧 Streaming Hub",
+  "kpop.sec.streaming.sub": "Where to listen — plus a daily goal to keep up with your bias",
   "kpop.sec.charts.title": "Real-Time Charts",
   "kpop.sec.charts.sub": "Top songs right now · Apple Music Korea",
   "kpop.sec.countdowns.title": "⏳ Comeback & Anniversary Countdowns",
@@ -592,5 +595,10 @@
   "hub.s114": "Where locals eat",
   "hub.s115": "5-day eating route",
   "hub.s116": "Order like a local",
-  "hub.s117": "Live exchange rates"
+  "hub.s117": "Live exchange rates",
+  "kbeauty.sec.ledger.title": "🔬 Trend evidence ledger",
+  "kbeauty.sec.ledger.sub": "Every 2026 trend graded by the evidence — proven, promising, or hype — dated and sourced.",
+  "kbeauty.sec.radar.title": "🛰️ Seoul-vs-World trend radar",
+  "kbeauty.sec.radar.sub": "Where every K-beauty trend lives on the Korea-vs-West map, where it is headed, and whether it has crossed over — dated and sourced.",
+  "kbeauty.filter.radar": "🛰️ Trend Radar"
 }
