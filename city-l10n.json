@@ -2567,5 +2567,663 @@
     }
    ]
   }
+ },
+ "Gangneung": {
+  "en": {
+   "h1": "Things to Do in Gangneung, Korea",
+   "title": "Things to Do in Gangneung, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Gangneung, Korea: Gyeongpo Beach, Anmok Coffee Street, Jeongdongjin sunrise, Ojukheon, hanok houses, seafood and soft tofu.",
+   "lead": "Gangneung sits on Korea's east coast in Gangwon Province, where the Taebaek Mountains slope down to a long ribbon of pale-sand beaches and a famously clear sea. It is a city that blends old and new with ease: centuries-old hanok estates and Joseon-era birthplaces sit a short ride from a beachfront \"coffee street,\" sunrise-watching trains, and bustling fish ports. Add Korea's deepest coffee culture, silky seawater tofu, and easy access to the mountains of Seoraksan and PyeongChang, and Gangneung makes an unhurried, rewarding base for exploring the eastern coast.",
+   "attractions": [
+    {
+     "name": "Gyeongpo Beach",
+     "nameLocal": "경포해변",
+     "blurb": "Gangneung's signature beach stretches for roughly six kilometers of soft white sand backed by a pine forest, making it one of the largest and most popular sandy beaches on the east coast. Wide and gently sloping, it is a favorite for long shoreline walks, summer swimming, and watching the sun rise over the East Sea."
+    },
+    {
+     "name": "Gyeongpo Lake",
+     "nameLocal": "경포호",
+     "blurb": "Just inland from the beach, this calm lagoon is ringed by a flat walking and cycling loop and framed by cherry trees that draw crowds when they bloom in spring. The pavilion of Gyeongpodae, perched on a rise above the water, has been a celebrated viewpoint for moon-gazing and poetry since the Goryeo and Joseon eras."
+    },
+    {
+     "name": "Anmok Coffee Street",
+     "nameLocal": "안목 커피거리",
+     "blurb": "This seaside strip of cafes and roasteries is the heart of Gangneung's reputation as Korea's coffee capital, a culture that traces back to beachfront vending machines of the 1980s. Today specialty baristas line the promenade, and visitors sip hand-drip brews with an unbroken view of the waves."
+    },
+    {
+     "name": "Jeongdongjin",
+     "nameLocal": "정동진",
+     "blurb": "Famed as one of Korea's premier sunrise spots, Jeongdongjin is home to a railway station that sits closer to the sea than almost any other in the country. The pine-lined platform and adjacent sandy cove fill with travelers welcoming the first light of the new year over the horizon."
+    },
+    {
+     "name": "Ojukheon",
+     "nameLocal": "오죽헌",
+     "blurb": "One of Korea's oldest surviving wooden residences, this mid-Joseon house is the birthplace of the great scholar Yulgok Yi I and his mother, the artist and calligrapher Shin Saimdang, both of whom appear on Korean banknotes. Its name comes from the black-stemmed bamboo that grows in the surrounding garden."
+    },
+    {
+     "name": "Seongyojang House",
+     "nameLocal": "선교장",
+     "blurb": "An exceptionally well-preserved aristocratic estate near Gyeongpo Lake, Seongyojang was home to ten generations of the same noble family. Its many tile-roofed halls, servants' quarters, lotus pond, and the elegant Hwallaejeong pavilion offer one of the country's finest pictures of upper-class Joseon life."
+    },
+    {
+     "name": "Jumunjin Beach and Port",
+     "nameLocal": "주문진해변·항구",
+     "blurb": "North of the city, Jumunjin is one of the east coast's largest fishing ports, where boats unload crab, squid, and the day's catch into a lively fish market. The neighboring beach and breakwater have become popular photo stops, and seafood restaurants serve raw fish and spicy seafood stews steps from the water."
+    },
+    {
+     "name": "Ojuk Hanok Village",
+     "nameLocal": "오죽한옥마을",
+     "blurb": "Set right beside Ojukheon, this cluster of traditional tile-roofed houses lets visitors experience an overnight stay in a hanok. The wooden architecture and courtyard layout follow Korean tradition while interiors offer comfortable, modern amenities."
+    },
+    {
+     "name": "Jeongdongjin Sandglass Park",
+     "nameLocal": "정동진 모래시계공원",
+     "blurb": "Beside Jeongdongjin station stands one of the world's largest hourglasses, built to mark the millennium, with the round shape symbolizing the sun and the endless flow of time. The seaside park around it is an easy and photogenic stroll paired with a sunrise visit."
+    },
+    {
+     "name": "Chodang Tofu Village",
+     "nameLocal": "초당두부마을",
+     "blurb": "This historic neighborhood is the birthplace of Chodang sundubu, a silky soft tofu traditionally curdled with clean East Sea seawater instead of conventional coagulants. Family-run restaurants here have served the delicate tofu for generations, in soups, fresh slabs, and warming stews."
+    }
+   ],
+   "food": [
+    {
+     "name": "Chodang Sundubu (soft tofu)",
+     "blurb": "Gangneung's most famous dish, this exceptionally soft, silky tofu is set with clean seawater for a light, savory flavor. It is served warm with soy dipping sauce, in a gentle soybean soup, or simmered into a spicy sundubu-jjigae stew."
+    },
+    {
+     "name": "Mulhoe (cold raw fish soup)",
+     "blurb": "A refreshing east-coast specialty of fresh raw fish or seafood in a chilled, tangy-spicy broth. It is an especially popular summer dish in the port towns around Jumunjin and along the coast."
+    },
+    {
+     "name": "Hoe (sliced raw fish)",
+     "blurb": "With major fishing ports on its doorstep, Gangneung serves some of Korea's freshest sliced raw fish. Diners pick from the day's catch at Jumunjin's seafood street and eat it within sight of the boats that brought it in."
+    },
+    {
+     "name": "Haemul-jjim and haemul-tang",
+     "blurb": "Hearty seafood feasts built from the local catch: haemul-jjim is a braised platter of crab, shellfish, and vegetables in a spicy sauce, while haemul-tang is a bubbling spicy seafood stew. Both are mainstays of Gangneung's port restaurants."
+    },
+    {
+     "name": "Gamja-ongsimi (potato dumpling soup)",
+     "blurb": "A comforting Gangwon Province specialty of chewy potato-dough dumplings in a savory broth, often with vegetables. It reflects the mountainous region's long tradition of potato farming."
+    },
+    {
+     "name": "Gangneung coffee",
+     "blurb": "More a ritual than a dish, hand-drip and specialty coffee define the city, born from its decades-long love affair with the bean. The roasteries of Anmok and beyond serve carefully brewed cups that have made Gangneung a pilgrimage for coffee lovers."
+    }
+   ],
+   "gettingThere": "Gangneung is one of the easiest provincial cities to reach from Seoul thanks to the KTX high-speed train, which runs from Seoul Station to Gangneung Station in roughly two hours, a route built up for the 2018 PyeongChang Winter Olympics. Intercity buses also connect Seoul's express bus terminal with Gangneung. Within the city, local buses link the station to Gyeongpo Beach, Anmok Coffee Street, Ojukheon, and Jumunjin, while a separate rail line and buses run south along the coast to Jeongdongjin. The city makes a natural gateway for day trips inland to the mountains and ski resorts of PyeongChang and north toward Seoraksan National Park.",
+   "tips": [
+    "Sunrise is a Gangneung ritual, especially at Jeongdongjin and Gyeongpo Beach; check the day's sunrise time in advance and dress warmly, as the seafront is breezy even outside winter.",
+    "Rent a bicycle to loop Gyeongpo Lake and link the lake, beach, and Anmok Coffee Street, as the area is flat and well connected by seaside paths.",
+    "Use the KTX from Seoul to keep travel simple, and consider basing yourself near Gangneung Station or Gyeongpo for easy bus access to the main sights.",
+    "Pair the coast with the mountains: Gangneung works well as a base for day trips to PyeongChang's highland resorts and the peaks around Seoraksan."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Gangneung?",
+     "a": "Two days is a comfortable amount of time to cover the highlights: a day around Gyeongpo Beach, Gyeongpo Lake, Anmok Coffee Street, and the historic houses of Ojukheon and Seongyojang, plus a second day for Jeongdongjin's sunrise and Jumunjin's port and beach. With three days you can add a mountain day trip toward PyeongChang or Seoraksan."
+    },
+    {
+     "q": "What is Gangneung most famous for?",
+     "a": "Gangneung is best known for its long sandy beaches such as Gyeongpo, its deep coffee culture centered on Anmok Coffee Street, the sunrise views at Jeongdongjin, and its heritage sites including Ojukheon and Seongyojang. It is also famous for Chodang soft tofu made with seawater."
+    },
+    {
+     "q": "How do you get from Seoul to Gangneung?",
+     "a": "The fastest way is the KTX high-speed train from Seoul Station, which reaches Gangneung in about two hours. Intercity buses from Seoul's express bus terminal are an alternative, taking longer but running frequently."
+    },
+    {
+     "q": "Is Gangneung good for a beach trip?",
+     "a": "Yes. Gangneung has some of the cleanest, widest beaches on Korea's east coast, with Gyeongpo and Jumunjin among the most popular. Summer is peak swimming season, while spring and autumn are pleasant for walks, sunrises, and cafe-hopping along the shore."
+    }
+   ]
+  }
+ },
+ "Sokcho": {
+  "en": {
+   "h1": "Things to Do in Sokcho, Korea",
+   "title": "Things to Do in Sokcho, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Sokcho, Korea: Seoraksan National Park, Sokcho Beach, Abai Village, the fishery market, Daepohang Port, and seaside pavilions.",
+   "lead": "Wedged between the granite peaks of Seoraksan and the deep blue East Sea, Sokcho is Gangwon Province's most rewarding coastal base. In a single day you can hike to a legendary rock formation, cross a lagoon on a hand-pulled raft ferry, watch the sunrise from a clifftop pavilion, and feast on squid sausage and sweet-glazed fried chicken straight from a buzzing fishery market. Here are the attractions and flavours that make Sokcho worth the trip.",
+   "attractions": [
+    {
+     "name": "Seoraksan National Park",
+     "nameLocal": "설악산국립공원",
+     "blurb": "Korea's most celebrated mountain park rises just outside the city, with jagged granite peaks, valleys, and waterfalls draped in mist. It is the heart of any Sokcho visit and a UNESCO Biosphere Reserve, dazzling in autumn when the slopes turn crimson and gold."
+    },
+    {
+     "name": "Ulsanbawi Rock",
+     "nameLocal": "울산바위",
+     "blurb": "This colossal ridge of six granite peaks is Seoraksan's signature hike, reached by a steep trail that climbs hundreds of metal steps in its final stretch. The summit delivers a sweeping panorama over the mountains, the city, and the East Sea beyond."
+    },
+    {
+     "name": "Sinheungsa Temple",
+     "nameLocal": "신흥사",
+     "blurb": "A serene Buddhist temple founded over a thousand years ago at the foot of Seoraksan, it is guarded by a giant bronze Great Unification Buddha statue. Its halls mark the gateway to the Ulsanbawi and Biseondae hiking trails."
+    },
+    {
+     "name": "Seoraksan Cable Car",
+     "nameLocal": "설악산 케이블카",
+     "blurb": "A short cable-car ride lifts visitors high above Seoraksan's valleys toward Gwongeumseong, an ancient fortress site perched on a rocky crag. From the top, a brief scramble rewards you with all-directional views of the peaks and coastline, no long hike required."
+    },
+    {
+     "name": "Sokcho Beach",
+     "nameLocal": "속초해수욕장",
+     "blurb": "A long sweep of soft pale sand right beside downtown, Sokcho Beach pairs gentle East Sea swimming in summer with year-round seaside strolls. Behind it, lively cafes and seafood eateries make it a relaxed counterpoint to the mountains."
+    },
+    {
+     "name": "Abai Village",
+     "nameLocal": "아바이마을",
+     "blurb": "Settled by North Korean refugees who fled south during the Korean War, this nostalgic neighbourhood preserves a vanished mid-century Korea and a famous regional cuisine. Narrow lanes lined with murals and family eateries gained fame as a Korean drama filming location."
+    },
+    {
+     "name": "Galaetbae Raft Ferry",
+     "nameLocal": "갯배",
+     "blurb": "A flat, hand-pulled raft that crosses the narrow channel between downtown and Abai Village, the gaetbae is one of Sokcho's most charming traditions. Passengers grab a metal hook and help haul the cable across the water in a quick, memorable ride."
+    },
+    {
+     "name": "Sokcho Tourist & Fishery Market",
+     "nameLocal": "속초관광수산시장",
+     "blurb": "Formerly Jungang Market, this covered warren of stalls is the city's culinary engine, piled high with fresh seafood, dried fish, and street snacks. It is the spot to taste Sokcho's famous sweet-and-crispy dakgangjeong fried chicken."
+    },
+    {
+     "name": "Daepohang Port",
+     "nameLocal": "대포항",
+     "blurb": "A working fishing harbour ringed by raw-fish restaurants and seafood stalls, Daepohang is where boats unload the day's catch. Visitors pick a fish from the tanks for sashimi or graze on fried shrimp and squid along the lively quay."
+    },
+    {
+     "name": "Yeonggeumjeong Pavilion",
+     "nameLocal": "영금정",
+     "blurb": "A graceful pavilion set on a rocky outcrop reached by a short pedestrian bridge over the surf, Yeonggeumjeong is a beloved spot for watching the East Sea sunrise. Its name evokes the music-like sound of waves striking the surrounding rocks."
+    }
+   ],
+   "food": [
+    {
+     "name": "Dakgangjeong",
+     "blurb": "Sokcho's signature snack: bite-sized fried chicken tossed in a glossy sweet-and-spicy glaze, sold by the boxful at the Tourist & Fishery Market and beloved by locals and visitors alike."
+    },
+    {
+     "name": "Abai Sundae",
+     "blurb": "A hearty North Korean-style blood sausage stuffed with glass noodles, vegetables, and seasonings, a specialty brought to Abai Village by refugee families and still served there today."
+    },
+    {
+     "name": "Ojingeo Sundae",
+     "blurb": "A Sokcho twist on sundae where a whole squid is stuffed with noodles, tofu, and vegetables, then steamed and sliced, showcasing the city's deep love of squid."
+    },
+    {
+     "name": "Mulhoe",
+     "blurb": "A cold, refreshing bowl of raw fish or seafood in a chilled, tangy chili-vinegar broth, a perfect East Coast summer dish enjoyed near the harbours."
+    },
+    {
+     "name": "Hoe (Fresh Sashimi)",
+     "blurb": "Glistening slices of just-caught fish, often picked live from tanks at Daepohang and Dongmyeonghang ports, served with sides in waterfront raw-fish restaurants."
+    },
+    {
+     "name": "Sundubu (Soft Tofu Stew)",
+     "blurb": "Silky handmade soft tofu, traditionally set with East Sea water, is the pride of nearby Haksapyeong village and served in a comforting, savoury stew."
+    }
+   ],
+   "gettingThere": "Sokcho sits on Korea's northeast coast in Gangwon Province, roughly a two-and-a-half to three-hour express bus ride from Seoul. The fastest route is the intercity or express bus from Seoul's Express Bus Terminal or Dong Seoul Terminal directly to Sokcho Intercity Bus Terminal. There is no direct train to the city itself, so buses are the standard choice. Within Sokcho, local buses, taxis, and the gaetbae raft ferry connect the downtown, the markets, and the beaches, while buses and taxis run to the Seoraksan National Park entrance about 20 to 30 minutes from the centre. The nearest airport with domestic flights is Yangyang International Airport, a short drive to the south.",
+   "tips": [
+    "Visit Seoraksan early in the day, especially in autumn foliage season, when trails and the cable car draw large crowds.",
+    "Wear sturdy shoes for the Ulsanbawi hike, which finishes with a long climb up steep metal staircases.",
+    "Carry small cash for the gaetbae raft ferry and market stalls, where card payment is not always available.",
+    "Combine Abai Village, the raft ferry, and the Tourist & Fishery Market into one easy walking loop around the harbour channel."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Sokcho?",
+     "a": "Two days is ideal: one for Seoraksan National Park and its hikes or cable car, and a second for the coast, Abai Village, the fishery market, and the seaside pavilions. A single packed day can cover the highlights if time is short."
+    },
+    {
+     "q": "What is Sokcho most famous for?",
+     "a": "Sokcho is best known as the gateway to Seoraksan National Park and for its East Sea seafood culture, including the fishery market, Daepohang Port, and local specialties like dakgangjeong fried chicken and squid sundae."
+    },
+    {
+     "q": "Is Sokcho worth visiting from Seoul?",
+     "a": "Yes. Despite being a few hours from Seoul by bus, Sokcho combines dramatic mountains, beaches, fresh seafood, and unique cultural sites like Abai Village, making it one of Korea's most rewarding short trips."
+    },
+    {
+     "q": "When is the best time to visit Sokcho?",
+     "a": "Autumn is spectacular for Seoraksan's fall foliage, while summer is popular for the beaches. Spring brings mild hiking weather and winter offers crisp coastal views, so the city rewards visitors year-round."
+    }
+   ]
+  }
+ },
+ "Suwon": {
+  "en": {
+   "h1": "Things to Do in Suwon, Korea",
+   "title": "Things to Do in Suwon, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Suwon: UNESCO Hwaseong Fortress, Haenggung Palace, mural-lined cafe streets, smoky Suwon galbi and an easy day trip from Seoul.",
+   "lead": "Just 30 minutes south of Seoul, Suwon is the walled capital of Gyeonggi Province and one of Korea's most rewarding day trips. The city grew up around Hwaseong, a vast 18th-century fortress that still wraps nearly six kilometres of stone wall around the old town and earned a place on the UNESCO World Heritage list. Beyond the ramparts you'll find a restored royal palace, a buzzing cafe-and-mural neighbourhood, and the city's signature salt-marinated galbi sizzling over charcoal. Here are the best things to do in Suwon.",
+   "attractions": [
+    {
+     "name": "Hwaseong Fortress",
+     "nameLocal": "수원 화성",
+     "blurb": "Suwon's crown jewel and a UNESCO World Heritage Site, this late-18th-century fortress was built by King Jeongjo of the Joseon Dynasty. Its nearly six-kilometre stone-and-brick wall climbs over Paldalsan hill and threads through the modern city, linking gates, command posts, bastions and floodgates. Walking the full circuit is the classic Suwon experience."
+    },
+    {
+     "name": "Hwaseong Haenggung Palace",
+     "nameLocal": "화성 행궁",
+     "blurb": "The largest temporary palace of the Joseon era, Haenggung served as King Jeongjo's residence and government seat during royal visits to Suwon. Burned and rebuilt, its sprawling courtyards and tiled halls have been faithfully restored. Costumed martial-arts and royal-procession reenactments are often staged in the main courtyard."
+    },
+    {
+     "name": "Paldalmun Gate",
+     "nameLocal": "팔달문",
+     "blurb": "The grand southern gate of Hwaseong Fortress, Paldalmun stands on a roundabout in the heart of the old town, ringed by bustling traditional markets. Its two-tiered wooden pavilion and semicircular defensive wall make it one of the best-preserved Joseon city gates in Korea."
+    },
+    {
+     "name": "Janganmun Gate",
+     "nameLocal": "장안문",
+     "blurb": "The northern and main gate of Hwaseong, Janganmun is the largest fortress gate in Korea, even bigger than Seoul's famous Namdaemun. Its broad arch and crescent-shaped barbican wall show off the cutting-edge military engineering King Jeongjo's builders pioneered here."
+    },
+    {
+     "name": "Haenggung-dong Cafe and Mural Street",
+     "nameLocal": "행궁동 벽화마을",
+     "blurb": "The lanes around Haenggung Palace have blossomed into Suwon's most photogenic neighbourhood, where old houses wear bright wall murals and a dense cluster of independent cafes, galleries and craft shops fills the alleys. It's the perfect place to slow down between fortress walks."
+    },
+    {
+     "name": "Hwahongmun Floodgate",
+     "nameLocal": "화홍문",
+     "blurb": "Spanning the Suwoncheon stream on the fortress's north side, Hwahongmun is a striking water gate with seven arched sluices and a pavilion perched above. When the stream is high, water rushing through the arches creates one of Suwon's signature scenes."
+    },
+    {
+     "name": "Banghwasuryujeong Pavilion",
+     "nameLocal": "방화수류정",
+     "blurb": "Set on a rocky rise beside the Yongyeon pond, this elegant pavilion doubled as a lookout post and a place to enjoy the view. Its irregular, terrain-hugging design and reflection in the pond below make it a beloved spot for photographers and sunset-watchers."
+    },
+    {
+     "name": "Yeonmudae Training Ground",
+     "nameLocal": "연무대",
+     "blurb": "Also called Dongjangdae, this eastern command post on high ground once served as a military training and review field for Hwaseong's garrison. Today visitors can try traditional Korean archery here, loosing arrows from the very ground where Joseon soldiers once drilled."
+    },
+    {
+     "name": "Korean Folk Village",
+     "nameLocal": "한국민속촌",
+     "blurb": "A short ride away in neighbouring Yongin, this sprawling living-history museum recreates a traditional Joseon-era village with thatched farmhouses, artisan workshops and folk performances like tightrope walking and farmers' dance. It's a popular pairing with a Suwon fortress visit."
+    },
+    {
+     "name": "Suwon Hwaseong Museum",
+     "nameLocal": "수원화성박물관",
+     "blurb": "This museum unpacks the story behind the fortress, from King Jeongjo's vision to the ingenious cranes and tools that raised the walls in just a few years. Detailed models and a recreation of the king's lavish royal procession bring Hwaseong's history vividly to life."
+    }
+   ],
+   "food": [
+    {
+     "name": "Suwon Galbi",
+     "blurb": "The city's most famous dish: oversized beef short ribs that are scored, lightly seasoned with salt rather than a heavy soy marinade, and grilled over charcoal to let the quality of the meat shine. A Suwon culinary institution."
+    },
+    {
+     "name": "Suwon Wanggalbi",
+     "blurb": "The king-sized version of Suwon galbi, with especially large, thick rib cuts that gave the local style its reputation. Best enjoyed at one of the longstanding galbi houses near the fortress."
+    },
+    {
+     "name": "Suwon Tongdak",
+     "blurb": "Whole crispy fried chicken sold from the lanes around Paldalmun's old chicken alley, a beloved local snack served hot and golden, often by the bird."
+    },
+    {
+     "name": "Sundae",
+     "blurb": "Korean blood-and-noodle sausage, a hearty street-food staple. Suwon has its own well-known sundae alley where vendors serve it steamed with sides or in spicy stir-fries."
+    },
+    {
+     "name": "Kalguksu",
+     "blurb": "Hand-cut wheat noodles in a warming broth, a comforting, inexpensive meal found in the markets ringing the fortress gates."
+    }
+   ],
+   "gettingThere": "Suwon is one of the easiest day trips from Seoul. Suwon Station sits on Seoul Subway Line 1, so you can ride the metro directly from central Seoul in about an hour, while frequent KTX and conventional trains reach Suwon Station in roughly 30 minutes from Seoul Station. From Suwon Station it's a short bus or taxi ride to Paldalmun Gate and the fortress wall, or about a 25-minute walk. Within the old town, the fortress sights, Haenggung Palace and the mural-and-cafe streets are clustered close enough to explore on foot, and a tourist trolley loops the main fortress stops. The Korean Folk Village lies in neighbouring Yongin, reachable by a free shuttle or local bus from Suwon.",
+   "tips": [
+    "Walk the fortress wall counterclockwise from Janganmun or Paldalmun to tackle the steep Paldalsan hill section while you're fresh, and wear comfortable shoes for the full six-kilometre circuit.",
+    "Pair the fortress with Haenggung Palace and the Haenggung-dong mural and cafe streets, which all sit within easy walking distance of one another in the old town.",
+    "Time your visit to catch one of the martial-arts or royal-procession reenactments often held in the Haenggung Palace courtyard.",
+    "Try traditional Korean archery at Yeonmudae and ride the dragon-shaped fortress trolley to rest your legs between wall sections."
+   ],
+   "faq": [
+    {
+     "q": "Is Suwon worth visiting as a day trip from Seoul?",
+     "a": "Yes. Suwon is only about 30 minutes from Seoul by KTX or roughly an hour on Subway Line 1, and the UNESCO-listed Hwaseong Fortress, Haenggung Palace and the cafe-and-mural streets are all close together, making it one of the most rewarding day trips in the Seoul area."
+    },
+    {
+     "q": "How long does it take to walk Hwaseong Fortress?",
+     "a": "The full wall circuit runs nearly six kilometres and typically takes two to three hours at a relaxed pace, including the climb over Paldalsan hill. You can also walk shorter sections or ride the fortress trolley between the main gates."
+    },
+    {
+     "q": "What food is Suwon famous for?",
+     "a": "Suwon is best known for Suwon galbi, oversized beef short ribs seasoned with salt and grilled over charcoal. The city also has a popular fried-chicken alley (Suwon tongdak), a sundae (blood sausage) alley, and traditional markets around the fortress gates."
+    },
+    {
+     "q": "How do I get from Suwon to the Korean Folk Village?",
+     "a": "The Korean Folk Village is in neighbouring Yongin, just outside Suwon. A free shuttle bus and local public buses run from near Suwon Station, making it an easy add-on to a fortress visit."
+    }
+   ]
+  }
+ },
+ "Daegu": {
+  "en": {
+   "h1": "Things to Do in Daegu, Korea",
+   "title": "Things to Do in Daegu, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Daegu, Korea: Seomun Market, Kim Kwang-seok Street, Apsan Park, Donghwasa Temple, 83 Tower, plus spicy local food.",
+   "lead": "Tucked into a basin ringed by mountains in southeastern Korea, Daegu is the country's fourth-largest city and a place where history, hot springs of flavor, and easygoing energy meet. Known historically as a center of the textile and medicinal-herb trades, the city pairs lively traditional markets and atmospheric Modern History Street with green escapes like Apsan and Palgongsan. Daegu is famous for its bold, spicy cuisine and a warm, unpretentious local character, making it a rewarding stop on any Korea itinerary beyond Seoul and Busan. Here are the best things to do.",
+   "attractions": [
+    {
+     "name": "Seomun Market",
+     "nameLocal": "서문시장",
+     "blurb": "One of Korea's largest and oldest traditional markets, Seomun Market dates back centuries to the Joseon era and was historically a hub of the textile trade. Thousands of stalls sell fabrics, clothing, and household goods, while its bustling night market is a magnet for street-food lovers."
+    },
+    {
+     "name": "Kim Kwang-seok Street",
+     "nameLocal": "김광석 길",
+     "blurb": "A colorful mural-lined alley in the Bangcheon Market area honoring the beloved late folk singer Kim Kwang-seok, who grew up in the neighborhood. Murals, sculptures, and his music drifting through the lane make it a moving pilgrimage for fans and a photogenic stroll for everyone."
+    },
+    {
+     "name": "Apsan Park and Cable Car",
+     "nameLocal": "앞산공원",
+     "blurb": "A sprawling forested park on the city's southern edge, Apsan is laced with hiking trails and dotted with temples. Its cable car climbs toward an observatory near the summit, where a sweeping panorama of Daegu's basin city unfolds, especially striking at sunset and after dark."
+    },
+    {
+     "name": "Donghwasa Temple",
+     "nameLocal": "동화사",
+     "blurb": "Founded in the Silla era and set on the slopes of Palgongsan, Donghwasa is one of the region's most important Buddhist temples. Its serene halls and a towering stone Buddha statue, the Tongil Yaksa Yeorae, draw pilgrims and visitors seeking forest tranquility."
+    },
+    {
+     "name": "Palgongsan Mountain",
+     "nameLocal": "팔공산",
+     "blurb": "The mountain that frames Daegu's northern horizon, Palgongsan is a national park prized for crisp ridge hikes, autumn foliage, and historic temples. A cable car carries visitors up for valley views, and the hermitage of Gatbawi, with its famous stone Buddha, draws devotees who climb to make a wish."
+    },
+    {
+     "name": "Daegu 83 Tower",
+     "nameLocal": "83타워",
+     "blurb": "Rising beside the E-World theme park, this landmark observation tower offers some of the city's highest viewpoints over the mountain-ringed basin. Its observatory and revolving restaurant make it a popular spot to take in Daegu by day and by glittering night."
+    },
+    {
+     "name": "E-World",
+     "nameLocal": "이월드",
+     "blurb": "A lively amusement park clustered at the foot of 83 Tower, E-World blends thrill rides, gardens, and seasonal light displays. Its springtime cherry blossoms and dazzling night illuminations have made it one of Daegu's signature family attractions."
+    },
+    {
+     "name": "Modern History Street",
+     "nameLocal": "근대골목",
+     "blurb": "A walkable trail through downtown Daegu that traces the city's early-20th-century history, winding past Gyesan Cathedral, missionary houses on Cheongna Hill, and the centuries-old Yangnyeongsi medicinal-herb market. Cobbled lanes and preserved architecture make it a living open-air museum."
+    },
+    {
+     "name": "Yangnyeongsi Herb Medicine Market",
+     "nameLocal": "약령시",
+     "blurb": "Established in the Joseon dynasty, Daegu's Yangnyeongsi is Korea's most storied oriental-medicine market, its lanes perfumed with dried roots and herbs. A dedicated museum nearby explains the heritage of traditional Korean medicine that still thrives here."
+    },
+    {
+     "name": "Suseong Lake",
+     "nameLocal": "수성못",
+     "blurb": "A scenic reservoir ringed by a walking path, cafes, and willow trees in southeastern Daegu. Locals come to stroll, ride swan boats, and watch musical fountain shows, making it a relaxed evening escape from the downtown bustle."
+    }
+   ],
+   "food": [
+    {
+     "name": "Makchang Gui",
+     "blurb": "A Daegu specialty of grilled pork or beef intestines, prized for their chewy texture and rich flavor. Served sizzling at smoky barbecue joints with a savory dipping sauce, makchang is a local late-night favorite best paired with soju."
+    },
+    {
+     "name": "Jjim-galbi",
+     "blurb": "Daegu's signature braised beef short ribs, slow-cooked in a fiery, garlicky chili sauce. Born in the Dongin-dong neighborhood, this bold, spicy take on galbi is so iconic the area is lined with restaurants serving it."
+    },
+    {
+     "name": "Napjak Mandu",
+     "blurb": "A uniquely Daegu street snack of thin, flat fried dumplings filled lightly with glass noodles, pan-crisped and topped with sauce and green onion. Found at market stalls, they are a beloved cheap bite."
+    },
+    {
+     "name": "Ttarogukbap",
+     "blurb": "A Daegu-style beef-and-rice soup where the rice is served 'separately' (ttaro) from the rich, spicy red broth. Hearty and warming, it is a classic local comfort meal."
+    },
+    {
+     "name": "Mungtigi",
+     "blurb": "Freshly sliced raw beef seasoned with sesame oil, garlic, and chili, a Daegu delicacy traditionally eaten very fresh. Tender and deeply savory, it is enjoyed at specialist eateries by adventurous diners."
+    },
+    {
+     "name": "Yakjeon Galbi",
+     "blurb": "Grilled marinated beef ribs flavored with a blend of medicinal herbs, a nod to Daegu's heritage as a center of oriental medicine. The aromatic marinade gives the meat a distinctive fragrance."
+    }
+   ],
+   "gettingThere": "Daegu sits in southeastern Korea and is easy to reach. The fastest route from Seoul is the KTX high-speed train, which runs to Dongdaegu Station in under two hours; trains also connect quickly to Busan. Dongdaegu Station is a major hub linking high-speed rail, regular trains, and an express bus terminal. Within the city, an efficient subway network of multiple lines, plus buses, connects the main sights, and most downtown attractions like Seomun Market, Modern History Street, and Kim Kwang-seok Street are walkable from one another. Daegu International Airport handles some domestic and regional international flights, while Gimhae International Airport near Busan and Incheon International Airport near Seoul serve longer-haul arrivals.",
+   "tips": [
+    "Daegu is famous for hot, humid summers, so plan strenuous hikes up Apsan or Palgongsan for early morning and carry water; spring cherry blossoms and autumn foliage are the most comfortable seasons to visit.",
+    "Ride the subway to skip downtown traffic, but use a taxi or the dedicated bus for Donghwasa and Palgongsan, as the temple and cable car sit outside the city core.",
+    "Visit Seomun Market in the evening to catch its lively night market and the best street-food atmosphere.",
+    "Come hungry and embrace the spice: Daegu's signature dishes like jjim-galbi and makchang are bold, so order plenty of side dishes and rice to balance the heat."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Daegu?",
+     "a": "Two days is enough to cover the highlights: spend one day downtown exploring Seomun Market, Modern History Street, and Kim Kwang-seok Street, and a second day on nature and views at Apsan or Palgongsan plus Donghwasa Temple and 83 Tower."
+    },
+    {
+     "q": "What is Daegu best known for?",
+     "a": "Daegu is known for its traditional markets, especially the huge Seomun Market and the historic Yangnyeongsi medicinal-herb market, as well as its bold, spicy local cuisine like jjim-galbi and grilled makchang. It is also framed by scenic mountains such as Palgongsan and Apsan."
+    },
+    {
+     "q": "Is Daegu worth visiting beyond Seoul and Busan?",
+     "a": "Yes. Daegu offers a more relaxed, local feel than the bigger cities, with rich history along Modern History Street, distinctive food found nowhere else, and easy access to mountain temples, all reachable in under two hours by KTX from Seoul."
+    },
+    {
+     "q": "What food should I try in Daegu?",
+     "a": "Try the city's signature jjim-galbi (spicy braised short ribs) and grilled makchang, along with street snacks like napjak mandu and hearty ttarogukbap soup. Adventurous eaters can sample mungtigi, freshly sliced raw beef."
+    }
+   ]
+  }
+ },
+ "Andong": {
+  "en": {
+   "h1": "Things to Do in Andong, Korea",
+   "title": "Things to Do in Andong, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Andong, Korea: UNESCO-listed Hahoe Folk Village, Confucian academies, Woryeonggyo Bridge, the Mask Dance Festival, and Andong jjimdak.",
+   "lead": "Often called the spiritual capital of Korean culture, Andong is a tranquil city in North Gyeongsang Province where centuries of Confucian tradition still shape daily life. Set along the meandering Nakdong River, it draws travelers with UNESCO-listed villages and academies, masked folk dramas with roots running back some 800 years, and a food culture all its own, from soy-braised jjimdak to fiercely strong rice soju. This guide rounds up the most rewarding things to do in Andong, blending living heritage, riverside scenery, and unhurried small-city charm.",
+   "attractions": [
+    {
+     "name": "Hahoe Folk Village",
+     "nameLocal": "하회마을",
+     "blurb": "This UNESCO World Heritage village, cradled in a bend of the Nakdong River, has preserved its Joseon-era layout of thatched and tiled-roof homes for centuries. Once the seat of the Ryu clan, it remains a living community where traditional houses, ancestral shrines, and Confucian heritage endure."
+    },
+    {
+     "name": "Dosan Seowon",
+     "nameLocal": "도산서원",
+     "blurb": "A UNESCO-inscribed Confucian academy founded in the 16th century to honor the revered scholar Yi Hwang, known as Toegye. Its serene wooden halls, lecture pavilions, and library overlook the Nakdong River, embodying the scholarly ideals at the heart of Korean Neo-Confucianism."
+    },
+    {
+     "name": "Byeongsan Seowon",
+     "nameLocal": "병산서원",
+     "blurb": "Another UNESCO World Heritage Confucian academy, built to commemorate the statesman-scholar Ryu Seong-ryong. Its open Mandaeru pavilion frames a celebrated view of the Byeongsan cliffs and the river below, widely regarded as one of Korea's most beautiful seowon settings."
+    },
+    {
+     "name": "Woryeonggyo Bridge",
+     "nameLocal": "월영교",
+     "blurb": "Korea's longest wooden footbridge stretches gracefully across the Nakdong River, with a pavilion at its midpoint for soaking in the water and hills. It is especially atmospheric at dusk, when the bridge lights up and reflects across the calm river surface."
+    },
+    {
+     "name": "Andong Mask Dance Festival",
+     "nameLocal": "안동국제탈춤페스티벌",
+     "blurb": "A celebrated cultural festival centered on traditional Korean mask dance, headlined by the Hahoe Byeolsingut Tallori folk drama and joined by masked performers from around the world. It transforms the riverside and Hahoe Village into a lively stage for music, ritual, and satire."
+    },
+    {
+     "name": "Bongjeongsa Temple",
+     "nameLocal": "봉정사",
+     "blurb": "Andong's largest Buddhist temple, traditionally traced to the 7th-century Silla period and tucked into the wooded slopes of Cheondeungsan. Its Geungnakjeon hall ranks among the oldest surviving wooden buildings in Korea, and the quiet compound holds several designated national treasures."
+    },
+    {
+     "name": "Andong Soju Museum",
+     "nameLocal": "안동소주박물관",
+     "blurb": "A museum dedicated to Andong's famous distilled rice liquor, tracing its history through artifacts, models, and reconstructed distilling rooms. Exhibits reveal how this potent regional specialty has been crafted for centuries and why it differs sharply from mass-market soju."
+    },
+    {
+     "name": "Andong Hahoe Mask Museum",
+     "nameLocal": "안동하회동탈박물관",
+     "blurb": "Located near Hahoe Folk Village, this museum displays the renowned Hahoe wooden masks alongside ritual and theatrical masks from Korea and around the world. It offers context for the byeolsingut mask drama and the expressive carved faces that define Andong's folk identity."
+    },
+    {
+     "name": "Andong Folk Museum",
+     "nameLocal": "안동민속박물관",
+     "blurb": "An accessible introduction to the region's Confucian rites, life-cycle ceremonies, and folk customs, with an adjoining open-air folk village of relocated traditional buildings. It sits close to Woryeonggyo Bridge, making the two an easy pairing along the river."
+    },
+    {
+     "name": "Buyongdae Cliff",
+     "nameLocal": "부용대",
+     "blurb": "A pine-topped cliff rising above the Nakdong River directly across from Hahoe Folk Village. The short climb rewards visitors with the classic panoramic view of the village wrapped within the river's wide loop, one of the most photographed scenes in Andong."
+    }
+   ],
+   "food": [
+    {
+     "name": "Andong Jjimdak",
+     "blurb": "The city's signature dish: chicken braised with potatoes, vegetables, and chewy glass noodles in a savory-sweet soy sauce. Born in Andong's old market, it is now beloved nationwide, and a whole alley of restaurants serves it near the traditional market."
+    },
+    {
+     "name": "Andong Soju",
+     "blurb": "A traditional distilled rice liquor with deep local roots, far stronger and purer than common diluted soju. Crafted through careful distillation, it is best sampled in small measures and pairs naturally with Andong's hearty regional cooking."
+    },
+    {
+     "name": "Heotjesabap",
+     "blurb": "A refined bibimbap of assorted seasoned vegetables over rice, dressed with soy sauce rather than chili paste. Modeled on Confucian ancestral-rite food, this gentle, scholarly dish reflects Andong's yangban heritage and is typically served with side dishes."
+    },
+    {
+     "name": "Andong Geonjin-guksu",
+     "blurb": "Hand-cut wheat noodles served in a light, clear broth, an Andong summer specialty traditionally made by hand. The thin, springy noodles are a comforting local staple alongside the city's richer fare like jjimdak and salted mackerel."
+    },
+    {
+     "name": "Andong Salted Mackerel",
+     "blurb": "Known as gangodeungeo, this salt-cured mackerel is an Andong specialty rooted in the days before refrigeration, when fish was salted to survive the inland journey. The curing yields a firm, deeply savory fillet, usually grilled and served with rice."
+    }
+   ],
+   "gettingThere": "Andong sits inland in North Gyeongsang Province, roughly in the eastern-central part of South Korea. The fastest route from Seoul is the KTX-Eum high-speed train from Cheongnyangni Station, which reaches Andong in around two hours; intercity buses also connect Seoul, Daegu, and other cities to Andong's bus terminal. Andong is a comfortable day-trip or overnight base from Daegu. Many of the headline sights, including Hahoe Folk Village, Dosan Seowon, and Byeongsan Seowon, lie outside the compact city center, so plan to use local buses, taxis, or a rental car to reach them, while riverside spots like Woryeonggyo Bridge are closer to town.",
+   "tips": [
+    "Group the out-of-town sights by direction: Hahoe Folk Village and Byeongsan Seowon lie to the west, while Dosan Seowon sits to the north, so cluster visits to cut down on backtracking.",
+    "Wear comfortable shoes, as the folk villages, temple grounds, and the climb up Buyongdae Cliff all involve uneven paths and stairs.",
+    "Time a riverside stroll across Woryeonggyo Bridge for late afternoon into evening to catch the sunset and the bridge's nighttime lighting.",
+    "Andong soju is far stronger than ordinary soju, so sample it slowly and pair it with food."
+   ],
+   "faq": [
+    {
+     "q": "Is Andong worth visiting?",
+     "a": "Yes. Andong is one of Korea's richest destinations for living heritage, home to the UNESCO-listed Hahoe Folk Village and two famous Confucian academies, plus distinctive local food like jjimdak and Andong soju. It rewards travelers seeking traditional culture and relaxed riverside scenery over big-city bustle."
+    },
+    {
+     "q": "How many days do you need in Andong?",
+     "a": "One full day covers the highlights if you focus on Hahoe Folk Village and a riverside stop at Woryeonggyo Bridge. Two days let you add Dosan Seowon, Byeongsan Seowon, Bongjeongsa Temple, and the museums at a more relaxed pace, which suits the spread-out nature of the sights."
+    },
+    {
+     "q": "What is Andong famous for?",
+     "a": "Andong is known as a spiritual and cultural capital of Korea, celebrated for the Hahoe Folk Village, its Confucian academies, and the international Mask Dance Festival. On the table, it is famous for Andong jjimdak braised chicken, strong distilled Andong soju, and salted mackerel."
+    },
+    {
+     "q": "How do you get from Seoul to Andong?",
+     "a": "The quickest way is the KTX-Eum high-speed train from Seoul's Cheongnyangni Station, which reaches Andong in about two hours. Intercity buses also run from Seoul to Andong's bus terminal, and the city is easily combined with a trip through Daegu or other parts of North Gyeongsang Province."
+    }
+   ]
+  }
+ },
+ "Yeosu": {
+  "en": {
+   "h1": "Things to Do in Yeosu, Korea",
+   "title": "Things to Do in Yeosu, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Yeosu, Korea: the Dolsan Bridge night sea view, Odongdo Island, the maritime cable car, Hyangiram Hermitage and fresh seafood.",
+   "lead": "Cradled along South Korea's southern coast in Jeollanam-do, Yeosu (여수) is a sea-laced port city where islands, bridges and hermitage temples meet some of the country's most celebrated seafood. Made famous beyond Korea by the 2012 World Expo and a beloved pop song about its night sea, the city pairs glittering coastal panoramas with camellia islands, cliffside shrines and a maritime cable car gliding over the water. Here are the best things to do in Yeosu.",
+   "attractions": [
+    {
+     "name": "Dolsan Bridge",
+     "nameLocal": "돌산대교",
+     "blurb": "This landmark cable-stayed bridge links downtown Yeosu to Dolsan Island and is the city's signature night-view spot, its towers and cables lit in shifting colors above the dark harbor. The waterfront promenades on either side offer some of the most photographed coastal scenes in Korea."
+    },
+    {
+     "name": "Odongdo Island",
+     "nameLocal": "오동도",
+     "blurb": "Reached on foot across a long breakwater from the mainland, this small island is blanketed in camellia trees that bloom red in late winter and early spring. Wooded trails lead to a white lighthouse at the tip, with sweeping views over Yeosu's bays and scattered islands."
+    },
+    {
+     "name": "Yeosu Maritime Cable Car",
+     "nameLocal": "여수해상케이블카",
+     "blurb": "Korea's first over-sea cable car connects Dolsan Park with Jasan Park, carrying riders high above the strait between the two shores. Glass-floored crystal cabins reveal the water below alongside panoramas of Dolsan Bridge, the turtle-ship bridge and the harbor's islands."
+    },
+    {
+     "name": "Hyangiram Hermitage",
+     "nameLocal": "향일암",
+     "blurb": "Perched on the rocky cliffs at the southern tip of Dolsan Island, this Buddhist hermitage is reached by steep stone steps threaded between huge boulders. As one of Korea's most famous sunrise spots, it draws crowds at dawn for the sun rising straight out of the open sea."
+    },
+    {
+     "name": "Yeosu Expo Ocean Park",
+     "nameLocal": "여수엑스포해양공원",
+     "blurb": "The waterfront site of the 2012 World Expo remains a lively seaside destination with broad promenades, themed pavilions and the Sky Tower. Its Big-O attraction is famed for a multimedia show that combines water screens, lights and music on the open sea."
+    },
+    {
+     "name": "Aqua Planet Yeosu",
+     "nameLocal": "아쿠아플라넷 여수",
+     "blurb": "Set on the Expo waterfront, this is one of Korea's largest aquariums, home to tens of thousands of marine animals across hundreds of species. Highlights include beluga whales, Baikal seals and a long underwater tunnel, making it a favorite for families."
+    },
+    {
+     "name": "Manseongri Black Sand Beach",
+     "nameLocal": "만성리 검은모래해변",
+     "blurb": "This unusual beach is named for its dark, mineral-rich sand, long reputed locally for soothing aches and ailments. Calm, shallow water and a quiet setting just outside the city center make it a relaxed spot for a seaside stroll or summer swim."
+    },
+    {
+     "name": "Jinnamgwan Hall",
+     "nameLocal": "진남관",
+     "blurb": "A vast single-story wooden pavilion and designated National Treasure, this Joseon-era hall served as a naval command post linked to Admiral Yi Sun-sin. One of the largest wooden structures of its kind in Korea, it anchors the city's deep maritime and military history."
+    },
+    {
+     "name": "Yi Sun-sin Square and Turtle Ship",
+     "nameLocal": "이순신광장",
+     "blurb": "This harborside plaza honors Admiral Yi Sun-sin, the naval hero who led victories from these waters. Its centerpiece is a full-size replica of the geobukseon, or turtle ship, an ironclad warship visitors can board to explore reconstructed decks and exhibits."
+    },
+    {
+     "name": "Janggundo Island and the Coastal Islands",
+     "nameLocal": "장군도",
+     "blurb": "Yeosu's harbor is dotted with small islands, including Janggun Island near the cable-car route, best appreciated from the water or from elevated viewpoints. Ferries and boat tours fan out to outlying isles, weaving past fishing villages and quiet coves."
+    }
+   ],
+   "food": [
+    {
+     "name": "Dolsan Gat-kimchi",
+     "blurb": "Yeosu's most famous regional specialty, made from mustard greens grown in the red-clay, sea-misted soil of Dolsan Island. The leaves yield a kimchi that is milder and more aromatic than ordinary versions, with a distinctive savory tang."
+    },
+    {
+     "name": "Gejang (Soy-marinated Crab)",
+     "blurb": "Raw crab cured in seasoned soy sauce or chili paste until silky and rich, often served as gejang baekban with rice and an array of side dishes. The buttery roe spooned over warm rice is a coastal delicacy locals swear by."
+    },
+    {
+     "name": "Seodae-hoe (Raw Tonguefish)",
+     "blurb": "Thin slices of fresh tonguefish served raw, a prized sashimi-style dish that showcases the clarity of Yeosu's local catch. It is typically enjoyed dipped in spicy-sour seasoning alongside soju."
+    },
+    {
+     "name": "Jangeo-gui (Grilled Eel)",
+     "blurb": "Conger and pike eel from local waters, grilled until smoky and tender, are a Yeosu staple. The eel is also sliced raw as gat jangeo-hoe, often eaten with mustard-leaf wraps for an extra peppery bite."
+    },
+    {
+     "name": "Yeosu-style Ssambap",
+     "blurb": "A generous spread of leaf wraps and rice served with grilled mackerel or sardine, salted fish, fresh vegetables and soybean-paste stew. The lane near City Hall is a long-running destination for this hearty, communal meal."
+    },
+    {
+     "name": "Gul-gui (Grilled Oysters)",
+     "blurb": "Plump oysters from the surrounding bays, grilled in the shell until just cooked and brimming with briny juice. A classic cold-season treat best eaten fresh by the harbor."
+    }
+   ],
+   "gettingThere": "Yeosu sits on the southern coast of Jeollanam-do and is well connected for a provincial city. KTX high-speed trains run from Seoul's Yongsan Station to Yeosu-Expo Station in roughly three hours, dropping you steps from the Expo waterfront. Express and intercity buses link Yeosu with Seoul, Busan, Gwangju and other hubs, while Yeosu Airport offers domestic flights from cities including Seoul and Jeju. Within the city, local buses and taxis reach Dolsan Island, Odongdo and the cable-car terminals, though renting a car gives the most freedom for the coastal drive out to Hyangiram Hermitage.",
+   "tips": [
+    "Time a visit to Hyangiram Hermitage for sunrise if you can, and wear sturdy shoes for the steep stone stairs and narrow rock passages.",
+    "Stay out until after dark at least one night for the Dolsan Bridge and harbor light show, which is the scene the city is most famous for.",
+    "Visit Odongdo in late winter to early spring to catch the camellia blossoms at their reddest, though the island is scenic year-round.",
+    "Buy vacuum-packed Dolsan gat-kimchi as a souvenir, as it travels well and is sold throughout the city and at the station."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Yeosu?",
+     "a": "Two to three days is ideal. That allows time for the Expo waterfront and Aqua Planet, the maritime cable car and Odongdo Island, a sunrise trip to Hyangiram Hermitage, and at least one evening enjoying the Dolsan Bridge night sea view, with plenty of seafood meals in between."
+    },
+    {
+     "q": "What is Yeosu most famous for?",
+     "a": "Yeosu is best known for its coastal night views, especially around Dolsan Bridge, along with the 2012 World Expo waterfront, camellia-covered Odongdo Island, the cliffside Hyangiram Hermitage and exceptional fresh seafood. A popular Korean song about Yeosu's night sea also boosted its fame."
+    },
+    {
+     "q": "Is Yeosu worth visiting?",
+     "a": "Yes. Yeosu combines dramatic sea-and-island scenery, a sky-high maritime cable car, historic sites tied to Admiral Yi Sun-sin, and some of Korea's most celebrated regional cooking. It is one of the country's top domestic getaways and increasingly popular with international travelers."
+    },
+    {
+     "q": "When is the best time to visit Yeosu?",
+     "a": "Spring and autumn offer the most comfortable weather and clear coastal views, while late winter to early spring brings the camellia blooms on Odongdo Island. Summer is popular for its beaches but is warm and busy, and the city's night views are spectacular in any season."
+    }
+   ]
+  }
  }
 }

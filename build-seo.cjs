@@ -170,6 +170,9 @@ const STAY = [
 // City itineraries that actually get generated (city × days) — hoisted so
 // every builder can link only to pages that exist.
 const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
+// Emerging provincial cities (regional-dispersal trend) — rich guides come from
+// city-l10n.json 'en'; not in CITIES, so generated via their own pass.
+const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }];
 
 // "Keep planning {city}" cross-cluster links — emits links only to pages this
 // generator writes. excludeUrl drops the current page from its own list.
@@ -900,7 +903,10 @@ function buildCity(city) {
     if (sights.length) { body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${sights.slice(0, 8).map(cardHtml).join('')}</div>`; }
     if (food.length) { body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${food.slice(0, 6).map(cardHtml).join('')}</div>`; }
   }
-  body += cityClusterLinks(city.name, url);
+  const isRegional = !CITIES.some(c => c.name === city.name);
+  body += isRegional
+    ? `<h2>🗺️ Explore more of Korea</h2><div class="seo-linklist"><a href="explore.html">🧭 All destinations</a><a href="guide/things-to-do-in-seoul.html">📍 Seoul</a><a href="guide/things-to-do-in-busan.html">📍 Busan</a><a href="guide/korea-travel-cost-index.html">💰 Cost Index 2026</a><a href="plan.html">🗺️ AI Trip Planner</a></div>`
+    : cityClusterLinks(city.name, url);
   const hasItin = ITIN.some(([cn]) => cn === city.name);
   const qa = (g && g.faq && g.faq.length) ? g.faq.map(x => [x.q, x.a]) : [
     [`How many days do you need in ${city.name}?`, `Most travelers spend 2–3 days in ${city.name} to cover the highlights.${hasItin ? ' See our day-by-day itinerary above for a ready-made plan.' : ''}`],
@@ -912,7 +918,7 @@ function buildCity(city) {
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
 
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} places</span></div></header>`;
-  const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: pool.slice(0, 12).map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, url: ORIGIN + `${BASEP}places/${it.slug}.html` })) };
+  const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: (g ? g.attractions.map(a => ({ name: a.name })) : pool.slice(0, 12).map(it => ({ name: it.name, url: ORIGIN + `${BASEP}places/${it.slug}.html` }))).map((it, i) => ({ '@type': 'ListItem', position: i + 1, ...it })) };
   // hreflang → localized city guides where they exist (reciprocal)
   const alts = LOCALES.filter(l => CITY_L10N[city.name] && CITY_L10N[city.name][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${slug(city.name)}.html` }));
   writePage(`guide/things-to-do-in-${slug(city.name)}.html`, shell({ url, title, desc, keywords: `${city.name} Korea, things to do ${city.name}, ${city.name} attractions, ${city.name} travel guide`, schemas: [itemList, breadcrumbLD(trail), faqLD(qa)], hero, body, alts }));
@@ -1295,7 +1301,7 @@ function buildExplore(urls) {
     ...FAQS.filter(f => FAQ_L10N[l] && FAQ_L10N[l].items[f.slug]).map(f => `<a href="${l}/faq/${f.slug}.html">${FLAGS[l]} ${esc(FAQ_L10N[l].items[f.slug][0])}</a>`),
   ]));
   body += section('🍜 By Topic', Object.keys(CAT_META).map(c => `<a href="guide/${CAT_SLUG[c]}.html">${CAT_META[c].icon} ${esc(CAT_META[c].label)}</a>`));
-  body += section('📍 City Guides', CITIES.map(c => `<a href="guide/things-to-do-in-${slug(c.name)}.html">📍 ${esc(c.name)}</a>`));
+  body += section('📍 City Guides', [...CITIES, ...REGIONAL_CITIES].map(c => `<a href="guide/things-to-do-in-${slug(c.name)}.html">📍 ${esc(c.name)}</a>`));
   if (urls.neighborhoods && urls.neighborhoods.length) body += section('🏘️ Seoul Neighborhoods', NEIGHBORHOODS.map(n => `<a href="guide/${slug(n.name)}-${slug(n.city)}-guide.html">${n.emoji} ${esc(n.name)}</a>`));
   body += section('🗺️ Itineraries', urls.itineraries.map(u => `<a href="${u.replace(BASEP, '')}">🗺️ ${esc(u.split('/').pop().replace(/-/g, ' ').replace('.html', '').replace(/\b\w/g, m => m.toUpperCase()))}</a>`));
   body += section('📅 When to Visit', [
@@ -1853,6 +1859,8 @@ for (const it of ALL) out.places.push(buildPlace(it));
 for (const cat of Object.keys(KOREA_DATA)) out.categories.push(buildCategory(cat));
 const cityPools = {};
 for (const c of CITIES) { const r = buildCity(c); out.cities.push(r.url); cityPools[c.name] = r.pool; }
+// Emerging provincial-city guides (regional-dispersal trend)
+out.regional = REGIONAL_CITIES.map(c => buildCity(c).url);
 // itineraries: top cities with enough data (ITIN hoisted to the constants section)
 for (const [cn, days] of ITIN) {
   const city = CITIES.find(c => c.name === cn);
@@ -1914,7 +1922,7 @@ sm += urlEntry(BASEP, '1.0', 'daily');
 LANGS.forEach(l => sm += `\n` + urlEntry(`${BASEP}?lang=${l}`, '0.8', 'weekly'));
 STATIC.slice(1).forEach(p => { const hot = (p === 'kbeauty.html'); sm += `\n` + urlEntry(BASEP + p, hot ? '0.9' : '0.8', hot ? 'daily' : 'weekly'); });
 sm += `\n` + urlEntry('/kpop', '0.9', 'daily');   // K-Pop hub: clean canonical URL (not /guide/kpop.html)
-[...out.categories, ...out.cities, out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
+[...out.categories, ...out.cities, ...(out.regional || []), out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.blog.forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.neighborhoods.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.itineraries.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
@@ -1983,7 +1991,7 @@ ${rssItems}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'blog/feed.xml'), rss);
 
-const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + (out.blogL10n || []).length + (out.itinL10n || []).length + (out.cost || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
+const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + (out.blogL10n || []).length + (out.itinL10n || []).length + (out.cost || []).length + (out.regional || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
 console.log(`✅ Generated ${total} SEO pages:`);
 console.log(`   places:        ${out.places.length}`);
 console.log(`   categories:    ${out.categories.length}`);
