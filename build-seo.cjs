@@ -583,6 +583,19 @@ const TRUST = {
   pt: { by: 'Equipe editorial KoreaPlus', upd: 'Atualizado', rev: 'Verificado para 2026' },
   id: { by: 'Tim Editorial KoreaPlus', upd: 'Diperbarui', rev: 'Diperiksa untuk 2026' },
 };
+// GEO "Key facts" strip — icon-led, scannable, matched by the Speakable selector
+// so AI answer engines can lift the at-a-glance facts. items: ['🗓 …','🗣 …', …].
+function keyFactsBox(items) {
+  if (!items || !items.length) return '';
+  return `<div class="seo-keyfacts" style="display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 18px;padding:12px 14px;background:var(--card,rgba(255,255,255,.04));border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px;font-size:13.5px;line-height:1.5">` +
+    items.map(x => `<span>${x}</span>`).join('') + `</div>`;
+}
+// Localized city-guide key facts (ja/zh/es).
+const CITY_FACTS = {
+  ja: c => [`🗓️ ベスト: 4〜5月・9〜11月`, `🗣️ 韓国語`, `💱 ウォン (₩)`, `⏱️ 目安 ${c === 'Seoul' ? '3〜4' : '2〜3'}日`, (c === 'Seoul' || c === 'Incheon') ? '✈️ 仁川空港から' : '🚄 ソウルからKTX/バス'],
+  zh: c => [`🗓️ 最佳: 4–5月·9–11月`, `🗣️ 韩语`, `💱 韩元 (₩)`, `⏱️ 建议 ${c === 'Seoul' ? '3–4' : '2–3'} 天`, (c === 'Seoul' || c === 'Incheon') ? '✈️ 仁川机场' : '🚄 首尔出发 KTX/巴士'],
+  es: c => [`🗓️ Mejor época: abr–may y sep–nov`, `🗣️ Coreano`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} días`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Aeropuerto de Incheon' : '🚄 KTX/bus desde Seúl'],
+};
 function trustBlock(lang) {
   const t = TRUST[lang] || TRUST.en;
   return `<div class="seo-byline" style="font-size:12px;color:var(--text3,#8a93a0);margin:4px 0 16px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center">` +
@@ -867,8 +880,11 @@ function buildCity(city) {
   const food = pool.filter(i => i.cat === 'food'), sights = pool.filter(i => i.cat !== 'food');
   const desc = g ? g.metaDesc : `Top things to do in ${city.name} (${city.kr}): ${pool.slice(0, 5).map(i => i.name).join(', ')}. Local food, attractions, transport & insider tips for travelers.`;
   const trail = [{ name: 'Home', url: BASEP }, { name: 'Travel', url: `${BASEP}guide/${CAT_SLUG.travel}.html` }, { name: city.name, url }];
+  const isHub = city.name === 'Seoul';
+  const getThere = (city.name === 'Seoul' || city.name === 'Incheon') ? '✈️ Incheon Airport (AREX/metro)' : '🚄 KTX/bus from Seoul';
 
   let body = bcHtml(trail);
+  body += keyFactsBox([`🗓️ Best time: Apr–May & Sep–Nov`, `🗣️ Korean (한국어)`, `💱 KRW (₩)`, `⏱️ Suggested: ${isHub ? '3–4' : '2–3'} days`, getThere]);
   if (g) {
     body += `<p class="lead">${esc(g.lead)}</p>`;
     body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${g.attractions.map(a => {
@@ -933,6 +949,7 @@ function buildCityL10n(cityName, lang) {
   const trail = [{ name: 'Home', url: BASEP }, { name: g.h1, url }];
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(g.lead)}</p>`;
+  body += keyFactsBox((CITY_FACTS[lang] || (() => []))(cityName));
   // Attractions
   body += `<h2>${esc(ui.attractionsH)}</h2><div class="seo-grid">${g.attractions.map(a => {
     const sl = placeSlugFor(a.name);
@@ -979,6 +996,7 @@ function buildItinerary(city, days, pool) {
 
   let body = bcHtml(trail);
   body += `<p class="lead">This ${days}-day ${esc(city.name)} itinerary balances must-see sights, great food and downtime — perfect for first-time visitors. Adjust it freely in our AI planner.</p>`;
+  body += keyFactsBox([`📅 ${days}-day plan`, `📍 Base: ${esc(city.name)}`, `🗓️ Best: Apr–May & Sep–Nov`, `🎯 First-timer friendly`]);
 
   const perDay = Math.max(2, Math.ceil(sights.length / days));
   let si = 0, fi = 0;
@@ -1610,6 +1628,7 @@ function buildTheme(t) {
   const foods = foodsPool.length ? foodsPool : ALL.filter(i => i.cat === 'food');
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(t.desc)}</p>`;
+  body += keyFactsBox([`📅 ${t.days}-day route`, `📍 Base: ${esc((THEME_CITY[t.slug] || 'Seoul'))}`, t.month ? `🗓️ Best: ${t.month[0].toUpperCase() + t.month.slice(1)}` : `🗓️ Best: Apr–May & Sep–Nov`, `🎯 Themed route`]);
   if (t.month) body += `<p>📅 Best timed with our <a href="guide/korea-in-${t.month}.html">Korea in ${t.month[0].toUpperCase() + t.month.slice(1)}</a> seasonal guide.</p>`;
   let si = 0, fi = 0;
   for (let d = 1; d <= t.days; d++) {
