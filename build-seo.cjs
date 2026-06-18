@@ -674,6 +674,7 @@ ${trustBlock(lang)}
 <article class="seo-body">
 ${body}
 </article>
+<div id="kp-react" class="kp-react" style="display:none;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 4px;padding:12px 14px;font-size:14px;border-top:1px solid var(--border,rgba(255,255,255,.08))"></div>
 </main>
 <footer class="footer" role="contentinfo" style="text-align:center;padding:40px 20px;border-top:1px solid var(--border,rgba(255,255,255,.08));margin-top:40px">
   <p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
@@ -702,6 +703,7 @@ ${body}
 <script src="modules/api-client.js"></script>
 <script defer src="modules/topads.js"></script>
 <script defer src="modules/korea-now.js?v=1"></script>
+<script defer src="modules/react.js?v=1"></script>
 </body>
 </html>`;
 }

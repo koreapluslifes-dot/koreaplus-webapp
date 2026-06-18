@@ -15,6 +15,7 @@
 import { handleApiRoute } from './router.ts';
 import { handlePlanRequest, handleSharePost, handleShareGet, handleShareHtml } from './handlers/planner.ts';
 import { handleAffiliate } from './handlers/affiliate.ts';
+import { handleReact } from './handlers/reactions.ts';
 import { handleMenuTranslate } from './handlers/translator.ts';
 import type { CacheEnv } from './cache.ts';
 import type { LLMEnv } from './api/groq.ts';
@@ -48,7 +49,8 @@ export interface WorkerEnv extends CacheEnv, LLMEnv {
   LASTFM_API_KEY?:        string;   // (P2) supplementary popularity signal
   // ── K-Beauty vertical (optional) ──────────────────────────────────────────
   // Wikidata bio needs NO key. AliExpress affiliate grid lights up when these
-  // are set (reuse app_key 536770 from the sibling apps; tracking_id 'koreaplus').
+  // are set (reuse app_key 536770 from the sibling apps; tracking_id 'luckynum'
+  // — the id registered in that affiliate account; 'koreaplus' is NOT and 402s).
   ALI_APP_KEY?:           string;   // AliExpress Portals app key
   ALI_APP_SECRET?:        string;   // AliExpress Portals app secret (HMAC signing)
 }
@@ -250,6 +252,9 @@ export default {
         return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty.html' + url.search, 302);
       }
     }
+
+    // "Was this helpful?" reactions (GET counts, POST a vote) — element 8 UGC
+    if (path.endsWith('/api/react')) return handleReact(request, env);
 
     // ── GET routes ────────────────────────────────────────────────────────
     if (request.method === 'GET') {
