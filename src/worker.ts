@@ -283,7 +283,7 @@ export default {
       // full hreflang alternate set). Reached via the koreaplus-lifes.com/kbeauty*
       // worker route — no separate CF route needed.
       if (path.endsWith('/kbeauty-sitemap.xml')) {
-        const BASE = 'https://koreaplus-lifes.com/guide/kbeauty.html';
+        const BASE = 'https://koreaplus-lifes.com/kbeauty';
         const today = new Date().toISOString().slice(0, 10);
         const ALT: [string, string][] = [
           ['x-default', ''], ['en', ''], ['ko', '?lang=ko'], ['ja', '?lang=ja'], ['zh-CN', '?lang=zh'],
