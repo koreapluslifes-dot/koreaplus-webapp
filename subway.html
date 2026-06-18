@@ -206,28 +206,28 @@
   <div class="search-section">
     <div class="search-row">
       <input class="station-input" id="station-input" type="search" placeholder="Station name — e.g. Hongdae, Gangnam, Itaewon…" autocomplete="off" aria-label="Station name">
-      <button class="search-btn" id="search-btn" onclick="searchStation()">🔍 Live Status</button>
+      <button class="search-btn" id="search-btn" onclick="searchStation()" data-i18n="hub.s62">🔍 Live Status</button>
     </div>
     <div class="search-hint">Type in English or Korean (e.g. 홍대입구, Hongik University, 강남)</div>
   </div>
 
   <div id="fav-section" class="fav-section" style="display:none">
-    <div class="fav-title">⭐ Saved Stations <span style="color:var(--text3);font-weight:400;font-size:11px">(tap to check)</span></div>
+    <div class="fav-title">⭐ Saved Stations <span style="color:var(--text3);font-weight:400;font-size:11px" data-i18n="hub.s63">(tap to check)</span></div>
     <div class="fav-list" id="fav-list"></div>
   </div>
 
   <div class="quick-stations">
     <div class="quick-label">Popular stations:</div>
-    <button class="quick-chip" onclick="quickSearch('Hongik University')">🎨 Hongdae</button>
-    <button class="quick-chip" onclick="quickSearch('Gangnam')">💼 Gangnam</button>
-    <button class="quick-chip" onclick="quickSearch('Itaewon')">🍻 Itaewon</button>
-    <button class="quick-chip" onclick="quickSearch('Myeongdong')">🛍 Myeongdong</button>
-    <button class="quick-chip" onclick="quickSearch('Gyeongbokgung')">🏯 Gyeongbokgung</button>
-    <button class="quick-chip" onclick="quickSearch('Dongdaemun')">🌃 Dongdaemun</button>
-    <button class="quick-chip" onclick="quickSearch('Seoul Station')">🚄 Seoul Station</button>
-    <button class="quick-chip" onclick="quickSearch('Sinchon')">🍺 Sinchon</button>
-    <button class="quick-chip" onclick="quickSearch('Insadong')">🎎 Insadong</button>
-    <button class="quick-chip" onclick="quickSearch('Yeouido')">🌸 Yeouido</button>
+    <button class="quick-chip" onclick="quickSearch('Hongik University')" data-i18n="hub.s64">🎨 Hongdae</button>
+    <button class="quick-chip" onclick="quickSearch('Gangnam')" data-i18n="hub.s65">💼 Gangnam</button>
+    <button class="quick-chip" onclick="quickSearch('Itaewon')" data-i18n="hub.s66">🍻 Itaewon</button>
+    <button class="quick-chip" onclick="quickSearch('Myeongdong')" data-i18n="hub.s67">🛍 Myeongdong</button>
+    <button class="quick-chip" onclick="quickSearch('Gyeongbokgung')" data-i18n="hub.s68">🏯 Gyeongbokgung</button>
+    <button class="quick-chip" onclick="quickSearch('Dongdaemun')" data-i18n="hub.s69">🌃 Dongdaemun</button>
+    <button class="quick-chip" onclick="quickSearch('Seoul Station')" data-i18n="hub.s70">🚄 Seoul Station</button>
+    <button class="quick-chip" onclick="quickSearch('Sinchon')" data-i18n="hub.s71">🍺 Sinchon</button>
+    <button class="quick-chip" onclick="quickSearch('Insadong')" data-i18n="hub.s72">🎎 Insadong</button>
+    <button class="quick-chip" onclick="quickSearch('Yeouido')" data-i18n="hub.s73">🌸 Yeouido</button>
   </div>
 
   <div id="result-area"></div>
@@ -250,13 +250,13 @@
 <section class="hub-explore">
   <h2 class="hub-explore-title" data-i18n="guides.keepExploring">Keep Exploring Korea</h2>
   <div class="hub-explore-grid">
-    <a class="hub-explore-card" href="guide/korea-transport-guide.html"><span class="ic">🚄</span><span>Full Transport Guide<span class="sub">KTX, buses & taxis</span></span></a>
-    <a class="hub-explore-card" href="guide/ktx-vs-bus-vs-flight-korea.html"><span class="ic">🚅</span><span>KTX vs Bus vs Flight<span class="sub">Cost & time compared</span></span></a>
-    <a class="hub-explore-card" href="faq/how-to-get-from-incheon-airport-to-seoul.html"><span class="ic">✈</span><span>Airport to Seoul<span class="sub">AREX, bus or taxi</span></span></a>
-    <a class="hub-explore-card" href="faq/is-uber-available-in-korea.html"><span class="ic">🚕</span><span>Is Uber Available?<span class="sub">Taxi apps that work</span></span></a>
-    <a class="hub-explore-card" href="currency.html"><span class="ic">💱</span><span>T-money & Currency<span class="sub">Top-up & exchange</span></span></a>
-    <a class="hub-explore-card" href="phrases.html"><span class="ic">💬</span><span>Transit Phrases<span class="sub">Ask for directions</span></span></a>
-    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub">Free personalized itinerary in 2 minutes</span></span></a>
+    <a class="hub-explore-card" href="guide/korea-transport-guide.html"><span class="ic">🚄</span><span>Full Transport Guide<span class="sub" data-i18n="hub.s74">KTX, buses & taxis</span></span></a>
+    <a class="hub-explore-card" href="guide/ktx-vs-bus-vs-flight-korea.html"><span class="ic">🚅</span><span>KTX vs Bus vs Flight<span class="sub" data-i18n="hub.s75">Cost & time compared</span></span></a>
+    <a class="hub-explore-card" href="faq/how-to-get-from-incheon-airport-to-seoul.html"><span class="ic">✈</span><span>Airport to Seoul<span class="sub" data-i18n="hub.s76">AREX, bus or taxi</span></span></a>
+    <a class="hub-explore-card" href="faq/is-uber-available-in-korea.html"><span class="ic">🚕</span><span>Is Uber Available?<span class="sub" data-i18n="hub.s77">Taxi apps that work</span></span></a>
+    <a class="hub-explore-card" href="currency.html"><span class="ic">💱</span><span>T-money & Currency<span class="sub" data-i18n="hub.s78">Top-up & exchange</span></span></a>
+    <a class="hub-explore-card" href="phrases.html"><span class="ic">💬</span><span>Transit Phrases<span class="sub" data-i18n="hub.s79">Ask for directions</span></span></a>
+    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub" data-i18n="hub.s1">Free personalized itinerary in 2 minutes</span></span></a>
   </div>
 </section>
 

@@ -105,6 +105,8 @@
        data-ad-format="horizontal" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </div>
+<!-- Localized AliExpress merch strip (AdSense top unit above; data-ads=off). Dormant until ALI keys set. -->
+<div id="kp-topads" class="kp-topads" data-q="korea souvenir travel gift" data-ads="off" style="max-width:880px;margin:0 auto;padding:0 16px"></div>
 
 
 <div class="hub-content">
@@ -121,7 +123,7 @@
   <!-- Filter Bar -->
   <div class="filter-bar">
     <span class="filter-label">City</span>
-    <button class="filter-pill active" data-filter="city" data-val="all">All Cities</button>
+    <button class="filter-pill active" data-filter="city" data-val="all" data-i18n="hub.s38">All Cities</button>
     <button class="filter-pill" data-filter="city" data-val="Seoul">Seoul</button>
     <button class="filter-pill" data-filter="city" data-val="Busan">Busan</button>
     <button class="filter-pill" data-filter="city" data-val="Jeju">Jeju</button>
@@ -129,8 +131,8 @@
 
     <span class="filter-label" style="margin-left:12px">Type</span>
     <button class="filter-pill active" data-filter="type" data-val="all">All</button>
-    <button class="filter-pill" data-filter="type" data-val="free">Free Access</button>
-    <button class="filter-pill" data-filter="type" data-val="transport">Subway Access</button>
+    <button class="filter-pill" data-filter="type" data-val="free" data-i18n="hub.s39">Free Access</button>
+    <button class="filter-pill" data-filter="type" data-val="transport" data-i18n="hub.s40">Subway Access</button>
   </div>
 
   <div class="cards-grid" id="night-grid"></div>
@@ -154,6 +156,7 @@
 
 <script src="config.js"></script>
 <script src="modules/api-client.js"></script>
+<script defer src="modules/topads.js"></script>
 <script>
 // ── Sunset calculation (astronomical formula, no API needed) ────────────────
 function getSunsetKST(lat, lng, date) {
@@ -310,13 +313,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="hub-explore">
   <h2 class="hub-explore-title" data-i18n="guides.keepExploring">Keep Exploring Korea</h2>
   <div class="hub-explore-grid">
-    <a class="hub-explore-card" href="guide/hongdae-seoul-guide.html"><span class="ic">🎨</span><span>Hongdae Guide<span class="sub">Nightlife & street art</span></span></a>
-    <a class="hub-explore-card" href="guide/gangnam-seoul-guide.html"><span class="ic">🌆</span><span>Gangnam Guide<span class="sub">Skyline & shopping</span></span></a>
-    <a class="hub-explore-card" href="itinerary/seoul-3-day-itinerary.html"><span class="ic">🧳</span><span>Seoul 3-Day Itinerary<span class="sub">Day & night plan</span></span></a>
-    <a class="hub-explore-card" href="kdrama-locations.html"><span class="ic">🎬</span><span>K-Drama Locations<span class="sub">Famous filming spots</span></span></a>
-    <a class="hub-explore-card" href="faq/is-korea-safe-at-night.html"><span class="ic">🌙</span><span>Is Korea Safe at Night?<span class="sub">Honest answer</span></span></a>
-    <a class="hub-explore-card" href="guide/things-to-do-in-busan.html"><span class="ic">🌉</span><span>Things to Do in Busan<span class="sub">Coastal night views</span></span></a>
-    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub">Free personalized itinerary in 2 minutes</span></span></a>
+    <a class="hub-explore-card" href="guide/hongdae-seoul-guide.html"><span class="ic">🎨</span><span>Hongdae Guide<span class="sub" data-i18n="hub.s41">Nightlife & street art</span></span></a>
+    <a class="hub-explore-card" href="guide/gangnam-seoul-guide.html"><span class="ic">🌆</span><span>Gangnam Guide<span class="sub" data-i18n="hub.s42">Skyline & shopping</span></span></a>
+    <a class="hub-explore-card" href="itinerary/seoul-3-day-itinerary.html"><span class="ic">🧳</span><span>Seoul 3-Day Itinerary<span class="sub" data-i18n="hub.s43">Day & night plan</span></span></a>
+    <a class="hub-explore-card" href="kdrama-locations.html"><span class="ic">🎬</span><span>K-Drama Locations<span class="sub" data-i18n="hub.s44">Famous filming spots</span></span></a>
+    <a class="hub-explore-card" href="faq/is-korea-safe-at-night.html"><span class="ic">🌙</span><span>Is Korea Safe at Night?<span class="sub" data-i18n="hub.s11">Honest answer</span></span></a>
+    <a class="hub-explore-card" href="guide/things-to-do-in-busan.html"><span class="ic">🌉</span><span>Things to Do in Busan<span class="sub" data-i18n="hub.s45">Coastal night views</span></span></a>
+    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub" data-i18n="hub.s1">Free personalized itinerary in 2 minutes</span></span></a>
   </div>
 </section>
 

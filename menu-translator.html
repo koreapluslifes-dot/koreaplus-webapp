@@ -195,8 +195,8 @@
       <input type="file" id="file-input" accept="image/*" capture="environment" aria-label="Upload menu photo">
       <div class="upload-icon">📷</div>
       <div class="upload-title">Take a photo or upload menu image</div>
-      <div class="upload-sub">Supports Korean menus — JPG, PNG, HEIC, WebP<br>Best results with <span>clear, well-lit photos</span></div>
-      <button class="cam-btn" type="button" onclick="document.getElementById('file-input').click()">📷 Use Camera / Choose File</button>
+      <div class="upload-sub">Supports Korean menus — JPG, PNG, HEIC, WebP<br>Best results with <span data-i18n="hub.s108">clear, well-lit photos</span></div>
+      <button class="cam-btn" type="button" onclick="document.getElementById('file-input').click()" data-i18n="hub.s109">📷 Use Camera / Choose File</button>
     </div>
   </div>
 
@@ -205,7 +205,7 @@
   <div class="manual-input">
     <textarea id="manual-text" placeholder="Paste Korean menu text here…&#10;Example: 된장찌개 8,000원&#10;비빔밥 9,000원&#10;삼겹살 13,000원/1인분"></textarea>
     <br>
-    <button class="translate-btn" id="manual-btn" onclick="translateManual()">🔤 Translate Menu Text</button>
+    <button class="translate-btn" id="manual-btn" onclick="translateManual()" data-i18n="hub.s110">🔤 Translate Menu Text</button>
   </div>
 
   <div id="preview-section" style="display:none">
@@ -232,7 +232,7 @@
 
   <div id="results-section" style="display:none">
     <div id="ocr-text-section" class="ocr-text-section">
-      <span class="ocr-toggle" onclick="toggleOcr()">Show extracted text ▾</span>
+      <span class="ocr-toggle" onclick="toggleOcr()" data-i18n="hub.s111">Show extracted text ▾</span>
       <pre class="ocr-raw" id="ocr-raw"></pre>
     </div>
 
@@ -243,7 +243,7 @@
 
     <div class="menu-grid" id="menu-grid"></div>
 
-    <button class="translate-btn" style="background:var(--surface);color:var(--text);border:1px solid var(--border)" onclick="clearAll()">↩ Translate Another Menu</button>
+    <button class="translate-btn" style="background:var(--surface);color:var(--text);border:1px solid var(--border)" onclick="clearAll()" data-i18n="hub.s112">↩ Translate Another Menu</button>
   </div>
 
 
@@ -258,13 +258,13 @@
 <section class="hub-explore">
   <h2 class="hub-explore-title" data-i18n="guides.keepExploring">Keep Exploring Korea</h2>
   <div class="hub-explore-grid">
-    <a class="hub-explore-card" href="guide/best-korean-food.html"><span class="ic">🍜</span><span>Best Korean Food<span class="sub">30 must-try dishes</span></span></a>
-    <a class="hub-explore-card" href="guide/best-food-in-seoul.html"><span class="ic">🍢</span><span>Best Food in Seoul<span class="sub">Where locals eat</span></span></a>
-    <a class="hub-explore-card" href="itinerary/korea-food-tour-5-day-itinerary.html"><span class="ic">🍽</span><span>Food Tour Itinerary<span class="sub">5-day eating route</span></span></a>
-    <a class="hub-explore-card" href="faq/is-street-food-safe-in-korea.html"><span class="ic">🥟</span><span>Street Food Safety<span class="sub">Honest answer</span></span></a>
-    <a class="hub-explore-card" href="phrases.html"><span class="ic">💬</span><span>Restaurant Phrases<span class="sub">Order like a local</span></span></a>
-    <a class="hub-explore-card" href="currency.html"><span class="ic">💱</span><span>Currency Converter<span class="sub">Live exchange rates</span></span></a>
-    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub">Free personalized itinerary in 2 minutes</span></span></a>
+    <a class="hub-explore-card" href="guide/best-korean-food.html"><span class="ic">🍜</span><span>Best Korean Food<span class="sub" data-i18n="hub.s113">30 must-try dishes</span></span></a>
+    <a class="hub-explore-card" href="guide/best-food-in-seoul.html"><span class="ic">🍢</span><span>Best Food in Seoul<span class="sub" data-i18n="hub.s114">Where locals eat</span></span></a>
+    <a class="hub-explore-card" href="itinerary/korea-food-tour-5-day-itinerary.html"><span class="ic">🍽</span><span>Food Tour Itinerary<span class="sub" data-i18n="hub.s115">5-day eating route</span></span></a>
+    <a class="hub-explore-card" href="faq/is-street-food-safe-in-korea.html"><span class="ic">🥟</span><span>Street Food Safety<span class="sub" data-i18n="hub.s11">Honest answer</span></span></a>
+    <a class="hub-explore-card" href="phrases.html"><span class="ic">💬</span><span>Restaurant Phrases<span class="sub" data-i18n="hub.s116">Order like a local</span></span></a>
+    <a class="hub-explore-card" href="currency.html"><span class="ic">💱</span><span>Currency Converter<span class="sub" data-i18n="hub.s117">Live exchange rates</span></span></a>
+    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub" data-i18n="hub.s1">Free personalized itinerary in 2 minutes</span></span></a>
   </div>
 </section>
 

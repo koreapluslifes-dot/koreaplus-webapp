@@ -106,6 +106,8 @@
        data-ad-format="horizontal" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </div>
+<!-- Localized AliExpress merch strip (AdSense top unit above; data-ads=off). Dormant until ALI keys set. -->
+<div id="kp-topads" class="kp-topads" data-q="korea souvenir travel gift" data-ads="off" style="max-width:880px;margin:0 auto;padding:0 16px"></div>
 
 
 <div class="hub-content" style="padding-top:16px">
@@ -119,15 +121,15 @@
     <button class="filter-pill" data-filter="city" data-val="Andong">Andong</button>
 
     <span class="filter-label" style="margin-left:12px">Type</span>
-    <button class="filter-pill active" data-filter="cat" data-val="culture">All Culture</button>
-    <button class="filter-pill" data-filter="cat" data-val="museum">Museums</button>
-    <button class="filter-pill" data-filter="cat" data-val="gallery">Galleries</button>
-    <button class="filter-pill" data-filter="cat" data-val="hanok">Hanok</button>
-    <button class="filter-pill" data-filter="cat" data-val="nature">Nature</button>
+    <button class="filter-pill active" data-filter="cat" data-val="culture" data-i18n="hub.s22">All Culture</button>
+    <button class="filter-pill" data-filter="cat" data-val="museum" data-i18n="hub.s23">Museums</button>
+    <button class="filter-pill" data-filter="cat" data-val="gallery" data-i18n="hub.s24">Galleries</button>
+    <button class="filter-pill" data-filter="cat" data-val="hanok" data-i18n="hub.s25">Hanok</button>
+    <button class="filter-pill" data-filter="cat" data-val="nature" data-i18n="hub.s26">Nature</button>
 
     <div class="view-toggle">
-      <button class="view-btn active" id="btn-map"  onclick="setView('map')">🗺 Map</button>
-      <button class="view-btn"        id="btn-grid" onclick="setView('grid')">☰ List</button>
+      <button class="view-btn active" id="btn-map"  onclick="setView('map')" data-i18n="hub.s6">🗺 Map</button>
+      <button class="view-btn"        id="btn-grid" onclick="setView('grid')" data-i18n="hub.s2">☰ List</button>
     </div>
   </div>
 
@@ -168,6 +170,7 @@
 
 <script src="config.js"></script>
 <script src="modules/api-client.js"></script>
+<script defer src="modules/topads.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 // ── Map init ────────────────────────────────────────────────────────────────
@@ -392,13 +395,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="hub-explore">
   <h2 class="hub-explore-title" data-i18n="guides.keepExploring">Keep Exploring Korea</h2>
   <div class="hub-explore-grid">
-    <a class="hub-explore-card" href="temples.html"><span class="ic">⛩</span><span>Temples & Palaces<span class="sub">Top heritage sites</span></span></a>
-    <a class="hub-explore-card" href="etiquette.html"><span class="ic">🎎</span><span>Korean Etiquette<span class="sub">Do's and don'ts</span></span></a>
-    <a class="hub-explore-card" href="guide/k-pop-and-culture-guide.html"><span class="ic">🎤</span><span>K-Pop & Culture Guide<span class="sub">Fan spots & shows</span></span></a>
-    <a class="hub-explore-card" href="guide/korean-history-guide.html"><span class="ic">📜</span><span>Korean History Guide<span class="sub">5,000 years in brief</span></span></a>
-    <a class="hub-explore-card" href="guide/insadong-seoul-guide.html"><span class="ic">🏘</span><span>Insadong Neighborhood<span class="sub">Traditional Seoul</span></span></a>
-    <a class="hub-explore-card" href="kdrama-locations.html"><span class="ic">🎬</span><span>K-Drama Locations<span class="sub">Filming spots map</span></span></a>
-    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub">Free personalized itinerary in 2 minutes</span></span></a>
+    <a class="hub-explore-card" href="temples.html"><span class="ic">⛩</span><span>Temples & Palaces<span class="sub" data-i18n="hub.s27">Top heritage sites</span></span></a>
+    <a class="hub-explore-card" href="etiquette.html"><span class="ic">🎎</span><span>Korean Etiquette<span class="sub" data-i18n="hub.s7">Do's and don'ts</span></span></a>
+    <a class="hub-explore-card" href="guide/k-pop-and-culture-guide.html"><span class="ic">🎤</span><span>K-Pop & Culture Guide<span class="sub" data-i18n="hub.s8">Fan spots & shows</span></span></a>
+    <a class="hub-explore-card" href="guide/korean-history-guide.html"><span class="ic">📜</span><span>Korean History Guide<span class="sub" data-i18n="hub.s28">5,000 years in brief</span></span></a>
+    <a class="hub-explore-card" href="guide/insadong-seoul-guide.html"><span class="ic">🏘</span><span>Insadong Neighborhood<span class="sub" data-i18n="hub.s29">Traditional Seoul</span></span></a>
+    <a class="hub-explore-card" href="kdrama-locations.html"><span class="ic">🎬</span><span>K-Drama Locations<span class="sub" data-i18n="hub.s30">Filming spots map</span></span></a>
+    <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub" data-i18n="hub.s1">Free personalized itinerary in 2 minutes</span></span></a>
   </div>
 </section>
 
