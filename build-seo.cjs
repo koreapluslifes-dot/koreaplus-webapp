@@ -561,6 +561,23 @@ const PRIMARY_NAV = `
 // (hreflang cluster; x-default points at the English URL).
 const OG_LOCALE = { en:'en_US', ko:'ko_KR', ja:'ja_JP', zh:'zh_CN', es:'es_ES', fr:'fr_FR', de:'de_DE', pt:'pt_BR', id:'id_ID' };
 
+// ── Auto Table of Contents (traffic: SERP "jump to" anchors + dwell time) ──
+// Adds stable ids to every <h2> and prepends a jump-link nav when a page has
+// enough sections. Strips emoji/tags from the visible link text.
+const TOC_H = { en: 'On this page', ko: '목차', ja: '目次', zh: '目录', es: 'En esta página', fr: 'Sur cette page', de: 'Auf dieser Seite', pt: 'Nesta página', id: 'Di halaman ini' };
+function injectToc(body, lang) {
+  const heads = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)];
+  if (heads.length < 3) return body;
+  let i = 0;
+  const out = body.replace(/<h2((?:(?!id=)[^>])*)>([\s\S]*?)<\/h2>/g, (m, attrs, txt) => `<h2${attrs} id="sec-${++i}">${txt}</h2>`);
+  const items = heads.map((h, idx) => {
+    const label = h[1].replace(/<[^>]+>/g, '').replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}←-⇿⬀-⯿️]/gu, '').trim();
+    return label ? `<a href="#sec-${idx + 1}">${label}</a>` : '';
+  }).filter(Boolean).join('');
+  const toc = `<nav class="seo-toc" aria-label="${esc(TOC_H[lang] || TOC_H.en)}" style="margin:0 0 20px;padding:12px 16px;background:var(--card,rgba(255,255,255,.04));border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px;font-size:13.5px"><div style="font-weight:700;margin-bottom:6px">${esc(TOC_H[lang] || TOC_H.en)}</div><div style="display:flex;flex-wrap:wrap;gap:6px 14px">${items}</div></nav>`;
+  return toc + out;
+}
+
 // ── Authority / E-E-A-T / GEO — injected on EVERY generated page ─────
 // Establishes the brand as a knowledge-graph entity (Organization+WebSite),
 // marks the key answer as Speakable (AI-answer/GEO), and shows a visible
@@ -641,6 +658,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnect" href="https://koreaplus-webapp.jeybeeicon.workers.dev">
 <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
@@ -672,11 +690,22 @@ ${trustBlock(lang)}
      Dormant (self-removes) until ALI_APP_KEY/SECRET secrets are set on the Worker. -->
 <div id="kp-topads" class="kp-topads" data-q="korea souvenir travel gift" data-ads="off"></div>
 <article class="seo-body">
-${body}
+${injectToc(body, lang)}
 </article>
 <div id="kp-react" class="kp-react" style="display:none;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 4px;padding:12px 14px;font-size:14px;border-top:1px solid var(--border,rgba(255,255,255,.08))"></div>
 </main>
 <footer class="footer" role="contentinfo" style="text-align:center;padding:40px 20px;border-top:1px solid var(--border,rgba(255,255,255,.08));margin-top:40px">
+  <p style="font-size:12px;color:var(--text2,#aaa);font-weight:700;margin-bottom:8px">⭐ Popular Korea guides</p>
+  <p style="font-size:12px;color:var(--text3,#888);margin-bottom:16px;line-height:2">
+    <a href="guide/things-to-do-in-seoul.html" style="color:var(--accent2,#74b9ff)">Things to Do in Seoul</a> ·
+    <a href="guide/things-to-do-in-busan.html" style="color:var(--accent2,#74b9ff)">Busan</a> ·
+    <a href="guide/things-to-do-in-jeju.html" style="color:var(--accent2,#74b9ff)">Jeju</a> ·
+    <a href="itinerary/first-time-korea-7-day-itinerary.html" style="color:var(--accent2,#74b9ff)">7-Day Korea Itinerary</a> ·
+    <a href="guide/korea-visa-k-eta-guide.html" style="color:var(--accent2,#74b9ff)">Visa &amp; K-ETA</a> ·
+    <a href="guide/korea-travel-cost-index.html" style="color:var(--accent2,#74b9ff)">Trip Cost Index</a> ·
+    <a href="faq/best-time-to-visit-korea.html" style="color:var(--accent2,#74b9ff)">Best Time to Visit</a> ·
+    <a href="seasons.html" style="color:var(--accent2,#74b9ff)">Cherry Blossom Forecast</a>
+  </p>
   <p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
   <p style="font-size:11px;color:var(--text3,#888);margin-top:8px">
     <a href="index.html" style="color:var(--accent2,#74b9ff)">Home</a> ·
@@ -920,6 +949,7 @@ function buildCity(city) {
     [`How do I get to ${city.name}?`, `${city.name === 'Seoul' || city.name === 'Incheon' ? 'Fly into Incheon (ICN) airport, then use the AREX train or metro.' : `Take the KTX bullet train or an express bus from Seoul to reach ${city.name} comfortably.`}`],
   ];
   body += `<h2>❓ ${esc(city.name)} Travel FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += `<h2>🧭 Plan your ${esc(city.name)} trip</h2><div class="seo-linklist"><a href="guide/best-time-to-visit-${slug(city.name)}.html">🗓️ Best time to visit ${esc(city.name)}</a>${TRANSPORT_ROUTES.some(r => r.to === city.name) ? `<a href="guide/seoul-to-${slug(city.name)}.html">🚄 Seoul → ${esc(city.name)}</a>` : ''}<a href="guide/korea-travel-cost-index.html">💰 Trip cost index</a></div>`;
   body += `<h2>📺 ${esc(city.name)} on video & K-screen</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(city.name + ' Korea travel')}" target="_blank" rel="noopener">▶️ ${esc(city.name)} travel videos</a><a href="kdrama-locations.html">🎬 K-drama filming locations</a><a href="kpop.html">🎤 K-pop in Korea</a></div>`;
   body += affHtml(`🎫 Book ${city.name} tours, hotels & essentials`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
@@ -1247,6 +1277,94 @@ function buildBlogIndex() {
 }
 
 // ══════════════════════════════════════════════════════════════════
+// 6a) PROGRAMMATIC LONG-TAIL — "Best time to visit {city}" + transport pages
+// ══════════════════════════════════════════════════════════════════
+const BEST_TIME_CITY = {
+  Seoul: { peak: 'April–May (cherry blossoms) and October (autumn foliage)', note: 'Seoul shines in spring when cherry blossoms line the Han River and palaces, and in autumn when the palace gardens and Bukhansan turn gold.' },
+  Busan: { peak: 'May–June and September–October', note: 'Busan’s beaches peak in summer, but May–June and September–October offer warm sea air without the July–August crowds and humidity.' },
+  Jeju: { peak: 'April (canola & cherry) and October–November', note: 'Jeju blooms earliest in Korea — canola and cherry in April — while autumn brings clear skies ideal for Hallasan and the coast.' },
+  Gyeongju: { peak: 'April (cherry blossoms) and late October–early November (foliage)', note: 'Gyeongju’s tomb mounds and temples are unforgettable framed by cherry blossoms in April or golden foliage in late autumn.' },
+  Jeonju: { peak: 'April–May and September–October', note: 'The Hanok Village is loveliest in mild spring and autumn, perfect for strolling and street food without summer heat.' },
+  Incheon: { peak: 'April–June and September–October', note: 'Incheon’s islands, Chinatown and Songdo are best in spring and autumn, with comfortable temperatures for walking the open-port streets.' },
+};
+const SEASON_ROWS = [
+  ['🌸', 'Spring (Mar–May)', '5–20°C, mild and bright', 'Cherry blossoms, green hills, palace strolls — the most popular season. Book ahead.'],
+  ['🏖️', 'Summer (Jun–Aug)', '24–33°C, hot, humid, monsoon in Jul', 'Beaches, water festivals and long days — lively but rainy and crowded mid-summer.'],
+  ['🍁', 'Autumn (Sep–Nov)', '10–22°C, crisp and clear', 'Spectacular foliage, harvest food and blue skies — the other peak season.'],
+  ['❄️', 'Winter (Dec–Feb)', '-5–6°C, cold and dry', 'Snowy palaces, skiing, hot street food and the lowest prices and crowds.'],
+];
+function buildBestTime(city) {
+  const c = city.name; const cs = slug(c);
+  const url = `${BASEP}guide/best-time-to-visit-${cs}.html`;
+  const h1 = `Best Time to Visit ${c}, Korea`;
+  const title = `${h1} — Month-by-Month (2026) | KoreaPlus`;
+  const bt = BEST_TIME_CITY[c] || { peak: 'April–May and September–November', note: `${c} is most rewarding in spring and autumn.` };
+  const desc = `When is the best time to visit ${c}? Peak: ${bt.peak}. Season-by-season weather, what's on, when it's cheapest and when to avoid crowds — month-by-month for 2026.`;
+  const trail = [{ name: 'Home', url: BASEP }, { name: 'Travel', url: `${BASEP}guide/${CAT_SLUG.travel}.html` }, { name: c, url: `${BASEP}guide/things-to-do-in-${cs}.html` }, { name: 'Best Time to Visit', url }];
+  let body = bcHtml(trail);
+  body += `<p class="lead">The best time to visit ${esc(c)} is <strong>${esc(bt.peak)}</strong>. ${esc(bt.note)} Here's the full season-by-season breakdown, including when it's cheapest and least crowded.</p>`;
+  body += keyFactsBox([`🏆 Best: ${esc(bt.peak.split(' and ')[0])}`, `💸 Cheapest: winter (Dec–Feb)`, `🚫 Most crowded: cherry-blossom week & Chuseok`, `🗓️ Worst weather: monsoon (Jul)`]);
+  body += `<h2>📅 ${esc(c)} by season</h2><table class="seo-costtable"><thead><tr><th>Season</th><th>Weather</th><th>What's on</th></tr></thead><tbody>${SEASON_ROWS.map(([ic, s, w, d]) => `<tr><td>${ic} ${esc(s)}</td><td>${esc(w)}</td><td>${esc(d)}</td></tr>`).join('')}</tbody></table>`;
+  body += `<h2>🏆 When to go for the best experience</h2><p>For the iconic version of ${esc(c)}, aim for <strong>${esc(bt.peak)}</strong>. Spring and autumn give the mildest weather and the most photogenic scenery, which is exactly why they're busiest — book accommodation and KTX seats two to three months ahead.</p>`;
+  body += `<h2>💸 When ${esc(c)} is cheapest</h2><p>Winter (December–February, excluding holidays) brings the lowest hotel rates and the thinnest crowds. Summer's monsoon weeks (early–mid July) are also quieter and cheaper if you don't mind the rain. Avoid the cherry-blossom peak and the Chuseok/Seollal holidays for the best value.</p>`;
+  body += `<h2>🔗 Plan your ${esc(c)} trip</h2><div class="seo-linklist"><a href="guide/things-to-do-in-${cs}.html">📍 Things to Do in ${esc(c)}</a><a href="guide/korea-travel-cost-index.html">💰 Trip Cost Index</a><a href="explore.html#months">📅 Month-by-month guides</a><a href="seasons.html">🌸 Live blossom & foliage forecast</a></div>`;
+  const qa = [
+    [`What is the best month to visit ${c}?`, `${bt.peak.split(' and ')[0]} is the single best window for ${c} — mild weather and the most scenic conditions. ${bt.peak.includes('October') || bt.peak.includes('autumn') ? 'October is a close second for crisp air and foliage.' : 'Autumn (September–November) is an excellent alternative.'}`],
+    [`When is the cheapest time to visit ${c}?`, `Winter (December–February, outside major holidays) has the lowest prices and fewest crowds in ${c}.`],
+    [`What is the worst time to visit ${c}?`, `Early-to-mid July brings the heaviest monsoon rain. The cherry-blossom peak and the Chuseok and Seollal holidays are the most crowded and expensive.`],
+  ];
+  body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += affBlock({ city: c, cat: 'hotel', q: '', lang: 'en' });
+  body += ctaHtml(`Planning ${c} around the season?`, `Get a free AI ${c} itinerary tuned to your travel dates.`);
+  const hero = `<header class="seo-hero"><span class="emoji">🗓️</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge">Month-by-month</span><span class="seo-badge">2026</span></div></header>`;
+  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  writePage(`guide/best-time-to-visit-${cs}.html`, shell({ url, title, desc, keywords: `best time to visit ${c}, when to visit ${c}, ${c} weather by month, ${c} cheapest time`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body }));
+  return url;
+}
+const TRANSPORT_ROUTES = [
+  { to: 'Busan', kr: '부산', ktx: '2h 20m', ktxKrw: '₩59,800', bus: '4h 20m', busKrw: '₩28,000', flight: '~1h', note: 'The KTX from Seoul Station to Busan Station is the clear winner — fast, frequent and city-center to city-center.' },
+  { to: 'Jeju', kr: '제주', ktx: null, bus: null, flight: '~1h 5m', flightKrw: '₩40,000–90,000', note: 'Jeju is an island — fly. Gimpo–Jeju is one of the world\'s busiest air routes, with flights every few minutes from Seoul (Gimpo).' },
+  { to: 'Gyeongju', kr: '경주', ktx: '2h (to Singyeongju)', ktxKrw: '₩49,000', bus: '3h 40m', busKrw: '₩24,000', note: 'Take the KTX to Singyeongju Station, then a short bus or taxi into town; express buses run direct to Gyeongju terminal.' },
+  { to: 'Jeonju', kr: '전주', ktx: '1h 40m (KTX) / 2h 20m (regular)', ktxKrw: '₩34,000', bus: '2h 45m', busKrw: '₩16,000', note: 'KTX/SRT to Jeonju Station is fastest; express buses from Seoul are cheaper and drop you central.' },
+  { to: 'Incheon', kr: '인천', ktx: null, bus: null, subway: '~1h (Line 1 / AREX)', subwayKrw: '₩1,500–4,750', note: 'Incheon is part of greater Seoul — just take Subway Line 1 to Incheon Station (Chinatown) or AREX toward the airport.' },
+];
+function buildTransport(r) {
+  const ts = slug(r.to);
+  const url = `${BASEP}guide/seoul-to-${ts}.html`;
+  const h1 = `Seoul to ${r.to}: How to Get There (2026)`;
+  const title = `Seoul to ${r.to} — Train, Bus & Flight | KoreaPlus`;
+  const desc = `How to get from Seoul to ${r.to} (${r.kr}): compare KTX train, express bus and flights by time and price, plus which to book and how. Updated for 2026.`;
+  const trail = [{ name: 'Home', url: BASEP }, { name: 'Transport', url: `${BASEP}guide/${CAT_SLUG.transport || CAT_SLUG.travel}.html` }, { name: `Seoul to ${r.to}`, url }];
+  let body = bcHtml(trail);
+  body += `<p class="lead">${esc(r.note)}</p>`;
+  const facts = [];
+  if (r.ktx) facts.push(`🚄 KTX: ${r.ktx}`);
+  if (r.flight) facts.push(`✈️ Flight: ${r.flight}`);
+  if (r.bus) facts.push(`🚌 Bus: ${r.bus}`);
+  if (r.subway) facts.push(`🚇 Subway: ${r.subway}`);
+  body += keyFactsBox(facts);
+  const rows = [];
+  if (r.ktx) rows.push(['🚄 KTX train', r.ktx, r.ktxKrw || '—']);
+  if (r.flight) rows.push(['✈️ Flight', r.flight, r.flightKrw || '—']);
+  if (r.bus) rows.push(['🚌 Express bus', r.bus, r.busKrw || '—']);
+  if (r.subway) rows.push(['🚇 Subway / AREX', r.subway, r.subwayKrw || '—']);
+  body += `<h2>🚦 Seoul → ${esc(r.to)} options compared</h2><table class="seo-costtable"><thead><tr><th>Mode</th><th>Time</th><th>Fare (one-way)</th></tr></thead><tbody>${rows.map(([m, t, f]) => `<tr><td>${esc(m)}</td><td>${esc(t)}</td><td>${esc(f)}</td></tr>`).join('')}</tbody></table>`;
+  body += `<h2>🎫 How to book</h2><p>Book KTX/SRT trains on the official Korail (Korail Talk) or SRT apps, or at any station — reserve a few days ahead for weekends. Express buses use the Korea Bus / Kobus / T-money GO apps or the express bus terminal. ${r.flight ? 'Domestic flights are cheapest booked early on Korean Air, Asiana or low-cost carriers (Jeju Air, Jin Air, T\'way).' : ''} A T-money card covers local transit at both ends.</p>`;
+  body += `<h2>🔗 Plan your trip</h2><div class="seo-linklist"><a href="guide/things-to-do-in-${ts}.html">📍 Things to Do in ${esc(r.to)}</a><a href="guide/best-time-to-visit-${ts}.html">🗓️ Best Time to Visit ${esc(r.to)}</a><a href="explore.html">🧭 All Korea guides</a><a href="guide/korea-travel-cost-index.html">💰 Cost Index</a></div>`;
+  const qa = [
+    [`How long does it take to get from Seoul to ${r.to}?`, `${r.ktx ? `By KTX about ${r.ktx}. ` : ''}${r.flight ? `By air about ${r.flight} (plus airport time). ` : ''}${r.bus ? `By express bus about ${r.bus}.` : ''}${r.subway ? `By subway about ${r.subway}.` : ''}`],
+    [`What is the cheapest way from Seoul to ${r.to}?`, `${r.bus ? 'The express bus is usually the cheapest option' : r.subway ? 'The subway is the cheapest option' : 'Low-cost-carrier flights booked early are cheapest'}, while ${r.ktx ? 'the KTX is fastest' : 'flying is fastest'}.`],
+    [`Do I need to book Seoul to ${r.to} in advance?`, `${r.flight && !r.ktx ? 'Yes — book flights early for the best fares, especially on weekends and holidays.' : 'For weekends and holidays, reserve KTX seats a few days ahead; weekday travel is usually fine same-day.'}`],
+  ];
+  body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += affBlock({ city: r.to, cat: 'hotel', q: '', lang: 'en' });
+  body += ctaHtml(`Going to ${r.to}?`, `Build a free AI itinerary that starts the moment you arrive.`);
+  const hero = `<header class="seo-hero"><span class="emoji">🚄</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">Transport</span><span class="seo-badge">2026</span></div></header>`;
+  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  writePage(`guide/seoul-to-${ts}.html`, shell({ url, title, desc, keywords: `Seoul to ${r.to}, how to get from Seoul to ${r.to}, Seoul ${r.to} KTX, Seoul ${r.to} train`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body }));
+  return url;
+}
+
 // 6b) ORIGINAL DATA — Korea Travel Cost Index (citable dataset, all langs)
 // ══════════════════════════════════════════════════════════════════
 const COST_DATA = {
@@ -1317,6 +1435,8 @@ function buildExplore(urls) {
   body += section('📅 When to Visit', [
     ...SEASONS4.map(s => `<a href="guide/korea-in-${s.slug}.html">${s.emoji} ${esc(s.name)}</a>`),
     ...MONTHS.map(m => `<a href="guide/korea-in-${m[0].toLowerCase()}.html">${m[1]} ${esc(m[0])}</a>`)]);
+  body += section('🗓️ Best Time to Visit', [...CITIES, ...REGIONAL_CITIES].map(c => `<a href="guide/best-time-to-visit-${slug(c.name)}.html">🗓️ Best time: ${esc(c.name)}</a>`));
+  body += section('🚄 Getting Around (Seoul to…)', TRANSPORT_ROUTES.map(r => `<a href="guide/seoul-to-${slug(r.to)}.html">🚄 Seoul → ${esc(r.to)}</a>`));
   body += section('❓ Quick Answers', FAQS.map(f => `<a href="faq/${f.slug}.html">${f.emoji} ${esc(f.q)}</a>`));
   body += section('⚖️ Comparisons', COMPARES.map(c => `<a href="guide/${c.slug}.html">${c.emoji} ${esc(c.h1.split(':')[0])}</a>`));
   body += section('🍱 Food by City', CITIES.map(c => `<a href="guide/best-food-in-${slug(c.name)}.html">🍜 ${esc(c.name)}</a>`));
@@ -1914,6 +2034,9 @@ COMPARES.forEach(c => out.compare.push(buildCompare(c)));
 CITIES.forEach(c => out.cityfood.push(buildCityFood(c)));
 SEASONS4.forEach(s => out.seasonal.push(buildSeason(s)));
 out.cost = ['en', ...LOCALES].map(l => buildCostIndex(l)).filter(Boolean);
+// Programmatic long-tail: best-time + Seoul→city transport pages
+out.besttime = [...CITIES, ...REGIONAL_CITIES].map(buildBestTime);
+out.transport = TRANSPORT_ROUTES.map(buildTransport);
 const exploreUrl = buildExplore(out);
 
 // ── IndexNow key file (Bing/Naver/Yandex instant indexing) ──────────
@@ -1940,6 +2063,7 @@ out.months.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.faqL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.cost || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
+[...(out.besttime || []), ...(out.transport || [])].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 (out.cityL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 (out.blogL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));
 (out.itinL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
@@ -2001,7 +2125,7 @@ ${rssItems}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'blog/feed.xml'), rss);
 
-const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + (out.blogL10n || []).length + (out.itinL10n || []).length + (out.cost || []).length + (out.regional || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
+const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + (out.blogL10n || []).length + (out.itinL10n || []).length + (out.cost || []).length + (out.regional || []).length + (out.besttime || []).length + (out.transport || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
 console.log(`✅ Generated ${total} SEO pages:`);
 console.log(`   places:        ${out.places.length}`);
 console.log(`   categories:    ${out.categories.length}`);
