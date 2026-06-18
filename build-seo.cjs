@@ -622,9 +622,17 @@ function trustBlock(lang) {
     `<span>✍️ <a href="about.html" style="color:var(--accent2,#74b9ff);text-decoration:none">${esc(t.by)}</a></span>` +
     `<span>🔄 ${esc(t.upd)} ${TODAY}</span><span>✓ ${esc(t.rev)}</span></div>`;
 }
+// Collects hreflang clusters as pages are generated, so the sitemap can carry
+// reciprocal <xhtml:link> alternate annotations (helps Google discover + index
+// every language variant faster). Keyed by the BASEP-relative url.
+const HREFLANG_SM = new Map();
 function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [] }) {
   const canonical = ORIGIN + url;
   const xDefault = ORIGIN + ((alts.find(a => a.lang === 'en') || {}).url || url);
+  if (alts.length) {
+    // Full cluster = this page + its alternates; x-default → the English URL.
+    HREFLANG_SM.set(url, { cluster: [{ lang, url }, ...alts], xdef: (alts.find(a => a.lang === 'en') || {}).url || url });
+  }
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -651,7 +659,12 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <meta property="og:locale" content="${OG_LOCALE[lang] || 'en_US'}">
 ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta property="og:locale:alternate" content="${OG_LOCALE[a.lang]}">`).join('\n')}
 <meta property="og:image" content="${ORIGIN}/guide/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${esc(title)}">
+<meta property="og:updated_time" content="${TODAY}T08:00:00Z">
+<meta property="article:published_time" content="${TODAY}T08:00:00Z">
+<meta property="article:modified_time" content="${TODAY}T08:00:00Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -1074,7 +1087,8 @@ function buildItinerary(city, days, pool) {
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   const itSlug = `${slug(city.name)}-${days}-day-itinerary`;
   const alts = LOCALES.filter(l => ITIN_L10N[itSlug] && ITIN_L10N[itSlug][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/itinerary/${itSlug}.html` }));
-  writePage(`itinerary/${itSlug}.html`, shell({ url, title, desc, keywords: `${city.name} itinerary, ${days} days ${city.name}, ${city.name} travel plan, things to do ${city.name}`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, alts }));
+  const trip = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: h1, description: desc, touristType: ['leisure', 'first-time visitors'], provider: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', url: ORIGIN + url };
+  writePage(`itinerary/${itSlug}.html`, shell({ url, title, desc, keywords: `${city.name} itinerary, ${days} days ${city.name}, ${city.name} travel plan, things to do ${city.name}`, schemas: [article, trip, breadcrumbLD(trail), faqLD(qa)], hero, body, alts }));
   return url;
 }
 function slotHtml(icon, label, it) {
@@ -1837,7 +1851,8 @@ function buildTheme(t) {
   const hero = `<header class="seo-hero"><span class="emoji">${t.emoji}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">${t.days} days</span><span class="seo-badge region">Themed route</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: t.h1, description: t.desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   const talts = LOCALES.filter(l => ITIN_L10N[t.slug] && ITIN_L10N[t.slug][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/itinerary/${t.slug}.html` }));
-  writePage(`itinerary/${t.slug}.html`, shell({ url, title, desc: t.desc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, alts: talts }));
+  const trip = { '@context': 'https://schema.org', '@type': 'TouristTrip', name: t.h1, description: t.desc, touristType: ['leisure'], provider: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', url: ORIGIN + url };
+  writePage(`itinerary/${t.slug}.html`, shell({ url, title, desc: t.desc, keywords: '', schemas: [article, trip, breadcrumbLD(trail), faqLD(qa)], hero, body, alts: talts }));
   return url;
 }
 
@@ -2049,8 +2064,15 @@ const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html
   'kbeauty.html',
   'menu-translator.html', 'subway.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
-const urlEntry = (loc, pri, freq) => `  <url>\n    <loc>${ORIGIN}${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
-let sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+const urlEntry = (loc, pri, freq) => {
+  const hl = HREFLANG_SM.get(loc);
+  const alt = hl
+    ? '\n' + hl.cluster.map(c => `    <xhtml:link rel="alternate" hreflang="${c.lang}" href="${ORIGIN}${c.url}"/>`).join('\n')
+      + `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${hl.xdef}"/>`
+    : '';
+  return `  <url>\n    <loc>${ORIGIN}${loc}</loc>${alt}\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
+};
+let sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 sm += urlEntry(BASEP, '1.0', 'daily');
 LANGS.forEach(l => sm += `\n` + urlEntry(`${BASEP}?lang=${l}`, '0.8', 'weekly'));
 STATIC.slice(1).forEach(p => { const hot = (p === 'kbeauty.html'); sm += `\n` + urlEntry(BASEP + p, hot ? '0.9' : '0.8', hot ? 'daily' : 'weekly'); });
