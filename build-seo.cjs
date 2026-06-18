@@ -39,6 +39,9 @@ try { CITY_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'city-l10n.json'), '
 // Localized blog translations. Shape: { "<slug>": { ja:{h1,title,metaDesc,body,faq[]}, zh:{}, es:{} } }
 let BLOG_L10N = {};
 try { BLOG_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'blog-l10n.json'), 'utf8')); } catch { /* none yet */ }
+// Localized itineraries. Shape: { "<slug>": { ja:{h1,title,metaDesc,lead,days:[{label,plan}],tips[],faq[]}, zh, es } }
+let ITIN_L10N = {};
+try { ITIN_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'itinerary-l10n.json'), 'utf8')); } catch { /* none yet */ }
 
 // ── Helpers ─────────────────────────────────────────────────────────
 const slug = s => String(s).toLowerCase()
@@ -613,6 +616,9 @@ ${hero}
        data-ad-format="horizontal" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
+<!-- Localized merch strip (AliExpress affiliate) — AdSense already above, so data-ads="off".
+     Dormant (self-removes) until ALI_APP_KEY/SECRET secrets are set on the Worker. -->
+<div id="kp-topads" class="kp-topads" data-q="korea souvenir travel gift" data-ads="off"></div>
 <article class="seo-body">
 ${body}
 </article>
@@ -638,6 +644,11 @@ ${body}
     <a href="emergency.html" style="color:var(--text2,#aaa)">Emergency</a>
   </p>
 </footer>
+<!-- Localized merch strip runtime: config (optional) → Worker URL fallback → API client → topads -->
+<script src="config.js" onerror="void 0"></script>
+<script>window.WORKER_URL=window.WORKER_URL||'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
+<script src="modules/api-client.js"></script>
+<script defer src="modules/topads.js"></script>
 </body>
 </html>`;
 }
@@ -819,17 +830,30 @@ function buildCity(city) {
   const url = `${BASEP}guide/things-to-do-in-${slug(city.name)}.html`;
   const h1 = `Things to Do in ${city.name}, Korea`;
   const title = `${h1} — Top Attractions, Food & Tips (2026) | KoreaPlus`;
+  const g = (CITY_L10N[city.name] || {}).en;  // rich English content when generated
   const food = pool.filter(i => i.cat === 'food'), sights = pool.filter(i => i.cat !== 'food');
-  const desc = `Top things to do in ${city.name} (${city.kr}): ${pool.slice(0, 5).map(i => i.name).join(', ')}. Local food, attractions, transport & insider tips for travelers.`;
+  const desc = g ? g.metaDesc : `Top things to do in ${city.name} (${city.kr}): ${pool.slice(0, 5).map(i => i.name).join(', ')}. Local food, attractions, transport & insider tips for travelers.`;
   const trail = [{ name: 'Home', url: BASEP }, { name: 'Travel', url: `${BASEP}guide/${CAT_SLUG.travel}.html` }, { name: city.name, url }];
 
   let body = bcHtml(trail);
-  body += `<p class="lead">${esc(city.name)} (${esc(city.kr)}) is one of Korea's must-visit destinations. Here's everything to see, eat and experience — with insider tips and maps.</p>`;
-  if (sights.length) { body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${sights.slice(0, 8).map(cardHtml).join('')}</div>`; }
-  if (food.length) { body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${food.slice(0, 6).map(cardHtml).join('')}</div>`; }
+  if (g) {
+    body += `<p class="lead">${esc(g.lead)}</p>`;
+    body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${g.attractions.map(a => {
+      const sl = placeSlugFor(a.name);
+      const inner = `<span class="ce">📍</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
+      return sl ? `<a class="seo-card" href="places/${sl}.html">${inner}</a>` : `<div class="seo-card">${inner}</div>`;
+    }).join('')}</div>`;
+    if (g.food && g.food.length) body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${g.food.map(f => `<div class="seo-card"><span class="ce">🍽️</span><div class="cn">${esc(f.name)}</div><div class="cd">${esc(f.blurb)}</div></div>`).join('')}</div>`;
+    if (g.gettingThere) body += `<h2>🚄 Getting There & Getting Around</h2><p>${esc(g.gettingThere)}</p>`;
+    if (g.tips && g.tips.length) body += `<h2>💡 Insider Tips</h2><ul class="tips">${g.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
+  } else {
+    body += `<p class="lead">${esc(city.name)} (${esc(city.kr)}) is one of Korea's must-visit destinations. Here's everything to see, eat and experience — with insider tips and maps.</p>`;
+    if (sights.length) { body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${sights.slice(0, 8).map(cardHtml).join('')}</div>`; }
+    if (food.length) { body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${food.slice(0, 6).map(cardHtml).join('')}</div>`; }
+  }
   body += cityClusterLinks(city.name, url);
   const hasItin = ITIN.some(([cn]) => cn === city.name);
-  const qa = [
+  const qa = (g && g.faq && g.faq.length) ? g.faq.map(x => [x.q, x.a]) : [
     [`How many days do you need in ${city.name}?`, `Most travelers spend 2–3 days in ${city.name} to cover the highlights.${hasItin ? ' See our day-by-day itinerary above for a ready-made plan.' : ''}`],
     [`Is ${city.name} worth visiting?`, `Yes — ${city.name} offers ${pool.slice(0,3).map(i=>i.name).join(', ')} and much more, making it one of Korea's top destinations.`],
     [`How do I get to ${city.name}?`, `${city.name === 'Seoul' || city.name === 'Incheon' ? 'Fly into Incheon (ICN) airport, then use the AREX train or metro.' : `Take the KTX bullet train or an express bus from Seoul to reach ${city.name} comfortably.`}`],
@@ -951,7 +975,9 @@ function buildItinerary(city, days, pool) {
 
   const hero = `<header class="seo-hero"><span class="emoji">🗺️</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">${days} days</span><span class="seo-badge region">${esc(city.name)}</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
-  writePage(`itinerary/${slug(city.name)}-${days}-day-itinerary.html`, shell({ url, title, desc, keywords: `${city.name} itinerary, ${days} days ${city.name}, ${city.name} travel plan, things to do ${city.name}`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body }));
+  const itSlug = `${slug(city.name)}-${days}-day-itinerary`;
+  const alts = LOCALES.filter(l => ITIN_L10N[itSlug] && ITIN_L10N[itSlug][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/itinerary/${itSlug}.html` }));
+  writePage(`itinerary/${itSlug}.html`, shell({ url, title, desc, keywords: `${city.name} itinerary, ${days} days ${city.name}, ${city.name} travel plan, things to do ${city.name}`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, alts }));
   return url;
 }
 function slotHtml(icon, label, it) {
@@ -1578,7 +1604,43 @@ function buildTheme(t) {
   body += ctaHtml('Make it yours', 'Our AI rebuilds this plan around your dates, pace and budget — free.');
   const hero = `<header class="seo-hero"><span class="emoji">${t.emoji}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">${t.days} days</span><span class="seo-badge region">Themed route</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: t.h1, description: t.desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
-  writePage(`itinerary/${t.slug}.html`, shell({ url, title, desc: t.desc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body }));
+  const talts = LOCALES.filter(l => ITIN_L10N[t.slug] && ITIN_L10N[t.slug][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/itinerary/${t.slug}.html` }));
+  writePage(`itinerary/${t.slug}.html`, shell({ url, title, desc: t.desc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, alts: talts }));
+  return url;
+}
+
+// Localized itinerary (ja/zh/es) — native day-by-day plan (itinerary-l10n.json).
+const ITIN_UI = {
+  ja: { tipsH: '💡 旅のヒント', faqH: '❓ よくある質問', ctaH: 'この旅程をカスタマイズ', ctaP: 'AIがあなたの日程に合わせて無料で作り直します。', planBtn: '🗺️ 無料で旅程を作成', enBtn: '🇬🇧 English' },
+  zh: { tipsH: '💡 行程贴士', faqH: '❓ 常见问题', ctaH: '定制你的专属行程', ctaP: 'AI 按你的日期免费重新生成行程。', planBtn: '🗺️ 免费生成行程', enBtn: '🇬🇧 English' },
+  es: { tipsH: '💡 Consejos', faqH: '❓ Preguntas frecuentes', ctaH: 'Personaliza este itinerario', ctaP: 'La IA lo rehace según tus fechas, gratis.', planBtn: '🗺️ Crear itinerario gratis', enBtn: '🇬🇧 English' },
+};
+// Agoda banner city for an itinerary slug (city itineraries → their city; themes → THEME_CITY).
+function itinCity(itSlug) {
+  for (const c of AGODA_LIVE_CITIES) if (itSlug.startsWith(slug(c) + '-')) return c;
+  return THEME_CITY[itSlug] || 'Seoul';
+}
+function buildItineraryL10n(itSlug, lang) {
+  const byLang = ITIN_L10N[itSlug]; const t = byLang && byLang[lang];
+  if (!t) return null;
+  const L = L10N[lang]; const dir = L.dir; const ui = ITIN_UI[lang];
+  const emoji = (THEMES.find(x => x.slug === itSlug) || {}).emoji || '🗺️';
+  const url = `${BASEP}${dir}/itinerary/${itSlug}.html`;
+  const enUrl = `${BASEP}itinerary/${itSlug}.html`;
+  const trail = [{ name: 'Home', url: BASEP }, { name: t.h1, url }];
+  let body = bcHtml(trail);
+  body += `<p class="lead">${esc(t.lead)}</p>`;
+  for (const d of (t.days || [])) body += `<h2>${esc(d.label)}</h2><p>${esc(d.plan)}</p>`;
+  if (t.tips && t.tips.length) body += `<h2>${esc(ui.tipsH)}</h2><ul class="tips">${t.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  body += affBlock({ city: itinCity(itSlug), cat: 'travel', q: '', lang });
+  const qa = (t.faq || []).map(x => [x.q, x.a]);
+  if (qa.length) body += `<h2>${esc(ui.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += `<div class="seo-cta"><h2>${esc(ui.ctaH)}</h2><p>${esc(ui.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
+  const hero = `<header class="seo-hero"><span class="emoji">${emoji}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">${(t.days || []).length} ${lang === 'ja' ? '日間' : lang === 'zh' ? '天' : 'días'}</span></div></header>`;
+  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: t.h1, description: t.metaDesc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  const alts = [{ lang: 'en', url: enUrl },
+    ...LOCALES.filter(l => l !== lang && ITIN_L10N[itSlug] && ITIN_L10N[itSlug][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/itinerary/${itSlug}.html` }))];
+  writePage(`${dir}/itinerary/${itSlug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts }));
   return url;
 }
 
@@ -1723,6 +1785,11 @@ out.blogL10n = [];
 for (const slug of Object.keys(BLOG_L10N)) {
   for (const lang of LOCALES) { const u = buildBlogPostL10n(slug, lang); if (u) out.blogL10n.push(u); }
 }
+// Localized itineraries (ja/zh/es) — native day-by-day plans (itinerary-l10n.json)
+out.itinL10n = [];
+for (const itSlug of Object.keys(ITIN_L10N)) {
+  for (const lang of LOCALES) { const u = buildItineraryL10n(itSlug, lang); if (u) out.itinL10n.push(u); }
+}
 // Blog
 out.blog = BLOG.map(buildBlogPost);
 out.blogIndex = buildBlogIndex();
@@ -1759,6 +1826,7 @@ out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.faqL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.cityL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 (out.blogL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));
+(out.itinL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 [...out.compare, ...out.seasonal].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 [...out.faq, ...out.cityfood].forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
@@ -1817,7 +1885,7 @@ ${rssItems}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'blog/feed.xml'), rss);
 
-const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + (out.blogL10n || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
+const total = out.places.length + out.categories.length + out.cities.length + out.itineraries.length + out.months.length + out.neighborhoods.length + out.stays.length + out.l10n.length + (out.faqL10n || []).length + (out.cityL10n || []).length + (out.blogL10n || []).length + (out.itinL10n || []).length + out.faq.length + out.compare.length + out.cityfood.length + out.seasonal.length + out.blog.length + 3;
 console.log(`✅ Generated ${total} SEO pages:`);
 console.log(`   places:        ${out.places.length}`);
 console.log(`   categories:    ${out.categories.length}`);
@@ -1828,6 +1896,7 @@ console.log(`   l10n month+visa: ${out.l10n.length}`);
 console.log(`   l10n faq (ja/zh/es): ${(out.faqL10n || []).length}`);
 console.log(`   l10n city guides:    ${(out.cityL10n || []).length}`);
 console.log(`   l10n blog posts:     ${(out.blogL10n || []).length}`);
+console.log(`   l10n itineraries:    ${(out.itinL10n || []).length}`);
 console.log(`   blog:          ${out.blog.length} + index`);
 console.log(`   neighborhoods: ${out.neighborhoods.length}`);
 console.log(`   where-to-stay: ${out.stays.length}`);

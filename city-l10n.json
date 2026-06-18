@@ -326,6 +326,115 @@
      "a": "Los ciudadanos españoles pueden entrar como turistas sin visado para estancias cortas, aunque conviene comprobar antes del viaje si es necesario tramitar la autorización electrónica K-ETA, ya que los requisitos cambian con cierta frecuencia. Revisa siempre la información oficial actualizada antes de volar."
     }
    ]
+  },
+  "en": {
+   "h1": "Things to Do in Seoul, Korea",
+   "title": "Things to Do in Seoul: Top Attractions | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Seoul, from royal palaces and hanok villages to Han River parks, street food markets, and the neon nightlife of Hongdae.",
+   "lead": "Seoul is a city of thrilling contrasts, where 600-year-old palaces sit in the shadow of glass skyscrapers and centuries-old hanok lanes lead to buzzing K-pop districts. South Korea's capital rewards every kind of traveler: history lovers wander Joseon-era throne halls, foodies graze through smoky market alleys, and night owls chase neon and city-light panoramas. Wrapped by green mountains and split by the broad Han River, Seoul makes it easy to pair a temple morning with a riverside afternoon and a late-night street-food crawl. Here are the experiences that should anchor your trip.",
+   "attractions": [
+    {
+     "name": "Gyeongbokgung Palace",
+     "nameLocal": "경복궁",
+     "blurb": "The grandest of Seoul's five royal palaces, built in 1395 as the main seat of the Joseon dynasty. Wander its sweeping courtyards to the throne hall and the picturesque Gyeonghoeru pavilion set over a lotus pond, and time your visit for the colorful royal guard-changing ceremony at the main gate."
+    },
+    {
+     "name": "Bukchon Hanok Village",
+     "nameLocal": "북촌한옥마을",
+     "blurb": "A hillside neighborhood of hundreds of preserved hanok, traditional tiled-roof homes, tucked between Gyeongbokgung and Changdeokgung palaces. Steep, winding lanes frame photogenic views of curved rooftops against the modern skyline, and many houses now hold craft workshops, tea rooms, and galleries."
+    },
+    {
+     "name": "Changdeokgung Palace & Secret Garden",
+     "nameLocal": "창덕궁 후원",
+     "blurb": "A UNESCO World Heritage palace prized for blending its architecture into the natural landscape. Beyond the elegant halls lies the Huwon, or Secret Garden, a serene royal retreat of pavilions, ponds, and ancient trees that can be explored on a guided tour."
+    },
+    {
+     "name": "N Seoul Tower",
+     "nameLocal": "N서울타워",
+     "blurb": "Perched atop Namsan mountain, this communications tower delivers Seoul's signature panorama, a 360-degree sweep of the sprawling city and the Han River. Ride the Namsan cable car up, browse the railings draped in love locks, and stay for a glittering sunset and night view."
+    },
+    {
+     "name": "Myeongdong",
+     "nameLocal": "명동",
+     "blurb": "Seoul's most famous shopping and street-food district, a dense grid of pedestrian lanes packed with cosmetics flagships, fashion stores, and department halls. By evening the streets fill with food carts serving tornado potatoes, grilled lobster, and egg bread amid a constant buzz."
+    },
+    {
+     "name": "Hongdae",
+     "nameLocal": "홍대",
+     "blurb": "The youthful creative heart of Seoul, anchored by Hongik University and famed for indie music, street performers, and late-night energy. Buskers take over the streets near the main park while cafes, live-music clubs, vintage shops, and bars fill the surrounding alleys."
+    },
+    {
+     "name": "Insadong",
+     "nameLocal": "인사동",
+     "blurb": "A culture-rich district where the main street and its hidden alleys are lined with antique dealers, calligraphy shops, art galleries, and traditional tea houses. It is the place to hunt for hanji paper, ceramics, and handmade crafts, and to slow down over a pot of Korean tea."
+    },
+    {
+     "name": "Gwangjang Market",
+     "nameLocal": "광장시장",
+     "blurb": "One of Korea's oldest traditional markets and a legendary street-food destination. Crowd around the open stalls for mung-bean bindae-tteok pancakes, fresh mayak gimbap, and chewy raw beef tartare, all served amid the cheerful chaos of vendors and shared tables."
+    },
+    {
+     "name": "Dongdaemun Design Plaza",
+     "nameLocal": "동대문디자인플라자",
+     "blurb": "A landmark of futuristic architecture by Zaha Hadid, its flowing silver curves anchor the Dongdaemun fashion and shopping district. Inside are design exhibitions and shops, while the surrounding wholesale malls keep the area humming late into the night."
+    },
+    {
+     "name": "Han River Parks",
+     "nameLocal": "한강공원",
+     "blurb": "A string of riverside parks lining both banks of the Han River, beloved by locals for picnics, cycling, and easygoing afternoons. Rent a bike, watch the rainbow Banpo Bridge fountain, or order fried chicken to a grassy spot and watch the sun set over the water."
+    }
+   ],
+   "food": [
+    {
+     "name": "Korean BBQ (Samgyeopsal)",
+     "blurb": "Thick slices of pork belly grilled over charcoal or gas right at your table, then wrapped in lettuce with garlic, ssamjang, and kimchi. A communal, hands-on meal that is a non-negotiable Seoul experience."
+    },
+    {
+     "name": "Bibimbap",
+     "blurb": "A colorful bowl of rice topped with seasoned vegetables, beef, a fried egg, and gochujang chili paste, all mixed together before eating. Comforting, balanced, and found everywhere from market stalls to upscale restaurants."
+    },
+    {
+     "name": "Tteokbokki",
+     "blurb": "Chewy cylindrical rice cakes simmered in a sweet-and-spicy red sauce, the quintessential Korean street snack. Order it with fish cakes and a fried-food side at carts across Myeongdong and Hongdae."
+    },
+    {
+     "name": "Bindae-tteok",
+     "blurb": "Crispy savory pancakes made from ground mung beans, fried golden and served hot with a soy dipping sauce. A specialty of Gwangjang Market, best eaten standing at the stall."
+    },
+    {
+     "name": "Korean Fried Chicken",
+     "blurb": "Double-fried for an extra-crackly crust and glazed in flavors from soy-garlic to fiery yangnyeom, often paired with beer in the beloved chimaek combo. A perfect Han River picnic order."
+    },
+    {
+     "name": "Naengmyeon",
+     "blurb": "Cold buckwheat noodles served in an icy, tangy broth or tossed in a spicy sauce, topped with cucumber, pear, and egg. A refreshing Seoul favorite, especially welcome in the summer heat."
+    }
+   ],
+   "gettingThere": "Most international visitors arrive at Incheon International Airport (ICN), about an hour west of the city, with a smaller share landing at Gimpo International Airport (GMP), which is closer in. The AREX airport railroad links both airports directly to Seoul Station, and limousine buses run to major neighborhoods and hotels. Within the city, Seoul's clean, extensive, and English-signed subway is the easiest way to get around; pick up a rechargeable T-money card to tap onto subways, buses, and many taxis. Most headline sights cluster in the historic core north of the Han River, making it simple to combine palaces, hanok villages, and markets on foot in a single day.",
+   "tips": [
+    "Buy a rechargeable T-money card at any convenience store or subway station; it works on the subway, buses, and taxis and saves fumbling for cash.",
+    "Wear comfortable shoes, as the best of Seoul, from Bukchon's hills to Bukhansan's trails, is explored on foot, and palace grounds are expansive.",
+    "Visitors wearing traditional hanbok often enter the major palaces free of charge, so renting an outfit near Gyeongbokgung is both fun and practical.",
+    "Keep voices low in residential Bukchon Hanok Village, where real families live; signs ask visitors to be quiet and respectful in the lanes."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Seoul?",
+     "a": "Three to four days lets you cover the essentials, palaces and hanok villages, a market food crawl, the N Seoul Tower view, and a Han River afternoon, without rushing. With five or more days you can add day trips, more neighborhoods like Gangnam and Itaewon, and a Bukhansan hike."
+    },
+    {
+     "q": "Is Seoul a walkable city for tourists?",
+     "a": "Yes. The historic core north of the Han River packs many top sights within walking distance, and where walking falls short the subway is fast, affordable, and signed in English. Most travelers never need to rent a car."
+    },
+    {
+     "q": "When is the best time to visit Seoul?",
+     "a": "Spring (April to May) and autumn (September to November) are the most pleasant, with mild temperatures and either cherry blossoms or fall foliage. Summers are hot, humid, and bring a rainy season, while winters are cold and dry but festive."
+    },
+    {
+     "q": "Do people in Seoul speak English?",
+     "a": "English is common around major attractions, hotels, and on transit signage, though less so in local markets and older neighborhoods. A translation app and a few basic Korean phrases go a long way, and locals are generally helpful to visitors."
+    }
+   ]
   }
  },
  "Busan": {
@@ -651,6 +760,111 @@
      "a": "Sí. El metro está señalizado en inglés y es muy intuitivo, y las principales atracciones turísticas suelen tener indicaciones también en inglés. Para los lugares peor comunicados por metro, las apps de mapas locales y el taxi (asequible y abundante) resuelven cualquier desplazamiento sin necesidad de hablar coreano."
     }
    ]
+  },
+  "en": {
+   "h1": "Things to Do in Busan, Korea",
+   "title": "Things to Do in Busan, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Busan: beaches, seaside temples, the Gamcheon Culture Village, fish markets and more in Korea's coastal city. A local-style guide.",
+   "lead": "Korea's second city wraps mountains, beaches and busy harbors into one salt-aired sprawl, and Busan rewards travelers who let it pull them in different directions. Mornings can begin with steam rising over a fish market, afternoons with toes in the sand at a wide city beach, and evenings with neon mirrored across a bay. Pastel hillside villages, cliff-edge shrines that face the open sea, and some of the best seafood in the country are all within easy reach. Here are the experiences that capture what makes Busan worth the trip.",
+   "attractions": [
+    {
+     "name": "Haeundae Beach",
+     "nameLocal": "해운대해수욕장",
+     "blurb": "Busan's most famous beach is a broad arc of pale sand backed by high-rise hotels and cafes. Beyond summer swimming, the seafront promenade, nearby Dongbaekseom coastal walk and the Blueline Park beach train make it a year-round draw."
+    },
+    {
+     "name": "Gamcheon Culture Village",
+     "nameLocal": "감천문화마을",
+     "blurb": "A hillside maze of pastel houses, murals and tiny galleries cascading down a mountainside above the harbor. Once a humble settlement, it has become Busan's most photogenic neighborhood, full of staircases, viewpoints and artful surprises around every corner."
+    },
+    {
+     "name": "Gwangalli Beach",
+     "nameLocal": "광안리해수욕장",
+     "blurb": "This lively beach is best known for its view of the soaring Gwangan Bridge, which lights up after dark. The strip behind the sand brims with cafes, bars and seafood restaurants, making it a favorite spot for sunset and evening strolls."
+    },
+    {
+     "name": "Jagalchi Fish Market",
+     "nameLocal": "자갈치시장",
+     "blurb": "Korea's largest seafood market sprawls along the waterfront in Nampo-dong, with tanks of live fish, octopus and shellfish. Pick your catch downstairs and have it prepared upstairs, or simply wander the bustling stalls to feel the pulse of Busan's fishing heritage."
+    },
+    {
+     "name": "Haedong Yonggungsa Temple",
+     "nameLocal": "해동용궁사",
+     "blurb": "One of Korea's rare seaside temples, perched on rocky cliffs along the northeast coast in Gijang. Waves crash below stone pagodas and ornate shrines, and the salt spray and ocean horizon give this Buddhist sanctuary a setting unlike the country's mountain temples."
+    },
+    {
+     "name": "Beomeosa Temple",
+     "nameLocal": "범어사",
+     "blurb": "Tucked into the forested slopes of Geumjeongsan, this ancient temple is one of Korea's principal Buddhist sanctuaries. Founded over a thousand years ago, its serene halls and gates offer a peaceful mountain retreat just a short journey from the city center."
+    },
+    {
+     "name": "Taejongdae",
+     "nameLocal": "태종대",
+     "blurb": "A dramatic cliff park on the southern tip of Yeongdo Island, ringed by pine forest and sheer rock dropping to the sea. A looping path and tram lead to a lighthouse and observation points, with views that on clear days stretch toward distant islands."
+    },
+    {
+     "name": "Songdo Skywalk",
+     "nameLocal": "송도구름산책로",
+     "blurb": "A curving glass-floored walkway that juts out over the waves at Songdo Beach, Korea's oldest public beach. Stroll above the sea for a gentle thrill, then pair it with the nearby Songdo marine cable car gliding high over the coast."
+    },
+    {
+     "name": "BIFF Square",
+     "nameLocal": "비프광장",
+     "blurb": "The lively heart of Busan's Nampo-dong entertainment district, named for the city's international film festival. Brass handprints of stars line the ground, while street-food carts and cinemas make this a buzzing spot to eat, browse and people-watch."
+    },
+    {
+     "name": "Gukje Market",
+     "nameLocal": "국제시장",
+     "blurb": "A sprawling traditional market that grew from the city's postwar years into a warren of alleys selling everything from clothing and housewares to street snacks. Adjoining BIFF Square, it offers an authentic taste of everyday Busan commerce and cuisine."
+    }
+   ],
+   "food": [
+    {
+     "name": "Dwaeji gukbap (pork soup rice)",
+     "blurb": "A milky pork-bone broth poured over rice, served with chives, salted shrimp and condiments to season to taste. This hearty, comforting soup is practically Busan's signature dish and is found at specialty restaurants across the city."
+    },
+    {
+     "name": "Milmyeon (wheat noodles)",
+     "blurb": "A Busan original born in the postwar era, these chewy wheat noodles come in a chilled tangy broth or a spicy bibim style. Refreshing and inexpensive, it is the city's beloved answer to summer heat."
+    },
+    {
+     "name": "Ssiat hotteok (seeded sweet pancake)",
+     "blurb": "A Busan twist on Korea's classic griddled pancake, this version is stuffed with brown sugar syrup and a generous mix of seeds and nuts. Sold sizzling from carts around BIFF Square and Gukje Market, it is a must-try street snack."
+    },
+    {
+     "name": "Hoe (raw sliced fish)",
+     "blurb": "Freshly sliced raw fish is a coastal staple, eaten with chili paste, garlic and lettuce wraps. Markets like Jagalchi and waterfront restaurants let you enjoy it about as fresh as it gets."
+    },
+    {
+     "name": "Eomuk (fish cake)",
+     "blurb": "Busan is famed for its fish cakes, served on skewers in warm broth or fried into countless shapes. The city's specialty shops have elevated this humble street food into a regional point of pride."
+    }
+   ],
+   "gettingThere": "Busan sits on Korea's southeastern coast and is easy to reach from elsewhere in the country. The KTX high-speed train runs from Seoul to Busan Station in roughly two and a half to three hours, making it the most popular way to arrive. Gimhae International Airport serves domestic flights and a range of regional international routes, and connects to the city by light rail and bus. Within Busan, an efficient subway network links most major sights, and buses and taxis fill in the gaps; a rechargeable transit card makes getting around simple. Some coastal attractions, such as Haedong Yonggungsa and Taejongdae, lie outside the subway zone and are best reached by bus, taxi or organized tour.",
+   "tips": [
+    "Busan is hilly and spread out, so group sights by district, such as Nampo-dong's markets or the Haeundae and Gwangalli beach areas, to cut down on travel time.",
+    "Wear comfortable shoes for the many staircases at Gamcheon Culture Village and the coastal paths at Taejongdae and Haedong Yonggungsa.",
+    "Late spring and autumn bring the most pleasant weather; summer is hot, humid and prone to typhoons, while beaches are liveliest in the warm months.",
+    "Pick up a rechargeable transit card for seamless travel on the subway and buses, and keep some cash on hand for market stalls and street food."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Busan?",
+     "a": "Two to three days is enough to see the highlights, including a beach or two, Gamcheon Culture Village, the Nampo-dong markets and a seaside temple. With four or more days you can add day trips, relax on the sand and explore neighborhoods at a slower pace."
+    },
+    {
+     "q": "What is Busan best known for?",
+     "a": "Busan is famous for its beaches, especially Haeundae and Gwangalli, its fresh seafood and fish markets like Jagalchi, the colorful Gamcheon Culture Village, and dramatic coastal scenery such as the cliffside Haedong Yonggungsa Temple and Taejongdae."
+    },
+    {
+     "q": "Is Busan worth visiting compared to Seoul?",
+     "a": "Yes. While Seoul is the bustling capital, Busan offers a more relaxed, coastal atmosphere with beaches, mountains and seafood culture all in one city. Many travelers pair the two, taking the high-speed train between them for a contrasting taste of Korea."
+    },
+    {
+     "q": "When is the best time to visit Busan?",
+     "a": "Late spring (April to June) and autumn (September to November) offer the most comfortable weather and clear skies. Summer is hot and crowded but best for swimming, while winter is mild compared to much of Korea, though too cool for the beach."
+    }
+   ]
   }
  },
  "Gyeongju": {
@@ -955,6 +1169,111 @@
     {
      "q": "佛国寺和石窟庵是同一个地方吗？",
      "a": "不是。两者同属世界文化遗产、都位于吐含山一带，但分处不同位置：佛国寺是依山而建的寺院，石窟庵则是山腰上的人工石窟，从佛国寺需另行换乘前往。"
+    }
+   ]
+  },
+  "en": {
+   "h1": "Things to Do in Gyeongju, Korea",
+   "title": "Things to Do in Gyeongju, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Gyeongju, Korea's ancient Silla capital: royal tombs, Bulguksa Temple, Cheomseongdae, Wolji Pond, food and travel tips.",
+   "lead": "Often called \"the museum without walls,\" Gyeongju was the capital of the Silla kingdom for nearly a thousand years, and that legacy is everywhere you look. Grassy royal burial mounds rise between modern streets, golden-hued temples cling to forested mountainsides, and stone monuments to ancient astronomy sit quietly in city parks. Compact, walkable, and crowned with two UNESCO World Heritage treasures, Gyeongju lets you trace 2,000 years of Korean history on foot and by bike, then unwind beside a lantern-lit pond as the past glows back to life.",
+   "attractions": [
+    {
+     "name": "Bulguksa Temple",
+     "nameLocal": "불국사",
+     "blurb": "A masterpiece of Silla-era Buddhist art and Gyeongju's most famous temple, Bulguksa is a UNESCO World Heritage Site set against wooded Tohamsan mountain. Its terraced stone platforms, twin pagodas Dabotap and Seokgatap, and gracefully arched bridge-staircases are among the finest surviving examples of Korean architecture."
+    },
+    {
+     "name": "Seokguram Grotto",
+     "nameLocal": "석굴암",
+     "blurb": "High on Tohamsan above Bulguksa, this artificial granite grotto shelters a serene seated Buddha gazing toward the East Sea. A UNESCO World Heritage Site, the eighth-century sanctuary is celebrated for the breathtaking precision of its carved guardians and bodhisattvas, considered a pinnacle of Buddhist sculpture in East Asia."
+    },
+    {
+     "name": "Daereungwon Tumuli Park",
+     "nameLocal": "대릉원",
+     "blurb": "A green expanse of more than twenty enormous Silla royal burial mounds, their gently rounded silhouettes one of Gyeongju's signature sights. Inside Cheonmachong, the excavated 'Heavenly Horse Tomb,' you can walk into a real mound and see replicas of the dazzling gold crown and grave goods unearthed here."
+    },
+    {
+     "name": "Cheomseongdae Observatory",
+     "nameLocal": "첨성대",
+     "blurb": "This elegant bottle-shaped stone tower is widely regarded as one of the oldest surviving astronomical observatories in East Asia, built during the reign of Queen Seondeok in the seventh century. Standing alone in a grassy field that blooms with seasonal flowers, it is one of Gyeongju's most photographed and beloved landmarks."
+    },
+    {
+     "name": "Donggung Palace & Wolji Pond",
+     "nameLocal": "동궁과 월지",
+     "blurb": "Once a secondary palace and banquet garden for Silla crown princes, this reconstructed complex around Wolji Pond (long known as Anapji) is Gyeongju's classic evening destination. After dark, illuminated pavilions mirror perfectly on the still water, creating one of Korea's most romantic nighttime scenes."
+    },
+    {
+     "name": "Gyeongju National Museum",
+     "nameLocal": "국립경주박물관",
+     "blurb": "The essential primer for understanding Silla civilization, this museum houses gold crowns, jewelry, and Buddhist art recovered from the region's tombs and temples. Its outdoor grounds display the massive Divine Bell of King Seongdeok, famed for its haunting tone and intricate flying-apsara reliefs."
+    },
+    {
+     "name": "Woljeonggyo Bridge",
+     "nameLocal": "월정교",
+     "blurb": "A faithfully reconstructed Silla-era covered wooden bridge spanning the Namcheon stream, its tiled roofs and red-and-green woodwork evoking the splendor of the ancient capital. It is especially striking at dusk, when warm lighting reflects across the water and draws strollers and photographers."
+    },
+    {
+     "name": "Yangdong Folk Village",
+     "nameLocal": "양동마을",
+     "blurb": "A UNESCO-listed Joseon-era clan village of tiled aristocratic mansions and thatched-roof cottages nestled into wooded hills outside the city center. Still inhabited today, Yangdong offers a vivid look at traditional Korean architecture, Confucian academies, and centuries-old family life."
+    },
+    {
+     "name": "Gyeongju National Park (Namsan)",
+     "nameLocal": "경주 남산",
+     "blurb": "A sacred mountain dotted with Buddhist rock carvings, pagodas, and temple ruins scattered along its trails, Namsan is sometimes called an open-air museum of Silla devotion. Hikers are rewarded with weathered stone Buddhas, valley scenery, and sweeping views over the historic plain."
+    },
+    {
+     "name": "Bunhwangsa Temple",
+     "nameLocal": "분황사",
+     "blurb": "Home to Korea's oldest dated stone pagoda, built in the seventh century from carefully cut stone blocks resembling brick, this active temple sits a short distance from Cheomseongdae. Its surviving tier, flanked by stone guardian figures and corner lions, is a quietly powerful relic of early Silla Buddhism."
+    }
+   ],
+   "food": [
+    {
+     "name": "Ssambap",
+     "blurb": "Gyeongju's signature meal: a generous spread of rice, grilled or seasoned meats, and dozens of small side dishes wrapped in fresh lettuce and perilla leaves. Ssambap restaurants cluster near the historic sites, making it the classic post-sightseeing feast."
+    },
+    {
+     "name": "Hwangnam-ppang",
+     "blurb": "A beloved local pastry born in Gyeongju's Hwangnam neighborhood, these small round cakes have a thin, lightly toasted shell packed with sweet red bean paste. Freshly made, they are the city's most popular edible souvenir."
+    },
+    {
+     "name": "Gyeongju Beopju and chalboribbang",
+     "blurb": "Chalboribbang are chewy glutinous-barley cakes filled with red bean, a regional specialty often paired with the area's traditional aromas of grain and honey. They make a satisfying, distinctly Gyeongju snack between temple visits."
+    },
+    {
+     "name": "Hanjeongsik",
+     "blurb": "A full Korean table-d'hote banquet of many shared dishes, from soups and stews to grilled fish and pickled vegetables. In a historic city like Gyeongju, a leisurely hanjeongsik is a fitting way to sample the breadth of regional home cooking."
+    },
+    {
+     "name": "Memil-muk (buckwheat jelly)",
+     "blurb": "Cool, savory acorn or buckwheat jelly tossed with vegetables and a tangy soy-based dressing, a refreshing rustic dish well suited to a warm day of sightseeing among the tombs and temples."
+    }
+   ],
+   "gettingThere": "Gyeongju sits in southeastern Korea and is easiest to reach by train. High-speed KTX and SRT trains run from Seoul to Singyeongju Station in roughly two hours, where local buses and taxis connect to the historic center; trains also link Gyeongju with Busan and Daegu. Intercity express buses serve Gyeongju from cities nationwide. The nearest airports are in Busan (Gimhae International) and Daegu, both within easy bus or train reach. Once in town, the compact historic core around Daereungwon, Cheomseongdae, and Wolji Pond is very walkable, and renting a bicycle is a popular way to link the central sites; city buses run out to Bulguksa, Seokguram, and Yangdong Folk Village.",
+   "tips": [
+    "Base yourself near the central historic area so you can walk or cycle between Daereungwon, Cheomseongdae, Woljeonggyo, and Wolji Pond, then take buses to outlying sites like Bulguksa and Seokguram.",
+    "Visit Donggung Palace and Wolji Pond around sunset and into the evening, when the illuminated pavilions reflect on the water for the city's best night views.",
+    "Pair Bulguksa and Seokguram in a single trip, since the grotto sits on the mountain above the temple and the two share the same UNESCO-protected slopes.",
+    "Wear comfortable shoes and pace yourself; Gyeongju's sites are spread across a wide historic plain, and a bicycle or a planned bus route saves a lot of walking."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Gyeongju?",
+     "a": "Two days is the sweet spot. One day covers the walkable central cluster of Daereungwon, Cheomseongdae, Woljeonggyo, and Wolji Pond, and a second day handles Bulguksa, Seokguram, the Gyeongju National Museum, and an outlying site like Yangdong Folk Village. A single packed day is possible for highlights, while three days lets you add Namsan hiking at a relaxed pace."
+    },
+    {
+     "q": "Is Gyeongju a good day trip from Busan?",
+     "a": "Yes. Gyeongju is one of the most popular day trips from Busan, reachable by train or intercity bus in about an hour. A day trip is enough to see the central historic sites or the Bulguksa and Seokguram pairing, though staying overnight lets you experience Wolji Pond after dark and explore at a calmer pace."
+    },
+    {
+     "q": "What is Gyeongju famous for?",
+     "a": "Gyeongju was the capital of the Silla kingdom for nearly a thousand years, so it is famous for its extraordinary concentration of ancient sites: grassy royal burial mounds, the UNESCO-listed Bulguksa Temple and Seokguram Grotto, the Cheomseongdae observatory, and treasures of Buddhist and gold artistry. It is often called a 'museum without walls.'"
+    },
+    {
+     "q": "How do you get around Gyeongju?",
+     "a": "The central historic district is compact and best explored on foot or by rental bicycle, with many key sights within easy reach of one another. City buses and taxis connect to outlying attractions such as Bulguksa, Seokguram, and Yangdong Folk Village. Trains and intercity buses link Gyeongju to Seoul, Busan, and other cities."
     }
    ]
   }
@@ -1286,6 +1605,115 @@
      "a": "Sí. Dormir en un hanok tradicional es una de las experiencias más especiales de Jeonju. Estas casas de madera y suelo radiante ondol te sumergen en la atmósfera histórica del barrio y te permiten disfrutar del pueblo hanok temprano, antes de que lleguen los visitantes del día."
     }
    ]
+  },
+  "en": {
+   "h1": "Things to Do in Jeonju, Korea",
+   "title": "Things to Do in Jeonju, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Jeonju: the largest hanok village, Gyeonggijeon Shrine, Jeondong Cathedral, bibimbap, makgeolli alleys, hanji crafts and more.",
+   "lead": "Jeonju is Korea's soul food made into a city. Once the spiritual home of the Joseon dynasty, today it cradles the country's largest cluster of traditional hanok houses, where curved tile roofs sweep above lantern-lit lanes filled with the smell of sizzling pancakes and freshly poured rice wine. This is the birthplace of bibimbap and a UNESCO City of Gastronomy, but it is also a place to slow down: to trace martyrs' stories at a century-old cathedral, watch a craftsman pull sheets of mulberry hanji paper, climb a pine-shaded hill for a rooftop panorama, and let an evening dissolve into a makgeolli alley where the snacks never stop coming. Here are the best things to do in Jeonju.",
+   "attractions": [
+    {
+     "name": "Jeonju Hanok Village",
+     "nameLocal": "전주 한옥마을",
+     "blurb": "The heart of any Jeonju visit, this is Korea's largest hanok village, with roughly 700 traditional tile-roofed houses packed into a single walkable neighborhood. Wander the lanes in a rented hanbok, sip street snacks, and watch curved black rooftops layer into the hills."
+    },
+    {
+     "name": "Gyeonggijeon Shrine",
+     "nameLocal": "경기전",
+     "blurb": "This serene walled shrine enshrines a royal portrait of King Taejo, the founder of the Joseon dynasty whose ancestral roots trace to Jeonju. Beyond the wooden halls lies a photogenic bamboo grove that draws visitors year-round."
+    },
+    {
+     "name": "Jeondong Catholic Cathedral",
+     "nameLocal": "전동성당",
+     "blurb": "A graceful Romanesque-Byzantine church of red brick and granite, regarded as one of Korea's most beautiful cathedrals. It stands on the site where the country's first Catholic martyrs were executed in 1791, and faces Gyeonggijeon across the road."
+    },
+    {
+     "name": "Omokdae",
+     "nameLocal": "오목대",
+     "blurb": "A pine-shaded pavilion on a low hill where the future King Taejo is said to have celebrated a victory over coastal raiders. The short climb rewards you with a sweeping bird's-eye view over the sea of hanok rooftops below."
+    },
+    {
+     "name": "Pungnammun Gate",
+     "nameLocal": "풍남문",
+     "blurb": "The lone survivor of the four gates that once guarded Jeonju's fortress wall, this stout two-story gate is a designated national treasure and a symbol of the city. It anchors the southern edge of the old town beside Nambu Market."
+    },
+    {
+     "name": "Nambu Night Market",
+     "nameLocal": "남부야시장",
+     "blurb": "By day a sprawling traditional market, by weekend night a glowing corridor of food stalls. Graze your way past mung bean pancakes, skewers, dumplings and creative fusion bites, drink in hand, elbow to elbow with locals."
+    },
+    {
+     "name": "Jaman Mural Village",
+     "nameLocal": "자만벽화마을",
+     "blurb": "A hillside warren of narrow alleys where house walls bloom with colorful murals of folk tales, cartoon characters and local life. It sits just a short walk from the hanok village, reached via the overpass near Omokdae."
+    },
+    {
+     "name": "Jeonju Hyanggyo",
+     "nameLocal": "전주향교",
+     "blurb": "A beautifully preserved Confucian academy and shrine dating to the Goryeo and Joseon eras, where scholars once studied the classics. Its courtyards are famous for towering ancient ginkgo trees that turn brilliant gold in autumn."
+    },
+    {
+     "name": "Jeonju Traditional Hanji Center",
+     "nameLocal": "전주전통한지원",
+     "blurb": "Jeonju has long been Korea's capital of hanji, the durable handmade paper crafted from mulberry bark. Here you can watch artisans pull and dry sheets the traditional way and try shaping the paper yourself in hands-on workshops."
+    },
+    {
+     "name": "Jeonjucheon Stream",
+     "nameLocal": "전주천",
+     "blurb": "A clear, shallow stream that threads along the edge of the hanok village, lined with walking and cycling paths. It's a calm, leafy place for a riverside stroll between sightseeing and snacking, with stepping stones to cross at several points."
+    }
+   ],
+   "food": [
+    {
+     "name": "Jeonju Bibimbap",
+     "blurb": "The dish that made Jeonju famous worldwide. The local version layers seasoned vegetables, local bean sprouts, beef and a raw egg yolk over rice cooked in beef broth, served in a brass bowl and mixed with red chili paste."
+    },
+    {
+     "name": "Kongnamul Gukbap",
+     "blurb": "Jeonju's beloved hangover cure and comfort breakfast: a steaming bowl of bean sprout soup over rice, brightened with scallions and chili, often served with a side of squid and a raw egg to swirl in."
+    },
+    {
+     "name": "Makgeolli",
+     "blurb": "Jeonju's makgeolli culture is unlike anywhere else: order a kettle of the milky rice wine in a makgeolli alley and a parade of free side dishes keeps arriving, the spread growing with every round you order."
+    },
+    {
+     "name": "Pitteok (Mung Bean Pancake) and Market Snacks",
+     "blurb": "Sizzling nokdujeon mung bean pancakes are a Nambu Market staple, crisp at the edges and best eaten hot. They pair perfectly with a bowl of makgeolli from a nearby stall."
+    },
+    {
+     "name": "PNB Choco Pie",
+     "blurb": "A local bakery institution, Jeonju's handmade chocolate pies layer soft cake, cream and jam under a chocolate coat. They've become a classic edible souvenir to carry home from the city."
+    },
+    {
+     "name": "Hanjeongsik (Korean Table d'hote)",
+     "blurb": "As a designated City of Gastronomy, Jeonju excels at hanjeongsik, an elaborate multi-dish feast where the table disappears under dozens of small banchan plates, soups and grilled dishes."
+    }
+   ],
+   "gettingThere": "Jeonju sits in the southwest of South Korea and is easiest to reach by train. KTX high-speed services run from Seoul's Yongsan Station to Jeonju Station in roughly two hours; slower but cheaper ITX and Mugunghwa trains also serve the route. Intercity express buses connect Jeonju with Seoul, Busan, Daejeon and other major cities, arriving at the Jeonju Express/Intercity Bus Terminal. From either the train station or bus terminal, the Hanok Village is a short city-bus or taxi ride away. Once you arrive, the old town and its main sights are compact and best explored entirely on foot.",
+   "tips": [
+    "Rent a hanbok for the day from one of the many shops near Gyeonggijeon; wearing one also gets you free admission to several palaces and heritage sites across Korea.",
+    "Time your visit to overlap with a weekend if you want to catch the Nambu Night Market, which only fires up its food stalls on certain evenings.",
+    "Stay overnight in a traditional hanok guesthouse to experience the village after the day-trippers leave, when the lantern-lit lanes are at their most atmospheric.",
+    "Wear comfortable shoes: the hill up to Omokdae and the alleys of Jaman Mural Village involve slopes and steps, and the whole area is best covered on foot."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Jeonju?",
+     "a": "One full day is enough to see the Hanok Village highlights, but staying overnight is highly recommended. A night lets you enjoy the village after the crowds thin, sleep in a traditional hanok, and explore the night market and makgeolli alleys. Two days gives a relaxed pace with time for the hanji center, Hyanggyo and nearby sights."
+    },
+    {
+     "q": "Is Jeonju worth visiting as a day trip from Seoul?",
+     "a": "Yes. With KTX trains reaching Jeonju in about two hours, it works as a long day trip, and the main attractions cluster within walking distance of each other in the Hanok Village. That said, staying the night unlocks the city's quieter, more magical evening atmosphere."
+    },
+    {
+     "q": "What is Jeonju most famous for?",
+     "a": "Jeonju is best known as the birthplace of bibimbap and a UNESCO City of Gastronomy, as well as home to Korea's largest traditional hanok village. It's also celebrated for makgeolli rice wine culture and for hanji, the traditional handmade mulberry-bark paper."
+    },
+    {
+     "q": "What is the best time of year to visit Jeonju?",
+     "a": "Spring and autumn are ideal, with mild weather for walking and especially beautiful foliage. Autumn brings golden ginkgo leaves at Jeonju Hyanggyo, while spring offers comfortable temperatures and blossoms. Summers are hot and humid and winters cold, though the hanok rooftops look striking under a dusting of snow."
+    }
+   ]
   }
  },
  "Incheon": {
@@ -1589,6 +2017,115 @@
     {
      "q": "¿Cómo llego desde el aeropuerto de Incheon a la ciudad de Incheon?",
      "a": "Toma la Línea 1 del metro hasta la estación de Incheon, situada a la entrada del Barrio Chino; el trayecto desde el aeropuerto ronda una hora. Para ir a Seúl, el tren AREX llega al centro en algo menos de una hora. Cómprate una tarjeta T-money en cualquier tienda de conveniencia para pagar el transporte público fácilmente."
+    }
+   ]
+  },
+  "en": {
+   "h1": "Things to Do in Incheon, Korea",
+   "title": "Things to Do in Incheon, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Incheon, Korea: Chinatown, Songdo Central Park, Wolmido, the Open Port district, Ganghwa Island, local food and travel tips.",
+   "lead": "Most travelers only see Incheon through the windows of an airport terminal, but Korea's gateway city rewards anyone who lingers. This is where the country first opened to the world in 1883, and that history still echoes through the brick warehouses and curving lanes of the Open Port district. A short walk away, Korea's oldest Chinatown perfumes the air with black-bean noodles, while across the harbor the futuristic glass towers of Songdo rise from reclaimed land around a tidal park. Add the ferry-fed islands of the Yellow Sea, the fortress hills of Ganghwa, and a string of breezy seaside neighborhoods, and Incheon makes a rewarding day trip from Seoul or a relaxed first or last stop on any Korea itinerary.",
+   "attractions": [
+    {
+     "name": "Incheon Chinatown",
+     "nameLocal": "인천 차이나타운",
+     "blurb": "Korea's only official Chinatown grew up beside the open port in the 1880s, when Chinese merchants settled near the harbor. Today its red-and-gold gates, painted murals, and hillside stairways frame a dense cluster of restaurants where jjajangmyeon, the black-bean noodle dish, was born. It is the most atmospheric introduction to old Incheon."
+    },
+    {
+     "name": "Songdo Central Park",
+     "nameLocal": "송도 센트럴파크",
+     "blurb": "The green heart of Songdo International Business District, this waterfront park is built around a seawater canal that you can paddle by kayak or water taxi. Surrounded by mirror-glass skyscrapers, it pairs lawns, a deer garden, and walking paths with one of the most photogenic skylines in Korea, especially after dark."
+    },
+    {
+     "name": "Wolmido",
+     "nameLocal": "월미도",
+     "blurb": "This small harbor island, now joined to the mainland, is Incheon's classic seaside playground. A wooden boardwalk hugs the shore past raw-fish restaurants and amusement rides, ferries depart for nearby islands, and the breezy Culture Street is a long-loved spot to watch the sun set over the Yellow Sea."
+    },
+    {
+     "name": "Incheon Open Port Area",
+     "nameLocal": "인천 개항장",
+     "blurb": "When Incheon opened to foreign trade in 1883, Japanese and Western banks, consulates, and trading houses lined these streets. Many of those stone and brick buildings survive, now housing museums and cafes. Strolling the Open Port district is like walking through a preserved chapter of Korea's first encounter with the wider world."
+    },
+    {
+     "name": "Sinpo International Market",
+     "nameLocal": "신포국제시장",
+     "blurb": "One of Incheon's oldest traditional markets traces its roots to the open-port era, when it served the city's foreign community. Locals come for the famous Sinpo-style dakgangjeong, sweet-and-crispy fried chicken, plus hand-made dumplings and street snacks along its covered lanes."
+    },
+    {
+     "name": "Jayu Park",
+     "nameLocal": "자유공원",
+     "blurb": "Crowning the hill above the open port, Jayu (Freedom) Park is Korea's first Western-style public park, dating to 1888. Shaded paths lead to a statue of General MacArthur and a sweeping overlook of the harbor, making it a peaceful, history-rich climb just above Chinatown."
+    },
+    {
+     "name": "Ganghwa Island",
+     "nameLocal": "강화도",
+     "blurb": "A short drive northwest of the city, Ganghwa is a large, history-layered island reachable by bridge. It holds ancient dolmen tombs recognized by UNESCO, coastal fortifications that guarded the approach to Seoul, and Jeondeungsa, a serene mountain temple. It rewards travelers who want nature, heritage, and quiet seaside views."
+    },
+    {
+     "name": "Incheon Grand Park",
+     "nameLocal": "인천대공원",
+     "blurb": "A sprawling green expanse at the foot of Mount Gwanmo, this beloved municipal park offers lakeside trails, a botanical garden, cherry blossoms in spring, and rental bikes for easy exploring. It is a favorite weekend escape for local families and an easy break from the city's harborside bustle."
+    },
+    {
+     "name": "Eurwangni Beach",
+     "nameLocal": "을왕리해수욕장",
+     "blurb": "On Yeongjong Island near the airport, Eurwangni is one of the metro area's most popular beaches, known for its broad sandy flats, dramatic tidal range, and west-facing sunsets. Clam-grilling restaurants line the shore, making it a relaxed seaside detour for travelers with time before or after a flight."
+    },
+    {
+     "name": "Songwol-dong Fairy Tale Village",
+     "nameLocal": "송월동 동화마을",
+     "blurb": "An aging neighborhood near Chinatown was reborn as a storybook village, its houses and alleys painted with scenes from classic fairy tales like Dorothy, Peter Pan, and the Little Mermaid. Compact and colorful, it is a cheerful, family-friendly stop that pairs naturally with the surrounding open-port sights."
+    }
+   ],
+   "food": [
+    {
+     "name": "Jjajangmyeon",
+     "blurb": "Wheat noodles smothered in a savory black-bean and pork sauce, this Korean-Chinese staple was created in Incheon's Chinatown in the open-port era. Eating a bowl on the very streets where it was invented is an essential Incheon experience."
+    },
+    {
+     "name": "Sinpo Dakgangjeong",
+     "blurb": "Bite-sized fried chicken double-fried until shatteringly crisp, then tossed in a glossy sweet-and-spicy glaze. The version sold at Sinpo Market made the dish famous and remains one of the city's most sought-after snacks."
+    },
+    {
+     "name": "Jjamppong",
+     "blurb": "A fiery red seafood noodle soup loaded with squid, mussels, and vegetables in a spicy broth. The other half of the classic Chinatown noodle duo, it is the go-to order for anyone who finds jjajangmyeon too mild."
+    },
+    {
+     "name": "Hoe (Raw Sliced Fish)",
+     "blurb": "Thanks to Incheon's harbor location, fresh hoe is a local highlight, especially around Wolmido and Sorae Port. Diners pick from tanks of seasonal Yellow Sea catch, sliced and served with chili paste, garlic, and lettuce wraps."
+    },
+    {
+     "name": "Grilled Clams (Jogae-gui)",
+     "blurb": "A coastal favorite cooked tableside over a grill, with assorted clams and shellfish popping open in their shells. It is the signature meal at the seaside clam towns of Yeongjong Island near the airport."
+    },
+    {
+     "name": "Gonggal-ppang",
+     "blurb": "A hollow, puffed Chinese-style bread served warm with sweet condensed milk for dipping. Light, crisp, and a little theatrical, it is a popular Chinatown treat to nibble between bigger meals."
+    }
+   ],
+   "gettingThere": "Incheon is the metro area's gateway, so most travelers arrive by air at Incheon International Airport (ICN) on Yeongjong Island. From there, the AREX airport railroad runs directly into the city and on to Seoul Station, while Seoul Subway Line 1 connects central Incheon, Chinatown (Incheon Station), and the open-port sights to the capital in about an hour. Songdo is served by the Incheon Subway, and frequent buses and bridges link the airport island, Songdo, and Ganghwa. Because the core attractions cluster around two areas, Chinatown and the open port near Incheon Station, and Songdo Central Park, a transit card and comfortable shoes are all you really need.",
+   "tips": [
+    "Pair Chinatown, the Open Port district, Jayu Park, and the Fairy Tale Village in a single walk — they sit within a few hundred meters of Incheon Station on Subway Line 1.",
+    "Save Wolmido and Yeongjong Island beaches for late afternoon to catch the west-facing Yellow Sea sunset.",
+    "Incheon's tidal range is among the world's largest, so check tide times before a beach visit — at low tide the water can retreat far across the flats.",
+    "With a long airport layover, Yeongjong Island (Eurwangni Beach, Muui Island) is closer and easier to reach than central Incheon or Seoul."
+   ],
+   "faq": [
+    {
+     "q": "Is Incheon worth visiting, or is it just the airport?",
+     "a": "It is well worth a visit. Beyond the airport, Incheon has Korea's only Chinatown, the historic open-port district where the country first opened to foreign trade, the futuristic Songdo waterfront, breezy harbor islands, and the heritage landscapes of Ganghwa Island. A half-day covers the highlights, and it makes an easy day trip from Seoul."
+    },
+    {
+     "q": "How do I get from Incheon Airport to the city's attractions?",
+     "a": "The airport sits on Yeongjong Island, linked to the mainland by bridge. The AREX railroad and airport buses reach central Incheon and Seoul, while Subway Line 1 connects Incheon Station — the doorstep of Chinatown and the open port — to the wider metro network. Songdo is reached via the Incheon Subway."
+    },
+    {
+     "q": "How much time do I need in Incheon?",
+     "a": "Half a day is enough to enjoy Chinatown, the open-port streets, and a noodle lunch. A full day lets you add Songdo Central Park or a Wolmido sunset, and two days gives you time for a trip out to Ganghwa Island or the beaches of Yeongjong Island."
+    },
+    {
+     "q": "Can I visit Incheon during a layover at the airport?",
+     "a": "Yes, if your layover is long enough and you have cleared immigration. With a few free hours, Yeongjong Island's beaches and clam restaurants are closest to the terminals. Around five to six hours lets you reach Chinatown and the open-port district by train, but always allow a generous buffer to return for your flight."
     }
    ]
   }
@@ -1918,6 +2455,115 @@
     {
      "q": "¿Qué hacen las haenyeo?",
      "a": "Las haenyeo son buceadoras de Jeju que recogen marisco, abulón y algas a pulmón, sin equipo de oxígeno, una tradición reconocida por la Unesco. En lugares como Seongsan o la isla de Udo es habitual verlas faenar e incluso asistir a sus exhibiciones."
+    }
+   ]
+  },
+  "en": {
+   "h1": "Things to Do in Jeju, Korea",
+   "title": "Things to Do in Jeju, Korea | KoreaPlus",
+   "metaDesc": "Discover the best things to do in Jeju, Korea: Sunrise Peak, Hallasan, lava tubes, waterfalls, beaches, Olle trails, haenyeo divers and island food.",
+   "lead": "Jeju is South Korea's volcanic island getaway, a UNESCO-recognized land of lava tubes, crater peaks, black-sand beaches and emerald coves rising off the country's southern tip. Born from eruptions that shaped Hallasan, the nation's highest mountain, the island rewards every kind of traveler: hike a sunrise crater on the east coast, wander basalt waterfalls in the south, watch free-diving haenyeo grandmothers surface with the day's catch, or simply trace coastal Olle trails between fishing villages. Here are the best things to do in Jeju, from its most iconic landmarks to the quiet corners locals love.",
+   "attractions": [
+    {
+     "name": "Seongsan Ilchulbong (Sunrise Peak)",
+     "nameLocal": "성산일출봉",
+     "blurb": "This dramatic tuff cone rose from an undersea volcanic eruption, forming a vast green crater rimmed by jagged rocks on Jeju's eastern coast. A steep stairway climbs to the summit, famous for spectacular sunrises over the sea, and it is part of the island's UNESCO World Heritage listing."
+    },
+    {
+     "name": "Hallasan National Park",
+     "nameLocal": "한라산국립공원",
+     "blurb": "At the heart of the island stands Hallasan, a dormant shield volcano and South Korea's tallest mountain, crowned by the Baengnokdam crater lake. Several well-marked trails wind through changing forests to alpine meadows, with the Seongpanak and Gwaneumsa routes reaching the summit."
+    },
+    {
+     "name": "Manjanggul Lava Tube",
+     "nameLocal": "만장굴",
+     "blurb": "One of the world's finest lava tubes, this cavern was carved by molten rock flowing from a Geomunoreum eruption thousands of years ago. A walkable section reveals lava stalactites, rope-like flow walls and a towering lava column, all part of Jeju's UNESCO natural heritage."
+    },
+    {
+     "name": "Cheonjeyeon Waterfall",
+     "nameLocal": "천제연폭포",
+     "blurb": "A three-tier cascade in Seogwipo plunges through a lush subtropical gorge ringed by rare plants and ferns. The arched Seonimgyo Bridge, decorated with carvings of mythical nymphs, spans the ravine and links the falls to a scenic riverside walk."
+    },
+    {
+     "name": "Jeongbang Waterfall",
+     "nameLocal": "정방폭포",
+     "blurb": "Said to be one of the few waterfalls in Asia that tumbles directly into the ocean, Jeongbang spills off a coastal cliff onto the rocks below. The sound of crashing water meeting the sea makes it a memorable stop along Seogwipo's southern shore."
+    },
+    {
+     "name": "Udo Island",
+     "nameLocal": "우도",
+     "blurb": "A short ferry ride off the eastern coast, this small island is named for its cow-lying shape and circled by easy bike, scooter and walking routes. Highlights include a rare coral-sand beach, low stone walls, lighthouses and views back toward Sunrise Peak."
+    },
+    {
+     "name": "Hyeopjae Beach",
+     "nameLocal": "협재해수욕장",
+     "blurb": "On the northwest coast, Hyeopjae draws crowds with its powdery white sand, shallow turquoise water and views of the cone-shaped Biyangdo island offshore. A grove of pine trees backs the shore, and the adjoining Geumneung Beach extends the same scenery."
+    },
+    {
+     "name": "Jeju Olle Trails",
+     "nameLocal": "제주올레길",
+     "blurb": "This network of waymarked walking routes loops around the island, linking coastline, oreum volcanic cones, villages and forests over more than two dozen numbered courses. Blue-and-orange ribbons mark the way, letting walkers sample Jeju at a slow, scenic pace."
+    },
+    {
+     "name": "Camellia Hill",
+     "nameLocal": "카멜리아힐",
+     "blurb": "A sprawling botanical garden in the island's west planted with hundreds of camellia varieties alongside seasonal blooms and themed walking paths. It is especially loved in the cooler months when the camellias flower, making it a favorite for photographers."
+    },
+    {
+     "name": "Seopjikoji",
+     "nameLocal": "섭지코지",
+     "blurb": "A grassy cape jutting into the sea near Sunrise Peak, Seopjikoji is known for its lighthouse, wildflower fields and sweeping coastal views. The headland's volcanic rock formations and breezy walking paths have made it a popular filming location."
+    }
+   ],
+   "food": [
+    {
+     "name": "Heukdwaeji (Jeju black pork)",
+     "blurb": "Jeju's prized native black pigs yield rich, flavorful pork grilled over charcoal at barbecue restaurants island-wide. It is the island's signature meat dish, often eaten with salted shrimp sauce and fresh garlic."
+    },
+    {
+     "name": "Galchi (cutlassfish)",
+     "blurb": "Long, silvery hairtail fish are a Jeju specialty served as a hearty braise with radish and chili (galchi-jorim) or simply grilled. The freshest catches come straight from the surrounding seas."
+    },
+    {
+     "name": "Jeonbok-juk (abalone porridge)",
+     "blurb": "A comforting rice porridge cooked with tender abalone, often harvested by haenyeo divers, tinted green from the shellfish. It is considered a nourishing, restorative Jeju classic."
+    },
+    {
+     "name": "Gogi-guksu (pork noodle soup)",
+     "blurb": "A beloved local comfort food of wheat noodles in a milky pork-bone broth topped with slices of boiled pork. You will find dedicated noodle shops serving it across the island."
+    },
+    {
+     "name": "Hallabong citrus",
+     "blurb": "A sweet, bump-topped mandarin variety grown on Jeju's sunny slopes, named after Hallasan. Look for it fresh as well as in juices, chocolates and other island treats."
+    },
+    {
+     "name": "Fresh seafood and sashimi",
+     "blurb": "Surrounded by sea, Jeju is known for ultra-fresh sashimi, sea urchin and shellfish, much of it gathered by haenyeo divers. Coastal markets and harbor restaurants serve the day's catch."
+    }
+   ],
+   "gettingThere": "Most travelers reach Jeju by air: Jeju International Airport sits just outside Jeju City on the north coast and is one of the world's busiest routes, with frequent flights from Seoul (Gimpo), Busan and other mainland cities, plus some international connections. Ferries also run to Jeju from mainland ports such as Wando, Mokpo and Busan for those bringing a vehicle or preferring the sea. Once on the island, renting a car is the most flexible way to explore, as many natural attractions are spread along the coast and into the interior; an extensive local and intercity bus network connects Jeju City, Seogwipo and major sights for those not driving.",
+   "tips": [
+    "Renting a car gives you the most freedom, since top sights are scattered around the coast and mountains and public transport between them can be slow.",
+    "Weather changes fast and the island is windy, so pack layers and a rain shell even in summer, and check conditions before a Hallasan summit hike.",
+    "Sunrise Peak lives up to its name at dawn, but it is also far less crowded and just as scenic in late afternoon light.",
+    "Base yourself strategically: Jeju City in the north suits airport access and nightlife, while Seogwipo in the south is closer to waterfalls and the Jungmun resort area."
+   ],
+   "faq": [
+    {
+     "q": "How many days do you need in Jeju?",
+     "a": "Three to four days lets you cover the main highlights at a comfortable pace, splitting time between the east coast (Sunrise Peak, Manjanggul, Udo) and the south and west (waterfalls, beaches, gardens). A week allows for a Hallasan hike, multiple Olle trails and slower island living."
+    },
+    {
+     "q": "What is the best time of year to visit Jeju?",
+     "a": "Spring brings canola and cherry blossoms, while autumn offers crisp, clear weather ideal for hiking, making both the most popular seasons. Summer is warm and busy with beachgoers, and winter is mild compared with the mainland, with camellias in bloom and occasional snow on Hallasan."
+    },
+    {
+     "q": "Do you need to climb to the summit to enjoy Hallasan?",
+     "a": "No. The full summit hike to Baengnokdam crater is long and demanding, but shorter, easier trails through the national park's forests and to viewpoints let you experience the mountain without going all the way up. Summit routes can require advance reservation, so check before you go."
+    },
+    {
+     "q": "Can you visit Jeju without renting a car?",
+     "a": "Yes. Jeju has an extensive bus network linking the airport, Jeju City, Seogwipo and major attractions, and many travelers combine buses with taxis or guided day tours. That said, a rental car makes reaching remote beaches, oreum and trailheads far easier and faster."
     }
    ]
   }
