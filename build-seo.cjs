@@ -655,6 +655,7 @@ ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
   <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
   <div class="hub-nav-links">${PRIMARY_NAV}</div>
 </nav>
+<div id="kp-korea-now" class="kp-korea-now" style="display:none;max-width:920px;margin:0 auto;padding:7px 16px;font-size:12.5px;color:var(--text2,#aab);flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;border-bottom:1px solid var(--border,rgba(255,255,255,.07))" aria-live="polite"></div>
 <main class="seo-wrap">
 ${hero}
 ${trustBlock(lang)}
@@ -698,6 +699,7 @@ ${body}
 <script>window.WORKER_URL=window.WORKER_URL||'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
 <script src="modules/api-client.js"></script>
 <script defer src="modules/topads.js"></script>
+<script defer src="modules/korea-now.js?v=1"></script>
 </body>
 </html>`;
 }
