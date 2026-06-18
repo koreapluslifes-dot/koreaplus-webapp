@@ -634,6 +634,7 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <meta property="og:locale" content="${OG_LOCALE[lang] || 'en_US'}">
 ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta property="og:locale:alternate" content="${OG_LOCALE[a.lang]}">`).join('\n')}
 <meta property="og:image" content="${ORIGIN}/guide/og-image.jpg">
+<meta property="og:image:alt" content="${esc(title)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -651,12 +652,13 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
 </head>
 <body>
+<a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to content</a>
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
   <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
   <div class="hub-nav-links">${PRIMARY_NAV}</div>
 </nav>
 <div id="kp-korea-now" class="kp-korea-now" style="display:none;max-width:920px;margin:0 auto;padding:7px 16px;font-size:12.5px;color:var(--text2,#aab);flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;border-bottom:1px solid var(--border,rgba(255,255,255,.07))" aria-live="polite"></div>
-<main class="seo-wrap">
+<main id="main" class="seo-wrap" role="main">
 ${hero}
 ${trustBlock(lang)}
 <!-- AdSense — compact horizontal unit, upper placement (after hero) -->
@@ -916,6 +918,7 @@ function buildCity(city) {
     [`How do I get to ${city.name}?`, `${city.name === 'Seoul' || city.name === 'Incheon' ? 'Fly into Incheon (ICN) airport, then use the AREX train or metro.' : `Take the KTX bullet train or an express bus from Seoul to reach ${city.name} comfortably.`}`],
   ];
   body += `<h2>❓ ${esc(city.name)} Travel FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += `<h2>📺 ${esc(city.name)} on video & K-screen</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(city.name + ' Korea travel')}" target="_blank" rel="noopener">▶️ ${esc(city.name)} travel videos</a><a href="kdrama-locations.html">🎬 K-drama filming locations</a><a href="kpop.html">🎤 K-pop in Korea</a></div>`;
   body += affHtml(`🎫 Book ${city.name} tours, hotels & essentials`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
 
@@ -978,6 +981,9 @@ function buildCityL10n(cityName, lang) {
   const qa = (g.faq || []).map(x => [x.q, x.a]);
   if (qa.length) body += `<h2>${esc(ui.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   // Sibling-language cluster + the locale's other hubs
+  const vH = { ja: '📺 動画とK-コンテンツ', zh: '📺 视频与 K-内容', es: '📺 Vídeos y contenido K' }[lang] || '📺 Video';
+  const vL = { ja: '▶️ 旅行動画', zh: '▶️ 旅行视频', es: '▶️ Vídeos de viaje' }[lang] || '▶️ Videos';
+  body += `<h2>${vH}</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(cityName + ' Korea travel')}" target="_blank" rel="noopener">${vL} (${esc(cityName)})</a><a href="kdrama-locations.html">🎬 K-drama</a><a href="kpop.html">🎤 K-pop</a></div>`;
   body += `<h2>${esc(ui.moreH)}</h2><div class="seo-linklist"><a href="${dir}/korea-visa-k-eta-guide.html">🛂 ${esc(L.visa.h1)}</a></div>`;
   body += `<div class="seo-cta"><h2>${esc(g.h1)}</h2><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(g.h1)}</h1><div class="kr">${esc((CITY_NAME_L10N[lang] || {})[cityName] || cityName)}</div><div class="meta"><span class="seo-badge">${g.attractions.length} ${lang === 'ja' ? 'スポット' : lang === 'zh' ? '景点' : 'lugares'}</span></div></header>`;
