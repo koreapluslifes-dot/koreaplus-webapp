@@ -33,11 +33,16 @@
   // (ingredient explainers, routine steps, concerns, glossary…) is localized
   // here from assets/kbeauty-content.<lang>.json (English fallback per key).
   let CONTENT = {};
+  // Bump OVERLAY_VER whenever the per-language content overlays change, so the
+  // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
+  // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
+  // overly-aggressive 'force-cache'.
+  const OVERLAY_VER = '6';
   async function loadContent() {
     if (lang === 'en') return;
     try {
       const base = document.querySelector('base')?.href || '';
-      const r = await fetch(base + 'assets/kbeauty-content.' + lang + '.json', { cache: 'force-cache' });
+      const r = await fetch(base + 'assets/kbeauty-content.' + lang + '.json?v=' + OVERLAY_VER, { cache: 'default' });
       if (r.ok) CONTENT = await r.json() || {};
     } catch { /* keep English */ }
   }
