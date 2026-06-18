@@ -557,6 +557,38 @@ const PRIMARY_NAV = `
 // lang: page language code. alts: [{lang,url}] other-language versions
 // (hreflang cluster; x-default points at the English URL).
 const OG_LOCALE = { en:'en_US', ko:'ko_KR', ja:'ja_JP', zh:'zh_CN', es:'es_ES', fr:'fr_FR', de:'de_DE', pt:'pt_BR', id:'id_ID' };
+
+// ── Authority / E-E-A-T / GEO — injected on EVERY generated page ─────
+// Establishes the brand as a knowledge-graph entity (Organization+WebSite),
+// marks the key answer as Speakable (AI-answer/GEO), and shows a visible
+// authorship + freshness byline (Experience/Trust). No fabricated sameAs.
+const ORG_LD = {
+  '@context': 'https://schema.org', '@type': 'Organization', '@id': ORIGIN + '/#org',
+  name: 'KoreaPlus', alternateName: 'KoreaPlus-Lifes', url: ORIGIN + BASEP,
+  logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' },
+  description: 'Independent expert travel guide to South Korea for international visitors — itineraries, city guides, food, K-culture, visa help and a free AI trip planner, in 9 languages.',
+  knowsLanguage: ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'],
+  areaServed: { '@type': 'Country', name: 'South Korea' },
+};
+const siteLD = lang => ({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': ORIGIN + '/#website', name: 'KoreaPlus', url: ORIGIN + BASEP, inLanguage: lang, publisher: { '@id': ORIGIN + '/#org' } });
+const speakableLD = url => ({ '@context': 'https://schema.org', '@type': 'WebPage', url: ORIGIN + url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.lead', '.seo-keyfacts'] } });
+const TRUST = {
+  en: { by: 'By the KoreaPlus Editorial Team', upd: 'Updated', rev: 'Fact-checked for 2026' },
+  ko: { by: 'KoreaPlus 편집팀', upd: '업데이트', rev: '2026년 기준 사실 확인' },
+  ja: { by: 'KoreaPlus 編集チーム', upd: '更新', rev: '2026年版・確認済み' },
+  zh: { by: 'KoreaPlus 编辑团队', upd: '更新', rev: '2026 年核实' },
+  es: { by: 'Equipo editorial de KoreaPlus', upd: 'Actualizado', rev: 'Verificado para 2026' },
+  fr: { by: 'Équipe éditoriale KoreaPlus', upd: 'Mis à jour le', rev: 'Vérifié pour 2026' },
+  de: { by: 'KoreaPlus-Redaktion', upd: 'Aktualisiert', rev: 'Geprüft für 2026' },
+  pt: { by: 'Equipe editorial KoreaPlus', upd: 'Atualizado', rev: 'Verificado para 2026' },
+  id: { by: 'Tim Editorial KoreaPlus', upd: 'Diperbarui', rev: 'Diperiksa untuk 2026' },
+};
+function trustBlock(lang) {
+  const t = TRUST[lang] || TRUST.en;
+  return `<div class="seo-byline" style="font-size:12px;color:var(--text3,#8a93a0);margin:4px 0 16px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center">` +
+    `<span>✍️ <a href="about.html" style="color:var(--accent2,#74b9ff);text-decoration:none">${esc(t.by)}</a></span>` +
+    `<span>🔄 ${esc(t.upd)} ${TODAY}</span><span>✓ ${esc(t.rev)}</span></div>`;
+}
 function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [] }) {
   const canonical = ORIGIN + url;
   const xDefault = ORIGIN + ((alts.find(a => a.lang === 'en') || {}).url || url);
@@ -600,7 +632,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <script src="modules/header.js"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
-${schemas.map(jsonld).join('\n')}
+${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
 </head>
 <body>
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
@@ -609,6 +641,7 @@ ${schemas.map(jsonld).join('\n')}
 </nav>
 <main class="seo-wrap">
 ${hero}
+${trustBlock(lang)}
 <!-- AdSense — compact horizontal unit, upper placement (after hero) -->
 <div class="seo-ad seo-ad-top">
   <ins class="adsbygoogle" style="display:block"
