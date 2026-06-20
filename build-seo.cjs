@@ -296,6 +296,16 @@ const L10N = {
   },
 };
 const LOCALES = ['ja', 'zh', 'es'];
+// City guides localize into 5 more languages than months/visa/faq/blog/itin.
+const CITY_GUIDE_LANGS = ['ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'];
+// Minimal L10N for the 5 extra city-guide languages (buildCityL10n uses dir + visa.h1).
+Object.assign(L10N, {
+  ko: { dir: 'ko', visa: { h1: '한국 비자 & K-ETA 가이드' } },
+  fr: { dir: 'fr', visa: { h1: 'Visa Corée & K-ETA' } },
+  de: { dir: 'de', visa: { h1: 'Korea-Visum & K-ETA' } },
+  pt: { dir: 'pt', visa: { h1: 'Visto para a Coreia e K-ETA' } },
+  id: { dir: 'id', visa: { h1: 'Visa Korea & K-ETA' } },
+});
 
 // ── Blog posts (EN) — long-tail, high-intent queries ────────────────
 const BLOG = [
@@ -615,6 +625,11 @@ const CITY_FACTS = {
   ja: c => [`🗓️ ベスト: 4〜5月・9〜11月`, `🗣️ 韓国語`, `💱 ウォン (₩)`, `⏱️ 目安 ${c === 'Seoul' ? '3〜4' : '2〜3'}日`, (c === 'Seoul' || c === 'Incheon') ? '✈️ 仁川空港から' : '🚄 ソウルからKTX/バス'],
   zh: c => [`🗓️ 最佳: 4–5月·9–11月`, `🗣️ 韩语`, `💱 韩元 (₩)`, `⏱️ 建议 ${c === 'Seoul' ? '3–4' : '2–3'} 天`, (c === 'Seoul' || c === 'Incheon') ? '✈️ 仁川机场' : '🚄 首尔出发 KTX/巴士'],
   es: c => [`🗓️ Mejor época: abr–may y sep–nov`, `🗣️ Coreano`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} días`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Aeropuerto de Incheon' : '🚄 KTX/bus desde Seúl'],
+  ko: c => [`🗓️ 베스트: 4~5월·9~11월`, `🗣️ 한국어`, `💱 원 (₩)`, `⏱️ 추천 ${c === 'Seoul' ? '3~4' : '2~3'}일`, (c === 'Seoul' || c === 'Incheon') ? '✈️ 인천공항에서' : '🚄 서울에서 KTX/버스'],
+  fr: c => [`🗓️ Idéal : avr–mai & sep–nov`, `🗣️ Coréen`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} jours`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Aéroport d’Incheon' : '🚄 KTX/bus depuis Séoul'],
+  de: c => [`🗓️ Beste Zeit: Apr–Mai & Sep–Nov`, `🗣️ Koreanisch`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} Tage`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Flughafen Incheon' : '🚄 KTX/Bus ab Seoul'],
+  pt: c => [`🗓️ Melhor época: abr–maio e set–nov`, `🗣️ Coreano`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} dias`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Aeroporto de Incheon' : '🚄 KTX/ônibus de Seul'],
+  id: c => [`🗓️ Terbaik: Apr–Mei & Sep–Nov`, `🗣️ Bahasa Korea`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} hari`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Bandara Incheon' : '🚄 KTX/bus dari Seoul'],
 };
 function trustBlock(lang) {
   const t = TRUST[lang] || TRUST.en;
@@ -970,7 +985,7 @@ function buildCity(city) {
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} places</span></div></header>`;
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: (g ? g.attractions.map(a => ({ name: a.name })) : pool.slice(0, 12).map(it => ({ name: it.name, url: ORIGIN + `${BASEP}places/${it.slug}.html` }))).map((it, i) => ({ '@type': 'ListItem', position: i + 1, ...it })) };
   // hreflang → localized city guides where they exist (reciprocal)
-  const alts = LOCALES.filter(l => CITY_L10N[city.name] && CITY_L10N[city.name][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${slug(city.name)}.html` }));
+  const alts = CITY_GUIDE_LANGS.filter(l => CITY_L10N[city.name] && CITY_L10N[city.name][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${slug(city.name)}.html` }));
   writePage(`guide/things-to-do-in-${slug(city.name)}.html`, shell({ url, title, desc, keywords: `${city.name} Korea, things to do ${city.name}, ${city.name} attractions, ${city.name} travel guide`, schemas: [itemList, breadcrumbLD(trail), faqLD(qa)], hero, body, alts }));
   return { url, pool };
 }
@@ -980,11 +995,21 @@ const CITY_UI = {
   ja: { attractionsH: '🏯 観光スポット', eatH: '🍜 グルメ', gettingH: '🚄 アクセス・交通', tipsH: '💡 旅のヒント', faqH: '❓ よくある質問', enBtn: '🇬🇧 English', planBtn: '🗺️ 無料で旅程を作成', moreH: '🔗 関連ガイド' },
   zh: { attractionsH: '🏯 必游景点', eatH: '🍜 必尝美食', gettingH: '🚄 交通方式', tipsH: '💡 旅行贴士', faqH: '❓ 常见问题', enBtn: '🇬🇧 English', planBtn: '🗺️ 免费生成行程', moreH: '🔗 相关攻略' },
   es: { attractionsH: '🏯 Qué ver', eatH: '🍜 Qué comer', gettingH: '🚄 Cómo llegar y moverse', tipsH: '💡 Consejos', faqH: '❓ Preguntas frecuentes', enBtn: '🇬🇧 English', planBtn: '🗺️ Crear itinerario gratis', moreH: '🔗 Guías relacionadas' },
+  ko: { attractionsH: '🏯 가볼 곳', eatH: '🍜 먹거리', gettingH: '🚄 가는 법·교통', tipsH: '💡 여행 팁', faqH: '❓ 자주 묻는 질문', enBtn: '🇬🇧 English', planBtn: '🗺️ 무료 일정 만들기', moreH: '🔗 관련 가이드' },
+  fr: { attractionsH: '🏯 À voir', eatH: '🍜 Où manger', gettingH: '🚄 Y aller et se déplacer', tipsH: '💡 Conseils', faqH: '❓ FAQ', enBtn: '🇬🇧 English', planBtn: '🗺️ Créer mon itinéraire', moreH: '🔗 Guides liés' },
+  de: { attractionsH: '🏯 Sehenswürdigkeiten', eatH: '🍜 Essen', gettingH: '🚄 Anreise & Verkehr', tipsH: '💡 Tipps', faqH: '❓ FAQ', enBtn: '🇬🇧 English', planBtn: '🗺️ Reiseplan erstellen', moreH: '🔗 Verwandte Guides' },
+  pt: { attractionsH: '🏯 O que ver', eatH: '🍜 O que comer', gettingH: '🚄 Como chegar e circular', tipsH: '💡 Dicas', faqH: '❓ Perguntas frequentes', enBtn: '🇬🇧 English', planBtn: '🗺️ Criar meu itinerário', moreH: '🔗 Guias relacionados' },
+  id: { attractionsH: '🏯 Tempat wisata', eatH: '🍜 Kuliner', gettingH: '🚄 Cara ke sana & transportasi', tipsH: '💡 Tips', faqH: '❓ Pertanyaan umum', enBtn: '🇬🇧 English', planBtn: '🗺️ Buat itinerari gratis', moreH: '🔗 Panduan terkait' },
 };
 const CITY_NAME_L10N = {
   ja: { Seoul: 'ソウル', Busan: '釜山', Jeju: '済州', Gyeongju: '慶州', Jeonju: '全州', Incheon: '仁川' },
   zh: { Seoul: '首尔', Busan: '釜山', Jeju: '济州', Gyeongju: '庆州', Jeonju: '全州', Incheon: '仁川' },
   es: { Seoul: 'Seúl', Busan: 'Busan', Jeju: 'Jeju', Gyeongju: 'Gyeongju', Jeonju: 'Jeonju', Incheon: 'Incheon' },
+  ko: { Seoul: '서울', Busan: '부산', Jeju: '제주', Gyeongju: '경주', Jeonju: '전주', Incheon: '인천' },
+  fr: { Seoul: 'Séoul', Busan: 'Busan', Jeju: 'Jeju', Gyeongju: 'Gyeongju', Jeonju: 'Jeonju', Incheon: 'Incheon' },
+  de: { Seoul: 'Seoul', Busan: 'Busan', Jeju: 'Jeju', Gyeongju: 'Gyeongju', Jeonju: 'Jeonju', Incheon: 'Incheon' },
+  pt: { Seoul: 'Seul', Busan: 'Busan', Jeju: 'Jeju', Gyeongju: 'Gyeongju', Jeonju: 'Jeonju', Incheon: 'Incheon' },
+  id: { Seoul: 'Seoul', Busan: 'Busan', Jeju: 'Jeju', Gyeongju: 'Gyeongju', Jeonju: 'Jeonju', Incheon: 'Incheon' },
 };
 // Match an attraction name to an existing English place page for internal linking.
 function placeSlugFor(name) {
@@ -1029,13 +1054,13 @@ function buildCityL10n(cityName, lang) {
   const vH = { ja: '📺 動画とK-コンテンツ', zh: '📺 视频与 K-内容', es: '📺 Vídeos y contenido K' }[lang] || '📺 Video';
   const vL = { ja: '▶️ 旅行動画', zh: '▶️ 旅行视频', es: '▶️ Vídeos de viaje' }[lang] || '▶️ Videos';
   body += `<h2>${vH}</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(cityName + ' Korea travel')}" target="_blank" rel="noopener">${vL} (${esc(cityName)})</a><a href="kdrama-locations.html">🎬 K-drama</a><a href="kpop.html">🎤 K-pop</a></div>`;
-  body += `<h2>${esc(ui.moreH)}</h2><div class="seo-linklist"><a href="${dir}/korea-visa-k-eta-guide.html">🛂 ${esc(L.visa.h1)}</a></div>`;
+  body += `<h2>${esc(ui.moreH)}</h2><div class="seo-linklist"><a href="${LOCALES.includes(lang) ? `${dir}/korea-visa-k-eta-guide.html` : 'guide/korea-visa-k-eta-guide.html'}">🛂 ${esc(L.visa.h1)}</a></div>`;
   body += `<div class="seo-cta"><h2>${esc(g.h1)}</h2><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(g.h1)}</h1><div class="kr">${esc((CITY_NAME_L10N[lang] || {})[cityName] || cityName)}</div><div class="meta"><span class="seo-badge">${g.attractions.length} ${lang === 'ja' ? 'スポット' : lang === 'zh' ? '景点' : 'lugares'}</span></div></header>`;
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: g.h1, itemListElement: g.attractions.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.name })) };
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: g.h1, description: g.metaDesc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   const alts = [{ lang: 'en', url: enUrl },
-    ...LOCALES.filter(l => l !== lang && CITY_L10N[cityName] && CITY_L10N[cityName][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${cs}.html` }))];
+    ...CITY_GUIDE_LANGS.filter(l => l !== lang && CITY_L10N[cityName] && CITY_L10N[cityName][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${cs}.html` }))];
   writePage(`${dir}/guide/things-to-do-in-${cs}.html`, shell({ url, title: g.title, desc: g.metaDesc, keywords: '', schemas: [article, itemList, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts }));
   return url;
 }
@@ -2027,7 +2052,7 @@ for (const lang of LOCALES) {
 // Localized city guides (ja/zh/es) — rich native content (city-l10n.json)
 out.cityL10n = [];
 for (const cityName of Object.keys(CITY_L10N)) {
-  for (const lang of LOCALES) { const u = buildCityL10n(cityName, lang); if (u) out.cityL10n.push(u); }
+  for (const lang of CITY_GUIDE_LANGS) { const u = buildCityL10n(cityName, lang); if (u) out.cityL10n.push(u); }
 }
 // Localized blog posts (ja/zh/es) — faithful translations (blog-l10n.json)
 out.blogL10n = [];
