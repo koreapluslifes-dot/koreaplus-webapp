@@ -42,6 +42,11 @@ try { BLOG_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'blog-l10n.json'), '
 // Localized itineraries. Shape: { "<slug>": { ja:{h1,title,metaDesc,lead,days:[{label,plan}],tips[],faq[]}, zh, es } }
 let ITIN_L10N = {};
 try { ITIN_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'itinerary-l10n.json'), 'utf8')); } catch { /* none yet */ }
+// Per-city Unsplash photos (element 5 image SEO). { City: { raw, alt, by, byUrl, link } }
+// From prefetch-images.cjs (key never stored here). Hotlinked from the Unsplash
+// CDN with photographer attribution per Unsplash API guidelines.
+let CITY_IMAGES = {};
+try { CITY_IMAGES = JSON.parse(fs.readFileSync(path.join(OUT, 'city-images.json'), 'utf8')); } catch { /* none yet */ }
 
 // ── Helpers ─────────────────────────────────────────────────────────
 const slug = s => String(s).toLowerCase()
@@ -51,6 +56,15 @@ const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const enc = s => encodeURIComponent(s);
 const jsonld = obj => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
+const cityImg = c => CITY_IMAGES[c] || null;
+const imgUrl = (raw, w, h) => raw + (raw.includes('?') ? '&' : '?') + `w=${w}` + (h ? `&h=${h}&fit=crop` : '') + `&q=80&fm=jpg&auto=format`;
+const ogImgFor = im => im ? imgUrl(im.raw, 1200, 630) : null;
+function heroFigure(im) {
+  if (!im) return '';
+  return `<figure class="seo-hero-img" style="margin:0 0 18px;border-radius:14px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.08))">` +
+    `<img src="${esc(imgUrl(im.raw, 1000, 480))}" alt="${esc(im.alt)}" width="1000" height="480" loading="eager" style="width:100%;height:auto;display:block;aspect-ratio:25/12;object-fit:cover">` +
+    `<figcaption style="font-size:11px;color:var(--text3,#8a93a0);padding:6px 10px">📷 <a href="${esc(im.byUrl)}" target="_blank" rel="noopener nofollow">${esc(im.by)}</a> / <a href="https://unsplash.com/?utm_source=koreaplus&utm_medium=referral" target="_blank" rel="noopener nofollow">Unsplash</a></figcaption></figure>`;
+}
 const writePage = (rel, html) => {
   const fp = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(fp), { recursive: true });
@@ -295,17 +309,13 @@ const L10N = {
     },
   },
 };
-const LOCALES = ['ja', 'zh', 'es'];
+const LOCALES = ['ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'];
 // City guides localize into 5 more languages than months/visa/faq/blog/itin.
 const CITY_GUIDE_LANGS = ['ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'];
-// Minimal L10N for the 5 extra city-guide languages (buildCityL10n uses dir + visa.h1).
-Object.assign(L10N, {
-  ko: { dir: 'ko', visa: { h1: '한국 비자 & K-ETA 가이드' } },
-  fr: { dir: 'fr', visa: { h1: 'Visa Corée & K-ETA' } },
-  de: { dir: 'de', visa: { h1: 'Korea-Visum & K-ETA' } },
-  pt: { dir: 'pt', visa: { h1: 'Visto para a Coreia e K-ETA' } },
-  id: { dir: 'id', visa: { h1: 'Visa Korea & K-ETA' } },
-});
+// Native-quality ko/fr/de/pt/id localizations (months + UI + FULL visa), generated +
+// per-language verified out-of-band. Supersedes the old minimal {dir, visa.h1} stubs so
+// the month/visa builders gain 5 real languages (city guides already used dir + visa.h1).
+Object.assign(L10N, require('./seo-l10n-extra.js'));
 
 // ── Blog posts (EN) — long-tail, high-intent queries ────────────────
 const BLOG = [
@@ -641,8 +651,9 @@ function trustBlock(lang) {
 // reciprocal <xhtml:link> alternate annotations (helps Google discover + index
 // every language variant faster). Keyed by the BASEP-relative url.
 const HREFLANG_SM = new Map();
-function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [] }) {
+function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [], image }) {
   const canonical = ORIGIN + url;
+  const ogImg = image || `${ORIGIN}/guide/og-image.jpg`;
   const xDefault = ORIGIN + ((alts.find(a => a.lang === 'en') || {}).url || url);
   if (alts.length) {
     // Full cluster = this page + its alternates; x-default → the English URL.
@@ -673,7 +684,7 @@ ${alts.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${ORIGIN + a.u
 <meta property="og:site_name" content="KoreaPlus-Lifes">
 <meta property="og:locale" content="${OG_LOCALE[lang] || 'en_US'}">
 ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta property="og:locale:alternate" content="${OG_LOCALE[a.lang]}">`).join('\n')}
-<meta property="og:image" content="${ORIGIN}/guide/og-image.jpg">
+<meta property="og:image" content="${esc(ogImg)}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${esc(title)}">
@@ -681,6 +692,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <meta property="article:published_time" content="${TODAY}T08:00:00Z">
 <meta property="article:modified_time" content="${TODAY}T08:00:00Z">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${esc(ogImg)}">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -950,6 +962,8 @@ function buildCity(city) {
   const getThere = (city.name === 'Seoul' || city.name === 'Incheon') ? '✈️ Incheon Airport (AREX/metro)' : '🚄 KTX/bus from Seoul';
 
   let body = bcHtml(trail);
+  const im = cityImg(city.name);
+  body += heroFigure(im);
   body += keyFactsBox([`🗓️ Best time: Apr–May & Sep–Nov`, `🗣️ Korean (한국어)`, `💱 KRW (₩)`, `⏱️ Suggested: ${isHub ? '3–4' : '2–3'} days`, getThere]);
   if (g) {
     body += `<p class="lead">${esc(g.lead)}</p>`;
@@ -986,7 +1000,8 @@ function buildCity(city) {
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: (g ? g.attractions.map(a => ({ name: a.name })) : pool.slice(0, 12).map(it => ({ name: it.name, url: ORIGIN + `${BASEP}places/${it.slug}.html` }))).map((it, i) => ({ '@type': 'ListItem', position: i + 1, ...it })) };
   // hreflang → localized city guides where they exist (reciprocal)
   const alts = CITY_GUIDE_LANGS.filter(l => CITY_L10N[city.name] && CITY_L10N[city.name][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${slug(city.name)}.html` }));
-  writePage(`guide/things-to-do-in-${slug(city.name)}.html`, shell({ url, title, desc, keywords: `${city.name} Korea, things to do ${city.name}, ${city.name} attractions, ${city.name} travel guide`, schemas: [itemList, breadcrumbLD(trail), faqLD(qa)], hero, body, alts }));
+  const imgLD = im ? { '@context': 'https://schema.org', '@type': 'ImageObject', contentUrl: ogImgFor(im), caption: im.alt, creditText: `${im.by} / Unsplash`, author: { '@type': 'Person', name: im.by } } : null;
+  writePage(`guide/things-to-do-in-${slug(city.name)}.html`, shell({ url, title, desc, keywords: `${city.name} Korea, things to do ${city.name}, ${city.name} attractions, ${city.name} travel guide`, schemas: [itemList, breadcrumbLD(trail), faqLD(qa), ...(imgLD ? [imgLD] : [])], hero, body, alts, image: ogImgFor(im) }));
   return { url, pool };
 }
 
@@ -1030,6 +1045,8 @@ function buildCityL10n(cityName, lang) {
   const trail = [{ name: 'Home', url: BASEP }, { name: g.h1, url }];
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(g.lead)}</p>`;
+  const im = cityImg(cityName);
+  body += heroFigure(im);
   body += keyFactsBox((CITY_FACTS[lang] || (() => []))(cityName));
   // Attractions
   body += `<h2>${esc(ui.attractionsH)}</h2><div class="seo-grid">${g.attractions.map(a => {
@@ -1058,10 +1075,10 @@ function buildCityL10n(cityName, lang) {
   body += `<div class="seo-cta"><h2>${esc(g.h1)}</h2><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(g.h1)}</h1><div class="kr">${esc((CITY_NAME_L10N[lang] || {})[cityName] || cityName)}</div><div class="meta"><span class="seo-badge">${g.attractions.length} ${lang === 'ja' ? 'スポット' : lang === 'zh' ? '景点' : 'lugares'}</span></div></header>`;
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: g.h1, itemListElement: g.attractions.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.name })) };
-  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: g.h1, description: g.metaDesc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: g.h1, description: g.metaDesc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ogImgFor(im) || ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   const alts = [{ lang: 'en', url: enUrl },
     ...CITY_GUIDE_LANGS.filter(l => l !== lang && CITY_L10N[cityName] && CITY_L10N[cityName][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${cs}.html` }))];
-  writePage(`${dir}/guide/things-to-do-in-${cs}.html`, shell({ url, title: g.title, desc: g.metaDesc, keywords: '', schemas: [article, itemList, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts }));
+  writePage(`${dir}/guide/things-to-do-in-${cs}.html`, shell({ url, title: g.title, desc: g.metaDesc, keywords: '', schemas: [article, itemList, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts, image: ogImgFor(im) }));
   return url;
 }
 
@@ -1187,16 +1204,17 @@ function buildMonthL10n(idx, lang) {
   const desc = `${why}${dot}${weather}${dot}${wear}${dot}`.trim();
   const trail = [{ name: 'Home', url: BASEP }, { name: h1, url }];
   let body = bcHtml(trail);
-  body += `<p class="lead">${esc(tw.lead(nameL))} ${esc(why)}。</p>`;
-  body += `<h2>🌡️ ${esc(nameL)}${esc(tw.weatherH)}</h2><p>${esc(weather)}。</p>`;
-  body += `<h2>${esc(tw.wearH)}</h2><p>${esc(wear)}。</p>`;
-  body += `<h2>${esc(tw.doH)}</h2><p>${esc(events)}。</p>`;
+  body += `<p class="lead">${esc(tw.lead(nameL))} ${esc(why)}${dot}</p>`;
+  body += `<h2>🌡️ ${esc(nameL)}${esc(tw.weatherH)}</h2><p>${esc(weather)}${dot}</p>`;
+  body += `<h2>${esc(tw.wearH)}</h2><p>${esc(wear)}${dot}</p>`;
+  body += `<h2>${esc(tw.doH)}</h2><p>${esc(events)}${dot}</p>`;
   body += `<h2>${esc(tw.evH)}</h2><p>${esc(tw.evP)}</p><div class="seo-links"><a href="festivals.html">📅 Festival Calendar ↗</a><a href="seasons.html">🌸 Cherry Blossom & Foliage ↗</a></div>`;
-  // Intra-language month navigator — keeps ja/zh/es visitors inside their language cluster
-  const moreH = { ja: '📅 他の月の韓国旅行ガイド', zh: '📅 其他月份韩国攻略', es: '📅 Corea mes a mes' }[lang];
+  // Intra-language month navigator — keeps visitors inside their language cluster
+  const moreH = { ja: '📅 他の月の韓国旅行ガイド', zh: '📅 其他月份韩国攻略', es: '📅 Corea mes a mes',
+    ko: '📅 다른 달 한국 여행 가이드', fr: '📅 La Corée mois par mois', de: '📅 Korea Monat für Monat', pt: '📅 Coreia mês a mês', id: '📅 Korea bulan demi bulan' }[lang] || '📅 Korea month by month';
   const sibMonths = MONTHS.map((m, i) => i === idx ? '' : `<a href="${L.dir}/korea-in-${m[0].toLowerCase()}.html">${m[1]} ${esc(L.months[i][0])}</a>`).join('');
   body += `<h2>${moreH}</h2><div class="seo-linklist">${sibMonths}<a href="${L.dir}/korea-visa-k-eta-guide.html">🛂 ${esc(L.visa.h1)}</a></div>`;
-  const qa = [[tw.q1(nameL), `${why}。${weather}。`], [tw.q2(nameL), `${wear}。`]];
+  const qa = [[tw.q1(nameL), `${why}${dot}${weather}${dot}`.trim()], [tw.q2(nameL), `${wear}${dot}`.trim()]];
   body += `<h2>${esc(tw.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affBlock({ city: monthCity(idx), cat: 'hotel', q: '', lang });
   body += `<div class="seo-cta"><h2>${esc(tw.ctaH)}</h2><p>${esc(tw.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English version</a></div></div>`;
@@ -1221,7 +1239,8 @@ function buildVisaL10n(lang) {
   body += `<div class="seo-links"><a href="https://www.k-eta.go.kr/" target="_blank" rel="noopener">🌐 K-ETA Official ↗</a></div>`;
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${V.faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   // Intra-language month links — visa page doubles as the locale's mini-hub
-  const bestH = { ja: '📅 ベストシーズンを探す', zh: '📅 选择最佳出行月份', es: '📅 ¿Cuándo viajar a Corea?' }[lang];
+  const bestH = { ja: '📅 ベストシーズンを探す', zh: '📅 选择最佳出行月份', es: '📅 ¿Cuándo viajar a Corea?',
+    ko: '📅 베스트 시즌 찾기', fr: '📅 Quand partir en Corée ?', de: '📅 Wann nach Korea reisen?', pt: '📅 Quando viajar para a Coreia?', id: '📅 Kapan ke Korea?' }[lang] || '📅 Best time to visit';
   body += `<h2>${bestH}</h2><div class="seo-linklist">${MONTHS.map((m, i) => `<a href="${L.dir}/korea-in-${m[0].toLowerCase()}.html">${m[1]} ${esc(L.months[i][0])}</a>`).join('')}</div>`;
   body += affBlock({ city: 'Seoul', cat: 'hotel', q: '', lang });
   body += `<div class="seo-cta"><h2>${esc(V.ctaH)}</h2><p>${esc(V.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English version</a></div></div>`;
@@ -1344,6 +1363,8 @@ function buildBestTime(city) {
   const trail = [{ name: 'Home', url: BASEP }, { name: 'Travel', url: `${BASEP}guide/${CAT_SLUG.travel}.html` }, { name: c, url: `${BASEP}guide/things-to-do-in-${cs}.html` }, { name: 'Best Time to Visit', url }];
   let body = bcHtml(trail);
   body += `<p class="lead">The best time to visit ${esc(c)} is <strong>${esc(bt.peak)}</strong>. ${esc(bt.note)} Here's the full season-by-season breakdown, including when it's cheapest and least crowded.</p>`;
+  const im = cityImg(c);
+  body += heroFigure(im);
   body += keyFactsBox([`🏆 Best: ${esc(bt.peak.split(' and ')[0])}`, `💸 Cheapest: winter (Dec–Feb)`, `🚫 Most crowded: cherry-blossom week & Chuseok`, `🗓️ Worst weather: monsoon (Jul)`]);
   body += `<h2>📅 ${esc(c)} by season</h2><table class="seo-costtable"><thead><tr><th>Season</th><th>Weather</th><th>What's on</th></tr></thead><tbody>${SEASON_ROWS.map(([ic, s, w, d]) => `<tr><td>${ic} ${esc(s)}</td><td>${esc(w)}</td><td>${esc(d)}</td></tr>`).join('')}</tbody></table>`;
   body += `<h2>🏆 When to go for the best experience</h2><p>For the iconic version of ${esc(c)}, aim for <strong>${esc(bt.peak)}</strong>. Spring and autumn give the mildest weather and the most photogenic scenery, which is exactly why they're busiest — book accommodation and KTX seats two to three months ahead.</p>`;
@@ -1359,7 +1380,7 @@ function buildBestTime(city) {
   body += ctaHtml(`Planning ${c} around the season?`, `Get a free AI ${c} itinerary tuned to your travel dates.`);
   const hero = `<header class="seo-hero"><span class="emoji">🗓️</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge">Month-by-month</span><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
-  writePage(`guide/best-time-to-visit-${cs}.html`, shell({ url, title, desc, keywords: `best time to visit ${c}, when to visit ${c}, ${c} weather by month, ${c} cheapest time`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body }));
+  writePage(`guide/best-time-to-visit-${cs}.html`, shell({ url, title, desc, keywords: `best time to visit ${c}, when to visit ${c}, ${c} weather by month, ${c} cheapest time`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, image: ogImgFor(im) }));
   return url;
 }
 const TRANSPORT_ROUTES = [
@@ -1383,6 +1404,8 @@ function buildTransport(r) {
   if (r.flight) facts.push(`✈️ Flight: ${r.flight}`);
   if (r.bus) facts.push(`🚌 Bus: ${r.bus}`);
   if (r.subway) facts.push(`🚇 Subway: ${r.subway}`);
+  const im = cityImg(r.to);
+  body += heroFigure(im);
   body += keyFactsBox(facts);
   const rows = [];
   if (r.ktx) rows.push(['🚄 KTX train', r.ktx, r.ktxKrw || '—']);
@@ -1402,7 +1425,7 @@ function buildTransport(r) {
   body += ctaHtml(`Going to ${r.to}?`, `Build a free AI itinerary that starts the moment you arrive.`);
   const hero = `<header class="seo-hero"><span class="emoji">🚄</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">Transport</span><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
-  writePage(`guide/seoul-to-${ts}.html`, shell({ url, title, desc, keywords: `Seoul to ${r.to}, how to get from Seoul to ${r.to}, Seoul ${r.to} KTX, Seoul ${r.to} train`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body }));
+  writePage(`guide/seoul-to-${ts}.html`, shell({ url, title, desc, keywords: `Seoul to ${r.to}, how to get from Seoul to ${r.to}, Seoul ${r.to} KTX, Seoul ${r.to} train`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, image: ogImgFor(im) }));
   return url;
 }
 
@@ -1442,9 +1465,10 @@ function buildCostIndex(lang) {
   const hero = `<header class="seo-hero"><span class="emoji">💰</span><h1>${esc(C.h1)}</h1><div class="meta"><span class="seo-badge">2026</span><span class="seo-badge region">${esc(C.h1.includes('Index') || true ? 'Original data' : '')}</span></div></header>`;
   const dataset = { '@context': 'https://schema.org', '@type': 'Dataset', name: C.h1, description: C.desc, inLanguage: lang, creator: { '@id': ORIGIN + '/#org' }, dateModified: TODAY, license: ORIGIN + BASEP, isAccessibleForFree: true, keywords: 'Korea travel cost, Korea trip budget, Korea daily budget 2026' };
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: C.h1, description: C.desc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  const cLangs = LOCALES.filter(l => COST_L10N[l]);   // cost index exists only where translated (ja/zh/es)
   const alts = lang === 'en'
-    ? LOCALES.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/${slugp}` }))
-    : [{ lang: 'en', url: enUrl }, ...LOCALES.filter(l => l !== lang).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/${slugp}` }))];
+    ? cLangs.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/${slugp}` }))
+    : [{ lang: 'en', url: enUrl }, ...cLangs.filter(l => l !== lang).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/${slugp}` }))];
   writePage(`${dir}${slugp}`, shell({ url, title: C.title, desc: C.desc, keywords: '', schemas: [dataset, article, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts }));
   return url;
 }
@@ -1463,8 +1487,8 @@ function buildExplore(urls) {
   body += section('📰 Blog', BLOG.map(p => `<a href="blog/${p.slug}.html">${p.emoji} ${esc(p.h1.split(/[:?(]/)[0].trim())}</a>`));
   // All 13 localized pages per language, generated programmatically so new
   // locale pages are never dropped from the index
-  const FLAGS = { ja: '🇯🇵', zh: '🇨🇳', es: '🇪🇸' };
-  body += section('🌏 日本語 / 中文 / Español', LOCALES.flatMap(l => [
+  const FLAGS = { ja: '🇯🇵', zh: '🇨🇳', es: '🇪🇸', ko: '🇰🇷', fr: '🇫🇷', de: '🇩🇪', pt: '🇧🇷', id: '🇮🇩' };
+  body += section('🌏 다국어 · 多言語 · Multilingüe · Mehrsprachig', LOCALES.flatMap(l => [
     `<a href="${l}/korea-visa-k-eta-guide.html">${FLAGS[l]} ${esc(L10N[l].visa.h1)}</a>`,
     ...MONTHS.map((m, i) => `<a href="${l}/korea-in-${m[0].toLowerCase()}.html">${FLAGS[l]} ${esc(L10N[l].months[i][0])}</a>`),
     ...FAQS.filter(f => FAQ_L10N[l] && FAQ_L10N[l].items[f.slug]).map(f => `<a href="${l}/faq/${f.slug}.html">${FLAGS[l]} ${esc(FAQ_L10N[l].items[f.slug][0])}</a>`),
@@ -2121,6 +2145,18 @@ out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
 sm += `\n</urlset>\n`;
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sm);
+
+// ── Image sitemap (element 5) — city photos on their guide/best-time/localized pages ──
+let imgsm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
+const imgUrlEntry = (loc, im, title) => `  <url>\n    <loc>${loc}</loc>\n    <image:image>\n      <image:loc>${esc(ogImgFor(im))}</image:loc>\n      <image:title>${esc(title)}</image:title>\n    </image:image>\n  </url>\n`;
+for (const [cityName, im] of Object.entries(CITY_IMAGES)) {
+  const cs = slug(cityName);
+  imgsm += imgUrlEntry(`${ORIGIN}${BASEP}guide/things-to-do-in-${cs}.html`, im, `Things to Do in ${cityName}, Korea`);
+  if ((out.besttime || []).includes(`${BASEP}guide/best-time-to-visit-${cs}.html`)) imgsm += imgUrlEntry(`${ORIGIN}${BASEP}guide/best-time-to-visit-${cs}.html`, im, `Best Time to Visit ${cityName}`);
+  for (const l of CITY_GUIDE_LANGS) if (CITY_L10N[cityName] && CITY_L10N[cityName][l]) imgsm += imgUrlEntry(`${ORIGIN}${BASEP}${L10N[l].dir}/guide/things-to-do-in-${cs}.html`, im, `${cityName}, Korea`);
+}
+imgsm += `</urlset>\n`;
+fs.writeFileSync(path.join(OUT, 'sitemap-images.xml'), imgsm);
 
 // ── llms.txt — guidance for AI search engines (ChatGPT, Perplexity, etc.) ──
 let llms = `# KoreaPlus — Korea Travel Guide

@@ -8,4 +8,5 @@ Disallow: /guide/api-test.html
 
 # Sitemaps
 Sitemap: https://koreaplus-lifes.com/guide/sitemap.xml
+Sitemap: https://koreaplus-lifes.com/guide/sitemap-images.xml
 Sitemap: https://koreaplus-webapp.jeybeeicon.workers.dev/i-sitemap.xml
