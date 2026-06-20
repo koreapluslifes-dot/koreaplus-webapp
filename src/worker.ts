@@ -351,6 +351,25 @@ export default {
       return handleSharePost(request, env);
     }
 
+    // Email list (#9) — capture subscribers to KV. Double-opt-in email is sent
+    // later (when Cloudflare Email DNS is configured); for now we store leads.
+    if (path.endsWith('/api/subscribe')) {
+      try {
+        const b = await request.json() as { email?: string; lang?: string; source?: string };
+        const email = (b.email || '').trim().toLowerCase();
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.length > 120) return json({ error: 'invalid email' }, 400);
+        if (env.CACHE_KV) {
+          await env.CACHE_KV.put('sub:' + email, JSON.stringify({
+            email, lang: String(b.lang || 'en').slice(0, 5), source: String(b.source || '').slice(0, 40),
+            ts: new Date().toISOString(), confirmed: false,
+          }));
+        }
+        return json({ ok: true });
+      } catch {
+        return json({ error: 'bad request' }, 400);
+      }
+    }
+
     let body: Record<string, unknown>;
     try {
       body = await request.json() as Record<string, unknown>;
