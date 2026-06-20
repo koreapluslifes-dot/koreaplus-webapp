@@ -744,7 +744,9 @@ ${injectToc(body, lang)}
     <a href="guide/korea-visa-k-eta-guide.html" style="color:var(--accent2,#74b9ff)">Visa &amp; K-ETA</a> ·
     <a href="guide/korea-travel-cost-index.html" style="color:var(--accent2,#74b9ff)">Trip Cost Index</a> ·
     <a href="faq/best-time-to-visit-korea.html" style="color:var(--accent2,#74b9ff)">Best Time to Visit</a> ·
-    <a href="seasons.html" style="color:var(--accent2,#74b9ff)">Cherry Blossom Forecast</a>
+    <a href="seasons.html" style="color:var(--accent2,#74b9ff)">Cherry Blossom Forecast</a> ·
+    <a href="quiz.html" style="color:var(--accent2,#74b9ff)">🧩 Korea Quiz</a> ·
+    <a href="bucket-list.html" style="color:var(--accent2,#74b9ff)">✅ Bucket List</a>
   </p>
   <p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
   <p style="font-size:11px;color:var(--text3,#888);margin-top:8px">
@@ -1442,6 +1444,9 @@ const COST_L10N = {
   zh: { title: '韩国旅行费用指数 2026 — 真实每日预算 | KoreaPlus', h1: '韩国旅行费用指数 2026', desc: '2026 年去韩国要花多少钱？每天 $55–250 的真实预算，以及餐饮、交通、住宿、景点的逐项价格。KoreaPlus 原创数据。', lead: '2026 年韩国旅行要花多少？基于当地最新价格，这里有按风格划分的每日预算和各项真实花费——我们持续更新的原创指数。', budgetH: '💰 按旅行风格的每日预算', perDay: '/天', itemsH: '🧾 各项真实花费（2026）', th: ['项目', '韩元', '美元'], cityH: '📍 各城市花费差异', methodH: '🔬 计算方法', method: '数据取自韩国各地餐厅菜价、公共交通票价、官方景点门票及常见酒店价格的中位数，按实时汇率换算并取整。指数定期更新，上方日期为最近更新日。不含机票。', faqH: '❓ 常见问题', styleN: { backpacker: '背包客', midrange: '中端', comfort: '舒适型' }, itemN: ['街头小吃（辣炒年糕）', '大众一餐（拌饭）', '韩式烤肉（每人）', '咖啡馆咖啡', '地铁/公交', 'KTX 首尔→釜山', '宫殿门票（穿韩服免费）', '3 星酒店/晚', '青旅床位', '烧酒（餐厅）'], cityN: [['首尔', '基准——价格区间最广'], ['釜山', '比首尔便宜约 5–10%'], ['济州', '需加机票+租车'], ['庆州/全州', '性价比最高，最便宜']], faq: [['在韩国玩一周要花多少钱？', '不含机票，穷游约 $500–600，中端 $800–1,000，舒适型 7 天 $1,700 以上。'], ['韩国比日本便宜吗？', '是的，住宿和餐饮比日本便宜约 10–25%，交通便宜得多。'], ['韩国最大的开销是什么？', '住宿，其次是城际交通。餐饮最划算，9,000–13,000 韩元就能吃顿好的。']] },
   es: { title: 'Índice de costes de viaje a Corea 2026 | KoreaPlus', h1: 'Índice de costes de viaje a Corea 2026', desc: '¿Cuánto cuesta un viaje a Corea en 2026? Presupuestos diarios reales ($55–250/día) y precios detallados de comida, transporte, hoteles y atracciones. Datos propios de KoreaPlus.', lead: '¿Cuánto cuesta Corea en 2026? Con precios actuales sobre el terreno, este es el presupuesto diario real por estilo de viaje y lo que cuesta cada cosa — nuestro índice propio, actualizado con frecuencia.', budgetH: '💰 Presupuesto diario por estilo', perDay: '/día', itemsH: '🧾 Lo que cuestan las cosas (2026)', th: ['Concepto', 'Won', 'USD'], cityH: '📍 Cómo varía por ciudad', methodH: '🔬 Cómo lo calculamos', method: 'Las cifras son medianas de precios de menús, billetes de transporte público, entradas oficiales y tarifas típicas de hotel en Corea, convertidas a tipo de cambio en vivo y redondeadas. Actualizamos el índice con regularidad; la fecha de arriba indica la última actualización. No incluye vuelos.', faqH: '❓ Preguntas frecuentes', styleN: { backpacker: 'Mochilero', midrange: 'Gama media', comfort: 'Cómodo' }, itemN: ['Aperitivo callejero (tteokbokki)', 'Comida sencilla (bibimbap)', 'BBQ coreana (por persona)', 'Café', 'Metro / autobús', 'KTX Seúl→Busan', 'Entrada a palacio (gratis con hanbok)', 'Hotel 3★ / noche', 'Litera en albergue', 'Soju (restaurante)'], cityN: [['Seúl', 'Referencia — el mayor rango de precios'], ['Busan', 'Un 5–10% más barato que Seúl'], ['Jeju', 'Suma vuelos + coche de alquiler'], ['Gyeongju / Jeonju', 'La mejor relación calidad-precio']], faq: [['¿Cuánto cuesta una semana en Corea?', 'Sin vuelos, unos $500–600 económico, $800–1.000 gama media y $1.700+ cómodo en 7 días.'], ['¿Es Corea más barata que Japón?', 'Sí: alojamiento y comida cuestan un 10–25% menos que opciones comparables en Japón, y el transporte mucho menos.'], ['¿Cuál es el mayor gasto en Corea?', 'El alojamiento y luego el transporte entre ciudades. La comida es la ganga: comidas excelentes por 9.000–13.000 ₩.']] },
 };
+// Native-quality ko/fr/de/pt/id cost-index translations, generated + verified
+// out-of-band. Merged so the cost-index page localizes into 8 languages.
+Object.assign(COST_L10N, require('./seo-cost-l10n.js'));
 function buildCostIndex(lang) {
   const C = COST_L10N[lang]; if (!C) return null;
   const dir = lang === 'en' ? '' : L10N[lang].dir + '/';
@@ -1484,6 +1489,7 @@ function buildExplore(urls) {
   body += `<p class="lead">Your complete index of Korea travel content — tap any guide to dive in.</p>`;
   const section = (t, list) => `<h2 class="seo-secttitle">${t}</h2><div class="seo-linklist">${list.join('')}</div>`;
   body += section('✈️ Travel Basics', [`<a href="guide/korea-visa-k-eta-guide.html">🛂 Visa & K-ETA Guide</a>`, `<a href="guide/korea-travel-cost-index.html">💰 Korea Travel Cost Index 2026</a>`, ...(urls.stays || []).map(u => `<a href="${u.replace(BASEP, '')}">🏨 ${esc(u.split('/').pop().replace(/-/g, ' ').replace('.html', '').replace(/\b\w/g, m => m.toUpperCase()))}</a>`)]);
+  body += section('🎮 Fun &amp; Interactive', [`<a href="quiz.html">🧩 Which Korean City Should You Visit? (Quiz)</a>`, `<a href="bucket-list.html">✅ Korea Travel Bucket List (40 things)</a>`, `<a href="plan.html">🗺️ AI Trip Planner</a>`, `<a href="currency.html">💱 Currency Converter</a>`]);
   body += section('📰 Blog', BLOG.map(p => `<a href="blog/${p.slug}.html">${p.emoji} ${esc(p.h1.split(/[:?(]/)[0].trim())}</a>`));
   // All 13 localized pages per language, generated programmatically so new
   // locale pages are never dropped from the index
@@ -1771,6 +1777,9 @@ const FAQ_L10N = {
     },
   },
 };
+// Native-quality ko/fr/de/pt/id FAQ translations (ui + 20 Q&A), generated +
+// per-language verified out-of-band. Merged so FAQ pages localize into 8 langs.
+Object.assign(FAQ_L10N, require('./seo-faq-l10n.js'));
 
 function buildFaq(f) {
   const url = `${BASEP}faq/${f.slug}.html`;
@@ -2113,7 +2122,7 @@ fs.writeFileSync(path.join(OUT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html', 'temples.html', 'nightviews.html',
   'emergency.html', 'phrases.html', 'currency.html', 'etiquette.html', 'seasons.html', 'kdrama-locations.html',
   'kbeauty.html',
-  'menu-translator.html', 'subway.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
+  'menu-translator.html', 'subway.html', 'quiz.html', 'bucket-list.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
 const urlEntry = (loc, pri, freq) => {
   const hl = HREFLANG_SM.get(loc);
