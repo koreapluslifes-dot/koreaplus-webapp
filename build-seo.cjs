@@ -1989,6 +1989,7 @@ function buildItineraryL10n(itSlug, lang) {
   for (const d of (t.days || [])) body += `<h2>${esc(d.label)}</h2><p>${esc(d.plan)}</p>`;
   if (t.tips && t.tips.length) body += `<h2>${esc(ui.tipsH)}</h2><ul class="tips">${t.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
   body += affBlock({ city: itinCity(itSlug), cat: 'travel', q: '', lang });
+  body += klookBlock(lang);
   const qa = (t.faq || []).map(x => [x.q, x.a]);
   if (qa.length) body += `<h2>${esc(ui.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += `<div class="seo-cta"><h2>${esc(ui.ctaH)}</h2><p>${esc(ui.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
