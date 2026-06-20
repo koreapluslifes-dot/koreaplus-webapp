@@ -43,11 +43,13 @@
   <meta name="twitter:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Fonts loaded non-render-blocking (CWV); display=swap shows text immediately -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="hub-styles.css?v=5">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="seo.css">
-  <script src="modules/header.js"></script>
+  <script src="modules/header.js" defer></script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Beauty Guide — Korean Skincare Routine, Ingredients & Brands","url":"https://koreaplus-lifes.com/kbeauty","inLanguage":"en","datePublished":"2026-06-14","dateModified":"2026-06-18","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-beauty (Korean skincare & cosmetics)"},"publisher":{"@type":"Organization","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/","logo":{"@type":"ImageObject","url":"https://koreaplus-lifes.com/guide/icons/kplus.svg"}},"author":{"@type":"Organization","name":"KoreaPlus Editorial"},"description":"Korean skincare routine builder, ingredient decoder, brand directory and shopping guide."}
   </script>
@@ -867,6 +869,7 @@
   <section class="hub-explore">
     <h2 class="hub-explore-title" data-i18n="kbeauty.explore.title">Keep Exploring K-Culture</h2>
     <div class="hub-explore-grid">
+      <a class="hub-explore-card" href="guide/kb/"><span class="ic">📋</span><span>Trend verdicts<span class="sub">Does it actually work?</span></span></a>
       <a class="hub-explore-card" href="guide/k-beauty-guide.html"><span class="ic">💄</span><span>K-Beauty Shopping<span class="sub">Where to buy in Korea</span></span></a>
       <a class="hub-explore-card" href="guide/best-shopping-in-korea.html"><span class="ic">🛍️</span><span>Best Shopping<span class="sub">Myeongdong & more</span></span></a>
       <a class="hub-explore-card" href="kpop.html"><span class="ic">🎤</span><span>K-Pop Now<span class="sub">Charts & comebacks</span></span></a>
