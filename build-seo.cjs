@@ -748,7 +748,8 @@ ${injectToc(body, lang)}
     <a href="seasons.html" style="color:var(--accent2,#74b9ff)">Cherry Blossom Forecast</a> ·
     <a href="quiz.html" style="color:var(--accent2,#74b9ff)">🧩 Korea Quiz</a> ·
     <a href="bucket-list.html" style="color:var(--accent2,#74b9ff)">✅ Bucket List</a> ·
-    <a href="compare.html" style="color:var(--accent2,#74b9ff)">⚖️ Compare Cities</a>
+    <a href="compare.html" style="color:var(--accent2,#74b9ff)">⚖️ Compare Cities</a> ·
+    <a href="trending.html" style="color:var(--accent2,#74b9ff)">🔥 Trending Now</a>
   </p>
   <p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
   <p style="font-size:11px;color:var(--text3,#888);margin-top:8px">
@@ -778,6 +779,7 @@ ${injectToc(body, lang)}
 <script defer src="modules/korea-now.js?v=2"></script>
 <script defer src="modules/react.js?v=1"></script>
 <script defer src="modules/foryou.js?v=1"></script>
+<script defer src="modules/install.js?v=1"></script>
 </body>
 </html>`;
 }
@@ -1286,6 +1288,11 @@ const BLOG_UI = {
   ja: { faqH: '❓ よくある質問', moreH: '📰 ブログの関連記事', ctaH: '韓国旅行を計画しましょう', ctaP: 'AIが30秒で無料の旅程を作成します。', planBtn: '🗺️ 無料で旅程を作成', enBtn: '🇬🇧 English', badge: '旅のヒント' },
   zh: { faqH: '❓ 常见问题', moreH: '📰 更多博客文章', ctaH: '开始规划你的韩国之旅', ctaP: 'AI 30秒免费生成逐日行程。', planBtn: '🗺️ 免费生成行程', enBtn: '🇬🇧 English', badge: '旅行贴士' },
   es: { faqH: '❓ Preguntas frecuentes', moreH: '📰 Más del blog', ctaH: '¿Listo para planear tu viaje a Corea?', ctaP: 'Crea un itinerario diario gratis con IA.', planBtn: '🗺️ Crear itinerario gratis', enBtn: '🇬🇧 English', badge: 'Consejos de viaje' },
+  ko: { faqH: '❓ 자주 묻는 질문', moreH: '📰 블로그 다른 글', ctaH: '한국 여행을 계획해 보세요', ctaP: 'AI가 30초 만에 무료로 일정을 짜 드려요.', planBtn: '🗺️ 무료로 일정 만들기', enBtn: '🇬🇧 English', badge: '여행 팁' },
+  fr: { faqH: '❓ Questions fréquentes', moreH: '📰 Plus d\'articles du blog', ctaH: 'Prêt à planifier ton voyage en Corée ?', ctaP: 'Crée gratuitement un itinéraire jour par jour avec l\'IA.', planBtn: '🗺️ Créer mon itinéraire gratuit', enBtn: '🇬🇧 English', badge: 'Conseils de voyage' },
+  de: { faqH: '❓ Häufige Fragen', moreH: '📰 Mehr aus dem Blog', ctaH: 'Bereit, deine Korea-Reise zu planen?', ctaP: 'Erstelle mit KI gratis einen Tagesplan.', planBtn: '🗺️ Gratis Reiseplan erstellen', enBtn: '🇬🇧 English', badge: 'Reisetipps' },
+  pt: { faqH: '❓ Perguntas frequentes', moreH: '📰 Mais do blog', ctaH: 'Pronto para planejar sua viagem à Coreia?', ctaP: 'Crie um roteiro diário grátis com IA.', planBtn: '🗺️ Criar roteiro grátis', enBtn: '🇬🇧 English', badge: 'Dicas de viagem' },
+  id: { faqH: '❓ Pertanyaan umum', moreH: '📰 Artikel blog lainnya', ctaH: 'Siap merencanakan liburan ke Korea?', ctaP: 'Buat itinerary harian gratis dengan AI.', planBtn: '🗺️ Buat itinerary gratis', enBtn: '🇬🇧 English', badge: 'Tips perjalanan' },
 };
 // Some translators return the body with tags entity-encoded (&lt;p&gt;). Decode
 // only when that's detected, so genuinely raw HTML is left untouched.
@@ -1492,7 +1499,7 @@ function buildExplore(urls) {
   body += `<p class="lead">Your complete index of Korea travel content — tap any guide to dive in.</p>`;
   const section = (t, list) => `<h2 class="seo-secttitle">${t}</h2><div class="seo-linklist">${list.join('')}</div>`;
   body += section('✈️ Travel Basics', [`<a href="guide/korea-visa-k-eta-guide.html">🛂 Visa & K-ETA Guide</a>`, `<a href="guide/korea-travel-cost-index.html">💰 Korea Travel Cost Index 2026</a>`, ...(urls.stays || []).map(u => `<a href="${u.replace(BASEP, '')}">🏨 ${esc(u.split('/').pop().replace(/-/g, ' ').replace('.html', '').replace(/\b\w/g, m => m.toUpperCase()))}</a>`)]);
-  body += section('🎮 Fun &amp; Interactive', [`<a href="quiz.html">🧩 Which Korean City Should You Visit? (Quiz)</a>`, `<a href="bucket-list.html">✅ Korea Travel Bucket List (40 things)</a>`, `<a href="compare.html">⚖️ Compare Korean Cities (Seoul vs Busan vs Jeju)</a>`, `<a href="plan.html">🗺️ AI Trip Planner</a>`, `<a href="currency.html">💱 Currency Converter</a>`, `<a href="embed.html">🧩 Free Korea Widgets (embed on your site)</a>`]);
+  body += section('🎮 Fun &amp; Interactive', [`<a href="quiz.html">🧩 Which Korean City Should You Visit? (Quiz)</a>`, `<a href="bucket-list.html">✅ Korea Travel Bucket List (40 things)</a>`, `<a href="compare.html">⚖️ Compare Korean Cities (Seoul vs Busan vs Jeju)</a>`, `<a href="trending.html">🔥 Trending in Korea Right Now</a>`, `<a href="plan.html">🗺️ AI Trip Planner</a>`, `<a href="currency.html">💱 Currency Converter</a>`, `<a href="embed.html">🧩 Free Korea Widgets (embed on your site)</a>`]);
   body += section('📰 Blog', BLOG.map(p => `<a href="blog/${p.slug}.html">${p.emoji} ${esc(p.h1.split(/[:?(]/)[0].trim())}</a>`));
   // All 13 localized pages per language, generated programmatically so new
   // locale pages are never dropped from the index
@@ -1924,6 +1931,11 @@ const ITIN_UI = {
   ja: { tipsH: '💡 旅のヒント', faqH: '❓ よくある質問', ctaH: 'この旅程をカスタマイズ', ctaP: 'AIがあなたの日程に合わせて無料で作り直します。', planBtn: '🗺️ 無料で旅程を作成', enBtn: '🇬🇧 English' },
   zh: { tipsH: '💡 行程贴士', faqH: '❓ 常见问题', ctaH: '定制你的专属行程', ctaP: 'AI 按你的日期免费重新生成行程。', planBtn: '🗺️ 免费生成行程', enBtn: '🇬🇧 English' },
   es: { tipsH: '💡 Consejos', faqH: '❓ Preguntas frecuentes', ctaH: 'Personaliza este itinerario', ctaP: 'La IA lo rehace según tus fechas, gratis.', planBtn: '🗺️ Crear itinerario gratis', enBtn: '🇬🇧 English' },
+  ko: { tipsH: '💡 여행 팁', faqH: '❓ 자주 묻는 질문', ctaH: '이 일정을 내 맞춤으로', ctaP: 'AI가 날짜에 맞춰 무료로 다시 짜 드려요.', planBtn: '🗺️ 무료로 일정 만들기', enBtn: '🇬🇧 English' },
+  fr: { tipsH: '💡 Conseils', faqH: '❓ Questions fréquentes', ctaH: 'Personnalise cet itinéraire', ctaP: 'L\'IA le refait gratuitement selon tes dates.', planBtn: '🗺️ Créer mon itinéraire gratuit', enBtn: '🇬🇧 English' },
+  de: { tipsH: '💡 Reisetipps', faqH: '❓ Häufige Fragen', ctaH: 'Pass diesen Reiseplan an', ctaP: 'Die KI erstellt ihn gratis nach deinen Daten neu.', planBtn: '🗺️ Gratis Reiseplan erstellen', enBtn: '🇬🇧 English' },
+  pt: { tipsH: '💡 Dicas', faqH: '❓ Perguntas frequentes', ctaH: 'Personalize este roteiro', ctaP: 'A IA refaz conforme suas datas, de graça.', planBtn: '🗺️ Criar roteiro grátis', enBtn: '🇬🇧 English' },
+  id: { tipsH: '💡 Tips', faqH: '❓ Pertanyaan umum', ctaH: 'Sesuaikan itinerary ini', ctaP: 'AI menyusun ulang sesuai tanggalmu, gratis.', planBtn: '🗺️ Buat itinerary gratis', enBtn: '🇬🇧 English' },
 };
 // Agoda banner city for an itinerary slug (city itineraries → their city; themes → THEME_CITY).
 function itinCity(itSlug) {
@@ -2125,7 +2137,7 @@ fs.writeFileSync(path.join(OUT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html', 'temples.html', 'nightviews.html',
   'emergency.html', 'phrases.html', 'currency.html', 'etiquette.html', 'seasons.html', 'kdrama-locations.html',
   'kbeauty.html',
-  'menu-translator.html', 'subway.html', 'quiz.html', 'bucket-list.html', 'compare.html', 'embed.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
+  'menu-translator.html', 'subway.html', 'quiz.html', 'bucket-list.html', 'compare.html', 'trending.html', 'embed.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
 const urlEntry = (loc, pri, freq) => {
   const hl = HREFLANG_SM.get(loc);
