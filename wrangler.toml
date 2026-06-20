@@ -9,6 +9,6 @@ compatibility_date = "2024-11-01"
 binding = "CACHE_KV"
 id = "c31e411152504ef896ce587132c12339"
 
-# ─── Cron Triggers (optional: auto-refresh exchange rates daily) ────────────
-# [triggers]
-# crons = ["0 1 * * *"]   # 01:00 UTC daily
+# ─── Cron Triggers — daily IndexNow submission + freshness stamp (scheduled()) ─
+[triggers]
+crons = ["0 1 * * *"]   # 01:00 UTC daily

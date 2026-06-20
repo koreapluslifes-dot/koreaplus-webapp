@@ -6,7 +6,58 @@ Allow: /guide/
 # Block developer/test tools only
 Disallow: /guide/api-test.html
 
+# ── AI answer engines: explicitly allowed so KoreaPlus can be cited in AI
+#    Overviews, ChatGPT, Perplexity, Claude, Gemini, etc. Kept as separate
+#    groups so a future block rule never silently removes the crawlers that
+#    drive live AI citations. ──
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Curated answer indexes for LLMs:
+#   https://koreaplus-lifes.com/guide/llms.txt
+#   https://koreaplus-lifes.com/guide/llms-full.txt
+
 # Sitemaps
 Sitemap: https://koreaplus-lifes.com/guide/sitemap.xml
 Sitemap: https://koreaplus-lifes.com/guide/sitemap-images.xml
+Sitemap: https://koreaplus-lifes.com/kbeauty-sitemap.xml
 Sitemap: https://koreaplus-webapp.jeybeeicon.workers.dev/i-sitemap.xml

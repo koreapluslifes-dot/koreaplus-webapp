@@ -210,9 +210,36 @@ async function handlePlace(body: { query?: string }, env: WorkerEnv): Promise<Re
   });
 }
 
+// ── IndexNow ping (cron) — get new/updated URLs crawled in hours, not weeks ───
+async function pingIndexNow(env: WorkerEnv): Promise<void> {
+  const host = 'koreaplus-lifes.com';
+  const key = 'kp7e3f1c9a2b5d48069e3f1c9a2b5d48';
+  const langs = ['?lang=ko', '?lang=ja', '?lang=zh', '?lang=es', '?lang=fr', '?lang=de', '?lang=pt', '?lang=id'];
+  const urlList = [
+    `https://${host}/kbeauty`,
+    ...langs.map(q => `https://${host}/kbeauty${q}`),
+    `https://${host}/guide/`,
+    `https://${host}/guide/kpop.html`,
+    `https://${host}/guide/explore.html`,
+    `https://${host}/guide/llms-full.txt`,
+  ];
+  try {
+    await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ host, key, keyLocation: `https://${host}/guide/${key}.txt`, urlList }),
+    });
+    if (env.CACHE_KV) await env.CACHE_KV.put('freshness:lastPing', new Date().toISOString());
+  } catch { /* best-effort; never throws */ }
+}
+
 // ── Main fetch handler ────────────────────────────────────────────────────────
 
 export default {
+  // Cron (wrangler.toml [triggers]) — daily IndexNow submission + freshness stamp.
+  async scheduled(_event: unknown, env: WorkerEnv, ctx: { waitUntil: (p: Promise<unknown>) => void }): Promise<void> {
+    ctx.waitUntil(pingIndexNow(env));
+  },
   async fetch(request: Request, env: WorkerEnv): Promise<Response> {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS });

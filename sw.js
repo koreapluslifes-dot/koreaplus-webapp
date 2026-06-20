@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v39';
+const CACHE = 'kp-v40';
 const BASE  = '/guide';
 
 const PRECACHE = [

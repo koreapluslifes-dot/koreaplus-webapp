@@ -123,6 +123,19 @@
     clearTimeout(el._tm); el._tm = setTimeout(() => { el.style.opacity = '0'; }, 1800);
   };
 
+  // ── Analytics (#2 funnel instrumentation) — reuse global kpAnalytics.track ──
+  const kbtrack = (name, params) => { try { if (window.kpAnalytics && window.kpAnalytics.track) window.kpAnalytics.track(name, params || {}); } catch {} };
+  let _impSeen = {};
+  function observeImpression(sel, name, params) {
+    try {
+      const el = $(sel); if (!el || !('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach(e => { if (e.isIntersecting && !_impSeen[name]) { _impSeen[name] = 1; kbtrack(name, params || {}); io.disconnect(); } });
+      }, { threshold: 0.4 });
+      io.observe(el);
+    } catch {}
+  }
+
   // ── State helpers ──────────────────────────────────────────────────────────
   const getSkin = () => { try { return localStorage.getItem(SKIN_KEY) || ''; } catch { return ''; } };
   const setSkin = (id) => { try { localStorage.setItem(SKIN_KEY, id); } catch {} };
@@ -181,6 +194,7 @@
       let best = 'combination', max = -1;
       for (const k in scores) if (scores[k] > max) { max = scores[k]; best = k; }
       setSkin(best); renderResult(best); refreshPersonalized();
+      kbtrack('quiz_completed', { skin: best });
       try { document.getElementById('kb-quiz').scrollIntoView({ behavior:'smooth', block:'start' }); } catch {}
     });
   }
@@ -899,6 +913,7 @@
   async function loadShop(seed) {
     const grid = $('#kb-shop-grid'); if (!grid) return;
     seed = seed || (SHOP.aliSeeds || {}).general || 'korean skincare';
+    kbtrack('shop_open', { seed: seed });
     if (seed === lastSeed && grid.dataset.loaded === '1') return;
     lastSeed = seed;
     grid.innerHTML = `<div class="kb-loading" style="grid-column:1/-1"><div class="kb-spin"></div>${esc(t('loading'))}</div>`;
@@ -1244,6 +1259,9 @@
     renderTrust();         // #3 methodology & trust center
     renderReport();        // #10 quarterly trend report + share
     injectTrendSchema();   // #7 localized ItemList JSON-LD
+    kbtrack('kbeauty_view', { lang });                                  // #2 funnel
+    observeImpression('#kb-topads', 'aff_strip_impression', { lang });  // ad-strip view → CTR denominator
+    observeImpression('#kb-shop', 'shop_impression', { lang });
     renderQuiz();
     renderConcerns();
     renderStack();
