@@ -601,7 +601,7 @@ const ORG_LD = {
   areaServed: { '@type': 'Country', name: 'South Korea' },
 };
 const siteLD = lang => ({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': ORIGIN + '/#website', name: 'KoreaPlus', url: ORIGIN + BASEP, inLanguage: lang, publisher: { '@id': ORIGIN + '/#org' } });
-const speakableLD = url => ({ '@context': 'https://schema.org', '@type': 'WebPage', url: ORIGIN + url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.lead', '.seo-keyfacts'] } });
+const speakableLD = url => ({ '@context': 'https://schema.org', '@type': 'WebPage', url: ORIGIN + url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.lead', '.seo-keyfacts'] }, primaryImageOfPage: { '@type': 'ImageObject', url: ORIGIN + '/guide/og-image.jpg', width: 1200, height: 630 } });
 const TRUST = {
   en: { by: 'By the KoreaPlus Editorial Team', upd: 'Updated', rev: 'Fact-checked for 2026' },
   ko: { by: 'KoreaPlus 편집팀', upd: '업데이트', rev: '2026년 기준 사실 확인' },
@@ -1180,9 +1180,11 @@ function buildMonthL10n(idx, lang) {
   const sslug = nameEn.toLowerCase();
   const url = `${BASEP}${L.dir}/korea-in-${sslug}.html`;
   const enUrl = `${BASEP}guide/korea-in-${sslug}.html`;
-  const h1 = lang === 'ja' ? `${nameL}の韓国旅行` : lang === 'zh' ? `${nameL}韩国旅游攻略` : `Corea en ${nameL}`;
+  const dot = (lang === 'ja' || lang === 'zh') ? '。' : '. ';   // sentence separator: CJK full-stop vs Latin/Korean period
+  const h1 = ({ ja: `${nameL}の韓国旅行`, zh: `${nameL}韩国旅游攻略`, es: `Corea en ${nameL}`,
+    ko: `${nameL} 한국 여행`, fr: `La Corée en ${nameL}`, de: `Korea im ${nameL}`, pt: `Coreia em ${nameL}`, id: `Korea di bulan ${nameL}` }[lang]) || `Corea en ${nameL}`;
   const title = lang === 'es' ? `Corea en ${nameL}: clima, qué llevar y qué hacer | KoreaPlus` : `${nameL}${tw.titleSuffix} | KoreaPlus`;
-  const desc = `${why}。${weather}。${wear}。`;
+  const desc = `${why}${dot}${weather}${dot}${wear}${dot}`.trim();
   const trail = [{ name: 'Home', url: BASEP }, { name: h1, url }];
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(tw.lead(nameL))} ${esc(why)}。</p>`;
