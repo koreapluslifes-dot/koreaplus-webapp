@@ -233,6 +233,25 @@ async function pingIndexNow(env: WorkerEnv): Promise<void> {
   } catch { /* best-effort; never throws */ }
 }
 
+// Minimal markdown→HTML for the AI text-twin (llms-kbeauty.txt → clean HTML).
+function mdToHtml(md: string, canonical: string): string {
+  const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c] as string));
+  let html = '', inList = false, title = 'K-Beauty Trend Authority — KoreaPlus', desc = '';
+  const closeList = () => { if (inList) { html += '</ul>'; inList = false; } };
+  for (const raw of md.split('\n')) {
+    const line = raw.trimEnd();
+    if (/^#\s+/.test(line)) { closeList(); title = line.replace(/^#\s+/, ''); html += `<h1>${esc(title)}</h1>`; }
+    else if (/^##\s+/.test(line)) { closeList(); html += `<h2>${esc(line.replace(/^##\s+/, ''))}</h2>`; }
+    else if (/^###\s+/.test(line)) { closeList(); html += `<h3>${esc(line.replace(/^###\s+/, ''))}</h3>`; }
+    else if (/^>\s?/.test(line)) { closeList(); const tx = line.replace(/^>\s?/, ''); if (!desc) desc = tx; html += `<p><em>${esc(tx)}</em></p>`; }
+    else if (/^-\s+/.test(line)) { if (!inList) { html += '<ul>'; inList = true; } html += `<li>${esc(line.replace(/^-\s+/, ''))}</li>`; }
+    else if (line === '') { closeList(); }
+    else { closeList(); html += `<p>${esc(line)}</p>`; }
+  }
+  closeList();
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc.slice(0, 160))}"><link rel="canonical" href="${canonical}"></head><body>${html}<p><a href="${canonical}">Open the full interactive K-beauty hub →</a></p></body></html>`;
+}
+
 // ── Main fetch handler ────────────────────────────────────────────────────────
 
 export default {
@@ -258,6 +277,21 @@ export default {
       return Response.redirect('https://koreaplus-lifes.com/kbeauty' + url.search, 301);
     }
     if (path === '/kbeauty') {
+      // GEO text-twin: AI answer-engine crawlers can't run the JS that renders the
+      // trend data, so serve them a clean text version (from llms-kbeauty.txt).
+      // Googlebot/Bingbot are NOT included — they render JS for ranking, so they
+      // get the full app (this is GEO, not ranking-cloaking).
+      const ua = request.headers.get('user-agent') || '';
+      if (/GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|Perplexity-User|ClaudeBot|anthropic-ai|Claude-Web|CCBot|Bytespider|Google-Extended|Applebot-Extended|Amazonbot/i.test(ua)) {
+        try {
+          const r = await fetch('https://koreaplus-lifes.com/guide/llms-kbeauty.txt', { cf: { cacheTtl: 600, cacheEverything: true } });
+          if (r.ok) {
+            return new Response(mdToHtml(await r.text(), 'https://koreaplus-lifes.com/kbeauty'), {
+              headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'public, max-age=600', 'x-served-by': 'kbeauty-ai-twin' },
+            });
+          }
+        } catch { /* fall through to the normal proxy */ }
+      }
       try {
         const originResp = await fetch('https://koreaplus-lifes.com/guide/kbeauty.html', {
           cf: { cacheTtl: 300, cacheEverything: true },
