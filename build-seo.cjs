@@ -134,6 +134,36 @@ function affBlock({ city = 'Seoul', cat = 'hotel', q = '', lang = 'en' } = {}) {
 </div>`;
 }
 
+// ── Klook activities widget (complements the Agoda hotel block) ──────────────
+// Klook = activities, eSIM, airport transport, tours. Placed ONLY on the
+// highest booking-intent SEO pages (city guides + itineraries) — one tasteful
+// unit per page — so monetization stays helpful, not excessive. The heavy Klook
+// iframe script is lazy-loaded by modules/klook-cards.js only when this block
+// scrolls into view; pages without it never pay the cost. (Distinct from the
+// dispatch session's modules/klook.js, which serves #kp-klook on the hand-built
+// travel pages — we don't touch that file; this is the dark-theme SEO variant.)
+const KLOOK_T = {
+  en: { h: '🎟️ Popular Korea activities & travel essentials', s: 'eSIM · airport transport · tours — book in seconds', disc: 'Affiliate — we may earn a small commission at no extra cost to you.' },
+  ko: { h: '🎟️ 한국 인기 액티비티 · 교통 · eSIM', s: 'eSIM · 공항 교통 · 투어 — 바로 예약', disc: '제휴 링크 — 추가 비용 없이 소액의 수수료를 받을 수 있어요.' },
+  ja: { h: '🎟️ 韓国の人気アクティビティ・eSIM・交通', s: 'eSIM・空港送迎・ツアーをすぐ予約', disc: 'アフィリエイト — 追加料金なしで少額の手数料が入ることがあります。' },
+  zh: { h: '🎟️ 韩国热门活动 · eSIM · 交通', s: 'eSIM · 机场交通 · 一日游 — 即刻预订', disc: '联盟链接 — 您无需额外付费，我们可能获得少量佣金。' },
+  es: { h: '🎟️ Actividades y esenciales de Corea', s: 'eSIM · transporte al aeropuerto · tours — reserva al instante', disc: 'Enlace de afiliado — podríamos ganar una pequeña comisión sin coste adicional.' },
+  fr: { h: '🎟️ Activités et essentiels en Corée', s: 'eSIM · transport aéroport · visites — réservez en quelques secondes', disc: 'Lien affilié — nous pouvons percevoir une petite commission sans surcoût.' },
+  de: { h: '🎟️ Beliebte Aktivitäten & Reise-Essentials in Korea', s: 'eSIM · Flughafentransfer · Touren — sofort buchen', disc: 'Affiliate-Link — wir erhalten ggf. eine kleine Provision ohne Mehrkosten für dich.' },
+  pt: { h: '🎟️ Atividades e essenciais da Coreia', s: 'eSIM · transporte do aeroporto · passeios — reserve em segundos', disc: 'Link de afiliado — podemos receber uma pequena comissão sem custo extra para você.' },
+  id: { h: '🎟️ Aktivitas & kebutuhan perjalanan di Korea', s: 'eSIM · transportasi bandara · tur — pesan seketika', disc: 'Tautan afiliasi — kami dapat memperoleh komisi kecil tanpa biaya tambahan untuk Anda.' }
+};
+function klookBlock(lang = 'en') {
+  const T = KLOOK_T[lang] || KLOOK_T.en;
+  return `
+<aside class="kp-klook" data-klook="1" aria-label="${esc(T.h)}" style="margin:22px 0;padding:16px 16px 12px;border:1px solid var(--border,rgba(255,255,255,.1));border-radius:16px;background:var(--card,rgba(255,255,255,.04))">
+  <div style="font-weight:800;font-size:15px;line-height:1.3">${T.h}</div>
+  <div style="color:var(--text2,#9fb0c3);font-size:12.5px;margin:2px 0 10px">${esc(T.s)}</div>
+  <div class="kp-klook-slot" style="min-height:8px"></div>
+  <div style="color:var(--text3,#8895a6);font-size:11px;margin-top:8px">${esc(T.disc)}</div>
+</aside>`;
+}
+
 // Topical city pickers — the Agoda banner should book hotels where the page is
 // about. Only Seoul/Busan/Jeju/Incheon/Gyeongju/Jeonju return LIVE price cards,
 // so non-live places map to the nearest of those six.
@@ -780,6 +810,7 @@ ${injectToc(body, lang)}
 <script defer src="modules/react.js?v=1"></script>
 <script defer src="modules/foryou.js?v=1"></script>
 <script defer src="modules/install.js?v=1"></script>
+<script defer src="modules/klook-cards.js?v=1"></script>
 </body>
 </html>`;
 }
@@ -1001,6 +1032,7 @@ function buildCity(city) {
   body += `<h2>🧭 Plan your ${esc(city.name)} trip</h2><div class="seo-linklist"><a href="guide/best-time-to-visit-${slug(city.name)}.html">🗓️ Best time to visit ${esc(city.name)}</a>${TRANSPORT_ROUTES.some(r => r.to === city.name) ? `<a href="guide/seoul-to-${slug(city.name)}.html">🚄 Seoul → ${esc(city.name)}</a>` : ''}<a href="guide/korea-travel-cost-index.html">💰 Trip cost index</a></div>`;
   body += `<h2>📺 ${esc(city.name)} on video & K-screen</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(city.name + ' Korea travel')}" target="_blank" rel="noopener">▶️ ${esc(city.name)} travel videos</a><a href="kdrama-locations.html">🎬 K-drama filming locations</a><a href="kpop.html">🎤 K-pop in Korea</a></div>`;
   body += affHtml(`🎫 Book ${city.name} tours, hotels & essentials`, { city: city.name, cat: 'travel', q: '' });
+  body += klookBlock('en');
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
 
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} places</span></div></header>`;
@@ -1071,6 +1103,7 @@ function buildCityL10n(cityName, lang) {
   if (g.tips && g.tips.length) body += `<h2>${esc(ui.tipsH)}</h2><ul class="tips">${g.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
   // Localized Agoda banner (live cards in the visitor's language + currency)
   body += affBlock({ city: cityName, cat: 'travel', q: '', lang });
+  body += klookBlock(lang);
   // FAQ
   const qa = (g.faq || []).map(x => [x.q, x.a]);
   if (qa.length) body += `<h2>${esc(ui.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
@@ -1130,6 +1163,7 @@ function buildItinerary(city, days, pool) {
   body += `<h2>🗺️ More Korea itineraries</h2><div class="seo-linklist">${themeRel}</div>`;
   body += `<h2>❓ ${esc(city.name)} Itinerary FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml(`🎫 Book your ${city.name} trip`, { city: city.name, cat: 'travel', q: '' });
+  body += klookBlock('en');
   body += ctaHtml('Customize this itinerary', `Tweak days, pace and budget — our AI rebuilds your ${city.name} plan instantly.`);
 
   const hero = `<header class="seo-hero"><span class="emoji">🗺️</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">${days} days</span><span class="seo-badge region">${esc(city.name)}</span></div></header>`;
