@@ -29,6 +29,20 @@
   };
   function lang() { return (document.documentElement.lang || 'en').slice(0, 2); }
   function num(n) { return Math.round(n).toLocaleString(); }
+  // Seasonal D-day to the next cherry-blossom (~Apr) or autumn-foliage (~late Oct) peak.
+  var SEASON = [
+    { e: '🌸', m: 3, d: 1, t: { en: 'Cherry blossoms', ko: '벚꽃', ja: '桜', zh: '樱花', es: 'Cerezos', fr: 'Cerisiers', de: 'Kirschblüte', pt: 'Cerejeiras', id: 'Bunga sakura' } },
+    { e: '🍁', m: 9, d: 25, t: { en: 'Autumn foliage', ko: '단풍', ja: '紅葉', zh: '红叶', es: 'Follaje otoñal', fr: 'Feuillage', de: 'Herbstlaub', pt: 'Folhagem', id: 'Daun musim gugur' } }
+  ];
+  function countdown(L) {
+    var now = new Date(), y = now.getFullYear(), best = null, bd = 1e15;
+    SEASON.forEach(function (s) {
+      var dt = new Date(y, s.m, s.d); if (dt < now) dt = new Date(y + 1, s.m, s.d);
+      var diff = dt - now; if (diff < bd) { bd = diff; best = s; }
+    });
+    var days = Math.ceil(bd / 86400000);
+    return best.e + ' ' + (best.t[L] || best.t.en) + ': D-' + days;
+  }
 
   function go() {
     var el = document.getElementById('kp-korea-now');
@@ -47,6 +61,7 @@
       if (w && w.temp != null) html += ' <span>' + (w.conditionEmoji || '') + ' Seoul ' + Math.round(w.temp) + '°</span>';
       if (aq && aq.pm25 != null) html += ' <span>🌫️ ' + t.air + ': ' + (gr[aq.pm25Grade] || aq.pm25Grade) + '</span>';
       if (fx && fx.usdToKrw) html += ' <span>💱 ₩' + num(fx.usdToKrw) + ' / $1</span>';
+      html += ' <span>' + countdown(L) + '</span>'; // seasonal D-day (always shows)
       if (html.indexOf('<span>') === -1) return; // nothing live → stay hidden
       el.innerHTML = html;
       el.style.display = 'flex';

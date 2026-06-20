@@ -167,6 +167,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://koreaplus-lifes.com/guide/compare.html</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://koreaplus-lifes.com/guide/about.html</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -5075,6 +5081,11 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
     <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -5086,6 +5097,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
     <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -5097,6 +5113,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
     <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -5108,6 +5129,91 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/guide/korea-travel-cost-index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/guide/korea-travel-cost-index.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/guide/korea-travel-cost-index.html"/>
     <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>

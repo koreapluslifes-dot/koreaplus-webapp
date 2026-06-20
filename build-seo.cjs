@@ -746,7 +746,8 @@ ${injectToc(body, lang)}
     <a href="faq/best-time-to-visit-korea.html" style="color:var(--accent2,#74b9ff)">Best Time to Visit</a> ·
     <a href="seasons.html" style="color:var(--accent2,#74b9ff)">Cherry Blossom Forecast</a> ·
     <a href="quiz.html" style="color:var(--accent2,#74b9ff)">🧩 Korea Quiz</a> ·
-    <a href="bucket-list.html" style="color:var(--accent2,#74b9ff)">✅ Bucket List</a>
+    <a href="bucket-list.html" style="color:var(--accent2,#74b9ff)">✅ Bucket List</a> ·
+    <a href="compare.html" style="color:var(--accent2,#74b9ff)">⚖️ Compare Cities</a>
   </p>
   <p style="font-size:13px;color:var(--text2,#aaa)">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
   <p style="font-size:11px;color:var(--text3,#888);margin-top:8px">
@@ -1489,7 +1490,7 @@ function buildExplore(urls) {
   body += `<p class="lead">Your complete index of Korea travel content — tap any guide to dive in.</p>`;
   const section = (t, list) => `<h2 class="seo-secttitle">${t}</h2><div class="seo-linklist">${list.join('')}</div>`;
   body += section('✈️ Travel Basics', [`<a href="guide/korea-visa-k-eta-guide.html">🛂 Visa & K-ETA Guide</a>`, `<a href="guide/korea-travel-cost-index.html">💰 Korea Travel Cost Index 2026</a>`, ...(urls.stays || []).map(u => `<a href="${u.replace(BASEP, '')}">🏨 ${esc(u.split('/').pop().replace(/-/g, ' ').replace('.html', '').replace(/\b\w/g, m => m.toUpperCase()))}</a>`)]);
-  body += section('🎮 Fun &amp; Interactive', [`<a href="quiz.html">🧩 Which Korean City Should You Visit? (Quiz)</a>`, `<a href="bucket-list.html">✅ Korea Travel Bucket List (40 things)</a>`, `<a href="plan.html">🗺️ AI Trip Planner</a>`, `<a href="currency.html">💱 Currency Converter</a>`]);
+  body += section('🎮 Fun &amp; Interactive', [`<a href="quiz.html">🧩 Which Korean City Should You Visit? (Quiz)</a>`, `<a href="bucket-list.html">✅ Korea Travel Bucket List (40 things)</a>`, `<a href="compare.html">⚖️ Compare Korean Cities (Seoul vs Busan vs Jeju)</a>`, `<a href="plan.html">🗺️ AI Trip Planner</a>`, `<a href="currency.html">💱 Currency Converter</a>`]);
   body += section('📰 Blog', BLOG.map(p => `<a href="blog/${p.slug}.html">${p.emoji} ${esc(p.h1.split(/[:?(]/)[0].trim())}</a>`));
   // All 13 localized pages per language, generated programmatically so new
   // locale pages are never dropped from the index
@@ -2122,7 +2123,7 @@ fs.writeFileSync(path.join(OUT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html', 'temples.html', 'nightviews.html',
   'emergency.html', 'phrases.html', 'currency.html', 'etiquette.html', 'seasons.html', 'kdrama-locations.html',
   'kbeauty.html',
-  'menu-translator.html', 'subway.html', 'quiz.html', 'bucket-list.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
+  'menu-translator.html', 'subway.html', 'quiz.html', 'bucket-list.html', 'compare.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
 const urlEntry = (loc, pri, freq) => {
   const hl = HREFLANG_SM.get(loc);
