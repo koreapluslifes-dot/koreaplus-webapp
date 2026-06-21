@@ -276,9 +276,19 @@ export default {
     if (path === '/k-beauty') {
       return Response.redirect('https://koreaplus-lifes.com/kbeauty' + url.search, 301);
     }
-    // Legacy apex sitemap URL → the standalone static file (Apache-served).
+    // Serve the K-beauty sitemap at the clean apex /kbeauty-sitemap.xml by proxying
+    // the static source file (/guide/kbeauty-sitemap.xml). The /kbeauty* route
+    // intercepts this path, so we serve it here rather than redirect. HEAD ok.
     if (path === '/kbeauty-sitemap.xml') {
-      return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty-sitemap.xml', 301);
+      const smHeaders = { 'content-type': 'application/xml; charset=utf-8', 'cache-control': 'public, max-age=3600', 'x-served-by': 'kbeauty-sitemap' };
+      if (request.method === 'HEAD') return new Response(null, { status: 200, headers: smHeaders });
+      try {
+        const r = await fetch('https://koreaplus-lifes.com/guide/kbeauty-sitemap.xml', { cf: { cacheTtl: 600, cacheEverything: true } });
+        if (!r.ok) throw new Error('origin ' + r.status);
+        return new Response(await r.text(), { headers: smHeaders });
+      } catch {
+        return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty-sitemap.xml', 302);
+      }
     }
     if (path === '/kbeauty') {
       // GEO text-twin: AI answer-engine crawlers can't run the JS that renders the
