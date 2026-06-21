@@ -1041,16 +1041,18 @@
       <span class="em" aria-hidden="true">🛍️</span>
       <div style="flex:1;min-width:150px"><div class="kb-ad-ali-t">${esc(t('adAliTitle'))}</div><div class="kb-ad-ali-s">${esc(t('adAliSub'))}</div></div>
       <a class="kb-ad-ali-cta" id="kb-ad-ali-go">${esc(t('adAliCta'))} →</a></div>`;
-    const wireGo = () => { const g = $('#kb-ad-ali-go'); if (g) g.addEventListener('click', () => { loadShop(seed); jumpTo('#kb-shop'); }); };
-    if (!API || !API.getKbeautyProducts) { box.innerHTML = banner(); wireGo(); return; }
+    // target 'buy' (no live products yet) → on-site Where-to-Buy hub (works without
+    // the AliExpress API key); 'shop' (live products) → in-page product grid.
+    const wireGo = (target) => { const g = $('#kb-ad-ali-go'); if (g) g.addEventListener('click', () => { if (target === 'buy') { jumpTo('#kb-buy'); } else { loadShop(seed); jumpTo('#kb-shop'); } }); };
+    if (!API || !API.getKbeautyProducts) { box.innerHTML = banner(); wireGo('buy'); return; }
     API.getKbeautyProducts(seed, lang).then(items => {
-      if (!Array.isArray(items) || !items.length) { box.innerHTML = banner(); wireGo(); return; }
+      if (!Array.isArray(items) || !items.length) { box.innerHTML = banner(); wireGo('buy'); return; }
       const cards = items.slice(0, 10).map(p => `<a class="kb-ad-prod" href="${esc(p.url || '#')}" target="_blank" rel="sponsored noopener">
         ${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">` : ''}
         <div class="pb"><div class="pt">${esc(p.title || '')}</div>${p.price ? `<div class="pp">${esc(t('priceFrom'))} ${esc(p.price)}</div>` : ''}</div></a>`).join('');
       box.innerHTML = `<div class="kb-ad-ali-head"><div><div class="kb-ad-ali-t">${esc(t('adAliTitle'))}</div><div class="kb-ad-ali-s">${esc(t('adAliSub'))}</div></div><a class="kb-ad-ali-cta" id="kb-ad-ali-go">${esc(t('adAliCta'))} →</a></div><div class="kb-ad-strip">${cards}</div>`;
-      wireGo();
-    }).catch(() => { box.innerHTML = banner(); wireGo(); });
+      wireGo('shop');
+    }).catch(() => { box.innerHTML = banner(); wireGo('buy'); });
   }
 
   // ── Seoul-vs-World Trend Radar (#1): Korea×West quadrant + lifecycle cards ──
