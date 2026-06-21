@@ -401,6 +401,14 @@ const SEASONS = [
 ];
 let seasCount = 0;
 SEASONS.forEach(se => {
+  // season overview hub
+  const hubUrl = `${SITE}/guide/kb/seasonal/${se.id}.html`;
+  const hubBody = `<p class="lead">${esc(se.note)}</p>
+    <h2>By skin type</h2><div>${SKINTYPES.map(s => `<a class="pill" href="${se.id}-${s.id}-skin.html">${s.emoji || ''} ${esc(s.name)} skin</a>`).join('')}</div>
+    <h2>By concern</h2><div>${CONCERNS.map(c => `<a class="pill" href="${se.id}-${c.id}.html">${c.emoji || ''} ${esc(c.name)}</a>`).join('')}</div>
+    <p><a href="${SITE}/kbeauty">Build your routine free →</a></p>`;
+  emit(`seasonal/${se.id}.html`, shell({ url: hubUrl, depth: 3, crumb: 'Seasonal routines', emoji: se.emoji, h1: `Korean ${se.name.toLowerCase()} skincare guide`, title: `Korean ${se.name.toLowerCase()} skincare — the seasonal guide`, desc: se.note, bodyHtml: hubBody, ld: [artLD(`Korean ${se.name} skincare guide`, se.note, hubUrl)] }), '0.6');
+  seasCount++;
   SKINTYPES.forEach(s => {
     const url = `${SITE}/guide/kb/seasonal/${se.id}-${s.id}-skin.html`;
     const body = `<p class="lead">A Korean <b>${esc(se.name.toLowerCase())}</b> skincare routine for <b>${esc(s.name.toLowerCase())} skin</b>.</p>
