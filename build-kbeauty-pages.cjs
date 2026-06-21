@@ -213,6 +213,10 @@ const EDITORIAL_CATS = {
   industry: { path: 'industry', crumb: 'Industry', label: '🏭 Industry & regulation' },
   country: { path: 'country', crumb: 'K-beauty worldwide', label: '🌍 K-beauty worldwide' },
   philosophy: { path: 'compare', crumb: 'Korea vs West', label: '⚖️ Korea vs the West' },
+  culture: { path: 'culture', crumb: 'Beauty culture', label: '🎎 Beauty culture' },
+  cities: { path: 'shop', crumb: 'Where to shop', label: '🛍️ Seoul shopping' },
+  people: { path: 'people', crumb: 'People & creators', label: '👤 People & creators' },
+  howto: { path: 'how-to', crumb: 'How-to guides', label: '📋 How-to guides' },
 };
 const editorialIndex = {};   // cat -> [{slug,h1,emoji,label}]
 const EDIT_FILE = path.join(__dirname, 'kbeauty-editorial.json');
@@ -388,6 +392,53 @@ SKINTYPES.forEach(s => {
 const catHubLinks = CATS_ITEMS.map(ci => `<a href="category/${ci.id}.html">${ci.emoji || ''} ${esc(ci.name.split('/')[0].trim())}</a>`);
 const stHubLinks = SKINTYPES.map(s => `<a href="skin-type/${s.id}.html">${s.emoji || ''} ${esc(s.name)} skin</a>`);
 
+// ── 13. Seasonal routines (season×skintype + season×concern) ────────────────
+const SEASONS = [
+  { id: 'spring', name: 'Spring', emoji: '🌸', note: 'Fluctuating temperatures, pollen and sensitivity, and rising UV mean a gentle, barrier-supportive routine with reliable daily SPF.' },
+  { id: 'summer', name: 'Summer', emoji: '☀️', note: 'Heat, humidity, sweat and excess oil call for lightweight, fast-absorbing layers and a high, re-applied sunscreen.' },
+  { id: 'autumn', name: 'Autumn', emoji: '🍂', note: 'Dropping humidity is the classic time to repair the moisture barrier and slowly transition to richer textures.' },
+  { id: 'winter', name: 'Winter', emoji: '❄️', note: 'Cold air and indoor heating strip moisture, so layer hydrating toners and essences under a richer cream or occlusive.' },
+];
+let seasCount = 0;
+SEASONS.forEach(se => {
+  SKINTYPES.forEach(s => {
+    const url = `${SITE}/guide/kb/seasonal/${se.id}-${s.id}-skin.html`;
+    const body = `<p class="lead">A Korean <b>${esc(se.name.toLowerCase())}</b> skincare routine for <b>${esc(s.name.toLowerCase())} skin</b>.</p>
+      <p>${esc(se.note)}</p><p>${esc(s.desc || '')}</p>
+      <h2>${esc(se.name)} adjustments</h2><ul><li>Match texture to the weather — lighter in heat, richer in cold.</li><li>Never skip morning SPF, year-round.</li><li>Introduce or pull back actives gradually as your skin reacts to the season.</li></ul>
+      <p><a href="${SITE}/guide/kb/skin-type/${s.id}.html">${esc(s.name)} skin guide →</a> · <a href="${SITE}/kbeauty">Build your routine free →</a></p>`;
+    emit(`seasonal/${se.id}-${s.id}-skin.html`, shell({ url, depth: 3, crumb: 'Seasonal routines', emoji: se.emoji, h1: `Korean ${se.name.toLowerCase()} skincare for ${s.name.toLowerCase()} skin`, title: `${se.name} Korean routine for ${s.name.toLowerCase()} skin`, desc: `Korean ${se.name.toLowerCase()} skincare for ${s.name.toLowerCase()} skin: ${se.note.slice(0, 90)}`, bodyHtml: body, ld: [artLD(`Korean ${se.name} routine for ${s.name} skin`, se.note, url)] }), '0.5');
+    seasCount++;
+  });
+  CONCERNS.forEach(c => {
+    const look = (c.lookFor || []).map(id => ING_BY[id]).filter(Boolean).slice(0, 4);
+    const url = `${SITE}/guide/kb/seasonal/${se.id}-${c.id}.html`;
+    const body = `<p class="lead">Managing <b>${esc(c.name.toLowerCase())}</b> in <b>${esc(se.name.toLowerCase())}</b> with a Korean approach.</p>
+      <p>${esc(se.note)}</p><p>${esc(c.desc || '')}</p>
+      <h2>Ingredients to lean on</h2><div>${look.map(i => `<a class="pill" href="${SITE}/guide/kb/ingredient/${i.id}-for-${c.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`).join('')}</div>
+      ${c.tip ? `<div class="box">💡 ${esc(c.tip)}</div>` : ''}
+      <p><a href="${SITE}/guide/kb/concern/${c.id}.html">All ${esc(c.name.toLowerCase())} picks →</a></p>`;
+    emit(`seasonal/${se.id}-${c.id}.html`, shell({ url, depth: 3, crumb: 'Seasonal routines', emoji: se.emoji, h1: `${se.name} K-beauty for ${c.name.toLowerCase()}`, title: `Korean ${se.name.toLowerCase()} skincare for ${c.name.toLowerCase()}`, desc: `Managing ${c.name.toLowerCase()} in ${se.name.toLowerCase()} with K-beauty.`, bodyHtml: body, ld: [artLD(`${se.name} K-beauty for ${c.name}`, c.desc, url)] }), '0.5');
+    seasCount++;
+  });
+});
+
+// ── 14. Ingredient × skin-type (gated via skin-type→concern mapping) ─────────
+let isCount = 0;
+SKINTYPES.forEach(s => {
+  const ids = [...new Set((ST_CONCERNS[s.id] || []).flatMap(cid => (CONCERN_BY[cid] && CONCERN_BY[cid].lookFor) || []))];
+  ids.map(id => ING_BY[id]).filter(Boolean).forEach(i => {
+    const url = `${SITE}/guide/kb/ingredient/${i.id}-for-${s.id}-skin.html`;
+    const body = `<p class="lead">Is <b>${esc(i.name)}</b> good for <b>${esc(s.name.toLowerCase())} skin</b>?</p>
+      <p>${esc(i.explainer || '')}</p>
+      <h2>Why it suits ${esc(s.name.toLowerCase())} skin</h2><ul>${(i.benefits || []).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+      <div class="box">💡 <b>How to use:</b> ${esc((i.time || 'both').toUpperCase())} · patch-test and introduce gradually.</div>
+      <p><a href="${SITE}/guide/kb/ingredient/${i.id}.html">Full ${esc(i.name)} guide →</a> · <a href="${SITE}/guide/kb/skin-type/${s.id}.html">${esc(s.name)} skin guide →</a></p>`;
+    emit(`ingredient/${i.id}-for-${s.id}-skin.html`, shell({ url, depth: 3, crumb: 'Ingredients', emoji: i.emoji, h1: `${i.name} for ${s.name.toLowerCase()} skin`, title: `${i.name} for ${s.name.toLowerCase()} skin — does it suit it?`, desc: `${i.name} for ${s.name.toLowerCase()} skin: ${(i.benefits || [])[0] || ''}`, bodyHtml: body, ld: [faqLD(`Is ${i.name} good for ${s.name.toLowerCase()} skin?`, (i.benefits || []).join(' '))] }), '0.5');
+    isCount++;
+  });
+});
+
 // ── Library index ───────────────────────────────────────────────────────────
 const idxSections = [
   ...editorialIdxSections,
@@ -398,6 +449,7 @@ const idxSections = [
   ['🎯 Concerns', CONCERNS.map(c => `<a href="concern/${c.id}.html">${c.emoji || ''} ${esc(c.name)}</a>`)],
   ['🧖 Skin types', stHubLinks],
   ['🧴 Product types', catHubLinks],
+  ['🗓️ Seasonal routines', SEASONS.map(se => SKINTYPES.map(s => `<a href="seasonal/${se.id}-${s.id}-skin.html">${se.emoji} ${esc(se.name)} · ${esc(s.name.toLowerCase())}</a>`)).flat()],
   ['💸 Dupes', DUPES.map(dp => `<a href="dupe/${dp.id}.html">${esc(dp.altName || dp.reference)}</a>`)],
   ['📖 Glossary', GLOSS.map(g => `<a href="term/${slug(g.term)}.html">${esc(g.term)}</a>`)],
 ];
