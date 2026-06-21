@@ -315,6 +315,79 @@ gatedInci.forEach(e => {
 });
 const inciHubLinks = Object.keys(byBase).map(base => { const info = FN_INFO[base] || FN_INFO.other; return `<a href="inci-class/${base}.html">${info[1]} ${esc(info[0])}</a>`; });
 
+// ── 12. Product categories + category×concern + category×skintype + skintype hubs ──
+const CATS_ITEMS = (d.KBEAUTY_CATEGORIES && d.KBEAUTY_CATEGORIES.items) || [];
+const TREAT = new Set(['toner', 'essence', 'serum', 'ampoule', 'emulsion', 'cream']);
+const ST_CONCERNS = { dry: ['dryness', 'dullness'], oily: ['oiliness', 'acne', 'pores'], combination: ['pores', 'oiliness', 'dryness'], sensitive: ['redness', 'dryness'], normal: ['dullness', 'aging'] };
+const textureFit = (thickness, stId) => {
+  const light = thickness <= 2, rich = thickness >= 4;
+  if ((stId === 'oily' || stId === 'combination') && light) return 'A lightweight texture like this suits oily and combination skin well — it hydrates without feeling heavy or greasy.';
+  if ((stId === 'oily') && rich) return 'This is on the richer side, so oily skin should use it sparingly (or save it for drier patches and colder months).';
+  if ((stId === 'dry' || stId === 'sensitive') && rich) return 'A richer, cushioning texture like this is ideal for dry and sensitive skin that needs extra comfort and barrier support.';
+  if ((stId === 'dry') && light) return 'On its own this may not be enough for very dry skin — layer it under a richer cream to seal in the hydration.';
+  return 'It works for most skin types — adjust how much you layer to how your skin feels.';
+};
+// 12a. category pages
+CATS_ITEMS.forEach(ci => {
+  const url = `${SITE}/guide/kb/category/${ci.id}.html`;
+  const concernLinks = TREAT.has(ci.id) ? CONCERNS.map(c => `<a class="pill" href="${ci.id}-for-${c.id}.html">${c.emoji || ''} for ${esc(c.name.toLowerCase())}</a>`).join('') : '';
+  const stLinks = SKINTYPES.map(s => `<a class="pill" href="${ci.id}-for-${s.id}-skin.html">${s.emoji || ''} ${esc(s.name.toLowerCase())} skin</a>`).join('');
+  const body = `<p class="lead">${esc(ci.job || '')}</p>
+    <h2>At a glance</h2><div>
+      <span class="pill">Texture: ${esc(ci.texture || '')}</span>
+      ${ci.westernEquiv ? `<span class="pill">≈ ${esc(ci.westernEquiv)}</span>` : ''}
+      ${ci.routinePosition ? `<span class="pill">When: ${esc(ci.routinePosition)}</span>` : ''}
+    </div>
+    ${ci.need ? `<h2>Do you need it?</h2><p>${esc(ci.need)}${ci.needWhy ? ' ' + esc(ci.needWhy) : ''}</p>` : ''}
+    ${ci.skipIf ? `<div class="box">⏭️ <b>You can skip it if:</b> ${esc(ci.skipIf)}</div>` : ''}
+    ${ci.tip ? `<div class="box">💡 <b>Tip:</b> ${esc(ci.tip)}</div>` : ''}
+    ${concernLinks ? `<h2>Choose by concern</h2><div>${concernLinks}</div>` : ''}
+    <h2>Choose by skin type</h2><div>${stLinks}</div>
+    <p><a href="${SITE}/kbeauty">Build your routine free →</a></p>`;
+  emit(`category/${ci.id}.html`, shell({ url, depth: 3, crumb: 'Product types', emoji: ci.emoji, h1: `Korean ${ci.name}: what it is & do you need it`, ko: ci.korean, title: `Korean ${ci.name} — what it does & how to use`, desc: ci.job, bodyHtml: body, ld: [artLD(`Korean ${ci.name}`, ci.job, url), faqLD(`What is a Korean ${ci.name.toLowerCase()}?`, ci.job)] }), '0.6');
+});
+// 12b. category × concern
+CATS_ITEMS.filter(ci => TREAT.has(ci.id)).forEach(ci => {
+  CONCERNS.forEach(c => {
+    const look = (c.lookFor || []).map(id => ING_BY[id]).filter(Boolean);
+    const url = `${SITE}/guide/kb/category/${ci.id}-for-${c.id}.html`;
+    const body = `<p class="lead">How to choose a Korean <b>${esc(ci.name.toLowerCase())}</b> for <b>${esc(c.name.toLowerCase())}</b>.</p>
+      <p>${esc(ci.job || '')}</p>
+      <h2>Ingredients to look for</h2><div>${look.map(i => `<a class="pill" href="../ingredient/${i.id}-for-${c.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`).join('')}</div>
+      ${c.tip ? `<div class="box">💡 ${esc(c.tip)}</div>` : ''}
+      <p><a href="${ci.id}.html">All about Korean ${esc(ci.name.toLowerCase())} →</a> · <a href="../concern/${c.id}.html">All ${esc(c.name.toLowerCase())} picks →</a></p>`;
+    emit(`category/${ci.id}-for-${c.id}.html`, shell({ url, depth: 3, crumb: 'Product types', emoji: ci.emoji, h1: `Best Korean ${ci.name.toLowerCase()} for ${c.name.toLowerCase()}`, title: `Korean ${ci.name.toLowerCase()} for ${c.name.toLowerCase()} — what to look for`, desc: `Choosing a Korean ${ci.name.toLowerCase()} for ${c.name.toLowerCase()}: ${look.map(i => i.name).slice(0, 3).join(', ')}.`, bodyHtml: body, ld: [faqLD(`What Korean ${ci.name.toLowerCase()} is best for ${c.name.toLowerCase()}?`, look.map(i => i.name).join(', '))] }), '0.5');
+  });
+});
+// 12c. category × skintype
+CATS_ITEMS.forEach(ci => {
+  SKINTYPES.forEach(s => {
+    const url = `${SITE}/guide/kb/category/${ci.id}-for-${s.id}-skin.html`;
+    const body = `<p class="lead">Choosing a Korean <b>${esc(ci.name.toLowerCase())}</b> for <b>${esc(s.name.toLowerCase())} skin</b>.</p>
+      <p>${esc(s.desc || '')}</p>
+      <h2>The texture fit</h2><p>${esc(textureFit(ci.thickness || 3, s.id))}</p>
+      <p><b>What this step does:</b> ${esc(ci.job || '')}</p>
+      ${ci.tip ? `<div class="box">💡 ${esc(ci.tip)}</div>` : ''}
+      <p><a href="${ci.id}.html">All about Korean ${esc(ci.name.toLowerCase())} →</a> · <a href="../skin-type/${s.id}.html">${esc(s.name)} skin guide →</a></p>`;
+    emit(`category/${ci.id}-for-${s.id}-skin.html`, shell({ url, depth: 3, crumb: 'Product types', emoji: ci.emoji, h1: `Best Korean ${ci.name.toLowerCase()} for ${s.name.toLowerCase()} skin`, title: `Korean ${ci.name.toLowerCase()} for ${s.name.toLowerCase()} skin`, desc: `Choosing a Korean ${ci.name.toLowerCase()} for ${s.name.toLowerCase()} skin.`, bodyHtml: body, ld: [artLD(`Korean ${ci.name} for ${s.name} skin`, ci.job, url)] }), '0.5');
+  });
+});
+// 12d. skin-type hubs
+SKINTYPES.forEach(s => {
+  const concerns = (ST_CONCERNS[s.id] || []).map(id => CONCERN_BY[id]).filter(Boolean);
+  const ings = [...new Set(concerns.flatMap(c => (c.lookFor || [])))].map(id => ING_BY[id]).filter(Boolean);
+  const url = `${SITE}/guide/kb/skin-type/${s.id}.html`;
+  const body = `<p class="lead">${esc(s.desc || '')}</p>
+    <h2>What to focus on</h2><div>${(s.focus || []).map(f => `<span class="pill">${esc(f)}</span>`).join('')}</div>
+    <h2>Ingredients that suit ${esc(s.name.toLowerCase())} skin</h2><div>${ings.map(i => `<a class="pill" href="../ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`).join('')}</div>
+    <h2>Common concerns for ${esc(s.name.toLowerCase())} skin</h2><div>${concerns.map(c => `<a class="pill" href="../routine/${s.id}-${c.id}.html">${c.emoji || ''} ${esc(c.name)}</a>`).join('')}</div>
+    <h2>Product textures to reach for</h2><div>${CATS_ITEMS.map(ci => `<a class="pill" href="../category/${ci.id}-for-${s.id}-skin.html">${ci.emoji || ''} ${esc(ci.name.split('/')[0].trim())}</a>`).join('')}</div>
+    <p><a href="${SITE}/kbeauty">Build your ${esc(s.name.toLowerCase())}-skin routine free →</a></p>`;
+  emit(`skin-type/${s.id}.html`, shell({ url, depth: 3, crumb: 'Skin types', emoji: s.emoji, h1: `Korean skincare for ${s.name.toLowerCase()} skin`, title: `Korean skincare for ${s.name.toLowerCase()} skin — routine & ingredients`, desc: s.desc, bodyHtml: body, ld: [artLD(`Korean skincare for ${s.name} skin`, s.desc, url), faqLD(`What is the best Korean skincare for ${s.name.toLowerCase()} skin?`, ings.map(i => i.name).join(', '))] }), '0.6');
+});
+const catHubLinks = CATS_ITEMS.map(ci => `<a href="category/${ci.id}.html">${ci.emoji || ''} ${esc(ci.name.split('/')[0].trim())}</a>`);
+const stHubLinks = SKINTYPES.map(s => `<a href="skin-type/${s.id}.html">${s.emoji || ''} ${esc(s.name)} skin</a>`);
+
 // ── Library index ───────────────────────────────────────────────────────────
 const idxSections = [
   ...editorialIdxSections,
@@ -323,6 +396,8 @@ const idxSections = [
   ['🧪 Ingredients', ING.map(i => `<a href="ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`)],
   ['🏷️ Brands', BRANDS.map(b => `<a href="brand/${b.id}.html">${b.emoji || ''} ${esc(b.name)}</a>`)],
   ['🎯 Concerns', CONCERNS.map(c => `<a href="concern/${c.id}.html">${c.emoji || ''} ${esc(c.name)}</a>`)],
+  ['🧖 Skin types', stHubLinks],
+  ['🧴 Product types', catHubLinks],
   ['💸 Dupes', DUPES.map(dp => `<a href="dupe/${dp.id}.html">${esc(dp.altName || dp.reference)}</a>`)],
   ['📖 Glossary', GLOSS.map(g => `<a href="term/${slug(g.term)}.html">${esc(g.term)}</a>`)],
 ];
