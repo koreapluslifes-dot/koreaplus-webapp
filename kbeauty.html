@@ -455,6 +455,10 @@
     /* AdSense */
     .kb-ad-adsense { padding:0 12px 10px; min-height:100px; display:flex; align-items:center; justify-content:center; }
     .kb-ad-adsense ins { width:100%; }
+    /* Coupang Partners (KR/ko) */
+    .kb-ad-coupang { padding:8px 8px 4px; overflow-x:auto; text-align:center; }
+    .kb-ad-coupang iframe { display:block; margin:0 auto; }
+    .kb-ad-coupang-disc { font-size:10.5px; color:var(--text3); padding:4px 12px 8px; line-height:1.45; }
     @media (max-width:520px){ .kb-ad-ali-cta { width:100%; text-align:center; } }
 
     /* ═══ Seoul-vs-World Trend Radar ══════════════════════════════════════════ */
@@ -642,7 +646,6 @@
     <button class="filter-chip" data-target="kb-dupes" data-i18n="kbeauty.filter.dupes">💸 Dupes</button>
     <button class="filter-chip" data-target="kb-buy" data-i18n="kbeauty.filter.buy">🛡️ Buy Safe</button>
     <button class="filter-chip" data-target="kb-board" data-i18n="kbeauty.filter.board">🔥 Trending</button>
-    <button class="filter-chip" data-target="kb-shop" data-i18n="kbeauty.filter.shop">🛍️ Shop</button>
   </div>
 
   <!-- Seasonal skin forecast (zero-key static; live UV is a future upgrade) -->
@@ -844,16 +847,7 @@
     <div id="kb-board-box" aria-live="polite"></div>
   </section>
 
-  <!-- Shop (live AliExpress grid + curated retailers) -->
-  <section class="kb-sec" id="kb-shop">
-    <div class="kb-sec-head">
-      <div class="kb-sec-title" data-i18n="kbeauty.sec.shop.title">🛍️ Shop authentic K-beauty</div>
-      <div class="kb-sec-sub" data-i18n="kbeauty.sec.shop.sub">Localized picks · official brand stores</div>
-    </div>
-    <div id="kb-shop-grid" class="kb-shop-grid" aria-live="polite"></div>
-    <div id="kb-retailers" class="kb-retailers"></div>
-    <div class="funnel-disc" id="kb-shop-disc" data-i18n="kbeauty.shop.disc">Some links are affiliate links — they help keep KoreaPlus free, at no extra cost to you. We only suggest authentic K-beauty retailers.</div>
-  </section>
+  <!-- (AliExpress shop section removed — "정품 구매처(#kb-buy)" hub now covers retailers) -->
 
   <!-- Build your shelf funnel -->
   <section class="funnel" id="kb-shelf">
@@ -925,9 +919,9 @@
 
 <script src="config.js" onerror="void 0"></script>
 <script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
-<script src="kbeauty-data.js?v=7"></script>
+<script src="kbeauty-data.js?v=10"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/kbeauty-sharecard.js"></script>
-<script src="modules/kbeauty.js?v=9"></script>
+<script src="modules/kbeauty.js?v=10"></script>
 </body>
 </html>

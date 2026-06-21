@@ -910,26 +910,11 @@
       </${tag}>`;
     }).join('');
   }
-  async function loadShop(seed) {
-    const grid = $('#kb-shop-grid'); if (!grid) return;
-    seed = seed || (SHOP.aliSeeds || {}).general || 'korean skincare';
-    kbtrack('shop_open', { seed: seed });
-    if (seed === lastSeed && grid.dataset.loaded === '1') return;
-    lastSeed = seed;
-    grid.innerHTML = `<div class="kb-loading" style="grid-column:1/-1"><div class="kb-spin"></div>${esc(t('loading'))}</div>`;
-    if (!API || !API.getKbeautyProducts) { grid.innerHTML = `<div class="kb-empty" style="grid-column:1/-1">${esc(t('shopEmpty'))}</div>`; return; }
-    try {
-      const items = await API.getKbeautyProducts(seed, lang);
-      if (!Array.isArray(items) || !items.length) throw new Error('empty');
-      grid.dataset.loaded = '1';
-      grid.innerHTML = items.slice(0, 12).map(p => `<a class="kb-prod" href="${esc(p.url || '#')}" target="_blank" rel="sponsored noopener">
-        ${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">` : ''}
-        <div class="p-body"><div class="p-title">${esc(p.title || '')}</div>
-        ${p.price ? `<div class="p-price">${esc(t('priceFrom'))} ${esc(p.price)}</div>` : ''}</div>
-      </a>`).join('');
-    } catch {
-      grid.innerHTML = `<div class="kb-empty" style="grid-column:1/-1">${esc(t('shopEmpty'))}</div>`;
-    }
+  // AliExpress shopping removed — all "shop" CTAs now route to the on-site
+  // Where-to-Buy hub (Olive Young, YesStyle, official stores + authenticity guide).
+  function loadShop(seed) {
+    kbtrack('shop_open', { seed: seed || '' });
+    jumpTo('#kb-buy');
   }
 
   // ── Build-your-shelf funnel ─────────────────────────────────────────────────
@@ -1026,34 +1011,33 @@
   // ── Top sponsored block (localized AliExpress geo strip + AdSense) ───────────
   function renderTopAds() {
     const host = $('#kb-topads'); if (!host) return;
+    const isKo = (lang === 'ko');
     const parts = [];
-    parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · AliExpress</div><div class="kb-ad-ali" id="kb-ad-ali"><div class="kb-empty">${esc(t('adAliLoading'))}</div></div></div>`);
+    // Korea visitors: Coupang Partners carousel (real products, ships in Korea).
+    if (isKo) parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · 쿠팡파트너스</div><div class="kb-ad-coupang" id="kb-ad-coupang"></div><div class="kb-ad-coupang-disc">이 광고는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div></div>`);
     parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('advertisement'))}</div><div class="kb-ad-adsense"><ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200" data-ad-format="auto" data-full-width-responsive="true"></ins></div></div>`);
     host.innerHTML = parts.join('');
     host.hidden = false;
     try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
-    loadTopAli();
+    if (isKo) injectCoupang($('#kb-ad-coupang'));
   }
-  function loadTopAli() {
-    const box = $('#kb-ad-ali'); if (!box) return;
-    const seed = (SHOP.aliSeeds || {}).general || 'korean skincare';
-    const banner = () => `<div class="kb-ad-ali-banner">
-      <span class="em" aria-hidden="true">🛍️</span>
-      <div style="flex:1;min-width:150px"><div class="kb-ad-ali-t">${esc(t('adAliTitle'))}</div><div class="kb-ad-ali-s">${esc(t('adAliSub'))}</div></div>
-      <a class="kb-ad-ali-cta" id="kb-ad-ali-go">${esc(t('adAliCta'))} →</a></div>`;
-    // target 'buy' (no live products yet) → on-site Where-to-Buy hub (works without
-    // the AliExpress API key); 'shop' (live products) → in-page product grid.
-    const wireGo = (target) => { const g = $('#kb-ad-ali-go'); if (g) g.addEventListener('click', () => { if (target === 'buy') { jumpTo('#kb-buy'); } else { loadShop(seed); jumpTo('#kb-shop'); } }); };
-    if (!API || !API.getKbeautyProducts) { box.innerHTML = banner(); wireGo('buy'); return; }
-    API.getKbeautyProducts(seed, lang).then(items => {
-      if (!Array.isArray(items) || !items.length) { box.innerHTML = banner(); wireGo('buy'); return; }
-      const cards = items.slice(0, 10).map(p => `<a class="kb-ad-prod" href="${esc(p.url || '#')}" target="_blank" rel="sponsored noopener">
-        ${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">` : ''}
-        <div class="pb"><div class="pt">${esc(p.title || '')}</div>${p.price ? `<div class="pp">${esc(t('priceFrom'))} ${esc(p.price)}</div>` : ''}</div></a>`).join('');
-      box.innerHTML = `<div class="kb-ad-ali-head"><div><div class="kb-ad-ali-t">${esc(t('adAliTitle'))}</div><div class="kb-ad-ali-s">${esc(t('adAliSub'))}</div></div><a class="kb-ad-ali-cta" id="kb-ad-ali-go">${esc(t('adAliCta'))} →</a></div><div class="kb-ad-strip">${cards}</div>`;
-      wireGo('shop');
-    }).catch(() => { box.innerHTML = banner(); wireGo('buy'); });
+  function injectCoupang(host) {
+    if (!host || host.dataset.done) return; host.dataset.done = '1';
+    try {
+      const ifr = document.createElement('iframe');
+      ifr.style.cssText = 'width:100%;max-width:690px;height:150px;border:0;overflow:hidden;display:block;margin:0 auto';
+      ifr.setAttribute('scrolling', 'no'); ifr.setAttribute('title', 'Coupang Partners'); ifr.setAttribute('loading', 'lazy');
+      host.appendChild(ifr);
+      const d = ifr.contentWindow.document;
+      d.open();
+      d.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:hidden}</style></head><body>'
+        + '<script src="https://ads-partners.coupang.com/g.js"><\/script>'
+        + '<script>new PartnersCoupang.G({"id":996633,"trackingCode":"AF4227535","subId":null,"template":"carousel","width":"680","height":"140"});<\/script>'
+        + '</body></html>');
+      d.close();
+    } catch { /* coupang failed — leave block empty */ }
   }
+  // (loadTopAli removed — AliExpress top strip dropped; top block is now Coupang(ko) + AdSense)
 
   // ── Seoul-vs-World Trend Radar (#1): Korea×West quadrant + lifecycle cards ──
   const RADAR_STAGE_CLS = { emerging:'st-emerging', rising:'st-rising', peak:'st-peak', mainstream:'st-mainstream', fading:'st-fading' };
