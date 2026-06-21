@@ -79,7 +79,7 @@
   </script>
 
   <script src="config.js"></script>
-  <link rel="stylesheet" href="style.css?v=19">
+  <link rel="stylesheet" href="style.css?v=20">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
   <link rel="stylesheet" href="hub-styles.css?v=8">
@@ -188,6 +188,9 @@
 <!-- Returning-visitor retention: welcome-back strip + recently-viewed rail
      (populated by app.js from localStorage; hidden when empty) -->
 <section id="kp-retain" class="kp-retain" aria-label="Your activity"></section>
+
+<!-- Localized top ads (AdSense + AliExpress merch) — no top unit otherwise. Strip self-hides if AliExpress empty. -->
+<div id="kp-topads" class="kp-topads" data-q="korea souvenir travel gift" style="max-width:1100px;margin:0 auto;padding:0 24px"></div>
 
 <!-- Categories -->
 <section class="categories-section" id="categories-section">
@@ -524,6 +527,7 @@
 <script src="app.js?v=21"></script>
 <script src="modules/nav.js?v=3"></script>
 <script src="modules/api-client.js"></script>
+<script defer src="modules/topads.js"></script>
 <script src="modules/dashboard.js?v=2"></script>
 <script src="modules/week-section.js"></script>
 
