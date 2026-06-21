@@ -204,8 +204,121 @@ verdItems.forEach((it, i) => {
   sitemapUrls.push({ loc: url, prio: '0.7' }); written.push(it.slug + '.html');
 });
 
+// ── 10. Editorial content (history/format/heritage/company/industry/country/philosophy) ──
+const EDITORIAL_CATS = {
+  history: { path: 'history', crumb: 'History', label: '📜 K-beauty history' },
+  format: { path: 'format', crumb: 'Formats', label: '💡 Formats & inventions' },
+  heritage: { path: 'heritage', crumb: 'Heritage ingredients', label: '🌿 Heritage ingredients' },
+  company: { path: 'company', crumb: 'Companies', label: '🏢 Companies & makers' },
+  industry: { path: 'industry', crumb: 'Industry', label: '🏭 Industry & regulation' },
+  country: { path: 'country', crumb: 'K-beauty worldwide', label: '🌍 K-beauty worldwide' },
+  philosophy: { path: 'compare', crumb: 'Korea vs West', label: '⚖️ Korea vs the West' },
+};
+const editorialIndex = {};   // cat -> [{slug,h1,emoji,label}]
+const EDIT_FILE = path.join(__dirname, 'kbeauty-editorial.json');
+if (fs.existsSync(EDIT_FILE)) {
+  const ed = JSON.parse(fs.readFileSync(EDIT_FILE, 'utf8'));
+  (ed.categories || []).forEach(catObj => {
+    const meta = EDITORIAL_CATS[catObj.cat]; if (!meta) return;
+    const peers = (catObj.items || []);
+    editorialIndex[catObj.cat] = [];
+    peers.forEach((it, idx) => {
+      const sg = slug(it.slug || it.h1);
+      const url = `${SITE}/guide/kb/${meta.path}/${sg}.html`;
+      const sections = (it.sections || []).map(s => `<h2>${esc(s.h)}</h2><p>${esc(s.body)}</p>`).join('');
+      const facts = (it.keyFacts || []).length ? `<div class="box"><b>Key facts</b><ul>${it.keyFacts.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>` : '';
+      const cites = (it.citations || []).length ? `<h2>Sources</h2><ul>${it.citations.map(c => `<li><a href="${esc(c.url)}" rel="nofollow noopener" target="_blank">${esc(c.label)} ↗</a></li>`).join('')}</ul>` : '';
+      const rel = peers.filter((_, j) => j !== idx).slice(0, 6).map(p => `<a href="${slug(p.slug || p.h1)}.html">${p.emoji || ''} ${esc(p.h1)}</a>`).join('');
+      const body = `<p class="lead">${esc(it.lead || '')}</p>${sections}${facts}${cites}`;
+      emit(`${meta.path}/${sg}.html`, shell({ url, depth: 3, crumb: meta.crumb, emoji: it.emoji, h1: it.h1, title: it.title, desc: it.metaDesc, bodyHtml: body, related: rel, ld: [artLD(it.h1, it.metaDesc, url)] }), catObj.cat === 'history' ? '0.7' : '0.6');
+      editorialIndex[catObj.cat].push({ sg, h1: it.h1, emoji: it.emoji, path: meta.path });
+    });
+  });
+}
+const editorialIdxSections = Object.entries(EDITORIAL_CATS)
+  .filter(([k]) => (editorialIndex[k] || []).length)
+  .map(([k, meta]) => [meta.label, editorialIndex[k].map(it => `<a href="${meta.path}/${it.sg}.html">${it.emoji || ''} ${esc(it.h1)}</a>`)]);
+
+// ── 11. INCI decoder — function hubs + gated individual ingredient pages ─────
+const COSING = require('./assets/cosing-ingredients.json');
+const FN_INFO = {
+  'humectant': ['Humectants', '💧', 'Humectants draw water into the upper layers of skin, the backbone of K-beauty "dewy" hydration. They work best sandwiched under an emollient or occlusive that locks the water in.'],
+  'emollient': ['Emollients & occlusives', '🧴', 'Emollients soften and smooth the skin surface; occlusives form a light seal that slows water loss — the "lock it in" step after watery layers.'],
+  'soothing': ['Soothing / calming', '🌿', 'Soothing actives help comfort the look of redness and sensitivity — a defining strength of Korean cica/centella and heartleaf formulas.'],
+  'antioxidant': ['Antioxidants', '🍊', 'Antioxidants help defend skin against the visible effects of daily environmental stress and support a brighter, more even-looking tone.'],
+  'surfactant': ['Cleansing agents (surfactants)', '🫧', 'Surfactants lift away oil, sunscreen and grime. K-beauty favours mild amino-acid and amphoteric surfactants that clean without stripping.'],
+  'preservative': ['Preservatives', '🛡️', 'Preservatives keep water-based formulas safe from microbial growth. Modern, well-tolerated systems are why your essence stays safe for months.'],
+  'uv-filter': ['UV filters (sunscreen)', '☀️', 'UV filters absorb or reflect UV. Korea approves several elegant next-generation filters not yet available in the US, a key reason Korean sunscreens feel so light.'],
+  'exfoliant': ['Exfoliants (AHA/BHA/PHA)', '✨', 'Chemical exfoliants loosen dead surface cells for smoother, clearer-looking skin. K-beauty tends to favour low, gentle, gradual percentages.'],
+  'retinoid': ['Retinoids & alternatives', '🌙', 'Retinoids support skin renewal and the look of firmness over time. Introduce slowly at night and always pair with daytime SPF.'],
+  'peptide': ['Peptides', '🧬', 'Peptides are signal ingredients formulated to support a firmer, bouncier-looking complexion — a fast-growing K-beauty category.'],
+  'brightening': ['Brightening actives', '🌟', 'Brightening actives target the look of dark spots and uneven tone for a more radiant, even finish.'],
+  'fragrance': ['Fragrance & essential oils', '🌸', 'Fragrance and essential oils add scent but can be a sensitivity trigger — useful to recognise on a label if your skin is reactive.'],
+  'conditioning': ['Skin-conditioning agents', '🍃', 'Skin-conditioning agents improve how skin looks and feels — versatile multitaskers found across toners, essences and creams.'],
+  'stabilizer': ['Emulsifiers & stabilizers', '⚗️', 'Emulsifiers and stabilizers hold oil and water together so a cream stays smooth and uniform from first pump to last.'],
+  'ph-adjuster': ['pH adjusters', '⚖️', 'pH adjusters fine-tune a formula to skin-friendly acidity, which keeps both the product and your skin barrier happy.'],
+  'chelator': ['Chelators', '🔗', 'Chelators bind stray metal ions so formulas stay stable and effective for longer.'],
+  'solvent': ['Solvents', '🧪', 'Solvents dissolve and carry other ingredients. Some lightweight alcohols also give a fast-absorbing finish (a sensitivity point for some skin).'],
+  'other': ['Other functional ingredients', '🔬', 'Specialised functional ingredients that round out modern K-beauty formulas.'],
+};
+function fnBase(fn) {
+  const f = String(fn).toLowerCase();
+  if (f.includes('uv filter')) return 'uv-filter';
+  if (f.includes('humectant')) return 'humectant';
+  if (f.includes('preservative')) return 'preservative';
+  if (f.includes('fragrance') || f.includes('essential oil')) return 'fragrance';
+  if (f.includes('emollient') || f.includes('occlusive')) return 'emollient';
+  if (f.includes('antioxidant')) return 'antioxidant';
+  if (f.includes('soothing')) return 'soothing';
+  if (f.includes('surfactant')) return 'surfactant';
+  if (f.includes('peptide')) return 'peptide';
+  if (f.includes('retinoid') || f.includes('retinol')) return 'retinoid';
+  if (f.includes('exfoliant') || /\b(aha|bha|pha)\b/.test(f)) return 'exfoliant';
+  if (f.includes('brightening')) return 'brightening';
+  if (f.includes('chelator')) return 'chelator';
+  if (f.includes('ph ') || f.includes('ph-adjuster') || f.includes('ph adjuster')) return 'ph-adjuster';
+  if (f.includes('emulsifier') || f.includes('stabilizer')) return 'stabilizer';
+  if (f.includes('solvent') || f.includes('alcohol')) return 'solvent';
+  if (f.includes('conditioning') || f.includes('hydrating')) return 'conditioning';
+  return 'other';
+}
+const inciEntries = Object.entries(COSING.ingredients || {}).map(([key, v]) => ({ key, slug: slug(key), name: v.name || key, fn: v.fn || '', desc: v.desc || '', flags: v.flags || [], base: fnBase(v.fn || '') }));
+const byBase = {};
+inciEntries.forEach(e => { (byBase[e.base] = byBase[e.base] || []).push(e); });
+const gatedInci = inciEntries.filter(e => e.desc && e.desc.split(/\s+/).length >= 14);
+const gatedSlugs = new Set(gatedInci.map(e => e.slug));
+// 11a. function hubs
+Object.entries(byBase).forEach(([base, list]) => {
+  const info = FN_INFO[base] || FN_INFO.other;
+  const url = `${SITE}/guide/kb/inci-class/${base}.html`;
+  const rows = list.slice().sort((a, b) => a.name.localeCompare(b.name)).map(e => gatedSlugs.has(e.slug)
+    ? `<li><a href="../inci/${e.slug}.html"><b>${esc(e.name)}</b></a> — ${esc(e.desc || e.fn)}</li>`
+    : `<li><b>${esc(e.name)}</b> — ${esc(e.desc || e.fn)}</li>`).join('');
+  const body = `<p class="lead">${esc(info[2])}</p>
+    <h2>${list.length} ${esc(info[0].toLowerCase())} in the K-beauty INCI decoder</h2>
+    <ul>${rows}</ul>
+    <p><a href="${SITE}/kbeauty">Decode any ingredient list free →</a></p>`;
+  emit(`inci-class/${base}.html`, shell({ url, depth: 3, crumb: 'INCI decoder', emoji: info[1], h1: `${info[0]} in skincare — what they do`, title: `${info[0]} in K-beauty — what they do & full list`, desc: info[2], bodyHtml: body, ld: [artLD(`${info[0]} in skincare`, info[2], url), faqLD(`What are ${info[0].toLowerCase()} in skincare?`, info[2])] }), '0.6');
+});
+// 11b. gated individual INCI pages
+const FLAG_LABEL = { 'eu-allergen': '⚠️ EU-listed fragrance allergen', 'fungal-acne-trigger': '⚠️ May feed malassezia (fungal acne)', 'comedogenic': '⚠️ Can be pore-clogging for some', 'drying': '⚠️ Can be drying in high amounts', 'sensitizer': '⚠️ Possible sensitizer for reactive skin' };
+gatedInci.forEach(e => {
+  const info = FN_INFO[e.base] || FN_INFO.other;
+  const url = `${SITE}/guide/kb/inci/${e.slug}.html`;
+  const flagsHtml = (e.flags || []).length ? `<div class="box"><b>Heads-up flags</b><ul>${e.flags.map(f => `<li>${esc(FLAG_LABEL[f] || f)}</li>`).join('')}</ul></div>` : '';
+  const peers = (byBase[e.base] || []).filter(x => x.slug !== e.slug && gatedSlugs.has(x.slug)).slice(0, 6).map(x => `<a href="${x.slug}.html">${esc(x.name)}</a>`).join('');
+  const body = `<p class="lead">${esc(e.desc)}</p>
+    <h2>What it does</h2><p><b>Function:</b> ${esc(e.fn)}. ${esc(info[2])}</p>
+    ${flagsHtml}
+    <h2>How to spot it on a label</h2><p>On a Korean product's INCI list, look for <b>${esc(e.name)}</b>. Ingredients are listed high-to-low by amount, so its position hints at how much is in the formula. <a href="../inci-class/${e.base}.html">See all ${esc(info[0].toLowerCase())} →</a></p>`;
+  emit(`inci/${e.slug}.html`, shell({ url, depth: 3, crumb: 'INCI decoder', emoji: info[1], h1: `${e.name}: what it is in skincare`, title: `${e.name} in skincare — what it does, safety`, desc: e.desc.slice(0, 155), bodyHtml: body, related: peers, ld: [{ '@context': 'https://schema.org', '@type': 'DefinedTerm', name: e.name, description: e.desc, inDefinedTermSet: `${SITE}/guide/kb/inci-class/${e.base}.html` }, faqLD(`What is ${e.name} in skincare?`, e.desc)] }), '0.5');
+});
+const inciHubLinks = Object.keys(byBase).map(base => { const info = FN_INFO[base] || FN_INFO.other; return `<a href="inci-class/${base}.html">${info[1]} ${esc(info[0])}</a>`; });
+
 // ── Library index ───────────────────────────────────────────────────────────
 const idxSections = [
+  ...editorialIdxSections,
+  ['🔬 INCI ingredient decoder', inciHubLinks],
   ['⚖️ Trend verdicts', verdItems.map(it => `<a href="${it.slug}.html">${it.emoji || ''} ${esc(it.label)}</a>`)],
   ['🧪 Ingredients', ING.map(i => `<a href="ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`)],
   ['🏷️ Brands', BRANDS.map(b => `<a href="brand/${b.id}.html">${b.emoji || ''} ${esc(b.name)}</a>`)],
