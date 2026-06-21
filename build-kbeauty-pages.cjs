@@ -42,6 +42,12 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + '.foot{margin-top:24px;border-top:1px solid #eee;padding-top:14px;font-size:13px;color:#777}.foot a{margin-right:14px;text-decoration:none}'
   + '.disc{font-size:11.5px;color:#999;margin-top:16px}';
 
+// ── Google AdSense (Auto ads page tag + one in-content responsive unit) ─────
+const ADSENSE_CLIENT = 'ca-pub-1378943893051810';
+const ADSENSE_SLOT = '4521899200';
+const AD_LOADER = `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>`;
+const AD_UNIT = `<ins class="adsbygoogle" style="display:block;margin:22px 0;width:100%" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${ADSENSE_SLOT}" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>`;
+
 function shell(o) {
   // o: {url, title, desc, depth, h1, emoji, ko, bodyHtml, ld, related}
   const back = '../'.repeat(o.depth || 2);
@@ -54,11 +60,13 @@ function shell(o) {
 <meta property="og:title" content="${esc(o.h1)}"><meta property="og:description" content="${esc((o.desc || '').slice(0, 158))}"><meta property="og:url" content="${o.url}"><meta property="og:type" content="article">
 <link rel="alternate" hreflang="x-default" href="${HUB}">
 ${ld}
+${AD_LOADER}
 <style>${CSS}</style></head><body><div class="w">
 <div class="bc"><a href="${SITE}/kbeauty">K-Beauty</a> › <a href="${SITE}/guide/kb/">Library</a>${o.crumb ? ' › ' + o.crumb : ''}</div>
 <div class="em" aria-hidden="true">${o.emoji || '✨'}</div>
 <h1>${esc(o.h1)}${o.ko ? ` <span class="ko">${esc(o.ko)}</span>` : ''}</h1>
 ${o.bodyHtml}
+${AD_UNIT}
 <a class="cta" href="${SITE}/kbeauty">Explore the full K-beauty hub →</a>
 ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
 <div class="foot"><a href="${SITE}/kbeauty">💄 K-Beauty hub</a><a href="${SITE}/guide/kb/">📚 All guides</a><a href="${SITE}/guide/kpop.html">🎤 K-Pop</a><a href="${SITE}/guide/">🧭 Korea travel</a></div>
