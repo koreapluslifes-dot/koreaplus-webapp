@@ -32,7 +32,23 @@
     pt: { hA: 'Não perca suas ideias de viagem à Coreia', hB: 'Resumo semanal grátis de Coreia e K-beauty', sub: 'Tendências, ofertas e dicas — uma vez por semana, sem spam.', ph: 'seu@email.com', btn: 'Quero o resumo', no: 'Agora não', ok: 'Pronto! Confira seu e-mail em breve ✓', err: 'Insira um e-mail válido.' },
     id: { hA: 'Jangan lewatkan ide perjalanan Korea', hB: 'Ringkasan mingguan Korea & K-beauty gratis', sub: 'Tren, promo, dan tips — sekali seminggu, tanpa spam.', ph: 'kamu@email.com', btn: 'Dapatkan ringkasan', no: 'Lain kali', ok: 'Berhasil! Cek email kamu segera ✓', err: 'Masukkan email yang valid.' },
   };
-  var t = T[lang] || T.en;
+  // Context-aware copy: K-beauty pages get beauty offers, travel pages get travel offers.
+  var isBeauty = /kbeauty|k-beauty/i.test(location.pathname) || !!D.getElementById('kb-radar') || !!D.getElementById('kb-quiz-box');
+  var B = {
+    en: { hA: "Don't miss the next K-beauty trend", hB: 'Free weekly K-beauty trends & deals', sub: 'Trends, honest verdicts and deals — once a week, no spam.' },
+    ko: { hA: '다음 K-뷰티 트렌드, 놓치지 마세요', hB: '주간 K-뷰티 트렌드·딜 무료 받기', sub: '트렌드·정직한 평가·특가 — 주 1회, 스팸 없음.' },
+    ja: { hA: '次のK-beautyトレンドをお見逃しなく', hB: '毎週のK-beautyトレンド・お得が無料', sub: 'トレンド・正直な評価・お得を週1回、スパムなし。' },
+    zh: { hA: '别错过下一个K-beauty趋势', hB: '每周K-beauty趋势与优惠，免费', sub: '趋势、诚实评测与优惠，每周一封，无垃圾邮件。' },
+    es: { hA: 'No te pierdas la próxima tendencia K-beauty', hB: 'Tendencias y ofertas K-beauty gratis cada semana', sub: 'Tendencias, veredictos honestos y ofertas — una vez por semana, sin spam.' },
+    fr: { hA: 'Ne ratez pas la prochaine tendance K-beauty', hB: 'Tendances & bons plans K-beauty, gratuits chaque semaine', sub: 'Tendances, verdicts honnêtes et bons plans — une fois par semaine, sans spam.' },
+    de: { hA: 'Verpasse den nächsten K-Beauty-Trend nicht', hB: 'Wöchentliche K-Beauty-Trends & Deals, gratis', sub: 'Trends, ehrliche Urteile und Deals — einmal pro Woche, kein Spam.' },
+    pt: { hA: 'Não perca a próxima tendência de K-beauty', hB: 'Tendências e ofertas de K-beauty grátis toda semana', sub: 'Tendências, vereditos honestos e ofertas — uma vez por semana, sem spam.' },
+    id: { hA: 'Jangan lewatkan tren K-beauty berikutnya', hB: 'Tren & promo K-beauty mingguan, gratis', sub: 'Tren, penilaian jujur, dan promo — sekali seminggu, tanpa spam.' },
+  };
+  var base = T[lang] || T.en;
+  var t = isBeauty ? Object.assign({}, base, B[lang] || B.en) : base;
+  var heroEmoji = isBeauty ? '💄✨' : '✈️🗺️';
+  var ctx = isBeauty ? 'beauty' : 'travel';
 
   // ── Frequency cap ─────────────────────────────────────────────────────────
   if (g('kp_subscribed') === '1') return;
@@ -48,7 +64,7 @@
     bg.id = 'kp-cro';
     bg.style.cssText = 'position:fixed;inset:0;z-index:100001;background:rgba(20,12,24,.55);display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;transition:opacity .2s';
     bg.innerHTML = '<div role="dialog" aria-modal="true" aria-label="' + head + '" style="background:#fff;color:#1a1320;max-width:380px;width:100%;border-radius:18px;padding:24px 22px;box-shadow:0 20px 60px rgba(0,0,0,.4);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">'
-      + '<div style="font-size:30px">✈️💄</div>'
+      + '<div style="font-size:30px">' + heroEmoji + '</div>'
       + '<h2 style="font-size:20px;line-height:1.3;margin:8px 0 6px">' + head + '</h2>'
       + '<p style="font-size:13.5px;color:#555;margin:0 0 14px">' + t.sub + '</p>'
       + '<form id="kp-cro-form"><input id="kp-cro-email" type="email" required placeholder="' + t.ph + '" autocomplete="email" style="width:100%;box-sizing:border-box;font-size:15px;padding:12px 14px;border:1px solid #ddd;border-radius:12px;margin-bottom:10px">'
@@ -69,9 +85,9 @@
       var errEl = D.getElementById('kp-cro-err');
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { errEl.textContent = t.err; errEl.style.display = 'block'; return; }
       var url = (W.WORKER_URL || '') + '/api/subscribe';
-      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, lang: lang, source: 'exit-' + ab }) }).catch(function () {});
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, lang: lang, source: 'exit-' + ctx + '-' + ab }) }).catch(function () {});
       s('kp_subscribed', '1');
-      track('subscribe', { source: 'exit', variant: ab });
+      track('subscribe', { source: 'exit', context: ctx, variant: ab });
       var card = bg.firstChild;
       card.innerHTML = '<div style="font-size:34px">🎉</div><h2 style="font-size:19px;margin:10px 0">' + t.ok + '</h2>';
       setTimeout(function () { bg.style.opacity = '0'; setTimeout(function () { bg.remove(); }, 200); }, 1900);
