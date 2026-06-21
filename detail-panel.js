@@ -21,7 +21,7 @@
     ['overview', 'bestFor', 'schedule'].forEach(k => { if (loc[k]) m[k] = loc[k]; });
     if (loc.howto && loc.howto.length) m.howto = loc.howto;
     if (loc.tips && loc.tips.length) m.tips = loc.tips;
-    if (en.price || loc.priceNote) m.price = { range: en.price && en.price.range, note: loc.priceNote || (en.price && en.price.note) };
+    if (en.price || loc.priceNote || loc.priceRange) m.price = { range: loc.priceRange || (en.price && en.price.range), note: loc.priceNote || (en.price && en.price.note) };
     return m;
   }
 

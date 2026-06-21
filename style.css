@@ -345,7 +345,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 
 /* ===== MUST-VISIT SECTION ===== */
 .mv-section{background:var(--bg2);padding:80px 24px 0;border-top:1px solid var(--border)}
-.mv-header{max-width:1400px;margin:0 auto 48px;text-align:center}
+.mv-header{max-width:1240px;margin:0 auto 44px;text-align:center}
 .mv-eyebrow{
   font-size:12px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;
   color:var(--gold);margin-bottom:10px;
@@ -363,8 +363,8 @@ button{cursor:pointer;border:none;font-family:inherit}
 
 /* Spot Cards Grid */
 .mv-grid{
-  max-width:1400px;margin:0 auto 72px;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  max-width:1240px;margin:0 auto 80px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
 }
 .mv-card{
   background:var(--bg3);border-radius:16px;padding:24px;
@@ -382,8 +382,8 @@ button{cursor:pointer;border:none;font-family:inherit}
 .mv-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px}
 .mv-tags{display:flex;flex-wrap:wrap;gap:6px}
 .mv-tags span{
-  padding:4px 11px;border-radius:20px;font-size:11px;font-weight:600;
-  background:rgba(0,0,0,0.05);color:var(--text3);
+  padding:4px 11px;border-radius:999px;font-size:11px;font-weight:600;
+  background:var(--surface);border:1px solid var(--border);color:var(--text2);
 }
 
 /* Bucket List — fixed dark bg for contrast */
@@ -391,19 +391,19 @@ button{cursor:pointer;border:none;font-family:inherit}
   background:#141210;margin:0 -24px;padding:64px 24px 72px;
   border-top:3px solid var(--gold);
 }
-.bucket-header{max-width:1400px;margin:0 auto 40px;text-align:center}
+.bucket-header{max-width:1240px;margin:0 auto 40px;text-align:center}
 .bucket-title{
   font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;
   letter-spacing:-0.5px;margin-bottom:10px;
 }
 .bucket-sub{font-size:14px;color:rgba(255,255,255,0.45)}
 .bucket-grid{
-  max-width:1400px;margin:0 auto;
+  max-width:1240px;margin:0 auto;
   display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
 }
 .bucket-item{
   display:flex;align-items:center;gap:14px;
-  padding:16px 20px;border-radius:12px;
+  padding:16px 20px;border-radius:14px;
   background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
   transition:background 0.2s,border-color 0.2s,transform 0.2s;
   cursor:default;
