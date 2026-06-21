@@ -9,8 +9,20 @@
 
   let lastItem = null; // remember for re-render on language change
 
+  // Merge localized content (DETAIL_L10N for the current language) over the
+  // English base. Keeps English price.range (numbers) + links; localizes the
+  // prose fields. Falls back to English when a localization is missing.
   function getDetail(name) {
-    return (window.DETAIL_DATA && window.DETAIL_DATA[name]) || {};
+    const en = (window.DETAIL_DATA && window.DETAIL_DATA[name]) || {};
+    const lang = (document.documentElement.lang || 'en').slice(0, 2);
+    const loc = (lang !== 'en' && window.DETAIL_L10N) ? window.DETAIL_L10N[name] : null;
+    if (!loc) return en;
+    const m = Object.assign({}, en);
+    ['overview', 'bestFor', 'schedule'].forEach(k => { if (loc[k]) m[k] = loc[k]; });
+    if (loc.howto && loc.howto.length) m.howto = loc.howto;
+    if (loc.tips && loc.tips.length) m.tips = loc.tips;
+    if (en.price || loc.priceNote) m.price = { range: en.price && en.price.range, note: loc.priceNote || (en.price && en.price.note) };
+    return m;
   }
 
   function esc(s) {
@@ -75,6 +87,23 @@
     return _ddPromise;
   }
 
+  // Per-language detail content (overview/tips/etc. in the visitor's language),
+  // loaded on demand for the current <html lang>. Missing file → English base.
+  let _l10nLang = null, _l10nPromise = null;
+  function ensureL10n() {
+    const lang = (document.documentElement.lang || 'en').slice(0, 2);
+    if (lang === 'en') return Promise.resolve();
+    if (_l10nLang === lang && _l10nPromise) return _l10nPromise;
+    _l10nLang = lang;
+    _l10nPromise = new Promise(res => {
+      const s = document.createElement('script');
+      s.src = 'detail-l10n.' + lang + '.js?v=1';
+      s.onload = res; s.onerror = res;
+      document.head.appendChild(s);
+    });
+    return _l10nPromise;
+  }
+
   // Track viewed places for the home "Recently viewed" rail (retention).
   function trackView(item) {
     if (!item || !item.name) return;
@@ -90,7 +119,9 @@
 
   function open(item) {
     trackView(item);
-    if (window.DETAIL_DATA) { renderOpen(item); return; }
+    const lang = (document.documentElement.lang || 'en').slice(0, 2);
+    const ready = window.DETAIL_DATA && (lang === 'en' || (_l10nLang === lang && window.DETAIL_L10N));
+    if (ready) { renderOpen(item); return; }
     // Open immediately with a loading state, then render once data arrives.
     createShell();
     lastItem = item;
@@ -101,7 +132,7 @@
     document.getElementById('detail-panel').classList.add('open');
     document.getElementById('detail-backdrop').classList.add('open');
     document.body.classList.add('kp-modal-open');
-    ensureDetailData().then(() => renderOpen(item));
+    Promise.all([ensureDetailData(), ensureL10n()]).then(() => renderOpen(item));
   }
 
   function renderOpen(item) {
