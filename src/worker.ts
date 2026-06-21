@@ -276,6 +276,10 @@ export default {
     if (path === '/k-beauty') {
       return Response.redirect('https://koreaplus-lifes.com/kbeauty' + url.search, 301);
     }
+    // Legacy apex sitemap URL → the standalone static file (Apache-served).
+    if (path === '/kbeauty-sitemap.xml') {
+      return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty-sitemap.xml', 301);
+    }
     if (path === '/kbeauty') {
       // GEO text-twin: AI answer-engine crawlers can't run the JS that renders the
       // trend data, so serve them a clean text version (from llms-kbeauty.txt).
@@ -342,25 +346,6 @@ export default {
           ).join('\n');
         }
         const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>`;
-        return new Response(xml, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600', 'Access-Control-Allow-Origin': '*' } });
-      }
-
-      // K-Beauty multilingual sitemap (hub + 9 language variants, each with the
-      // full hreflang alternate set). Reached via the koreaplus-lifes.com/kbeauty*
-      // worker route — no separate CF route needed.
-      if (path.endsWith('/kbeauty-sitemap.xml')) {
-        const BASE = 'https://koreaplus-lifes.com/kbeauty';
-        const today = new Date().toISOString().slice(0, 10);
-        const ALT: [string, string][] = [
-          ['x-default', ''], ['en', ''], ['ko', '?lang=ko'], ['ja', '?lang=ja'], ['zh-CN', '?lang=zh'],
-          ['es', '?lang=es'], ['fr', '?lang=fr'], ['de', '?lang=de'], ['pt-BR', '?lang=pt'], ['id', '?lang=id'],
-        ];
-        const alts = ALT.map(([hl, q]) => `    <xhtml:link rel="alternate" hreflang="${hl}" href="${BASE}${q}"/>`).join('\n');
-        const variants = ['', '?lang=ko', '?lang=ja', '?lang=zh', '?lang=es', '?lang=fr', '?lang=de', '?lang=pt', '?lang=id'];
-        const urls = variants.map(q =>
-          `  <url>\n    <loc>${BASE}${q}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${q ? '0.8' : '0.9'}</priority>\n${alts}\n  </url>`
-        ).join('\n');
-        const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>`;
         return new Response(xml, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600', 'Access-Control-Allow-Origin': '*' } });
       }
 

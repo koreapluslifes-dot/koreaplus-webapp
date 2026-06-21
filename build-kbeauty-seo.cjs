@@ -114,12 +114,19 @@ const indexHtml = `<!doctype html><html lang="en"><head>
 </div></body></html>`;
 fs.writeFileSync(path.join(OUT, 'index.html'), indexHtml);
 
-// Sitemap for the answer cluster
-const today = '2026-06-18';
-const urls = [`${SITE}/guide/kb/`, ...items.map(it => `${SITE}/guide/kb/${it.slug}.html`)];
-const sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
-  + urls.map(u => `  <url><loc>${u}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`).join('\n')
-  + `\n</urlset>`;
-fs.writeFileSync(path.join(__dirname, 'kbeauty-answers-sitemap.xml'), sm);
+// ── Standalone, consolidated K-beauty sitemap ───────────────────────────────
+// One dedicated static file (Apache serves it as application/xml, HEAD works,
+// renders as a proper sitemap — no Worker dependency). Covers the hub in all 9
+// languages (with hreflang) + the answer-page cluster.
+const today = '2026-06-21';
+const HUB = SITE + '/kbeauty';
+const ALT = [['x-default', ''], ['en', ''], ['ko', '?lang=ko'], ['ja', '?lang=ja'], ['zh-CN', '?lang=zh'], ['es', '?lang=es'], ['fr', '?lang=fr'], ['de', '?lang=de'], ['pt-BR', '?lang=pt'], ['id', '?lang=id']];
+const alts = ALT.map(([hl, q]) => `    <xhtml:link rel="alternate" hreflang="${hl}" href="${HUB}${q}"/>`).join('\n');
+const hubVariants = ['', '?lang=ko', '?lang=ja', '?lang=zh', '?lang=es', '?lang=fr', '?lang=de', '?lang=pt', '?lang=id'];
+const hubUrls = hubVariants.map(q => `  <url>\n    <loc>${HUB}${q}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${q ? '0.8' : '0.9'}</priority>\n${alts}\n  </url>`).join('\n');
+const answerUrls = [`${SITE}/guide/kb/`, ...items.map(it => `${SITE}/guide/kb/${it.slug}.html`)]
+  .map(u => `  <url>\n    <loc>${u}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`).join('\n');
+const sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${hubUrls}\n${answerUrls}\n</urlset>\n`;
+fs.writeFileSync(path.join(__dirname, 'kbeauty-sitemap.xml'), sm);
 
-console.log('wrote ' + items.length + ' answer pages + index + sitemap (' + urls.length + ' urls)');
+console.log('wrote ' + items.length + ' answer pages + index + standalone kbeauty-sitemap.xml (' + (hubVariants.length + items.length + 1) + ' urls)');

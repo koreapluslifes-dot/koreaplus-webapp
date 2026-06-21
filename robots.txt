@@ -59,6 +59,5 @@ Allow: /
 # Sitemaps
 Sitemap: https://koreaplus-lifes.com/guide/sitemap.xml
 Sitemap: https://koreaplus-lifes.com/guide/sitemap-images.xml
-Sitemap: https://koreaplus-lifes.com/kbeauty-sitemap.xml
-Sitemap: https://koreaplus-lifes.com/guide/kbeauty-answers-sitemap.xml
+Sitemap: https://koreaplus-lifes.com/guide/kbeauty-sitemap.xml
 Sitemap: https://koreaplus-webapp.jeybeeicon.workers.dev/i-sitemap.xml
