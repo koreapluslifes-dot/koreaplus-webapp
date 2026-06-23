@@ -159,13 +159,14 @@
       g[1].forEach(function(it){
         var id='i'+(k++),on=done[id];
         var link=it[1]?'<div class="l"><a href="'+it[1]+'" onclick="event.stopPropagation()">Learn more →</a></div>':'';
-        html+='<div class="item'+(on?' done':'')+'" data-id="'+id+'"><div class="box">'+(on?'✓':'')+'</div><div class="tx"><div class="t">'+it[0]+'</div>'+link+'</div></div>';
+        html+='<div class="item'+(on?' done':'')+'" data-id="'+id+'" role="checkbox" tabindex="0" aria-checked="'+(on?'true':'false')+'"><div class="box" aria-hidden="true">'+(on?'✓':'')+'</div><div class="tx"><div class="t">'+it[0]+'</div>'+link+'</div></div>';
       });
     });
     document.getElementById('list').innerHTML=html;
     Array.prototype.forEach.call(document.querySelectorAll('.item'),function(el){
-      el.onclick=function(){var id=el.getAttribute('data-id');done[id]=!done[id];save();el.classList.toggle('done',done[id]);el.querySelector('.box').textContent=done[id]?'✓':'';refresh();
+      el.onclick=function(){var id=el.getAttribute('data-id');done[id]=!done[id];save();el.classList.toggle('done',done[id]);el.setAttribute('aria-checked',done[id]?'true':'false');el.querySelector('.box').textContent=done[id]?'✓':'';refresh();
         try{if(window.kpAnalytics)window.kpAnalytics.track('bucket_toggle',{n:count()})}catch(e){}};
+      el.onkeydown=function(e){if(e.key===' '||e.key==='Enter'||e.key==='Spacebar'){e.preventDefault();el.onclick();}};
     });
     refresh();
   }

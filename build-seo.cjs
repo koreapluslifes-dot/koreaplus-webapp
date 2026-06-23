@@ -62,10 +62,11 @@ const jsonld = obj => `<script type="application/ld+json">${JSON.stringify(obj)}
 const cityImg = c => CITY_IMAGES[c] || null;
 const imgUrl = (raw, w, h) => raw + (raw.includes('?') ? '&' : '?') + `w=${w}` + (h ? `&h=${h}&fit=crop` : '') + `&q=80&fm=jpg&auto=format`;
 const ogImgFor = im => im ? imgUrl(im.raw, 1200, 630) : null;
-function heroFigure(im) {
+function heroFigure(im, label) {
   if (!im) return '';
+  const alt = label ? (label + (im.alt ? ' — ' + im.alt : '')) : (im.alt || '');
   return `<figure class="seo-hero-img" style="margin:0 0 18px;border-radius:14px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.08))">` +
-    `<img src="${esc(imgUrl(im.raw, 1000, 480))}" alt="${esc(im.alt)}" width="1000" height="480" loading="eager" style="width:100%;height:auto;display:block;aspect-ratio:25/12;object-fit:cover">` +
+    `<img src="${esc(imgUrl(im.raw, 1000, 480))}" alt="${esc(alt)}" width="1000" height="480" loading="eager" fetchpriority="high" style="width:100%;height:auto;display:block;aspect-ratio:25/12;object-fit:cover">` +
     `<figcaption style="font-size:11px;color:var(--text3,#8a93a0);padding:6px 10px">📷 <a href="${esc(im.byUrl)}" target="_blank" rel="noopener nofollow">${esc(im.by)}</a> / <a href="https://unsplash.com/?utm_source=koreaplus&utm_medium=referral" target="_blank" rel="noopener nofollow">Unsplash</a></figcaption></figure>`;
 }
 const writePage = (rel, html) => {
@@ -225,7 +226,7 @@ const STAY = [
 const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
 // Emerging provincial cities (regional-dispersal trend) — rich guides come from
 // city-l10n.json 'en'; not in CITIES, so generated via their own pass.
-const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }];
+const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }, { name: 'Andong', kr: '안동' }, { name: 'Yeosu', kr: '여수' }];
 
 // "Keep planning {city}" cross-cluster links — emits links only to pages this
 // generator writes. excludeUrl drops the current page from its own list.
@@ -698,6 +699,49 @@ function trustBlock(lang) {
 // reciprocal <xhtml:link> alternate annotations (helps Google discover + index
 // every language variant faster). Keyed by the BASEP-relative url.
 const HREFLANG_SM = new Map();
+// On a localized page, rewrite the 6 city links that HAVE a same-language variant
+// (Seoul/Busan/Jeju/Gyeongju/Jeonju/Incheon) from the EN relative href to the
+// locale dir, so non-EN users clicking the nav/footer/city links stay in their
+// language instead of being dumped into English. Hub/other links keep EN.
+const L10N_CITY_SLUGS = ['seoul', 'busan', 'jeju', 'gyeongju', 'jeonju', 'incheon'];
+const _cityLinkRe = new RegExp('href="guide/things-to-do-in-(' + L10N_CITY_SLUGS.join('|') + ')\\.html"', 'g');
+function localizeLinks(html, lang) {
+  const L = L10N[lang];
+  if (!L || lang === 'en') return html;
+  return html.replace(_cityLinkRe, 'href="' + L.dir + '/guide/things-to-do-in-$1.html"');
+}
+// Pick a category-appropriate emoji for an attraction/food card so the grid
+// reads as a varied, scannable set instead of a wall of identical pins.
+function placeEmoji(name) {
+  const n = String(name || '').toLowerCase();
+  const m = [
+    [/palace|궁|gyeongbok|changdeok|deoksu/, '🏯'], [/temple|사찰|bulguksa|jogyesa|haedong/, '⛩️'], [/tower|타워|n seoul/, '🗼'],
+    [/market|시장|sijang/, '🛒'], [/beach|해수욕|해변|해운대|gwangalli/, '🏖️'],
+    [/museum|박물관|gallery|미술관/, '🏛️'], [/mountain|\bsan\b|산$|봉|seoraksan|hallasan|namsan/, '⛰️'],
+    [/village|마을|hanok|한옥|bukchon|gamcheon/, '🏘️'], [/park|공원|arboretum|수목원|garden|정원/, '🌳'],
+    [/river|han river|강|lake|호수|호/, '🌊'], [/island|섬|\bdo\b|jeju|nami/, '🏝️'],
+    [/shopping|명동|myeong|면세|duty|mall|coex|dongdaemun|ddp/, '🛍️'], [/bridge|다리|대교/, '🌉'],
+    [/hot spring|온천|spa|jjimjil|찜질/, '♨️'], [/night|야경|nightview/, '🌃'],
+    [/cave|동굴/, '🕳️'], [/airport|공항|station|역/, '🚉'], [/cafe|카페|coffee/, '☕'],
+    [/waterfall|폭포/, '💧'], [/fortress|성곽|성벽|hwaseong|성$/, '🏰'], [/zoo|동물원|world|놀이|theme/, '🎡']
+  ];
+  for (const [re, e] of m) if (re.test(n)) return e;
+  return '📍';
+}
+function foodEmoji(name) {
+  const n = String(name || '').toLowerCase();
+  const m = [
+    [/bbq|구이|galbi|갈비|samgyeop|삼겹|bulgogi|불고기|고기|beef|pork|meat/, '🍖'],
+    [/noodle|면|국수|myeon|naengmyeon|냉면|ramyeon|jjajang|짜장|kalguksu/, '🍜'],
+    [/chicken|치킨|닭|dak/, '🍗'], [/soup|탕|찌개|jjigae|gukbap|국밥|stew|전골|jeongol/, '🍲'],
+    [/bibimbap|비빔밥|rice|밥|gimbap|김밥/, '🍚'], [/seafood|회|sashimi|해물|raw fish|hoe|굴|oyster|abalone|전복/, '🦞'],
+    [/dumpling|mandu|만두/, '🥟'], [/pancake|jeon|전$|부침|hotteok|호떡/, '🥞'],
+    [/tteokbokki|떡볶이|street|분식|spicy rice/, '🌶️'], [/bingsu|빙수|dessert|디저트|cake|빵|bakery|bread|소보로|pastry/, '🍧'],
+    [/soju|소주|makgeolli|막걸리|beer|맥주|alcohol|drink|술/, '🍶'], [/tea|차$|녹차/, '🍵']
+  ];
+  for (const [re, e] of m) if (re.test(n)) return e;
+  return '🍽️';
+}
 function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [], image, homeHref = 'index.html' }) {
   const canonical = ORIGIN + url;
   const ogImg = image || `${ORIGIN}/guide/og-image.jpg`;
@@ -713,7 +757,7 @@ function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', a
   if (!/class="kp-klook"/.test(body)) {
     body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
   }
-  return `<!DOCTYPE html>
+  const __out = `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
 <meta charset="UTF-8">
@@ -754,11 +798,12 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnect" href="https://koreaplus-webapp.jeybeeicon.workers.dev">
 <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=3">
-<script src="modules/header.js"></script>
+<link rel="stylesheet" href="seo.css?v=4">
+<script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
+<script defer src="modules/header.js"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
 ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
@@ -837,6 +882,7 @@ ${injectToc(body, lang)}
 <script defer src="modules/klook-cards.js?v=2"></script>
 </body>
 </html>`;
+  return lang === 'en' ? __out : localizeLinks(__out, lang);
 }
 
 function breadcrumbLD(trail) { // trail: [{name,url}]
@@ -1025,16 +1071,16 @@ function buildCity(city) {
 
   let body = bcHtml(trail);
   const im = cityImg(city.name);
-  body += heroFigure(im);
+  body += heroFigure(im, `${city.name}, South Korea`);
   body += keyFactsBox([`🗓️ Best time: Apr–May & Sep–Nov`, `🗣️ Korean (한국어)`, `💱 KRW (₩)`, `⏱️ Suggested: ${isHub ? '3–4' : '2–3'} days`, getThere]);
   if (g) {
     body += `<p class="lead">${esc(g.lead)}</p>`;
     body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${g.attractions.map(a => {
       const sl = placeSlugFor(a.name);
-      const inner = `<span class="ce">📍</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
+      const inner = `<span class="ce">${placeEmoji((a.name || '') + ' ' + (a.nameLocal || ''))}</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
       return sl ? `<a class="seo-card" href="places/${sl}.html">${inner}</a>` : `<div class="seo-card">${inner}</div>`;
     }).join('')}</div>`;
-    if (g.food && g.food.length) body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${g.food.map(f => `<div class="seo-card"><span class="ce">🍽️</span><div class="cn">${esc(f.name)}</div><div class="cd">${esc(f.blurb)}</div></div>`).join('')}</div>`;
+    if (g.food && g.food.length) body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${g.food.map(f => `<div class="seo-card"><span class="ce">${foodEmoji(f.name)}</span><div class="cn">${esc(f.name)}</div><div class="cd">${esc(f.blurb)}</div></div>`).join('')}</div>`;
     if (g.gettingThere) body += `<h2>🚄 Getting There & Getting Around</h2><p>${esc(g.gettingThere)}</p>`;
     if (g.tips && g.tips.length) body += `<h2>💡 Insider Tips</h2><ul class="tips">${g.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
   } else {
@@ -1053,7 +1099,7 @@ function buildCity(city) {
     [`How do I get to ${city.name}?`, `${city.name === 'Seoul' || city.name === 'Incheon' ? 'Fly into Incheon (ICN) airport, then use the AREX train or metro.' : `Take the KTX bullet train or an express bus from Seoul to reach ${city.name} comfortably.`}`],
   ];
   body += `<h2>❓ ${esc(city.name)} Travel FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
-  body += `<h2>🧭 Plan your ${esc(city.name)} trip</h2><div class="seo-linklist"><a href="guide/best-time-to-visit-${slug(city.name)}.html">🗓️ Best time to visit ${esc(city.name)}</a>${TRANSPORT_ROUTES.some(r => r.to === city.name) ? `<a href="guide/seoul-to-${slug(city.name)}.html">🚄 Seoul → ${esc(city.name)}</a>` : ''}<a href="guide/korea-travel-cost-index.html">💰 Trip cost index</a></div>`;
+  body += `<h2>🧭 Keep planning ${esc(city.name)}</h2><div class="seo-linklist"><a href="guide/best-time-to-visit-${slug(city.name)}.html">🗓️ Best time to visit ${esc(city.name)}</a>${TRANSPORT_ROUTES.some(r => r.to === city.name) ? `<a href="guide/seoul-to-${slug(city.name)}.html">🚄 Seoul → ${esc(city.name)}</a>` : ''}<a href="guide/korea-travel-cost-index.html">💰 Trip cost index</a></div>`;
   body += `<h2>📺 ${esc(city.name)} on video & K-screen</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(city.name + ' Korea travel')}" target="_blank" rel="noopener">▶️ ${esc(city.name)} travel videos</a><a href="kdrama-locations.html">🎬 K-drama filming locations</a><a href="kpop.html">🎤 K-pop in Korea</a></div>`;
   body += affHtml(`🎫 Book ${city.name} tours, eSIM & essentials`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
@@ -1108,17 +1154,17 @@ function buildCityL10n(cityName, lang) {
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(g.lead)}</p>`;
   const im = cityImg(cityName);
-  body += heroFigure(im);
+  body += heroFigure(im, (CITY_NAME_L10N[lang] || {})[cityName] || cityName);
   body += keyFactsBox((CITY_FACTS[lang] || (() => []))(cityName));
   // Attractions
   body += `<h2>${esc(ui.attractionsH)}</h2><div class="seo-grid">${g.attractions.map(a => {
     const sl = placeSlugFor(a.name);
-    const inner = `<span class="ce">📍</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
+    const inner = `<span class="ce">${placeEmoji((a.name || '') + ' ' + (a.nameLocal || ''))}</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
     return sl ? `<a class="seo-card" href="places/${sl}.html">${inner}</a>` : `<div class="seo-card">${inner}</div>`;
   }).join('')}</div>`;
   // Food
   if (g.food && g.food.length) {
-    body += `<h2>${esc(ui.eatH)}</h2><div class="seo-grid">${g.food.map(f => `<div class="seo-card"><span class="ce">🍽️</span><div class="cn">${esc(f.name)}</div><div class="cd">${esc(f.blurb)}</div></div>`).join('')}</div>`;
+    body += `<h2>${esc(ui.eatH)}</h2><div class="seo-grid">${g.food.map(f => `<div class="seo-card"><span class="ce">${foodEmoji(f.name)}</span><div class="cn">${esc(f.name)}</div><div class="cd">${esc(f.blurb)}</div></div>`).join('')}</div>`;
   }
   // Getting there
   if (g.gettingThere) body += `<h2>${esc(ui.gettingH)}</h2><p>${esc(g.gettingThere)}</p>`;
@@ -1431,7 +1477,7 @@ function buildBestTime(city) {
   let body = bcHtml(trail);
   body += `<p class="lead">The best time to visit ${esc(c)} is <strong>${esc(bt.peak)}</strong>. ${esc(bt.note)} Here's the full season-by-season breakdown, including when it's cheapest and least crowded.</p>`;
   const im = cityImg(c);
-  body += heroFigure(im);
+  body += heroFigure(im, `${c}, South Korea`);
   body += keyFactsBox([`🏆 Best: ${esc(bt.peak.split(' and ')[0])}`, `💸 Cheapest: winter (Dec–Feb)`, `🚫 Most crowded: cherry-blossom week & Chuseok`, `🗓️ Worst weather: monsoon (Jul)`]);
   body += `<h2>📅 ${esc(c)} by season</h2><table class="seo-costtable"><thead><tr><th>Season</th><th>Weather</th><th>What's on</th></tr></thead><tbody>${SEASON_ROWS.map(([ic, s, w, d]) => `<tr><td>${ic} ${esc(s)}</td><td>${esc(w)}</td><td>${esc(d)}</td></tr>`).join('')}</tbody></table>`;
   body += `<h2>🏆 When to go for the best experience</h2><p>For the iconic version of ${esc(c)}, aim for <strong>${esc(bt.peak)}</strong>. Spring and autumn give the mildest weather and the most photogenic scenery, which is exactly why they're busiest — book accommodation and KTX seats two to three months ahead.</p>`;
@@ -1472,7 +1518,7 @@ function buildTransport(r) {
   if (r.bus) facts.push(`🚌 Bus: ${r.bus}`);
   if (r.subway) facts.push(`🚇 Subway: ${r.subway}`);
   const im = cityImg(r.to);
-  body += heroFigure(im);
+  body += heroFigure(im, `${r.to}, South Korea`);
   body += keyFactsBox(facts);
   const rows = [];
   if (r.ktx) rows.push(['🚄 KTX train', r.ktx, r.ktxKrw || '—']);

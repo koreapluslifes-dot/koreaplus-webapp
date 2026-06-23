@@ -110,8 +110,12 @@
 /* Section list (explore hub) */
 .seo-secttitle { font-size: 20px; font-weight: 800; color: var(--text, #fff); margin: 34px 0 14px; }
 .seo-linklist { display: flex; flex-wrap: wrap; gap: 8px; }
-.seo-linklist a { font-size: 13px; padding: 7px 14px; border-radius: 20px; background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); color: var(--text2, #ccc); text-decoration: none; }
+.seo-linklist a { font-size: 13px; padding: 9px 16px; min-height: 38px; display: inline-flex; align-items: center; border-radius: 20px; background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); color: var(--text2, #ccc); text-decoration: none; }
 .seo-linklist a:hover { border-color: var(--red, #D62246); color: var(--red, #D62246); }
+
+/* On-this-page table of contents (injectToc emits .seo-toc with bare anchors) */
+.seo-toc a { display: inline-flex; align-items: center; min-height: 34px; color: var(--accent2, #74b9ff); text-decoration: none; padding: 5px 12px; border-radius: 8px; background: var(--surface, rgba(255,255,255,.05)); border: 1px solid var(--border, rgba(255,255,255,.08)); font-size: 13px; font-weight: 600; line-height: 1.2; }
+.seo-toc a:hover { border-color: var(--accent2, #74b9ff); color: var(--text, #fff); }
 
 @media (max-width: 600px) {
   .seo-maps a { flex: 1 1 100%; }
