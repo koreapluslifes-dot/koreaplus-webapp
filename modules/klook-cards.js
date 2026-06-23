@@ -35,8 +35,11 @@
     var slot = el.querySelector('.kp-klook-slot') || el;
     var ins = document.createElement('ins');
     ins.className = 'klk-aff-widget';
+    // Per-page widget id: the block's data-adid (city-matched in build-seo.cjs);
+    // fall back to the default Seoul/all-categories widget.
+    var adid = el.getAttribute('data-adid') || '1310693';
     var attrs = {
-      'data-adid': '1310693', 'data-lang': '', 'data-currency': '',
+      'data-adid': adid, 'data-lang': '', 'data-currency': '',
       'data-cardH': '126', 'data-padding': '92', 'data-lgH': '470',
       'data-edgeValue': '655', 'data-cid': '13', 'data-tid': '-1',
       'data-amount': '3', 'data-prod': 'dynamic_widget'

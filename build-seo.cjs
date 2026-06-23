@@ -42,6 +42,9 @@ try { BLOG_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'blog-l10n.json'), '
 // Localized itineraries. Shape: { "<slug>": { ja:{h1,title,metaDesc,lead,days:[{label,plan}],tips[],faq[]}, zh, es } }
 let ITIN_L10N = {};
 try { ITIN_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'itinerary-l10n.json'), 'utf8')); } catch { /* none yet */ }
+// K-Pop history pages (9 languages). Shape: { "<slug>": { en:{h1,title,metaDesc,lead,sections:[{h,body}],faq:[{q,a}]}, ko, ja, zh, es, fr, de, pt, id } }
+let KPOP_HIST = {};
+try { KPOP_HIST = JSON.parse(fs.readFileSync(path.join(OUT, 'kpop-history.json'), 'utf8')); } catch { /* none yet */ }
 // Per-city Unsplash photos (element 5 image SEO). { City: { raw, alt, by, byUrl, link } }
 // From prefetch-images.cjs (key never stored here). Hotlinked from the Unsplash
 // CDN with photographer attribution per Unsplash API guidelines.
@@ -118,20 +121,13 @@ const AFF_T = {
   zh: { label: () => '🏨 寻找韩国酒店',                 cta: () => '🛏️ 韩国酒店与住宿',       sub: 'Agoda · 比较最优价格',           disc: '联盟链接 — 通过预订我们可能获得少量佣金（您无需支付额外费用），这有助于 KoreaPlus 保持免费。' },
   es: { label: () => '🏨 Dónde alojarte en Corea',     cta: () => '🛏️ Hoteles y alojamiento', sub: 'Agoda · compara las mejores ofertas', disc: 'Enlace de afiliado — podríamos ganar una pequeña comisión sin coste adicional para ti. Ayuda a mantener KoreaPlus gratis.' },
 };
-// One tasteful Agoda hotel block. data-aff lets modules/affiliate.js swap in
-// live hotel cards (real prices via the Worker) when available.
+// Agoda (hotels) was removed 2026-06 — these blocks now render the city-matched
+// Klook activities widget instead. The affBlock/affHtml names are kept so all
+// ~25 call sites switch over with no per-site edits; `city` picks the Klook adid
+// (see CITY_KLOOK below). Klook is globally bookable + Korea-relevant (activities,
+// eSIM, airport transport, tours).
 function affBlock({ city = 'Seoul', cat = 'hotel', q = '', lang = 'en' } = {}) {
-  const T = AFF_T[lang] || AFF_T.en;
-  const url = agodaUrl(city, lang);
-  return `
-<div class="seo-aff" data-aff="${esc(JSON.stringify({ city, cat, q }))}" data-aff-lang="${lang}">
-  <div class="aff-label">${T.label(city)}</div>
-  <div class="aff-grid">
-    <a href="${esc(url)}" target="_blank" rel="sponsored noopener" data-aff-brand="Agoda">
-      <strong>${T.cta(city)}</strong><span>${T.sub}</span></a>
-  </div>
-  <div class="aff-disc">${T.disc}</div>
-</div>`;
+  return klookBlock(lang, { city, cat });
 }
 
 // ── Klook activities widget (complements the Agoda hotel block) ──────────────
@@ -153,10 +149,22 @@ const KLOOK_T = {
   pt: { h: '🎟️ Atividades e essenciais da Coreia', s: 'eSIM · transporte do aeroporto · passeios — reserve em segundos', disc: 'Link de afiliado — podemos receber uma pequena comissão sem custo extra para você.' },
   id: { h: '🎟️ Aktivitas & kebutuhan perjalanan di Korea', s: 'eSIM · transportasi bandara · tur — pesan seketika', disc: 'Tautan afiliasi — kami dapat memperoleh komisi kecil tanpa biaya tambahan untuk Anda.' }
 };
-function klookBlock(lang = 'en') {
+// City → Klook dynamic-widget adid (from the affiliate dashboard). The page's
+// city selects the matching widget so each city guide shows THAT city's top
+// activities; every non-city / unmapped page falls back to the default
+// (Seoul / all-categories) widget. Jeonju uses a Daejeon-based widget (Jeonju
+// isn't searchable on Klook). Add category-specific adids here later if created.
+const CITY_KLOOK = {
+  Seoul: '1310693', Busan: '1313869', Jeju: '1313871',
+  Gyeongju: '1313873', Jeonju: '1313876', Incheon: '1313877'
+};
+const KLOOK_DEFAULT = '1310693';
+function klookAdid(city) { return (city && CITY_KLOOK[city]) || KLOOK_DEFAULT; }
+function klookBlock(lang = 'en', opts = {}) {
   const T = KLOOK_T[lang] || KLOOK_T.en;
+  const adid = klookAdid(opts.city);
   return `
-<aside class="kp-klook" data-klook="1" aria-label="${esc(T.h)}" style="margin:22px 0;padding:16px 16px 12px;border:1px solid var(--border,rgba(255,255,255,.1));border-radius:16px;background:var(--card,rgba(255,255,255,.04))">
+<aside class="kp-klook" data-klook="1" data-adid="${adid}" aria-label="${esc(T.h)}" style="margin:22px 0;padding:16px 16px 12px;border:1px solid var(--border,rgba(255,255,255,.1));border-radius:16px;background:var(--card,rgba(255,255,255,.04))">
   <div style="font-weight:800;font-size:15px;line-height:1.3">${T.h}</div>
   <div style="color:var(--text2,#9fb0c3);font-size:12.5px;margin:2px 0 10px">${esc(T.s)}</div>
   <div class="kp-klook-slot" style="min-height:8px"></div>
@@ -618,8 +626,16 @@ const TOC_H = { en: 'On this page', ko: '목차', ja: '目次', zh: '目录', es
 function injectToc(body, lang) {
   const heads = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)];
   if (heads.length < 3) return body;
+  // In-article AdSense — one mid-content unit on long pages (>=4 sections) so
+  // long-form articles monetize the scroll, not only the top. Google permits the
+  // same ad unit more than once per page; short pages keep just the top unit.
+  const midN = heads.length >= 4 ? Math.ceil(heads.length / 2) : 0;
+  const midAd = `\n<div class="seo-ad seo-ad-mid">\n  <ins class="adsbygoogle" style="display:block;text-align:center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"></ins>\n  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>\n</div>\n`;
   let i = 0;
-  const out = body.replace(/<h2((?:(?!id=)[^>])*)>([\s\S]*?)<\/h2>/g, (m, attrs, txt) => `<h2${attrs} id="sec-${++i}">${txt}</h2>`);
+  const out = body.replace(/<h2((?:(?!id=)[^>])*)>([\s\S]*?)<\/h2>/g, (m, attrs, txt) => {
+    const tag = `<h2${attrs} id="sec-${++i}">${txt}</h2>`;
+    return (midN && i === midN) ? midAd + tag : tag;
+  });
   const items = heads.map((h, idx) => {
     const label = h[1].replace(/<[^>]+>/g, '').replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}←-⇿⬀-⯿️]/gu, '').trim();
     return label ? `<a href="#sec-${idx + 1}">${label}</a>` : '';
@@ -681,13 +697,20 @@ function trustBlock(lang) {
 // reciprocal <xhtml:link> alternate annotations (helps Google discover + index
 // every language variant faster). Keyed by the BASEP-relative url.
 const HREFLANG_SM = new Map();
-function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [], image }) {
+function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [], image, homeHref = 'index.html' }) {
   const canonical = ORIGIN + url;
   const ogImg = image || `${ORIGIN}/guide/og-image.jpg`;
   const xDefault = ORIGIN + ((alts.find(a => a.lang === 'en') || {}).url || url);
   if (alts.length) {
     // Full cluster = this page + its alternates; x-default → the English URL.
     HREFLANG_SM.set(url, { cluster: [{ lang, url }, ...alts], xdef: (alts.find(a => a.lang === 'en') || {}).url || url });
+  }
+  // Affiliate safety-net — guarantee every page (incl. category/index pages and
+  // any future builder that forgets) carries exactly one Klook block. Pages that
+  // already injected a context-specific (city-matched) block keep theirs; the
+  // default (Seoul) block is only added when none is present. No duplication.
+  if (!/class="kp-klook"/.test(body)) {
+    body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
   }
   return `<!DOCTYPE html>
 <html lang="${lang}">
@@ -742,7 +765,7 @@ ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
 <body>
 <a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to content</a>
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
-  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
+  <a class="hub-nav-logo" href="${homeHref}">Korea<span>Plus</span></a>
   <div class="hub-nav-links">${PRIMARY_NAV}</div>
 </nav>
 <div id="kp-korea-now" class="kp-korea-now" style="display:none;max-width:920px;margin:0 auto;padding:7px 16px;font-size:12.5px;color:var(--text2,#aab);flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;border-bottom:1px solid var(--border,rgba(255,255,255,.07))" aria-live="polite"></div>
@@ -810,7 +833,7 @@ ${injectToc(body, lang)}
 <script defer src="modules/react.js?v=1"></script>
 <script defer src="modules/foryou.js?v=1"></script>
 <script defer src="modules/install.js?v=1"></script>
-<script defer src="modules/klook-cards.js?v=1"></script>
+<script defer src="modules/klook-cards.js?v=2"></script>
 </body>
 </html>`;
 }
@@ -1031,8 +1054,7 @@ function buildCity(city) {
   body += `<h2>❓ ${esc(city.name)} Travel FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += `<h2>🧭 Plan your ${esc(city.name)} trip</h2><div class="seo-linklist"><a href="guide/best-time-to-visit-${slug(city.name)}.html">🗓️ Best time to visit ${esc(city.name)}</a>${TRANSPORT_ROUTES.some(r => r.to === city.name) ? `<a href="guide/seoul-to-${slug(city.name)}.html">🚄 Seoul → ${esc(city.name)}</a>` : ''}<a href="guide/korea-travel-cost-index.html">💰 Trip cost index</a></div>`;
   body += `<h2>📺 ${esc(city.name)} on video & K-screen</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(city.name + ' Korea travel')}" target="_blank" rel="noopener">▶️ ${esc(city.name)} travel videos</a><a href="kdrama-locations.html">🎬 K-drama filming locations</a><a href="kpop.html">🎤 K-pop in Korea</a></div>`;
-  body += affHtml(`🎫 Book ${city.name} tours, hotels & essentials`, { city: city.name, cat: 'travel', q: '' });
-  body += klookBlock('en');
+  body += affHtml(`🎫 Book ${city.name} tours, eSIM & essentials`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
 
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} places</span></div></header>`;
@@ -1103,7 +1125,6 @@ function buildCityL10n(cityName, lang) {
   if (g.tips && g.tips.length) body += `<h2>${esc(ui.tipsH)}</h2><ul class="tips">${g.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
   // Localized Agoda banner (live cards in the visitor's language + currency)
   body += affBlock({ city: cityName, cat: 'travel', q: '', lang });
-  body += klookBlock(lang);
   // FAQ
   const qa = (g.faq || []).map(x => [x.q, x.a]);
   if (qa.length) body += `<h2>${esc(ui.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
@@ -1163,7 +1184,6 @@ function buildItinerary(city, days, pool) {
   body += `<h2>🗺️ More Korea itineraries</h2><div class="seo-linklist">${themeRel}</div>`;
   body += `<h2>❓ ${esc(city.name)} Itinerary FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml(`🎫 Book your ${city.name} trip`, { city: city.name, cat: 'travel', q: '' });
-  body += klookBlock('en');
   body += ctaHtml('Customize this itinerary', `Tweak days, pace and budget — our AI rebuilds your ${city.name} plan instantly.`);
 
   const hero = `<header class="seo-hero"><span class="emoji">🗺️</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">${days} days</span><span class="seo-badge region">${esc(city.name)}</span></div></header>`;
@@ -1989,7 +2009,6 @@ function buildItineraryL10n(itSlug, lang) {
   for (const d of (t.days || [])) body += `<h2>${esc(d.label)}</h2><p>${esc(d.plan)}</p>`;
   if (t.tips && t.tips.length) body += `<h2>${esc(ui.tipsH)}</h2><ul class="tips">${t.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
   body += affBlock({ city: itinCity(itSlug), cat: 'travel', q: '', lang });
-  body += klookBlock(lang);
   const qa = (t.faq || []).map(x => [x.q, x.a]);
   if (qa.length) body += `<h2>${esc(ui.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += `<div class="seo-cta"><h2>${esc(ui.ctaH)}</h2><p>${esc(ui.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
@@ -2107,6 +2126,40 @@ function buildSeason(s) {
 }
 
 // ══════════════════════════════════════════════════════════════════
+// K-POP HISTORY PAGES (9 languages) — content from kpop-history.json
+// ══════════════════════════════════════════════════════════════════
+const KPOP_HIST_LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+const KPOP_HIST_DIR = (lang) => lang === 'en' ? '' : ((L10N[lang] && L10N[lang].dir) || lang) + '/';
+const KPOP_HIST_EMOJI = { 'kpop-history': '📜', 'first-generation-kpop': '1️⃣', 'second-generation-kpop': '2️⃣', 'third-generation-kpop': '3️⃣', 'fourth-generation-kpop': '4️⃣', 'fifth-generation-kpop': '5️⃣', 'sm-entertainment-history': '🏛️', 'yg-entertainment-history': '🖤', 'jyp-entertainment-history': '💚', 'hybe-history': '💜' };
+const KPOP_HIST_MORE = { en: '🎤 More K-Pop history', ko: '🎤 K-pop 역사 더보기', ja: '🎤 K-POPの歴史をもっと見る', zh: '🎤 更多 K-pop 历史', es: '🎤 Más historia del K-pop', fr: '🎤 Plus d\'histoire de la K-pop', de: '🎤 Mehr K-Pop-Geschichte', pt: '🎤 Mais história do K-pop', id: '🎤 Sejarah K-pop lainnya' };
+function buildKpopHistory(slug, lang) {
+  const byLang = KPOP_HIST[slug]; const t = byLang && byLang[lang];
+  if (!t) return null;
+  const dir = KPOP_HIST_DIR(lang);
+  const url = `${BASEP}${dir}kpop/${slug}.html`;
+  const enUrl = `${BASEP}kpop/${slug}.html`;
+  // Standalone K-Pop channel: breadcrumb root is the K-Pop hub (/kpop), not the
+  // travel-guide home — keeps users inside the K-Pop property.
+  const trail = [{ name: 'K-Pop', url: '/kpop' }, { name: t.h1, url }];
+  let body = bcHtml(trail);
+  body += `<p class="lead">${esc(t.lead)}</p>`;
+  for (const s of (t.sections || [])) body += `<h2>${esc(s.h)}</h2>${(s.body || '').trim().startsWith('<') ? s.body : `<p>${esc(s.body)}</p>`}`;
+  const qa = (t.faq || []).map(x => Array.isArray(x) ? x : [x.q, x.a]);
+  if (qa.length) body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  const sibs = Object.keys(KPOP_HIST).filter(s2 => s2 !== slug && KPOP_HIST[s2] && KPOP_HIST[s2][lang]).slice(0, 9);
+  body += `<h2>${esc(KPOP_HIST_MORE[lang] || KPOP_HIST_MORE.en)}</h2><div class="seo-linklist">${sibs.map(s2 => `<a href="${dir}kpop/${s2}.html">${KPOP_HIST_EMOJI[s2] || '🎶'} ${esc(KPOP_HIST[s2][lang].h1)}</a>`).join('')}<a href="/kpop">🎤 K-Pop Hub</a></div>`;
+  body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
+  const hero = `<header class="seo-hero"><span class="emoji">${KPOP_HIST_EMOJI[slug] || '🎤'}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">K-Pop</span><span class="seo-badge">2026</span></div></header>`;
+  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: t.h1, description: t.metaDesc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  const others = KPOP_HIST_LANGS.filter(l => l !== lang && KPOP_HIST[slug][l]);
+  const alts = lang === 'en'
+    ? others.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))
+    : [{ lang: 'en', url: enUrl }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))];
+  writePage(`${dir}kpop/${slug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts, homeHref: '/kpop' }));
+  return url;
+}
+
+// ══════════════════════════════════════════════════════════════════
 // RUN
 // ══════════════════════════════════════════════════════════════════
 const out = { places: [], categories: [], cities: [], itineraries: [], months: [], neighborhoods: [], stays: [], visa: '', faq: [], compare: [], cityfood: [], seasonal: [], l10n: [], blog: [], blogIndex: '' };
@@ -2149,6 +2202,11 @@ out.itinL10n = [];
 for (const itSlug of Object.keys(ITIN_L10N)) {
   for (const lang of LOCALES) { const u = buildItineraryL10n(itSlug, lang); if (u) out.itinL10n.push(u); }
 }
+// K-Pop history pages (9 languages) — content from kpop-history.json
+out.kpopHist = [];
+for (const slug of Object.keys(KPOP_HIST)) {
+  for (const lang of KPOP_HIST_LANGS) { const u = buildKpopHistory(slug, lang); if (u) out.kpopHist.push(u); }
+}
 // Blog
 out.blog = BLOG.map(buildBlogPost);
 out.blogIndex = buildBlogIndex();
@@ -2189,6 +2247,7 @@ STATIC.slice(1).forEach(p => { const hot = (p === 'kbeauty.html'); sm += `\n` + 
 sm += `\n` + urlEntry('/kpop', '0.9', 'daily');   // K-Pop hub: clean canonical URL (not /guide/kpop.html)
 [...out.categories, ...out.cities, ...(out.regional || []), out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.blog.forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
+(out.kpopHist || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.neighborhoods.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.itineraries.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.months.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
@@ -2204,6 +2263,19 @@ out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
 sm += `\n</urlset>\n`;
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sm);
+
+// ── Independent K-Pop sitemap (deployed to the DOMAIN ROOT: /kpop-sitemap.xml) ──
+// Covers the whole K-pop vertical: the /kpop hub, every K-pop history page (9
+// languages, with reciprocal hreflang from HREFLANG_SM), and K-pop-themed
+// guide/itinerary/place pages. urlEntry adds <xhtml:link> alternates automatically.
+let ksm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
+ksm += urlEntry('/kpop', '1.0', 'daily');
+(out.kpopHist || []).forEach(u => ksm += `\n` + urlEntry(u, '0.8', 'weekly'));
+const kpopThemed = [...new Set([...out.categories, ...out.itineraries, ...(out.itinL10n || []), ...out.places].filter(u => /k-?pop/i.test(u)))];
+kpopThemed.forEach(u => ksm += `\n` + urlEntry(u, '0.7', 'weekly'));
+ksm += `\n</urlset>\n`;
+fs.writeFileSync(path.join(OUT, 'kpop-sitemap.xml'), ksm);
+console.log(`   kpop-sitemap.xml: ${(ksm.match(/<url>/g) || []).length} URLs (independent, → domain root)`);
 
 // ── Image sitemap (element 5) — city photos on their guide/best-time/localized pages ──
 let imgsm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;

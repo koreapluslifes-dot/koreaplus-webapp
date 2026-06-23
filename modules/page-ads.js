@@ -18,7 +18,6 @@
   if (document.getElementById('kp-page-ads')) return;
 
   var ADS_CLIENT = 'ca-pub-1378943893051810', ADS_SLOT = '4521899200';
-  var AGODA = 'https://www.agoda.com/country/south-korea.html?cid=1952761';
 
   var LBL = {
     en: { h: '🎫 Plan & book your Korea trip', agoda: '🏨 Find great hotels in Korea on Agoda →', ad: 'Advertisement', disc: 'Affiliate links & ads — at no extra cost to you, they help keep KoreaPlus free.' },
@@ -40,8 +39,7 @@
   sec.style.cssText = 'max-width:960px;margin:30px auto 0;padding:18px 16px 8px;border-top:1px solid rgba(255,255,255,.1)';
   sec.innerHTML =
     '<div style="font-weight:800;font-size:15px;color:#eaf0f7;margin-bottom:12px">' + esc(L.h) + '</div>' +
-    '<a href="' + AGODA + '" target="_blank" rel="sponsored noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:12px;background:linear-gradient(135deg,rgba(255,107,53,.14),rgba(214,34,70,.10));border:1px solid rgba(255,107,53,.30);color:#eaf0f7;text-decoration:none;font-weight:700;font-size:14px">' + esc(L.agoda) + '</a>' +
-    '<div class="kp-pa-klook" style="margin-top:14px;min-height:8px"></div>' +
+    '<div class="kp-pa-klook" style="min-height:8px"></div>' +
     '<div class="kp-pa-ad" style="margin-top:16px"><div style="font-size:10px;color:#8895a6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">' + esc(L.ad) + '</div>' +
       '<ins class="adsbygoogle" style="display:block;width:100%;min-height:90px" data-ad-client="' + ADS_CLIENT + '" data-ad-slot="' + ADS_SLOT + '" data-ad-format="auto" data-full-width-responsive="true"></ins></div>' +
     '<div style="font-size:11px;color:#8895a6;margin-top:10px;text-align:center;line-height:1.5">' + esc(L.disc) + '</div>';
