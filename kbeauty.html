@@ -96,6 +96,21 @@
     .filter-chip { padding:6px 15px; border-radius:20px; font-size:13px; font-weight:700; cursor:pointer; border:2px solid var(--border); background:var(--surface); color:var(--text2); transition:all .15s; }
     .filter-chip:hover { border-color:var(--border2); color:var(--text); }
     .filter-chip.active { border-color:var(--kb1); color:var(--kb1); background:var(--kb-soft); }
+    /* Category navigation (landing menu + sticky chips + back bar) */
+    .filter-bar { position:sticky; top:0; z-index:40; background:var(--bg); padding:10px 0 8px; margin:0 0 2px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .kb-landing { display:grid; grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); gap:14px; margin:20px 0 44px; }
+    .kb-tile { display:flex; flex-direction:column; gap:7px; padding:20px 16px; border-radius:18px; border:2px solid var(--border); background:var(--surface); cursor:pointer; text-align:left; text-decoration:none; color:var(--text); transition:transform .18s, box-shadow .18s, border-color .18s; min-height:120px; font:inherit; }
+    .kb-tile:hover { border-color:var(--kb1); transform:translateY(-3px); box-shadow:0 10px 28px rgba(214,31,110,.14); }
+    .kb-tile .ti { font-size:30px; line-height:1; }
+    .kb-tile .tt { font-weight:900; font-size:15.5px; color:var(--text); }
+    .kb-tile .ts { font-size:12px; color:var(--text3); line-height:1.45; }
+    .kb-tile-lib { background:linear-gradient(135deg,var(--kb1),var(--kb2)); border-color:transparent; }
+    .kb-tile-lib .tt, .kb-tile-lib .ts { color:#fff; }
+    .kb-tile-lib .ts { opacity:.9; }
+    .kb-back { display:flex; align-items:center; gap:13px; margin:10px 0 4px; flex-wrap:wrap; }
+    .kb-back-btn { background:var(--surface); border:2px solid var(--border); border-radius:20px; padding:8px 16px; font-weight:800; font-size:13px; cursor:pointer; color:var(--text2); }
+    .kb-back-btn:hover { border-color:var(--kb1); color:var(--kb1); }
+    .kb-back-title { font-weight:900; font-size:18px; color:var(--text); }
 
     .kb-sec { margin:34px 0; scroll-margin-top:64px; }
     .kb-sec-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
@@ -633,19 +648,14 @@
   <!-- Sponsored — localized AliExpress + AdSense. Populated by modules/kbeauty.js -->
   <aside id="kb-topads" class="kb-topads" aria-label="Sponsored" hidden></aside>
 
-  <div class="filter-bar" id="kb-filters">
-    <button class="filter-chip active" data-target="all" data-i18n="kbeauty.filter.all">✨ All</button>
-    <button class="filter-chip" data-target="kb-quiz" data-i18n="kbeauty.filter.quiz">🪞 My Skin</button>
-    <button class="filter-chip" data-target="kb-radar" data-i18n="kbeauty.filter.radar">🛰️ Trend Radar</button>
-    <button class="filter-chip" data-target="kb-routine" data-i18n="kbeauty.filter.routine">🧴 Routine</button>
-    <button class="filter-chip" data-target="kb-glassskin" data-i18n="kbeauty.filter.glassskin">🪞 Glass Skin</button>
-    <button class="filter-chip" data-target="kb-sun" data-i18n="kbeauty.filter.sun">☀️ Sunscreen</button>
-    <button class="filter-chip" data-target="kb-ingredients" data-i18n="kbeauty.filter.ingredients">🧪 Ingredients</button>
-    <button class="filter-chip" data-target="kb-trouble" data-i18n="kbeauty.filter.trouble">🩺 Troubleshoot</button>
-    <button class="filter-chip" data-target="kb-brands" data-i18n="kbeauty.filter.brands">🏷️ Brands</button>
-    <button class="filter-chip" data-target="kb-dupes" data-i18n="kbeauty.filter.dupes">💸 Dupes</button>
-    <button class="filter-chip" data-target="kb-buy" data-i18n="kbeauty.filter.buy">🛡️ Buy Safe</button>
-    <button class="filter-chip" data-target="kb-board" data-i18n="kbeauty.filter.board">🔥 Trending</button>
+  <!-- Category navigation: a landing menu shows by default; clicking a category
+       reveals only that category's sections. Chips + tiles populated by
+       modules/kbeauty.js renderNav(); see wireFilters()/showCategory(). -->
+  <div class="filter-bar" id="kb-filters" role="tablist" aria-label="K-beauty categories"></div>
+  <div id="kb-landing" class="kb-landing"></div>
+  <div id="kb-back" class="kb-back" hidden>
+    <button class="kb-back-btn" type="button">← <span data-i18n="kbeauty.back">All categories</span></button>
+    <span class="kb-back-title" id="kb-back-title"></span>
   </div>
 
   <!-- Seasonal skin forecast (zero-key static; live UV is a future upgrade) -->
@@ -862,13 +872,12 @@
   <section class="hub-explore">
     <h2 class="hub-explore-title" data-i18n="kbeauty.explore.title">Keep Exploring K-Culture</h2>
     <div class="hub-explore-grid">
-      <a class="hub-explore-card" href="guide/kb/"><span class="ic">📋</span><span>Trend verdicts<span class="sub">Does it actually work?</span></span></a>
-      <a class="hub-explore-card" href="guide/k-beauty-guide.html"><span class="ic">💄</span><span>K-Beauty Shopping<span class="sub">Where to buy in Korea</span></span></a>
-      <a class="hub-explore-card" href="guide/best-shopping-in-korea.html"><span class="ic">🛍️</span><span>Best Shopping<span class="sub">Myeongdong & more</span></span></a>
-      <a class="hub-explore-card" href="kpop.html"><span class="ic">🎤</span><span>K-Pop Now<span class="sub">Charts & comebacks</span></span></a>
-      <a class="hub-explore-card" href="culture.html"><span class="ic">🏛️</span><span>Korean Culture<span class="sub">Traditions & today</span></span></a>
-      <a class="hub-explore-card" href="menu-translator.html"><span class="ic">📷</span><span>Menu Translator<span class="sub">Scan & translate</span></span></a>
-      <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic">🤖</span><span>Plan my Korea trip with AI<span class="sub">Free personalized itinerary</span></span></a>
+      <a class="hub-explore-card" href="/guide/kb/history/joseon-court-gungjung-beauty.html"><span class="ic">📜</span><span>K-Beauty History<span class="sub">Hanbang roots to today</span></span></a>
+      <a class="hub-explore-card" href="/guide/kb/ingredient/snail.html"><span class="ic">🧪</span><span>Ingredient Guides<span class="sub">What each one does</span></span></a>
+      <a class="hub-explore-card" href="/guide/kb/brand/cosrx.html"><span class="ic">🏷️</span><span>Brand Profiles<span class="sub">30+ K-beauty brands</span></span></a>
+      <a class="hub-explore-card" href="/guide/kb/country/k-beauty-united-states.html"><span class="ic">🌍</span><span>K-Beauty Worldwide<span class="sub">Where to buy near you</span></span></a>
+      <a class="hub-explore-card" href="/guide/kb/how-to/how-to-apply-sunscreen-correctly-amount-and-reapply.html"><span class="ic">📋</span><span>How-To Guides<span class="sub">Routines, layering & more</span></span></a>
+      <a class="hub-explore-card hub-explore-cta" href="/guide/kb/"><span class="ic">📚</span><span>The K-Beauty Library<span class="sub">1,000+ guides — dive in</span></span></a>
     </div>
   </section>
 
@@ -922,6 +931,6 @@
 <script src="kbeauty-data.js?v=10"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/kbeauty-sharecard.js"></script>
-<script src="modules/kbeauty.js?v=10"></script>
+<script src="modules/kbeauty.js?v=11"></script>
 </body>
 </html>

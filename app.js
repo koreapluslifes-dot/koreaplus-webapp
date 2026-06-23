@@ -428,6 +428,11 @@ function renderGrid(cat) {
       </div>`;
   }).join('');
 
+  // K-Beauty: lead into the full interactive hub (not the old travel guide).
+  if (cat === 'kbeauty') {
+    grid.insertAdjacentHTML('afterbegin', '<a class="card" href="kbeauty.html" style="grid-column:1/-1;display:flex;align-items:center;gap:14px;text-decoration:none;background:linear-gradient(135deg,#d61f6e,#8b46d6);color:#fff;border:none"><span style="font-size:34px;line-height:1">💄</span><span><span style="display:block;font-weight:900;font-size:17px">' + i18n('kbeauty.homecta.title', 'Open the K-Beauty Hub →') + '</span><span style="display:block;font-size:13px;opacity:.92">' + i18n('kbeauty.homecta.sub', 'Skin quiz, routine builder, ingredient decoder & 1,000+ guides — in your language') + '</span></span></a>');
+  }
+
   grid.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', e => {
       if (e.target.classList.contains('card-map-btn')) {

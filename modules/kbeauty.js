@@ -995,17 +995,87 @@
     if (wrap) wrap.hidden = false;
   }
 
+  // ── Category navigation ─────────────────────────────────────────────────────
+  // The hub's ~25 sections are grouped into 8 categories. By default a landing
+  // menu shows (no heavy content); clicking a category reveals only that
+  // category's sections. Deep-linkable via #cat=<id> or a #kb-<section> anchor.
+  // tk = an existing 9-language messages key (emoji + label baked in) reused for
+  // instant localization; sub = English fallback via cx() (overlays may add later).
+  const KB_CATS = [
+    { id: 'skin', icon: '🪞', tk: 'kbeauty.filter.quiz', t: 'My Skin', sub: 'Skin-type quiz, concerns, seasonal forecast & your stack', secs: ['kb-quiz', 'kb-concerns', 'kb-forecast', 'kb-stack'] },
+    { id: 'routine', icon: '🧴', tk: 'kbeauty.filter.routine', t: 'Routine', sub: 'AM/PM routine builder, product types & glass skin', secs: ['kb-routine', 'kb-categories', 'kb-glassskin'] },
+    { id: 'sun', icon: '☀️', tk: 'kbeauty.filter.sun', t: 'Sunscreen', sub: 'Decode SPF/PA & find your Korean sunscreen', secs: ['kb-sun'] },
+    { id: 'ingr', icon: '🧪', tk: 'kbeauty.filter.ingredients', t: 'Ingredients', sub: 'Encyclopedia, label decoder & what not to mix', secs: ['kb-ingredients', 'kb-snail', 'kb-conflicts'] },
+    { id: 'trouble', icon: '🩺', tk: 'kbeauty.filter.trouble', t: 'Troubleshoot', sub: 'Purging vs breakout, barrier & fungal-acne checks', secs: ['kb-trouble'] },
+    { id: 'brands', icon: '🏷️', tk: 'kbeauty.filter.brands', t: 'Brands & Terms', sub: '30 brands, dupes & a K-beauty glossary', secs: ['kb-brands', 'kb-dupes', 'kb-glossary'] },
+    { id: 'buy', icon: '🛡️', tk: 'kbeauty.filter.buy', t: 'Buy Safe', sub: 'Where to buy authentic, spot fakes & build your shelf', secs: ['kb-buy', 'kb-shelf'] },
+    { id: 'trends', icon: '🔥', tk: 'kbeauty.filter.board', t: 'Trends & Authority', sub: 'Trend radar, evidence, SkinTok checks & Korean sources', secs: ['kb-radar', 'kb-ledger', 'kb-viral', 'kb-board', 'kb-report', 'kb-news', 'kb-krsrc', 'kb-trust'] },
+  ];
+  const KB_ALLSECS = KB_CATS.reduce((a, c) => a.concat(c.secs), []);
+  const kbCatById = (id) => KB_CATS.filter(c => c.id === id)[0] || null;
+  const kbCatOfSec = (sid) => KB_CATS.filter(c => c.secs.indexOf(sid) >= 0)[0] || null;
+  // Localized labels come from the chrome i18n layer (window.kpI18n, messages/*.json),
+  // which kbeauty.js's local t() does NOT read. kbChip = full label (emoji+text);
+  // kbTitle = same with the leading emoji stripped (tiles show their own big icon).
+  const i18get = (k) => { try { const v = window.kpI18n && window.kpI18n.t ? window.kpI18n.t(k) : null; return (v && v !== k) ? v : null; } catch (e) { return null; } };
+  const kbChip = (c) => i18get(c.tk) || (c.icon + ' ' + c.t);
+  const kbTitle = (c) => { const v = kbChip(c).replace(/^[^\p{L}\p{N}]+/u, '').trim(); return v || c.t; };
+  function applyNavI18n() {
+    KB_CATS.forEach(c => {
+      const full = kbChip(c), title = kbTitle(c);
+      $$('#kb-filters [data-catid="' + c.id + '"]').forEach(e => { e.textContent = full; });
+      $$('#kb-landing .tt[data-catid="' + c.id + '"]').forEach(e => { e.textContent = title; });
+    });
+    const bt = $('#kb-back-title'); if (bt && bt.dataset.catid) { const c = kbCatById(bt.dataset.catid); if (c) bt.textContent = c.icon + ' ' + kbTitle(c); }
+  }
+
+  function showLanding() {
+    KB_ALLSECS.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+    const land = $('#kb-landing'); if (land) land.style.display = '';
+    const back = $('#kb-back'); if (back) back.hidden = true;
+    $$('.filter-chip', $('#kb-filters')).forEach(c => { const on = c.dataset.target === 'home'; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
+  }
+  function showCategory(id, opts) {
+    const cat = kbCatById(id); if (!cat) { showLanding(); return; }
+    const land = $('#kb-landing'); if (land) land.style.display = 'none';
+    KB_ALLSECS.forEach(sid => { const el = document.getElementById(sid); if (el) el.style.display = (cat.secs.indexOf(sid) >= 0) ? '' : 'none'; });
+    const back = $('#kb-back'); if (back) { back.hidden = false; const bt = $('#kb-back-title'); if (bt) { bt.dataset.catid = cat.id; bt.textContent = cat.icon + ' ' + kbTitle(cat); } }
+    $$('.filter-chip', $('#kb-filters')).forEach(c => { const on = c.dataset.target === id; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    if (!opts || !opts.noscroll) { const bar = $('#kb-filters'); if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+  function renderNav() {
+    const bar = $('#kb-filters');
+    if (bar) {
+      bar.innerHTML = '<button class="filter-chip kb-home-chip active" data-target="home" type="button" role="tab" aria-selected="true">🏠 ' + esc(cx('cat.menu', 'Menu')) + '</button>'
+        + KB_CATS.map(c => '<button class="filter-chip" data-target="' + c.id + '" data-catid="' + c.id + '" type="button" role="tab" aria-selected="false">' + esc(kbChip(c)) + '</button>').join('');
+    }
+    const land = $('#kb-landing');
+    if (land) {
+      land.innerHTML = KB_CATS.map(c => '<button class="kb-tile" data-target="' + c.id + '" type="button"><span class="ti">' + c.icon + '</span><span class="tt" data-catid="' + c.id + '">' + esc(kbTitle(c)) + '</span><span class="ts">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></button>').join('')
+        + '<a class="kb-tile kb-tile-lib" href="/guide/kb/"><span class="ti">📚</span><span class="tt">' + esc(cx('cat.lib.t', 'K-Beauty Library')) + '</span><span class="ts">' + esc(cx('cat.lib.sub', '1,000+ guides: history, ingredients, brands, how-to & more')) + '</span></a>';
+    }
+    applyNavI18n();
+  }
+  function openFromHash() {
+    const h = (location.hash || '').replace(/^#/, '');
+    if (!h) { showLanding(); return; }
+    if (h.indexOf('cat=') === 0) { showCategory(h.slice(4)); return; }
+    const cat = kbCatOfSec(h);
+    if (cat) { showCategory(cat.id, { noscroll: true }); const el = document.getElementById(h); if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 140); return; }
+    showLanding();
+  }
   function wireFilters() {
-    const bar = $('#kb-filters'); if (!bar) return;
-    const map = { 'kb-quiz':['kb-quiz','kb-concerns','kb-forecast','kb-stack'], 'kb-radar':['kb-radar','kb-ledger','kb-viral','kb-report','kb-news','kb-krsrc','kb-trust'], 'kb-routine':['kb-routine','kb-categories'], 'kb-glassskin':['kb-glassskin'], 'kb-sun':['kb-sun'], 'kb-ingredients':['kb-ingredients','kb-snail','kb-conflicts'], 'kb-trouble':['kb-trouble'], 'kb-brands':['kb-brands','kb-glossary'], 'kb-dupes':['kb-dupes'], 'kb-buy':['kb-buy'], 'kb-board':['kb-board','kb-ledger'], 'kb-shop':['kb-shop','kb-shelf'] };
-    $$('.filter-chip', bar).forEach(chip => chip.addEventListener('click', () => {
-      $$('.filter-chip', bar).forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
-      chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
-      const tg = chip.dataset.target;
-      const show = tg === 'all' ? null : (map[tg] || [tg]);
-      $$('.kb-sec').forEach(sec => { sec.style.display = (!show || show.includes(sec.id)) ? '' : 'none'; });
-      const shelf = $('#kb-shelf'); if (shelf) shelf.style.display = (!show || show.includes('kb-shop')) ? '' : 'none';
-    }));
+    renderNav();
+    const bar = $('#kb-filters');
+    if (bar) bar.addEventListener('click', (e) => { const b = e.target.closest('.filter-chip'); if (!b) return; const tg = b.dataset.target; if (tg === 'home') showLanding(); else showCategory(tg); });
+    const land = $('#kb-landing');
+    if (land) land.addEventListener('click', (e) => { const b = e.target.closest('.kb-tile'); if (!b || !b.dataset.target) return; e.preventDefault(); showCategory(b.dataset.target); });
+    const back = $('#kb-back'); if (back) { const bb = back.querySelector('.kb-back-btn'); if (bb) bb.addEventListener('click', () => { showLanding(); window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    // Localize nav labels once the chrome i18n layer is ready, and on switch.
+    document.addEventListener('kp:langchange', applyNavI18n);
+    applyNavI18n(); setTimeout(applyNavI18n, 600); setTimeout(applyNavI18n, 1600);
   }
 
   // ── Top sponsored block (localized AliExpress geo strip + AdSense) ───────────
