@@ -226,7 +226,7 @@ const STAY = [
 const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
 // Emerging provincial cities (regional-dispersal trend) — rich guides come from
 // city-l10n.json 'en'; not in CITIES, so generated via their own pass.
-const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }, { name: 'Andong', kr: '안동' }, { name: 'Yeosu', kr: '여수' }];
+const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }, { name: 'Andong', kr: '안동' }, { name: 'Yeosu', kr: '여수' }, { name: 'Taean', kr: '태안' }, { name: 'Tongyeong', kr: '통영' }, { name: 'Pohang', kr: '포항' }, { name: 'Chuncheon', kr: '춘천' }, { name: 'Damyang', kr: '담양' }, { name: 'Korea Hiking', kr: '한국 등산' }];
 
 // "Keep planning {city}" cross-cluster links — emits links only to pages this
 // generator writes. excludeUrl drops the current page from its own list.
@@ -1060,9 +1060,9 @@ function cityPool(city) {
 function buildCity(city) {
   const pool = cityPool(city);
   const url = `${BASEP}guide/things-to-do-in-${slug(city.name)}.html`;
-  const h1 = `Things to Do in ${city.name}, Korea`;
-  const title = `${h1} — Top Attractions, Food & Tips (2026) | KoreaPlus`;
   const g = (CITY_L10N[city.name] || {}).en;  // rich English content when generated
+  const h1 = (g && g.h1) || `Things to Do in ${city.name}, Korea`;
+  const title = `${h1} — Top Attractions, Food & Tips (2026) | KoreaPlus`;
   const food = pool.filter(i => i.cat === 'food'), sights = pool.filter(i => i.cat !== 'food');
   const desc = g ? g.metaDesc : `Top things to do in ${city.name} (${city.kr}): ${pool.slice(0, 5).map(i => i.name).join(', ')}. Local food, attractions, transport & insider tips for travelers.`;
   const trail = [{ name: 'Home', url: BASEP }, { name: 'Travel', url: `${BASEP}guide/${CAT_SLUG.travel}.html` }, { name: city.name, url }];
