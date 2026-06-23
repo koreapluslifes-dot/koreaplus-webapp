@@ -152,11 +152,12 @@ const KLOOK_T = {
 // City → Klook dynamic-widget adid (from the affiliate dashboard). The page's
 // city selects the matching widget so each city guide shows THAT city's top
 // activities; every non-city / unmapped page falls back to the default
-// (Seoul / all-categories) widget. Jeonju uses a Daejeon-based widget (Jeonju
-// isn't searchable on Klook). Add category-specific adids here later if created.
+// (Seoul / all-categories) widget. (Daejeon has its own widget + a dedicated
+// city guide; Jeonju isn't searchable on Klook so it uses the default.)
+// Add category-specific adids here later if created.
 const CITY_KLOOK = {
   Seoul: '1310693', Busan: '1313869', Jeju: '1313871',
-  Gyeongju: '1313873', Jeonju: '1313876', Incheon: '1313877'
+  Gyeongju: '1313873', Daejeon: '1313876', Incheon: '1313877'
 };
 const KLOOK_DEFAULT = '1310693';
 function klookAdid(city) { return (city && CITY_KLOOK[city]) || KLOOK_DEFAULT; }
@@ -224,7 +225,7 @@ const STAY = [
 const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
 // Emerging provincial cities (regional-dispersal trend) — rich guides come from
 // city-l10n.json 'en'; not in CITIES, so generated via their own pass.
-const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }];
+const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }];
 
 // "Keep planning {city}" cross-cluster links — emits links only to pages this
 // generator writes. excludeUrl drops the current page from its own list.
