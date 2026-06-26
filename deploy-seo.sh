@@ -26,7 +26,22 @@ echo "==> Extracting + fixing perms on prod…"
 # Apache (daemon) 403 everything under them. `chmod -R a+rX` is the robust fix:
 # it adds o+rx to EVERY dir (traversable) + o+r to files, without setting +x on
 # files. The per-find `-exec chmod 755 {} +` form missed some nested dirs (ja/guide).
-$SSH "sudo tar xzf /tmp/kp.tgz -C $REMOTE && sudo chown -R bitnami:daemon $REMOTE && sudo chmod -R a+rX $REMOTE && rm -f /tmp/kp.tgz && echo OK"
+$SSH "sudo tar xzf /tmp/kp.tgz -C $REMOTE && sudo chown -R bitnami:daemon $REMOTE && rm -f /tmp/kp.tgz && echo EXTRACTED"
+
+echo "==> Fixing perms (chmod a+rX) + verifying no dir is left non-traversable…"
+# Loop: a+rX, then check for any dir missing world-execute (octal 001). Re-run if
+# any remain (a single chmod -R has been observed to miss some nested dirs). Apache
+# (daemon) 403s every page under a 700 dir, so this MUST end with 0 stragglers.
+$SSH '
+  for i in 1 2 3; do
+    sudo chmod -R a+rX '"$REMOTE"'
+    left=$(sudo find '"$REMOTE"' -type d ! -perm -001 | wc -l)
+    echo "pass $i: $left non-traversable dirs remain"
+    [ "$left" = "0" ] && break
+  done
+  bad=$(sudo find '"$REMOTE"' -type d ! -perm -001 | head; sudo find '"$REMOTE"' -type f ! -perm -004 | head)
+  [ -z "$bad" ] && echo "PERMS_OK" || { echo "PERMS_FAIL: $bad"; exit 1; }
+'
 
 echo "==> IndexNow ping…"
 node indexnow-submit.cjs || true
