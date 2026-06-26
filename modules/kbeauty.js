@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '7';
+  const OVERLAY_VER = '8';
   async function loadContent() {
     if (lang === 'en') return;
     try {
@@ -209,9 +209,15 @@
         <div class="r-desc">${esc(st.desc)}</div>
       </div>
       <button class="r-reset" id="kb-retake">↻ ${esc(t('retake'))}</button>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="kb-quiz-cta" id="kb-cta-stack" type="button" style="background:linear-gradient(135deg,var(--kb1),var(--kb2));color:#fff;border:none;border-radius:24px;padding:11px 20px;font-weight:800;font-size:14px;cursor:pointer">✨ ${esc(cx('ux.yourStack', 'Your personalized stack'))} →</button>
+      <button class="kb-quiz-cta" id="kb-cta-routine" type="button" style="background:var(--surface);color:var(--kb1);border:2px solid var(--kb1);border-radius:24px;padding:9px 18px;font-weight:800;font-size:14px;cursor:pointer">🧴 ${esc(cx('ux.buildRoutine', 'Build your routine'))} →</button>
     </div>`;
     const rt = $('#kb-retake');
     if (rt) rt.addEventListener('click', () => { try { localStorage.removeItem(SKIN_KEY); } catch {} for (const k in quizAnswers) delete quizAnswers[k]; renderQuiz(); refreshPersonalized(); });
+    const cs = $('#kb-cta-stack'); if (cs) cs.addEventListener('click', () => { const el = document.getElementById('kb-stack'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    const cr = $('#kb-cta-routine'); if (cr) cr.addEventListener('click', () => { showCategory('routine'); });
     showShareFab();
   }
 
@@ -967,6 +973,97 @@
     if (getSkin() || getConcerns().size) fab.hidden = false;
   }
 
+  // ── Modern UX layer (10 conveniences) ───────────────────────────────────────
+  const KB_LIB = '/guide/kb';
+  function kbToast(msg) {
+    let w = $('#kb-toast-wrap'); if (!w) { w = document.createElement('div'); w.id = 'kb-toast-wrap'; document.body.appendChild(w); }
+    const t = document.createElement('div'); t.className = 'kb-toast'; t.textContent = msg; w.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('in'));
+    setTimeout(() => { t.classList.remove('in'); setTimeout(() => t.remove(), 320); }, 2200);
+  }
+  const KB_RECENT_KEY = 'kp_kbeauty_recent';
+  function kbAddRecent(type, id, name, emoji) {
+    if (!id || !name) return;
+    try { let a = JSON.parse(localStorage.getItem(KB_RECENT_KEY) || '[]'); a = a.filter(x => !(x.t === type && x.id === id)); a.unshift({ t: type, id, n: name, e: emoji || '' }); localStorage.setItem(KB_RECENT_KEY, JSON.stringify(a.slice(0, 6))); } catch (e) {}
+  }
+  function kbRenderRecent() {
+    const host = $('#kb-recent'); if (!host) return;
+    let a = []; try { a = JSON.parse(localStorage.getItem(KB_RECENT_KEY) || '[]'); } catch (e) {}
+    if (!a.length) { host.style.display = 'none'; return; }
+    host.style.display = '';
+    host.innerHTML = '<h3>' + esc(cx('ux.recent', 'Recently viewed')) + '</h3><div>' + a.map(x =>
+      '<a class="pill" href="' + KB_LIB + '/' + (x.t === 'brand' ? 'brand' : 'ingredient') + '/' + encodeURIComponent(x.id) + '.html">' + (x.e || '') + ' ' + esc(x.n) + '</a>'
+    ).join('') + '</div>';
+  }
+  function kbSearchIndex() {
+    const idx = [];
+    (window.KBEAUTY_INGREDIENTS || []).forEach(i => idx.push({ l: i.name, e: i.emoji || '🧪', u: KB_LIB + '/ingredient/' + i.id + '.html', t: cx('ux.ingredient', 'Ingredient') }));
+    (window.KBEAUTY_BRANDS || []).forEach(b => idx.push({ l: b.name, e: b.emoji || '🏷️', u: KB_LIB + '/brand/' + b.id + '.html', t: cx('ux.brand', 'Brand') }));
+    (window.KBEAUTY_CONCERNS || []).forEach(c => idx.push({ l: c.name, e: c.emoji || '🎯', u: KB_LIB + '/concern/' + c.id + '.html', t: cx('ux.concern', 'Concern') }));
+    return idx;
+  }
+  function syncBnav(active) { $$('#kb-bnav button').forEach(b => b.classList.toggle('on', b.dataset.bn === active)); }
+  function initUX() {
+    const body = document.body;
+    const prog = document.createElement('div'); prog.id = 'kb-progress'; body.appendChild(prog);
+    const top = document.createElement('button'); top.className = 'kb-fabtop'; top.type = 'button'; top.setAttribute('aria-label', cx('ux.top', 'Back to top')); top.textContent = '↑'; body.appendChild(top);
+    top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    const onScroll = () => { const h = document.documentElement, sc = h.scrollTop || body.scrollTop, max = (h.scrollHeight - h.clientHeight) || 1; prog.style.width = Math.min(100, (sc / max) * 100) + '%'; top.classList.toggle('show', sc > 600); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    // search + recent toolbar (landing only)
+    const landing = $('#kb-landing');
+    if (landing && !$('#kb-toolbar')) {
+      const tb = document.createElement('div'); tb.id = 'kb-toolbar';
+      tb.innerHTML = '<div class="kb-search-wrap"><span class="kb-search-ic">🔎</span>'
+        + '<input id="kb-search" class="kb-search" type="search" autocomplete="off" placeholder="' + esc(cx('ux.searchph', 'Search ingredients, brands, concerns…')) + '" aria-label="' + esc(cx('ux.search', 'Search K-beauty')) + '">'
+        + '<div id="kb-search-res" class="kb-search-res" role="listbox"></div></div><div id="kb-recent" class="kb-recent"></div>';
+      landing.parentNode.insertBefore(tb, landing);
+      const inp = $('#kb-search'), res = $('#kb-search-res'); let idx = null;
+      inp.addEventListener('input', () => {
+        const q = inp.value.trim().toLowerCase(); if (!q) { res.classList.remove('show'); res.innerHTML = ''; return; }
+        if (!idx) idx = kbSearchIndex();
+        const hits = idx.filter(x => x.l.toLowerCase().indexOf(q) >= 0).slice(0, 8);
+        res.innerHTML = hits.length ? hits.map(x => '<a href="' + x.u + '"><span>' + x.e + '</span><span>' + esc(x.l) + '</span><span class="ty">' + esc(x.t) + '</span></a>').join('') : '<a style="cursor:default;color:var(--text3)">' + esc(cx('ux.noresults', 'No matches')) + '</a>';
+        res.classList.add('show');
+      });
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') { const a = res.querySelector('a[href]'); if (a) location.href = a.getAttribute('href'); } else if (e.key === 'Escape') { res.classList.remove('show'); inp.blur(); } });
+      document.addEventListener('click', e => { if (!tb.contains(e.target)) res.classList.remove('show'); });
+    }
+    // bottom nav (mobile)
+    if (!$('#kb-bnav')) {
+      const bn = document.createElement('nav'); bn.id = 'kb-bnav'; bn.setAttribute('aria-label', 'K-beauty');
+      const items = [['home', '🏠', cx('cat.menu', 'Menu')], ['skin', '🪞', kbTitle(kbCatById('skin'))], ['routine', '🧴', kbTitle(kbCatById('routine'))], ['buy', '🛡️', kbTitle(kbCatById('buy'))]];
+      bn.innerHTML = items.map(it => '<button type="button" data-bn="' + it[0] + '"><span class="bi">' + it[1] + '</span><span>' + esc(it[2]) + '</span></button>').join('');
+      body.appendChild(bn);
+      bn.addEventListener('click', e => { const b = e.target.closest('[data-bn]'); if (!b) return; if (b.dataset.bn === 'home') showLanding(); else showCategory(b.dataset.bn); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    }
+    // copy current-category deep-link (share)
+    const sc = $('#kb-share-cat');
+    if (sc) sc.addEventListener('click', () => {
+      const cat = ((($('#kb-back-title') || {}).dataset) || {}).catid || '';
+      const link = location.origin + '/kbeauty' + (cat ? '#cat=' + cat : '');
+      const done = () => kbToast(cx('ux.copied', 'Link copied ✓'));
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done).catch(done);
+      else { try { const ta = document.createElement('textarea'); ta.value = link; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); } catch (e) {} done(); }
+    });
+    // reveal-on-scroll
+    if (window.IntersectionObserver && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      $$('.kb-sec').forEach(s => { s.classList.add('kb-reveal'); io.observe(s); });
+    }
+    // recently-viewed recorder + haptic micro-interaction
+    document.addEventListener('click', e => {
+      const ig = e.target.closest('[data-ing]'); if (ig) { const i = ING_BY_ID[ig.dataset.ing]; if (i) kbAddRecent('ing', i.id, i.name, i.emoji); }
+      const br = e.target.closest('[data-brand]'); if (br) { const b = (window.KBEAUTY_BRANDS || []).filter(x => x.id === br.dataset.brand)[0]; if (b) kbAddRecent('brand', b.id, b.name, b.emoji); }
+      if (e.target.closest('.filter-chip,.kb-tile,.kb-quiz-cta,#kb-bnav button')) { try { navigator.vibrate && navigator.vibrate(8); } catch (e2) {} }
+    });
+    // sync toolbar + bottom-nav to the current (possibly deep-linked) state
+    const inCat = $('#kb-back') && !$('#kb-back').hidden;
+    const tb2 = $('#kb-toolbar'); if (tb2) tb2.style.display = inCat ? 'none' : '';
+    syncBnav(inCat ? ((($('#kb-back-title') || {}).dataset || {}).catid || 'home') : 'home');
+    kbRenderRecent();
+  }
+
   // ── Modal / filters / personalization ───────────────────────────────────────
   let _modalOpener = null;
   function openModalA11y() {
@@ -1034,6 +1131,9 @@
     const land = $('#kb-landing'); if (land) land.style.display = '';
     const back = $('#kb-back'); if (back) back.hidden = true;
     $$('.filter-chip', $('#kb-filters')).forEach(c => { const on = c.dataset.target === 'home'; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    const tb = $('#kb-toolbar'); if (tb) tb.style.display = '';
+    if (typeof kbRenderRecent === 'function') kbRenderRecent();
+    if (typeof syncBnav === 'function') syncBnav('home');
   }
   // Lazy render: a category's sections are rendered the first time it opens
   // (boot only renders the landing chrome), so the hub doesn't do ~25 sections'
@@ -1061,6 +1161,8 @@
     KB_ALLSECS.forEach(sid => { const el = document.getElementById(sid); if (el) el.style.display = (cat.secs.indexOf(sid) >= 0) ? '' : 'none'; });
     const back = $('#kb-back'); if (back) { back.hidden = false; const bt = $('#kb-back-title'); if (bt) { bt.dataset.catid = cat.id; bt.textContent = cat.icon + ' ' + kbTitle(cat); } }
     $$('.filter-chip', $('#kb-filters')).forEach(c => { const on = c.dataset.target === id; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    const tb = $('#kb-toolbar'); if (tb) tb.style.display = 'none';
+    if (typeof syncBnav === 'function') syncBnav(id);
     if (!opts || !opts.noscroll) { const bar = $('#kb-filters'); if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   }
   function renderNav() {
@@ -1335,6 +1437,7 @@
     // (see ensureCatRendered) — boot only builds the landing chrome, ticker & ads.
     wireFilters();
     showShareFab();
+    initUX();   // modern UX layer: search, back-to-top, progress, bottom-nav, toast, recent, reveal, haptics
 
     // routine tabs
     $$('#kb-routine-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {
