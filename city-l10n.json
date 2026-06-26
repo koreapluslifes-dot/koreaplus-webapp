@@ -18796,6 +18796,660 @@
      "a": "Jinju est célèbre pour sa forteresse de Jinjuseong et les sièges de la guerre d'Imjin, la légende de Nongae au rocher d'Uiam, et le Festival des lanternes de Namgang (Namgang Yudeung) chaque mois d'octobre. Elle est aussi connue pour son bibimbap au yukhoe (préparé avec du bœuf cru) et pour produire la majeure partie de la soie coréenne."
     }
    ]
+  },
+  "ja": {
+   "h1": "韓国・晋州（チンジュ）の観光ガイド",
+   "title": "韓国・晋州（チンジュ）の観光ガイド — 人気スポット・グルメ・旅のコツ（2026年版） | KoreaPlus",
+   "metaDesc": "晋州を満喫：晋州城、矗石楼、10月の南江流灯祭、国立晋州博物館、ユッケビビンバ、韓国シルクを紹介します。",
+   "lead": "晋州（チンジュ）は慶尚南道の南江沿いに広がる歴史の薫り漂う街で、川沿いに建つ晋州城と、壬辰倭乱（文禄・慶長の役）における劇的な攻防戦で知られています。毎年10月には南江流灯（ユドゥン）祭が街を彩り、数万個の灯籠が川面に浮かび、古い城壁沿いに並びます。さらに独特なユッケビビンバと千年の歴史を誇るシルク文化が加わり、晋州は定番の観光ルートから少し外れた、泊まりがけの価値ある旅先となっています。",
+   "attractions": [
+    {
+     "name": "晋州城（チンジュソン）",
+     "nameLocal": "진주성",
+     "blurb": "南江を見下ろす石垣の城は晋州の中心であり、壬辰倭乱中の1592〜1593年に行われた二度の有名な攻防戦の舞台です。再建された城壁を歩けば、門や指揮所、大砲の脇を抜けながら、ずっと雄大な川の眺めを楽しめます。毎年秋には灯籠祭のメイン会場となります。"
+    },
+    {
+     "name": "矗石楼（チョクソンヌ）",
+     "nameLocal": "촉석루",
+     "blurb": "城内の崖の上にそびえるこの壮麗な木造楼閣は、南江を見渡す韓国を代表する楼閣のひとつで、もとは指揮所や宴会場として建てられました。水面越しの眺めは象徴的で、開かれた広間には扁額や古い漢詩が掲げられています。最初に訪れるべき必見スポットで、夕暮れ時はとりわけ美しいです。"
+    },
+    {
+     "name": "義岩（ウィアム）",
+     "nameLocal": "의암",
+     "blurb": "矗石楼のすぐ下、川にある平らな巨岩が義岩です。1593年に城が落ちた後、妓生の論介（ノンゲ）が日本の武将を抱き寄せて共に川へ身を投げたという伝説に結びついています。近くには小さな祠と案内板があり、彼女の物語を伝えています。街でもっとも胸を打つ場所のひとつです。"
+    },
+    {
+     "name": "国立晋州博物館",
+     "nameLocal": "국립진주박물관",
+     "blurb": "城壁の内側に位置するこの博物館は壬辰倭乱（1592〜1598年）を専門としており、甲冑や武器、地図、ジオラマで戦いと晋州での攻防戦を解説しています。また、周辺地域の古代伽耶（カヤ）文化についても扱っています。入場無料で、城歩きと組み合わせるのにぴったりです。"
+    },
+    {
+     "name": "南江（ナムガン）",
+     "nameLocal": "남강",
+     "blurb": "幅広い南江は城のすぐそばを蛇行して流れ、晋州の風景と祭りの生命線となっています。川沿いの遊歩道や橋は気軽な散策にうってつけで、10月の祭りの間は水面が映る灯籠の光で輝きます。日中は城の崖と楼閣の穏やかな眺めを楽しめます。"
+    },
+    {
+     "name": "晋州城 城壁ウォーク",
+     "nameLocal": "진주성 성곽길",
+     "blurb": "目玉の楼閣以外にも、城の敷地は復元された城壁沿いや矗石門・拱北門といった門をくぐるゆったりとした一周散策が楽しめます。木陰の道、見張り台、そして金時敏（キム・シミン）将軍などの戦の英雄の像が道沿いに並びます。古い防衛施設の規模を肌で感じるには最適です。"
+    },
+    {
+     "name": "晋陽湖（チニャンホ）",
+     "nameLocal": "진양호",
+     "blurb": "南江上流のダムによって形成されたこの大きな貯水池は、夕日の名所として地元の人に愛される湖畔公園に囲まれています。園内には遊歩道、小さな動物園、遊園地エリアがあり、歴史的な中心部とは対照的に、のんびりとした家族連れ向けのスポットです。中心街から西へ少し行ったところにあります。"
+    },
+    {
+     "name": "慶南文化芸術会館",
+     "nameLocal": "경남문화예술회관",
+     "blurb": "南江沿いに建つこの施設は、慶尚南道を代表する公演・展示会場で、韓国様式と西洋様式の建築が融合しています。コンサートや演劇、ギャラリーでの企画展などが開催されます。城めぐり以外に文化的な夜を過ごしたいなら、スケジュールを確認してみてください。"
+    },
+    {
+     "name": "晋州中央市場",
+     "nameLocal": "진주중앙시장",
+     "blurb": "市の中心部近くにある活気あふれる晋州の伝統市場は、地元の軽食を味わい、史跡を離れた日常の暮らしを感じられる場所です。露店では野菜や乾物、屋台料理、生活雑貨が売られています。観光の合間に手頃な一口を楽しむのに、気軽で雰囲気のある立ち寄り先です。"
+    },
+    {
+     "name": "晋州シルク（伝統絹織物）",
+     "nameLocal": "진주 실크",
+     "blurb": "晋州は千年以上にわたってシルクを織り続けており、今なお韓国のシルクの大半を生産しています。これは染色に使われる南江の清らかな水と結びついた工芸です。地元の店やショールームではスカーフや伝統生地が売られており、この伝統は市民の誇りとなっています。地元で作られた、意味のあるお土産になります。"
+    }
+   ],
+   "food": [
+    {
+     "name": "晋州ビビンバ",
+     "blurb": "晋州の名物料理は、味付けしたご飯と野菜の上に火を通した肉ではなく生肉（ユッケ）をのせ、しばしば澄んだ牛肉スープを添えて提供されます。特製のコチュジャンで和えられ、新鮮で澄んだ味わいが珍重されています。その起源は、壬辰倭乱の攻防戦の際に兵士たちを食べさせたことにあるという伝説があります。"
+    },
+    {
+     "name": "ユッケ（牛肉のたたき）",
+     "blurb": "ごま油、ニンニク、薬味で味付けした手切りの生肉は、それ自体が晋州の定番で、副菜として、またビビンバの上に盛って提供されます。新鮮でなめらかな食感は、街の老舗専門店で味わうのが一番です。ご飯とスープを合わせれば、地元らしい定番のランチになります。"
+    },
+    {
+     "name": "晋州冷麺",
+     "blurb": "北部の冷麺とは異なり、晋州冷麺は洗練された魚介ベースのスープで、伝統的に薄く焼いた牛肉と卵を細切りにして添えます。韓国で名高い郷土麺のひとつで、夏にぴったりのさっぱりとした一品です。中心街の老舗の麺屋で探してみてください。"
+    },
+    {
+     "name": "ホッチェサッパプ（模擬祭祀飯）",
+     "blurb": "文字通り「模擬の祭祀飯」を意味するこの料理は、儒教の法要で供される食べ物を再現したもので、各種の味付け野菜、焼き魚、祭祀用の副菜をのせたご飯を、コチュジャンではなく醤油で食べます。より静かで儀礼的なビビンバの親戚と言えます。晋州はこれを味わうのに最適な場所のひとつです。"
+    },
+    {
+     "name": "手作り餃子と地元の軽食",
+     "blurb": "中央市場や中心街の周辺では、長年営む店主が新鮮に作る手作り餃子（マンドゥ）やホットク、その他の韓国屋台軽食が見つかります。安くてお腹も満たされ、観光の合間のつまみ食いにぴったりです。グルメ三昧の晋州の一日を締めくくってくれます。"
+    },
+    {
+     "name": "ウナギの炭火焼き",
+     "blurb": "川に恵まれた晋州は、甘辛いタレを塗って炭火で焼くウナギの蒲焼きで知られています。濃厚で満足感があり、特に暖かい季節に人気のスタミナ料理です。川沿いや専門店では、定番の副菜の数々とともに提供されます。"
+    }
+   ],
+   "gettingThere": "ソウルからは、列車か高速バスが最も手軽な選択肢です。KTX／SRTの高速列車が晋州方面へ運行しており（一部は乗り換えが必要）、ソウル駅発の直通コレイル都市間列車なら晋州駅まで約3時間半で到着します。運賃はおおむね3万〜5万5千ウォン程度です。高速バス・都市間バスはソウル南部ターミナルとセントラルシティ（高速）ターミナルから頻繁に発着し、晋州のバスターミナルまで約3時間半かかります。晋州に着けば、歴史的な中心部はコンパクトで、晋州城、矗石楼、国立博物館、川沿いはすべて中心街から徒歩圏内です。晋陽湖や郊外のスポットへは市内バスや短いタクシー移動で行けます。晋州空港（泗川）にはソウル金浦や済州との間に限られた便があり、飛行機での移動を好む方にも対応しています。",
+   "tips": [
+    "訪問は、毎年10月（おおむね上旬〜中旬）に川と城で開催される晋州南江流灯（ユドゥン）祭に合わせて計画しましょう。予約前に公式祭典サイトで正確な日程を確認してください。",
+    "最高の光と川の眺めを楽しむには、夕暮れ時に近い時間帯に城と矗石楼を訪れ、灯籠祭の期間中ならライトアップされた城壁を眺めながら滞在しましょう。",
+    "街を代表する料理である本物のユッケ入り晋州ビビンバを、中心部近くの老舗専門店で腰を据えて味わいましょう。",
+    "晋州は泊まりがけの旅にちょうどよく、泗川や統営など近隣の慶南の観光地とも組み合わせやすいので、ソウルからの日帰りで急ぐより、ここを拠点に一泊するのを検討してみてください。"
+   ],
+   "faq": [
+    {
+     "q": "晋州には何日必要ですか？",
+     "a": "主な見どころ——晋州城、矗石楼、義岩、国立晋州博物館に加えてユッケビビンバのランチ——は丸一日で回れます。10月の灯籠祭の期間に訪れる場合や、晋陽湖とゆったりとした川沿いの夜を加えたい場合は、一泊しましょう。"
+    },
+    {
+     "q": "晋州は訪れる価値がありますか？",
+     "a": "はい、特に混雑を避けて韓国の歴史と食に興味がある旅行者にはおすすめです。川沿いの城、その劇的な壬辰倭乱の物語、見事な秋の灯籠祭、そして独特な郷土料理が訪れる価値のある立ち寄り先にしており、他の慶南の観光地とも組み合わせやすいです。"
+    },
+    {
+     "q": "ソウルから晋州へはどう行きますか？",
+     "a": "列車では、ソウル駅発のコレイル都市間直通列車が晋州駅まで約3時間半で到着し、乗り換えを伴う高速列車の選択肢もあります。ソウルの南部・セントラルシティ両ターミナルからの高速バス・都市間バスもおよそ3時間半かかります。また、近隣の晋州（泗川）空港への便も限られた数ですがあります。"
+    },
+    {
+     "q": "晋州は何で有名ですか？",
+     "a": "晋州は晋州城と壬辰倭乱の攻防戦、義岩での論介の伝説、そして毎年10月の南江流灯祭で有名です。また、生肉を使ったユッケビビンバや、韓国のシルクの大半を生産していることでも知られています。"
+    }
+   ]
+  },
+  "zh": {
+   "h1": "韩国晋州旅游攻略",
+   "title": "韩国晋州旅游攻略 — 必游景点、美食与贴士（2026） | KoreaPlus",
+   "metaDesc": "探索晋州：晋州城、矗石楼、十月南江流灯节、国立晋州博物馆、生牛肉拌饭以及韩国丝绸。",
+   "lead": "晋州是位于庆尚南道南江畔的历史名城，最为人称道的是江边的晋州城及其壬辰倭乱时期惊心动魄的两次围城战。每年十月，南江流灯节让这座城市熠熠生辉，数以万计的灯笼漂浮在江面、点缀着古老的城墙。再加上独具特色的生牛肉拌饭和千年丝绸传统，晋州是一处值得在常规旅游线路之外停留一晚的理想去处。",
+   "attractions": [
+    {
+     "name": "晋州城（晋州要塞）",
+     "nameLocal": "진주성",
+     "blurb": "这座屹立于南江之上的石墙要塞是晋州的核心，也是壬辰倭乱期间1592至1593年两次著名围城战的发生地。你可以沿着重建的城墙漫步，经过城门、指挥所和大炮，一路皆有开阔的江景相伴。每年秋天，这里都是流灯节的主舞台。"
+    },
+    {
+     "name": "矗石楼",
+     "nameLocal": "촉석루",
+     "blurb": "这座宏伟的木结构楼阁矗立于要塞内的悬崖之上，俯瞰南江，是韩国经典楼阁之一，最初建作指挥所兼宴会厅。临水远眺的景致堪称标志性画面，敞开的厅堂内悬挂着匾额与古诗。它是必访的第一站，日落时分尤为美丽。"
+    },
+    {
+     "name": "义岩",
+     "nameLocal": "의암",
+     "blurb": "义岩是矗石楼下方江中的一块扁平巨石，与论介的传说紧密相连。论介是一名妓生，1593年要塞陷落后，她诱使一名日本将领与她相拥，随后一同跃入江中。附近设有小祠堂与解说牌讲述她的故事。这是城中最令人动容的地点之一。"
+    },
+    {
+     "name": "国立晋州博物馆",
+     "nameLocal": "국립진주박물관",
+     "blurb": "这座博物馆坐落于城墙之内，专注于壬辰倭乱（1592至1598年），陈列盔甲、兵器、地图与立体模型，讲解这场战争以及晋州的围城战。馆内还介绍周边地区古老的伽倻文化。免费入场，与城墙漫步完美搭配。"
+    },
+    {
+     "name": "南江",
+     "nameLocal": "남강",
+     "blurb": "宽阔的南江紧贴要塞蜿蜒流过，是晋州景致与节庆的命脉。江畔步道与桥梁让漫步轻松惬意，十月节庆期间江面更是倒映着灯火、流光溢彩。白天，这里能看到要塞悬崖与楼阁的静谧美景。"
+    },
+    {
+     "name": "晋州城城墙步道",
+     "nameLocal": "진주성 성곽길",
+     "blurb": "除了招牌的楼阁之外，整个要塞群更值得沿着修复的城墙、穿过矗石门与拱北门等城门慢慢绕行一圈。沿途遍布林荫小径、瞭望哨所，以及如金时敏将军等战争英雄的雕像。这是感受古代防御工事宏大规模的最佳方式。"
+    },
+    {
+     "name": "晋阳湖",
+     "nameLocal": "진양호",
+     "blurb": "晋阳湖由南江上游的水坝形成，是一座大型水库，环湖的湖畔公园深受当地人喜爱，是观赏日落的好去处。园内设有步道、小型动物园和游乐区，相较于历史核心区，是一处轻松适合家庭出游的去处。它位于市中心以西不远处。"
+    },
+    {
+     "name": "庆南文化艺术会馆",
+     "nameLocal": "경남문화예술회관",
+     "blurb": "这座会馆坐落于南江畔，是庆尚南道首屈一指的演出与展览场所，融合了韩式与西式建筑风格。馆内举办音乐会、戏剧以及轮换的艺术展。若你想在要塞之外度过一个文化之夜，不妨查看演出日程。"
+    },
+    {
+     "name": "晋州中央市场",
+     "nameLocal": "진주중앙시장",
+     "blurb": "晋州这座熙熙攘攘的传统市场位于市中心附近，是品尝当地小吃、感受古迹之外日常生活的好地方。摊位上售卖农产品、干货、街头小吃与日用品。在景点之间，这里是一处轻松而充满烟火气、可以低价饱餐一顿的去处。"
+    },
+    {
+     "name": "晋州丝绸文化",
+     "nameLocal": "진주 실크",
+     "blurb": "晋州织造丝绸已逾千年，至今仍生产韩国绝大部分的丝绸，这门工艺与用于染色的南江清澈水源密不可分。当地店铺与展示厅售卖丝巾与传统布料，这份传承是这座城市实实在在的骄傲。它是一份意义深远、本地手工制作的纪念品。"
+    }
+   ],
+   "food": [
+    {
+     "name": "晋州拌饭",
+     "blurb": "晋州的招牌菜在调味米饭与蔬菜上铺以生牛肉（육회）而非熟肉，通常另配一碗清澈的牛肉汤。它以特制辣酱拌食，因新鲜爽口的风味而备受推崇。相传其起源与壬辰倭乱围城战期间为军队供餐有关。"
+    },
+    {
+     "name": "生牛肉（육회）",
+     "blurb": "手切生牛肉以芝麻油、蒜末与调料调味，本身就是晋州的一道主打，可作为配菜或堆在拌饭上享用。新鲜细滑，在城中历史悠久的专门餐厅品尝最佳。搭配米饭与汤，便是一顿经典的当地午餐。"
+    },
+    {
+     "name": "晋州冷面",
+     "blurb": "与北方冷面不同，晋州冷面采用考究的海鲜底汤，传统上以煎牛肉细丝和鸡蛋作为浇头。它是韩国备受赞誉的地方面食之一，也是清爽的夏日佳肴。可在市中心老字号面馆寻觅。"
+    },
+    {
+     "name": "祭祀饭（헛제삿밥）",
+     "blurb": "字面意为“仿祭祀饭”，这道菜再现了儒家祭礼上供奉的食物：米饭配以各式调味蔬菜、烤鱼和祭祀小菜，蘸酱油而非辣酱食用。它是拌饭更为内敛、更具仪式感的“近亲”。晋州是品尝它的最佳地点之一。"
+    },
+    {
+     "name": "手工饺子与当地小吃",
+     "blurb": "在中央市场与市中心一带，你能找到由老字号商贩现做的手工饺子（만두）、糖饼以及其他韩式街头小吃。它们价格实惠、份量饱足，最适合在景点之间随走随吃。它们为晋州以美食为主题的一天画上圆满句号。"
+    },
+    {
+     "name": "烤鳗鱼（장어구이）",
+     "blurb": "得益于丰沛的河流，晋州以烤淡水鳗鱼闻名，鳗鱼刷上甜咸酱汁、以炭火烤制。口感丰腴、令人满足，是一道广受欢迎的滋补菜肴，尤其在温暖的季节。江畔与专门餐厅供应时会配上常见的各式小菜。"
+    }
+   ],
+   "gettingThere": "从首尔出发，最便捷的方式是乘火车或高速巴士。KTX/SRT高铁列车开往晋州方向（部分需中途换乘），而从首尔站发出的Korail直达城际列车约三个半小时即可抵达晋州站；车票通常约为30,000至55,000韩元。高速巴士与城际巴士从首尔南部和Central City（高速）巴士客运站频繁发车，约3.5小时可到达晋州的巴士客运站。抵达晋州后，历史核心区十分紧凑：晋州城、矗石楼、国立博物馆以及江滨皆可从市中心步行前往，乘市内巴士或短途出租车即可到达晋阳湖及周边地点。对于偏好飞行的旅客，晋州机场（泗川）也有往返首尔金浦及济州的少量航班。",
+   "tips": [
+    "将行程安排在晋州南江流灯节期间，该节庆每年十月（约上旬至中旬）在江边与要塞举行——预订前请在官方节庆网站确认确切日期。",
+    "在接近日落时分游览要塞与矗石楼，可获得最佳光线与江景，若你恰逢流灯节，还可留下来欣赏灯火通明的城墙。",
+    "在市中心附近的老字号专门餐厅坐下来，品尝配生牛肉的正宗晋州拌饭——这是这座城市最负盛名的菜肴。",
+    "晋州非常适合作为过夜之旅，并能轻松与泗川或统营等邻近的庆南目的地搭配，因此不妨考虑在此住一晚，而非从首尔匆忙地一日往返。"
+   ],
+   "faq": [
+    {
+     "q": "在晋州需要待几天？",
+     "a": "一整天足以游览精华——晋州城、矗石楼、义岩和国立晋州博物馆，再加一顿生牛肉拌饭午餐。如果你在十月流灯节期间到访，或想加上晋阳湖与悠闲的江畔之夜，则建议留宿一晚。"
+    },
+    {
+     "q": "晋州值得一去吗？",
+     "a": "值得，尤其对于想避开人潮、探寻韩国历史与美食的旅客而言。江畔要塞、惊心动魄的壬辰倭乱故事、壮观的秋季流灯节以及独具特色的当地美食，让它成为一处收获满满的停留地，并能与其他庆南目的地很好地搭配。"
+    },
+    {
+     "q": "如何从首尔前往晋州？",
+     "a": "乘火车，从首尔站发出的Korail城际直达列车约3.5小时可抵达晋州站，也有需中途换乘的高铁选择。从首尔南部和Central City客运站发出的高速巴士与城际巴士同样约需3.5小时。此外，附近的晋州（泗川）机场也有少量航班。"
+    },
+    {
+     "q": "晋州以什么闻名？",
+     "a": "晋州以晋州城及壬辰倭乱围城战、义岩论介的传说，以及每年十月的南江流灯节而闻名。它还以生牛肉拌饭（用生牛肉制作）以及生产韩国大部分丝绸而著称。"
+    }
+   ]
+  },
+  "ko": {
+   "h1": "진주 여행, 꼭 가봐야 할 명소",
+   "title": "진주 여행 가볼 만한 곳 — 명소, 맛집, 여행 팁 (2026) | KoreaPlus",
+   "metaDesc": "진주 여행 가이드: 진주성, 촉석루, 10월 남강유등축제, 국립진주박물관, 육회비빔밥, 그리고 진주 실크까지 한눈에.",
+   "lead": "진주는 경남 남강 변에 자리한 역사 깊은 도시로, 강가의 진주성과 임진왜란 당시의 극적인 진주성 전투로 가장 잘 알려져 있습니다. 매년 10월이면 남강유등축제로 도시 전체가 환히 밝아지는데, 수만 개의 등이 강물 위에 떠다니고 옛 성곽을 따라 늘어섭니다. 여기에 독특한 육회비빔밥과 천 년을 이어 온 실크 전통까지 더해져, 진주는 흔한 관광 코스에서 벗어나 하룻밤 머물 만한 가치가 충분한 도시입니다.",
+   "attractions": [
+    {
+     "name": "진주성",
+     "nameLocal": "진주성",
+     "blurb": "남강을 굽어보는 이 석성은 진주의 중심이자, 임진왜란 중 벌어진 두 차례(1592~1593년)의 유명한 진주성 전투 현장입니다. 복원된 성벽을 따라 성문, 지휘소, 대포를 지나며 걷는 내내 탁 트인 강 풍경을 감상할 수 있습니다. 매년 가을 유등축제의 주무대이기도 합니다."
+    },
+    {
+     "name": "촉석루",
+     "nameLocal": "촉석루",
+     "blurb": "성 안 절벽 위에 자리해 남강을 내려다보는 이 웅장한 목조 누각은 한국을 대표하는 누각 중 하나로, 원래는 지휘소이자 연회장으로 지어졌습니다. 강 건너로 펼쳐지는 풍경은 그 자체로 상징적이며, 개방된 누마루에는 현판과 옛 시문이 걸려 있습니다. 가장 먼저 들러야 할 곳으로, 특히 해 질 녘에 더없이 아름답습니다."
+    },
+    {
+     "name": "의암",
+     "nameLocal": "의암",
+     "blurb": "촉석루 바로 아래 강가에 놓인 평평한 바위인 의암은, 1593년 성이 함락된 뒤 적장을 끌어안고 함께 강물에 몸을 던진 기생 논개의 전설과 얽혀 있습니다. 인근에는 작은 사당과 안내판이 그녀의 이야기를 전합니다. 도시에서 가장 가슴 저미는 장소 중 하나입니다."
+    },
+    {
+     "name": "국립진주박물관",
+     "nameLocal": "국립진주박물관",
+     "blurb": "진주성 성곽 안에 자리한 이 박물관은 임진왜란(1592~1598년)을 전문적으로 다루며, 갑옷, 무기, 지도, 디오라마로 전쟁과 진주성 전투를 설명합니다. 또한 인근 지역의 고대 가야 문화도 소개합니다. 입장료가 무료이며, 진주성 산책과 함께 둘러보기에 더없이 좋습니다."
+    },
+    {
+     "name": "남강",
+     "nameLocal": "남강",
+     "blurb": "넓은 남강은 진주성 바로 곁을 휘감아 흐르며, 진주의 풍경과 축제를 떠받치는 생명줄과 같습니다. 강변 산책로와 다리를 따라 가볍게 걷기 좋고, 10월 축제 때는 물 위로 비치는 등불로 강이 일렁입니다. 낮에는 성곽 절벽과 누각을 바라보는 잔잔한 풍경을 선사합니다."
+    },
+    {
+     "name": "진주성 성곽길",
+     "nameLocal": "진주성 성곽길",
+     "blurb": "대표 누각을 넘어, 진주성은 복원된 성벽을 따라 천천히 한 바퀴 돌며 촉석문, 공북문 같은 성문을 지나볼 때 그 진가가 드러납니다. 그늘진 길, 망루, 그리고 김시민 장군 같은 전쟁 영웅들의 동상이 길을 따라 늘어서 있습니다. 옛 방어 시설의 규모를 온몸으로 느끼기에 가장 좋은 방법입니다."
+    },
+    {
+     "name": "진양호",
+     "nameLocal": "진양호",
+     "blurb": "남강 상류에 댐을 세워 만든 이 큰 저수지는 호숫가 공원으로 둘러싸여 있어, 현지인들이 노을 풍경으로 사랑하는 곳입니다. 산책로, 작은 동물원, 놀이 시설이 갖춰져 있어 역사적인 시내 중심가와 대비되는 여유로운 가족 나들이 장소가 됩니다. 시내에서 서쪽으로 짧게 이동하면 닿을 수 있습니다."
+    },
+    {
+     "name": "경남문화예술회관",
+     "nameLocal": "경남문화예술회관",
+     "blurb": "남강을 따라 자리한 이곳은 한국과 서양의 건축 양식을 어우른 경상남도의 대표 공연·전시 공간입니다. 콘서트, 연극, 그리고 갤러리에서 번갈아 열리는 미술 전시를 선보입니다. 진주성 외에 문화를 즐기는 저녁 시간을 보내고 싶다면 일정을 확인해 보세요."
+    },
+    {
+     "name": "진주중앙시장",
+     "nameLocal": "진주중앙시장",
+     "blurb": "시내 중심가 가까이에 있는 활기 넘치는 진주의 전통시장은, 명소를 벗어나 현지 간식을 맛보고 일상의 모습을 엿보기에 좋은 곳입니다. 가판대에서는 농산물, 건어물, 길거리 음식, 생활용품을 판매합니다. 명소를 둘러보는 사이 부담 없이 한 끼 채우기 좋은, 운치 있는 들러볼 만한 곳입니다."
+    },
+    {
+     "name": "진주 실크",
+     "nameLocal": "진주 실크",
+     "blurb": "진주는 천 년 넘게 실크를 짜 왔으며 지금도 한국 실크의 대부분을 생산하는데, 이는 염색에 쓰이던 남강의 맑은 물과 깊이 얽힌 공예입니다. 현지 상점과 전시장에서는 스카프와 전통 직물을 판매하며, 이 유산은 시민들의 진정한 자부심입니다. 지역에서 직접 만든 뜻깊은 기념품으로 제격입니다."
+    }
+   ],
+   "food": [
+    {
+     "name": "진주비빔밥",
+     "blurb": "진주의 대표 음식으로, 양념한 밥과 나물 위에 익힌 고기 대신 생고기인 육회를 올리고 흔히 맑은 소고기 육수를 곁들여 냅니다. 특별한 고추장으로 비벼 먹으며, 신선하고 깔끔한 맛으로 정평이 나 있습니다. 그 유래는 임진왜란 진주성 전투 때 병사들을 먹이던 데서 비롯되었다는 이야기가 전해집니다."
+    },
+    {
+     "name": "육회",
+     "blurb": "참기름, 마늘, 갖은 양념으로 버무린 손질된 생고기는 그 자체로 진주의 명물로, 단품으로 내거나 비빔밥 위에 듬뿍 올려 먹습니다. 신선하고 부드러운 육회는 오래된 전문점에서 맛볼 때 가장 좋습니다. 밥, 국과 함께 곁들이면 정통 현지식 점심이 됩니다."
+    },
+    {
+     "name": "진주냉면",
+     "blurb": "북쪽 지방의 냉면과 달리 진주냉면은 정갈한 해물 육수에 말아내며, 전통적으로 부쳐낸 소고기를 가늘게 채 썰어 얹고 지단을 올립니다. 한국을 대표하는 향토 면 요리 중 하나로, 여름철 입맛을 돋우는 시원한 한 끼입니다. 시내의 오래된 냉면집에서 찾아보세요."
+    },
+    {
+     "name": "헛제사밥",
+     "blurb": "말 그대로 '제사를 흉내 낸 밥'으로, 유교 제례에 올리던 음식을 재현한 요리입니다. 밥 위에 갖은 양념 나물, 구운 생선, 제례 반찬을 곁들이고 고추장 대신 간장으로 비벼 먹습니다. 비빔밥의 좀 더 조용하고 격식 있는 사촌 격이라 할 수 있습니다. 진주는 헛제사밥을 맛보기에 가장 좋은 곳 중 하나입니다."
+    },
+    {
+     "name": "진주 만두와 향토 간식",
+     "blurb": "진주중앙시장과 시내 중심가 일대에서는 오랜 단골 상인들이 즉석에서 빚어내는 손만두, 호떡, 그 밖의 한국식 길거리 간식을 만날 수 있습니다. 값싸고 든든하며, 명소를 오가며 간단히 맛보기에 안성맞춤입니다. 음식에 초점을 맞춘 진주에서의 하루를 완성해 줍니다."
+    },
+    {
+     "name": "장어구이",
+     "blurb": "강이 풍부한 진주는 장어구이로도 유명한데, 달콤짭짤한 양념을 발라 숯불에 구워냅니다. 진하고 든든한 이 음식은 특히 더운 계절에 인기 있는 보양식입니다. 강변과 전문점에서 으레 갖춰진 다양한 반찬과 함께 내옵니다."
+    }
+   ],
+   "gettingThere": "서울에서 가는 가장 편한 방법은 기차나 고속버스입니다. KTX/SRT 고속열차가 진주 방면으로 운행하며(일부는 환승 필요), 서울역에서 출발하는 코레일 직통 일반열차는 약 3시간 30분 만에 진주역에 도착합니다. 요금은 보통 3만~5만 5천 원 정도입니다. 고속·시외버스는 서울 남부터미널과 센트럴시티(고속)터미널에서 자주 출발하며, 진주 버스터미널까지 약 3시간 30분이 걸립니다. 진주에 도착하면 역사적인 중심가는 아담해서, 진주성, 촉석루, 국립진주박물관, 강변은 모두 시내에서 걸어서 다닐 수 있고, 진양호와 외곽 명소는 시내버스나 짧은 택시로 닿을 수 있습니다. 비행기를 선호한다면 진주(사천)공항에서 서울 김포와 제주를 오가는 항공편도 일부 있습니다.",
+   "tips": [
+    "매년 10월(대체로 초중순) 강과 진주성 일대에서 열리는 진주 남강유등축제에 맞춰 방문을 계획해 보세요. 예약 전에 공식 축제 사이트에서 정확한 날짜를 확인하세요.",
+    "빛과 강 풍경이 가장 좋은 해 질 녘에 진주성과 촉석루를 둘러보고, 유등축제 기간이라면 불 밝힌 성벽까지 감상하며 머물러 보세요.",
+    "진주가 자랑하는 음식인 육회비빔밥은 시내 가까이 있는 오래된 전문점에서 자리 잡고 제대로 맛보세요.",
+    "진주는 1박 여행으로 잘 어울리고 사천이나 통영 같은 인근 경남 명소와 묶기도 쉬우니, 서울에서 당일치기로 서두르기보다 하룻밤 거점으로 삼는 것을 고려해 보세요."
+   ],
+   "faq": [
+    {
+     "q": "진주 여행은 며칠이 필요한가요?",
+     "a": "하루면 진주성, 촉석루, 의암, 국립진주박물관 같은 핵심 명소에 육회비빔밥 점심까지 충분히 둘러볼 수 있습니다. 10월 유등축제 기간에 방문하거나 진양호와 여유로운 강변의 저녁을 더하고 싶다면 하룻밤 머무는 것을 추천합니다."
+    },
+    {
+     "q": "진주는 가볼 만한 가치가 있나요?",
+     "a": "네, 특히 붐비는 곳을 벗어나 한국의 역사와 음식에 관심 있는 여행자에게 좋습니다. 강가의 성, 극적인 임진왜란 이야기, 화려한 가을 유등축제, 그리고 독특한 향토 음식이 어우러져 들를 만한 가치가 충분하며, 다른 경남 명소와도 잘 어울립니다."
+    },
+    {
+     "q": "서울에서 진주까지 어떻게 가나요?",
+     "a": "기차로는 서울역에서 출발하는 코레일 직통 일반열차가 약 3시간 30분 만에 진주역에 닿고, 환승을 거치는 고속열차 편도 있습니다. 서울 남부터미널과 센트럴시티터미널에서 출발하는 고속·시외버스 역시 약 3시간 30분이 걸립니다. 인근 진주(사천)공항을 오가는 항공편도 일부 있습니다."
+    },
+    {
+     "q": "진주는 무엇으로 유명한가요?",
+     "a": "진주는 진주성과 임진왜란 진주성 전투, 의암에 얽힌 논개의 전설, 그리고 매년 10월 열리는 남강유등축제로 유명합니다. 또한 생고기로 만든 육회비빔밥과 한국 실크의 대부분을 생산하는 것으로도 알려져 있습니다."
+    }
+   ]
+  },
+  "de": {
+   "h1": "Sehenswürdigkeiten in Jinju, Korea",
+   "title": "Sehenswürdigkeiten in Jinju, Korea — Top-Attraktionen, Essen & Tipps (2026) | KoreaPlus",
+   "metaDesc": "Entdecke Jinju: Festung Jinjuseong, Pavillon Chokseongnu, Namgang-Laternenfest im Oktober, Nationalmuseum Jinju, Yukhoe-Bibimbap und koreanische Seide.",
+   "lead": "Jinju ist eine geschichtsträchtige Stadt am Nam-Fluss in der Provinz Gyeongnam, vor allem bekannt für die am Flussufer gelegene Festung Jinjuseong und ihre dramatischen Belagerungen während des Imjin-Kriegs. Jeden Oktober erstrahlt die Stadt beim Namgang-Yudeung-Laternenfest, wenn Zehntausende Laternen auf dem Fluss treiben und die alten Festungsmauern säumen. Ergänzt durch ein unverwechselbares Yukhoe-Bibimbap und eine tausendjährige Seidentradition, ist Jinju ein lohnendes Ziel für eine Übernachtung abseits der üblichen Touristenpfade.",
+   "attractions": [
+    {
+     "name": "Festung Jinjuseong (Jinju-Festung)",
+     "nameLocal": "진주성",
+     "blurb": "Diese steinummauerte Festung über dem Nam-Fluss ist das Herz von Jinju und Schauplatz zweier berühmter Belagerungen von 1592 bis 1593 während des Imjin-Kriegs. Man kann auf den wiederaufgebauten Wällen entlang von Toren, Kommandoposten und Kanonen spazieren und genießt dabei durchgehend weite Ausblicke auf den Fluss. Im Herbst ist sie die Hauptbühne des Laternenfests."
+    },
+    {
+     "name": "Pavillon Chokseongnu",
+     "nameLocal": "촉석루",
+     "blurb": "Auf einer Klippe innerhalb der Festung thronend, ist dieser prächtige Holzpavillon mit Blick auf den Nam-Fluss einer der klassischen Pavillons Koreas und wurde ursprünglich als Kommandoposten und Bankettsaal erbaut. Der Blick über das Wasser ist legendär, und die offene Halle ist mit Tafeln und alten Gedichten behängt. Er ist ein unverzichtbarer erster Halt und besonders bei Sonnenuntergang schön."
+    },
+    {
+     "name": "Uiam-Felsen",
+     "nameLocal": "의암",
+     "blurb": "Uiam, ein flacher Felsblock im Fluss direkt unterhalb des Chokseongnu, ist mit der Legende von Nongae verbunden, einer Gisaeng, die einen japanischen General in eine Umarmung lockte und nach dem Fall der Festung 1593 mit ihm in den Fluss stürzte. Ein kleiner Schrein und Tafeln in der Nähe erzählen ihre Geschichte. Es ist einer der ergreifendsten Orte der Stadt."
+    },
+    {
+     "name": "Nationalmuseum Jinju",
+     "nameLocal": "국립진주박물관",
+     "blurb": "Innerhalb der Festungsmauern gelegen, ist dieses Museum auf den Imjin-Krieg (1592–1598) spezialisiert und zeigt Rüstungen, Waffen, Karten und Dioramen, die den Konflikt und die Belagerungen von Jinju erklären. Es behandelt auch die alte Gaya-Kultur der umliegenden Region. Der Eintritt ist frei, und es lässt sich perfekt mit einem Spaziergang durch die Festung verbinden."
+    },
+    {
+     "name": "Nam-Fluss (Namgang)",
+     "nameLocal": "남강",
+     "blurb": "Der breite Nam-Fluss windet sich direkt an der Festung vorbei und ist die Lebensader der Landschaft und Feste von Jinju. Uferwege und Brücken laden zu einem entspannten Spaziergang ein, und während des Oktoberfests glüht das Wasser im Widerschein der Laternen. Tagsüber bietet er ruhige Ausblicke auf die Festungsklippen und den Pavillon."
+    },
+    {
+     "name": "Mauerweg und Tore der Jinju-Festung",
+     "nameLocal": "진주성 성곽길",
+     "blurb": "Über den berühmten Pavillon hinaus belohnt die Festungsanlage eine gemächliche Runde entlang der restaurierten Wehrmauern und durch Tore wie Chokseongmun und Gongbungmun. Schattige Wege, Aussichtsposten und Statuen von Kriegshelden wie General Kim Si-min säumen die Route. So bekommt man am besten ein Gefühl für das Ausmaß der alten Befestigungen."
+    },
+    {
+     "name": "Jinyangho-See",
+     "nameLocal": "진양호",
+     "blurb": "Dieser große Stausee, der durch einen Damm flussaufwärts am Nam-Fluss entstand, ist von einem Uferpark umgeben, den Einheimische für Sonnenuntergänge lieben. Das Gelände umfasst Wanderwege, einen kleinen Zoo und einen Vergnügungsbereich und bildet ein entspanntes, familienfreundliches Gegenstück zum historischen Zentrum. Es liegt nur eine kurze Fahrt westlich der Innenstadt."
+    },
+    {
+     "name": "Gyeongnam Kultur- und Kunstzentrum",
+     "nameLocal": "경남문화예술회관",
+     "blurb": "Am Nam-Fluss gelegen, ist dies der wichtigste Veranstaltungsort der Provinz Gyeongsangnam-do für Aufführungen und Ausstellungen und verbindet koreanische mit westlichen Baustilen. Es beherbergt Konzerte, Theaterstücke und wechselnde Kunstausstellungen in seinen Galerien. Wirf einen Blick in den Spielplan, wenn du jenseits der Festung einen kulturvollen Abend verbringen möchtest."
+    },
+    {
+     "name": "Jungang-Markt",
+     "nameLocal": "진주중앙시장",
+     "blurb": "Jinjus quirliger traditioneller Markt nahe dem Stadtzentrum ist der Ort, um lokale Snacks zu probieren und abseits der Sehenswürdigkeiten das Alltagsleben zu erleben. An den Ständen gibt es Obst und Gemüse, Trockenwaren, Streetfood und Haushaltsartikel. Es ist ein unkomplizierter, stimmungsvoller Halt für einen günstigen Imbiss zwischen den Sehenswürdigkeiten."
+    },
+    {
+     "name": "Jinju-Seidenhandwerk",
+     "nameLocal": "진주 실크",
+     "blurb": "Jinju webt seit über tausend Jahren Seide und produziert noch heute den Großteil der koreanischen Seide – ein Handwerk, das eng mit dem klaren Wasser des Nam-Flusses verbunden ist, das zum Färben verwendet wird. Lokale Geschäfte und Ausstellungsräume verkaufen Schals und traditionelle Stoffe, und das Erbe ist ein echter Quell des Bürgerstolzes. Es ergibt ein sinnvolles, vor Ort gefertigtes Souvenir."
+    }
+   ],
+   "food": [
+    {
+     "name": "Jinju-Bibimbap",
+     "blurb": "Jinjus Signaturgericht krönt gewürzten Reis und Gemüse mit rohem Rindfleisch (Yukhoe) statt mit gegartem Fleisch und wird oft mit einer klaren Rinderbrühe serviert. Es wird mit einer besonderen Chilipaste angerichtet und für seinen frischen, reinen Geschmack geschätzt. Der Legende nach geht sein Ursprung auf die Verpflegung der Truppen während der Belagerungen im Imjin-Krieg zurück."
+    },
+    {
+     "name": "Yukhoe (Rindertatar)",
+     "blurb": "Von Hand geschnittenes rohes Rindfleisch, gewürzt mit Sesamöl, Knoblauch und Gewürzen, ist in Jinju auch für sich genommen ein Klassiker, serviert als Beilage oder auf Bibimbap gehäuft. Frisch und zart schmeckt es am besten in den alteingesessenen Spezialitätenrestaurants der Stadt. Kombiniere es mit Reis und Suppe für ein klassisches lokales Mittagessen."
+    },
+    {
+     "name": "Jinju-Naengmyeon",
+     "blurb": "Anders als die nordkoreanischen kalten Nudeln kommt das Jinju-Naengmyeon in einer feinen Brühe auf Meeresfrüchtebasis und wird traditionell mit dünnen Streifen aus angebratenem Rindfleisch und Ei garniert. Es ist einer der berühmten regionalen Nudelstile Koreas und eine erfrischende Sommermahlzeit. Suche danach in den etablierten Nudelhäusern der Innenstadt."
+    },
+    {
+     "name": "Heot-jesatbap",
+     "blurb": "Wörtlich „Schein-Ahnenritus-Reis“, stellt dieses Gericht die Speisen nach, die bei konfuzianischen Gedenkzeremonien dargeboten werden: Reis mit verschiedenen gewürzten Gemüsesorten, gegrilltem Fisch und rituellen Beilagen, gegessen mit Sojasauce statt Chilipaste. Es ist ein stillerer, zeremoniellerer Verwandter des Bibimbap. Jinju ist einer der besten Orte, um es zu probieren."
+    },
+    {
+     "name": "Mandu und lokale Snacks",
+     "blurb": "Rund um den Jungang-Markt und das Stadtzentrum findest du handgemachte Teigtaschen (Mandu), Hotteok und andere koreanische Streetfood-Snacks, die von langjährigen Händlern frisch zubereitet werden. Sie sind günstig, sättigend und perfekt zum Naschen zwischen den Sehenswürdigkeiten. Sie runden einen kulinarisch geprägten Tag in Jinju ab."
+    },
+    {
+     "name": "Jangeo-gui (gegrillter Süßwasseraal)",
+     "blurb": "Dank seiner Flüsse ist Jinju für gegrillten Süßwasseraal bekannt, der mit einer süß-herzhaften Sauce bestrichen und über Holzkohle gegart wird. Reichhaltig und sättigend, ist er ein beliebtes Kraftgericht, besonders in den wärmeren Monaten. Restaurants am Flussufer und Spezialitätenlokale servieren ihn mit der üblichen Auswahl an Beilagen."
+    }
+   ],
+   "gettingThere": "Von Seoul aus sind Zug oder Express-Bus die einfachsten Optionen. KTX/SRT-Hochgeschwindigkeitszüge fahren in Richtung Jinju (teils mit Umstieg), und direkte Korail-Überlandzüge vom Bahnhof Seoul erreichen den Bahnhof Jinju in etwa dreieinhalb Stunden; Tickets kosten in der Regel rund 30.000–55.000 Won. Express- und Überlandbusse fahren häufig von den Busterminals Seoul Nambu und Central City (Express) und brauchen etwa 3,5 Stunden zu den Busterminals von Jinju. In Jinju selbst ist das historische Zentrum kompakt: Festung Jinjuseong, Chokseongnu, das Nationalmuseum und das Flussufer sind alle von der Innenstadt aus zu Fuß erreichbar, und Stadtbusse oder kurze Taxifahrten bringen einen zum Jinyangho-See und zu abgelegeneren Orten. Der Flughafen Jinju (Sacheon) bietet außerdem begrenzte Flüge von und nach Seoul Gimpo und Jeju für alle, die lieber fliegen.",
+   "tips": [
+    "Plane deinen Besuch passend zum Jinju-Namgang-Yudeung-Laternenfest, das jeden Oktober (etwa Anfang bis Mitte des Monats) entlang des Flusses und der Festung stattfindet – bestätige die genauen Daten vor der Buchung auf der offiziellen Festival-Website.",
+    "Besuche die Festung und den Chokseongnu kurz vor Sonnenuntergang für das beste Licht und die schönsten Flussblicke und bleibe für die beleuchteten Mauern, wenn du während des Laternenfests dort bist.",
+    "Setz dich für das echte Jinju-Bibimbap mit Yukhoe in eines der alteingesessenen Spezialitätenrestaurants nahe dem Zentrum – es ist das Gericht, für das die Stadt bekannt ist.",
+    "Jinju eignet sich gut für eine Übernachtung und lässt sich leicht mit nahe gelegenen Gyeongnam-Zielen wie Sacheon oder Tongyeong verbinden, also ziehe in Betracht, hier eine Nacht zu bleiben, statt einen Tagesausflug von Seoul aus zu hetzen."
+   ],
+   "faq": [
+    {
+     "q": "Wie viele Tage braucht man in Jinju?",
+     "a": "Ein voller Tag deckt die Höhepunkte ab – Festung Jinjuseong, Chokseongnu, Uiam-Felsen und das Nationalmuseum Jinju, dazu ein Yukhoe-Bibimbap zum Mittagessen. Bleibe über Nacht, wenn du während des Laternenfests im Oktober da bist oder den Jinyangho-See und einen entspannten Abend am Flussufer ergänzen möchtest."
+    },
+    {
+     "q": "Lohnt sich ein Besuch in Jinju?",
+     "a": "Ja, besonders für Reisende, die sich abseits der Menschenmassen für koreanische Geschichte und Küche interessieren. Die Festung am Flussufer, ihre dramatische Imjin-Kriegsgeschichte, das spektakuläre herbstliche Laternenfest und die unverwechselbare lokale Küche machen sie zu einem lohnenden Halt, der sich gut mit anderen Gyeongnam-Zielen verbinden lässt."
+    },
+    {
+     "q": "Wie kommt man von Seoul nach Jinju?",
+     "a": "Mit dem Zug erreicht der direkte Korail-Überlandverkehr vom Bahnhof Seoul den Bahnhof Jinju in etwa 3,5 Stunden, mit Hochgeschwindigkeitsoptionen über Umstiege. Express- und Überlandbusse von den Seouler Terminals Nambu und Central City brauchen ebenfalls rund 3,5 Stunden. Außerdem gibt es begrenzte Flüge zum nahe gelegenen Flughafen Jinju (Sacheon)."
+    },
+    {
+     "q": "Wofür ist Jinju berühmt?",
+     "a": "Jinju ist berühmt für die Festung Jinjuseong und die Belagerungen im Imjin-Krieg, die Legende von Nongae am Uiam-Felsen und das Namgang-Yudeung-Laternenfest jeden Oktober. Es ist außerdem bekannt für sein Yukhoe-Bibimbap (mit rohem Rindfleisch) und dafür, den Großteil der koreanischen Seide zu produzieren."
+    }
+   ]
+  },
+  "pt": {
+   "h1": "O Que Fazer em Jinju, Coreia",
+   "title": "O Que Fazer em Jinju, Coreia — Principais Atrações, Gastronomia e Dicas (2026) | KoreaPlus",
+   "metaDesc": "Descubra Jinju: a Fortaleza Jinjuseong, o pavilhão Chokseongnu, o Festival das Lanternas do Rio Namgang em outubro, o Museu Nacional, o bibimbap com yukhoe e a seda.",
+   "lead": "Jinju é uma cidade repleta de história às margens do Rio Nam, na província de Gyeongnam, conhecida sobretudo pela Fortaleza Jinjuseong, à beira do rio, e pelos seus dramáticos cercos durante a Guerra Imjin. A cada outubro, ela se ilumina com o Festival das Lanternas do Namgang (Namgang Yudeung), quando dezenas de milhares de lanternas flutuam sobre o rio e contornam as antigas muralhas da fortaleza. Acrescente um bibimbap de yukhoe bem característico e uma tradição milenar de seda, e Jinju se torna uma gratificante escapada de uma noite, longe das rotas turísticas habituais.",
+   "attractions": [
+    {
+     "name": "Fortaleza Jinjuseong (Fortaleza de Jinju)",
+     "nameLocal": "진주성",
+     "blurb": "Esta fortaleza de muralhas de pedra acima do Rio Nam é o coração de Jinju e palco de dois famosos cercos de 1592–1593 durante a Guerra Imjin. Você pode percorrer as muralhas reconstruídas, passando por portões, postos de comando e canhões, com vistas amplas do rio o tempo todo. É o palco principal do festival das lanternas a cada outono."
+    },
+    {
+     "name": "Pavilhão Chokseongnu",
+     "nameLocal": "촉석루",
+     "blurb": "Empoleirado em um penhasco dentro da fortaleza, este grandioso pavilhão de madeira com vista para o Rio Nam é um dos pavilhões clássicos da Coreia e foi originalmente construído como posto de comando e salão de banquetes. A vista sobre as águas é icônica, e o salão aberto é decorado com placas e poesias antigas. É uma parada essencial e especialmente bela ao pôr do sol."
+    },
+    {
+     "name": "Rocha Uiam",
+     "nameLocal": "의암",
+     "blurb": "Um rochedo plano sobre o rio logo abaixo do Chokseongnu, Uiam está ligado à lenda de Nongae, uma gisaeng que atraiu um general japonês para um abraço e mergulhou com ele no rio após a queda da fortaleza em 1593. Um pequeno santuário e placas nas proximidades contam sua história. É um dos pontos mais comoventes da cidade."
+    },
+    {
+     "name": "Museu Nacional de Jinju",
+     "nameLocal": "국립진주박물관",
+     "blurb": "Localizado dentro das muralhas da fortaleza, este museu é especializado na Guerra Imjin (1592–1598), com armaduras, armas, mapas e dioramas que explicam o conflito e os cercos de Jinju. Também aborda a antiga cultura Gaya da região circundante. A entrada é gratuita e combina perfeitamente com uma caminhada pela fortaleza."
+    },
+    {
+     "name": "Rio Nam (Namgang)",
+     "nameLocal": "남강",
+     "blurb": "O largo Rio Nam serpenteia bem ao lado da fortaleza e é a alma da paisagem e dos festivais de Jinju. Caminhos e pontes à beira-rio convidam a um passeio tranquilo, e a água brilha com o reflexo das lanternas durante o festival de outubro. Durante o dia, oferece vistas serenas dos penhascos da fortaleza e do pavilhão."
+    },
+    {
+     "name": "Caminhada pelos Portões e Muralhas da Fortaleza de Jinju",
+     "nameLocal": "진주성 성곽길",
+     "blurb": "Além do pavilhão de destaque, o complexo da fortaleza recompensa um passeio tranquilo ao longo de suas muralhas restauradas e através de portões como o Chokseongmun e o Gongbungmun. Caminhos sombreados, postos de observação e estátuas de heróis de guerra, como o General Kim Si-min, ladeiam o percurso. É a melhor maneira de sentir a dimensão das antigas defesas."
+    },
+    {
+     "name": "Lago Jinyangho",
+     "nameLocal": "진양호",
+     "blurb": "Formado por uma represa rio acima do Rio Nam, este grande reservatório é cercado por um parque à beira do lago que os moradores adoram pelas vistas do pôr do sol. A área inclui trilhas para caminhada, um pequeno zoológico e uma área de diversões, sendo um contraponto relaxante e familiar ao centro histórico. Fica a um curto trajeto a oeste do centro."
+    },
+    {
+     "name": "Centro de Cultura e Artes de Gyeongnam",
+     "nameLocal": "경남문화예술회관",
+     "blurb": "Situado às margens do Rio Nam, este é o principal espaço da província de Gyeongsangnam-do para apresentações e exposições, mesclando estilos arquitetônicos coreanos e ocidentais. Ele recebe concertos, peças teatrais e mostras de arte rotativas em suas galerias. Confira a programação se quiser uma noite de cultura além da fortaleza."
+    },
+    {
+     "name": "Mercado Jungang",
+     "nameLocal": "진주중앙시장",
+     "blurb": "O movimentado mercado tradicional de Jinju, perto do centro da cidade, é o lugar para provar petiscos locais e ver a vida cotidiana longe dos monumentos. As barracas vendem produtos frescos, alimentos secos, comida de rua e utensílios domésticos. É uma parada fácil e cheia de atmosfera para uma refeição barata entre os passeios."
+    },
+    {
+     "name": "Patrimônio da Seda de Jinju",
+     "nameLocal": "진주 실크",
+     "blurb": "Jinju tece seda há mais de mil anos e ainda produz a grande maioria da seda da Coreia, um ofício ligado às águas limpas do Rio Nam, usadas no tingimento. Lojas e showrooms locais vendem lenços e tecidos tradicionais, e esse patrimônio é um genuíno motivo de orgulho cívico. Rende uma lembrança significativa e feita localmente."
+    }
+   ],
+   "food": [
+    {
+     "name": "Bibimbap de Jinju",
+     "blurb": "O prato típico de Jinju cobre o arroz temperado e os legumes com carne bovina crua (yukhoe), em vez de carne cozida, sendo frequentemente servido com um caldo de carne claro à parte. É temperado com uma pasta de pimenta especial e valorizado por seu sabor fresco e leve. A lenda atribui sua origem à alimentação das tropas durante os cercos da Guerra Imjin."
+    },
+    {
+     "name": "Yukhoe (Tartar de Carne)",
+     "blurb": "Carne bovina crua cortada à mão e temperada com óleo de gergelim, alho e condimentos é, por si só, um clássico de Jinju, servida como acompanhamento ou sobre o bibimbap. Fresca e macia, é melhor apreciada nos restaurantes especializados de longa tradição da cidade. Combine-a com arroz e sopa para um almoço local clássico."
+    },
+    {
+     "name": "Naengmyeon de Jinju",
+     "blurb": "Ao contrário do macarrão frio do norte, o naengmyeon de Jinju vem em um caldo refinado à base de frutos do mar e é tradicionalmente guarnecido com finas tiras de carne frita e ovo. É um dos celebrados estilos regionais de macarrão da Coreia e uma refeição refrescante de verão. Procure-o nas casas de macarrão consagradas do centro."
+    },
+    {
+     "name": "Heot-jesatbap",
+     "blurb": "Literalmente 'arroz de falso rito ancestral', este prato recria os alimentos oferecidos nas cerimônias memoriais confucianas: arroz coberto com diversos legumes temperados, peixe grelhado e acompanhamentos rituais, comido com molho de soja em vez de pasta de pimenta. É um primo mais discreto e cerimonial do bibimbap. Jinju é um dos melhores lugares para experimentá-lo."
+    },
+    {
+     "name": "Mandu de Naengmyeon de Jinju e Petiscos Locais",
+     "blurb": "Ao redor do Mercado Jungang e do centro da cidade, você encontrará bolinhos feitos à mão (mandu), hotteok e outros petiscos de rua coreanos preparados na hora por vendedores antigos. São baratos, saciantes e perfeitos para beliscar entre os passeios. Eles completam um dia voltado à gastronomia em Jinju."
+    },
+    {
+     "name": "Jangeo-gui (Enguia de Água Doce Grelhada)",
+     "blurb": "Graças aos seus rios, Jinju é conhecida pela enguia de água doce grelhada, pincelada com um molho agridoce e assada na brasa. Rica e satisfatória, é um popular prato energético, especialmente nos meses mais quentes. Restaurantes à beira-rio e especializados a servem com a habitual variedade de acompanhamentos."
+    }
+   ],
+   "gettingThere": "De Seul, as opções mais fáceis são trem ou ônibus expresso. Trens de alta velocidade KTX/SRT seguem em direção a Jinju (alguns com baldeação), e trens intermunicipais diretos da Korail da Estação de Seul chegam à Estação de Jinju em cerca de três horas e meia; as passagens costumam custar entre 30.000 e 55.000 wones. Ônibus expressos e intermunicipais partem com frequência dos terminais rodoviários Nambu de Seul e Central City (Express), levando cerca de 3,5 horas até os terminais rodoviários de Jinju. Uma vez em Jinju, o núcleo histórico é compacto: a Fortaleza Jinjuseong, o Chokseongnu, o Museu Nacional e a orla do rio ficam todos a uma curta caminhada do centro, e ônibus urbanos ou breves corridas de táxi chegam ao Lago Jinyangho e a pontos mais afastados. O Aeroporto de Jinju (Sacheon) também tem voos limitados de/para Seul Gimpo e Jeju, para quem prefere voar.",
+   "tips": [
+    "Programe sua visita para o Festival das Lanternas do Namgang (Namgang Yudeung), realizado ao longo do rio e da fortaleza a cada outubro (por volta do início ou meados do mês) — confirme as datas exatas no site oficial do festival antes de reservar.",
+    "Visite a fortaleza e o Chokseongnu perto do pôr do sol para a melhor luz e vistas do rio, e fique para ver as muralhas iluminadas se estiver lá durante o festival das lanternas.",
+    "Sente-se para saborear o verdadeiro bibimbap de Jinju com yukhoe em um dos restaurantes especializados de longa tradição da cidade, perto do centro — é o prato pelo qual a cidade é conhecida.",
+    "Jinju funciona bem como uma viagem de uma noite e combina facilmente com destinos próximos de Gyeongnam, como Sacheon ou Tongyeong, então considere se hospedar aqui por uma noite em vez de fazer uma corrida apressada de bate e volta a partir de Seul."
+   ],
+   "faq": [
+    {
+     "q": "Quantos dias são necessários em Jinju?",
+     "a": "Um dia inteiro cobre os destaques — a Fortaleza Jinjuseong, o Chokseongnu, a Rocha Uiam e o Museu Nacional de Jinju, além de um almoço de bibimbap com yukhoe. Passe uma noite se estiver visitando durante o festival das lanternas em outubro ou se quiser incluir o Lago Jinyangho e uma noite tranquila à beira do rio."
+    },
+    {
+     "q": "Vale a pena visitar Jinju?",
+     "a": "Sim, especialmente para viajantes interessados na história e na gastronomia coreanas longe das multidões. A fortaleza à beira do rio, sua dramática história da Guerra Imjin, o espetacular festival das lanternas no outono e a culinária local característica fazem dela uma parada gratificante, e combina bem com outros destinos de Gyeongnam."
+    },
+    {
+     "q": "Como chegar a Jinju a partir de Seul?",
+     "a": "De trem, o serviço intermunicipal direto da Korail da Estação de Seul chega à Estação de Jinju em cerca de 3,5 horas, com opções de alta velocidade mediante baldeação. Ônibus expressos e intermunicipais dos terminais Nambu e Central City de Seul também levam cerca de 3,5 horas. Há também voos limitados para o Aeroporto de Jinju (Sacheon), nas proximidades."
+    },
+    {
+     "q": "Pelo que Jinju é famosa?",
+     "a": "Jinju é famosa pela Fortaleza Jinjuseong e pelos cercos da Guerra Imjin, pela lenda de Nongae na Rocha Uiam e pelo Festival das Lanternas do Namgang a cada outubro. Também é conhecida por seu bibimbap de yukhoe (feito com carne bovina crua) e por produzir a maior parte da seda da Coreia."
+    }
+   ]
+  },
+  "id": {
+   "h1": "Hal yang Bisa Dilakukan di Jinju, Korea",
+   "title": "Hal yang Bisa Dilakukan di Jinju, Korea — Atraksi Terbaik, Kuliner & Tips (2026) | KoreaPlus",
+   "metaDesc": "Jelajahi Jinju: Benteng Jinjuseong, paviliun Chokseongnu, Festival Lampion Namgang Oktober, Museum Nasional Jinju, bibimbap yukhoe, dan sutra Korea.",
+   "lead": "Jinju adalah kota yang sarat sejarah di tepi Sungai Nam di provinsi Gyeongnam, paling terkenal dengan Benteng Jinjuseong di tepi sungai dan pengepungan dramatisnya pada masa Perang Imjin. Setiap bulan Oktober, kota ini bersinar dengan Festival Lampion Namgang Yudeung, ketika puluhan ribu lampion mengapung di sungai dan menghiasi tembok benteng tua. Tambahkan bibimbap yukhoe yang khas dan tradisi sutra seribu tahun, dan Jinju menjadi pelarian menginap yang berkesan dari jalur wisata yang biasa.",
+   "attractions": [
+    {
+     "name": "Benteng Jinjuseong (Benteng Jinju)",
+     "nameLocal": "진주성",
+     "blurb": "Benteng bertembok batu di atas Sungai Nam ini adalah jantung kota Jinju dan lokasi dua pengepungan terkenal pada tahun 1592–1593 selama Perang Imjin. Anda bisa menyusuri benteng yang telah dibangun kembali melewati gerbang, pos komando, dan meriam, dengan pemandangan sungai yang luas sepanjang jalan. Inilah panggung utama festival lampion setiap musim gugur."
+    },
+    {
+     "name": "Paviliun Chokseongnu",
+     "nameLocal": "촉석루",
+     "blurb": "Bertengger di atas tebing di dalam benteng, paviliun kayu megah yang menghadap Sungai Nam ini adalah salah satu paviliun klasik Korea dan awalnya dibangun sebagai pos komando dan aula perjamuan. Pemandangan ke seberang air sangat ikonik, dan aula terbukanya dihiasi plakat dan puisi kuno. Ini adalah perhentian pertama yang wajib dan sangat indah saat matahari terbenam."
+    },
+    {
+     "name": "Batu Uiam",
+     "nameLocal": "의암",
+     "blurb": "Sebuah batu besar yang datar di sungai tepat di bawah Chokseongnu, Uiam terkait dengan legenda Nongae, seorang gisaeng yang memikat seorang jenderal Jepang ke dalam pelukan lalu terjun bersamanya ke sungai setelah benteng jatuh pada tahun 1593. Sebuah kuil kecil dan papan informasi di dekatnya menceritakan kisahnya. Ini adalah salah satu tempat paling mengharukan di kota."
+    },
+    {
+     "name": "Museum Nasional Jinju",
+     "nameLocal": "국립진주박물관",
+     "blurb": "Terletak di dalam tembok benteng, museum ini berfokus pada Perang Imjin (1592–1598), dengan baju zirah, senjata, peta, dan diorama yang menjelaskan konflik dan pengepungan Jinju. Museum ini juga membahas budaya Gaya kuno dari wilayah sekitarnya. Masuknya gratis dan sangat cocok dipadukan dengan jalan-jalan di benteng."
+    },
+    {
+     "name": "Sungai Nam (Namgang)",
+     "nameLocal": "남강",
+     "blurb": "Sungai Nam yang lebar mengalir tepat di depan benteng dan menjadi sumber kehidupan bagi pemandangan dan festival Jinju. Jalur tepi sungai dan jembatan-jembatannya cocok untuk berjalan santai, dan airnya berkilau dengan pantulan lampion selama festival Oktober. Di siang hari, sungai ini menawarkan pemandangan tenang tebing benteng dan paviliun."
+    },
+    {
+     "name": "Jalan Gerbang dan Tembok Benteng Jinju",
+     "nameLocal": "진주성 성곽길",
+     "blurb": "Selain paviliun utama, kompleks benteng ini layak dijelajahi dengan menyusuri tembok pertahanannya yang telah dipugar dan melewati gerbang seperti Chokseongmun dan Gongbungmun. Jalur yang teduh, pos pengintaian, dan patung-patung pahlawan perang seperti Jenderal Kim Si-min menghiasi rute ini. Inilah cara terbaik untuk merasakan kemegahan pertahanan kuno tersebut."
+    },
+    {
+     "name": "Danau Jinyangho",
+     "nameLocal": "진양호",
+     "blurb": "Terbentuk oleh bendungan di hulu Sungai Nam, waduk besar ini dikelilingi taman tepi danau yang disukai warga lokal untuk pemandangan matahari terbenam. Areanya mencakup jalur jalan kaki, kebun binatang kecil, dan area hiburan, menjadikannya pelengkap santai yang ramah keluarga dibandingkan pusat kota bersejarah. Lokasinya hanya sebentar berkendara ke barat dari pusat kota."
+    },
+    {
+     "name": "Pusat Kebudayaan & Seni Gyeongnam",
+     "nameLocal": "경남문화예술회관",
+     "blurb": "Berdiri di sepanjang Sungai Nam, ini adalah tempat unggulan provinsi Gyeongsangnam-do untuk pertunjukan dan pameran, memadukan gaya arsitektur Korea dan Barat. Tempat ini menyelenggarakan konser, drama, dan pameran seni bergilir di galerinya. Periksa jadwalnya jika Anda ingin malam yang penuh budaya di luar benteng."
+    },
+    {
+     "name": "Pasar Jungang",
+     "nameLocal": "진주중앙시장",
+     "blurb": "Pasar tradisional Jinju yang ramai di dekat pusat kota adalah tempat untuk mencicipi jajanan lokal dan melihat kehidupan sehari-hari jauh dari monumen. Kios-kiosnya menjual hasil bumi, bahan kering, jajanan kaki lima, dan perlengkapan rumah tangga. Ini adalah perhentian yang mudah dan penuh suasana untuk makan murah di sela-sela menjelajahi tempat wisata."
+    },
+    {
+     "name": "Warisan Sutra Jinju",
+     "nameLocal": "진주 실크",
+     "blurb": "Jinju telah menenun sutra selama lebih dari seribu tahun dan masih memproduksi sebagian besar sutra Korea, sebuah kerajinan yang terkait dengan air bersih Sungai Nam yang digunakan untuk pewarnaan. Toko dan showroom lokal menjual syal dan kain tradisional, dan warisan ini menjadi sumber kebanggaan kota yang sesungguhnya. Ini menjadi oleh-oleh buatan lokal yang bermakna."
+    }
+   ],
+   "food": [
+    {
+     "name": "Bibimbap Jinju",
+     "blurb": "Hidangan khas Jinju ini menyajikan nasi bumbu dan sayuran dengan daging sapi mentah (yukhoe) alih-alih daging matang, sering disajikan dengan kaldu sapi bening di sampingnya. Hidangan ini dibumbui dengan pasta cabai khusus dan dikenal karena rasanya yang segar dan bersih. Legenda mengaitkan asal-usulnya dengan pemberian makan kepada pasukan selama pengepungan Perang Imjin."
+    },
+    {
+     "name": "Yukhoe (Daging Sapi Tartar)",
+     "blurb": "Daging sapi mentah yang dipotong tangan dan dibumbui dengan minyak wijen, bawang putih, dan rempah adalah hidangan andalan Jinju tersendiri, disajikan sebagai lauk atau ditumpuk di atas bibimbap. Segar dan lembut, paling nikmat di restoran spesialis kota yang sudah lama berdiri. Padukan dengan nasi dan sup untuk santap siang lokal yang klasik."
+    },
+    {
+     "name": "Naengmyeon Jinju",
+     "blurb": "Berbeda dari mi dingin gaya utara, naengmyeon Jinju disajikan dalam kaldu berbahan dasar makanan laut yang halus dan secara tradisional dihias dengan irisan tipis daging sapi goreng dan telur. Ini adalah salah satu gaya mi daerah Korea yang terkenal dan santapan musim panas yang menyegarkan. Carilah di kedai mi mapan di pusat kota."
+    },
+    {
+     "name": "Heot-jesatbap",
+     "blurb": "Secara harfiah berarti 'nasi tiruan upacara leluhur,' hidangan ini meniru makanan yang dipersembahkan dalam upacara peringatan Konfusianisme: nasi yang diberi aneka sayuran berbumbu, ikan bakar, dan lauk ritual, disantap dengan kecap asin alih-alih pasta cabai. Ini adalah sepupu bibimbap yang lebih tenang dan lebih sakral. Jinju adalah salah satu tempat terbaik untuk mencobanya."
+    },
+    {
+     "name": "Mandu Naengmyeon Jinju dan Jajanan Lokal",
+     "blurb": "Di sekitar Pasar Jungang dan pusat kota, Anda akan menemukan pangsit buatan tangan (mandu), hotteok, dan jajanan kaki lima Korea lainnya yang dibuat segar oleh pedagang lama. Jajanan ini murah, mengenyangkan, dan sempurna untuk dinikmati di sela-sela menjelajahi tempat wisata. Ini melengkapi hari yang berfokus pada kuliner di Jinju."
+    },
+    {
+     "name": "Jangeo-gui (Belut Air Tawar Bakar)",
+     "blurb": "Berkat sungai-sungainya, Jinju terkenal dengan belut air tawar bakar, diolesi saus manis-gurih dan dimasak di atas arang. Kaya rasa dan memuaskan, ini adalah hidangan penambah stamina yang populer, terutama di bulan-bulan yang lebih hangat. Restoran tepi sungai dan restoran spesialis menyajikannya dengan beragam lauk seperti biasa."
+    }
+   ],
+   "gettingThere": "Dari Seoul, pilihan termudah adalah kereta atau bus ekspres. Kereta cepat KTX/SRT melaju menuju Jinju (beberapa dengan transit), dan kereta antarkota Korail langsung dari Stasiun Seoul mencapai Stasiun Jinju dalam waktu sekitar tiga setengah jam; tiket biasanya berkisar 30.000–55.000 won. Bus ekspres dan antarkota berangkat secara rutin dari terminal bus Seoul Nambu dan Central City (Express), memakan waktu sekitar 3,5 jam menuju terminal bus Jinju. Setibanya di Jinju, kawasan bersejarahnya cukup ringkas: Benteng Jinjuseong, Chokseongnu, Museum Nasional, dan tepi sungai semuanya dapat dijangkau dengan berjalan kaki dari pusat kota, sementara bus kota atau perjalanan taksi singkat dapat mencapai Danau Jinyangho dan tempat-tempat di pinggiran. Bandara Jinju (Sacheon) juga memiliki penerbangan terbatas ke/dari Seoul Gimpo dan Jeju bagi yang lebih suka terbang.",
+   "tips": [
+    "Atur waktu kunjungan Anda untuk Festival Lampion Jinju Namgang Yudeung, yang diadakan di sepanjang sungai dan benteng setiap bulan Oktober (sekitar awal hingga pertengahan bulan) — pastikan tanggal pastinya di situs resmi festival sebelum memesan.",
+    "Kunjungi benteng dan Chokseongnu menjelang matahari terbenam untuk cahaya dan pemandangan sungai terbaik, lalu tinggallah untuk menyaksikan tembok yang diterangi jika Anda berkunjung saat festival lampion.",
+    "Duduklah untuk menyantap bibimbap Jinju asli dengan yukhoe di salah satu restoran spesialis kota yang sudah lama berdiri di dekat pusat kota — inilah hidangan yang membuat kota ini terkenal.",
+    "Jinju cocok untuk perjalanan menginap dan mudah dipadukan dengan destinasi Gyeongnam terdekat seperti Sacheon atau Tongyeong, jadi pertimbangkan untuk menginap semalam di sini daripada terburu-buru melakukan perjalanan sehari dari Seoul."
+   ],
+   "faq": [
+    {
+     "q": "Berapa hari yang dibutuhkan di Jinju?",
+     "a": "Satu hari penuh sudah cukup untuk menjelajahi tempat-tempat unggulan — Benteng Jinjuseong, Chokseongnu, Batu Uiam, dan Museum Nasional Jinju, ditambah santap siang bibimbap yukhoe. Menginaplah semalam jika Anda berkunjung saat festival lampion Oktober atau ingin menambahkan Danau Jinyangho dan malam santai di tepi sungai."
+    },
+    {
+     "q": "Apakah Jinju layak dikunjungi?",
+     "a": "Ya, terutama bagi wisatawan yang tertarik dengan sejarah dan kuliner Korea jauh dari keramaian. Benteng tepi sungai, kisah dramatis Perang Imjin-nya, festival lampion musim gugur yang spektakuler, dan masakan lokal yang khas menjadikannya perhentian yang berkesan, serta cocok dipadukan dengan destinasi Gyeongnam lainnya."
+    },
+    {
+     "q": "Bagaimana cara menuju Jinju dari Seoul?",
+     "a": "Dengan kereta, layanan antarkota Korail langsung dari Stasiun Seoul mencapai Stasiun Jinju dalam waktu sekitar 3,5 jam, dengan pilihan kereta cepat melalui transit. Bus ekspres dan antarkota dari terminal Nambu dan Central City Seoul juga memakan waktu sekitar 3,5 jam. Ada juga penerbangan terbatas ke Bandara Jinju (Sacheon) terdekat."
+    },
+    {
+     "q": "Jinju terkenal karena apa?",
+     "a": "Jinju terkenal dengan Benteng Jinjuseong dan pengepungan Perang Imjin, legenda Nongae di Batu Uiam, dan Festival Lampion Namgang Yudeung setiap bulan Oktober. Kota ini juga dikenal dengan bibimbap yukhoe-nya (dibuat dengan daging sapi mentah) dan karena memproduksi sebagian besar sutra Korea."
+    }
+   ]
   }
  },
  "Suncheon": {
