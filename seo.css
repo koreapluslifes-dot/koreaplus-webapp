@@ -14,7 +14,7 @@
 
 /* Hero */
 .seo-hero { padding: 14px 0 22px; border-bottom: 1px solid var(--border, rgba(255,255,255,.08)); margin-bottom: 26px; }
-.seo-hero .emoji { font-size: 50px; line-height: 1; display: block; margin-bottom: 12px; }
+.seo-hero .emoji { font-size: 44px; line-height: 1; width: 84px; height: 84px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; border-radius: 22px; background: linear-gradient(135deg, rgba(116,185,255,.18), rgba(255,107,157,.12)); border: 1px solid rgba(255,255,255,.10); box-shadow: 0 6px 22px -10px rgba(116,185,255,.35); }
 .seo-hero h1 { font-size: clamp(26px, 4.5vw, 40px); font-weight: 900; line-height: 1.12; color: var(--text, #fff); margin: 0 0 8px; letter-spacing: -.01em; }
 .seo-hero .kr { font-size: 16px; color: var(--gold, #C8973A); font-weight: 700; }
 .seo-hero .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }

@@ -813,7 +813,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=4">
+<link rel="stylesheet" href="seo.css?v=5">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
 <script defer src="modules/header.js"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
@@ -1841,6 +1841,12 @@ const FAQS = [
     rel: [['Full cost breakdown', 'blog/is-korea-expensive.html'], ['Budget itinerary', 'itinerary/budget-korea-7-day-itinerary.html'], ['Daily budget calculator', 'currency.html']] },
 ];
 
+// People-Also-Ask follow-ups, kept in faq-paa.json (slug → [[q,a],…]) so the
+// data is editable/git-trackable without touching the FAQS literal. Merged onto
+// each FAQ as f.paa; buildFaq renders them + adds them to the FAQPage schema.
+const FAQ_PAA = (() => { try { return require('./faq-paa.json'); } catch (e) { return {}; } })();
+FAQS.forEach(f => { f.paa = Array.isArray(FAQ_PAA[f.slug]) ? FAQ_PAA[f.slug] : []; });
+
 // Localized Q&A micro-pages (ja / zh / es) — highest-intent long-tail queries
 // per language. items keyed by EN slug → [question, answer, bodyHtml].
 const FAQ_L10N = {
@@ -1931,13 +1937,16 @@ function buildFaq(f) {
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(f.a)}</p>`;
   body += f.body;
+  // People-Also-Ask: 3 related follow-up Q&As, surfaced visibly + in FAQPage schema
+  const paa = Array.isArray(f.paa) ? f.paa : [];
+  if (paa.length) body += `<h2>🙋 People also ask</h2><div class="seo-faq">${paa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += `<h2>🔗 Related guides</h2><div class="seo-linklist">${f.rel.map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('')}</div>`;
   body += affHtml('🏨 Where to stay', { city: FAQ_CITY[f.slug] || 'Seoul', cat: 'hotel', q: '' });
   body += ctaHtml('Planning a Korea trip?', 'Get a free AI-built day-by-day itinerary in 30 seconds.');
   const hero = `<header class="seo-hero"><span class="emoji">${f.emoji}</span><h1>${esc(f.q)}</h1><div class="meta"><span class="seo-badge">Quick answer</span><span class="seo-badge">2026</span></div></header>`;
   // hreflang cluster → localized versions exist for every FAQ in all LOCALES
   const alts = LOCALES.filter(l => FAQ_L10N[l] && FAQ_L10N[l].items[f.slug]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/faq/${f.slug}.html` }));
-  writePage(`faq/${f.slug}.html`, shell({ url, title, desc: f.a.slice(0, 155), keywords: '', schemas: [faqLD([[f.q, f.a]]), breadcrumbLD(trail)], hero, body, alts }));
+  writePage(`faq/${f.slug}.html`, shell({ url, title, desc: f.a.slice(0, 155), keywords: '', schemas: [faqLD([[f.q, f.a], ...paa]), breadcrumbLD(trail)], hero, body, alts }));
   return url;
 }
 
