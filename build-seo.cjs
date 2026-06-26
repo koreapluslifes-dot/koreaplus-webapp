@@ -45,6 +45,8 @@ try { ITIN_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'itinerary-l10n.json
 // K-Pop history pages (9 languages). Shape: { "<slug>": { en:{h1,title,metaDesc,lead,sections:[{h,body}],faq:[{q,a}]}, ko, ja, zh, es, fr, de, pt, id } }
 let KPOP_HIST = {};
 try { KPOP_HIST = JSON.parse(fs.readFileSync(path.join(OUT, 'kpop-history.json'), 'utf8')); } catch { /* none yet */ }
+let KPOP_ROSTER = [];
+try { KPOP_ROSTER = require('./kpop-data.js').KPOP_ROSTER || []; } catch { /* roster optional */ }
 // Per-city Unsplash photos (element 5 image SEO). { City: { raw, alt, by, byUrl, link } }
 // From prefetch-images.cjs (key never stored here). Hotlinked from the Unsplash
 // CDN with photographer attribution per Unsplash API guidelines.
@@ -578,7 +580,23 @@ const PRIMARY_NAV = `
   <div class="kp-pnav">
     <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
     <div class="kp-pnav-items">
-      <a class="kp-pnav-link" href="index.html#categories-section" data-i18n="nav.explore">Explore</a>
+      <a class="kp-pnav-link" href="explore.html" data-i18n="nav.explore">Explore</a>
+      <div class="kp-pnav-drop">
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.browse">Browse</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <div class="kp-pnav-menu" role="menu">
+          <div class="kp-pnav-group" role="group">
+            <div class="kp-pnav-gh" data-i18n="nav.group.category">By category</div>
+            <a role="menuitem" href="destinations.html" data-i18n="nav.cat.destinations">📍 Destinations</a>
+            <a role="menuitem" href="experiences.html" data-i18n="nav.cat.experiences">🍜 Things to Do</a>
+            <a role="menuitem" href="when-to-visit.html" data-i18n="nav.cat.whentovisit">📅 When to Visit</a>
+            <a role="menuitem" href="travel-basics.html" data-i18n="nav.cat.basics">✈️ Travel Basics</a>
+            <a role="menuitem" href="itineraries.html" data-i18n="nav.cat.itineraries">🗺️ Itineraries</a>
+            <a role="menuitem" href="tools.html" data-i18n="nav.cat.tools">🧰 Free Tools</a>
+            <a role="menuitem" href="faq/index.html" data-i18n="nav.cat.faq">❓ FAQ</a>
+            <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
+          </div>
+        </div>
+      </div>
       <div class="kp-pnav-drop">
         <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.guides">Guides</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
         <div class="kp-pnav-menu" role="menu">
@@ -619,7 +637,7 @@ const PRIMARY_NAV = `
             <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
             <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
             <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
-            <a role="menuitem" class="kp-pnav-all" href="explore.html" data-i18n="nav.alldest">🗺️ All destinations</a>
+            <a role="menuitem" class="kp-pnav-all" href="destinations.html" data-i18n="nav.alldest">🗺️ All destinations</a>
           </div>
         </div>
       </div>
@@ -765,7 +783,7 @@ function foodEmoji(name) {
   for (const [re, e] of m) if (re.test(n)) return e;
   return '🍽️';
 }
-function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [], image, homeHref = 'index.html' }) {
+function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [], image, homeHref = 'index.html', brand = 'Korea<span>Plus</span>' }) {
   const canonical = ORIGIN + url;
   const ogImg = image || `${ORIGIN}/guide/og-image.jpg`;
   const xDefault = ORIGIN + ((alts.find(a => a.lang === 'en') || {}).url || url);
@@ -824,7 +842,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=5">
+<link rel="stylesheet" href="seo.css?v=7">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
 <script defer src="modules/header.js"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
@@ -834,7 +852,7 @@ ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
 <body>
 <a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to content</a>
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
-  <a class="hub-nav-logo" href="${homeHref}">Korea<span>Plus</span></a>
+  <a class="hub-nav-logo" href="${homeHref}" aria-label="KoreaPlus — back to home" title="Home"><span aria-hidden="true">🇰🇷</span> ${brand}</a>
   <div class="hub-nav-links">${PRIMARY_NAV}</div>
 </nav>
 <div id="kp-korea-now" class="kp-korea-now" style="display:none;max-width:920px;margin:0 auto;padding:7px 16px;font-size:12.5px;color:var(--text2,#aab);flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;border-bottom:1px solid var(--border,rgba(255,255,255,.07))" aria-live="polite"></div>
@@ -1629,12 +1647,130 @@ function buildCostIndex(lang) {
 // ══════════════════════════════════════════════════════════════════
 // 6) EXPLORE HUB
 // ══════════════════════════════════════════════════════════════════
+// ── Hierarchical browse: Explore (L1 tiles) → category hub (L2) → page (L3) ──
+// A clean drill-down so every page is reachable by clicking through categories.
+function hubLinks(list) {
+  return `<div class="seo-linklist">${list.filter(Boolean).map(([l, h]) => `<a href="${h}">${l}</a>`).join('')}</div>`;
+}
+function buildHub({ slug: sl, h1, emoji, lead, badge, sections }) {
+  const url = `${BASEP}${sl}`;
+  const title = `${h1} | KoreaPlus`;
+  const desc = lead.replace(/\s+/g, ' ').slice(0, 155);
+  const trail = [{ name: 'Home', url: BASEP }, { name: 'Explore', url: `${BASEP}explore.html` }, { name: h1, url }];
+  let body = bcHtml(trail);
+  body += `<p class="lead">${esc(lead)}</p>`;
+  for (const s of (sections || [])) {
+    if (!s || !s.links || !s.links.length) continue;
+    body += `<h2 class="seo-secttitle">${s.title}</h2>`;
+    if (s.note) body += `<div class="sub" style="color:var(--text2,#9fb0c3);font-size:13px;margin:-4px 0 10px">${esc(s.note)}</div>`;
+    body += hubLinks(s.links);
+  }
+  body += ctaHtml('Plan your Korea trip', 'Build a free, route-optimized itinerary with AI in seconds.');
+  const total = (sections || []).reduce((n, s) => n + ((s && s.links) ? s.links.length : 0), 0);
+  const hero = `<header class="seo-hero"><span class="emoji">${emoji}</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">${badge || (total + ' guides')}</span></div></header>`;
+  writePage(sl, shell({ url, title, desc, keywords: '', schemas: [breadcrumbLD(trail), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: ORIGIN + url }], hero, body }));
+  return url;
+}
+// Build all category hubs; returns [{slug,h1,emoji,tagline,count,url}] for the Explore tile grid.
+function buildBrowseHubs(urls) {
+  const allCities = [...CITIES, ...REGIONAL_CITIES];
+  const cap = s => s.split('/').pop().replace('.html', '').replace(/-/g, ' ').replace(/\b\w/g, m => m.toUpperCase());
+  const hubs = [];
+  const reg = (meta) => { meta.url = buildHub(meta.build); hubs.push(meta); };
+
+  reg({ slug: 'destinations.html', h1: 'Destinations', emoji: '📍', tagline: 'All 24 cities & regions — guides, food, best time, where to stay', count: allCities.length, build: {
+    slug: 'destinations.html', h1: 'Destinations in Korea', emoji: '📍',
+    lead: 'Every city and region we cover, from Seoul and Busan to Boseong tea fields and Damyang bamboo forest — pick a destination, then dive into its attractions, food, best season and where to stay.',
+    badge: allCities.length + ' destinations',
+    sections: [
+      { title: '🏙️ Major cities', links: CITIES.map(c => [`📍 ${esc(c.name)}`, `guide/things-to-do-in-${slug(c.name)}.html`]) },
+      { title: '🗺️ More destinations', links: REGIONAL_CITIES.filter(c => c.name !== 'Korea Hiking').map(c => [`📍 ${esc(c.name)}`, `guide/things-to-do-in-${slug(c.name)}.html`]) },
+      { title: '🍜 Best food by city', links: CITIES.map(c => [`🍜 ${esc(c.name)} food`, `guide/best-food-in-${slug(c.name)}.html`]) },
+      { title: '🗓️ Best time to visit by city', links: allCities.map(c => [`🗓️ ${esc(c.name)}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
+      { title: '🏨 Where to stay', links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
+      { title: '🏘️ Seoul neighborhoods', links: NEIGHBORHOODS.map(n => [`${n.emoji} ${esc(n.name)}`, `guide/${slug(n.name)}-${slug(n.city)}-guide.html`]) },
+      { title: '🚄 Getting there (Seoul to…)', links: TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`]) },
+    ],
+  } });
+
+  reg({ slug: 'experiences.html', h1: 'Things to Do', emoji: '🍜', tagline: 'Browse by theme — palaces, food, nature, nightlife & more', count: ALL.length, build: {
+    slug: 'experiences.html', h1: 'Things to Do in Korea', emoji: '🍜',
+    lead: 'Browse Korea by what you want to experience — palaces and temples, markets and street food, nature and hikes, nightlife and K-culture — then drill into individual places.',
+    badge: ALL.length + '+ places',
+    sections: [
+      { title: '🍱 By topic', links: Object.keys(CAT_META).map(c => [`${CAT_META[c].icon} ${esc(CAT_META[c].label)}`, `guide/${CAT_SLUG[c]}.html`]) },
+      { title: '🎭 Culture & seasonal', links: [['📅 Festivals & events', 'festivals.html'], ['🌸 Seasons & bloom forecast', 'seasons.html'], ['🏛️ Korean culture', 'culture.html'], ['🛕 Temples', 'temples.html'], ['🌃 Night views', 'nightviews.html'], ['🎬 K-Drama locations', 'kdrama-locations.html'], ['🥾 Korea hiking', 'guide/things-to-do-in-korea-hiking.html']] },
+      { title: '⚖️ Compare & decide', links: COMPARES.map(c => [`${c.emoji} ${esc(c.h1.split(':')[0])}`, `guide/${c.slug}.html`]) },
+      { title: `🏯 All places (${ALL.length})`, links: ALL.map(i => [`${i.emoji} ${esc(i.name)}`, `places/${i.slug}.html`]) },
+    ],
+  } });
+
+  reg({ slug: 'when-to-visit.html', h1: 'When to Visit', emoji: '📅', tagline: 'Season & month-by-month guides + bloom forecasts', count: SEASONS4.length + MONTHS.length, build: {
+    slug: 'when-to-visit.html', h1: 'When to Visit Korea', emoji: '📅',
+    lead: 'Figure out the perfect time for your trip — cherry blossoms, autumn foliage, festivals and weather — with season, month-by-month and per-city timing guides.',
+    badge: (SEASONS4.length + MONTHS.length) + ' guides',
+    sections: [
+      { title: '🌸 By season', links: SEASONS4.map(s => [`${s.emoji} ${esc(s.name)}`, `guide/korea-in-${s.slug}.html`]) },
+      { title: '📆 Month by month', links: MONTHS.map(m => [`${m[1]} ${esc(m[0])}`, `guide/korea-in-${m[0].toLowerCase()}.html`]) },
+      { title: '🗓️ Best time by city', links: allCities.map(c => [`🗓️ ${esc(c.name)}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
+      { title: '❓ Timing questions', links: [['🌸 Cherry blossom season', 'faq/when-is-cherry-blossom-season-in-korea.html'], ['🍁 Fall foliage season', 'faq/when-is-fall-foliage-in-korea.html'], ['📅 Best time to visit Korea', 'faq/best-time-to-visit-korea.html']] },
+    ],
+  } });
+
+  reg({ slug: 'travel-basics.html', h1: 'Travel Basics', emoji: '✈️', tagline: 'Visa, budget, transport, money & where to stay', count: 12, build: {
+    slug: 'travel-basics.html', h1: 'Korea Travel Basics', emoji: '✈️',
+    lead: 'Everything you need to sort before you go — visa and K-ETA, daily budget, getting around, money, SIM/Wi-Fi and where to base yourself.',
+    badge: 'Plan your trip',
+    sections: [
+      { title: '🛂 Essentials', links: [['🛂 Visa & K-ETA guide', 'guide/korea-visa-k-eta-guide.html'], ['💰 Travel cost index 2026', 'guide/korea-travel-cost-index.html'], ['💱 Currency & budget', 'currency.html'], ['🆘 Emergency & health', 'emergency.html']] },
+      { title: '🚄 Getting around', links: [['🚇 Seoul subway', 'subway.html'], ...TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`])] },
+      { title: '🏨 Where to stay', links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
+      { title: '📱 Money, apps & connectivity', links: [['💱 What currency does Korea use?', 'faq/what-currency-does-korea-use.html'], ['💳 Do I need cash in Korea?', 'faq/do-i-need-cash-in-korea.html'], ['📱 What apps do I need?', 'faq/what-apps-do-i-need-for-korea.html'], ['📶 Is Wi-Fi free in Korea?', 'faq/is-wifi-free-in-korea.html'], ['🗺️ Does Google Maps work?', 'faq/can-you-use-google-maps-in-korea.html'], ['🔌 What power plug?', 'faq/what-power-plug-does-korea-use.html']] },
+      { title: '🗣️ Language & etiquette', links: [['🗣️ Survival Korean phrases', 'phrases.html'], ['🎎 Korean etiquette', 'etiquette.html'], ['📷 Menu translator', 'menu-translator.html']] },
+    ],
+  } });
+
+  reg({ slug: 'itineraries.html', h1: 'Itineraries', emoji: '🗺️', tagline: 'Ready-made day-by-day trip plans you can customize', count: (urls.itineraries || []).length, build: {
+    slug: 'itineraries.html', h1: 'Korea Itineraries', emoji: '🗺️',
+    lead: 'Ready-made, day-by-day Korea trip plans — first-timer routes, city itineraries and themed trips — or build your own free with our AI planner.',
+    badge: (urls.itineraries || []).length + ' itineraries',
+    sections: [
+      { title: '🗺️ All itineraries', links: (urls.itineraries || []).map(u => [`🗺️ ${esc(cap(u))}`, u.replace(BASEP, '')]) },
+      { title: '🤖 Build your own', links: [['🗺️ Free AI Trip Planner', 'plan.html'], ['🧩 Which city should you visit? (Quiz)', 'quiz.html'], ['⚖️ Compare cities', 'compare.html']] },
+    ],
+  } });
+
+  reg({ slug: 'tools.html', h1: 'Free Tools', emoji: '🧰', tagline: 'Quiz, comparisons, bucket list, currency & live trends', count: 11, build: {
+    slug: 'tools.html', h1: 'Free Korea Travel Tools', emoji: '🧰',
+    lead: 'Interactive tools to plan and enjoy your Korea trip — take the city quiz, compare destinations, track your bucket list, convert currency and see what is trending now.',
+    badge: 'Interactive',
+    sections: [
+      { title: '🧰 Plan & decide', links: [['🗺️ AI Trip Planner', 'plan.html'], ['🧩 City Quiz', 'quiz.html'], ['⚖️ Compare Cities', 'compare.html'], ['✅ Bucket List', 'bucket-list.html']] },
+      { title: '🔧 Handy utilities', links: [['💱 Currency Converter', 'currency.html'], ['📷 Menu Translator', 'menu-translator.html'], ['🗣️ Phrasebook', 'phrases.html'], ['🚇 Subway', 'subway.html']] },
+      { title: '🔥 Live & embeds', links: [['🔥 Trending Now', 'trending.html'], ['🌸 Bloom Forecast', 'seasons.html'], ['🔗 Free Widgets (embed)', 'embed.html']] },
+    ],
+  } });
+
+  reg({ slug: 'faq/index.html', h1: 'FAQ', emoji: '❓', tagline: 'Quick, expert answers to the most-asked Korea questions', count: FAQS.length, build: {
+    slug: 'faq/index.html', h1: 'Korea Travel FAQ — Quick Answers', emoji: '❓',
+    lead: 'Fast, expert answers to the questions travelers ask most about Korea — money, transport, safety, etiquette, timing and connectivity.',
+    badge: FAQS.length + ' answers',
+    sections: [{ title: '❓ All quick answers', links: FAQS.map(f => [`${f.emoji} ${esc(f.q)}`, `faq/${f.slug}.html`]) }],
+  } });
+
+  return hubs;
+}
+
 function buildExplore(urls) {
   const url = `${BASEP}explore.html`;
   const title = `Explore Korea — Travel Guides, Itineraries & Tips | KoreaPlus`;
-  const desc = `Browse 150+ Korea travel guides: top attractions, food, city itineraries, monthly guides and more. Plan the perfect trip to Korea.`;
+  const desc = `Browse all Korea travel guides by category: destinations, things to do, when to visit, travel basics, itineraries, tools and FAQ. Reach every guide in a click.`;
   let body = bcHtml([{ name: 'Home', url: BASEP }, { name: 'Explore', url }]);
   body += `<p class="lead">Your complete index of Korea travel content — tap any guide to dive in.</p>`;
+  // L1 category tiles → category hubs (drill down to everything)
+  if (urls.hubs && urls.hubs.length) {
+    body += `<div class="seo-tiles">${urls.hubs.map(hb => `<a class="seo-tile" href="${hb.url.replace(BASEP, '')}"><span class="seo-tile-e">${hb.emoji}</span><span class="seo-tile-h">${esc(hb.h1)}</span><span class="seo-tile-d">${esc(hb.tagline)}</span></a>`).join('') + `<a class="seo-tile" href="blog/index.html"><span class="seo-tile-e">📰</span><span class="seo-tile-h">Blog</span><span class="seo-tile-d">Stories, tips & deep dives on Korea travel</span></a>`}</div>`;
+  }
   const section = (t, list) => `<h2 class="seo-secttitle">${t}</h2><div class="seo-linklist">${list.join('')}</div>`;
   body += section('✈️ Travel Basics', [`<a href="guide/korea-visa-k-eta-guide.html">🛂 Visa & K-ETA Guide</a>`, `<a href="guide/korea-travel-cost-index.html">💰 Korea Travel Cost Index 2026</a>`, ...(urls.stays || []).map(u => `<a href="${u.replace(BASEP, '')}">🏨 ${esc(u.split('/').pop().replace(/-/g, ' ').replace('.html', '').replace(/\b\w/g, m => m.toUpperCase()))}</a>`)]);
   body += section('🎮 Fun &amp; Interactive', [`<a href="quiz.html">🧩 Which Korean City Should You Visit? (Quiz)</a>`, `<a href="bucket-list.html">✅ Korea Travel Bucket List (40 things)</a>`, `<a href="compare.html">⚖️ Compare Korean Cities (Seoul vs Busan vs Jeju)</a>`, `<a href="trending.html">🔥 Trending in Korea Right Now</a>`, `<a href="plan.html">🗺️ AI Trip Planner</a>`, `<a href="currency.html">💱 Currency Converter</a>`, `<a href="embed.html">🧩 Free Korea Widgets (embed on your site)</a>`]);
@@ -2246,7 +2382,8 @@ function buildKpopHistory(slug, lang) {
   const qa = (t.faq || []).map(x => Array.isArray(x) ? x : [x.q, x.a]);
   if (qa.length) body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   const sibs = Object.keys(KPOP_HIST).filter(s2 => s2 !== slug && KPOP_HIST[s2] && KPOP_HIST[s2][lang]).slice(0, 9);
-  body += `<h2>${esc(KPOP_HIST_MORE[lang] || KPOP_HIST_MORE.en)}</h2><div class="seo-linklist">${sibs.map(s2 => `<a href="${dir}kpop/${s2}.html">${KPOP_HIST_EMOJI[s2] || '🎶'} ${esc(KPOP_HIST[s2][lang].h1)}</a>`).join('')}<a href="/kpop">🎤 K-Pop Hub</a></div>`;
+  const browseLabel = (KPOP_BROWSE_T[lang] || KPOP_BROWSE_T.en).more;
+  body += `<h2>${esc(KPOP_HIST_MORE[lang] || KPOP_HIST_MORE.en)}</h2><div class="seo-linklist">${sibs.map(s2 => `<a href="${dir}kpop/${s2}.html">${KPOP_HIST_EMOJI[s2] || '🎶'} ${esc(KPOP_HIST[s2][lang].h1)}</a>`).join('')}<a href="${dir}kpop/browse.html">${esc(browseLabel)}</a><a href="/kpop">🎤 K-Pop Hub</a></div>`;
   body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
   const hero = `<header class="seo-hero"><span class="emoji">${KPOP_HIST_EMOJI[slug] || '🎤'}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">K-Pop</span><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: t.h1, description: t.metaDesc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
@@ -2254,7 +2391,78 @@ function buildKpopHistory(slug, lang) {
   const alts = lang === 'en'
     ? others.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))
     : [{ lang: 'en', url: enUrl }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))];
-  writePage(`${dir}kpop/${slug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts, homeHref: '/kpop' }));
+  writePage(`${dir}kpop/${slug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts, homeHref: '/kpop', brand: '🎤 Korea<span>Plus</span>' }));
+  return url;
+}
+
+// ── K-Pop browse / directory: subdivided categories so every page is reachable
+// by drilling down from the hub. One localized page per language. ──────────────
+const KPOP_CAT = {
+  artists:   { emoji: '🎤', label: { en: 'Artists & Groups', ko: '아티스트 · 그룹', ja: 'アーティスト・グループ', zh: '艺人 · 团体', es: 'Artistas y grupos', fr: 'Artistes et groupes', de: 'Künstler & Gruppen', pt: 'Artistas e grupos', id: 'Artis & Grup' } },
+  basics:    { emoji: '📖', label: { en: 'K-Pop Basics & Terms', ko: 'K-pop 입문 · 용어', ja: 'K-POP入門・用語', zh: 'K-pop 入门 · 术语', es: 'Conceptos y términos', fr: 'Bases et termes', de: 'Grundlagen & Begriffe', pt: 'Básico e termos', id: 'Dasar & Istilah' } },
+  legends:   { emoji: '⭐', label: { en: 'Legendary Acts', ko: '레전드 아티스트', ja: 'レジェンド', zh: '传奇组合', es: 'Grupos legendarios', fr: 'Groupes légendaires', de: 'Legendäre Acts', pt: 'Grupos lendários', id: 'Artis Legendaris' } },
+  history:   { emoji: '🏛️', label: { en: 'History & Generations', ko: '역사 · 세대', ja: '歴史・世代', zh: '历史 · 世代', es: 'Historia y generaciones', fr: 'Histoire et générations', de: 'Geschichte & Generationen', pt: 'História e gerações', id: 'Sejarah & Generasi' } },
+  companies: { emoji: '🏢', label: { en: 'Agencies', ko: '소속사', ja: '事務所', zh: '经纪公司', es: 'Agencias', fr: 'Agences', de: 'Agenturen', pt: 'Agências', id: 'Agensi' } },
+  global:    { emoji: '🌍', label: { en: 'Global Records & Culture', ko: '세계화 · 기록 · 문화', ja: '世界進出・記録・文化', zh: '全球纪录 · 文化', es: 'Récords globales y cultura', fr: 'Records mondiaux et culture', de: 'Globale Rekorde & Kultur', pt: 'Recordes globais e cultura', id: 'Rekor Global & Budaya' } },
+};
+const KPOP_CAT_SLUGS = {
+  basics: ['what-is-a-comeback-kpop', 'what-is-a-bias-kpop', 'what-is-a-bias-wrecker', 'what-is-a-maknae', 'what-is-aegyo', 'kpop-fandom-culture', 'kpop-fan-chant', 'kpop-visual-position', 'kpop-positions-explained', 'kpop-sub-unit', 'kpop-lightstick', 'kpop-photocard-culture', 'kpop-title-track', 'kpop-fansign-events', 'kpop-music-shows', 'kpop-trainee-system', 'kpop-fandom-names-and-colors'],
+  legends: ['seo-taiji-and-boys', 'hot-kpop', 'sechs-kies', 'ses-kpop', 'finkl', 'shinhwa', 'god-kpop', 'boa', 'rain-bi', 'tvxq', 'super-junior', 'girls-generation-snsd', 'wonder-girls', 'kara', '2ne1', 'bigbang', 'shinee', 'fx-kpop', '2pm', 'highlight-beast', 'sistar', 'apink', 'exo-history', 'infinite'],
+  history: ['kpop-history', 'first-generation-kpop', 'second-generation-kpop', 'third-generation-kpop', 'fourth-generation-kpop', 'fifth-generation-kpop', 'history-of-kpop-girl-groups', 'history-of-kpop-boy-groups', 'kpop-choreography-history', 'kpop-fashion-history', 'kpop-music-video-history', 'kpop-concept-and-worldbuilding', 'kpop-and-social-media'],
+  companies: ['sm-entertainment-history', 'yg-entertainment-history', 'jyp-entertainment-history', 'hybe-history'],
+  global: ['gangnam-style-phenomenon', 'bts-billboard-history', 'hallyu-korean-wave', 'kpop-at-coachella', 'blackpink-global-records', 'kpop-grammy-history', 'kpop-youtube-records', 'kpop-stadium-tours', 'bts-at-the-un', 'kpop-military-enlistment', 'kpop-fan-philanthropy', 'kpop-survival-shows'],
+};
+const KPOP_BROWSE_T = {
+  en: { h1: 'Browse all K-Pop', title: 'Browse all K-Pop — Artists, History & Guides | KoreaPlus', lead: 'Every K-Pop guide on KoreaPlus, sorted into categories — artist profiles, fan terms, history, agencies and global records. Tap a category, then dive in.', girl: 'Girl Groups', boy: 'Boy Groups', solo: 'Soloists', more: '📚 Browse all' },
+  ko: { h1: 'K-pop 전체 둘러보기', title: 'K-pop 전체 둘러보기 — 아티스트 · 역사 · 가이드 | KoreaPlus', lead: 'KoreaPlus의 모든 K-pop 가이드를 카테고리로 정리했습니다 — 아티스트 프로필, 팬 용어, 역사, 소속사, 세계 기록까지. 카테고리를 골라 타고 들어가 보세요.', girl: '걸그룹', boy: '보이그룹', solo: '솔로', more: '📚 전체 둘러보기' },
+  ja: { h1: 'K-POPをすべて見る', title: 'K-POP総合ガイド — アーティスト・歴史・用語 | KoreaPlus', lead: 'KoreaPlusのK-POPガイドをカテゴリ別に整理。アーティスト紹介、ファン用語、歴史、事務所、世界記録まで。カテゴリを選んで深掘りしましょう。', girl: 'ガールグループ', boy: 'ボーイグループ', solo: 'ソロ', more: '📚 すべて見る' },
+  zh: { h1: '浏览全部 K-pop', title: 'K-pop 全部内容 — 艺人 · 历史 · 指南 | KoreaPlus', lead: 'KoreaPlus 的所有 K-pop 指南，按类别整理 —— 艺人资料、饭圈术语、历史、经纪公司与全球纪录。选个类别，逐层深入。', girl: '女团', boy: '男团', solo: 'solo 歌手', more: '📚 浏览全部' },
+  es: { h1: 'Explora todo el K-pop', title: 'Todo el K-pop — Artistas, historia y guías | KoreaPlus', lead: 'Todas las guías de K-pop de KoreaPlus, ordenadas por categorías: perfiles, términos de fans, historia, agencias y récords globales. Elige una categoría y entra.', girl: 'Grupos femeninos', boy: 'Grupos masculinos', solo: 'Solistas', more: '📚 Explorar todo' },
+  fr: { h1: 'Explorer tout le K-pop', title: 'Tout le K-pop — Artistes, histoire et guides | KoreaPlus', lead: 'Tous les guides K-pop de KoreaPlus, classés par catégories : profils, termes de fans, histoire, agences et records mondiaux. Choisissez une catégorie et explorez.', girl: 'Girl groups', boy: 'Boy groups', solo: 'En solo', more: '📚 Tout explorer' },
+  de: { h1: 'Alle K-Pop entdecken', title: 'Alles über K-Pop — Künstler, Geschichte & Guides | KoreaPlus', lead: 'Alle K-Pop-Guides von KoreaPlus, nach Kategorien sortiert: Profile, Fan-Begriffe, Geschichte, Agenturen und Weltrekorde. Kategorie wählen und eintauchen.', girl: 'Girlgroups', boy: 'Boygroups', solo: 'Solokünstler', more: '📚 Alle entdecken' },
+  pt: { h1: 'Explorar todo o K-pop', title: 'Todo o K-pop — Artistas, história e guias | KoreaPlus', lead: 'Todos os guias de K-pop do KoreaPlus, organizados por categorias: perfis, termos de fãs, história, agências e recordes globais. Escolha uma categoria e explore.', girl: 'Girl groups', boy: 'Boy groups', solo: 'Solistas', more: '📚 Explorar tudo' },
+  id: { h1: 'Jelajahi semua K-pop', title: 'Semua K-pop — Artis, Sejarah & Panduan | KoreaPlus', lead: 'Semua panduan K-pop di KoreaPlus, tersusun per kategori: profil artis, istilah fandom, sejarah, agensi, dan rekor global. Pilih kategori lalu telусури.', girl: 'Girl group', boy: 'Boy group', solo: 'Solois', more: '📚 Jelajahi semua' },
+};
+const kpopCatLabel = (k, lang) => (KPOP_CAT[k].label[lang] || KPOP_CAT[k].label.en);
+function buildKpopBrowse(lang) {
+  if (!Object.keys(KPOP_HIST).length) return null;
+  const dir = KPOP_HIST_DIR(lang);
+  const url = `${BASEP}${dir}kpop/browse.html`;
+  const T = KPOP_BROWSE_T[lang] || KPOP_BROWSE_T.en;
+  const has = (slug) => KPOP_HIST[slug] && KPOP_HIST[slug][lang];
+  const link = (slug) => {
+    if (!has(slug)) return '';
+    let emoji = KPOP_HIST_EMOJI[slug];
+    if (!emoji && /-profile$/.test(slug)) { const a = KPOP_ROSTER.find(r => r.id === slug.replace('-profile', '')); emoji = a && a.emoji; }
+    return `<a href="${dir}kpop/${slug}.html">${emoji || (/-profile$/.test(slug) ? '🎤' : '🎶')} ${esc(KPOP_HIST[slug][lang].h1)}</a>`;
+  };
+  const grid = (slugs) => `<div class="seo-linklist">${slugs.map(link).filter(Boolean).join('')}</div>`;
+  const trail = [{ name: 'K-Pop', url: '/kpop' }, { name: T.h1, url }];
+  let body = bcHtml(trail);
+  body += `<p class="lead">${esc(T.lead)}</p>`;
+  // Artists (profiles), subdivided by roster type/gender
+  const profiles = Object.keys(KPOP_HIST).filter(s => /-profile$/.test(s) && has(s));
+  const byType = (pred) => profiles.filter(s => { const a = KPOP_ROSTER.find(r => r.id === s.replace('-profile', '')); return a && pred(a); });
+  const girl = byType(a => a.type === 'group' && a.gender === 'girl');
+  const boy = byType(a => a.type === 'group' && a.gender === 'boy');
+  const solo = byType(a => a.type === 'soloist');
+  if (profiles.length) {
+    body += `<h2 id="cat-artists">${KPOP_CAT.artists.emoji} ${esc(kpopCatLabel('artists', lang))} <span class="kpb-n">${profiles.length}</span></h2>`;
+    if (girl.length) body += `<h3>${esc(T.girl)}</h3>${grid(girl)}`;
+    if (boy.length) body += `<h3>${esc(T.boy)}</h3>${grid(boy)}`;
+    if (solo.length) body += `<h3>${esc(T.solo)}</h3>${grid(solo)}`;
+  }
+  ['basics', 'legends', 'history', 'companies', 'global'].forEach(k => {
+    const slugs = KPOP_CAT_SLUGS[k].filter(has);
+    if (slugs.length) body += `<h2 id="cat-${k}">${KPOP_CAT[k].emoji} ${esc(kpopCatLabel(k, lang))} <span class="kpb-n">${slugs.length}</span></h2>${grid(slugs)}`;
+  });
+  body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
+  const hero = `<header class="seo-hero"><span class="emoji">📚</span><h1>${esc(T.h1)}</h1><div class="meta"><span class="seo-badge">K-Pop</span></div></header>`;
+  const others = KPOP_HIST_LANGS.filter(l => l !== lang);
+  const alts = lang === 'en'
+    ? others.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/browse.html` }))
+    : [{ lang: 'en', url: `${BASEP}kpop/browse.html` }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/browse.html` }))];
+  writePage(`${dir}kpop/browse.html`, shell({ url, title: T.title, desc: T.lead, keywords: '', schemas: [breadcrumbLD(trail)], hero, body, lang, alts, homeHref: '/kpop', brand: '🎤 Korea<span>Plus</span>' }));
   return url;
 }
 
@@ -2306,6 +2514,9 @@ out.kpopHist = [];
 for (const slug of Object.keys(KPOP_HIST)) {
   for (const lang of KPOP_HIST_LANGS) { const u = buildKpopHistory(slug, lang); if (u) out.kpopHist.push(u); }
 }
+// Categorized browse / directory (one per language) — drill-down to every page
+out.kpopBrowse = [];
+for (const lang of KPOP_HIST_LANGS) { const u = buildKpopBrowse(lang); if (u) out.kpopBrowse.push(u); }
 // Blog
 out.blog = BLOG.map(buildBlogPost);
 out.blogIndex = buildBlogIndex();
@@ -2319,6 +2530,7 @@ out.cost = ['en', ...LOCALES].map(l => buildCostIndex(l)).filter(Boolean);
 // Programmatic long-tail: best-time + Seoul→city transport pages
 out.besttime = [...CITIES, ...REGIONAL_CITIES].map(buildBestTime);
 out.transport = TRANSPORT_ROUTES.map(buildTransport);
+out.hubs = buildBrowseHubs(out);            // category hub pages (Explore L2)
 const exploreUrl = buildExplore(out);
 
 // ── IndexNow key file (Bing/Naver/Yandex instant indexing) ──────────
@@ -2347,6 +2559,7 @@ sm += `\n` + urlEntry('/kpop', '0.9', 'daily');   // K-Pop hub: clean canonical 
 [...out.categories, ...out.cities, ...(out.regional || []), out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.blog.forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 (out.kpopHist || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
+(out.kpopBrowse || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));
 out.neighborhoods.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.itineraries.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.months.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
@@ -2359,6 +2572,7 @@ out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.itinL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 [...out.compare, ...out.seasonal].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 [...out.faq, ...out.cityfood].forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
+(out.hubs || []).forEach(h => sm += `\n` + urlEntry(h.url, '0.8', 'weekly'));  // browse category hubs
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
 sm += `\n</urlset>\n`;
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sm);
@@ -2370,6 +2584,7 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sm);
 let ksm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 ksm += urlEntry('/kpop', '1.0', 'daily');
 (out.kpopHist || []).forEach(u => ksm += `\n` + urlEntry(u, '0.8', 'weekly'));
+(out.kpopBrowse || []).forEach(u => ksm += `\n` + urlEntry(u, '0.7', 'weekly'));
 const kpopThemed = [...new Set([...out.categories, ...out.itineraries, ...(out.itinL10n || []), ...out.places].filter(u => /k-?pop/i.test(u)))];
 kpopThemed.forEach(u => ksm += `\n` + urlEntry(u, '0.7', 'weekly'));
 ksm += `\n</urlset>\n`;
