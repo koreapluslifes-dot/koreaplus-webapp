@@ -48,25 +48,37 @@ const ADSENSE_SLOT = '4521899200';
 const AD_LOADER = `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>`;
 const AD_UNIT = `<ins class="adsbygoogle" style="display:block;margin:22px 0;width:100%" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${ADSENSE_SLOT}" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>`;
 
+function crumbLD(o) {
+  const items = [
+    { name: 'K-Beauty', item: SITE + '/kbeauty' },
+    { name: 'Library', item: SITE + '/guide/kb/' },
+    { name: o.crumb || o.h1, item: o.url },
+  ];
+  return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x.name, item: x.item })) };
+}
 function shell(o) {
-  // o: {url, title, desc, depth, h1, emoji, ko, bodyHtml, ld, related}
+  // o: {url, title, desc, depth, h1, emoji, ko, bodyHtml, ld, related, ads}
   const back = '../'.repeat(o.depth || 2);
-  const ld = (o.ld || []).map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('');
+  const ld = [crumbLD(o)].concat(o.ld || []).map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('');
+  // Ads only on substantive pages (AdSense policy: no ads on thin/low-value pages).
+  const plain = (o.bodyHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const adsOk = o.ads !== false && plain.length >= 300;
   return `<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(o.title)} | KoreaPlus</title>
 <meta name="description" content="${esc((o.desc || '').slice(0, 158))}">
 <link rel="canonical" href="${o.url}">
 <meta property="og:title" content="${esc(o.h1)}"><meta property="og:description" content="${esc((o.desc || '').slice(0, 158))}"><meta property="og:url" content="${o.url}"><meta property="og:type" content="article">
-<link rel="alternate" hreflang="x-default" href="${HUB}">
+<link rel="alternate" hreflang="en" href="${o.url}">
+<link rel="alternate" hreflang="x-default" href="${o.url}">
 ${ld}
-${AD_LOADER}
+${adsOk ? AD_LOADER : ''}
 <style>${CSS}</style></head><body><div class="w">
 <div class="bc"><a href="${SITE}/kbeauty">K-Beauty</a> › <a href="${SITE}/guide/kb/">Library</a>${o.crumb ? ' › ' + o.crumb : ''}</div>
 <div class="em" aria-hidden="true">${o.emoji || '✨'}</div>
 <h1>${esc(o.h1)}${o.ko ? ` <span class="ko">${esc(o.ko)}</span>` : ''}</h1>
 ${o.bodyHtml}
-${AD_UNIT}
+${adsOk ? AD_UNIT : ''}
 <a class="cta" href="${SITE}/kbeauty">Explore the full K-beauty hub →</a>
 ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
 <div class="foot"><a href="${SITE}/kbeauty">💄 K-Beauty hub</a><a href="${SITE}/guide/kb/">📚 All guides</a><a href="${SITE}/guide/kpop.html">🎤 K-Pop</a><a href="${SITE}/guide/">🧭 Korea travel</a></div>
@@ -76,6 +88,19 @@ ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
 function emit(rel, html, prio) { const fp = path.join(OUT, rel); ensure(path.dirname(rel)); fs.writeFileSync(fp, html); sitemapUrls.push({ loc: `${SITE}/guide/kb/${rel}`, prio: prio || '0.6' }); written.push(rel); }
 const faqLD = (q, a) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }] });
 const artLD = (h, desc, url) => ({ '@context': 'https://schema.org', '@type': 'Article', headline: h, description: desc, datePublished: '2026-06-01', dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus Editorial' }, publisher: { '@type': 'Organization', name: 'KoreaPlus' }, mainEntityOfPage: url });
+
+// ── "Where to buy authentic" box (affiliate-ready; YesStyle AWIN deeplink slots in later) ──
+// Real retailer search links now (rel sponsored nofollow); swap YesStyle URL for the
+// AWIN deeplink once approved. Helps the high-intent K-beauty "buy authentic" journey.
+const RETAILERS = [
+  { n: '🛒 YesStyle', u: q => `https://www.yesstyle.com/en/search?q=${encodeURIComponent(q)}` },
+  { n: '🛒 Amazon', u: q => `https://www.amazon.com/s?k=${encodeURIComponent(q + ' korean skincare')}` },
+];
+function buyBox(query, label) {
+  const links = RETAILERS.map(r => `<a class="pill" rel="sponsored nofollow noopener" target="_blank" href="${r.u(query)}">${r.n}</a>`).join('');
+  return `<div class="box"><b>🛍️ ${esc(label || ('Shop ' + query))}</b><div style="margin-top:8px">${links}</div>`
+    + `<p class="disc" style="margin-top:8px">Links to trusted retailers — buy from official brand stores or first-party sellers to avoid counterfeits. Some links may earn KoreaPlus a commission at no extra cost to you.</p></div>`;
+}
 
 // ── 1. Ingredient deep-dives ────────────────────────────────────────────────
 ING.forEach(i => {
@@ -88,7 +113,8 @@ ING.forEach(i => {
     ${concerns.length ? `<h2>Best for</h2><div>${concerns.map(c => `<a class="pill" href="../concern/${c.id}.html">${c.emoji || ''} ${esc(c.name)}</a>`).join('')}</div>` : ''}
     ${pairs.length ? `<h2>Pairs well with</h2><div>${pairs.map(p => `<a class="pill" href="${p.id}.html">${p.emoji || ''} ${esc(p.name)}</a>`).join('')}</div>` : ''}
     ${avoid.length ? `<div class="box"><b>⚠️ Be careful pairing with:</b> ${avoid.map(p => esc(p.name)).join(', ')} — introduce gradually or alternate nights.</div>` : ''}
-    <div class="box">🤰 <b>Pregnancy:</b> ${esc(i.preg === 'safe' ? 'Generally considered fine — confirm with your doctor.' : i.preg === 'caution' ? 'Ask your doctor before use during pregnancy.' : 'Check with your doctor.')} · ⏰ <b>Use:</b> ${esc((i.time || 'both').toUpperCase())}</div>`;
+    <div class="box">🤰 <b>Pregnancy:</b> ${esc(i.preg === 'safe' ? 'Generally considered fine — confirm with your doctor.' : i.preg === 'caution' ? 'Ask your doctor before use during pregnancy.' : 'Check with your doctor.')} · ⏰ <b>Use:</b> ${esc((i.time || 'both').toUpperCase())}</div>
+    ${buyBox('Korean ' + i.name, 'Shop Korean ' + i.name + ' products')}`;
   const related = ING.filter(x => x.id !== i.id && (x.cat === i.cat || (x.bestFor || []).some(b => (i.bestFor || []).includes(b)))).slice(0, 6).map(x => `<a href="${x.id}.html">${x.emoji || ''} ${esc(x.name)}</a>`).join('');
   emit(`ingredient/${i.id}.html`, shell({ url, depth: 3, crumb: 'Ingredients', emoji: i.emoji, h1: `${i.name}: K-beauty ingredient guide`, ko: i.korean, title: `${i.name} in K-beauty — benefits, how to use, what to pair`, desc: i.explainer, bodyHtml: body, related, ld: [artLD(`${i.name} in K-beauty`, i.explainer, url), faqLD(`What does ${i.name} do for skin?`, (i.benefits || []).join(' ') )] }), '0.7');
 });
@@ -105,9 +131,16 @@ BRANDS.forEach(b => {
       ${b.intl ? '<span class="pill">🌍 Ships internationally</span>' : ''}
     </div>
     ${(b.hero || []).length ? `<h2>Hero products</h2><ul>${(b.hero || []).map(h => `<li>${esc(h)}</li>`).join('')}</ul>` : ''}
-    <div class="box">🛡️ <b>Buy authentic:</b> ${esc(b.name)} is widely counterfeited on marketplaces — buy from the brand's official store or a first-party retailer. <a href="${SITE}/kbeauty">See our where-to-buy &amp; authenticity guide →</a></div>`;
+    <h2>Where to buy ${esc(b.name)} authentic</h2>
+    <p>${esc(b.name)} is widely counterfeited on open marketplaces — buy from the brand's official store or a trusted first-party retailer.</p>
+    ${buyBox(b.name, 'Shop ' + b.name)}`;
   const related = BRANDS.filter(x => x.id !== b.id && x.tier === b.tier).slice(0, 6).map(x => `<a href="${x.id}.html">${x.emoji || ''} ${esc(x.name)}</a>`).join('');
-  emit(`brand/${b.id}.html`, shell({ url, depth: 3, crumb: 'Brands', emoji: b.emoji, h1: `${b.name}: Korean beauty brand`, ko: b.korean, title: `${b.name} — K-beauty brand profile, hero products, where to buy`, desc: `${b.name}: ${b.knownFor}. Hero products, tier, and how to buy authentic.`, bodyHtml: body, related, ld: [artLD(`${b.name} brand profile`, b.knownFor, url)] }), '0.6');
+  const brandLd = [
+    { '@context': 'https://schema.org', '@type': 'Brand', name: b.name, alternateName: b.korean || undefined, description: b.knownFor, url },
+    (b.hero || []).length ? { '@context': 'https://schema.org', '@type': 'ItemList', name: b.name + ' hero products', itemListElement: b.hero.map((h, i) => ({ '@type': 'ListItem', position: i + 1, name: h })) } : null,
+    artLD(b.name + ' brand profile', b.knownFor, url),
+  ].filter(Boolean);
+  emit(`brand/${b.id}.html`, shell({ url, depth: 3, crumb: 'Brands', emoji: b.emoji, h1: `${b.name}: Korean beauty brand`, ko: b.korean, title: `${b.name} — K-beauty brand profile, hero products, where to buy`, desc: `${b.name}: ${b.knownFor}. Hero products, tier, and how to buy authentic.`, bodyHtml: body, related, ld: brandLd }), '0.6');
 });
 
 // ── 3. Concern hubs ─────────────────────────────────────────────────────────
@@ -118,7 +151,9 @@ CONCERNS.forEach(c => {
     <h2>Ingredients to look for</h2><div>${look.map(i => `<a class="pill" href="../ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`).join('')}</div>
     ${c.tip ? `<div class="box">💡 <b>Tip:</b> ${esc(c.tip)}</div>` : ''}
     ${c.avoid ? `<div class="box">⚠️ <b>Be careful with:</b> ${esc(c.avoid)}</div>` : ''}
-    <h2>Build a routine for ${esc(c.name.toLowerCase())}</h2><p>Start gentle, introduce one active at a time, and always finish your morning routine with SPF. <a href="${SITE}/kbeauty">Use the free routine builder →</a></p>`;
+    <h2>Build a routine for ${esc(c.name.toLowerCase())}</h2><p>Start gentle, introduce one active at a time, and always finish your morning routine with SPF.</p>
+    <div>${SKINTYPES.map(s => `<a class="pill" href="../routine/${s.id}-${c.id}.html">${s.emoji || ''} ${esc(s.name)} skin</a>`).join('')}</div>
+    <p><a href="${SITE}/kbeauty">Use the free routine builder →</a></p>`;
   const related = look.slice(0, 6).map(i => `<a href="../ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)} for ${esc(c.id)}</a>`).join('');
   emit(`concern/${c.id}.html`, shell({ url, depth: 3, crumb: 'Concerns', emoji: c.emoji, h1: `Korean skincare for ${c.name.toLowerCase()}`, title: `K-beauty for ${c.name} — ingredients, routine & what to avoid`, desc: c.desc, bodyHtml: body, related, ld: [artLD(`Korean skincare for ${c.name}`, c.desc, url), faqLD(`What Korean ingredients help with ${c.name.toLowerCase()}?`, look.map(i => i.name).join(', '))] }), '0.7');
 });
@@ -158,14 +193,26 @@ CONFLICTS.forEach(cf => mixPage(cf.a, cf.b, cf.verdict, cf.reason));
 ING.forEach(i => (i.pairsWith || []).forEach(pid => mixPage(i.id, pid, 'safe', `${i.name} and ${ING_BY[pid] ? ING_BY[pid].name : pid} layer well together — a common, complementary K-beauty pairing. Apply thinnest to thickest and give each a moment to absorb.`)));
 
 // ── 6. Dupe pages ───────────────────────────────────────────────────────────
+const BRAND_BY = Object.fromEntries(BRANDS.map(b => [b.id, b]));
 DUPES.forEach(dp => {
   const url = `${SITE}/guide/kb/dupe/${dp.id}.html`;
+  const altBrand = dp.altBrandId && BRAND_BY[dp.altBrandId] ? BRAND_BY[dp.altBrandId] : null;
   const body = `<p class="lead">Looking for a Korean alternative to <b>${esc(dp.reference)}</b>? ${esc(dp.referenceRole || '')}</p>
     <h2>The K-beauty alternative</h2>
     <div class="box"><b>${esc(dp.altName || '')}</b><br>≈ <b>${esc(dp.sharedHero || '')}</b> — ${esc(dp.whyComparable || '')}</div>
     <p><b>${esc(dp.reference)}</b> ${dp.referenceBand ? `(${esc(dp.referenceBand)})` : ''} vs the Korean pick — similar hero ingredients, a fraction of the price.</p>
-    <p><a href="${SITE}/kbeauty">See all 23 K-beauty dupes →</a></p>`;
-  emit(`dupe/${dp.id}.html`, shell({ url, depth: 3, crumb: 'Dupes', emoji: dp.referenceEmoji || '💸', h1: `${dp.altName || 'Korean dupe'} — a K-beauty alternative to ${dp.reference}`, title: `Korean dupe for ${dp.reference}`, desc: dp.whyComparable, bodyHtml: body, ld: [artLD(`Korean dupe for ${dp.reference}`, dp.whyComparable, url)] }), '0.6');
+    ${altBrand ? `<p><a href="../brand/${altBrand.id}.html">${altBrand.emoji || ''} More from ${esc(altBrand.name)} →</a></p>` : ''}
+    ${buyBox(dp.altName || dp.reference, 'Shop the Korean alternative')}
+    <p><a href="${SITE}/kbeauty">See all ${DUPES.length} K-beauty dupes →</a></p>`;
+  const dupeLd = [
+    { '@context': 'https://schema.org', '@type': 'ItemList', name: `Korean dupe for ${dp.reference}`, itemListElement: [
+      { '@type': 'ListItem', position: 1, item: { '@type': 'Product', name: dp.reference, category: dp.category } },
+      { '@type': 'ListItem', position: 2, item: { '@type': 'Product', name: dp.altName, category: dp.category, brand: altBrand ? { '@type': 'Brand', name: altBrand.name } : undefined } },
+    ] },
+    faqLD(`Is ${dp.altName} a good dupe for ${dp.reference}?`, `${dp.altName} shares ${dp.sharedHero || 'the key hero ingredients'} with ${dp.reference}. ${dp.whyComparable || ''}`.trim()),
+    artLD(`Korean dupe for ${dp.reference}`, dp.whyComparable, url),
+  ];
+  emit(`dupe/${dp.id}.html`, shell({ url, depth: 3, crumb: 'Dupes', emoji: dp.referenceEmoji || '💸', h1: `${dp.altName || 'Korean dupe'} — a K-beauty alternative to ${dp.reference}`, title: `Korean dupe for ${dp.reference}`, desc: dp.whyComparable, bodyHtml: body, ld: dupeLd }), '0.6');
 });
 
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
@@ -173,7 +220,7 @@ GLOSS.forEach((g, idx) => {
   const sg = slug(g.term);
   const url = `${SITE}/guide/kb/term/${sg}.html`;
   const body = `<p class="lead">${esc(g.def || '')}</p>`;
-  emit(`term/${sg}.html`, shell({ url, depth: 3, crumb: 'Glossary', emoji: '📖', h1: esc(g.term), ko: g.korean, title: `${g.term} — K-beauty glossary`, desc: g.def, bodyHtml: body, ld: [{ '@context': 'https://schema.org', '@type': 'DefinedTerm', name: g.term, description: g.def, inDefinedTermSet: `${SITE}/guide/kb/` }] }), '0.5');
+  emit(`term/${sg}.html`, shell({ url, depth: 3, crumb: 'Glossary', emoji: '📖', h1: esc(g.term), ko: g.korean, title: `${g.term} — K-beauty glossary`, desc: g.def, bodyHtml: body, ads: false, ld: [{ '@context': 'https://schema.org', '@type': 'DefinedTerm', name: g.term, description: g.def, inDefinedTermSet: `${SITE}/guide/kb/` }] }), '0.5');
 });
 
 // ── 8. Skin-type × concern routines ─────────────────────────────────────────
@@ -227,12 +274,22 @@ const EDITORIAL_CATS = {
   howto: { path: 'how-to', crumb: 'How-to guides', label: '📋 How-to guides' },
 };
 const editorialIndex = {};   // cat -> [{slug,h1,emoji,label}]
+// Dedup: two editorial waves produced near-duplicate history topics that
+// cannibalize each other; keep one per topic, drop the weaker slug.
+const EDITORIAL_DROP = new Set([
+  'bb-cream-boom-korea-history', 'cushion-compact-era-2008', 'snail-mucin-ingredient-wave',
+  'ten-step-routine-globalizes-k-beauty', 'glass-skin-viral-concept-history',
+  'thaad-china-demand-shock-2016-17', 'olive-young-health-beauty-retail',
+  'indie-brand-boom-late-2010s', 'stylenanda-3ce-makeup-era', 'k-beauty-amazon-history',
+  'skintok-tiktok-era-history', 'pdrn-salmon-dna-history',
+]);
 const EDIT_FILE = path.join(__dirname, 'kbeauty-editorial.json');
+let editorialDropped = 0;
 if (fs.existsSync(EDIT_FILE)) {
   const ed = JSON.parse(fs.readFileSync(EDIT_FILE, 'utf8'));
   (ed.categories || []).forEach(catObj => {
     const meta = EDITORIAL_CATS[catObj.cat]; if (!meta) return;
-    const peers = (catObj.items || []);
+    const peers = (catObj.items || []).filter(it => { const drop = EDITORIAL_DROP.has(slug(it.slug || it.h1)); if (drop) editorialDropped++; return !drop; });
     editorialIndex[catObj.cat] = [];
     peers.forEach((it, idx) => {
       const sg = slug(it.slug || it.h1);
