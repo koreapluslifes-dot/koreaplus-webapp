@@ -71,6 +71,9 @@ function shell(o) {
 <meta property="og:title" content="${esc(o.h1)}"><meta property="og:description" content="${esc((o.desc || '').slice(0, 158))}"><meta property="og:url" content="${o.url}"><meta property="og:type" content="article">
 <link rel="alternate" hreflang="en" href="${o.url}">
 <link rel="alternate" hreflang="x-default" href="${o.url}">
+<link rel="icon" type="image/svg+xml" href="${SITE}/guide/kbeauty-favicon.svg">
+<meta name="theme-color" content="#d61f6e">
+<meta property="og:site_name" content="K-Beauty by KoreaPlus">
 ${ld}
 ${adsOk ? AD_LOADER : ''}
 <style>${CSS}</style></head><body><div class="w">
