@@ -41,6 +41,13 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + '.rel{margin-top:28px;border-top:1px solid #eee;padding-top:16px}.rel a{display:inline-block;margin:4px 8px 4px 0}'
   + '.foot{margin-top:24px;border-top:1px solid #eee;padding-top:14px;font-size:13px;color:#777}.foot a{margin-right:14px;text-decoration:none}'
   + '.kb-faq{background:#faf3f7;border:1px solid #f0d8e6;border-radius:12px;padding:10px 14px;margin:8px 0}.kb-faq summary{cursor:pointer;font-weight:800;font-size:15px;color:#1a1320}.kb-faq p{margin:8px 0 2px;font-size:14.5px}'
+  + '.kbh{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 18px;background:#fff;border-bottom:1px solid #f0d8e6}'
+  + '.kbh-logo{font-weight:900;font-size:18px;color:#1a1320;text-decoration:none;letter-spacing:-.01em}.kbh-logo b{color:#d61f6e}'
+  + '.kbh-lib{margin-left:auto;font-size:13px;font-weight:800;color:#c01a63;text-decoration:none}.kbh-lib:hover{text-decoration:underline}'
+  + '.kbhub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:14px 0 30px}'
+  + '.kbhub-card{display:block;padding:16px;border:1px solid #f0d8e6;border-radius:14px;text-decoration:none;color:#1a1320;background:#faf3f7;transition:transform .15s,box-shadow .15s}.kbhub-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(214,31,110,.1)}'
+  + '.kbhub-card .he{font-size:24px}.kbhub-card .ht{font-weight:800;font-size:14.5px;margin-top:4px}.kbhub-card .hn{font-size:12px;color:#999;margin-top:2px}'
+  + '.kbhub-sec{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#999;margin:24px 0 4px}'
   + '.disc{font-size:11.5px;color:#999;margin-top:16px}';
 
 // ── Google AdSense (Auto ads page tag + one in-content responsive unit) ─────
@@ -77,7 +84,9 @@ ${hreflangs}
 <meta property="og:site_name" content="K-Beauty by KoreaPlus">
 ${ld}
 ${adsOk ? AD_LOADER : ''}
-<style>${CSS}</style></head><body><div class="w">
+<style>${CSS}</style></head><body>
+<header class="kbh"><a class="kbh-logo" href="/kbeauty" aria-label="K-Beauty home"><span aria-hidden="true">🧴</span> <b>K</b>·Beauty</a><a class="kbh-lib" href="/guide/kb/">📚 Library</a></header>
+<div class="w">
 <div class="bc"><a href="${SITE}/kbeauty">K-Beauty</a> › <a href="${SITE}/guide/kb/">Library</a>${o.crumb ? ' › ' + o.crumb : ''}</div>
 <div class="em" aria-hidden="true">${o.emoji || '✨'}</div>
 <h1>${esc(o.h1)}${o.ko ? ` <span class="ko">${esc(o.ko)}</span>` : ''}</h1>
@@ -89,7 +98,15 @@ ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
 <p class="disc">General educational information using cosmetic structure-function wording — not medical advice. Always patch-test new actives. © KoreaPlus.</p>
 </div></body></html>`;
 }
-function emit(rel, html, prio) { const fp = path.join(OUT, rel); ensure(path.dirname(rel)); fs.writeFileSync(fp, html); sitemapUrls.push({ loc: `${SITE}/guide/kb/${rel}`, prio: prio || '0.6' }); written.push(rel); }
+const INDEX = [];   // {rel, dir, title} — drives the category/language hub pages
+function emit(rel, html, prio) {
+  const fp = path.join(OUT, rel); ensure(path.dirname(rel)); fs.writeFileSync(fp, html);
+  sitemapUrls.push({ loc: `${SITE}/guide/kb/${rel}`, prio: prio || '0.6' }); written.push(rel);
+  const m = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+  const title = m ? m[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() : rel;
+  const dir = rel.indexOf('/') >= 0 ? rel.slice(0, rel.indexOf('/')) : '_root';
+  INDEX.push({ rel, dir, title });
+}
 const faqLD = (q, a) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }] });
 const artLD = (h, desc, url) => ({ '@context': 'https://schema.org', '@type': 'Article', headline: h, description: desc, datePublished: '2026-06-01', dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus Editorial' }, publisher: { '@type': 'Organization', name: 'KoreaPlus' }, mainEntityOfPage: url });
 
@@ -567,23 +584,69 @@ if (fs.existsSync(I18N_FILE)) {
   });
 }
 
-// ── Library index ───────────────────────────────────────────────────────────
-const idxSections = [
-  ...editorialIdxSections,
-  ['🔬 INCI ingredient decoder', inciHubLinks],
-  ['⚖️ Trend verdicts', verdItems.map(it => `<a href="${it.slug}.html">${it.emoji || ''} ${esc(it.label)}</a>`)],
-  ['🧪 Ingredients', ING.map(i => `<a href="ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`)],
-  ['🏷️ Brands', BRANDS.map(b => `<a href="brand/${b.id}.html">${b.emoji || ''} ${esc(b.name)}</a>`)],
-  ['🎯 Concerns', CONCERNS.map(c => `<a href="concern/${c.id}.html">${c.emoji || ''} ${esc(c.name)}</a>`)],
-  ['🧖 Skin types', stHubLinks],
-  ['🧴 Product types', catHubLinks],
-  ['🗓️ Seasonal routines', SEASONS.map(se => SKINTYPES.map(s => `<a href="seasonal/${se.id}-${s.id}-skin.html">${se.emoji} ${esc(se.name)} · ${esc(s.name.toLowerCase())}</a>`)).flat()],
-  ['💸 Dupes', DUPES.map(dp => `<a href="dupe/${dp.id}.html">${esc(dp.altName || dp.reference)}</a>`)],
-  ['📖 Glossary', GLOSS.map(g => `<a href="term/${slug(g.term)}.html">${esc(g.term)}</a>`)],
-];
-const idxBody = idxSections.map(([h, links]) => `<h2>${h}</h2><div class="rel">${links.join('')}</div>`).join('');
-fs.writeFileSync(path.join(OUT, 'index.html'), shell({ url: `${SITE}/guide/kb/`, depth: 1, h1: 'The K-Beauty Library', emoji: '📚', title: 'K-Beauty Library — ingredients, brands, concerns, dupes & guides', desc: 'The complete K-beauty knowledge library: ingredients, brands, skin concerns, dupes, glossary and routines.', bodyHtml: `<p class="lead">Everything K-beauty, organized — ${ING.length} ingredients, ${BRANDS.length} brands, ${CONCERNS.length} concerns, ${DUPES.length} dupes and more.</p>${idxBody}` }));
-sitemapUrls.push({ loc: `${SITE}/guide/kb/`, prio: '0.8' });
+// ── Hierarchical navigation: category hubs + per-language hubs + top-level index ──
+// Every page is reachable: index → category hub → page (EN), and index → language → lang hub → page (i18n).
+const HUB_META = {
+  ingredient: { e: '🧪', t: 'Ingredients', g: 'Ingredients & INCI' },
+  inci: { e: '🔬', t: 'INCI decoder', g: 'Ingredients & INCI' },
+  'inci-class': { e: '🔬', t: 'INCI by function', g: 'Ingredients & INCI' },
+  mix: { e: '🧪', t: 'What to mix', g: 'Ingredients & INCI' },
+  brand: { e: '🏷️', t: 'Brands', g: 'Brands & products' },
+  dupe: { e: '💸', t: 'Dupes', g: 'Brands & products' },
+  category: { e: '🧴', t: 'Product types', g: 'Brands & products' },
+  concern: { e: '🎯', t: 'Skin concerns', g: 'Skin & routines' },
+  'skin-type': { e: '🧖', t: 'Skin types', g: 'Skin & routines' },
+  routine: { e: '🧴', t: 'Routines', g: 'Skin & routines' },
+  seasonal: { e: '🗓️', t: 'Seasonal routines', g: 'Skin & routines' },
+  'how-to': { e: '📋', t: 'How-to guides', g: 'Skin & routines' },
+  term: { e: '📖', t: 'Glossary', g: 'Reference' },
+  history: { e: '📜', t: 'History', g: 'K-beauty knowledge' },
+  format: { e: '💡', t: 'Formats & inventions', g: 'K-beauty knowledge' },
+  heritage: { e: '🌿', t: 'Heritage ingredients', g: 'K-beauty knowledge' },
+  company: { e: '🏢', t: 'Companies', g: 'K-beauty knowledge' },
+  industry: { e: '🏭', t: 'Industry', g: 'K-beauty knowledge' },
+  country: { e: '🌍', t: 'K-beauty worldwide', g: 'K-beauty knowledge' },
+  compare: { e: '⚖️', t: 'Korea vs West', g: 'K-beauty knowledge' },
+  culture: { e: '🎎', t: 'Beauty culture', g: 'K-beauty knowledge' },
+  shop: { e: '🛍️', t: 'Where to shop', g: 'K-beauty knowledge' },
+  people: { e: '👤', t: 'People & creators', g: 'K-beauty knowledge' },
+};
+const LANG_NAMES = { ko: '한국어', ja: '日本語', zh: '简体中文', es: 'Español', fr: 'Français', de: 'Deutsch', pt: 'Português', id: 'Bahasa Indonesia' };
+const byDir = {};
+INDEX.forEach(p => { (byDir[p.dir] = byDir[p.dir] || []).push(p); });
+
+// 1) English-library category hubs → /guide/kb/<dir>/index.html
+Object.keys(HUB_META).forEach(dir => {
+  const pages = (byDir[dir] || []).slice().sort((a, b) => a.title.localeCompare(b.title));
+  if (!pages.length) return;
+  const m = HUB_META[dir];
+  const links = pages.map(p => `<a href="${p.rel.slice(dir.length + 1)}">${esc(p.title)}</a>`).join('');
+  emit(`${dir}/index.html`, shell({ url: `${SITE}/guide/kb/${dir}/`, depth: 2, crumb: m.t, emoji: m.e, h1: `${m.t} — K-Beauty Library`, title: `K-Beauty ${m.t} — all ${pages.length} guides`, desc: `Browse all ${pages.length} K-beauty ${m.t.toLowerCase()} guides in the KoreaPlus library.`, bodyHtml: `<p class="lead">All ${pages.length} ${esc(m.t.toLowerCase())} guides.</p><div class="rel">${links}</div>`, ads: false }), '0.5');
+});
+
+// 2) Per-language hubs → /guide/kb/<lang>/index.html (grouped by topic type)
+const langGroupOf = (key) => key.startsWith('company-') ? 'Companies' : (key.startsWith('routine-') || key.startsWith('how-to-')) ? 'Routines & how-to' : key.startsWith('ingredient-') ? 'Ingredients' : (key.startsWith('brand-') || key.startsWith('best-')) ? 'Brands' : key.startsWith('faq-') ? 'FAQ' : 'Shopping & trends';
+const LG_ORDER = ['Routines & how-to', 'Ingredients', 'Brands', 'Companies', 'Shopping & trends', 'FAQ'];
+Object.keys(LANG_NAMES).forEach(lc => {
+  const pages = (byDir[lc] || []).slice();
+  if (!pages.length) return;
+  const groups = {};
+  pages.forEach(p => { const key = p.rel.slice(lc.length + 1).replace(/\.html$/, ''); const g = langGroupOf(key); (groups[g] = groups[g] || []).push(p); });
+  const body = LG_ORDER.filter(g => groups[g]).map(g => `<h2>${g}</h2><div class="rel">${groups[g].sort((a, b) => a.title.localeCompare(b.title)).map(p => `<a href="${p.rel.slice(lc.length + 1)}">${esc(p.title)}</a>`).join('')}</div>`).join('');
+  emit(`${lc}/index.html`, shell({ url: `${SITE}/guide/kb/${lc}/`, depth: 2, lang: lc, crumb: LANG_NAMES[lc], emoji: '🌐', h1: `K-Beauty — ${LANG_NAMES[lc]}`, title: `K-Beauty ${LANG_NAMES[lc]} — ${pages.length} guides`, desc: `${pages.length} K-beauty guides in ${LANG_NAMES[lc]}.`, bodyHtml: `<p class="lead">${pages.length} guides.</p>${body}`, ads: false }), '0.7');
+});
+
+// 3) Top-level library index → /guide/kb/index.html (category tiles + language tiles + verdicts)
+const hubCard = (href, e, t, n) => `<a class="kbhub-card" href="${href}"><div class="he">${e}</div><div class="ht">${esc(t)}</div><div class="hn">${n} guides</div></a>`;
+const groups = {};
+Object.keys(HUB_META).forEach(dir => { if (!(byDir[dir] || []).length) return; const m = HUB_META[dir]; (groups[m.g] = groups[m.g] || []).push(hubCard(`${dir}/`, m.e, m.t, (byDir[dir] || []).length)); });
+const GROUP_ORDER = ['Ingredients & INCI', 'Brands & products', 'Skin & routines', 'K-beauty knowledge', 'Reference'];
+let mainBody = `<p class="lead">Everything K-beauty, organized — drill into a category to reach every guide. ${INDEX.length}+ pages across 9 languages.</p>`;
+GROUP_ORDER.forEach(g => { if (groups[g]) mainBody += `<div class="kbhub-sec">${g}</div><div class="kbhub-grid">${groups[g].join('')}</div>`; });
+mainBody += `<div class="kbhub-sec">🌐 In your language</div><div class="kbhub-grid">` + Object.keys(LANG_NAMES).map(lc => (byDir[lc] || []).length ? hubCard(`${lc}/`, '🌐', LANG_NAMES[lc], (byDir[lc] || []).length) : '').join('') + `</div>`;
+if ((byDir._root || []).length) mainBody += `<div class="kbhub-sec">⚖️ Trend verdicts</div><div class="rel">` + byDir._root.slice().sort((a, b) => a.title.localeCompare(b.title)).map(p => `<a href="${p.rel}">${esc(p.title)}</a>`).join('') + `</div>`;
+fs.writeFileSync(path.join(OUT, 'index.html'), shell({ url: `${SITE}/guide/kb/`, depth: 1, h1: 'The K-Beauty Library', emoji: '📚', title: 'K-Beauty Library — ingredients, brands, companies & guides in 9 languages', desc: 'The complete K-beauty knowledge library — ingredients, brands, company analyses, routines, dupes & FAQs in 9 languages. Browse by category.', bodyHtml: mainBody, ads: false }));
+sitemapUrls.push({ loc: `${SITE}/guide/kb/`, prio: '0.9' });
 
 // ── Consolidated sitemap (hub 9-lang + every page) ──────────────────────────
 const ALT = [['x-default', ''], ['en', ''], ['ko', '?lang=ko'], ['ja', '?lang=ja'], ['zh-CN', '?lang=zh'], ['es', '?lang=es'], ['fr', '?lang=fr'], ['de', '?lang=de'], ['pt-BR', '?lang=pt'], ['id', '?lang=id']];
