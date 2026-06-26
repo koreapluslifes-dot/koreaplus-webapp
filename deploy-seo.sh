@@ -21,7 +21,12 @@ echo "==> Uploading tarball…"
 scp -i "$PEM" -o StrictHostKeyChecking=no /c/tmp/kp.tgz "bitnami@$IP:/tmp/kp.tgz"
 
 echo "==> Extracting + fixing perms on prod…"
-$SSH "sudo tar xzf /tmp/kp.tgz -C $REMOTE && sudo chown -R bitnami:daemon $REMOTE && sudo find $REMOTE -type d -exec chmod 755 {} + && sudo find $REMOTE -type f -exec chmod 644 {} + && rm -f /tmp/kp.tgz && echo OK"
+# NOTE: docroot is /opt/bitnami/wordpress; the app lives at web /guide/ = $REMOTE.
+# tar recreates nested dir entries with the local (Windows) 700 perms, which makes
+# Apache (daemon) 403 everything under them. `chmod -R a+rX` is the robust fix:
+# it adds o+rx to EVERY dir (traversable) + o+r to files, without setting +x on
+# files. The per-find `-exec chmod 755 {} +` form missed some nested dirs (ja/guide).
+$SSH "sudo tar xzf /tmp/kp.tgz -C $REMOTE && sudo chown -R bitnami:daemon $REMOTE && sudo chmod -R a+rX $REMOTE && rm -f /tmp/kp.tgz && echo OK"
 
 echo "==> IndexNow ping…"
 node indexnow-submit.cjs || true
