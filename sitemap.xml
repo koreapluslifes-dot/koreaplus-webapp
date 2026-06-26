@@ -63,14 +63,14 @@
   <url>
     <loc>https://koreaplus-lifes.com/guide/explore.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/explore.html?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/explore.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/explore.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/explore.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/explore.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/explore.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/explore.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/explore.html?lang=id"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -26306,45 +26306,1139 @@
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ja/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/zh/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/es/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/ko/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/fr/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/de/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/pt/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/destinations.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/destinations.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/destinations.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/experiences.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/experiences.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/experiences.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/when-to-visit.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/when-to-visit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/when-to-visit.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/travel-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/travel-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/travel-basics.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/itineraries.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/itineraries.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/itineraries.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/tools.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/tools.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/tools.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/faq/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/faq/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/faq/index.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/id/explore.html</loc>
+    <xhtml:link rel="alternate" hreflang="id" href="https://koreaplus-lifes.com/guide/id/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://koreaplus-lifes.com/guide/ja/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://koreaplus-lifes.com/guide/zh/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://koreaplus-lifes.com/guide/es/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://koreaplus-lifes.com/guide/ko/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://koreaplus-lifes.com/guide/fr/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://koreaplus-lifes.com/guide/de/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://koreaplus-lifes.com/guide/pt/explore.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/explore.html"/>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/places/bibimbap.html</loc>

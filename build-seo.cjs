@@ -52,6 +52,9 @@ try { KPOP_ROSTER = require('./kpop-data.js').KPOP_ROSTER || []; } catch { /* ro
 // CDN with photographer attribution per Unsplash API guidelines.
 let CITY_IMAGES = {};
 try { CITY_IMAGES = JSON.parse(fs.readFileSync(path.join(OUT, 'city-images.json'), 'utf8')); } catch { /* none yet */ }
+// Translated category-hub UI strings (en + 8 locales); built by the hub-l10n workflow.
+let HUB_L10N = {};
+try { HUB_L10N = JSON.parse(fs.readFileSync(path.join(OUT, 'hub-l10n.json'), 'utf8')); } catch { /* none yet → localized hubs skipped */ }
 
 // ── Helpers ─────────────────────────────────────────────────────────
 const slug = s => String(s).toLowerCase()
@@ -746,10 +749,15 @@ const HREFLANG_SM = new Map();
 // language instead of being dumped into English. Hub/other links keep EN.
 const L10N_CITY_SLUGS = ['seoul', 'busan', 'jeju', 'gyeongju', 'jeonju', 'incheon'];
 const _cityLinkRe = new RegExp('href="guide/things-to-do-in-(' + L10N_CITY_SLUGS.join('|') + ')\\.html"', 'g');
+// Nav links to the browse hubs (root-relative) → repoint to the localized hub on
+// localized pages so the whole Explore→hub→page drill-down stays in-language.
+const _hubLinkRe = /href="((?:explore|destinations|experiences|when-to-visit|travel-basics|itineraries|tools)\.html|faq\/index\.html)"/g;
 function localizeLinks(html, lang) {
   const L = L10N[lang];
   if (!L || lang === 'en') return html;
-  return html.replace(_cityLinkRe, 'href="' + L.dir + '/guide/things-to-do-in-$1.html"');
+  return html
+    .replace(_cityLinkRe, 'href="' + L.dir + '/guide/things-to-do-in-$1.html"')
+    .replace(_hubLinkRe, 'href="' + L.dir + '/$1"');
 }
 // Pick a category-appropriate emoji for an attraction/food card so the grid
 // reads as a varied, scannable set instead of a wall of identical pins.
@@ -1652,11 +1660,12 @@ function buildCostIndex(lang) {
 function hubLinks(list) {
   return `<div class="seo-linklist">${list.filter(Boolean).map(([l, h]) => `<a href="${h}">${l}</a>`).join('')}</div>`;
 }
-function buildHub({ slug: sl, h1, emoji, lead, badge, sections }) {
-  const url = `${BASEP}${sl}`;
+function buildHub({ slug: sl, h1, emoji, lead, badge, sections, lang = 'en', alts = [], ui = {} }) {
+  const dir = lang === 'en' ? '' : L10N[lang].dir + '/';
+  const url = `${BASEP}${dir}${sl}`;
   const title = `${h1} | KoreaPlus`;
   const desc = lead.replace(/\s+/g, ' ').slice(0, 155);
-  const trail = [{ name: 'Home', url: BASEP }, { name: 'Explore', url: `${BASEP}explore.html` }, { name: h1, url }];
+  const trail = [{ name: ui.home || 'Home', url: BASEP }, { name: ui.explore || 'Explore', url: `${BASEP}${dir}explore.html` }, { name: h1, url }];
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(lead)}</p>`;
   for (const s of (sections || [])) {
@@ -1665,18 +1674,104 @@ function buildHub({ slug: sl, h1, emoji, lead, badge, sections }) {
     if (s.note) body += `<div class="sub" style="color:var(--text2,#9fb0c3);font-size:13px;margin:-4px 0 10px">${esc(s.note)}</div>`;
     body += hubLinks(s.links);
   }
-  body += ctaHtml('Plan your Korea trip', 'Build a free, route-optimized itinerary with AI in seconds.');
+  body += ctaHtml(ui.ctaH || 'Plan your Korea trip', ui.ctaP || 'Build a free, route-optimized itinerary with AI in seconds.');
   const total = (sections || []).reduce((n, s) => n + ((s && s.links) ? s.links.length : 0), 0);
   const hero = `<header class="seo-hero"><span class="emoji">${emoji}</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">${badge || (total + ' guides')}</span></div></header>`;
-  writePage(sl, shell({ url, title, desc, keywords: '', schemas: [breadcrumbLD(trail), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: ORIGIN + url }], hero, body }));
+  writePage(`${dir}${sl}`, shell({ url, title, desc, keywords: '', schemas: [breadcrumbLD(trail), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: ORIGIN + url }], hero, body, lang, alts }));
   return url;
+}
+const HUB_SLUGS = ['explore.html', 'destinations.html', 'experiences.html', 'when-to-visit.html', 'travel-basics.html', 'itineraries.html', 'tools.html', 'faq/index.html'];
+function hubAlts(sl, lang) {  // hreflang cluster for one hub slug across en + all locales
+  const langs = ['en', ...LOCALES];
+  return langs.filter(l => l !== lang).map(l => ({ lang: l, url: `${BASEP}${l === 'en' ? '' : L10N[l].dir + '/'}${sl}` }));
+}
+// Localized category hubs (one set per locale). Mirrors buildBrowseHubs but with
+// translated UI (HUB_L10N) and links pointing to the localized page where it
+// exists (else the English page), so every page stays reachable in-language.
+function buildBrowseHubsL10n(urls, lang) {
+  const T = HUB_L10N[lang]; if (!T) return [];
+  const L = L10N[lang], dir = L.dir;
+  const allCities = [...CITIES, ...REGIONAL_CITIES];
+  const cap = s => s.split('/').pop().replace('.html', '').replace(/-/g, ' ').replace(/\b\w/g, m => m.toUpperCase());
+  // Set of all localized URLs actually generated for this lang → link only to real pages.
+  const built = new Set([...(urls.cityL10n || []), ...(urls.l10n || []), ...(urls.faqL10n || []), ...(urls.itinL10n || []), ...(urls.cost || [])].map(u => u.replace(BASEP, '')));
+  const loc = (en, rel) => built.has(rel) ? rel : en;          // localized if it exists, else English
+  const cityName = n => `📍 ${(CITY_NAME_L10N[lang] || {})[n] || n}`;
+  const faqLabel = (f) => `${f.emoji} ${(FAQ_L10N[lang] && FAQ_L10N[lang].items[f.slug]) ? FAQ_L10N[lang].items[f.slug][0] : f.q}`;
+  const ui = { home: T.ui.home, explore: T.ui.explore, ctaH: T.ui.ctaH, ctaP: T.ui.ctaP };
+  const hubs = [];
+  const mk = (slug, hk, emoji, sections) => {
+    const t = T.hubs[hk];
+    const url = buildHub({ slug, h1: t.h1, emoji, lead: t.lead, badge: t.badge, sections, lang, alts: hubAlts(slug, lang), ui });
+    hubs.push({ slug, url, h1: t.h1, emoji, tagline: t.tagline });
+  };
+
+  mk('destinations.html', 'destinations', '📍', [
+    { title: T.hubs.destinations.sec.major, links: CITIES.map(c => [cityName(c.name), loc(`guide/things-to-do-in-${slug(c.name)}.html`, `${dir}/guide/things-to-do-in-${slug(c.name)}.html`)]) },
+    { title: T.hubs.destinations.sec.more, links: REGIONAL_CITIES.filter(c => c.name !== 'Korea Hiking').map(c => [cityName(c.name), loc(`guide/things-to-do-in-${slug(c.name)}.html`, `${dir}/guide/things-to-do-in-${slug(c.name)}.html`)]) },
+    { title: T.hubs.destinations.sec.food, links: CITIES.map(c => [`🍜 ${(CITY_NAME_L10N[lang] || {})[c.name] || c.name}`, `guide/best-food-in-${slug(c.name)}.html`]) },
+    { title: T.hubs.destinations.sec.besttime, links: allCities.map(c => [`🗓️ ${(CITY_NAME_L10N[lang] || {})[c.name] || c.name}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
+    { title: T.hubs.destinations.sec.stay, links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
+    { title: T.hubs.destinations.sec.hoods, links: NEIGHBORHOODS.map(n => [`${n.emoji} ${esc(n.name)}`, `guide/${slug(n.name)}-${slug(n.city)}-guide.html`]) },
+    { title: T.hubs.destinations.sec.transport, links: TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`]) },
+  ]);
+
+  mk('experiences.html', 'experiences', '🍜', [
+    { title: T.hubs.experiences.sec.topic, links: Object.keys(CAT_META).map(c => [`${CAT_META[c].icon} ${esc(CAT_META[c].label)}`, `guide/${CAT_SLUG[c]}.html`]) },
+    { title: T.hubs.experiences.sec.culture, links: [['📅 Festivals', 'festivals.html'], ['🌸 Seasons', 'seasons.html'], ['🏛️ Culture', 'culture.html'], ['🛕 Temples', 'temples.html'], ['🌃 Night views', 'nightviews.html'], ['🎬 K-Drama', 'kdrama-locations.html'], ['🥾 Korea hiking', loc('guide/things-to-do-in-korea-hiking.html', `${dir}/guide/things-to-do-in-korea-hiking.html`)]] },
+    { title: T.hubs.experiences.sec.compare, links: COMPARES.map(c => [`${c.emoji} ${esc(c.h1.split(':')[0])}`, `guide/${c.slug}.html`]) },
+    { title: T.hubs.experiences.sec.places, links: ALL.map(i => [`${i.emoji} ${esc(i.name)}`, `places/${i.slug}.html`]) },
+  ]);
+
+  mk('when-to-visit.html', 'whentovisit', '📅', [
+    { title: T.hubs.whentovisit.sec.season, links: SEASONS4.map(s => [`${s.emoji} ${esc(s.name)}`, `guide/korea-in-${s.slug}.html`]) },
+    { title: T.hubs.whentovisit.sec.month, links: MONTHS.map((m, i) => [`${m[1]} ${esc((L.months && L.months[i]) ? L.months[i][0] : m[0])}`, loc(`guide/korea-in-${m[0].toLowerCase()}.html`, `${dir}/korea-in-${m[0].toLowerCase()}.html`)]) },
+    { title: T.hubs.whentovisit.sec.besttime, links: allCities.map(c => [`🗓️ ${(CITY_NAME_L10N[lang] || {})[c.name] || c.name}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
+    { title: T.hubs.whentovisit.sec.timing, links: [{ s: 'when-is-cherry-blossom-season-in-korea', e: '🌸' }, { s: 'when-is-fall-foliage-in-korea', e: '🍁' }, { s: 'best-time-to-visit-korea', e: '📅' }].map(x => [`${x.e} ${(FAQ_L10N[lang] && FAQ_L10N[lang].items[x.s]) ? FAQ_L10N[lang].items[x.s][0] : x.s.replace(/-/g, ' ')}`, loc(`faq/${x.s}.html`, `${dir}/faq/${x.s}.html`)]) },
+  ]);
+
+  mk('travel-basics.html', 'basics', '✈️', [
+    { title: T.hubs.basics.sec.essentials, links: [['🛂 ' + L.visa.h1, loc('guide/korea-visa-k-eta-guide.html', `${dir}/korea-visa-k-eta-guide.html`)], ['💰 ' + ((COST_L10N[lang] && COST_L10N[lang].h1) || 'Travel Cost Index'), loc('guide/korea-travel-cost-index.html', `${dir}/guide/korea-travel-cost-index.html`)], ['💱 Currency', 'currency.html'], ['🆘 Emergency', 'emergency.html']] },
+    { title: T.hubs.basics.sec.around, links: [['🚇 Subway', 'subway.html'], ...TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`])] },
+    { title: T.hubs.basics.sec.stay, links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
+    { title: T.hubs.basics.sec.money, links: [['what-currency-does-korea-use', '💱'], ['do-i-need-cash-in-korea', '💳'], ['what-apps-do-i-need-for-korea', '📱'], ['is-wifi-free-in-korea', '📶'], ['can-you-use-google-maps-in-korea', '🗺️'], ['what-power-plug-does-korea-use', '🔌']].map(([s, e]) => [faqLabel({ slug: s, emoji: e, q: s.replace(/-/g, ' ') }), loc(`faq/${s}.html`, `${dir}/faq/${s}.html`)]) },
+    { title: T.hubs.basics.sec.lang, links: [['🗣️ Phrases', 'phrases.html'], ['🎎 Etiquette', 'etiquette.html'], ['📷 Menu', 'menu-translator.html']] },
+  ]);
+
+  mk('itineraries.html', 'itineraries', '🗺️', [
+    { title: T.hubs.itineraries.sec.all, links: (urls.itineraries || []).map(u => { const rel = u.replace(BASEP, ''); return [`🗺️ ${esc(cap(u))}`, loc(rel, `${dir}/${rel}`)]; }) },
+    { title: T.hubs.itineraries.sec.own, links: [['🗺️ AI Trip Planner', 'plan.html'], ['🧩 Quiz', 'quiz.html'], ['⚖️ Compare', 'compare.html']] },
+  ]);
+
+  mk('tools.html', 'tools', '🧰', [
+    { title: T.hubs.tools.sec.plan, links: [['🗺️ AI Trip Planner', 'plan.html'], ['🧩 City Quiz', 'quiz.html'], ['⚖️ Compare Cities', 'compare.html'], ['✅ Bucket List', 'bucket-list.html']] },
+    { title: T.hubs.tools.sec.utils, links: [['💱 Currency', 'currency.html'], ['📷 Menu', 'menu-translator.html'], ['🗣️ Phrases', 'phrases.html'], ['🚇 Subway', 'subway.html']] },
+    { title: T.hubs.tools.sec.live, links: [['🔥 Trending', 'trending.html'], ['🌸 Bloom Forecast', 'seasons.html'], ['🔗 Widgets', 'embed.html']] },
+  ]);
+
+  mk('faq/index.html', 'faq', '❓', [
+    { title: T.hubs.faq.sec.all, links: FAQS.map(f => [faqLabel(f), loc(`faq/${f.slug}.html`, `${dir}/faq/${f.slug}.html`)]) },
+  ]);
+
+  // Localized Explore (L1 tile grid → the 7 hubs above + Blog)
+  const exUrl = `${BASEP}${dir}/explore.html`;
+  const tiles = hubs.map(hb => `<a class="seo-tile" href="${hb.url.replace(BASEP, '')}"><span class="seo-tile-e">${hb.emoji}</span><span class="seo-tile-h">${esc(hb.h1)}</span><span class="seo-tile-d">${esc(hb.tagline)}</span></a>`).join('')
+    + `<a class="seo-tile" href="blog/index.html"><span class="seo-tile-e">📰</span><span class="seo-tile-h">Blog</span><span class="seo-tile-d">${esc(T.ui.blogTile)}</span></a>`;
+  let exBody = bcHtml([{ name: T.ui.home, url: BASEP }, { name: T.ui.explore, url: exUrl }]);
+  exBody += `<p class="lead">${esc(T.ui.exploreLead)}</p><div class="seo-tiles">${tiles}</div>`;
+  exBody += ctaHtml(T.ui.ctaH, T.ui.ctaP);
+  const exHero = `<header class="seo-hero"><span class="emoji">🧭</span><h1>${esc(T.hubs.explore.h1)}</h1><div class="meta"><span class="seo-badge">${ALL.length}+</span></div></header>`;
+  writePage(`${dir}/explore.html`, shell({ url: exUrl, title: `${T.hubs.explore.h1} | KoreaPlus`, desc: T.ui.exploreLead.slice(0, 155), keywords: '', schemas: [breadcrumbLD([{ name: T.ui.home, url: BASEP }, { name: T.ui.explore, url: exUrl }]), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: T.hubs.explore.h1, url: ORIGIN + exUrl }], hero: exHero, body: exBody, lang, alts: hubAlts('explore.html', lang) }));
+  hubs.push({ slug: 'explore.html', url: exUrl, h1: T.hubs.explore.h1, emoji: '🧭' });
+
+  return hubs;
 }
 // Build all category hubs; returns [{slug,h1,emoji,tagline,count,url}] for the Explore tile grid.
 function buildBrowseHubs(urls) {
   const allCities = [...CITIES, ...REGIONAL_CITIES];
   const cap = s => s.split('/').pop().replace('.html', '').replace(/-/g, ' ').replace(/\b\w/g, m => m.toUpperCase());
   const hubs = [];
-  const reg = (meta) => { meta.url = buildHub(meta.build); hubs.push(meta); };
+  const reg = (meta) => { meta.build.alts = hubAlts(meta.build.slug, 'en'); meta.url = buildHub(meta.build); hubs.push(meta); };
 
   reg({ slug: 'destinations.html', h1: 'Destinations', emoji: '📍', tagline: 'All 24 cities & regions — guides, food, best time, where to stay', count: allCities.length, build: {
     slug: 'destinations.html', h1: 'Destinations in Korea', emoji: '📍',
@@ -1798,7 +1893,7 @@ function buildExplore(urls) {
   body += section('🏯 All Places (' + ALL.length + ')', ALL.map(i => `<a href="places/${i.slug}.html">${i.emoji} ${esc(i.name)}</a>`));
   body += ctaHtml('Ready to plan?', 'Build a free, route-optimized Korea itinerary with AI.');
   const hero = `<header class="seo-hero"><span class="emoji">🧭</span><h1>Explore Korea</h1><div class="meta"><span class="seo-badge">${ALL.length}+ guides</span></div></header>`;
-  writePage('explore.html', shell({ url, title, desc, keywords: 'Korea travel guide, Korea attractions, Korea itinerary, things to do Korea', schemas: [breadcrumbLD([{ name: 'Home', url: BASEP }, { name: 'Explore', url }]), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: ORIGIN + url }], alts: ['ko','ja','zh','es','fr','de','pt','id'].map(l => ({ lang: l, url: `${url}?lang=${l}` })), hero, body }));
+  writePage('explore.html', shell({ url, title, desc, keywords: 'Korea travel guide, Korea attractions, Korea itinerary, things to do Korea', schemas: [breadcrumbLD([{ name: 'Home', url: BASEP }, { name: 'Explore', url }]), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: ORIGIN + url }], alts: hubAlts('explore.html', 'en'), hero, body }));
   return url;
 }
 
@@ -2531,6 +2626,8 @@ out.cost = ['en', ...LOCALES].map(l => buildCostIndex(l)).filter(Boolean);
 out.besttime = [...CITIES, ...REGIONAL_CITIES].map(buildBestTime);
 out.transport = TRANSPORT_ROUTES.map(buildTransport);
 out.hubs = buildBrowseHubs(out);            // category hub pages (Explore L2)
+out.hubsL10n = [];                          // localized category hubs + explore (per locale)
+for (const lang of LOCALES) { for (const h of buildBrowseHubsL10n(out, lang)) out.hubsL10n.push(h.url); }
 const exploreUrl = buildExplore(out);
 
 // ── IndexNow key file (Bing/Naver/Yandex instant indexing) ──────────
@@ -2573,6 +2670,7 @@ out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 [...out.compare, ...out.seasonal].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 [...out.faq, ...out.cityfood].forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.hubs || []).forEach(h => sm += `\n` + urlEntry(h.url, '0.8', 'weekly'));  // browse category hubs
+(out.hubsL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));   // localized browse hubs
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
 sm += `\n</urlset>\n`;
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sm);

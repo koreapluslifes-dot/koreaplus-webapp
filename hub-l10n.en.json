@@ -1,0 +1,96 @@
+{
+ "ui": {
+  "explore": "Explore",
+  "home": "Home",
+  "browseAll": "🧭 All guides",
+  "ctaH": "Plan your Korea trip",
+  "ctaP": "Build a free, route-optimized itinerary with AI in seconds.",
+  "exploreLead": "Browse everything by category, then drill down to any guide — destinations, things to do, when to visit, travel basics, itineraries, tools and FAQ.",
+  "blogTile": "Stories, tips & deep dives on Korea travel"
+ },
+ "hubs": {
+  "explore": { "h1": "Explore Korea" },
+  "destinations": {
+   "h1": "Destinations in Korea",
+   "tagline": "All 24 cities & regions — guides, food, best time, where to stay",
+   "lead": "Every city and region we cover, from Seoul and Busan to Boseong tea fields and Damyang bamboo forest — pick a destination, then dive into its attractions, food, best season and where to stay.",
+   "badge": "destinations",
+   "sec": {
+    "major": "🏙️ Major cities",
+    "more": "🗺️ More destinations",
+    "food": "🍜 Best food by city",
+    "besttime": "🗓️ Best time to visit by city",
+    "stay": "🏨 Where to stay",
+    "hoods": "🏘️ Seoul neighborhoods",
+    "transport": "🚄 Getting there (Seoul to…)"
+   }
+  },
+  "experiences": {
+   "h1": "Things to Do in Korea",
+   "tagline": "Browse by theme — palaces, food, nature, nightlife & more",
+   "lead": "Browse Korea by what you want to experience — palaces and temples, markets and street food, nature and hikes, nightlife and K-culture — then drill into individual places.",
+   "badge": "places",
+   "sec": {
+    "topic": "🍱 By topic",
+    "culture": "🎭 Culture & seasonal",
+    "compare": "⚖️ Compare & decide",
+    "places": "🏯 All places"
+   }
+  },
+  "whentovisit": {
+   "h1": "When to Visit Korea",
+   "tagline": "Season & month-by-month guides + bloom forecasts",
+   "lead": "Figure out the perfect time for your trip — cherry blossoms, autumn foliage, festivals and weather — with season, month-by-month and per-city timing guides.",
+   "badge": "guides",
+   "sec": {
+    "season": "🌸 By season",
+    "month": "📆 Month by month",
+    "besttime": "🗓️ Best time by city",
+    "timing": "❓ Timing questions"
+   }
+  },
+  "basics": {
+   "h1": "Korea Travel Basics",
+   "tagline": "Visa, budget, transport, money & where to stay",
+   "lead": "Everything you need to sort before you go — visa and K-ETA, daily budget, getting around, money, SIM/Wi-Fi and where to base yourself.",
+   "badge": "Plan your trip",
+   "sec": {
+    "essentials": "🛂 Essentials",
+    "around": "🚄 Getting around",
+    "stay": "🏨 Where to stay",
+    "money": "📱 Money, apps & connectivity",
+    "lang": "🗣️ Language & etiquette"
+   }
+  },
+  "itineraries": {
+   "h1": "Korea Itineraries",
+   "tagline": "Ready-made day-by-day trip plans you can customize",
+   "lead": "Ready-made, day-by-day Korea trip plans — first-timer routes, city itineraries and themed trips — or build your own free with our AI planner.",
+   "badge": "itineraries",
+   "sec": {
+    "all": "🗺️ All itineraries",
+    "own": "🤖 Build your own"
+   }
+  },
+  "tools": {
+   "h1": "Free Korea Travel Tools",
+   "tagline": "Quiz, comparisons, bucket list, currency & live trends",
+   "lead": "Interactive tools to plan and enjoy your Korea trip — take the city quiz, compare destinations, track your bucket list, convert currency and see what is trending now.",
+   "badge": "Interactive",
+   "sec": {
+    "plan": "🧰 Plan & decide",
+    "utils": "🔧 Handy utilities",
+    "live": "🔥 Live & embeds"
+   }
+  },
+  "faq": {
+   "h1": "Korea Travel FAQ — Quick Answers",
+   "tagline": "Quick, expert answers to the most-asked Korea questions",
+   "lead": "Fast, expert answers to the questions travelers ask most about Korea — money, transport, safety, etiquette, timing and connectivity.",
+   "badge": "answers",
+   "sec": {
+    "all": "❓ All quick answers"
+   }
+  }
+ }
+}
