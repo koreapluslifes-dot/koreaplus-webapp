@@ -69,22 +69,30 @@
         window.KPApi.getAqi('Seoul'),
       ]);
 
-      // Update weather card
-      if (weather.status === 'fulfilled') {
-        const w = weather.value;
+      // Update weather card — hide it cleanly if the feed is unavailable (no
+      // perpetual "Loading…" placeholder).
+      const w = weather.status === 'fulfilled' ? weather.value : null;
+      if (w && w.temp != null) {
         document.getElementById('week-weather-text').innerHTML =
-          `<strong style="font-size:18px;color:#fff">${w.conditionEmoji || '🌡️'} ${Math.round(w.temp)}°C</strong><br>${w.condition}<br><span style="color:rgba(255,255,255,0.35)">Seoul</span>`;
+          `<strong style="font-size:18px;color:#fff">${w.conditionEmoji || '🌡️'} ${Math.round(w.temp)}°C</strong><br>${w.condition || ''}<br><span style="color:rgba(255,255,255,0.35)">Seoul</span>`;
         const ph = section.querySelector('#week-weather-card .week-card-thumb-ph');
         if (ph) ph.textContent = w.conditionEmoji || '🌡️';
+      } else {
+        section.querySelector('#week-weather-card')?.remove();
       }
 
-      // Update AQI card
-      if (aqi.status === 'fulfilled') {
-        const a = aqi.value;
-        const grade = a.khaiGrade ?? a.pm25Grade ?? 'unknown';
+      // Update AQI card — air quality needs AIRKOREA_API_KEY on the Worker; until
+      // that's set the feed returns nothing, so hide the card rather than leave it
+      // stuck on "Loading…" (per design: graceful omission).
+      const a = aqi.status === 'fulfilled' ? aqi.value : null;
+      const grade = a ? (a.khaiGrade ?? a.pm25Grade ?? 'unknown') : 'unknown';
+      const aqiUsable = a && (a.pm25 != null || a.pm10 != null || (grade && grade !== 'unknown'));
+      if (aqiUsable) {
         const labels = { good:t('air.good','Good 🟢'), moderate:t('air.moderate','Moderate 🟡'), unhealthy:t('air.unhealthy','Unhealthy 🟠'), veryUnhealthy:t('air.veryBad','Very Bad 🔴'), unknown:'N/A' };
         document.getElementById('week-aqi-text').innerHTML =
           `<strong style="font-size:14px;color:#fff">${labels[grade] || grade}</strong><br>PM2.5: ${a.pm25 ?? '—'} μg/m³<br>PM10: ${a.pm10 ?? '—'} μg/m³`;
+      } else {
+        section.querySelector('#week-aqi-card')?.remove();
       }
 
       // Festivals

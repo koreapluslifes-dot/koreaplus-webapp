@@ -15,7 +15,7 @@ ROOTS="explore.html sitemap.xml about.html festivals.html seasons.html culture.h
 KEYS=$(ls kp*.txt 2>/dev/null | tr '\n' ' ')
 
 echo "==> Tarring $(echo $DIRS | wc -w) dirs + root files…"
-tar czf /c/tmp/kp.tgz $DIRS $ROOTS modules/klook-cards.js modules/page-ads.js $KEYS
+tar czf /c/tmp/kp.tgz $DIRS $ROOTS modules/klook-cards.js modules/page-ads.js modules/week-section.js modules/korea-now.js $KEYS
 
 echo "==> Uploading tarball…"
 scp -i "$PEM" -o StrictHostKeyChecking=no /c/tmp/kp.tgz "bitnami@$IP:/tmp/kp.tgz"

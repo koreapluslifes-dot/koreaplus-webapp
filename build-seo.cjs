@@ -60,14 +60,25 @@ const esc = s => String(s == null ? '' : s)
 const enc = s => encodeURIComponent(s);
 const jsonld = obj => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
 const cityImg = c => CITY_IMAGES[c] || null;
-const imgUrl = (raw, w, h) => raw + (raw.includes('?') ? '&' : '?') + `w=${w}` + (h ? `&h=${h}&fit=crop` : '') + `&q=80&fm=jpg&auto=format`;
+// Wikimedia Commons thumbnails are already sized (~1280px) and ignore Unsplash-style
+// query params — pass them through unchanged; only Unsplash URLs get the resize query.
+const imgUrl = (raw, w, h) => /upload\.wikimedia\.org/.test(raw)
+  ? raw
+  : raw + (raw.includes('?') ? '&' : '?') + `w=${w}` + (h ? `&h=${h}&fit=crop` : '') + `&q=80&fm=jpg&auto=format`;
 const ogImgFor = im => im ? imgUrl(im.raw, 1200, 630) : null;
+// Photo credit honoring each source's license (Wikimedia requires author + license).
+function photoCredit(im) {
+  if (im.source === 'wikimedia') {
+    return `📷 <a href="${esc(im.byUrl)}" target="_blank" rel="noopener nofollow">${esc(im.by)}</a> / <a href="${esc(im.link || im.byUrl)}" target="_blank" rel="noopener nofollow">Wikimedia Commons</a>${im.license ? ' (' + esc(im.license) + ')' : ''}`;
+  }
+  return `📷 <a href="${esc(im.byUrl)}" target="_blank" rel="noopener nofollow">${esc(im.by)}</a> / <a href="https://unsplash.com/?utm_source=koreaplus&utm_medium=referral" target="_blank" rel="noopener nofollow">Unsplash</a>`;
+}
 function heroFigure(im, label) {
   if (!im) return '';
   const alt = label ? (label + (im.alt ? ' — ' + im.alt : '')) : (im.alt || '');
   return `<figure class="seo-hero-img" style="margin:0 0 18px;border-radius:14px;overflow:hidden;border:1px solid var(--border,rgba(255,255,255,.08))">` +
     `<img src="${esc(imgUrl(im.raw, 1000, 480))}" alt="${esc(alt)}" width="1000" height="480" loading="eager" fetchpriority="high" style="width:100%;height:auto;display:block;aspect-ratio:25/12;object-fit:cover">` +
-    `<figcaption style="font-size:11px;color:var(--text3,#8a93a0);padding:6px 10px">📷 <a href="${esc(im.byUrl)}" target="_blank" rel="noopener nofollow">${esc(im.by)}</a> / <a href="https://unsplash.com/?utm_source=koreaplus&utm_medium=referral" target="_blank" rel="noopener nofollow">Unsplash</a></figcaption></figure>`;
+    `<figcaption style="font-size:11px;color:var(--text3,#8a93a0);padding:6px 10px">${photoCredit(im)}</figcaption></figure>`;
 }
 const writePage = (rel, html) => {
   const fp = path.join(OUT, rel);
@@ -1120,7 +1131,7 @@ function buildCity(city) {
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: (g ? g.attractions.map(a => ({ name: a.name })) : pool.slice(0, 12).map(it => ({ name: it.name, url: ORIGIN + `${BASEP}places/${it.slug}.html` }))).map((it, i) => ({ '@type': 'ListItem', position: i + 1, ...it })) };
   // hreflang → localized city guides where they exist (reciprocal)
   const alts = CITY_GUIDE_LANGS.filter(l => CITY_L10N[city.name] && CITY_L10N[city.name][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${slug(city.name)}.html` }));
-  const imgLD = im ? { '@context': 'https://schema.org', '@type': 'ImageObject', contentUrl: ogImgFor(im), caption: im.alt, creditText: `${im.by} / Unsplash`, author: { '@type': 'Person', name: im.by } } : null;
+  const imgLD = im ? { '@context': 'https://schema.org', '@type': 'ImageObject', contentUrl: ogImgFor(im), caption: im.alt, creditText: `${im.by} / ${im.source === 'wikimedia' ? 'Wikimedia Commons' + (im.license ? ' (' + im.license + ')' : '') : 'Unsplash'}`, license: im.byUrl, author: { '@type': 'Person', name: im.by } } : null;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, inLanguage: 'en', datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ogImgFor(im) || ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   writePage(`guide/things-to-do-in-${slug(city.name)}.html`, shell({ url, title, desc, keywords: `${city.name} Korea, things to do ${city.name}, ${city.name} attractions, ${city.name} travel guide`, schemas: [article, itemList, breadcrumbLD(trail), faqLD(qa), ...(imgLD ? [imgLD] : [])], hero, body, alts, image: ogImgFor(im) }));
   return { url, pool };
