@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '8';
+  const OVERLAY_VER = '9';
   async function loadContent() {
     if (lang === 'en') return;
     try {
@@ -1207,6 +1207,11 @@
     const parts = [];
     // Korea visitors: Coupang Partners carousel (real products, ships in Korea).
     if (isKo) parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · 쿠팡파트너스</div><div class="kb-ad-coupang" id="kb-ad-coupang"></div><div class="kb-ad-coupang-disc">이 광고는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div></div>`);
+    // Non-Korea visitors: region-appropriate global K-beauty retailers (NOT Korea-only Coupang).
+    else parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">🛍️ ${esc(t('sponsored'))}</div>`
+      + `<div style="display:flex;gap:10px;flex-wrap:wrap;padding:2px 0">`
+      + `<a rel="sponsored nofollow noopener" target="_blank" style="font-weight:800;font-size:13px;color:#c01a63;text-decoration:none;border:2px solid var(--border,#f0d8e6);border-radius:18px;padding:7px 14px" href="https://www.yesstyle.com/en/search?q=korean%20skincare">🛒 YesStyle</a>`
+      + `<a rel="sponsored nofollow noopener" target="_blank" style="font-weight:800;font-size:13px;color:#c01a63;text-decoration:none;border:2px solid var(--border,#f0d8e6);border-radius:18px;padding:7px 14px" href="https://www.amazon.com/s?k=korean+skincare">🛒 Amazon</a></div></div>`);
     parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('advertisement'))}</div><div class="kb-ad-adsense"><ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200" data-ad-format="auto" data-full-width-responsive="true"></ins></div></div>`);
     host.innerHTML = parts.join('');
     host.hidden = false;
