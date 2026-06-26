@@ -40,6 +40,7 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + 'ul{padding-left:20px}li{margin:5px 0}'
   + '.rel{margin-top:28px;border-top:1px solid #eee;padding-top:16px}.rel a{display:inline-block;margin:4px 8px 4px 0}'
   + '.foot{margin-top:24px;border-top:1px solid #eee;padding-top:14px;font-size:13px;color:#777}.foot a{margin-right:14px;text-decoration:none}'
+  + '.kb-faq{background:#faf3f7;border:1px solid #f0d8e6;border-radius:12px;padding:10px 14px;margin:8px 0}.kb-faq summary{cursor:pointer;font-weight:800;font-size:15px;color:#1a1320}.kb-faq p{margin:8px 0 2px;font-size:14.5px}'
   + '.disc{font-size:11.5px;color:#999;margin-top:16px}';
 
 // ── Google AdSense (Auto ads page tag + one in-content responsive unit) ─────
@@ -63,14 +64,14 @@ function shell(o) {
   // Ads only on substantive pages (AdSense policy: no ads on thin/low-value pages).
   const plain = (o.bodyHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const adsOk = o.ads !== false && plain.length >= 300;
-  return `<!doctype html><html lang="en"><head>
+  const hreflangs = o.altLinks || (`<link rel="alternate" hreflang="en" href="${o.url}">\n<link rel="alternate" hreflang="x-default" href="${o.url}">`);
+  return `<!doctype html><html lang="${o.lang || 'en'}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(o.title)} | KoreaPlus</title>
 <meta name="description" content="${esc((o.desc || '').slice(0, 158))}">
 <link rel="canonical" href="${o.url}">
 <meta property="og:title" content="${esc(o.h1)}"><meta property="og:description" content="${esc((o.desc || '').slice(0, 158))}"><meta property="og:url" content="${o.url}"><meta property="og:type" content="article">
-<link rel="alternate" hreflang="en" href="${o.url}">
-<link rel="alternate" hreflang="x-default" href="${o.url}">
+${hreflangs}
 <link rel="icon" type="image/svg+xml" href="${SITE}/guide/kbeauty-favicon.svg">
 <meta name="theme-color" content="#d61f6e">
 <meta property="og:site_name" content="K-Beauty by KoreaPlus">
@@ -535,6 +536,36 @@ SKINTYPES.forEach(s => {
     isCount++;
   });
 });
+
+// ── 15. Per-language SEO content (8 languages × canonical topics, hreflang clusters) ──
+const I18N_FILE = path.join(__dirname, 'kbeauty-i18n.json');
+const I18N_HL = { ko: 'ko', ja: 'ja', zh: 'zh-CN', es: 'es', fr: 'fr', de: 'de', pt: 'pt-BR', id: 'id' };
+let i18nCount = 0;
+if (fs.existsSync(I18N_FILE)) {
+  const data = JSON.parse(fs.readFileSync(I18N_FILE, 'utf8'));
+  const langs = data.languages || [];
+  const topicLangs = {};
+  langs.forEach(L => (L.items || []).forEach(it => { (topicLangs[it.topicKey] = topicLangs[it.topicKey] || []).push(L.lang); }));
+  langs.forEach(L => {
+    const lc = L.lang;
+    (L.items || []).forEach(it => {
+      const tk = slug(it.topicKey);
+      const url = `${SITE}/guide/kb/${lc}/${tk}.html`;
+      const alt = (topicLangs[it.topicKey] || []).map(l => `<link rel="alternate" hreflang="${I18N_HL[l] || l}" href="${SITE}/guide/kb/${l}/${tk}.html">`).join('') + `<link rel="alternate" hreflang="x-default" href="${HUB}">`;
+      const sections = (it.sections || []).map(s => `<h2>${esc(s.h)}</h2><p>${esc(s.body)}</p>`).join('');
+      const facts = (it.keyFacts || []).length ? `<div class="box"><ul>${it.keyFacts.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>` : '';
+      const faqHtml = (it.faq || []).length ? `<h2>FAQ</h2>` + it.faq.map(f => `<details class="kb-faq"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('') : '';
+      const cites = (it.citations || []).length ? `<h2>Sources</h2><ul>${it.citations.map(c => `<li><a href="${esc(c.url)}" rel="nofollow noopener" target="_blank">${esc(c.label)} ↗</a></li>`).join('')}</ul>` : '';
+      const sib = (topicLangs[it.topicKey] || []).filter(l => l !== lc).map(l => `<a href="${SITE}/guide/kb/${l}/${tk}.html">${l.toUpperCase()}</a>`).join(' · ');
+      const peers = (L.items || []).filter(x => x.topicKey !== it.topicKey).slice(0, 6).map(p => `<a href="${slug(p.topicKey)}.html">${esc(p.h1)}</a>`).join('');
+      const body = `<p class="lead">${esc(it.lead || '')}</p>${sections}${facts}${faqHtml}${cites}${sib ? `<p style="font-size:12px;color:#999;margin-top:14px">🌐 ${sib}</p>` : ''}`;
+      const ld = [artLD(it.h1, it.metaDesc, url)];
+      if ((it.faq || []).length) ld.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: it.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+      emit(`${lc}/${tk}.html`, shell({ url, depth: 3, lang: lc, altLinks: alt, crumb: 'K-Beauty', emoji: '💄', h1: it.h1, title: it.title, desc: it.metaDesc, bodyHtml: body, related: peers, ld }), '0.6');
+      i18nCount++;
+    });
+  });
+}
 
 // ── Library index ───────────────────────────────────────────────────────────
 const idxSections = [
