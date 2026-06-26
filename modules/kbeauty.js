@@ -1035,8 +1035,28 @@
     const back = $('#kb-back'); if (back) back.hidden = true;
     $$('.filter-chip', $('#kb-filters')).forEach(c => { const on = c.dataset.target === 'home'; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
   }
+  // Lazy render: a category's sections are rendered the first time it opens
+  // (boot only renders the landing chrome), so the hub doesn't do ~25 sections'
+  // worth of main-thread work up front — big mobile TBT/INP win.
+  const _renderedCats = {};
+  function ensureCatRendered(id) {
+    if (_renderedCats[id]) return;
+    _renderedCats[id] = true;
+    const M = {
+      skin: [renderForecast, renderQuiz, renderConcerns, renderStack],
+      routine: [renderRoutine, renderCategories, renderGlassSkin],
+      sun: [renderSunscreen],
+      ingr: [renderIngredients, renderSnail, renderPicker, renderVerdicts],
+      trouble: [renderTroubleshooter],
+      brands: [renderBrands, renderGlossary, renderDupes],
+      buy: [renderBuy, detectBuyRegion, renderRetailers, renderShelf],
+      trends: [renderRadar, renderLedger, renderViral, renderBestsellers, renderReport, renderNewsdesk, renderKrSources, renderTrust],
+    };
+    (M[id] || []).forEach(fn => { try { fn(); } catch (e) { try { console.error('kb render ' + id, e); } catch (e2) {} } });
+  }
   function showCategory(id, opts) {
     const cat = kbCatById(id); if (!cat) { showLanding(); return; }
+    ensureCatRendered(id);
     const land = $('#kb-landing'); if (land) land.style.display = 'none';
     KB_ALLSECS.forEach(sid => { const el = document.getElementById(sid); if (el) el.style.display = (cat.secs.indexOf(sid) >= 0) ? '' : 'none'; });
     const back = $('#kb-back'); if (back) { back.hidden = false; const bt = $('#kb-back-title'); if (bt) { bt.dataset.catid = cat.id; bt.textContent = cat.icon + ' ' + kbTitle(cat); } }
@@ -1306,37 +1326,13 @@
     localizeData();
     localizeNewData();     // localize the new top-10 datasets (window.KBEAUTY_*)
     renderTopAds();        // localized AliExpress + AdSense
-    renderForecast();
-    renderRadar();         // #1 Seoul-vs-World trend radar
-    renderLedger();        // #2 trend evidence ledger
-    renderViral();         // #4 SkinTok reality check
-    renderNewsdesk();      // #5 beauty-science & safety desk
-    renderKrSources();     // #8 Korea-source provenance
-    renderTrust();         // #3 methodology & trust center
-    renderReport();        // #10 quarterly trend report + share
-    injectTrendSchema();   // #7 localized ItemList JSON-LD
+    injectTrendSchema();   // #7 localized ItemList JSON-LD (data-driven, page-level — SEO)
     kbtrack('kbeauty_view', { lang });                                  // #2 funnel
     observeImpression('#kb-topads', 'aff_strip_impression', { lang });  // ad-strip view → CTR denominator
     observeImpression('#kb-shop', 'shop_impression', { lang });
-    renderQuiz();
-    renderConcerns();
-    renderStack();
-    renderRoutine();
-    renderCategories();
-    renderGlassSkin();
-    renderSunscreen();
-    renderIngredients();
-    renderSnail();
-    renderPicker(); renderVerdicts();
-    renderTroubleshooter();
-    renderBrands();
-    renderGlossary();
-    renderDupes();
-    renderBuy(); detectBuyRegion();
-    renderBestsellers();
-    renderRetailers();
-    renderShelf();
-    renderTicker();
+    renderTicker();        // top trends ticker (always visible)
+    // Per-section renderers now run lazily the first time their category opens
+    // (see ensureCatRendered) — boot only builds the landing chrome, ticker & ads.
     wireFilters();
     showShareFab();
 

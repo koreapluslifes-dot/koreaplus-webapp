@@ -226,7 +226,7 @@ const STAY = [
 const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
 // Emerging provincial cities (regional-dispersal trend) — rich guides come from
 // city-l10n.json 'en'; not in CITIES, so generated via their own pass.
-const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }, { name: 'Andong', kr: '안동' }, { name: 'Yeosu', kr: '여수' }, { name: 'Taean', kr: '태안' }, { name: 'Tongyeong', kr: '통영' }, { name: 'Pohang', kr: '포항' }, { name: 'Chuncheon', kr: '춘천' }, { name: 'Damyang', kr: '담양' }, { name: 'Korea Hiking', kr: '한국 등산' }];
+const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }, { name: 'Andong', kr: '안동' }, { name: 'Yeosu', kr: '여수' }, { name: 'Taean', kr: '태안' }, { name: 'Tongyeong', kr: '통영' }, { name: 'Pohang', kr: '포항' }, { name: 'Chuncheon', kr: '춘천' }, { name: 'Damyang', kr: '담양' }, { name: 'Jinju', kr: '진주' }, { name: 'Suncheon', kr: '순천' }, { name: 'Boseong', kr: '보성' }, { name: 'Mokpo', kr: '목포' }, { name: 'Gongju', kr: '공주' }, { name: 'Korea Hiking', kr: '한국 등산' }];
 
 // "Keep planning {city}" cross-cluster links — emits links only to pages this
 // generator writes. excludeUrl drops the current page from its own list.
@@ -678,6 +678,18 @@ function keyFactsBox(items) {
   return `<div class="seo-keyfacts" style="display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 18px;padding:12px 14px;background:var(--card,rgba(255,255,255,.04));border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px;font-size:13.5px;line-height:1.5">` +
     items.map(x => `<span>${x}</span>`).join('') + `</div>`;
 }
+// E-E-A-T: official-source citation block for YMYL pages (visa, cost, safety).
+// label/note are localizable; sources = [{name, url}]. Shows a last-verified date.
+function sourcesBlock(sources, { label = 'Official sources', note = '', lang = 'en' } = {}) {
+  if (!sources || !sources.length) return '';
+  const L = { en: 'Last verified', ja: '最終確認', zh: '最后核实', es: 'Última verificación', ko: '최종 확인', fr: 'Dernière vérification', de: 'Zuletzt geprüft', pt: 'Última verificação', id: 'Terakhir diperiksa' };
+  const verified = (L[lang] || L.en) + ': ' + TODAY;
+  return `<aside class="seo-sources" style="margin:22px 0;padding:13px 16px;background:var(--card,rgba(255,255,255,.04));border:1px solid var(--border,rgba(255,255,255,.1));border-radius:12px;font-size:13px;line-height:1.6">`
+    + `<div style="font-weight:700;margin-bottom:5px">🔎 ${esc(label)}</div>`
+    + `<ul style="margin:0;padding-left:18px">` + sources.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener nofollow">${esc(s.name)} ↗</a></li>`).join('') + `</ul>`
+    + (note ? `<p style="margin:7px 0 0;color:var(--text2,#9fb0c3)">${esc(note)}</p>` : '')
+    + `<p style="margin:7px 0 0;color:var(--text2,#9fb0c3);font-size:12px">🗓️ ${esc(verified)}</p></aside>`;
+}
 // Localized city-guide key facts (ja/zh/es).
 const CITY_FACTS = {
   ja: c => [`🗓️ ベスト: 4〜5月・9〜11月`, `🗣️ 韓国語`, `💱 ウォン (₩)`, `⏱️ 目安 ${c === 'Seoul' ? '3〜4' : '2〜3'}日`, (c === 'Seoul' || c === 'Incheon') ? '✈️ 仁川空港から' : '🚄 ソウルからKTX/バス'],
@@ -1104,12 +1116,13 @@ function buildCity(city) {
   body += affHtml(`🎫 Book ${city.name} tours, eSIM & essentials`, { city: city.name, cat: 'travel', q: '' });
   body += ctaHtml(`Plan your ${city.name} trip`, `Get a free AI-built ${city.name} itinerary with optimized routes.`);
 
-  const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} places</span></div></header>`;
+  const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(h1)}</h1><div class="kr" lang="ko">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} places</span></div></header>`;
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: (g ? g.attractions.map(a => ({ name: a.name })) : pool.slice(0, 12).map(it => ({ name: it.name, url: ORIGIN + `${BASEP}places/${it.slug}.html` }))).map((it, i) => ({ '@type': 'ListItem', position: i + 1, ...it })) };
   // hreflang → localized city guides where they exist (reciprocal)
   const alts = CITY_GUIDE_LANGS.filter(l => CITY_L10N[city.name] && CITY_L10N[city.name][l]).map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/guide/things-to-do-in-${slug(city.name)}.html` }));
   const imgLD = im ? { '@context': 'https://schema.org', '@type': 'ImageObject', contentUrl: ogImgFor(im), caption: im.alt, creditText: `${im.by} / Unsplash`, author: { '@type': 'Person', name: im.by } } : null;
-  writePage(`guide/things-to-do-in-${slug(city.name)}.html`, shell({ url, title, desc, keywords: `${city.name} Korea, things to do ${city.name}, ${city.name} attractions, ${city.name} travel guide`, schemas: [itemList, breadcrumbLD(trail), faqLD(qa), ...(imgLD ? [imgLD] : [])], hero, body, alts, image: ogImgFor(im) }));
+  const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, inLanguage: 'en', datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ogImgFor(im) || ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  writePage(`guide/things-to-do-in-${slug(city.name)}.html`, shell({ url, title, desc, keywords: `${city.name} Korea, things to do ${city.name}, ${city.name} attractions, ${city.name} travel guide`, schemas: [article, itemList, breadcrumbLD(trail), faqLD(qa), ...(imgLD ? [imgLD] : [])], hero, body, alts, image: ogImgFor(im) }));
   return { url, pool };
 }
 
@@ -1350,6 +1363,12 @@ function buildVisaL10n(lang) {
   const bestH = { ja: '📅 ベストシーズンを探す', zh: '📅 选择最佳出行月份', es: '📅 ¿Cuándo viajar a Corea?',
     ko: '📅 베스트 시즌 찾기', fr: '📅 Quand partir en Corée ?', de: '📅 Wann nach Korea reisen?', pt: '📅 Quando viajar para a Coreia?', id: '📅 Kapan ke Korea?' }[lang] || '📅 Best time to visit';
   body += `<h2>${bestH}</h2><div class="seo-linklist">${MONTHS.map((m, i) => `<a href="${L.dir}/korea-in-${m[0].toLowerCase()}.html">${m[1]} ${esc(L.months[i][0])}</a>`).join('')}</div>`;
+  const _vsLabel = { ja: '公式情報源', zh: '官方来源', es: 'Fuentes oficiales', ko: '공식 출처', fr: 'Sources officielles', de: 'Offizielle Quellen', pt: 'Fontes oficiais', id: 'Sumber resmi' }[lang] || 'Official sources';
+  body += sourcesBlock([
+    { name: 'K-ETA Official Portal (k-eta.go.kr)', url: 'https://www.k-eta.go.kr/' },
+    { name: 'Korea MOFA Travel (0404.go.kr)', url: 'https://www.0404.go.kr/' },
+    { name: 'Korea Immigration (hikorea.go.kr)', url: 'https://www.hikorea.go.kr/' },
+  ], { label: _vsLabel, lang });
   body += affBlock({ city: 'Seoul', cat: 'hotel', q: '', lang });
   body += `<div class="seo-cta"><h2>${esc(V.ctaH)}</h2><p>${esc(V.ctaP)}</p><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English version</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">🛂</span><h1>${esc(V.h1)}</h1><div class="meta"><span class="seo-badge">2026</span></div></header>`;
@@ -1491,7 +1510,7 @@ function buildBestTime(city) {
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affBlock({ city: c, cat: 'hotel', q: '', lang: 'en' });
   body += ctaHtml(`Planning ${c} around the season?`, `Get a free AI ${c} itinerary tuned to your travel dates.`);
-  const hero = `<header class="seo-hero"><span class="emoji">🗓️</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge">Month-by-month</span><span class="seo-badge">2026</span></div></header>`;
+  const hero = `<header class="seo-hero"><span class="emoji">🗓️</span><h1>${esc(h1)}</h1><div class="kr" lang="ko">${esc(city.kr)}</div><div class="meta"><span class="seo-badge">Month-by-month</span><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@id': ORIGIN + '/#org' }, publisher: { '@id': ORIGIN + '/#org' }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   writePage(`guide/best-time-to-visit-${cs}.html`, shell({ url, title, desc, keywords: `best time to visit ${c}, when to visit ${c}, ${c} weather by month, ${c} cheapest time`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, image: ogImgFor(im) }));
   return url;
@@ -1575,6 +1594,13 @@ function buildCostIndex(lang) {
   body += `<h2>${esc(C.methodH)}</h2><p>${esc(C.method)}</p>`;
   const qa = C.faq;
   body += `<h2>${esc(C.faqH)}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  const _srcLabel = { en: 'Sources & methodology', ja: '出典・算出方法', zh: '来源与方法', es: 'Fuentes y metodología' };
+  const _srcNote = { en: 'Prices are our own field estimates cross-checked against the official references below; exchange rates fluctuate daily.', ja: '価格は当サイトの実地推計を以下の公式情報と照合したものです。為替は日々変動します。', zh: '价格为本站实地估算并与以下官方资料核对；汇率每日波动。', es: 'Los precios son estimaciones propias contrastadas con las referencias oficiales; el tipo de cambio varía a diario.' };
+  body += sourcesBlock([
+    { name: 'Bank of Korea — exchange rates (bok.or.kr)', url: 'https://www.bok.or.kr/eng/main/main.do' },
+    { name: 'Visit Korea — official tourism (english.visitkorea.or.kr)', url: 'https://english.visitkorea.or.kr/' },
+    { name: 'Korea Tourism Data Lab (datalab.visitkorea.or.kr)', url: 'https://datalab.visitkorea.or.kr/' },
+  ], { label: _srcLabel[lang] || _srcLabel.en, note: _srcNote[lang] || _srcNote.en, lang });
   body += affBlock({ city: 'Seoul', cat: 'hotel', q: '', lang });
   body += (lang === 'en') ? ctaHtml('Plan within your budget', 'Our free AI planner builds a Korea trip to match your daily budget.')
     : `<div class="seo-cta"><h2>${esc(C.h1)}</h2><div class="btns"><a class="primary" href="plan.html">🗺️ AI Trip Planner</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">🇬🇧 English</a></div></div>`;
@@ -1653,6 +1679,12 @@ function buildVisa() {
     ['How long is K-ETA valid?', 'Once approved, K-ETA is valid for multiple entries over 2–3 years (as long as your passport is valid).'],
   ];
   body += `<h2>❓ Visa & K-ETA FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+  body += sourcesBlock([
+    { name: 'K-ETA Official Portal (k-eta.go.kr)', url: 'https://www.k-eta.go.kr/' },
+    { name: 'Korea MOFA — Overseas Travel & Visa (0404.go.kr)', url: 'https://www.0404.go.kr/' },
+    { name: 'Korea Immigration Service (hikorea.go.kr)', url: 'https://www.hikorea.go.kr/' },
+    { name: 'Visit Korea — official tourism (english.visitkorea.or.kr)', url: 'https://english.visitkorea.or.kr/' },
+  ], { label: 'Official sources', note: 'Visa and K-ETA rules change frequently — always confirm your nationality’s current requirement on the official government portals before booking.' });
   body += affHtml('🎫 Sorted your entry? Book the rest', { city: 'Seoul', cat: 'esim', q: '' });
   body += ctaHtml('Ready to plan your Korea trip?', 'Build a free day-by-day itinerary with AI in seconds.');
   const hero = `<header class="seo-hero"><span class="emoji">🛂</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">Updated 2026</span><a class="seo-badge" href="ja/korea-visa-k-eta-guide.html">🇯🇵 日本語</a><a class="seo-badge" href="zh/korea-visa-k-eta-guide.html">🇨🇳 中文</a><a class="seo-badge" href="es/korea-visa-k-eta-guide.html">🇪🇸 Español</a></div></header>`;
@@ -2136,7 +2168,7 @@ function buildCityFood(city) {
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += affHtml(`🍜 Food tours in ${n}`, { city: n, cat: 'food', q: '' });
   body += ctaHtml(`Eating your way through ${n}?`, 'The AI planner weaves these dishes into a day-by-day route.');
-  const hero = `<header class="seo-hero"><span class="emoji">🍜</span><h1>${esc(h1)}</h1><div class="kr">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} picks</span></div></header>`;
+  const hero = `<header class="seo-hero"><span class="emoji">🍜</span><h1>${esc(h1)}</h1><div class="kr" lang="ko">${esc(city.kr)}</div><div class="meta"><span class="seo-badge region">${pool.length} picks</span></div></header>`;
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, itemListElement: pool.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, url: ORIGIN + `${BASEP}places/${it.slug}.html` })) };
   writePage(`guide/best-food-in-${slug(n)}.html`, shell({ url, title, desc, keywords: '', schemas: [itemList, breadcrumbLD(trail), faqLD(qa)], hero, body }));
   return url;

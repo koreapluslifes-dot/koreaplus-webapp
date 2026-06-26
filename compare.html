@@ -55,11 +55,15 @@
   .btn{display:inline-flex;gap:8px;align-items:center;border:0;border-radius:14px;padding:14px 24px;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#06101d}
   footer{max-width:960px;margin:0 auto;padding:30px 20px;border-top:1px solid var(--bd);text-align:center;color:var(--t2);font-size:12.5px;line-height:2}
   footer a{color:var(--ac)}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .skip-link{position:absolute;left:8px;top:-44px;z-index:100;background:var(--ac);color:#06101d;padding:9px 16px;border-radius:0 0 10px 10px;font-weight:800;font-size:14px;transition:top .15s}
+  .skip-link:focus{top:0}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="top"><a class="logo" href="index.html">Korea<span>Plus</span></a><a href="quiz.html" style="font-size:14px">🧩 Not sure? Take the quiz →</a></div>
-<main class="wrap">
+<main class="wrap" id="main">
   <section class="hero">
     <span class="badge">⚖️ Free comparison tool</span>
     <h1>Compare Korean Cities</h1>
@@ -67,7 +71,7 @@
   </section>
   <div class="chips" id="chips"></div>
   <div class="hint">Pick 2–3 cities to compare</div>
-  <div class="tablewrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+  <div class="tablewrap"><table><caption class="sr-only">Side-by-side comparison of the selected Korean cities across vibe, ideal days, top sight, food, transport from Seoul and best season</caption><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
   <div class="cta"><a class="btn" href="quiz.html">🧩 Still deciding? Take the 60-sec quiz →</a></div>
 </main>
 <footer>
@@ -102,7 +106,7 @@
   param();
   function chips(){
     document.getElementById('chips').innerHTML=order.map(function(k){
-      return '<button class="chip'+(sel.indexOf(k)>=0?' on':'')+'" data-k="'+k+'">'+C[k].e+' '+k+'</button>';
+      return '<button class="chip'+(sel.indexOf(k)>=0?' on':'')+'" data-k="'+k+'" aria-pressed="'+(sel.indexOf(k)>=0?'true':'false')+'">'+C[k].e+' '+k+'</button>';
     }).join('');
     Array.prototype.forEach.call(document.querySelectorAll('.chip'),function(b){
       b.onclick=function(){var k=b.getAttribute('data-k'),i=sel.indexOf(k);
@@ -112,10 +116,10 @@
   }
   function draw(){
     chips();
-    document.getElementById('thead').innerHTML='<tr><th></th>'+sel.map(function(k){return '<th><a href="guide/things-to-do-in-'+C[k].slug+'.html"><span class="em">'+C[k].e+'</span> '+k+'</a></th>'}).join('')+'</tr>';
+    document.getElementById('thead').innerHTML='<tr><th scope="col"><span class="sr-only">Attribute</span></th>'+sel.map(function(k){return '<th scope="col"><a href="guide/things-to-do-in-'+C[k].slug+'.html"><span class="em">'+C[k].e+'</span> '+k+'</a></th>'}).join('')+'</tr>';
     document.getElementById('tbody').innerHTML=ROWS.map(function(r){
-      return '<tr><th>'+r[1]+'</th>'+sel.map(function(k){return '<td>'+C[k][r[0]]+'</td>'}).join('')+'</tr>';
-    }).join('')+'<tr><th></th>'+sel.map(function(k){return '<td><a href="guide/things-to-do-in-'+C[k].slug+'.html">Full '+k+' guide →</a></td>'}).join('')+'</tr>';
+      return '<tr><th scope="row">'+r[1]+'</th>'+sel.map(function(k){return '<td>'+C[k][r[0]]+'</td>'}).join('')+'</tr>';
+    }).join('')+'<tr><th scope="row"><span class="sr-only">Full guide</span></th>'+sel.map(function(k){return '<td><a href="guide/things-to-do-in-'+C[k].slug+'.html">Full '+k+' guide →</a></td>'}).join('')+'</tr>';
     try{history.replaceState(null,'','?cities='+sel.join(','))}catch(e){}
   }
   draw();

@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v47';
+const CACHE = 'kp-v49';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -52,6 +52,7 @@ const PRECACHE = [
   BASE + '/subway.html',
   BASE + '/modules/api-client.js',
   BASE + '/modules/kpop.js',
+  BASE + '/modules/kpop-plus.js',
   BASE + '/modules/kpop-sharecard.js',
   BASE + '/modules/topads.js',
   BASE + '/modules/kbeauty.js',

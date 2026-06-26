@@ -102,6 +102,26 @@ function buyBox(query, label) {
     + `<p class="disc" style="margin-top:8px">Links to trusted retailers — buy from official brand stores or first-party sellers to avoid counterfeits. Some links may earn KoreaPlus a commission at no extra cost to you.</p></div>`;
 }
 
+// Hub-spoke interlinking: surface the real ingredient/brand pages a piece of
+// editorial/verdict copy is about (word-boundary match on its title/slug), plus
+// CTAs into the interactive hub tools. Distributes authority + keeps users in K-beauty.
+const KB_TOOLS = `<div style="margin-top:6px">`
+  + `<a class="pill" href="${SITE}/kbeauty#cat=skin">🪞 Find your skin type</a>`
+  + `<a class="pill" href="${SITE}/kbeauty#cat=routine">🧴 Build a routine</a>`
+  + `<a class="pill" href="${SITE}/kbeauty#cat=buy">🛡️ Where to buy authentic</a></div>`;
+function kbCrossLinks(item) {
+  const hay = ' ' + [item.title, item.slug, item.h1, item.label].filter(Boolean).join(' ').toLowerCase() + ' ';
+  const hit = n => new RegExp('(^|[^a-z])' + n.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^a-z]|$)').test(hay);
+  const out = [];
+  ING.forEach(i => { if (hit(i.name) || hay.includes(' ' + i.id + ' ') || hay.includes('-' + i.id + '-') || hay.includes('-' + i.id + ' ')) out.push(`<a class="pill" href="${SITE}/guide/kb/ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)}</a>`); });
+  BRANDS.forEach(b => { if (hit(b.name)) out.push(`<a class="pill" href="${SITE}/guide/kb/brand/${b.id}.html">${b.emoji || ''} ${esc(b.name)}</a>`); });
+  return [...new Set(out)].slice(0, 8);
+}
+function deeperBlock(item) {
+  const links = kbCrossLinks(item);
+  return (links.length ? `<h2>Related K-beauty guides</h2><div>${links.join('')}</div>` : '') + `<h2>Try the free tools</h2>${KB_TOOLS}`;
+}
+
 // ── 1. Ingredient deep-dives ────────────────────────────────────────────────
 ING.forEach(i => {
   const concerns = (i.bestFor || []).map(c => CONCERN_BY[c]).filter(Boolean);
@@ -253,7 +273,8 @@ verdItems.forEach((it, i) => {
   const body = `<p><span class="vb">${verdEmoji(it.verdict)} ${esc(verdLabel(it.verdict))}</span></p>
     <p class="lead"><i>${esc(it.summary)}</i></p>
     <div class="box">${esc(it.answer)}</div>
-    ${it.cite ? `<p style="font-size:13px;color:#666">Evidence: <a href="${esc(it.cite.url)}" rel="nofollow noopener" target="_blank">${esc(it.cite.label)} ↗</a></p>` : ''}`;
+    ${it.cite ? `<p style="font-size:13px;color:#666">Evidence: <a href="${esc(it.cite.url)}" rel="nofollow noopener" target="_blank">${esc(it.cite.label)} ↗</a></p>` : ''}
+    ${deeperBlock(it)}`;
   const rel = [verdItems[(i + 1) % verdItems.length], verdItems[(i + 2) % verdItems.length], verdItems[(i + 3) % verdItems.length]].map(r => `<a href="${r.slug}.html">${r.emoji || '•'} ${esc(r.h1)}</a>`).join('');
   fs.writeFileSync(path.join(OUT, it.slug + '.html'), shell({ url, depth: 2, crumb: 'Trend verdicts', emoji: it.emoji, h1: it.h1, title: `Does ${it.label} actually work? — K-beauty verdict`, desc: it.answer, bodyHtml: body, related: rel, ld: [faqLD(`Does ${it.label} actually work?`, `${verdLabel(it.verdict)}. ${it.answer}`), { '@context': 'https://schema.org', '@type': 'WebPage', speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.box'] }, url }] }));
   sitemapUrls.push({ loc: url, prio: '0.7' }); written.push(it.slug + '.html');
@@ -298,7 +319,7 @@ if (fs.existsSync(EDIT_FILE)) {
       const facts = (it.keyFacts || []).length ? `<div class="box"><b>Key facts</b><ul>${it.keyFacts.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>` : '';
       const cites = (it.citations || []).length ? `<h2>Sources</h2><ul>${it.citations.map(c => `<li><a href="${esc(c.url)}" rel="nofollow noopener" target="_blank">${esc(c.label)} ↗</a></li>`).join('')}</ul>` : '';
       const rel = peers.filter((_, j) => j !== idx).slice(0, 6).map(p => `<a href="${slug(p.slug || p.h1)}.html">${p.emoji || ''} ${esc(p.h1)}</a>`).join('');
-      const body = `<p class="lead">${esc(it.lead || '')}</p>${sections}${facts}${cites}`;
+      const body = `<p class="lead">${esc(it.lead || '')}</p>${sections}${facts}${deeperBlock(it)}${cites}`;
       emit(`${meta.path}/${sg}.html`, shell({ url, depth: 3, crumb: meta.crumb, emoji: it.emoji, h1: it.h1, title: it.title, desc: it.metaDesc, bodyHtml: body, related: rel, ld: [artLD(it.h1, it.metaDesc, url)] }), catObj.cat === 'history' ? '0.7' : '0.6');
       editorialIndex[catObj.cat].push({ sg, h1: it.h1, emoji: it.emoji, path: meta.path });
     });
