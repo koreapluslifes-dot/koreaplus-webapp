@@ -338,6 +338,27 @@ ASKQ.forEach(q => {
   emit(`ask/${q.slug}.html`, shell({ url, depth: 3, crumb: 'Q&A', emoji: '💬', h1: q.q, title: `${q.q} — K-beauty answer`, desc: q.answer, quickAnswer: q.answer, bodyHtml: body, ld: [faqLD(q.q, `${q.answer} ${q.detail}`), artLD(q.q, q.answer, url)] }), '0.7');
 });
 
+// ── 6f. Auto-dated monthly K-beauty trend report (freshness signal, data-driven) ──
+(function () {
+  const V = d.KBEAUTY_BESTSELLERS_VELOCITY, B = d.KBEAUTY_BESTSELLERS;
+  if (!V || !B || !V.items) return;
+  const period = V.statusAsOf; const mm = parseInt((period.split('-')[1] || '1'), 10);
+  const monthName = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][mm] + ' ' + period.split('-')[0];
+  const byId = Object.fromEntries((B.items || []).map(x => [x.id, x]));
+  const labels = V.statusLabels || {}; const verbEmoji = { rising: '📈', peaking: '🔥', steady: '➡️', cooling: '📉' };
+  const groups = {};
+  Object.keys(V.items).forEach(id => { const s = V.items[id].status; (groups[s] = groups[s] || []).push(Object.assign({ id }, V.items[id], byId[id] || {})); });
+  const sections = ['rising', 'peaking', 'steady', 'cooling'].filter(s => (groups[s] || []).length).map(s =>
+    `<h2>${verbEmoji[s] || ''} ${esc(labels[s] || s)}</h2>` + groups[s].map(it =>
+      `<div class="box"><b>${it.emoji || ''} ${esc(it.brand || '')} ${esc(it.name || '')}</b>${it.koreaNative ? ' <span class="ko">🇰🇷 Korea-native</span>' : ''}<br>${esc(it.whyMoved || '')}${it.channel ? ` <span class="disc">— Korea signal: ${esc(it.channel)}</span>` : ''}${it.worthIt ? `<br>💡 ${esc(it.worthIt)}` : ''}</div>`).join('')).join('');
+  const qa = `As of ${monthName}, Korean skincare has ${(groups.rising || []).length} rising and ${(groups.peaking || []).length} peaking products on Korea's own retail signals (Olive Young, Hwahae) — here's what's moving and why.`;
+  const url = `${SITE}/guide/kb/report/${period}.html`;
+  const body = `<p class="lead">What's rising, peaking and cooling in Korean skincare as of <b>${monthName}</b> — read straight from Korea's own retail and review signals, with an honest 'worth it?' take.</p>${sections}
+    <p class="disc">Status reflects editorial review of Korea-native retail/review signals as of ${period}; updated when the underlying data changes, not on a fixed schedule.</p>
+    ${deeperBlock({ title: 'K-beauty trend report bestseller Olive Young', slug: 'report' })}`;
+  emit(`report/${period}.html`, shell({ url, depth: 3, crumb: 'Trend report', emoji: '📰', h1: `K-Beauty Trend Report — ${monthName}`, title: `K-Beauty trends ${monthName} — what's rising, peaking & cooling`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD(`K-Beauty Trend Report ${monthName}`, qa, url), faqLD(`What are the K-beauty trends in ${monthName}?`, qa)] }), '0.8');
+})();
+
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
 GLOSS.forEach((g, idx) => {
   const sg = slug(g.term);
@@ -689,6 +710,7 @@ const HUB_META = {
   hanbang: { e: '🪷', t: 'Hanbang heritage', g: 'K-beauty knowledge' },
   say: { e: '🗣️', t: 'Pronunciation', g: 'K-beauty knowledge' },
   ask: { e: '💬', t: 'K-beauty Q&A', g: 'K-beauty knowledge' },
+  report: { e: '📰', t: 'Trend reports', g: 'Skin & routines' },
   company: { e: '🏢', t: 'Companies', g: 'K-beauty knowledge' },
   industry: { e: '🏭', t: 'Industry', g: 'K-beauty knowledge' },
   country: { e: '🌍', t: 'K-beauty worldwide', g: 'K-beauty knowledge' },

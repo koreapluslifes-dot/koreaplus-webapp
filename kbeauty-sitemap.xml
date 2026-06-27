@@ -2185,6 +2185,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://koreaplus-lifes.com/guide/kb/report/2026-06.html</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://koreaplus-lifes.com/guide/kb/term/toner-skin.html</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -10172,6 +10178,12 @@
   </url>
   <url>
     <loc>https://koreaplus-lifes.com/guide/kb/ask/index.html</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://koreaplus-lifes.com/guide/kb/report/index.html</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
