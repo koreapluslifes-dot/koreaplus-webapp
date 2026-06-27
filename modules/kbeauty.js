@@ -1025,7 +1025,15 @@
     const prog = document.createElement('div'); prog.id = 'kb-progress'; body.appendChild(prog);
     const top = document.createElement('button'); top.className = 'kb-fabtop'; top.type = 'button'; top.setAttribute('aria-label', cx('ux.top', 'Back to top')); top.textContent = '↑'; body.appendChild(top);
     top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    const onScroll = () => { const h = document.documentElement, sc = h.scrollTop || body.scrollTop, max = (h.scrollHeight - h.clientHeight) || 1; prog.style.width = Math.min(100, (sc / max) * 100) + '%'; top.classList.toggle('show', sc > 600); };
+    let _scrollTick = false;
+    const onScroll = () => {
+      if (_scrollTick) return; _scrollTick = true;
+      requestAnimationFrame(() => {
+        const h = document.documentElement, sc = h.scrollTop || body.scrollTop, max = (h.scrollHeight - h.clientHeight) || 1;
+        prog.style.width = Math.min(100, (sc / max) * 100) + '%'; top.classList.toggle('show', sc > 600);
+        _scrollTick = false;
+      });
+    };
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
     // search + recent toolbar (landing only)
     const landing = $('#kb-landing');
@@ -1093,7 +1101,7 @@
     document.addEventListener('click', e => {
       const ig = e.target.closest('[data-ing]'); if (ig) { const i = ING_BY_ID[ig.dataset.ing]; if (i) kbAddRecent('ing', i.id, i.name, i.emoji); }
       const br = e.target.closest('[data-brand]'); if (br) { const b = (window.KBEAUTY_BRANDS || []).filter(x => x.id === br.dataset.brand)[0]; if (b) kbAddRecent('brand', b.id, b.name, b.emoji); }
-      if (e.target.closest('.filter-chip,.kb-tile,.kb-quiz-cta,#kb-bnav button')) { try { navigator.vibrate && navigator.vibrate(8); } catch (e2) {} }
+      if (e.target.closest('.filter-chip,.kb-tile,.kb-quiz-cta,#kb-bnav button,.kb-ing,.kb-brand,.kb-concern,.kb-opt,.kb-tab,.kb-pick-chip,.kb-retailer,.km-link,.kb-sheet-row,.kb-auth-exp,.tk-item,.kb-back-btn,.kb-step-shop,.kb-shelf-cta')) { try { navigator.vibrate && navigator.vibrate(8); } catch (e2) {} }
     });
     // sync toolbar + bottom-nav to the current (possibly deep-linked) state
     const inCat = $('#kb-back') && !$('#kb-back').hidden;
@@ -1128,6 +1136,8 @@
     rail.innerHTML = html + html;
     if (wrap) wrap.hidden = false;
     if (!rail.dataset.wired) { rail.dataset.wired = '1'; rail.addEventListener('click', (e) => { const b = e.target.closest('[data-trend]'); if (b) openTrendModal(b.dataset.trend); }); }
+    // Pause the desktop marquee when the tab is hidden (battery / off-screen work).
+    if (!document._kbTickerVis) { document._kbTickerVis = 1; document.addEventListener('visibilitychange', () => { const r = $('#kb-ticker'); if (r) r.style.animationPlayState = document.hidden ? 'paused' : ''; }); }
   }
   // Ticker keyword → instant localized trend detail (verdict + science + source).
   function openTrendModal(id) {
@@ -1179,6 +1189,7 @@
       $$('#kb-landing .tt[data-catid="' + c.id + '"]').forEach(e => { e.textContent = title; });
     });
     const bt = $('#kb-back-title'); if (bt && bt.dataset.catid) { const c = kbCatById(bt.dataset.catid); if (c) bt.textContent = c.icon + ' ' + kbTitle(c); }
+    const cta = $('#kb-landing .kb-cta-hero'); if (cta) { const tt = cta.querySelector('.cta-t'), ss = cta.querySelector('.cta-s'); const tv = i18get('kbeauty.sec.quiz.title'), sv = i18get('kbeauty.sec.quiz.sub'); if (tt && tv) tt.textContent = tv; if (ss && sv) ss.textContent = sv; }
   }
 
   function showLanding() {
@@ -1218,7 +1229,25 @@
     $$('.filter-chip', $('#kb-filters')).forEach(c => { const on = c.dataset.target === id; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
     const tb = $('#kb-toolbar'); if (tb) tb.style.display = 'none';
     if (typeof syncBnav === 'function') syncBnav(id);
+    if (id === 'trends') applyTrendsDensity(opts && opts.activeSec);
     if (!opts || !opts.noscroll) { const bar = $('#kb-filters'); if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+  // Trends carries 8 sections — keep the 4 evidence/trend reads in focus and tuck the
+  // 4 authority/methodology sections behind one expander (Toss one-focus). Deep-links
+  // into an authority section auto-expand. Re-applied every time Trends is shown
+  // because showCategory resets all section display:'' first.
+  const KB_TRENDS_AUTHORITY = ['kb-report', 'kb-news', 'kb-krsrc', 'kb-trust'];
+  function applyTrendsDensity(activeSec) {
+    const open = KB_TRENDS_AUTHORITY.indexOf(activeSec) >= 0;
+    const old = document.getElementById('kb-auth-exp'); if (old) old.remove();
+    KB_TRENDS_AUTHORITY.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = open ? '' : 'none'; });
+    if (open) return;
+    const first = document.getElementById(KB_TRENDS_AUTHORITY[0]); if (!first) return;
+    const ex = document.createElement('button');
+    ex.id = 'kb-auth-exp'; ex.type = 'button'; ex.className = 'kb-auth-exp';
+    ex.innerHTML = '<span>📚 ' + esc(cx('ux.authmore', 'Sources, methodology & science')) + '</span><span class="kb-auth-exp-c" aria-hidden="true">＋</span>';
+    first.parentNode.insertBefore(ex, first);
+    ex.addEventListener('click', () => { KB_TRENDS_AUTHORITY.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = ''; }); ex.remove(); });
   }
   function renderNav() {
     const bar = $('#kb-filters');
@@ -1228,7 +1257,8 @@
     }
     const land = $('#kb-landing');
     if (land) {
-      land.innerHTML = KB_CATS.map(c => '<button class="kb-tile" data-target="' + c.id + '" type="button"><span class="ti">' + c.icon + '</span><span class="tt" data-catid="' + c.id + '">' + esc(kbTitle(c)) + '</span><span class="ts">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></button>').join('')
+      land.innerHTML = '<button type="button" class="kb-cta-hero" aria-label="' + esc(i18get('kbeauty.sec.quiz.title') || 'Find your skin type') + '"><span class="cta-tx"><span class="cta-t">' + esc(i18get('kbeauty.sec.quiz.title') || '🪞 Find your skin type') + '</span><span class="cta-s">' + esc(i18get('kbeauty.sec.quiz.sub') || 'A 30-second quiz personalizes everything') + '</span></span><span class="cta-go" aria-hidden="true">→</span></button>'
+        + KB_CATS.map(c => '<button class="kb-tile" data-target="' + c.id + '" type="button"><span class="ti">' + c.icon + '</span><span class="tt" data-catid="' + c.id + '">' + esc(kbTitle(c)) + '</span><span class="ts">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></button>').join('')
         + '<a class="kb-tile kb-tile-lib" href="/guide/kb/"><span class="ti">📚</span><span class="tt">' + esc(cx('cat.lib.t', 'K-Beauty Library')) + '</span><span class="ts">' + esc(cx('cat.lib.sub', '1,000+ guides: history, ingredients, brands, how-to & more')) + '</span></a>';
     }
     applyNavI18n();
@@ -1238,7 +1268,7 @@
     if (!h) { showLanding(); return; }
     if (h.indexOf('cat=') === 0) { showCategory(h.slice(4)); return; }
     const cat = kbCatOfSec(h);
-    if (cat) { showCategory(cat.id, { noscroll: true }); const el = document.getElementById(h); if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 140); return; }
+    if (cat) { showCategory(cat.id, { noscroll: true, activeSec: h }); const el = document.getElementById(h); if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 140); return; }
     showLanding();
   }
   function wireFilters() {
@@ -1246,7 +1276,11 @@
     const bar = $('#kb-filters');
     if (bar) bar.addEventListener('click', (e) => { const b = e.target.closest('.filter-chip'); if (!b) return; const tg = b.dataset.target; if (tg === 'home') showLanding(); else showCategory(tg); });
     const land = $('#kb-landing');
-    if (land) land.addEventListener('click', (e) => { const b = e.target.closest('.kb-tile'); if (!b || !b.dataset.target) return; e.preventDefault(); showCategory(b.dataset.target); });
+    if (land) land.addEventListener('click', (e) => {
+      const cta = e.target.closest('.kb-cta-hero');
+      if (cta) { e.preventDefault(); showCategory('skin'); setTimeout(() => jumpTo('#kb-quiz'), 80); return; }
+      const b = e.target.closest('.kb-tile'); if (!b || !b.dataset.target) return; e.preventDefault(); showCategory(b.dataset.target);
+    });
     const back = $('#kb-back'); if (back) { const bb = back.querySelector('.kb-back-btn'); if (bb) bb.addEventListener('click', () => { showLanding(); window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
     openFromHash();
     window.addEventListener('hashchange', openFromHash);
@@ -1487,12 +1521,16 @@
     await loadContent();   // per-language content overlay (English fallback)
     localizeData();
     localizeNewData();     // localize the new top-10 datasets (window.KBEAUTY_*)
-    renderTopAds();        // localized AliExpress + AdSense
-    injectTrendSchema();   // #7 localized ItemList JSON-LD (data-driven, page-level — SEO)
-    kbtrack('kbeauty_view', { lang });                                  // #2 funnel
-    observeImpression('#kb-topads', 'aff_strip_impression', { lang });  // ad-strip view → CTR denominator
-    observeImpression('#kb-shop', 'shop_impression', { lang });
+    renderTopAds();        // localized AliExpress + AdSense (kept inline: monetization + avoids CLS)
     renderTicker();        // top trends ticker (always visible)
+    // Defer non-visual work (SEO JSON-LD + analytics) off the boot critical path → better INP/TBT.
+    const _idle = window.requestIdleCallback || function (f) { return setTimeout(f, 200); };
+    _idle(function () {
+      try { injectTrendSchema(); } catch (e) {}                                       // #7 localized ItemList JSON-LD (SEO)
+      try { kbtrack('kbeauty_view', { lang }); } catch (e) {}                          // #2 funnel
+      try { observeImpression('#kb-topads', 'aff_strip_impression', { lang }); } catch (e) {} // ad-strip view → CTR denominator
+      try { observeImpression('#kb-shop', 'shop_impression', { lang }); } catch (e) {}
+    });
     // Per-section renderers now run lazily the first time their category opens
     // (see ensureCatRendered) — boot only builds the landing chrome, ticker & ads.
     wireFilters();

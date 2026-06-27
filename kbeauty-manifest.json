@@ -1,0 +1,26 @@
+{
+  "name": "K-Beauty by KoreaPlus",
+  "short_name": "K-Beauty",
+  "id": "/kbeauty",
+  "description": "Korean skincare routine builder, ingredient decoder, brand directory & authentic shopping — dermatologist-informed, in 9 languages.",
+  "start_url": "/guide/kbeauty.html?src=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0510",
+  "theme_color": "#d61f6e",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["lifestyle", "shopping", "beauty", "health"],
+  "icons": [
+    { "src": "/guide/kbeauty-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/guide/kbeauty-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/guide/kbeauty-icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Skin-type quiz", "short_name": "Skin", "url": "/guide/kbeauty.html#cat=skin" },
+    { "name": "My routine", "short_name": "Routine", "url": "/guide/kbeauty.html#cat=routine" },
+    { "name": "Ingredients", "short_name": "Ingredients", "url": "/guide/kbeauty.html#cat=ingr" },
+    { "name": "Where to buy", "short_name": "Buy", "url": "/guide/kbeauty.html#cat=buy" }
+  ]
+}
