@@ -81,7 +81,7 @@ function shell(o) {
   const plain = (o.bodyHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const adsOk = o.ads !== false && plain.length >= 300;
   const hreflangs = o.altLinks || (`<link rel="alternate" hreflang="en" href="${o.url}">\n<link rel="alternate" hreflang="x-default" href="${o.url}">`);
-  return `<!doctype html><html lang="${o.lang || 'en'}"><head>
+  return `<!doctype html><html lang="${o.lang || 'en'}"${o.lang === 'ar' ? ' dir="rtl"' : ''}><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(o.title)} | KoreaPlus</title>
 <meta name="description" content="${esc((o.desc || '').slice(0, 158))}">
@@ -692,7 +692,7 @@ SKINTYPES.forEach(s => {
 
 // ── 15. Per-language SEO content (8 languages × canonical topics, hreflang clusters) ──
 const I18N_FILE = path.join(__dirname, 'kbeauty-i18n.json');
-const I18N_HL = { ko: 'ko', ja: 'ja', zh: 'zh-CN', es: 'es', fr: 'fr', de: 'de', pt: 'pt-BR', id: 'id' };
+const I18N_HL = { ko: 'ko', ja: 'ja', zh: 'zh-CN', es: 'es', fr: 'fr', de: 'de', pt: 'pt-BR', id: 'id', ar: 'ar', hi: 'hi', ru: 'ru', vi: 'vi', th: 'th' };
 let i18nCount = 0;
 if (fs.existsSync(I18N_FILE)) {
   const data = JSON.parse(fs.readFileSync(I18N_FILE, 'utf8'));
@@ -754,7 +754,7 @@ const HUB_META = {
   shop: { e: '🛍️', t: 'Where to shop', g: 'K-beauty knowledge' },
   people: { e: '👤', t: 'People & creators', g: 'K-beauty knowledge' },
 };
-const LANG_NAMES = { ko: '한국어', ja: '日本語', zh: '简体中文', es: 'Español', fr: 'Français', de: 'Deutsch', pt: 'Português', id: 'Bahasa Indonesia' };
+const LANG_NAMES = { ko: '한국어', ja: '日本語', zh: '简体中文', es: 'Español', fr: 'Français', de: 'Deutsch', pt: 'Português', id: 'Bahasa Indonesia', ar: 'العربية', hi: 'हिन्दी', ru: 'Русский', vi: 'Tiếng Việt', th: 'ภาษาไทย' };
 const byDir = {};
 INDEX.forEach(p => { (byDir[p.dir] = byDir[p.dir] || []).push(p); });
 
