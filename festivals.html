@@ -33,7 +33,7 @@
 <link rel="icon" type="image/svg+xml" href="icons/kplus.svg">
 <link rel="apple-touch-icon" href="icons/kplus.svg">
 <meta name="theme-color" content="#0c1829">
-<link rel="stylesheet" href="hub-styles.css?v=9">
+<link rel="stylesheet" href="hub-styles.css?v=10">
 <link rel="stylesheet" href="theme.css">
 <script src="modules/header.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Korea Festivals Calendar","description":"Upcoming festivals in South Korea","url":"https://koreaplus-lifes.com/guide/festivals.html"}</script>
@@ -501,5 +501,13 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </section>
 
+<nav class="kp-tabbar" aria-label="Mobile navigation">
+  <a href="index.html" data-tab="home"><span class="kp-tab-i" aria-hidden="true">🏠</span><span class="kp-tab-l">Home</span></a>
+  <a href="explore.html" data-tab="explore"><span class="kp-tab-i" aria-hidden="true">🧭</span><span class="kp-tab-l">Explore</span></a>
+  <button type="button" data-action="search" data-tab="search" aria-label="Search"><span class="kp-tab-i" aria-hidden="true">🔎</span><span class="kp-tab-l">Search</span></button>
+  <a href="plan.html" data-tab="plan"><span class="kp-tab-i" aria-hidden="true">🗺️</span><span class="kp-tab-l">Plan</span></a>
+  <a href="bucket-list.html" data-tab="saved"><span class="kp-tab-i" aria-hidden="true">❤️</span><span class="kp-tab-l">Saved</span></a>
+</nav>
+<script>(function(){try{var p=location.pathname,t="";if(/explore.html/.test(p))t="explore";else if(/plan.html/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";else if(//(index.html)?$/.test(p))t="home";var el=t&&document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}catch(e){}})();</script>
 </body>
 </html>

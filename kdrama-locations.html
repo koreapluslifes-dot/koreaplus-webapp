@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="hub-styles.css?v=9">
+  <link rel="stylesheet" href="hub-styles.css?v=10">
   <link rel="stylesheet" href="theme.css">
   <script src="modules/header.js"></script>
   <style>
@@ -432,5 +432,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="modules/api-client.js"></script>
 <script defer src="modules/topads.js"></script>
 
+<nav class="kp-tabbar" aria-label="Mobile navigation">
+  <a href="index.html" data-tab="home"><span class="kp-tab-i" aria-hidden="true">🏠</span><span class="kp-tab-l">Home</span></a>
+  <a href="explore.html" data-tab="explore"><span class="kp-tab-i" aria-hidden="true">🧭</span><span class="kp-tab-l">Explore</span></a>
+  <button type="button" data-action="search" data-tab="search" aria-label="Search"><span class="kp-tab-i" aria-hidden="true">🔎</span><span class="kp-tab-l">Search</span></button>
+  <a href="plan.html" data-tab="plan"><span class="kp-tab-i" aria-hidden="true">🗺️</span><span class="kp-tab-l">Plan</span></a>
+  <a href="bucket-list.html" data-tab="saved"><span class="kp-tab-i" aria-hidden="true">❤️</span><span class="kp-tab-l">Saved</span></a>
+</nav>
+<script>(function(){try{var p=location.pathname,t="";if(/explore.html/.test(p))t="explore";else if(/plan.html/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";else if(//(index.html)?$/.test(p))t="home";var el=t&&document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}catch(e){}})();</script>
 </body>
 </html>
