@@ -106,70 +106,47 @@ Write-Host "Creating remote directories..." -ForegroundColor Yellow
 ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" `
     "mkdir -p $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons $REMOTE_DIR/assets && chmod 755 $REMOTE_DIR $REMOTE_DIR/modules $REMOTE_DIR/messages $REMOTE_DIR/icons $REMOTE_DIR/assets"
 
-# Upload root files
-Write-Host "`nUploading root files..." -ForegroundColor Yellow
-foreach ($file in $ROOT_FILES) {
-    Write-Host "  $file" -ForegroundColor DarkYellow
-    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$LOCAL_DIR\$file" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/"
-}
-
-# Upload module files
-Write-Host "`nUploading modules..." -ForegroundColor Yellow
-foreach ($file in $MODULE_FILES) {
-    Write-Host "  $file" -ForegroundColor DarkYellow
-    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
-    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/modules/"
-}
-
-# Upload static data assets
-Write-Host "`nUploading assets..." -ForegroundColor Yellow
-foreach ($file in $ASSET_FILES) {
-    Write-Host "  $file" -ForegroundColor DarkYellow
-    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
-    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/assets/"
-}
-
-# Upload message files
-Write-Host "`nUploading i18n messages..." -ForegroundColor Yellow
-foreach ($file in $MESSAGE_FILES) {
-    Write-Host "  $file" -ForegroundColor DarkYellow
-    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
-    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/messages/"
-}
-
-# Upload icon files
-Write-Host "`nUploading icons..." -ForegroundColor Yellow
-foreach ($file in $ICON_FILES) {
-    Write-Host "  $file" -ForegroundColor DarkYellow
-    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
-    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/icons/"
-}
-
-# Upload generated SEO pages (build-seo.cjs output) — recursive directories
-# These are NOT git-tracked; regenerate with `node build-seo.cjs` before deploying.
+# ── FAST BULK UPLOAD (single tar bundle) ──────────────────────────────────
+# Every web asset is packed into ONE gzip'd tar, sent in a single scp, and
+# extracted remotely. This replaces thousands of per-file scp round-trips
+# (each a full SSH handshake over a Korea→US-East link) with one stream —
+# typically 20-50x faster. The local tree mirrors the remote /guide layout,
+# so every path extracts 1:1 under $REMOTE_DIR. tar overwrites in place
+# (same as scp); it never deletes remote-only files.
 $SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "kpop", "ja", "zh", "es", "ko", "fr", "de", "pt", "id")
 $SEO_ROOT_FILES = @("explore.html", "sitemap.xml", "robots.txt", "llms.txt", "blog/feed.xml")
-Write-Host "`nUploading SEO pages (recursive dirs)..." -ForegroundColor Yellow
-foreach ($dir in $SEO_DIRS) {
-    $localPath = "$LOCAL_DIR\$dir"
-    if (Test-Path $localPath) {
-        Write-Host "  $dir/  (recursive)" -ForegroundColor DarkYellow
-        scp -i $PEM_KEY -o "StrictHostKeyChecking=no" -r "$localPath" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/"
-    }
-}
-Write-Host "`nUploading SEO root files..." -ForegroundColor Yellow
-foreach ($file in $SEO_ROOT_FILES) {
-    $localPath = "$LOCAL_DIR\$($file.Replace('/', '\'))"
-    if (Test-Path $localPath) {
-        Write-Host "  $file" -ForegroundColor DarkYellow
-        $remoteSub = if ($file -match '/') { "$REMOTE_DIR/" + ($file -replace '/[^/]+$', '') } else { $REMOTE_DIR }
-        scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$localPath" "${REMOTE_USER}@${ServerIP}:${remoteSub}/"
-    }
-}
-# IndexNow key file (Bing/Naver/Yandex instant indexing)
-Get-ChildItem -Path $LOCAL_DIR -Filter "kp*.txt" -File | ForEach-Object {
-    scp -i $PEM_KEY -o "StrictHostKeyChecking=no" "$($_.FullName)" "${REMOTE_USER}@${ServerIP}:${REMOTE_DIR}/"
-}
+$KP_TXT = @(Get-ChildItem -Path $LOCAL_DIR -Filter "kp*.txt" -File | ForEach-Object { $_.Name })
+
+$BUNDLE_ITEMS = @()
+$BUNDLE_ITEMS += $ROOT_FILES
+$BUNDLE_ITEMS += $MODULE_FILES
+$BUNDLE_ITEMS += $ASSET_FILES
+$BUNDLE_ITEMS += $MESSAGE_FILES
+$BUNDLE_ITEMS += $ICON_FILES
+$BUNDLE_ITEMS += $SEO_DIRS
+$BUNDLE_ITEMS += $SEO_ROOT_FILES
+$BUNDLE_ITEMS += $KP_TXT
+
+# Keep only paths that exist locally; normalize to forward slashes for tar.
+$present = $BUNDLE_ITEMS |
+    Where-Object { Test-Path (Join-Path $LOCAL_DIR ($_ -replace '/', '\')) } |
+    ForEach-Object { $_ -replace '\\', '/' } |
+    Select-Object -Unique
+
+Write-Host "`nPacking $($present.Count) items into one tar bundle..." -ForegroundColor Yellow
+$listFile = Join-Path $env:TEMP "kp-deploy-list.txt"
+$bundle   = Join-Path $env:TEMP "kp-deploy-bundle.tar.gz"
+[System.IO.File]::WriteAllLines($listFile, [string[]]$present)
+if ([System.IO.File]::Exists($bundle)) { [System.IO.File]::Delete($bundle) }
+# Windows bsdtar: -C sets the base dir, -T reads the member list (relative paths).
+tar -czf $bundle -C $LOCAL_DIR -T $listFile
+if (-not (Test-Path $bundle)) { Write-Error "tar bundle creation failed"; exit 1 }
+$mb = [math]::Round((Get-Item $bundle).Length / 1MB, 2)
+Write-Host "  bundle = $mb MB  ->  single scp + one remote extract" -ForegroundColor DarkYellow
+
+scp -i $PEM_KEY -o "StrictHostKeyChecking=no" $bundle "${REMOTE_USER}@${ServerIP}:/tmp/kp-deploy-bundle.tar.gz"
+ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" "mkdir -p $REMOTE_DIR && tar -xzf /tmp/kp-deploy-bundle.tar.gz -C $REMOTE_DIR && rm -f /tmp/kp-deploy-bundle.tar.gz"
+foreach ($tmp in @($bundle, $listFile)) { try { [System.IO.File]::Delete($tmp) } catch {} }
 
 # Independent K-pop sitemap → DOMAIN ROOT (served at /kpop-sitemap.xml, NOT /guide/).
 # Generated by build-seo.cjs; covers the /kpop hub + all K-pop history pages (9 langs) + kpop-themed pages.
