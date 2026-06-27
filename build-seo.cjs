@@ -575,6 +575,32 @@ for (const [cat, items] of Object.entries(KOREA_DATA))
   for (const it of items) ALL.push({ ...it, cat, slug: slug(it.name) });
 const bySlug = Object.fromEntries(ALL.map(i => [i.slug, i]));
 
+// ── Mobile bottom tab bar (Toss-style) — thumb-friendly persistent nav shown
+// only on phones (≤768px). Labels localized per page language. The Search tab
+// reuses search.js (data-action="search"); Explore auto-localizes via localizeLinks.
+const TABBAR = {
+  en: ['Home', 'Explore', 'Search', 'Plan', 'Saved'],
+  ko: ['홈', '둘러보기', '검색', '플랜', '저장'],
+  ja: ['ホーム', '見る', '検索', 'プラン', '保存'],
+  zh: ['首页', '探索', '搜索', '行程', '收藏'],
+  es: ['Inicio', 'Explorar', 'Buscar', 'Planear', 'Guardado'],
+  fr: ['Accueil', 'Explorer', 'Rechercher', 'Planifier', 'Enreg.'],
+  de: ['Start', 'Entdecken', 'Suche', 'Planen', 'Merkliste'],
+  pt: ['Início', 'Explorar', 'Buscar', 'Planejar', 'Salvos'],
+  id: ['Beranda', 'Jelajahi', 'Cari', 'Rencana', 'Disimpan'],
+};
+function tabBar(lang) {
+  const T = TABBAR[lang] || TABBAR.en;
+  return `<nav class="kp-tabbar" aria-label="Mobile navigation">
+    <a href="index.html" data-tab="home"><span class="kp-tab-i" aria-hidden="true">🏠</span><span class="kp-tab-l">${T[0]}</span></a>
+    <a href="explore.html" data-tab="explore"><span class="kp-tab-i" aria-hidden="true">🧭</span><span class="kp-tab-l">${T[1]}</span></a>
+    <button type="button" data-action="search" data-tab="search" aria-label="${T[2]}"><span class="kp-tab-i" aria-hidden="true">🔎</span><span class="kp-tab-l">${T[2]}</span></button>
+    <a href="plan.html" data-tab="plan"><span class="kp-tab-i" aria-hidden="true">🗺️</span><span class="kp-tab-l">${T[3]}</span></a>
+    <a href="bucket-list.html" data-tab="saved"><span class="kp-tab-i" aria-hidden="true">❤️</span><span class="kp-tab-l">${T[4]}</span></a>
+  </nav>
+  <script>(function(){try{var p=location.pathname,t='explore';if(/\\/(index\\.html)?$/.test(p)&&!/explore/.test(p))t='home';else if(/explore\\.html/.test(p))t='explore';else if(/plan\\.html/.test(p))t='plan';else if(/bucket-list/.test(p))t='saved';else t='';var el=document.querySelector('.kp-tabbar [data-tab="'+t+'"]');if(el)el.classList.add('on');}catch(e){}})();</script>`;
+}
+
 // ── Unified primary nav (kp-pnav) — same simplified 3-bucket nav as the
 // homepage/hub pages. Hrefs are root-relative to <base href="/guide/">, so
 // they resolve identically from any generated subdirectory. Localized via
@@ -850,7 +876,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=8">
+<link rel="stylesheet" href="seo.css?v=9">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
 <script defer src="modules/header.js"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
@@ -923,6 +949,7 @@ ${injectToc(body, lang)}
 <div id="kp-progress" style="position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#74b9ff,#ff6b9d);z-index:1200;transition:width .1s ease-out"></div>
 <button id="kp-totop" aria-label="Back to top" style="position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(12,24,41,.85);color:#fff;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s;z-index:1200;backdrop-filter:blur(6px)">↑</button>
 <script>(function(){var b=document.getElementById('kp-progress'),t=document.getElementById('kp-totop');function u(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;if(b)b.style.width=Math.min(100,sc/mx*100)+'%';if(t){var on=sc>600;t.style.opacity=on?'1':'0';t.style.visibility=on?'visible':'hidden';}}window.addEventListener('scroll',u,{passive:true});if(t)t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});u();})();</script>
+${tabBar(lang)}
 <!-- Localized merch strip runtime: config (optional) → Worker URL fallback → API client → topads -->
 <script src="config.js" onerror="void 0"></script>
 <script>window.WORKER_URL=window.WORKER_URL||'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
