@@ -389,19 +389,54 @@ function filtered() {
   });
 }
 
+// ── Image fallback ────────────────────────────────────────────────────────────
+// Many TourAPI/KOPIS events ship no poster. Instead of a bare emoji, fill the
+// card with a relevant free Wikimedia Commons image chosen by keyword (EN + KR).
+var FEST_IMG = {
+  gugak: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Korean.Music-Parade-01.jpg/960px-Korean.Music-Parade-01.jpg',
+  dance: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Korean_dance-Grand_Drum_Ensemble-02.jpg/960px-Korean_dance-Grand_Drum_Ensemble-02.jpg',
+  lantern: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Jinju_namgang_lantern_festival.jpg/960px-Jinju_namgang_lantern_festival.jpg',
+  mask: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Hahoe_Folk_Village_02.jpg/960px-Hahoe_Folk_Village_02.jpg',
+  fireworks: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Seoul_international_fireworks_festival_2011-001.JPG/960px-Seoul_international_fireworks_festival_2011-001.JPG',
+  hanbok: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Hanbok_Day_2016_29_%2830467033136%29.jpg/960px-Hanbok_Day_2016_29_%2830467033136%29.jpg',
+  food: 'https://upload.wikimedia.org/wikipedia/commons/f/f4/Han-jeongsik.jpg',
+  flower: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sakura_and_Moss_Pink_-_%E6%A1%9C%28%E3%81%95%E3%81%8F%E3%82%89%29%E3%81%A8%E8%8A%9D%E6%A1%9C%28%E3%81%97%E3%81%B0%E3%81%96%E3%81%8F%E3%82%89%29.jpg/960px-Sakura_and_Moss_Pink_-_%E6%A1%9C%28%E3%81%95%E3%81%8F%E3%82%89%29%E3%81%A8%E8%8A%9D%E6%A1%9C%28%E3%81%97%E3%81%B0%E3%81%96%E3%81%8F%E3%82%89%29.jpg',
+  performance: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Bigthumb_DSC_1101.jpg',
+  market: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/%EB%82%A8%EB%8C%80%EB%AC%B8_%EC%A4%91%EC%95%99%EB%A1%9C%EC%9D%98_%EC%9D%B4%EB%8F%99%EC%8B%9D_%EB%85%B8%EC%A0%90.jpg',
+  festivalDefault: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Mud_Fest_2008_%282679028799%29.jpg/960px-Mud_Fest_2008_%282679028799%29.jpg'
+};
+var FEST_RULES = [
+  [/gugak|국악|판소리|pansori|가야금|gayageum|거문고|사물놀이|samul|민요|정악/, 'gugak'],
+  [/lantern|연등|유등|등 축제|등축제|yudeung/, 'lantern'],
+  [/mask|탈춤|탈 춤|hahoe|하회|가면/, 'mask'],
+  [/firework|불꽃/, 'fireworks'],
+  [/dance|무용|춤|발레|ballet|드럼|drum|북/, 'dance'],
+  [/hanbok|한복/, 'hanbok'],
+  [/flower|꽃|blossom|벚꽃|cherry|tulip|튤립|rose|장미|lotus|연꽃|chrysanthemum|국화|garden|정원|수목원|tea|녹차/, 'flower'],
+  [/food|음식|먹거리|cuisine|막걸리|makgeolli|kimchi|김치|맛 축제|먹방|beer|맥주|wine|커피|coffee/, 'food'],
+  [/market|시장|장터|마켓|벼룩/, 'market'],
+  [/concert|공연|뮤지컬|musical|콘서트|연주|orchestra|stage|밴드|\bband\b|연극|theater|theatre|festival hall|예술|art/, 'performance']
+];
+function festFallbackImg(ev){
+  var s = ((ev.nameEn||ev.title||'')+' '+(ev.nameKo||'')+' '+(ev.category||'')).toLowerCase();
+  for (var i=0;i<FEST_RULES.length;i++){ if (FEST_RULES[i][0].test(s)) return FEST_IMG[FEST_RULES[i][1]]; }
+  return (ev._type==='show') ? FEST_IMG.performance : FEST_IMG.festivalDefault;   // shows → stage; else generic festival
+}
+function festImgErr(img){ img.onerror=null; var d=document.createElement('div'); d.className='hub-card-img-placeholder'; d.textContent='🎪'; img.replaceWith(d); }
+
 // ── Card HTML ─────────────────────────────────────────────────────────────────
 function eventCardHtml(ev) {
   const name   = ev.nameEn  || ev.title || 'Event';
   const sub    = ev.nameKo  || ev.venue || '';
   const date   = KPApi.fmtDateRange(ev.eventStartDate || ev.startDate, ev.eventEndDate || ev.endDate);
   const loc    = ev.address  ? ev.address.split(' ').slice(0,2).join(' ') : (ev.area || ev.venue || '');
-  const thumb  = ev.thumbnail || ev.image || ev.poster;
+  const thumb  = ev.thumbnail || ev.image || ev.poster || festFallbackImg(ev);
   const isFree = (ev.price || '').toLowerCase().includes('free') || (ev.price || '') === '0';
   const type   = ev._type === 'show' ? 'show' : 'festival';
   const typeLabel = ev._type === 'show' ? (ev.category || 'Performance') : 'Festival';
   return `
     <div class="hub-card">
-      ${thumb ? `<img class="hub-card-img" src="${thumb}" alt="${name}" loading="lazy" onerror="this.style.display='none'">` : `<div class="hub-card-img-placeholder">🎪</div>`}
+      <img class="hub-card-img" src="${thumb}" alt="${name}" loading="lazy" onerror="festImgErr(this)">
       <div class="hub-card-body">
         <div class="hub-card-badges">
           <span class="badge badge-${type}">${typeLabel}</span>

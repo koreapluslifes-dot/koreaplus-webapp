@@ -850,7 +850,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=7">
+<link rel="stylesheet" href="seo.css?v=8">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
 <script defer src="modules/header.js"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
@@ -919,6 +919,10 @@ ${injectToc(body, lang)}
     <a href="emergency.html" style="color:var(--text2,#aaa)">Emergency</a>
   </p>
 </footer>
+<!-- Reading-progress bar + back-to-top (self-contained, no module dependency) -->
+<div id="kp-progress" style="position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#74b9ff,#ff6b9d);z-index:1200;transition:width .1s ease-out"></div>
+<button id="kp-totop" aria-label="Back to top" style="position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(12,24,41,.85);color:#fff;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s;z-index:1200;backdrop-filter:blur(6px)">↑</button>
+<script>(function(){var b=document.getElementById('kp-progress'),t=document.getElementById('kp-totop');function u(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;if(b)b.style.width=Math.min(100,sc/mx*100)+'%';if(t){var on=sc>600;t.style.opacity=on?'1':'0';t.style.visibility=on?'visible':'hidden';}}window.addEventListener('scroll',u,{passive:true});if(t)t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});u();})();</script>
 <!-- Localized merch strip runtime: config (optional) → Worker URL fallback → API client → topads -->
 <script src="config.js" onerror="void 0"></script>
 <script>window.WORKER_URL=window.WORKER_URL||'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
@@ -1660,6 +1664,14 @@ function buildCostIndex(lang) {
 function hubLinks(list) {
   return `<div class="seo-linklist">${list.filter(Boolean).map(([l, h]) => `<a href="${h}">${l}</a>`).join('')}</div>`;
 }
+// Localized "Filter…" placeholder for the instant in-page filter on hub pages.
+const FILTER_PH = { en: 'Filter guides…', ko: '검색·필터…', ja: '絞り込み…', zh: '筛选…', es: 'Filtrar…', fr: 'Filtrer…', de: 'Filtern…', pt: 'Filtrar…', id: 'Saring…' };
+// Instant client-side filter: type to narrow the link lists; hides empty sections
+// + shows a live count. Self-contained (no module dependency) so it works anywhere.
+function hubFilterInput(ph) {
+  return `<div class="hub-filter-wrap"><span class="hub-filter-ico" aria-hidden="true">🔎</span><input id="hubf" class="hub-filter" type="search" placeholder="${esc(ph)}" aria-label="${esc(ph)}" autocomplete="off"><span id="hubfc" class="hub-filter-count" aria-live="polite"></span></div>`;
+}
+const HUB_FILTER_JS = `<script>(function(){var i=document.getElementById('hubf');if(!i)return;var L=[].slice.call(document.querySelectorAll('.seo-body .seo-linklist a')),S=[].slice.call(document.querySelectorAll('.seo-body h2.seo-secttitle')),c=document.getElementById('hubfc'),T=L.length;function r(){var q=i.value.trim().toLowerCase(),n=0;L.forEach(function(a){var m=!q||a.textContent.toLowerCase().indexOf(q)>=0;a.style.display=m?'':'none';if(m)n++;});S.forEach(function(h){var d=h.nextElementSibling;while(d&&!d.classList.contains('seo-linklist'))d=d.nextElementSibling;if(d){var v=[].some.call(d.querySelectorAll('a'),function(a){return a.style.display!=='none';});h.style.display=v?'':'none';d.style.display=v?'':'none';if(d.previousElementSibling&&d.previousElementSibling.classList.contains('sub'))d.previousElementSibling.style.display=v?'':'none';}});c.textContent=q?(n+' / '+T):'';}i.addEventListener('input',r);})();</script>`;
 function buildHub({ slug: sl, h1, emoji, lead, badge, sections, lang = 'en', alts = [], ui = {} }) {
   const dir = lang === 'en' ? '' : L10N[lang].dir + '/';
   const url = `${BASEP}${dir}${sl}`;
@@ -1668,12 +1680,14 @@ function buildHub({ slug: sl, h1, emoji, lead, badge, sections, lang = 'en', alt
   const trail = [{ name: ui.home || 'Home', url: BASEP }, { name: ui.explore || 'Explore', url: `${BASEP}${dir}explore.html` }, { name: h1, url }];
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(lead)}</p>`;
+  body += hubFilterInput(ui.filterPh || FILTER_PH[lang] || FILTER_PH.en);
   for (const s of (sections || [])) {
     if (!s || !s.links || !s.links.length) continue;
     body += `<h2 class="seo-secttitle">${s.title}</h2>`;
     if (s.note) body += `<div class="sub" style="color:var(--text2,#9fb0c3);font-size:13px;margin:-4px 0 10px">${esc(s.note)}</div>`;
     body += hubLinks(s.links);
   }
+  body += HUB_FILTER_JS;
   body += ctaHtml(ui.ctaH || 'Plan your Korea trip', ui.ctaP || 'Build a free, route-optimized itinerary with AI in seconds.');
   const total = (sections || []).reduce((n, s) => n + ((s && s.links) ? s.links.length : 0), 0);
   const hero = `<header class="seo-hero"><span class="emoji">${emoji}</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">${badge || (total + ' guides')}</span></div></header>`;
