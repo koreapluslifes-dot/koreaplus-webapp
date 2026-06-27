@@ -1002,7 +1002,24 @@
     (window.KBEAUTY_CONCERNS || []).forEach(c => idx.push({ l: c.name, e: c.emoji || '🎯', u: KB_LIB + '/concern/' + c.id + '.html', t: cx('ux.concern', 'Concern') }));
     return idx;
   }
-  function syncBnav(active) { $$('#kb-bnav button').forEach(b => b.classList.toggle('on', b.dataset.bn === active)); }
+  // The bottom tab bar exposes 4 primary destinations; every other category
+  // lives behind 'More', so a tab always lights up ('you are here').
+  const KB_BNAV_PRIMARY = ['home', 'skin', 'routine', 'buy'];
+  function syncBnav(active) {
+    const a = KB_BNAV_PRIMARY.indexOf(active) >= 0 ? active : 'more';
+    $$('#kb-bnav button').forEach(b => b.classList.toggle('on', b.dataset.bn === a));
+  }
+  function openMoreSheet() {
+    const box = $('#kb-modal'); if (!box) return;
+    const moreCats = ['sun', 'ingr', 'trouble', 'brands', 'trends'].map(id => kbCatById(id)).filter(Boolean);
+    const rows = moreCats.map(c => '<button type="button" class="kb-sheet-row" data-morecat="' + c.id + '"><span class="se">' + c.icon + '</span><span><span>' + esc(kbTitle(c)) + '</span><span class="sd">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></span></button>').join('');
+    const lib = '<a class="kb-sheet-row" href="/guide/kb/"><span class="se">📚</span><span><span>' + esc(cx('ux.library', 'The K-Beauty Library')) + '</span><span class="sd">' + esc(cx('ux.librarysub', '1,000+ guides')) + '</span></span></a>';
+    box.innerHTML = '<button class="kb-modal-x" data-close aria-label="Close">✕</button>'
+      + '<div class="kb-sheet-h">' + esc(cx('ux.more', 'More')) + '</div>'
+      + '<div class="kb-sheet-menu">' + rows + lib + '</div>';
+    openModalA11y();
+    box.querySelectorAll('[data-morecat]').forEach(b => b.addEventListener('click', () => { closeModal(); showCategory(b.dataset.morecat); window.scrollTo({ top: 0, behavior: 'smooth' }); }));
+  }
   function initUX() {
     const body = document.body;
     const prog = document.createElement('div'); prog.id = 'kb-progress'; body.appendChild(prog);
@@ -1032,11 +1049,32 @@
     // bottom nav (mobile)
     if (!$('#kb-bnav')) {
       const bn = document.createElement('nav'); bn.id = 'kb-bnav'; bn.setAttribute('aria-label', 'K-beauty');
-      const items = [['home', '🏠', cx('cat.menu', 'Menu')], ['skin', '🪞', kbTitle(kbCatById('skin'))], ['routine', '🧴', kbTitle(kbCatById('routine'))], ['buy', '🛡️', kbTitle(kbCatById('buy'))]];
+      const items = [['home', '🏠', cx('ux.home', 'Home')], ['skin', '🪞', kbTitle(kbCatById('skin'))], ['routine', '🧴', kbTitle(kbCatById('routine'))], ['buy', '🛍️', cx('ux.shop', 'Shop')], ['more', '☰', cx('ux.more', 'More')]];
       bn.innerHTML = items.map(it => '<button type="button" data-bn="' + it[0] + '"><span class="bi">' + it[1] + '</span><span>' + esc(it[2]) + '</span></button>').join('');
       body.appendChild(bn);
-      bn.addEventListener('click', e => { const b = e.target.closest('[data-bn]'); if (!b) return; if (b.dataset.bn === 'home') showLanding(); else showCategory(b.dataset.bn); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      bn.addEventListener('click', e => { const b = e.target.closest('[data-bn]'); if (!b) return; const t = b.dataset.bn; if (t === 'more') { openMoreSheet(); return; } if (t === 'home') showLanding(); else showCategory(t); window.scrollTo({ top: 0, behavior: 'smooth' }); });
     }
+    // bottom-sheet swipe-down-to-dismiss (mobile only; engages only at scrollTop 0)
+    (function () {
+      const box = $('#kb-modal'); if (!box || box.dataset.swipe) return; box.dataset.swipe = '1';
+      let startY = 0, dy = 0, dragging = false;
+      const isSheet = () => matchMedia('(max-width:680px)').matches;
+      box.addEventListener('touchstart', e => {
+        if (!isSheet() || box.scrollTop > 0 || e.touches.length !== 1) { dragging = false; return; }
+        startY = e.touches[0].clientY; dy = 0; dragging = true;
+      }, { passive: true });
+      box.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        dy = e.touches[0].clientY - startY;
+        if (dy > 0) { box.classList.add('kb-dragging'); box.style.transform = 'translateY(' + dy + 'px)'; }
+      }, { passive: true });
+      box.addEventListener('touchend', () => {
+        if (!dragging) return; dragging = false;
+        box.classList.remove('kb-dragging');
+        if (dy > 110) closeModal();
+        box.style.transform = '';
+      });
+    })();
     // copy current-category deep-link (share)
     const sc = $('#kb-share-cat');
     if (sc) sc.addEventListener('click', () => {
