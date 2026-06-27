@@ -877,13 +877,15 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="seo.css?v=9">
+<link rel="stylesheet" href="mobile.css?v=1">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
 <script defer src="modules/header.js"></script>
+<script defer src="modules/mobile.js?v=1"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
 ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
 </head>
-<body>
+<body data-mnav="${homeHref === '/kpop' ? 'kpop' : 'travel'}">
 <a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to content</a>
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
   <a class="hub-nav-logo" href="${homeHref}" aria-label="KoreaPlus — back to home" title="Home"><span aria-hidden="true">🇰🇷</span> ${brand}</a>

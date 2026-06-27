@@ -1,0 +1,150 @@
+/* ════════════════════════════════════════════════════════════════════════
+   mobile.css — KoreaPlus mobile-first foundation ("틀")
+   Toss-inspired: simple, thumb-first, app-like. Loaded LAST on every page
+   (after theme.css + the page's own CSS) so it can raise mobile ergonomics
+   without restyling desktop. Universal rules are desktop-safe (env()→0,
+   100dvh→100vh on desktop); aggressive touch ergonomics are scoped to ≤768px.
+   Pairs with modules/mobile.js (context bottom nav + behaviors).
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-l:env(safe-area-inset-left,0px);
+  --safe-r:env(safe-area-inset-right,0px);
+  --tap:48px;                 /* Toss thumb-target floor */
+  --mnav-h:0px;               /* set by mobile.js when a bottom nav mounts */
+}
+
+/* 1) Dynamic viewport height — kill the iOS URL-bar layout jump (CLS) */
+@supports (min-height:100dvh){ html,body{ min-height:100dvh; } }
+
+/* 2) Inputs never trigger iOS zoom-on-focus (≥16px) */
+input,select,textarea{ font-size:max(16px,1em); }
+
+/* 3) Touch ergonomics base (desktop-safe) */
+html{ -webkit-text-size-adjust:100%; }
+body{
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+  overscroll-behavior-y:none;
+}
+html,body{ -webkit-overflow-scrolling:touch; }
+img,video,iframe{ max-width:100%; }
+
+/* 4) Safe-area on the shared sticky top chrome (notch) — universal */
+.hub-nav{
+  padding-top:var(--safe-t);
+  padding-left:max(16px,var(--safe-l));
+  padding-right:max(16px,var(--safe-r));
+}
+
+/* 5) Reserve bottom space when a bottom nav is mounted */
+body.has-mnav{ padding-bottom:calc(var(--mnav-h) + var(--safe-b)); }
+
+/* ── Mobile ergonomics (≤768px) ─────────────────────────────────────────── */
+@media (max-width:768px){
+  /* 48px tap-target floor on interactive chrome (vertical-center the label) */
+  .hub-nav-link,.kp-pnav-link,.filter-chip,.filter-pill,.filter-select,
+  .seo-links a,.seo-maps a,.seo-linklist a,.km-link,
+  .kpop-ticker-pause,.kp-search-btn,.kp-theme-btn,.kp-mt-btn{
+    min-height:var(--tap);
+  }
+  .filter-chip,.filter-pill,.seo-links a,.seo-linklist a,.km-link{
+    display:inline-flex; align-items:center;
+  }
+
+  /* Long de/pt/id tokens wrap instead of forcing horizontal scroll */
+  h1,h2,h3,.seo-body p,.km-name{ overflow-wrap:anywhere; }
+
+  /* Wide tables scroll inside their own box, not the page */
+  .seo-body table{ display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .seo-tbl th{ white-space:normal; }
+
+  /* SEO multi-column grids collapse to one comfortable column */
+  .seo-grid,.seo-tiles,.seo-aff .aff-grid,.aff-grid-rich{ grid-template-columns:1fr !important; }
+
+  /* Breathing room so the bottom nav never covers the last content */
+  .seo-wrap,.hub-content,main.seo-wrap{
+    padding-bottom:calc(88px + var(--mnav-h) + var(--safe-b)) !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Bottom navigation (Toss signature) — mounted by modules/mobile.js
+   ════════════════════════════════════════════════════════════════════════ */
+.mnav{
+  position:fixed; left:0; right:0; bottom:0; z-index:90;
+  display:none;
+  padding-bottom:var(--safe-b);
+  background:var(--bg,#0b0d10);
+  border-top:1px solid var(--border,rgba(255,255,255,.08));
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .mnav{
+    background:color-mix(in srgb,var(--bg,#0b0d10) 86%,transparent);
+    -webkit-backdrop-filter:blur(16px) saturate(1.4);
+    backdrop-filter:blur(16px) saturate(1.4);
+  }
+}
+.mnav-row{ display:flex; max-width:600px; margin:0 auto; }
+.mnav-item{
+  position:relative; flex:1 1 0; min-width:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  min-height:54px; padding:7px 2px 5px;
+  background:none; border:0; cursor:pointer; font:inherit;
+  font-size:10.5px; font-weight:700; letter-spacing:.01em; line-height:1.1;
+  color:var(--text3,#8a93a0); text-decoration:none; text-align:center;
+  -webkit-tap-highlight-color:transparent; transition:color .15s;
+}
+.mnav-item>span:last-child{ max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.mnav-ic{ font-size:21px; line-height:1; transition:transform .16s ease; }
+.mnav-item:active .mnav-ic{ transform:scale(.9); }
+.mnav-item.is-active{ color:var(--text,#fff); }
+.mnav-item.is-active .mnav-ic{ transform:translateY(-1px) scale(1.1); }
+.mnav-item.is-active::before{
+  content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:26px; height:3px; border-radius:0 0 3px 3px; background:var(--accent,#ff2e74);
+}
+.mnav.mnav-hidden{ transform:translateY(118%); }      /* auto-hide on scroll-down */
+@media (max-width:768px){ .mnav.mnav-on{ display:block; } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Bottom-sheet — generalize the mobile dialog pattern to the shared modal
+   (the kpop modal already does this in kpop.css; this covers .hub-modal)
+   ════════════════════════════════════════════════════════════════════════ */
+@media (max-width:768px){
+  .hub-modal-backdrop{ align-items:flex-end !important; padding:0 !important; }
+  .hub-modal{
+    max-width:none !important; width:100% !important;
+    border-radius:20px 20px 0 0 !important; max-height:90dvh;
+    padding-bottom:calc(18px + var(--safe-b)) !important;
+    animation:m-sheet-up .26s ease;
+  }
+  .hub-modal::after{
+    content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%);
+    width:40px; height:4px; border-radius:3px;
+    background:var(--border2,rgba(255,255,255,.22)); z-index:3;
+  }
+}
+@keyframes m-sheet-up{ from{ transform:translateY(100%); } to{ transform:translateY(0); } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Sticky bottom CTA dock — pin a primary action in the thumb zone (opt-in)
+   ════════════════════════════════════════════════════════════════════════ */
+.m-cta-dock{ padding:14px 0; }
+@media (max-width:768px){
+  .m-cta-dock{
+    position:fixed; left:0; right:0; z-index:85;
+    bottom:calc(var(--mnav-h) + var(--safe-b));
+    padding:10px max(16px,var(--safe-l)) 10px max(16px,var(--safe-r));
+    background:linear-gradient(to top,var(--bg,#0b0d10) 72%,transparent);
+  }
+  .m-cta-dock>*{ width:100%; min-height:52px; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .mnav,.mnav-ic,.hub-modal{ transition:none !important; animation:none !important; }
+}

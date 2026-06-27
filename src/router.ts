@@ -315,6 +315,32 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
     }
   }
 
+  // ── GET /api/kpop/yt ──────────────────────────────────────────────────────
+  // Resolve the top YouTube videoId for a query (NO key — scrapes the public
+  // search HTML for the first "videoId"). Lets the hub play songs IN-PAGE by id
+  // instead of bouncing to Apple Music. Cached 24h.  ?q=NewJeans Super Shy
+  if (request.method === 'GET' && path.endsWith('/api/kpop/yt')) {
+    const q = qp(url, 'q', '').trim();
+    if (!q) return errorResponse('Missing q parameter');
+    try {
+      const { data, cached, cacheAgeSeconds } = await withCache(
+        env, `kpop:yt:${q.toLowerCase()}`, 86400,
+        async (): Promise<{ videoId: string | null }> => {
+          const res = await globalThis.fetch(
+            `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}&hl=en&gl=US`,
+            { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36', 'Accept-Language': 'en-US,en;q=0.9', 'Cookie': 'CONSENT=YES+1' } },
+          );
+          const html = await res.text();
+          const m = html.match(/"videoId":"([0-9A-Za-z_-]{11})"/);
+          return { videoId: m ? m[1] : null };
+        },
+      );
+      return jsonResponse({ data, cached, cacheAgeSeconds, source: 'youtube' });
+    } catch (e) {
+      return errorResponse(`YT search failed: ${(e as Error).message}`);
+    }
+  }
+
   // ── GET /api/kpop/ticker ──────────────────────────────────────────────────
   // Zero-key scrolling ticker built from the KR chart. Client prepends its own
   // comeback countdowns (computed from kpop-data.js) ahead of these.
@@ -471,8 +497,10 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
     }
     const client = new AliExpressClient(env.ALI_APP_KEY, env.ALI_APP_SECRET);
     try {
+      // Cache key carries a version (v2) so the empty results cached before the
+      // tracking_id fix don't linger for their 12h TTL.
       const { data, cached, cacheAgeSeconds } = await withCache(
-        env, `kbeauty:products:${lang}:${country || 'XX'}:${q.toLowerCase()}`, 43200,
+        env, `kbeauty:products:v2:${lang}:${country || 'XX'}:${q.toLowerCase()}`, 43200,
         () => client.searchProducts(q, lang, country),
       );
       return jsonResponse({ data, cached, cacheAgeSeconds, source: 'aliexpress' });

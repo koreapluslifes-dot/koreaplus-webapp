@@ -6,14 +6,33 @@
   <title>K-Pop Now: Comebacks, Charts & Idol News (Real-Time) | KoreaPlus</title>
   <meta name="description" content="The world's K-pop hub — real-time charts, comeback countdowns, idol news and artist profiles for BTS, BLACKPINK, NewJeans, SEVENTEEN, Stray Kids & more. Follow your bias, then see them live and plan the trip. 9 languages.">
   <link rel="canonical" href="https://koreaplus-lifes.com/kpop">
+  <link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/kpop">
+  <link rel="alternate" hreflang="en"    href="https://koreaplus-lifes.com/kpop">
+  <link rel="alternate" hreflang="ko"    href="https://koreaplus-lifes.com/kpop?lang=ko">
+  <link rel="alternate" hreflang="ja"    href="https://koreaplus-lifes.com/kpop?lang=ja">
+  <link rel="alternate" hreflang="zh"    href="https://koreaplus-lifes.com/kpop?lang=zh">
+  <link rel="alternate" hreflang="es"    href="https://koreaplus-lifes.com/kpop?lang=es">
+  <link rel="alternate" hreflang="fr"    href="https://koreaplus-lifes.com/kpop?lang=fr">
+  <link rel="alternate" hreflang="de"    href="https://koreaplus-lifes.com/kpop?lang=de">
+  <link rel="alternate" hreflang="pt"    href="https://koreaplus-lifes.com/kpop?lang=pt">
+  <link rel="alternate" hreflang="id"    href="https://koreaplus-lifes.com/kpop?lang=id">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000406">
-  <link rel="icon" type="image/svg+xml" href="icons/kplus.svg">
-  <link rel="apple-touch-icon" href="icons/kplus.svg">
+  <link rel="icon" type="image/svg+xml" href="icons/kpop.svg">
+  <link rel="apple-touch-icon" href="icons/kpop.svg">
   <meta property="og:type" content="website">
   <meta property="og:title" content="K-Pop Now — Real-Time Charts, Comebacks & Idol News">
   <meta property="og:description" content="Real-time K-pop charts, comeback countdowns and idol news. Follow your bias, see them live, plan the trip. In your language.">
   <meta property="og:url" content="https://koreaplus-lifes.com/kpop">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ko_KR">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="id_ID">
   <meta property="og:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +43,8 @@
   <link rel="stylesheet" href="hub-styles.css?v=8">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="seo.css">
-  <link rel="stylesheet" href="kpop.css?v=1">
+  <link rel="stylesheet" href="kpop.css?v=6">
+  <link rel="stylesheet" href="mobile.css?v=1">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Pop Now — Real-Time Charts, Comebacks & Idol News","url":"https://koreaplus-lifes.com/kpop","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-pop"},"description":"Real-time K-pop charts, comeback countdowns, idol news and artist profiles."}
   </script>
@@ -32,63 +52,10 @@
   <script>try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}</script>
   <script src="modules/header.js" defer></script>
 </head>
-<body class="kpop-page">
+<body class="kpop-page" data-mnav="hub">
 
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
-  <a class="hub-nav-logo" href="index.html">Korea<span>Plus</span></a>
-  <div class="hub-nav-links">
-  <div class="kp-pnav">
-    <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
-    <div class="kp-pnav-items">
-      <a class="kp-pnav-link" href="index.html#categories-section" data-i18n="nav.explore">Explore</a>
-      <div class="kp-pnav-drop">
-        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.guides">Guides</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
-        <div class="kp-pnav-menu" role="menu">
-          <div class="kp-pnav-group" role="group">
-            <div class="kp-pnav-gh" data-i18n="nav.group.discover">Discover</div>
-            <a role="menuitem" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
-            <a role="menuitem" href="seasons.html" data-i18n="nav.seasons">🌸 Seasons</a>
-            <a role="menuitem" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
-            <a role="menuitem" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
-            <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
-            <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
-            <a role="menuitem" href="kpop.html" data-i18n="nav.kpop" aria-current="page">🎤 K-Pop</a>
-            <a role="menuitem" href="kbeauty.html" data-i18n="nav.kbeauty">💄 K-Beauty</a>
-          </div>
-          <div class="kp-pnav-group" role="group">
-            <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
-            <a role="menuitem" href="phrases.html" data-i18n="nav.phrases">🗣️ Phrases</a>
-            <a role="menuitem" href="currency.html" data-i18n="nav.currency">💱 Currency</a>
-            <a role="menuitem" href="subway.html" data-i18n="nav.subway">🚇 Subway</a>
-            <a role="menuitem" href="menu-translator.html" data-i18n="nav.menu">📷 Menu</a>
-            <a role="menuitem" href="etiquette.html" data-i18n="nav.etiquette">🎎 Etiquette</a>
-            <a role="menuitem" href="emergency.html" data-i18n="nav.emergency">🆘 Emergency</a>
-          </div>
-          <div class="kp-pnav-group" role="group">
-            <div class="kp-pnav-gh" data-i18n="nav.group.more">More</div>
-            <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
-            <a role="menuitem" href="blog/index.html" data-i18n="nav.blog">📰 Blog</a>
-          </div>
-        </div>
-      </div>
-      <div class="kp-pnav-drop">
-        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.whereto">Where to Go</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
-        <div class="kp-pnav-menu" role="menu">
-          <div class="kp-pnav-group" role="group">
-            <a role="menuitem" href="guide/things-to-do-in-seoul.html" data-i18n="nav.city.seoul">📍 Seoul</a>
-            <a role="menuitem" href="guide/things-to-do-in-busan.html" data-i18n="nav.city.busan">📍 Busan</a>
-            <a role="menuitem" href="guide/things-to-do-in-jeju.html" data-i18n="nav.city.jeju">📍 Jeju</a>
-            <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
-            <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
-            <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
-            <a role="menuitem" class="kp-pnav-all" href="explore.html" data-i18n="nav.alldest">🗺️ All destinations</a>
-          </div>
-        </div>
-      </div>
-      <a class="kp-pnav-cta" href="plan.html" data-i18n="nav.plan">🗺️ Plan Trip</a>
-    </div>
-  </div>
-</div>
+  <a class="hub-nav-logo" href="/kpop">Korea<span>Plus</span></a>
 </nav>
 
 <!-- Live ticker (countdowns + chart) — populated by modules/kpop.js -->
@@ -109,10 +76,18 @@
       <span class="kp-stat"><b id="kp-stat-langs">9</b><span data-i18n="kpop.hero.stat.langs">languages</span></span>
       <span class="kp-stat"><b id="kp-stat-next">—</b><span data-i18n="kpop.hero.stat.next">next comeback</span></span>
     </div>
+    <a class="kp-hero-browse" id="kp-browse-cta" href="kpop/browse.html">📚 Browse all K-Pop</a>
+    <script>(function(){try{var L=(localStorage.getItem('kp_lang')||(navigator.language||'en').slice(0,2)||'en').toLowerCase();var M={en:'📚 Browse all K-Pop',ko:'📚 K-pop 전체 둘러보기',ja:'📚 K-POPをすべて見る',zh:'📚 浏览全部 K-pop',es:'📚 Explora todo el K-pop',fr:'📚 Explorer tout le K-pop',de:'📚 Alle K-Pop entdecken',pt:'📚 Explorar todo o K-pop',id:'📚 Jelajahi semua K-pop'};var e=document.getElementById('kp-browse-cta');if(e){if(M[L])e.textContent=M[L];var d=(['ko','ja','zh','es','fr','de','pt','id'].indexOf(L)>=0)?L+'/':'';e.setAttribute('href',d+'kpop/browse.html');}}catch(e){}})();</script>
   </div>
 </header>
 
 <main class="hub-content" id="main" tabindex="-1" style="max-width:1100px">
+
+  <!-- Live social-proof pulse (modules/kpop-plus.js) -->
+  <div id="kpop-pulse-slot"></div>
+
+  <!-- Localized top ads: AdSense + AliExpress merch (geo-localized) -->
+  <div id="kp-topads" class="kp-topads" data-q="kpop lightstick photocard album merch"></div>
 
   <!-- Today's spotlight (JS-filled from the soonest event) -->
   <section class="kp-spotlight" id="kp-spotlight" hidden aria-label="Today's spotlight"></section>
@@ -122,11 +97,21 @@
 
   <div class="filter-bar" id="kpop-filters" role="tablist" aria-label="K-pop sections">
     <button class="filter-chip active" role="tab" aria-selected="true" tabindex="0" data-target="all" data-i18n="kpop.filter.all">🔥 All</button>
+    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-foryou" aria-controls="kpop-foryou" data-i18n="kpop.filter.foryou">✨ For You</button>
     <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-charts" aria-controls="kpop-charts" data-i18n="kpop.filter.charts">📈 Charts</button>
     <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-countdowns" aria-controls="kpop-countdowns" data-i18n="kpop.filter.countdowns">⏳ Comebacks</button>
     <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-artists" aria-controls="kpop-artists" data-i18n="kpop.filter.artists">🎤 Artists</button>
+    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-birthdays" aria-controls="kpop-birthdays" data-i18n="kpop.filter.bdays">🎂 Birthdays</button>
+    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-streaming" aria-controls="kpop-streaming" data-i18n="kpop.filter.streaming">🎧 Streaming</button>
     <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-news" aria-controls="kpop-news" data-i18n="kpop.filter.news">📰 News</button>
   </div>
+
+  <!-- Search launcher slot (modules/kpop-plus.js mounts a ⌘K search button) -->
+  <div id="kpop-search-slot"></div>
+
+  <!-- ✨ For You — personalized & interactive features (modules/kpop-plus.js).
+       data-noall: shown only on its own tab, never in the stacked "All" view. -->
+  <section class="kpop-sec" id="kpop-foryou" data-noall hidden aria-label="For You"></section>
 
   <!-- Charts (zero-key: iTunes RSS) -->
   <section class="kpop-sec" id="kpop-charts">
@@ -134,6 +119,7 @@
       <h2 class="kpop-sec-title"><span class="kpop-live-dot" aria-hidden="true"></span><span data-i18n="kpop.sec.charts.title">Real-Time Charts</span></h2>
       <div class="kpop-sec-sub" data-i18n="kpop.sec.charts.sub">Top songs right now · Apple Music Korea</div>
     </div>
+    <div id="kpop-chart-controls" class="kp-chart-controls"></div>
     <div id="kpop-charts-podium" class="kp-podium" hidden></div>
     <div id="kpop-charts-list" class="chart-list" role="region" aria-live="polite" aria-busy="true" aria-label="K-pop charts">
       <div class="chart-row kp-sk"></div><div class="chart-row kp-sk"></div><div class="chart-row kp-sk"></div><div class="chart-row kp-sk"></div>
@@ -151,6 +137,15 @@
       <div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div>
       <div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div>
     </div>
+  </section>
+
+  <!-- Upcoming member birthdays (zero-key: kpop-enrich.js) -->
+  <section class="kpop-sec" id="kpop-birthdays">
+    <div class="kpop-sec-head">
+      <h2 class="kpop-sec-title" data-i18n="kpop.sec.bdays.title">🎂 Upcoming Birthdays</h2>
+      <div class="kpop-sec-sub" data-i18n="kpop.sec.bdays.sub">Idol birthdays counting down — add them to your calendar</div>
+    </div>
+    <div id="kpop-bday-grid" class="bday-grid"></div>
   </section>
 
   <!-- Concerts (keyed: Ticketmaster → only renders when key + results exist) -->
@@ -173,6 +168,15 @@
       <div class="art-card kp-sk"></div><div class="art-card kp-sk"></div><div class="art-card kp-sk"></div><div class="art-card kp-sk"></div>
       <div class="art-card kp-sk"></div><div class="art-card kp-sk"></div><div class="art-card kp-sk"></div><div class="art-card kp-sk"></div>
     </div>
+  </section>
+
+  <!-- Streaming Hub (zero-key: official platform links + local daily checklist + streak) -->
+  <section class="kpop-sec" id="kpop-streaming">
+    <div class="kpop-sec-head">
+      <h2 class="kpop-sec-title" data-i18n="kpop.sec.streaming.title">🎧 Streaming Hub</h2>
+      <div class="kpop-sec-sub" data-i18n="kpop.sec.streaming.sub">Where to listen — plus a daily goal to keep up with your bias</div>
+    </div>
+    <div id="kpop-stream-body"></div>
   </section>
 
   <!-- News (keyed: NewsData → graceful empty without key) -->
@@ -229,8 +233,14 @@
 <script src="config.js" onerror="void 0"></script>
 <script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
 <script src="kpop-data.js"></script>
+<script src="kpop-enrich.js"></script>
 <script src="modules/api-client.js"></script>
+<script src="modules/topads.js"></script>
 <script src="modules/kpop-sharecard.js"></script>
-<script src="modules/kpop.js?v=2"></script>
+<script src="modules/kpop-player.js?v=2"></script>
+<script src="modules/kpop.js?v=6"></script>
+<script src="modules/kpop-plus.js?v=1"></script>
+<script src="modules/kpop-ux.js?v=1"></script>
+<script src="modules/mobile.js?v=1" defer></script>
 </body>
 </html>

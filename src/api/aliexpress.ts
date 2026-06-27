@@ -19,7 +19,10 @@
 import type { BeautyProduct } from './schema.ts';
 
 const ENDPOINT = 'https://api-sg.aliexpress.com/sync';
-const TRACKING_ID = 'koreaplus';
+// Tracking ID must be one registered in the AliExpress affiliate account behind
+// app_key 536770. 'koreaplus' was never created there → API 402 "TrackingId input
+// parameter error"; the sibling account's registered id is 'luckynum'.
+const TRACKING_ID = 'luckynum';
 
 // Map visitor country → target currency (AliExpress supported). Fallback USD.
 const COUNTRY_CUR: Record<string, string> = {

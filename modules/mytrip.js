@@ -416,6 +416,8 @@ html.light .kp-save-btn{background:rgba(0,0,0,.05)}
   /* ── Header button + badge ──────────────────────────────────────── */
   function mountHeaderButton() {
     if (document.getElementById('kp-mt-btn')) return;
+    // The standalone K-Pop hub is travel-free — no "My Trip" button there.
+    if (document.body && document.body.classList.contains('kpop-page')) return;
     // index.html control bar, or hub-nav
     const host = document.querySelector('.header-inner > div:last-child')
       || document.querySelector('.hub-nav') || document.querySelector('.header-inner');

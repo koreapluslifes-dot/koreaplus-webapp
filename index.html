@@ -83,8 +83,10 @@
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
   <link rel="stylesheet" href="hub-styles.css?v=11">
+  <link rel="stylesheet" href="mobile.css?v=1">
+  <script defer src="modules/mobile.js?v=1"></script>
 </head>
-<body>
+<body data-mnav="travel">
 <a href="#main" class="kp-skip" data-i18n="a11y.skip">Skip to content</a>
 
 <!-- Header -->
