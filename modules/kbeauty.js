@@ -1004,14 +1004,14 @@
   }
   // The bottom tab bar exposes 4 primary destinations; every other category
   // lives behind 'More', so a tab always lights up ('you are here').
-  const KB_BNAV_PRIMARY = ['home', 'skin', 'routine', 'buy'];
+  const KB_BNAV_PRIMARY = ['home', 'skin', 'routine', 'ingr'];
   function syncBnav(active) {
     const a = KB_BNAV_PRIMARY.indexOf(active) >= 0 ? active : 'more';
     $$('#kb-bnav button').forEach(b => b.classList.toggle('on', b.dataset.bn === a));
   }
   function openMoreSheet() {
     const box = $('#kb-modal'); if (!box) return;
-    const moreCats = ['sun', 'ingr', 'trouble', 'brands', 'trends'].map(id => kbCatById(id)).filter(Boolean);
+    const moreCats = ['sun', 'trouble', 'brands', 'buy', 'trends'].map(id => kbCatById(id)).filter(Boolean);
     const rows = moreCats.map(c => '<button type="button" class="kb-sheet-row" data-morecat="' + c.id + '"><span class="se">' + c.icon + '</span><span><span>' + esc(kbTitle(c)) + '</span><span class="sd">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></span></button>').join('');
     const lib = '<a class="kb-sheet-row" href="/guide/kb/"><span class="se">📚</span><span><span>' + esc(cx('ux.library', 'The K-Beauty Library')) + '</span><span class="sd">' + esc(cx('ux.librarysub', '1,000+ guides')) + '</span></span></a>';
     box.innerHTML = '<button class="kb-modal-x" data-close aria-label="Close">✕</button>'
@@ -1057,7 +1057,7 @@
     // bottom nav (mobile)
     if (!$('#kb-bnav')) {
       const bn = document.createElement('nav'); bn.id = 'kb-bnav'; bn.setAttribute('aria-label', 'K-beauty');
-      const items = [['home', '🏠', cx('ux.home', 'Home')], ['skin', '🪞', kbTitle(kbCatById('skin'))], ['routine', '🧴', kbTitle(kbCatById('routine'))], ['buy', '🛍️', cx('ux.shop', 'Shop')], ['more', '☰', cx('ux.more', 'More')]];
+      const items = [['home', '🏠', cx('ux.home', 'Home')], ['skin', '🪞', kbTitle(kbCatById('skin'))], ['routine', '🧴', kbTitle(kbCatById('routine'))], ['ingr', '🧪', kbTitle(kbCatById('ingr'))], ['more', '☰', cx('ux.more', 'More')]];
       bn.innerHTML = items.map(it => '<button type="button" data-bn="' + it[0] + '"><span class="bi">' + it[1] + '</span><span>' + esc(it[2]) + '</span></button>').join('');
       body.appendChild(bn);
       bn.addEventListener('click', e => { const b = e.target.closest('[data-bn]'); if (!b) return; const t = b.dataset.bn; if (t === 'more') { openMoreSheet(); return; } if (t === 'home') showLanding(); else showCategory(t); window.scrollTo({ top: 0, behavior: 'smooth' }); });
@@ -1108,6 +1108,8 @@
     const tb2 = $('#kb-toolbar'); if (tb2) tb2.style.display = inCat ? 'none' : '';
     syncBnav(inCat ? ((($('#kb-back-title') || {}).dataset || {}).catid || 'home') : 'home');
     kbRenderRecent();
+    // Affiliate paused → hide shopping CTAs site-wide (AdSense-first). Toggle via AFFILIATE_ON.
+    document.body.classList.toggle('kb-noaffil', !AFFILIATE_ON);
   }
 
   // ── Modal / filters / personalization ───────────────────────────────────────
@@ -1289,23 +1291,29 @@
     applyNavI18n(); setTimeout(applyNavI18n, 600); setTimeout(applyNavI18n, 1600);
   }
 
-  // ── Top sponsored block (localized AliExpress geo strip + AdSense) ───────────
+  // Affiliate is paused for now — the app leads with AdSense, not shopping pushes.
+  // Flip this to true to restore the Coupang / YesStyle / Amazon strips + shop CTAs.
+  const AFFILIATE_ON = false;
+
+  // ── Top ad block (AdSense-first; affiliate strips gated behind AFFILIATE_ON) ──
   function renderTopAds() {
     const host = $('#kb-topads'); if (!host) return;
     const isKo = (lang === 'ko');
     const parts = [];
-    // Korea visitors: Coupang Partners carousel (real products, ships in Korea).
-    if (isKo) parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · 쿠팡파트너스</div><div class="kb-ad-coupang" id="kb-ad-coupang"></div><div class="kb-ad-coupang-disc">이 광고는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div></div>`);
-    // Non-Korea visitors: region-appropriate global K-beauty retailers (NOT Korea-only Coupang).
-    else parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">🛍️ ${esc(t('sponsored'))}</div>`
-      + `<div style="display:flex;gap:10px;flex-wrap:wrap;padding:2px 0">`
-      + `<a rel="sponsored nofollow noopener" target="_blank" style="font-weight:800;font-size:13px;color:#c01a63;text-decoration:none;border:2px solid var(--border,#f0d8e6);border-radius:18px;padding:7px 14px" href="https://www.yesstyle.com/en/search?q=korean%20skincare">🛒 YesStyle</a>`
-      + `<a rel="sponsored nofollow noopener" target="_blank" style="font-weight:800;font-size:13px;color:#c01a63;text-decoration:none;border:2px solid var(--border,#f0d8e6);border-radius:18px;padding:7px 14px" href="https://www.amazon.com/s?k=korean+skincare">🛒 Amazon</a></div></div>`);
+    if (AFFILIATE_ON) {
+      // Korea visitors: Coupang Partners carousel (real products, ships in Korea).
+      if (isKo) parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('sponsored'))} · 쿠팡파트너스</div><div class="kb-ad-coupang" id="kb-ad-coupang"></div><div class="kb-ad-coupang-disc">이 광고는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div></div>`);
+      // Non-Korea visitors: region-appropriate global K-beauty retailers.
+      else parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">🛍️ ${esc(t('sponsored'))}</div>`
+        + `<div style="display:flex;gap:10px;flex-wrap:wrap;padding:2px 0">`
+        + `<a rel="sponsored nofollow noopener" target="_blank" style="font-weight:800;font-size:13px;color:#c01a63;text-decoration:none;border:2px solid var(--border,#f0d8e6);border-radius:18px;padding:7px 14px" href="https://www.yesstyle.com/en/search?q=korean%20skincare">🛒 YesStyle</a>`
+        + `<a rel="sponsored nofollow noopener" target="_blank" style="font-weight:800;font-size:13px;color:#c01a63;text-decoration:none;border:2px solid var(--border,#f0d8e6);border-radius:18px;padding:7px 14px" href="https://www.amazon.com/s?k=korean+skincare">🛒 Amazon</a></div></div>`);
+    }
     parts.push(`<div class="kb-ad-card"><div class="kb-ad-label">${esc(t('advertisement'))}</div><div class="kb-ad-adsense"><ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200" data-ad-format="auto" data-full-width-responsive="true"></ins></div></div>`);
     host.innerHTML = parts.join('');
     host.hidden = false;
     try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
-    if (isKo) injectCoupang($('#kb-ad-coupang'));
+    if (AFFILIATE_ON && isKo) injectCoupang($('#kb-ad-coupang'));
   }
   function injectCoupang(host) {
     if (!host || host.dataset.done) return; host.dataset.done = '1';
