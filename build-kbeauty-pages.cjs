@@ -26,6 +26,10 @@ const GLOSS = d.KBEAUTY_GLOSSARY || [];
 const CONFLICTS = d.KBEAUTY_CONFLICTS || [];
 const SKINTYPES = d.KBEAUTY_SKINTYPES || [];
 const verd = id => { const v = (d.KBEAUTY_BOARD_CONFIG.verdicts || {})[id]; return v ? (v.emoji + ' ' + v.label) : ''; };
+// Traffic-10 datasets (authored, no-fabrication): pronunciation/Hangul, hanbang heritage, PAA Q&A.
+const SAY = require('./kbeauty-say.json');       // { brands:[], ingredients:[] }
+const HANBANG = require('./kbeauty-hanbang.json'); // []
+const ASKQ = require('./kbeauty-ask.json');        // []
 
 const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1320;background:#fff}'
   + '.w{max-width:740px;margin:0 auto;padding:22px 18px 64px}a{color:#c01a63}'
@@ -285,6 +289,53 @@ Object.keys(byRef).forEach(ref => {
     ${deeperBlock({ title: ref + ' ' + alts.map(a => a.altName).join(' '), slug })}`;
   const ld = [artLD(`Korean alternative to ${ref}`, qa, url), faqLD(`What is the Korean alternative to ${ref}?`, qa)];
   emit(`alternative/${slug}.html`, shell({ url, depth: 3, crumb: 'Korean alternatives', emoji: a0.referenceEmoji || '🔁', h1: `Korean alternative to ${ref}`, title: `Korean alternative to ${ref} — the K-beauty pick that works`, desc: qa, quickAnswer: qa, bodyHtml: body, ld }), '0.6');
+});
+
+// ── 6c. Pronunciation + Hangul guide (say/) — teaches Korean while answering
+//        "how to pronounce <brand>" / "how to say <ingredient> in Korean".
+const BRAND_BY2 = Object.fromEntries(BRANDS.map(b => [b.id, b]));
+const sayItems = [].concat(
+  (SAY.brands || []).map(x => Object.assign({ kind: 'brand' }, x)),
+  (SAY.ingredients || []).map(x => Object.assign({ kind: 'ingredient' }, x))
+);
+sayItems.forEach(s => {
+  const url = `${SITE}/guide/kb/say/${s.id}.html`;
+  const qa = `${s.name}${s.hangul ? ` (${s.hangul})` : ''} is pronounced "${s.respell}"${s.romanization ? `, romanized ${s.romanization}` : ''}.${s.meaning ? ` Meaning: ${s.meaning}` : ''}`;
+  const linkPage = s.kind === 'brand' && BRAND_BY2[s.id] ? `../brand/${s.id}.html` : (s.kind === 'ingredient' && ING_BY[s.id] ? `../ingredient/${s.id}.html` : '');
+  const body = `<p class="lead">How do you pronounce <b>${esc(s.name)}</b>? Here's the Korean — Hangul, romanization and an easy English respelling.</p>
+    <div class="box"><b>🗣️ Say it right</b><ul>
+      ${s.hangul ? `<li><b>Hangul:</b> ${esc(s.hangul)}</li>` : ''}
+      ${s.romanization ? `<li><b>Romanization:</b> ${esc(s.romanization)}</li>` : ''}
+      <li><b>Say it like:</b> ${esc(s.respell)}</li>
+    </ul></div>
+    ${s.meaning ? `<h2>What ${esc(s.name)} means</h2><p>${esc(s.meaning)}</p>` : ''}
+    <p>${esc(s.name)} is ${s.kind === 'brand' ? 'a Korean beauty brand' : 'a K-beauty ingredient'} — learning its Korean name and pronunciation is a small step into the Korean language behind K-beauty.</p>
+    ${linkPage ? `<p><a class="pill" href="${linkPage}">Full ${esc(s.name)} guide →</a></p>` : ''}
+    ${deeperBlock({ title: s.name, slug: s.id })}`;
+  emit(`say/${s.id}.html`, shell({ url, depth: 3, crumb: 'Pronunciation', emoji: '🗣️', h1: `How to pronounce ${s.name}`, ko: s.hangul, title: `How to pronounce ${s.name} (${s.respell}) — Korean & Hangul`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [faqLD(`How do you pronounce ${s.name}?`, qa), artLD(`How to pronounce ${s.name}`, qa, url)] }), '0.6');
+});
+
+// ── 6d. Hanbang (한방) heritage encyclopedia — Korea's traditional botanicals.
+HANBANG.forEach(h => {
+  const url = `${SITE}/guide/kb/hanbang/${h.id}.html`;
+  const qa = `${h.name} (${h.hangul}, ${h.romanization}) is a hanbang botanical Korea has used in traditional skincare for generations. ${h.modernUse}`;
+  const body = `<p class="lead">${esc(h.heritageNote)}</p>
+    <div class="box">🗣️ <b>${esc(h.name)}</b> — Hangul ${esc(h.hangul)}, romanized ${esc(h.romanization)}, say "${esc(h.respell)}".</div>
+    <h2>In modern K-beauty</h2><p>${esc(h.modernUse)}</p>
+    ${(h.concerns || []).length ? `<h2>Associated with the look of</h2><div>${h.concerns.map(c => `<span class="pill">${esc(c)}</span>`).join('')}</div>` : ''}
+    ${(h.heritageBrands || []).length ? `<h2>Korean brands that feature it</h2><p>${h.heritageBrands.map(esc).join(' · ')}</p>` : ''}
+    ${deeperBlock({ title: h.name + ' ' + h.id, slug: h.id })}`;
+  emit(`hanbang/${h.id}.html`, shell({ url, depth: 3, crumb: 'Hanbang heritage', emoji: '🪷', h1: `${h.name}: Korea's hanbang heritage ingredient`, ko: h.hangul, title: `${h.name} (${h.hangul}) — hanbang K-beauty heritage`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD(`${h.name} — hanbang heritage`, qa, url), faqLD(`What is ${h.name} in Korean skincare?`, `${h.heritageNote} ${h.modernUse}`)] }), '0.7');
+});
+
+// ── 6e. Voice/PAA answer pages (ask/) — question-as-URL, speakable answer.
+ASKQ.forEach(q => {
+  const url = `${SITE}/guide/kb/ask/${q.slug}.html`;
+  const body = `<p class="lead">${esc(q.answer)}</p>
+    <h2>More detail</h2><p>${esc(q.detail)}</p>
+    <div class="box">🇰🇷 ${esc(q.koreaNote)}</div>
+    ${deeperBlock({ title: q.q, slug: q.slug })}`;
+  emit(`ask/${q.slug}.html`, shell({ url, depth: 3, crumb: 'Q&A', emoji: '💬', h1: q.q, title: `${q.q} — K-beauty answer`, desc: q.answer, quickAnswer: q.answer, bodyHtml: body, ld: [faqLD(q.q, `${q.answer} ${q.detail}`), artLD(q.q, q.answer, url)] }), '0.7');
 });
 
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
@@ -635,6 +686,9 @@ const HUB_META = {
   history: { e: '📜', t: 'History', g: 'K-beauty knowledge' },
   format: { e: '💡', t: 'Formats & inventions', g: 'K-beauty knowledge' },
   heritage: { e: '🌿', t: 'Heritage ingredients', g: 'K-beauty knowledge' },
+  hanbang: { e: '🪷', t: 'Hanbang heritage', g: 'K-beauty knowledge' },
+  say: { e: '🗣️', t: 'Pronunciation', g: 'K-beauty knowledge' },
+  ask: { e: '💬', t: 'K-beauty Q&A', g: 'K-beauty knowledge' },
   company: { e: '🏢', t: 'Companies', g: 'K-beauty knowledge' },
   industry: { e: '🏭', t: 'Industry', g: 'K-beauty knowledge' },
   country: { e: '🌍', t: 'K-beauty worldwide', g: 'K-beauty knowledge' },

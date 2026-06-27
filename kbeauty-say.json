@@ -1,0 +1,310 @@
+{
+ "brands": [
+  {
+   "id": "cosrx",
+   "name": "COSRX",
+   "hangul": "코스알엑스",
+   "romanization": "koseuarekseu",
+   "respell": "koh-es-ar-eks",
+   "meaning": "Coined name; commonly read as a blend of \"cosmetics\" and \"Rx\" (prescription)."
+  },
+  {
+   "id": "beautyofjoseon",
+   "name": "Beauty of Joseon",
+   "hangul": "조선미녀",
+   "romanization": "Joseon minyeo",
+   "respell": "jo-suhn mee-nyuh",
+   "meaning": "\"Joseon beauty/beautiful woman\" — Joseon is Korea's last dynasty (1392-1897)."
+  },
+  {
+   "id": "anua",
+   "name": "Anua",
+   "hangul": "아누아",
+   "romanization": "Anua",
+   "respell": "ah-noo-ah",
+   "meaning": ""
+  },
+  {
+   "id": "skin1004",
+   "name": "SKIN1004",
+   "hangul": "스킨천사",
+   "romanization": "seukin cheonsa",
+   "respell": "skin chun-sah",
+   "meaning": "Korean name \"skin cheonsa\" means \"skin angel\" (cheonsa = angel)."
+  },
+  {
+   "id": "roundlab",
+   "name": "Round Lab",
+   "hangul": "라운드랩",
+   "romanization": "Raundeu Raep",
+   "respell": "rown-duh lab",
+   "meaning": "English \"Round Lab\" transliterated."
+  },
+  {
+   "id": "isntree",
+   "name": "Isntree",
+   "hangul": "이즌트리",
+   "romanization": "Ijeunteuri",
+   "respell": "ee-zun-tree",
+   "meaning": "Coined from English \"isn't\" + \"tree\" (brand styling)."
+  },
+  {
+   "id": "somebymi",
+   "name": "Some By Mi",
+   "hangul": "썸바이미",
+   "romanization": "Sseombaimi",
+   "respell": "sum-by-mee",
+   "meaning": "English \"Some By Mi\" transliterated."
+  },
+  {
+   "id": "numbuzin",
+   "name": "Numbuzin",
+   "hangul": "넘버즈인",
+   "romanization": "Neombeojeuin",
+   "respell": "num-burz-in",
+   "meaning": "Coined from English \"numbers in\" (products are numbered)."
+  },
+  {
+   "id": "torriden",
+   "name": "Torriden",
+   "hangul": "토리든",
+   "romanization": "Torideun",
+   "respell": "toh-ree-dun",
+   "meaning": ""
+  },
+  {
+   "id": "mixsoon",
+   "name": "Mixsoon",
+   "hangul": "믹순",
+   "romanization": "Mikssun",
+   "respell": "mik-soon",
+   "meaning": "Coined name blending English \"mix\" with the Korean syllable \"soon\" (soonhada = mild/gentle)."
+  },
+  {
+   "id": "medicube",
+   "name": "Medicube",
+   "hangul": "메디큐브",
+   "romanization": "Medikyubeu",
+   "respell": "meh-dee-kyoob",
+   "meaning": "Coined from English \"medi\" (medical) + \"cube\"."
+  },
+  {
+   "id": "tirtir",
+   "name": "TIRTIR",
+   "hangul": "티르티르",
+   "romanization": "Tireutireu",
+   "respell": "teer-teer",
+   "meaning": ""
+  },
+  {
+   "id": "innisfree",
+   "name": "Innisfree",
+   "hangul": "이니스프리",
+   "romanization": "Iniseupeuri",
+   "respell": "in-iss-free",
+   "meaning": "From \"The Lake Isle of Innisfree,\" a W. B. Yeats poem; evokes a pure natural island."
+  },
+  {
+   "id": "etude",
+   "name": "ETUDE",
+   "hangul": "에뛰드",
+   "romanization": "Ettwideu",
+   "respell": "eh-tyood",
+   "meaning": "French \"etude\" = a study or musical practice piece."
+  },
+  {
+   "id": "missha",
+   "name": "MISSHA",
+   "hangul": "미샤",
+   "romanization": "Misya",
+   "respell": "mee-shah",
+   "meaning": ""
+  },
+  {
+   "id": "naturerepublic",
+   "name": "Nature Republic",
+   "hangul": "네이처리퍼블릭",
+   "romanization": "Neicheo Ripeobeullik",
+   "respell": "nay-chur ree-pub-lik",
+   "meaning": "English \"Nature Republic\" transliterated."
+  },
+  {
+   "id": "laneige",
+   "name": "Laneige",
+   "hangul": "라네즈",
+   "romanization": "Ranejeu",
+   "respell": "lah-nezh",
+   "meaning": "French \"la neige\" = \"the snow.\""
+  },
+  {
+   "id": "drjart",
+   "name": "Dr.Jart+",
+   "hangul": "닥터자르트",
+   "romanization": "Dakteo Jareuteu",
+   "respell": "dok-tur zhart",
+   "meaning": "\"Dr.\" + a coinage of \"Jart\" said to blend \"join\" and \"art\" (doctor joins art)."
+  },
+  {
+   "id": "belif",
+   "name": "belif",
+   "hangul": "빌리프",
+   "romanization": "Billipeu",
+   "respell": "bee-leef",
+   "meaning": "English word \"belief.\""
+  },
+  {
+   "id": "pyunkangyul",
+   "name": "Pyunkang Yul",
+   "hangul": "편강율",
+   "romanization": "Pyeongang-yul",
+   "respell": "pyun-gang-yool",
+   "meaning": "From \"pyeongang\" (peaceful/healthy lungs, an oriental-medicine concept) — name of the affiliated Korean clinic."
+  },
+  {
+   "id": "purito",
+   "name": "Purito SEOUL",
+   "hangul": "퓨리토",
+   "romanization": "Pyurito",
+   "respell": "pyoo-ree-toh",
+   "meaning": "Coined from English \"purity\" / \"pure.\""
+  },
+  {
+   "id": "abib",
+   "name": "Abib",
+   "hangul": "아비브",
+   "romanization": "Abibeu",
+   "respell": "ah-beeb",
+   "meaning": ""
+  },
+  {
+   "id": "klairs",
+   "name": "Dear, Klairs",
+   "hangul": "클레어스",
+   "romanization": "Keulleeoseu",
+   "respell": "klairz",
+   "meaning": "Stylized from the name \"Claire(s).\""
+  },
+  {
+   "id": "mediheal",
+   "name": "Mediheal",
+   "hangul": "메디힐",
+   "romanization": "Medihil",
+   "respell": "meh-dee-heel",
+   "meaning": "Coined from English \"medi\" (medical) + \"heal.\""
+  },
+  {
+   "id": "maryandmay",
+   "name": "Mary&May",
+   "hangul": "메리앤메이",
+   "romanization": "Meri-aen-Mei",
+   "respell": "meh-ree-and-may",
+   "meaning": "English given names \"Mary\" and \"May.\""
+  },
+  {
+   "id": "sulwhasoo",
+   "name": "Sulwhasoo",
+   "hangul": "설화수",
+   "romanization": "Seolhwasu",
+   "respell": "sul-hwa-soo",
+   "meaning": "From hanja often read as \"snow flower elegance/longevity\" (seol = snow, hwa = flower)."
+  },
+  {
+   "id": "whoo",
+   "name": "The History of Whoo",
+   "hangul": "후",
+   "romanization": "Hu",
+   "respell": "hoo",
+   "meaning": "\"Hu\" (后) means \"queen/empress,\" evoking royal-court heritage."
+  },
+  {
+   "id": "ohui",
+   "name": "O HUI",
+   "hangul": "오휘",
+   "romanization": "Ohwi",
+   "respell": "oh-hwee",
+   "meaning": ""
+  },
+  {
+   "id": "hera",
+   "name": "HERA",
+   "hangul": "헤라",
+   "romanization": "Hera",
+   "respell": "heh-rah",
+   "meaning": "Named after Hera, queen of the gods in Greek mythology."
+  },
+  {
+   "id": "amorepacific",
+   "name": "AMOREPACIFIC",
+   "hangul": "아모레퍼시픽",
+   "romanization": "Amore Peosipik",
+   "respell": "ah-mor-eh puh-sif-ik",
+   "meaning": "\"Amore\" (Italian for love) + \"Pacific\" (the ocean)."
+  }
+ ],
+ "ingredients": [
+  {
+   "id": "snail",
+   "name": "Snail Mucin",
+   "hangul": "달팽이 점액",
+   "romanization": "dalpaengi jeomaek",
+   "respell": "dal-peng-ee jum-aek",
+   "meaning": "\"Snail mucus/secretion\" (dalpaengi = snail, jeomaek = mucus)."
+  },
+  {
+   "id": "centella",
+   "name": "Centella (Cica)",
+   "hangul": "병풀",
+   "romanization": "byeongpul",
+   "respell": "byung-pool",
+   "meaning": "Korean common name for Centella asiatica (\"byeongpul\"); \"cica\" is short for Latin Centella."
+  },
+  {
+   "id": "propolis",
+   "name": "Propolis",
+   "hangul": "프로폴리스",
+   "romanization": "peuropolliseu",
+   "respell": "pro-poh-liss",
+   "meaning": "Loanword from \"propolis,\" the bee-made resin (from Greek for \"defense of the city\")."
+  },
+  {
+   "id": "mugwort",
+   "name": "Mugwort (Artemisia)",
+   "hangul": "쑥",
+   "romanization": "ssuk",
+   "respell": "ssook",
+   "meaning": "Korean word for mugwort (Artemisia), a traditional herb."
+  },
+  {
+   "id": "heartleaf",
+   "name": "Heartleaf (Houttuynia)",
+   "hangul": "어성초",
+   "romanization": "eoseongcho",
+   "respell": "uh-sung-cho",
+   "meaning": "Korean name for Houttuynia cordata; \"eoseong\" refers to its fishy smell, \"cho\" = herb."
+  },
+  {
+   "id": "rice",
+   "name": "Rice Extract",
+   "hangul": "쌀",
+   "romanization": "ssal",
+   "respell": "ssal",
+   "meaning": "Korean word for (uncooked) rice."
+  },
+  {
+   "id": "ginseng",
+   "name": "Ginseng",
+   "hangul": "인삼",
+   "romanization": "insam",
+   "respell": "in-sahm",
+   "meaning": "Korean for ginseng (insam), a prized hanbang (herbal) root."
+  },
+  {
+   "id": "greentea",
+   "name": "Green Tea",
+   "hangul": "녹차",
+   "romanization": "nokcha",
+   "respell": "nok-cha",
+   "meaning": "\"Green tea\" (nok = green, cha = tea); Korea's is famously grown on Jeju Island."
+  }
+ ]
+}

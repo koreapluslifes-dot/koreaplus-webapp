@@ -1,0 +1,275 @@
+[
+ {
+  "slug": "what-is-glass-skin",
+  "q": "What is glass skin?",
+  "answer": "Glass skin is a Korean beauty ideal describing a complexion so smooth, even and hydrated it looks translucent and reflective, like a pane of glass. It isn't a single product but the result of diligent hydration, gentle exfoliation and sun protection layered over a healthy skin barrier.",
+  "detail": "The look emphasizes a poreless-appearing, dewy finish rather than matte coverage, achieved through consistent layering of hydrating toners, essences and moisturizers.",
+  "koreaNote": "The term originated in Korean skincare culture and went global as 'yuri-pibu' (유리 피부), Korean for glass skin."
+ },
+ {
+  "slug": "what-is-the-10-step-korean-skincare-routine",
+  "q": "What is the 10-step Korean skincare routine?",
+  "answer": "The 10-step Korean skincare routine is a layered framework popularized in Korea: oil cleanser, water cleanser, exfoliant, toner, essence, serum or ampoule, sheet mask, eye cream, moisturizer and sunscreen. It's a customizable menu, not a daily mandate, and most people use only the steps their skin needs.",
+  "detail": "Steps are spread across morning and evening, with exfoliation and masks used only a few times weekly rather than daily.",
+  "koreaNote": "The sequence reflects the Korean philosophy of gentle, gradual layering over harsh, one-step treatments."
+ },
+ {
+  "slug": "what-is-double-cleansing",
+  "q": "What is double cleansing?",
+  "answer": "Double cleansing is a two-step Korean method: first an oil-based cleanser dissolves makeup, sunscreen and sebum, then a water-based cleanser removes sweat and water-soluble debris. The pairing aims to clean thoroughly without the tightness or stripping that one harsh wash can cause.",
+  "detail": "It's especially recommended at night to remove long-wear sunscreen and makeup that water alone struggles to break down.",
+  "koreaNote": "Double cleansing is a foundational first step in Korean routines, where sun protection is worn daily and needs careful removal."
+ },
+ {
+  "slug": "what-is-essence-in-korean-skincare",
+  "q": "What is essence in Korean skincare?",
+  "answer": "Essence is a lightweight, watery Korean skincare layer applied after toner and before serum. It's designed to hydrate and prep the skin so later products absorb better. Often fermented or ingredient-rich, essence is sometimes called the heart of a Korean routine.",
+  "detail": "Many essences feature fermented ingredients like galactomyces or rice extract, prized for adding glow and a smoother-looking texture.",
+  "koreaNote": "The 'first essence' concept was pioneered by Korean and Japanese brands and is central to K-beauty layering."
+ },
+ {
+  "slug": "essence-vs-serum-difference",
+  "q": "What is the difference between essence and serum?",
+  "answer": "In Korean skincare, essence is typically a thinner, hydration-focused layer that preps skin, while serum is more concentrated with targeted actives like vitamin C or niacinamide. Essence usually comes first; serum follows. The line between them blurs, and not every routine needs both.",
+  "detail": "Serums and ampoules carry higher active concentrations for specific concerns, whereas essences emphasize overall hydration and absorption.",
+  "koreaNote": "The layered essence-then-serum order is a hallmark of the multi-step Korean approach."
+ },
+ {
+  "slug": "is-snail-mucin-safe",
+  "q": "Is snail mucin safe for skin?",
+  "answer": "Snail mucin (snail secretion filtrate) is widely used in Korean skincare and generally well tolerated, including for sensitive skin. It's valued as a hydrating, comforting ingredient. As with any product, patch-test first, and those with known allergies to mollusks or related ingredients should be cautious.",
+  "detail": "It's a popular humectant praised for a plump, dewy finish; results vary by individual and formulation.",
+  "koreaNote": "Snail mucin (달팽이 점액) is a K-beauty icon that went global after viral interest in Korean essences."
+ },
+ {
+  "slug": "what-does-snail-mucin-do",
+  "q": "What does snail mucin do for skin?",
+  "answer": "Snail mucin is a Korean skincare staple used mainly to hydrate and give skin a plump, dewy, smoother-looking finish. Many people also like it for soothing the look of post-blemish marks. Its benefits are cosmetic and hydration-focused rather than medical treatment.",
+  "detail": "It works as a humectant, drawing moisture into the skin, and pairs well with hyaluronic acid and niacinamide.",
+  "koreaNote": "Snail secretion filtrate (달팽이 점액) is one of the most recognizable Korean beauty ingredients worldwide."
+ },
+ {
+  "slug": "what-is-cica-centella",
+  "q": "What is cica or centella in skincare?",
+  "answer": "Cica is short for Centella asiatica, a plant also called tiger grass and widely used in Korean skincare to soothe the look of redness and support a comfortable, resilient barrier. It's a go-to for sensitive, stressed or breakout-prone skin in calming creams and serums.",
+  "detail": "Its most studied calming compound, madecassoside, is sometimes concentrated on its own for soothing and barrier support.",
+  "koreaNote": "Centella, known as 시카 (cica) in Korea, anchors many popular Korean barrier-repair lines."
+ },
+ {
+  "slug": "why-is-korean-sunscreen-better",
+  "q": "Why is Korean sunscreen considered better?",
+  "answer": "Korean sunscreens are often praised for elegant, lightweight textures that feel pleasant enough to wear daily, which encourages consistent use. They frequently use newer filters approved in Korea but not the US. Preferences are partly cosmetic; effectiveness depends on applying enough and reapplying regardless of brand.",
+  "detail": "Korea's cosmetic regulations classify sunscreen differently, allowing access to filters that can feel less greasy or white-casting.",
+  "koreaNote": "Daily sun protection is a cultural cornerstone of Korean skincare, prized as the top anti-ageing step."
+ },
+ {
+  "slug": "what-is-the-7-skin-method",
+  "q": "What is the 7-skin method?",
+  "answer": "The 7-skin method is a Korean hydration technique of patting on multiple thin layers of a watery toner or essence, traditionally up to seven, to deeply hydrate. 'Skin' is the Korean word for toner. Most people adjust the number of layers to their own skin's needs.",
+  "detail": "Each layer is applied to damp skin and pressed in before the next, building hydration without heaviness.",
+  "koreaNote": "The name comes from 'skin' (스킨), the Korean term for hydrating toner."
+ },
+ {
+  "slug": "what-is-korean-toner",
+  "q": "What is a Korean toner and how is it different?",
+  "answer": "In Korea, toner (called 'skin' or 'skin toner') is usually a gentle, hydrating step that preps and balances skin after cleansing, rather than a harsh astringent. It's meant to add moisture and help following layers absorb, not to strip or tighten the skin.",
+  "detail": "This differs from older Western alcohol-based toners; Korean toners often emphasize humectants and soothing botanicals.",
+  "koreaNote": "Koreans call toner '스킨' (skin), reflecting its role as a hydrating base layer."
+ },
+ {
+  "slug": "what-is-an-ampoule",
+  "q": "What is an ampoule in K-beauty?",
+  "answer": "An ampoule is a highly concentrated Korean skincare treatment, stronger than a serum, used to target specific concerns like dullness, dryness or fine lines. Applied after essence and before moisturizer, it's typically used in short bursts or when skin needs an extra boost.",
+  "detail": "Ampoules pack higher active concentrations and are often reached for as an intensive add-on rather than an everyday step.",
+  "koreaNote": "Ampoules are a distinctly K-beauty product tier, sitting between essence and serum in the layering order."
+ },
+ {
+  "slug": "what-is-skin-barrier-and-why-k-beauty-focus",
+  "q": "What is the skin barrier and why does K-beauty focus on it?",
+  "answer": "The skin barrier is the outermost layer that locks in moisture and keeps out irritants. Korean skincare emphasizes protecting and supporting it because a healthy barrier looks calmer, hydrated and more resilient. The philosophy favors gentle, hydrating care over aggressive actives that can compromise it.",
+  "detail": "Ingredients like ceramides, centella and panthenol are popular in Korea for supporting a comfortable, resilient barrier.",
+  "koreaNote": "Barrier-first thinking is a defining feature of Korean skincare's gentle, layered approach."
+ },
+ {
+  "slug": "what-is-niacinamide",
+  "q": "What does niacinamide do?",
+  "answer": "Niacinamide is a form of vitamin B3 widely used in Korean skincare to help brighten the look of dullness, refine the appearance of pores and support the skin barrier. It's gentle, well tolerated by most skin types and pairs easily with many other ingredients.",
+  "detail": "It's a versatile multitasker often combined with hyaluronic acid, centella or vitamin C in K-beauty formulas.",
+  "koreaNote": "Niacinamide is a staple active across Korean brightening and barrier-support products."
+ },
+ {
+  "slug": "what-is-hyaluronic-acid",
+  "q": "What is hyaluronic acid and how do you use it?",
+  "answer": "Hyaluronic acid is a humectant that draws water into the skin for a plumper, hydrated look. In Korean routines it's best applied to damp skin and sealed with a moisturizer on top, so the moisture it attracts stays locked in rather than evaporating.",
+  "detail": "It layers well under creams and is a core part of the hydration-focused 7-skin and glass-skin approaches.",
+  "koreaNote": "Hyaluronic acid is central to the deep-hydration ethos behind Korean dewy, glass-skin looks."
+ },
+ {
+  "slug": "what-is-fermented-skincare",
+  "q": "What is fermented skincare?",
+  "answer": "Fermented skincare uses ingredients broken down by microorganisms, like galactomyces, rice or yeast ferments, which Korean brands prize for adding glow and a smoother-looking texture. Fermentation is thought to make some ingredients lighter and more skin-friendly, and it's a signature of many Korean essences.",
+  "detail": "Fermented 'first essences' are among the most recognizable products in this category.",
+  "koreaNote": "Fermentation draws on Korea's long food heritage and is a celebrated K-beauty technique."
+ },
+ {
+  "slug": "what-is-hanbang-skincare",
+  "q": "What is hanbang Korean skincare?",
+  "answer": "Hanbang refers to Korean skincare rooted in traditional herbal medicine, using botanicals like ginseng, mugwort and licorice. These ingredients appear in premium and heritage Korean lines, especially anti-ageing products, blending old herbal traditions with modern cosmetic formulation.",
+  "detail": "Ginseng (인삼) is a flagship hanbang hero featured in many luxury Korean firming and glow products.",
+  "koreaNote": "Hanbang (한방) literally means Korean traditional medicine, the basis of these herbal beauty lines."
+ },
+ {
+  "slug": "what-is-mugwort-skincare",
+  "q": "What is mugwort used for in skincare?",
+  "answer": "Mugwort, called ssuk in Korean, is a traditional botanical used in K-beauty to calm the look of irritated, reactive or breakout-prone skin. It appears in soothing toners, essences and masks and is often paired with centella or panthenol for sensitive skin care.",
+  "detail": "It's valued as a gentle, comforting extract rather than a strong active.",
+  "koreaNote": "Mugwort (쑥) is a heritage Korean plant long used in food and folk remedies, now a beauty favorite."
+ },
+ {
+  "slug": "what-is-heartleaf-skincare",
+  "q": "What is heartleaf in Korean skincare?",
+  "answer": "Heartleaf, or Houttuynia cordata (어성초 in Korean), is a trending calming extract used in K-beauty to soothe and help balance oily, blemish-prone skin. It's found in lightweight toners and essences and pairs well with centella, niacinamide or BHA for troubled skin.",
+  "detail": "Its soothing, comforting effect is well established, though pore-shrinking claims are often overstated.",
+  "koreaNote": "Heartleaf surged in popularity through Korean acne-care and calming product lines."
+ },
+ {
+  "slug": "what-is-mochi-skin",
+  "q": "What is mochi skin?",
+  "answer": "Mochi skin is a Korean and Japanese-influenced beauty look describing soft, bouncy, plump skin with a velvety matte-to-dewy finish, like a rice cake. Compared with glossy glass skin, mochi skin emphasizes a cushiony softness and even, smooth texture rather than high shine.",
+  "detail": "It's typically built through deep hydration plus ingredients that soften and smooth, like rice extract.",
+  "koreaNote": "Rice extract (쌀), a heritage Korean ingredient, is closely tied to the soft mochi-skin finish."
+ },
+ {
+  "slug": "what-is-skin-cycling-korean",
+  "q": "What is skin cycling?",
+  "answer": "Skin cycling is a rotation method that spaces out active ingredients across nights, alternating exfoliation, treatment and recovery, to avoid overloading skin. While the trend name is recent, the gentle, barrier-protective spirit aligns closely with Korean skincare's caution against using too many actives at once.",
+  "detail": "A common cycle alternates an exfoliant night, an active night, then rest nights focused on hydration.",
+  "koreaNote": "The measured, barrier-first approach mirrors the gentle philosophy long emphasized in Korean routines."
+ },
+ {
+  "slug": "what-is-bha-in-skincare",
+  "q": "What is BHA and what does it do?",
+  "answer": "BHA, usually salicylic acid, is an oil-soluble exfoliant that can penetrate pores to dissolve oil and dead skin, helping refine the look of texture and blemish-prone skin. In Korean routines it's used a few times weekly, with sunscreen by day, to avoid over-exfoliating.",
+  "detail": "It's often paired with niacinamide or heartleaf in K-beauty products for congested, oily skin.",
+  "koreaNote": "BHA features in many Korean exfoliating toners aimed at the smooth, glass-skin texture goal."
+ },
+ {
+  "slug": "what-is-aha-vs-bha",
+  "q": "What is the difference between AHA and BHA?",
+  "answer": "AHAs like glycolic and lactic acid are water-soluble and work on the skin's surface to brighten and smooth, while BHA like salicylic acid is oil-soluble and gets into pores. In Korean skincare both are used sparingly, a few times weekly, always with daily sun protection.",
+  "detail": "AHAs suit dullness and surface texture; BHA suits oily, congested, blemish-prone skin.",
+  "koreaNote": "Gentle, infrequent exfoliation fits the Korean emphasis on protecting the skin barrier."
+ },
+ {
+  "slug": "what-is-pdrn-salmon-sperm",
+  "q": "What is PDRN or salmon DNA in skincare?",
+  "answer": "PDRN (polydeoxyribonucleotide), sometimes called salmon DNA, is an ingredient trending in Korean skincare and aesthetic treatments, marketed for a smoother, more revitalized look. In cosmetics its effects are described in appearance terms; stronger claims belong to clinical procedures, not over-the-counter products.",
+  "detail": "It appears in serums and ampoules positioned for glow and firmness; results vary and evidence for topical forms is still developing.",
+  "koreaNote": "PDRN gained mainstream attention through Korea's skincare and aesthetics scene before spreading globally."
+ },
+ {
+  "slug": "is-korean-skincare-good-for-acne",
+  "q": "Is Korean skincare good for acne?",
+  "answer": "Korean skincare can suit blemish-prone skin through gentle, barrier-friendly care using ingredients like centella, heartleaf, niacinamide and BHA. The approach favors soothing over stripping, since over-cleansing can worsen oil and breakouts. Persistent or severe acne should be assessed by a dermatologist rather than self-treated.",
+  "detail": "Patch-testing new actives and avoiding heavy occlusives or high fragrance are common K-beauty acne tips.",
+  "koreaNote": "Calming botanicals like heartleaf (어성초) are central to Korean blemish-care lines."
+ },
+ {
+  "slug": "what-order-to-apply-skincare",
+  "q": "What order do you apply Korean skincare?",
+  "answer": "A general Korean order goes thinnest to thickest: cleanse, then toner, essence, serum or ampoule, eye cream, moisturizer, and sunscreen last in the morning. Lighter, watery layers go on first so they absorb, with richer creams and sun protection sealing everything in.",
+  "detail": "At night, double cleansing replaces sunscreen, and exfoliants or masks are added only on select days.",
+  "koreaNote": "This thin-to-thick layering logic is a defining principle of Korean routines."
+ },
+ {
+  "slug": "what-is-a-sheet-mask",
+  "q": "What is a sheet mask and how often to use it?",
+  "answer": "A sheet mask is a serum-soaked fabric or hydrogel mask, a Korean skincare staple, used to flood skin with hydration and active ingredients for 15 to 20 minutes. Most people use them a few times a week or as an occasional boost, applied after essence and before moisturizer.",
+  "detail": "After removing the mask, the remaining essence is patted in rather than rinsed off.",
+  "koreaNote": "Sheet masks were popularized globally by Korean brands and remain a signature K-beauty product."
+ },
+ {
+  "slug": "do-you-need-all-10-steps",
+  "q": "Do you really need all 10 steps of Korean skincare?",
+  "answer": "No. The 10-step routine is a menu, not a requirement. Many Koreans use a simple core of cleanser, hydrating toner, moisturizer and sunscreen, adding serums, essences or masks only as their skin needs. The point is consistency and customization, not maximum steps.",
+  "detail": "Over-layering can overwhelm skin; a minimal, barrier-friendly routine is widely recommended for beginners.",
+  "koreaNote": "Even in Korea, streamlined 'skip-care' routines have become popular alongside the classic multi-step approach."
+ },
+ {
+  "slug": "what-is-skip-care",
+  "q": "What is skip-care in Korean skincare?",
+  "answer": "Skip-care is a Korean minimalist trend that streamlines routines down to a few effective, multitasking products instead of many layers. It emerged as a reaction to the elaborate 10-step routine, prioritizing skin health, efficiency and avoiding product overload while keeping core steps like hydration and sun protection.",
+  "detail": "It often combines functions, such as a toner-essence hybrid, to cut steps without sacrificing results.",
+  "koreaNote": "Skip-care reflects an evolution within Korean beauty toward simpler, smarter routines."
+ },
+ {
+  "slug": "what-is-cushion-foundation",
+  "q": "What is a cushion foundation?",
+  "answer": "A cushion foundation is a Korean makeup innovation: liquid foundation soaked into a sponge inside a compact, applied with a puff for a dewy, buildable, skincare-infused finish. Many include sun protection and hydrating ingredients, blurring the line between makeup and skincare.",
+  "detail": "The portable format made on-the-go touch-ups and a natural glow-from-within look widely accessible.",
+  "koreaNote": "The cushion compact was invented in Korea and became one of K-beauty's biggest global exports."
+ },
+ {
+  "slug": "what-is-double-glazing-skin",
+  "q": "What is the skin-flooding or double-glazing trend?",
+  "answer": "Skin flooding, sometimes called double glazing, is a hydration trend of layering watery humectant products on damp skin then sealing with a moisturizer, for a plump, dewy look. It echoes long-standing Korean layering ideas like the 7-skin method rather than being entirely new.",
+  "detail": "Applying each layer to slightly damp skin helps lock moisture in before it evaporates.",
+  "koreaNote": "The technique closely mirrors Korea's multi-layer hydration methods behind glass and dewy skin."
+ },
+ {
+  "slug": "is-korean-skincare-worth-it",
+  "q": "Is Korean skincare worth it?",
+  "answer": "Korean skincare is often considered good value for its texture-focused, innovative formulations at accessible prices, with a gentle, barrier-first philosophy many find effective. Whether it's worth it depends on individual skin, consistency and choosing products for your needs rather than following every trend or step.",
+  "detail": "Its strengths are pleasant textures, hydration focus and ingredient innovation; results still require patience and routine.",
+  "koreaNote": "Korea's competitive beauty market drives rapid innovation and affordable formulations that fuel its global reach."
+ },
+ {
+  "slug": "what-is-propolis-skincare",
+  "q": "What is propolis in skincare?",
+  "answer": "Propolis is a bee-derived, honey-like extract used in Korean skincare for a comforting, nourishing glow and antioxidant support. It's popular in soothing essences and ampoules for dry or stressed skin. Anyone with a bee-product allergy should avoid it and patch-test before regular use.",
+  "detail": "It's often paired with niacinamide, snail mucin or centella in glow-focused K-beauty formulas.",
+  "koreaNote": "Propolis (프로폴리스) is a favorite glow-giving ingredient across Korean honey-themed lines."
+ },
+ {
+  "slug": "how-long-korean-skincare-results",
+  "q": "How long does Korean skincare take to work?",
+  "answer": "Most skincare, Korean or otherwise, needs time. Hydration benefits can appear quickly, but visible changes in tone, texture or fine lines typically take several weeks to a few months of consistent use, roughly one skin cycle or more. Sun protection and patience matter more than any single product.",
+  "detail": "Brightening and exfoliating actives in particular work gradually and only alongside diligent daily SPF.",
+  "koreaNote": "The slow-and-steady, consistency-over-intensity mindset is core to Korean skincare culture."
+ },
+ {
+  "slug": "can-you-mix-vitamin-c-and-niacinamide",
+  "q": "Can you use vitamin C and niacinamide together?",
+  "answer": "Yes, current understanding is that vitamin C and niacinamide can be used together safely, and many Korean formulas combine them. The old warning that they cancel out is largely outdated. If your skin is sensitive, you can still apply them at different times of day to be cautious.",
+  "detail": "Both are popular brightening actives often paired in K-beauty serums and essences.",
+  "koreaNote": "Layering compatible actives reflects the careful, combination-friendly approach common in Korean routines."
+ },
+ {
+  "slug": "what-is-glazed-donut-skin",
+  "q": "What is glazed donut skin?",
+  "answer": "Glazed donut skin is a viral look describing a high-shine, ultra-hydrated, dewy complexion resembling a glazed donut. It's a close cousin of Korea's glass-skin ideal, built through deep hydration layering and finishing with a glow-giving oil or occlusive to seal in the sheen.",
+  "detail": "The emphasis is on moisture and reflectivity rather than matte coverage.",
+  "koreaNote": "The aesthetic draws directly on Korea's hydration-first glass-skin philosophy."
+ },
+ {
+  "slug": "what-is-ceramide-skincare",
+  "q": "What are ceramides in skincare?",
+  "answer": "Ceramides are lipids that naturally make up part of the skin barrier, helping it hold moisture and stay resilient. In Korean skincare they're used to support and replenish a comfortable, hydrated barrier, especially for dry or sensitive skin, and pair well with centella and panthenol.",
+  "detail": "They're a cornerstone ingredient in the barrier-repair products central to K-beauty's gentle philosophy.",
+  "koreaNote": "Ceramides align with Korea's barrier-first focus on protecting rather than stripping the skin."
+ },
+ {
+  "slug": "what-is-the-best-korean-skincare-for-beginners",
+  "q": "What is a good Korean skincare routine for beginners?",
+  "answer": "A simple beginner Korean routine is a gentle cleanser, a hydrating toner, a lightweight moisturizer and daily sunscreen, adding one targeted serum once your skin adjusts. Introduce actives slowly, one at a time, and patch-test, following the Korean principle of gentle, barrier-friendly care over many steps at once.",
+  "detail": "Starting minimal helps you spot what works and avoid irritation before building up layers.",
+  "koreaNote": "This streamlined start reflects Korea's growing 'skip-care' trend toward simpler routines."
+ },
+ {
+  "slug": "why-do-koreans-have-good-skin",
+  "q": "Why do Koreans have good skin?",
+  "answer": "Clear skin reflects many factors, including genetics, diet and climate, not skincare alone. That said, Korean culture strongly emphasizes consistent daily routines, gentle hydration-focused care and diligent sun protection from a young age, habits that support healthy-looking skin over time. Individual results always vary.",
+  "detail": "Widespread daily sunscreen use and a barrier-protective mindset are commonly cited cultural factors.",
+  "koreaNote": "Skincare is woven into everyday Korean culture, with strong social emphasis on prevention and consistency."
+ }
+]

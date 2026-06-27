@@ -1,0 +1,221 @@
+[
+ {
+  "id": "ginseng",
+  "name": "Korean Ginseng",
+  "hangul": "인삼",
+  "romanization": "insam",
+  "respell": "in-SAHM",
+  "heritageNote": "Korean ginseng (Panax ginseng) is among the most storied herbs in traditional Korean medicine and appears in classic hanbang materia medica, including the Donguibogam, the early-17th-century Korean medical compendium. It was historically valued as a restorative tonic and was associated with vitality in court and folk traditions.",
+  "modernUse": "In modern K-beauty it is used as an antioxidant-rich botanical extract often marketed in premium anti-ageing and 'energising' formulas to help support the look of firmer, more radiant skin. Cosmetic claims center on a revitalised, glowing appearance rather than treatment.",
+  "concerns": [
+   "aging",
+   "dullness",
+   "firmness"
+  ],
+  "heritageBrands": [
+   "Sulwhasoo",
+   "The History of Whoo",
+   "Donginbi"
+  ]
+ },
+ {
+  "id": "mugwort",
+  "name": "Mugwort",
+  "hangul": "쑥",
+  "romanization": "ssuk",
+  "respell": "SSOOK",
+  "heritageNote": "Mugwort (Artemisia) has a long history in Korean folk and traditional medicine, used in herbal baths, steaming, and the warming practice of moxibustion, and it appears in classic hanbang texts. It is a familiar everyday botanical in Korean households and cuisine as well.",
+  "modernUse": "Modern K-beauty features mugwort extract in toners, essences, and masks positioned to help calm the look of irritated, reactive skin and support a comfortable barrier. Claims are soothing and comforting in nature, not medical.",
+  "concerns": [
+   "redness",
+   "sensitivity",
+   "acne"
+  ],
+  "heritageBrands": [
+   "I'm From",
+   "Round Lab",
+   "Missha"
+  ]
+ },
+ {
+  "id": "licorice",
+  "name": "Licorice Root",
+  "hangul": "감초",
+  "romanization": "gamcho",
+  "respell": "GAHM-choh",
+  "heritageNote": "Licorice root (Glycyrrhiza) is one of the most frequently used herbs in traditional Korean and East Asian medicine and is documented in hanbang references such as the Donguibogam, often described as a harmonising herb combined with others in herbal formulas.",
+  "modernUse": "In cosmetics, licorice-root extract and its derivatives (such as glabridin) are widely used in brightening and soothing products to help even the look of tone and calm visible redness. Marketed for radiance and comfort, framed as cosmetic rather than therapeutic.",
+  "concerns": [
+   "pigmentation",
+   "redness",
+   "dullness"
+  ],
+  "heritageBrands": [
+   "Beauty of Joseon",
+   "Hanyul",
+   "Sulwhasoo"
+  ]
+ },
+ {
+  "id": "danggui",
+  "name": "Angelica gigas (Korean Angelica)",
+  "hangul": "당귀",
+  "romanization": "danggui",
+  "respell": "DAHNG-gwee",
+  "heritageNote": "Korean angelica (Angelica gigas, danggui) is a classic root in traditional Korean medicine documented in hanbang materia medica and the Donguibogam, where angelica roots were valued as nourishing 'blood-tonic' herbs in herbal formulas.",
+  "modernUse": "K-beauty uses angelica-root extract as a botanical antioxidant in nourishing and anti-ageing formulations, positioned to help skin look revitalised and supple. Cosmetic positioning emphasises a healthy, well-cared-for appearance.",
+  "concerns": [
+   "aging",
+   "dullness",
+   "dryness"
+  ],
+  "heritageBrands": [
+   "Sulwhasoo",
+   "The History of Whoo"
+  ]
+ },
+ {
+  "id": "heartleaf",
+  "name": "Heartleaf (Houttuynia)",
+  "hangul": "어성초",
+  "romanization": "eoseongcho",
+  "respell": "UH-sung-choh",
+  "heritageNote": "Heartleaf (Houttuynia cordata, eoseongcho) is a traditional East Asian plant long used in Korean folk remedies and herbal teas, noted in traditional usage for skin and was a familiar botanical in everyday folk practice.",
+  "modernUse": "It has become a trending calming ingredient in K-beauty toners and essences aimed at oily, blemish-prone skin, positioned to help balance and soothe the look of stressed skin. Claims stay within comforting, cosmetic territory.",
+  "concerns": [
+   "acne",
+   "redness",
+   "oiliness"
+  ],
+  "heritageBrands": [
+   "Anua",
+   "Abib",
+   "Some By Mi"
+  ]
+ },
+ {
+  "id": "greentea",
+  "name": "Jeju Green Tea",
+  "hangul": "녹차",
+  "romanization": "nokcha",
+  "respell": "NOK-chah",
+  "heritageNote": "Green tea (Camellia sinensis) has a centuries-long place in Korean culture as a cultivated and ceremonial tea, and the volcanic island of Jeju is a well-known modern Korean green-tea growing region. Tea is referenced across traditional Korean cultural and herbal practice.",
+  "modernUse": "Jeju-grown green tea extract is a staple antioxidant in K-beauty cleansers, toners, and serums, marketed to help protect the look of skin from environmental stress and to balance oily, sensitive complexions. Framed as antioxidant cosmetic care.",
+  "concerns": [
+   "oiliness",
+   "redness",
+   "dullness"
+  ],
+  "heritageBrands": [
+   "Innisfree",
+   "Osulloc",
+   "Amorepacific"
+  ]
+ },
+ {
+  "id": "rice",
+  "name": "Rice",
+  "hangul": "쌀",
+  "romanization": "ssal",
+  "respell": "SSAHL",
+  "heritageNote": "Rice is central to Korean food and culture, and rice water and rice bran were traditional home beauty staples used for washing and softening the skin, a practice passed down in Korean folk grooming customs.",
+  "modernUse": "K-beauty widely uses rice extract, rice bran, and rice ferment in cleansers, toners, and essences to help skin look softer, smoother, and more luminous, often associated with the 'mochi skin' or glowing finish. Claims are cosmetic softening and radiance.",
+  "concerns": [
+   "dullness",
+   "dryness",
+   "pigmentation"
+  ],
+  "heritageBrands": [
+   "Beauty of Joseon",
+   "I'm From",
+   "Haruharu Wonder"
+  ]
+ },
+ {
+  "id": "camellia",
+  "name": "Camellia (Dongbaek)",
+  "hangul": "동백",
+  "romanization": "dongbaek",
+  "respell": "DONG-baek",
+  "heritageNote": "Camellia (dongbaek) and its pressed seed oil have a long heritage in Korea, especially on Jeju and the southern coast, where camellia oil was traditionally used to nourish hair and skin and is woven into regional folk tradition.",
+  "modernUse": "Camellia seed oil appears in modern K-beauty face and hair oils, balms, and creams, positioned as a rich, nourishing emollient that helps skin feel soft and look conditioned. Marketed as a heritage nourishing oil, cosmetic in scope.",
+  "concerns": [
+   "dryness",
+   "dullness"
+  ],
+  "heritageBrands": [
+   "Innisfree",
+   "Whamisa"
+  ]
+ },
+ {
+  "id": "mungbean",
+  "name": "Mung Bean",
+  "hangul": "녹두",
+  "romanization": "nokdu",
+  "respell": "NOK-doo",
+  "heritageNote": "Mung bean (nokdu) has a long place in Korean food culture and traditional grooming, where mung-bean powder was used as a gentle cleansing and clarifying agent for the skin in folk beauty practice.",
+  "modernUse": "In contemporary K-beauty, mung-bean extract or powder features in cleansing and clarifying products positioned to help skin feel clean and look fresh and balanced. Claims focus on gentle cleansing and a clarified appearance.",
+  "concerns": [
+   "oiliness",
+   "pores",
+   "acne"
+  ],
+  "heritageBrands": [
+   "Beauty of Joseon"
+  ]
+ },
+ {
+  "id": "safflower",
+  "name": "Safflower",
+  "hangul": "홍화",
+  "romanization": "honghwa",
+  "respell": "HONG-hwah",
+  "heritageNote": "Safflower (honghwa) is a herb documented in traditional Korean medicine and hanbang references including materia medica such as the Donguibogam, where its flowers were used in herbal preparations. It also served historically as a natural dye.",
+  "modernUse": "K-beauty uses safflower flower extract and safflower seed oil as botanical antioxidants and emollients in nourishing and brightening formulas, positioned to help skin look radiant and feel conditioned. Positioning is cosmetic and antioxidant-focused.",
+  "concerns": [
+   "dullness",
+   "dryness",
+   "aging"
+  ],
+  "heritageBrands": [
+   "Sulwhasoo",
+   "The History of Whoo"
+  ]
+ },
+ {
+  "id": "goji",
+  "name": "Goji Berry",
+  "hangul": "구기자",
+  "romanization": "gugija",
+  "respell": "goo-GEE-jah",
+  "heritageNote": "Goji berry (gugija, the fruit of Lycium) is a classic tonic fruit in traditional Korean and East Asian medicine, documented in hanbang materia medica and valued as a nourishing, antioxidant-rich botanical in herbal tradition.",
+  "modernUse": "Goji-berry extract appears in K-beauty antioxidant and anti-ageing serums and creams, marketed to help skin look revitalised and protected against the appearance of dullness. Claims remain antioxidant and cosmetic.",
+  "concerns": [
+   "aging",
+   "dullness"
+  ],
+  "heritageBrands": [
+   "Sulwhasoo",
+   "The History of Whoo"
+  ]
+ },
+ {
+  "id": "jujube",
+  "name": "Jujube (Korean Date)",
+  "hangul": "대추",
+  "romanization": "daechu",
+  "respell": "DAE-choo",
+  "heritageNote": "Jujube (daechu, Korean red date) is a familiar fruit in Korean cuisine and traditional medicine, appearing in many hanbang herbal formulas and the Donguibogam as a harmonising, nourishing ingredient often paired with ginseng.",
+  "modernUse": "Jujube fruit extract is used in K-beauty as a botanical antioxidant and humectant-supporting ingredient in nourishing, comforting formulas positioned to help skin look healthy and feel supple. Cosmetic nourishing positioning.",
+  "concerns": [
+   "dryness",
+   "dullness",
+   "aging"
+  ],
+  "heritageBrands": [
+   "The History of Whoo",
+   "Sulwhasoo"
+  ]
+ }
+]
