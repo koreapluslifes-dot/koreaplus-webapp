@@ -41,6 +41,7 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + '.rel{margin-top:28px;border-top:1px solid #eee;padding-top:16px}.rel a{display:inline-block;margin:4px 8px 4px 0}'
   + '.foot{margin-top:24px;border-top:1px solid #eee;padding-top:14px;font-size:13px;color:#777}.foot a{margin-right:14px;text-decoration:none}'
   + '.kb-faq{background:#faf3f7;border:1px solid #f0d8e6;border-radius:12px;padding:10px 14px;margin:8px 0}.kb-faq summary{cursor:pointer;font-weight:800;font-size:15px;color:#1a1320}.kb-faq p{margin:8px 0 2px;font-size:14.5px}'
+  + '.qa{background:linear-gradient(135deg,#fff0f6,#f3ecff);border:1px solid #f0d8e6;border-left:4px solid #d61f6e;border-radius:12px;padding:12px 15px;margin:14px 0 18px;font-size:15.5px;line-height:1.55;color:#1a1320}.qa b{color:#c01a63}'
   + '.kbh{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 18px;background:#fff;border-bottom:1px solid #f0d8e6}'
   + '.kbh-logo{font-weight:900;font-size:18px;color:#1a1320;text-decoration:none;letter-spacing:-.01em}.kbh-logo b{color:#d61f6e}'
   + '.kbh-lib{margin-left:auto;font-size:13px;font-weight:800;color:#c01a63;text-decoration:none}.kbh-lib:hover{text-decoration:underline}'
@@ -65,9 +66,13 @@ function crumbLD(o) {
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x.name, item: x.item })) };
 }
 function shell(o) {
-  // o: {url, title, desc, depth, h1, emoji, ko, bodyHtml, ld, related, ads}
+  // o: {url, title, desc, depth, h1, emoji, ko, bodyHtml, ld, related, ads, quickAnswer}
   const back = '../'.repeat(o.depth || 2);
-  const ld = [crumbLD(o)].concat(o.ld || []).map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('');
+  // AEO: a short Korea-framed "Quick answer" on every content page, marked Speakable so
+  // answer engines / voice assistants can quote it. Hubs (ads:false) skip it.
+  const qaText = o.quickAnswer || (o.ads !== false ? (o.desc || '') : '');
+  const speak = qaText ? [{ '@context': 'https://schema.org', '@type': 'WebPage', url: o.url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.qa', 'h1'] } }] : [];
+  const ld = [crumbLD(o)].concat(o.ld || []).concat(speak).map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('');
   // Ads only on substantive pages (AdSense policy: no ads on thin/low-value pages).
   const plain = (o.bodyHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const adsOk = o.ads !== false && plain.length >= 300;
@@ -90,6 +95,7 @@ ${adsOk ? AD_LOADER : ''}
 <div class="bc"><a href="${SITE}/kbeauty">K-Beauty</a> › <a href="${SITE}/guide/kb/">Library</a>${o.crumb ? ' › ' + o.crumb : ''}</div>
 <div class="em" aria-hidden="true">${o.emoji || '✨'}</div>
 <h1>${esc(o.h1)}${o.ko ? ` <span class="ko">${esc(o.ko)}</span>` : ''}</h1>
+${qaText ? `<div class="qa">⚡ <b>Quick answer:</b> ${esc(qaText)}</div>` : ''}
 ${o.bodyHtml}
 ${adsOk ? AD_UNIT : ''}
 <a class="cta" href="${SITE}/kbeauty">Explore the full K-beauty hub →</a>
@@ -117,7 +123,10 @@ const RETAILERS = [
   { n: '🛒 YesStyle', u: q => `https://www.yesstyle.com/en/search?q=${encodeURIComponent(q)}` },
   { n: '🛒 Amazon', u: q => `https://www.amazon.com/s?k=${encodeURIComponent(q + ' korean skincare')}` },
 ];
+// Affiliate is paused site-wide (AdSense-first). buyBox emits nothing until re-enabled.
+const AFFILIATE_ON = false;
 function buyBox(query, label) {
+  if (!AFFILIATE_ON) return '';
   const links = RETAILERS.map(r => `<a class="pill" rel="sponsored nofollow noopener" target="_blank" href="${r.u(query)}">${r.n}</a>`).join('');
   return `<div class="box"><b>🛍️ ${esc(label || ('Shop ' + query))}</b><div style="margin-top:8px">${links}</div>`
     + `<p class="disc" style="margin-top:8px">Links to trusted retailers — buy from official brand stores or first-party sellers to avoid counterfeits. Some links may earn KoreaPlus a commission at no extra cost to you.</p></div>`;
@@ -254,6 +263,28 @@ DUPES.forEach(dp => {
     artLD(`Korean dupe for ${dp.reference}`, dp.whyComparable, url),
   ];
   emit(`dupe/${dp.id}.html`, shell({ url, depth: 3, crumb: 'Dupes', emoji: dp.referenceEmoji || '💸', h1: `${dp.altName || 'Korean dupe'} — a K-beauty alternative to ${dp.reference}`, title: `Korean dupe for ${dp.reference}`, desc: dp.whyComparable, bodyHtml: body, ld: dupeLd }), '0.6');
+});
+
+// ── 6b. "Korean alternative to [global product]" — inverse-keyed by the Western
+//        product people actually search for (groups all Korean alts per reference).
+const slugify = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const byRef = {};
+DUPES.forEach(dp => { (byRef[dp.reference] = byRef[dp.reference] || []).push(dp); });
+Object.keys(byRef).forEach(ref => {
+  const alts = byRef[ref];
+  const slug = slugify(ref); if (!slug) return;
+  const url = `${SITE}/guide/kb/alternative/${slug}.html`;
+  const a0 = alts[0];
+  const qa = `In Korean skincare, the go-to alternative to ${ref} is ${a0.altName} — it delivers ${a0.sharedHero || 'the same hero ingredients'} for a similar result at a fraction of the price.`;
+  const altCards = alts.map(dp => `<div class="box"><b>${esc(dp.altName || '')}</b>${dp.altBand ? ` <span class="ko">${esc(dp.altBand)}</span>` : ''}<br>≈ <b>${esc(dp.sharedHero || '')}</b> — ${esc(dp.whyComparable || '')}${dp.save ? ` <b>Save ${esc(dp.save)}.</b>` : ''}<div style="margin-top:6px"><a class="pill" href="../dupe/${dp.id}.html">Full comparison →</a></div></div>`).join('');
+  const body = `<p class="lead">Want a <b>Korean alternative to ${esc(ref)}</b>? Korean skincare is famous for delivering the same proven actives — backed by formulation science, at far better value. Here's the K-beauty pick and why it works.</p>
+    <h2>The Korean alternative${alts.length > 1 ? 's' : ''}</h2>
+    ${altCards}
+    <h2>Why the Korean formula compares</h2>
+    <p>Korea's skincare industry iterates fast on proven actives — ferments, peptides, centella and niacinamide — in elegant, barrier-friendly textures. That's how a Korean ${esc(a0.category || 'product')} can match a Western icon like ${esc(ref)} on the ingredients that actually matter, for less.</p>
+    ${deeperBlock({ title: ref + ' ' + alts.map(a => a.altName).join(' '), slug })}`;
+  const ld = [artLD(`Korean alternative to ${ref}`, qa, url), faqLD(`What is the Korean alternative to ${ref}?`, qa)];
+  emit(`alternative/${slug}.html`, shell({ url, depth: 3, crumb: 'Korean alternatives', emoji: a0.referenceEmoji || '🔁', h1: `Korean alternative to ${ref}`, title: `Korean alternative to ${ref} — the K-beauty pick that works`, desc: qa, quickAnswer: qa, bodyHtml: body, ld }), '0.6');
 });
 
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
@@ -593,6 +624,7 @@ const HUB_META = {
   mix: { e: '🧪', t: 'What to mix', g: 'Ingredients & INCI' },
   brand: { e: '🏷️', t: 'Brands', g: 'Brands & products' },
   dupe: { e: '💸', t: 'Dupes', g: 'Brands & products' },
+  alternative: { e: '🔁', t: 'Korean alternatives', g: 'Brands & products' },
   category: { e: '🧴', t: 'Product types', g: 'Brands & products' },
   concern: { e: '🎯', t: 'Skin concerns', g: 'Skin & routines' },
   'skin-type': { e: '🧖', t: 'Skin types', g: 'Skin & routines' },
