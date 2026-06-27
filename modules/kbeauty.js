@@ -1085,11 +1085,28 @@
 
   function renderTicker() {
     const wrap = $('#kb-ticker-wrap'), rail = $('#kb-ticker'); if (!rail) return;
-    const items = TRENDS.map(tr => ({ kind: tr.emoji || '✨', text: tr.title, val: '' }));
-    if (!items.length) return;
-    const html = items.map(it => `<span class="tk-item"><span class="tk-kind">${it.kind}</span>${esc(it.text)}</span>`).join('');
+    if (!TRENDS.length) return;
+    const html = TRENDS.map(tr => `<button type="button" class="tk-item" data-trend="${esc(tr.id)}" aria-label="${esc(tr.title)}"><span class="tk-kind">${tr.emoji || '✨'}</span>${esc(tr.title)}</button>`).join('');
     rail.innerHTML = html + html;
     if (wrap) wrap.hidden = false;
+    if (!rail.dataset.wired) { rail.dataset.wired = '1'; rail.addEventListener('click', (e) => { const b = e.target.closest('[data-trend]'); if (b) openTrendModal(b.dataset.trend); }); }
+  }
+  // Ticker keyword → instant localized trend detail (verdict + science + source).
+  function openTrendModal(id) {
+    const tr = TRENDS.filter(x => x.id === id)[0]; const box = $('#kb-modal'); if (!tr || !box) return;
+    const v = ((window.KBEAUTY_BOARD_CONFIG || {}).verdicts || {})[tr.verdict] || { emoji: '', label: tr.verdict || '' };
+    const cite = (tr.cite && (window.KBEAUTY_CITATIONS || {})[tr.cite]) ? window.KBEAUTY_CITATIONS[tr.cite] : null;
+    box.innerHTML = `<button class="kb-modal-x" data-close aria-label="Close">✕</button>
+      <div style="text-align:center"><div class="km-emoji">${tr.emoji || '✨'}</div><div class="km-name">${esc(tr.title)}</div></div>
+      <div style="text-align:center;margin:10px 0"><span style="display:inline-block;font-size:12.5px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--kb1),var(--kb2));border-radius:16px;padding:5px 13px">${esc(v.emoji || '')} ${esc(v.label || '')}</span></div>
+      ${tr.blurb ? `<div class="km-bio" style="font-style:italic">${esc(tr.blurb)}</div>` : ''}
+      ${tr.science ? `<div class="km-bio">${esc(tr.science)}</div>` : ''}
+      ${cite ? `<div class="km-list"><a href="${esc(cite.url)}" target="_blank" rel="nofollow noopener">📄 ${esc(cite.label)} ↗</a></div>` : ''}
+      <div class="km-links"><button class="km-link" id="kb-trend-more">🔥 ${esc(t('allTrends'))} →</button></div>`;
+    openModalA11y();
+    const more = box.querySelector('#kb-trend-more');
+    if (more) more.addEventListener('click', () => { closeModal(); showCategory('trends'); });
+    try { kbtrack('ticker_click', { id: id }); } catch (e) {}
   }
 
   // ── Category navigation ─────────────────────────────────────────────────────

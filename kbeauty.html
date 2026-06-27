@@ -87,7 +87,8 @@
     .kb-ticker { display:flex; gap:28px; white-space:nowrap; padding:9px 16px; will-change:transform; animation:kb-marquee 46s linear infinite; }
     .kb-ticker:hover { animation-play-state:paused; }
     @keyframes kb-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .tk-item { display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; color:var(--text2); }
+    .tk-item { display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; color:var(--text2); background:none; border:none; padding:0; font-family:inherit; cursor:pointer; transition:color .15s; }
+    .tk-item:hover { color:var(--kb1); }
     .tk-item .tk-kind { font-size:13px; }
     .tk-item .tk-val  { color:var(--kb1); font-weight:800; }
     @media (prefers-reduced-motion:reduce){ .kb-ticker{ animation:none; overflow-x:auto } }
@@ -148,6 +149,8 @@
     /* ── K-beauty dedicated header + branding (simplify: drop travel-site chrome) ── */
     .hub-nav { display:flex; align-items:center; gap:10px; flex-wrap:nowrap; }
     .hub-nav .hub-nav-links { display:none !important; }
+    /* K-beauty is its own destination — drop travel-app ties (My Trip, parent link) from the header */
+    #kp-mt-btn, .kp-mt-btn { display:none !important; }
     .kb-logo { display:inline-flex; align-items:center; gap:6px; font-weight:900; font-size:21px; letter-spacing:-.02em; text-decoration:none; color:var(--text); margin-right:auto; }
     .kb-logo .kb-logo-em { font-size:19px; }
     .kb-logo span:not(.kb-logo-em) { background:linear-gradient(110deg,var(--kb1),var(--kb2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
@@ -624,7 +627,6 @@
 
 <nav class="hub-nav" role="navigation" aria-label="Navigation">
   <a class="hub-nav-logo kb-logo" href="/kbeauty" aria-label="K-Beauty home"><span class="kb-logo-em" aria-hidden="true">🧴</span>K<span>·Beauty</span></a>
-  <a class="kb-parent-link" href="/guide/" aria-label="KoreaPlus home">KoreaPlus ↗</a>
   <div class="hub-nav-links">
   <div class="kp-pnav">
     <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
@@ -980,6 +982,6 @@
 <script src="kbeauty-data.js?v=10"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/kbeauty-sharecard.js"></script>
-<script src="modules/kbeauty.js?v=14"></script>
+<script src="modules/kbeauty.js?v=15"></script>
 </body>
 </html>
