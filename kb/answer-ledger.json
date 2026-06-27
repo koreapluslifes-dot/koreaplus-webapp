@@ -1,0 +1,184 @@
+{
+ "generated": "2026-06",
+ "canonical": "https://koreaplus-lifes.com/kbeauty",
+ "publisher": "KoreaPlus",
+ "note": "Korea-source K-beauty trend verdicts, evidence-graded, structure-function wording only.",
+ "verdicts": [
+  {
+   "topic": "Glass skin",
+   "verdict": "Science-backed",
+   "science": "A real, achievable hydration-and-glow look from layered moisture + SPF — an aesthetic, not a permanent change to your skin.",
+   "since": "2017",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "PDRN “Salmon DNA”",
+   "verdict": "Promising / emerging",
+   "science": "Strong as an injectable; topical-cosmetic evidence is still emerging — expect a hydrated, plumped glow, not injectable-level firming.",
+   "since": "2024",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Exosomes & next-gen",
+   "verdict": "More hype than proof",
+   "science": "Exciting science, but rigorous evidence for topical cosmetic exosomes is very limited today — treat as a nice serum, not a clinic substitute.",
+   "since": "2024",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Snail mucin",
+   "verdict": "Science-backed",
+   "science": "A well-liked hydrating, comforting humectant — great for glow and dewiness; “repair” claims are softer than the marketing.",
+   "since": "2014",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Heartleaf (어성초)",
+   "verdict": "Science-backed",
+   "science": "A well-established soothing botanical — the calmer, comfier-skin result is real; the “shrinks pores” framing is the overclaim.",
+   "since": "2022",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Barrier-first skincare",
+   "verdict": "Science-backed",
+   "science": "Well-supported. A healthy barrier (ceramides, gentle care, fewer harsh actives) is the foundation of calm, resilient skin.",
+   "since": "2020",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Microbiome & postbiotics",
+   "verdict": "Promising / emerging",
+   "science": "A genuinely active research field; ferments hydrate and feel great, but “rebalances your microbiome” claims outpace the evidence.",
+   "since": "2021",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Sun stick & reapply",
+   "verdict": "Science-backed",
+   "science": "Reapplication is the most evidence-backed habit in skincare — just apply enough; thin layers under-deliver the SPF on the label.",
+   "since": "2022",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Skin cycling",
+   "verdict": "Science-backed",
+   "science": "A sensible scheduling framework that reduces over-exfoliation and irritation — the method, not a product, is the point.",
+   "since": "2022",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Slugging",
+   "verdict": "Works, but…",
+   "science": "Genuinely helps dry, compromised barriers hold water — but can feel heavy and isn’t ideal for oily or breakout-prone skin.",
+   "since": "2021",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Glazed-donut skin",
+   "verdict": "Science-backed",
+   "science": "Same idea as glass skin — layered hydration and a dewy finish; an aesthetic, not a skin-health metric.",
+   "since": "2022",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Men’s K-beauty",
+   "verdict": "Science-backed",
+   "science": "Skin doesn’t read gender — the same proven basics (cleanse, hydrate, SPF) work. A real market shift, not a gimmick.",
+   "since": "2019",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Skinimalism / skip-care",
+   "verdict": "Science-backed",
+   "science": "Fewer, well-chosen steps reduce irritation and improve consistency — an evidence-aligned correction to overuse.",
+   "since": "2021",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Mugwort (쑥)",
+   "verdict": "Promising / emerging",
+   "science": "A comforting, antioxidant-rich botanical — pleasant and soothing; specific “healing” claims outrun the topical evidence.",
+   "since": "2021",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "PDRN “Salmon DNA”",
+   "verdict": "Promising / emerging",
+   "science": "Strong as an injectable; topical-cosmetic evidence is still emerging. Expect a hydrated, plumped glow — not injectable-level firming.",
+   "source": "PubMed — polydeoxyribonucleotide & skin — https://pubmed.ncbi.nlm.nih.gov/?term=polydeoxyribonucleotide+skin",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Barrier-first skincare",
+   "verdict": "Science-backed",
+   "science": "Well-supported. A healthy barrier (ceramides, gentle care, fewer harsh actives) is the foundation of calm, resilient skin.",
+   "source": "PubMed — skin barrier & ceramides — https://pubmed.ncbi.nlm.nih.gov/?term=skin+barrier+ceramide",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Microbiome & postbiotics",
+   "verdict": "Promising / emerging",
+   "science": "A genuinely active research field; ferments hydrate and feel great, but specific “rebalances your microbiome” product claims still outpace the topical evidence.",
+   "source": "PubMed — skin microbiome & postbiotics — https://pubmed.ncbi.nlm.nih.gov/?term=skin+microbiome+postbiotic",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Exosomes & next-gen",
+   "verdict": "More hype than proof",
+   "science": "Exciting science, but rigorous evidence for topical cosmetic exosomes is very limited today. Treat as a nice serum, not a clinic substitute.",
+   "source": "PubMed — topical exosomes in skin — https://pubmed.ncbi.nlm.nih.gov/?term=exosome+topical+skin",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Heartleaf everything",
+   "verdict": "Science-backed",
+   "science": "A well-established soothing botanical — the “calmer, comfier skin” result is real; the “shrinks pores” framing is the overclaim.",
+   "source": "PubMed — Houttuynia cordata & skin — https://pubmed.ncbi.nlm.nih.gov/?term=houttuynia+cordata+skin",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Men’s K-beauty boom",
+   "verdict": "Science-backed",
+   "science": "Skin doesn’t read gender — the same proven basics (cleanse, hydrate, SPF) work. A real, sensible market shift, not a gimmick.",
+   "source": "American Academy of Dermatology — skin care basics — https://www.aad.org/public/everyday-care/skin-care-basics",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Sun-stick & reapply",
+   "verdict": "Science-backed",
+   "science": "Reapplication is the most evidence-backed habit in skincare. Sticks/cushions help compliance — just apply enough; thin layers under-deliver SPF.",
+   "source": "American Academy of Dermatology — sun protection — https://www.aad.org/public/everyday-care/sun-protection",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  },
+  {
+   "topic": "Skinimalism",
+   "verdict": "Science-backed",
+   "science": "Fewer, well-chosen steps reduce irritation and improve consistency — a solid, evidence-aligned correction to product overload.",
+   "source": "American Academy of Dermatology — skin care basics — https://www.aad.org/public/everyday-care/skin-care-basics",
+   "koreaOrigin": true,
+   "url": "https://koreaplus-lifes.com/kbeauty"
+  }
+ ]
+}

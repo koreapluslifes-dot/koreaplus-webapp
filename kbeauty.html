@@ -698,6 +698,21 @@
     .kb-auth-exp .kb-auth-exp-c { font-size:19px; font-weight:700; line-height:1; }
     .kb-auth-exp:active { transform:scale(.99); }
 
+    /* Glass Skin Score — result card */
+    .gsc-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px 18px; box-shadow:var(--shadow-1); text-align:center; }
+    html.light .gsc-card { background:#fff; }
+    .gsc-big { font-size:66px; font-weight:900; line-height:1; background:linear-gradient(135deg,var(--kb1),var(--kb2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .gsc-big span { font-size:24px; color:var(--text3); -webkit-text-fill-color:var(--text3); }
+    .gsc-tier { font-size:19px; font-weight:900; color:var(--text); margin-top:6px; }
+    .gsc-bars { display:grid; gap:11px; margin:18px 0; text-align:left; }
+    .gsc-bar-h { font-size:13.5px; font-weight:700; color:var(--text2); margin-bottom:5px; }
+    .gsc-bar-h b { color:var(--kb1); }
+    .gsc-track { height:9px; background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+    .gsc-fill { height:100%; background:linear-gradient(90deg,var(--kb1),var(--kb2)); border-radius:6px; transition:width .7s var(--ease); }
+    .gsc-next { text-align:left; background:var(--kb-soft); border-radius:12px; padding:12px 15px; font-size:14px; color:var(--text); }
+    .gsc-next ul { margin:6px 0 0; padding-left:18px; } .gsc-next li { margin:4px 0; color:var(--text2); }
+    .gsc-actions { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+
     /* ═══ Mobile app-shell overrides (placed last so they win source-order) ═════ */
     @media (max-width:680px) {
       /* Trim the hero so content reaches the fold sooner (was ~192px → ~120px) */
@@ -842,6 +857,15 @@
       <div class="kb-sec-sub" data-i18n="kbeauty.sec.quiz.sub">A 30-second quiz personalizes everything below</div>
     </div>
     <div id="kb-quiz-box"></div>
+  </section>
+
+  <!-- Glass Skin Score (gamified diagnostic → shareable scorecard) -->
+  <section class="kb-sec" id="kb-glassscore">
+    <div class="kb-sec-head">
+      <div class="kb-sec-title" data-i18n="kbeauty.sec.glassscore.title">🔮 What's your Glass Skin Score?</div>
+      <div class="kb-sec-sub" data-i18n="kbeauty.sec.glassscore.sub">8 quick questions → your 0–100 score, tier & next steps to share</div>
+    </div>
+    <div id="kb-glassscore-box"></div>
   </section>
 
   <!-- Concern selector -->
@@ -1102,7 +1126,7 @@
 <script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
 <script defer src="kbeauty-data.js?v=10"></script>
 <script defer src="modules/api-client.js"></script>
-<script defer src="modules/kbeauty-sharecard.js"></script>
-<script defer src="modules/kbeauty.js?v=20"></script>
+<script defer src="modules/kbeauty-sharecard.js?v=2"></script>
+<script defer src="modules/kbeauty.js?v=21"></script>
 </body>
 </html>

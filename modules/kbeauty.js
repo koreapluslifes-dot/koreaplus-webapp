@@ -221,6 +221,79 @@
     showShareFab();
   }
 
+  // ── Glass Skin Score (gamified diagnostic → shareable 0-100 scorecard) ────────
+  const GLASS_DIMS = [
+    { id: 'hydration', label: () => cx('gs.dim.hydration', 'Hydration'), emoji: '💧' },
+    { id: 'barrier', label: () => cx('gs.dim.barrier', 'Barrier'), emoji: '🛡️' },
+    { id: 'glow', label: () => cx('gs.dim.glow', 'Glow'), emoji: '✨' },
+    { id: 'consistency', label: () => cx('gs.dim.consistency', 'Consistency'), emoji: '🔁' },
+  ];
+  const GLASS_Q = [
+    { dim: 'hydration', k: 'q1', q: 'How does your skin feel a few hours after cleansing?', opts: ['Tight or dry', 'Slightly tight', 'Comfortable', 'Dewy — never tight'] },
+    { dim: 'hydration', k: 'q2', q: 'Do you layer a hydrating toner or essence?', opts: ['Never', 'Sometimes', 'Most days', 'Daily, often 2–3 layers'] },
+    { dim: 'barrier', k: 'q3', q: 'How often is your skin red, stinging or reactive?', opts: ['Very often', 'Sometimes', 'Rarely', 'Almost never'] },
+    { dim: 'barrier', k: 'q4', q: 'Do you pile on strong actives / over-exfoliate?', opts: ['Yes, a lot', 'A fair bit', 'Occasionally', 'No — I keep it gentle'] },
+    { dim: 'glow', k: 'q5', q: "How would you describe your skin's finish?", opts: ['Dull or tired', 'A bit uneven', 'Healthy', 'Bright & luminous'] },
+    { dim: 'glow', k: 'q6', q: 'Do you use brightening actives (vitamin C, niacinamide, rice)?', opts: ['No', 'Rarely', 'Sometimes', 'Regularly'] },
+    { dim: 'consistency', k: 'q7', q: 'How consistent is your daily routine?', opts: ['I barely have one', 'On and off', 'Most days', 'Morning & night, daily'] },
+    { dim: 'consistency', k: 'q8', q: 'Do you wear (and reapply) sunscreen?', opts: ['Never', 'Sometimes', 'Daily', 'Daily + reapply'] },
+  ];
+  const GLASS_NEXT = {
+    hydration: ['💧 Hyaluronic acid / beta-glucan toner', '🐌 Snail mucin essence', '🧴 7-skin layering method'],
+    barrier: ['🌿 Centella (cica)', '🧱 Ceramide moisturizer', '🍃 Heartleaf toner'],
+    glow: ['✨ Niacinamide serum', '🍚 Rice extract essence', '🍊 Vitamin C in the AM'],
+    consistency: ['☀️ Daily SPF 50+ & reapply', '🧼 Gentle double cleanse', '🌙 A simple repeatable AM/PM routine'],
+  };
+  const glassAns = {};
+  function glassTier(score) {
+    if (score >= 75) return { id: 'glass', name: cx('gs.tier.glass', 'Glass Skin'), ko: '유리 피부', emoji: '🔮' };
+    if (score >= 45) return { id: 'honey', name: cx('gs.tier.honey', 'Honey Skin'), ko: '꿀 피부', emoji: '🍯' };
+    return { id: 'jelly', name: cx('gs.tier.jelly', 'Jelly Skin'), ko: '젤리 피부', emoji: '🫧' };
+  }
+  function renderGlassScore() {
+    const box = $('#kb-glassscore-box'); if (!box) return;
+    box.innerHTML = `<div class="kb-quiz">
+      ${GLASS_Q.map((q, qi) => `<div class="kb-q" data-gq="${qi}">
+        <div class="kb-q-text">${qi + 1}. ${esc(cx('gs.' + q.k + '.q', q.q))}</div>
+        <div class="kb-opts">${q.opts.map((o, oi) => `<button class="kb-opt" type="button" data-gq="${qi}" data-go="${oi}">${esc(cx('gs.' + q.k + '.o' + oi, o))}</button>`).join('')}</div>
+      </div>`).join('')}
+      <button class="kb-quiz-cta" id="kb-glass-submit" type="button" disabled>🔮 ${esc(cx('gs.cta', 'Get my Glass Score'))}</button>
+    </div>`;
+    $$('.kb-opt', box).forEach(b => b.addEventListener('click', () => {
+      const qi = +b.dataset.gq;
+      $$(`.kb-opt[data-gq="${qi}"]`, box).forEach(x => x.classList.remove('sel'));
+      b.classList.add('sel'); glassAns[qi] = +b.dataset.go;
+      const s = $('#kb-glass-submit'); if (s) s.disabled = Object.keys(glassAns).length < GLASS_Q.length;
+    }));
+    const submit = $('#kb-glass-submit');
+    if (submit) submit.addEventListener('click', renderGlassResult);
+  }
+  function computeGlass() {
+    const raw = { hydration: 0, barrier: 0, glow: 0, consistency: 0 };
+    GLASS_Q.forEach((q, qi) => { raw[q.dim] += (glassAns[qi] || 0); });   // 0..6 per dim
+    const subs = GLASS_DIMS.map(d => ({ id: d.id, label: d.label(), emoji: d.emoji, val: Math.round(raw[d.id] / 6 * 25) }));
+    const score = subs.reduce((a, s) => a + s.val, 0);
+    const weakest = subs.slice().sort((a, b) => a.val - b.val)[0];
+    return { score, subs, tier: glassTier(score), next: GLASS_NEXT[weakest.id] || [] };
+  }
+  function renderGlassResult() {
+    const box = $('#kb-glassscore-box'); if (!box) return;
+    const r = computeGlass();
+    box.innerHTML = `<div class="gsc-card">
+      <div class="gsc-big">${r.score}<span>/100</span></div>
+      <div class="gsc-tier">${r.tier.emoji} ${esc(r.tier.name)} <span class="gs-ko">${esc(r.tier.ko)}</span></div>
+      <div class="gsc-bars">${r.subs.map(s => `<div class="gsc-bar"><div class="gsc-bar-h">${s.emoji} ${esc(s.label)} <b>${s.val}/25</b></div><div class="gsc-track"><div class="gsc-fill" style="width:${s.val / 25 * 100}%"></div></div></div>`).join('')}</div>
+      <div class="gsc-next"><b>${esc(cx('gs.next', 'Raise your score with'))}:</b><ul>${r.next.map(n => `<li>${esc(n)}</li>`).join('')}</ul></div>
+      <div class="gsc-actions">
+        <button class="kb-quiz-cta" id="kb-glass-share" type="button">📤 ${esc(cx('gs.share', 'Share my score'))}</button>
+        <button class="r-reset" id="kb-glass-retake" type="button">↻ ${esc(t('retake'))}</button>
+      </div></div>`;
+    try { kbtrack('glass_score', { score: r.score, tier: r.tier.id }); } catch (e) {}
+    const sh = $('#kb-glass-share'); if (sh) sh.addEventListener('click', () => { try { window.KbeautyShareCard && window.KbeautyShareCard.generateGlassScore && window.KbeautyShareCard.generateGlassScore(r); } catch (e) {} });
+    const rt = $('#kb-glass-retake'); if (rt) rt.addEventListener('click', () => { for (const k in glassAns) delete glassAns[k]; renderGlassScore(); });
+    try { document.getElementById('kb-glassscore').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch {}
+  }
+
   // ── Concern selector ────────────────────────────────────────────────────────
   function renderConcerns() {
     const grid = $('#kb-concern-grid'); if (!grid) return;
@@ -1166,7 +1239,7 @@
   // tk = an existing 9-language messages key (emoji + label baked in) reused for
   // instant localization; sub = English fallback via cx() (overlays may add later).
   const KB_CATS = [
-    { id: 'skin', icon: '🪞', tk: 'kbeauty.filter.quiz', t: 'My Skin', sub: 'Skin-type quiz, concerns, seasonal forecast & your stack', secs: ['kb-quiz', 'kb-concerns', 'kb-forecast', 'kb-stack'] },
+    { id: 'skin', icon: '🪞', tk: 'kbeauty.filter.quiz', t: 'My Skin', sub: 'Skin-type quiz, glass score, concerns & your stack', secs: ['kb-quiz', 'kb-glassscore', 'kb-concerns', 'kb-forecast', 'kb-stack'] },
     { id: 'routine', icon: '🧴', tk: 'kbeauty.filter.routine', t: 'Routine', sub: 'AM/PM routine builder, product types & glass skin', secs: ['kb-routine', 'kb-categories', 'kb-glassskin'] },
     { id: 'sun', icon: '☀️', tk: 'kbeauty.filter.sun', t: 'Sunscreen', sub: 'Decode SPF/PA & find your Korean sunscreen', secs: ['kb-sun'] },
     { id: 'ingr', icon: '🧪', tk: 'kbeauty.filter.ingredients', t: 'Ingredients', sub: 'Encyclopedia, label decoder & what not to mix', secs: ['kb-ingredients', 'kb-snail', 'kb-conflicts'] },
@@ -1211,7 +1284,7 @@
     if (_renderedCats[id]) return;
     _renderedCats[id] = true;
     const M = {
-      skin: [renderForecast, renderQuiz, renderConcerns, renderStack],
+      skin: [renderForecast, renderQuiz, renderGlassScore, renderConcerns, renderStack],
       routine: [renderRoutine, renderCategories, renderGlassSkin],
       sun: [renderSunscreen],
       ingr: [renderIngredients, renderSnail, renderPicker, renderVerdicts],

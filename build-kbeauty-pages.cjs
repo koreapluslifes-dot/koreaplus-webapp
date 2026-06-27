@@ -359,6 +359,39 @@ ASKQ.forEach(q => {
   emit(`report/${period}.html`, shell({ url, depth: 3, crumb: 'Trend report', emoji: '📰', h1: `K-Beauty Trend Report — ${monthName}`, title: `K-Beauty trends ${monthName} — what's rising, peaking & cooling`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD(`K-Beauty Trend Report ${monthName}`, qa, url), faqLD(`What are the K-beauty trends in ${monthName}?`, qa)] }), '0.8');
 })();
 
+// ── 6g. Glass Skin Score — SEO landing that funnels to the interactive hub tool.
+(function () {
+  const url = `${SITE}/guide/kb/glass-score/index.html`;
+  const qa = `Your Glass Skin Score rates how close your skin is to the Korean 'glass skin' (유리 피부) ideal across hydration, barrier, glow and consistency — take the free 8-question test for your 0–100 score and the Korean next steps to raise it.`;
+  const body = `<p class="lead">${esc(qa)}</p>
+    <p><a class="cta" href="${SITE}/kbeauty#kb-glassscore">🔮 Take the Glass Skin Score test →</a></p>
+    <h2>What is a Glass Skin Score?</h2>
+    <p>Glass skin — <i>yuri-pibu</i> (유리 피부) — is the Korean ideal of a smooth, translucent, luminous complexion. The Glass Skin Score turns that ideal into four measurable habits: <b>Hydration</b>, <b>Barrier</b>, <b>Glow</b> and <b>Consistency</b>. Answer eight quick questions for a 0–100 score, a Korean tier (Jelly 🫧 → Honey 🍯 → Glass 🔮), and the three Korean ingredients or steps most likely to raise your weakest area.</p>
+    <h2>How to raise your score</h2>
+    <ul><li><b>Hydration:</b> layer hydrating toners/essences (the 7-skin method), snail mucin, beta-glucan.</li><li><b>Barrier:</b> centella (cica), ceramides, heartleaf — and ease off harsh actives.</li><li><b>Glow:</b> niacinamide, rice extract, morning vitamin C.</li><li><b>Consistency:</b> a simple repeatable AM/PM routine and daily SPF with reapplication.</li></ul>
+    ${deeperBlock({ title: 'glass skin score hydration barrier glow centella niacinamide snail rice', slug: 'glass-score' })}`;
+  emit(`glass-score/index.html`, shell({ url, depth: 3, crumb: 'Glass Skin Score', emoji: '🔮', h1: 'Glass Skin Score — the free K-beauty skin test', title: 'Glass Skin Score — how close are you to Korean glass skin?', desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD('Glass Skin Score', qa, url), faqLD('What is a glass skin score?', qa)] }), '0.7');
+})();
+
+// ── 6h. K-pop / K-drama beauty (star/) — GENERAL educational content only.
+//        No fabricated per-celebrity product claims (right-of-publicity safe);
+//        bridges the global K-wave to Korean skincare + cross-links the /kpop vertical.
+const STARS = [
+  { slug: 'kpop-idol-skincare-routine', h1: 'K-pop idol skincare routine: the real Korean approach', qa: 'K-pop idols are widely reported to rely on a consistent, hydration-first Korean routine — gentle double cleansing, layered hydration, barrier care (centella, snail mucin) and daily SPF — rather than any single miracle product.', secs: [['Hydration over everything', 'The look most associated with idols is dewy, even, "glass" skin. In practice that comes from layering lightweight hydration — toner, essence, moisturizer — on a healthy barrier, the cornerstone of Korean skincare, not from one product.'], ['Gentle, not harsh', 'Because idols are in heavy makeup often, thorough but gentle double cleansing (oil then water-based) and barrier-supporting ingredients like centella (cica) and ceramides are emphasized to keep skin calm.'], ['Sun protection is non-negotiable', 'Daily SPF 50+ and reapplication is the most evidence-backed habit for keeping skin even and youthful — and Korean sunscreens are prized for elegant, no-white-cast textures.']] },
+  { slug: 'kdrama-actor-glass-skin', h1: 'How K-drama actors get glass skin', qa: 'The luminous "glass skin" seen on K-drama actors is a lighting-plus-skincare effect: months of consistent hydration, exfoliation in moderation and barrier care, finished with dewy makeup — an aesthetic rooted in Korean skincare culture.', secs: [['It starts months before camera', 'Glass skin (유리 피부) is built over time through consistent hydration and a calm barrier — not overnight. Korean routines prioritize this slow, gentle consistency.'], ['Prep + dewy finish', 'On set, hydrating prep (essences, sheet masks) plus dewy, skin-like makeup amplify the glass effect under lighting.'], ['The Korean ingredient toolkit', 'Hydrators (hyaluronic acid, snail mucin), soothers (centella, heartleaf) and brighteners (niacinamide, rice) are the Korean staples behind the look.']] },
+  { slug: 'korean-celebrity-skincare-secrets', h1: 'Korean celebrity skincare secrets (the science)', qa: 'The "secret" behind Korean celebrity skin is mostly unglamorous and evidence-based: consistency, gentle cleansing, layered hydration, barrier repair and rigorous daily sun protection — the same Korean principles anyone can follow.', secs: [['Consistency beats intensity', 'Doing a simple routine every morning and night outperforms occasional aggressive treatments — a core Korean philosophy.'], ['Barrier-first', 'Protecting the skin barrier (ceramides, centella, avoiding over-exfoliation) keeps skin resilient and glowing.'], ['Professional support', 'Many also rely on dermatologist guidance and in-clinic care; at home, the routine stays gentle and hydration-led.']] },
+  { slug: 'kpop-glass-skin-ingredients', h1: 'The Korean ingredients behind K-pop glass skin', qa: 'The Korean ingredients most linked to the K-pop "glass skin" look are hydrators (hyaluronic acid, snail mucin, beta-glucan), soothers (centella/cica, heartleaf) and gentle brighteners (niacinamide, rice extract) — all layered over diligent SPF.', secs: [['Hydrators for the dewy base', 'Hyaluronic acid, snail mucin and beta-glucan draw in and hold water for the plump, reflective finish.'], ['Soothers for an even tone', 'Centella (cica) and heartleaf help calm redness so skin looks uniform — key to the glass effect.'], ['Brighteners for glow', 'Niacinamide and traditional rice extract support a brighter, more luminous appearance over time.']] },
+  { slug: 'how-idols-prep-skin-before-makeup', h1: 'How idols prep their skin before makeup', qa: 'Idol-style skin prep is hydration layering: a gentle cleanse, a hydrating toner/essence, a lightweight moisturizer and SPF, letting each absorb so makeup sits smoothly on a plump, dewy base — a hallmark of Korean skincare.', secs: [['Clean, then hydrate', 'A gentle low-pH cleanse, then layered hydration (the "7-skin" idea of pressing in light toner layers) creates a smooth canvas.'], ['Lock and protect', 'A light moisturizer seals hydration; SPF protects — both help makeup last and look skin-like.'], ['Let it absorb', 'Pausing between steps so each layer absorbs prevents pilling and gives the dewy, glass-skin finish.']] },
+];
+STARS.forEach(s => {
+  const url = `${SITE}/guide/kb/star/${s.slug}.html`;
+  const body = `<p class="lead">${esc(s.qa)}</p>
+    ${s.secs.map(sec => `<h2>${esc(sec[0])}</h2><p>${esc(sec[1])}</p>`).join('')}
+    <div class="box">🎤 <b>Love K-pop & K-drama?</b> Explore the people and culture behind the wave on our <a href="${SITE}/guide/kpop.html">K-Pop hub</a> — then build the look with the <a href="${SITE}/kbeauty#kb-glassscore">Glass Skin Score</a>.</div>
+    ${deeperBlock({ title: s.h1 + ' glass skin centella snail niacinamide rice heartleaf', slug: s.slug })}`;
+  emit(`star/${s.slug}.html`, shell({ url, depth: 3, crumb: 'K-pop & K-drama beauty', emoji: '🎤', h1: s.h1, title: `${s.h1} — K-beauty`, desc: s.qa, quickAnswer: s.qa, bodyHtml: body, ld: [artLD(s.h1, s.qa, url), faqLD(s.h1.replace(/:.*/, '') + '?', s.qa)] }), '0.6');
+});
+
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
 GLOSS.forEach((g, idx) => {
   const sg = slug(g.term);
@@ -711,6 +744,8 @@ const HUB_META = {
   say: { e: '🗣️', t: 'Pronunciation', g: 'K-beauty knowledge' },
   ask: { e: '💬', t: 'K-beauty Q&A', g: 'K-beauty knowledge' },
   report: { e: '📰', t: 'Trend reports', g: 'Skin & routines' },
+  star: { e: '🎤', t: 'K-pop & K-drama beauty', g: 'K-beauty knowledge' },
+  'glass-score': { e: '🔮', t: 'Glass Skin Score', g: 'Skin & routines' },
   company: { e: '🏢', t: 'Companies', g: 'K-beauty knowledge' },
   industry: { e: '🏭', t: 'Industry', g: 'K-beauty knowledge' },
   country: { e: '🌍', t: 'K-beauty worldwide', g: 'K-beauty knowledge' },
