@@ -416,3 +416,41 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0)) !important; }
 }
 @media (max-width: 380px) { .kp-tabbar .kp-tab-l { font-size: 9.5px; } }
+
+/* ── Reusable bottom sheet (Toss-style) — desktop: inline; mobile: slide-up sheet ── */
+.kp-sheet-trigger { display: none; }
+.kp-sheet-handle, .kp-sheet-title, .kp-sheet-backdrop, .kp-sheet-done { display: none; }
+@media (max-width: 768px) {
+  .kp-sheet-trigger { display: inline-flex; align-items: center; gap: 6px; padding: 9px 15px; border-radius: 999px; background: var(--card, rgba(255,255,255,.06)); border: 1px solid var(--border, rgba(255,255,255,.14)); color: var(--text, #fff); font-size: 13.5px; font-weight: 700; font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .kp-sheet { position: fixed; inset: 0; z-index: 1300; visibility: hidden; }
+  .kp-sheet.open { visibility: visible; }
+  .kp-sheet-backdrop { display: block; position: absolute; inset: 0; background: rgba(0,0,0,.5); opacity: 0; transition: opacity .25s; }
+  .kp-sheet.open .kp-sheet-backdrop { opacity: 1; }
+  .kp-sheet-panel { position: absolute; left: 0; right: 0; bottom: 0; background: var(--bg2, #0f1929); border-top: 1px solid var(--border, rgba(255,255,255,.1)); border-radius: 20px 20px 0 0; padding: 6px 18px calc(18px + env(safe-area-inset-bottom, 0)); transform: translateY(100%); transition: transform .3s cubic-bezier(.32,.72,0,1); max-height: 82vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .kp-sheet.open .kp-sheet-panel { transform: translateY(0); }
+  .kp-sheet-handle { display: block; width: 40px; height: 4px; border-radius: 99px; background: rgba(255,255,255,.28); margin: 8px auto 14px; }
+  .kp-sheet-title { display: block; font-size: 16px; font-weight: 800; color: var(--text, #fff); margin: 0 0 14px; }
+  .kp-sheet .filter-bar { flex-direction: column; align-items: stretch; gap: 7px; overflow: visible; }
+  .kp-sheet .filter-label { margin: 8px 0 2px !important; opacity: .7; font-size: 12px; }
+  .kp-sheet .filter-pill { width: 100%; text-align: left; min-height: 44px; }
+  .kp-sheet .view-toggle { display: none; }   /* view toggle stays in the top bar, not the sheet */
+  .kp-sheet-done { display: block; width: 100%; margin-top: 16px; padding: 13px; border: 0; border-radius: 12px; background: var(--accent2, #74b9ff); color: #06101d; font-size: 15px; font-weight: 800; font-family: inherit; cursor: pointer; }
+  .fest-controls { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+}
+
+/* ── Home mobile simplification — shorter hero + tighter section rhythm (less scroll) ── */
+@media (max-width: 768px) {
+  .map-hero { min-height: 420px !important; }
+  .categories-section { padding-top: 34px !important; }
+  .seo-article { padding-top: 30px !important; padding-bottom: 6px !important; }
+  .mv-section, .bucket-section, .popular-guides, #kp-retain { padding-top: 30px !important; }
+  .section-header { margin-bottom: 14px !important; }
+}
+
+/* ── Home: collapse the long SEO article on mobile behind "Read more" (less clutter, SEO-safe) ── */
+.kp-readmore { display: none; }
+@media (max-width: 768px) {
+  #seo-article.kp-clamp { max-height: 300px; overflow: hidden; position: relative; }
+  #seo-article.kp-clamp::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: linear-gradient(transparent, var(--bg, #0a1422)); pointer-events: none; }
+  .kp-readmore { display: block; margin: 14px auto 0; padding: 11px 24px; border: 1px solid var(--border, rgba(255,255,255,.18)); border-radius: 999px; background: var(--card, rgba(255,255,255,.06)); color: var(--text, #fff); font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
+}

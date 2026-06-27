@@ -33,7 +33,7 @@
 <link rel="icon" type="image/svg+xml" href="icons/kplus.svg">
 <link rel="apple-touch-icon" href="icons/kplus.svg">
 <meta name="theme-color" content="#0c1829">
-<link rel="stylesheet" href="hub-styles.css?v=10">
+<link rel="stylesheet" href="hub-styles.css?v=11">
 <link rel="stylesheet" href="theme.css">
 <script src="modules/header.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Korea Festivals Calendar","description":"Upcoming festivals in South Korea","url":"https://koreaplus-lifes.com/guide/festivals.html"}</script>
@@ -118,26 +118,49 @@
 
 <div class="hub-byline" style="max-width:880px;margin:8px auto 0;padding:6px 16px;color:#9fb0c3;font-size:12.5px;line-height:1.5"><span aria-hidden="true">✍️</span> By the <strong style="color:#eaf0f7">KoreaPlus Editorial Team</strong> · Updated 2026 · <span aria-hidden="true">✓</span> Fact-checked against official Korean tourism &amp; government sources</div>
 <div class="hub-content" id="main">
-  <!-- Filter Bar -->
-  <div class="filter-bar">
-    <span class="filter-label">City</span>
-    <button class="filter-pill active" data-filter="city" data-val="" data-i18n="hub.s3">All Korea</button>
-    <button class="filter-pill" data-filter="city" data-val="Seoul">Seoul</button>
-    <button class="filter-pill" data-filter="city" data-val="Busan">Busan</button>
-    <button class="filter-pill" data-filter="city" data-val="Jeju">Jeju</button>
-    <button class="filter-pill" data-filter="city" data-val="Gyeongju">Gyeongju</button>
-    <button class="filter-pill" data-filter="city" data-val="Jeonju">Jeonju</button>
-
-    <span class="filter-label" style="margin-left:12px">Type</span>
-    <button class="filter-pill active" data-filter="type" data-val="all">All</button>
-    <button class="filter-pill" data-filter="type" data-val="festival" data-i18n="hub.s13">Festivals</button>
-    <button class="filter-pill" data-filter="type" data-val="show">Shows</button>
-
+  <!-- Filter controls — mobile: bottom-sheet; desktop: inline bar -->
+  <div class="fest-controls">
+    <button class="kp-sheet-trigger" id="festFilterBtn" type="button" aria-haspopup="dialog" aria-controls="festSheet">🎚️ <span>Filters</span></button>
     <div class="view-toggle">
       <button class="view-btn" id="btn-cal" onclick="setView('cal')" data-i18n="hub.s14">📅 Calendar</button>
       <button class="view-btn active" id="btn-list" onclick="setView('list')" data-i18n="hub.s2">☰ List</button>
     </div>
   </div>
+  <div class="kp-sheet" id="festSheet" aria-hidden="true">
+    <div class="kp-sheet-backdrop" data-sheet-close></div>
+    <div class="kp-sheet-panel" role="dialog" aria-modal="true" aria-label="Filters">
+      <div class="kp-sheet-handle" data-sheet-close></div>
+      <div class="kp-sheet-title">Filters</div>
+      <div class="filter-bar">
+        <span class="filter-label">City</span>
+        <button class="filter-pill active" data-filter="city" data-val="" data-i18n="hub.s3">All Korea</button>
+        <button class="filter-pill" data-filter="city" data-val="Seoul">Seoul</button>
+        <button class="filter-pill" data-filter="city" data-val="Busan">Busan</button>
+        <button class="filter-pill" data-filter="city" data-val="Jeju">Jeju</button>
+        <button class="filter-pill" data-filter="city" data-val="Gyeongju">Gyeongju</button>
+        <button class="filter-pill" data-filter="city" data-val="Jeonju">Jeonju</button>
+
+        <span class="filter-label" style="margin-left:12px">Type</span>
+        <button class="filter-pill active" data-filter="type" data-val="all">All</button>
+        <button class="filter-pill" data-filter="type" data-val="festival" data-i18n="hub.s13">Festivals</button>
+        <button class="filter-pill" data-filter="type" data-val="show">Shows</button>
+      </div>
+      <button class="kp-sheet-done" type="button" data-sheet-close>Done</button>
+    </div>
+  </div>
+  <script>(function(){
+    var sheet=document.getElementById('festSheet'),trig=document.getElementById('festFilterBtn');
+    if(!sheet||!trig)return; var panel=sheet.querySelector('.kp-sheet-panel');
+    function open(){sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+    function close(){sheet.classList.remove('open');sheet.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+    trig.addEventListener('click',open);
+    sheet.querySelectorAll('[data-sheet-close]').forEach(function(e){e.addEventListener('click',close);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&sheet.classList.contains('open'))close();});
+    var sy=0,dy=0,drag=false;
+    panel.addEventListener('touchstart',function(e){if(panel.scrollTop>0){drag=false;return;}sy=e.touches[0].clientY;drag=true;dy=0;},{passive:true});
+    panel.addEventListener('touchmove',function(e){if(!drag)return;dy=e.touches[0].clientY-sy;if(dy>0)panel.style.transform='translateY('+dy+'px)';},{passive:true});
+    panel.addEventListener('touchend',function(){if(!drag)return;drag=false;panel.style.transform='';if(dy>90)close();});
+  })();</script>
 
   <!-- Calendar View -->
   <div id="view-cal">

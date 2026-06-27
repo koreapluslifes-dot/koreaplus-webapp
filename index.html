@@ -82,7 +82,7 @@
   <link rel="stylesheet" href="style.css?v=21">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
-  <link rel="stylesheet" href="hub-styles.css?v=10">
+  <link rel="stylesheet" href="hub-styles.css?v=11">
 </head>
 <body>
 <a href="#main" class="kp-skip" data-i18n="a11y.skip">Skip to content</a>
@@ -570,5 +570,6 @@
   <a href="bucket-list.html" data-tab="saved"><span class="kp-tab-i" aria-hidden="true">❤️</span><span class="kp-tab-l">Saved</span></a>
 </nav>
 <script>(function(){var T={en:["Home","Explore","Search","Plan","Saved"],ko:["홈","둘러보기","검색","플랜","저장"],ja:["ホーム","見る","検索","プラン","保存"],zh:["首页","探索","搜索","行程","收藏"],es:["Inicio","Explorar","Buscar","Planear","Guardado"],fr:["Accueil","Explorer","Rechercher","Planifier","Enreg."],de:["Start","Entdecken","Suche","Planen","Merkliste"],pt:["Início","Explorar","Buscar","Planejar","Salvos"],id:["Beranda","Jelajahi","Cari","Rencana","Disimpan"]};function lng(){try{return (localStorage.getItem("kp_lang")||document.documentElement.lang||navigator.language||"en").slice(0,2);}catch(e){return "en";}}function apply(){var a=T[lng()]||T.en,e=document.querySelectorAll(".kp-tabbar .kp-tab-l");for(var i=0;i<e.length&&i<a.length;i++)e[i].textContent=a[i];}function active(){try{var p=location.pathname,t="home";if(/explore.html/.test(p))t="explore";else if(/plan.html/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";var el=document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}catch(e){}}apply();active();document.addEventListener("kp:langchange",apply);})();</script>
+<script>(function(){try{if(window.innerWidth>768)return;var a=document.getElementById("seo-article");if(!a)return;a.classList.add("kp-clamp");var L={en:"Read more",ko:"더 보기",ja:"もっと見る",zh:"查看更多",es:"Leer más",fr:"Voir plus",de:"Mehr",pt:"Ver mais",id:"Selengkapnya"};var g=(localStorage.getItem("kp_lang")||document.documentElement.lang||"en").slice(0,2);var b=document.createElement("button");b.className="kp-readmore";b.type="button";b.textContent=(L[g]||L.en)+" ▾";b.addEventListener("click",function(){a.classList.remove("kp-clamp");b.remove();});a.parentNode.insertBefore(b,a.nextSibling);}catch(e){}})();</script>
 </body>
 </html>
