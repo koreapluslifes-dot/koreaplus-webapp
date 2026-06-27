@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '9';
+  const OVERLAY_VER = '10';
   async function loadContent() {
     if (lang === 'en') return;
     try {
@@ -102,7 +102,7 @@
   // Language resolution mirrors modules/i18n.js detect(): URL ?lang= wins (so
   // hreflang'd /kbeauty.html?lang=xx pages serve matching content), then the
   // saved choice, then the browser language.
-  const _SUPPORTED = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+  const _SUPPORTED = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id', 'ar', 'hi', 'ru', 'vi', 'th'];
   const _urlLang = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
   const lang = (_SUPPORTED.includes(_urlLang) ? _urlLang
     : (localStorage.getItem('kp_lang') || (navigator.language || 'en').slice(0, 2) || 'en')).toLowerCase();

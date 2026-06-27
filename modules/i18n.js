@@ -1,6 +1,7 @@
 /* KoreaPlus i18n Module — 9 languages */
 (function () {
-  const SUPPORTED = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+  const SUPPORTED = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id', 'ar', 'hi', 'ru', 'vi', 'th'];
+  const RTL = ['ar'];
   const LABELS = {
     en: { flag: '🇺🇸', name: 'English' },
     ko: { flag: '🇰🇷', name: '한국어' },
@@ -11,6 +12,11 @@
     de: { flag: '🇩🇪', name: 'Deutsch' },
     pt: { flag: '🇧🇷', name: 'Português' },
     id: { flag: '🇮🇩', name: 'Indonesia' },
+    ar: { flag: '🇸🇦', name: 'العربية' },
+    hi: { flag: '🇮🇳', name: 'हिन्दी' },
+    ru: { flag: '🇷🇺', name: 'Русский' },
+    vi: { flag: '🇻🇳', name: 'Tiếng Việt' },
+    th: { flag: '🇹🇭', name: 'ไทย' },
   };
 
   let lang = 'en';
@@ -100,7 +106,10 @@
     document.documentElement.lang = lang;
     // Self-canonicalize + sync og:url per language (SEO: makes hreflang reciprocal)
     syncCanonical();
-    // Update <html dir> for RTL languages (none currently, but future-proof)
+    // Keep the document LTR even for Arabic — the shared travel chrome (cookie banner,
+    // search overlay, trip panel) isn't RTL-safe. RTL is scoped to the K-beauty hub
+    // content via CSS (html[lang=ar] .hub-content, see kbeauty.html); library pages
+    // set their own dir=rtl in shell() (no shared chrome there).
     document.documentElement.dir = 'ltr';
     // Notify dynamic modules (My Trip panel, detail panel, etc.) to relabel.
     try { document.dispatchEvent(new CustomEvent('kp:langchange', { detail: { lang } })); } catch {}

@@ -713,6 +713,18 @@
     .gsc-next ul { margin:6px 0 0; padding-left:18px; } .gsc-next li { margin:4px 0; color:var(--text2); }
     .gsc-actions { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
 
+    /* RTL (Arabic) — scoped to the K-beauty hub's OWN containers only. The shared
+       travel chrome (cookie banner, search overlay, trip panel) is not RTL-safe, so
+       the document stays LTR and we flip just the hub. (Library pages set dir=rtl in shell().) */
+    html[lang=ar] .hub-nav, html[lang=ar] .kb-ticker-wrap, html[lang=ar] .hub-hero,
+    html[lang=ar] main.hub-content, html[lang=ar] #kb-modal, html[lang=ar] #kb-bnav { direction:rtl; }
+    html[lang=ar] .kb-fabtop { right:auto; left:16px; }
+    html[lang=ar] .kb-share-fab { right:auto; left:18px; }
+    html[lang=ar] .kb-modal-x { right:auto; left:12px; }
+    html[lang=ar] .filter-bar { -webkit-mask-image:linear-gradient(270deg,#000 90%,transparent); mask-image:linear-gradient(270deg,#000 90%,transparent); }
+    html[lang=ar] .kb-sec-title { padding-left:0; padding-right:14px; }
+    html[lang=ar] .kb-sec-title::before { left:auto; right:0; }
+
     /* ═══ Mobile app-shell overrides (placed last so they win source-order) ═════ */
     @media (max-width:680px) {
       /* Trim the hero so content reaches the fold sooner (was ~192px → ~120px) */
@@ -1127,6 +1139,6 @@
 <script defer src="kbeauty-data.js?v=10"></script>
 <script defer src="modules/api-client.js"></script>
 <script defer src="modules/kbeauty-sharecard.js?v=2"></script>
-<script defer src="modules/kbeauty.js?v=21"></script>
+<script defer src="modules/kbeauty.js?v=22"></script>
 </body>
 </html>
