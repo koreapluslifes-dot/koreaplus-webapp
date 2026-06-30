@@ -612,5 +612,12 @@
  "kbeauty.sec.report.title": "📑 तिमाही K-beauty ट्रेंड रिपोर्ट",
  "kbeauty.sec.report.sub": "हमारी तारीख वाली, उद्धृत करने योग्य तिमाही समीक्षा — क्या ज़ोर पकड़ रहा है, क्या छोड़ने लायक है, और इसके पीछे का सबूत। शेयर करने के लिए एक टैप।",
  "kbeauty.sec.glassscore.title": "🔮 आपका Glass Skin स्कोर क्या है?",
- "kbeauty.sec.glassscore.sub": "8 झटपट सवाल → आपका 0–100 स्कोर, टियर और शेयर करने के अगले कदम"
+ "kbeauty.sec.glassscore.sub": "8 झटपट सवाल → आपका 0–100 स्कोर, टियर और शेयर करने योग्य अगले कदम",
+ "kbeauty.filter.tools": "🧰 टूल्स",
+ "kbeauty.sec.cost.title": "💸 प्रति-उपयोग लागत कैलकुलेटर",
+ "kbeauty.sec.cost.sub": "किसी प्रोडक्ट की असली कीमत — प्रति उपयोग, प्रति माह",
+ "kbeauty.sec.pao.title": "🗓️ एक्सपायरी / शेल्फ-लाइफ ट्रैकर",
+ "kbeauty.sec.pao.sub": "कब फेंकें — PAO सुरक्षित-उपयोग अवधि",
+ "kbeauty.sec.cycling.title": "🔄 स्किन-साइक्लिंग प्लानर",
+ "kbeauty.sec.cycling.sub": "एक मुलायम कोरियन बैरियर-फर्स्ट 4-रात का चक्र"
 }

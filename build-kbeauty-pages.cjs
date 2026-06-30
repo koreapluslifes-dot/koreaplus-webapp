@@ -556,6 +556,47 @@ fs.writeFileSync(path.join(OUT, 'embed/glass-skin-score.html'), BADGE_HTML);
   emit('tools/embed-glass-skin-score.html', shell({ url, depth: 3, crumb: 'Tools', emoji: '🔌', h1: 'Embed the Glass Skin Score widget', title: 'Embed the Glass Skin Score — free K-beauty widget', desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD('Embed the Glass Skin Score', qa, url)] }), '0.5');
 })();
 
+// ── 6r. Layering-order pages (layer/) — optimal sequence + wait-time + AM/PM, by
+//        formulation logic (thinnest→thickest, low-pH first, oils last). Data-derived.
+const LAYER = {
+  vitaminc: { rank: 2, low: 1, am: 1 }, aha: { rank: 2, low: 1, pm: 1, acid: 1 }, bha: { rank: 2, low: 1, pm: 1, acid: 1 }, pha: { rank: 2.5, low: 1, acid: 1 },
+  hyaluronic: { rank: 3, damp: 1 }, betaglucan: { rank: 3, damp: 1 }, panthenol: { rank: 3.5 },
+  snail: { rank: 4 }, galactomyces: { rank: 4 }, heartleaf: { rank: 4 }, rice: { rank: 4 }, mugwort: { rank: 4 }, ginseng: { rank: 4 }, greentea: { rank: 4 }, propolis: { rank: 4 }, centella: { rank: 4 }, madecassoside: { rank: 4 },
+  niacinamide: { rank: 5 }, azelaic: { rank: 5 }, arbutin: { rank: 5 }, tranexamic: { rank: 5 }, peptides: { rank: 5 }, pdrn: { rank: 5 },
+  retinol: { rank: 6, pm: 1, retinoid: 1 }, bakuchiol: { rank: 6 },
+  ceramide: { rank: 7 }, squalane: { rank: 8, oil: 1 },
+};
+const LAYER_COMBOS = [['vitaminc', 'niacinamide'], ['retinol', 'niacinamide', 'hyaluronic'], ['bha', 'niacinamide'], ['vitaminc', 'hyaluronic', 'ceramide'], ['snail', 'niacinamide', 'hyaluronic'], ['centella', 'hyaluronic', 'ceramide'], ['aha', 'hyaluronic', 'squalane'], ['azelaic', 'niacinamide'], ['peptides', 'hyaluronic', 'ceramide'], ['bakuchiol', 'hyaluronic'], ['pdrn', 'peptides', 'hyaluronic'], ['arbutin', 'vitaminc', 'niacinamide'], ['retinol', 'ceramide'], ['snail', 'centella', 'hyaluronic'], ['niacinamide', 'hyaluronic', 'retinol']];
+const seenLayer = {};
+LAYER_COMBOS.forEach(combo => {
+  if (!combo.every(id => ING_BY[id] && LAYER[id])) return;
+  const sorted = combo.slice().sort((a, b) => LAYER[a].rank - LAYER[b].rank);
+  const slug = sorted.join('-'); if (seenLayer[slug]) return; seenLayer[slug] = 1;
+  const names = sorted.map(id => ING_BY[id].name);
+  const url = `${SITE}/guide/kb/layer/${slug}.html`;
+  const hasAcid = combo.some(id => LAYER[id].acid), hasRet = combo.some(id => LAYER[id].retinoid), hasVitc = combo.includes('vitaminc'), hasLow = combo.some(id => LAYER[id].low);
+  const steps = sorted.map((id, idx) => {
+    const L = LAYER[id]; const tags = [];
+    if (L.low) tags.push('low pH — apply to clean, dry skin');
+    if (L.damp) tags.push('press into slightly damp skin');
+    if (L.oil) tags.push('seal everything in (oil/occlusive last)');
+    if (L.am) tags.push('AM');
+    if (L.pm) tags.push('PM');
+    return `<div class="rank"><div class="rn">${idx + 1}</div><div><b><a href="../ingredient/${id}.html">${esc(ING_BY[id].name)}</a></b>${tags.length ? `<div class="rb">${esc(tags.join(' · '))}</div>` : ''}</div></div>`;
+  }).join('');
+  const notes = [];
+  if (hasLow) notes.push('⏳ Wait ~15–20 minutes after the low-pH step (acid or vitamin C) so it can work before the next layer.');
+  if (hasAcid && hasRet) notes.push('🚫 Don’t layer exfoliating acids with a retinoid the same night — alternate them on different nights.');
+  if (hasVitc && (hasRet || hasAcid)) notes.push('🕑 Split AM/PM: vitamin C in the morning, ' + (hasRet ? 'retinoid' : 'acids') + ' at night.');
+  notes.push('☀️ Finish every morning with SPF, whatever you layered.');
+  const qa = `The optimal order for ${names.join(', ')} is: ${names.join(' → ')}. Apply thinnest to thickest, low-pH actives first, oils last — the Korean barrier-friendly way.`;
+  const body = `<p class="lead">${esc(qa)}</p><h2>Apply in this order</h2>${steps}
+    <div class="box">${notes.map(n => `<div style="margin:4px 0">${esc(n)}</div>`).join('')}</div>
+    <p>${sorted.map(id => `<a class="pill" href="../ingredient/${id}.html">${esc(ING_BY[id].name)}</a>`).join('')}<a class="pill" href="${SITE}/kbeauty#cat=ingr">⚗️ Check any combo →</a></p>
+    ${deeperBlock({ title: names.join(' '), slug })}`;
+  emit(`layer/${slug}.html`, shell({ url, depth: 3, crumb: 'Layering order', emoji: '🧅', h1: `In what order? ${names.join(' + ')}`, title: `What order to apply ${names.join(', ')} — K-beauty layering`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD(`Layering order: ${names.join(' + ')}`, qa, url), faqLD(`What order do you apply ${names.join(', ')}?`, qa)] }), '0.6');
+});
+
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
 GLOSS.forEach((g, idx) => {
   const sg = slug(g.term);
@@ -901,6 +942,7 @@ const HUB_META = {
   evidence: { e: '📊', t: 'Evidence grades', g: 'Ingredients & INCI' },
   formulation: { e: '🧫', t: 'Formulation science', g: 'Ingredients & INCI' },
   matrix: { e: '🧮', t: 'Pairing matrix', g: 'Ingredients & INCI' },
+  layer: { e: '🧅', t: 'Layering order', g: 'Ingredients & INCI' },
   age: { e: '🎂', t: 'Routines by age', g: 'Skin & routines' },
   climate: { e: '🌡️', t: 'Routines by climate', g: 'Skin & routines' },
   digest: { e: '📰', t: 'Research digest', g: 'K-beauty knowledge' },

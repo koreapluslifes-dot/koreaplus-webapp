@@ -612,5 +612,12 @@
  "kbeauty.sec.report.title": "📑 รายงานเทรนด์ K-beauty รายไตรมาส",
  "kbeauty.sec.report.sub": "บทวิเคราะห์รายไตรมาสที่ระบุวันที่และอ้างอิงได้ — อะไรกำลังมา อะไรควรข้าม และหลักฐานเบื้องหลัง แตะเดียวเพื่อแชร์",
  "kbeauty.sec.glassscore.title": "🔮 คะแนน Glass Skin ของคุณเท่าไหร่?",
- "kbeauty.sec.glassscore.sub": "8 คำถามรวดเร็ว → คะแนน 0–100 ระดับผิว และขั้นต่อไปเพื่อแชร์"
+ "kbeauty.sec.glassscore.sub": "8 คำถามด่วน → คะแนน 0–100 ระดับ และขั้นตอนถัดไปไว้แชร์",
+ "kbeauty.filter.tools": "🧰 เครื่องมือ",
+ "kbeauty.sec.cost.title": "💸 เครื่องคำนวณต้นทุนต่อการใช้",
+ "kbeauty.sec.cost.sub": "ต้นทุนจริงของผลิตภัณฑ์ — ต่อครั้ง ต่อเดือน",
+ "kbeauty.sec.pao.title": "🗓️ ตัวติดตามวันหมดอายุ / อายุการใช้งาน",
+ "kbeauty.sec.pao.sub": "ควรทิ้งเมื่อไหร่ — ช่วงใช้งานปลอดภัยแบบ PAO",
+ "kbeauty.sec.cycling.title": "🔄 แผนการ skin-cycling",
+ "kbeauty.sec.cycling.sub": "รอบ 4 คืนแบบอ่อนโยนเน้นเกราะผิวก่อนสไตล์เกาหลี"
 }

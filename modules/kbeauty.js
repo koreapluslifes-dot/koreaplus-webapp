@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '10';
+  const OVERLAY_VER = '11';
   async function loadContent() {
     if (lang === 'en') return;
     try {

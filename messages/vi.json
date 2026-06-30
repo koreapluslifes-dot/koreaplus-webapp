@@ -611,6 +611,13 @@
  "kbeauty.sec.trust.sub": "Cách chúng tôi đọc xu hướng, chấm bằng chứng, dẫn nguồn nhận định và cập nhật liên tục — cùng chính sách về tuyên bố & tiếp thị liên kết.",
  "kbeauty.sec.report.title": "📑 Báo cáo xu hướng K-beauty hằng quý",
  "kbeauty.sec.report.sub": "Bản phân tích hằng quý có ngày tháng, có thể trích dẫn — điều gì đang lên, điều gì nên bỏ qua, và bằng chứng đằng sau. Một chạm để chia sẻ.",
- "kbeauty.sec.glassscore.title": "🔮 Điểm da căng bóng của bạn là bao nhiêu?",
- "kbeauty.sec.glassscore.sub": "8 câu hỏi nhanh → điểm 0–100, hạng & bước tiếp theo để chia sẻ"
+ "kbeauty.sec.glassscore.title": "🔮 Điểm Glass Skin của bạn là bao nhiêu?",
+ "kbeauty.sec.glassscore.sub": "8 câu hỏi nhanh → điểm 0–100, hạng & các bước tiếp theo để chia sẻ",
+ "kbeauty.filter.tools": "🧰 Công cụ",
+ "kbeauty.sec.cost.title": "💸 Máy tính chi phí mỗi lần dùng",
+ "kbeauty.sec.cost.sub": "Sản phẩm thực sự tốn bao nhiêu — mỗi lần dùng, mỗi tháng",
+ "kbeauty.sec.pao.title": "🗓️ Theo dõi hạn dùng / thời hạn sử dụng",
+ "kbeauty.sec.pao.sub": "Khi nào nên bỏ — thời hạn dùng an toàn PAO",
+ "kbeauty.sec.cycling.title": "🔄 Lịch skin-cycling",
+ "kbeauty.sec.cycling.sub": "Chu kỳ 4 đêm dịu nhẹ kiểu Hàn, ưu tiên hàng rào da"
 }
