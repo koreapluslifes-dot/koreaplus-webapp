@@ -1,0 +1,191 @@
+[
+ {
+  "id": "snail",
+  "target": "hydration & smoother skin feel; look of post-blemish marks",
+  "mechanism": "Snail secretion filtrate is a complex mixture (glycosaminoglycans, glycoproteins, hyaluronic acid, allantoin, and trace glycolic acid). Topically it acts mainly as a humectant film that draws and holds water at the surface, helping skin look plumper and feel smoother. Soothing and 'marks-fading' reputation is attributed to allantoin and the humectant matrix rather than any single proven pathway.",
+  "ceiling": "A cosmetic hydrator and conditioner — it supports the look of skin but does not regenerate tissue or remove scars.",
+  "evidenceGrade": "Limited"
+ },
+ {
+  "id": "centella",
+  "target": "visible redness & barrier comfort",
+  "mechanism": "Centella asiatica extract delivers triterpenes (asiaticoside, madecassoside, asiatic and madecassic acids). These are associated with supporting collagen-related signaling and dampening visible irritation, and the extract carries antioxidant flavonoids. Cosmetically this helps calm the appearance of redness and supports a comfortable barrier feel.",
+  "ceiling": "Calms and conditions the look of stressed skin; not a wound or rosacea treatment despite traditional wound-healing lore.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "niacinamide",
+  "target": "pore appearance, even tone & barrier/oil balance",
+  "mechanism": "Niacinamide (vitamin B3) is a precursor to NAD+ cofactors and supports ceramide and free-fatty-acid synthesis, which helps strengthen the barrier and reduce trans-epidermal water loss. It can interrupt transfer of pigment-containing melanosomes to surface skin cells, helping even tone, and helps regulate the look of oil and pores. Typically 2–5%; the old 'cannot mix with vitamin C' warning is a debunked myth at cosmetic conditions.",
+  "ceiling": "A genuine multitasker for tone, barrier and oil look, but a cosmetic refiner — not a depigmenting drug.",
+  "evidenceGrade": "Strong"
+ },
+ {
+  "id": "hyaluronic",
+  "target": "surface hydration & instant plumping",
+  "mechanism": "Hyaluronic acid is a glycosaminoglycan humectant that binds large amounts of water. On skin it forms a hydrated film that immediately plumps the look of fine, dry lines. Larger molecules sit on the surface; smaller fragments distribute within the upper layers. Best applied to damp skin and sealed, so it pulls water in rather than out in dry air.",
+  "ceiling": "Temporary surface hydration and plumping only; it does not durably rebuild dermal HA the way injectable fillers do.",
+  "evidenceGrade": "Strong"
+ },
+ {
+  "id": "ceramide",
+  "target": "barrier lipids & moisture retention",
+  "mechanism": "Ceramides are the skin's own lipids, forming the 'mortar' between corneocytes alongside cholesterol and fatty acids. Topical ceramides supplement this lamellar lipid matrix, helping restore barrier integrity, reduce water loss, and calm tightness and flaking — especially after over-exfoliation. Physiologic ratios with cholesterol and fatty acids work best.",
+  "ceiling": "Replenishes and supports the barrier's look and feel; it tops up lipids rather than reprogramming the skin's own production.",
+  "evidenceGrade": "Strong"
+ },
+ {
+  "id": "panthenol",
+  "target": "soothing & lightweight hydration",
+  "mechanism": "Panthenol (pro-vitamin B5) converts in skin toward pantothenic acid and acts as a humectant that draws and holds water. It has a well-documented soothing, barrier-supporting profile and is broadly tolerated, making it useful in post-active and barrier-repair routines.",
+  "ceiling": "A gentle conditioner and humectant supporting comfort and the look of healing; not a medicinal healing agent.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "propolis",
+  "target": "comforting glow & antioxidant support",
+  "mechanism": "Propolis is a bee-derived resin rich in flavonoids and phenolic acids that provide antioxidant activity, helping defend the look of skin against oxidative dullness while delivering a nourishing, comforting glow. Composition varies widely by source. Avoid with bee-product allergy.",
+  "ceiling": "A cosmetic antioxidant and conditioner with no standardized active %; benefits are surface-level glow, not antimicrobial therapy.",
+  "evidenceGrade": "Limited"
+ },
+ {
+  "id": "mugwort",
+  "target": "look of irritated, reactive skin",
+  "mechanism": "Mugwort (Artemisia) extract supplies antioxidant flavonoids and other polyphenols traditionally used to calm sensitive, troubled skin. Cosmetically it is positioned as a soothing botanical that supports the appearance of comfortable, less-reactive skin. No standardized active concentration exists, so claims should stay modest.",
+  "ceiling": "A soothing botanical with no standard dosing; conditions the look of skin rather than treating irritation medically.",
+  "evidenceGrade": "Limited"
+ },
+ {
+  "id": "heartleaf",
+  "target": "calming & balancing blemish-prone skin look",
+  "mechanism": "Heartleaf (Houttuynia cordata) extract contains flavonoids (e.g. quercitrin) and other polyphenols linked to antioxidant and soothing activity in lab settings. In cosmetics it is used to calm the appearance of redness and support oily, breakout-prone skin. There is no standardized topical concentration, so cosmetic claims are best hedged.",
+  "ceiling": "A trending calming botanical without standardized dosing; supports the look of balanced skin, not an acne medicine.",
+  "evidenceGrade": "Emerging"
+ },
+ {
+  "id": "rice",
+  "target": "glow, softening & brighter look",
+  "mechanism": "Rice extract / ferment supplies starches, amino acids, and antioxidants (including ferulic acid and allantoin in some preparations) that condition and soften skin and lend a luminous 'mochi skin' finish. Brightening is largely a cosmetic light-diffusing and antioxidant effect. Concentrations are not standardized.",
+  "ceiling": "A softening, glow-giving conditioner; brightening is cosmetic radiance, not pigment correction.",
+  "evidenceGrade": "Limited"
+ },
+ {
+  "id": "ginseng",
+  "target": "antioxidant glow & firm-looking skin",
+  "mechanism": "Ginseng (Panax) extract contains ginsenosides and antioxidant polyphenols associated with defending the look of skin against oxidative stress and giving an energized, firmer-looking finish, central to hanbang anti-aging lines. No standardized cosmetic % exists, and firming is an appearance effect.",
+  "ceiling": "A premium antioxidant conditioner; supports a firmer, glowing look rather than measurably rebuilding structure.",
+  "evidenceGrade": "Limited"
+ },
+ {
+  "id": "greentea",
+  "target": "antioxidant defense & oily-skin balance",
+  "mechanism": "Green tea (Camellia sinensis) is rich in polyphenol catechins, notably EGCG, which are potent antioxidants that help neutralize free radicals and support the look of calm, balanced oily skin. Topical antioxidant activity is well documented; cosmetic formulas vary in catechin content.",
+  "ceiling": "A well-supported topical antioxidant that defends and soothes the skin's look; not a sebum drug or sun substitute.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "galactomyces",
+  "target": "radiance & smoother-looking texture",
+  "mechanism": "Galactomyces ferment filtrate is a yeast-fermentation broth supplying amino acids, vitamins, minerals, and antioxidants that hydrate and condition, helping skin look more radiant and refined. The 'first essence' glow is a hydration-and-antioxidant conditioning effect; ferment composition is not standardized.",
+  "ceiling": "A radiance-boosting conditioning essence; cosmetic glow and texture, not a pore- or tone-correcting drug.",
+  "evidenceGrade": "Limited"
+ },
+ {
+  "id": "pdrn",
+  "target": "firm, bouncy 'glass-skin' look",
+  "mechanism": "PDRN (polydeoxyribonucleotide, often from salmon) is a DNA-fragment mixture. In injectable/clinical use it is studied for tissue repair signaling, but as a topical cosmetic its large molecules have limited penetration, so its on-skin role is mainly as a hydrating, film-forming conditioner that supports a plump, bouncy look. Topical evidence is emerging and distinct from injectable data.",
+  "ceiling": "Cosmetic hydration and bounce only — topical PDRN is not equivalent to clinical injectables and should not be claimed as such.",
+  "evidenceGrade": "Emerging"
+ },
+ {
+  "id": "peptides",
+  "target": "firmer, smoother-looking skin",
+  "mechanism": "Peptides are short amino-acid chains. Signal peptides (e.g. Matrixyl-type) are designed to cue skin toward collagen-related activity, while others condition the surface; effects depend heavily on specific sequence, concentration and delivery. Cosmetically they support a firmer, smoother look and are gentle enough to layer.",
+  "ceiling": "A gentle anti-aging support; cosmetic firmness signaling, not the structural remodeling of prescription retinoids or injectables.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "vitaminc",
+  "target": "brightening, even tone & antioxidant defense",
+  "mechanism": "Vitamin C (L-ascorbic acid) is an antioxidant that neutralizes free radicals and is a cofactor for collagen-synthesizing enzymes; it also interferes with the tyrosinase step of pigment formation to help even tone. Pure L-ascorbic acid is effective around 10–20% at pH below 3.5; gentler derivatives suit sensitive skin but are generally less potent. Best in the AM under sunscreen.",
+  "ceiling": "A strong cosmetic antioxidant and tone-evener; it supports defense and brightness but does not replace sunscreen.",
+  "evidenceGrade": "Strong"
+ },
+ {
+  "id": "retinol",
+  "target": "lines, texture & pore/blemish look",
+  "mechanism": "Retinol converts in skin to retinoic acid, which binds nuclear retinoid receptors to influence gene expression — increasing cell turnover and supporting collagen-related activity, refining the look of lines, texture and pores over weeks to months. Typically 0.1–1%. PM only, introduce slowly, and use SPF the next day; avoid in pregnancy.",
+  "ceiling": "The best-evidenced cosmetic anti-aging active, but OTC retinol is milder and slower than prescription retinoids.",
+  "evidenceGrade": "Strong"
+ },
+ {
+  "id": "bakuchiol",
+  "target": "lines & texture (retinol-alternative feel)",
+  "mechanism": "Bakuchiol is a plant-derived meroterpene that is structurally unrelated to retinoids but appears to influence some similar gene-expression pathways, giving a 'retinol-like' look with generally better tolerance and antioxidant activity. Comparative cosmetic studies are encouraging though smaller than the retinoid literature; pregnancy-safety data is limited.",
+  "ceiling": "A gentler retinol alternative for the look of aging; the evidence base is younger and thinner than retinol's.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "aha",
+  "target": "surface exfoliation, glow & even tone",
+  "mechanism": "AHAs (glycolic, lactic) are water-soluble acids that weaken the bonds between surface dead skin cells, loosening and shedding them to reveal smoother, brighter skin and to even tone; lactic also adds humectant hydration. Glycolic (smallest) penetrates fastest and is stronger; lactic is gentler. OTC commonly 5–10%; SPF is essential afterward.",
+  "ceiling": "Effective surface resurfacing for glow and tone; it works on the upper layers, not deep pigment or dermal aging.",
+  "evidenceGrade": "Strong"
+ },
+ {
+  "id": "bha",
+  "target": "pore decongestion in oily, blemish-prone skin",
+  "mechanism": "BHA (salicylic acid) is oil-soluble, so it penetrates sebum-filled pores and exfoliates inside them, loosening debris to decongest blackheads and support clearer, less-congested skin; it is also mildly soothing. Typically 0.5–2% in cosmetics.",
+  "ceiling": "Excellent for the look of clear pores and oily skin; cosmetic exfoliation, not a substitute for prescription acne therapy in severe cases.",
+  "evidenceGrade": "Strong"
+ },
+ {
+  "id": "pha",
+  "target": "very gentle exfoliation + hydration",
+  "mechanism": "PHAs (e.g. gluconolactone) are larger polyhydroxy acids that exfoliate the surface like AHAs but penetrate more slowly, making them gentler and well-suited to sensitive skin new to acids; their multiple hydroxyl groups also bind water for added hydration and they carry mild antioxidant activity.",
+  "ceiling": "The gentlest exfoliating acid; slower and milder resurfacing than AHA/BHA, suited to reactive skin.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "azelaic",
+  "target": "redness, bumps & post-blemish tone",
+  "mechanism": "Azelaic acid is a dicarboxylic acid that helps calm the look of redness, supports a more even tone by interfering with pigment formation, and is often used for blemish-prone, reactive skin. Cosmetic OTC products are commonly around 10% and it is usually well tolerated.",
+  "ceiling": "A versatile, gentle tone-and-redness active at cosmetic strength; higher prescription concentrations are a separate medical category.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "tranexamic",
+  "target": "stubborn dark spots & uneven tone",
+  "mechanism": "Tranexamic acid is a lysine derivative that helps interrupt the signaling between skin and pigment-producing cells (in part via the plasmin pathway), making it a favorite for the look of stubborn pigmentation and melasma, frequently paired with niacinamide. Cosmetic topical concentrations are modest and not rigidly standardized.",
+  "ceiling": "Supports the look of even tone on difficult pigmentation, but topical cosmetic use is milder than oral or in-office melasma protocols.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "arbutin",
+  "target": "dark spots & uneven tone (gentle brightening)",
+  "mechanism": "Alpha-arbutin is a stable glycoside that gradually releases hydroquinone-related activity, gently inhibiting tyrosinase, the key enzyme in melanin formation, to help fade the look of dark spots with low irritation. It is valued as a stable, gentle brightener.",
+  "ceiling": "A gentle cosmetic brightener for spots and tone; slower and milder than prescription depigmenting agents.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "madecassoside",
+  "target": "redness & barrier support",
+  "mechanism": "Madecassoside is a single purified triterpene saponin isolated from Centella asiatica — the most-studied cica active. It carries antioxidant activity and is associated with supporting collagen-related processes and calming visible irritation, giving a concentrated, standardized soothing and barrier-support effect versus whole-extract centella.",
+  "ceiling": "A focused cosmetic soother and barrier supporter; calms the look of redness rather than treating inflammatory disease.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "betaglucan",
+  "target": "deep hydration & soothing",
+  "mechanism": "Beta-glucan is a polysaccharide (often from oat or yeast) that forms a water-binding, film-like humectant layer delivering deep, lasting hydration and a soothing, barrier-comforting feel, gentle enough for very reactive skin; it also carries antioxidant activity. Its moisturizing performance is frequently compared to hyaluronic acid.",
+  "ceiling": "A high-performing humectant and soother; cosmetic hydration and comfort, not an immune or wound treatment.",
+  "evidenceGrade": "Moderate"
+ },
+ {
+  "id": "squalane",
+  "target": "emollient moisture seal for dry skin",
+  "mechanism": "Squalane is the stable, hydrogenated form of squalene, a lipid the skin naturally makes. As a skin-mimicking emollient it fills gaps between surface cells, softening skin and helping seal in moisture by slowing water loss, all with a lightweight, non-greasy, non-comedogenic feel. Usually plant-derived (e.g. olive, sugarcane).",
+  "ceiling": "An excellent occlusive-emollient that softens and seals; it conditions the surface but adds no active treatment effect.",
+  "evidenceGrade": "Strong"
+ }
+]

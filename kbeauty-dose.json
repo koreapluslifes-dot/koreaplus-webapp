@@ -1,0 +1,245 @@
+[
+ {
+  "id": "snail",
+  "pctRange": "varies (extract — often listed high, e.g. 70–96% snail secretion filtrate)",
+  "phRange": "5.0–6.5",
+  "evidenceGrade": "Limited",
+  "onset": "2–4 weeks (hydration look)",
+  "ceilingNote": "A high % mainly signals more humectant feel; beyond a point it adds tackiness, not benefit.",
+  "plainRead": "On a Korean label a big snail % (e.g. 96%) is a marketing/feel cue, not a standardized active dose — there's no agreed effective concentration, so treat it as a hydrating base."
+ },
+ {
+  "id": "centella",
+  "pctRange": "varies (extract; standardized formulas often cited around 0.1–1% of actives)",
+  "phRange": "5.0–6.5",
+  "evidenceGrade": "Moderate",
+  "onset": "2–4 weeks (calming look)",
+  "ceilingNote": "More extract isn't linearly better; the soothing comes from specific triterpenes, not raw percentage.",
+  "plainRead": "A centella/cica % on the label rarely tells you the active triterpene content — look instead for standardized actives like madecassoside if you want a measurable dose."
+ },
+ {
+  "id": "niacinamide",
+  "pctRange": "2–5%",
+  "phRange": "5.0–7.0",
+  "evidenceGrade": "Strong",
+  "onset": "4–8 weeks",
+  "ceilingNote": "Above ~5–10% offers little extra and more often triggers flushing or irritation in sensitive skin.",
+  "plainRead": "A label listing 2–5% niacinamide is in the well-supported sweet spot; a '10%' product is not twice as good and may simply read as more irritating."
+ },
+ {
+  "id": "hyaluronic",
+  "pctRange": "0.1–2% (as raw HA; finished serums often ~1–2%)",
+  "phRange": "5.0–7.0",
+  "evidenceGrade": "Strong",
+  "onset": "Immediate (surface plumping)",
+  "ceilingNote": "Past ~2% it gets sticky/tacky and can feel drying in low humidity — more isn't more hydration.",
+  "plainRead": "HA percentages look tiny because a little goes a long way; a '2% HA complex' is already high — apply to damp skin and seal to see the benefit."
+ },
+ {
+  "id": "ceramide",
+  "pctRange": "~0.1–1% (ceramide content; full lipid blends higher)",
+  "phRange": "5.0–7.0",
+  "evidenceGrade": "Strong",
+  "onset": "1–4 weeks",
+  "ceilingNote": "Balance with cholesterol/fatty acids matters more than raw ceramide %; excess alone doesn't help.",
+  "plainRead": "You'll rarely see a meaningful ceramide % on the label; what matters is the lipid ratio in the formula, not a single headline number."
+ },
+ {
+  "id": "panthenol",
+  "pctRange": "1–5%",
+  "phRange": "4.0–7.0",
+  "evidenceGrade": "Moderate",
+  "onset": "1–2 weeks",
+  "ceilingNote": "Above ~5% adds little and can feel slightly tacky; it's a supporting soother, not a dose-chasing active.",
+  "plainRead": "1–5% panthenol on a label is plenty; it's a gentle hydrator/soother where higher numbers don't translate to visibly better results."
+ },
+ {
+  "id": "propolis",
+  "pctRange": "varies (extract — ampoules often listed 10–80%+ propolis extract)",
+  "phRange": "4.5–6.5",
+  "evidenceGrade": "Limited",
+  "onset": "2–4 weeks (glow/comfort look)",
+  "ceilingNote": "A high listed % is a feel/marketing cue, not a standardized active dose; allergy risk (bee products) is the real ceiling.",
+  "plainRead": "A big propolis % on a Korean ampoule signals a richer, glow-giving base — not a measured active strength; patch test if you react to bee products."
+ },
+ {
+  "id": "mugwort",
+  "pctRange": "varies (extract; essences often listed very high, e.g. 90%+)",
+  "phRange": "5.0–6.5",
+  "evidenceGrade": "Limited",
+  "onset": "2–4 weeks (soothing look)",
+  "ceilingNote": "A high mugwort % reflects a watery extract base, not concentrated potency; more doesn't mean stronger calming.",
+  "plainRead": "'100% mugwort' style claims mean the water phase is mugwort extract, not that it's a high-strength active — read it as a gentle soothing base."
+ },
+ {
+  "id": "heartleaf",
+  "pctRange": "varies (extract; toners often listed up to ~70–90%+)",
+  "phRange": "5.0–6.5",
+  "evidenceGrade": "Limited",
+  "onset": "2–4 weeks (calming look)",
+  "ceilingNote": "High listed % is a base-feel cue; standardized heartleaf actives aren't established, so percentage ≠ potency.",
+  "plainRead": "A heartleaf/Houttuynia toner boasting a high % is mostly a diluted botanical water — a soothing base, not a dose you can compare to acids or niacinamide."
+ },
+ {
+  "id": "rice",
+  "pctRange": "varies (extract/ferment; often listed high in essences)",
+  "phRange": "4.5–6.5",
+  "evidenceGrade": "Limited",
+  "onset": "2–4 weeks (radiance look)",
+  "ceilingNote": "A high rice % signals a nourishing essence base, not a standardized brightening dose.",
+  "plainRead": "Rice extract percentages on K-beauty labels are about the 'glow/mochi' feel of the base, not a measurable active level — there's no consensus effective %."
+ },
+ {
+  "id": "ginseng",
+  "pctRange": "varies (extract; luxury serums often listed high, no standard active %)",
+  "phRange": "5.0–6.5",
+  "evidenceGrade": "Limited",
+  "onset": "4–8 weeks (glow look)",
+  "ceilingNote": "Saponin (ginsenoside) content matters more than raw extract %, which is rarely disclosed.",
+  "plainRead": "A high ginseng % on a hanbang label is a premium positioning cue; it doesn't tell you the ginsenoside dose that actually drives the antioxidant glow."
+ },
+ {
+  "id": "greentea",
+  "pctRange": "varies (extract; serums commonly ~1–5% extract, essences higher)",
+  "phRange": "5.0–6.5",
+  "evidenceGrade": "Moderate",
+  "onset": "2–4 weeks (antioxidant/calming look)",
+  "ceilingNote": "Polyphenol (EGCG) content and stability matter more than headline extract %.",
+  "plainRead": "A green-tea % tells you little about active polyphenols; freshness and formulation (dark packaging) matter more than the number on the label."
+ },
+ {
+  "id": "galactomyces",
+  "pctRange": "varies (ferment filtrate — first-essences often listed 90–95%+)",
+  "phRange": "4.0–5.5",
+  "evidenceGrade": "Limited",
+  "onset": "2–4 weeks (radiance look)",
+  "ceilingNote": "A 90%+ listing is the essence base itself, not a concentrated active dose; more isn't proportionally brighter.",
+  "plainRead": "'95% galactomyces' means the essence is mostly ferment filtrate — read it as the product format, not a high-strength standardized active."
+ },
+ {
+  "id": "pdrn",
+  "pctRange": "varies (no established topical %; often ~0.5–2% sodium DNA in serums)",
+  "phRange": "5.0–7.0",
+  "evidenceGrade": "Emerging",
+  "onset": "4–8 weeks (cosmetic feel)",
+  "ceilingNote": "Topical evidence is early; a higher % doesn't equal injectable-grade results and may just add cost.",
+  "plainRead": "PDRN/'salmon DNA' percentages aren't standardized for topicals — treat any number as a cosmetic feel claim, not a clinical dose."
+ },
+ {
+  "id": "peptides",
+  "pctRange": "varies (typically fractions of a % active; blends often 2–10% of a peptide solution)",
+  "phRange": "5.0–7.0",
+  "evidenceGrade": "Moderate",
+  "onset": "8–12 weeks",
+  "ceilingNote": "Peptides work at low signal-level concentrations; a big '10%' is usually the diluted trade-solution, not pure peptide.",
+  "plainRead": "A '10% peptide complex' on a label is mostly the carrier solution — peptides act at tiny concentrations, so the headline % overstates the actual active."
+ },
+ {
+  "id": "vitaminc",
+  "pctRange": "10–20% (L-ascorbic acid); derivatives vary 1–10%",
+  "phRange": "<3.5 (L-ascorbic acid); derivatives 5–7",
+  "evidenceGrade": "Strong",
+  "onset": "4–12 weeks",
+  "ceilingNote": "Above ~20% L-ascorbic acid raises irritation with little added benefit and oxidizes faster.",
+  "plainRead": "For pure vitamin C, 10–20% at low pH is the effective window; a gentler '5% derivative' is a different, milder molecule — don't compare the numbers directly."
+ },
+ {
+  "id": "retinol",
+  "pctRange": "0.1–1%",
+  "phRange": "5.0–6.0",
+  "evidenceGrade": "Strong",
+  "onset": "8–12 weeks",
+  "ceilingNote": "Above ~1% irritation rises sharply with limited extra benefit; build up slowly.",
+  "plainRead": "0.1–1% is the meaningful retinol range; a '1%' product is strong, not beginner-friendly — start low and increase frequency before strength."
+ },
+ {
+  "id": "bakuchiol",
+  "pctRange": "0.5–2%",
+  "phRange": "4.0–8.0",
+  "evidenceGrade": "Emerging",
+  "onset": "8–12 weeks",
+  "ceilingNote": "Most studies use ~0.5–1%; going higher hasn't shown added benefit.",
+  "plainRead": "0.5–2% bakuchiol is the typical studied range; it's gentler than retinol, but pregnancy-safety data is limited, so don't assume it's automatically pregnancy-safe."
+ },
+ {
+  "id": "aha",
+  "pctRange": "5–10% (glycolic OTC); lactic up to ~10%",
+  "phRange": "3.0–4.0",
+  "evidenceGrade": "Strong",
+  "onset": "2–6 weeks",
+  "ceilingNote": "Above ~10% (or pH below ~3) sharply increases stinging and barrier stress for home use.",
+  "plainRead": "A 5–10% glycolic/lactic at pH 3–4 is the effective OTC zone; a high % at very low pH is a professional-style peel, not daily care."
+ },
+ {
+  "id": "bha",
+  "pctRange": "0.5–2%",
+  "phRange": "3.0–4.0",
+  "evidenceGrade": "Strong",
+  "onset": "2–4 weeks",
+  "ceilingNote": "2% is the practical OTC ceiling; higher mainly increases dryness and irritation, not pore-clearing.",
+  "plainRead": "0.5–2% salicylic acid is the standard range; '2%' is already the strong end for leave-on, so more isn't better for blackheads."
+ },
+ {
+  "id": "pha",
+  "pctRange": "4–10% (gluconolactone/lactobionic)",
+  "phRange": "3.0–4.5",
+  "evidenceGrade": "Moderate",
+  "onset": "4–8 weeks",
+  "ceilingNote": "Larger molecules are gentler, so even higher % stays mild — but irritation can still creep up past ~10%.",
+  "plainRead": "PHA percentages run higher than AHA/BHA because the molecule is bigger and milder; a '10% PHA' is gentler than a '10% glycolic,' so don't read the numbers as equivalent."
+ },
+ {
+  "id": "azelaic",
+  "pctRange": "10% (OTC cosmetic); 15–20% is prescription-tier",
+  "phRange": "4.0–5.0",
+  "evidenceGrade": "Strong",
+  "onset": "6–12 weeks",
+  "ceilingNote": "OTC tops out near 10%; higher strengths are regulated/medical, not standard cosmetics.",
+  "plainRead": "A 10% azelaic product is the cosmetic OTC standard; '20%' figures refer to prescription products, so a higher label number usually means a different regulatory category."
+ },
+ {
+  "id": "tranexamic",
+  "pctRange": "2–5%",
+  "phRange": "5.0–7.0",
+  "evidenceGrade": "Moderate",
+  "onset": "8–12 weeks",
+  "ceilingNote": "Above ~5% topically shows little added benefit; often paired with niacinamide rather than pushed higher.",
+  "plainRead": "2–5% tranexamic acid is the usual effective window for tone; a higher % isn't a proven upgrade, so pairing beats dose-chasing."
+ },
+ {
+  "id": "arbutin",
+  "pctRange": "2% (alpha-arbutin)",
+  "phRange": "4.0–6.0",
+  "evidenceGrade": "Moderate",
+  "onset": "8–12 weeks",
+  "ceilingNote": "~2% is the established sweet spot; higher can risk irritation/paradoxical effects with little gain.",
+  "plainRead": "Around 2% alpha-arbutin is the recognized effective dose; a label boasting much more isn't a proven advantage and may just irritate."
+ },
+ {
+  "id": "madecassoside",
+  "pctRange": "~0.1–1% (purified active)",
+  "phRange": "5.0–6.5",
+  "evidenceGrade": "Moderate",
+  "onset": "2–4 weeks (calming look)",
+  "ceilingNote": "It's effective at low purified percentages; very high figures are uncommon and not needed.",
+  "plainRead": "Madecassoside is the standardized active from centella, so even a small % (0.1–1%) is meaningful — unlike a vague 'centella extract' number, this one is measurable."
+ },
+ {
+  "id": "betaglucan",
+  "pctRange": "varies (typically ~0.1–0.5% active; some essences much higher base %)",
+  "phRange": "4.5–7.0",
+  "evidenceGrade": "Moderate",
+  "onset": "1–2 weeks (hydration/soothing look)",
+  "ceilingNote": "Effective at low active levels; a high listed % is often the diluted solution, not pure beta-glucan.",
+  "plainRead": "Beta-glucan works at very low concentrations, so a small active % is fine; a big headline number usually reflects a watery base, not extra potency."
+ },
+ {
+  "id": "squalane",
+  "pctRange": "varies (emollient; can be 1–100% in face oils)",
+  "phRange": "n/a",
+  "evidenceGrade": "Moderate",
+  "onset": "Immediate (softening feel)",
+  "ceilingNote": "It's an emollient, not a dose-dependent active — '100% squalane' just means a pure oil, not a stronger treatment.",
+  "plainRead": "Squalane % is about texture/richness, not active strength; pH doesn't apply to an oil, and 100% simply means an undiluted facial oil."
+ }
+]

@@ -1,0 +1,155 @@
+[
+ {
+  "topic": "Snail Mucin",
+  "slug": "snail-mucin",
+  "claim": "Snail mucin deeply hydrates and fades post-acne marks for that plump, glassy finish.",
+  "grade": "Emerging",
+  "digest": "Snail secretion filtrate (SSF) is a humectant-rich cosmetic ingredient that can help skin feel more hydrated and look smoother and dewier in the short term. It contains glycoproteins, hyaluronic acid and glycolic acid, which plausibly support a softer, bouncier look. However, there is no industry-standard use concentration, and rigorous independent clinical data is limited and often small or manufacturer-linked, so claims about fading marks should be read as a cosmetic appearance benefit rather than a proven effect. Patch-test if you have a shellfish or mollusk sensitivity.",
+  "citeIds": []
+ },
+ {
+  "topic": "Centella / Madecassoside (Cica)",
+  "slug": "centella-madecassoside",
+  "claim": "Cica calms redness and strengthens the skin barrier.",
+  "grade": "Moderate",
+  "digest": "Centella asiatica and its purified component madecassoside are among the better-studied K-beauty botanicals for supporting a calm, comfortable look in sensitive or stressed skin. The plant's triterpenes (madecassoside, asiaticoside, asiatic acid) have antioxidant and soothing properties in lab and some clinical work, and madecassoside is the most-characterized of these. There is no single agreed cosmetic percentage, and most evidence supports comfort and the appearance of reduced redness rather than treatment of any skin condition. Generally well tolerated.",
+  "citeIds": [
+   "pubmed-barrier"
+  ]
+ },
+ {
+  "topic": "Niacinamide (Vitamin B3)",
+  "slug": "niacinamide",
+  "claim": "Niacinamide refines pores, evens tone and supports the barrier; the 'never mix with vitamin C' rule is a myth.",
+  "grade": "Strong",
+  "digest": "Niacinamide is one of the best-supported cosmetic actives, with reasonable evidence at roughly 2-5% for helping even the look of tone, soften the appearance of enlarged pores, support sebum balance and reinforce the moisture barrier. Higher concentrations raise irritation risk without clear added benefit for most people. The old warning against pairing it with vitamin C is essentially a debunked myth based on outdated lab conditions; in modern formulations they coexist fine. Well tolerated by most skin types.",
+  "citeIds": [
+   "pubmed-barrier",
+   "aad-basics"
+  ]
+ },
+ {
+  "topic": "PDRN (Salmon DNA)",
+  "slug": "pdrn-salmon-dna",
+  "claim": "Topical salmon-DNA PDRN firms skin for a glass-skin bounce like the injectable.",
+  "grade": "Emerging",
+  "digest": "Polydeoxyribonucleotide (PDRN) is a fragmented-DNA active, often salmon-derived, that has clinical literature mainly in injectable and wound-healing contexts. As a topical cosmetic it is a 2025-2026 trend ingredient where the evidence is genuinely emerging: penetration of large DNA fragments through intact skin is uncertain, and topical results should not be equated with the studied injectable or procedural forms. It can act as a hydrating, conditioning ingredient that supports a smoother, firmer-looking surface, but firming claims remain unproven for leave-on cosmetics.",
+  "citeIds": [
+   "pubmed-pdrn"
+  ]
+ },
+ {
+  "topic": "Microbiome / Postbiotics",
+  "slug": "microbiome-postbiotics",
+  "claim": "Pre/post/probiotic skincare balances the skin microbiome to calm and strengthen skin.",
+  "grade": "Emerging",
+  "digest": "The skin microbiome is a real and active research area, and ingredients labeled prebiotic, probiotic or postbiotic (often ferment lysates or fragments) can act as soothing, conditioning agents that support a comfortable, balanced-looking complexion. However, claims that a topical product reliably rebalances your skin's microbial ecosystem outrun the current cosmetic evidence: effects vary by formula, live organisms rarely survive in leave-on products, and standardized outcomes are lacking. Treat microbiome benefits as a promising but still-developing appearance and comfort story.",
+  "citeIds": [
+   "pubmed-microbiome"
+  ]
+ },
+ {
+  "topic": "Exosomes",
+  "slug": "exosomes",
+  "claim": "Topical exosomes regenerate skin and dramatically boost firmness and glow.",
+  "grade": "Emerging",
+  "digest": "Exosomes are tiny cell-derived vesicles attracting strong interest as a next-generation cosmetic ingredient for a smoother, more radiant look. The science is early: most compelling data comes from lab or procedural (post-microneedling, in-clinic) settings, and whether intact exosomes meaningfully penetrate or remain stable in an over-the-counter leave-on product is unresolved. There are also no standardized cosmetic concentrations or potency measures. Regenerative or dramatic-firming claims are not supported for ordinary topical use; current realistic benefit is conditioning and the appearance of improved texture.",
+  "citeIds": [
+   "pubmed-exosome"
+  ]
+ },
+ {
+  "topic": "Ceramides / Barrier Repair",
+  "slug": "ceramides-barrier",
+  "claim": "Ceramides rebuild the skin barrier to lock in moisture and calm flaking.",
+  "grade": "Strong",
+  "digest": "Ceramides are core structural lipids of the skin's barrier, and replenishing them topically is well supported for helping reduce moisture loss and easing the look and feel of dryness, tightness and flaking, especially in dry, sensitive or over-exfoliated skin. They work best alongside other barrier lipids such as cholesterol and fatty acids in balanced formulas. This is a well-established cosmetic-chemistry consensus, though specific brand percentages vary and aren't standardized. Generally excellent tolerance across skin types.",
+  "citeIds": [
+   "pubmed-barrier",
+   "aad-basics"
+  ]
+ },
+ {
+  "topic": "Propolis",
+  "slug": "propolis",
+  "claim": "Propolis gives a nourishing glow with antioxidant support for blemish-prone skin.",
+  "grade": "Emerging",
+  "digest": "Propolis is a bee-derived resin extract used in K-beauty for a comforting, nourishing, glowy finish and antioxidant support. Lab studies show antioxidant and antimicrobial activity, but standardized topical cosmetic concentrations and robust independent clinical skin data are limited, and composition varies widely by source. Benefits are best framed as conditioning and appearance-related rather than therapeutic. Important caveat: propolis is a notable contact-allergy and bee-product sensitizer, so anyone with a bee or honey allergy should avoid it and others should patch-test.",
+  "citeIds": []
+ },
+ {
+  "topic": "Heartleaf (Houttuynia cordata)",
+  "slug": "heartleaf",
+  "claim": "Heartleaf calms and balances oily, breakout-prone skin.",
+  "grade": "Emerging",
+  "digest": "Heartleaf (Houttuynia cordata, 'eoseongcho') is a trending Korean calming botanical used to support a soothed, balanced look in oily and blemish-prone skin. It contains flavonoids and other compounds with antioxidant and soothing activity in laboratory studies, but high-quality clinical evidence for topical cosmetic use is limited and there is no standard use percentage. Frame its value as comfort and the appearance of calmer, less reactive skin rather than as a treatment for breakouts. Generally well tolerated; patch-test reactive skin.",
+  "citeIds": [
+   "pubmed-heartleaf"
+  ]
+ },
+ {
+  "topic": "Rice & Galactomyces Ferment",
+  "slug": "rice-galactomyces-ferment",
+  "claim": "Rice and fermented-ferment essences brighten dull skin for a glassy mochi-skin glow.",
+  "grade": "Emerging",
+  "digest": "Rice extracts and fermented ferment filtrates such as galactomyces are heritage and modern K-beauty ingredients prized for a soft, luminous, brightened-looking finish. They act largely as humectants and conditioning agents rich in amino acids, vitamins and antioxidants, which can make skin look more radiant and feel smoother. Independent clinical evidence is limited, fermentation composition varies by batch and brand, and there is no standardized cosmetic percentage. Benefits are best described as glow and softness of appearance rather than proven brightening of pigment.",
+  "citeIds": []
+ },
+ {
+  "topic": "Vitamin C",
+  "slug": "vitamin-c",
+  "claim": "Vitamin C brightens, evens tone and provides antioxidant defense under SPF.",
+  "grade": "Strong",
+  "digest": "Vitamin C is a well-supported antioxidant cosmetic active. Pure L-ascorbic acid is most studied, typically used around 10-20% at a low pH (below ~3.5) for stability and uptake, and is best applied in the morning under sunscreen to support antioxidant defense and a brighter, more even-looking tone over time. It is prone to oxidation, so packaging and formulation matter. Gentler derivatives suit sensitive skin but have less direct evidence. Some users find L-ascorbic acid at high strength mildly irritating.",
+  "citeIds": [
+   "aad-basics"
+  ]
+ },
+ {
+  "topic": "Retinol",
+  "slug": "retinol",
+  "claim": "Retinol is the gold standard for softening lines and refining texture over time.",
+  "grade": "Strong",
+  "digest": "Retinol is among the best-evidenced cosmetic actives for improving the look of fine lines, uneven texture and tone with consistent long-term use, typically in the 0.1-1% range. It works gradually, so start low and infrequent (1-2 times weekly), build up, use it only at night, and always pair with daytime SPF since it can increase sun sensitivity and initial irritation. Avoid during pregnancy and breastfeeding as a precaution. Effects are real but require patience and tolerance-building.",
+  "citeIds": [
+   "aad-basics"
+  ]
+ },
+ {
+  "topic": "Bakuchiol",
+  "slug": "bakuchiol",
+  "claim": "Bakuchiol is a gentler plant-based retinol alternative.",
+  "grade": "Emerging",
+  "digest": "Bakuchiol is a plant-derived ingredient marketed as a gentler 'retinol alternative' for a smoother, firmer-looking complexion, often better tolerated than retinol with less dryness or irritation. A handful of small studies suggest comparable appearance benefits to low-strength retinol, which is promising but not yet the deep evidence base retinol has. There is no standardized cosmetic percentage. Note that, unlike retinoids, pregnancy-safety data is limited rather than reassuring, so don't assume it is safe in pregnancy. Generally well tolerated by sensitive skin.",
+  "citeIds": []
+ },
+ {
+  "topic": "Peptides",
+  "slug": "peptides",
+  "claim": "Peptides signal skin to look firmer and smoother, gently.",
+  "grade": "Emerging",
+  "digest": "Peptides are short amino-acid chains used in cosmetics to support a firmer, smoother-looking complexion, and they are generally gentle and layer-friendly even for sensitive skin. Specific peptides (signal, carrier, neurotransmitter-inhibiting) have supportive lab and some clinical data, but results depend heavily on the exact peptide, its concentration and whether it penetrates, and marketing often outpaces evidence for any given blend. There is no single standard percentage. Realistic framing is gradual support for the appearance of firmness rather than dramatic or guaranteed results.",
+  "citeIds": []
+ },
+ {
+  "topic": "Azelaic Acid",
+  "slug": "azelaic-acid",
+  "claim": "Azelaic acid calms redness, smooths bumps and evens post-acne tone, gently.",
+  "grade": "Moderate",
+  "digest": "Azelaic acid is a well-regarded multitasking ingredient, commonly at 10% over the counter (higher strengths are prescription), valued for helping calm the look of redness, smooth bumpy texture and even post-blemish tone, while usually being well tolerated on reactive skin. It has a solid track record, though stronger therapeutic claims belong to prescription concentrations and medical oversight. As a cosmetic at OTC strength, frame benefits as supporting a more even, calmer-looking complexion. Mild tingling on application is common at first.",
+  "citeIds": [
+   "aad-basics"
+  ]
+ },
+ {
+  "topic": "Sunscreen Reapplication",
+  "slug": "sunscreen-reapplication",
+  "claim": "You must reapply sunscreen every two hours for protection to hold.",
+  "grade": "Strong",
+  "digest": "Reapplying sunscreen is well-established sun-protection guidance: apply generously and reapply roughly every two hours, and sooner after swimming, sweating or toweling off, because protection degrades with time and activity. Most people also apply too little to begin with, so adequate amount and reapplication together matter more than the specific SPF number. Daily broad-spectrum SPF 30 or higher, reapplied, is a cornerstone of supporting healthy-looking skin and limiting UV-driven signs of aging. This reflects consensus dermatology guidance.",
+  "citeIds": [
+   "aad-sunscreen",
+   "aad-basics"
+  ]
+ }
+]

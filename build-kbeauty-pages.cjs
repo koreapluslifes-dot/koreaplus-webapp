@@ -30,6 +30,12 @@ const verd = id => { const v = (d.KBEAUTY_BOARD_CONFIG.verdicts || {})[id]; retu
 const SAY = require('./kbeauty-say.json');       // { brands:[], ingredients:[] }
 const HANBANG = require('./kbeauty-hanbang.json'); // []
 const ASKQ = require('./kbeauty-ask.json');        // []
+// Advanced-20 science spine
+const DOSE = require('./kbeauty-dose.json');             // [{id,pctRange,phRange,evidenceGrade,onset,ceilingNote,plainRead}]
+const MOA = require('./kbeauty-moa.json');               // [{id,mechanism,target,ceiling,evidenceGrade}]
+const EVID = require('./kbeauty-evidence.json');         // [{topic,slug,claim,grade,digest,citeIds}]
+const FORM = require('./kbeauty-formulation.json');      // [{slug,title,h1,qa,sections}]
+const CITES = d.KBEAUTY_CITATIONS || {};
 
 const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1320;background:#fff}'
   + '.w{max-width:740px;margin:0 auto;padding:22px 18px 64px}a{color:#c01a63}'
@@ -53,13 +59,23 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + '.kbhub-card{display:block;padding:16px;border:1px solid #f0d8e6;border-radius:14px;text-decoration:none;color:#1a1320;background:#faf3f7;transition:transform .15s,box-shadow .15s}.kbhub-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(214,31,110,.1)}'
   + '.kbhub-card .he{font-size:24px}.kbhub-card .ht{font-weight:800;font-size:14.5px;margin-top:4px}.kbhub-card .hn{font-size:12px;color:#999;margin-top:2px}'
   + '.kbhub-sec{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#999;margin:24px 0 4px}'
-  + '.disc{font-size:11.5px;color:#999;margin-top:16px}';
+  + '.disc{font-size:11.5px;color:#999;margin-top:16px}'
+  + '.cmp{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}.cmp th,.cmp td{border:1px solid #f0d8e6;padding:8px 10px;text-align:left;vertical-align:top}.cmp th{background:#faf3f7;font-weight:800}'
+  + '.rank{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #f0d8e6;border-radius:12px;padding:12px 14px;margin:8px 0}.rank .rn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#d61f6e,#8b46d6);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}.rank .rb{font-size:11px;font-weight:800;color:#c01a63;text-transform:uppercase}'
+  + '.grade{display:inline-block;font-size:11px;font-weight:800;border-radius:10px;padding:2px 9px;color:#fff}.grade.Strong{background:#1a7a45}.grade.Moderate{background:#2060c8}.grade.Emerging{background:#b35f1e}.grade.Limited,.grade.Insufficient{background:#5f6571}';
+// Externalize the page CSS to one cached file (cuts ~4KB inline from every one of the
+// 1,852+ pages; browsers cache it once). shell() links /guide/kb/kb.css?v=CSS_VER.
+fs.mkdirSync(OUT, { recursive: true });
+fs.writeFileSync(path.join(OUT, 'kb.css'), CSS);
 
-// ── Google AdSense (Auto ads page tag + one in-content responsive unit) ─────
+// ── Google AdSense — idle-gated (loads only after idle/first interaction, off the
+//    critical render path → big LCP/INP win across all 1,852+ pages). Slot reserves
+//    min-height to hold CLS ~0. ──
 const ADSENSE_CLIENT = 'ca-pub-1378943893051810';
 const ADSENSE_SLOT = '4521899200';
-const AD_LOADER = `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>`;
-const AD_UNIT = `<ins class="adsbygoogle" style="display:block;margin:22px 0;width:100%" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${ADSENSE_SLOT}" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>`;
+const AD_UNIT = `<ins class="adsbygoogle" style="display:block;margin:22px 0;width:100%;min-height:280px" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${ADSENSE_SLOT}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+const AD_BOOT = `<script>(function(){var d;function L(){if(d)return;d=1;var s=document.createElement('script');s.async=1;s.crossOrigin='anonymous';s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}';s.onload=function(){document.querySelectorAll('ins.adsbygoogle').forEach(function(){try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}})};document.head.appendChild(s);}['scroll','pointerdown','keydown','touchstart'].forEach(function(e){addEventListener(e,L,{once:true,passive:true})});(window.requestIdleCallback||function(f){setTimeout(f,2500)})(L,{timeout:5000});})();</script>`;
+const CSS_VER = '1';
 
 function crumbLD(o) {
   const items = [
@@ -92,8 +108,7 @@ ${hreflangs}
 <meta name="theme-color" content="#d61f6e">
 <meta property="og:site_name" content="K-Beauty by KoreaPlus">
 ${ld}
-${adsOk ? AD_LOADER : ''}
-<style>${CSS}</style></head><body>
+<link rel="stylesheet" href="/guide/kb/kb.css?v=${CSS_VER}"></head><body>
 <header class="kbh"><a class="kbh-logo" href="/kbeauty" aria-label="K-Beauty home"><span aria-hidden="true">🧴</span> <b>K</b>·Beauty</a><a class="kbh-lib" href="/guide/kb/">📚 Library</a></header>
 <div class="w">
 <div class="bc"><a href="${SITE}/kbeauty">K-Beauty</a> › <a href="${SITE}/guide/kb/">Library</a>${o.crumb ? ' › ' + o.crumb : ''}</div>
@@ -105,8 +120,11 @@ ${adsOk ? AD_UNIT : ''}
 <a class="cta" href="${SITE}/kbeauty">Explore the full K-beauty hub →</a>
 ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
 <div class="foot"><a href="${SITE}/kbeauty">💄 K-Beauty hub</a><a href="${SITE}/guide/kb/">📚 All guides</a><a href="${SITE}/guide/kpop.html">🎤 K-Pop</a><a href="${SITE}/guide/">🧭 Korea travel</a></div>
+<p class="disc">✍️ Written &amp; reviewed by the <b>KoreaPlus Editorial</b> team — dermatologist-informed, cosmetic-science researched &amp; source-cited. Last reviewed ${TODAY}.</p>
 <p class="disc">General educational information using cosmetic structure-function wording — not medical advice. Always patch-test new actives. © KoreaPlus.</p>
-</div></body></html>`;
+</div>
+${adsOk ? AD_BOOT : ''}
+</body></html>`;
 }
 const INDEX = [];   // {rel, dir, title} — drives the category/language hub pages
 function emit(rel, html, prio) {
@@ -118,7 +136,7 @@ function emit(rel, html, prio) {
   INDEX.push({ rel, dir, title });
 }
 const faqLD = (q, a) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }] });
-const artLD = (h, desc, url) => ({ '@context': 'https://schema.org', '@type': 'Article', headline: h, description: desc, datePublished: '2026-06-01', dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus Editorial' }, publisher: { '@type': 'Organization', name: 'KoreaPlus' }, mainEntityOfPage: url });
+const artLD = (h, desc, url) => ({ '@context': 'https://schema.org', '@type': 'Article', headline: h, description: desc, datePublished: '2026-06-01', dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus Editorial' }, reviewedBy: { '@type': 'Organization', name: 'KoreaPlus Editorial' }, publisher: { '@type': 'Organization', name: 'KoreaPlus' }, mainEntityOfPage: url });
 
 // ── "Where to buy authentic" box (affiliate-ready; YesStyle AWIN deeplink slots in later) ──
 // Real retailer search links now (rel sponsored nofollow); swap YesStyle URL for the
@@ -390,6 +408,93 @@ STARS.forEach(s => {
     <div class="box">🎤 <b>Love K-pop & K-drama?</b> Explore the people and culture behind the wave on our <a href="${SITE}/guide/kpop.html">K-Pop hub</a> — then build the look with the <a href="${SITE}/kbeauty#kb-glassscore">Glass Skin Score</a>.</div>
     ${deeperBlock({ title: s.h1 + ' glass skin centella snail niacinamide rice heartleaf', slug: s.slug })}`;
   emit(`star/${s.slug}.html`, shell({ url, depth: 3, crumb: 'K-pop & K-drama beauty', emoji: '🎤', h1: s.h1, title: `${s.h1} — K-beauty`, desc: s.qa, quickAnswer: s.qa, bodyHtml: body, ld: [artLD(s.h1, s.qa, url), faqLD(s.h1.replace(/:.*/, '') + '?', s.qa)] }), '0.6');
+});
+
+// ── 6i. Ranked "Best Korean ingredients for <concern>" (best/) — ranks INGREDIENTS
+//        (never products) by a transparent score. AdSense-only, no affiliate.
+CONCERNS.forEach(c => {
+  const ranked = ING.filter(i => (i.bestFor || []).includes(c.id))
+    .map(i => ({ i, score: (i.star ? 2 : 0) + (i.benefits || []).length * 0.2 + (i.bestFor || []).length * 0.1 }))
+    .sort((a, b) => b.score - a.score || a.i.name.localeCompare(b.i.name)).slice(0, 10);
+  if (ranked.length < 3) return;
+  const cn = c.name.toLowerCase();
+  const url = `${SITE}/guide/kb/best/korean-ingredients-for-${c.id}.html`;
+  const qa = `For ${cn}, the most-recommended Korean skincare ingredients are ${ranked.slice(0, 3).map(r => r.i.name).join(', ')} — ranked by hero status, breadth of benefit, and how broadly Korean routines use them for ${cn}.`;
+  const rows = ranked.map((r, idx) => `<div class="rank"><div class="rn">${idx + 1}</div><div><div><b>${r.i.emoji || ''} <a href="../ingredient/${r.i.id}.html">${esc(r.i.name)}</a></b> ${r.i.korean ? `<span class="ko">${esc(r.i.korean)}</span>` : ''}</div><div style="font-size:13.5px;color:#555;margin-top:3px">${esc(r.i.explainer || '')}</div></div></div>`).join('');
+  const body = `<p class="lead">${esc(qa)}</p>
+    <p style="font-size:13px;color:#777">Ranking criteria (transparent): hero-ingredient status, breadth of documented skin benefits, and how broadly Korean routines use it for ${esc(cn)}. We rank ingredients, never specific products.</p>
+    ${rows}
+    ${deeperBlock({ title: c.name + ' ' + ranked.map(r => r.i.name).join(' '), slug: 'best-' + c.id })}`;
+  emit(`best/korean-ingredients-for-${c.id}.html`, shell({ url, depth: 3, crumb: 'Best for…', emoji: '🏆', h1: `Best Korean ingredients for ${cn}`, title: `Best Korean skincare ingredients for ${cn} — ranked`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD(`Best Korean ingredients for ${c.name}`, qa, url), faqLD(`What are the best Korean ingredients for ${cn}?`, qa), { '@context': 'https://schema.org', '@type': 'ItemList', name: `Best Korean ingredients for ${c.name}`, itemListElement: ranked.map((r, idx) => ({ '@type': 'ListItem', position: idx + 1, name: r.i.name })) }] }), '0.7');
+});
+
+// ── 6j. "X vs Y" ingredient comparison matrix (vs/) — curated same-purpose pairs.
+const VS_PAIRS = [['snail', 'hyaluronic'], ['centella', 'mugwort'], ['centella', 'heartleaf'], ['niacinamide', 'azelaic'], ['niacinamide', 'vitaminc'], ['retinol', 'bakuchiol'], ['retinol', 'peptides'], ['aha', 'bha'], ['bha', 'pha'], ['vitaminc', 'arbutin'], ['arbutin', 'tranexamic'], ['hyaluronic', 'betaglucan'], ['ceramide', 'squalane'], ['pdrn', 'peptides'], ['ginseng', 'propolis'], ['rice', 'galactomyces']];
+VS_PAIRS.forEach(([aid, bid]) => {
+  const a = ING_BY[aid], b = ING_BY[bid]; if (!a || !b) return;
+  const slug = `${aid}-vs-${bid}`;
+  const url = `${SITE}/guide/kb/vs/${slug}.html`;
+  const clash = (a.avoidWith || []).includes(bid) || (b.avoidWith || []).includes(aid);
+  const together = clash ? 'with care — alternate nights or split AM/PM' : 'yes — they layer well together';
+  const aFor = (a.bestFor || []).map(x => (CONCERN_BY[x] || {}).name).filter(Boolean);
+  const bFor = (b.bestFor || []).map(x => (CONCERN_BY[x] || {}).name).filter(Boolean);
+  const qa = `${a.name} vs ${b.name}: ${a.name} leans toward ${aFor[0] ? aFor[0].toLowerCase() : 'its strengths'}, while ${b.name} targets ${bFor[0] ? bFor[0].toLowerCase() : 'its strengths'}. Can you use both? ${together.charAt(0).toUpperCase() + together.slice(1)}.`;
+  const table = `<table class="cmp"><tr><th></th><th>${esc(a.name)}</th><th>${esc(b.name)}</th></tr>
+    <tr><th>What it is</th><td>${esc(a.explainer || '')}</td><td>${esc(b.explainer || '')}</td></tr>
+    <tr><th>Best for</th><td>${esc(aFor.join(', '))}</td><td>${esc(bFor.join(', '))}</td></tr>
+    <tr><th>When to use</th><td>${esc((a.time || 'both').toUpperCase())}</td><td>${esc((b.time || 'both').toUpperCase())}</td></tr></table>`;
+  const body = `<p class="lead">${esc(qa)}</p>${table}
+    <h2>Which should you choose?</h2><p>Choose <b>${esc(a.name)}</b> if your priority is ${esc(aFor[0] || 'its strengths')}; choose <b>${esc(b.name)}</b> for ${esc(bFor[0] || 'its strengths')}. Many Korean routines use both — ${together}.</p>
+    <p><a class="pill" href="../ingredient/${a.id}.html">${esc(a.name)} guide →</a><a class="pill" href="../ingredient/${b.id}.html">${esc(b.name)} guide →</a></p>
+    ${deeperBlock({ title: a.name + ' ' + b.name, slug })}`;
+  emit(`vs/${slug}.html`, shell({ url, depth: 3, crumb: 'Compare', emoji: '⚖️', h1: `${a.name} vs ${b.name}: which Korean skincare ingredient?`, title: `${a.name} vs ${b.name} — K-beauty comparison`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD(`${a.name} vs ${b.name}`, qa, url), faqLD(`${a.name} vs ${b.name} — which is better?`, qa)] }), '0.6');
+});
+
+// ── 6k. Dosage & pH (dose/) — effective % + pH window per active.
+DOSE.forEach(x => {
+  const i = ING_BY[x.id]; if (!i) return;
+  const url = `${SITE}/guide/kb/dose/${x.id}.html`;
+  const qa = `${i.name}: effective concentration ${x.pctRange}, optimal pH ${x.phRange}, evidence ${x.evidenceGrade}. ${x.plainRead}`;
+  const body = `<p class="lead">How much ${esc(i.name)} actually works? Here's the dosage, pH and evidence — the formulator-level read behind the % on a Korean label.</p>
+    <table class="cmp"><tr><th>Effective %</th><td>${esc(x.pctRange)}</td></tr><tr><th>Optimal pH</th><td>${esc(x.phRange)}</td></tr><tr><th>Evidence</th><td><span class="grade ${esc(x.evidenceGrade)}">${esc(x.evidenceGrade)}</span></td></tr><tr><th>Onset</th><td>${esc(x.onset)}</td></tr></table>
+    <h2>What the % on the label really means</h2><p>${esc(x.plainRead)}</p>
+    <div class="box">⚠️ <b>Ceiling:</b> ${esc(x.ceilingNote)}</div>
+    <p><a class="pill" href="../ingredient/${i.id}.html">${esc(i.name)} guide →</a><a class="pill" href="../how-it-works/${i.id}.html">How ${esc(i.name)} works →</a></p>
+    ${deeperBlock({ title: i.name + ' ' + i.id, slug: 'dose-' + i.id })}`;
+  emit(`dose/${x.id}.html`, shell({ url, depth: 3, crumb: 'Dosage & pH', emoji: '⚗️', h1: `${i.name}: effective % & pH`, ko: i.korean, title: `${i.name} — effective concentration, pH & dose (K-beauty)`, desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD(`${i.name} dosage & pH`, qa, url), faqLD(`What percentage of ${i.name} is effective?`, qa)] }), '0.7');
+});
+
+// ── 6l. Mechanism of action (how-it-works/) — how each active works.
+MOA.forEach(x => {
+  const i = ING_BY[x.id]; if (!i) return;
+  const url = `${SITE}/guide/kb/how-it-works/${x.id}.html`;
+  const qa = `How does ${i.name} work? ${x.mechanism}`;
+  const body = `<p class="lead">${esc(x.mechanism)}</p>
+    <table class="cmp"><tr><th>Acts on</th><td>${esc(x.target)}</td></tr><tr><th>Evidence</th><td><span class="grade ${esc(x.evidenceGrade)}">${esc(x.evidenceGrade)}</span></td></tr></table>
+    <div class="box">🔬 <b>The honest ceiling:</b> ${esc(x.ceiling)}</div>
+    <p><a class="pill" href="../ingredient/${i.id}.html">${esc(i.name)} guide →</a><a class="pill" href="../dose/${i.id}.html">Effective % & pH →</a></p>
+    ${deeperBlock({ title: i.name + ' ' + i.id + ' mechanism', slug: 'moa-' + i.id })}`;
+  emit(`how-it-works/${x.id}.html`, shell({ url, depth: 3, crumb: 'How it works', emoji: '🔬', h1: `How ${i.name} works`, ko: i.korean, title: `How does ${i.name} work? — mechanism (K-beauty)`, desc: qa.slice(0, 158), quickAnswer: qa.slice(0, 300), bodyHtml: body, ld: [artLD(`How ${i.name} works`, x.mechanism, url), faqLD(`How does ${i.name} work?`, x.mechanism)] }), '0.7');
+});
+
+// ── 6m. Evidence-grade digests (evidence/) — GRADE-style authority over real sources.
+EVID.forEach(x => {
+  const url = `${SITE}/guide/kb/evidence/${x.slug}.html`;
+  const cites = (x.citeIds || []).map(id => CITES[id]).filter(Boolean);
+  const qa = `${x.claim} — Evidence grade: ${x.grade}. ${x.digest}`;
+  const body = `<p class="lead"><b>The claim:</b> ${esc(x.claim)}</p>
+    <p><span class="grade ${esc(x.grade)}">${esc(x.grade)} evidence</span></p>
+    <h2>What the research actually shows</h2><p>${esc(x.digest)}</p>
+    ${cites.length ? `<h2>Sources</h2><ul>${cites.map(c => `<li><a href="${esc(c.url)}" target="_blank" rel="nofollow noopener">${esc(c.label)} ↗</a></li>`).join('')}</ul>` : ''}
+    ${deeperBlock({ title: x.topic, slug: x.slug })}`;
+  emit(`evidence/${x.slug}.html`, shell({ url, depth: 3, crumb: 'Evidence grades', emoji: '📊', h1: `${x.topic}: what the evidence says`, title: `Is ${x.topic} backed by science? — evidence grade`, desc: qa.slice(0, 158), quickAnswer: qa, bodyHtml: body, ld: [artLD(`${x.topic} evidence`, x.digest, url), faqLD(`Is ${x.topic} backed by science?`, `${x.grade} evidence. ${x.digest}`)] }), '0.7');
+});
+
+// ── 6n. Formulation science explainers (formulation/).
+FORM.forEach(x => {
+  const url = `${SITE}/guide/kb/formulation/${x.slug}.html`;
+  const body = `<p class="lead">${esc(x.qa)}</p>${(x.sections || []).map(s => `<h2>${esc(s.h)}</h2><p>${esc(s.body)}</p>`).join('')}${deeperBlock({ title: x.title, slug: x.slug })}`;
+  emit(`formulation/${x.slug}.html`, shell({ url, depth: 3, crumb: 'Formulation science', emoji: '🧫', h1: x.h1, title: `${x.title} — K-beauty formulation science`, desc: x.qa, quickAnswer: x.qa, bodyHtml: body, ld: [artLD(x.h1, x.qa, url), faqLD(x.title, x.qa)] }), '0.7');
 });
 
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
@@ -730,6 +835,12 @@ const HUB_META = {
   brand: { e: '🏷️', t: 'Brands', g: 'Brands & products' },
   dupe: { e: '💸', t: 'Dupes', g: 'Brands & products' },
   alternative: { e: '🔁', t: 'Korean alternatives', g: 'Brands & products' },
+  best: { e: '🏆', t: 'Best ingredients for…', g: 'Ingredients & INCI' },
+  vs: { e: '⚖️', t: 'Ingredient comparisons', g: 'Ingredients & INCI' },
+  dose: { e: '⚗️', t: 'Dosage & pH', g: 'Ingredients & INCI' },
+  'how-it-works': { e: '🔬', t: 'How actives work', g: 'Ingredients & INCI' },
+  evidence: { e: '📊', t: 'Evidence grades', g: 'Ingredients & INCI' },
+  formulation: { e: '🧫', t: 'Formulation science', g: 'Ingredients & INCI' },
   category: { e: '🧴', t: 'Product types', g: 'Brands & products' },
   concern: { e: '🎯', t: 'Skin concerns', g: 'Skin & routines' },
   'skin-type': { e: '🧖', t: 'Skin types', g: 'Skin & routines' },
