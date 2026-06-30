@@ -1,0 +1,140 @@
+{
+  "_note": "Where-to-stay neighborhood/area guides for cities beyond Seoul/Busan/Jeju (which live in the STAY literal in build-seo.cjs). Same record shape as STAY: {city, kr, areas:[[areaName, whyDescription], ...]}. Area entries describe DISTRICTS/NEIGHBORHOODS only — NO hotel/brand names. Descriptions are general, verifiable orientation facts (who it suits, transit access, atmosphere), hedged where appropriate. City keys match city-l10n.json exactly; kr labels taken from city-l10n.json.",
+  "stayAreas": [
+    {
+      "city": "Incheon",
+      "kr": "인천",
+      "areas": [
+        ["Songdo", "Modern comfort & families — a planned waterfront district with wide parks, malls and convention centers; calm and spacious, though a subway or bus ride from the old city sights."],
+        ["Wolmido / Open Port (Jung-gu)", "Sightseeing & atmosphere — close to Chinatown, the historic open-port streets and the seaside promenade; walkable and characterful, handy for ferries to nearby islands."],
+        ["Near Incheon Airport (Yeongjong)", "Layovers & early flights — convenient for transit travelers who want to be minutes from the terminals; quieter and less central for general city exploring."]
+      ]
+    },
+    {
+      "city": "Gyeongju",
+      "kr": "경주",
+      "areas": [
+        ["Bomun Lake Resort area", "Resorts & relaxation — a landscaped lakeside zone east of the center with larger hotels and spas; scenic and quiet, but you'll want a bus or taxi to reach the historic core."],
+        ["Hwangnidan-gil / Historic Center", "First-timers & walkers — beside the royal tombs, Cheomseongdae and the trendy Hwangnidan-gil cafe street; central and atmosphere-rich, ideal for exploring on foot."],
+        ["Near Singyeongju KTX Station", "Train arrivals & convenience — practical if you arrive by KTX and want an easy base, though it sits outside town and generally needs a bus or taxi into the sights."]
+      ]
+    },
+    {
+      "city": "Jeonju",
+      "kr": "전주",
+      "areas": [
+        ["Hanok Village (Pungnam-dong)", "Tradition & first-timers — staying in or beside the famous hanok village puts you among traditional guesthouses, food alleys and landmarks; central and immersive, can be busy on weekends."],
+        ["Gaeksa / Downtown", "Shopping & nightlife — the modern downtown around Gaeksa has shops, restaurants and bars within walking distance of the hanok area; lively and convenient."],
+        ["Near Jeonju Station / Express Bus Terminal", "Transit convenience — handy for arrivals and departures, generally cheaper, but a short bus or taxi ride from the main attractions."]
+      ]
+    },
+    {
+      "city": "Daegu",
+      "kr": "대구",
+      "areas": [
+        ["Dongseongno / Jung-gu (Downtown)", "First-timers & shopping — the central downtown core with the Dongseongno shopping street, markets and dense dining; very walkable with strong subway access."],
+        ["Near Dongdaegu Station", "Train travelers & connections — beside the KTX/express-bus hub, making intercity trips easy; practical and well-connected, a little less atmospheric than downtown."],
+        ["Suseong-gu", "Quiet & upscale comfort — a calmer residential-leaning area around Suseong Lake with parks and restaurants; relaxed, better suited to travelers wanting space over nightlife."]
+      ]
+    },
+    {
+      "city": "Daejeon",
+      "kr": "대전",
+      "areas": [
+        ["Near Daejeon Station / Jung-gu", "Train hubs & convenience — central and tied to the main KTX station, with traditional markets and eateries nearby; practical for travelers using Daejeon as a transit base."],
+        ["Dunsan / Seo-gu", "Modern comfort & dining — the newer business and government district with department stores, restaurants and broad streets; clean and convenient, popular for longer or business stays."],
+        ["Yuseong", "Hot springs & relaxation — known for its spa and hot-spring tradition, suiting travelers who want a restful, wellness-oriented base away from the busiest streets."]
+      ]
+    },
+    {
+      "city": "Sokcho",
+      "kr": "속초",
+      "areas": [
+        ["Sokcho Beach & Expo area", "Beach & first-timers — close to the long sandy beach and waterfront; scenic and relaxed in summer, an easy base for seaside time."],
+        ["Jungang Market / Downtown", "Food & convenience — beside the lively Jungang traditional market and the harbor, with abundant seafood; central and walkable for dining and day-trip planning."],
+        ["Near Seoraksan / Daepo Port", "Hikers & nature — closer to Seoraksan National Park access or the fishing-port atmosphere of Daepo; better for travelers prioritizing the mountains or fresh seafood over the town center."]
+      ]
+    },
+    {
+      "city": "Gangneung",
+      "kr": "강릉",
+      "areas": [
+        ["Gyeongpo Beach & Lake", "Beach & resorts — around the wide Gyeongpo beach and lake with cafes and seaside hotels; scenic and relaxed, the classic summer base, busier in peak season."],
+        ["Anmok Beach (Coffee Street)", "Cafes & atmosphere — the seafront cafe district popular for sea-view coffee and sunrises; laid-back and walkable, well-suited to leisurely stays."],
+        ["Near Gangneung KTX Station / Downtown", "Train arrivals & convenience — handy for the fast train from Seoul and close to markets and downtown dining; practical, with beaches a short bus or taxi away."]
+      ]
+    },
+    {
+      "city": "Yeosu",
+      "kr": "여수",
+      "areas": [
+        ["Dolsan / Night-view waterfront", "Scenery & first-timers — near the famous illuminated harbor, Dolsan Bridge and the cable car; celebrated for night views, ideal for travelers chasing the coastal scenery."],
+        ["Expo / Odongdo area", "Sights & families — beside the Expo waterfront and Odongdo island with promenades and attractions; convenient and pleasant for sightseeing on foot."],
+        ["Near Yeosu-Expo Station / Downtown", "Transit & dining — close to the KTX station and central seafood restaurants and markets; practical for arrivals and food-focused stays."]
+      ]
+    },
+    {
+      "city": "Suwon",
+      "kr": "수원",
+      "areas": [
+        ["Hwaseong Fortress / Haenggung-dong", "History & first-timers — beside the UNESCO-listed Hwaseong Fortress and the atmospheric Haenggung-dong cafe and gallery streets; walkable and rich in sights."],
+        ["Suwon Station area", "Transit & shopping — around the major rail hub with department stores, malls and dense dining; very convenient for connections and a common, well-priced base."],
+        ["Yeongtong / Gwanggyo", "Modern & quiet comfort — newer districts with parks, lakeside areas and clean streets; calmer and more spread out, better for space than central buzz."]
+      ]
+    },
+    {
+      "city": "Andong",
+      "kr": "안동",
+      "areas": [
+        ["Hahoe Folk Village area", "Tradition & immersion — staying near the historic Hahoe village offers traditional hanok lodging and a heritage atmosphere; tranquil and scenic, but well outside the city center."],
+        ["Downtown Andong", "Convenience & food — the central area with markets, the famous Andong jjimdak restaurants and everyday amenities; practical and walkable as a base for exploring the region."],
+        ["Near Andong Station", "Transit convenience — handy for train and bus arrivals and generally simpler for getting around the wider area; a functional base rather than a scenic one."]
+      ]
+    },
+    {
+      "city": "Tongyeong",
+      "kr": "통영",
+      "areas": [
+        ["Gangguan Port / Jungang Market", "First-timers & food — the lively central harbor beside Jungang Market, ferry terminals and the cable car; walkable and atmospheric, with abundant seafood."],
+        ["Dongpirang Village area", "Atmosphere & views — near the colorful mural village on the hill above the port; charming and photogenic, with stair-heavy lanes and harbor views."],
+        ["Near Tongyeong Bus Terminal", "Transit convenience — practical for intercity bus arrivals and generally quieter and cheaper, a short ride from the waterfront sights."]
+      ]
+    },
+    {
+      "city": "Chuncheon",
+      "kr": "춘천",
+      "areas": [
+        ["Myeongdong / Downtown (Dakgalbi Street)", "First-timers & food — the central area with the famous dakgalbi alley, shops and nightlife; walkable and convenient as a main base."],
+        ["Near Chuncheon / Namchuncheon Station", "Transit & day trips — close to the ITX rail line from Seoul, easy for arrivals and excursions; practical and well-connected."],
+        ["Soyang River / Lakeside", "Scenery & relaxation — toward the rivers and lakes with rail-bike, ferries and Nami Island access; calmer and more scenic, suited to nature-focused stays."]
+      ]
+    },
+    {
+      "city": "Pohang",
+      "kr": "포항",
+      "areas": [
+        ["Yeongildae Beach", "Beach & first-timers — around the city's main urban beach and seaside promenade; convenient and lively in summer, an easy coastal base close to downtown."],
+        ["Jukdo Market / Downtown", "Food & convenience — beside the large Jukdo seafood market and central dining; practical and walkable for travelers focused on food and city access."],
+        ["Homigot area", "Sunrises & scenery — toward the easterly cape known for sunrise views; scenic but well outside the center, better for a short scenic stay than a main base."]
+      ]
+    },
+    {
+      "city": "Mokpo",
+      "kr": "목포",
+      "areas": [
+        ["Mokpo Modern History / Waterfront", "Sights & first-timers — near the old open-port streets, Yudalsan and the harbor with the marine cable car; characterful and walkable for sightseeing."],
+        ["Near Mokpo Station / Downtown", "Transit & convenience — beside the KTX terminus with markets and dining nearby; practical for arrivals and island-ferry connections."],
+        ["Pyeonghwa Square / Dancing Sea Fountain area", "Evening atmosphere — along the newer waterfront with the seafront fountain show and restaurants; pleasant for relaxed seaside evenings."]
+      ]
+    },
+    {
+      "city": "Suncheon",
+      "kr": "순천",
+      "areas": [
+        ["Near Suncheonman Bay / Garden Expo", "Nature & first-timers — toward the famous coastal wetland reserve and the National Garden; scenic and spacious, ideal for travelers centered on the gardens and bay."],
+        ["Downtown Suncheon / Station area", "Convenience & transit — the central area near the rail station with markets, dining and everyday amenities; practical and well-connected as a base."],
+        ["Naganeupseong area", "Tradition & quiet — near the historic walled folk village outside town; heritage-rich and tranquil, but removed from city conveniences."]
+      ]
+    }
+  ]
+}

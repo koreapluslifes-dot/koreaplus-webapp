@@ -14,6 +14,11 @@
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
+// Layer-0 shared helpers for the seo-<name>.cjs generated-content modules.
+// Pure (no build-seo coupling); injected into every module via the CTX object
+// assembled just before the build loop. See `const CTX = {...}` below.
+const __ld = require('./modules/seo-ld.cjs');
+const __derive = require('./modules/seo-derive.cjs');
 
 const ORIGIN = 'https://koreaplus-lifes.com';
 const BASEP = '/guide/';
@@ -47,6 +52,12 @@ let KPOP_HIST = {};
 try { KPOP_HIST = JSON.parse(fs.readFileSync(path.join(OUT, 'kpop-history.json'), 'utf8')); } catch { /* none yet */ }
 let KPOP_ROSTER = [];
 try { KPOP_ROSTER = require('./kpop-data.js').KPOP_ROSTER || []; } catch { /* roster optional */ }
+// K-Pop member enrichment (lightstick + verified member birthdays). Browser
+// global file (window.KPOP_ENRICH); loaded via vm. Shape keyed by group id:
+//   { "<id>": { lightstick?, color?, bdays: [[memberName, "YYYY-MM-DD"], ...] } }
+// CTX.ENRICH for the generated-content modules. Optional — build works without.
+let KPOP_ENRICH = {};
+try { const ec = { window: {} }; vm.createContext(ec); vm.runInContext(fs.readFileSync(path.join(OUT, 'kpop-enrich.js'), 'utf8'), ec); KPOP_ENRICH = ec.window.KPOP_ENRICH || {}; } catch { /* none yet */ }
 // Per-city Unsplash photos (element 5 image SEO). { City: { raw, alt, by, byUrl, link } }
 // From prefetch-images.cjs (key never stored here). Hotlinked from the Unsplash
 // CDN with photographer attribution per Unsplash API guidelines.
@@ -690,7 +701,7 @@ function injectToc(body, lang) {
   // long-form articles monetize the scroll, not only the top. Google permits the
   // same ad unit more than once per page; short pages keep just the top unit.
   const midN = heads.length >= 4 ? Math.ceil(heads.length / 2) : 0;
-  const midAd = `\n<div class="seo-ad seo-ad-mid">\n  <ins class="adsbygoogle" style="display:block;text-align:center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"></ins>\n  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>\n</div>\n`;
+  const midAd = `\n<div class="seo-ad seo-ad-mid">\n  <ins class="adsbygoogle" style="display:block;text-align:center;min-height:100px" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"></ins>\n  <script>(function(){function p(){(adsbygoogle=window.adsbygoogle||[]).push({});}(window.requestIdleCallback||function(f){setTimeout(f,2200);})(p);})();</script>\n</div>\n`;
   let i = 0;
   const out = body.replace(/<h2((?:(?!id=)[^>])*)>([\s\S]*?)<\/h2>/g, (m, attrs, txt) => {
     const tag = `<h2${attrs} id="sec-${++i}">${txt}</h2>`;
@@ -821,6 +832,12 @@ function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', a
   const canonical = ORIGIN + url;
   const ogImg = image || `${ORIGIN}/guide/og-image.jpg`;
   const xDefault = ORIGIN + ((alts.find(a => a.lang === 'en') || {}).url || url);
+  // LCP — preload the hero image (if any) so the preload scanner fetches it before
+  // CSS/JS. The hero photo is the first <img> inside a .seo-hero-img <figure>;
+  // it may live in the `hero` header or (for city guides) at the top of `body`.
+  // Emoji-only heroes have no such <img>, so heroPreload stays empty (no-op).
+  const heroImgM = /class="seo-hero-img"[\s\S]*?<img\s+src="([^"]+)"/.exec((hero || '') + (body || ''));
+  const heroPreload = heroImgM ? `<link rel="preload" as="image" href="${heroImgM[1]}" fetchpriority="high">\n` : '';
   if (alts.length) {
     // Full cluster = this page + its alternates; x-default → the English URL.
     HREFLANG_SM.set(url, { cluster: [{ lang, url }, ...alts], xdef: (alts.find(a => a.lang === 'en') || {}).url || url });
@@ -868,7 +885,7 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <meta name="twitter:image" content="${esc(ogImg)}">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnect" href="https://koreaplus-webapp.jeybeeicon.workers.dev">
@@ -897,10 +914,10 @@ ${hero}
 ${trustBlock(lang)}
 <!-- AdSense — compact horizontal unit, upper placement (after hero) -->
 <div class="seo-ad seo-ad-top">
-  <ins class="adsbygoogle" style="display:block"
+  <ins class="adsbygoogle" style="display:block;min-height:90px"
        data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"
        data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <script>(function(){function p(){(adsbygoogle=window.adsbygoogle||[]).push({});}(window.requestIdleCallback||function(f){setTimeout(f,2200);})(p);})();</script>
 </div>
 <!-- Localized merch strip (AliExpress affiliate) — AdSense already above, so data-ads="off".
      Dormant (self-removes) until ALI_APP_KEY/SECRET secrets are set on the Worker. -->
@@ -1954,6 +1971,15 @@ function buildVisa() {
   body += `<h2>🛂 Do I need a visa for Korea?</h2><p>Citizens of <strong>110+ countries</strong> (incl. USA, UK, Canada, Australia, most of the EU, Japan, Singapore) can enter Korea <strong>visa-free</strong> for tourism — typically 30–90 days depending on nationality. Always confirm your nationality's allowance before booking.</p>`;
   body += `<h2>✅ What is K-ETA?</h2><p>K-ETA is an online travel authorization (similar to the US ESTA). Visa-free travelers usually need it to board a flight to Korea. <strong>Note:</strong> Korea has periodically granted <em>temporary K-ETA exemptions</em> for many countries — check the official portal for current status before you travel.</p>`;
   body += `<h2>📝 How to apply for K-ETA</h2><ol class="steps"><li>Go to the official site <strong>k-eta.go.kr</strong> (or the K-ETA app) — beware of copycat sites that overcharge.</li><li>Apply at least <strong>72 hours before departure</strong>.</li><li>Upload a passport photo, passport info and trip details.</li><li>Pay the fee (around <strong>₩10,000</strong>) by card.</li><li>Receive approval by email — valid for multiple entries over <strong>2–3 years</strong>.</li></ol>`;
+  // G01 — HowTo schema: plain-text mirror of the <ol class="steps"> above (HTML
+  // emphasis stripped, wording identical — zero fabrication).
+  const ketaHowToSteps = [
+    'Go to the official site k-eta.go.kr (or the K-ETA app) — beware of copycat sites that overcharge.',
+    'Apply at least 72 hours before departure.',
+    'Upload a passport photo, passport info and trip details.',
+    'Pay the fee (around ₩10,000) by card.',
+    'Receive approval by email — valid for multiple entries over 2–3 years.',
+  ];
   body += `<h2>💰 Cost & processing time</h2><div class="seo-pricebox"><div class="range">≈ ₩10,000 (~$7–8)</div><div class="note">Approval usually within minutes to 72 hours. Apply early to be safe.</div></div>`;
   body += `<h2>🧳 On arrival</h2><ul class="tips"><li>Fill in the arrival card (or Q-CODE health form if required at the time).</li><li>Have your accommodation address and return ticket ready.</li><li>Keep digital + printed copies of your K-ETA approval and passport.</li></ul>`;
   body += `<div class="seo-links"><a href="https://www.k-eta.go.kr/" target="_blank" rel="noopener">🌐 Official K-ETA Portal ↗</a><a href="https://www.0404.go.kr/" target="_blank" rel="noopener">🌐 Korea MOFA Travel Info ↗</a></div>`;
@@ -1975,7 +2001,8 @@ function buildVisa() {
   const hero = `<header class="seo-hero"><span class="emoji">🛂</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">Updated 2026</span><a class="seo-badge" href="ja/korea-visa-k-eta-guide.html">🇯🇵 日本語</a><a class="seo-badge" href="zh/korea-visa-k-eta-guide.html">🇨🇳 中文</a><a class="seo-badge" href="es/korea-visa-k-eta-guide.html">🇪🇸 Español</a></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   const alts = LOCALES.map(l => ({ lang: l, url: `${BASEP}${l}/korea-visa-k-eta-guide.html` }));
-  writePage('guide/korea-visa-k-eta-guide.html', shell({ url, title, desc, keywords: 'Korea visa, K-ETA, do I need a visa for Korea, Korea visa free, K-ETA application, Korea entry requirements', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, alts }));
+  const ketaHowTo = __ld.howToLD(ketaHowToSteps, { name: 'How to apply for K-ETA', description: 'Step-by-step K-ETA application for Korea.', origin: ORIGIN });
+  writePage('guide/korea-visa-k-eta-guide.html', shell({ url, title, desc, keywords: 'Korea visa, K-ETA, do I need a visa for Korea, Korea visa free, K-ETA application, Korea entry requirements', schemas: [article, ketaHowTo, breadcrumbLD(trail), faqLD(qa)].filter(Boolean), hero, body, alts }));
   return url;
 }
 
@@ -2437,7 +2464,15 @@ function buildCompare(c) {
   body += ctaHtml('Still deciding?', 'Tell the AI planner your dates and interests — it routes the best option for you.');
   const hero = `<header class="seo-hero"><span class="emoji">${c.emoji}</span><h1>${esc(c.h1)}</h1><div class="meta"><span class="seo-badge">Comparison</span><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: c.h1, description: c.desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
-  writePage(`guide/${c.slug}.html`, shell({ url, title, desc: c.desc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(c.qa)], hero, body }));
+  // G02 — enumerate the compared options as an ItemList (the header row of
+  // c.rows lists the options; cell [0][0] is the row-label column → skip it).
+  // No fabrication: option names are mirrored verbatim from the table header.
+  const optionNames = Array.isArray(c.rows) && c.rows.length
+    ? c.rows[0].slice(1).map(s => String(s || '').trim()).filter(Boolean) : [];
+  const compareList = optionNames.length
+    ? __ld.itemListLD(optionNames.map(name => ({ name })), { name: c.h1, description: c.desc, origin: ORIGIN })
+    : null;
+  writePage(`guide/${c.slug}.html`, shell({ url, title, desc: c.desc, keywords: '', schemas: [article, compareList, breadcrumbLD(trail), faqLD(c.qa)].filter(Boolean), hero, body }));
   return url;
 }
 
@@ -2525,11 +2560,35 @@ function buildKpopHistory(slug, lang) {
   body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
   const hero = `<header class="seo-hero"><span class="emoji">${KPOP_HIST_EMOJI[slug] || '🎤'}</span><h1>${esc(t.h1)}</h1><div class="meta"><span class="seo-badge">K-Pop</span><span class="seo-badge">2026</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: t.h1, description: t.metaDesc, inLanguage: lang, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
+  // K08 — MusicGroup schema on artist *-profile pages (joined to KPOP_ROSTER
+  // by id). sameAs only from VERIFIED external ids; members listed by name
+  // with NO birthDate (per-member bdays absent → never fabricated).
+  let musicGroup = null;
+  if (/-profile$/.test(slug)) {
+    const a = KPOP_ROSTER.find(r => r.id === slug.replace('-profile', ''));
+    if (a) {
+      const sameAs = [];
+      if (a.wikidataId && /^Q\d+$/.test(a.wikidataId)) sameAs.push('https://www.wikidata.org/wiki/' + a.wikidataId);
+      if (a.spotifyId && /^[A-Za-z0-9]+$/.test(a.spotifyId)) sameAs.push('https://open.spotify.com/artist/' + a.spotifyId);
+      if (a.youtubeChannelId && /^[A-Za-z0-9_-]+$/.test(a.youtubeChannelId)) sameAs.push('https://www.youtube.com/channel/' + a.youtubeChannelId);
+      musicGroup = __ld.musicGroupLD({
+        name: a.nameEn || t.h1,
+        alternateName: a.nameKo,
+        genre: Array.isArray(a.genres) ? a.genres : undefined,
+        foundingDate: a.debut,
+        url: ORIGIN + url,
+        sameAs,
+        image: ORIGIN + '/guide/og-image.jpg',
+        members: Array.isArray(a.members) ? a.members.map(m => ({ name: m })) : undefined, // no birthDate — never fabricated
+        origin: ORIGIN,
+      });
+    }
+  }
   const others = KPOP_HIST_LANGS.filter(l => l !== lang && KPOP_HIST[slug][l]);
   const alts = lang === 'en'
     ? others.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))
     : [{ lang: 'en', url: enUrl }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))];
-  writePage(`${dir}kpop/${slug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body, lang, alts, homeHref: '/kpop', brand: '🎤 Korea<span>Plus</span>' }));
+  writePage(`${dir}kpop/${slug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, musicGroup, breadcrumbLD(trail), faqLD(qa)].filter(Boolean), hero, body, lang, alts, homeHref: '/kpop', brand: '🎤 Korea<span>Plus</span>' }));
   return url;
 }
 
@@ -2605,9 +2664,52 @@ function buildKpopBrowse(lang) {
 }
 
 // ══════════════════════════════════════════════════════════════════
+// CTX — frozen injection object for the generated-content modules
+// (modules/seo-<name>.cjs). Modules receive ONLY this; they never require
+// build-seo helpers directly. Names map to the real in-file identifiers:
+//   ROSTER     → KPOP_ROSTER   (group/soloist roster from kpop-data.js)
+//   ENRICH     → KPOP_ENRICH   (lightstick + member bdays from kpop-enrich.js)
+//   COST_INDEX → COST_DATA     (travel-cost index data object)
+//   FOOD       → ALL food items (frozen pool; ALL filtered to cat==='food')
+// CITY_L10N/MONTHS/SEASONS4/COMPARES/L10N/LOCALES/esc/slug/enc/etc. are the
+// genuine identifiers. ld/derive are the layer-0 pure-helper factories.
+const FOOD = ALL.filter(i => i.cat === 'food');   // frozen 16-item food pool
+const CTX = {
+  shell, writePage, BASEP, L10N, LOCALES,
+  esc, slug, enc, bcHtml, breadcrumbLD, faqLD, keyFactsBox, affBlock,
+  ROSTER: KPOP_ROSTER, ENRICH: KPOP_ENRICH,
+  MONTHS, SEASONS4, CITY_L10N, COMPARES, FOOD, COST_INDEX: COST_DATA,
+  TODAY, ld: __ld, derive: __derive,
+};
+
+// ══════════════════════════════════════════════════════════════════
 // RUN
 // ══════════════════════════════════════════════════════════════════
 const out = { places: [], categories: [], cities: [], itineraries: [], months: [], neighborhoods: [], stays: [], visa: '', faq: [], compare: [], cityfood: [], seasonal: [], l10n: [], blog: [], blogIndex: '' };
+// === GENERATED CONTENT MODULES (require/out 배선 지점) ===
+// Integrator wires new seo-<name>.cjs generators here. Pattern per module:
+//   const mX = require('./modules/seo-<name>.cjs')(CTX);
+//   __out.main.push(...mX.urls());   // or __out.kpop for K-pop-channel pages
+// __out.main / __out.kpop accumulate {lang,url} objects; the sitemap loops
+// below spread them in at the marked hooks. Keep CTX the sole dependency.
+const __out = { main: [], kpop: [] };
+void CTX; // referenced by the wired modules above (silences no-unused until wired)
+// --- Wired generated-content modules (layer-1). Each urls() returns {lang,url}[]. ---
+const mKpopZodiac   = require('./modules/seo-kpop-zodiac.cjs')(CTX);     __out.kpop.push(...mKpopZodiac.urls());
+const mKpopCnZodiac = require('./modules/seo-kpop-cnzodiac.cjs')(CTX);   __out.kpop.push(...mKpopCnZodiac.urls());
+const mKpopBmonth   = require('./modules/seo-kpop-bmonth.cjs')(CTX);     __out.kpop.push(...mKpopBmonth.urls());
+const mKpopAgency   = require('./modules/seo-kpop-agency.cjs')(CTX);     __out.kpop.push(...mKpopAgency.urls());
+const mKpopVs       = require('./modules/seo-kpop-vs.cjs')(CTX);         __out.kpop.push(...mKpopVs.urls());
+const mKpopGlossary = require('./modules/seo-kpop-glossary.cjs')(CTX);   __out.kpop.push(...mKpopGlossary.urls());
+const mKpopLight    = require('./modules/seo-kpop-lightstick.cjs')(CTX); __out.kpop.push(...mKpopLight.urls());
+const mKpopMember   = require('./modules/seo-kpop-member.cjs')(CTX);     __out.kpop.push(...mKpopMember.urls());
+const mKpopTools    = require('./modules/seo-kpop-tools.cjs')(CTX);      __out.kpop.push(...mKpopTools.urls());
+const mFood         = require('./modules/seo-food.cjs')(CTX);            __out.main.push(...mFood.urls());
+const mStay         = require('./modules/seo-stay.cjs')(CTX);           __out.main.push(...mStay.urls());
+const mSeasonCity   = require('./modules/seo-seasoncity.cjs')(CTX);      __out.main.push(...mSeasonCity.urls());
+const mBudget       = require('./modules/seo-budgettool.cjs')(CTX);      __out.main.push(...mBudget.urls());
+const mFestivals    = require('./modules/seo-festivals.cjs')(CTX);       __out.main.push(...mFestivals.urls());
+const mRoute        = require('./modules/seo-route.cjs')(CTX);           __out.main.push(...mRoute.urls());
 for (const it of ALL) out.places.push(buildPlace(it));
 for (const cat of Object.keys(KOREA_DATA)) out.categories.push(buildCategory(cat));
 const cityPools = {};
@@ -2715,6 +2817,8 @@ out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.hubs || []).forEach(h => sm += `\n` + urlEntry(h.url, '0.8', 'weekly'));  // browse category hubs
 (out.hubsL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));   // localized browse hubs
 out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
+// === MODULE URL HOOK (main sitemap) === generated-content module URLs ({lang,url})
+Object.values(__out.main || []).flat().forEach(e => { if (e && e.url) sm += `\n` + urlEntry(e.url, '0.7', 'weekly'); });
 sm += `\n</urlset>\n`;
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sm);
 
@@ -2728,6 +2832,8 @@ ksm += urlEntry('/kpop', '1.0', 'daily');
 (out.kpopBrowse || []).forEach(u => ksm += `\n` + urlEntry(u, '0.7', 'weekly'));
 const kpopThemed = [...new Set([...out.categories, ...out.itineraries, ...(out.itinL10n || []), ...out.places].filter(u => /k-?pop/i.test(u)))];
 kpopThemed.forEach(u => ksm += `\n` + urlEntry(u, '0.7', 'weekly'));
+// === MODULE URL HOOK (kpop sitemap) === K-pop-channel module URLs ({lang,url})
+Object.values(__out.kpop || []).flat().forEach(e => { if (e && e.url) ksm += `\n` + urlEntry(e.url, '0.7', 'weekly'); });
 ksm += `\n</urlset>\n`;
 fs.writeFileSync(path.join(OUT, 'kpop-sitemap.xml'), ksm);
 console.log(`   kpop-sitemap.xml: ${(ksm.match(/<url>/g) || []).length} URLs (independent, → domain root)`);

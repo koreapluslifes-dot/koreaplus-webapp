@@ -113,7 +113,7 @@ ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" `
 # typically 20-50x faster. The local tree mirrors the remote /guide layout,
 # so every path extracts 1:1 under $REMOTE_DIR. tar overwrites in place
 # (same as scp); it never deletes remote-only files.
-$SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "kpop", "ja", "zh", "es", "ko", "fr", "de", "pt", "id")
+$SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "kpop", "ja", "zh", "es", "ko", "fr", "de", "pt", "id", "tools", "embed", "food")
 $SEO_ROOT_FILES = @("explore.html", "sitemap.xml", "robots.txt", "llms.txt", "blog/feed.xml")
 $KP_TXT = @(Get-ChildItem -Path $LOCAL_DIR -Filter "kp*.txt" -File | ForEach-Object { $_.Name })
 
@@ -126,6 +126,32 @@ $BUNDLE_ITEMS += $ICON_FILES
 $BUNDLE_ITEMS += $SEO_DIRS
 $BUNDLE_ITEMS += $SEO_ROOT_FILES
 $BUNDLE_ITEMS += $KP_TXT
+
+# ── Sitemap-driven coverage ───────────────────────────────────────────────
+# Generated SEO pages emitted to the repo ROOT (kpop-idols-*.html,
+# cherry-blossom-in-*.html, food-dictionary.html, korea-festivals-in-*.html,
+# destinations.html, …) are not in any whitelist or $SEO_DIR. Parse both
+# sitemaps and add every referenced ROOT-level (non-$SEO_DIR) file so the
+# canonical pages always deploy/update. Language + kpop/food/tools subdir files
+# are already covered by the recursive $SEO_DIRS entries, so we skip those.
+$BASE_URL = "https://koreaplus-lifes.com/guide/"
+$seoDirSet = @{}; foreach ($d in $SEO_DIRS) { $seoDirSet[$d] = $true }
+foreach ($sm in @("sitemap.xml", "kpop-sitemap.xml")) {
+    $smPath = Join-Path $LOCAL_DIR $sm
+    if (Test-Path $smPath) {
+        $raw = Get-Content -LiteralPath $smPath -Raw
+        foreach ($mm in [regex]::Matches($raw, '<loc>\s*([^<]+?)\s*</loc>')) {
+            $u = $mm.Groups[1].Value.Trim()
+            if ($u.StartsWith($BASE_URL)) {
+                $rel = $u.Substring($BASE_URL.Length)
+                if ($rel) {
+                    $top = ($rel -split '/')[0]
+                    if (-not $seoDirSet.ContainsKey($top)) { $BUNDLE_ITEMS += $rel }
+                }
+            }
+        }
+    }
+}
 
 # Keep only paths that exist locally; normalize to forward slashes for tar.
 $present = $BUNDLE_ITEMS |

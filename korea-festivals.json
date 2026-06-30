@@ -1,0 +1,162 @@
+[
+  {
+    "slug": "boryeong-mud-festival",
+    "name": { "en": "Boryeong Mud Festival", "ko": "보령머드축제" },
+    "city": "Boryeong",
+    "month": 7,
+    "desc": "A summer beach festival at Daecheon Beach centered on mineral-rich mud play, mud slides, and pools.",
+    "url": "https://en.wikipedia.org/wiki/Boryeong_Mud_Festival"
+  },
+  {
+    "slug": "jinhae-gunhangje",
+    "name": { "en": "Jinhae Gunhangje Festival", "ko": "진해군항제" },
+    "city": "Changwon",
+    "month": 4,
+    "desc": "Korea's largest cherry blossom festival, held in the Jinhae district with naval port heritage themes.",
+    "url": "https://en.wikipedia.org/wiki/Jinhae_Gunhangje_Festival"
+  },
+  {
+    "slug": "busan-international-film-festival",
+    "name": { "en": "Busan International Film Festival", "ko": "부산국제영화제" },
+    "city": "Busan",
+    "month": 10,
+    "desc": "One of Asia's major film festivals, screening international and Asian cinema centered on the Busan Cinema Center.",
+    "url": "https://en.wikipedia.org/wiki/Busan_International_Film_Festival"
+  },
+  {
+    "slug": "hwacheon-sancheoneo-ice-festival",
+    "name": { "en": "Hwacheon Sancheoneo Ice Festival", "ko": "화천산천어축제" },
+    "city": "Hwacheon",
+    "month": 1,
+    "desc": "A winter festival on a frozen river featuring ice fishing for mountain trout (sancheoneo), sledding, and ice sculptures.",
+    "url": "https://en.wikipedia.org/wiki/Hwacheon_Sancheoneo_Ice_Festival"
+  },
+  {
+    "slug": "andong-maskdance-festival",
+    "name": { "en": "Andong International Mask Dance Festival", "ko": "안동국제탈춤페스티벌" },
+    "city": "Andong",
+    "month": 9,
+    "desc": "A festival celebrating Korean and international mask dance (talchum) traditions, linked to the Hahoe folk village.",
+    "url": "https://en.wikipedia.org/wiki/Andong"
+  },
+  {
+    "slug": "boseong-green-tea-festival",
+    "name": { "en": "Boseong Green Tea Festival", "ko": "보성다향대축제" },
+    "city": "Boseong",
+    "month": 5,
+    "desc": "A spring festival among the terraced green tea plantations of Boseong with tea tasting and harvesting experiences.",
+    "url": "https://en.wikipedia.org/wiki/Boseong_County"
+  },
+  {
+    "slug": "jinju-namgang-yudeung-festival",
+    "name": { "en": "Jinju Namgang Yudeung (Lantern) Festival", "ko": "진주남강유등축제" },
+    "city": "Jinju",
+    "month": 10,
+    "desc": "A lantern festival floating thousands of illuminated lanterns on the Namgang River, rooted in Imjin War history.",
+    "url": "https://en.wikipedia.org/wiki/Jinju"
+  },
+  {
+    "slug": "seoul-lantern-festival",
+    "name": { "en": "Seoul Lantern Festival", "ko": "서울빛초롱축제" },
+    "city": "Seoul",
+    "month": 11,
+    "desc": "An annual lantern festival displaying large illuminated lanterns along the Cheonggyecheon stream in central Seoul.",
+    "url": "https://en.wikipedia.org/wiki/Cheonggyecheon"
+  },
+  {
+    "slug": "busan-fireworks-festival",
+    "name": { "en": "Busan Fireworks Festival", "ko": "부산불꽃축제" },
+    "city": "Busan",
+    "month": 10,
+    "desc": "A large-scale fireworks show over Gwangalli Beach and Gwangan Bridge, one of Korea's biggest pyrotechnic events.",
+    "url": "https://en.wikipedia.org/wiki/Gwangan_Bridge"
+  },
+  {
+    "slug": "jarasum-jazz-festival",
+    "name": { "en": "Jarasum Jazz Festival", "ko": "자라섬재즈페스티벌" },
+    "city": "Gapyeong",
+    "month": 10,
+    "desc": "An international jazz festival held on Jarasum island in Gapyeong with Korean and global jazz performers.",
+    "url": "https://en.wikipedia.org/wiki/Gapyeong_County"
+  },
+  {
+    "slug": "gwangju-kimchi-festival",
+    "name": { "en": "Gwangju World Kimchi Festival", "ko": "광주김치축제" },
+    "city": "Gwangju",
+    "month": 10,
+    "desc": "A festival celebrating kimchi culture with kimchi-making (kimjang) experiences, tastings, and food programs.",
+    "url": "https://en.wikipedia.org/wiki/Kimchi"
+  },
+  {
+    "slug": "jinju-namgang-bullfighting",
+    "name": { "en": "Gimje Horizon Festival", "ko": "김제지평선축제" },
+    "city": "Gimje",
+    "month": 10,
+    "desc": "A harvest-themed festival on the Honam plain celebrating rice farming heritage and rural folk culture.",
+    "url": "https://en.wikipedia.org/wiki/Gimje"
+  },
+  {
+    "slug": "muju-firefly-festival",
+    "name": { "en": "Muju Firefly Festival", "ko": "무주반딧불축제" },
+    "city": "Muju",
+    "month": 8,
+    "desc": "An eco-themed festival in Muju centered on fireflies and their clean-environment habitat in the Deogyusan area.",
+    "url": "https://en.wikipedia.org/wiki/Muju_County"
+  },
+  {
+    "slug": "damyang-bamboo-festival",
+    "name": { "en": "Damyang Bamboo Festival", "ko": "담양대나무축제" },
+    "city": "Damyang",
+    "month": 5,
+    "desc": "A festival among Damyang's bamboo groves, including the Juknokwon bamboo forest, with crafts and walking trails.",
+    "url": "https://en.wikipedia.org/wiki/Damyang_County"
+  },
+  {
+    "slug": "gwangyang-maehwa-plum-festival",
+    "name": { "en": "Gwangyang Maehwa Plum Blossom Festival", "ko": "광양매화축제" },
+    "city": "Gwangyang",
+    "month": 3,
+    "desc": "An early-spring festival among the plum (maehwa) blossom orchards along the Seomjingang River in Gwangyang.",
+    "url": "https://en.wikipedia.org/wiki/Gwangyang"
+  },
+  {
+    "slug": "jeju-fire-festival",
+    "name": { "en": "Jeju Fire Festival (Jeongwol Daeboreum)", "ko": "제주들불축제" },
+    "city": "Jeju",
+    "month": 3,
+    "desc": "A Jeju folk festival rooted in the old practice of burning fields, held around the first full moon of the lunar year.",
+    "url": "https://en.wikipedia.org/wiki/Jeju_Province"
+  },
+  {
+    "slug": "gimje-horizon-festival",
+    "name": { "en": "Yeongdeungpo Yeouido Spring Flower Festival", "ko": "영등포여의도봄꽃축제" },
+    "city": "Seoul",
+    "month": 4,
+    "desc": "A spring cherry blossom festival along Yunjung-ro behind the National Assembly on Yeouido island in Seoul.",
+    "url": "https://en.wikipedia.org/wiki/Yeouido"
+  },
+  {
+    "slug": "taean-tulip-festival",
+    "name": { "en": "Taean Tulip Festival", "ko": "태안세계튤립축제" },
+    "city": "Taean",
+    "month": 4,
+    "desc": "A spring flower festival at Korea Flower Park in Taean featuring large tulip displays along the west coast.",
+    "url": "https://en.wikipedia.org/wiki/Taean_County"
+  },
+  {
+    "slug": "jeonju-bibimbap-festival",
+    "name": { "en": "Jeonju Bibimbap Festival", "ko": "전주비빔밥축제" },
+    "city": "Jeonju",
+    "month": 10,
+    "desc": "A food festival in Jeonju celebrating bibimbap and local Korean cuisine near the Hanok Village area.",
+    "url": "https://en.wikipedia.org/wiki/Jeonju"
+  },
+  {
+    "slug": "yeosu-night-sea-festival",
+    "name": { "en": "Yeosu Geobukseon (Turtle Ship) Festival", "ko": "여수거북선축제" },
+    "city": "Yeosu",
+    "month": 5,
+    "desc": "A coastal festival in Yeosu commemorating Admiral Yi Sun-sin and the turtle ship naval heritage of the region.",
+    "url": "https://en.wikipedia.org/wiki/Yeosu"
+  }
+]

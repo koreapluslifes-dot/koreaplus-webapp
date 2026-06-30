@@ -1,0 +1,1026 @@
+{
+  "_note": "NEW Korean dishes for seo-food.cjs (buildDish/buildFoodDictionary). Object keyed by dish slug; each slug holds 9 per-language objects (en,ja,zh,es,ko,fr,de,pt,id). Fields consumed by the module: name, kr, romaja, desc, taste, howToEat[], whereTo, region, mapQ, tags[], emoji, faq[[q,a]]. Content is general/public knowledge only; prices are ₩ ranges; origins are hedged. No overlap with frozen FOOD-16 (bibimbap, kimchi, korean-bbq, tteokbokki, bulgogi, jjajangmyeon, kimchi-jjigae, naengmyeon, pajeon, japchae, bingsu, mandu, chimaek, dakgalbi, haemul-jeongol, makgeolli).",
+
+  "samgyetang": {
+    "ko": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "전국", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["보양식", "닭요리", "국·탕"],
+      "desc": "어린 닭 한 마리 속에 찹쌀·인삼·대추·마늘을 채워 푹 끓인 보양 닭백숙. 흔히 여름 복날에 먹는 대표 보양식으로 알려져 있습니다.",
+      "taste": "맑고 진한 국물에 부드럽게 익은 닭과 인삼 향이 어우러져, 자극적이지 않고 담백·구수한 맛이 납니다.",
+      "howToEat": ["뜨거울 때 닭 살을 발라 소금·후추에 살짝 찍어 먹습니다.", "속에 든 찹쌀밥을 국물과 함께 떠 먹습니다.", "곁들여 나오는 인삼주를 한 잔 곁들이기도 합니다."],
+      "whereTo": "서울 종로·서촌 일대의 오래된 삼계탕 전문점이 유명하며, 전국 어디서나 쉽게 만날 수 있습니다. 1인분 약 ₩15,000–20,000 선입니다.",
+      "faq": [["삼계탕은 어떤 음식인가요?", "어린 닭 속에 찹쌀·인삼·대추를 넣어 끓인 한국식 보양 닭탕으로, 흔히 여름 복날 음식으로 알려져 있습니다."], ["맵나요?", "기본은 맵지 않은 담백한 국물입니다. 취향에 따라 깍두기나 청양고추를 곁들입니다."]]
+    },
+    "en": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "Nationwide", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["restorative", "chicken", "soup"],
+      "desc": "A whole young chicken stuffed with sweet glutinous rice, ginseng, jujube and garlic, then simmered into a milky restorative broth. It is commonly eaten on Korea's hottest summer days.",
+      "taste": "Clean, gently savory and comforting — tender chicken and a faint ginseng aroma, with no chili heat in the base broth.",
+      "howToEat": ["Pull the chicken off the bone while hot and dip lightly in salt and pepper.", "Spoon up the glutinous rice from inside the bird with the broth.", "Some diners add a small cup of ginseng liquor on the side."],
+      "whereTo": "Long-running specialist shops around Jongno and Seochon in Seoul are well known, and you can find it nationwide. A single serving usually runs about ₩15,000–20,000.",
+      "faq": [["What is samgyetang?", "A Korean restorative chicken soup made by stuffing a young chicken with glutinous rice, ginseng and jujube — often eaten on hot summer days."], ["Is it spicy?", "The base broth is mild, not spicy. Diners add side dishes such as kkakdugi (radish kimchi) or fresh chili to taste."]]
+    },
+    "ja": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "全国", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["スタミナ料理", "鶏料理", "スープ"],
+      "desc": "若鶏一羽の中にもち米・高麗人参・なつめ・にんにくを詰めてじっくり煮込んだ参鶏湯。一般に夏の土用（伏日）に食べる代表的なスタミナ料理として知られています。",
+      "taste": "澄んで濃厚なスープに柔らかな鶏肉と人参の香りが溶け合い、刺激が少なく素朴でやさしい味わいです。",
+      "howToEat": ["熱いうちに鶏肉をほぐし、塩こしょうに軽くつけて食べます。", "中のもち米をスープと一緒にすくって食べます。", "添えられる人参酒を一杯合わせることもあります。"],
+      "whereTo": "ソウルの鍾路（チョンノ）や西村（ソチョン）の老舗専門店が有名で、全国どこでも味わえます。1人前およそ₩15,000〜20,000ほどです。",
+      "faq": [["参鶏湯とはどんな料理ですか？", "若鶏にもち米・高麗人参・なつめを詰めて煮込んだ韓国式スタミナ鶏スープで、夏の伏日に食べることで知られています。"], ["辛いですか？", "ベースのスープは辛くなく素朴な味です。お好みでカクテキや青唐辛子を添えます。"]]
+    },
+    "zh": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "全国", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["滋补", "鸡肉", "汤"],
+      "desc": "整只童子鸡塞入糯米、人参、红枣和大蒜慢炖而成的滋补鸡汤。通常被认为是韩国盛夏伏天进补的代表料理。",
+      "taste": "汤色清润浓郁，鸡肉软嫩，带淡淡人参香，不辣不刺激，口味清淡温和。",
+      "howToEat": ["趁热把鸡肉拆下，蘸少许盐和胡椒食用。", "把鸡腹中的糯米连同汤一起舀着吃。", "有些人会配一小杯人参酒。"],
+      "whereTo": "首尔钟路、西村一带的老字号专门店颇有名气，全国各地皆可品尝。一人份约 ₩15,000–20,000。",
+      "faq": [["参鸡汤是什么？", "把童子鸡塞入糯米、人参、红枣炖成的韩式滋补鸡汤，常在盛夏伏天食用。"], ["辣吗？", "汤底不辣，口味清淡。可按喜好搭配萝卜块泡菜或青辣椒。"]]
+    },
+    "es": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "Todo el país", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["reconstituyente", "pollo", "sopa"],
+      "desc": "Un pollo joven entero relleno de arroz glutinoso, ginseng, azufaifa y ajo, cocido a fuego lento hasta lograr un caldo reconfortante. Suele asociarse a los días más calurosos del verano coreano.",
+      "taste": "Limpio, suavemente sabroso y reconfortante: pollo tierno con un leve aroma a ginseng y sin picante en el caldo base.",
+      "howToEat": ["Separa la carne del hueso en caliente y mójala ligeramente en sal y pimienta.", "Toma con cuchara el arroz glutinoso del interior junto con el caldo.", "Algunos lo acompañan con una pequeña copa de licor de ginseng."],
+      "whereTo": "Los locales especializados de toda la vida en Jongno y Seochon (Seúl) son muy conocidos, y se encuentra en todo el país. Una ración suele costar unos ₩15,000–20,000.",
+      "faq": [["¿Qué es el samgyetang?", "Una sopa coreana reconstituyente de pollo, rellenado con arroz glutinoso, ginseng y azufaifa, que suele comerse en los días calurosos del verano."], ["¿Pica?", "El caldo base es suave, no picante. Se acompaña con guarniciones como kkakdugi o chile fresco al gusto."]]
+    },
+    "fr": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "Tout le pays", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["revigorant", "poulet", "soupe"],
+      "desc": "Un jeune poulet entier farci de riz gluant, de ginseng, de jujube et d'ail, longuement mijoté en un bouillon réconfortant. On l'associe généralement aux jours les plus chauds de l'été coréen.",
+      "taste": "Net, doucement savoureux et réconfortant : poulet tendre, légère note de ginseng et bouillon de base sans piment.",
+      "howToEat": ["Détachez la chair du poulet bien chaud et trempez-la légèrement dans le sel et le poivre.", "Prélevez à la cuillère le riz gluant logé dans le poulet avec le bouillon.", "Certains l'accompagnent d'un petit verre d'alcool de ginseng."],
+      "whereTo": "Les établissements spécialisés historiques de Jongno et Seochon, à Séoul, sont réputés, et on en trouve dans tout le pays. Une portion coûte généralement autour de ₩15,000–20,000.",
+      "faq": [["Qu'est-ce que le samgyetang ?", "Une soupe de poulet revigorante coréenne, le poulet étant farci de riz gluant, de ginseng et de jujube — souvent dégustée par fortes chaleurs estivales."], ["Est-ce épicé ?", "Le bouillon de base est doux, pas épicé. On l'accompagne de garnitures comme le kkakdugi ou du piment frais selon le goût."]]
+    },
+    "de": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "Landesweit", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["stärkend", "Huhn", "Suppe"],
+      "desc": "Ein ganzes junges Huhn, gefüllt mit Klebreis, Ginseng, Jujube und Knoblauch und zu einer kräftigenden Brühe geköchelt. Es gilt gemeinhin als typisches Stärkungsgericht für die heißesten Sommertage Koreas.",
+      "taste": "Klar, dezent herzhaft und wohltuend: zartes Hühnchen mit feiner Ginsengnote, die Grundbrühe ohne Chilischärfe.",
+      "howToEat": ["Das Fleisch heiß vom Knochen lösen und leicht in Salz und Pfeffer tunken.", "Den Klebreis aus dem Inneren des Huhns mit der Brühe auslöffeln.", "Manche reichen ein kleines Glas Ginsenglikör dazu."],
+      "whereTo": "Alteingesessene Spezialitätenlokale rund um Jongno und Seochon in Seoul sind bekannt, und man findet es landesweit. Eine Portion kostet meist etwa ₩15,000–20,000.",
+      "faq": [["Was ist Samgyetang?", "Eine stärkende koreanische Hühnersuppe, bei der ein junges Huhn mit Klebreis, Ginseng und Jujube gefüllt wird — oft an heißen Sommertagen gegessen."], ["Ist es scharf?", "Die Grundbrühe ist mild, nicht scharf. Dazu werden Beilagen wie Kkakdugi oder frische Chili nach Geschmack gereicht."]]
+    },
+    "pt": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "Todo o país", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["revigorante", "frango", "sopa"],
+      "desc": "Um frango jovem inteiro recheado com arroz glutinoso, ginseng, jujuba e alho, cozido lentamente até virar um caldo reconfortante. Costuma ser associado aos dias mais quentes do verão coreano.",
+      "taste": "Limpo, suavemente saboroso e reconfortante: frango macio com leve aroma de ginseng e sem ardência no caldo base.",
+      "howToEat": ["Solte a carne do osso ainda quente e mergulhe levemente em sal e pimenta.", "Coma com a colher o arroz glutinoso de dentro do frango junto com o caldo.", "Alguns acompanham com um pequeno cálice de licor de ginseng."],
+      "whereTo": "Casas especializadas tradicionais em Jongno e Seochon, em Seul, são conhecidas, e o prato é encontrado em todo o país. Uma porção costuma custar cerca de ₩15,000–20,000.",
+      "faq": [["O que é samgyetang?", "Uma sopa de frango revigorante coreana, com o frango recheado de arroz glutinoso, ginseng e jujuba — muitas vezes comida em dias quentes de verão."], ["É picante?", "O caldo base é suave, não picante. Acompanha-se com guarnições como kkakdugi ou pimenta fresca a gosto."]]
+    },
+    "id": {
+      "name": "Samgyetang", "kr": "삼계탕", "romaja": "samgyetang", "emoji": "🐔",
+      "region": "Seluruh Korea", "mapQ": "Samgyetang restaurant Seoul",
+      "tags": ["penambah stamina", "ayam", "sup"],
+      "desc": "Seekor ayam muda utuh diisi beras ketan, ginseng, jujube, dan bawang putih, lalu direbus perlahan menjadi kaldu yang menyehatkan. Umumnya dikenal sebagai hidangan penambah stamina khas hari-hari terpanas musim panas Korea.",
+      "taste": "Bening, gurih lembut, dan menenangkan — ayam empuk dengan aroma ginseng samar, dan kaldu dasarnya tanpa rasa pedas cabai.",
+      "howToEat": ["Suwir daging ayam selagi panas dan celupkan sedikit ke garam dan merica.", "Sendok beras ketan dari dalam ayam bersama kaldunya.", "Sebagian orang menambah secangkir kecil arak ginseng."],
+      "whereTo": "Kedai khusus lawas di sekitar Jongno dan Seochon di Seoul terkenal, dan hidangan ini mudah ditemukan di seluruh Korea. Satu porsi biasanya sekitar ₩15,000–20,000.",
+      "faq": [["Apa itu samgyetang?", "Sup ayam penambah stamina khas Korea, ayam diisi beras ketan, ginseng, dan jujube — sering disantap saat hari panas musim panas."], ["Apakah pedas?", "Kaldu dasarnya ringan, tidak pedas. Disajikan dengan lauk seperti kkakdugi atau cabai segar sesuai selera."]]
+    }
+  },
+
+  "sundubu-jjigae": {
+    "ko": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "전국", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["찌개", "두부", "얼큰"],
+      "desc": "굳히지 않은 부드러운 순두부를 고춧가루 양념 국물에 넣고 끓인 얼큰한 두부 찌개. 보통 뚝배기에 부글부글 끓여 날달걀을 풀어 냅니다.",
+      "taste": "보들보들한 순두부와 칼칼한 국물이 어우러져 얼큰하면서도 부드럽고, 매운 정도는 가게마다 조절됩니다.",
+      "howToEat": ["뜨거운 뚝배기가 끓을 때 날달걀을 깨 넣고 살짝 익혀 먹습니다.", "공깃밥을 국물에 말거나 떠 먹습니다.", "곁들이는 김치·반찬과 함께 먹습니다."],
+      "whereTo": "분식집·백반집·전문점 어디서나 흔하며, 1인분 약 ₩8,000–12,000 선입니다.",
+      "faq": [["순두부찌개는 무엇인가요?", "부드러운 순두부를 얼큰한 양념 국물에 끓인 한국식 두부 찌개로, 보통 뚝배기에 날달걀을 풀어 냅니다."], ["많이 맵나요?", "기본은 얼큰하지만 가게에서 맵기를 조절할 수 있어, 순한 맛으로도 주문할 수 있습니다."]]
+    },
+    "en": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "Nationwide", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["stew", "tofu", "spicy"],
+      "desc": "A bubbling stew of silky uncurded soft tofu in a chili-seasoned broth. It is usually served in a hot earthenware pot with a raw egg cracked in at the table.",
+      "taste": "Soft, custardy tofu in a warming, gently spicy broth; the heat level is adjusted from shop to shop.",
+      "howToEat": ["Crack the raw egg into the bubbling pot and let it set briefly before eating.", "Eat the steamed rice spooned with the broth or stirred in.", "Enjoy alongside the kimchi and side dishes served with it."],
+      "whereTo": "Common at casual diners, set-meal houses and specialist shops everywhere; a serving usually runs about ₩8,000–12,000.",
+      "faq": [["What is sundubu-jjigae?", "A Korean soft-tofu stew of silky uncurded tofu in a spicy broth, usually served in an earthenware pot with a raw egg stirred in."], ["Is it very spicy?", "It is moderately spicy by default, but the heat can be adjusted, and many shops will make a mild version on request."]]
+    },
+    "ja": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "全国", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["チゲ", "豆腐", "辛口"],
+      "desc": "固める前のなめらかなおぼろ豆腐を唐辛子入りのスープで煮込んだ辛口の豆腐チゲ。ふつう石鍋でぐつぐつ煮て、卓上で生卵を割り入れます。",
+      "taste": "とろりとした柔らかい豆腐とピリ辛のスープが合わさり、辛さの中にやさしさがあります。辛さは店ごとに調整されます。",
+      "howToEat": ["熱い石鍋が煮立ったら生卵を割り入れ、軽く火を通して食べます。", "ご飯をスープに入れて、またはすくって食べます。", "添えのキムチや副菜と一緒に食べます。"],
+      "whereTo": "粉食店・定食屋・専門店などどこでもよく見かけ、1人前およそ₩8,000〜12,000ほどです。",
+      "faq": [["スンドゥブチゲとは何ですか？", "柔らかいおぼろ豆腐をピリ辛スープで煮込んだ韓国式豆腐チゲで、ふつう石鍋に生卵を割り入れて出します。"], ["とても辛いですか？", "標準ではピリ辛ですが、辛さは調整可能で、控えめにも注文できます。"]]
+    },
+    "zh": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "全国", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["炖锅", "豆腐", "微辣"],
+      "desc": "用未凝固的嫩豆腐放入辣椒调味汤底炖煮的辣味豆腐汤锅。通常用砂锅滚烫上桌，并在桌边打入一颗生鸡蛋。",
+      "taste": "嫩滑豆腐配上暖身的微辣汤底，辣中带柔，辣度可由店家调整。",
+      "howToEat": ["趁砂锅滚烫时打入生鸡蛋，稍微烫熟即可食用。", "把米饭泡入汤中或舀着吃。", "搭配附上的泡菜和小菜一起吃。"],
+      "whereTo": "在小吃店、家常饭馆和专门店都很常见，一人份约 ₩8,000–12,000。",
+      "faq": [["嫩豆腐汤是什么？", "用嫩豆腐放入辣味汤底炖成的韩式豆腐汤锅，通常用砂锅盛装并打入生鸡蛋。"], ["很辣吗？", "默认微辣，但辣度可调，许多店家可应要求做成不辣版本。"]]
+    },
+    "es": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "Todo el país", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["guiso", "tofu", "picante"],
+      "desc": "Un guiso burbujeante de tofu blando y sedoso sin cuajar en un caldo sazonado con chile. Suele servirse en una olla de barro caliente y se casca un huevo crudo en la mesa.",
+      "taste": "Tofu suave y cremoso en un caldo reconfortante y ligeramente picante; el nivel de picante se ajusta según el local.",
+      "howToEat": ["Casca el huevo crudo en la olla burbujeante y deja que cuaje un poco antes de comer.", "Come el arroz al vapor con el caldo o mezclado dentro.", "Acompáñalo con el kimchi y las guarniciones que vienen con el plato."],
+      "whereTo": "Habitual en comedores informales, casas de menú y locales especializados por todas partes; una ración suele costar unos ₩8,000–12,000.",
+      "faq": [["¿Qué es el sundubu-jjigae?", "Un guiso coreano de tofu blando sedoso en un caldo picante, servido normalmente en olla de barro con un huevo crudo mezclado."], ["¿Pica mucho?", "Es moderadamente picante por defecto, pero el picante puede ajustarse y muchos locales lo preparan suave si se pide."]]
+    },
+    "fr": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "Tout le pays", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["ragoût", "tofu", "épicé"],
+      "desc": "Un ragoût bouillonnant de tofu soyeux non caillé dans un bouillon assaisonné au piment. Il est généralement servi dans un pot en terre cuite brûlant, avec un œuf cru cassé à table.",
+      "taste": "Tofu fondant et crémeux dans un bouillon réconfortant et légèrement épicé ; le niveau de piment varie d'un établissement à l'autre.",
+      "howToEat": ["Cassez l'œuf cru dans le pot bouillonnant et laissez-le prendre brièvement avant de manger.", "Mangez le riz vapeur avec le bouillon ou mélangé dedans.", "Dégustez-le avec le kimchi et les accompagnements servis avec."],
+      "whereTo": "Courant dans les gargotes, les maisons de menus et les enseignes spécialisées partout ; une portion coûte généralement autour de ₩8,000–12,000.",
+      "faq": [["Qu'est-ce que le sundubu-jjigae ?", "Un ragoût coréen de tofu soyeux non caillé dans un bouillon épicé, servi le plus souvent en pot de terre avec un œuf cru mélangé."], ["Est-ce très épicé ?", "Il est modérément épicé par défaut, mais le piment peut être ajusté et de nombreux établissements le préparent doux sur demande."]]
+    },
+    "de": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "Landesweit", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["Eintopf", "Tofu", "scharf"],
+      "desc": "Ein brodelnder Eintopf aus seidigem, ungeronnenem Seidentofu in einer mit Chili gewürzten Brühe. Er wird meist im heißen Tontopf serviert, in den am Tisch ein rohes Ei aufgeschlagen wird.",
+      "taste": "Weicher, puddingartiger Tofu in einer wärmenden, leicht scharfen Brühe; der Schärfegrad wird je nach Lokal angepasst.",
+      "howToEat": ["Das rohe Ei in den brodelnden Topf schlagen und kurz stocken lassen, bevor man isst.", "Den gedämpften Reis mit der Brühe löffeln oder einrühren.", "Mit dem dazu gereichten Kimchi und den Beilagen genießen."],
+      "whereTo": "Überall in einfachen Lokalen, Menühäusern und Spezialitätenrestaurants verbreitet; eine Portion kostet meist etwa ₩8,000–12,000.",
+      "faq": [["Was ist Sundubu-jjigae?", "Ein koreanischer Eintopf aus seidigem, ungeronnenem Tofu in scharfer Brühe, meist im Tontopf mit einem eingerührten rohen Ei serviert."], ["Ist es sehr scharf?", "Standardmäßig mäßig scharf, doch die Schärfe lässt sich anpassen, und viele Lokale machen auf Wunsch eine milde Variante."]]
+    },
+    "pt": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "Todo o país", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["ensopado", "tofu", "picante"],
+      "desc": "Um ensopado borbulhante de tofu macio e sedoso não coalhado em um caldo temperado com pimenta. Costuma ser servido numa panela de barro quente, com um ovo cru quebrado à mesa.",
+      "taste": "Tofu macio e cremoso em um caldo reconfortante e levemente picante; o nível de ardência é ajustado de casa para casa.",
+      "howToEat": ["Quebre o ovo cru na panela borbulhante e deixe firmar um pouco antes de comer.", "Coma o arroz cozido com o caldo ou misturado nele.", "Aprecie com o kimchi e os acompanhamentos servidos junto."],
+      "whereTo": "Comum em restaurantes simples, casas de refeição e lojas especializadas em todo lugar; uma porção costuma custar cerca de ₩8,000–12,000.",
+      "faq": [["O que é sundubu-jjigae?", "Um ensopado coreano de tofu macio e sedoso em caldo picante, geralmente servido em panela de barro com um ovo cru misturado."], ["É muito picante?", "É moderadamente picante por padrão, mas a ardência pode ser ajustada e muitas casas fazem versão suave a pedido."]]
+    },
+    "id": {
+      "name": "Sundubu-jjigae", "kr": "순두부찌개", "romaja": "sundubu-jjigae", "emoji": "🌶️",
+      "region": "Seluruh Korea", "mapQ": "Sundubu jjigae restaurant Seoul",
+      "tags": ["sup kental", "tahu", "pedas"],
+      "desc": "Sup kental mendidih berisi tahu sutra lembut yang belum dipadatkan dalam kaldu berbumbu cabai. Biasanya disajikan dalam pot tanah liat panas, dengan telur mentah dipecahkan di meja.",
+      "taste": "Tahu lembut bertekstur halus dalam kaldu hangat yang sedikit pedas; tingkat pedasnya disesuaikan tiap kedai.",
+      "howToEat": ["Pecahkan telur mentah ke dalam pot yang mendidih dan biarkan setengah matang sebelum disantap.", "Makan nasi putih dengan kuah atau dicampurkan ke dalamnya.", "Nikmati bersama kimchi dan lauk yang disajikan."],
+      "whereTo": "Umum di warung sederhana, rumah makan set, dan kedai khusus di mana-mana; satu porsi biasanya sekitar ₩8,000–12,000.",
+      "faq": [["Apa itu sundubu-jjigae?", "Sup tahu lembut khas Korea berisi tahu sutra dalam kaldu pedas, biasanya disajikan di pot tanah liat dengan telur mentah yang dicampurkan."], ["Apakah sangat pedas?", "Standarnya cukup pedas, tetapi tingkat pedas bisa disesuaikan dan banyak kedai membuat versi ringan jika diminta."]]
+    }
+  },
+
+  "gamjatang": {
+    "ko": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "전국", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["탕", "돼지등뼈", "얼큰"],
+      "desc": "돼지 등뼈를 우거지·감자·들깨가루와 함께 얼큰하게 끓인 한국식 등뼈 감자탕. 뼈에 붙은 살을 발라 먹는 푸짐한 해장·안주 음식으로 알려져 있습니다.",
+      "taste": "구수한 들깨와 칼칼한 양념, 부드럽게 익은 등뼈 살이 어우러져 진하고 든든한 맛입니다.",
+      "howToEat": ["집게로 등뼈를 잡고 젓가락으로 뼈에 붙은 살을 발라 먹습니다.", "감자와 우거지를 국물과 함께 떠 먹습니다.", "남은 국물에 밥이나 라면 사리를 넣어 마무리하기도 합니다."],
+      "whereTo": "24시간 감자탕 전문점이 전국에 많으며, 보통 2–3인용 냄비를 함께 나눠 먹습니다. 소(小) 약 ₩20,000–28,000 선입니다.",
+      "faq": [["감자탕은 무엇인가요?", "돼지 등뼈를 우거지·감자·들깨와 끓인 얼큰한 한국식 탕으로, 뼈에 붙은 살을 발라 먹습니다."], ["감자가 주재료인가요?", "감자도 들어가지만, 핵심 재료는 돼지 등뼈입니다. 등뼈에서 우러난 진한 국물이 특징입니다."]]
+    },
+    "en": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "Nationwide", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["soup", "pork spine", "spicy"],
+      "desc": "A hearty, spicy pork-spine stew simmered with potatoes, dried napa greens and ground perilla seeds. It is known as a filling shared dish where you pick the meat off the bones.",
+      "taste": "Rich and warming — nutty perilla, a spicy seasoned broth and tender meat falling off the spine bones.",
+      "howToEat": ["Hold a bone with the tongs and use chopsticks to pick off the tender meat.", "Spoon up the potatoes and greens with the broth.", "Finish by adding rice or ramen noodles to the leftover broth, as many do."],
+      "whereTo": "24-hour gamjatang specialists are common nationwide, and it's usually shared from a 2–3 person pot. A small pot runs about ₩20,000–28,000.",
+      "faq": [["What is gamjatang?", "A spicy Korean stew of pork spine simmered with potatoes, greens and perilla, where diners pick the meat off the bones."], ["Is potato the main ingredient?", "Potatoes are included, but the core ingredient is pork spine, which gives the rich broth its body."]]
+    },
+    "ja": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "全国", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["タン（鍋）", "豚背骨", "辛口"],
+      "desc": "豚の背骨を白菜の干葉・じゃがいも・えごま粉とともに辛く煮込んだ韓国式の背骨鍋。骨に付いた肉をほぐして食べる、ボリューム満点の一品として知られています。",
+      "taste": "香ばしいえごまとピリ辛の味付け、柔らかくほぐれる背骨の肉が合わさり、濃厚で食べごたえがあります。",
+      "howToEat": ["トングで背骨をつかみ、箸で骨に付いた肉をほぐして食べます。", "じゃがいもや干葉をスープと一緒にすくって食べます。", "残ったスープにご飯やラーメンを入れて締めることもあります。"],
+      "whereTo": "24時間営業のカムジャタン専門店が全国に多く、ふつう2〜3人用の鍋を分け合います。小サイズでおよそ₩20,000〜28,000ほどです。",
+      "faq": [["カムジャタンとは何ですか？", "豚の背骨をじゃがいも・干葉・えごまと煮込んだ韓国式の辛い鍋で、骨に付いた肉をほぐして食べます。"], ["主役はじゃがいもですか？", "じゃがいもも入りますが、主役は豚の背骨です。背骨から出る濃いスープが特徴です。"]]
+    },
+    "zh": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "全国", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["汤锅", "猪脊骨", "微辣"],
+      "desc": "用猪脊骨搭配干白菜叶、土豆和紫苏籽粉熬煮的辣味脊骨汤锅。以从骨头上剔肉而食、分量十足著称。",
+      "taste": "紫苏的香气、辣味调料与软烂脱骨的脊骨肉相融，汤头浓郁、十分扎实。",
+      "howToEat": ["用夹子夹住脊骨，用筷子把骨上的肉剔下来吃。", "把土豆和干白菜叶连汤一起舀着吃。", "很多人会在剩汤里加米饭或拉面收尾。"],
+      "whereTo": "全国有许多 24 小时土豆汤专门店，通常点 2–3 人份的锅一起分享。小锅约 ₩20,000–28,000。",
+      "faq": [["土豆汤（脊骨汤）是什么？", "用猪脊骨搭配土豆、菜叶和紫苏熬成的韩式辣味汤锅，食客把骨上的肉剔下来吃。"], ["土豆是主料吗？", "虽然有土豆，但核心食材是猪脊骨，浓郁汤头正来自脊骨。"]]
+    },
+    "es": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "Todo el país", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["guiso", "espinazo de cerdo", "picante"],
+      "desc": "Un contundente guiso picante de espinazo de cerdo cocido a fuego lento con patatas, hojas de col secas y semillas de perilla molidas. Es conocido como un plato abundante para compartir en el que se desprende la carne de los huesos.",
+      "taste": "Rico y reconfortante: la perilla con sabor a frutos secos, un caldo sazonado y picante y la carne tierna que se separa del espinazo.",
+      "howToEat": ["Sujeta un hueso con las pinzas y, con los palillos, desprende la carne tierna.", "Toma con cuchara las patatas y las verduras con el caldo.", "Termina añadiendo arroz o fideos ramen al caldo que sobra, como hacen muchos."],
+      "whereTo": "Los locales de gamjatang abiertos 24 horas son comunes en todo el país, y suele compartirse en una olla para 2–3 personas. Una olla pequeña cuesta unos ₩20,000–28,000.",
+      "faq": [["¿Qué es el gamjatang?", "Un guiso coreano picante de espinazo de cerdo cocido con patatas, verduras y perilla, en el que se desprende la carne de los huesos."], ["¿La patata es el ingrediente principal?", "Lleva patatas, pero el ingrediente central es el espinazo de cerdo, que da cuerpo al caldo."]]
+    },
+    "fr": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "Tout le pays", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["ragoût", "échine de porc", "épicé"],
+      "desc": "Un ragoût épicé et copieux d'échine de porc, mijoté avec des pommes de terre, des feuilles de chou séchées et des graines de périlla moulues. C'est un plat généreux à partager, où l'on détache la viande des os.",
+      "taste": "Riche et réconfortant : périlla aux notes de noisette, bouillon assaisonné et épicé, et viande tendre qui se détache de l'échine.",
+      "howToEat": ["Maintenez un os avec la pince et détachez la viande tendre aux baguettes.", "Prélevez à la cuillère les pommes de terre et les légumes avec le bouillon.", "Terminez en ajoutant du riz ou des nouilles ramen au bouillon restant, comme beaucoup le font."],
+      "whereTo": "Les enseignes de gamjatang ouvertes 24 h/24 sont courantes dans tout le pays, et le plat se partage généralement dans une marmite pour 2–3 personnes. Une petite marmite coûte autour de ₩20,000–28,000.",
+      "faq": [["Qu'est-ce que le gamjatang ?", "Un ragoût coréen épicé d'échine de porc mijotée avec pommes de terre, légumes et périlla, où l'on détache la viande des os."], ["La pomme de terre est-elle l'ingrédient principal ?", "Il y a des pommes de terre, mais l'ingrédient central est l'échine de porc, qui donne du corps au bouillon."]]
+    },
+    "de": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "Landesweit", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["Eintopf", "Schweinerücken", "scharf"],
+      "desc": "Ein herzhafter, scharfer Eintopf aus Schweinerückenknochen, geköchelt mit Kartoffeln, getrockneten Kohlblättern und gemahlenen Perillasamen. Er gilt als sättigendes Gericht zum Teilen, bei dem man das Fleisch von den Knochen löst.",
+      "taste": "Kräftig und wärmend — nussige Perilla, eine gewürzte, scharfe Brühe und zartes Fleisch, das sich von den Wirbelknochen löst.",
+      "howToEat": ["Einen Knochen mit der Zange halten und das zarte Fleisch mit Stäbchen ablösen.", "Kartoffeln und Kohl mit der Brühe auslöffeln.", "Zum Abschluss Reis oder Ramen-Nudeln in die übrige Brühe geben, wie viele es tun."],
+      "whereTo": "Rund um die Uhr geöffnete Gamjatang-Lokale sind landesweit verbreitet, und das Gericht wird meist aus einem Topf für 2–3 Personen geteilt. Ein kleiner Topf kostet etwa ₩20,000–28,000.",
+      "faq": [["Was ist Gamjatang?", "Ein scharfer koreanischer Eintopf aus Schweinerücken, geköchelt mit Kartoffeln, Kohl und Perilla, bei dem man das Fleisch von den Knochen löst."], ["Ist Kartoffel die Hauptzutat?", "Kartoffeln sind enthalten, doch die Kernzutat ist der Schweinerücken, der der Brühe ihren Körper verleiht."]]
+    },
+    "pt": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "Todo o país", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["ensopado", "espinhaço de porco", "picante"],
+      "desc": "Um ensopado picante e substancial de espinhaço de porco, cozido com batatas, folhas de couve secas e sementes de perila moídas. É conhecido como um prato farto para partilhar, em que se retira a carne dos ossos.",
+      "taste": "Encorpado e reconfortante — perila com sabor amendoado, um caldo temperado e picante, e carne macia que se solta do espinhaço.",
+      "howToEat": ["Segure um osso com a pinça e use os hashis para retirar a carne macia.", "Coma com a colher as batatas e os vegetais com o caldo.", "Finalize adicionando arroz ou macarrão ramen ao caldo restante, como muitos fazem."],
+      "whereTo": "Casas de gamjatang abertas 24 horas são comuns em todo o país, e o prato costuma ser partilhado em uma panela para 2–3 pessoas. Uma panela pequena custa cerca de ₩20,000–28,000.",
+      "faq": [["O que é gamjatang?", "Um ensopado coreano picante de espinhaço de porco cozido com batatas, vegetais e perila, em que se retira a carne dos ossos."], ["A batata é o ingrediente principal?", "Há batatas, mas o ingrediente central é o espinhaço de porco, que dá corpo ao caldo."]]
+    },
+    "id": {
+      "name": "Gamjatang", "kr": "감자탕", "romaja": "gamjatang", "emoji": "🥔",
+      "region": "Seluruh Korea", "mapQ": "Gamjatang restaurant Seoul",
+      "tags": ["sup", "tulang punggung babi", "pedas"],
+      "desc": "Sup tulang punggung babi yang mengenyangkan dan pedas, direbus bersama kentang, sayuran sawi kering, dan bubuk biji perila. Dikenal sebagai hidangan berbagi yang mengenyangkan; daging dicungkil dari tulangnya.",
+      "taste": "Kaya dan menghangatkan — perila bercita rasa kacang, kaldu berbumbu pedas, dan daging empuk yang lepas dari tulang punggung.",
+      "howToEat": ["Pegang tulang dengan penjepit dan gunakan sumpit untuk mencungkil daging empuknya.", "Sendok kentang dan sayuran bersama kuahnya.", "Akhiri dengan menambahkan nasi atau mi ramyeon ke kuah sisa, seperti yang banyak dilakukan."],
+      "whereTo": "Kedai gamjatang 24 jam umum di seluruh Korea, dan biasanya disantap bersama dari panci untuk 2–3 orang. Panci kecil sekitar ₩20,000–28,000.",
+      "faq": [["Apa itu gamjatang?", "Sup tulang punggung babi pedas khas Korea, direbus bersama kentang, sayuran, dan perila; daging dicungkil dari tulangnya."], ["Apakah kentang bahan utamanya?", "Ada kentang, tetapi bahan inti adalah tulang punggung babi, yang memberi kekayaan pada kuahnya."]]
+    }
+  },
+
+  "budae-jjigae": {
+    "ko": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "의정부·전국", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["찌개", "퓨전", "한국전쟁 유래"],
+      "desc": "햄·소시지·스팸에 김치·라면사리·두부를 넣고 얼큰하게 끓이는 '부대찌개'. 흔히 한국전쟁 직후 미군 부대 주변에서 생겨난 음식으로 알려져 있습니다.",
+      "taste": "햄·소시지의 짭짤한 감칠맛과 김치의 칼칼함, 라면사리의 쫄깃함이 어우러져 진하고 든든한 맛입니다.",
+      "howToEat": ["식탁 위 버너에서 끓이며 라면사리를 넣어 익혀 먹습니다.", "건더기와 국물을 공깃밥과 함께 떠 먹습니다.", "국물이 졸면 육수나 사리를 추가해 끓입니다."],
+      "whereTo": "의정부 부대찌개 거리가 유명하며, 전국 전문점에서 보통 2인 이상 함께 먹습니다. 1인분 약 ₩9,000–13,000 선입니다.",
+      "faq": [["부대찌개는 어떤 음식인가요?", "햄·소시지·김치·라면사리를 넣고 끓이는 한국식 퓨전 찌개로, 흔히 한국전쟁 이후 생겨난 것으로 알려져 있습니다."], ["스팸이 꼭 들어가나요?", "햄·소시지·스팸류가 핵심 재료지만, 가게마다 구성은 조금씩 다릅니다."]]
+    },
+    "en": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "Uijeongbu / nationwide", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["stew", "fusion", "army base"],
+      "desc": "\"Army-base stew\" of ham, sausage and Spam simmered with kimchi, ramen noodles and tofu in a spicy broth. It is commonly said to have emerged near U.S. army bases just after the Korean War.",
+      "taste": "Rich and filling — the salty umami of ham and sausage, the tang of kimchi and chewy ramen noodles in a spicy broth.",
+      "howToEat": ["Cook it at the table on a burner, adding ramen noodles to the bubbling pot.", "Spoon the ingredients and broth over a bowl of steamed rice.", "Top up with extra stock or noodles as the broth reduces."],
+      "whereTo": "Uijeongbu's budae-jjigae street is famous, and specialist shops nationwide usually serve it for two or more. A serving runs about ₩9,000–13,000.",
+      "faq": [["What is budae-jjigae?", "A Korean fusion stew of ham, sausage, kimchi and ramen noodles, commonly said to have arisen after the Korean War."], ["Does it always contain Spam?", "Ham, sausage and Spam-type meats are central, but the exact mix varies from shop to shop."]]
+    },
+    "ja": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "議政府・全国", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["チゲ", "フュージョン", "米軍基地由来"],
+      "desc": "ハム・ソーセージ・スパムにキムチ・ラーメン・豆腐を入れて辛く煮込む「プデチゲ（部隊チゲ）」。一般に朝鮮戦争直後、米軍基地周辺で生まれた料理として知られています。",
+      "taste": "ハムやソーセージの塩気と旨み、キムチの辛み、ラーメンのコシが合わさり、濃厚で食べごたえのある味です。",
+      "howToEat": ["卓上バーナーで煮ながら、ラーメンを入れて食べます。", "具とスープをご飯と一緒にすくって食べます。", "スープが煮詰まったらだしや麺を足して煮ます。"],
+      "whereTo": "議政府（ウィジョンブ）のプデチゲ通りが有名で、全国の専門店ではふつう2人以上で食べます。1人前およそ₩9,000〜13,000ほどです。",
+      "faq": [["プデチゲとはどんな料理ですか？", "ハム・ソーセージ・キムチ・ラーメンを入れて煮込む韓国式フュージョンチゲで、一般に朝鮮戦争後に生まれたとされます。"], ["スパムは必ず入りますか？", "ハム・ソーセージ・スパム類が中心ですが、具の構成は店ごとに少しずつ異なります。"]]
+    },
+    "zh": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "议政府·全国", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["炖锅", "融合料理", "源于驻军"],
+      "desc": "把火腿、香肠、午餐肉与泡菜、拉面、豆腐一起辣炖的「部队锅」。一般认为它源于朝鲜战争后美军基地周边。",
+      "taste": "火腿香肠的咸鲜、泡菜的辣劲与拉面的弹牙交织，汤头浓郁、十分管饱。",
+      "howToEat": ["在餐桌的炉子上边煮边吃，把拉面下入滚锅。", "把料和汤浇在米饭上一起吃。", "汤收干时再加高汤或面继续煮。"],
+      "whereTo": "议政府的部队锅一条街颇负盛名，全国专门店通常 2 人以上一起吃。一人份约 ₩9,000–13,000。",
+      "faq": [["部队锅是什么？", "用火腿、香肠、泡菜和拉面炖成的韩式融合锅，一般认为源于朝鲜战争之后。"], ["一定有午餐肉吗？", "火腿、香肠、午餐肉类是核心，但具体搭配各店略有不同。"]]
+    },
+    "es": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "Uijeongbu / todo el país", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["guiso", "fusión", "base militar"],
+      "desc": "El \"guiso de base militar\" de jamón, salchicha y Spam cocido con kimchi, fideos ramen y tofu en un caldo picante. Suele decirse que surgió cerca de las bases del ejército estadounidense justo después de la Guerra de Corea.",
+      "taste": "Rico y saciante: el umami salado del jamón y la salchicha, el toque ácido del kimchi y los fideos ramen al dente en un caldo picante.",
+      "howToEat": ["Cocínalo en la mesa sobre un hornillo, añadiendo los fideos ramen a la olla burbujeante.", "Sirve los ingredientes y el caldo sobre un cuenco de arroz al vapor.", "Añade más caldo o fideos a medida que se reduce."],
+      "whereTo": "La calle del budae-jjigae de Uijeongbu es famosa, y los locales especializados de todo el país suelen servirlo para dos o más. Una ración cuesta unos ₩9,000–13,000.",
+      "faq": [["¿Qué es el budae-jjigae?", "Un guiso coreano de fusión con jamón, salchicha, kimchi y fideos ramen, que suele decirse que surgió tras la Guerra de Corea."], ["¿Siempre lleva Spam?", "El jamón, la salchicha y las carnes tipo Spam son centrales, pero la mezcla exacta varía según el local."]]
+    },
+    "fr": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "Uijeongbu / tout le pays", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["ragoût", "fusion", "base militaire"],
+      "desc": "Le « ragoût de base militaire » à base de jambon, de saucisse et de Spam, mijoté avec du kimchi, des nouilles ramen et du tofu dans un bouillon épicé. On dit communément qu'il est apparu près des bases de l'armée américaine juste après la guerre de Corée.",
+      "taste": "Riche et nourrissant : l'umami salé du jambon et de la saucisse, l'acidité du kimchi et des nouilles ramen al dente dans un bouillon épicé.",
+      "howToEat": ["Faites-le cuire à table sur un réchaud, en ajoutant les nouilles ramen au pot bouillonnant.", "Servez les ingrédients et le bouillon sur un bol de riz vapeur.", "Rajoutez du bouillon ou des nouilles à mesure qu'il réduit."],
+      "whereTo": "La rue du budae-jjigae d'Uijeongbu est célèbre, et les enseignes spécialisées du pays le servent généralement pour deux personnes ou plus. Une portion coûte autour de ₩9,000–13,000.",
+      "faq": [["Qu'est-ce que le budae-jjigae ?", "Un ragoût coréen fusion de jambon, saucisse, kimchi et nouilles ramen, dont on dit qu'il est né après la guerre de Corée."], ["Contient-il toujours du Spam ?", "Le jambon, la saucisse et les viandes type Spam sont au cœur du plat, mais la composition exacte varie selon l'établissement."]]
+    },
+    "de": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "Uijeongbu / landesweit", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["Eintopf", "Fusion", "Armeestützpunkt"],
+      "desc": "Der „Armeebasis-Eintopf\" aus Schinken, Wurst und Spam, geköchelt mit Kimchi, Ramen-Nudeln und Tofu in scharfer Brühe. Es heißt gemeinhin, er sei kurz nach dem Koreakrieg in der Nähe von US-Militärbasen entstanden.",
+      "taste": "Kräftig und sättigend — das salzige Umami von Schinken und Wurst, die Säure des Kimchi und bissfeste Ramen-Nudeln in scharfer Brühe.",
+      "howToEat": ["Am Tisch auf einem Kocher zubereiten und Ramen-Nudeln in den brodelnden Topf geben.", "Die Zutaten und die Brühe über eine Schale gedämpften Reis löffeln.", "Mit zusätzlicher Brühe oder Nudeln nachfüllen, wenn sie einkocht."],
+      "whereTo": "Die Budae-jjigae-Straße in Uijeongbu ist berühmt, und Spezialitätenlokale landesweit servieren es meist für zwei oder mehr Personen. Eine Portion kostet etwa ₩9,000–13,000.",
+      "faq": [["Was ist Budae-jjigae?", "Ein koreanischer Fusion-Eintopf aus Schinken, Wurst, Kimchi und Ramen-Nudeln, der gemeinhin auf die Zeit nach dem Koreakrieg zurückgeführt wird."], ["Ist immer Spam enthalten?", "Schinken, Wurst und Spam-artiges Fleisch stehen im Mittelpunkt, doch die genaue Mischung variiert von Lokal zu Lokal."]]
+    },
+    "pt": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "Uijeongbu / todo o país", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["ensopado", "fusão", "base militar"],
+      "desc": "O \"ensopado de base militar\" de presunto, salsicha e Spam cozido com kimchi, macarrão ramen e tofu em caldo picante. Costuma-se dizer que surgiu perto de bases do exército dos EUA logo após a Guerra da Coreia.",
+      "taste": "Encorpado e saciante — o umami salgado do presunto e da salsicha, a acidez do kimchi e o macarrão ramen no ponto em um caldo picante.",
+      "howToEat": ["Cozinhe à mesa num fogareiro, adicionando o macarrão ramen à panela borbulhante.", "Sirva os ingredientes e o caldo sobre uma tigela de arroz cozido.", "Reponha caldo ou macarrão à medida que reduz."],
+      "whereTo": "A rua do budae-jjigae de Uijeongbu é famosa, e casas especializadas pelo país costumam servir para duas pessoas ou mais. Uma porção custa cerca de ₩9,000–13,000.",
+      "faq": [["O que é budae-jjigae?", "Um ensopado de fusão coreano de presunto, salsicha, kimchi e macarrão ramen, que costuma-se dizer ter surgido após a Guerra da Coreia."], ["Sempre leva Spam?", "Presunto, salsicha e carnes tipo Spam são centrais, mas a combinação exata varia de casa para casa."]]
+    },
+    "id": {
+      "name": "Budae-jjigae", "kr": "부대찌개", "romaja": "budae-jjigae", "emoji": "🍲",
+      "region": "Uijeongbu / seluruh Korea", "mapQ": "Budae jjigae Uijeongbu",
+      "tags": ["sup kental", "fusion", "pangkalan militer"],
+      "desc": "\"Sup pangkalan militer\" berisi ham, sosis, dan Spam yang direbus bersama kimchi, mi ramyeon, dan tahu dalam kaldu pedas. Umumnya dikatakan muncul di dekat pangkalan tentara AS tepat setelah Perang Korea.",
+      "taste": "Kaya dan mengenyangkan — umami asin dari ham dan sosis, asam segar kimchi, serta mi ramyeon kenyal dalam kaldu pedas.",
+      "howToEat": ["Masak di meja dengan kompor portabel, menambahkan mi ramyeon ke panci mendidih.", "Sendok isian dan kuah ke atas semangkuk nasi putih.", "Tambahkan kaldu atau mi lagi saat kuah menyusut."],
+      "whereTo": "Jalan budae-jjigae di Uijeongbu terkenal, dan kedai khusus di seluruh Korea biasanya menyajikan untuk dua orang atau lebih. Satu porsi sekitar ₩9,000–13,000.",
+      "faq": [["Apa itu budae-jjigae?", "Sup fusion khas Korea berisi ham, sosis, kimchi, dan mi ramyeon, yang umumnya dikatakan muncul setelah Perang Korea."], ["Apakah selalu memakai Spam?", "Ham, sosis, dan daging sejenis Spam menjadi inti, tetapi komposisi pastinya berbeda tiap kedai."]]
+    }
+  },
+
+  "hotteok": {
+    "ko": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "전국·길거리", "mapQ": "Hotteok street food Seoul",
+      "tags": ["길거리음식", "디저트", "겨울간식"],
+      "desc": "반죽 안에 흑설탕·계피·견과를 넣어 기름에 지진 달콤한 길거리 호떡. 흔히 겨울철 대표 길거리 간식으로 알려져 있습니다.",
+      "taste": "겉은 바삭하고 속은 쫄깃하며, 안에서 녹은 흑설탕 시럽이 뜨겁고 달콤하게 흘러나옵니다.",
+      "howToEat": ["갓 지진 호떡을 종이컵에 받아 뜨거울 때 먹습니다.", "속 시럽이 뜨거우니 한 김 식혀 베어 뭅니다.", "씨앗호떡 등 견과가 든 변형도 즐깁니다."],
+      "whereTo": "전국 시장·길거리 노점에서 흔하며, 부산 비프광장의 씨앗호떡이 유명합니다. 보통 한 개 약 ₩1,500–3,000 선입니다.",
+      "faq": [["호떡은 무엇인가요?", "흑설탕·계피를 넣어 기름에 지진 달콤한 한국식 길거리 팬케이크로, 겨울 간식으로 인기 있습니다."], ["꿀이 들어 있나요?", "보통은 녹은 흑설탕 시럽이며, 가게에 따라 꿀이나 견과를 넣기도 합니다."]]
+    },
+    "en": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "Nationwide / street", "mapQ": "Hotteok street food Seoul",
+      "tags": ["street food", "dessert", "winter snack"],
+      "desc": "A sweet, pan-fried street pancake filled with brown sugar, cinnamon and nuts. It is commonly known as a signature wintertime street snack.",
+      "taste": "Crisp outside and chewy inside, with hot, sweet molten brown-sugar syrup oozing from the center.",
+      "howToEat": ["Take the freshly fried pancake in a paper cup and eat it hot.", "Let it cool for a moment first, as the syrup inside is very hot.", "Try variations like seed-filled hotteok with nuts."],
+      "whereTo": "Common at markets and street stalls nationwide; the seed-filled hotteok at Busan's BIFF Square is especially famous. One usually costs about ₩1,500–3,000.",
+      "faq": [["What is hotteok?", "A sweet Korean street pancake pan-fried with a brown-sugar and cinnamon filling, popular as a winter snack."], ["Does it contain honey?", "The filling is usually molten brown sugar; some vendors add honey or nuts."]]
+    },
+    "ja": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "全国・屋台", "mapQ": "Hotteok street food Seoul",
+      "tags": ["屋台グルメ", "デザート", "冬のおやつ"],
+      "desc": "生地の中に黒砂糖・シナモン・ナッツを入れて油で焼いた甘い屋台ホットク。一般に冬を代表する屋台のおやつとして知られています。",
+      "taste": "外はカリッ、中はもちもちで、中で溶けた黒砂糖シロップが熱く甘くとろけ出します。",
+      "howToEat": ["焼きたてを紙コップに受け取り、熱いうちに食べます。", "中のシロップが熱いので、少し冷ましてからかじります。", "ナッツ入りの「シアッホットク」などの変わり種も楽しめます。"],
+      "whereTo": "全国の市場や屋台でよく見かけ、釜山BIFF広場のシアッホットクが有名です。ふつう1個およそ₩1,500〜3,000ほどです。",
+      "faq": [["ホットクとは何ですか？", "黒砂糖やシナモンを詰めて油で焼いた甘い韓国式の屋台パンケーキで、冬のおやつとして人気です。"], ["蜂蜜が入っていますか？", "ふつうは溶けた黒砂糖シロップですが、店によっては蜂蜜やナッツを加えます。"]]
+    },
+    "zh": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "全国·街头", "mapQ": "Hotteok street food Seoul",
+      "tags": ["街头小吃", "甜点", "冬季小吃"],
+      "desc": "在面团里包入红糖、肉桂和坚果再油煎的甜味街头糖饼。一般被视为冬季代表性的街头小吃。",
+      "taste": "外脆内糯，中间融化的红糖糖浆又热又甜地流淌出来。",
+      "howToEat": ["把刚煎好的糖饼盛在纸杯里趁热吃。", "里面的糖浆很烫，先稍凉一下再咬。", "也可尝试夹坚果的「籽糖饼」等变种。"],
+      "whereTo": "全国市场和街头摊位都很常见，釜山 BIFF 广场的籽糖饼尤为出名。通常每个约 ₩1,500–3,000。",
+      "faq": [["糖饼（호떡）是什么？", "包入红糖和肉桂油煎的甜味韩式街头煎饼，是受欢迎的冬季小吃。"], ["里面有蜂蜜吗？", "馅料通常是融化的红糖，有些摊位会加蜂蜜或坚果。"]]
+    },
+    "es": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "Todo el país / calle", "mapQ": "Hotteok street food Seoul",
+      "tags": ["comida callejera", "postre", "tentempié de invierno"],
+      "desc": "Una tortita callejera dulce, frita en sartén, rellena de azúcar moreno, canela y frutos secos. Suele conocerse como un tentempié callejero típico del invierno.",
+      "taste": "Crujiente por fuera y masticable por dentro, con un jarabe caliente y dulce de azúcar moreno fundido que rezuma del centro.",
+      "howToEat": ["Recoge la tortita recién frita en un vaso de papel y cómela caliente.", "Déjala enfriar un momento, porque el jarabe del interior está muy caliente.", "Prueba variantes como el hotteok relleno de semillas y frutos secos."],
+      "whereTo": "Común en mercados y puestos callejeros de todo el país; el hotteok de semillas de la plaza BIFF en Busan es especialmente famoso. Suele costar unos ₩1,500–3,000 cada uno.",
+      "faq": [["¿Qué es el hotteok?", "Una tortita callejera coreana dulce, frita con un relleno de azúcar moreno y canela, popular como tentempié de invierno."], ["¿Lleva miel?", "El relleno suele ser azúcar moreno fundido; algunos vendedores añaden miel o frutos secos."]]
+    },
+    "fr": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "Tout le pays / rue", "mapQ": "Hotteok street food Seoul",
+      "tags": ["street food", "dessert", "en-cas d'hiver"],
+      "desc": "Une crêpe de rue sucrée, poêlée, fourrée de sucre roux, de cannelle et de noix. On la connaît généralement comme un en-cas de rue emblématique de l'hiver.",
+      "taste": "Croustillante à l'extérieur et moelleuse à l'intérieur, avec un sirop de sucre roux fondu, chaud et sucré, qui s'écoule du centre.",
+      "howToEat": ["Récupérez la crêpe tout juste poêlée dans un gobelet en papier et mangez-la chaude.", "Laissez-la refroidir un instant, car le sirop à l'intérieur est brûlant.", "Essayez des variantes comme le hotteok fourré aux graines et aux noix."],
+      "whereTo": "Courant sur les marchés et les stands de rue dans tout le pays ; le hotteok aux graines de la place BIFF à Busan est particulièrement réputé. Il coûte généralement autour de ₩1,500–3,000 pièce.",
+      "faq": [["Qu'est-ce que le hotteok ?", "Une crêpe de rue coréenne sucrée, poêlée avec une garniture de sucre roux et de cannelle, populaire comme en-cas d'hiver."], ["Contient-il du miel ?", "La garniture est généralement du sucre roux fondu ; certains vendeurs ajoutent du miel ou des noix."]]
+    },
+    "de": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "Landesweit / Straße", "mapQ": "Hotteok street food Seoul",
+      "tags": ["Streetfood", "Dessert", "Wintersnack"],
+      "desc": "Ein süßer, in der Pfanne gebackener Straßen-Pfannkuchen, gefüllt mit braunem Zucker, Zimt und Nüssen. Er ist gemeinhin als typischer Winter-Straßensnack bekannt.",
+      "taste": "Außen knusprig, innen zäh-weich, mit heißem, süßem geschmolzenem Braunzuckersirup, der aus der Mitte quillt.",
+      "howToEat": ["Den frisch gebackenen Pfannkuchen im Pappbecher heiß essen.", "Kurz abkühlen lassen, da der Sirup im Inneren sehr heiß ist.", "Varianten wie den mit Saaten und Nüssen gefüllten Hotteok probieren."],
+      "whereTo": "Verbreitet auf Märkten und an Straßenständen landesweit; der saatengefüllte Hotteok am BIFF-Platz in Busan ist besonders bekannt. Ein Stück kostet meist etwa ₩1,500–3,000.",
+      "faq": [["Was ist Hotteok?", "Ein süßer koreanischer Straßen-Pfannkuchen, gebraten mit einer Füllung aus braunem Zucker und Zimt, beliebt als Wintersnack."], ["Enthält er Honig?", "Die Füllung ist meist geschmolzener brauner Zucker; manche Verkäufer geben Honig oder Nüsse hinzu."]]
+    },
+    "pt": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "Todo o país / rua", "mapQ": "Hotteok street food Seoul",
+      "tags": ["comida de rua", "sobremesa", "lanche de inverno"],
+      "desc": "Uma panqueca de rua doce, frita na chapa, recheada com açúcar mascavo, canela e nozes. É comumente conhecida como um lanche de rua típico do inverno.",
+      "taste": "Crocante por fora e mastigável por dentro, com uma calda quente e doce de açúcar mascavo derretido escorrendo do centro.",
+      "howToEat": ["Pegue a panqueca recém-frita num copo de papel e coma quente.", "Deixe esfriar um instante, pois a calda de dentro fica muito quente.", "Experimente variações como o hotteok recheado de sementes e nozes."],
+      "whereTo": "Comum em mercados e barracas de rua pelo país; o hotteok de sementes da praça BIFF em Busan é especialmente famoso. Costuma custar cerca de ₩1,500–3,000 cada.",
+      "faq": [["O que é hotteok?", "Uma panqueca de rua coreana doce, frita com recheio de açúcar mascavo e canela, popular como lanche de inverno."], ["Leva mel?", "O recheio costuma ser açúcar mascavo derretido; alguns vendedores acrescentam mel ou nozes."]]
+    },
+    "id": {
+      "name": "Hotteok", "kr": "호떡", "romaja": "hotteok", "emoji": "🥞",
+      "region": "Seluruh Korea / kaki lima", "mapQ": "Hotteok street food Seoul",
+      "tags": ["jajanan kaki lima", "pencuci mulut", "camilan musim dingin"],
+      "desc": "Panekuk kaki lima manis yang digoreng pan, berisi gula merah, kayu manis, dan kacang. Umumnya dikenal sebagai camilan kaki lima khas musim dingin.",
+      "taste": "Renyah di luar dan kenyal di dalam, dengan sirup gula merah leleh yang panas dan manis mengalir dari tengahnya.",
+      "howToEat": ["Ambil panekuk yang baru digoreng dalam gelas kertas dan makan selagi panas.", "Biarkan dingin sejenak karena sirup di dalamnya sangat panas.", "Coba variasi seperti hotteok isi biji-bijian dan kacang."],
+      "whereTo": "Umum di pasar dan lapak kaki lima di seluruh Korea; hotteok isi biji di BIFF Square Busan sangat terkenal. Biasanya sekitar ₩1,500–3,000 per buah.",
+      "faq": [["Apa itu hotteok?", "Panekuk kaki lima manis khas Korea, digoreng dengan isian gula merah dan kayu manis, populer sebagai camilan musim dingin."], ["Apakah mengandung madu?", "Isiannya biasanya gula merah leleh; sebagian penjual menambahkan madu atau kacang."]]
+    }
+  },
+
+  "jjamppong": {
+    "ko": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "전국", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["면요리", "해물", "얼큰"],
+      "desc": "오징어·홍합·새우 등 해물과 채소를 매콤한 고추기름 국물에 끓여 면을 말아낸 한국식 중화요리 짬뽕. 흔히 짜장면과 짝을 이루는 중국집 대표 메뉴로 알려져 있습니다.",
+      "taste": "얼큰하고 시원한 해물 국물에 불맛이 더해져, 칼칼하면서도 감칠맛이 깊습니다.",
+      "howToEat": ["뜨거운 국물과 면을 함께 후루룩 먹습니다.", "해물 건더기를 곁들여 먹고, 단무지·양파를 함께 즐깁니다.", "짜장면 한 그릇과 나눠 먹는 '짬짜면' 구성도 인기입니다."],
+      "whereTo": "전국 중국집 어디서나 주문할 수 있으며, 한 그릇 약 ₩8,000–12,000 선입니다.",
+      "faq": [["짬뽕은 무엇인가요?", "해물과 채소를 매운 국물에 끓여 면을 만 한국식 중화요리로, 보통 중국집에서 짜장면과 함께 판매됩니다."], ["많이 맵나요?", "기본이 얼큰한 편이며, 가게에 따라 순한 백짬뽕(하얀 국물)도 있습니다."]]
+    },
+    "en": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "Nationwide", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["noodles", "seafood", "spicy"],
+      "desc": "A Korean-Chinese noodle soup of squid, mussels, shrimp and vegetables in a spicy chili-oil broth. It is commonly paired with jjajangmyeon as a staple of Korea's Chinese restaurants.",
+      "taste": "Spicy and bracing — a seafood-rich broth with a smoky wok aroma, sharp heat and deep umami.",
+      "howToEat": ["Slurp the noodles together with the hot broth.", "Eat the seafood alongside, with pickled radish and raw onion.", "Try the 'jjamjjamyeon' combo, sharing a half-portion with jjajangmyeon."],
+      "whereTo": "Available at Chinese restaurants nationwide; a bowl runs about ₩8,000–12,000.",
+      "faq": [["What is jjamppong?", "A Korean-Chinese spicy seafood noodle soup, usually sold at Chinese restaurants alongside jjajangmyeon."], ["Is it very spicy?", "It is fairly spicy by default; some shops also offer a milder white 'baek-jjamppong' with a non-chili broth."]]
+    },
+    "ja": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "全国", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["麺料理", "海鮮", "辛口"],
+      "desc": "イカ・ムール貝・エビなどの海鮮と野菜を辛いラー油スープで煮込み、麺を入れた韓国式中華「チャンポン」。一般にチャジャンミョンと対になる中華食堂の定番として知られています。",
+      "taste": "辛くてすっきりした海鮮スープに香ばしい鍋の香りが加わり、ピリ辛ながら旨みが深い味わいです。",
+      "howToEat": ["熱いスープと麺を一緒にすすって食べます。", "海鮮の具を合わせ、たくあんや玉ねぎと一緒に楽しみます。", "チャジャンミョンと半分ずつ食べる「チャムチャミョン」も人気です。"],
+      "whereTo": "全国の中華食堂で注文でき、一杯およそ₩8,000〜12,000ほどです。",
+      "faq": [["チャンポンとは何ですか？", "海鮮と野菜を辛いスープで煮込み麺を入れた韓国式中華で、ふつう中華食堂でチャジャンミョンと並んで売られています。"], ["とても辛いですか？", "標準ではかなり辛めですが、店によっては辛くない白いペクチャンポンもあります。"]]
+    },
+    "zh": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "全国", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["面食", "海鲜", "微辣"],
+      "desc": "用鱿鱼、青口、虾等海鲜与蔬菜在辣椒油辣汤里煮成、再下面条的韩式中华炒码面。一般被视为与炸酱面成对的中餐馆招牌。",
+      "taste": "辣爽的海鲜汤底带着镬气，辣中鲜味十足，回味深厚。",
+      "howToEat": ["把热汤和面条一起呼噜噜地吃。", "搭配海鲜料，配腌萝卜和生洋葱一起吃。", "也可点与炸酱面各半的「炒酱面」组合。"],
+      "whereTo": "全国中餐馆均可点到，一碗约 ₩8,000–12,000。",
+      "faq": [["炒码面（짬뽕）是什么？", "用海鲜和蔬菜在辣汤里煮成再下面的韩式中华面，通常在中餐馆与炸酱面一同售卖。"], ["很辣吗？", "默认偏辣，部分店家也提供不辣的白色「白炒码面」。"]]
+    },
+    "es": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "Todo el país", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["fideos", "marisco", "picante"],
+      "desc": "Una sopa de fideos coreano-china de calamar, mejillones, gambas y verduras en un caldo picante de aceite de chile. Suele acompañar al jjajangmyeon como básico de los restaurantes chinos de Corea.",
+      "taste": "Picante y vivificante: un caldo rico en marisco con aroma ahumado de wok, un picante intenso y mucho umami.",
+      "howToEat": ["Sorbe los fideos junto con el caldo caliente.", "Come el marisco al lado, con rábano encurtido y cebolla cruda.", "Prueba el combo 'jjamjjamyeon', compartiendo media ración con jjajangmyeon."],
+      "whereTo": "Disponible en los restaurantes chinos de todo el país; un cuenco cuesta unos ₩8,000–12,000.",
+      "faq": [["¿Qué es el jjamppong?", "Una sopa de fideos coreano-china picante con marisco, que suele venderse en restaurantes chinos junto al jjajangmyeon."], ["¿Pica mucho?", "Es bastante picante por defecto; algunos locales ofrecen también un 'baek-jjamppong' blanco más suave, sin chile."]]
+    },
+    "fr": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "Tout le pays", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["nouilles", "fruits de mer", "épicé"],
+      "desc": "Une soupe de nouilles sino-coréenne au calmar, aux moules, aux crevettes et aux légumes dans un bouillon épicé à l'huile de piment. Elle accompagne souvent le jjajangmyeon comme incontournable des restaurants chinois de Corée.",
+      "taste": "Épicé et tonifiant : un bouillon riche en fruits de mer au parfum fumé de wok, une chaleur vive et un umami profond.",
+      "howToEat": ["Aspirez les nouilles avec le bouillon chaud.", "Mangez les fruits de mer à côté, avec du radis mariné et de l'oignon cru.", "Essayez le combo « jjamjjamyeon », une demi-portion partagée avec du jjajangmyeon."],
+      "whereTo": "Disponible dans les restaurants chinois de tout le pays ; un bol coûte autour de ₩8,000–12,000.",
+      "faq": [["Qu'est-ce que le jjamppong ?", "Une soupe de nouilles sino-coréenne épicée aux fruits de mer, généralement vendue dans les restaurants chinois aux côtés du jjajangmyeon."], ["Est-ce très épicé ?", "Il est assez épicé par défaut ; certains établissements proposent aussi un 'baek-jjamppong' blanc plus doux, sans piment."]]
+    },
+    "de": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "Landesweit", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["Nudeln", "Meeresfrüchte", "scharf"],
+      "desc": "Eine koreanisch-chinesische Nudelsuppe aus Tintenfisch, Muscheln, Garnelen und Gemüse in einer scharfen Chiliöl-Brühe. Sie wird gemeinhin zusammen mit Jjajangmyeon als Klassiker von Koreas China-Restaurants serviert.",
+      "taste": "Scharf und belebend — eine meeresfrüchtereiche Brühe mit rauchigem Wok-Aroma, kräftiger Schärfe und tiefem Umami.",
+      "howToEat": ["Die Nudeln zusammen mit der heißen Brühe schlürfen.", "Die Meeresfrüchte dazu essen, mit eingelegtem Rettich und roher Zwiebel.", "Das 'Jjamjjamyeon'-Combo probieren — eine halbe Portion zusammen mit Jjajangmyeon."],
+      "whereTo": "In China-Restaurants landesweit erhältlich; eine Schale kostet etwa ₩8,000–12,000.",
+      "faq": [["Was ist Jjamppong?", "Eine scharfe koreanisch-chinesische Meeresfrüchte-Nudelsuppe, meist in China-Restaurants neben Jjajangmyeon verkauft."], ["Ist es sehr scharf?", "Standardmäßig recht scharf; manche Lokale bieten auch ein milderes weißes 'Baek-Jjamppong' ohne Chili an."]]
+    },
+    "pt": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "Todo o país", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["macarrão", "frutos do mar", "picante"],
+      "desc": "Uma sopa de macarrão sino-coreana de lula, mexilhões, camarão e legumes em um caldo picante de óleo de pimenta. Costuma acompanhar o jjajangmyeon como item básico dos restaurantes chineses da Coreia.",
+      "taste": "Picante e revigorante — um caldo rico em frutos do mar com aroma defumado de wok, ardência intensa e umami profundo.",
+      "howToEat": ["Sorva o macarrão junto com o caldo quente.", "Coma os frutos do mar ao lado, com rabanete em conserva e cebola crua.", "Experimente o combo 'jjamjjamyeon', dividindo meia porção com jjajangmyeon."],
+      "whereTo": "Disponível em restaurantes chineses por todo o país; uma tigela custa cerca de ₩8,000–12,000.",
+      "faq": [["O que é jjamppong?", "Uma sopa de macarrão sino-coreana picante com frutos do mar, geralmente vendida em restaurantes chineses ao lado do jjajangmyeon."], ["É muito picante?", "É bastante picante por padrão; algumas casas também oferecem o 'baek-jjamppong' branco, mais suave, sem pimenta."]]
+    },
+    "id": {
+      "name": "Jjamppong", "kr": "짬뽕", "romaja": "jjamppong", "emoji": "🍜",
+      "region": "Seluruh Korea", "mapQ": "Jjamppong restaurant Seoul",
+      "tags": ["mi", "makanan laut", "pedas"],
+      "desc": "Sup mi Korea-Tionghoa berisi cumi, kerang, udang, dan sayuran dalam kaldu pedas berminyak cabai. Umumnya disandingkan dengan jjajangmyeon sebagai menu pokok restoran Tionghoa di Korea.",
+      "taste": "Pedas dan menyegarkan — kaldu kaya makanan laut dengan aroma wok, rasa pedas tajam, dan umami dalam.",
+      "howToEat": ["Seruput mi bersama kuah panasnya.", "Makan makanan lautnya, ditemani lobak acar dan bawang bombai mentah.", "Coba kombo 'jjamjjamyeon', berbagi setengah porsi dengan jjajangmyeon."],
+      "whereTo": "Tersedia di restoran Tionghoa di seluruh Korea; satu mangkuk sekitar ₩8,000–12,000.",
+      "faq": [["Apa itu jjamppong?", "Sup mi Korea-Tionghoa pedas dengan makanan laut, biasanya dijual di restoran Tionghoa bersama jjajangmyeon."], ["Apakah sangat pedas?", "Standarnya cukup pedas; sebagian kedai juga menyediakan 'baek-jjamppong' putih yang lebih ringan tanpa cabai."]]
+    }
+  },
+
+  "jokbal": {
+    "ko": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "전국", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["돼지족", "안주", "야식"],
+      "desc": "돼지 족(다리)을 간장·생강·계피 등 향신료에 윤기 나게 졸여낸 족발. 얇게 썰어 쌈·새우젓과 함께 먹는 인기 야식·안주로 알려져 있습니다.",
+      "taste": "쫄깃한 껍질과 부드러운 살에 짭짤·달큰한 간장 양념이 배어, 잡내 없이 고소합니다.",
+      "howToEat": ["얇게 썬 족발을 상추·깻잎 쌈에 싸 먹습니다.", "새우젓이나 쌈장을 곁들여 간을 맞춥니다.", "소주·맥주와 함께 야식·안주로 즐깁니다."],
+      "whereTo": "서울 장충동 족발 골목이 유명하며, 전국 전문점·배달로 흔합니다. 보통 중(中) 약 ₩25,000–35,000 선입니다.",
+      "faq": [["족발은 무엇인가요?", "돼지 다리를 간장 양념에 졸인 한국 음식으로, 얇게 썰어 쌈과 새우젓에 곁들여 먹습니다."], ["맵나요?", "기본 간장 족발은 맵지 않으며, 매콤한 '불족발' 버전도 있습니다."]]
+    },
+    "en": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "Nationwide", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["pig's trotter", "drinking food", "late-night"],
+      "desc": "Pig's trotters braised to a glossy sheen in soy sauce with ginger, cinnamon and other spices. Sliced thin, it is a popular late-night and drinking dish eaten in lettuce wraps with salted shrimp.",
+      "taste": "Chewy skin and tender meat soak up a savory-sweet soy seasoning; clean-tasting and rich, without gaminess.",
+      "howToEat": ["Wrap the thin slices in lettuce or perilla leaves.", "Season each bite with salted shrimp (saeujeot) or ssamjang.", "Enjoy with soju or beer as a late-night drinking snack."],
+      "whereTo": "Seoul's Jangchung-dong jokbal alley is famous, and it's common at specialist shops and by delivery nationwide. A medium order runs about ₩25,000–35,000.",
+      "faq": [["What is jokbal?", "A Korean dish of pig's trotters braised in soy seasoning, sliced thin and eaten in wraps with salted shrimp."], ["Is it spicy?", "Classic soy jokbal is not spicy; there is also a spicy 'bul-jokbal' version."]]
+    },
+    "ja": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "全国", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["豚足", "つまみ", "夜食"],
+      "desc": "豚足を醤油・生姜・シナモンなどの香辛料でつやよく煮込んだチョッパル。薄く切ってサムや塩辛と一緒に食べる、人気の夜食・つまみとして知られています。",
+      "taste": "もちっとした皮と柔らかい肉に、甘塩っぱい醤油だれが染み込み、臭みなく香ばしい味わいです。",
+      "howToEat": ["薄切りのチョッパルをサンチュやえごまの葉で包んで食べます。", "アミの塩辛やサムジャンで味を調えます。", "ソジュやビールと一緒に夜食・つまみとして楽しみます。"],
+      "whereTo": "ソウル奨忠洞（チャンチュンドン）のチョッパル横丁が有名で、全国の専門店や宅配でも一般的です。中サイズでおよそ₩25,000〜35,000ほどです。",
+      "faq": [["チョッパルとは何ですか？", "豚足を醤油だれで煮込んだ韓国料理で、薄く切ってサムや塩辛と一緒に食べます。"], ["辛いですか？", "基本の醤油チョッパルは辛くなく、ピリ辛の「プルチョッパル」もあります。"]]
+    },
+    "zh": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "全国", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["猪蹄", "下酒菜", "宵夜"],
+      "desc": "用酱油、姜、肉桂等香料把猪蹄卤得油亮的猪脚（족발）。切薄片，配生菜包和虾酱食用，是受欢迎的宵夜与下酒菜。",
+      "taste": "弹牙的皮和软嫩的肉吸饱咸甜酱油味，无腥味，醇香可口。",
+      "howToEat": ["把切薄的猪脚用生菜或苏子叶包着吃。", "蘸虾酱或包饭酱调味。", "配烧酒或啤酒当宵夜、下酒菜享用。"],
+      "whereTo": "首尔奖忠洞的猪脚一条街很有名，全国专门店和外卖都很常见。中份约 ₩25,000–35,000。",
+      "faq": [["猪脚（족발）是什么？", "用酱油香料卤制的韩式猪蹄，切薄片配菜包和虾酱食用。"], ["辣吗？", "经典酱油猪脚不辣，也有辣味的「火猪脚（불족발）」。"]]
+    },
+    "es": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "Todo el país", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["manitas de cerdo", "comida para beber", "trasnoche"],
+      "desc": "Manitas de cerdo guisadas hasta quedar brillantes en salsa de soja con jengibre, canela y otras especias. Cortado fino, es un plato popular para la noche y para acompañar la bebida, que se come en hojas de lechuga con camarón salado.",
+      "taste": "Piel gelatinosa y carne tierna que absorben un aliño de soja dulce-salado; sabor limpio y sabroso, sin gusto fuerte.",
+      "howToEat": ["Envuelve las lonchas finas en hojas de lechuga o perilla.", "Sazona cada bocado con camarón salado (saeujeot) o ssamjang.", "Disfrútalo con soju o cerveza como tentempié nocturno."],
+      "whereTo": "El callejón del jokbal de Jangchung-dong en Seúl es famoso, y es común en locales especializados y a domicilio en todo el país. Un pedido mediano cuesta unos ₩25,000–35,000.",
+      "faq": [["¿Qué es el jokbal?", "Un plato coreano de manitas de cerdo guisadas en salsa de soja, cortadas finas y comidas en rollitos con camarón salado."], ["¿Pica?", "El jokbal clásico de soja no pica; también existe una versión picante, el 'bul-jokbal'."]]
+    },
+    "fr": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "Tout le pays", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["pied de porc", "accompagnement de boisson", "fin de soirée"],
+      "desc": "Des pieds de porc braisés jusqu'à un beau lustre dans une sauce soja au gingembre, à la cannelle et à d'autres épices. Émincé, c'est un plat de fin de soirée et d'accompagnement de boissons très prisé, mangé en feuilles de laitue avec des crevettes salées.",
+      "taste": "Peau gélatineuse et viande tendre imprégnées d'un assaisonnement soja sucré-salé ; goût net et savoureux, sans relent fort.",
+      "howToEat": ["Enroulez les fines tranches dans des feuilles de laitue ou de périlla.", "Assaisonnez chaque bouchée de crevettes salées (saeujeot) ou de ssamjang.", "Dégustez avec du soju ou de la bière en en-cas de fin de soirée."],
+      "whereTo": "La ruelle du jokbal de Jangchung-dong à Séoul est célèbre, et il est courant dans les enseignes spécialisées et en livraison partout. Une commande moyenne coûte autour de ₩25,000–35,000.",
+      "faq": [["Qu'est-ce que le jokbal ?", "Un plat coréen de pieds de porc braisés à la sauce soja, émincés et mangés en rouleaux avec des crevettes salées."], ["Est-ce épicé ?", "Le jokbal classique au soja n'est pas épicé ; il existe aussi une version épicée, le 'bul-jokbal'."]]
+    },
+    "de": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "Landesweit", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["Schweinshaxe", "Trinkspeise", "Spätsnack"],
+      "desc": "Schweinsfüße, in Sojasauce mit Ingwer, Zimt und weiteren Gewürzen glänzend geschmort. Dünn aufgeschnitten ist es ein beliebtes Spätnacht- und Begleitgericht zum Trinken, gegessen in Salatblättern mit gesalzenen Garnelen.",
+      "taste": "Zäh-bissfeste Haut und zartes Fleisch nehmen eine herzhaft-süße Sojawürze auf; sauberer, kräftiger Geschmack ohne strengen Beigeschmack.",
+      "howToEat": ["Die dünnen Scheiben in Salat- oder Perillablätter wickeln.", "Jeden Bissen mit gesalzenen Garnelen (Saeujeot) oder Ssamjang würzen.", "Mit Soju oder Bier als Spätnacht-Snack genießen."],
+      "whereTo": "Die Jokbal-Gasse in Seouls Jangchung-dong ist berühmt, und es ist landesweit in Spezialitätenlokalen und per Lieferung verbreitet. Eine mittlere Portion kostet etwa ₩25,000–35,000.",
+      "faq": [["Was ist Jokbal?", "Ein koreanisches Gericht aus in Sojawürze geschmorten Schweinsfüßen, dünn geschnitten und in Wraps mit gesalzenen Garnelen gegessen."], ["Ist es scharf?", "Das klassische Soja-Jokbal ist nicht scharf; es gibt auch eine scharfe Variante, das 'Bul-Jokbal'."]]
+    },
+    "pt": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "Todo o país", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["pé de porco", "petisco", "madrugada"],
+      "desc": "Pés de porco refogados até ganhar brilho em molho de soja com gengibre, canela e outras especiarias. Fatiado fino, é um prato popular de madrugada e para acompanhar a bebida, comido em folhas de alface com camarão salgado.",
+      "taste": "Pele gelatinosa e carne macia absorvem um tempero de soja agridoce; sabor limpo e encorpado, sem gosto forte.",
+      "howToEat": ["Enrole as fatias finas em folhas de alface ou perila.", "Tempere cada porção com camarão salgado (saeujeot) ou ssamjang.", "Aprecie com soju ou cerveja como petisco de madrugada."],
+      "whereTo": "O beco do jokbal em Jangchung-dong, Seul, é famoso, e o prato é comum em casas especializadas e por entrega em todo o país. Um pedido médio custa cerca de ₩25,000–35,000.",
+      "faq": [["O que é jokbal?", "Um prato coreano de pés de porco refogados em molho de soja, fatiados finos e comidos em trouxinhas com camarão salgado."], ["É picante?", "O jokbal clássico de soja não é picante; há também uma versão picante, o 'bul-jokbal'."]]
+    },
+    "id": {
+      "name": "Jokbal", "kr": "족발", "romaja": "jokbal", "emoji": "🐷",
+      "region": "Seluruh Korea", "mapQ": "Jokbal restaurant Seoul",
+      "tags": ["kaki babi", "teman minum", "santapan malam"],
+      "desc": "Kaki babi yang direbus mengkilap dalam kecap asin dengan jahe, kayu manis, dan rempah lain. Diiris tipis, ini hidangan populer untuk larut malam dan teman minum, disantap dengan bungkus selada dan udang asin.",
+      "taste": "Kulit kenyal dan daging empuk menyerap bumbu kecap manis-asin; rasa bersih dan gurih, tanpa bau prengus.",
+      "howToEat": ["Bungkus irisan tipis dalam daun selada atau perila.", "Bumbui tiap suapan dengan udang asin (saeujeot) atau ssamjang.", "Nikmati dengan soju atau bir sebagai camilan larut malam."],
+      "whereTo": "Gang jokbal di Jangchung-dong, Seoul, terkenal, dan hidangan ini umum di kedai khusus serta layanan antar di seluruh Korea. Pesanan ukuran sedang sekitar ₩25,000–35,000.",
+      "faq": [["Apa itu jokbal?", "Hidangan Korea berupa kaki babi yang direbus dalam bumbu kecap, diiris tipis dan disantap dengan bungkus serta udang asin."], ["Apakah pedas?", "Jokbal kecap klasik tidak pedas; ada juga versi pedas bernama 'bul-jokbal'."]]
+    }
+  },
+
+  "bossam": {
+    "ko": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "전국", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["수육", "쌈", "돼지고기"],
+      "desc": "삶은 돼지고기 수육을 배추·무김치·쌈장과 함께 쌈으로 싸 먹는 보쌈. 흔히 김장철에 즐겨 먹던 음식에서 비롯된 것으로 알려져 있습니다.",
+      "taste": "기름기를 뺀 부드러운 수육에 매콤한 무생채와 쌈장이 어우러져, 느끼하지 않고 개운합니다.",
+      "howToEat": ["수육 한 점을 절인 배추나 상추에 올립니다.", "무생채·새우젓·쌈장을 곁들여 한입에 싸 먹습니다.", "소주와 함께 안주로 즐기기도 합니다."],
+      "whereTo": "전국 보쌈 전문점·배달로 흔하며, 보통 2–3인용 한 상 약 ₩25,000–40,000 선입니다.",
+      "faq": [["보쌈은 무엇인가요?", "삶은 돼지고기를 김치·쌈과 함께 싸 먹는 한국 음식으로, 김장철 음식에서 유래한 것으로 알려져 있습니다."], ["족발과 어떻게 다른가요?", "족발은 간장에 졸인 돼지 다리, 보쌈은 향신료에 삶아 기름을 뺀 수육입니다."]]
+    },
+    "en": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "Nationwide", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["boiled pork", "wraps", "pork"],
+      "desc": "Boiled pork belly served with napa cabbage, radish kimchi and ssamjang to wrap and eat. It is commonly said to trace back to dishes enjoyed during the kimchi-making (gimjang) season.",
+      "taste": "Tender, de-greased boiled pork balanced by spicy radish salad and ssamjang — clean and refreshing rather than heavy.",
+      "howToEat": ["Place a slice of pork on a pickled cabbage or lettuce leaf.", "Add radish salad, salted shrimp and ssamjang, and wrap into one bite.", "Often enjoyed with soju as a drinking dish."],
+      "whereTo": "Common at bossam specialists and by delivery nationwide; a 2–3 person spread runs about ₩25,000–40,000.",
+      "faq": [["What is bossam?", "A Korean dish of boiled pork wrapped with kimchi and greens, commonly said to originate from gimjang-season cooking."], ["How is it different from jokbal?", "Jokbal is pig's trotters braised in soy; bossam is boiled, de-greased pork belly simmered with spices."]]
+    },
+    "ja": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "全国", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["ゆで豚", "サム（包み）", "豚肉"],
+      "desc": "ゆでた豚肉（スユク）を白菜・大根キムチ・サムジャンと一緒に包んで食べるポッサム。一般にキムジャン（白菜の漬け込み）の時期に楽しまれた料理に由来するとされています。",
+      "taste": "脂を落とした柔らかなゆで豚に、ピリ辛の大根なますやサムジャンが合わさり、しつこくなくさっぱりしています。",
+      "howToEat": ["ゆで豚を一切れ、漬けた白菜やサンチュにのせます。", "大根なます・アミの塩辛・サムジャンを添えて一口で包みます。", "ソジュと一緒につまみとして楽しむこともあります。"],
+      "whereTo": "全国のポッサム専門店や宅配で一般的で、ふつう2〜3人前の一膳でおよそ₩25,000〜40,000ほどです。",
+      "faq": [["ポッサムとは何ですか？", "ゆでた豚肉をキムチやサムと一緒に包んで食べる韓国料理で、キムジャンの時期の料理に由来するとされています。"], ["チョッパルとの違いは？", "チョッパルは醤油で煮た豚足、ポッサムは香辛料でゆでて脂を落とした豚肉です。"]]
+    },
+    "zh": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "全国", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["白切肉", "菜包", "猪肉"],
+      "desc": "把水煮猪肉（수육）配白菜、萝卜泡菜和包饭酱包着吃的菜包肉（보쌈）。一般认为源于腌泡菜（gimjang）季节享用的料理。",
+      "taste": "去油的软嫩水煮肉搭配辣味萝卜丝和包饭酱，毫不油腻、清爽可口。",
+      "howToEat": ["把一片水煮肉放在腌白菜或生菜上。", "加萝卜丝、虾酱和包饭酱，包成一口吃下。", "也常配烧酒当下酒菜。"],
+      "whereTo": "全国菜包肉专门店和外卖都很常见，通常 2–3 人份一桌约 ₩25,000–40,000。",
+      "faq": [["菜包肉（보쌈）是什么？", "把水煮猪肉配泡菜和菜叶包着吃的韩国料理，一般认为源于腌泡菜季节的料理。"], ["和猪脚有何不同？", "猪脚是用酱油卤的猪蹄，菜包肉是用香料煮、去油的猪肉。"]]
+    },
+    "es": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "Todo el país", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["cerdo hervido", "rollitos", "cerdo"],
+      "desc": "Panceta de cerdo hervida que se sirve con col china, kimchi de rábano y ssamjang para envolver y comer. Suele decirse que procede de los platos que se disfrutaban en la temporada de elaboración del kimchi (gimjang).",
+      "taste": "Cerdo hervido tierno y desgrasado, equilibrado por la ensalada picante de rábano y el ssamjang: limpio y refrescante en lugar de pesado.",
+      "howToEat": ["Coloca una loncha de cerdo sobre una hoja de col encurtida o de lechuga.", "Añade ensalada de rábano, camarón salado y ssamjang, y envuélvelo en un bocado.", "Suele disfrutarse con soju como plato para acompañar la bebida."],
+      "whereTo": "Común en locales especializados de bossam y a domicilio en todo el país; una mesa para 2–3 personas cuesta unos ₩25,000–40,000.",
+      "faq": [["¿Qué es el bossam?", "Un plato coreano de cerdo hervido envuelto con kimchi y verduras, que suele decirse que procede de la cocina de la temporada de gimjang."], ["¿En qué se diferencia del jokbal?", "El jokbal son manitas de cerdo guisadas en soja; el bossam es panceta hervida y desgrasada cocida con especias."]]
+    },
+    "fr": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "Tout le pays", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["porc bouilli", "rouleaux", "porc"],
+      "desc": "De la poitrine de porc bouillie, servie avec du chou chinois, du kimchi de radis et du ssamjang pour envelopper et manger. On dit communément qu'il remonte aux plats appréciés pendant la saison de préparation du kimchi (gimjang).",
+      "taste": "Porc bouilli tendre et dégraissé, équilibré par la salade de radis épicée et le ssamjang : net et rafraîchissant plutôt que lourd.",
+      "howToEat": ["Posez une tranche de porc sur une feuille de chou mariné ou de laitue.", "Ajoutez la salade de radis, les crevettes salées et le ssamjang, puis enroulez en une bouchée.", "Souvent dégusté avec du soju en accompagnement de boisson."],
+      "whereTo": "Courant dans les enseignes spécialisées de bossam et en livraison partout ; une table pour 2–3 personnes coûte autour de ₩25,000–40,000.",
+      "faq": [["Qu'est-ce que le bossam ?", "Un plat coréen de porc bouilli enroulé avec du kimchi et des légumes, dont on dit qu'il vient de la cuisine de la saison du gimjang."], ["En quoi diffère-t-il du jokbal ?", "Le jokbal, ce sont des pieds de porc braisés au soja ; le bossam est de la poitrine bouillie et dégraissée, mijotée aux épices."]]
+    },
+    "de": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "Landesweit", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["gekochtes Schwein", "Wraps", "Schwein"],
+      "desc": "Gekochter Schweinebauch, serviert mit Chinakohl, Rettich-Kimchi und Ssamjang zum Einwickeln und Essen. Es heißt gemeinhin, er gehe auf Gerichte zurück, die zur Kimchi-Einmachzeit (Gimjang) genossen wurden.",
+      "taste": "Zartes, entfettetes gekochtes Schwein, ausbalanciert durch würzigen Rettichsalat und Ssamjang — sauber und erfrischend statt schwer.",
+      "howToEat": ["Eine Scheibe Schwein auf ein eingelegtes Kohl- oder Salatblatt legen.", "Rettichsalat, gesalzene Garnelen und Ssamjang dazugeben und zu einem Bissen wickeln.", "Oft mit Soju als Trinkspeise genossen."],
+      "whereTo": "Verbreitet in Bossam-Spezialitätenlokalen und per Lieferung landesweit; ein Gedeck für 2–3 Personen kostet etwa ₩25,000–40,000.",
+      "faq": [["Was ist Bossam?", "Ein koreanisches Gericht aus gekochtem Schwein, in Kimchi und Blätter gewickelt, das gemeinhin auf die Küche der Gimjang-Zeit zurückgeführt wird."], ["Worin unterscheidet es sich von Jokbal?", "Jokbal sind in Soja geschmorte Schweinsfüße; Bossam ist gekochter, entfetteter Schweinebauch, mit Gewürzen geköchelt."]]
+    },
+    "pt": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "Todo o país", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["porco cozido", "trouxinhas", "porco"],
+      "desc": "Barriga de porco cozida, servida com acelga, kimchi de rabanete e ssamjang para enrolar e comer. Costuma-se dizer que remonta a pratos apreciados na época de preparo do kimchi (gimjang).",
+      "taste": "Porco cozido macio e sem gordura, equilibrado pela salada de rabanete picante e pelo ssamjang — limpo e refrescante em vez de pesado.",
+      "howToEat": ["Coloque uma fatia de porco sobre uma folha de acelga em conserva ou de alface.", "Acrescente salada de rabanete, camarão salgado e ssamjang, e enrole numa só dentada.", "Muitas vezes apreciado com soju como petisco."],
+      "whereTo": "Comum em casas especializadas em bossam e por entrega em todo o país; uma mesa para 2–3 pessoas custa cerca de ₩25,000–40,000.",
+      "faq": [["O que é bossam?", "Um prato coreano de porco cozido enrolado com kimchi e verduras, que costuma-se dizer vir da culinária da época do gimjang."], ["Qual a diferença para o jokbal?", "O jokbal são pés de porco refogados em soja; o bossam é barriga cozida e sem gordura, fervida com especiarias."]]
+    },
+    "id": {
+      "name": "Bossam", "kr": "보쌈", "romaja": "bossam", "emoji": "🥬",
+      "region": "Seluruh Korea", "mapQ": "Bossam restaurant Seoul",
+      "tags": ["babi rebus", "bungkus", "daging babi"],
+      "desc": "Samcan babi rebus yang disajikan dengan sawi putih, kimchi lobak, dan ssamjang untuk dibungkus dan disantap. Umumnya dikatakan berasal dari hidangan yang dinikmati saat musim pembuatan kimchi (gimjang).",
+      "taste": "Babi rebus empuk yang sudah ditiriskan lemaknya, diimbangi salad lobak pedas dan ssamjang — bersih dan menyegarkan, tidak berat.",
+      "howToEat": ["Letakkan sepotong babi di atas daun sawi asin atau selada.", "Tambahkan salad lobak, udang asin, dan ssamjang, lalu bungkus jadi satu suapan.", "Sering dinikmati dengan soju sebagai teman minum."],
+      "whereTo": "Umum di kedai khusus bossam dan layanan antar di seluruh Korea; satu set untuk 2–3 orang sekitar ₩25,000–40,000.",
+      "faq": [["Apa itu bossam?", "Hidangan Korea berupa babi rebus yang dibungkus dengan kimchi dan sayuran, umumnya dikatakan berasal dari masakan musim gimjang."], ["Apa bedanya dengan jokbal?", "Jokbal adalah kaki babi yang direbus dalam kecap; bossam adalah samcan rebus tanpa lemak yang dimasak dengan rempah."]]
+    }
+  },
+
+  "sundae": {
+    "ko": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "전국·길거리", "mapQ": "Sundae market Seoul",
+      "tags": ["길거리음식", "분식", "순대"],
+      "desc": "돼지 창자에 당면·찹쌀·선지 등을 채워 쪄낸 한국식 순대(블러드 소시지). 흔히 시장·분식집의 대표 길거리 음식으로 알려져 있습니다.",
+      "taste": "쫄깃한 껍질 속 부드러운 당면 소가 구수하며, 소금이나 양념에 찍어 먹으면 짭조름하게 어울립니다.",
+      "howToEat": ["순대를 소금이나 양념(들깨·고추 양념)에 찍어 먹습니다.", "간·허파 등 부속과 함께 모둠으로 즐깁니다.", "떡볶이 국물에 찍어 먹는 조합도 인기입니다."],
+      "whereTo": "전국 재래시장·분식집에서 흔하며, 보통 1인분 약 ₩4,000–8,000 선입니다.",
+      "faq": [["순대는 무엇인가요?", "돼지 창자에 당면과 찹쌀 등을 채워 찐 한국식 순대로, 시장과 분식집에서 흔히 파는 길거리 음식입니다."], ["맵나요?", "순대 자체는 맵지 않으며, 곁들이는 양념이나 떡볶이 국물에 따라 매운맛을 더할 수 있습니다."]]
+    },
+    "en": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "Nationwide / street", "mapQ": "Sundae market Seoul",
+      "tags": ["street food", "snack", "blood sausage"],
+      "desc": "A Korean blood sausage of pig's intestine stuffed with cellophane noodles, glutinous rice and pig's blood, then steamed. It is commonly known as a market and snack-bar street food.",
+      "taste": "Chewy casing around a soft, savory noodle filling; dipped in salt or seasoning it turns nicely salty-savory.",
+      "howToEat": ["Dip the sundae in salt or a seasoned dip (perilla or chili).", "Enjoy it as a platter with offal sides like liver and lung.", "Dip it in tteokbokki sauce — a popular combination."],
+      "whereTo": "Common at traditional markets and snack bars nationwide; a serving usually runs about ₩4,000–8,000.",
+      "faq": [["What is sundae?", "A Korean blood sausage of pig's intestine stuffed with noodles and glutinous rice, a common market and snack-bar street food."], ["Is it spicy?", "The sausage itself is not spicy; heat comes from the dip or from dipping it in tteokbokki sauce."]]
+    },
+    "ja": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "全国・屋台", "mapQ": "Sundae market Seoul",
+      "tags": ["屋台グルメ", "粉食", "血のソーセージ"],
+      "desc": "豚の腸に春雨・もち米・血などを詰めて蒸した韓国式スンデ（ブラッドソーセージ）。一般に市場や粉食店の代表的な屋台グルメとして知られています。",
+      "taste": "もちっとした皮の中の柔らかな春雨の餡が香ばしく、塩や薬味につけると塩気が利いてよく合います。",
+      "howToEat": ["スンデを塩や薬味（えごま・唐辛子）につけて食べます。", "レバーや肺などの内臓と盛り合わせで楽しみます。", "トッポッキの汁につけて食べる組み合わせも人気です。"],
+      "whereTo": "全国の在来市場や粉食店でよく見かけ、ふつう1人前およそ₩4,000〜8,000ほどです。",
+      "faq": [["スンデとは何ですか？", "豚の腸に春雨やもち米を詰めて蒸した韓国式の血のソーセージで、市場や粉食店でよく売られる屋台グルメです。"], ["辛いですか？", "スンデ自体は辛くなく、つける薬味やトッポッキの汁で辛さを加えられます。"]]
+    },
+    "zh": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "全国·街头", "mapQ": "Sundae market Seoul",
+      "tags": ["街头小吃", "粉食", "血肠"],
+      "desc": "在猪肠里填入粉丝、糯米和猪血再蒸制的韩式血肠（순대）。一般被视为市场和小吃店的代表性街头食物。",
+      "taste": "弹牙的肠衣里包着软糯的粉丝馅，香气十足，蘸盐或调料更显咸鲜。",
+      "howToEat": ["把血肠蘸盐或调料（紫苏、辣椒）食用。", "和猪肝、肺等内脏拼成拼盘一起吃。", "蘸辣炒年糕的汤汁吃也很受欢迎。"],
+      "whereTo": "全国传统市场和小吃店都很常见，通常一人份约 ₩4,000–8,000。",
+      "faq": [["血肠（순대）是什么？", "在猪肠里填入粉丝和糯米蒸制的韩式血肠，是市场和小吃店常见的街头食物。"], ["辣吗？", "血肠本身不辣，辣味来自蘸料或辣炒年糕的汤汁。"]]
+    },
+    "es": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "Todo el país / calle", "mapQ": "Sundae market Seoul",
+      "tags": ["comida callejera", "tentempié", "morcilla"],
+      "desc": "Una morcilla coreana de intestino de cerdo rellena de fideos celofán, arroz glutinoso y sangre de cerdo, y luego cocida al vapor. Suele conocerse como comida callejera de mercados y locales de tentempiés.",
+      "taste": "Una tripa elástica en torno a un relleno blando y sabroso de fideos; mojada en sal o en aliño resulta agradablemente salada.",
+      "howToEat": ["Moja el sundae en sal o en una salsa con especias (perilla o chile).", "Disfrútalo en plato combinado con vísceras como hígado y pulmón.", "Mójalo en la salsa de tteokbokki, una combinación muy popular."],
+      "whereTo": "Común en mercados tradicionales y locales de tentempiés de todo el país; una ración suele costar unos ₩4,000–8,000.",
+      "faq": [["¿Qué es el sundae?", "Una morcilla coreana de intestino de cerdo rellena de fideos y arroz glutinoso, una comida callejera habitual de mercados y locales de tentempiés."], ["¿Pica?", "El embutido en sí no pica; el picante viene del aliño o de mojarlo en la salsa de tteokbokki."]]
+    },
+    "fr": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "Tout le pays / rue", "mapQ": "Sundae market Seoul",
+      "tags": ["street food", "en-cas", "boudin"],
+      "desc": "Un boudin coréen d'intestin de porc farci de vermicelles de cellophane, de riz gluant et de sang de porc, puis cuit à la vapeur. On le connaît généralement comme une street food des marchés et des snacks.",
+      "taste": "Une enveloppe élastique autour d'une farce de vermicelles tendre et savoureuse ; trempé dans le sel ou un assaisonnement, il devient agréablement salé.",
+      "howToEat": ["Trempez le sundae dans du sel ou une sauce assaisonnée (périlla ou piment).", "Dégustez-le en assortiment avec des abats comme le foie et le poumon.", "Trempez-le dans la sauce du tteokbokki — une combinaison appréciée."],
+      "whereTo": "Courant sur les marchés traditionnels et dans les snacks partout dans le pays ; une portion coûte généralement autour de ₩4,000–8,000.",
+      "faq": [["Qu'est-ce que le sundae ?", "Un boudin coréen d'intestin de porc farci de vermicelles et de riz gluant, une street food courante des marchés et des snacks."], ["Est-ce épicé ?", "Le boudin lui-même n'est pas épicé ; le piquant vient de la sauce ou du fait de le tremper dans la sauce du tteokbokki."]]
+    },
+    "de": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "Landesweit / Straße", "mapQ": "Sundae market Seoul",
+      "tags": ["Streetfood", "Snack", "Blutwurst"],
+      "desc": "Eine koreanische Blutwurst aus Schweinedarm, gefüllt mit Glasnudeln, Klebreis und Schweineblut und anschließend gedämpft. Sie ist gemeinhin als Streetfood von Märkten und Imbissbuden bekannt.",
+      "taste": "Eine bissfeste Hülle um eine weiche, herzhafte Nudelfüllung; in Salz oder Würze getunkt wird sie angenehm salzig-herzhaft.",
+      "howToEat": ["Den Sundae in Salz oder einen gewürzten Dip (Perilla oder Chili) tunken.", "Als Platte mit Innereien wie Leber und Lunge genießen.", "In Tteokbokki-Sauce tunken — eine beliebte Kombination."],
+      "whereTo": "Verbreitet auf traditionellen Märkten und in Imbissbuden landesweit; eine Portion kostet meist etwa ₩4,000–8,000.",
+      "faq": [["Was ist Sundae?", "Eine koreanische Blutwurst aus Schweinedarm, gefüllt mit Nudeln und Klebreis — ein verbreitetes Streetfood von Märkten und Imbissbuden."], ["Ist es scharf?", "Die Wurst selbst ist nicht scharf; die Schärfe kommt vom Dip oder vom Eintunken in Tteokbokki-Sauce."]]
+    },
+    "pt": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "Todo o país / rua", "mapQ": "Sundae market Seoul",
+      "tags": ["comida de rua", "petisco", "morcela"],
+      "desc": "Uma morcela coreana de intestino de porco recheada com macarrão celofane, arroz glutinoso e sangue de porco, depois cozida no vapor. É comumente conhecida como comida de rua de mercados e lanchonetes.",
+      "taste": "Uma tripa elástica em torno de um recheio macio e saboroso de macarrão; mergulhada em sal ou tempero, fica agradavelmente salgada.",
+      "howToEat": ["Mergulhe o sundae em sal ou num molho temperado (perila ou pimenta).", "Aprecie em prato misto com miúdos como fígado e pulmão.", "Mergulhe no molho de tteokbokki — uma combinação popular."],
+      "whereTo": "Comum em mercados tradicionais e lanchonetes em todo o país; uma porção costuma custar cerca de ₩4,000–8,000.",
+      "faq": [["O que é sundae?", "Uma morcela coreana de intestino de porco recheada com macarrão e arroz glutinoso, comida de rua comum em mercados e lanchonetes."], ["É picante?", "A própria morcela não é picante; a ardência vem do molho ou de mergulhá-la no molho de tteokbokki."]]
+    },
+    "id": {
+      "name": "Sundae", "kr": "순대", "romaja": "sundae", "emoji": "🌭",
+      "region": "Seluruh Korea / kaki lima", "mapQ": "Sundae market Seoul",
+      "tags": ["jajanan kaki lima", "camilan", "sosis darah"],
+      "desc": "Sosis darah khas Korea dari usus babi yang diisi soun, beras ketan, dan darah babi, lalu dikukus. Umumnya dikenal sebagai jajanan kaki lima pasar dan kedai camilan.",
+      "taste": "Kulit kenyal membungkus isian soun yang lembut dan gurih; dicocol garam atau bumbu terasa asin gurih yang pas.",
+      "howToEat": ["Cocol sundae ke garam atau bumbu (perila atau cabai).", "Nikmati sebagai piring campur dengan jeroan seperti hati dan paru.", "Cocol ke kuah tteokbokki — kombinasi yang populer."],
+      "whereTo": "Umum di pasar tradisional dan kedai camilan di seluruh Korea; satu porsi biasanya sekitar ₩4,000–8,000.",
+      "faq": [["Apa itu sundae?", "Sosis darah khas Korea dari usus babi berisi soun dan beras ketan, jajanan kaki lima umum di pasar dan kedai camilan."], ["Apakah pedas?", "Sosisnya sendiri tidak pedas; rasa pedas datang dari cocolan atau dari mencelupkannya ke kuah tteokbokki."]]
+    }
+  },
+
+  "gimbap": {
+    "ko": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "전국", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["분식", "도시락", "김밥"],
+      "desc": "밥과 여러 재료를 김에 말아 한입 크기로 썬 한국식 김밥(김밥/킴밥 병기). 흔히 소풍·도시락·간편식의 대표 메뉴로 알려져 있습니다.",
+      "taste": "고소한 참기름 향의 밥과 단무지·채소·달걀·고기 등이 어우러져 짭짤하고 균형 잡힌 맛입니다.",
+      "howToEat": ["한입 크기로 썬 김밥을 그대로 집어 먹습니다.", "단무지나 어묵국과 곁들여 먹기도 합니다.", "참치·치즈·소고기 등 다양한 속재료 버전을 골라 즐깁니다."],
+      "whereTo": "전국 분식집·김밥 전문점에서 흔하며, 한 줄 약 ₩3,000–5,000 선입니다.",
+      "faq": [["김밥은 무엇인가요?", "밥과 채소·달걀·고기 등을 김에 말아 썬 한국 음식으로, 영어로는 gimbap 또는 kimbap으로 표기합니다."], ["초밥(스시)과 같은가요?", "겉모습은 비슷하지만, 김밥은 참기름·소금으로 밑간한 밥을 쓰고 식초 밥을 쓰지 않는 점이 다릅니다."]]
+    },
+    "en": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "Nationwide", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["snack", "lunchbox", "rice roll"],
+      "desc": "Korean seaweed rice rolls (gimbap, also spelled kimbap) of rice and assorted fillings wrapped in dried laver and sliced into bite-size rounds. It is commonly known as a picnic, lunchbox and grab-and-go staple.",
+      "taste": "Sesame-scented rice with pickled radish, vegetables, egg and meat — savory and well balanced.",
+      "howToEat": ["Pick up the bite-size slices and eat them as they are.", "Pair with pickled radish or a bowl of fish-cake soup.", "Choose from versions with tuna, cheese, beef and more."],
+      "whereTo": "Common at snack bars and gimbap specialists nationwide; one roll runs about ₩3,000–5,000.",
+      "faq": [["What is gimbap?", "A Korean seaweed rice roll of rice and fillings, sliced into rounds — written as gimbap or kimbap in English."], ["Is it the same as sushi?", "It looks similar, but gimbap uses rice seasoned with sesame oil and salt, not vinegared sushi rice."]]
+    },
+    "ja": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "全国", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["粉食", "弁当", "海苔巻き"],
+      "desc": "ご飯と具材を海苔で巻き、一口大に切った韓国式キンパ（gimbap／kimbap 併記）。一般に遠足・弁当・手軽な食事の定番として知られています。",
+      "taste": "ごま油の香るご飯にたくあん・野菜・卵・肉などが合わさり、塩気のバランスがよい味わいです。",
+      "howToEat": ["一口大に切ったキンパをそのままつまんで食べます。", "たくあんやおでん（魚のすり身）スープと一緒に食べることもあります。", "ツナ・チーズ・牛肉などさまざまな具のバリエーションを選べます。"],
+      "whereTo": "全国の粉食店やキンパ専門店でよく見かけ、一本およそ₩3,000〜5,000ほどです。",
+      "faq": [["キンパとは何ですか？", "ご飯と具を海苔で巻いて切った韓国料理で、英語では gimbap または kimbap と表記します。"], ["寿司と同じですか？", "見た目は似ていますが、キンパはごま油と塩で味付けしたご飯を使い、酢飯は使いません。"]]
+    },
+    "zh": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "全国", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["粉食", "便当", "海苔卷"],
+      "desc": "把米饭和各种配料用海苔卷起、切成一口大小的韩式紫菜包饭（gimbap／kimbap 并写）。一般被视为郊游、便当和便携餐的代表。",
+      "taste": "带香油香气的米饭配腌萝卜、蔬菜、鸡蛋和肉，咸香适口、口味均衡。",
+      "howToEat": ["把切成一口大小的紫菜包饭直接夹着吃。", "也可搭配腌萝卜或鱼糕汤一起吃。", "可选金枪鱼、芝士、牛肉等多种馅料版本。"],
+      "whereTo": "全国小吃店和紫菜包饭专门店都很常见，一卷约 ₩3,000–5,000。",
+      "faq": [["紫菜包饭（김밥）是什么？", "把米饭和配料用海苔卷起切片的韩国料理，英文写作 gimbap 或 kimbap。"], ["和寿司一样吗？", "外观相似，但紫菜包饭用香油和盐调味的米饭，而非醋饭。"]]
+    },
+    "es": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "Todo el país", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["tentempié", "fiambrera", "rollo de arroz"],
+      "desc": "Rollos coreanos de arroz y alga (gimbap, también escrito kimbap) con arroz y diversos rellenos envueltos en alga seca y cortados en rodajas de un bocado. Suele conocerse como un básico de pícnic, fiambrera y comida para llevar.",
+      "taste": "Arroz con aroma a sésamo, rábano encurtido, verduras, huevo y carne: sabroso y bien equilibrado.",
+      "howToEat": ["Coge las rodajas de un bocado y cómelas tal cual.", "Acompáñalas con rábano encurtido o un cuenco de sopa de pastel de pescado.", "Elige entre versiones con atún, queso, ternera y más."],
+      "whereTo": "Común en locales de tentempiés y especialistas en gimbap de todo el país; un rollo cuesta unos ₩3,000–5,000.",
+      "faq": [["¿Qué es el gimbap?", "Un rollo coreano de arroz y alga con diversos rellenos, cortado en rodajas; se escribe gimbap o kimbap en español."], ["¿Es lo mismo que el sushi?", "Se parece, pero el gimbap usa arroz sazonado con aceite de sésamo y sal, no arroz avinagrado de sushi."]]
+    },
+    "fr": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "Tout le pays", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["en-cas", "boîte-repas", "rouleau de riz"],
+      "desc": "Des rouleaux coréens de riz et d'algue (gimbap, aussi écrit kimbap) faits de riz et de garnitures variées enroulés dans de l'algue séchée et coupés en bouchées. On les connaît généralement comme un incontournable du pique-nique, de la boîte-repas et de l'en-cas à emporter.",
+      "taste": "Riz parfumé au sésame avec radis mariné, légumes, œuf et viande : savoureux et bien équilibré.",
+      "howToEat": ["Prenez les tranches en bouchées et mangez-les telles quelles.", "Accompagnez-les de radis mariné ou d'un bol de soupe de pâte de poisson.", "Choisissez parmi les versions au thon, au fromage, au bœuf, et plus encore."],
+      "whereTo": "Courant dans les snacks et les enseignes spécialisées de gimbap partout dans le pays ; un rouleau coûte autour de ₩3,000–5,000.",
+      "faq": [["Qu'est-ce que le gimbap ?", "Un rouleau coréen de riz et d'algue avec diverses garnitures, coupé en tranches ; écrit gimbap ou kimbap en français."], ["Est-ce la même chose que le sushi ?", "Cela y ressemble, mais le gimbap utilise du riz assaisonné à l'huile de sésame et au sel, pas du riz vinaigré à sushi."]]
+    },
+    "de": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "Landesweit", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["Snack", "Lunchbox", "Reisrolle"],
+      "desc": "Koreanische Reis-Seetang-Rollen (Gimbap, auch Kimbap geschrieben) aus Reis und verschiedenen Füllungen, in getrocknetem Seetang gerollt und in mundgerechte Scheiben geschnitten. Sie gelten gemeinhin als Klassiker für Picknick, Lunchbox und unterwegs.",
+      "taste": "Sesam-duftender Reis mit eingelegtem Rettich, Gemüse, Ei und Fleisch — herzhaft und gut ausgewogen.",
+      "howToEat": ["Die mundgerechten Scheiben einfach so essen.", "Mit eingelegtem Rettich oder einer Schale Fischkuchen-Suppe kombinieren.", "Aus Varianten mit Thunfisch, Käse, Rind und mehr wählen."],
+      "whereTo": "Verbreitet in Imbissbuden und Gimbap-Spezialitätenläden landesweit; eine Rolle kostet etwa ₩3,000–5,000.",
+      "faq": [["Was ist Gimbap?", "Eine koreanische Reis-Seetang-Rolle aus Reis und Füllungen, in Scheiben geschnitten — auf Deutsch Gimbap oder Kimbap geschrieben."], ["Ist es dasselbe wie Sushi?", "Es sieht ähnlich aus, doch Gimbap verwendet mit Sesamöl und Salz gewürzten Reis, keinen gesäuerten Sushireis."]]
+    },
+    "pt": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "Todo o país", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["petisco", "marmita", "rolinho de arroz"],
+      "desc": "Rolinhos coreanos de arroz e alga (gimbap, também grafado kimbap) de arroz e recheios variados enrolados em alga seca e cortados em rodelas de uma dentada. É comumente conhecido como item básico de piquenique, marmita e comida para levar.",
+      "taste": "Arroz com aroma de gergelim, rabanete em conserva, legumes, ovo e carne — saboroso e bem equilibrado.",
+      "howToEat": ["Pegue as rodelas de uma dentada e coma do jeito que estão.", "Acompanhe com rabanete em conserva ou uma tigela de sopa de bolinho de peixe.", "Escolha entre versões com atum, queijo, carne e mais."],
+      "whereTo": "Comum em lanchonetes e casas especializadas em gimbap por todo o país; um rolo custa cerca de ₩3,000–5,000.",
+      "faq": [["O que é gimbap?", "Um rolinho coreano de arroz e alga com recheios variados, cortado em rodelas — grafado gimbap ou kimbap em português."], ["É o mesmo que sushi?", "Parece, mas o gimbap usa arroz temperado com óleo de gergelim e sal, não arroz avinagrado de sushi."]]
+    },
+    "id": {
+      "name": "Gimbap (Kimbap)", "kr": "김밥", "romaja": "gimbap", "emoji": "🍙",
+      "region": "Seluruh Korea", "mapQ": "Gimbap restaurant Seoul",
+      "tags": ["camilan", "bekal", "gulungan nasi"],
+      "desc": "Gulungan nasi rumput laut khas Korea (gimbap, ditulis juga kimbap) berisi nasi dan aneka isian yang digulung dalam lembaran rumput laut kering dan dipotong seukuran sekali suap. Umumnya dikenal sebagai menu pokok piknik, bekal, dan makanan praktis.",
+      "taste": "Nasi beraroma wijen dengan lobak acar, sayuran, telur, dan daging — gurih dan seimbang.",
+      "howToEat": ["Ambil potongan seukuran sekali suap dan makan langsung.", "Padukan dengan lobak acar atau semangkuk sup odeng.", "Pilih dari versi dengan tuna, keju, daging sapi, dan lainnya."],
+      "whereTo": "Umum di kedai camilan dan kedai khusus gimbap di seluruh Korea; satu gulung sekitar ₩3,000–5,000.",
+      "faq": [["Apa itu gimbap?", "Gulungan nasi rumput laut khas Korea berisi nasi dan aneka isian, dipotong-potong — ditulis gimbap atau kimbap."], ["Apakah sama dengan sushi?", "Tampak mirip, tetapi gimbap memakai nasi yang dibumbui minyak wijen dan garam, bukan nasi sushi bercuka."]]
+    }
+  },
+
+  "kalguksu": {
+    "ko": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "전국", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["면요리", "칼국수", "따뜻한국물"],
+      "desc": "칼로 썬 밀가루 손칼국수를 멸치·닭·해물 등으로 낸 따뜻한 국물에 끓여 먹는 한국식 칼국수. 흔히 비 오는 날이나 쌀쌀할 때 즐겨 먹는 음식으로 알려져 있습니다.",
+      "taste": "쫄깃하고 부드러운 면발에 구수하고 시원한 국물이 어우러져, 자극적이지 않고 속이 편안합니다.",
+      "howToEat": ["뜨거운 국물과 면을 함께 후루룩 먹습니다.", "겉절이 김치를 곁들여 먹습니다.", "남은 국물에 밥을 말아 마무리하기도 합니다."],
+      "whereTo": "전국 분식집·칼국수 전문점에서 흔하며, 한 그릇 약 ₩7,000–10,000 선입니다. 멸치·닭·바지락 등 육수 종류가 다양합니다.",
+      "faq": [["칼국수는 무엇인가요?", "칼로 썬 밀국수를 따뜻한 육수에 끓인 한국식 면 요리로, 비 오는 날 즐겨 먹는 것으로 알려져 있습니다."], ["맵나요?", "기본 국물은 맵지 않은 담백한 맛이며, 곁들이는 겉절이로 매콤함을 더할 수 있습니다."]]
+    },
+    "en": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "Nationwide", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["noodles", "knife-cut", "warm soup"],
+      "desc": "Korean knife-cut wheat noodles simmered in a warm broth made from anchovy, chicken or seafood. It is commonly enjoyed on rainy or chilly days.",
+      "taste": "Chewy, tender hand-cut noodles in a mild, comforting broth — gentle on the stomach rather than fiery.",
+      "howToEat": ["Slurp the noodles together with the hot broth.", "Eat with a side of fresh, lightly dressed geotjeori kimchi.", "Finish by stirring rice into the leftover broth, as some do."],
+      "whereTo": "Common at snack bars and kalguksu specialists nationwide; a bowl runs about ₩7,000–10,000, with anchovy, chicken or clam broths.",
+      "faq": [["What is kalguksu?", "A Korean noodle dish of knife-cut wheat noodles in a warm broth, commonly enjoyed on rainy days."], ["Is it spicy?", "The base broth is mild, not spicy; you can add heat with the fresh geotjeori kimchi served alongside."]]
+    },
+    "ja": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "全国", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["麺料理", "手打ち麺", "温かいスープ"],
+      "desc": "包丁で切った小麦の手打ち麺を、煮干し・鶏・海鮮などでとった温かいスープで煮込む韓国式カルグクス。一般に雨の日や肌寒いときに好まれる料理として知られています。",
+      "taste": "もちっと柔らかな麺に、香ばしくすっきりしたスープが合わさり、刺激が少なく胃にやさしい味わいです。",
+      "howToEat": ["熱いスープと麺を一緒にすすって食べます。", "浅漬けの即席キムチ（コッチョリ）を添えて食べます。", "残ったスープにご飯を入れて締めることもあります。"],
+      "whereTo": "全国の粉食店やカルグクス専門店でよく見かけ、一杯およそ₩7,000〜10,000ほどです。煮干し・鶏・あさりなどスープの種類が豊富です。",
+      "faq": [["カルグクスとは何ですか？", "包丁で切った小麦麺を温かいスープで煮込んだ韓国式麺料理で、雨の日に好まれることで知られています。"], ["辛いですか？", "ベースのスープは辛くなく素朴な味で、添えのコッチョリで辛さを加えられます。"]]
+    },
+    "zh": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "全国", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["面食", "刀切面", "热汤"],
+      "desc": "把刀切的小麦手擀面放入用凤尾鱼、鸡或海鲜熬的热汤里煮成的韩式刀削面（칼국수）。一般被视为雨天或天凉时爱吃的料理。",
+      "taste": "弹牙软滑的面条配上鲜香清爽的汤底，不刺激、暖胃舒适。",
+      "howToEat": ["把热汤和面条一起呼噜噜地吃。", "搭配现拌的快手泡菜（겉절이）一起吃。", "也可在剩汤里加米饭收尾。"],
+      "whereTo": "全国小吃店和刀削面专门店都很常见，一碗约 ₩7,000–10,000。汤底有凤尾鱼、鸡、蛤蜊等多种。",
+      "faq": [["刀削面（칼국수）是什么？", "把刀切小麦面放入热汤煮成的韩式面食，一般被视为雨天爱吃的料理。"], ["辣吗？", "汤底清淡不辣，可用附上的快手泡菜增添辣味。"]]
+    },
+    "es": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "Todo el país", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["fideos", "cortados a cuchillo", "sopa caliente"],
+      "desc": "Fideos de trigo coreanos cortados a cuchillo, cocidos en un caldo caliente de anchoa, pollo o marisco. Suele disfrutarse en días lluviosos o fríos.",
+      "taste": "Fideos hechos a mano, tiernos y elásticos, en un caldo suave y reconfortante: amable con el estómago en lugar de picante.",
+      "howToEat": ["Sorbe los fideos junto con el caldo caliente.", "Cómelos con una guarnición de geotjeori, kimchi fresco y poco aliñado.", "Termina mezclando arroz en el caldo que sobra, como hacen algunos."],
+      "whereTo": "Común en locales de tentempiés y especialistas en kalguksu de todo el país; un cuenco cuesta unos ₩7,000–10,000, con caldos de anchoa, pollo o almeja.",
+      "faq": [["¿Qué es el kalguksu?", "Un plato coreano de fideos de trigo cortados a cuchillo en un caldo caliente, que suele disfrutarse en días de lluvia."], ["¿Pica?", "El caldo base es suave, no picante; puedes añadir picante con el geotjeori fresco que lo acompaña."]]
+    },
+    "fr": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "Tout le pays", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["nouilles", "coupées au couteau", "soupe chaude"],
+      "desc": "Des nouilles de blé coréennes coupées au couteau, mijotées dans un bouillon chaud d'anchois, de poulet ou de fruits de mer. On les déguste généralement les jours de pluie ou de fraîcheur.",
+      "taste": "Des nouilles faites main, tendres et élastiques, dans un bouillon doux et réconfortant : douces pour l'estomac plutôt que relevées.",
+      "howToEat": ["Aspirez les nouilles avec le bouillon chaud.", "Accompagnez-les d'un geotjeori, un kimchi frais légèrement assaisonné.", "Terminez en mélangeant du riz dans le bouillon restant, comme certains le font."],
+      "whereTo": "Courant dans les snacks et les enseignes spécialisées de kalguksu partout dans le pays ; un bol coûte autour de ₩7,000–10,000, avec des bouillons d'anchois, de poulet ou de palourde.",
+      "faq": [["Qu'est-ce que le kalguksu ?", "Un plat coréen de nouilles de blé coupées au couteau dans un bouillon chaud, généralement dégusté les jours de pluie."], ["Est-ce épicé ?", "Le bouillon de base est doux, pas épicé ; on peut relever avec le geotjeori frais servi à côté."]]
+    },
+    "de": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "Landesweit", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["Nudeln", "messergeschnitten", "warme Suppe"],
+      "desc": "Koreanische, mit dem Messer geschnittene Weizennudeln, geköchelt in einer warmen Brühe aus Sardelle, Huhn oder Meeresfrüchten. Man genießt sie gemeinhin an regnerischen oder kühlen Tagen.",
+      "taste": "Bissfeste, zarte handgeschnittene Nudeln in einer milden, wohltuenden Brühe — sanft zum Magen statt feurig.",
+      "howToEat": ["Die Nudeln zusammen mit der heißen Brühe schlürfen.", "Mit einer Beilage aus frischem, leicht angemachtem Geotjeori-Kimchi essen.", "Zum Abschluss Reis in die übrige Brühe rühren, wie es manche tun."],
+      "whereTo": "Verbreitet in Imbissbuden und Kalguksu-Spezialitätenlokalen landesweit; eine Schale kostet etwa ₩7,000–10,000, mit Sardellen-, Hühner- oder Venusmuschelbrühe.",
+      "faq": [["Was ist Kalguksu?", "Ein koreanisches Nudelgericht aus messergeschnittenen Weizennudeln in warmer Brühe, das gemeinhin an Regentagen genossen wird."], ["Ist es scharf?", "Die Grundbrühe ist mild, nicht scharf; Schärfe lässt sich mit dem dazu gereichten frischen Geotjeori hinzufügen."]]
+    },
+    "pt": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "Todo o país", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["macarrão", "cortado à faca", "sopa quente"],
+      "desc": "Macarrão de trigo coreano cortado à faca, cozido em um caldo quente de anchova, frango ou frutos do mar. Costuma ser apreciado em dias chuvosos ou frios.",
+      "taste": "Macarrão feito à mão, macio e elástico, em um caldo suave e reconfortante — leve para o estômago em vez de ardido.",
+      "howToEat": ["Sorva o macarrão junto com o caldo quente.", "Coma com um acompanhamento de geotjeori, kimchi fresco levemente temperado.", "Finalize misturando arroz no caldo restante, como alguns fazem."],
+      "whereTo": "Comum em lanchonetes e casas especializadas em kalguksu por todo o país; uma tigela custa cerca de ₩7,000–10,000, com caldos de anchova, frango ou amêijoa.",
+      "faq": [["O que é kalguksu?", "Um prato coreano de macarrão de trigo cortado à faca em caldo quente, comumente apreciado em dias de chuva."], ["É picante?", "O caldo base é suave, não picante; pode-se acrescentar ardência com o geotjeori fresco servido ao lado."]]
+    },
+    "id": {
+      "name": "Kalguksu", "kr": "칼국수", "romaja": "kalguksu", "emoji": "🍜",
+      "region": "Seluruh Korea", "mapQ": "Kalguksu restaurant Seoul",
+      "tags": ["mi", "potong pisau", "sup hangat"],
+      "desc": "Mi gandum khas Korea yang dipotong dengan pisau, direbus dalam kaldu hangat dari ikan teri, ayam, atau makanan laut. Umumnya dinikmati saat hujan atau cuaca dingin.",
+      "taste": "Mi buatan tangan yang kenyal dan lembut dalam kaldu ringan yang menenangkan — ramah di perut, bukan pedas membara.",
+      "howToEat": ["Seruput mi bersama kuah panasnya.", "Makan dengan lauk geotjeori, kimchi segar yang dibumbui ringan.", "Akhiri dengan mencampur nasi ke kuah sisa, seperti yang sebagian orang lakukan."],
+      "whereTo": "Umum di kedai camilan dan kedai khusus kalguksu di seluruh Korea; satu mangkuk sekitar ₩7,000–10,000, dengan kaldu teri, ayam, atau kerang.",
+      "faq": [["Apa itu kalguksu?", "Hidangan mi khas Korea berupa mi gandum potong pisau dalam kaldu hangat, umumnya dinikmati saat hujan."], ["Apakah pedas?", "Kaldu dasarnya ringan, tidak pedas; rasa pedas bisa ditambah dari geotjeori segar yang disajikan."]]
+    }
+  }
+}
