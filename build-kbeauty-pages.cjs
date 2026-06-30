@@ -35,6 +35,7 @@ const DOSE = require('./kbeauty-dose.json');             // [{id,pctRange,phRang
 const MOA = require('./kbeauty-moa.json');               // [{id,mechanism,target,ceiling,evidenceGrade}]
 const EVID = require('./kbeauty-evidence.json');         // [{topic,slug,claim,grade,digest,citeIds}]
 const FORM = require('./kbeauty-formulation.json');      // [{slug,title,h1,qa,sections}]
+const ADVC = require('./kbeauty-adv-clusters.json');     // { ageClimate, fresh, hair, makeup, clinic }
 const CITES = d.KBEAUTY_CITATIONS || {};
 
 const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1320;background:#fff}'
@@ -497,6 +498,41 @@ FORM.forEach(x => {
   emit(`formulation/${x.slug}.html`, shell({ url, depth: 3, crumb: 'Formulation science', emoji: '🧫', h1: x.h1, title: `${x.title} — K-beauty formulation science`, desc: x.qa, quickAnswer: x.qa, bodyHtml: body, ld: [artLD(x.h1, x.qa, url), faqLD(x.title, x.qa)] }), '0.7');
 });
 
+// ── 6o. Advanced content clusters (age/climate routines, freshness feeds, 3 verticals).
+function emitContent(dir, item, crumb, emoji, extraNote, prio) {
+  const url = `${SITE}/guide/kb/${dir}/${item.slug}.html`;
+  const body = `<p class="lead">${esc(item.qa)}</p>${(item.sections || []).map(s => `<h2>${esc(s.h)}</h2><p>${esc(s.body)}</p>`).join('')}${extraNote || ''}${deeperBlock({ title: item.h1 + ' ' + item.slug, slug: item.slug })}`;
+  emit(`${dir}/${item.slug}.html`, shell({ url, depth: 3, crumb, emoji, h1: item.h1, ko: item.ko || '', title: item.title, desc: item.qa, quickAnswer: item.qa, bodyHtml: body, ld: [artLD(item.h1, item.qa, url), faqLD(item.h1.replace(/[:—].*/, '').trim() + '?', item.qa)] }), prio || '0.6');
+}
+ADVC.ageClimate.forEach(it => { const cl = /climate|humid|winter|hard-water|altitude|tropical|arid/.test(it.slug); emitContent(cl ? 'climate' : 'age', it, cl ? 'Climate routines' : 'Routines by age', cl ? '🌡️' : '🎂'); });
+ADVC.fresh.forEach(it => { const w = /^watch/.test(it.slug); emitContent(w ? 'watch' : 'digest', it, w ? 'Regulatory & safety watch' : 'Research digest', w ? '⚠️' : '📰', '', '0.7'); });
+ADVC.hair.forEach(it => emitContent('hair', it, 'K-Haircare & scalp', '💇'));
+ADVC.makeup.forEach(it => emitContent('makeup', it, 'K-Makeup & color', '💋'));
+const CLINIC_NOTE = `<div class="box">⚕️ <b>Education only.</b> General information about Korean skincare/aesthetic concepts — not medical advice or a recommendation. Procedures carry risks; always consult a licensed medical professional in person.</div>`;
+ADVC.clinic.forEach(it => emitContent('clinic', it, 'K-Derma education', '⚕️', CLINIC_NOTE));
+
+// ── 6p. Ingredient pairing matrix (matrix/) — at-a-glance N×N from pairs/avoid data.
+(function () {
+  const acts = ING.filter(i => (i.pairsWith || []).length || (i.avoidWith || []).length).slice(0, 14);
+  if (acts.length < 4) return;
+  const cell = (a, b) => {
+    if (a.id === b.id) return '<td style="background:#eee">—</td>';
+    const avoid = (a.avoidWith || []).includes(b.id) || (b.avoidWith || []).includes(a.id);
+    const pair = (a.pairsWith || []).includes(b.id) || (b.pairsWith || []).includes(a.id);
+    const v = avoid ? ['⚠️', '#b35f1e'] : pair ? ['✓', '#1a7a45'] : ['·', '#bbb'];
+    return `<td style="text-align:center;color:${v[1]};font-weight:800" title="${esc(a.name)} + ${esc(b.name)}">${v[0]}</td>`;
+  };
+  const header = `<tr><th></th>${acts.map(a => `<th style="font-size:10px">${esc(a.name.replace(/\s*\(.*\)/, ''))}</th>`).join('')}</tr>`;
+  const rows = acts.map(a => `<tr><th style="font-size:12px;white-space:nowrap;text-align:left">${a.emoji || ''} ${esc(a.name)}</th>${acts.map(b => cell(a, b)).join('')}</tr>`).join('');
+  const url = `${SITE}/guide/kb/matrix/pairing-matrix.html`;
+  const qa = `A quick-reference pairing matrix for ${acts.length} popular Korean skincare actives — which pair well (✓), which to use with care (⚠️), and which are neutral (·), at a glance.`;
+  const body = `<p class="lead">${esc(qa)}</p><div style="overflow-x:auto"><table class="cmp">${header}${rows}</table></div>
+    <p style="font-size:13px;color:#777">✓ pairs well · ⚠️ use with care (alternate nights or split AM/PM) · · neutral. Tap an ingredient for its full guide.</p>
+    <p>${acts.map(a => `<a class="pill" href="../ingredient/${a.id}.html">${esc(a.name)}</a>`).join('')}</p>
+    <p><a class="cta" href="${SITE}/kbeauty#cat=ingr">⚗️ Check your own combo in the interactive tool →</a></p>`;
+  emit('matrix/pairing-matrix.html', shell({ url, depth: 3, crumb: 'Pairing matrix', emoji: '🧮', h1: 'K-beauty ingredient pairing matrix', title: 'Korean skincare ingredient pairing matrix — what mixes', desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD('Ingredient pairing matrix', qa, url), faqLD('Which Korean skincare ingredients can you mix?', qa)] }), '0.7');
+})();
+
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
 GLOSS.forEach((g, idx) => {
   const sg = slug(g.term);
@@ -841,6 +877,14 @@ const HUB_META = {
   'how-it-works': { e: '🔬', t: 'How actives work', g: 'Ingredients & INCI' },
   evidence: { e: '📊', t: 'Evidence grades', g: 'Ingredients & INCI' },
   formulation: { e: '🧫', t: 'Formulation science', g: 'Ingredients & INCI' },
+  matrix: { e: '🧮', t: 'Pairing matrix', g: 'Ingredients & INCI' },
+  age: { e: '🎂', t: 'Routines by age', g: 'Skin & routines' },
+  climate: { e: '🌡️', t: 'Routines by climate', g: 'Skin & routines' },
+  digest: { e: '📰', t: 'Research digest', g: 'K-beauty knowledge' },
+  watch: { e: '⚠️', t: 'Regulatory & safety watch', g: 'K-beauty knowledge' },
+  hair: { e: '💇', t: 'K-Haircare & scalp', g: 'K-beauty knowledge' },
+  makeup: { e: '💋', t: 'K-Makeup & color', g: 'K-beauty knowledge' },
+  clinic: { e: '⚕️', t: 'K-Derma education', g: 'K-beauty knowledge' },
   category: { e: '🧴', t: 'Product types', g: 'Brands & products' },
   concern: { e: '🎯', t: 'Skin concerns', g: 'Skin & routines' },
   'skin-type': { e: '🧖', t: 'Skin types', g: 'Skin & routines' },
