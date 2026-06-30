@@ -294,6 +294,89 @@
     try { document.getElementById('kb-glassscore').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch {}
   }
 
+  // ── Advanced hub tools: PAO shelf-life, cost calculator, skin-cycling planner ──
+  const PAO_TABLE = [
+    { id: 'sunscreen', name: () => cx('tool.pao.sunscreen', 'Sunscreen'), emoji: '☀️', months: 12, note: () => cx('tool.pao.n.sun', 'Filters degrade — replace yearly and by the printed expiry; don’t stockpile.') },
+    { id: 'vitc', name: () => cx('tool.pao.vitc', 'Vitamin C serum'), emoji: '🍊', months: 3, note: () => cx('tool.pao.n.vitc', 'L-ascorbic acid oxidizes fast — toss if it turns dark orange/brown.') },
+    { id: 'retinoid', name: () => cx('tool.pao.retinoid', 'Retinoid (retinol/retinal)'), emoji: '🌙', months: 6, note: () => cx('tool.pao.n.ret', 'Light- and air-sensitive; keep it capped and cool.') },
+    { id: 'water', name: () => cx('tool.pao.water', 'Toner / essence / water serum'), emoji: '💧', months: 12, note: () => '' },
+    { id: 'cream', name: () => cx('tool.pao.cream', 'Moisturizer / cream'), emoji: '🧴', months: 12, note: () => cx('tool.pao.n.jar', 'Jars expose product to air — a tube or pump stays cleaner.') },
+    { id: 'oil', name: () => cx('tool.pao.oil', 'Facial oil / balm cleanser'), emoji: '🫧', months: 9, note: () => cx('tool.pao.n.oil', 'Oils can go rancid — smell-test before use.') },
+    { id: 'foam', name: () => cx('tool.pao.foam', 'Cleanser (foam / gel)'), emoji: '🧼', months: 12, note: () => '' },
+  ];
+  function renderPAO() {
+    const box = $('#kb-pao-box'); if (!box) return;
+    box.innerHTML = `<div class="kb-tool">
+      <div class="kb-tool-h">🗓️ ${esc(cx('tool.pao.title', 'When does it expire?'))}</div>
+      <div class="kb-tool-sub">${esc(cx('tool.pao.sub', 'Pick a product type and the date you opened it — get its safe-use window (PAO).'))}</div>
+      <select id="kb-pao-type" class="kb-buy-region-sel" style="width:100%;font-size:16px;padding:11px;border-radius:11px;border:1px solid var(--border);background:var(--bg);color:var(--text);margin:8px 0">${PAO_TABLE.map(p => `<option value="${p.id}">${p.emoji} ${esc(p.name())}</option>`).join('')}</select>
+      <input id="kb-pao-date" type="date" class="kb-buy-region-sel" style="width:100%;font-size:16px;padding:11px;border-radius:11px;border:1px solid var(--border);background:var(--bg);color:var(--text);margin:0 0 8px">
+      <button class="kb-tool-btn" id="kb-pao-go">${esc(cx('tool.pao.go', 'Show my expiry'))}</button>
+      <div id="kb-pao-res" aria-live="polite"></div></div>`;
+    const go = () => {
+      const p = PAO_TABLE.filter(x => x.id === $('#kb-pao-type').value)[0]; if (!p) return;
+      const dv = $('#kb-pao-date').value; const opened = dv ? new Date(dv) : new Date();
+      const dispose = new Date(opened.getTime()); dispose.setMonth(dispose.getMonth() + p.months);
+      const left = Math.round((dispose - new Date()) / 86400000);
+      const fmt = (d) => d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      $('#kb-pao-res').innerHTML = `<div class="gsc-card" style="margin-top:12px;padding:16px">
+        <div style="font-size:15px;color:var(--text2)">${esc(cx('tool.pao.use', 'Safe-use window'))}: <b>${p.months} ${esc(cx('tool.pao.mo', 'months'))}</b></div>
+        <div class="gsc-big" style="font-size:30px;margin-top:6px">${fmt(dispose)}</div>
+        <div style="font-size:13px;color:var(--text3)">${esc(cx('tool.pao.disposeby', 'dispose by'))}${left >= 0 ? ` · ${left} ${esc(cx('tool.pao.daysleft', 'days left'))}` : ` · ${esc(cx('tool.pao.expired', 'past its window'))}`}</div>
+        ${p.note() ? `<div class="gsc-next" style="margin-top:12px">💡 ${esc(p.note())}</div>` : ''}</div>`;
+      try { kbtrack('tool_pao', { type: p.id }); } catch (e) {}
+    };
+    $('#kb-pao-go').addEventListener('click', go);
+  }
+  function renderCost() {
+    const box = $('#kb-cost-box'); if (!box) return;
+    const f = (id, ph, val) => `<input id="${id}" type="number" inputmode="decimal" min="0" placeholder="${esc(ph)}" value="${val}" style="width:100%;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);margin:4px 0">`;
+    box.innerHTML = `<div class="kb-tool">
+      <div class="kb-tool-h">💸 ${esc(cx('tool.cost.title', 'What does this product really cost?'))}</div>
+      <div class="kb-tool-sub">${esc(cx('tool.cost.sub', 'Cost-per-use is what matters — not the sticker price. Enter the details:'))}</div>
+      <label style="font-size:13px;color:var(--text3)">${esc(cx('tool.cost.price', 'Price'))}</label>${f('kb-cost-price', '32', '')}
+      <label style="font-size:13px;color:var(--text3)">${esc(cx('tool.cost.size', 'Size (ml or g)'))}</label>${f('kb-cost-size', '100', '')}
+      <label style="font-size:13px;color:var(--text3)">${esc(cx('tool.cost.peruse', 'Amount per use (ml)'))}</label>${f('kb-cost-use', '1', '0.7')}
+      <label style="font-size:13px;color:var(--text3)">${esc(cx('tool.cost.perday', 'Uses per day'))}</label>${f('kb-cost-day', '2', '2')}
+      <button class="kb-tool-btn" id="kb-cost-go" style="margin-top:8px">${esc(cx('tool.cost.go', 'Calculate'))}</button>
+      <div id="kb-cost-res" aria-live="polite"></div></div>`;
+    $('#kb-cost-go').addEventListener('click', () => {
+      const price = +$('#kb-cost-price').value, size = +$('#kb-cost-size').value, per = +$('#kb-cost-use').value || 0.7, day = +$('#kb-cost-day').value || 1;
+      if (!price || !size || !per) { $('#kb-cost-res').innerHTML = `<div class="kb-empty" style="margin-top:10px">${esc(cx('tool.cost.fill', 'Enter price, size and amount per use.'))}</div>`; return; }
+      const uses = size / per, cpu = price / uses, daysLast = uses / day, monthly = cpu * day * 30;
+      $('#kb-cost-res').innerHTML = `<div class="gsc-card" style="margin-top:12px;padding:16px">
+        <div class="gsc-big" style="font-size:38px">${cpu < 1 ? cpu.toFixed(2) : cpu.toFixed(2)}<span style="font-size:18px"> / ${esc(cx('tool.cost.use2', 'use'))}</span></div>
+        <div class="gsc-bars"><div class="gsc-bar"><div class="gsc-bar-h">${esc(cx('tool.cost.monthly', 'Per month'))} <b>${monthly.toFixed(2)}</b></div></div>
+        <div class="gsc-bar"><div class="gsc-bar-h">${esc(cx('tool.cost.lasts', 'Lasts about'))} <b>${Math.round(daysLast)} ${esc(cx('tool.cost.days', 'days'))}</b> (${Math.round(uses)} ${esc(cx('tool.cost.uses', 'uses'))})</div></div></div></div>`;
+      try { kbtrack('tool_cost', {}); } catch (e) {}
+    });
+  }
+  function renderCycling() {
+    const box = $('#kb-cycling-box'); if (!box) return;
+    const nights = [
+      { n: 1, t: () => cx('tool.cyc.n1', 'Exfoliation'), e: '✨', d: () => cx('tool.cyc.n1d', 'A gentle Korean AHA/BHA or PHA to support smoother-looking texture.'), ing: 'aha / bha / pha' },
+      { n: 2, t: () => cx('tool.cyc.n2', 'Retinoid'), e: '🌙', d: () => cx('tool.cyc.n2d', 'Your retinal/retinol — buffer with moisturizer if sensitive.'), ing: 'retinol / retinal' },
+      { n: 3, t: () => cx('tool.cyc.n3', 'Recovery'), e: '🛡️', d: () => cx('tool.cyc.n3d', 'Barrier care — centella (cica), ceramides, snail mucin. No actives.'), ing: 'centella / ceramide / snail' },
+      { n: 4, t: () => cx('tool.cyc.n4', 'Recovery'), e: '💧', d: () => cx('tool.cyc.n4d', 'More hydration & calm — heartleaf, panthenol, hyaluronic. Let skin reset.'), ing: 'heartleaf / panthenol / hyaluronic' },
+    ];
+    box.innerHTML = `<div class="kb-tool">
+      <div class="kb-tool-h">🔄 ${esc(cx('tool.cyc.title', 'Skin-cycling planner (Korean way)'))}</div>
+      <div class="kb-tool-sub">${esc(cx('tool.cyc.sub', 'A gentle 4-night cycle: exfoliate, retinoid, then two recovery nights — Korean barrier-first. Pick your pace:'))}</div>
+      <div class="kb-tabs" id="kb-cyc-pace" style="margin:10px 0">
+        <button class="kb-tab active" data-pace="0">${esc(cx('tool.cyc.standard', 'Standard (4-night)'))}</button>
+        <button class="kb-tab" data-pace="1">${esc(cx('tool.cyc.sensitive', 'Sensitive (+1 recovery)'))}</button>
+      </div>
+      <div id="kb-cyc-res"></div></div>`;
+    const draw = (extra) => {
+      const list = nights.slice();
+      if (extra) list.push({ n: 5, t: () => cx('tool.cyc.n5', 'Recovery'), e: '🌿', d: () => cx('tool.cyc.n5d', 'An extra calm night before restarting — ideal for reactive skin.'), ing: 'mugwort / madecassoside' });
+      $('#kb-cyc-res').innerHTML = `<div class="kb-steps">${list.map(nt => `<div class="kb-step"><div class="kb-step-no">${nt.e}</div><div class="kb-step-b"><div class="kb-step-name">${esc(cx('tool.cyc.night', 'Night'))} ${nt.n} · ${esc(nt.t())}</div><div class="kb-step-desc">${esc(nt.d())}</div><div class="kb-step-lay">🧪 ${esc(nt.ing)}</div></div></div>`).join('')}</div>
+        <div class="gsc-next" style="margin-top:12px">🔁 ${esc(cx('tool.cyc.repeat', 'Repeat the cycle. Always wear SPF every morning, whatever last night was.'))}</div>`;
+    };
+    draw(false);
+    $$('#kb-cyc-pace .kb-tab', box).forEach(t => t.addEventListener('click', () => { $$('#kb-cyc-pace .kb-tab', box).forEach(x => x.classList.remove('active')); t.classList.add('active'); draw(t.dataset.pace === '1'); }));
+  }
+
   // ── Concern selector ────────────────────────────────────────────────────────
   function renderConcerns() {
     const grid = $('#kb-concern-grid'); if (!grid) return;
@@ -1084,7 +1167,7 @@
   }
   function openMoreSheet() {
     const box = $('#kb-modal'); if (!box) return;
-    const moreCats = ['sun', 'trouble', 'brands', 'buy', 'trends'].map(id => kbCatById(id)).filter(Boolean);
+    const moreCats = ['sun', 'trouble', 'brands', 'buy', 'trends', 'tools'].map(id => kbCatById(id)).filter(Boolean);
     const rows = moreCats.map(c => '<button type="button" class="kb-sheet-row" data-morecat="' + c.id + '"><span class="se">' + c.icon + '</span><span><span>' + esc(kbTitle(c)) + '</span><span class="sd">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></span></button>').join('');
     const lib = '<a class="kb-sheet-row" href="/guide/kb/"><span class="se">📚</span><span><span>' + esc(cx('ux.library', 'The K-Beauty Library')) + '</span><span class="sd">' + esc(cx('ux.librarysub', '1,000+ guides')) + '</span></span></a>';
     box.innerHTML = '<button class="kb-modal-x" data-close aria-label="Close">✕</button>'
@@ -1247,6 +1330,7 @@
     { id: 'brands', icon: '🏷️', tk: 'kbeauty.filter.brands', t: 'Brands & Terms', sub: '30 brands, dupes & a K-beauty glossary', secs: ['kb-brands', 'kb-dupes', 'kb-glossary'] },
     { id: 'buy', icon: '🛡️', tk: 'kbeauty.filter.buy', t: 'Buy Safe', sub: 'Where to buy authentic, spot fakes & build your shelf', secs: ['kb-buy', 'kb-shelf'] },
     { id: 'trends', icon: '🔥', tk: 'kbeauty.filter.board', t: 'Trends & Authority', sub: 'Trend radar, evidence, SkinTok checks & Korean sources', secs: ['kb-radar', 'kb-ledger', 'kb-viral', 'kb-board', 'kb-report', 'kb-news', 'kb-krsrc', 'kb-trust'] },
+    { id: 'tools', icon: '🧰', tk: 'kbeauty.filter.tools', t: 'Tools', sub: 'Cost-per-use, expiry (PAO) & skin-cycling planners', secs: ['kb-cost', 'kb-pao', 'kb-cycling'] },
   ];
   const KB_ALLSECS = KB_CATS.reduce((a, c) => a.concat(c.secs), []);
   const kbCatById = (id) => KB_CATS.filter(c => c.id === id)[0] || null;
@@ -1292,6 +1376,7 @@
       brands: [renderBrands, renderGlossary, renderDupes],
       buy: [renderBuy, detectBuyRegion, renderRetailers, renderShelf],
       trends: [renderRadar, renderLedger, renderViral, renderBestsellers, renderReport, renderNewsdesk, renderKrSources, renderTrust],
+      tools: [renderCost, renderPAO, renderCycling],
     };
     (M[id] || []).forEach(fn => { try { fn(); } catch (e) { try { console.error('kb render ' + id, e); } catch (e2) {} } });
   }

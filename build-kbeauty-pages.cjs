@@ -533,6 +533,29 @@ ADVC.clinic.forEach(it => emitContent('clinic', it, 'K-Derma education', '⚕️
   emit('matrix/pairing-matrix.html', shell({ url, depth: 3, crumb: 'Pairing matrix', emoji: '🧮', h1: 'K-beauty ingredient pairing matrix', title: 'Korean skincare ingredient pairing matrix — what mixes', desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD('Ingredient pairing matrix', qa, url), faqLD('Which Korean skincare ingredients can you mix?', qa)] }), '0.7');
 })();
 
+// ── 6q. Hub-tool SEO landings (tools/) + #16 embeddable Glass-Score badge widget.
+const TOOL_LANDINGS = [
+  { slug: 'cost-per-use-calculator', h1: 'Skincare cost-per-use calculator', emoji: '💸', qa: 'Stop comparing sticker prices — our free calculator shows what a Korean skincare product really costs per use, per month and per year, and how long a bottle lasts.', secs: [['Why cost-per-use matters', 'A pricey essence you use sparingly can be cheaper per use than a budget one you pour on. Cost-per-use reveals the true value of a Korean routine and where to spend or save.'], ['How it works', 'Enter price, size (ml), amount per use and uses per day. The tool computes cost-per-use, monthly and annual spend, and how many days the bottle lasts.']] },
+  { slug: 'skincare-expiry-pao-tracker', h1: 'Skincare expiry & shelf-life (PAO) tracker', emoji: '🗓️', qa: 'Not sure when to toss a product? Our free PAO tracker gives the safe-use window for sunscreens, vitamin C, retinoids and more — plus a dispose-by date from the day you opened it.', secs: [['What is PAO?', 'PAO (Period After Opening) is how long a product stays good once opened — shown as a little open-jar symbol (e.g. 12M). Actives like vitamin C and sunscreen degrade faster, so the window is shorter.'], ['How to use it', 'Pick the product type and the date you opened it; the tool returns the months it stays effective and the exact dispose-by date, so you never use a product that has turned.']] },
+  { slug: 'skin-cycling-routine-planner', h1: 'Skin-cycling planner — the Korean barrier-first way', emoji: '🔄', qa: 'Skin cycling alternates active and recovery nights for results without irritation. Our free planner lays out a gentle Korean 4-night cycle — exfoliate, retinoid, recover, recover — with the right K-beauty ingredients for each night.', secs: [['What is skin cycling?', 'Instead of using actives every night, you cycle: one exfoliation night, one retinoid night, then recovery nights for the barrier. It suits sensitive and beginner skin.'], ['The Korean twist', 'K-beauty leans barrier-first, so the recovery nights use centella (cica), ceramides, snail mucin and heartleaf to keep skin calm — and SPF every morning, always.']] },
+];
+TOOL_LANDINGS.forEach(t => {
+  const url = `${SITE}/guide/kb/tools/${t.slug}.html`;
+  const body = `<p class="lead">${esc(t.qa)}</p>${t.secs.map(s => `<h2>${esc(s[0])}</h2><p>${esc(s[1])}</p>`).join('')}<p><a class="cta" href="${SITE}/kbeauty#cat=tools">🧰 Open the free tool →</a></p>${deeperBlock({ title: t.h1, slug: t.slug })}`;
+  emit(`tools/${t.slug}.html`, shell({ url, depth: 3, crumb: 'Tools', emoji: t.emoji, h1: t.h1, title: `${t.h1} — free K-beauty tool`, desc: t.qa, quickAnswer: t.qa, bodyHtml: body, ld: [artLD(t.h1, t.qa, url), faqLD(t.h1 + '?', t.qa)] }), '0.6');
+});
+// #16 — the embeddable badge (minimal standalone iframe target; written raw, not in sitemap).
+const BADGE_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glass Skin Score</title><style>body{margin:0;font:15px/1.4 -apple-system,system-ui,sans-serif}a{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#d61f6e,#8b46d6);padding:15px 18px;border-radius:14px}a .e{font-size:30px}a b{font-size:16px}a small{display:block;opacity:.92;font-weight:400;font-size:12px;margin-top:2px}a .go{margin-left:auto;font-size:20px}</style></head><body><a href="${SITE}/kbeauty#kb-glassscore" target="_top" rel="noopener"><span class="e">🔮</span><span><b>What's your Glass Skin Score?</b><small>Take the free K-beauty skin test · KoreaPlus</small></span><span class="go">→</span></a></body></html>`;
+fs.mkdirSync(path.join(OUT, 'embed'), { recursive: true });
+fs.writeFileSync(path.join(OUT, 'embed/glass-skin-score.html'), BADGE_HTML);
+(function () {
+  const url = `${SITE}/guide/kb/tools/embed-glass-skin-score.html`;
+  const snippet = `<iframe src="${SITE}/guide/kb/embed/glass-skin-score.html" style="width:100%;max-width:360px;height:82px;border:0" loading="lazy" title="Glass Skin Score by KoreaPlus"></iframe>`;
+  const qa = `Embed the free Glass Skin Score on your blog or site with one line of HTML — your visitors take the K-beauty skin test on KoreaPlus and you get a polished interactive widget.`;
+  const body = `<p class="lead">${esc(qa)}</p><h2>Copy this snippet</h2><pre style="background:#faf3f7;border:1px solid #f0d8e6;border-radius:10px;padding:12px;overflow-x:auto;font-size:12.5px">${esc(snippet)}</pre><h2>Live preview</h2>${snippet}<p style="font-size:13px;color:#777">Free to embed. Links back to the full Glass Skin Score tool on KoreaPlus.</p>${deeperBlock({ title: 'glass skin score embed widget', slug: 'embed' })}`;
+  emit('tools/embed-glass-skin-score.html', shell({ url, depth: 3, crumb: 'Tools', emoji: '🔌', h1: 'Embed the Glass Skin Score widget', title: 'Embed the Glass Skin Score — free K-beauty widget', desc: qa, quickAnswer: qa, bodyHtml: body, ld: [artLD('Embed the Glass Skin Score', qa, url)] }), '0.5');
+})();
+
 // ── 7. Glossary terms ───────────────────────────────────────────────────────
 GLOSS.forEach((g, idx) => {
   const sg = slug(g.term);
@@ -885,6 +908,7 @@ const HUB_META = {
   hair: { e: '💇', t: 'K-Haircare & scalp', g: 'K-beauty knowledge' },
   makeup: { e: '💋', t: 'K-Makeup & color', g: 'K-beauty knowledge' },
   clinic: { e: '⚕️', t: 'K-Derma education', g: 'K-beauty knowledge' },
+  tools: { e: '🧰', t: 'Free tools', g: 'Skin & routines' },
   category: { e: '🧴', t: 'Product types', g: 'Brands & products' },
   concern: { e: '🎯', t: 'Skin concerns', g: 'Skin & routines' },
   'skin-type': { e: '🧖', t: 'Skin types', g: 'Skin & routines' },
