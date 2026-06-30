@@ -252,8 +252,10 @@ const STAY = [
 // every builder can link only to pages that exist.
 const ITIN = [['Seoul', 3], ['Seoul', 5], ['Busan', 3], ['Jeju', 3], ['Gyeongju', 2], ['Jeonju', 2]];
 // Emerging provincial cities (regional-dispersal trend) — rich guides come from
-// city-l10n.json 'en'; not in CITIES, so generated via their own pass.
-const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }, { name: 'Andong', kr: '안동' }, { name: 'Yeosu', kr: '여수' }, { name: 'Taean', kr: '태안' }, { name: 'Tongyeong', kr: '통영' }, { name: 'Pohang', kr: '포항' }, { name: 'Chuncheon', kr: '춘천' }, { name: 'Damyang', kr: '담양' }, { name: 'Jinju', kr: '진주' }, { name: 'Suncheon', kr: '순천' }, { name: 'Boseong', kr: '보성' }, { name: 'Mokpo', kr: '목포' }, { name: 'Gongju', kr: '공주' }, { name: 'Korea Hiking', kr: '한국 등산' }];
+// city-l10n.json 'en'; generated via their own pass. MUST NOT overlap CITIES
+// (data.js): a city in both lists is built twice and registered twice in the
+// sitemap (Andong/Yeosu were such duplicates — kept in CITIES, dropped here).
+const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', kr: '속초' }, { name: 'Suwon', kr: '수원' }, { name: 'Daegu', kr: '대구' }, { name: 'Daejeon', kr: '대전' }, { name: 'Taean', kr: '태안' }, { name: 'Tongyeong', kr: '통영' }, { name: 'Pohang', kr: '포항' }, { name: 'Chuncheon', kr: '춘천' }, { name: 'Damyang', kr: '담양' }, { name: 'Jinju', kr: '진주' }, { name: 'Suncheon', kr: '순천' }, { name: 'Boseong', kr: '보성' }, { name: 'Mokpo', kr: '목포' }, { name: 'Gongju', kr: '공주' }, { name: 'Korea Hiking', kr: '한국 등산' }];
 
 // "Keep planning {city}" cross-cluster links — emits links only to pages this
 // generator writes. excludeUrl drops the current page from its own list.
@@ -2793,17 +2795,33 @@ const urlEntry = (loc, pri, freq) => {
     : '';
   return `  <url>\n    <loc>${ORIGIN}${loc}</loc>${alt}\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
 };
+
+// ── K-pop URL set (single source of truth) ──────────────────────────
+// Every K-pop URL lives ONLY in kpop-sitemap.xml (assembled below). Collect the
+// full set here so the main sitemap can EXCLUDE it — otherwise the same URL is
+// registered in both sitemaps (canonical ambiguity / cross-file duplication).
+// Covers: the /kpop hub, history + profile pages (9 langs), per-language browse
+// hubs, K-pop-themed travel pages, and every K-pop-channel module URL.
+const kpopThemed = [...new Set([...out.categories, ...out.itineraries, ...(out.itinL10n || []), ...out.places].filter(u => /k-?pop/i.test(u)))];
+const KPOP_LOCS = new Set([
+  '/kpop',
+  ...(out.kpopHist || []),
+  ...(out.kpopBrowse || []),
+  ...kpopThemed,
+  ...Object.values(__out.kpop || []).flat().filter(e => e && e.url).map(e => e.url),
+]);
+const notKpop = (u) => !KPOP_LOCS.has(u);
+
 let sm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 sm += urlEntry(BASEP, '1.0', 'daily');
 LANGS.forEach(l => sm += `\n` + urlEntry(`${BASEP}?lang=${l}`, '0.8', 'weekly'));
 STATIC.slice(1).forEach(p => { const hot = (p === 'kbeauty.html'); sm += `\n` + urlEntry(BASEP + p, hot ? '0.9' : '0.8', hot ? 'daily' : 'weekly'); });
-sm += `\n` + urlEntry('/kpop', '0.9', 'daily');   // K-Pop hub: clean canonical URL (not /guide/kpop.html)
-[...out.categories, ...out.cities, ...(out.regional || []), out.visa, ...out.stays, out.blogIndex].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
+// K-pop URLs (/kpop hub, kpopHist, kpopBrowse, K-pop-themed pages) are emitted
+// ONLY in kpop-sitemap.xml — filtered out of the main sitemap via notKpop().
+[...out.categories, ...out.cities, ...(out.regional || []), out.visa, ...out.stays, out.blogIndex].filter(notKpop).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 out.blog.forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
-(out.kpopHist || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
-(out.kpopBrowse || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));
 out.neighborhoods.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
-out.itineraries.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
+out.itineraries.filter(notKpop).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.months.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.faqL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
@@ -2811,12 +2829,12 @@ out.l10n.forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 [...(out.besttime || []), ...(out.transport || [])].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 (out.cityL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 (out.blogL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));
-(out.itinL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
+(out.itinL10n || []).filter(notKpop).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 [...out.compare, ...out.seasonal].forEach(u => sm += `\n` + urlEntry(u, '0.8', 'weekly'));
 [...out.faq, ...out.cityfood].forEach(u => sm += `\n` + urlEntry(u, '0.7', 'monthly'));
 (out.hubs || []).forEach(h => sm += `\n` + urlEntry(h.url, '0.8', 'weekly'));  // browse category hubs
 (out.hubsL10n || []).forEach(u => sm += `\n` + urlEntry(u, '0.7', 'weekly'));   // localized browse hubs
-out.places.forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
+out.places.filter(notKpop).forEach(u => sm += `\n` + urlEntry(u, '0.6', 'monthly'));
 // === MODULE URL HOOK (main sitemap) === generated-content module URLs ({lang,url})
 Object.values(__out.main || []).flat().forEach(e => { if (e && e.url) sm += `\n` + urlEntry(e.url, '0.7', 'weekly'); });
 sm += `\n</urlset>\n`;
@@ -2830,7 +2848,7 @@ let ksm = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sit
 ksm += urlEntry('/kpop', '1.0', 'daily');
 (out.kpopHist || []).forEach(u => ksm += `\n` + urlEntry(u, '0.8', 'weekly'));
 (out.kpopBrowse || []).forEach(u => ksm += `\n` + urlEntry(u, '0.7', 'weekly'));
-const kpopThemed = [...new Set([...out.categories, ...out.itineraries, ...(out.itinL10n || []), ...out.places].filter(u => /k-?pop/i.test(u)))];
+// kpopThemed computed once above (used to exclude these URLs from the main sitemap).
 kpopThemed.forEach(u => ksm += `\n` + urlEntry(u, '0.7', 'weekly'));
 // === MODULE URL HOOK (kpop sitemap) === K-pop-channel module URLs ({lang,url})
 Object.values(__out.kpop || []).flat().forEach(e => { if (e && e.url) ksm += `\n` + urlEntry(e.url, '0.7', 'weekly'); });

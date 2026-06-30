@@ -1,19 +1,19 @@
 {
   "generatedAt": "2026-06-30",
   "perSitemap": {
-    "sitemap.xml": 2519,
+    "sitemap.xml": 1556,
     "kpop-sitemap.xml": 3407
   },
-  "total": 5926,
+  "total": 4963,
   "perLang": {
-    "en": 822,
-    "ko": 638,
-    "ja": 638,
-    "zh": 638,
-    "es": 638,
-    "fr": 638,
-    "de": 638,
-    "pt": 638,
-    "id": 638
+    "en": 707,
+    "ko": 532,
+    "ja": 532,
+    "zh": 532,
+    "es": 532,
+    "fr": 532,
+    "de": 532,
+    "pt": 532,
+    "id": 532
   }
 }
