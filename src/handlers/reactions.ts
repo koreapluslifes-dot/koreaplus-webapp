@@ -23,6 +23,31 @@ async function getCounts(env: WorkerEnv, key: string): Promise<{ up: number; dow
   try { const c = JSON.parse(raw); return { up: c.up || 0, down: c.down || 0 }; } catch { return { up: 0, down: 0 }; }
 }
 
+/**
+ * S17: page view counter. GET /api/view?slug=<page> → { views }.
+ * Real counts only — react.js uses this for social proof ("N travelers viewed
+ * this"). Server does a simple increment; same-session dedup is the client's
+ * job. Fallback-quiet: no KV or bad slug → { views: 0 }.
+ */
+export async function handleView(request: Request, env: WorkerEnv): Promise<Response> {
+  const u = new URL(request.url);
+  const slug = (u.searchParams.get('slug') || '').slice(0, 120).replace(/[^a-zA-Z0-9/_.-]/g, '');
+  if (!slug || !env.CACHE_KV) return json({ views: 0 });
+  const key = `view:${slug}`;
+
+  const raw = await env.CACHE_KV.get(key);
+  let views = 0;
+  if (raw) { const n = parseInt(raw, 10); if (Number.isFinite(n) && n >= 0) views = n; }
+
+  // GET is the read+increment path (react.js fires a single GET per page load;
+  // it also serves as a plain read since the delta is +1). HEAD/other → read only.
+  if (request.method === 'GET' || request.method === 'POST') {
+    views += 1;
+    await env.CACHE_KV.put(key, String(views)).catch(() => {});
+  }
+  return json({ views });
+}
+
 export async function handleReact(request: Request, env: WorkerEnv): Promise<Response> {
   const u = new URL(request.url);
   const slug = (u.searchParams.get('slug') || '').slice(0, 120).replace(/[^a-zA-Z0-9/_.-]/g, '');

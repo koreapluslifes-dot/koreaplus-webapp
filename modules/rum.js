@@ -18,7 +18,10 @@
     if (window.__kpRum) return;            // dup-mount guard
     window.__kpRum = 1;
 
-    var ENDPOINT = '/api/rum';
+    // Worker API lives on the workers.dev origin (same as react.js), NOT the
+    // main domain — a relative '/api/rum' would hit the static WP host (200 HTML)
+    // and silently drop the beacon.
+    var ENDPOINT = (window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev') + '/api/rum';
     var SAMPLE = 0.10;                      // 10%
 
     // ── sampling decision, sticky per session ──────────────────────

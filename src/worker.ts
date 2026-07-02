@@ -15,7 +15,7 @@
 import { handleApiRoute } from './router.ts';
 import { handlePlanRequest, handleSharePost, handleShareGet, handleShareHtml } from './handlers/planner.ts';
 import { handleAffiliate } from './handlers/affiliate.ts';
-import { handleReact } from './handlers/reactions.ts';
+import { handleReact, handleView } from './handlers/reactions.ts';
 import { handleMenuTranslate } from './handlers/translator.ts';
 import type { CacheEnv } from './cache.ts';
 import type { LLMEnv } from './api/groq.ts';
@@ -61,6 +61,12 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+// AI answer-engine crawlers (GEO). These can't run the JS that renders the
+// interactive pages, so we serve them a clean static text-twin instead. NOTE:
+// Googlebot/Bingbot are deliberately EXCLUDED — they render JS for ranking, so
+// they get the full app (this is GEO enrichment, NOT ranking cloaking).
+const AI_CRAWLER_RE = /GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|Perplexity-User|ClaudeBot|anthropic-ai|Claude-Web|CCBot|Bytespider|Google-Extended|Applebot-Extended|Amazonbot|Meta-ExternalAgent|cohere-ai|DuckAssistBot|YouBot/i;
+
 function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), {
     status,
@@ -88,9 +94,75 @@ const LANG_NAMES: Record<string, string> = {
   es: 'Spanish', fr: 'French', de: 'German', pt: 'Portuguese', id: 'Indonesian',
 };
 
-async function handleChat(body: { message?: string; history?: { role: string; content: string }[]; lang?: string }, env: WorkerEnv): Promise<Response> {
+// ── S14: page-ask cost guard ──────────────────────────────────────────────────
+// A "page-ask" is a Q&A about a specific SEO page (body carries `page`). The
+// live chatbot (free-form /chat) is untouched. The guard only kicks in for
+// page-ask so that, when ask.js's gate is turned on in future, cost stays bounded:
+//   (a) lang whitelist en/ko/ja/zh/es (others politely declined, no LLM call)
+//   (b) KV pre-cache keyed by hash(page+question) — served answers skip the LLM
+//   (c) daily global call cap (KV counter chat:count:<date>) → 429 when exceeded
+//   (d) context = ONLY the client-supplied summary (token thrift)
+const PAGE_ASK_LANGS = new Set(['en', 'ko', 'ja', 'zh', 'es']);
+const CHAT_DAILY_CAP = 2000;              // global LLM calls/day for page-ask
+const CHAT_CACHE_TTL = 7 * 86400;         // cached answers live 7 days
+
+function djb2hex(s: string): string {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = (h * 33 ^ s.charCodeAt(i)) >>> 0;
+  return h.toString(16);
+}
+
+async function handleChat(
+  body: { message?: string; history?: { role: string; content: string }[]; lang?: string; page?: string; summary?: string; context?: string },
+  env: WorkerEnv,
+): Promise<Response> {
   const { message, history = [], lang } = body;
   if (!message?.trim()) return json({ error: 'No message' }, 400);
+
+  // ── S14 page-ask cost guard (only when the request targets a specific page) ──
+  const pageId = (body.page || '').trim();
+  if (pageId) {
+    const lc = (lang || '').slice(0, 2).toLowerCase();
+    // (a) language whitelist — decline others without spending an LLM call.
+    if (!PAGE_ASK_LANGS.has(lc)) {
+      return json({ reply: 'Sorry — page Q&A is currently available in English, Korean, Japanese, Chinese, and Spanish only. 🙏' });
+    }
+    const q = message.trim().slice(0, 500);
+    const cacheKey = `chat:cache:${lc}:${djb2hex(pageId.slice(0, 200))}:${djb2hex(q)}`;
+    // (b) serve a cached answer with zero LLM cost.
+    if (env.CACHE_KV) {
+      try {
+        const hit = await env.CACHE_KV.get(cacheKey);
+        if (hit) return json({ reply: hit, cached: true });
+      } catch { /* cache miss path */ }
+    }
+    // (c) daily global cap — protects the free-tier budget.
+    if (env.CACHE_KV) {
+      const date = new Date().toISOString().slice(0, 10);
+      const countKey = `chat:count:${date}`;
+      try {
+        const cur = parseInt((await env.CACHE_KV.get(countKey)) || '0', 10) || 0;
+        if (cur >= CHAT_DAILY_CAP) {
+          return json({ reply: '⚠️ Our AI assistant is very busy right now. Please try again later.' }, 429);
+        }
+        // reserve a slot (best-effort; ~1-day TTL so the counter self-resets)
+        await env.CACHE_KV.put(countKey, String(cur + 1), { expirationTtl: 2 * 86400 }).catch(() => {});
+      } catch { /* counter unavailable — allow through */ }
+    }
+    // (d) context = ONLY the client-supplied summary (token thrift; no history).
+    const summary = (body.summary || body.context || '').slice(0, 1500);
+    const langName = LANG_NAMES[lc] || 'English';
+    const askMessages = [
+      { role: 'system', content: `${SYSTEM_PROMPT}\nReply in ${langName}. Answer strictly using the page context below; if the answer isn't there, say so briefly.\n\n[PAGE CONTEXT]\n${summary}` },
+      { role: 'user', content: q },
+    ];
+    const reply = await runChatCompletion(askMessages, env);
+    if (reply && env.CACHE_KV) {
+      await env.CACHE_KV.put(cacheKey, reply, { expirationTtl: CHAT_CACHE_TTL }).catch(() => {});
+    }
+    return json({ reply: reply || 'No response.' });
+  }
+
 
   // The UI language is the default reply language; mirroring the user's own
   // language still wins if they write in something else.
@@ -105,6 +177,14 @@ async function handleChat(body: { message?: string; history?: { role: string; co
     { role: 'user', content: message },
   ];
 
+  const reply = await runChatCompletion(chatMessages, env);
+  return json({ reply: reply || '⚠️ AI temporarily unavailable. Please try again in a moment.' });
+}
+
+// Shared LLM completion: Groq first (fast free tier) → OpenRouter fallback.
+// Returns the trimmed reply, or '' if every provider failed. Used by both the
+// free-form chatbot and the S14 guarded page-ask path.
+async function runChatCompletion(messages: { role: string; content: string }[], env: WorkerEnv): Promise<string> {
   type ChatResp = { choices?: { message?: { content?: string } }[] };
   const extract = (data: ChatResp) => data.choices?.[0]?.message?.content?.trim() || '';
 
@@ -123,13 +203,13 @@ async function handleChat(body: { message?: string; history?: { role: string; co
           model: 'llama-3.1-8b-instant',
           max_tokens: 320,
           temperature: 0.6,
-          messages: chatMessages,
+          messages,
         }),
         signal: AbortSignal.timeout(25_000),
       });
       if (res.ok) {
         const reply = extract(await res.json() as ChatResp);
-        if (reply) return json({ reply });
+        if (reply) return reply;
         console.error('[Groq chat] ok but empty content');
       } else {
         console.error(`[Groq chat] HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
@@ -151,17 +231,16 @@ async function handleChat(body: { message?: string; history?: { role: string; co
         model,
         max_tokens: 220,
         temperature: 0.6,
-        messages: chatMessages,
+        messages,
       }),
     });
 
   try {
     let res = await callOpenRouter(MODEL_PRIMARY);
     if (!res.ok) res = await callOpenRouter(MODEL_FALLBACK);
-    const reply = extract(await res.json() as ChatResp) || 'No response.';
-    return json({ reply });
+    return extract(await res.json() as ChatResp);
   } catch {
-    return json({ reply: '⚠️ AI temporarily unavailable. Please try again in a moment.' });
+    return '';
   }
 }
 
@@ -233,6 +312,42 @@ async function pingIndexNow(env: WorkerEnv): Promise<void> {
   } catch { /* best-effort; never throws */ }
 }
 
+// ── S20: Real User Monitoring (Core Web Vitals) ingest ────────────────────────
+// POST /api/rum  {lcp,inp,cls,url,lang}. Client (rum.js) handles sampling; the
+// server just keeps a tiny daily rolling aggregate per metric in KV so we never
+// grow unbounded. Best-effort: any failure returns 204 anyway (never blocks the
+// page). Payload is validated & clamped so a bad/huge body can't poison the KV.
+async function handleRum(request: Request, env: WorkerEnv): Promise<Response> {
+  const noStore = { ...CORS, 'Cache-Control': 'no-store' };
+  const num = (v: unknown, max: number): number | null => {
+    const n = typeof v === 'number' ? v : parseFloat(String(v));
+    return Number.isFinite(n) && n >= 0 && n <= max ? n : null;
+  };
+  try {
+    const b = await request.json() as { lcp?: unknown; inp?: unknown; cls?: unknown; url?: unknown; lang?: unknown };
+    if (env.CACHE_KV) {
+      const date = new Date().toISOString().slice(0, 10);
+      const metrics: Array<[string, number | null]> = [
+        ['lcp', num(b.lcp, 120_000)],   // ms
+        ['inp', num(b.inp, 120_000)],   // ms
+        ['cls', num(b.cls, 100)],       // unitless
+      ];
+      // Rolling mean per metric per day: {n, sum, last}. Small (<80 bytes), 3-day TTL.
+      await Promise.all(metrics.map(async ([metric, val]) => {
+        if (val == null) return;
+        const key = `rum:${date}:${metric}`;
+        try {
+          const prev = await env.CACHE_KV!.get(key);
+          const agg = prev ? JSON.parse(prev) as { n: number; sum: number } : { n: 0, sum: 0 };
+          const next = { n: (agg.n || 0) + 1, sum: (agg.sum || 0) + val, last: val };
+          await env.CACHE_KV!.put(key, JSON.stringify(next), { expirationTtl: 3 * 86400 });
+        } catch { /* per-metric failure is harmless */ }
+      }));
+    }
+  } catch { /* bad JSON / KV down — swallow; RUM must never break a page */ }
+  return new Response(null, { status: 204, headers: noStore });
+}
+
 // Minimal markdown→HTML for the AI text-twin (llms-kbeauty.txt → clean HTML).
 function mdToHtml(md: string, canonical: string): string {
   const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c] as string));
@@ -267,6 +382,40 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, '');
 
+    // ── S13: AI-crawler text-twin for /guide SEO pages ──────────────────────
+    // AI answer engines can't run the JS that renders the /guide pages, so we
+    // serve them the pre-built static text-twin (/guide/llms-full.<lang>.txt,
+    // emitted by the build). Googlebot/Bingbot are excluded (see AI_CRAWLER_RE)
+    // so this is GEO enrichment, not cloaking. Any failure falls through to the
+    // normal page. HTML pages only — never .txt/.xml/assets, and NEVER the
+    // llms-full.*.txt twins themselves (infinite-loop guard).
+    if ((request.method === 'GET' || request.method === 'HEAD') &&
+        path.startsWith('/guide/') &&
+        !/\/llms-full\./i.test(path) &&
+        !/\/llms[\w.-]*\.txt$/i.test(path) &&
+        /(?:\/guide\/[\w-]+)?(?:\.html)?$/i.test(path) &&
+        !/\.(?:txt|xml|json|js|css|png|jpe?g|webp|svg|gif|ico|woff2?|ttf|map)$/i.test(path)) {
+      const ua = request.headers.get('user-agent') || '';
+      if (AI_CRAWLER_RE.test(ua)) {
+        const lang = (url.searchParams.get('lang') || 'en').slice(0, 5).replace(/[^a-z-]/gi, '') || 'en';
+        const twinHeaders = {
+          'content-type': 'text/plain; charset=utf-8',
+          'cache-control': 'public, max-age=600',
+          'x-served-by': 'guide-ai-twin',
+          'vary': 'User-Agent',
+        };
+        try {
+          // Try the language-specific twin, then fall back to the English twin.
+          let r = await fetch(`https://koreaplus-lifes.com/guide/llms-full.${lang}.txt`, { cf: { cacheTtl: 600, cacheEverything: true } });
+          if (!r.ok && lang !== 'en') r = await fetch('https://koreaplus-lifes.com/guide/llms-full.en.txt', { cf: { cacheTtl: 600, cacheEverything: true } });
+          if (r.ok) {
+            if (request.method === 'HEAD') return new Response(null, { status: 200, headers: twinHeaders });
+            return new Response(await r.text(), { headers: twinHeaders });
+          }
+        } catch { /* fall through to normal page serving below */ }
+      }
+    }
+
     // ── Pretty-URL serving ─────────────────────────────────────────────────
     // The K-Beauty hub is a static file under /guide/. We serve it at the clean
     // /kbeauty URL by PROXYING the origin file (not redirecting) so the address
@@ -296,7 +445,7 @@ export default {
       // Googlebot/Bingbot are NOT included — they render JS for ranking, so they
       // get the full app (this is GEO, not ranking-cloaking).
       const ua = request.headers.get('user-agent') || '';
-      if (/GPTBot|OAI-SearchBot|ChatGPT-User|PerplexityBot|Perplexity-User|ClaudeBot|anthropic-ai|Claude-Web|CCBot|Bytespider|Google-Extended|Applebot-Extended|Amazonbot/i.test(ua)) {
+      if (AI_CRAWLER_RE.test(ua)) {
         try {
           const r = await fetch('https://koreaplus-lifes.com/guide/llms-kbeauty.txt', { cf: { cacheTtl: 600, cacheEverything: true } });
           if (r.ok) {
@@ -330,6 +479,14 @@ export default {
 
     // "Was this helpful?" reactions (GET counts, POST a vote) — element 8 UGC
     if (path.endsWith('/api/react')) return handleReact(request, env);
+
+    // S17: page view counter — GET /api/view?slug=... increments & returns views.
+    // Real counts only (react.js uses it for social proof). Session-dedup is the
+    // client's job; the server just does a simple atomic-ish increment.
+    if (path.endsWith('/api/view')) return handleView(request, env);
+
+    // S20: Real User Monitoring ingest — POST /api/rum {lcp,inp,cls,url,lang}.
+    if (request.method === 'POST' && path.endsWith('/api/rum')) return handleRum(request, env);
 
     // ── GET routes ────────────────────────────────────────────────────────
     if (request.method === 'GET') {
@@ -411,6 +568,6 @@ export default {
 
     // Existing: /place and /chat
     if (path.endsWith('/place')) return handlePlace(body as { query?: string }, env);
-    return handleChat(body as { message?: string; history?: { role: string; content: string }[] }, env);
+    return handleChat(body as { message?: string; history?: { role: string; content: string }[]; lang?: string; page?: string; summary?: string; context?: string }, env);
   },
 };
