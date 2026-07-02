@@ -633,78 +633,48 @@ function tabBar(lang) {
   <script>(function(){try{var p=location.pathname,t='explore';if(/\\/(index\\.html)?$/.test(p)&&!/explore/.test(p))t='home';else if(/explore\\.html/.test(p))t='explore';else if(/plan\\.html/.test(p))t='plan';else if(/bucket-list/.test(p))t='saved';else t='';var el=document.querySelector('.kp-tabbar [data-tab="'+t+'"]');if(el)el.classList.add('on');}catch(e){}})();</script>`;
 }
 
-// ── Unified primary nav (kp-pnav) — same simplified 3-bucket nav as the
-// homepage/hub pages. Hrefs are root-relative to <base href="/guide/">, so
-// they resolve identically from any generated subdirectory. Localized via
-// data-i18n + header.js→i18n.js; behavior via nav.js (loaded by header.js).
-const PRIMARY_NAV = `
+// ── Simplified primary nav (kp-pnav): Explore | Browse ▾ (7 hubs, localized
+// at build time from HUB_L10N) | Plan CTA. One dropdown instead of three —
+// everything else is reachable through the hubs (and the footer keeps direct
+// links for SEO). Behavior via nav.js (loaded by header.js).
+function primaryNav(lang) {
+  const T = (HUB_L10N[lang] || HUB_L10N.en || { ui: {}, hubs: {} });
+  const H = T.hubs || {};
+  const nm = (k, fb) => ((H[k] && H[k].h1) || fb).split(' — ')[0];
+  const items = [
+    ['📍', 'destinations.html', nm('destinations', 'Destinations')],
+    ['🍜', 'experiences.html', nm('experiences', 'Things to Do')],
+    ['📅', 'when-to-visit.html', nm('whentovisit', 'When to Visit')],
+    ['✈️', 'travel-basics.html', nm('basics', 'Travel Basics')],
+    ['🗺️', 'itineraries.html', nm('itineraries', 'Itineraries')],
+    ['🧰', 'tools.html', nm('tools', 'Free Tools')],
+    ['❓', 'faq/index.html', nm('faq', 'FAQ')],
+  ];
+  const browse = (T.ui && T.ui.explore) || 'Browse';
+  const allGuides = (T.ui && T.ui.browseAll) || '🧭 All guides';
+  return `
   <div class="kp-pnav">
     <button class="kp-pnav-burger" data-action="kp-burger" aria-label="Open menu" data-i18n-aria="nav.menu.open" aria-expanded="false">☰</button>
     <div class="kp-pnav-items">
-      <a class="kp-pnav-link" href="explore.html" data-i18n="nav.explore">Explore</a>
       <div class="kp-pnav-drop">
-        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.browse">Browse</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
+        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span>${esc(browse)}</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
         <div class="kp-pnav-menu" role="menu">
           <div class="kp-pnav-group" role="group">
-            <div class="kp-pnav-gh" data-i18n="nav.group.category">By category</div>
-            <a role="menuitem" href="destinations.html" data-i18n="nav.cat.destinations">📍 Destinations</a>
-            <a role="menuitem" href="experiences.html" data-i18n="nav.cat.experiences">🍜 Things to Do</a>
-            <a role="menuitem" href="when-to-visit.html" data-i18n="nav.cat.whentovisit">📅 When to Visit</a>
-            <a role="menuitem" href="travel-basics.html" data-i18n="nav.cat.basics">✈️ Travel Basics</a>
-            <a role="menuitem" href="itineraries.html" data-i18n="nav.cat.itineraries">🗺️ Itineraries</a>
-            <a role="menuitem" href="tools.html" data-i18n="nav.cat.tools">🧰 Free Tools</a>
-            <a role="menuitem" href="faq/index.html" data-i18n="nav.cat.faq">❓ FAQ</a>
-            <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
-          </div>
-        </div>
-      </div>
-      <div class="kp-pnav-drop">
-        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.guides">Guides</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
-        <div class="kp-pnav-menu" role="menu">
-          <div class="kp-pnav-group" role="group">
-            <div class="kp-pnav-gh" data-i18n="nav.group.discover">Discover</div>
-            <a role="menuitem" href="festivals.html" data-i18n="nav.festivals">📅 Festivals</a>
-            <a role="menuitem" href="seasons.html" data-i18n="nav.seasons">🌸 Seasons</a>
-            <a role="menuitem" href="culture.html" data-i18n="nav.culture">🏛️ Culture</a>
-            <a role="menuitem" href="temples.html" data-i18n="nav.temples">🛕 Temples</a>
-            <a role="menuitem" href="nightviews.html" data-i18n="nav.nightviews">🌃 Night Views</a>
-            <a role="menuitem" href="kdrama-locations.html" data-i18n="nav.kdrama">🎬 K-Drama</a>
-            <a role="menuitem" href="kpop.html" data-i18n="nav.kpop">🎤 K-Pop</a>
-            <a role="menuitem" href="kbeauty.html" data-i18n="nav.kbeauty">💄 K-Beauty</a>
-          </div>
-          <div class="kp-pnav-group" role="group">
-            <div class="kp-pnav-gh" data-i18n="nav.group.practical">Practical</div>
-            <a role="menuitem" href="phrases.html" data-i18n="nav.phrases">🗣️ Phrases</a>
-            <a role="menuitem" href="currency.html" data-i18n="nav.currency">💱 Currency</a>
-            <a role="menuitem" href="subway.html" data-i18n="nav.subway">🚇 Subway</a>
-            <a role="menuitem" href="menu-translator.html" data-i18n="nav.menu">📷 Menu</a>
-            <a role="menuitem" href="etiquette.html" data-i18n="nav.etiquette">🎎 Etiquette</a>
-            <a role="menuitem" href="emergency.html" data-i18n="nav.emergency">🆘 Emergency</a>
+            ${items.map(([e, h, l]) => `<a role="menuitem" href="${h}">${e} ${esc(l)}</a>`).join('\n            ')}
+            <a role="menuitem" class="kp-pnav-all" href="explore.html">${esc(allGuides)}</a>
           </div>
           <div class="kp-pnav-group" role="group">
             <div class="kp-pnav-gh" data-i18n="nav.group.more">More</div>
-            <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
+            <a role="menuitem" href="kpop.html" data-i18n="nav.kpop">🎤 K-Pop</a>
+            <a role="menuitem" href="kbeauty.html" data-i18n="nav.kbeauty">💄 K-Beauty</a>
             <a role="menuitem" href="blog/index.html" data-i18n="nav.blog">📰 Blog</a>
-          </div>
-        </div>
-      </div>
-      <div class="kp-pnav-drop">
-        <button class="kp-pnav-link kp-pnav-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.whereto">Where to Go</span> <span class="kp-caret" aria-hidden="true">▾</span></button>
-        <div class="kp-pnav-menu" role="menu">
-          <div class="kp-pnav-group" role="group">
-            <a role="menuitem" href="guide/things-to-do-in-seoul.html" data-i18n="nav.city.seoul">📍 Seoul</a>
-            <a role="menuitem" href="guide/things-to-do-in-busan.html" data-i18n="nav.city.busan">📍 Busan</a>
-            <a role="menuitem" href="guide/things-to-do-in-jeju.html" data-i18n="nav.city.jeju">📍 Jeju</a>
-            <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
-            <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
-            <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
-            <a role="menuitem" class="kp-pnav-all" href="destinations.html" data-i18n="nav.alldest">🗺️ All destinations</a>
           </div>
         </div>
       </div>
       <a class="kp-pnav-cta" href="plan.html" data-i18n="nav.plan">🗺️ Plan Trip</a>
     </div>
   </div>`;
+}
 
 // ── Master template ─────────────────────────────────────────────────
 // lang: page language code. alts: [{lang,url}] other-language versions
@@ -1163,7 +1133,7 @@ ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
 <a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">${esc(aria(lang).skip)}</a>
 <nav class="hub-nav" role="navigation" aria-label="${esc(aria(lang).nav)}">
   <a class="hub-nav-logo" href="${homeHref}" aria-label="KoreaPlus — back to home" title="Home"><span aria-hidden="true">🇰🇷</span> ${brand}</a>
-  <div class="hub-nav-links">${PRIMARY_NAV}</div>
+  <div class="hub-nav-links">${primaryNav(lang)}</div>
 </nav>
 <div id="kp-korea-now" class="kp-korea-now" style="display:none;max-width:920px;margin:0 auto;padding:7px 16px;font-size:12.5px;color:var(--text2,#aab);flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;border-bottom:1px solid var(--border,rgba(255,255,255,.07))" aria-live="polite"></div>
 <main id="main" class="seo-wrap" role="main">

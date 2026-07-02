@@ -394,6 +394,6 @@ renderPhrases();
   <a href="plan.html" data-tab="plan"><span class="kp-tab-i" aria-hidden="true">🗺️</span><span class="kp-tab-l">Plan</span></a>
   <a href="bucket-list.html" data-tab="saved"><span class="kp-tab-i" aria-hidden="true">❤️</span><span class="kp-tab-l">Saved</span></a>
 </nav>
-<script>(function(){try{var p=location.pathname,t="";if(/explore.html/.test(p))t="explore";else if(/plan.html/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";else if(//(index.html)?$/.test(p))t="home";var el=t&&document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}catch(e){}})();</script>
+<script>(function(){try{var p=location.pathname,t="";if(/explore.html/.test(p))t="explore";else if(/plan.html/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";if(t){var el=document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}}catch(e){}})();</script>
 </body>
 </html>

@@ -82,7 +82,7 @@
   <link rel="stylesheet" href="style.css?v=21">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
-  <link rel="stylesheet" href="hub-styles.css?v=11">
+  <link rel="stylesheet" href="hub-styles.css?v=12">
   <link rel="stylesheet" href="mobile.css?v=1">
   <script defer src="modules/mobile.js?v=1"></script>
 </head>
@@ -185,10 +185,38 @@
   </div>
 </section>
 
+<!-- Start-here task grid: answers "what can I do here?" in one glance (self-localizing) -->
+<section class="kp-tasks" aria-label="Quick start">
+  <h2 class="kp-tasks-h" data-kpt="title">Start here</h2>
+  <div class="kp-tasks-grid">
+    <a class="kp-task" href="destinations.html" data-kpt="go"><span class="kp-task-i">📍</span><span class="kp-task-l">Where to go</span></a>
+    <a class="kp-task" href="experiences.html" data-kpt="do"><span class="kp-task-i">🍜</span><span class="kp-task-l">What to do</span></a>
+    <a class="kp-task" href="when-to-visit.html" data-kpt="when"><span class="kp-task-i">📅</span><span class="kp-task-l">When to visit</span></a>
+    <a class="kp-task" href="travel-basics.html" data-kpt="before"><span class="kp-task-i">✈️</span><span class="kp-task-l">Before you go</span></a>
+    <a class="kp-task" href="plan.html" data-kpt="plan"><span class="kp-task-i">🗺️</span><span class="kp-task-l">Plan my trip</span></a>
+    <button type="button" class="kp-task" data-action="search" data-kpt="search"><span class="kp-task-i">🔎</span><span class="kp-task-l">Search everything</span></button>
+  </div>
+</section>
+<script>(function(){var M={
+ en:{title:"Start here",go:"Where to go",do:"What to do",when:"When to visit",before:"Before you go",plan:"Plan my trip",search:"Search everything"},
+ ko:{title:"여기서 시작",go:"어디로 갈까",do:"뭘 할까",when:"언제 갈까",before:"떠나기 전에",plan:"여행 일정 짜기",search:"전체 검색"},
+ ja:{title:"ここから始める",go:"どこへ行く",do:"何をする",when:"いつ行く",before:"出発前に",plan:"旅程を作る",search:"すべて検索"},
+ zh:{title:"从这里开始",go:"去哪里",do:"做什么",when:"何时去",before:"出发前",plan:"规划行程",search:"搜索全部"},
+ es:{title:"Empieza aquí",go:"A dónde ir",do:"Qué hacer",when:"Cuándo ir",before:"Antes de ir",plan:"Planear mi viaje",search:"Buscar todo"},
+ fr:{title:"Commencez ici",go:"Où aller",do:"Que faire",when:"Quand partir",before:"Avant de partir",plan:"Planifier",search:"Tout rechercher"},
+ de:{title:"Hier starten",go:"Wohin",do:"Was tun",when:"Wann reisen",before:"Vor der Reise",plan:"Reise planen",search:"Alles suchen"},
+ pt:{title:"Comece aqui",go:"Para onde ir",do:"O que fazer",when:"Quando ir",before:"Antes de ir",plan:"Planejar viagem",search:"Buscar tudo"},
+ id:{title:"Mulai di sini",go:"Ke mana",do:"Mau ngapain",when:"Kapan pergi",before:"Sebelum pergi",plan:"Buat rencana",search:"Cari semua"}};
+function lng(){try{return (localStorage.getItem("kp_lang")||document.documentElement.lang||navigator.language||"en").slice(0,2);}catch(e){return "en";}}
+function apply(){var m=M[lng()]||M.en;document.querySelectorAll("[data-kpt]").forEach(function(el){var k=el.getAttribute("data-kpt");var t=el.querySelector(".kp-task-l")||el;if(m[k])t.textContent=m[k];});}
+apply();document.addEventListener("kp:langchange",apply);})();</script>
+
 <div id="week-anchor"></div>
 
 <!-- Returning-visitor retention: welcome-back strip + recently-viewed rail
      (populated by app.js from localStorage; hidden when empty) -->
+
+
 <section id="kp-retain" class="kp-retain" aria-label="Your activity"></section>
 
 <!-- Home screen is intentionally AD-FREE (no AdSense, no AliExpress). Ads run on every non-home page instead. -->
@@ -572,5 +600,8 @@
 </nav>
 <script>(function(){var T={en:["Home","Explore","Search","Plan","Saved"],ko:["홈","둘러보기","검색","플랜","저장"],ja:["ホーム","見る","検索","プラン","保存"],zh:["首页","探索","搜索","行程","收藏"],es:["Inicio","Explorar","Buscar","Planear","Guardado"],fr:["Accueil","Explorer","Rechercher","Planifier","Enreg."],de:["Start","Entdecken","Suche","Planen","Merkliste"],pt:["Início","Explorar","Buscar","Planejar","Salvos"],id:["Beranda","Jelajahi","Cari","Rencana","Disimpan"]};function lng(){try{return (localStorage.getItem("kp_lang")||document.documentElement.lang||navigator.language||"en").slice(0,2);}catch(e){return "en";}}function apply(){var a=T[lng()]||T.en,e=document.querySelectorAll(".kp-tabbar .kp-tab-l");for(var i=0;i<e.length&&i<a.length;i++)e[i].textContent=a[i];}function active(){try{var p=location.pathname,t="home";if(/explore.html/.test(p))t="explore";else if(/plan.html/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";var el=document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}catch(e){}}apply();active();document.addEventListener("kp:langchange",apply);})();</script>
 <script>(function(){try{if(window.innerWidth>768)return;var a=document.getElementById("seo-article");if(!a)return;a.classList.add("kp-clamp");var L={en:"Read more",ko:"더 보기",ja:"もっと見る",zh:"查看更多",es:"Leer más",fr:"Voir plus",de:"Mehr",pt:"Ver mais",id:"Selengkapnya"};var g=(localStorage.getItem("kp_lang")||document.documentElement.lang||"en").slice(0,2);var b=document.createElement("button");b.className="kp-readmore";b.type="button";b.textContent=(L[g]||L.en)+" ▾";b.addEventListener("click",function(){a.classList.remove("kp-clamp");b.remove();});a.parentNode.insertBefore(b,a.nextSibling);}catch(e){}})();</script>
+<script>(function(){try{if(window.innerWidth>768)return;var g=document.getElementById("content-grid");if(!g)return;var L={en:"Show more",ko:"더 보기",ja:"もっと見る",zh:"查看更多",es:"Ver más",fr:"Voir plus",de:"Mehr",pt:"Ver mais",id:"Selengkapnya"};var lg=(localStorage.getItem("kp_lang")||document.documentElement.lang||"en").slice(0,2);
+function arm(){if(g.scrollHeight<1900)return;g.classList.add("kp-clamp-grid");var b=document.createElement("button");b.className="kp-readmore";b.type="button";b.textContent=(L[lg]||L.en)+" ▾";b.addEventListener("click",function(){g.classList.remove("kp-clamp-grid");b.remove();});g.parentNode.insertBefore(b,g.nextSibling);}
+setTimeout(arm,1200);}catch(e){}})();</script>
 </body>
 </html>
