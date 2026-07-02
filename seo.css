@@ -260,10 +260,11 @@
 .kp-resume-go { background: var(--accent2, #74b9ff); color: #06101d; }
 .kp-resume-x { background: rgba(255,255,255,.1); color: #fff; }
 
-/* sticky mobile Plan CTA (above the tab bar) */
-.kp-sticky-cta { display: none; }
-@media (max-width: 768px) {
-  .kp-sticky-cta { position: fixed; left: 16px; right: 16px; bottom: calc(66px + env(safe-area-inset-bottom, 0)); z-index: 1090; text-align: center; padding: 13px; border-radius: 14px; background: linear-gradient(135deg, var(--accent2, #74b9ff), var(--accent, #ff6b9d)); color: #06101d; font-size: 0.9375rem; font-weight: 800; text-decoration: none; box-shadow: 0 10px 30px -8px rgba(116,185,255,.5); transform: translateY(90px); transition: transform .3s; }
-  .kp-sticky-cta.show { transform: translateY(0); }
-  .kp-toc { position: sticky; top: 8px; z-index: 40; max-height: 42vh; overflow-y: auto; }
-}
+
+
+/* details-based TOC (mobile: collapsed by default so it never blocks scrolling) */
+summary.kp-toc-h { cursor: pointer; list-style: none; }
+summary.kp-toc-h::-webkit-details-marker { display: none; }
+summary.kp-toc-h::after { content: " ▾"; opacity: .6; }
+details.kp-toc[open] > summary.kp-toc-h::after { content: " ▴"; }
+details.kp-toc:not([open]) > summary.kp-toc-h { margin-bottom: 0; }

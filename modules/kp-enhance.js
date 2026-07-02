@@ -84,9 +84,10 @@
       var h2s = article ? [].slice.call(article.querySelectorAll('h2')) : [];
       if (h2s.length >= 3) {
         h2s.forEach(function (h, i) { if (!h.id) h.id = 'sec-' + i; });
-        var toc = ce('nav', 'kp-toc');
-        toc.setAttribute('aria-label', t('onThisPage'));
-        toc.innerHTML = '<div class="kp-toc-h">' + t('onThisPage') + '</div>';
+        var toc = ce('details', 'kp-toc');
+        if (window.innerWidth > 768) toc.setAttribute('open', '');   // desktop: open; mobile: collapsed so it never blocks scrolling
+        var sum = ce('summary', 'kp-toc-h', t('onThisPage'));
+        toc.appendChild(sum);
         h2s.forEach(function (h) {
           var a = ce('a', null, (h.textContent || '').replace(/^[^\w가-힣ぁ-んァ-ヶ一-鿿]+/, '').trim());
           a.href = '#' + h.id;
@@ -157,16 +158,8 @@
       window.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(function () { try { var d = document.documentElement; localStorage.setItem(RKEY, (d.scrollTop / (d.scrollHeight - d.clientHeight || 1)).toFixed(3)); } catch (e) {} }, 400); }, { passive: true });
     } catch (e) {}
 
-    // 9) Sticky mobile "Plan my trip" CTA (sits above the bottom tab bar)
-    try {
-      if (!document.querySelector('.kp-sticky-cta')) {
-        var cta = ce('a', 'kp-sticky-cta', '🗺️ ' + t('planCta'));
-        cta.href = 'plan.html';
-        document.body.appendChild(cta);
-        var last = 0;
-        window.addEventListener('scroll', function () { var y = window.scrollY; cta.classList.toggle('show', y > 700 && y < document.documentElement.scrollHeight - 1400); last = y; }, { passive: true });
-      }
-    } catch (e) {}
+    // (sticky Plan CTA removed — redundant with the bottom tab bar's Plan tab
+    // and it crowded the bottom edge over content while scrolling)
 
     // 10) Keyboard shortcuts: "/" focus search, "t" back to top
     try {

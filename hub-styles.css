@@ -469,13 +469,15 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   .kp-tasks { margin-top: 18px; padding: 0 16px; }
   .kp-tasks-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .kp-task { padding: 16px 14px; min-height: 84px; }
-  /* tighter mobile hero so tasks are visible near the fold */
-  .map-hero { min-height: 0 !important; }
-  .map-hero-overlay { padding-top: 26px !important; padding-bottom: 26px !important; }
 }
 
 /* collapsed long category grid on mobile (content stays in DOM) */
 @media (max-width: 768px) {
   .kp-clamp-grid { max-height: 1500px; overflow: hidden; position: relative; }
   .kp-clamp-grid::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 110px; background: linear-gradient(transparent, var(--bg, #0a1422)); pointer-events: none; }
+}
+
+/* Mobile: the home Leaflet map must not swallow vertical swipes (page scroll first) */
+@media (max-width: 768px) {
+  #korea-map, #korea-map .leaflet-container, #korea-map .leaflet-container * { touch-action: pan-y !important; }
 }
