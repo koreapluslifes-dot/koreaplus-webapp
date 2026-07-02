@@ -26,7 +26,7 @@
     if (document.getElementById('kpp-player-css')) return;
     var s = document.createElement('style'); s.id = 'kpp-player-css';
     s.textContent = [
-      '#kpp-player{position:fixed;left:16px;bottom:16px;z-index:65;width:min(360px,calc(100vw - 32px));',
+      '#kpp-player{position:fixed;left:16px;bottom:calc(16px + var(--mnav-h,0px) + env(safe-area-inset-bottom,0px));z-index:65;width:min(360px,calc(100vw - 32px));',
       'background:var(--surface,#15151f);border:1px solid var(--border,rgba(255,255,255,.14));border-radius:16px;',
       'box-shadow:0 14px 40px rgba(0,0,0,.5);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(14px);',
       'transition:opacity .22s ease,transform .22s ease,visibility .22s;}',
@@ -50,10 +50,16 @@
       '#kpp-player .kpp-pl-ch:hover{border-color:var(--accent,#ff2e74);color:var(--accent,#ff2e74);}',
       '#kpp-player .kpp-pl-ch[hidden]{display:none;}',
       '#kpp-player .kpp-pl-foot a:hover{color:var(--accent2,#74b9ff);text-decoration:underline;}',
-      '#kpp-player .kpp-pl-tip{margin-left:auto;font-size:10px;color:var(--text3,#8a93a0);}',
+      '#kpp-player .kpp-pl-tip{margin-left:auto;font-size:11px;color:var(--text3,#8a93a0);}',
       '#kpp-player.kpp-min .kpp-pl-frame,#kpp-player.kpp-min .kpp-pl-foot{display:none;}',
-      '@media (max-width:520px){#kpp-player{left:8px;right:8px;width:auto;bottom:8px;}}',
-      '@media (prefers-reduced-motion:reduce){#kpp-player{transition:opacity .12s linear;transform:none;}#kpp-player.kpp-on{transform:none;}#kpp-player .kpp-pl-eq i{animation:none;}}'
+      /* KP-12: mini EQ shown inside the currently playing [data-play] row (.is-playing) */
+      '.kpp-row-eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;margin-left:6px;flex:0 0 auto;vertical-align:middle;}',
+      '.kpp-row-eq i{width:3px;background:var(--accent,#ff2e74);border-radius:2px;animation:kppEq .9s ease-in-out infinite;}',
+      '.kpp-row-eq i:nth-child(1){height:5px;animation-delay:0s}.kpp-row-eq i:nth-child(2){height:11px;animation-delay:.15s}.kpp-row-eq i:nth-child(3){height:8px;animation-delay:.3s}',
+      '@media (max-width:520px){#kpp-player{left:8px;right:8px;width:auto;bottom:calc(8px + var(--mnav-h,0px) + env(safe-area-inset-bottom,0px));}}',
+      /* KP-06: 44px touch targets for player controls */
+      '@media (hover:none){#kpp-player .kpp-pl-btn{width:44px;height:44px;}}',
+      '@media (prefers-reduced-motion:reduce){#kpp-player{transition:opacity .12s linear;transform:none;}#kpp-player.kpp-on{transform:none;}#kpp-player .kpp-pl-eq i,.kpp-row-eq i{animation:none;}}'
     ].join('');
     (document.head || document.documentElement).appendChild(s);
   }
@@ -108,10 +114,42 @@
       .catch(function () { return null; });
   }
 
+  // KP-12: map "now playing" back onto the list. kpPlay only receives the query
+  // string, so we reverse-look-up the [data-play] element(s) whose attribute
+  // matches it and flag them with .is-playing + a mini EQ. Chart re-renders drop
+  // the class (accepted — highlight simply reappears on the next play).
+  function clearPlaying() {
+    var els = document.querySelectorAll('[data-play].is-playing, .is-playing[data-play]');
+    for (var i = 0; i < els.length; i++) {
+      els[i].classList.remove('is-playing');
+      var eq = els[i].querySelector('.kpp-row-eq');
+      if (eq && eq.parentNode) eq.parentNode.removeChild(eq);
+    }
+  }
+  function markPlaying(query) {
+    clearPlaying();
+    var q = String(query == null ? '' : query).trim();
+    if (!q) return;
+    var all = document.querySelectorAll('[data-play]');
+    for (var i = 0; i < all.length; i++) {
+      if ((all[i].getAttribute('data-play') || '').trim() !== q) continue;
+      all[i].classList.add('is-playing');
+      if (!all[i].querySelector('.kpp-row-eq')) {
+        var eq = document.createElement('span');
+        eq.className = 'kpp-pl-eq kpp-row-eq';
+        eq.setAttribute('aria-hidden', 'true');
+        eq.innerHTML = '<i></i><i></i><i></i>';
+        all[i].appendChild(eq);
+      }
+    }
+  }
+
   function close() {
     if (!box) return;
     box.classList.remove('kpp-on');
     if (frame) frame.innerHTML = ''; // stop playback
+    document.body.classList.remove('kp-playing'); // KP-05: restore FABs (CSS hook in kpop.css)
+    clearPlaying(); // KP-12
   }
 
   var playToken = 0;
@@ -129,6 +167,8 @@
       openLink.href = 'https://www.youtube.com/results?search_query=' + enc(q + ' official');
       chBtn.hidden = !curCh;
       box.classList.add('kpp-on');
+      document.body.classList.add('kp-playing'); // KP-05: hide bottom FABs while playing (CSS hook in kpop.css)
+      markPlaying(query || q); // KP-12: highlight the source row
       setState(t('loading'));
       var token = ++playToken;
       resolveVideoId(q).then(function (vid) {

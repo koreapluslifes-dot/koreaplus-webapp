@@ -63,6 +63,7 @@
         "#kpp-pulse .kpp-x{flex:0 0 auto;z-index:1;background:transparent;border:0;color:var(--text3,#8a93a0);font-size:18px;line-height:1;cursor:pointer;padding:2px 4px;border-radius:8px;width:26px;height:26px;display:flex;align-items:center;justify-content:center}",
         "#kpp-pulse .kpp-x:hover{color:var(--text,#fff);background:var(--border,rgba(255,255,255,.12))}",
         "#kpp-pulse .kpp-x:focus-visible{outline:2px solid var(--accent,#ff2e74);outline-offset:2px}",
+        "@media (hover:none){#kpp-pulse .kpp-x{position:relative}#kpp-pulse .kpp-x::after{content:'';position:absolute;inset:-9px;border-radius:12px}}",
         "@media (max-width:380px){#kpp-pulse .kpp-live{display:none}#kpp-pulse .kpp-msg{font-size:12px}}",
         "@media (prefers-reduced-motion:reduce){#kpp-pulse .kpp-dot{animation:none}#kpp-pulse .kpp-msg{transition:none}}"
       ].join("");
@@ -254,15 +255,15 @@ var SUP=["en","ko","ja","zh","es","fr","de","pt","id"];
 if(SUP.indexOf(L)<0) L="en";
 
 var I18N={
-  en:{launch:"Search artists",ph:"Search by name, agency, fandom, member…",empty:"Start typing to find artists",none:"No matches found",recent:"Recent",open:"Open",members:"Members",agency:"Agency",fandom:"Fandom",closeL:"Close search",searchL:"Search artists",resultsL:"Search results",clearL:"Clear recent searches"},
-  ko:{launch:"아티스트 검색",ph:"이름·소속사·팬덤·멤버로 검색…",empty:"검색어를 입력해 아티스트를 찾아보세요",none:"검색 결과가 없습니다",recent:"최근 검색",open:"열기",members:"멤버",agency:"소속사",fandom:"팬덤",closeL:"검색 닫기",searchL:"아티스트 검색",resultsL:"검색 결과",clearL:"최근 검색 지우기"},
-  ja:{launch:"アーティスト検索",ph:"名前・事務所・ファンダム・メンバーで検索…",empty:"入力してアーティストを探しましょう",none:"一致する結果がありません",recent:"最近の検索",open:"開く",members:"メンバー",agency:"事務所",fandom:"ファンダム",closeL:"検索を閉じる",searchL:"アーティスト検索",resultsL:"検索結果",clearL:"最近の検索を消去"},
-  zh:{launch:"搜索艺人",ph:"按名称、经纪公司、粉丝名、成员搜索…",empty:"开始输入以查找艺人",none:"未找到匹配结果",recent:"最近搜索",open:"打开",members:"成员",agency:"经纪公司",fandom:"粉丝名",closeL:"关闭搜索",searchL:"搜索艺人",resultsL:"搜索结果",clearL:"清除最近搜索"},
-  es:{launch:"Buscar artistas",ph:"Busca por nombre, agencia, fandom, miembro…",empty:"Escribe para encontrar artistas",none:"No se encontraron coincidencias",recent:"Recientes",open:"Abrir",members:"Miembros",agency:"Agencia",fandom:"Fandom",closeL:"Cerrar búsqueda",searchL:"Buscar artistas",resultsL:"Resultados de búsqueda",clearL:"Borrar búsquedas recientes"},
-  fr:{launch:"Rechercher des artistes",ph:"Cherchez par nom, agence, fandom, membre…",empty:"Commencez à taper pour trouver des artistes",none:"Aucun résultat trouvé",recent:"Récents",open:"Ouvrir",members:"Membres",agency:"Agence",fandom:"Fandom",closeL:"Fermer la recherche",searchL:"Rechercher des artistes",resultsL:"Résultats de recherche",clearL:"Effacer les recherches récentes"},
-  de:{launch:"Künstler suchen",ph:"Nach Name, Agentur, Fandom, Mitglied suchen…",empty:"Tippe, um Künstler zu finden",none:"Keine Treffer gefunden",recent:"Zuletzt",open:"Öffnen",members:"Mitglieder",agency:"Agentur",fandom:"Fandom",closeL:"Suche schließen",searchL:"Künstler suchen",resultsL:"Suchergebnisse",clearL:"Letzte Suchen löschen"},
-  pt:{launch:"Buscar artistas",ph:"Busque por nome, agência, fandom, membro…",empty:"Comece a digitar para encontrar artistas",none:"Nenhum resultado encontrado",recent:"Recentes",open:"Abrir",members:"Membros",agency:"Agência",fandom:"Fandom",closeL:"Fechar busca",searchL:"Buscar artistas",resultsL:"Resultados da busca",clearL:"Limpar buscas recentes"},
-  id:{launch:"Cari artis",ph:"Cari berdasarkan nama, agensi, fandom, member…",empty:"Mulai ketik untuk menemukan artis",none:"Tidak ada hasil",recent:"Terbaru",open:"Buka",members:"Member",agency:"Agensi",fandom:"Fandom",closeL:"Tutup pencarian",searchL:"Cari artis",resultsL:"Hasil pencarian",clearL:"Hapus pencarian terbaru"}
+  en:{launch:"Search artists",ph:"Search by name, agency, fandom, member…",empty:"Start typing to find artists",none:"No matches found",recent:"Recent",open:"Open",members:"Members",agency:"Agency",fandom:"Fandom",closeL:"Close search",searchL:"Search artists",resultsL:"Search results",clearL:"Clear recent searches",siteSearch:"Search the whole site"},
+  ko:{launch:"아티스트 검색",ph:"이름·소속사·팬덤·멤버로 검색…",empty:"검색어를 입력해 아티스트를 찾아보세요",none:"검색 결과가 없습니다",recent:"최근 검색",open:"열기",members:"멤버",agency:"소속사",fandom:"팬덤",closeL:"검색 닫기",searchL:"아티스트 검색",resultsL:"검색 결과",clearL:"최근 검색 지우기",siteSearch:"사이트 전체 검색"},
+  ja:{launch:"アーティスト検索",ph:"名前・事務所・ファンダム・メンバーで検索…",empty:"入力してアーティストを探しましょう",none:"一致する結果がありません",recent:"最近の検索",open:"開く",members:"メンバー",agency:"事務所",fandom:"ファンダム",closeL:"検索を閉じる",searchL:"アーティスト検索",resultsL:"検索結果",clearL:"最近の検索を消去",siteSearch:"サイト全体を検索"},
+  zh:{launch:"搜索艺人",ph:"按名称、经纪公司、粉丝名、成员搜索…",empty:"开始输入以查找艺人",none:"未找到匹配结果",recent:"最近搜索",open:"打开",members:"成员",agency:"经纪公司",fandom:"粉丝名",closeL:"关闭搜索",searchL:"搜索艺人",resultsL:"搜索结果",clearL:"清除最近搜索",siteSearch:"搜索整个网站"},
+  es:{launch:"Buscar artistas",ph:"Busca por nombre, agencia, fandom, miembro…",empty:"Escribe para encontrar artistas",none:"No se encontraron coincidencias",recent:"Recientes",open:"Abrir",members:"Miembros",agency:"Agencia",fandom:"Fandom",closeL:"Cerrar búsqueda",searchL:"Buscar artistas",resultsL:"Resultados de búsqueda",clearL:"Borrar búsquedas recientes",siteSearch:"Buscar en todo el sitio"},
+  fr:{launch:"Rechercher des artistes",ph:"Cherchez par nom, agence, fandom, membre…",empty:"Commencez à taper pour trouver des artistes",none:"Aucun résultat trouvé",recent:"Récents",open:"Ouvrir",members:"Membres",agency:"Agence",fandom:"Fandom",closeL:"Fermer la recherche",searchL:"Rechercher des artistes",resultsL:"Résultats de recherche",clearL:"Effacer les recherches récentes",siteSearch:"Rechercher sur tout le site"},
+  de:{launch:"Künstler suchen",ph:"Nach Name, Agentur, Fandom, Mitglied suchen…",empty:"Tippe, um Künstler zu finden",none:"Keine Treffer gefunden",recent:"Zuletzt",open:"Öffnen",members:"Mitglieder",agency:"Agentur",fandom:"Fandom",closeL:"Suche schließen",searchL:"Künstler suchen",resultsL:"Suchergebnisse",clearL:"Letzte Suchen löschen",siteSearch:"Gesamte Website durchsuchen"},
+  pt:{launch:"Buscar artistas",ph:"Busque por nome, agência, fandom, membro…",empty:"Comece a digitar para encontrar artistas",none:"Nenhum resultado encontrado",recent:"Recentes",open:"Abrir",members:"Membros",agency:"Agência",fandom:"Fandom",closeL:"Fechar busca",searchL:"Buscar artistas",resultsL:"Resultados da busca",clearL:"Limpar buscas recentes",siteSearch:"Buscar em todo o site"},
+  id:{launch:"Cari artis",ph:"Cari berdasarkan nama, agensi, fandom, member…",empty:"Mulai ketik untuk menemukan artis",none:"Tidak ada hasil",recent:"Terbaru",open:"Buka",members:"Member",agency:"Agensi",fandom:"Fandom",closeL:"Tutup pencarian",searchL:"Cari artis",resultsL:"Hasil pencarian",clearL:"Hapus pencarian terbaru",siteSearch:"Cari di seluruh situs"}
 };
 var T=I18N[L]||I18N.en;
 function t(k){return (T&&T[k])||I18N.en[k]||k;}
@@ -314,6 +315,10 @@ if(!document.getElementById(CSSID)){
   ".kpp-s-why mark{background:transparent;color:var(--accent,#ff2e74);font-weight:800;padding:0}"+
   ".kpp-s-go{flex:0 0 auto;color:var(--text3,#8a93a0)}"+
   ".kpp-s-item[aria-selected=true] .kpp-s-go{color:var(--accent,#ff2e74)}"+
+  ".kpp-s-site{display:block;width:100%;flex:0 0 auto;background:transparent;border:0;border-top:1px solid var(--border,rgba(255,255,255,.12));color:var(--text3,#8a93a0);font:600 12px/1.2 inherit;padding:12px 16px;cursor:pointer;text-align:center}"+
+  ".kpp-s-site:hover{color:var(--text,#fff)}"+
+  ".kpp-s-site:focus-visible{outline:2px solid var(--accent,#ff2e74);outline-offset:-2px}"+
+  "@media(hover:none){.kpp-s-site{min-height:44px}}"+
   "@media(prefers-reduced-motion:no-preference){#kpp-search-launch,.kpp-s-chip,.kpp-s-item{transition:border-color .15s,background .12s,color .15s}.kpp-s-ov{animation:kpp-s-fade .14s ease}@keyframes kpp-s-fade{from{opacity:0}to{opacity:1}}}";
   document.head.appendChild(st);
 }
@@ -463,7 +468,14 @@ function open(){
   head.appendChild(inp);head.appendChild(escb);
   list=document.createElement("ul");list.className="kpp-s-list";list.setAttribute("role","listbox");list.setAttribute("aria-label",t("resultsL"));list.id="kpp-s-listbox";
   inp.setAttribute("aria-controls","kpp-s-listbox");
-  modal.appendChild(head);modal.appendChild(list);ov.appendChild(modal);
+  modal.appendChild(head);modal.appendChild(list);
+  // KP-07: site-wide search escape hatch (bypasses the capture guard below)
+  var site=document.createElement("button");
+  site.type="button";site.className="kpp-s-site";
+  site.textContent=t("siteSearch")+" →";
+  site.addEventListener("click",function(){close();openGlobalSearch();});
+  modal.appendChild(site);
+  ov.appendChild(modal);
   document.body.appendChild(ov);
 
   ov.addEventListener("mousedown",function(e){if(e.target===ov)close();});
@@ -500,15 +512,47 @@ function close(){
   if(lastFocus&&typeof lastFocus.focus==="function"){try{lastFocus.focus();}catch(e){}}
 }
 
-// global hotkeys
+// KP-07: single capture-phase guard — on the K-pop hub, the search intent is
+// artist search. Intercept .kp-search-btn clicks (incl. mobile.js tab's b.click())
+// and Cmd/Ctrl+K BEFORE search.js's own listeners (capture beats target/bubble),
+// open only the artist search and stop propagation so no double modal opens.
+// The old separate ⌘K binding is consolidated here (single handler, so
+// stopImmediatePropagation can't kill our own toggle).
+var guardBypass=false;
+function openGlobalSearch(){ // used by the modal's "site-wide search" link
+  guardBypass=true;
+  try{
+    if(window.kpSearch&&typeof window.kpSearch.open==="function"){window.kpSearch.open();}
+    else{var b=document.querySelector(".kp-search-btn");if(b)b.click();}
+  }catch(err){}
+  guardBypass=false;
+}
+document.addEventListener("click",function(e){
+  if(guardBypass)return;
+  var el=e.target;
+  var hit=(el&&el.closest)?el.closest(".kp-search-btn"):null;
+  if(!hit)return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  if(ov)close();else open();
+},true);
 document.addEventListener("keydown",function(e){
-  if((e.metaKey||e.ctrlKey)&&(e.key==="k"||e.key==="K")){e.preventDefault();if(ov)close();else open();return;}
+  if(guardBypass)return;
+  if((e.metaKey||e.ctrlKey)&&(e.key==="k"||e.key==="K")){
+    // if the site-wide search is open (opened via the modal link), let search.js close it
+    var gso=document.getElementById("kp-search-overlay");
+    if(gso&&gso.classList.contains("open"))return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if(ov)close();else open();
+    return;
+  }
   if(e.key==="/"&&!ov){
     var ae=document.activeElement,tag=ae&&ae.tagName?ae.tagName.toLowerCase():"";
     var typing=tag==="input"||tag==="textarea"||tag==="select"||(ae&&ae.isContentEditable);
     if(!typing){e.preventDefault();open();}
   }
-});
+},true);
 
 })();
 
@@ -1088,7 +1132,7 @@ document.addEventListener("keydown",function(e){
       var el=document.getElementById("kpop-toast");
       if(!el){
         el=document.createElement("div"); el.id="kpop-toast";
-        el.style.cssText="position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:calc(100vw - 32px);background:var(--text,#fff);color:var(--bg,#0c0c14);padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:9999;opacity:0;transition:opacity .2s;pointer-events:none";
+        el.style.cssText="position:fixed;left:50%;bottom:calc(20px + var(--mnav-h,0px) + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:calc(100vw - 32px);background:var(--text,#fff);color:var(--bg,#0c0c14);padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:9999;opacity:0;transition:opacity .2s;pointer-events:none";
         document.body.appendChild(el);
       }
       el.textContent=msg; el.style.opacity="1";

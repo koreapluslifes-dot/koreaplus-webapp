@@ -657,6 +657,12 @@
         pill.setAttribute("aria-hidden", "false");
       }
       setLabel(t("refreshing"));
+      // KP-16: preserve the active filter tab across the reload (kpop.js restores it)
+      try {
+        var activeChip = document.querySelector("#kpop-filters .filter-chip.active");
+        var tgt = activeChip && activeChip.getAttribute("data-target");
+        if (tgt) sessionStorage.setItem("kux_tab", tgt);
+      } catch (x) {}
       setTimeout(function () { try { location.reload(); } catch (e) {} }, reduce ? 120 : 260);
     }
 

@@ -1,0 +1,261 @@
+{
+  "newjeans": { "fandomColor": "", "lightstick": "Binky Bong", "members": [
+    { "name": "Minji", "birthday": "2004-05-07" },
+    { "name": "Hanni", "birthday": "2004-10-06" },
+    { "name": "Danielle", "birthday": "2005-04-11" },
+    { "name": "Haerin", "birthday": "2006-05-15" },
+    { "name": "Hyein", "birthday": "2008-04-21" }
+  ] },
+  "blackpink": { "fandomColor": "", "lightstick": "Bl-ping-bong", "members": [
+    { "name": "Jisoo", "birthday": "1995-01-03" },
+    { "name": "Jennie", "birthday": "1996-01-16" },
+    { "name": "Rosé", "birthday": "1997-02-11" },
+    { "name": "Lisa", "birthday": "1997-03-27" }
+  ] },
+  "twice": { "fandomColor": "", "lightstick": "Candy Bong", "members": [
+    { "name": "Nayeon", "birthday": "1995-09-22" },
+    { "name": "Jeongyeon", "birthday": "1996-11-01" },
+    { "name": "Momo", "birthday": "1996-11-09" },
+    { "name": "Sana", "birthday": "1996-12-29" },
+    { "name": "Jihyo", "birthday": "1997-02-01" },
+    { "name": "Mina", "birthday": "1997-03-24" },
+    { "name": "Dahyun", "birthday": "1998-05-28" },
+    { "name": "Chaeyoung", "birthday": "1999-04-23" },
+    { "name": "Tzuyu", "birthday": "1999-06-14" }
+  ] },
+  "aespa": { "fandomColor": "", "lightstick": "Yebbong", "members": [
+    { "name": "Karina", "birthday": "2000-04-11" },
+    { "name": "Giselle", "birthday": "2000-10-30" },
+    { "name": "Winter", "birthday": "2001-01-01" },
+    { "name": "Ningning", "birthday": "2002-10-23" }
+  ] },
+  "ive": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Yujin", "birthday": "2003-09-01" },
+    { "name": "Gaeul", "birthday": "2002-09-24" },
+    { "name": "Rei", "birthday": "2004-02-03" },
+    { "name": "Wonyoung", "birthday": "2004-08-31" },
+    { "name": "Liz", "birthday": "2004-11-21" },
+    { "name": "Leeseo", "birthday": "2007-02-21" }
+  ] },
+  "lesserafim": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Sakura", "birthday": "1998-03-19" },
+    { "name": "Kim Chaewon", "birthday": "2000-08-01" },
+    { "name": "Huh Yunjin", "birthday": "2001-10-08" },
+    { "name": "Kazuha", "birthday": "2003-08-09" },
+    { "name": "Hong Eunchae", "birthday": "2006-11-10" }
+  ] },
+  "gidle": { "fandomColor": "", "lightstick": "Neverbong", "members": [
+    { "name": "Miyeon", "birthday": "1997-01-31" },
+    { "name": "Minnie", "birthday": "1997-10-23" },
+    { "name": "Soyeon", "birthday": "1998-08-26" },
+    { "name": "Yuqi", "birthday": "1999-09-23" },
+    { "name": "Shuhua", "birthday": "2000-01-06" }
+  ] },
+  "itzy": { "fandomColor": "", "lightstick": "Light Ring", "members": [
+    { "name": "Yeji", "birthday": "2000-05-26" },
+    { "name": "Lia", "birthday": "2000-07-21" },
+    { "name": "Ryujin", "birthday": "2001-04-17" },
+    { "name": "Chaeryeong", "birthday": "2001-06-05" },
+    { "name": "Yuna", "birthday": "2003-12-09" }
+  ] },
+  "redvelvet": { "fandomColor": "", "lightstick": "Kim Mam Bong", "members": [
+    { "name": "Irene", "birthday": "1991-03-29" },
+    { "name": "Seulgi", "birthday": "1994-02-10" },
+    { "name": "Wendy", "birthday": "1994-02-21" },
+    { "name": "Joy", "birthday": "1996-09-03" },
+    { "name": "Yeri", "birthday": "1999-03-05" }
+  ] },
+  "nmixx": { "fandomColor": "", "lightstick": "MIXXTICK", "members": [
+    { "name": "Lily", "birthday": "2002-10-17" },
+    { "name": "Haewon", "birthday": "2003-02-25" },
+    { "name": "Sullyoon", "birthday": "2004-01-26" },
+    { "name": "Bae", "birthday": "2004-12-28" },
+    { "name": "Jiwoo", "birthday": "2005-04-13" },
+    { "name": "Kyujin", "birthday": "2006-05-26" }
+  ] },
+  "stayc": { "fandomColor": "", "lightstick": "Wink Bong", "members": [
+    { "name": "Sumin", "birthday": "2001-03-13" },
+    { "name": "Sieun", "birthday": "2001-08-01" },
+    { "name": "Isa", "birthday": "2002-01-23" },
+    { "name": "Seeun", "birthday": "2003-06-14" },
+    { "name": "Yoon", "birthday": "2004-04-14" },
+    { "name": "J", "birthday": "2004-12-09" }
+  ] },
+  "babymonster": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Ruka", "birthday": "2002-03-20" },
+    { "name": "Pharita", "birthday": "2005-08-26" },
+    { "name": "Asa", "birthday": "2006-04-17" },
+    { "name": "Ahyeon", "birthday": "2007-04-11" },
+    { "name": "Rami", "birthday": "2007-10-17" },
+    { "name": "Rora", "birthday": "2008-08-14" },
+    { "name": "Chiquita", "birthday": "2009-02-17" }
+  ] },
+  "illit": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Yunah", "birthday": "2004-01-15" },
+    { "name": "Minju", "birthday": "2004-05-11" },
+    { "name": "Moka", "birthday": "2004-10-08" },
+    { "name": "Wonhee", "birthday": "2007-06-26" },
+    { "name": "Iroha", "birthday": "2008-02-04" }
+  ] },
+  "kissoflife": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Julie", "birthday": "2000-03-29" },
+    { "name": "Natty", "birthday": "2002-05-30" },
+    { "name": "Belle", "birthday": "2004-03-20" },
+    { "name": "Haneul", "birthday": "2005-05-25" }
+  ] },
+  "bts": { "fandomColor": "#9b59b6", "lightstick": "ARMY Bomb", "members": [
+    { "name": "Jin", "birthday": "1992-12-04" },
+    { "name": "Suga", "birthday": "1993-03-09" },
+    { "name": "J-Hope", "birthday": "1994-02-18" },
+    { "name": "RM", "birthday": "1994-09-12" },
+    { "name": "Jimin", "birthday": "1995-10-13" },
+    { "name": "V", "birthday": "1995-12-30" },
+    { "name": "Jungkook", "birthday": "1997-09-01" }
+  ] },
+  "seventeen": { "fandomColor": "", "lightstick": "Carat Bong", "members": [
+    { "name": "S.Coups", "birthday": "1995-08-08" },
+    { "name": "Jeonghan", "birthday": "1995-10-04" },
+    { "name": "Joshua", "birthday": "1995-12-30" },
+    { "name": "Jun", "birthday": "1996-06-10" },
+    { "name": "Hoshi", "birthday": "1996-06-15" },
+    { "name": "Wonwoo", "birthday": "1996-07-17" },
+    { "name": "Woozi", "birthday": "1996-11-22" },
+    { "name": "DK", "birthday": "1997-02-18" },
+    { "name": "Mingyu", "birthday": "1997-04-06" },
+    { "name": "The8", "birthday": "1997-11-07" },
+    { "name": "Seungkwan", "birthday": "1998-01-16" },
+    { "name": "Vernon", "birthday": "1998-02-18" },
+    { "name": "Dino", "birthday": "1999-02-11" }
+  ] },
+  "straykids": { "spotifyId": "2dIgFjalVxs4ThymZ67YCE", "youtubeChannelId": "UC9rMiEjNaCSsebs31MRDCRA", "fandomColor": "", "lightstick": "Nachimbong", "members": [
+    { "name": "Bang Chan", "birthday": "1997-10-03" },
+    { "name": "Lee Know", "birthday": "1998-10-25" },
+    { "name": "Changbin", "birthday": "1999-08-11" },
+    { "name": "Hyunjin", "birthday": "2000-03-20" },
+    { "name": "Han", "birthday": "2000-09-14" },
+    { "name": "Felix", "birthday": "2000-09-15" },
+    { "name": "Seungmin", "birthday": "2000-09-22" },
+    { "name": "I.N", "birthday": "2001-02-08" }
+  ] },
+  "txt": { "spotifyId": "0ghlgldX5Dd6720Q3qFyQB", "youtubeChannelId": "UCtiObj3CsEAdNU6ZPWDsddQ", "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Yeonjun", "birthday": "1999-09-13" },
+    { "name": "Soobin", "birthday": "2000-12-05" },
+    { "name": "Beomgyu", "birthday": "2001-03-13" },
+    { "name": "Taehyun", "birthday": "2002-02-05" },
+    { "name": "Hueningkai", "birthday": "2002-08-14" }
+  ] },
+  "enhypen": { "spotifyId": "5t5FqBwTcgKTaWmfEbwQY9", "youtubeChannelId": "UCArLZtok93cO5R9RI4_Y5Jw", "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Heeseung", "birthday": "2001-10-15" },
+    { "name": "Jay", "birthday": "2002-04-20" },
+    { "name": "Jake", "birthday": "2002-11-15" },
+    { "name": "Sunghoon", "birthday": "2002-12-08" },
+    { "name": "Sunoo", "birthday": "2003-06-24" },
+    { "name": "Jungwon", "birthday": "2004-02-09" },
+    { "name": "Ni-ki", "birthday": "2005-12-09" }
+  ] },
+  "ateez": { "spotifyId": "68KmkJeZGfwe1OUaivBa2L", "youtubeChannelId": "UC2e4Ukj5Pfr7cb3KpJAFBdQ", "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Hongjoong", "birthday": "1998-11-07" },
+    { "name": "Seonghwa", "birthday": "1998-04-03" },
+    { "name": "Yunho", "birthday": "1999-03-23" },
+    { "name": "Yeosang", "birthday": "1999-06-15" },
+    { "name": "San", "birthday": "1999-07-10" },
+    { "name": "Mingi", "birthday": "1999-08-09" },
+    { "name": "Wooyoung", "birthday": "1999-11-26" },
+    { "name": "Jongho", "birthday": "2000-10-12" }
+  ] },
+  "nct127": { "spotifyId": "7f4ignuCJhLXfZ9giKT7rH", "youtubeChannelId": "UCk2E0dbAyEJWnrN2bbQOcbg", "fandomColor": "", "lightstick": "Neobong", "members": [
+    { "name": "Johnny", "birthday": "1995-02-09" },
+    { "name": "Taeyong", "birthday": "1995-07-01" },
+    { "name": "Yuta", "birthday": "1995-10-26" },
+    { "name": "Doyoung", "birthday": "1996-02-01" },
+    { "name": "Jaehyun", "birthday": "1997-02-14" },
+    { "name": "Winwin", "birthday": "1997-10-28" },
+    { "name": "Jungwoo", "birthday": "1998-02-19" },
+    { "name": "Mark", "birthday": "1999-08-02" },
+    { "name": "Haechan", "birthday": "2000-06-06" }
+  ] },
+  "nctdream": { "spotifyId": "1gBUSTR3TyDdTVFIaQnc02", "youtubeChannelId": "UCXURHJRGr4-EB3l87kcbElw", "fandomColor": "", "lightstick": "Neobong", "members": [
+    { "name": "Mark", "birthday": "1999-08-02" },
+    { "name": "Renjun", "birthday": "2000-03-23" },
+    { "name": "Jeno", "birthday": "2000-04-23" },
+    { "name": "Haechan", "birthday": "2000-06-06" },
+    { "name": "Jaemin", "birthday": "2000-08-13" },
+    { "name": "Chenle", "birthday": "2001-11-22" },
+    { "name": "Jisung", "birthday": "2002-02-05" }
+  ] },
+  "treasure": { "fandomColor": "", "lightstick": "Teulight", "members": [
+    { "name": "Choi Hyunsuk", "birthday": "1999-04-21" },
+    { "name": "Jihoon", "birthday": "2000-03-14" },
+    { "name": "Yoshi", "birthday": "2000-05-15" },
+    { "name": "Junkyu", "birthday": "2000-09-09" },
+    { "name": "Yoon Jaehyuk", "birthday": "2001-07-23" },
+    { "name": "Asahi", "birthday": "2001-08-20" },
+    { "name": "Doyoung", "birthday": "2003-12-04" },
+    { "name": "Haruto", "birthday": "2004-04-05" },
+    { "name": "Park Jeongwoo", "birthday": "2004-09-28" },
+    { "name": "So Junghwan", "birthday": "2005-02-18" }
+  ] },
+  "zerobaseone": { "spotifyId": "7cjg7EkeZy3OI5o9Qthc6n", "youtubeChannelId": "UCSAp0Yl9S0Zq5uDqE6im_XQ", "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Kim Jiwoong", "birthday": "1998-12-14" },
+    { "name": "Zhang Hao", "birthday": "2000-07-25" },
+    { "name": "Sung Hanbin", "birthday": "2001-06-13" },
+    { "name": "Seok Matthew", "birthday": "2002-05-28" },
+    { "name": "Kim Taerae", "birthday": "2002-07-14" },
+    { "name": "Ricky", "birthday": "2004-05-20" },
+    { "name": "Kim Gyuvin", "birthday": "2004-08-30" },
+    { "name": "Park Gunwook", "birthday": "2005-01-10" },
+    { "name": "Han Yujin", "birthday": "2007-03-20" }
+  ] },
+  "riize": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Shotaro", "birthday": "2000-11-25" },
+    { "name": "Eunseok", "birthday": "2001-03-19" },
+    { "name": "Sungchan", "birthday": "2001-09-13" },
+    { "name": "Wonbin", "birthday": "2002-03-02" },
+    { "name": "Sohee", "birthday": "2003-11-21" },
+    { "name": "Anton", "birthday": "2004-03-21" }
+  ] },
+  "theboyz": { "fandomColor": "", "lightstick": "Heart Bbyong Bong", "members": [
+    { "name": "Sangyeon", "birthday": "1996-11-04" },
+    { "name": "Jacob", "birthday": "1997-05-30" },
+    { "name": "Younghoon", "birthday": "1997-08-08" },
+    { "name": "Hyunjae", "birthday": "1997-09-13" },
+    { "name": "Juyeon", "birthday": "1998-01-15" },
+    { "name": "Kevin", "birthday": "1998-02-23" },
+    { "name": "New", "birthday": "1998-04-26" },
+    { "name": "Q", "birthday": "1998-11-05" },
+    { "name": "Sunwoo", "birthday": "2000-04-12" },
+    { "name": "Eric", "birthday": "2000-12-22" }
+  ] },
+  "exo": { "fandomColor": "", "lightstick": "Eribong", "members": [
+    { "name": "Xiumin", "birthday": "1990-03-26" },
+    { "name": "Suho", "birthday": "1991-05-22" },
+    { "name": "Lay", "birthday": "1991-10-07" },
+    { "name": "Baekhyun", "birthday": "1992-05-06" },
+    { "name": "Chen", "birthday": "1992-09-21" },
+    { "name": "Chanyeol", "birthday": "1992-11-27" },
+    { "name": "D.O.", "birthday": "1993-01-12" },
+    { "name": "Kai", "birthday": "1994-01-14" },
+    { "name": "Sehun", "birthday": "1994-04-12" }
+  ] },
+  "iu": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "IU", "birthday": "1993-05-16" }
+  ] },
+  "jungkook": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Jungkook", "birthday": "1997-09-01" }
+  ] },
+  "lisa": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Lisa", "birthday": "1997-03-27" }
+  ] },
+  "jennie": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Jennie", "birthday": "1996-01-16" }
+  ] },
+  "rose": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Rosé", "birthday": "1997-02-11" }
+  ] },
+  "gdragon": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "G-Dragon", "birthday": "1988-08-18" }
+  ] },
+  "taeyeon": { "fandomColor": "", "lightstick": "", "members": [
+    { "name": "Taeyeon", "birthday": "1989-03-09" }
+  ] }
+}

@@ -64,7 +64,9 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + '.skip-link{position:absolute;left:-999px;top:0;background:#d61f6e;color:#fff;padding:8px 14px;border-radius:0 0 8px 0;z-index:500;text-decoration:none}.skip-link:focus{left:0}'
   + '.cmp{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}.cmp th,.cmp td{border:1px solid #f0d8e6;padding:8px 10px;text-align:left;vertical-align:top}.cmp th{background:#faf3f7;font-weight:800}'
   + '.rank{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #f0d8e6;border-radius:12px;padding:12px 14px;margin:8px 0}.rank .rn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#d61f6e,#8b46d6);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}.rank .rb{font-size:11px;font-weight:800;color:#c01a63;text-transform:uppercase}'
-  + '.grade{display:inline-block;font-size:11px;font-weight:800;border-radius:10px;padding:2px 9px;color:#fff}.grade.Strong{background:#1a7a45}.grade.Moderate{background:#2060c8}.grade.Emerging{background:#b35f1e}.grade.Limited,.grade.Insufficient{background:#5f6571}';
+  + '.grade{display:inline-block;font-size:11px;font-weight:800;border-radius:10px;padding:2px 9px;color:#fff}.grade.Strong{background:#1a7a45}.grade.Moderate{background:#2060c8}.grade.Emerging{background:#b35f1e}.grade.Limited,.grade.Insufficient{background:#5f6571}'
+  + '.kb-constel{margin:8px 0 6px;background:linear-gradient(135deg,#fff7fb,#f7f2ff);border:1px solid #f0d8e6;border-radius:16px;padding:6px 4px}.kb-constel svg{display:block;max-width:420px;margin:0 auto}.kb-constel a{cursor:pointer;text-decoration:none}.kb-constel a:hover circle{stroke-width:3.4}.kb-constel a:focus-visible circle{stroke-width:3.4;outline:none}'
+  + '.kb-paa{margin:26px 0 6px}.kb-paa>summary,.kb-paa .kb-q{cursor:pointer}.kb-q{background:#faf3f7;border:1px solid #f0d8e6;border-radius:12px;padding:11px 14px;margin:8px 0}.kb-q>summary{font-weight:800;font-size:15px;color:#1a1320;list-style:none}.kb-q>summary::-webkit-details-marker{display:none}.kb-q>summary::before{content:"›";display:inline-block;margin-right:8px;color:#c01a63;font-weight:900;transition:transform .15s}.kb-q[open]>summary::before{transform:rotate(90deg)}.kb-q p{margin:9px 0 3px;font-size:14.5px;color:#333}.kb-q a{font-weight:700}';
 // Externalize the page CSS to one cached file (cuts ~4KB inline from every one of the
 // 1,852+ pages; browsers cache it once). shell() links /guide/kb/kb.css?v=CSS_VER.
 const JS_VER = '1';  // bump when kb/kb.js (shared runtime) changes
@@ -78,7 +80,7 @@ const ADSENSE_CLIENT = 'ca-pub-1378943893051810';
 const ADSENSE_SLOT = '4521899200';
 const AD_UNIT = `<ins class="adsbygoogle" style="display:block;margin:22px 0;width:100%;min-height:280px" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${ADSENSE_SLOT}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
 const AD_BOOT = `<script>(function(){var d;function L(){if(d)return;d=1;var s=document.createElement('script');s.async=1;s.crossOrigin='anonymous';s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}';s.onload=function(){document.querySelectorAll('ins.adsbygoogle').forEach(function(){try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}})};document.head.appendChild(s);}['scroll','pointerdown','keydown','touchstart'].forEach(function(e){addEventListener(e,L,{once:true,passive:true})});(window.requestIdleCallback||function(f){setTimeout(f,2500)})(L,{timeout:5000});})();</script>`;
-const CSS_VER = '2';
+const CSS_VER = '3';
 
 function crumbLD(o) {
   const items = [
@@ -88,6 +90,31 @@ function crumbLD(o) {
   ];
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x.name, item: x.item })) };
 }
+// ── #14 People-Also-Ask — build-time related-questions from the ASK bank ──
+// Reuses the 39 already-authored Q&A entries: token-match each page's h1/title
+// against the question bank, surface the top matches as an expandable accordion
+// + fold them into the page's FAQPage schema (PAA/voice SERP + internal links).
+const PAA_STOP = new Set(('the a an and or for to of in on at with your you is are be how what which who whom whose when where why does do can could should would will i my me it its this that these those best good bad korean kbeauty k-beauty skincare skin care use using vs than better help helps into out about more most very use used also get make made not no yes did was were has have had').split(' '));
+const askTok = s => (String(s || '').toLowerCase().match(/[a-z][a-z-]{2,}/g) || []).filter(w => !PAA_STOP.has(w) && w.length > 2);
+const ASK_PAA = ASKQ.map(q => ({ q: q.q, answer: q.answer, url: `${SITE}/guide/kb/ask/${q.slug}.html`, slug: q.slug, toks: new Set(askTok(q.q)) }));
+function relatedQuestions(o) {
+  if (o.ads === false) return { html: '', qs: [] };           // skip hubs/thin pages
+  const ptoks = new Set(askTok((o.h1 || '') + ' ' + (o.title || '')));
+  if (!ptoks.size) return { html: '', qs: [] };
+  let scored = ASK_PAA
+    .filter(a => o.url.indexOf('/ask/' + a.slug + '.html') < 0)  // never self-link
+    .map(a => { let s = 0; a.toks.forEach(t => { if (ptoks.has(t)) s++; }); return { a, s }; })
+    .filter(x => x.s >= 1).sort((x, y) => y.s - x.s).slice(0, 4);
+  // Tokens are pre-stripped of stopwords + generic K-beauty terms, so a surviving
+  // shared token (e.g. "niacinamide", "centella") is a real entity match. Require
+  // 2+ related questions so a page never shows a lone tenuous match.
+  if (scored.length < 2) return { html: '', qs: [] };
+  const qs = scored.map(x => x.a);
+  const html = `<section class="kb-paa" aria-label="People also ask"><h2>🙋 People also ask</h2>`
+    + qs.map(a => `<details class="kb-q"><summary>${esc(a.q)}</summary><p>${esc(a.answer)}</p><p><a href="${a.url}">Read the full answer →</a></p></details>`).join('')
+    + `</section>`;
+  return { html, qs };
+}
 function shell(o) {
   // o: {url, title, desc, depth, h1, emoji, ko, bodyHtml, ld, related, ads, quickAnswer}
   const back = '../'.repeat(o.depth || 2);
@@ -95,7 +122,16 @@ function shell(o) {
   // answer engines / voice assistants can quote it. Hubs (ads:false) skip it.
   const qaText = o.quickAnswer || (o.ads !== false ? (o.desc || '') : '');
   const speak = qaText ? [{ '@context': 'https://schema.org', '@type': 'WebPage', url: o.url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.qa', 'h1'] } }] : [];
-  const ld = [crumbLD(o)].concat(o.ld || []).concat(speak).map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('');
+  // #14 — related-questions accordion + FAQPage merge (fold into existing faqLD, no dup FAQPage node)
+  const paa = relatedQuestions(o);
+  const ldArr = [crumbLD(o)].concat(o.ld || []);
+  if (paa.qs.length) {
+    const extra = paa.qs.map(a => ({ '@type': 'Question', name: a.q, acceptedAnswer: { '@type': 'Answer', text: a.answer } }));
+    const fp = ldArr.find(x => x && x['@type'] === 'FAQPage');
+    if (fp) { const have = new Set((fp.mainEntity || []).map(m => m.name)); fp.mainEntity = (fp.mainEntity || []).concat(extra.filter(e => !have.has(e.name))); }
+    else ldArr.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: extra });
+  }
+  const ld = ldArr.concat(speak).map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('');
   // Ads only on substantive pages (AdSense policy: no ads on thin/low-value pages).
   const plain = (o.bodyHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const adsOk = o.ads !== false && plain.length >= 300;
@@ -122,6 +158,7 @@ ${qaText ? `<div class="qa">⚡ <b>Quick answer:</b> ${esc(qaText)}</div>` : ''}
 ${o.bodyHtml}
 ${adsOk ? AD_UNIT : ''}
 <a class="cta" href="${SITE}/kbeauty">Explore the full K-beauty hub →</a>
+${paa.html}
 ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
 <div class="foot"><a href="${SITE}/kbeauty">💄 K-Beauty hub</a><a href="${SITE}/guide/kb/">📚 All guides</a><a href="${SITE}/guide/kpop.html">🎤 K-Pop</a><a href="${SITE}/guide/">🧭 Korea travel</a></div>
 <p class="disc">✍️ Written &amp; reviewed by the <b>KoreaPlus Editorial</b> team — dermatologist-informed, cosmetic-science researched &amp; source-cited. Last reviewed ${TODAY}.</p>
@@ -179,6 +216,33 @@ function deeperBlock(item) {
   return (links.length ? `<h2>Related K-beauty guides</h2><div>${links.join('')}</div>` : '') + `<h2>Try the free tools</h2>${KB_TOOLS}`;
 }
 
+// ── #11 Ingredient Constellation — build-time radial SVG compatibility graph ──
+// Turns the latent pairsWith/avoidWith arrays into a spatial, tappable map.
+// Pure static SVG (deterministic radial layout) → zero-JS, CLS-safe; every node
+// is an internal <a> to that ingredient's page (dense topical interlinking).
+function constellationSVG(i, pairs, avoid) {
+  const neigh = pairs.map(p => ({ o: p, type: 'good' }))
+    .concat(avoid.map(p => ({ o: p, type: 'warn' })))
+    .filter(n => n.o).slice(0, 8);
+  if (neigh.length < 2) return '';
+  const W = 340, H = 300, cx = W / 2, cy = 150, R = 112, rN = 22;
+  const short = s => { s = String(s || ''); return s.length > 13 ? s.slice(0, 12) + '…' : s; };
+  const col = t => t === 'good' ? '#1a7a45' : '#c0392b';
+  const nodes = neigh.map((n, idx) => {
+    const ang = (-90 + (360 / neigh.length) * idx) * Math.PI / 180;
+    return Object.assign({ x: +(cx + R * Math.cos(ang)).toFixed(1), y: +(cy + R * Math.sin(ang)).toFixed(1) }, n);
+  });
+  const edges = nodes.map(n => `<line x1="${cx}" y1="${cy}" x2="${n.x}" y2="${n.y}" stroke="${col(n.type)}" stroke-width="2.4" stroke-opacity=".45"${n.type === 'warn' ? ' stroke-dasharray="5 4"' : ''}/>`).join('');
+  const nodeEls = nodes.map(n => {
+    const ly = n.y < cy ? n.y - rN - 6 : n.y + rN + 13;
+    return `<a href="${esc(n.o.id)}.html" aria-label="${esc(n.o.name)} — ${n.type === 'good' ? 'pairs well' : 'use with care'}"><circle cx="${n.x}" cy="${n.y}" r="${rN}" fill="#faf3f7" stroke="${col(n.type)}" stroke-width="2"/><text x="${n.x}" y="${n.y + 6}" text-anchor="middle" font-size="18">${esc(n.o.emoji || '•')}</text><text x="${n.x}" y="${ly}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333">${esc(short(n.o.name))}</text></a>`;
+  }).join('');
+  const center = `<circle cx="${cx}" cy="${cy}" r="34" fill="#fff" stroke="#d61f6e" stroke-width="2.6"/><text x="${cx}" y="${cy + 2}" text-anchor="middle" font-size="24">${esc(i.emoji || '✨')}</text><text x="${cx}" y="${cy + 22}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1a1320">${esc(short(i.name))}</text>`;
+  return `<h2>🌌 ${esc(i.name)} compatibility map</h2>
+    <p style="font-size:13.5px;color:#666;margin:2px 0 8px">Tap any ingredient to open its guide. <span style="color:#1a7a45;font-weight:700">━ pairs well</span> · <span style="color:#c0392b;font-weight:700">┈ use with care</span>.</p>
+    <div class="kb-constel"><svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(i.name)} ingredient compatibility graph" xmlns="http://www.w3.org/2000/svg">${edges}${nodeEls}${center}</svg></div>`;
+}
+
 // ── 1. Ingredient deep-dives ────────────────────────────────────────────────
 ING.forEach(i => {
   const concerns = (i.bestFor || []).map(c => CONCERN_BY[c]).filter(Boolean);
@@ -188,7 +252,7 @@ ING.forEach(i => {
   const body = `<p class="lead">${esc(i.explainer || '')}</p>
     <h2>What ${esc(i.name)} does for your skin</h2><ul>${(i.benefits || []).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
     ${concerns.length ? `<h2>Best for</h2><div>${concerns.map(c => `<a class="pill" href="../concern/${c.id}.html">${c.emoji || ''} ${esc(c.name)}</a>`).join('')}</div>` : ''}
-    ${pairs.length ? `<h2>Pairs well with</h2><div>${pairs.map(p => `<a class="pill" href="${p.id}.html">${p.emoji || ''} ${esc(p.name)}</a>`).join('')}</div>` : ''}
+    ${constellationSVG(i, pairs, avoid) || (pairs.length ? `<h2>Pairs well with</h2><div>${pairs.map(p => `<a class="pill" href="${p.id}.html">${p.emoji || ''} ${esc(p.name)}</a>`).join('')}</div>` : '')}
     ${avoid.length ? `<div class="box"><b>⚠️ Be careful pairing with:</b> ${avoid.map(p => esc(p.name)).join(', ')} — introduce gradually or alternate nights.</div>` : ''}
     <div class="box">🤰 <b>Pregnancy:</b> ${esc(i.preg === 'safe' ? 'Generally considered fine — confirm with your doctor.' : i.preg === 'caution' ? 'Ask your doctor before use during pregnancy.' : 'Check with your doctor.')} · ⏰ <b>Use:</b> ${esc((i.time || 'both').toUpperCase())}</div>
     ${buyBox('Korean ' + i.name, 'Shop Korean ' + i.name + ' products')}`;

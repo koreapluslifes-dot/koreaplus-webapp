@@ -1,0 +1,529 @@
+===== PAGE 1 =====
+ 
+ 
+ 
+  
+AFFILIATE LONG TAIL SEARCH API 
+Agoda Partnership Guideline 
+ 
+===== PAGE 2 =====
+ 
+   
+ 
+ 
+1 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Revision History 
+ 
+Date Version Who Description 
+07 Feb 
+2018 1.0  Initial document 
+    
+    
+ 
+Table of Contents 
+Revision History ............................................................................................................................................ 1 
+Introduction .................................................................................................................................................. 2 
+Affiliate Long Tail Availability Work Flow.................................................................................................. 2 
+HTTPS ........................................................................................................................................................ 2 
+URL ............................................................................................................................................................ 2 
+Request header ......................................................................................................................................... 2 
+Long Tail Search Request .............................................................................................................................. 3 
+City search example request ..................................................................................................................... 3 
+Hotel List Search example request ........................................................................................................... 3 
+Request Parameter Schema .......................................................................................................................... 4 
+Long Tail Search Response ............................................................................................................................ 5 
+Response example (Correct case) ............................................................................................................. 5 
+Response example (error case) ................................................................................................................. 6 
+Response Schema ......................................................................................................................................... 7 
+Appendix ....................................................................................................................................................... 8 
+Response Codes ........................................................................................................................................ 8 
+Success Status ........................................................................................................................................... 8 
+Error Status ............................................................................................................................................... 8 
+Languages ................................................................................................................................................. 9 
+Currencies ............................................................................................................................................... 10 
+ 
+===== PAGE 3 =====
+ 
+   
+ 
+ 
+2 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Introduction 
+ 
+Our Long Tail Search API makes search functionality available to our Long Tail Search Partners, via 
+synchronous request-response RESTful web services. 
+ 
+Affiliate Long Tail Availability Work Flow 
+ 
+ 
+ 
+ 
+ 
+HTTPS 
+To utilize https, please contact your account manager for more information. 
+ 
+URL 
+Our main end point for the Affiliate Lite Search request is as follows: 
+http://affiliateapi7643.agoda.com/affiliateservice/lt_v1 
+If the domain is unknown, please contact your manager. 
+ 
+Request header 
+All requests must include a compression header to ensure fastest response times. 
+Accept-Encoding   gzip,deflate 
+ 
+All requests must include an Authorization header with siteid and apikey (with a colon inbetween) and it 
+must match with the siteid and apikey in the request body. 
+Authorization 123456:00000000-0000-0000-0000-000000000000 
+ 
+  
+Affiliate Long Tail 
+Search Request 
+Schema 
+Validation, 
+Security and 
+Search 
+Return Affiliate  Long Tail 
+Availability  
+===== PAGE 4 =====
+ 
+   
+ 
+ 
+3 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Long Tail Search Request 
+ 
+There are 2 types of search: City Search and Hotel List Search 
+City search example request 
+{ 
+    "criteria": { 
+        "additional": { 
+            "currency": "USD", 
+            "dailyRate": { 
+                "maximum": 10000, 
+                "minimum": 1 
+            }, 
+            "discountOnly": false, 
+            "language": "en-us", 
+            "maxResult": 10, 
+            "minimumReviewScore": 0, 
+            "minimumStarRating": 0, 
+            "occupancy": { 
+                "numberOfAdult": 2, 
+                "numberOfChildren": 1 
+            }, 
+            "sortBy": "PriceAsc" 
+        }, 
+        "checkInDate": "2018-09-02", 
+        "checkOutDate": "2018-09-03", 
+        "cityId": 9395 
+    } 
+} 
+Hotel List Search example request 
+{ 
+    "criteria": { 
+        "additional": { 
+            "currency": "USD", 
+            "discountOnly": false, 
+            "language": "en-us", 
+            "occupancy": { 
+                "numberOfAdult": 2, 
+                "numberOfChildren": 1 
+            } 
+        }, 
+        "checkInDate": "2018-09-02", 
+        "checkOutDate": "2018-09-03", 
+        "hotelId": [ 
+            407854 
+        ] 
+    } 
+} 
+  
+===== PAGE 5 =====
+ 
+   
+ 
+ 
+4 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Request Parameter Schema 
+ 
+Element Required Data Type Example Description 
+cityId / hotelId Y Integer (city id) 
+or list of 
+integers (hotel 
+id) 
+ City Id (for city search) or Hotel Id list (for hotel list search)  
+checkInDate Y Date 2018-09-02 Check in date, YYYY-MM-DD 
+checkOutDate Y Date 2018-09-03 Check out date, YYYY-MM-DD 
+language N String en-us Language code 
+Default as “en-us” 
+currency N String USD Currency code 
+Default as “USD” 
+sortBy  N String 1 Available sort types: 
+ Recommended 
+ PriceDesc 
+ PriceAsc 
+ StarRatingDesc 
+ StarRatingAsc 
+ AllGuestsReviewScore 
+ BusinessTravellerReviewScore 
+ CouplesReviewScore 
+ SoloTravllersReviewScore 
+ FamiliesWithYoungReviewScore 
+ FamiliesWithTeenReviewScore 
+ GroupsReviewScore  
+Default as “Recommended” 
+Used for City Search only 
+maxResult  N Integer (1-30) 10 Max Result for City Search 
+Default as “10” 
+Used for City Search only 
+discountOnly  
+ 
+N Boolean true true – Hotels with discount 
+false – Hotels with and without discount 
+Default is “false” 
+minimumStarRating  N Double (0-5) 0 Minimum star rating 
+Default is “0” 
+Used for City Search only 
+minimumReviewScore  N Double (1-10) 0 Minimum review score 
+Default is “0” 
+Used for City Search only 
+dailyRate : minimum  N Decimal  0 Minimum daily rate 
+Default is “0” 
+Used for City Search only 
+dailyRate : maximum  N Decimal 100,000 Maximum daily rate 
+Default is “100,000” 
+Used for City Search only 
+occupancy : numberOfAdult N Integer 2 Number of adult 
+Defaut is “2” 
+occupancy : numberOfChildren N Integer 0 Number of children 
+Defaut is “0” 
+occupancy : childrenAges N array of integer [10,12] List of children ages 
+If provided, amount of ages should be the same as for 
+numberOfChildren element 
+Example: 
+“numberOfChildren”: 2, 
+“childrenAges”: [10, 12] 
+ 
+  
+===== PAGE 6 =====
+ 
+   
+ 
+ 
+5 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Long Tail Search Response 
+ 
+Response example (Correct case) 
+{ 
+    "results": [ 
+        { 
+            "crossedOutRate": 50.34, 
+            "currency": "USD", 
+            "dailyRate": 18.54, 
+            "discountPercentage": 0, 
+            "freeWifi": true, 
+            "hotelId": 463019, 
+            "hotelName": "Decor Do Hostel", 
+            "imageURL": "http://pix6.agoda.net/hotelImages/463/463019/463019_16030116190040357686.jpg?s=800x600", 
+            "includeBreakfast": false, 
+            "landingURL": 
+"https://www.agoda.com/partners/partnersearch.aspx?cid=1752828&hid=463019&currency=USD&checkin=2017-09-
+02&checkout=2017-09-03&NumberofAdults=2&NumberofChildren=1&Rooms=1", 
+            "reviewScore": 8.1, 
+            "starRating": 2 
+        }, 
+        { 
+            "crossedOutRate": 44.42, 
+            "currency": "USD", 
+            "dailyRate": 20.54, 
+            "discountPercentage": 35, 
+            "freeWifi": true, 
+            "hotelId": 1144213, 
+            "hotelName": "The Mix Bangkok - Phrom Phong", 
+            "imageURL": "http://pix6.agoda.net/hotelImages/114/1144213/1144213_15122111410038649514.jpg?s=800x600", 
+            "includeBreakfast": false, 
+            "landingURL": 
+"https://www.agoda.com/partners/partnersearch.aspx?cid=1752828&hid=1144213&currency=USD&checkin=2017-09-
+02&checkout=2017-09-03&NumberofAdults=2&NumberofChildren=1&Rooms=1", 
+            "reviewScore": 5.2, 
+            "starRating": 2.5 
+        } 
+    ] 
+} 
+  
+===== PAGE 7 =====
+ 
+   
+ 
+ 
+6 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Response example (error case) 
+{ 
+    "error": { 
+        "id": 911, 
+        "message": "No search result" 
+    } 
+} 
+ 
+Please refer to Appendix document for full list of error codes. 
+ 
+  
+===== PAGE 8 =====
+ 
+   
+ 
+ 
+7 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Response Schema 
+ 
+  
+Element  Requir
+ed 
+Data Type Example Description 
+hotelId  Y Integer 123456 Hotel ID 
+hotelName  Y String  Hotel name in required language code. If 
+local language is unavailable, then returns 
+name in English. 
+roomtypeName  O String Deluxe Hot Deal This field is only available for hotel list 
+search 
+starRating  Y Double (0-5) 5 Star Rating 
+reviewScore  Y Double (0-10) 8.0 Review Score 
+reviewCount  Y Integer 123 Number of reviews 
+currency  Y String USD Currency code 
+dailyRate  Y Decimal 100 Daily rate, sell exclusive 
+crossedOutRate  Y Decimal  200 Cross out rate 
+discountPercent
+age 
+ Y Double (0-100) 30 Discount percentage of the promotion 
+imageURL  Y String http://pix6.agoda.net/hotelImages/114/1144213/1
+144213_15122111410038649514.jpg?s=800x600  
+Hotel main photo URL 
+landingURL  Y String https://www.agoda.com/partners/partnersearch.as
+px?cid=1752828&hid=1144213&currency=USD&che
+ckin=2017-09-02&checkout=2017-09-
+03&NumberofAdults=2&NumberofChildren=1&Roo
+ms=1 
+Hotel landing URL on Agoda website 
+includeBreakfas
+t 
+ Y Boolean true true/false 
+freeWifi  Y Boolean true true/false 
+===== PAGE 9 =====
+ 
+   
+ 
+ 
+8 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Appendix 
+ 
+Response Codes 
+For response XML root element or response object that have a ‘status’ field as an attribute will be 
+identified the general response type from Agoda’s API servers. 
+ 
+Success Status 
+ 
+Status Code Status Meaning Status Definition 
+200 Okay Request has been accepted and processed 
+202 Accepted Request is queued up for processing 
+204 No content The request does  not return any valid data 
+206 Partial content The request has been successfully processed and there is 
+content returned but this is not the complete set / 
+Asynchronous search 
+ 
+Error Status 
+ 
+Status Code Status Meaning Status Definition 
+400 Bad Request The request could not be understood by the system, 
+malformed syntax. 
+401 Unauthorized If ApiKey not found or IP address restructions violated 
+403 Forbidden You have violated our terms of use and exceed the quota 
+of requests 
+404 FileNotFound Service or file not found. 
+410 Gone If the object of your request search id, book id, etc) is too 
+old, no longer valid or times out 
+500 Internal Server Error We have encountered and unrecoverable problem in the 
+processing of the API call 
+503 Service Unavailable Due to maintenance is that either planned or ad-hoc, 
+service is temporary unavailable 
+506 PartialConfirm Cannot process the entire request, need to contact 
+customer service. 
+ 
+  
+===== PAGE 10 =====
+ 
+   
+ 
+ 
+9 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+Languages 
+The list of valid languages Agoda supports which use to communicate with us are: 
+Note: If available, otherwise defaulting to en-us 
+Language Code Language Definition 
+en-us English 
+fr-fr French 
+de-de German 
+it-it Italian 
+es-es Spanish 
+ja-jp Japanese 
+zh-hk T.Chinese / Hongkong 
+zh-cn S.Chinese / Mainland 
+ko-kr Korean 
+el-gr Greek 
+ru-ru Russian 
+pt-pt Portugese 
+nl-nl Dutch, Belgium 
+en-ca English / Canada 
+en-in English / India 
+en-gb English / United Kingdom 
+en-za English / South-Africa 
+en-au English / Australia 
+en-sg English / Singapore 
+zh-tw T. Chinese / Taiwan 
+en-nz English / New Zealand 
+th-th Thai 
+ms-my Malay 
+vi-vn Vietnamese 
+sv-se Swedish 
+id-id Indonesian 
+pl-pl Polish 
+nb-no Norwegian 
+da-dk Danish 
+fi-fi Finnish 
+cs-cz Czech 
+tr-tr Turkish 
+ca-es Catalan 
+hu-hu Hungarian 
+hi-in Hindi 
+bg-bg Bulgarian 
+ro-ro Romanian 
+sl-si Slovenian 
+he-il Hebrew 
+ar-ae Arabic 
+===== PAGE 11 =====
+ 
+   
+ 
+ 
+10 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+nl-be Dutch / Belgium 
+en-ie English / Ireland 
+pt-br Portuguese / Brazil 
+es-ar Spanish / Argentina 
+es-mx Spanish / Mexico 
+lt-lt Lithuanian 
+lv-lv Latvian 
+hr-hr Croatian 
+et-ee Estonian 
+uk-ua Ukrainian 
+ 
+Currencies 
+The list of valid currencies Agoda supports which you use to communicate with us are: 
+ 
+Currency Code Currency Definition 
+EUR Euro 
+GBP British Pound 
+HKD Hong Kong Dollar 
+MYR Malaysian Ringgit 
+SGD Singapore Dollar 
+THB Thai Baht 
+USD US Dollar  
+NZD New Zealand Dollar 
+AUD Australian Dollar 
+JPY Japanese Yen 
+ZAR South African Rand 
+CAD Canadian Dollar 
+AED Arab Emirates Dirham 
+CNY Chinese Yuan 
+PHP Philippine Peso 
+CHF Swiss Franc 
+DKK Danish Krone 
+SEK Swedish Krona 
+CZK Czech Koruna 
+PLN Polish Zloty 
+IDR Indonesian Rupiah 
+KRW Korean Won 
+INR Indian Rupee 
+TWD Taiwan Dollar 
+NOK Norwegian Krone 
+OMR Omani Rial 
+FJD Fiji Dollar 
+BHD Bahrain Dinar 
+===== PAGE 12 =====
+ 
+   
+ 
+ 
+11 | P a g e  
+All material herein © 2005 – 2018 Agoda Company Pte. Ltd., All Rights Reserved. 
+AGODA ® is a registered trademark of AGIP LLC, used under license by Agoda Company Pte. Ltd. 
+Agoda is part of Booking Holdings Inc. (NASDAQ:BKNG) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ARS Argentine Peso 
+XPF CFP Franc 
+VND Vietnamese Dong 
+HUF Hungarian Forint 
+UAH Ukrainian Grivna 
+JOD Jordanian Dinar 
+KWD Kuwaiti Dinar 
+MXN Mexican Peso 
+NGN Nigerian Naira 
+ILS New Israeli Sheqel 
+PKR Pakistan Rupee 
+QAR Qatari Rial 
+RUB Russian Ruble 
+SAR Saudi Riyal 
+KZT Kazakh Tenge 
+TRY Turkish Lira 
+BGN Bulgarian Lev 
+RON Romanian Leu 
+KHR Cambodian Riel 
+LAK Laotian Kip 
+LKR Sri Lankan Rupee 
+MVR Maldivian Rufiyaa 
+EGP Egyptian Pounds 

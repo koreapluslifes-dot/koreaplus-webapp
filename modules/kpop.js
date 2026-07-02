@@ -17,24 +17,40 @@
 
   // ── Mini i18n for JS-generated labels (chrome uses data-i18n via i18n.js) ──
   const STR = {
-    en: { anniv:'Year Anniversary', debut:'Debut', comeback:'Comeback', today:'Out today!', dleft:'days', d:'D', h:'H', m:'M', s:'S', follow:'Follow', following:'Following', yours:'★ Your artists', all:'All artists', members:'Members', debuted:'Debuted', share:'Share', spotify:'Spotify', youtube:'YouTube', tickets:'Find concerts', bioSoon:'Bio loads when connected.', newsEmpty:'Live news lights up here once connected — follow your bias to personalize this feed.', chartFail:'Charts are catching their breath — check back shortly.', followToast:'Added to your artists ★', unfollowToast:'Removed', onboardTitle:'Pick your bias 💜', onboardSub:'Follow your favorites to personalize comebacks & news.', onboardSkip:'Maybe later', spot:"Today's spotlight" },
-    ko: { anniv:'주년', debut:'데뷔', comeback:'컴백', today:'오늘 발매!', dleft:'일', d:'일', h:'시', m:'분', s:'초', follow:'팔로우', following:'팔로잉', yours:'★ 내 아티스트', all:'전체 아티스트', members:'멤버', debuted:'데뷔일', share:'공유', spotify:'스포티파이', youtube:'유튜브', tickets:'공연 찾기', bioSoon:'연결되면 소개가 표시됩니다.', newsEmpty:'연결되면 실시간 뉴스가 표시됩니다 — 최애를 팔로우해 피드를 맞춤화하세요.', chartFail:'차트를 불러오지 못했어요 — 잠시 후 다시 시도해요.', followToast:'내 아티스트에 추가됨 ★', unfollowToast:'삭제됨', onboardTitle:'최애를 골라보세요 💜', onboardSub:'좋아하는 아티스트를 팔로우하면 컴백·뉴스가 맞춤화됩니다.', onboardSkip:'나중에', spot:'오늘의 스포트라이트' },
-    ja: { anniv:'周年', debut:'デビュー', comeback:'カムバック', today:'本日リリース!', dleft:'日', d:'日', h:'時', m:'分', s:'秒', follow:'フォロー', following:'フォロー中', yours:'★ お気に入り', all:'すべて', members:'メンバー', debuted:'デビュー日', share:'シェア', spotify:'Spotify', youtube:'YouTube', tickets:'公演を探す', bioSoon:'接続するとプロフィールが表示されます。', newsEmpty:'接続すると最新ニュースが表示されます — 推しをフォローしてフィードをカスタマイズ。', chartFail:'チャートを取得できませんでした — 後ほどお試しください。', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', onboardTitle:'推しを選ぼう 💜', onboardSub:'好きなアーティストをフォローして、カムバックやニュースをカスタマイズ。', onboardSkip:'あとで', spot:'今日のスポットライト' },
-    zh: { anniv:'周年', debut:'出道', comeback:'回归', today:'今日发行!', dleft:'天', d:'天', h:'时', m:'分', s:'秒', follow:'关注', following:'已关注', yours:'★ 我的爱豆', all:'全部', members:'成员', debuted:'出道日', share:'分享', spotify:'Spotify', youtube:'YouTube', tickets:'查找演唱会', bioSoon:'连接后显示简介。', newsEmpty:'连接后这里会显示实时新闻 — 关注你的爱豆来定制此动态。', chartFail:'榜单暂时无法加载 — 请稍后再试。', followToast:'已加入我的爱豆 ★', unfollowToast:'已移除', onboardTitle:'选择你的爱豆 💜', onboardSub:'关注喜欢的艺人，定制回归与新闻。', onboardSkip:'稍后再说', spot:'今日焦点' },
-    es: { anniv:'Aniversario', debut:'Debut', comeback:'Comeback', today:'¡Ya disponible!', dleft:'d', d:'D', h:'H', m:'M', s:'S', follow:'Seguir', following:'Siguiendo', yours:'★ Mis artistas', all:'Todos', members:'Integrantes', debuted:'Debutó', share:'Compartir', spotify:'Spotify', youtube:'YouTube', tickets:'Buscar conciertos', bioSoon:'La biografía se carga al conectar.', newsEmpty:'Las noticias en vivo aparecerán aquí al conectar — sigue a tu bias para personalizar este feed.', chartFail:'Las listas están recuperándose — vuelve en un momento.', followToast:'Añadido a tus artistas ★', unfollowToast:'Eliminado', onboardTitle:'Elige tu bias 💜', onboardSub:'Sigue a tus favoritos para personalizar comebacks y noticias.', onboardSkip:'Quizás luego', spot:'Destacado de hoy' },
-    fr: { anniv:'Anniversaire', debut:'Débuts', comeback:'Comeback', today:'Disponible !', dleft:'j', d:'J', h:'H', m:'M', s:'S', follow:'Suivre', following:'Suivi', yours:'★ Mes artistes', all:'Tous', members:'Membres', debuted:'Débuts le', share:'Partager', spotify:'Spotify', youtube:'YouTube', tickets:'Trouver des concerts', bioSoon:'La bio se charge une fois connecté.', newsEmpty:'Les actus en direct apparaîtront ici une fois connecté — suivez votre bias pour personnaliser ce fil.', chartFail:'Les classements reviennent — réessayez bientôt.', followToast:'Ajouté à vos artistes ★', unfollowToast:'Retiré', onboardTitle:'Choisissez votre bias 💜', onboardSub:'Suivez vos favoris pour personnaliser comebacks et actus.', onboardSkip:'Plus tard', spot:'À la une aujourd\'hui' },
-    de: { anniv:'Jahrestag', debut:'Debüt', comeback:'Comeback', today:'Jetzt erschienen!', dleft:'T', d:'T', h:'Std', m:'Min', s:'Sek', follow:'Folgen', following:'Folge ich', yours:'★ Meine Artists', all:'Alle', members:'Mitglieder', debuted:'Debüt am', share:'Teilen', spotify:'Spotify', youtube:'YouTube', tickets:'Konzerte finden', bioSoon:'Bio wird geladen, sobald verbunden.', newsEmpty:'Live-News erscheinen hier, sobald verbunden — folge deinem Bias, um diesen Feed zu personalisieren.', chartFail:'Die Charts machen kurz Pause — schau gleich wieder vorbei.', followToast:'Zu deinen Artists hinzugefügt ★', unfollowToast:'Entfernt', onboardTitle:'Wähle deinen Bias 💜', onboardSub:'Folge deinen Favoriten, um Comebacks & News zu personalisieren.', onboardSkip:'Vielleicht später', spot:'Heute im Fokus' },
-    pt: { anniv:'Aniversário', debut:'Estreia', comeback:'Comeback', today:'Já disponível!', dleft:'d', d:'D', h:'H', m:'M', s:'S', follow:'Seguir', following:'Seguindo', yours:'★ Meus artistas', all:'Todos', members:'Integrantes', debuted:'Estreou', share:'Compartilhar', spotify:'Spotify', youtube:'YouTube', tickets:'Buscar shows', bioSoon:'A bio carrega ao conectar.', newsEmpty:'As notícias ao vivo aparecem aqui ao conectar — siga seu bias para personalizar este feed.', chartFail:'As paradas estão voltando — tente novamente em breve.', followToast:'Adicionado aos seus artistas ★', unfollowToast:'Removido', onboardTitle:'Escolha seu bias 💜', onboardSub:'Siga seus favoritos para personalizar comebacks e notícias.', onboardSkip:'Talvez depois', spot:'Destaque de hoje' },
-    id: { anniv:'Anniversary', debut:'Debut', comeback:'Comeback', today:'Rilis hari ini!', dleft:'h', d:'H', h:'J', m:'M', s:'D', follow:'Ikuti', following:'Mengikuti', yours:'★ Artis saya', all:'Semua', members:'Member', debuted:'Debut', share:'Bagikan', spotify:'Spotify', youtube:'YouTube', tickets:'Cari konser', bioSoon:'Bio dimuat saat terhubung.', newsEmpty:'Berita langsung akan muncul di sini saat terhubung — ikuti bias-mu untuk menyesuaikan feed ini.', chartFail:'Tangga lagu sedang dimuat ulang — coba lagi sebentar.', followToast:'Ditambahkan ke artis saya ★', unfollowToast:'Dihapus', onboardTitle:'Pilih bias-mu 💜', onboardSub:'Ikuti favoritmu untuk menyesuaikan comeback & berita.', onboardSkip:'Nanti saja', spot:'Sorotan hari ini' },
+    en: { anniv:'Year Anniversary', debut:'Debut', comeback:'Comeback', today:'Out today!', dleft:'days', d:'D', h:'H', m:'M', s:'S', follow:'Follow', following:'Following', yours:'★ Your artists', all:'All artists', members:'Members', debuted:'Debuted', share:'Share', spotify:'Spotify', youtube:'YouTube', tickets:'Find concerts', bioSoon:'Bio loads when connected.', newsEmpty:'Live news lights up here once connected — follow your bias to personalize this feed.', chartFail:'Charts are catching their breath — check back shortly.', followToast:'Added to your artists ★', unfollowToast:'Removed', undo:'Undo', onboardTitle:'Pick your bias 💜', onboardSub:'Follow your favorites to personalize comebacks & news.', onboardSkip:'Maybe later', spot:"Today's spotlight" },
+    ko: { anniv:'주년', debut:'데뷔', comeback:'컴백', today:'오늘 발매!', dleft:'일', d:'일', h:'시', m:'분', s:'초', follow:'팔로우', following:'팔로잉', yours:'★ 내 아티스트', all:'전체 아티스트', members:'멤버', debuted:'데뷔일', share:'공유', spotify:'스포티파이', youtube:'유튜브', tickets:'공연 찾기', bioSoon:'연결되면 소개가 표시됩니다.', newsEmpty:'연결되면 실시간 뉴스가 표시됩니다 — 최애를 팔로우해 피드를 맞춤화하세요.', chartFail:'차트를 불러오지 못했어요 — 잠시 후 다시 시도해요.', followToast:'내 아티스트에 추가됨 ★', unfollowToast:'삭제됨', undo:'되돌리기', onboardTitle:'최애를 골라보세요 💜', onboardSub:'좋아하는 아티스트를 팔로우하면 컴백·뉴스가 맞춤화됩니다.', onboardSkip:'나중에', spot:'오늘의 스포트라이트' },
+    ja: { anniv:'周年', debut:'デビュー', comeback:'カムバック', today:'本日リリース!', dleft:'日', d:'日', h:'時', m:'分', s:'秒', follow:'フォロー', following:'フォロー中', yours:'★ お気に入り', all:'すべて', members:'メンバー', debuted:'デビュー日', share:'シェア', spotify:'Spotify', youtube:'YouTube', tickets:'公演を探す', bioSoon:'接続するとプロフィールが表示されます。', newsEmpty:'接続すると最新ニュースが表示されます — 推しをフォローしてフィードをカスタマイズ。', chartFail:'チャートを取得できませんでした — 後ほどお試しください。', followToast:'お気に入りに追加 ★', unfollowToast:'削除しました', undo:'元に戻す', onboardTitle:'推しを選ぼう 💜', onboardSub:'好きなアーティストをフォローして、カムバックやニュースをカスタマイズ。', onboardSkip:'あとで', spot:'今日のスポットライト' },
+    zh: { anniv:'周年', debut:'出道', comeback:'回归', today:'今日发行!', dleft:'天', d:'天', h:'时', m:'分', s:'秒', follow:'关注', following:'已关注', yours:'★ 我的爱豆', all:'全部', members:'成员', debuted:'出道日', share:'分享', spotify:'Spotify', youtube:'YouTube', tickets:'查找演唱会', bioSoon:'连接后显示简介。', newsEmpty:'连接后这里会显示实时新闻 — 关注你的爱豆来定制此动态。', chartFail:'榜单暂时无法加载 — 请稍后再试。', followToast:'已加入我的爱豆 ★', unfollowToast:'已移除', undo:'撤销', onboardTitle:'选择你的爱豆 💜', onboardSub:'关注喜欢的艺人，定制回归与新闻。', onboardSkip:'稍后再说', spot:'今日焦点' },
+    es: { anniv:'Aniversario', debut:'Debut', comeback:'Comeback', today:'¡Ya disponible!', dleft:'d', d:'D', h:'H', m:'M', s:'S', follow:'Seguir', following:'Siguiendo', yours:'★ Mis artistas', all:'Todos', members:'Integrantes', debuted:'Debutó', share:'Compartir', spotify:'Spotify', youtube:'YouTube', tickets:'Buscar conciertos', bioSoon:'La biografía se carga al conectar.', newsEmpty:'Las noticias en vivo aparecerán aquí al conectar — sigue a tu bias para personalizar este feed.', chartFail:'Las listas están recuperándose — vuelve en un momento.', followToast:'Añadido a tus artistas ★', unfollowToast:'Eliminado', undo:'Deshacer', onboardTitle:'Elige tu bias 💜', onboardSub:'Sigue a tus favoritos para personalizar comebacks y noticias.', onboardSkip:'Quizás luego', spot:'Destacado de hoy' },
+    fr: { anniv:'Anniversaire', debut:'Débuts', comeback:'Comeback', today:'Disponible !', dleft:'j', d:'J', h:'H', m:'M', s:'S', follow:'Suivre', following:'Suivi', yours:'★ Mes artistes', all:'Tous', members:'Membres', debuted:'Débuts le', share:'Partager', spotify:'Spotify', youtube:'YouTube', tickets:'Trouver des concerts', bioSoon:'La bio se charge une fois connecté.', newsEmpty:'Les actus en direct apparaîtront ici une fois connecté — suivez votre bias pour personnaliser ce fil.', chartFail:'Les classements reviennent — réessayez bientôt.', followToast:'Ajouté à vos artistes ★', unfollowToast:'Retiré', undo:'Annuler', onboardTitle:'Choisissez votre bias 💜', onboardSub:'Suivez vos favoris pour personnaliser comebacks et actus.', onboardSkip:'Plus tard', spot:'À la une aujourd\'hui' },
+    de: { anniv:'Jahrestag', debut:'Debüt', comeback:'Comeback', today:'Jetzt erschienen!', dleft:'T', d:'T', h:'Std', m:'Min', s:'Sek', follow:'Folgen', following:'Folge ich', yours:'★ Meine Artists', all:'Alle', members:'Mitglieder', debuted:'Debüt am', share:'Teilen', spotify:'Spotify', youtube:'YouTube', tickets:'Konzerte finden', bioSoon:'Bio wird geladen, sobald verbunden.', newsEmpty:'Live-News erscheinen hier, sobald verbunden — folge deinem Bias, um diesen Feed zu personalisieren.', chartFail:'Die Charts machen kurz Pause — schau gleich wieder vorbei.', followToast:'Zu deinen Artists hinzugefügt ★', unfollowToast:'Entfernt', undo:'Rückgängig', onboardTitle:'Wähle deinen Bias 💜', onboardSub:'Folge deinen Favoriten, um Comebacks & News zu personalisieren.', onboardSkip:'Vielleicht später', spot:'Heute im Fokus' },
+    pt: { anniv:'Aniversário', debut:'Estreia', comeback:'Comeback', today:'Já disponível!', dleft:'d', d:'D', h:'H', m:'M', s:'S', follow:'Seguir', following:'Seguindo', yours:'★ Meus artistas', all:'Todos', members:'Integrantes', debuted:'Estreou', share:'Compartilhar', spotify:'Spotify', youtube:'YouTube', tickets:'Buscar shows', bioSoon:'A bio carrega ao conectar.', newsEmpty:'As notícias ao vivo aparecem aqui ao conectar — siga seu bias para personalizar este feed.', chartFail:'As paradas estão voltando — tente novamente em breve.', followToast:'Adicionado aos seus artistas ★', unfollowToast:'Removido', undo:'Desfazer', onboardTitle:'Escolha seu bias 💜', onboardSub:'Siga seus favoritos para personalizar comebacks e notícias.', onboardSkip:'Talvez depois', spot:'Destaque de hoje' },
+    id: { anniv:'Anniversary', debut:'Debut', comeback:'Comeback', today:'Rilis hari ini!', dleft:'h', d:'H', h:'J', m:'M', s:'D', follow:'Ikuti', following:'Mengikuti', yours:'★ Artis saya', all:'Semua', members:'Member', debuted:'Debut', share:'Bagikan', spotify:'Spotify', youtube:'YouTube', tickets:'Cari konser', bioSoon:'Bio dimuat saat terhubung.', newsEmpty:'Berita langsung akan muncul di sini saat terhubung — ikuti bias-mu untuk menyesuaikan feed ini.', chartFail:'Tangga lagu sedang dimuat ulang — coba lagi sebentar.', followToast:'Ditambahkan ke artis saya ★', unfollowToast:'Dihapus', undo:'Urungkan', onboardTitle:'Pilih bias-mu 💜', onboardSub:'Ikuti favoritmu untuk menyesuaikan comeback & berita.', onboardSkip:'Nanti saja', spot:'Sorotan hari ini' },
   };
   const t = (k) => (STR[lang] && STR[lang][k]) || STR.en[k] || k;
 
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
-  const toast = (msg) => {
+  const toast = (msg, action) => {
     let el = $('#kpop-toast');
-    if (!el) { el = document.createElement('div'); el.id = 'kpop-toast'; el.style.cssText = 'position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:calc(100vw - 32px);background:var(--text);color:var(--bg);padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none'; document.body.appendChild(el); }
-    el.textContent = msg; el.style.opacity = '1';
-    clearTimeout(el._tm); el._tm = setTimeout(() => { el.style.opacity = '0'; }, 1800);
+    if (!el) { el = document.createElement('div'); el.id = 'kpop-toast'; el.style.cssText = 'position:fixed;left:50%;bottom:calc(20px + var(--mnav-h,0px) + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:calc(100vw - 32px);background:var(--text);color:var(--bg);padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none'; document.body.appendChild(el); }
+    clearTimeout(el._tm);
+    const hide = () => { el.style.opacity = '0'; el.style.pointerEvents = 'none'; };
+    el.textContent = msg;
+    if (action) {
+      // Actionable toast (e.g. unfollow Undo) — must accept taps while visible.
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = action.label;
+      b.style.cssText = 'min-width:44px;min-height:44px;margin-left:8px;padding:0 10px;background:transparent;border:0;color:inherit;font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;vertical-align:middle';
+      b.addEventListener('click', () => { clearTimeout(el._tm); hide(); try { action.cb(); } catch {} });
+      el.appendChild(b);
+      el.style.display = 'inline-flex'; el.style.alignItems = 'center';
+      el.style.pointerEvents = 'auto';
+    } else {
+      el.style.display = ''; el.style.alignItems = '';
+      el.style.pointerEvents = 'none';
+    }
+    el.style.opacity = '1';
+    el._tm = setTimeout(hide, action ? 5000 : 1800);
   };
 
   // ── Follow state ───────────────────────────────────────────────────────────
@@ -285,7 +301,9 @@
     setFollows(f);
     try { window.dispatchEvent(new Event('kp:follows')); } catch {}
     if (adding) { try { const s = JSON.parse(localStorage.getItem('kp_kpop_since') || '{}'); if (!s[id]) { s[id] = new Date().getFullYear(); localStorage.setItem('kp_kpop_since', JSON.stringify(s)); } } catch {} }
-    toast(adding ? t('followToast') : t('unfollowToast'));
+    if (adding) toast(t('followToast'));
+    else toast(t('unfollowToast'), { label: t('undo'), cb: () => toggleFollow(id) }); // 5s Undo — re-toggles follow back on
+
     // Light, targeted DOM update — no full re-render, no async ticker refetch.
     const card = $(`.art-card[data-id="${CSS.escape ? CSS.escape(id) : id}"]`);
     if (card) {
@@ -405,11 +423,15 @@
   const STORE_FOR_LANG = { ko:'kr', en:'kr', ja:'jp', zh:'tw', es:'es', fr:'fr', de:'de', pt:'br', id:'id' };
   const STORE_LABEL = { kr:'🇰🇷 KR', jp:'🇯🇵 JP', tw:'🇹🇼 TW', es:'🇪🇸 ES', fr:'🇫🇷 FR', de:'🇩🇪 DE', br:'🇧🇷 BR', id:'🇮🇩 ID', us:'🌎' };
   const CHART_STR = {
-    en:{songs:'Songs',albums:'Albums',mvs:'MVs',neu:'NEW'}, ko:{songs:'곡',albums:'앨범',mvs:'MV',neu:'NEW'},
-    ja:{songs:'楽曲',albums:'アルバム',mvs:'MV',neu:'NEW'}, zh:{songs:'歌曲',albums:'专辑',mvs:'MV',neu:'NEW'},
-    es:{songs:'Canciones',albums:'Álbumes',mvs:'MVs',neu:'NUEVO'}, fr:{songs:'Titres',albums:'Albums',mvs:'Clips',neu:'NOUVEAU'},
-    de:{songs:'Songs',albums:'Alben',mvs:'MVs',neu:'NEU'}, pt:{songs:'Músicas',albums:'Álbuns',mvs:'MVs',neu:'NOVO'},
-    id:{songs:'Lagu',albums:'Album',mvs:'MV',neu:'BARU'},
+    en:{songs:'Songs',albums:'Albums',mvs:'MVs',neu:'NEW',asOf:'Updated',refresh:'Refresh charts',deltaHint:'Rank changes show from your next visit'},
+    ko:{songs:'곡',albums:'앨범',mvs:'MV',neu:'NEW',asOf:'기준',refresh:'차트 새로고침',deltaHint:'순위 변동은 다음 방문부터 표시돼요'},
+    ja:{songs:'楽曲',albums:'アルバム',mvs:'MV',neu:'NEW',asOf:'更新',refresh:'チャートを更新',deltaHint:'順位変動は次回の訪問から表示されます'},
+    zh:{songs:'歌曲',albums:'专辑',mvs:'MV',neu:'NEW',asOf:'更新于',refresh:'刷新榜单',deltaHint:'排名变化将从下次访问开始显示'},
+    es:{songs:'Canciones',albums:'Álbumes',mvs:'MVs',neu:'NUEVO',asOf:'Actualizado',refresh:'Actualizar listas',deltaHint:'Los cambios de puesto se muestran desde tu próxima visita'},
+    fr:{songs:'Titres',albums:'Albums',mvs:'Clips',neu:'NOUVEAU',asOf:'Mis à jour',refresh:'Actualiser les classements',deltaHint:'Les variations de classement s\'afficheront à votre prochaine visite'},
+    de:{songs:'Songs',albums:'Alben',mvs:'MVs',neu:'NEU',asOf:'Stand',refresh:'Charts aktualisieren',deltaHint:'Rangänderungen erscheinen ab deinem nächsten Besuch'},
+    pt:{songs:'Músicas',albums:'Álbuns',mvs:'MVs',neu:'NOVO',asOf:'Atualizado',refresh:'Atualizar paradas',deltaHint:'As mudanças de posição aparecem a partir da sua próxima visita'},
+    id:{songs:'Lagu',albums:'Album',mvs:'MV',neu:'BARU',asOf:'Diperbarui',refresh:'Muat ulang chart',deltaHint:'Perubahan peringkat tampil mulai kunjungan berikutnya'},
   };
   const ct = (k) => (CHART_STR[lang] || CHART_STR.en)[k] || CHART_STR.en[k];
   let curStore = STORE_FOR_LANG[lang] || 'kr';
@@ -436,7 +458,7 @@
     const d = r._prev - r.rank;
     if (d > 0) return `<span class="kp-delta kp-delta-up">▲${d}</span>`;
     if (d < 0) return `<span class="kp-delta kp-delta-down">▼${-d}</span>`;
-    return '';
+    return `<span class="kp-delta kp-delta-eq">=</span>`; // steady — distinguish "no change" from "no data"
   }
 
   function chartRow(r) {
@@ -490,6 +512,28 @@
       loadCharts(curStore, b.dataset.type);
     }));
   }
+  // KP-13: trust signals — local "as of" stamp + 44px refresh + one-time delta hint.
+  const DELTA_HINT_KEY = 'kp_kpop_delta_hint';
+  let deltaHintOn = false;
+  try { deltaHintOn = !localStorage.getItem(DELTA_HINT_KEY); } catch {}
+  function renderChartStamp() {
+    const ctl = $('#kpop-chart-controls'); if (!ctl) return;
+    let el = $('#kpop-chart-stamp');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'kpop-chart-stamp'; el.className = 'kp-chart-stamp';
+      el.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0 2px;font-size:11px;opacity:.8';
+      ctl.insertAdjacentElement('afterend', el);
+    }
+    const tm = new Date().toLocaleTimeString(lang === 'en' ? undefined : lang, { hour: '2-digit', minute: '2-digit' });
+    const hint = (!chartHadPrev && deltaHintOn) ? `<span class="kp-delta-hint">${esc(ct('deltaHint'))}</span>` : '';
+    el.innerHTML = `<span class="kp-chart-asof">${esc(ct('asOf'))} ${esc(tm)}</span>`
+      + `<button type="button" class="kp-chart-refresh" aria-label="${esc(ct('refresh'))}" title="${esc(ct('refresh'))}" style="min-width:44px;min-height:44px;background:transparent;border:1px solid var(--border,rgba(128,128,128,.35));border-radius:12px;color:inherit;font-size:15px;cursor:pointer">↻</button>`
+      + hint;
+    if (!chartHadPrev && deltaHintOn) { try { localStorage.setItem(DELTA_HINT_KEY, '1'); } catch {} }
+    el.querySelector('.kp-chart-refresh').addEventListener('click', () => loadCharts(curStore, curType));
+  }
+
   async function loadCharts(store, type) {
     store = store || curStore; type = type || curType; curStore = store; curType = type;
     const list = $('#kpop-charts-list'), podium = $('#kpop-charts-podium'); if (!list || !API) return;
@@ -502,6 +546,7 @@
       chartDeltas(store, type, rows);
       if (podium) { podium.innerHTML = rows.slice(0, 3).map((r, i) => chartPod(r, i)).join(''); podium.hidden = false; }
       list.innerHTML = rows.slice(3, 30).map(chartRow).join('');
+      renderChartStamp(); // success only — stamp reflects when this data actually landed
     } catch {
       if (podium) podium.hidden = true;
       list.innerHTML = `<div class="kpop-empty">${esc(t('chartFail'))}</div>`;
@@ -561,15 +606,18 @@
     if (!items.length) return;
     // Each ticker item is clickable: countdowns open the artist (modal), chart
     // entries play the song in-page — so the moving text always leads somewhere.
-    const render = it => {
+    const render = (it, dup) => {
+      const ti = dup ? ' tabindex="-1"' : ''; // marquee clone: keep links out of the tab order
       const inner = `<span class="tk-kind" aria-hidden="true">${it.kind}</span>${esc(it.text)} <span class="tk-val">${esc(it.val)}</span>`;
       const cls = `tk-item${it.soon ? ' is-soon' : ''}`;
-      if (it.artistId) return `<a class="${cls}" href="${esc(profileUrl(it.artistId))}" data-tk-artist="${esc(it.artistId)}">${inner}</a>`;
-      if (it.play) return `<a class="${cls}" href="https://www.youtube.com/results?search_query=${encodeURIComponent(it.play + ' official')}" target="_blank" rel="noopener" data-tk-play="${esc(it.play)}" data-tk-partist="${esc(it.artist)}">${inner}</a>`;
+      if (it.artistId) return `<a class="${cls}"${ti} href="${esc(profileUrl(it.artistId))}" data-tk-artist="${esc(it.artistId)}">${inner}</a>`;
+      if (it.play) return `<a class="${cls}"${ti} href="https://www.youtube.com/results?search_query=${encodeURIComponent(it.play + ' official')}" target="_blank" rel="noopener" data-tk-play="${esc(it.play)}" data-tk-partist="${esc(it.artist)}">${inner}</a>`;
       return `<span class="${cls}">${inner}</span>`;
     };
-    const html = items.map(render).join('');
-    rail.innerHTML = html + html; // duplicate for seamless marquee
+    const html = items.map(it => render(it)).join('');
+    const dupHtml = items.map(it => render(it, true)).join('');
+    // Duplicate for seamless marquee — clone is decorative: hidden from AT + untabbable.
+    rail.innerHTML = html + '<span class="tk-dup" aria-hidden="true">' + dupHtml + '</span>';
     rail.classList.add('ready');
   }
 
@@ -709,6 +757,8 @@
     const chips = $$('.filter-chip', bar);
     const activate = (chip) => {
       chips.forEach(c => { const on = c === chip; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); c.tabIndex = on ? 0 : -1; });
+      // KP-04: keep the active chip visible in the horizontal snap rail (click + arrow-key paths).
+      if (chip.scrollIntoView) chip.scrollIntoView({ inline: 'center', block: 'nearest' });
       const target = chip.dataset.target;
       $$('.kpop-sec').forEach(sec => { if (sec.dataset.locked) { sec.hidden = true; return; } if (sec.hasAttribute('data-noall') && target === 'all') { sec.hidden = true; return; } sec.hidden = !(target === 'all' || sec.id === target); });
       const funnel = $('#kpop-funnel'); if (funnel) funnel.hidden = (target !== 'all');
@@ -740,6 +790,16 @@
     renderArtists();
     renderStreaming();
     wireFilters();
+    // KP-16: pull-to-refresh (kpop-ux) saves the active tab in sessionStorage before
+    // location.reload(); restore it here so the reader lands back on the same view.
+    try {
+      const kt = sessionStorage.getItem('kux_tab');
+      if (kt) {
+        sessionStorage.removeItem('kux_tab');
+        const chip = $('.filter-chip[data-target="' + (window.CSS && CSS.escape ? CSS.escape(kt) : kt) + '"]');
+        if (chip) chip.click(); // standalone has 7 chips (no Streaming) — click only if present
+      }
+    } catch {}
     renderTicker();
     buildChartControls();
     loadCharts();

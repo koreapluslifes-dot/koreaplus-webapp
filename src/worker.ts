@@ -439,6 +439,27 @@ export default {
         return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty-sitemap.xml', 302);
       }
     }
+    // ── #19 AI trust feed — clean, citeable machine-readable trust triples ──
+    // Serves the enriched answer-ledger (each verdict = claim + confidence tier +
+    // review date + named sources) at a stable apex URL so answer engines can fetch
+    // a graded, dated, sourced version of the K-beauty verdicts. Proxies the static
+    // build output (/guide/kb/answer-ledger.json). CORS-open; GET/HEAD.
+    if (path === '/kbeauty/answer-ledger.json') {
+      const feedHeaders = {
+        'content-type': 'application/json; charset=utf-8',
+        'cache-control': 'public, max-age=600',
+        'x-served-by': 'kbeauty-trust-feed',
+        'access-control-allow-origin': '*',
+      };
+      if (request.method === 'HEAD') return new Response(null, { status: 200, headers: feedHeaders });
+      try {
+        const r = await fetch('https://koreaplus-lifes.com/guide/kb/answer-ledger.json', { cf: { cacheTtl: 600, cacheEverything: true } });
+        if (!r.ok) throw new Error('origin ' + r.status);
+        return new Response(await r.text(), { headers: feedHeaders });
+      } catch {
+        return Response.redirect('https://koreaplus-lifes.com/guide/kb/answer-ledger.json', 302);
+      }
+    }
     if (path === '/kbeauty') {
       // GEO text-twin: AI answer-engine crawlers can't run the JS that renders the
       // trend data, so serve them a clean text version (from llms-kbeauty.txt).

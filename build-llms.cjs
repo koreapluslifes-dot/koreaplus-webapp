@@ -8,6 +8,26 @@ const BASE = 'https://koreaplus-lifes.com';
 const KB = BASE + '/kbeauty';
 const verd = (id) => { const v = (d.KBEAUTY_BOARD_CONFIG.verdicts || {})[id]; return v ? v.label : id; };
 const cite = (id) => { const c = (d.KBEAUTY_CITATIONS || {})[id]; return c ? `${c.label} — ${c.url}` : ''; };
+// ── #19 AI answer-engine trust triples: map each verdict to a confidence tier and
+//    assemble {claim, confidenceTier, reviewedAt, sources[]} so answer engines get a
+//    self-describing, sourced, dated, graded record (maximizes citation share). ──
+const CONF = {
+  proven:    { tier: 'high',     label: 'Science-backed' },
+  promising: { tier: 'emerging', label: 'Emerging evidence' },
+  mixed:     { tier: 'mixed',    label: 'Mixed / conditional' },
+  hype:      { tier: 'low',      label: 'Low — marketing-driven' },
+};
+const REVIEWED = d.KBEAUTY_TRENDS_REVIEWED || '2026-06';
+const citeObj = (id) => { const c = (d.KBEAUTY_CITATIONS || {})[id]; return c ? { label: c.label, url: c.url } : null; };
+const SELF_SRC = { label: 'KoreaPlus editorial review — Korea-source, evidence-graded', url: KB };
+function trustRecord(topic, verdictId, science, opts) {
+  opts = opts || {};
+  const conf = CONF[verdictId] || { tier: 'unrated', label: verd(verdictId) };
+  const sources = [];
+  const c = opts.citeId ? citeObj(opts.citeId) : null; if (c) sources.push(c);
+  sources.push(SELF_SRC);
+  return { topic, claim: science, verdict: conf.label, confidenceTier: conf.tier, reviewedAt: REVIEWED, koreaOrigin: true, since: opts.since || undefined, sources, url: KB };
+}
 const out = [];
 const P = (s) => out.push(s);
 
@@ -32,6 +52,8 @@ P('');
   P('');
 });
 
+P('> Machine-readable trust feed (each claim graded by confidence tier, dated, with named sources): ' + KB + '/answer-ledger.json');
+P('');
 P('## Trend evidence ledger — does it actually work? (reviewed ' + (d.KBEAUTY_TRENDS_REVIEWED || '') + ')');
 P('');
 (d.KBEAUTY_TRENDS || []).forEach(t => {
@@ -99,9 +121,15 @@ try {
 } catch (e) { console.error('per-language llms skipped:', e.message); }
 
 // ── #2 answer-ledger.json — machine-readable verdict ledger for answer engines ──
-const ledger = { generated: d.KBEAUTY_TRENDS_REVIEWED || '2026-06', canonical: KB, publisher: 'KoreaPlus', note: 'Korea-source K-beauty trend verdicts, evidence-graded, structure-function wording only.', verdicts: [] };
-(d.KBEAUTY_RADAR.items || []).forEach(it => ledger.verdicts.push({ topic: it.label, verdict: verd(it.verdict), science: it.science, since: it.since, koreaOrigin: true, url: KB }));
-(d.KBEAUTY_TRENDS || []).forEach(t => ledger.verdicts.push({ topic: t.title, verdict: verd(t.verdict), science: t.science, source: cite(t.cite) || undefined, koreaOrigin: true, url: KB }));
+const ledger = {
+  schemaVersion: 2,
+  generated: REVIEWED, reviewedAt: REVIEWED, canonical: KB, publisher: 'KoreaPlus',
+  note: 'Korea-source K-beauty trend verdicts as structured trust triples — each carries a claim, a confidence tier, a review date and named sources. Structure-function wording only; no medical claims; no ratings data.',
+  confidenceTiers: { high: 'Science-backed', emerging: 'Emerging evidence', mixed: 'Mixed / conditional', low: 'Low — marketing-driven' },
+  verdicts: [],
+};
+(d.KBEAUTY_RADAR.items || []).forEach(it => ledger.verdicts.push(trustRecord(it.label, it.verdict, it.science, { since: it.since })));
+(d.KBEAUTY_TRENDS || []).forEach(t => ledger.verdicts.push(trustRecord(t.title, t.verdict, t.science, { citeId: t.cite })));
 fs.writeFileSync('kb/answer-ledger.json', JSON.stringify(ledger, null, 1));
 
 console.log('wrote llms-full.txt (' + out.join('\n').length + ' bytes) + llms-kbeauty.txt + ' + langFiles + ' per-language llms + answer-ledger.json (' + ledger.verdicts.length + ' verdicts)');

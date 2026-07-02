@@ -1,0 +1,13 @@
+{
+  "treasure": { "wikidataId": "Q61057550", "spotifyId": "3KonOYiLsU53m4yT7gNotP", "youtubeChannelId": "UCx9hXYOCvUYwrprEqe4ZQHA", "note": "All 3 verified: 10-member YG boy group; YT title TREASURE (트레저)" },
+  "riize": { "wikidataId": "Q121075203", "spotifyId": "2jOm3cYujQx6o1dxuiuqaX", "youtubeChannelId": "UCdVD0MsYecQaIE5Ru-pOIQQ", "note": "All 3 verified: SM boy group (2023); YT @RIIZE_official externalId" },
+  "theboyz": { "wikidataId": "Q41949104", "spotifyId": "0CmvFWTX9zmMNCUi6fHtAx", "youtubeChannelId": "UCkJ1rbOrsyPfBuHNfnLPm-Q", "note": "All 3 verified: THE BOYZ, 10-member SK boy group" },
+  "exo": { "wikidataId": "Q494717", "spotifyId": "3cjEqqelV9zb4BYE3qDQ4O", "youtubeChannelId": "UCzCedBCSSltI1TFd3bKyN6g", "note": "All 3 verified: EXO main channel/artist page (SM)" },
+  "iu": { "wikidataId": "Q20145", "spotifyId": "3HqSLMAZ3g3d5poNaI7GOU", "youtubeChannelId": "UC3SyT4_WLHzN7JmHQwKQZww", "note": "All 3 verified: IU / Lee Ji-eun; YT 이지금 [IU Official] @dlwlrma" },
+  "jungkook": { "wikidataId": "Q22338877", "spotifyId": "6HaGTQPmzraVmaVxvz6EUc", "youtubeChannelId": "", "note": "Wikidata + Spotify confirmed: Jung Kook, BTS soloist (GOLDEN). No official artist YouTube channel: Wikidata/Wikipedia list none; music is on BANGTANTV/HYBE. Only personal channel is pet vlog 'Bam's dad' (UCEjCOXUuTBQHAI1sbMgqOdw, @60ww0w_6am) - left blank as it is not an artist channel." },
+  "lisa": { "wikidataId": "Q26707663", "spotifyId": "5L1lO4eRHmJ7a0Q6csE5cT", "youtubeChannelId": "UC35HKvKYPkri4Grd5KXl3wQ", "note": "All 3 verified: LISA / Lalisa Manobal; YT Lilifilm Official @lalalalisa_m (Wikidata P2397)" },
+  "jennie": { "wikidataId": "Q26262599", "spotifyId": "250b0Wlc5Vk0CoUsaCY84M", "youtubeChannelId": "UCNYi_zGmR519r5gYdOKLTjQ", "note": "All 3 verified: JENNIE; YT @jennierubyjane externalId, title JENNIE" },
+  "rose": { "wikidataId": "Q27655344", "spotifyId": "3eVa5w3URK5duf6eyVDbu9", "youtubeChannelId": "UCBo1hnzxV9rz3WVsv__Rn1g", "note": "All 3 verified: ROSÉ; YT ROSÉ @roses_are_rosie (Wikidata P2397)" },
+  "gdragon": { "wikidataId": "Q495577", "spotifyId": "30b9WulBM8sFuBo17nNq9c", "youtubeChannelId": "UCeU5qTuBiqTU5z-hyL6WITQ", "note": "All 3 verified: G-DRAGON / Kwon Ji-yong; YT OfficialGDRAGON @xxxibgdrgn (Wikidata P2397)" },
+  "taeyeon": { "wikidataId": "Q233371", "spotifyId": "3qNVuliS40BLgXGxhdBdqu", "youtubeChannelId": "UCFPI8MI3zmzTlV4W-oSy-Ig", "note": "All 3 verified: TAEYEON; YT TAEYEON Official @taeyeonofficial (Wikidata P2397)" }
+}

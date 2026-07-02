@@ -78,6 +78,8 @@ Artemisia, the traditional hanbang soothing botanical, riding the calming-skinca
 Verdict: Promising / emerging. A comforting, antioxidant-rich botanical — pleasant and soothing; specific “healing” claims outrun the topical evidence.
 Source: https://koreaplus-lifes.com/kbeauty
 
+> Machine-readable trust feed (each claim graded by confidence tier, dated, with named sources): https://koreaplus-lifes.com/kbeauty/answer-ledger.json
+
 ## Trend evidence ledger — does it actually work? (reviewed 2026-06)
 
 ### PDRN “Salmon DNA” — Promising / emerging
