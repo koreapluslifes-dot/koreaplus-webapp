@@ -718,16 +718,12 @@ const TOC_H = { en: 'On this page', ko: '목차', ja: '目次', zh: '目录', es
 function injectToc(body, lang) {
   const heads = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)];
   if (heads.length < 3) return body;
-  // In-article AdSense — one mid-content unit on long pages (>=4 sections) so
-  // long-form articles monetize the scroll, not only the top. Google permits the
-  // same ad unit more than once per page; short pages keep just the top unit.
-  const midN = heads.length >= 4 ? Math.ceil(heads.length / 2) : 0;
-  const midAd = `\n<div class="seo-ad seo-ad-mid">\n  <ins class="adsbygoogle" style="display:block;text-align:center;min-height:100px" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1378943893051810" data-ad-slot="4521899200"></ins>\n  <script>(function(){function p(){(adsbygoogle=window.adsbygoogle||[]).push({});}(window.requestIdleCallback||function(f){setTimeout(f,2200);})(p);})();</script>\n</div>\n`;
+  // Single AdSense banner per page = the top unit injected by shell(). The
+  // in-article (mid) AdSense unit was removed 2026-07 per the monetization
+  // decision: every non-home page carries exactly ONE AdSense banner + ONE
+  // AliExpress strip. injectToc now only adds section ids + the jump nav.
   let i = 0;
-  const out = body.replace(/<h2((?:(?!id=)[^>])*)>([\s\S]*?)<\/h2>/g, (m, attrs, txt) => {
-    const tag = `<h2${attrs} id="sec-${++i}">${txt}</h2>`;
-    return (midN && i === midN) ? midAd + tag : tag;
-  });
+  const out = body.replace(/<h2((?:(?!id=)[^>])*)>([\s\S]*?)<\/h2>/g, (m, attrs, txt) => `<h2${attrs} id="sec-${++i}">${txt}</h2>`);
   const items = heads.map((h, idx) => {
     const label = h[1].replace(/<[^>]+>/g, '').replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}←-⇿⬀-⯿️]/gu, '').trim();
     return label ? `<a href="#sec-${idx + 1}">${label}</a>` : '';
