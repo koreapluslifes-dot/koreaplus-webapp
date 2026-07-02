@@ -61,11 +61,13 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + '.kbhub-card .he{font-size:24px}.kbhub-card .ht{font-weight:800;font-size:14.5px;margin-top:4px}.kbhub-card .hn{font-size:12px;color:#999;margin-top:2px}'
   + '.kbhub-sec{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#999;margin:24px 0 4px}'
   + '.disc{font-size:11.5px;color:#999;margin-top:16px}'
+  + '.skip-link{position:absolute;left:-999px;top:0;background:#d61f6e;color:#fff;padding:8px 14px;border-radius:0 0 8px 0;z-index:500;text-decoration:none}.skip-link:focus{left:0}'
   + '.cmp{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}.cmp th,.cmp td{border:1px solid #f0d8e6;padding:8px 10px;text-align:left;vertical-align:top}.cmp th{background:#faf3f7;font-weight:800}'
   + '.rank{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #f0d8e6;border-radius:12px;padding:12px 14px;margin:8px 0}.rank .rn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#d61f6e,#8b46d6);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}.rank .rb{font-size:11px;font-weight:800;color:#c01a63;text-transform:uppercase}'
   + '.grade{display:inline-block;font-size:11px;font-weight:800;border-radius:10px;padding:2px 9px;color:#fff}.grade.Strong{background:#1a7a45}.grade.Moderate{background:#2060c8}.grade.Emerging{background:#b35f1e}.grade.Limited,.grade.Insufficient{background:#5f6571}';
 // Externalize the page CSS to one cached file (cuts ~4KB inline from every one of the
 // 1,852+ pages; browsers cache it once). shell() links /guide/kb/kb.css?v=CSS_VER.
+const JS_VER = '1';  // bump when kb/kb.js (shared runtime) changes
 fs.mkdirSync(OUT, { recursive: true });
 fs.writeFileSync(path.join(OUT, 'kb.css'), CSS);
 
@@ -76,7 +78,7 @@ const ADSENSE_CLIENT = 'ca-pub-1378943893051810';
 const ADSENSE_SLOT = '4521899200';
 const AD_UNIT = `<ins class="adsbygoogle" style="display:block;margin:22px 0;width:100%;min-height:280px" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${ADSENSE_SLOT}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
 const AD_BOOT = `<script>(function(){var d;function L(){if(d)return;d=1;var s=document.createElement('script');s.async=1;s.crossOrigin='anonymous';s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}';s.onload=function(){document.querySelectorAll('ins.adsbygoogle').forEach(function(){try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}})};document.head.appendChild(s);}['scroll','pointerdown','keydown','touchstart'].forEach(function(e){addEventListener(e,L,{once:true,passive:true})});(window.requestIdleCallback||function(f){setTimeout(f,2500)})(L,{timeout:5000});})();</script>`;
-const CSS_VER = '1';
+const CSS_VER = '2';
 
 function crumbLD(o) {
   const items = [
@@ -110,8 +112,9 @@ ${hreflangs}
 <meta property="og:site_name" content="K-Beauty by KoreaPlus">
 ${ld}
 <link rel="stylesheet" href="/guide/kb/kb.css?v=${CSS_VER}"></head><body>
-<header class="kbh"><a class="kbh-logo" href="/kbeauty" aria-label="K-Beauty home"><span aria-hidden="true">🧴</span> <b>K</b>·Beauty</a><a class="kbh-lib" href="/guide/kb/">📚 Library</a></header>
-<div class="w">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="kbh" role="banner"><a class="kbh-logo" href="/kbeauty" aria-label="K-Beauty home"><span aria-hidden="true">🧴</span> <b>K</b>·Beauty</a><a class="kbh-lib" href="/guide/kb/">📚 Library</a></header>
+<main class="w" id="main" role="main" tabindex="-1">
 <div class="bc"><a href="${SITE}/kbeauty">K-Beauty</a> › <a href="${SITE}/guide/kb/">Library</a>${o.crumb ? ' › ' + o.crumb : ''}</div>
 <div class="em" aria-hidden="true">${o.emoji || '✨'}</div>
 <h1>${esc(o.h1)}${o.ko ? ` <span class="ko">${esc(o.ko)}</span>` : ''}</h1>
@@ -123,8 +126,9 @@ ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
 <div class="foot"><a href="${SITE}/kbeauty">💄 K-Beauty hub</a><a href="${SITE}/guide/kb/">📚 All guides</a><a href="${SITE}/guide/kpop.html">🎤 K-Pop</a><a href="${SITE}/guide/">🧭 Korea travel</a></div>
 <p class="disc">✍️ Written &amp; reviewed by the <b>KoreaPlus Editorial</b> team — dermatologist-informed, cosmetic-science researched &amp; source-cited. Last reviewed ${TODAY}.</p>
 <p class="disc">General educational information using cosmetic structure-function wording — not medical advice. Always patch-test new actives. © KoreaPlus.</p>
-</div>
+</main>
 ${adsOk ? AD_BOOT : ''}
+<script defer src="/guide/kb/kb.js?v=${JS_VER}"></script>
 </body></html>`;
 }
 const INDEX = [];   // {rel, dir, title} — drives the category/language hub pages
@@ -1011,6 +1015,15 @@ mainBody += `<div class="kbhub-sec">🌐 In your language</div><div class="kbhub
 if ((byDir._root || []).length) mainBody += `<div class="kbhub-sec">⚖️ Trend verdicts</div><div class="rel">` + byDir._root.slice().sort((a, b) => a.title.localeCompare(b.title)).map(p => `<a href="${p.rel}">${esc(p.title)}</a>`).join('') + `</div>`;
 fs.writeFileSync(path.join(OUT, 'index.html'), shell({ url: `${SITE}/guide/kb/`, depth: 1, h1: 'The K-Beauty Library', emoji: '📚', title: 'K-Beauty Library — ingredients, brands, companies & guides in 9 languages', desc: 'The complete K-beauty knowledge library — ingredients, brands, company analyses, routines, dupes & FAQs in 9 languages. Browse by category.', bodyHtml: mainBody, ads: false }));
 sitemapUrls.push({ loc: `${SITE}/guide/kb/`, prio: '0.9' });
+// kb-search.json — client-side full-library search index consumed by kb.js (all langs).
+const _langset = Object.keys(LANG_NAMES);
+const searchJson = INDEX.map(p => {
+  const lang = _langset.indexOf(p.dir) >= 0 ? p.dir : 'en';
+  const meta = HUB_META[p.dir];
+  return { t: p.title, u: '/guide/kb/' + p.rel, e: meta ? meta.e : '📄', d: meta ? meta.t : (lang !== 'en' ? LANG_NAMES[lang] : ''), l: lang };
+});
+fs.writeFileSync(path.join(OUT, 'kb-search.json'), JSON.stringify(searchJson));
+console.log('kb-search.json:', searchJson.length, 'entries');
 
 // ── Consolidated sitemap (hub 9-lang + every page) ──────────────────────────
 const ALT = [['x-default', ''], ['en', ''], ['ko', '?lang=ko'], ['ja', '?lang=ja'], ['zh-CN', '?lang=zh'], ['es', '?lang=es'], ['fr', '?lang=fr'], ['de', '?lang=de'], ['pt-BR', '?lang=pt'], ['id', '?lang=id']];
