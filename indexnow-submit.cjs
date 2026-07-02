@@ -22,8 +22,8 @@ function locsFrom(file) {
     .filter(u => u.includes('/guide/') && !u.includes('?'));  // key path scope + drop ?lang= variants
 }
 
-// Merge main + K-Pop sitemaps, de-dupe across both.
-const urls = [...new Set([...locsFrom('sitemap.xml'), ...locsFrom('kpop-sitemap.xml')])];
+// Merge main + K-Pop + K-Beauty sitemaps, de-dupe across all three.
+const urls = [...new Set([...locsFrom('sitemap.xml'), ...locsFrom('kpop-sitemap.xml'), ...locsFrom('kbeauty-sitemap.xml')])];
 
 function submit(chunk, idx, total) {
   const body = JSON.stringify({ host: HOST, key: KEY, keyLocation: KEY_LOCATION, urlList: chunk });
