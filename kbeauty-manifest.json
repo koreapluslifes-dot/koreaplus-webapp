@@ -2,7 +2,7 @@
   "name": "K-Beauty by KoreaPlus",
   "short_name": "K-Beauty",
   "id": "/kbeauty",
-  "description": "Korean skincare routine builder, ingredient decoder, brand directory & authentic shopping — dermatologist-informed, in 9 languages.",
+  "description": "Korean skincare routine builder, ingredient decoder, brand directory & authentic shopping — dermatologist-informed, in 14 languages.",
   "start_url": "/guide/kbeauty.html?src=pwa",
   "scope": "/",
   "display": "standalone",
@@ -22,5 +22,11 @@
     { "name": "My routine", "short_name": "Routine", "url": "/guide/kbeauty.html#cat=routine" },
     { "name": "Ingredients", "short_name": "Ingredients", "url": "/guide/kbeauty.html#cat=ingr" },
     { "name": "Where to buy", "short_name": "Buy", "url": "/guide/kbeauty.html#cat=buy" }
-  ]
+  ],
+  "share_target": {
+    "action": "/guide/kbeauty.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": { "title": "title", "text": "share", "url": "url" }
+  }
 }

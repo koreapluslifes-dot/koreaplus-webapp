@@ -1823,6 +1823,37 @@
   }
 
   // ── Boot ───────────────────────────────────────────────────────────────────
+  // ── PWA extras: routine reminders (.ics), Web Share Target, first-run onboarding ──
+  function initPWAExtras() {
+    // #12 routine reminders → downloadable .ics (universal; no backend/push)
+    const rb = $('#kb-routine-remind');
+    if (rb) rb.addEventListener('click', () => {
+      try {
+        const ev = (hh, name) => ['BEGIN:VEVENT', 'SUMMARY:' + name, 'RRULE:FREQ=DAILY', 'DTSTART:20260101T' + hh + '0000', 'DURATION:PT10M', 'BEGIN:VALARM', 'TRIGGER:PT0S', 'ACTION:DISPLAY', 'DESCRIPTION:' + name, 'END:VALARM', 'END:VEVENT'];
+        const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//KoreaPlus//K-Beauty//EN', 'CALSCALE:GREGORIAN'].concat(ev('0800', cx('rem.am', 'K-beauty AM skincare routine')), ev('2200', cx('rem.pm', 'K-beauty PM skincare routine')), ['END:VCALENDAR']);
+        const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'kbeauty-routine.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        if (typeof kbToast === 'function') kbToast(cx('rem.added', 'Reminders downloaded — open the file to add to your calendar ✓'));
+        try { kbtrack('reminder_ics', {}); } catch (e) {}
+      } catch (e) {}
+    });
+    // #13 Web Share Target — shared INCI/text arrives as ?share=; open the analyzer with it
+    try {
+      const sp = new URLSearchParams(location.search); const shared = sp.get('share') || sp.get('text');
+      if (shared && shared.length > 8) { showCategory('ingr'); setTimeout(() => { const inp = $('#kb-decoder-input'); if (inp) { inp.value = shared; runDecoder(); const el = document.getElementById('kb-ingredients'); if (el) el.scrollIntoView({ behavior: 'smooth' }); } }, 400); }
+    } catch (e) {}
+    // #17 first-run onboarding — skin-type quick-pick, once, only if no profile yet
+    try {
+      if (!localStorage.getItem('kb_onboarded') && !getSkin() && $('#kb-modal') && (!location.hash || location.hash === '#')) {
+        setTimeout(() => {
+          const box = $('#kb-modal'); if (!box) return;
+          box.innerHTML = '<button class="kb-modal-x" data-close aria-label="Close">✕</button><div class="kb-sheet-h">👋 ' + esc(cx('onb.title', 'Welcome to K-Beauty')) + '</div><p style="font-size:14px;color:var(--text2);margin:0 0 12px">' + esc(cx('onb.sub', 'Pick your skin type and we’ll personalize everything for you.')) + '</p><div class="kb-opts">' + SKINTYPES.map(s => '<button class="kb-opt" data-onb="' + esc(s.id) + '">' + (s.emoji || '') + ' ' + esc(s.name) + '</button>').join('') + '</div>';
+          openModalA11y(); localStorage.setItem('kb_onboarded', '1');
+          $$('[data-onb]', box).forEach(b => b.addEventListener('click', () => { setSkin(b.dataset.onb); try { refreshPersonalized(); } catch (e) {} closeModal(); showCategory('skin'); try { kbtrack('onboard_skin', { skin: b.dataset.onb }); } catch (e) {} }));
+        }, 1400);
+      }
+    } catch (e) {}
+  }
   async function boot() {
     await loadContent();   // per-language content overlay (English fallback)
     localizeData();
@@ -1842,6 +1873,7 @@
     wireFilters();
     showShareFab();
     initUX();   // modern UX layer: search, back-to-top, progress, bottom-nav, toast, recent, reveal, haptics
+    initPWAExtras();  // #12 .ics reminders, #13 Web Share Target, #17 first-run onboarding
 
     // routine tabs
     $$('#kb-routine-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {
