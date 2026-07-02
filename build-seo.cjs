@@ -602,6 +602,25 @@ const TABBAR = {
   pt: ['Início', 'Explorar', 'Buscar', 'Planejar', 'Salvos'],
   id: ['Beranda', 'Jelajahi', 'Cari', 'Rencana', 'Disimpan'],
 };
+// ── Localized ARIA / chrome strings (S19) — 14 languages, EN fallback.
+// Keys: skip=skip-to-content link, nav=main nav aria-label, top=back-to-top.
+const ARIA = {
+  en: { skip: 'Skip to content', nav: 'Navigation', top: 'Back to top' },
+  ko: { skip: '본문으로 건너뛰기', nav: '내비게이션', top: '맨 위로' },
+  ja: { skip: 'コンテンツにスキップ', nav: 'ナビゲーション', top: 'トップへ戻る' },
+  zh: { skip: '跳到主要内容', nav: '导航', top: '返回顶部' },
+  es: { skip: 'Saltar al contenido', nav: 'Navegación', top: 'Volver arriba' },
+  fr: { skip: 'Aller au contenu', nav: 'Navigation', top: 'Retour en haut' },
+  de: { skip: 'Zum Inhalt springen', nav: 'Navigation', top: 'Nach oben' },
+  pt: { skip: 'Pular para o conteúdo', nav: 'Navegação', top: 'Voltar ao topo' },
+  id: { skip: 'Lewati ke konten', nav: 'Navigasi', top: 'Kembali ke atas' },
+  ar: { skip: 'تخطَّ إلى المحتوى', nav: 'التنقل', top: 'العودة إلى الأعلى' },
+  hi: { skip: 'सामग्री पर जाएं', nav: 'नेविगेशन', top: 'ऊपर जाएं' },
+  ru: { skip: 'Перейти к содержанию', nav: 'Навигация', top: 'Наверх' },
+  vi: { skip: 'Bỏ qua đến nội dung', nav: 'Điều hướng', top: 'Lên đầu trang' },
+  th: { skip: 'ข้ามไปยังเนื้อหา', nav: 'การนำทาง', top: 'กลับด้านบน' },
+};
+const aria = lang => ARIA[lang] || ARIA.en;
 function tabBar(lang) {
   const T = TABBAR[lang] || TABBAR.en;
   return `<nav class="kp-tabbar" aria-label="Mobile navigation">
@@ -730,7 +749,7 @@ const ORG_LD = {
   areaServed: { '@type': 'Country', name: 'South Korea' },
 };
 const siteLD = lang => ({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': ORIGIN + '/#website', name: 'KoreaPlus', url: ORIGIN + BASEP, inLanguage: lang, publisher: { '@id': ORIGIN + '/#org' } });
-const speakableLD = url => ({ '@context': 'https://schema.org', '@type': 'WebPage', url: ORIGIN + url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.lead', '.seo-keyfacts'] }, primaryImageOfPage: { '@type': 'ImageObject', url: ORIGIN + '/guide/og-image.jpg', width: 1200, height: 630 } });
+const speakableLD = url => ({ '@context': 'https://schema.org', '@type': 'WebPage', url: ORIGIN + url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.seo-tldr', '.lead', '.seo-keyfacts'] }, primaryImageOfPage: { '@type': 'ImageObject', url: ORIGIN + '/guide/og-image.jpg', width: 1200, height: 630 } });
 const TRUST = {
   en: { by: 'By the KoreaPlus Editorial Team', upd: 'Updated', rev: 'Fact-checked for 2026' },
   ko: { by: 'KoreaPlus 편집팀', upd: '업데이트', rev: '2026년 기준 사실 확인' },
@@ -772,11 +791,15 @@ const CITY_FACTS = {
   pt: c => [`🗓️ Melhor época: abr–maio e set–nov`, `🗣️ Coreano`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} dias`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Aeroporto de Incheon' : '🚄 KTX/ônibus de Seul'],
   id: c => [`🗓️ Terbaik: Apr–Mei & Sep–Nov`, `🗣️ Bahasa Korea`, `💱 KRW (₩)`, `⏱️ ${c === 'Seoul' ? '3–4' : '2–3'} hari`, (c === 'Seoul' || c === 'Incheon') ? '✈️ Bandara Incheon' : '🚄 KTX/bus dari Seoul'],
 };
-function trustBlock(lang) {
+// S09: `updated` shows the real content-version date (when the page's content
+// last actually changed — content-hash tracked in PAGE_SUMMARIES), NOT the build
+// date. `cdate` is resolved in shell() from the TL;DR hash; falls back to TODAY.
+function trustBlock(lang, cdate) {
   const t = TRUST[lang] || TRUST.en;
+  const upd = cdate || TODAY;
   return `<div class="seo-byline" style="font-size:12px;color:var(--text3,#8a93a0);margin:4px 0 16px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center">` +
     `<span>✍️ <a href="about.html" style="color:var(--accent2,#74b9ff);text-decoration:none">${esc(t.by)}</a></span>` +
-    `<span>🔄 ${esc(t.upd)} ${TODAY}</span><span>✓ ${esc(t.rev)}</span></div>`;
+    `<span>🔄 ${esc(t.upd)} ${upd}</span><span>✓ ${esc(t.rev)}</span></div>`;
 }
 // Collects hreflang clusters as pages are generated, so the sitemap can carry
 // reciprocal <xhtml:link> alternate annotations (helps Google discover + index
@@ -830,6 +853,225 @@ function foodEmoji(name) {
   for (const [re, e] of m) if (re.test(n)) return e;
   return '🍽️';
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   S10 — miniChart: dependency-free, static inline SVG data-viz.
+   Renders numeric data (trip-cost budgets, monthly climate, travel times)
+   as a bar chart or sparkline right in the page HTML — no JS, no library,
+   so it costs nothing at runtime and never shifts layout (fixed viewBox +
+   min-height). Colors use CSS vars so it themes with light/dark. Accessible:
+   role="img" + <title>/aria-label describe the series for screen readers.
+   Returns '' when there is no usable data (caller then simply omits it).
+     series : [{ label, value:Number, display?:String }]
+     opts   : { type:'bar'|'spark', title, unit, height }
+   ═══════════════════════════════════════════════════════════════════════ */
+function miniChart(series, opts = {}) {
+  const data = (Array.isArray(series) ? series : [])
+    .map(d => ({ label: String(d.label == null ? '' : d.label), value: Number(d.value), display: d.display }))
+    .filter(d => Number.isFinite(d.value));
+  if (data.length < 2) return '';
+  const type = opts.type === 'spark' ? 'spark' : 'bar';
+  const title = opts.title || '';
+  const unit = opts.unit || '';
+  const vals = data.map(d => d.value);
+  const max = Math.max(...vals), min = Math.min(...vals);
+  const span = (max - min) || 1;
+  const cap = title ? `<title>${esc(title)}</title>` : '';
+  const aria = esc(title || 'chart') + ': ' + data.map(d => `${d.label} ${d.display || (d.value + unit)}`).join(', ');
+  const fmt = d => esc(d.display != null ? d.display : (d.value + unit));
+
+  if (type === 'spark') {
+    // 12-ish point line + area — good for a monthly temperature curve.
+    const W = 320, H = opts.height || 60, pad = 4;
+    const step = (W - pad * 2) / (data.length - 1);
+    const y = v => H - pad - ((v - min) / span) * (H - pad * 2);
+    const pts = data.map((d, i) => `${(pad + i * step).toFixed(1)},${y(d.value).toFixed(1)}`);
+    const area = `${pad},${H - pad} ${pts.join(' ')} ${(pad + (data.length - 1) * step).toFixed(1)},${H - pad}`;
+    const dots = data.map((d, i) => `<circle cx="${(pad + i * step).toFixed(1)}" cy="${y(d.value).toFixed(1)}" r="2" fill="var(--accent2,#74b9ff)"><title>${esc(d.label)}: ${fmt(d)}</title></circle>`).join('');
+    return `<figure class="kp-chart kp-chart-spark" style="margin:6px 0 18px">`
+      + (title ? `<figcaption style="font-size:12.5px;color:var(--text2,#9fb0c3);margin-bottom:4px">${esc(title)}</figcaption>` : '')
+      + `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="none" role="img" aria-label="${aria}" style="display:block;max-width:${W}px;min-height:${H}px">${cap}`
+      + `<polygon points="${area}" fill="var(--accent2,#74b9ff)" opacity="0.14"/>`
+      + `<polyline points="${pts.join(' ')}" fill="none" stroke="var(--accent2,#74b9ff)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`
+      + dots + `</svg></figure>`;
+  }
+
+  // Horizontal bar chart — good for a small labelled comparison (budgets, times).
+  const rowH = 26, gap = 6, labelW = 118, barMax = 168, valW = 66;
+  const W = labelW + barMax + valW + 8;
+  const H = data.length * (rowH + gap) - gap + 4;
+  const rows = data.map((d, i) => {
+    const y = i * (rowH + gap) + 2;
+    const w = Math.max(2, ((d.value - (min > 0 ? 0 : min)) / (max - (min > 0 ? 0 : min) || 1)) * barMax);
+    return `<text x="0" y="${y + rowH / 2 + 4}" font-size="12" fill="var(--text2,#9fb0c3)">${esc(d.label)}</text>`
+      + `<rect x="${labelW}" y="${y}" width="${w.toFixed(1)}" height="${rowH}" rx="4" fill="var(--accent2,#74b9ff)" opacity="0.85"><title>${esc(d.label)}: ${fmt(d)}</title></rect>`
+      + `<text x="${labelW + w + 6}" y="${y + rowH / 2 + 4}" font-size="12" font-weight="700" fill="var(--text,#e6edf5)">${fmt(d)}</text>`;
+  }).join('');
+  return `<figure class="kp-chart kp-chart-bar" style="margin:6px 0 18px">`
+    + (title ? `<figcaption style="font-size:12.5px;color:var(--text2,#9fb0c3);margin-bottom:4px">${esc(title)}</figcaption>` : '')
+    + `<svg viewBox="0 0 ${W} ${H}" width="100%" height="auto" role="img" aria-label="${aria}" style="display:block;max-width:${W}px;min-height:${H}px">${cap}${rows}</svg></figure>`;
+}
+// Parse a human duration ("2h 20m", "~1h", "1h 40m (KTX) / 2h 20m") → minutes.
+// Uses the FIRST time token (before any "/") so alternatives don't skew the bar.
+// Returns NaN when nothing parseable (miniChart then drops that row).
+function parseDuration(s) {
+  const first = String(s || '').split('/')[0];
+  const h = /(\d+(?:\.\d+)?)\s*h/.exec(first);
+  const m = /(\d+)\s*m(?!on)/.exec(first);   // "m" but not "mon"; minutes only
+  if (!h && !m) return NaN;
+  return (h ? parseFloat(h[1]) * 60 : 0) + (m ? parseInt(m[1], 10) : 0);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   STEP1a — build-time data products (S02 search index · S04 related · S08 TL;DR)
+   All deterministic (no LLM, zero hallucination): every value is lifted verbatim
+   from the page HTML that shell() already produced, or derived from the URL.
+   ══════════════════════════════════════════════════════════════════════ */
+const crypto = require('crypto');
+// One record per generated page, collected inside shell(); flushed to
+// search-index.<lang>.json / related.json after the build loop.
+const SEARCH_ENTRIES = [];
+// Incremental TL;DR cache — content-hash keyed so unchanged pages reuse the
+// prior summary/tldr HTML instead of recomputing. Shape:
+//   { "<url>": { hash, summary, tldr } }
+let PAGE_SUMMARIES = {};
+try { PAGE_SUMMARIES = JSON.parse(fs.readFileSync(path.join(OUT, 'page-summaries.json'), 'utf8')); } catch { /* first run */ }
+const PAGE_SUMMARIES_NEW = {};
+
+// TL;DR / summary heading label — 14 languages (9 site langs + 5 fallback locales).
+const TLDR_H = {
+  en: 'Summary', ko: '요약', ja: '要約', zh: '摘要', es: 'Resumen',
+  fr: 'Résumé', de: 'Zusammenfassung', pt: 'Resumo', id: 'Ringkasan',
+  it: 'Riepilogo', ru: 'Кратко', vi: 'Tóm tắt', th: 'สรุป', hi: 'सारांश',
+};
+
+// Strip tags → plain text; collapse whitespace & entities we emit (esc()).
+function _plain(html) {
+  return String(html == null ? '' : html)
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ').trim();
+}
+// First 2–3 sentences of the plain text, capped at ~260 chars (no mid-word cut).
+function _sentences(text, maxSent = 3, cap = 260) {
+  if (!text) return '';
+  const parts = text.match(/[^.!?。！？]+[.!?。！？]?/g) || [text];
+  let out = '';
+  for (const s of parts) {
+    if (out && (out.length + s.length) > cap) break;
+    out += s;
+    if ((out.match(/[.!?。！？]/g) || []).length >= maxSent) break;
+  }
+  out = out.trim();
+  if (out.length > cap) out = out.slice(0, cap).replace(/\s+\S*$/, '') + '…';
+  return out;
+}
+// Deterministic extraction of the page's lead paragraph + at-a-glance facts.
+// lead   → the <p class="lead"> text (the answer-first sentence on every page).
+// facts  → the .seo-keyfacts spans (icon-led scannable facts), max 3 bullets.
+function extractPageContent(body) {
+  const leadM = /<p class="lead"[^>]*>([\s\S]*?)<\/p>/.exec(body || '');
+  const lead = leadM ? _plain(leadM[1]) : '';
+  const facts = [];
+  const kfM = /<div class="seo-keyfacts"[^>]*>([\s\S]*?)<\/div>/.exec(body || '');
+  if (kfM) {
+    for (const sp of kfM[1].matchAll(/<span[^>]*>([\s\S]*?)<\/span>/g)) {
+      const t = _plain(sp[1]);
+      if (t) facts.push(t);
+      if (facts.length >= 3) break;
+    }
+  }
+  // Fallback fact source when no keyfacts box: first two <li> in the body.
+  if (!facts.length) {
+    for (const li of (body || '').matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)) {
+      const t = _plain(li[1]);
+      if (t && t.length <= 120) facts.push(t);
+      if (facts.length >= 3) break;
+    }
+  }
+  return { lead, facts };
+}
+// A short summary string (shared by S02 index + S08 TL;DR).
+function buildSummary(body, desc) {
+  const { lead } = extractPageContent(body);
+  const base = lead || _plain(desc);
+  return _sentences(base, 3, 260) || _plain(desc).slice(0, 200);
+}
+// Deterministic tags from URL segments + category signals (no LLM).
+// e.g. /guide/things-to-do-in-seoul.html → ['guide','seoul','things-to-do',…]
+const _TAG_STOP = new Set(['guide', 'html', 'the', 'in', 'to', 'of', 'and', 'a', 'do', 'is', 'best', 'ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id']);
+const _TAG_TOPIC = [
+  [/things-to-do|attraction|places|visit|destination/, 'attractions'],
+  [/itinerary|day|plan|trip/, 'itinerary'],
+  [/food|dish|eat|restaurant|bbq|street/, 'food'],
+  [/visa|k-eta|keta|entry/, 'visa'],
+  [/best-time|season|weather|month|korea-in-/, 'season'],
+  [/where-to-stay|hotel|stay|accommodation|neighbou?rhood/, 'stay'],
+  [/transport|ktx|train|subway|bus|seoul-to-/, 'transport'],
+  [/kbeauty|k-beauty|skincare|beauty/, 'kbeauty'],
+  [/kpop|k-pop|idol|comeback/, 'kpop'],
+  [/cost|budget|price|money/, 'budget'],
+  [/faq|question|answer/, 'faq'],
+  [/festival|event/, 'festival'],
+  [/temple|palace|hanok|history|culture/, 'culture'],
+  [/shopping|market|mall/, 'shopping'],
+];
+const _CITY_TAGS = ['seoul', 'busan', 'jeju', 'incheon', 'gyeongju', 'jeonju', 'andong', 'yeosu', 'daegu', 'gwangju', 'daejeon', 'suwon', 'sokcho', 'gangneung', 'jeonju', 'pohang'];
+function deriveTags(url, title) {
+  const tags = new Set();
+  const path = url.replace(BASEP, '').replace(/^(ja|zh|es|ko|fr|de|pt|id)\//, '');
+  // topic tags from the whole path
+  for (const [re, t] of _TAG_TOPIC) if (re.test(path)) tags.add(t);
+  // city tag
+  for (const c of _CITY_TAGS) if (new RegExp('\\b' + c + '\\b').test(path)) { tags.add(c); break; }
+  // salient path segment words (deduped, stopwords removed)
+  path.replace(/\.html$/, '').split(/[\/-]/).forEach(w => {
+    w = w.toLowerCase();
+    if (w.length >= 3 && !_TAG_STOP.has(w) && !/^\d+$/.test(w)) tags.add(w);
+  });
+  return [...tags].slice(0, 12);
+}
+// S08 — build-time static injection into the empty #kp-tldr div.
+// 2–3 sentence summary + up to 3 fact bullets. Deterministic; incremental via hash.
+function buildTldrHtml(url, body, desc, lang) {
+  const { facts } = extractPageContent(body);
+  const summary = buildSummary(body, desc);
+  if (!summary && !facts.length) return { html: '', summary: '', cdate: '' };
+  // Content hash for incremental reuse (summary + facts are the only inputs).
+  const hash = crypto.createHash('sha1').update(summary + ' ' + facts.join(' ')).digest('hex').slice(0, 16);
+  const cached = PAGE_SUMMARIES[url];
+  if (cached && cached.hash === hash) {
+    // S09: content unchanged -> keep the real content-version date. Legacy
+    // records (pre-S09) have no cdate; adopt TODAY once, then it stays fixed.
+    const cdate = cached.cdate || TODAY;
+    PAGE_SUMMARIES_NEW[url] = { hash, summary: cached.summary, tldr: cached.tldr, cdate };
+    return { html: cached.tldr, summary: cached.summary, cdate };
+  }
+  const h = TLDR_H[lang] || TLDR_H.en;
+  const bullets = facts.slice(0, 3).map(f => `<li>${esc(f)}</li>`).join('');
+  const html = `<div class="seo-tldr">`
+    + `<span class="kp-tldr-h">${esc(h)}</span>`
+    + (summary ? `<p class="kp-tldr-p">${esc(summary)}</p>` : '')
+    + (bullets ? `<ul class="kp-tldr-l">${bullets}</ul>` : '')
+    + `</div>`;
+  // S09: content changed (or new page) -> stamp the content-version date to TODAY.
+  const cdate = TODAY;
+  PAGE_SUMMARIES_NEW[url] = { hash, summary, tldr: html, cdate };
+  return { html, summary, cdate };
+}
+// S09 fallback for pages without a TL;DR (hubs/index/category pages): track a
+// body content-hash in the SAME cache so the "updated" date is a real
+// content-version date — it only advances to TODAY when the body text changes.
+// Records are kept under a "b:" prefix so they never collide with TL;DR entries.
+function contentVersionDate(url, body) {
+  const key = 'b:' + url;
+  const hash = crypto.createHash('sha1').update(_plain(body)).digest('hex').slice(0, 16);
+  const cached = PAGE_SUMMARIES[key];
+  const cdate = (cached && cached.hash === hash && cached.cdate) ? cached.cdate : TODAY;
+  PAGE_SUMMARIES_NEW[key] = { hash, cdate };
+  return cdate;
+}
+
 function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', alts = [], image, homeHref = 'index.html', brand = 'Korea<span>Plus</span>' }) {
   const canonical = ORIGIN + url;
   const ogImg = image || `${ORIGIN}/guide/og-image.jpg`;
@@ -851,6 +1093,22 @@ function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', a
   if (!/class="kp-klook"/.test(body)) {
     body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
   }
+  // ── STEP1a data products ──────────────────────────────────────────
+  // S08: deterministic TL;DR, injected build-time into the empty #kp-tldr div.
+  const _tldr = buildTldrHtml(url, body, desc, lang);
+  const tldrHtml = _tldr.html;
+  // S09: real content-version date for the trust byline. Prefer the TL;DR hash's
+  // cdate; for pages that produce no TL;DR, fall back to a body-hash record so the
+  // date is still stable (only bumps to TODAY when the body actually changes).
+  const contentDate = _tldr.cdate || contentVersionDate(url, body);
+  // S02: one search-index record per page (summary shared with the TL;DR).
+  SEARCH_ENTRIES.push({
+    url,
+    title: _plain(title).replace(/\s*\|\s*KoreaPlus.*$/i, '').trim() || _plain(title),
+    lang,
+    tags: deriveTags(url, title),
+    summary: _tldr.summary || buildSummary(body, desc),
+  });
   const __out = `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -880,9 +1138,9 @@ ${alts.filter(a => a.lang !== lang && OG_LOCALE[a.lang]).map(a => `<meta propert
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${esc(title)}">
-<meta property="og:updated_time" content="${TODAY}T08:00:00Z">
+<meta property="og:updated_time" content="${contentDate}T08:00:00Z">
 <meta property="article:published_time" content="${TODAY}T08:00:00Z">
-<meta property="article:modified_time" content="${TODAY}T08:00:00Z">
+<meta property="article:modified_time" content="${contentDate}T08:00:00Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="${esc(ogImg)}">
 <meta name="twitter:title" content="${esc(title)}">
@@ -895,8 +1153,9 @@ ${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=10">
+<link rel="stylesheet" href="seo.css?v=11">
 <link rel="stylesheet" href="mobile.css?v=1">
+<link rel="stylesheet" href="feature.css?v=1">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
 <script defer src="modules/header.js"></script>
 <script defer src="modules/mobile.js?v=1"></script>
@@ -905,15 +1164,16 @@ ${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 ${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
 </head>
 <body data-mnav="${homeHref === '/kpop' ? 'kpop' : 'travel'}">
-<a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to content</a>
-<nav class="hub-nav" role="navigation" aria-label="Navigation">
+<a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">${esc(aria(lang).skip)}</a>
+<nav class="hub-nav" role="navigation" aria-label="${esc(aria(lang).nav)}">
   <a class="hub-nav-logo" href="${homeHref}" aria-label="KoreaPlus — back to home" title="Home"><span aria-hidden="true">🇰🇷</span> ${brand}</a>
   <div class="hub-nav-links">${PRIMARY_NAV}</div>
 </nav>
 <div id="kp-korea-now" class="kp-korea-now" style="display:none;max-width:920px;margin:0 auto;padding:7px 16px;font-size:12.5px;color:var(--text2,#aab);flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;border-bottom:1px solid var(--border,rgba(255,255,255,.07))" aria-live="polite"></div>
 <main id="main" class="seo-wrap" role="main">
 ${hero}
-${trustBlock(lang)}
+<div id="kp-tldr">${tldrHtml}</div>
+${trustBlock(lang, contentDate)}
 <!-- AdSense — compact horizontal unit, upper placement (after hero) -->
 <div class="seo-ad seo-ad-top">
   <ins class="adsbygoogle" style="display:block;min-height:90px"
@@ -927,6 +1187,7 @@ ${trustBlock(lang)}
 <article class="seo-body">
 ${injectToc(body, lang)}
 </article>
+<div class="kp-nextsteps" hidden></div>
 <div id="kp-react" class="kp-react" style="display:none;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 4px;padding:12px 14px;font-size:14px;border-top:1px solid var(--border,rgba(255,255,255,.08))"></div>
 <div id="kp-foryou" style="display:none;margin:18px 0 4px;padding:16px 14px;border-top:1px solid var(--border,rgba(255,255,255,.08))"></div>
 </main>
@@ -968,8 +1229,8 @@ ${injectToc(body, lang)}
 </footer>
 <!-- Reading-progress bar + back-to-top (self-contained, no module dependency) -->
 <div id="kp-progress" style="position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#74b9ff,#ff6b9d);z-index:1200;transition:width .1s ease-out"></div>
-<button id="kp-totop" aria-label="Back to top" style="position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(12,24,41,.85);color:#fff;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s;z-index:1200;backdrop-filter:blur(6px)">↑</button>
-<script>(function(){var b=document.getElementById('kp-progress'),t=document.getElementById('kp-totop');function u(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;if(b)b.style.width=Math.min(100,sc/mx*100)+'%';if(t){var on=sc>600;t.style.opacity=on?'1':'0';t.style.visibility=on?'visible':'hidden';}}window.addEventListener('scroll',u,{passive:true});if(t)t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});u();})();</script>
+<button id="kp-totop" aria-label="${esc(aria(lang).top)}" style="position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(12,24,41,.85);color:#fff;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s;z-index:1200;backdrop-filter:blur(6px)">↑</button>
+<script>(function(){var b=document.getElementById('kp-progress'),t=document.getElementById('kp-totop');function u(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;if(b)b.style.width=Math.min(100,sc/mx*100)+'%';if(t){var on=sc>600;t.style.opacity=on?'1':'0';t.style.visibility=on?'visible':'hidden';}}window.addEventListener('scroll',u,{passive:true});if(t)t.addEventListener('click',function(){var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});u();})();</script>
 ${tabBar(lang)}
 <!-- Localized merch strip runtime: config (optional) → Worker URL fallback → API client → topads -->
 <script src="config.js" onerror="void 0"></script>
@@ -981,6 +1242,19 @@ ${tabBar(lang)}
 <script defer src="modules/foryou.js?v=1"></script>
 <script defer src="modules/install.js?v=1"></script>
 <script defer src="modules/kp-enhance.js?v=1"></script>
+<!-- STEP0 — instant-nav (S01) + feature module loaders. Same-origin only;
+     ad/tracker/worker-chat origins are excluded so prefetch never touches
+     pagead2 / doubleclick / googlesyndication / the Worker chat endpoint. -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/guide/*"},{"not":{"href_matches":"*pagead2*"}},{"not":{"href_matches":"*doubleclick*"}},{"not":{"href_matches":"*googlesyndication*"}},{"not":{"href_matches":"*.workers.dev/*"}},{"not":{"selector_matches":"[rel~=nofollow]"}}]},"eagerness":"moderate"}]}
+</script>
+<script defer src="modules/search.js?v=1"></script>
+<script defer src="modules/readnext.js?v=1"></script>
+<script defer src="modules/highlight.js?v=1"></script>
+<script defer src="modules/microquiz.js?v=1"></script>
+<script defer src="modules/countdown.js?v=1"></script>
+<script defer src="modules/rum.js?v=1"></script>
+<script defer src="modules/ask.js?v=1"></script>
 <script defer src="modules/klook-cards.js?v=2"></script>
 </body>
 </html>`;
@@ -1008,8 +1282,8 @@ function faqLD(qa) {
 function bcHtml(trail) {
   return `<nav class="seo-bc" aria-label="Breadcrumb">` +
     trail.map((t, i) => (i < trail.length - 1
-      ? `<a href="${t.url.replace(BASEP, '') || 'index.html'}">${esc(t.name)}</a><span>›</span>`
-      : `<span style="color:var(--text2,#bbb)">${esc(t.name)}</span>`)).join('') + `</nav>`;
+      ? `<a href="${t.url.replace(BASEP, '') || 'index.html'}">${esc(t.name)}</a><span class="seo-bc-sep" aria-hidden="true">›</span>`
+      : `<span aria-current="page" style="color:var(--text2,#bbb)">${esc(t.name)}</span>`)).join('') + `</nav>`;
 }
 const ctaHtml = (heading, sub) => `
 <div class="seo-cta">
@@ -1024,7 +1298,7 @@ const cardHtml = it => `
 <a class="seo-card" href="places/${it.slug}.html">
   <span class="ce">${it.emoji || '📍'}</span>
   <div class="cn">${esc(it.name)}</div>
-  <div class="ck">${esc(it.kr || '')}</div>
+  <div class="ck" lang="ko">${esc(it.kr || '')}</div>
   <div class="cd">${esc((it.desc || '').slice(0, 90))}${(it.desc || '').length > 90 ? '…' : ''}</div>
 </a>`;
 const mapsHtml = q => {
@@ -1099,7 +1373,7 @@ function buildPlace(it) {
   const hero = `<header class="seo-hero">
     <span class="emoji">${it.emoji || '📍'}</span>
     <h1>${esc(it.name)}</h1>
-    ${it.kr ? `<div class="kr">${esc(it.kr)}</div>` : ''}
+    ${it.kr ? `<div class="kr" lang="ko">${esc(it.kr)}</div>` : ''}
     <div class="meta">${it.region ? `<span class="seo-badge region">📍 ${esc(it.region)}</span>` : ''}${(it.tags || []).map(t => `<span class="seo-badge">${esc(t)}</span>`).join('')}</div>
   </header>`;
 
@@ -1179,7 +1453,7 @@ function buildCity(city) {
     body += `<p class="lead">${esc(g.lead)}</p>`;
     body += `<h2>🏯 Top Attractions in ${esc(city.name)}</h2><div class="seo-grid">${g.attractions.map(a => {
       const sl = placeSlugFor(a.name);
-      const inner = `<span class="ce">${placeEmoji((a.name || '') + ' ' + (a.nameLocal || ''))}</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
+      const inner = `<span class="ce">${placeEmoji((a.name || '') + ' ' + (a.nameLocal || ''))}</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck" lang="ko">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
       return sl ? `<a class="seo-card" href="places/${sl}.html">${inner}</a>` : `<div class="seo-card">${inner}</div>`;
     }).join('')}</div>`;
     if (g.food && g.food.length) body += `<h2>🍜 What to Eat in ${esc(city.name)}</h2><div class="seo-grid">${g.food.map(f => `<div class="seo-card"><span class="ce">${foodEmoji(f.name)}</span><div class="cn">${esc(f.name)}</div><div class="cd">${esc(f.blurb)}</div></div>`).join('')}</div>`;
@@ -1262,7 +1536,7 @@ function buildCityL10n(cityName, lang) {
   // Attractions
   body += `<h2>${esc(ui.attractionsH)}</h2><div class="seo-grid">${g.attractions.map(a => {
     const sl = placeSlugFor(a.name);
-    const inner = `<span class="ce">${placeEmoji((a.name || '') + ' ' + (a.nameLocal || ''))}</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
+    const inner = `<span class="ce">${placeEmoji((a.name || '') + ' ' + (a.nameLocal || ''))}</span><div class="cn">${esc(a.name)}</div>${a.nameLocal && a.nameLocal !== a.name ? `<div class="ck" lang="ko">${esc(a.nameLocal)}</div>` : ''}<div class="cd">${esc(a.blurb)}</div>`;
     return sl ? `<a class="seo-card" href="places/${sl}.html">${inner}</a>` : `<div class="seo-card">${inner}</div>`;
   }).join('')}</div>`;
   // Food
@@ -1367,6 +1641,13 @@ const MONTHS = [
   ['November', '🍂', '5°C to 15°C, cool late autumn', 'Coat, layers', 'Late foliage, fewer crowds, illuminations begin', 'Shoulder season, golden landscapes'],
   ['December', '🎄', '-3°C to 6°C, cold winter', 'Heavy coat, gloves, hat', 'Christmas markets, illuminations, ski season, hot spas', 'Festive lights, winter wonderland'],
 ];
+// S10 — numeric year-round temperature series parsed once from the MONTHS
+// weather strings ("-2°C to 5°C…" → midpoint 1.5°C). Powers the month-page
+// climate sparkline. Purely derived from existing data (no new facts).
+const MONTH_TEMPS = MONTHS.map(m => {
+  const nums = (m[2].match(/-?\d+(?:\.\d+)?(?=\s*°)/g) || []).map(Number);
+  return nums.length ? Math.round((nums.reduce((a, b) => a + b, 0) / nums.length) * 10) / 10 : NaN;
+});
 function buildMonth(m, idx) {
   const [name, icon, weather, wear, events, why] = m;
   const sslug = name.toLowerCase();
@@ -1379,6 +1660,8 @@ function buildMonth(m, idx) {
   let body = bcHtml(trail);
   body += `<p class="lead">${esc(why)}. Here's everything you need to know about visiting Korea in ${esc(name)} — weather, packing and the best things to do.</p>`;
   body += `<h2>🌡️ ${esc(name)} Weather in Korea</h2><p><strong>Typical temperatures:</strong> ${esc(weather)}.</p>`;
+  // S10 — year-round temperature curve (Seoul avg °C by month), current month marked.
+  body += miniChart(MONTHS.map((mm, i) => ({ label: mm[0].slice(0, 3), value: MONTH_TEMPS[i], display: MONTH_TEMPS[i] + '°C' })), { type: 'spark', title: 'Average temperature across the year (°C)', unit: '°C' });
   body += `<h2>🧳 What to Wear</h2><p>${esc(wear)}.</p>`;
   body += `<h2>🎉 Top Things to Do in ${esc(name)}</h2><p>${esc(events)}.</p>`;
   body += `<h2>📅 Live Events</h2><p>See what's on right now — Korea's festival calendar updates automatically with real-time data.</p><div class="seo-links"><a href="festivals.html">📅 Korea Festival Calendar ↗</a><a href="seasons.html">🌸 Cherry Blossom & Foliage Forecast ↗</a></div>`;
@@ -1635,6 +1918,9 @@ function buildTransport(r) {
   if (r.bus) rows.push(['🚌 Express bus', r.bus, r.busKrw || '—']);
   if (r.subway) rows.push(['🚇 Subway / AREX', r.subway, r.subwayKrw || '—']);
   body += `<h2>🚦 Seoul → ${esc(r.to)} options compared</h2><table class="seo-costtable"><thead><tr><th>Mode</th><th>Time</th><th>Fare (one-way)</th></tr></thead><tbody>${rows.map(([m, t, f]) => `<tr><td>${esc(m)}</td><td>${esc(t)}</td><td>${esc(f)}</td></tr>`).join('')}</tbody></table>`;
+  // S10 — static bar chart comparing travel time (minutes) by mode.
+  const _rmins = rows.map(([m, t]) => ({ label: m.replace(/^[^\p{L}]+/u, '').trim(), value: parseDuration(t), display: t.split('/')[0].trim() }));
+  body += miniChart(_rmins, { type: 'bar', title: `Seoul → ${r.to}: travel time by mode` });
   body += `<h2>🎫 How to book</h2><p>Book KTX/SRT trains on the official Korail (Korail Talk) or SRT apps, or at any station — reserve a few days ahead for weekends. Express buses use the Korea Bus / Kobus / T-money GO apps or the express bus terminal. ${r.flight ? 'Domestic flights are cheapest booked early on Korean Air, Asiana or low-cost carriers (Jeju Air, Jin Air, T\'way).' : ''} A T-money card covers local transit at both ends.</p>`;
   body += `<h2>🔗 Plan your trip</h2><div class="seo-linklist"><a href="guide/things-to-do-in-${ts}.html">📍 Things to Do in ${esc(r.to)}</a><a href="guide/best-time-to-visit-${ts}.html">🗓️ Best Time to Visit ${esc(r.to)}</a><a href="explore.html">🧭 All Korea guides</a><a href="guide/korea-travel-cost-index.html">💰 Cost Index</a></div>`;
   const qa = [
@@ -1679,6 +1965,8 @@ function buildCostIndex(lang) {
   body += `<p class="lead">${esc(C.lead)}</p>`;
   body += keyFactsBox([`💵 ${C.styleN.backpacker}: $55${C.perDay}`, `💳 ${C.styleN.midrange}: $120${C.perDay}`, `💎 ${C.styleN.comfort}: $250${C.perDay}`, `💱 KRW (₩)`]);
   body += `<h2>${esc(C.budgetH)}</h2><div class="seo-grid">${COST_DATA.styles.map(s => `<div class="seo-card"><div class="cn">${esc(C.styleN[s.k])}</div><div class="aff-rich-price"><b>${esc(s.krw)}</b> · $${s.usd}${esc(C.perDay)}</div></div>`).join('')}</div>`;
+  // S10 — static bar chart of the daily budget (USD) by travel style.
+  body += miniChart(COST_DATA.styles.map(s => ({ label: C.styleN[s.k], value: s.usd, display: '$' + s.usd })), { type: 'bar', title: C.budgetH.replace(/^[^\p{L}]+/u, ''), unit: '' });
   body += `<h2>${esc(C.itemsH)}</h2><table class="seo-costtable"><thead><tr><th>${esc(C.th[0])}</th><th>${esc(C.th[1])}</th><th>${esc(C.th[2])}</th></tr></thead><tbody>${COST_DATA.items.map(([ic, i, krw, usd]) => `<tr><td>${ic} ${esc(C.itemN[i])}</td><td>${esc(krw)}</td><td>${esc(usd)}</td></tr>`).join('')}</tbody></table>`;
   body += `<h2>${esc(C.cityH)}</h2><div class="seo-linklist">${COST_DATA.cities.map(ci => `<span class="seo-badge">${esc(C.cityN[ci][0])}: ${esc(C.cityN[ci][1])}</span>`).join('')}</div>`;
   body += `<h2>${esc(C.methodH)}</h2><p>${esc(C.method)}</p>`;
@@ -2064,7 +2352,7 @@ function buildStay(s) {
   body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   body += cityClusterLinks(s.city, url);
   body += ctaHtml(`Planning ${s.city}?`, `Get a free AI ${s.city} itinerary to match your base.`);
-  const hero = `<header class="seo-hero"><span class="emoji">🏨</span><h1>${esc('Where to Stay in ' + s.city)}</h1><div class="kr">${esc(s.kr)}</div><div class="meta"><span class="seo-badge region">${s.areas.length} areas</span></div></header>`;
+  const hero = `<header class="seo-hero"><span class="emoji">🏨</span><h1>${esc('Where to Stay in ' + s.city)}</h1><div class="kr" lang="ko">${esc(s.kr)}</div><div class="meta"><span class="seo-badge region">${s.areas.length} areas</span></div></header>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'KoreaPlus' }, publisher: { '@type': 'Organization', name: 'KoreaPlus-Lifes', logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' } }, image: ORIGIN + '/guide/og-image.jpg', mainEntityOfPage: ORIGIN + url };
   writePage(`guide/where-to-stay-in-${slug(s.city)}.html`, shell({ url, title, desc, keywords: `where to stay in ${s.city}, best area ${s.city}, ${s.city} hotels neighborhood, ${s.city} accommodation`, schemas: [article, breadcrumbLD(trail), faqLD(qa)], hero, body }));
   return url;
@@ -2778,6 +3066,53 @@ out.hubsL10n = [];                          // localized category hubs + explore
 for (const lang of LOCALES) { for (const h of buildBrowseHubsL10n(out, lang)) out.hubsL10n.push(h.url); }
 const exploreUrl = buildExplore(out);
 
+// ══════════════════════════════════════════════════════════════════
+// STEP1a — flush build-time data products (S02 search index · S04 related · S08 cache)
+// SEARCH_ENTRIES was collected inside shell() for every generated page.
+// ══════════════════════════════════════════════════════════════════
+// De-dupe by url (a page built twice keeps the last write).
+const _seenUrl = new Map();
+for (const e of SEARCH_ENTRIES) _seenUrl.set(e.url, e);
+const ALL_ENTRIES = [..._seenUrl.values()];
+
+// S02 — per-language search index (schema: {url,title,lang,tags,summary}).
+const byLang = {};
+for (const e of ALL_ENTRIES) (byLang[e.lang] = byLang[e.lang] || []).push(e);
+let s02Files = 0;
+for (const lg of Object.keys(byLang)) {
+  const rows = byLang[lg].sort((a, b) => a.url.localeCompare(b.url));
+  fs.writeFileSync(path.join(OUT, `search-index.${lg}.json`), JSON.stringify(rows));
+  s02Files++;
+}
+
+// S04 — deterministic related-pages precompute (topic/tag Jaccard + same-lang,
+// same city bonus). Keyed by url → top-5 {url,title}. No LLM.
+const related = {};
+for (const lg of Object.keys(byLang)) {
+  const rows = byLang[lg];
+  for (const a of rows) {
+    const at = new Set(a.tags);
+    const scored = [];
+    for (const b of rows) {
+      if (b.url === a.url) continue;
+      const bt = new Set(b.tags);
+      let inter = 0; for (const t of at) if (bt.has(t)) inter++;
+      const uni = at.size + bt.size - inter;
+      let score = uni ? inter / uni : 0;
+      // Small boost when both share a city tag (keeps city clusters together).
+      for (const c of _CITY_TAGS) if (at.has(c) && bt.has(c)) { score += 0.15; break; }
+      if (score > 0) scored.push({ url: b.url, title: b.title, s: score });
+    }
+    scored.sort((x, y) => y.s - x.s || x.url.localeCompare(y.url));
+    if (scored.length) related[a.url] = scored.slice(0, 5).map(x => ({ url: x.url, title: x.title }));
+  }
+}
+fs.writeFileSync(path.join(OUT, 'related.json'), JSON.stringify(related));
+
+// S08 — persist incremental TL;DR cache (content-hash keyed).
+fs.writeFileSync(path.join(OUT, 'page-summaries.json'), JSON.stringify(PAGE_SUMMARIES_NEW));
+console.log(`   search-index:  ${s02Files} langs · ${ALL_ENTRIES.length} pages · related: ${Object.keys(related).length} · tldr cache: ${Object.keys(PAGE_SUMMARIES_NEW).length}`);
+
 // ── IndexNow key file (Bing/Naver/Yandex instant indexing) ──────────
 const INDEXNOW_KEY = 'kp7e3f1c9a2b5d48069e3f1c9a2b5d48';
 fs.writeFileSync(path.join(OUT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
@@ -2788,13 +3123,22 @@ const STATIC = ['', 'plan.html', 'explore.html', 'festivals.html', 'culture.html
   'kbeauty.html',
   'menu-translator.html', 'subway.html', 'quiz.html', 'bucket-list.html', 'compare.html', 'trending.html', 'embed.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
 const LANGS = ['ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+// S09: lastmod = the page's real content-version date (content-hash tracked in
+// PAGE_SUMMARIES_NEW during the build loop), so it only advances when the page
+// actually changes — not on every rebuild. Falls back to TODAY for URLs with no
+// content record (hubs assembled after this point / static pages). Always a
+// valid ISO-8601 date, so sitemap validity is preserved.
+const lastmodFor = (loc) => {
+  const r = PAGE_SUMMARIES_NEW[loc] || PAGE_SUMMARIES_NEW['b:' + loc];
+  return (r && r.cdate) || TODAY;
+};
 const urlEntry = (loc, pri, freq) => {
   const hl = HREFLANG_SM.get(loc);
   const alt = hl
     ? '\n' + hl.cluster.map(c => `    <xhtml:link rel="alternate" hreflang="${c.lang}" href="${ORIGIN}${c.url}"/>`).join('\n')
       + `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${hl.xdef}"/>`
     : '';
-  return `  <url>\n    <loc>${ORIGIN}${loc}</loc>${alt}\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
+  return `  <url>\n    <loc>${ORIGIN}${loc}</loc>${alt}\n    <lastmod>${lastmodFor(loc)}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${pri}</priority>\n  </url>`;
 };
 
 // ── K-pop URL set (single source of truth) ──────────────────────────
@@ -2943,3 +3287,70 @@ console.log(`   seasonal hubs: ${out.seasonal.length}`);
 console.log(`   visa + explore: 2`);
 console.log(`   sitemap.xml:   ${(sm.match(/<url>/g) || []).length} URLs`);
 console.log(`   indexnow key:  ${INDEXNOW_KEY}.txt`);
+
+/* ══════════════════════════════════════════════════════════════════════
+   S20 — build-time SEO integrity gate. In-process audit of the hreflang
+   clusters (HREFLANG_SM) collected during the build, cross-checked against
+   the sitemaps just written. Three checks:
+     (a) self-reference   — every cluster lists its own {lang,url}.
+     (b) reciprocity      — every alternate points back (its own cluster
+                            contains the origin url), catching one-way links.
+     (c) URL existence    — every clustered url is a real <loc> in one of the
+                            emitted sitemaps (main / kpop), so we never advertise
+                            an alternate that isn't actually published.
+   Findings print as console warnings. A hard failure (self-ref/existence)
+   exits non-zero so CI/deploy catches it; asymmetry-only is a soft warning.
+   Then, if scripts/verify-seo.cjs exists, it is run for the deeper on-disk
+   audit (loc counts vs baseline, dupes, orphans) and its exit code is honored.
+   ═══════════════════════════════════════════════════════════════════════ */
+(function s20Gate() {
+  try {
+    const locSet = new Set();
+    for (const xml of [sm, ksm]) {
+      for (const mm of xml.matchAll(/<loc>\s*([^<\s][^<]*?)\s*<\/loc>/g)) {
+        locSet.add(mm[1].trim().replace(ORIGIN, ''));  // store BASEP-relative
+      }
+    }
+    let selfErr = 0, recipWarn = 0, existErr = 0;
+    const sample = { self: [], recip: [], exist: [] };
+    for (const [url, hl] of HREFLANG_SM) {
+      const cluster = hl.cluster || [];
+      // (a) self-reference
+      if (!cluster.some(c => c.url === url)) {
+        selfErr++; if (sample.self.length < 8) sample.self.push(url);
+      }
+      for (const c of cluster) {
+        // (c) existence — every advertised alternate must be a published <loc>.
+        if (!locSet.has(c.url)) {
+          existErr++; if (sample.exist.length < 8) sample.exist.push(c.url);
+        }
+        // (b) reciprocity — the alternate's own cluster must contain this url.
+        if (c.url !== url) {
+          const back = HREFLANG_SM.get(c.url);
+          if (!back || !(back.cluster || []).some(x => x.url === url)) {
+            recipWarn++; if (sample.recip.length < 8) sample.recip.push(`${url} ↔ ${c.url}`);
+          }
+        }
+      }
+    }
+    console.log('   ── S20 hreflang/sitemap audit ──');
+    console.log(`   clusters: ${HREFLANG_SM.size} · sitemap locs: ${locSet.size}`);
+    if (selfErr) console.warn(`   ⚠ S20 self-reference MISSING on ${selfErr} cluster(s): ${sample.self.join(', ')}`);
+    if (recipWarn) console.warn(`   ⚠ S20 non-reciprocal hreflang: ${recipWarn} pair(s): ${sample.recip.slice(0, 5).join(' | ')}`);
+    if (existErr) console.warn(`   ⚠ S20 hreflang alt NOT in any sitemap: ${existErr} url(s): ${sample.exist.join(', ')}`);
+    if (!selfErr && !recipWarn && !existErr) console.log('   ✓ S20 clean — self-ref, reciprocity & existence all pass.');
+
+    // Deeper on-disk audit (loc counts / dupes / orphans) if the script exists.
+    const verifyPath = path.join(OUT, 'scripts', 'verify-seo.cjs');
+    if (fs.existsSync(verifyPath)) {
+      const { spawnSync } = require('child_process');
+      const r = spawnSync(process.execPath, [verifyPath, '--no-baseline'], { encoding: 'utf8' });
+      if (r.stdout) process.stdout.write(r.stdout);
+      if (r.status) { console.error('   ⚠ S20 verify-seo.cjs reported FATAL (exit ' + r.status + ')'); process.exitCode = 1; }
+    }
+    // Hard-fail the build on genuine hreflang defects (broken links / phantom alts).
+    if (selfErr || existErr) { console.error('   ⚠ S20 GATE FAILED — hreflang self-ref/existence errors above.'); process.exitCode = 1; }
+  } catch (e) {
+    console.warn('   ⚠ S20 gate skipped (non-fatal): ' + e.message);
+  }
+})();

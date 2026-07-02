@@ -1,0 +1,122 @@
+/* ══════════════════════════════════════════════════════════════════
+   KoreaPlus — feature.css  (STEP0 foundation)
+   Loaded on every generated SEO page (build-seo.cjs shell() head, after
+   mobile.css). Holds shared, forward-looking widget primitives that the
+   STEP2 client modules mount into. Nothing here touches ad slots, the
+   top chrome, or existing kp-enhance / injectToc / breadcrumb styling —
+   those remain owned by hub-styles.css / seo.css / theme.css.
+   Tokens (--bg/--text/--accent2/--border/--surface…) come from
+   hub-styles.css :root; every rule keeps a literal fallback so a late
+   token never flashes.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Generic widget shell — modules render into .kp-widget cards ────────
+   All feature widgets share this look so the page reads as one system.
+   min-height reserves space to prevent CLS when a module hydrates late. */
+.kp-widget {
+  margin: 1.5rem 0;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--border, rgba(255,255,255,.1));
+  border-radius: 14px;
+  background: var(--surface, rgba(255,255,255,.04));
+}
+.kp-widget h2, .kp-widget h3 { margin-top: 0; }
+
+/* Skeleton shimmer — modules can drop .kp-skeleton blocks while loading
+   async data so the reserved box is never blank/janky. */
+.kp-skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--surface, rgba(255,255,255,.05));
+  min-height: 1rem;
+}
+.kp-skeleton::after {
+  content: "";
+  position: absolute; inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+  animation: kp-shimmer 1.3s infinite;
+}
+@keyframes kp-shimmer { 100% { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .kp-skeleton::after { animation: none; }
+}
+
+/* ── Single unified "next steps" footer container ──────────────────────
+   The ONLY new bottom-of-page container. STEP2 modules (read-next,
+   related, share, feedback, etc.) append their items INTO this one box.
+   One border-top for the whole block; inner items carry no border of
+   their own so we never stack multiple divider lines. Starts [hidden];
+   the first module that adds an item removes the hidden attribute.
+   min-height only applies once shown, so an empty (still-hidden) box
+   reserves nothing and causes no CLS. */
+.kp-nextsteps {
+  margin: 2rem 0 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--border, rgba(255,255,255,.08));
+}
+.kp-nextsteps:not([hidden]) { min-height: 4rem; }
+.kp-nextsteps > * { border: 0; }               /* items never add their own divider */
+.kp-nextsteps > * + * { margin-top: 1.25rem; } /* even spacing between stacked items */
+.kp-ns-title {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text3, #8a93a0);
+  margin: 0 0 .5rem;
+}
+
+/* ── TL;DR / summary box (S08) — deterministic extract, mounts in #kp-tldr.
+   Above-fold-adjacent, so reserve height to avoid pushing content on
+   hydrate. Sits right under the hero. */
+#kp-tldr:not(:empty) { min-height: 3.5rem; }
+.seo-tldr {
+  margin: 0 0 1.5rem;
+  padding: 0.875rem 1.125rem;
+  border: 1px solid var(--border, rgba(255,255,255,.1));
+  border-left: 3px solid var(--accent2, #74b9ff);
+  border-radius: 12px;
+  background: var(--surface, rgba(255,255,255,.04));
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text2, #d2d2d2);
+}
+.seo-tldr .kp-tldr-h {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--accent2, #74b9ff);
+  margin: 0 0 .375rem;
+}
+.seo-tldr ul { margin: .25rem 0 0; padding-left: 1.25rem; }
+.seo-tldr li { margin-bottom: .375rem; }
+
+/* ── Inline body-link visibility (a11y / scannability) ─────────────────
+   Article prose links previously inherited body color with no affordance;
+   give in-content <a> a visible color + underline. Scoped to prose text
+   only — excludes card/tile/link-chip/CTA/TOC/breadcrumb components that
+   own their own styling, and excludes ad/affiliate blocks entirely. */
+.seo-body p a,
+.seo-body li a {
+  color: var(--accent2, #74b9ff);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.seo-body p a:hover,
+.seo-body li a:hover { color: var(--text, #fff); }
+
+/* ── Breadcrumb semantic reinforcement (S03) ───────────────────────────
+   bcHtml already renders .seo-bc (styled in seo.css). Here we only add
+   the aria-current visual affordance + separator polish; we do NOT
+   restyle the base breadcrumb. */
+.seo-bc [aria-current="page"] { font-weight: 700; }
+.seo-bc .seo-bc-sep { opacity: .5; user-select: none; }
+
+/* ── Reduced-motion guard for any feature transitions ──────────────────*/
+@media (prefers-reduced-motion: reduce) {
+  .kp-widget, .seo-tldr, .kp-nextsteps { transition: none !important; }
+}

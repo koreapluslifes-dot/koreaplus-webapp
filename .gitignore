@@ -48,3 +48,9 @@ food-dictionary.html
 food/
 embed/
 tools/
+# Generated runtime data — service-improvement 20 (rebuild: node build-seo.cjs / build-llms.cjs)
+search-index.*.json
+related.json
+page-summaries.json
+llms-full*.txt
+llms-index.json

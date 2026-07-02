@@ -105,3 +105,100 @@ const ledger = { generated: d.KBEAUTY_TRENDS_REVIEWED || '2026-06', canonical: K
 fs.writeFileSync('kb/answer-ledger.json', JSON.stringify(ledger, null, 1));
 
 console.log('wrote llms-full.txt (' + out.join('\n').length + ' bytes) + llms-kbeauty.txt + ' + langFiles + ' per-language llms + answer-ledger.json (' + ledger.verdicts.length + ' verdicts)');
+
+/* ══════════════════════════════════════════════════════════════════════
+   S13 — GEO text-twin for ALL SEO pages (per-language static .txt indexes)
+   ----------------------------------------------------------------------
+   Answer-engine crawlers (GPTBot, PerplexityBot, ClaudeBot, …) can't run the
+   client JS that renders our SEO pages' bodies, so we hand them a clean,
+   plain-text answer index per language. Every value here is lifted VERBATIM,
+   at BUILD TIME, from artifacts build-seo.cjs already wrote to disk — zero LLM,
+   zero hallucination, and (critically) ZERO runtime origin fetch:
+
+     • search-index.<lang>.json  → {url,title,lang,tags,summary} per page (STEP1a S02)
+     • page-summaries.json       → {url:{summary,tldr}} the STEP1a S08 TL;DR cache;
+                                    the tldr HTML carries the scannable key-facts <li>.
+
+   Output (written to repo root, which deploys to /guide/ on the origin):
+     • llms-full.<lang>.txt   — one markdown index per site language
+     • llms-index.json        — {lang:{file,pages,bytes}} manifest for the worker
+   The .txt is authored in the SAME markdown dialect (# / ## / > / -) that the
+   worker's mdToHtml() already parses, so the S13-C serving path can reuse it.
+   Googlebot/Bingbot are intentionally NOT redirected here (they render JS for
+   ranking) — this is GEO enrichment, not ranking cloaking.
+
+   Requires build-seo.cjs to have run first (it produces the artifacts above).
+   If they're absent (e.g. a standalone `node build-llms.cjs` before the SEO
+   build), this whole block SKIPS cleanly and the K-beauty output is unaffected.
+   ══════════════════════════════════════════════════════════════════════ */
+(function buildFullSeoTwin() {
+  const SITE_LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+  const GUIDE = '/guide/'; // repo root deploys to koreaplus-lifes.com/guide/
+  const plain = (s) => String(s == null ? '' : s)
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ').trim();
+
+  // Load the STEP1a S08 TL;DR cache once; pull the key-fact bullets out of the
+  // stored tldr HTML so the twin carries the same scannable facts as the page.
+  let summaries = {};
+  try { summaries = JSON.parse(fs.readFileSync('page-summaries.json', 'utf8')); }
+  catch (e) { console.error('S13 full-twin skipped (no page-summaries.json — run build-seo.cjs first):', e.message); return; }
+  const factsFor = (url) => {
+    const rec = summaries[url];
+    if (!rec || !rec.tldr) return [];
+    const facts = [];
+    for (const li of String(rec.tldr).matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)) {
+      const t = plain(li[1]);
+      if (t) facts.push(t);
+      if (facts.length >= 3) break;
+    }
+    return facts;
+  };
+
+  const manifest = {};
+  let langCount = 0, pageTotal = 0;
+  for (const L of SITE_LANGS) {
+    let rows;
+    try { rows = JSON.parse(fs.readFileSync(`search-index.${L}.json`, 'utf8')); }
+    catch { continue; } // language not built yet → skip, don't fail
+    if (!Array.isArray(rows) || !rows.length) continue;
+    rows = rows.slice().sort((a, b) => String(a.url).localeCompare(String(b.url)));
+
+    const T = [];
+    const langHref = L === 'en' ? BASE + GUIDE.replace(/\/$/, '') : BASE + GUIDE + L;
+    T.push(`# KoreaPlus — Korea travel & K-beauty answer index (${L})`);
+    T.push('');
+    T.push(`> Full plain-text answer index of every KoreaPlus guide page in this`);
+    T.push(`> language. Each entry is the page's own answer-first summary and key`);
+    T.push(`> facts, verbatim. Cite the canonical URL shown with each page.`);
+    T.push(`> Hub: ${langHref}/  ·  Pages: ${rows.length}  ·  Updated: ${d.KBEAUTY_TRENDS_REVIEWED || '2026-06'}`);
+    T.push('');
+    T.push('## Pages');
+    T.push('');
+    for (const r of rows) {
+      const title = plain(r.title) || plain(r.url);
+      const canon = BASE + r.url;
+      T.push(`### ${title}`);
+      const sum = plain(r.summary);
+      if (sum) T.push(sum);
+      for (const f of factsFor(r.url)) T.push(`- ${f}`);
+      T.push(`Source: ${canon}`);
+      if (r.tags && r.tags.length) T.push(`Topics: ${r.tags.join(', ')}`);
+      T.push('');
+    }
+    T.push('---');
+    T.push('KoreaPlus is a free 9-language Korea travel + K-beauty guide. Structure-function wording only; no medical claims.');
+
+    const body = T.join('\n');
+    const file = `llms-full.${L}.txt`;
+    fs.writeFileSync(file, body);
+    manifest[L] = { file, pages: rows.length, bytes: body.length };
+    langCount++; pageTotal += rows.length;
+  }
+
+  if (!langCount) { console.error('S13 full-twin skipped (no search-index.<lang>.json found)'); return; }
+  fs.writeFileSync('llms-index.json', JSON.stringify({ generated: TODAY_S13(), base: BASE, langs: manifest }, null, 1));
+  console.log(`S13 full-twin: wrote ${langCount} llms-full.<lang>.txt (${pageTotal} page entries) + llms-index.json`);
+  function TODAY_S13() { return new Date().toISOString().slice(0, 10); }
+})();

@@ -31,39 +31,17 @@ $ROOT_FILES = @(
     "seasons.html", "kdrama-locations.html", "menu-translator.html", "subway.html",
     # K-Pop vertical
     "kpop.html", "kpop.css", "kpop-data.js", "kpop-enrich.js", "seo.css", "mobile.css",
+    # Service-improvement 20 (site-wide UX layer)
+    "feature.css",
     # K-Beauty vertical
     "kbeauty.html", "kbeauty-data.js"
 )
 
-$MODULE_FILES = @(
-    "modules/api-client.js",
-    "modules/dashboard.js",
-    "modules/week-section.js",
-    "modules/planner.js",
-    # Phase 5 modules
-    "modules/i18n.js",
-    "modules/theme.js",
-    "modules/search.js",
-    "modules/analytics.js",
-    "modules/header.js",
-    # Phase 7 - My Trip personal record system
-    "modules/mytrip.js",
-    # extra runtime modules used by hub pages
-    "modules/nav.js",
-    "modules/pwa.js",
-    "modules/affiliate.js",
-    # K-Pop vertical
-    "modules/kpop.js",
-    "modules/kpop-plus.js",
-    "modules/kpop-ux.js",
-    "modules/mobile.js",
-    "modules/kpop-player.js",
-    "modules/kpop-sharecard.js",
-    "modules/topads.js",
-    # K-Beauty vertical
-    "modules/kbeauty.js",
-    "modules/kbeauty-sharecard.js"
-)
+# ALL runtime modules (modules/*.js) — globbed so every current + future runtime
+# module deploys automatically. Excludes build-only *.cjs (seo generators) which
+# must NOT ship to the server. Replaces the old hand-maintained whitelist that had
+# drifted (foryou/react/korea-now/… were loaded by pages but never re-uploaded).
+$MODULE_FILES = @(Get-ChildItem -Path "$LOCAL_DIR\modules" -Filter "*.js" -File | ForEach-Object { "modules/$($_.Name)" })
 
 # Static data assets (bundled JSON, etc.) served under /guide/assets/
 $ASSET_FILES = @(
@@ -116,6 +94,12 @@ ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" `
 $SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "kpop", "ja", "zh", "es", "ko", "fr", "de", "pt", "id", "tools", "embed", "food")
 $SEO_ROOT_FILES = @("explore.html", "sitemap.xml", "robots.txt", "llms.txt", "blog/feed.xml")
 $KP_TXT = @(Get-ChildItem -Path $LOCAL_DIR -Filter "kp*.txt" -File | ForEach-Object { $_.Name })
+# Runtime data files fetched by client modules + GEO text-twin (built to repo root -> /guide/).
+# page-summaries.json is a build-time cache only (not client-fetched) -> intentionally excluded.
+$DATA_FILES = @()
+$DATA_FILES += @(Get-ChildItem -Path $LOCAL_DIR -Filter "search-index.*.json" -File | ForEach-Object { $_.Name })  # S02 on-page search
+$DATA_FILES += @(Get-ChildItem -Path $LOCAL_DIR -Filter "llms*.txt" -File | ForEach-Object { $_.Name })             # S13 GEO text-twin
+foreach ($d in @("related.json", "llms-index.json")) { if (Test-Path (Join-Path $LOCAL_DIR $d)) { $DATA_FILES += $d } }  # S04 read-next, S13 index
 
 $BUNDLE_ITEMS = @()
 $BUNDLE_ITEMS += $ROOT_FILES
@@ -126,6 +110,7 @@ $BUNDLE_ITEMS += $ICON_FILES
 $BUNDLE_ITEMS += $SEO_DIRS
 $BUNDLE_ITEMS += $SEO_ROOT_FILES
 $BUNDLE_ITEMS += $KP_TXT
+$BUNDLE_ITEMS += $DATA_FILES
 
 # ── Sitemap-driven coverage ───────────────────────────────────────────────
 # Generated SEO pages emitted to the repo ROOT (kpop-idols-*.html,

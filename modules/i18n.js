@@ -188,4 +188,148 @@
   } else {
     init();
   }
+
+  /* ══════════════════════════════════════════════════════════════════
+     S06 — Language auto-suggest banner (STEP2)
+     If the visitor's browser language differs from this page's <html lang>,
+     they have never explicitly chosen a language (kp_lang unset), they have
+     not already dismissed the offer, and the shell actually published a
+     matching hreflang alternate — show a single-line "Read in <target>?"
+     banner (localized in the TARGET language) that LINKS to the alternate
+     URL. This is a suggestion, never an auto-redirect.
+     Above-fold budget: when the banner shows it is mutually exclusive with
+     the "Korea now" strip — it sets a shared flag (window.kpAboveFold) and
+     hides #kp-korea-now for this session so only one above-fold widget runs.
+     ══════════════════════════════════════════════════════════════════ */
+  (function () {
+    'use strict';
+    try {
+      var DISMISS_KEY = 'kp_langsuggest_dismissed_v1';
+      // "Read in {lang}" phrased in the TARGET language; {L} = localized language name.
+      var STR = {
+        en: { msg: 'Read in {L}?', cta: 'Switch', close: 'Dismiss' },
+        ko: { msg: '{L}(으)로 볼까요?', cta: '전환', close: '닫기' },
+        ja: { msg: '{L}で読みますか？', cta: '切り替え', close: '閉じる' },
+        zh: { msg: '用{L}阅读？', cta: '切换', close: '关闭' },
+        es: { msg: '¿Leer en {L}?', cta: 'Cambiar', close: 'Cerrar' },
+        fr: { msg: 'Lire en {L} ?', cta: 'Changer', close: 'Fermer' },
+        de: { msg: 'Auf {L} lesen?', cta: 'Wechseln', close: 'Schließen' },
+        pt: { msg: 'Ler em {L}?', cta: 'Mudar', close: 'Fechar' },
+        id: { msg: 'Baca dalam {L}?', cta: 'Ganti', close: 'Tutup' },
+        ar: { msg: 'هل تريد القراءة بـ{L}؟', cta: 'تبديل', close: 'إغلاق' },
+        hi: { msg: '{L} में पढ़ें?', cta: 'बदलें', close: 'बंद करें' },
+        ru: { msg: 'Читать на {L}?', cta: 'Переключить', close: 'Закрыть' },
+        vi: { msg: 'Đọc bằng {L}?', cta: 'Chuyển', close: 'Đóng' },
+        th: { msg: 'อ่านเป็น{L}?', cta: 'สลับ', close: 'ปิด' }
+      };
+
+      function dismissed() { try { return localStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; } }
+      function setDismissed() { try { localStorage.setItem(DISMISS_KEY, '1'); } catch (e) {} }
+      function hasChosen() { try { return !!localStorage.getItem('kp_lang'); } catch (e) { return false; } }
+
+      // Find a published hreflang alternate whose base lang matches the target.
+      function findAlternate(target) {
+        var links = document.querySelectorAll('link[rel="alternate"][hreflang]');
+        for (var i = 0; i < links.length; i++) {
+          var hl = (links[i].getAttribute('hreflang') || '').slice(0, 2).toLowerCase();
+          if (hl === target && links[i].href) return links[i].href;
+        }
+        return null;
+      }
+
+      function suggest() {
+        if (document.getElementById('kp-langsuggest')) return;      // mount guard
+        if (hasChosen() || dismissed()) return;                     // explicit choice / already declined
+        var pageLang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+        var nav = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
+        if (!nav || nav === pageLang) return;                       // already in browser language
+        if (SUPPORTED.indexOf(nav) === -1) return;                  // we don't support it → no offer
+        // Also skip if a ?lang param is present (visitor arrived via an explicit link)
+        try { if (new URLSearchParams(location.search).get('lang')) return; } catch (e) {}
+        var href = findAlternate(nav);
+        if (!href) return;                                          // no reciprocal alternate → nothing to link to
+
+        var s = STR[nav] || STR.en;
+        var langName = (LABELS[nav] && LABELS[nav].name) || nav.toUpperCase();
+        var flag = (LABELS[nav] && LABELS[nav].flag) || '🌐';
+        var rtl = RTL.indexOf(nav) !== -1;
+
+        var bar = document.createElement('div');
+        bar.id = 'kp-langsuggest';
+        bar.setAttribute('role', 'region');
+        bar.setAttribute('aria-label', 'Language suggestion');
+        bar.setAttribute('lang', nav);
+        if (rtl) bar.setAttribute('dir', 'rtl');
+        bar.style.cssText = [
+          'display:flex', 'align-items:center', 'gap:10px', 'flex-wrap:wrap',
+          'min-height:40px', 'box-sizing:border-box',
+          'margin:0 0 12px', 'padding:8px 12px',
+          'font-size:14px', 'line-height:1.4',
+          'background:var(--card,rgba(255,255,255,.05))',
+          'border:1px solid var(--border,rgba(255,255,255,.12))',
+          'border-radius:10px', 'color:var(--text,inherit)'
+        ].join(';');
+
+        var label = document.createElement('span');
+        label.style.cssText = 'flex:1 1 auto;min-width:0';
+        label.textContent = flag + ' ' + s.msg.replace('{L}', langName);
+
+        var go = document.createElement('a');
+        go.href = href;
+        go.textContent = s.cta;
+        go.style.cssText = [
+          'flex:0 0 auto', 'text-decoration:none', 'font-weight:700', 'font-size:13px',
+          'padding:6px 12px', 'border-radius:999px',
+          'background:var(--accent2,#74b9ff)', 'color:#001',
+          'white-space:nowrap'
+        ].join(';');
+        // Persist the choice so the destination page doesn't re-offer, then let the
+        // link navigate normally (NOT a JS redirect — the href is the real target).
+        go.addEventListener('click', function () {
+          try { localStorage.setItem('kp_lang', nav); } catch (e) {}
+        });
+
+        var close = document.createElement('button');
+        close.type = 'button';
+        close.setAttribute('aria-label', s.close);
+        close.title = s.close;
+        close.textContent = '×';
+        close.style.cssText = [
+          'flex:0 0 auto', 'background:transparent', 'border:0', 'cursor:pointer',
+          'font-size:20px', 'line-height:1', 'padding:2px 6px',
+          'color:var(--text2,#aab)'
+        ].join(';');
+        close.addEventListener('click', function () {
+          setDismissed();
+          if (bar.parentNode) bar.parentNode.removeChild(bar);
+        });
+
+        bar.appendChild(label);
+        bar.appendChild(go);
+        bar.appendChild(close);
+
+        // Above-fold budget: this banner is mutually exclusive with "Korea now".
+        // Set a shared flag (so korea-now can bow out if it checks) and defensively
+        // hide the strip for this session — only one above-fold widget renders.
+        try { window.kpAboveFold = window.kpAboveFold || {}; window.kpAboveFold.claimed = 'langsuggest'; } catch (e) {}
+        var kn = document.getElementById('kp-korea-now');
+        if (kn) kn.style.display = 'none';
+
+        // Mount above the fold: before the hero-adjacent TLDR slot if present,
+        // else at the top of <main>/<article>, else top of body.
+        var anchor = document.getElementById('kp-tldr')
+          || document.querySelector('main article')
+          || document.querySelector('article')
+          || document.querySelector('main');
+        if (anchor && anchor.parentNode) {
+          anchor.parentNode.insertBefore(bar, anchor);
+        } else {
+          document.body.insertBefore(bar, document.body.firstChild);
+        }
+      }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', suggest);
+      else suggest();
+    } catch (e) { /* no-op */ }
+  })();
 })();

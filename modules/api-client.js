@@ -106,6 +106,28 @@
     getAff: (city, cat, q = '') =>
       kpFetch(`/api/aff?city=${encodeURIComponent(city)}&cat=${cat}&q=${encodeURIComponent(q)}`, 60 * 60_000),
 
+    // ── "Ask this page" (S14) — POST /chat with a page-context summary ───────
+    //    NOT cached (each question is unique). ctx = short page summary (NOT
+    //    full body) so the token cost stays bounded. Cost-sensitive: callers
+    //    must gate on window.KP_ASK_ENABLED + language whitelist + user click.
+    async askPage(question, opts = {}) {
+      const base = window.WORKER_URL || '';
+      if (!base) throw new Error('WORKER_URL not set');
+      const ctx = (opts.ctx || '').slice(0, 600);
+      const lang = opts.lang || (document.documentElement.lang || 'en').slice(0, 2);
+      const message = ctx
+        ? `Context about the page the user is reading:\n"${ctx}"\n\nUser question: ${question}`
+        : question;
+      const res = await fetch(base + '/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message, lang: lang }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const env = await res.json();
+      return (env && (env.reply || env.data)) || '';
+    },
+
     // ── K-Beauty vertical ─────────────────────────────────────────────────────
     // Live AliExpress product grid (server-side HMAC-signed; seller-listing
     // photos allowed). Returns [] gracefully when ALI_APP_SECRET is unset.
