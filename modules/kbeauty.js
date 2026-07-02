@@ -377,6 +377,118 @@
     $$('#kb-cyc-pace .kb-tab', box).forEach(t => t.addEventListener('click', () => { $$('#kb-cyc-pace .kb-tab', box).forEach(x => x.classList.remove('active')); t.classList.add('active'); draw(t.dataset.pace === '1'); }));
   }
 
+  // ══ Client intelligence (deterministic, offline): matcher, auditor, journey, wrapped ══
+  const LAYER_RANK = { exfoliant: 1, brightening: 2, antioxidant: 2, hydration: 3, soothing: 4, 'anti-aging': 5, repair: 5, multi: 5, barrier: 6 };
+  function scoreIngredientsFor(skin, concerns) {
+    return INGREDIENTS.map(i => {
+      let s = (i.star ? 1.5 : 0);
+      (i.bestFor || []).forEach(c => { if (concerns.indexOf(c) >= 0) s += 2; });
+      const fl = i.flags || [];
+      if (skin === 'sensitive' && (fl.indexOf('fragrance') >= 0 || fl.indexOf('allergen') >= 0 || fl.indexOf('sensitive-skin-caution') >= 0)) s -= 2;
+      if ((skin === 'oily' || skin === 'combination') && fl.indexOf('comedogenic-risk') >= 0) s -= 1.5;
+      return { i, s };
+    }).filter(x => x.s > 0).sort((a, b) => b.s - a.s);
+  }
+  function renderMatcher() {
+    const box = $('#kb-matcher-box'); if (!box) return;
+    const skin = getSkin(), concerns = [...getConcerns()];
+    if (!skin && !concerns.length) { box.innerHTML = `<div class="kb-empty">${esc(cx('match.needprofile', 'Take the skin quiz & pick your concerns first — then get an optimized, conflict-free Korean routine.'))} <a href="#cat=skin" style="color:var(--kb1);font-weight:700">${esc(cx('match.goquiz', 'Start the quiz →'))}</a></div>`; return; }
+    box.innerHTML = `<div class="kb-tool"><div class="kb-tool-h">🎯 ${esc(cx('match.title', 'Your optimized Korean routine'))}</div>
+      <div class="kb-tool-sub">${esc(cx('match.sub', 'Built from your skin type + concerns — conflict-free and ordered thinnest to thickest.'))}</div>
+      <div style="display:flex;gap:8px;align-items:center;margin:10px 0"><span style="font-size:13px;color:var(--text3)">${esc(cx('match.budget', 'Routine size'))}</span>
+        <input id="kb-match-budget" type="range" min="3" max="8" value="5" style="flex:1"><span id="kb-match-bval" style="font-weight:800;color:var(--kb1)">5</span></div>
+      <div id="kb-match-out" aria-live="polite"></div></div>`;
+    const draw = () => {
+      const n = +$('#kb-match-budget').value; $('#kb-match-bval').textContent = n;
+      const ranked = scoreIngredientsFor(skin, concerns);
+      const chosen = []; const chosenIds = [];
+      for (const { i } of ranked) {
+        if (chosen.length >= n) break;
+        // reject if it forms an avoid/caution pair with an already-chosen active
+        const clash = chosenIds.some(cid => { const v = conflictVerdict(i.id, cid); return v.verdict === 'avoid'; });
+        if (clash) continue;
+        chosen.push(i); chosenIds.push(i.id);
+      }
+      chosen.sort((a, b) => (LAYER_RANK[a.cat] || 5) - (LAYER_RANK[b.cat] || 5));
+      const st = SKINTYPES.find(s => s.id === skin);
+      $('#kb-match-out').innerHTML = `<div class="kb-steps" style="margin-top:6px">${chosen.map((i, idx) => `<div class="kb-step"><div class="kb-step-no">${idx + 1}</div><div class="kb-step-b"><div class="kb-step-name">${i.emoji || ''} ${esc(i.name)}</div><div class="kb-step-desc">${esc((i.benefits || [])[0] || i.explainer || '')}</div><div class="kb-step-lay">${esc((i.time || 'both').toUpperCase())} · ${esc((i.bestFor || []).map(c => (CONCERN_BY_ID[c] || {}).name).filter(Boolean).slice(0, 2).join(', '))}</div></div></div>`).join('')}</div>
+        <div class="gsc-next" style="margin-top:12px">✅ ${esc(cx('match.note', 'Conflict-checked & ordered'))}${st ? ' · ' + esc(st.name) : ''}. ${esc(cx('match.patch', 'Introduce one active at a time and patch-test.'))}</div>`;
+    };
+    draw(); const b = $('#kb-match-budget'); if (b) b.addEventListener('input', draw);
+  }
+  const auditPick = new Set();
+  function renderAuditor() {
+    const box = $('#kb-auditor-box'); if (!box) return;
+    box.innerHTML = `<div class="kb-tool"><div class="kb-tool-h">🩺 ${esc(cx('audit.title', 'Routine auditor'))}</div>
+      <div class="kb-tool-sub">${esc(cx('audit.sub', 'Pick the actives you currently use — get conflicts, redundancy & gaps for your whole routine.'))}</div>
+      <div id="kb-audit-pick" class="kb-pick" style="margin-top:10px"></div>
+      <div id="kb-audit-out" aria-live="polite"></div></div>`;
+    const bar = $('#kb-audit-pick');
+    bar.innerHTML = CHECKABLE.map(id => { const ing = ING_BY_ID[id] || { name: id }; return `<button class="kb-pick-chip${auditPick.has(id) ? ' on' : ''}" data-ap="${esc(id)}"><span aria-hidden="true">${esc(ing.emoji || '')}</span> ${esc(ing.name || id)}</button>`; }).join('');
+    $$('.kb-pick-chip', bar).forEach(b => b.addEventListener('click', () => { const id = b.dataset.ap; if (auditPick.has(id)) auditPick.delete(id); else auditPick.add(id); b.classList.toggle('on'); drawAudit(); }));
+    drawAudit();
+  }
+  function drawAudit() {
+    const out = $('#kb-audit-out'); if (!out) return;
+    const ids = [...auditPick];
+    if (ids.length < 1) { out.innerHTML = `<div class="kb-empty" style="margin-top:10px">${esc(cx('audit.empty', 'Pick the actives in your routine above.'))}</div>`; return; }
+    const items = [];
+    // conflicts
+    for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) { const v = conflictVerdict(ids[i], ids[j]); if (v.verdict !== 'safe') items.push({ ic: v.verdict === 'avoid' ? '⛔' : '⚠️', txt: `<b>${esc((ING_BY_ID[ids[i]] || {}).name)} + ${esc((ING_BY_ID[ids[j]] || {}).name)}</b> — ${esc(v.reason)}` }); }
+    // redundancy by cat
+    const byCat = {}; ids.forEach(id => { const c = (ING_BY_ID[id] || {}).cat; if (c) (byCat[c] = byCat[c] || []).push((ING_BY_ID[id] || {}).name); });
+    Object.keys(byCat).forEach(c => { if (byCat[c].length >= 2) items.push({ ic: '🔁', txt: `${esc(cx('audit.redundant', 'Overlapping'))} <b>${esc(c)}</b>: ${esc(byCat[c].join(', '))} — ${esc(cx('audit.redundantnote', 'you may not need all of these.'))}` }); });
+    // load
+    if (ids.length >= 4) items.push({ ic: '🧯', txt: esc(cx('audit.load', 'That’s a lot of actives at once — alternate nights to protect your barrier.')) });
+    // always: SPF + order
+    items.push({ ic: '☀️', txt: esc(cx('audit.spf', 'Make sure SPF is in your AM routine — the highest-impact step.')) });
+    items.push({ ic: '🧅', txt: esc(cx('audit.order', 'Layer thinnest → thickest; low-pH actives (acids, vitamin C) first.')) });
+    out.innerHTML = `<div class="kb-verdicts" style="margin-top:10px">${items.map(it => `<div class="kb-verdict"><div class="v-ic">${it.ic}</div><div><div class="v-reason">${it.txt}</div></div></div>`).join('')}</div>`;
+  }
+  const JOURNEY_KEY = 'kp_kbeauty_journey';
+  function renderJourney() {
+    const box = $('#kb-journey-box'); if (!box) return;
+    let log = []; try { log = JSON.parse(localStorage.getItem(JOURNEY_KEY) || '[]'); } catch (e) {}
+    const today = new Date().toISOString().slice(0, 10);
+    const done = log[0] && log[0].d === today;
+    const faces = ['😣', '😕', '😐', '🙂', '😍'];
+    box.innerHTML = `<div class="kb-tool"><div class="kb-tool-h">📔 ${esc(cx('journey.title', 'Skin journey'))}</div>
+      <div class="kb-tool-sub">${esc(cx('journey.sub', 'A 5-second daily check-in. Watch your skin trend over time — private, on your device.'))}</div>
+      ${done ? `<div class="gsc-next" style="margin-top:8px">✓ ${esc(cx('journey.donetoday', 'Logged today. Come back tomorrow!'))}</div>` : `<div style="display:flex;gap:8px;justify-content:center;margin:12px 0">${faces.map((f, i) => `<button class="kb-face" data-score="${i + 1}" style="font-size:30px;background:none;border:2px solid var(--border);border-radius:12px;width:52px;height:52px;cursor:pointer">${f}</button>`).join('')}</div>`}
+      <div id="kb-journey-chart"></div></div>`;
+    if (!done) $$('.kb-face', box).forEach(b => b.addEventListener('click', () => {
+      let l = []; try { l = JSON.parse(localStorage.getItem(JOURNEY_KEY) || '[]'); } catch (e) {}
+      l = l.filter(x => x.d !== today); l.unshift({ d: today, s: +b.dataset.score });
+      try { localStorage.setItem(JOURNEY_KEY, JSON.stringify(l.slice(0, 90))); } catch (e) {}
+      try { kbtrack('journey_checkin', { score: +b.dataset.score }); } catch (e) {}
+      renderJourney();
+    }));
+    // chart: last 14
+    const recent = log.slice(0, 14).reverse();
+    const streak = (() => { let s = 0; const d = new Date(); for (let k = 0; k < log.length; k++) { const ds = d.toISOString().slice(0, 10); if (log.find(x => x.d === ds)) { s++; d.setDate(d.getDate() - 1); } else break; } return s; })();
+    if (recent.length) {
+      $('#kb-journey-chart').innerHTML = `<div style="margin-top:14px"><div style="font-size:13px;color:var(--text3);margin-bottom:6px">🔥 ${streak} ${esc(cx('journey.streak', 'day streak'))} · ${esc(cx('journey.last', 'recent check-ins'))}</div>
+        <div style="display:flex;align-items:flex-end;gap:4px;height:70px">${recent.map(x => `<div title="${x.d}: ${x.s}/5" style="flex:1;background:linear-gradient(180deg,var(--kb1),var(--kb2));border-radius:4px 4px 0 0;height:${x.s / 5 * 100}%;min-height:6px"></div>`).join('')}</div></div>`;
+    }
+  }
+  function renderWrapped() {
+    const box = $('#kb-wrapped-box'); if (!box) return;
+    const skin = getSkin(), concerns = [...getConcerns()];
+    let recent = []; try { recent = JSON.parse(localStorage.getItem(KB_RECENT_KEY) || '[]'); } catch (e) {}
+    let follow = []; try { follow = [...getFollows()]; } catch (e) {}
+    const st = SKINTYPES.find(s => s.id === skin);
+    box.innerHTML = `<div class="kb-tool"><div class="kb-tool-h">🎁 ${esc(cx('wrap.title', 'Your K-Beauty Wrapped'))}</div>
+      <div class="kb-tool-sub">${esc(cx('wrap.sub', 'A snapshot of your K-beauty journey so far — share it!'))}</div>
+      <div class="gsc-card" style="margin-top:10px;text-align:left">
+        ${st ? `<div style="font-size:15px"><b>${esc(cx('wrap.skin', 'Skin type'))}:</b> ${st.emoji || ''} ${esc(st.name)}</div>` : ''}
+        ${concerns.length ? `<div style="font-size:15px;margin-top:4px"><b>${esc(cx('wrap.goals', 'Top goals'))}:</b> ${esc(concerns.map(c => (CONCERN_BY_ID[c] || {}).name).filter(Boolean).join(', '))}</div>` : ''}
+        <div style="font-size:15px;margin-top:4px"><b>${esc(cx('wrap.explored', 'Explored'))}:</b> ${recent.length} ${esc(cx('wrap.ingredients', 'ingredients/brands'))}${follow.length ? ` · ${follow.length} ${esc(cx('wrap.faves', 'favourites'))}` : ''}</div>
+        ${recent.length ? `<div style="font-size:14px;color:var(--text2);margin-top:6px">${recent.slice(0, 6).map(r => (r.e || '') + ' ' + esc(r.n)).join(' · ')}</div>` : ''}
+      </div>
+      <button class="kb-quiz-cta" id="kb-wrap-share" style="margin-top:12px">📤 ${esc(cx('wrap.share', 'Share my Wrapped'))}</button></div>`;
+    const sh = $('#kb-wrap-share'); if (sh) sh.addEventListener('click', () => { try { if (window.KbeautyShareCard && window.KbeautyShareCard.generateGlassScore) window.KbeautyShareCard.generateGlassScore({ score: recent.length, tier: { emoji: '🎁', name: (st ? st.name + ' skin' : 'K-Beauty fan'), ko: '' }, subs: [{ label: cx('wrap.explored', 'Explored'), emoji: '🔍', val: Math.min(25, recent.length) }, { label: cx('wrap.faves', 'Faves'), emoji: '❤️', val: Math.min(25, follow.length * 3) }, { label: cx('wrap.goals', 'Goals'), emoji: '🎯', val: Math.min(25, concerns.length * 6) }, { label: cx('wrap.days', 'Days'), emoji: '🔥', val: 12 }] }); } catch (e) {} });
+  }
+
   // ── Concern selector ────────────────────────────────────────────────────────
   function renderConcerns() {
     const grid = $('#kb-concern-grid'); if (!grid) return;
@@ -550,11 +662,11 @@
     const map = await loadCosing();
     const tokens = input.value.split(/[,\n;]+/).map(normToken).filter(Boolean);
     if (!tokens.length) { out.innerHTML = `<div class="kb-empty">${esc(t('decNone'))}</div>`; return; }
-    let found = 0;
-    const rows = tokens.slice(0, 60).map(tok => {
+    let found = 0; const hits = [];
+    const rows = tokens.slice(0, 60).map((tok, idx) => {
       const hit = lookupIngredient(map, tok);
       if (!hit) return `<div class="kb-dec-row miss"><div class="kb-dec-name">${esc(tok)}</div></div>`;
-      found++;
+      found++; hits.push(Object.assign({ idx: idx }, hit));
       const flags = (hit.flags || []).map(f => { const L = FLAG_LABELS[f]; return L ? `<span class="kb-flag ${L.cls}">${esc(L.txt)}</span>` : ''; }).join('');
       return `<div class="kb-dec-row">
         <div style="min-width:0;flex:1">
@@ -563,7 +675,33 @@
           ${flags ? `<div class="kb-dec-flags">${flags}</div>` : ''}
         </div></div>`;
     }).join('');
-    out.innerHTML = `<div class="kb-sec-sub" style="margin-bottom:4px">${found}/${tokens.length} ${esc(t('decFound'))} · ${esc(t('sources'))}</div>${rows}`;
+    out.innerHTML = analyzeINCI(hits, tokens.length) + `<div class="kb-sec-sub" style="margin:12px 0 4px">${found}/${tokens.length} ${esc(t('decFound'))} · ${esc(t('sources'))}</div>${rows}`;
+  }
+  // #4 — deterministic formula scorecard from the recognized tokens' fn/flags/position.
+  function analyzeINCI(hits, total) {
+    if (hits.length < 2) return '';
+    const b = { hydration: 0, soothing: 0, active: 0, barrier: 0 };
+    let frag = 0, allerg = 0, comedo = 0; const actIdx = [];
+    hits.forEach(h => {
+      const fn = (h.fn || '').toLowerCase(), fl = h.flags || [];
+      if (/humect|hydrat|water|moistur/.test(fn)) b.hydration++;
+      if (/sooth|calm|cica|centella|anti-irritant|antioxidant/.test(fn)) b.soothing++;
+      if (/bright|exfoli|retino|acid|vitamin|peptide|active|aha|bha/.test(fn) || fl.indexOf('hero') >= 0) { b.active++; actIdx.push(h.idx); }
+      if (/ceramide|occlus|emollient|barrier|lipid|oil|butter/.test(fn)) b.barrier++;
+      if (fl.indexOf('fragrance') >= 0) frag++;
+      if (fl.indexOf('allergen') >= 0) allerg++;
+      if (fl.indexOf('comedogenic-risk') >= 0) comedo++;
+    });
+    const sum = Math.max(1, b.hydration + b.soothing + b.active + b.barrier);
+    const bar = (lbl, n, col) => `<div class="gsc-bar"><div class="gsc-bar-h">${lbl} <b>${n}</b></div><div class="gsc-track"><div class="gsc-fill" style="width:${Math.round(n / sum * 100)}%;background:${col}"></div></div></div>`;
+    let pos = '';
+    if (actIdx.length && total) { const avg = actIdx.reduce((a, c) => a + c, 0) / actIdx.length; pos = avg < total * 0.4 ? cx('inc.high', 'Actives sit high in the list — likely a potent formula.') : avg > total * 0.66 ? cx('inc.low', 'Actives sit near the end — lightly dosed ("fairy-dusted").') : cx('inc.mid', 'Actives sit mid-list — a moderate dose.'); }
+    const flagLine = [frag ? frag + ' ' + cx('inc.frag', 'fragrance') : '', allerg ? allerg + ' ' + cx('inc.allerg', 'allergen(s)') : '', comedo ? comedo + ' ' + cx('inc.comedo', 'may-clog') : ''].filter(Boolean).join(' · ') || cx('inc.clean', 'no fragrance/allergen flags');
+    const verdict = (frag || allerg) ? cx('inc.vsens', 'Has fragrance/allergen flags — patch-test if reactive.') : (b.hydration >= b.active ? cx('inc.vhydr', 'A hydration-led, gentle formula.') : cx('inc.vactive', 'An active-forward formula — introduce slowly.'));
+    return `<div class="gsc-card" style="text-align:left;padding:16px">
+      <div style="font-weight:900;font-size:16px;margin-bottom:8px">🔬 ${esc(cx('inc.title', 'Formula analysis'))}</div>
+      <div class="gsc-bars">${bar('💧 ' + esc(cx('inc.hydr', 'Hydration')), b.hydration, '#2060c8')}${bar('🌿 ' + esc(cx('inc.sooth', 'Soothing')), b.soothing, '#1a7a45')}${bar('⚗️ ' + esc(cx('inc.active', 'Actives')), b.active, '#d61f6e')}${bar('🛡️ ' + esc(cx('inc.barrier', 'Barrier')), b.barrier, '#8b46d6')}</div>
+      <div class="gsc-next" style="margin-top:10px">🚩 ${esc(flagLine)}${pos ? `<br>📊 ${esc(pos)}` : ''}<br>💡 ${esc(verdict)}</div></div>`;
   }
 
   // ── What-not-to-mix checker ─────────────────────────────────────────────────
@@ -1167,7 +1305,7 @@
   }
   function openMoreSheet() {
     const box = $('#kb-modal'); if (!box) return;
-    const moreCats = ['sun', 'trouble', 'brands', 'buy', 'trends', 'tools'].map(id => kbCatById(id)).filter(Boolean);
+    const moreCats = ['you', 'sun', 'trouble', 'brands', 'buy', 'trends', 'tools'].map(id => kbCatById(id)).filter(Boolean);
     const rows = moreCats.map(c => '<button type="button" class="kb-sheet-row" data-morecat="' + c.id + '"><span class="se">' + c.icon + '</span><span><span>' + esc(kbTitle(c)) + '</span><span class="sd">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></span></button>').join('');
     const lib = '<a class="kb-sheet-row" href="/guide/kb/"><span class="se">📚</span><span><span>' + esc(cx('ux.library', 'The K-Beauty Library')) + '</span><span class="sd">' + esc(cx('ux.librarysub', '1,000+ guides')) + '</span></span></a>';
     box.innerHTML = '<button class="kb-modal-x" data-close aria-label="Close">✕</button>'
@@ -1331,6 +1469,7 @@
     { id: 'buy', icon: '🛡️', tk: 'kbeauty.filter.buy', t: 'Buy Safe', sub: 'Where to buy authentic, spot fakes & build your shelf', secs: ['kb-buy', 'kb-shelf'] },
     { id: 'trends', icon: '🔥', tk: 'kbeauty.filter.board', t: 'Trends & Authority', sub: 'Trend radar, evidence, SkinTok checks & Korean sources', secs: ['kb-radar', 'kb-ledger', 'kb-viral', 'kb-board', 'kb-report', 'kb-news', 'kb-krsrc', 'kb-trust'] },
     { id: 'tools', icon: '🧰', tk: 'kbeauty.filter.tools', t: 'Tools', sub: 'Cost-per-use, expiry (PAO) & skin-cycling planners', secs: ['kb-cost', 'kb-pao', 'kb-cycling'] },
+    { id: 'you', icon: '👤', tk: 'kbeauty.filter.you', t: 'For You', sub: 'Smart routine matcher, routine audit, skin journey & your Wrapped', secs: ['kb-matcher', 'kb-auditor', 'kb-journey', 'kb-wrapped'] },
   ];
   const KB_ALLSECS = KB_CATS.reduce((a, c) => a.concat(c.secs), []);
   const kbCatById = (id) => KB_CATS.filter(c => c.id === id)[0] || null;
@@ -1377,6 +1516,7 @@
       buy: [renderBuy, detectBuyRegion, renderRetailers, renderShelf],
       trends: [renderRadar, renderLedger, renderViral, renderBestsellers, renderReport, renderNewsdesk, renderKrSources, renderTrust],
       tools: [renderCost, renderPAO, renderCycling],
+      you: [renderMatcher, renderAuditor, renderJourney, renderWrapped],
     };
     (M[id] || []).forEach(fn => { try { fn(); } catch (e) { try { console.error('kb render ' + id, e); } catch (e2) {} } });
   }
