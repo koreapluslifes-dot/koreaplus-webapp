@@ -895,7 +895,7 @@ ${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=7">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=9">
+<link rel="stylesheet" href="seo.css?v=10">
 <link rel="stylesheet" href="mobile.css?v=1">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
 <script defer src="modules/header.js"></script>
@@ -980,6 +980,7 @@ ${tabBar(lang)}
 <script defer src="modules/react.js?v=1"></script>
 <script defer src="modules/foryou.js?v=1"></script>
 <script defer src="modules/install.js?v=1"></script>
+<script defer src="modules/kp-enhance.js?v=1"></script>
 <script defer src="modules/klook-cards.js?v=2"></script>
 </body>
 </html>`;

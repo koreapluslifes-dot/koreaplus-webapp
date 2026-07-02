@@ -221,3 +221,48 @@
   .seo-tiles { grid-template-columns: 1fr; }
   .kp-tabbar .kp-tab-l { font-size: 9.5px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   kp-enhance.js — page enhancement elements (share/save/TOC/TTS/lightbox…)
+   ══════════════════════════════════════════════════════════════════ */
+.kp-toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%) translateY(12px); z-index: 2000; background: #0c1829; color: #fff; border: 1px solid rgba(255,255,255,.15); border-radius: 12px; padding: 11px 18px; font-size: 13.5px; font-weight: 600; box-shadow: 0 8px 30px -8px rgba(0,0,0,.6); opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s; }
+.kp-toast.on { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+/* hero action row (share / save) */
+.kp-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.kp-act { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 999px; background: var(--surface, rgba(255,255,255,.05)); border: 1px solid var(--border, rgba(255,255,255,.12)); color: var(--text2, #ccc); font-size: 13.5px; font-weight: 700; font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.kp-act:hover { border-color: var(--accent2, #74b9ff); color: var(--text, #fff); }
+.kp-act.on { color: var(--gold, #C8973A); border-color: rgba(200,151,58,.4); }
+
+/* on-this-page scroll-spy */
+.kp-toc { margin: 0 0 24px; padding: 14px 18px; border: 1px solid var(--border, rgba(255,255,255,.09)); border-radius: 14px; background: var(--surface, rgba(255,255,255,.03)); }
+.kp-toc-h { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--text3, #8a93a0); margin-bottom: 8px; }
+.kp-toc a { display: block; font-size: 14px; color: var(--text2, #aab); text-decoration: none; padding: 5px 10px; border-left: 2px solid transparent; border-radius: 0 6px 6px 0; }
+.kp-toc a:hover { color: var(--text, #fff); }
+.kp-toc a.on { color: var(--accent2, #74b9ff); border-left-color: var(--accent2, #74b9ff); background: rgba(116,185,255,.08); font-weight: 700; }
+
+/* Korean name tools (listen / copy) */
+.kp-kr-tools { display: inline-flex; gap: 4px; margin-left: 8px; vertical-align: middle; }
+.kp-kr-btn { border: 1px solid var(--border, rgba(255,255,255,.15)); background: var(--surface, rgba(255,255,255,.05)); border-radius: 8px; width: 30px; height: 30px; font-size: 14px; cursor: pointer; color: var(--text2, #ccc); line-height: 1; padding: 0; }
+.kp-kr-btn:hover { border-color: var(--accent2, #74b9ff); }
+
+/* image lightbox */
+.kp-lb { position: fixed; inset: 0; z-index: 2100; background: rgba(0,0,0,.9); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .2s; padding: 20px; }
+.kp-lb.on { opacity: 1; visibility: visible; }
+.kp-lb img { max-width: 100%; max-height: 92vh; border-radius: 10px; }
+.kp-lb-x { position: absolute; top: 16px; right: 18px; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 42px; height: 42px; border-radius: 50%; font-size: 24px; cursor: pointer; }
+
+/* resume reading pill */
+.kp-resume { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%) translateY(16px); z-index: 1150; display: flex; align-items: center; gap: 8px; background: #12233a; border: 1px solid var(--border, rgba(255,255,255,.14)); border-radius: 999px; padding: 8px 10px 8px 16px; font-size: 13px; color: var(--text, #fff); box-shadow: 0 8px 30px -10px rgba(0,0,0,.6); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s; }
+.kp-resume.on { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.kp-resume button { border: 0; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 15px; font-weight: 800; }
+.kp-resume-go { background: var(--accent2, #74b9ff); color: #06101d; }
+.kp-resume-x { background: rgba(255,255,255,.1); color: #fff; }
+
+/* sticky mobile Plan CTA (above the tab bar) */
+.kp-sticky-cta { display: none; }
+@media (max-width: 768px) {
+  .kp-sticky-cta { position: fixed; left: 16px; right: 16px; bottom: calc(66px + env(safe-area-inset-bottom, 0)); z-index: 1090; text-align: center; padding: 13px; border-radius: 14px; background: linear-gradient(135deg, var(--accent2, #74b9ff), var(--accent, #ff6b9d)); color: #06101d; font-size: 15px; font-weight: 800; text-decoration: none; box-shadow: 0 10px 30px -8px rgba(116,185,255,.5); transform: translateY(90px); transition: transform .3s; }
+  .kp-sticky-cta.show { transform: translateY(0); }
+  .kp-toc { position: sticky; top: 8px; z-index: 40; max-height: 42vh; overflow-y: auto; }
+}
