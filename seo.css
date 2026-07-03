@@ -188,7 +188,7 @@
   .kp-tabbar a:active, .kp-tabbar button:active { transform: scale(.93); }
 
   /* clear the fixed bar + lift the back-to-top above it */
-  body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0)); }
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0)); }
   #kp-totop { bottom: calc(72px + env(safe-area-inset-bottom, 0)) !important; right: 14px !important; }
 
   /* comfortable reading: wider line-height, fewer cramped edges */

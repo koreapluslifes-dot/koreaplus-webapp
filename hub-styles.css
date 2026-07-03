@@ -28,7 +28,7 @@
   --font:      'Inter', -apple-system, sans-serif;
 }
 
-html { scroll-behavior: smooth; overflow-x: clip; }
+html { overflow-x: clip; }
 body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.5; overflow-x: hidden; }
 
 /* ── Hub Navigation ─────────────────────────────────────────────────── */
@@ -413,7 +413,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   .kp-tabbar .kp-tab-i { font-size: 21px; line-height: 1; }
   .kp-tabbar a.on, .kp-tabbar button.on { color: var(--accent2, #74b9ff); }
   .kp-tabbar a:active, .kp-tabbar button:active { transform: scale(.93); }
-  body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0)) !important; }
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0)) !important; }
 }
 @media (max-width: 380px) { .kp-tabbar .kp-tab-l { font-size: 9.5px; } }
 

@@ -333,7 +333,11 @@ function initMap() {
 
   function zoomToCity(city) {
     const [tx,ty] = ll(city.lat, city.lng);
-    zoom=2.5; panX=tx-W/2-70; panY=ty-H/2; applyView();
+    // view center = (W/2 - panX, H/2 - panY) per applyView's viewBox math, so
+    // centering on (tx,ty) needs pan = W/2 - tx (previous sign was inverted,
+    // which panned to the mirrored spot — pins didn't match the city).
+    // +70 keeps the pin left of the right-side attraction panel.
+    zoom=2.5; panX=W/2-tx-70; panY=H/2-ty; applyView();
     showPanel(city);
   }
 
