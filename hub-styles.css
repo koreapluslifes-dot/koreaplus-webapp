@@ -34,7 +34,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 /* ── Hub Navigation ─────────────────────────────────────────────────── */
 .hub-nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(0,4,6,0.92); backdrop-filter: blur(12px);
+  /* lighter blur = cheaper per-frame repaint while scrolling on PC */
+  background: rgba(0,4,6,0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   padding: 0 20px; height: 52px;
   display: flex; align-items: center; gap: 0;

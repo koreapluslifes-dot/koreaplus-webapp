@@ -214,17 +214,11 @@ function initMap() {
     });});
   });
 
-  mapEl.addEventListener('wheel',e=>{
-    if(!e.ctrlKey && !e.metaKey) return; // plain scroll = page scroll (Ctrl+wheel zooms)
-    e.preventDefault();
-    const rect=svg.getBoundingClientRect();
-    const mx=(e.clientX-rect.left)/rect.width*W, my=(e.clientY-rect.top)/rect.height*H;
-    const f=e.deltaY<0?1.14:0.88, nz=Math.max(1,Math.min(5,zoom*f));
-    panX+=((mx-W/2)/zoom)*(1-zoom/nz);
-    panY+=((my-H/2)/zoom)*(1-zoom/nz);
-    zoom=nz; if(zoom<=1){panX=0;panY=0;}
-    applyView();
-  },{passive:false});
+  // No wheel-to-zoom here on purpose. A {passive:false} wheel handler over the
+  // full-height hero map forced EVERY wheel tick through the main thread (the
+  // browser can't know in advance whether we'll preventDefault), so page scroll
+  // stuttered on the first screen. Zoom now lives on the +/−/⌂ buttons and touch
+  // pinch, leaving the wheel on the browser's fast compositor scroll path.
 
   mapEl.addEventListener('mousedown',e=>{
     if(e.target.closest('.city-dot,.zoom-ctrl'))return;
@@ -382,12 +376,8 @@ function initMap() {
     el('circle',{cx:ax,cy:ay,r:2,fill:'rgba(255,230,140,0.75)'},ag);
   });
 
-  // Zoom hint (data-i18n so applyTranslations repairs the boot-time raw key)
-  const hint=el('text',{x:W-54,y:134,fill:'rgba(255,255,255,0.55)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint.setAttribute('data-i18n','map.hint1');
-  const hv=window.kpI18n?.t('map.hint1'); hint.textContent=(hv&&hv!=='map.hint1')?hv:'Ctrl + scroll';
-  const hint2=el('text',{x:W-54,y:145,fill:'rgba(255,255,255,0.55)','font-size':'8.5','text-anchor':'middle','font-family':'Inter,sans-serif'},zCtrl); hint2.setAttribute('data-i18n','map.hint2');
-  const hv2=window.kpI18n?.t('map.hint2'); hint2.textContent=(hv2&&hv2!=='map.hint2')?hv2:'to zoom';
-  mapEl.addEventListener('wheel',()=>{hint.remove();hint2.remove();},{once:true,passive:true});
+  // (Zoom hint removed — the +/−/⌂ buttons are self-explanatory and wheel no
+  // longer zooms, so a "Ctrl + scroll to zoom" hint would be misleading.)
 
   mapEl.appendChild(svg);
   mapEl.style.background = '#000204';
@@ -1026,7 +1016,7 @@ function initScrollReveal() {
 function initHeader() {
   window.addEventListener('scroll', () => {
     document.getElementById('header')?.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  }, { passive: true });
 }
 
 /* ===== RETENTION: welcome-back + recently-viewed ===== */

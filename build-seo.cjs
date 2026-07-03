@@ -1117,7 +1117,7 @@ ${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://koreaplus-webapp.jeybeeicon.workers.dev">
 <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hub-styles.css?v=7">
+<link rel="stylesheet" href="hub-styles.css?v=15">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="seo.css?v=13">
 <link rel="stylesheet" href="mobile.css?v=1">

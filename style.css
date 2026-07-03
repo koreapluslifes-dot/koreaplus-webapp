@@ -18,7 +18,10 @@ button{cursor:pointer;border:none;font-family:inherit}
 /* ===== HEADER ===== */
 .header{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(7,12,22,0.82);backdrop-filter:blur(20px);
+  /* blur(20px) on a full-width fixed bar re-computed the blur every scroll frame
+     → wheel jank on PC. 10px keeps the frosted look at ~half the paint cost;
+     a slightly more opaque base keeps text legible with the smaller blur. */
+  background:rgba(7,12,22,0.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,0.09);transition:box-shadow 0.3s;
 }
 .header.scrolled{background:rgba(7,12,22,0.94);box-shadow:0 2px 22px rgba(0,0,0,0.45)}
