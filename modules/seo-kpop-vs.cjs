@@ -25,7 +25,7 @@ module.exports = function (ctx) {
   } catch { T = {}; }
 
   // Languages we can render = en + every locale that has a translation block.
-  const LANGS = ['en'].concat(['ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'])
+  const LANGS = require("./seo-langs.cjs")
     .filter(l => T[l]);
 
   // Build a quick id→roster lookup (objective fields only).

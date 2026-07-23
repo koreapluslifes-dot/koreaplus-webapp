@@ -24,7 +24,7 @@ module.exports = function (ctx) {
 
   // Languages this module can emit = those with both an l10n table entry and
   // (for non-en) a site dir. en is default (no dir).
-  const LANGS = ['en', 'ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id']
+  const LANGS = require("./seo-langs.cjs")
     .filter(l => T[l] && (l === 'en' || (L10N[l] && L10N[l].dir)));
 
   const dirOf = (lang) => (lang === 'en' ? '' : L10N[lang].dir + '/');

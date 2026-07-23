@@ -25,7 +25,7 @@ module.exports = function (ctx) {
 
   // Languages this generator can emit (intersection of content l10n + site L10N).
   // en is base; the rest must exist in both L10N (for dir) and L10N_CONTENT.
-  const LANGS = ['en', 'ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id']
+  const LANGS = require("./seo-langs.cjs")
     .filter(l => L10N_CONTENT[l] && (l === 'en' || (L10N[l] && L10N[l].dir)));
 
   // Minimum acts for an agency to get its own guide page (thin-content guard).

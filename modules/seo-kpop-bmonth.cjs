@@ -23,7 +23,7 @@
 const { MONTH_NAMES, T } = require('../seo-kpop-bmonth-l10n.js');
 
 // K-pop channel language set (en first; matches build-seo KPOP_HIST_LANGS).
-const LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+const LANGS = require("./seo-langs.cjs");
 
 // English month slugs, index 0 (january) … 11 (december).
 const MONTH_SLUGS = ['january', 'february', 'march', 'april', 'may', 'june',

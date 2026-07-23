@@ -31,7 +31,7 @@ const path = require('path');
 const { MONTH_NAMES, T } = require('./seo-festivals-l10n.js');
 
 // Travel/default channel language set (en first; en is the canonical root).
-const LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+const LANGS = require("./seo-langs.cjs");
 
 // English month slugs, index 0 (january) … 11 (december).
 const MONTH_SLUGS = ['january', 'february', 'march', 'april', 'may', 'june',

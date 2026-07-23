@@ -26,7 +26,7 @@
 const { T, SIGN_NAMES, ANIMAL_NAMES, MONTH_NAMES } = require('./seo-kpop-member-l10n.js');
 
 // 9 languages, en first (x-default). Must be a subset of what L10N supports.
-const LANGS = ['en', 'ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'];
+const LANGS = require("./seo-langs.cjs");
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, affBlock, ROSTER, ENRICH, ld, derive } = ctx;

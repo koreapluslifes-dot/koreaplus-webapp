@@ -129,7 +129,7 @@ const ORIGIN = 'https://koreaplus-lifes.com';
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, bcHtml, keyFactsBox, CITY_L10N, ld } = ctx;
-  const LANGS = ['en', 'ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'];
+  const LANGS = require("./seo-langs.cjs");
 
   // Localized city display name from CITY_L10N (h1 strips "Things to Do in"
   // is overkill — CITY_L10N carries no bare city name, so we fall back to the

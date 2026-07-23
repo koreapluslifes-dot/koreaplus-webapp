@@ -25,7 +25,7 @@ module.exports = function (ctx) {
   const ROSTER = ctx.ROSTER || [];
   const ENRICH = ctx.ENRICH || {};
 
-  const LANGS = ['en', 'ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'];
+  const LANGS = require("./seo-langs.cjs");
   const ORIGIN = 'https://koreaplus-lifes.com';
   const KPOP_HOME = '/kpop';
   const KPOP_BRAND = '🎤 Korea<span>Plus</span>';

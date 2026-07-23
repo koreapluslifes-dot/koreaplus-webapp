@@ -27,7 +27,7 @@ const { HUB, EXISTING, TERMS } = require('./seo-kpop-glossary-l10n.js');
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, ld, TODAY } = ctx;
 
-  const LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+  const LANGS = require("./seo-langs.cjs");
   // Try to read the history JSON if exposed; fall back to global require so
   // the EXISTING headwords still resolve their per-language article titles.
   // (We only LINK to history pages — we never regenerate them.)
