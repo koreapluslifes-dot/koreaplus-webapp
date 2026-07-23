@@ -206,7 +206,10 @@ ${faqHtml}
 ${relHtml}
 </article>`;
 
-    shell({
+    // shell() RETURNS the html string — it does not write. writePage must be
+    // called with the OUT-relative path (= url minus the BASEP prefix), else
+    // the page is sitemap-listed but never materialized on disk (ghost 404).
+    writePage(url.slice(BASEP.length), shell({
       url,
       title,
       desc,
@@ -218,7 +221,7 @@ ${relHtml}
       alts: altsFor(pair[0], pair[1]),
       homeHref: '/kpop',
       brand: '🎤 Korea<span>Plus</span>',
-    });
+    }));
 
     return url;
   }

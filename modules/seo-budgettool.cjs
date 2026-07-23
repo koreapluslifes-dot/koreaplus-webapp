@@ -166,7 +166,7 @@ module.exports = function (ctx) {
     const T = L10N[lang]; if (!T) return null;
     const C = T[tool.tkey];
     const dir = dirOf(lang);
-    const rel = `guide/${dir}tools/${tool.slug}.html`;
+    const rel = `${dir}tools/${tool.slug}.html`;
     const url = `${BASEP}${dir}tools/${tool.slug}.html`;
     const alts = altsFor(tool.slug, true);
 
@@ -235,7 +235,7 @@ module.exports = function (ctx) {
     const T = L10N[lang]; if (!T) return null;
     const C = T[tool.tkey];
     const dir = dirOf(lang);
-    const rel = `guide/${dir}embed/${tool.slug}.html`;
+    const rel = `${dir}embed/${tool.slug}.html`;
     // script lives at /guide/modules/... — use an absolute path so the embed
     // works regardless of the host page that frames it.
     const scriptSrc = `${BASEP}modules/kp-tool-budget.js`;
