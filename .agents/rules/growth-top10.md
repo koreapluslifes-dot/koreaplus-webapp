@@ -1,0 +1,25 @@
+﻿---
+trigger: model_decision
+description: "Rule for koreaplus-webapp: growth-top10.md"
+---
+2026-06-18 다중에이전트 전략 워크플로(8렌즈→종합→비평, 73후보)로 도출. 에이전트가 실제 파일을 검증함: robots는 wildcard만(AI봇 허용줄 없음), llms.txt 75줄, src/worker.ts에 scheduled() 없음+wrangler.toml cron 주석처리, planner/mytrip/kbeauty/sharecard는 track() 0회(affiliate.js만 aff_click), 어필리에이트 deepOffers()는 Agoda 호텔 단독(IMPACT-AFFILIATE.md엔 Klook/Airalo 문서화됐으나 미구현), AdSense 슬롯 4521899200 1개 전부 재사용, 폰트 2홉 렌더블로킹+header.js 동기. 핵심: "기능 만들고 안 엮은 것" 위주라 ROI 큼.
+
+**최종 10대 레버(우선순위)**:
+1. (P0,M,free) AI크롤러 텍스트 트윈 + 계층형 llms-full.txt + robots에 AI봇 Allow → AI답변엔진 인용. worker.ts UA분기(handleShareHtml 패턴 재사용), build-seo.cjs keyFactsBox/FAQ로 생성.
+2. (P0,M,free) 머니 모듈 풀퍼널 계측 — quiz/itinerary 단계 이벤트 + aff_strip_impression(IntersectionObserver). analytics.js track() 이미 있음, 상태전환에 호출 추가. **다른 레버의 측정 전제.**
+3. (P0,S,free) Worker scheduled() cron — IndexNow 변경URL POST(키파일 이미 존재) + dateModified 재스탬프 + 이메일다이제스트 훅. wrangler.toml cron 주석해제.
+4. (P1,M,free) GSC 수요루프 → 프로그매틱 답변페이지. GSC CSV 월간 인입→striking-distance(5~20위) 타이틀/메타 재작성 + 무페이지 쿼리용 buildAnswer(q). build-seo.cjs 헬퍼 재사용.
+5. (P1,M,needs-key) 어필리에이트 카테고리표 — eSIM(Airalo)/투어(Klook,KKday)/공항픽업 추가(현재 Agoda만). eSIM페이지 오퍼블록 0=순수누수. deepOffers() 카테고리별 딥링크+sub-id.
+6. (P1,M,free) 크로스버티컬 토픽클러스터 내부링크(현재 동일카테고리 회전만). relatedLinks(pageType,context)로 허브-스포크+kbeauty/travel/kpop 교차링크. 484페이지 최대 미구현 온페이지 레버.
+7. (P1,M,free) kbeauty 트렌드권위 데이터→GEO 답변페이지(verdict+citation+비교표, FAQPage/Speakable/DefinedTermSet). buildKbeautyAnswer() in build-seo.cjs, 9개언어 오버레이 재사용. 레버1에 공급.
+8. (P1,M,free) CWV 패스 — 폰트 셀프호스트+서브셋, header.js defer+CLS높이예약, 해시자산 immutable 캐시, AVIF/WebP. web-perf 스킬로 검증.
+9. (P2,M,free) 이메일 리스트(소유자산) — KV백엔드, Cloudflare Email Sending 더블옵트인, 고관심 모먼트에만 프롬프트. handleSharePost 패턴+kp_consent. 레버3 cron이 주간다이제스트 발송. (웹푸시는 솔로 유지부담으로 제외)
+10. (P2,M,free) AdSense 슬롯/수율 — pageType별 슬롯맵+ad_impression(현재 1슬롯=어트리뷰션 불가+정책리스크), 엣지 A/B(base-inject 훅+쿠키), 이탈의도 모달. 레버2 필요.
+
+**30/60/90(솔로 1인)**: D1-30(P0): wk1 robots AI봇 Allow+llms-full+header.js defer / wk2 퍼널계측(kbeauty→planner/mytrip) / wk3 cron+IndexNow / wk4 GSC 타이틀재작성20. D31-60: eSIM/투어 오퍼, pageType 슬롯맵+ad_impression, UA 텍스트트윈, kbeauty verdict 10페이지. D61-90: 크로스버티컬 내부링크(상위5도시), CWV 스윕, 이메일 subscribe+cron 다이제스트, A/B+이탈모달. **규칙: 머니/리테in션 레버는 계측(레버2) 먼저.**
+
+**진행상태(2026-06-20)**: **P0 완료·라이브** — #1(1차) robots.txt에 AI봇14종 Allow + build-llms.cjs로 llms-full.txt/llms-kbeauty.txt(답변내장, /guide/) , #3 worker scheduled()+wrangler cron "0 1 * * *" IndexNow 일일제출(키 kp7e3f1c9a2b5d48069e3f1c9a2b5d48), #2 kbeauty.js 계측(kbtrack/observeImpression: quiz_completed·shop_open·aff_strip_impression·kbeauty_view, window.kpAnalytics.track 재사용). **A그룹 완료·라이브** — #7 build-kbeauty-seo.cjs로 /guide/kb/ 24개 답변페이지+index+kbeauty-answers-sitemap.xml(FAQPage/Speakable JSON-LD, 권한 755/644 필수=403주의), #6 답변페이지 크로스버티컬 푸터+허브 explore에 역링크, #8 header.js defer + 폰트는 **Cloudflare Fonts가 자동 자체호스팅**(/cf-fonts/, swap)이라 추가작업 불필요(media=print onload 트릭은 CF가 제거하므로 쓰지말것). sw kp-v41. **#5 클룩 완료·라이브(2026-06-20)**: modules/klook.js = Klook 다이나믹 위젯(adid **1310693**, data-cid 13, amount 3, lang/currency 자동) → #kp-klook 컨테이너에 주입 + fetch-iframe-init.js. 13개 여행페이지(festivals/culture/temples/nightviews/seasons/kdrama-locations/currency/phrases/etiquette/subway/menu-translator/emergency/plan)에 "Keep exploring" 앞 삽입. **K-뷰티엔 의도적으로 미적용**(뷰티는 AliExpress+쿠팡). 9개언어 라벨+고지 내장. sw v42 precache에 klook.js 추가. build-seo 생성 여행페이지엔 아직 미적용(템플릿에 #kp-klook+klook.js 추가하면 484p 커버 가능—후속). **#9+#10 코어 라이브(2026-06-20)**: modules/cro.js = ①A/B 스티키 50/50(localStorage kp_ab→window.KP_AB→GA4 ab_variant) ②이탈의도 모달(데스크톱 mouseout top / 모바일 35s+45%스크롤, 7일 1회 캡, kp_subscribed시 미표시) = 9개언어 이메일 캡처 → POST WORKER_URL+/api/subscribe. **header.js loadModules 배열에 'cro.js?v=1' 추가 = 전 사이트(SEO 484p 포함) 자동 로드**. 주의: header.js는 analytics.js도 동적로드(=kpAnalytics/GA4 G-FHNPTNFGJK는 전 페이지 존재, #2 계측 정상; static grep은 오탐). worker.ts에 /api/subscribe(POST→CACHE_KV 'sub:<email>', 이메일검증, 더블옵트인 발송은 DNS 후) 추가. sw v43 precache에 cro.js. **남은 입력대기**: #4 GSC Performance CSV(생성기 미착수), #9 이메일 실제발송=Cloudflare Email DNS(SPF/DKIM)(현재 리드만 KV저장), #10 AdSense 페이지별 슬롯ID(현재 1슬롯; A/B하니스·이탈모달은 완료). KV에 test-verify@example.com 더미 1건(무해).
+
+**#1 텍스트트윈 완성(2026-06-20)**: worker.ts /kbeauty UA분기 — AI답변봇(GPTBot|OAI|Perplexity|Claude|anthropic|CCBot|Bytespider|Google-Extended|Applebot-Extended|Amazonbot)이면 origin /guide/llms-kbeauty.txt를 mdToHtml()로 변환해 JS없는 답변HTML 반환(x-served-by: kbeauty-ai-twin, h2 5/h3 32/PubMed·AAD 인용). **Googlebot/Bingbot 제외=정상앱(랭킹 클로킹 아님)**. 검증: GPTBot→twin, Chrome·Googlebot→kbeauty-pretty-url. **#6 결론**: 공유 nav가 전 생성페이지(484+)·정적허브에서 kbeauty.html+kpop.html 링크 = 버티컬 내부링크 전파 이미 충족(생성페이지 재생성 불필요). 답변페이지 크로스버티컬 푸터+허브 explore카드도 완료. 더 풍부한 토픽클러스터 related-cards는 선택(수확체감). **#8 결론**: Cloudflare Fonts가 구글폰트를 자동 자체호스팅(/cf-fonts/,swap)+header.js defer+.js 11일캐시+.json OVERLAY_VER = CWV 핵심 완료. AVIF/WebP 이미지 파이프라인은 선택(별도 작업). **결론: 4·9·10 제외한 나머지(1,2,3,5,6,7,8) 전부 라이브 완료.**
+
+**비평가 지적 갭(미포함, 별도 고려)**: 백링크/디지털PR(비AI 오가닉 천장), 484페이지 thin/중복 가드레일, 문서-코드 드리프트(Impact.com/Klook 문서 vs 실제 Agoda단독), 비주얼서치(구글이미지/핀터레스트), 이메일 GDPR 더블옵트인/수신거부.

@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '11';
+  const OVERLAY_VER = '12';
   async function loadContent() {
     if (lang === 'en') return;
     try {
@@ -1269,6 +1269,9 @@
 
   // ── Modern UX layer (10 conveniences) ───────────────────────────────────────
   const KB_LIB = '/guide/kb';
+  // Language-aware library entry: non-English users land on their native cluster
+  // index (/guide/kb/<lang>/), which links onward to the full English library.
+  const KB_LIB_HOME = (lang && lang !== 'en') ? KB_LIB + '/' + lang + '/' : KB_LIB + '/';
   function kbToast(msg) {
     let w = $('#kb-toast-wrap'); if (!w) { w = document.createElement('div'); w.id = 'kb-toast-wrap'; document.body.appendChild(w); }
     const t = document.createElement('div'); t.className = 'kb-toast'; t.textContent = msg; w.appendChild(t);
@@ -1307,7 +1310,7 @@
     const box = $('#kb-modal'); if (!box) return;
     const moreCats = ['you', 'sun', 'trouble', 'brands', 'buy', 'trends', 'tools'].map(id => kbCatById(id)).filter(Boolean);
     const rows = moreCats.map(c => '<button type="button" class="kb-sheet-row" data-morecat="' + c.id + '"><span class="se">' + c.icon + '</span><span><span>' + esc(kbTitle(c)) + '</span><span class="sd">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></span></button>').join('');
-    const lib = '<a class="kb-sheet-row" href="/guide/kb/"><span class="se">📚</span><span><span>' + esc(cx('ux.library', 'The K-Beauty Library')) + '</span><span class="sd">' + esc(cx('ux.librarysub', '1,000+ guides')) + '</span></span></a>';
+    const lib = '<a class="kb-sheet-row" href="' + KB_LIB_HOME + '"><span class="se">📚</span><span><span>' + esc(cx('ux.library', 'The K-Beauty Library')) + '</span><span class="sd">' + esc(cx('ux.librarysub', '1,000+ guides')) + '</span></span></a>';
     box.innerHTML = '<button class="kb-modal-x" data-close aria-label="Close">✕</button>'
       + '<div class="kb-sheet-h">' + esc(cx('ux.more', 'More')) + '</div>'
       + '<div class="kb-sheet-menu">' + rows + lib + '</div>';
@@ -1559,7 +1562,7 @@
     if (land) {
       land.innerHTML = '<button type="button" class="kb-cta-hero" aria-label="' + esc(i18get('kbeauty.sec.quiz.title') || 'Find your skin type') + '"><span class="cta-tx"><span class="cta-t">' + esc(i18get('kbeauty.sec.quiz.title') || '🪞 Find your skin type') + '</span><span class="cta-s">' + esc(i18get('kbeauty.sec.quiz.sub') || 'A 30-second quiz personalizes everything') + '</span></span><span class="cta-go" aria-hidden="true">→</span></button>'
         + KB_CATS.map(c => '<button class="kb-tile" data-target="' + c.id + '" type="button"><span class="ti">' + c.icon + '</span><span class="tt" data-catid="' + c.id + '">' + esc(kbTitle(c)) + '</span><span class="ts">' + esc(cx('cat.' + c.id + '.sub', c.sub)) + '</span></button>').join('')
-        + '<a class="kb-tile kb-tile-lib" href="/guide/kb/"><span class="ti">📚</span><span class="tt">' + esc(cx('cat.lib.t', 'K-Beauty Library')) + '</span><span class="ts">' + esc(cx('cat.lib.sub', '1,000+ guides: history, ingredients, brands, how-to & more')) + '</span></a>';
+        + '<a class="kb-tile kb-tile-lib" href="' + KB_LIB_HOME + '"><span class="ti">📚</span><span class="tt">' + esc(cx('cat.lib.t', 'K-Beauty Library')) + '</span><span class="ts">' + esc(cx('cat.lib.sub', '1,000+ guides: history, ingredients, brands, how-to & more')) + '</span></a>';
     }
     applyNavI18n();
   }
@@ -1874,6 +1877,8 @@
     showShareFab();
     initUX();   // modern UX layer: search, back-to-top, progress, bottom-nav, toast, recent, reveal, haptics
     initPWAExtras();  // #12 .ics reminders, #13 Web Share Target, #17 first-run onboarding
+    // Language-aware library entry on the static landing card too (HTML ships /guide/kb/).
+    if (lang && lang !== 'en') { try { $$('.hub-explore-cta').forEach(a => { a.href = KB_LIB_HOME; }); } catch (e) {} }
 
     // routine tabs
     $$('#kb-routine-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {

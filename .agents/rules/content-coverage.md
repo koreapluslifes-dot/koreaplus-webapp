@@ -1,0 +1,11 @@
+﻿---
+trigger: model_decision
+description: "Rule for koreaplus-webapp: content-coverage.md"
+---
+City/destination guides are driven by **city-l10n.json** (keyed by city name → per-language objects) + the **REGIONAL_CITIES**/CITIES arrays in build-seo.cjs. The localized build loop iterates `Object.keys(CITY_L10N)`, so **any city added to city-l10n.json with all 9 langs auto-generates localized guides** (en + ja/zh/es/ko/fr/de/pt/id); add it to REGIONAL_CITIES too for the EN page + sitemap + best-time pages.
+
+**Coverage (2026-06-26): 24 cities, ALL full 9-language + LIVE.** Original 6 (Seoul, Busan, Gyeongju, Jeonju, Incheon, Jeju) + Taean, Tongyeong, Pohang, Chuncheon, Damyang + **Korea Hiking** (topic guide) + **Jinju, Suncheon, Boseong, Mokpo, Gongju** (newest batch) + the 7 formerly-EN-only cities now fully localized into all 8 langs: **Gangneung, Sokcho, Suwon, Daegu, Daejeon, Andong, Yeosu**. (Localization workflows hit transient "Server is temporarily limiting requests" rate-limits — fix: run langs SEQUENTIALLY with per-lang retry, not 6+ parallel agents; the weekly usage cap is a separate limiter.)
+
+**Topic guides** (e.g. "Korea Hiking" / K-등산): reuse the city mechanism — entry keyed `"Korea Hiking"` (slug → things-to-do-in-korea-hiking.html), attractions = mountains, food = post-hike food. `buildCity` now uses `CITY_L10N[name].en.h1` when present so topic guides get a clean heading ("Korea Hiking Guide: …") instead of "Things to Do in Korea Hiking"; real cities are unchanged (their g.h1 already = "Things to Do in X, Korea"). Title keeps the hardcoded `… — Top Attractions, Food & Tips (2026) | KoreaPlus` suffix.
+
+**To add more destinations:** generate EN content (schema: h1/title/metaDesc/lead/attractions[10]{name,nameLocal,blurb}/food[5-6]/gettingThere/tips[4]/faq[4]) + localize into the 8 langs via a workflow (write per-lang JSON to C:/tmp/dest/), assemble into city-l10n.json (surgical insert before the closing brace; validate array lengths match en + keep Korean nameLocal), add to REGIONAL_CITIES, rebuild, deploy full tree. New cities default to the Seoul Klook widget (not in CITY_KLOOK) — fine. See [[affiliate-layout]], [[deploy-seo-pages]], [[webapp-audit-backlog]].

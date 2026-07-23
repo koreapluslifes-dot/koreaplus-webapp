@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v67';
+const CACHE = 'kp-v68';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -55,6 +55,11 @@ const PRECACHE = [
   BASE + '/assets/kbeauty-content.de.json',
   BASE + '/assets/kbeauty-content.pt.json',
   BASE + '/assets/kbeauty-content.id.json',
+  BASE + '/assets/kbeauty-content.ar.json',
+  BASE + '/assets/kbeauty-content.hi.json',
+  BASE + '/assets/kbeauty-content.ru.json',
+  BASE + '/assets/kbeauty-content.vi.json',
+  BASE + '/assets/kbeauty-content.th.json',
   BASE + '/menu-translator.html',
   BASE + '/subway.html',
   BASE + '/modules/api-client.js',
@@ -93,6 +98,11 @@ const PRECACHE = [
   BASE + '/messages/de.json',
   BASE + '/messages/pt.json',
   BASE + '/messages/id.json',
+  BASE + '/messages/ar.json',
+  BASE + '/messages/hi.json',
+  BASE + '/messages/ru.json',
+  BASE + '/messages/vi.json',
+  BASE + '/messages/th.json',
 ];
 
 // ── Install: pre-cache all static assets ─────────────────────────────────────

@@ -1,0 +1,31 @@
+﻿---
+trigger: model_decision
+description: "Rule for koreaplus-webapp: pet-webapp.md"
+---
+**PetPlus = "애완동물의 모든것"**, a new static vertical for **all-lifes.com** at web path **`/pet/`**. Source repo: `C:\Users\juksu\pet-webapp\` (self-contained, like lucky/iq-test). Plan doc: `C:\tmp\all-lifes-repo\docs\pet-webapp-plan.md`.
+
+Reuses the KoreaPlus pattern: `data/*.json` → `build-pet.cjs` → `dist/pet/**` (home, hubs, food pages, tools, sitemap, hreflang, schema.org). English is canonical, x-default=en.
+
+**Phase 1 built & verified locally (2026-07-06):** "Can dogs/cats eat X" programmatic pages (13 seed foods × dog & cat) + dog/cat **age calculators** (client-only) + home/hubs/tools + PWA. Languages **en + ko** only so far (engine loops `i18n.meta.langs`; adding a language is data-only). Build = `node build-pet.cjs` (64 pages). All routes serve 200; all JSON-LD valid. **Not yet deployed, not yet committed to git.**
+
+**Deploy target (RESOLVED 2026-07-06, from lucky-webapp/deploy.config.ps1):** all-lifes.com = a SEPARATE Lightsail Bitnami WordPress box from KoreaPlus — IP **3.36.235.171** (Seoul, ap-northeast-2), user `bitnami`, key `C:\Users\juksu\LightsailDefaultKey-ap-northeast-2.pem`, docroot `/opt/bitnami/wordpress`. Static verticals live as subdirs: lucky at `/opt/bitnami/wordpress/lucky` → web `/lucky/`, so **pet → `/opt/bitnami/wordpress/pet` → web `/pet/`**. Deploy via `bash deploy-pet.sh` (tar→scp /tmp→sudo extract→perm-loop→verify→IndexNow); same bitnami perm gotcha as [[deploy-seo-pages]]. IndexNow key for all-lifes: `3b23ebbe6ef3f8d86a1d70a7ca435527` (key file confirmed live at web root; **API needs `Content-Type: application/json; charset=utf-8` or it 400s**). **SSH-to-prod needs explicit user approval naming the target.**
+
+**DEPLOYED & LIVE 2026-07-06:** WordPress does NOT intercept /pet/ (same as /lucky/). Deploy = `bash deploy-pet.sh`. IndexNow needs `Content-Type: application/json; charset=utf-8` AND is now batched by 100 (a single 1135-URL POST intermittently 400s).
+
+**EXPANDED to multi-species platform (2026-07-06, ~1,130 pages, sitemap now lists per-language URLs):**
+- **8 species / 109 breeds** — `data/species.json` (species + 10 situation defs w/ trait-weight scoring + 13-trait rubric) + `data/animals.json` (each animal: traits 13×1-5, size, lifespan, summary/goodFor/care + rich `detail` {personality,origin,exercise,grooming,diet,housing,health,training,cost,pros[],cons[],faq[],funFact} bilingual).
+- **Pet matcher** `/pet/{lang}/matcher/` (7-Q quiz, `assets/matcher.js` scores `assets/animals.min.json`), **situation hubs** `/best-pets/{id}/` (10, ranked from trait scores), **compare** `/compare/{a}-vs-{b}/` (top-COMPARE_TOPK/species + related pairs, auto "key differences"), **species care guides** `/guide/{species}/` (`data/guides.json`, 8-section long-form).
+- Breed profiles + guides were authored by two parallel-agent **Workflows** (basic data, then rich `detail`+guides); generator scripts in the session scratchpad. All 1486 JSON-LD blocks valid (FAQPage per breed, Article per guide).
+- **AdSense (2026-07-06):** every page EXCEPT home carries a labeled ("광고"/"Advertisement") responsive unit at TOP (after header) + BOTTOM (before footer). Set centrally in `build-pet.cjs` `layout()` via `adSlot()` gated on `o.kind!=='home'`; client `ca-pub-1378943893051810`, slot `4521899200` (shared all-lifes publisher; all-lifes.com/ads.txt already carries it). Home = zero ads (no lib script either). ASSET_V/SW bumped to v3.
+**v4 GLOBAL REDESIGN + 6 LANGUAGES (2026-07-09, LIVE — 3,498 pages / 3,498 sitemap URLs):**
+- **Languages en/ko/ja/es/pt/de** (583 pages each). Translated via ONE 200-agent Workflow (UI+species+situations+matcher / foods / animals ×37 chunks / guides, per lang) reading source chunk files from scratchpad `trans-src/`; first run died at session limit (pt/de animals + all guides) and was **resumed with `resumeFromRunId`** — cached agents restored free, only failures re-ran. Merge = scratchpad `merge-translations.cjs` (forces `strings.htmlLang=lang`). Matcher questions now in `data/matcher.json`, About/share templates in i18n strings (all translator-covered).
+- **Wikimedia imagery 109/109 breeds** — `fetch-wikimedia-images.cjs` (Wikipedia pageimages API + Commons extmetadata attribution) → `data/images.json` {thumb,small,commons,artist,license}; 9 stragglers fixed via disambiguated titles + Commons file search (scratchpad patch-images.cjs). Rendered: animal-page hero figure w/ credit, card thumbs (lazy), compare hero pair, **og:image + summary_large_image**. Hotlinks upload.wikimedia.org (permitted).
+- **Design system v4** (`assets/pet.css` full rewrite): refined warm palette, gradient brand chip, hover-lift cards, pill search/filter chips, **dark mode via prefers-color-scheme** (all tokens variable-driven). ASSET_V/SW = v4.
+- **Programmatic depth (zero-authoring, derived from traits):** ownership snapshot (time/cost/beginner tiers), "compared with other {species}" ▲▼ chips vs species mean, best-for situation chips (rank<12), similar pets = authored related ∪ trait-nearest (+2 cross-species), compare pick-A/pick-B bullets, species-hub filter chips (kid/apt/beginner/low-shed via data-flags), home stats strip, trait-nearest pair added to compare pairs (411 total).
+- **QA gate:** `qa-check.cjs` (per-lang counts, html lang, hreflang=langs+1, ads 0-on-home/2-elsewhere, JSON-LD parse, hero+og+credit on imaged animal pages) — run after every build; 4,554 LD blocks valid.
+- **IndexNow at this scale:** submit in **500-URL batches with 3s sleep** (single 3.5k POST and rapid re-submits get rate-limited); deploy-pet.sh updated accordingly. All 3,499 URLs accepted 2026-07-09.
+- Still TODO (user/manual): submit sitemap in Google Search Console. pet-webapp is NOT yet a git repo / not committed.
+
+**Next candidates:** name generator, pet-insurance/Amazon affiliate blocks, more breeds/foods (data-only), fr/ru/zh via the same translate workflow. Guardrails: YMYL vet disclaimer, no symptom-checker, no thin pages, Wikimedia-only images.
+
+Sibling vertical plans also in `all-lifes-repo/docs/`: `calculator-hub-plan.md`, `religion-webapp-plan.md` (same reuse-KoreaPlus approach, same `/calc/` `/religion/` path convention).

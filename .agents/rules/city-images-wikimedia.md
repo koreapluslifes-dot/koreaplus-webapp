@@ -1,0 +1,9 @@
+﻿---
+trigger: model_decision
+description: "Rule for koreaplus-webapp: city-images-wikimedia.md"
+---
+City guide hero + og:image photos are driven by **city-images.json** (keyed by city name). As of 2026-06-26 these are **Wikimedia Commons** images, NOT Unsplash — the user found Unsplash images inaccurate/generic (e.g. Busan was "high-rise buildings"; Suwon's Wikipedia pageimage was even a *football-match* photo). Wikimedia lead images are landmark-accurate (Seoul→Deoksugung, Jeju→Hallasan, Boseong→green-tea fields, Damyang→bamboo forest, Suwon→Hwaseong Fortress).
+
+**Refresh/extend:** run `node fetch-wikimedia-images.cjs` (repo root). It maps each city → a Wikipedia article title (`CITY_TITLE`), pulls the 1280px lead-image thumbnail via the Wikipedia API (`prop=pageimages&pithumbsize=1280`) + author/license from Commons `extmetadata`, and writes `city-images.wikimedia.json`. Review it, then `cp city-images.wikimedia.json city-images.json`. Override a bad pageimage by changing that city's title to a landmark article (e.g. Suwon→'Hwaseong Fortress'). Be polite to the API (the script sleeps 350ms; a HEAD-flood gets 429s — harmless for real per-page loads).
+
+**build-seo.cjs wiring:** entry shape `{raw, alt, by, byUrl, link, license, source:'wikimedia', file}`. `imgUrl()` passes any `upload.wikimedia.org` URL through UNCHANGED (Wikimedia thumbs are pre-sized and ignore Unsplash `?w=&fit=crop&auto=format` params — appending them is pointless/ugly). `photoCredit(im)` + the ImageObject `creditText` cite **author + CC/PD license + the Commons file page** (license compliance — most are CC-BY/CC-BY-SA/CC0/PD). Hotlinking upload.wikimedia.org is allowed; images are external (not Cloudflare-proxied). 23 cities covered (all guide cities except the "Korea Hiking" topic). See [[content-coverage]], [[deploy-seo-pages]].

@@ -1090,9 +1090,9 @@ fs.writeFileSync(path.join(OUT, 'kb-search.json'), JSON.stringify(searchJson));
 console.log('kb-search.json:', searchJson.length, 'entries');
 
 // ── Consolidated sitemap (hub 9-lang + every page) ──────────────────────────
-const ALT = [['x-default', ''], ['en', ''], ['ko', '?lang=ko'], ['ja', '?lang=ja'], ['zh-CN', '?lang=zh'], ['es', '?lang=es'], ['fr', '?lang=fr'], ['de', '?lang=de'], ['pt-BR', '?lang=pt'], ['id', '?lang=id']];
+const ALT = [['x-default', ''], ['en', ''], ['ko', '?lang=ko'], ['ja', '?lang=ja'], ['zh-CN', '?lang=zh'], ['es', '?lang=es'], ['fr', '?lang=fr'], ['de', '?lang=de'], ['pt-BR', '?lang=pt'], ['id', '?lang=id'], ['ar', '?lang=ar'], ['hi', '?lang=hi'], ['ru', '?lang=ru'], ['vi', '?lang=vi'], ['th', '?lang=th']];
 const alts = ALT.map(([hl, q]) => `    <xhtml:link rel="alternate" hreflang="${hl}" href="${HUB}${q}"/>`).join('\n');
-const hubVariants = ['', '?lang=ko', '?lang=ja', '?lang=zh', '?lang=es', '?lang=fr', '?lang=de', '?lang=pt', '?lang=id'];
+const hubVariants = ['', '?lang=ko', '?lang=ja', '?lang=zh', '?lang=es', '?lang=fr', '?lang=de', '?lang=pt', '?lang=id', '?lang=ar', '?lang=hi', '?lang=ru', '?lang=vi', '?lang=th'];
 const hubXml = hubVariants.map(q => `  <url>\n    <loc>${HUB}${q}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${q ? '0.8' : '0.9'}</priority>\n${alts}\n  </url>`).join('\n');
 const pageXml = sitemapUrls.map(u => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${u.prio}</priority>\n  </url>`).join('\n');
 fs.writeFileSync(path.join(__dirname, 'kbeauty-sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${hubXml}\n${pageXml}\n</urlset>\n`);
