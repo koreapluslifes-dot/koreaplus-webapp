@@ -38,6 +38,17 @@ const FORM = require('./kbeauty-formulation.json');      // [{slug,title,h1,qa,s
 const ADVC = require('./kbeauty-adv-clusters.json');     // { ageClimate, fresh, hair, makeup, clinic }
 const CITES = d.KBEAUTY_CITATIONS || {};
 
+// ── Viral / social-share loop (OG-based) ────────────────────────────────────
+// Per-language viral copy (tagline, share text, alt) — authored natively, loaded
+// if present; English fallbacks keep the build green before the pack is merged.
+let VIRAL = {};
+try { VIRAL = require('./kbeauty-viral.json'); } catch (e) { /* pack not built yet */ }
+const VIRAL_EN = { tagline: 'Korean skincare, decoded.', ogAlt: 'K-Beauty by KoreaPlus — Korean skincare guides, ingredients & brands', shareText: 'Found this on K-Beauty by KoreaPlus 👇', shareLabel: 'Share', shareTitle: 'Share this guide', copied: 'Link copied!', ctaFollow: 'Explore more K-beauty guides →' };
+const viral = (lang) => Object.assign({}, VIRAL_EN, VIRAL[lang] || {});
+// og:locale per 2-char page language (Open Graph territory tags help platforms
+// preview the right language) — keyed by both 2-char and region hreflang codes.
+const OG_LOCALE = { en: 'en_US', ko: 'ko_KR', ja: 'ja_JP', zh: 'zh_CN', 'zh-CN': 'zh_CN', es: 'es_ES', fr: 'fr_FR', de: 'de_DE', pt: 'pt_BR', 'pt-BR': 'pt_BR', id: 'id_ID', ar: 'ar_AR', hi: 'hi_IN', ru: 'ru_RU', vi: 'vi_VN', th: 'th_TH' };
+
 const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1320;background:#fff}'
   + '.w{max-width:740px;margin:0 auto;padding:22px 18px 64px}a{color:#c01a63}'
   + '.bc{font-size:13px;color:#777;margin-bottom:12px}.bc a{color:#777;text-decoration:none}'
@@ -66,7 +77,8 @@ const CSS = 'body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Sego
   + '.rank{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #f0d8e6;border-radius:12px;padding:12px 14px;margin:8px 0}.rank .rn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#d61f6e,#8b46d6);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}.rank .rb{font-size:11px;font-weight:800;color:#c01a63;text-transform:uppercase}'
   + '.grade{display:inline-block;font-size:11px;font-weight:800;border-radius:10px;padding:2px 9px;color:#fff}.grade.Strong{background:#1a7a45}.grade.Moderate{background:#2060c8}.grade.Emerging{background:#b35f1e}.grade.Limited,.grade.Insufficient{background:#5f6571}'
   + '.kb-constel{margin:8px 0 6px;background:linear-gradient(135deg,#fff7fb,#f7f2ff);border:1px solid #f0d8e6;border-radius:16px;padding:6px 4px}.kb-constel svg{display:block;max-width:420px;margin:0 auto}.kb-constel a{cursor:pointer;text-decoration:none}.kb-constel a:hover circle{stroke-width:3.4}.kb-constel a:focus-visible circle{stroke-width:3.4;outline:none}'
-  + '.kb-paa{margin:26px 0 6px}.kb-paa>summary,.kb-paa .kb-q{cursor:pointer}.kb-q{background:#faf3f7;border:1px solid #f0d8e6;border-radius:12px;padding:11px 14px;margin:8px 0}.kb-q>summary{font-weight:800;font-size:15px;color:#1a1320;list-style:none}.kb-q>summary::-webkit-details-marker{display:none}.kb-q>summary::before{content:"›";display:inline-block;margin-right:8px;color:#c01a63;font-weight:900;transition:transform .15s}.kb-q[open]>summary::before{transform:rotate(90deg)}.kb-q p{margin:9px 0 3px;font-size:14.5px;color:#333}.kb-q a{font-weight:700}';
+  + '.kb-paa{margin:26px 0 6px}.kb-paa>summary,.kb-paa .kb-q{cursor:pointer}.kb-q{background:#faf3f7;border:1px solid #f0d8e6;border-radius:12px;padding:11px 14px;margin:8px 0}.kb-q>summary{font-weight:800;font-size:15px;color:#1a1320;list-style:none}.kb-q>summary::-webkit-details-marker{display:none}.kb-q>summary::before{content:"›";display:inline-block;margin-right:8px;color:#c01a63;font-weight:900;transition:transform .15s}.kb-q[open]>summary::before{transform:rotate(90deg)}.kb-q p{margin:9px 0 3px;font-size:14.5px;color:#333}.kb-q a{font-weight:700}'
+  + '.kp-nextsteps{margin:24px 0 4px;padding-top:18px;border-top:1px solid #f0d8e6;--border:#f0d8e6;--text:#1a1320;--card:#faf3f7}.kp-nextsteps[hidden]{display:none}.kp-ns-title{font-weight:800;font-size:15px;color:#1a1320;margin:0 0 10px}.kp-share-btn{text-decoration:none;transition:transform .12s,filter .12s}.kp-share-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}.kp-share-btn:active{transform:translateY(0)}';
 // Externalize the page CSS to one cached file (cuts ~4KB inline from every one of the
 // 1,852+ pages; browsers cache it once). shell() links /guide/kb/kb.css?v=CSS_VER.
 const JS_VER = '1';  // bump when kb/kb.js (shared runtime) changes
@@ -80,7 +92,7 @@ const ADSENSE_CLIENT = 'ca-pub-1378943893051810';
 const ADSENSE_SLOT = '4521899200';
 const AD_UNIT = `<ins class="adsbygoogle" style="display:block;margin:22px 0;width:100%;min-height:280px" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${ADSENSE_SLOT}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
 const AD_BOOT = `<script>(function(){var d;function L(){if(d)return;d=1;var s=document.createElement('script');s.async=1;s.crossOrigin='anonymous';s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}';s.onload=function(){document.querySelectorAll('ins.adsbygoogle').forEach(function(){try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}})};document.head.appendChild(s);}['scroll','pointerdown','keydown','touchstart'].forEach(function(e){addEventListener(e,L,{once:true,passive:true})});(window.requestIdleCallback||function(f){setTimeout(f,2500)})(L,{timeout:5000});})();</script>`;
-const CSS_VER = '3';
+const CSS_VER = '4';
 
 function crumbLD(o) {
   const items = [
@@ -136,12 +148,30 @@ function shell(o) {
   const plain = (o.bodyHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const adsOk = o.ads !== false && plain.length >= 300;
   const hreflangs = o.altLinks || (`<link rel="alternate" hreflang="en" href="${o.url}">\n<link rel="alternate" hreflang="x-default" href="${o.url}">`);
+  // ── OG/Twitter/article social block — the viral-share loop's engine. Baked into
+  // every page (and every FUTURE page, since it lives in shell()). Per-language:
+  // a localized share-card image, og:locale + the real alternate-locale cluster,
+  // a summary_large_image Twitter card, and article provenance tags. ──
+  const _lang = o.lang || 'en';
+  const V = viral(_lang);
+  const ogImg = `${SITE}/guide/kb/og/kb-og-${_lang}.png`;
+  const ogLocale = OG_LOCALE[_lang] || 'en_US';
+  const altLocales = [...new Set((hreflangs.match(/hreflang="([a-zA-Z-]+)"/g) || [])
+    .map(m => m.replace(/.*"([a-zA-Z-]+)"/, '$1'))
+    .filter(hl => hl !== 'x-default')
+    .map(hl => OG_LOCALE[hl])
+    .filter(loc => loc && loc !== ogLocale))];
+  const ogSocial = `<meta property="og:image" content="${ogImg}"><meta property="og:image:secure_url" content="${ogImg}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="${esc(V.ogAlt)}">
+<meta property="og:locale" content="${ogLocale}">${altLocales.map(l => `<meta property="og:locale:alternate" content="${l}">`).join('')}
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(o.h1)}"><meta name="twitter:description" content="${esc((o.desc || '').slice(0, 158))}"><meta name="twitter:image" content="${ogImg}"><meta name="twitter:image:alt" content="${esc(V.ogAlt)}"><meta name="twitter:site" content="@koreaplus">
+<meta property="article:published_time" content="2026-06-01"><meta property="article:modified_time" content="${TODAY}"><meta property="article:author" content="KoreaPlus Editorial"><meta property="article:section" content="${esc(o.crumb || 'K-Beauty')}">`;
   return `<!doctype html><html lang="${o.lang || 'en'}"${o.lang === 'ar' ? ' dir="rtl"' : ''}><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(o.title)} | KoreaPlus</title>
 <meta name="description" content="${esc((o.desc || '').slice(0, 158))}">
 <link rel="canonical" href="${o.url}">
 <meta property="og:title" content="${esc(o.h1)}"><meta property="og:description" content="${esc((o.desc || '').slice(0, 158))}"><meta property="og:url" content="${o.url}"><meta property="og:type" content="article">
+${ogSocial}
 ${hreflangs}
 <link rel="icon" type="image/svg+xml" href="${SITE}/guide/kbeauty-favicon.svg">
 <meta name="theme-color" content="#d61f6e">
@@ -160,12 +190,14 @@ ${adsOk ? AD_UNIT : ''}
 <a class="cta" href="${SITE}/kbeauty">Explore the full K-beauty hub →</a>
 ${paa.html}
 ${o.related ? `<div class="rel"><h2>Related</h2>${o.related}</div>` : ''}
+<div class="kp-nextsteps" hidden></div>
 <div class="foot"><a href="${SITE}/kbeauty">💄 K-Beauty hub</a><a href="${SITE}/guide/kb/">📚 All guides</a><a href="${SITE}/guide/kpop.html">🎤 K-Pop</a><a href="${SITE}/guide/">🧭 Korea travel</a></div>
 <p class="disc">✍️ Written &amp; reviewed by the <b>KoreaPlus Editorial</b> team — dermatologist-informed, cosmetic-science researched &amp; source-cited. Last reviewed ${TODAY}.</p>
 <p class="disc">General educational information using cosmetic structure-function wording — not medical advice. Always patch-test new actives. © KoreaPlus.</p>
 </main>
 ${adsOk ? AD_BOOT : ''}
 <script defer src="/guide/kb/kb.js?v=${JS_VER}"></script>
+<script defer src="/guide/modules/share-viral.js?v=1"></script>
 </body></html>`;
 }
 const INDEX = [];   // {rel, dir, title} — drives the category/language hub pages

@@ -1879,6 +1879,19 @@
     initPWAExtras();  // #12 .ics reminders, #13 Web Share Target, #17 first-run onboarding
     // Language-aware library entry on the static landing card too (HTML ships /guide/kb/).
     if (lang && lang !== 'en') { try { $$('.hub-explore-cta').forEach(a => { a.href = KB_LIB_HOME; }); } catch (e) {} }
+    // Viral loop: swap the OG/Twitter share card + og:locale to this language so a
+    // /kbeauty?lang=xx link previews with the right localized card on social.
+    try {
+      var OGLC = { en: 'en_US', ko: 'ko_KR', ja: 'ja_JP', zh: 'zh_CN', es: 'es_ES', fr: 'fr_FR', de: 'de_DE', pt: 'pt_BR', id: 'id_ID', ar: 'ar_AR', hi: 'hi_IN', ru: 'ru_RU', vi: 'vi_VN', th: 'th_TH' };
+      if (lang && lang !== 'en' && OGLC[lang]) {
+        var ogImg = '/guide/kb/og/kb-og-' + lang + '.png';
+        var setMeta = function (sel, val) { var m = document.querySelector(sel); if (m) m.setAttribute('content', val); };
+        setMeta('meta[property="og:image"]', ogImg);
+        setMeta('meta[property="og:image:secure_url"]', ogImg);
+        setMeta('meta[name="twitter:image"]', ogImg);
+        setMeta('meta[property="og:locale"]', OGLC[lang]);
+      }
+    } catch (e) {}
 
     // routine tabs
     $$('#kb-routine-tabs .kb-tab').forEach(tab => tab.addEventListener('click', () => {
