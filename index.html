@@ -603,5 +603,7 @@ apply();document.addEventListener("kp:langchange",apply);})();</script>
 <script>(function(){try{if(window.innerWidth>768)return;var g=document.getElementById("content-grid");if(!g)return;var L={en:"Show more",ko:"더 보기",ja:"もっと見る",zh:"查看更多",es:"Ver más",fr:"Voir plus",de:"Mehr",pt:"Ver mais",id:"Selengkapnya"};var lg=(localStorage.getItem("kp_lang")||document.documentElement.lang||"en").slice(0,2);
 function arm(){if(g.scrollHeight<1900)return;g.classList.add("kp-clamp-grid");var b=document.createElement("button");b.className="kp-readmore";b.type="button";b.textContent=(L[lg]||L.en)+" ▾";b.addEventListener("click",function(){g.classList.remove("kp-clamp-grid");b.remove();});g.parentNode.insertBefore(b,g.nextSibling);}
 setTimeout(arm,1200);}catch(e){}})();</script>
+<div class="kp-nextsteps" style="max-width:880px;margin:26px auto 0;padding:0 20px"></div>
+<script defer src="modules/share-viral.js?v=1"></script>
 </body>
 </html>

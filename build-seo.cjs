@@ -1208,7 +1208,6 @@ ${tabBar(lang)}
 <script defer src="modules/foryou.js?v=1"></script>
 <script defer src="modules/install.js?v=1"></script>
 <script defer src="modules/kp-enhance.js?v=3"></script>
-<script defer src="modules/kp-share.js?v=1"></script>
 <!-- STEP0 — instant-nav (S01) + feature module loaders. Same-origin only;
      ad/tracker/worker-chat origins are excluded so prefetch never touches
      pagead2 / doubleclick / googlesyndication / the Worker chat endpoint. -->
