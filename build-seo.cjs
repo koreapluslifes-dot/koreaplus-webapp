@@ -1207,7 +1207,8 @@ ${tabBar(lang)}
 <script defer src="modules/react.js?v=1"></script>
 <script defer src="modules/foryou.js?v=1"></script>
 <script defer src="modules/install.js?v=1"></script>
-<script defer src="modules/kp-enhance.js?v=2"></script>
+<script defer src="modules/kp-enhance.js?v=3"></script>
+<script defer src="modules/kp-share.js?v=1"></script>
 <!-- STEP0 — instant-nav (S01) + feature module loaders. Same-origin only;
      ad/tracker/worker-chat origins are excluded so prefetch never touches
      pagead2 / doubleclick / googlesyndication / the Worker chat endpoint. -->
@@ -1221,6 +1222,7 @@ ${tabBar(lang)}
 <script defer src="modules/countdown.js?v=1"></script>
 <script defer src="modules/rum.js?v=1"></script>
 <script defer src="modules/ask.js?v=1"></script>
+<script defer src="modules/share-viral.js?v=1"></script>
 <script defer src="modules/klook-cards.js?v=2"></script>
 </body>
 </html>`;
