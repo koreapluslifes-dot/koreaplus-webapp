@@ -2968,6 +2968,7 @@ const mSeasonCity   = require('./modules/seo-seasoncity.cjs')(CTX);      __out.m
 const mBudget       = require('./modules/seo-budgettool.cjs')(CTX);      __out.main.push(...mBudget.urls());
 const mFestivals    = require('./modules/seo-festivals.cjs')(CTX);       __out.main.push(...mFestivals.urls());
 const mRoute        = require('./modules/seo-route.cjs')(CTX);           __out.main.push(...mRoute.urls());
+const mBusanLocal   = require('./modules/seo-busan-local.cjs')(CTX);    __out.main.push(...mBusanLocal.urls());
 for (const it of ALL) out.places.push(buildPlace(it));
 for (const cat of Object.keys(KOREA_DATA)) out.categories.push(buildCategory(cat));
 const cityPools = {};

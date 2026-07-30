@@ -1,0 +1,931 @@
+{
+  "eat-like-a-local": {
+    "_emoji": "🍜",
+    "en": {
+      "h1": "Eat Like a Busan Local: The City's Soul Food Map",
+      "title": "Eat Like a Busan Local: Gukbap, Milmyeon & More | KoreaPlus",
+      "metaDesc": "A Busan local's guide to dwaeji-gukbap, milmyeon, ssiat-hotteok, eomuk, Jagalchi's upstairs system, and beach pojangmacha — where we actually eat.",
+      "lead": "Busan food is refugee food, port food, workers' food — hot broth at dawn, cold noodles in August, fish straight off the boat. Skip the hotel breakfast. This is where we actually eat: the gukbap alleys, the market floors, the tents on the sand. Bring cash, an appetite, and no schedule.",
+      "facts": [
+        "Dwaeji-gukbap (pork rice soup) is Busan's signature dish — eaten for breakfast, lunch, hangovers, and heartbreak.",
+        "Milmyeon was born during the Korean War, when refugees remade Northern naengmyeon with cheap wheat flour.",
+        "Busan is Korea's fish cake capital; Samjin Eomuk, founded 1953 on Yeongdo, is the country's oldest producer still running.",
+        "Ssiat-hotteok — hotteok split open and stuffed with seeds and nuts — was made famous by the BIFF Square stalls in Nampo-dong.",
+        "Jagalchi Market runs a two-floor system: buy live fish downstairs, pay a small table fee to eat it upstairs.",
+        "The Gwangalli M Drone Light Show runs Saturday nights over the beach — prime pojangmacha hours."
+      ],
+      "sections": [
+        {
+          "h": "Dwaeji-gukbap: the bowl that means Busan",
+          "paras": [
+            "Dwaeji-gukbap is pork bones simmered until the broth turns milky, poured over rice, served near-boiling. It was refugee food during the Korean War and never left. Locals eat it at 7am, at 3am, after soju, before soju. It arrives deliberately plain — seasoning is your job: salted shrimp (saeujeot) for depth, garlic chives (buchu) for bite, dadaegi chili paste if you want heat.",
+            "Seomyeon Gukbap Alley is the pilgrimage site — a short strip of specialists, several run by the same families for decades, some open around the clock. Each shop has partisans who refuse to eat at the one next door. Sit at the counter, watch the broth cauldrons, and don't ask for a menu translation: everyone is having the same thing."
+          ]
+        },
+        {
+          "h": "Milmyeon: war noodles turned summer religion",
+          "paras": [
+            "Milmyeon is Busan's answer to naengmyeon, invented by wartime refugees who couldn't get buckwheat and used wheat flour from aid rations instead. The result is chewier, cheaper, and sweeter-brothed than its Northern parent — and fiercely local; good milmyeon is hard to find outside Busan. Two forms: mul (icy broth with slush on top) and bibim (chili sauce, no broth).",
+            "Come summer, the famous houses run queues out the door by noon, but locals eat it in January too. Order mandu alongside — steamed dumplings against icy noodles is the whole point."
+          ]
+        },
+        {
+          "h": "Jagalchi: buy downstairs, eat upstairs",
+          "paras": [
+            "Jagalchi Market runs on a two-floor system every local knows. Ground floor: pick your fish live from the tanks — flatfish, rockfish, abalone, sea squirt — and agree the price before anything happens to it. The vendor cuts it into hoe on the spot, then you carry it (or it gets carried for you) up to a second-floor restaurant.",
+            "Upstairs charges a small per-person table fee — typically a few thousand won — which buys your table, banchan, lettuce, ssamjang, and wasabi-soy. For a little more they'll turn the bones and head into maeuntang, a spicy stew arguably better than the fish itself. The total still lands well below any raw-fish restaurant with a view."
+          ]
+        },
+        {
+          "h": "Ssiat-hotteok and the eomuk rules",
+          "paras": [
+            "At BIFF Square in Nampo-dong, hotteok gets the Busan treatment: fried in a slick of oil until shatter-crisp, snipped open with scissors, and packed with sunflower seeds, pumpkin seeds, and peanuts over molten brown sugar. That's ssiat-hotteok — seed hotteok — and the stalls that made it famous still work the same square.",
+            "Eomuk — fish cake — is Busan's other identity. The city has been Korea's fish cake capital for generations; Samjin Eomuk, founded in 1953 on Yeongdo, is the oldest producer still going. On the street it's skewers in paper cups of hot broth; in the shops it's croquettes and baguettes made of fish. Both count."
+          ]
+        },
+        {
+          "h": "Night moves: pojangmacha and the Millak trick",
+          "paras": [
+            "After dark, orange pojangmacha tents open along Gwangalli and around Haeundae: plastic stools, steaming grills, shellfish, golbaengi, soju. At Gwangalli you drink with the Gwangan Bridge lit up across the water — and on Saturday nights the M Drone Light Show plays right over the beach (check the official schedule for times).",
+            "The Millak trick is the local cheat code: at Millak-dong Raw Fish Town, the wholesale building at Gwangalli's north end, buy hoe to-go by weight downstairs, grab chopsticks and dipping sauce, and eat at Millak Waterside Park with the bridge in front of you. Waterfront raw fish at market prices."
+          ]
+        },
+        {
+          "h": "A local's one-day eating route",
+          "paras": [
+            "You can hit every essential in one loop if you pace yourself. This is the order a Busan friend would march you through it — light portions, no dessert detours, seafood saved for the evening."
+          ],
+          "listType": "ol",
+          "list": [
+            "07:30 — Dawn dwaeji-gukbap in Seomyeon Gukbap Alley; season it yourself.",
+            "12:00 — Mul milmyeon and mandu before the lunch queue peaks.",
+            "15:00 — Nampo-dong: ssiat-hotteok at BIFF Square, then eomuk and broth at Bupyeong Kkangtong Market.",
+            "17:30 — Jagalchi or Millak-dong: pick a fish, eat it upstairs — or take it to the beach.",
+            "21:00 — Pojangmacha nightcap at Gwangalli; on Saturdays, time it to the drone show."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Seomyeon Gukbap Alley",
+          "kr": "서면 돼지국밥 골목",
+          "wiki": "Dwaeji gukbap",
+          "desc": "A tight row of decades-old dwaeji-gukbap specialists behind Seomyeon's main drag, many open late or around the clock. Milky pork broth, rice, endless buchu refills — office workers at noon, taxi drivers at 3am.",
+          "tip": "Counter seats turn over fastest. Season in order: saeujeot first, then buchu, then dadaegi — taste between each.",
+          "mapQ": "Seomyeon Gukbap Alley Busan"
+        },
+        {
+          "name": "BIFF Square Hotteok Stalls",
+          "kr": "BIFF 광장 씨앗호떡",
+          "wiki": "Hotteok",
+          "desc": "The Nampo-dong stalls that made ssiat-hotteok famous: dough fried crisp in oil, snipped open, packed with brown sugar, seeds, and nuts. Expect a weekend queue and a molten filling.",
+          "tip": "Go on a weekday before 4pm to skip the line. Tilt the paper cup — the sugar runs. Typically ₩2,000–3,000.",
+          "mapQ": "BIFF Square hotteok Busan"
+        },
+        {
+          "name": "Jagalchi Market",
+          "kr": "자갈치시장",
+          "wiki": "Jagalchi Market",
+          "desc": "Korea's largest seafood market. The ground floor is tanks and ajumma vendors calling you over; the second floor is no-frills restaurants that prep whatever you bought below, banchan included.",
+          "tip": "Agree the total before the fish is cut. The upstairs table fee is small — add maeuntang made from the bones.",
+          "mapQ": "Jagalchi Market Busan"
+        },
+        {
+          "name": "Millak-dong Raw Fish Town",
+          "kr": "민락동 회센터",
+          "wiki": "",
+          "desc": "A stack of wholesale raw-fish centers at Gwangalli's north end. Same buy-downstairs, eat-upstairs system as Jagalchi, but locals often skip the upstairs entirely and take the hoe away.",
+          "tip": "Order to-go, walk to Millak Waterside Park, and eat facing Gwangan Bridge — Busan's cheapest waterfront hoe dinner.",
+          "mapQ": "Millak Raw Fish Town Busan"
+        },
+        {
+          "name": "Gwangalli Pojangmacha Row",
+          "kr": "광안리 포장마차촌",
+          "wiki": "Gwangalli Beach",
+          "desc": "Orange tents on the beachfront pouring soju beside grills of shellfish, with the Gwangan Bridge glittering behind the plastic sheeting. Loud, steamy, and exactly right after midnight.",
+          "tip": "On Saturdays, claim a seat before the M Drone Light Show starts — check the official schedule for times.",
+          "mapQ": "Gwangalli pojangmacha Busan"
+        },
+        {
+          "name": "Gukje & Bupyeong Kkangtong Markets",
+          "kr": "국제시장·부평깡통시장",
+          "wiki": "Gukje Market",
+          "desc": "Nampo's twin market maze: Gukje for daytime wandering, next-door Bupyeong Kkangtong — Korea's first regular night market — for eomuk skewers dunked in paper cups of hot broth.",
+          "tip": "Broth refills at eomuk carts are free and expected — cup after cup. Several stalls prefer cash.",
+          "mapQ": "Bupyeong Kkangtong Market Busan"
+        },
+        {
+          "name": "Gaya Milmyeon",
+          "kr": "가야밀면",
+          "wiki": "Milmyeon",
+          "desc": "One of the old-guard milmyeon houses Busan people argue about — chewy wheat noodles in an icy, herb-sweet broth, or slicked in chili sauce as bibim. Queues are part of the ritual.",
+          "tip": "Arrive by 11:30 in summer. First-timer order: mul milmyeon plus a plate of mandu.",
+          "mapQ": "Gaya Milmyeon Busan"
+        }
+      ],
+      "faq": [
+        [
+          "What is dwaeji-gukbap and how do I eat it?",
+          "A milky pork-bone soup with rice, served deliberately under-seasoned. Season it yourself: saeujeot (salted shrimp) for salt, buchu (garlic chives) stirred in for texture, dadaegi chili paste for heat. Eat it with the kkakdugi radish kimchi. Any hour is acceptable — locals treat it as breakfast, hangover cure, and midnight meal."
+        ],
+        [
+          "How is milmyeon different from naengmyeon?",
+          "Milmyeon uses wheat-flour noodles instead of buckwheat, so it's chewier and slightly sweet, with a broth built on pork and medicinal herbs. It was created in Busan by Korean War refugees adapting Northern naengmyeon to available ingredients — and it's genuinely hard to find done well outside Busan."
+        ],
+        [
+          "How much is the table fee at Jagalchi's second floor?",
+          "Expect a few thousand won per person — it covers your table, banchan, lettuce, and sauces. Confirm the fish price downstairs before it's cut, and budget a little extra if you want maeuntang stew made from the bones. The total still undercuts a standalone raw-fish restaurant."
+        ],
+        [
+          "When does the Gwangalli drone show run?",
+          "The Gwangalli M Drone Light Show runs on Saturday nights over the beach, with extra dates on some holidays. Times shift by season, so check the official schedule before planning dinner around it. Beachfront pojangmacha seats fill up well before showtime."
+        ],
+        [
+          "Do I need Korean to eat at these places?",
+          "No. Gukbap alleys have one-item menus, milmyeon houses have picture menus, and market vendors are experts at calculator-based negotiation. Learn two phrases: 'igeo' (this) while pointing, and 'eolmayeyo?' (how much?). Carry some cash — a few stalls and market floors still prefer it."
+        ]
+      ],
+      "tips": [
+        "Gukbap arrives under-seasoned on purpose. Add saeujeot for salt, buchu for crunch, dadaegi for heat — in that order.",
+        "Milmyeon houses all sell mandu; a plate split two ways turns noodles into a full meal.",
+        "At Jagalchi, agree the price before the knife comes out, then ask for maeuntang from the bones.",
+        "Millak-dong sells hoe to-go — eat it at Millak Waterside Park facing Gwangan Bridge.",
+        "Eomuk broth refills at street carts are free; nobody counts your cups.",
+        "The Gwangalli M Drone Light Show runs Saturday nights — check the official schedule, then eat in a tent after.",
+        "Street stalls and market floors often prefer cash; keep ₩10,000 notes handy.",
+        "Gukbap alleys serve at dawn — an early bowl in Seomyeon beats coffee for jet lag."
+      ]
+    }
+  },
+  "beaches-coastal-walks": {
+    "_emoji": "🏖️",
+    "en": {
+      "h1": "Beaches & Coastal Walks Busan Locals Actually Love",
+      "title": "Busan Beaches & Coastal Walks Locals Love | KoreaPlus",
+      "metaDesc": "A Busan local's guide to Haeundae vs Gwangalli, Songjeong surfing, the Blueline beach train, Igidae cliffs, Oryukdo Skywalk and Moontan Road at dusk.",
+      "lead": "Ask ten Busan locals for their favorite beach and you'll start an argument. Haeundae gets the fame, but we swim at Songjeong, drink at Gwangalli, and walk the cliffs at Igidae. This guide covers the coast the way we actually use it — which sand to stay near, and which paths to walk at dusk.",
+      "facts": [
+        "Busan has seven designated swimming beaches — Haeundae, Gwangalli, Songjeong, Songdo, Dadaepo, Ilgwang, and Imnang — the most of any Korean city.",
+        "Songdo Beach opened in 1913, making it Korea's first official public beach.",
+        "Haeundae Blueline Park's beach train runs 4.8 km along a retired coastal rail line from Mipo to Songjeong.",
+        "Gwangalli's M Drone Light Show flies over the beach on Saturday nights — check the official schedule for exact times.",
+        "The Oryukdo islets traditionally mark the boundary between Korea's East Sea and South Sea.",
+        "Nurimaru APEC House on Dongbaekseom hosted the 2005 APEC summit leaders' meeting."
+      ],
+      "sections": [
+        {
+          "h": "Haeundae vs Gwangalli: two beaches, two personalities",
+          "paras": [
+            "Haeundae is Busan's front page: a wide 1.5 km stretch with resort hotels, its own subway station, and every summer service imaginable. It's the easiest base for first-timers. Gwangalli is the local answer — a smaller crescent facing Gwangan Bridge, quieter by day, buzzing after dark with cafes, craft-beer bars, and fried chicken eaten right on the sand.",
+            "Stay near Haeundae if you want daytime convenience: the Blueline train, Dongbaekseom, and Dalmaji Hill are all walkable. Stay near Gwangalli if your Busan is an evening city — the bridge lights up nightly, and on Saturdays the M Drone Light Show plays over the water."
+          ],
+          "list": [
+            "Stay Haeundae: first visit, families, daytime sightseeing, Blueline Park on your doorstep",
+            "Stay Gwangalli: nightlife, cafe-hopping, bridge views, a younger and more local crowd"
+          ],
+          "listType": "ul"
+        },
+        {
+          "h": "Songjeong: where Busan learns to surf",
+          "paras": [
+            "One cove past Haeundae, Songjeong is where Busan learns to surf. Surf schools line the beach road offering beginner lessons with boards and wetsuits included, and the mellow beach-break waves forgive first-timers. Summer weekends get busy, so book a morning slot. Locals surf here year-round — winter swells are actually better, and schools rent thick wetsuits for the cold.",
+            "Even if you never paddle out, Songjeong is the low-key beach day: fewer parasols, more sand per person, and the preserved old rail station near the Blueline terminus gives the whole neighborhood a slow, retro feel."
+          ]
+        },
+        {
+          "h": "Blueline Park — and the free walk when tickets sell out",
+          "paras": [
+            "Haeundae Blueline Park reuses the old coastal rail line: a slow beach train runs the full 4.8 km from Mipo to Songjeong, while the pastel Sky Capsules cover the scenic Mipo–Cheongsapo stretch. It's charming and it knows it — weekend and holiday tickets sell out fast, so reserve ahead or line up early in the morning.",
+            "Here's the local secret: the walking path beside the old tracks from Mipo to Cheongsapo is free, flat, and shares the exact same sea views. It takes about forty minutes, ending near Cheongsapo's lighthouses and the Daritdol Skywalk observatory. Reward yourself with grilled clams — Cheongsapo's specialty — before walking or riding back."
+          ]
+        },
+        {
+          "h": "Igidae and Oryukdo: the dramatic south coast",
+          "paras": [
+            "Across the water from Gwangalli, the Igidae Coastal Walk strings boardwalks and stair sections along raw cliffs for roughly two hours of walking. The payoff is the single best view in Busan: Gwangan Bridge and the Marine City skyline stacked across the sea. Locals shoot it at dusk, when the city lights come on mid-hike.",
+            "At the southern trailhead, the Oryukdo Skywalk juts a glass floor out over the cliff edge — free to enter, shoe covers provided, and honestly brief, so treat it as the start or finish of Igidae rather than a destination in itself. The Oryukdo islets offshore traditionally mark where the East Sea meets the South Sea."
+          ]
+        },
+        {
+          "h": "Songdo: cable cars and a suspension bridge on the west side",
+          "paras": [
+            "On the other side of the city, past Jagalchi and Nampo-dong, Songdo is Korea's oldest public beach — opened in 1913 — and its best comeback story. The Busan Air Cruise cable car glides right over the open sea to Amnam Park; pay the upgrade for a Crystal cabin if you want the glass floor under your feet.",
+            "From Amnam Park, the Yonggung Suspension Bridge swings out to a rocky islet with open-ocean views, and back at the beach the curved Cloud Trail walkway loops over the water for free. Songdo pairs naturally with a Jagalchi Market lunch — it's one short bus ride from Nampo-dong."
+          ]
+        },
+        {
+          "h": "Dusk rituals: Dalmaji Hill and Dongbaekseom",
+          "paras": [
+            "When the sand empties, locals climb. Dalmaji Hill, rising from Haeundae's eastern end, is Busan's original cafe hill, and its Moontan Road — a softly lit pine-forest path made for walking by moonlight — is the city's favorite low-effort evening stroll. Come at dusk, claim a cafe window facing the sea, then walk as the lights come on.",
+            "At the beach's opposite end, Dongbaekseom is a camellia-covered islet with a flat boardwalk loop of about forty minutes. You'll pass Nurimaru APEC House from the 2005 summit, a lighthouse, and the Haeundae mermaid statue, with Gwangan Bridge floating across the bay. Locals jog it at sunrise; it's just as good before dinner."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Gwangalli Beach",
+          "kr": "광안리해수욕장",
+          "wiki": "Gwangalli Beach",
+          "desc": "A crescent of sand facing Gwangan Bridge, ringed by cafes, craft-beer bars, and chicken joints. Quieter than Haeundae by day, it becomes Busan's favorite evening living room after sunset.",
+          "tip": "Order fried chicken to the sand and stay for the Saturday M Drone Light Show — check the official schedule for times.",
+          "mapQ": "Gwangalli Beach Busan"
+        },
+        {
+          "name": "Songjeong Beach",
+          "kr": "송정해수욕장",
+          "wiki": "Songjeong Beach",
+          "desc": "Busan's surf beach, one cove east of Haeundae. Gentle beach-break waves, surf schools along the beach road, and a slower, more local pace than its famous neighbor.",
+          "tip": "Book a morning lesson before the wind picks up; boards and wetsuits are included. Winter surfing here is a real local subculture.",
+          "mapQ": "Songjeong Beach Busan"
+        },
+        {
+          "name": "Haeundae Blueline Park",
+          "kr": "해운대 블루라인파크",
+          "wiki": "Haeundae Blueline Park",
+          "desc": "The old coastal rail line reborn: a beach train runs 4.8 km from Mipo to Songjeong, with pastel Sky Capsules gliding above the sea on the Mipo–Cheongsapo stretch.",
+          "tip": "Capsules sell out on weekends — reserve ahead, or walk the free trackside path to Cheongsapo for identical views.",
+          "mapQ": "Haeundae Blueline Park Busan"
+        },
+        {
+          "name": "Igidae Coastal Walk",
+          "kr": "이기대 해안산책로",
+          "wiki": "Igidae",
+          "desc": "Cliffside boardwalks and stairs along the Yongho-dong coast, staring straight at Gwangan Bridge and the Marine City skyline. Around two hours end to end — Busan's best skyline photo op.",
+          "tip": "Start late afternoon so the bridge lights up mid-hike, and carry water — there are long stretches without shops.",
+          "mapQ": "Igidae Coastal Walk Busan"
+        },
+        {
+          "name": "Oryukdo Skywalk",
+          "kr": "오륙도 스카이워크",
+          "wiki": "Oryukdo",
+          "desc": "A glass-floored platform hanging over the cliffs where the East Sea traditionally meets the South Sea, with the Oryukdo islets scattered offshore. Free, breezy, and quick.",
+          "tip": "Come early morning for the fewest crowds, then walk north into Igidae instead of doubling back to the bus.",
+          "mapQ": "Oryukdo Skywalk Busan"
+        },
+        {
+          "name": "Songdo Beach",
+          "kr": "송도해수욕장",
+          "wiki": "Songdo Beach (Busan)",
+          "desc": "Korea's first public beach (1913), west of Nampo-dong, now known for the Busan Air Cruise cable car over the sea, the curved Cloud Trail walkway, and Yonggung Suspension Bridge.",
+          "tip": "Pay the upgrade for a glass-floored Crystal cabin, ride to Amnam Park, and walk the suspension bridge before midday crowds.",
+          "mapQ": "Songdo Beach Busan"
+        },
+        {
+          "name": "Dongbaekseom",
+          "kr": "동백섬",
+          "wiki": "Dongbaekseom",
+          "desc": "A camellia-forested islet stitched to Haeundae's western tip, looped by a flat boardwalk past Nurimaru APEC House, a lighthouse, and the mermaid statue, with Gwangan Bridge across the bay.",
+          "tip": "Do the loop at sunrise with the local joggers, or just before dinner — it takes about forty minutes.",
+          "mapQ": "Dongbaekseom Busan"
+        },
+        {
+          "name": "Dalmaji Hill",
+          "kr": "달맞이고개",
+          "wiki": "Dalmaji Hill",
+          "desc": "The cafe-lined hill above Haeundae's east end, famous for moon-viewing, spring cherry blossoms, and Moontan Road — a softly lit pine path made for evening walks.",
+          "tip": "Arrive an hour before sunset: sea-view coffee first, then walk Moontan Road as the lights come on.",
+          "mapQ": "Dalmaji Hill Busan"
+        }
+      ],
+      "faq": [
+        [
+          "Should I stay near Haeundae or Gwangalli?",
+          "Haeundae for a first visit: bigger beach, resort hotels, and Blueline Park, Dongbaekseom, and Dalmaji Hill all walkable. Gwangalli for evenings: bridge views, cafes, and bars right on the sand. Both sit on Metro Line 2, about fifteen minutes apart, so you can easily do both."
+        ],
+        [
+          "Do the Blueline Park Sky Capsules really sell out?",
+          "On weekends and holidays, yes — often by mid-morning. Reserve online in advance or come on a weekday morning. If you miss out, walk the free path beside the old tracks from Mipo to Cheongsapo; it takes about forty minutes and the sea views are identical."
+        ],
+        [
+          "Can complete beginners surf at Songjeong?",
+          "Yes — Songjeong's gentle beach break is exactly why Busan's surf schools cluster there. Lessons include board and wetsuit rental, and instructors are used to total first-timers. Book a morning session when the water is calmer and the beach less crowded."
+        ],
+        [
+          "When can I see the Gwangalli drone light show?",
+          "The M Drone Light Show runs on Saturday nights over Gwangalli Beach, with showtimes that change by season, so check the official schedule before you go. Watch from the middle of the beach for the full spread, or grab a rooftop cafe seat early."
+        ],
+        [
+          "Is the Igidae Coastal Walk difficult?",
+          "It's moderate: mostly boardwalk, but with plenty of stair climbs, taking around two hours one way. Wear proper shoes and bring water. Pair it with the Oryukdo Skywalk at the southern end, and time the finish for dusk when Gwangan Bridge lights up."
+        ]
+      ],
+      "tips": [
+        "Swimming season is summer only, but the coastal walks — Igidae, Moontan Road, Dongbaekseom — are genuinely better in spring and autumn.",
+        "Metro Line 2 links Haeundae and Gwangalli in about fifteen minutes; you rarely need taxis between the east-coast beaches.",
+        "Convenience-store beer on the sand is legal and normal — locals do Gwangalli nights with a mat, fried chicken, and cans.",
+        "For Gwangan Bridge photos, shoot from Igidae or Dongbaekseom; from Gwangalli itself the bridge is backdrop, not subject.",
+        "Cheongsapo and Songjeong both specialize in grilled clams (jogae-gui); go with a group, since portions are built for sharing.",
+        "Haeundae in late July and August is parasol gridlock — swim early morning or head to Songjeong instead.",
+        "The Oryukdo Skywalk can close in bad weather and the approach is exposed, so check conditions on windy days.",
+        "Sunrise is the local hour: joggers own Dongbaekseom and Gwangalli at 6 a.m., and the boardwalks are nearly empty."
+      ]
+    }
+  },
+  "hidden-neighborhoods": {
+    "_emoji": "🏘️",
+    "en": {
+      "h1": "Busan's Hidden Neighborhoods & Village Walks: A Local's Guide",
+      "title": "Busan's Hidden Villages: A Local's Walking Guide | KoreaPlus",
+      "metaDesc": "A Busan local's honest guide to Gamcheon, Huinnyeoul, Jeonpo Cafe Street, Bosu-dong Book Alley, Ibagu-gil and Kangkangee — etiquette, routes, real tips.",
+      "lead": "Everyone photographs Gamcheon; almost nobody walks it right. I grew up here, and Busan's soul isn't on the beaches — it's in hillside villages built by war refugees, shipyard alleys, and a book lane that's been trading since the 1940s. Here's how to walk six of them with respect, good timing, and better snacks.",
+      "facts": [
+        "Gamcheon began as a 1950s settlement of Korean War refugees and Taegeukdo believers; a 2009 public-art project turned it into the 'Machu Picchu of Busan'.",
+        "Huinnyeoul means 'white rapids,' after streams that once tumbled down its cliff — the village appeared in the 2013 film The Attorney.",
+        "Kangkangee Arts Village stands where Korea's first modern shipyard opened in 1887; its name mimics the 'kang kang' of hammers chipping rust off hulls.",
+        "Bosu-dong Book Alley has traded secondhand books since the late 1940s, when stalls first appeared after liberation.",
+        "The New York Times pointed to Jeonpo Cafe Street when naming Busan one of its 52 Places to Go in 2017.",
+        "The 168 Stairs were the fastest route from hillside Choryang to the docks — workers sprinted down when ships came in."
+      ],
+      "sections": [
+        {
+          "h": "Why Busan's real life happens on hillsides",
+          "paras": [
+            "Busan's prettiest neighborhoods weren't designed — they were improvised. During the Korean War, refugees doubled the city's population almost overnight, and homes climbed the only free land: the slopes. Gamcheon's terraces, Choryang's stair villages and Yeongdo's cliff houses all date from that scramble. Walking them isn't sightseeing so much as reading the city's autobiography, one retaining wall at a time."
+          ]
+        },
+        {
+          "h": "Etiquette first: people live here",
+          "paras": [
+            "Gamcheon draws well over a million visitors a year, and every one of them walks past someone's kitchen window. Go before 10am, keep voices low in the narrow alleys, never open gates or shoot photos into windows, and buy something — a coffee, the stamp map, a snack — because tourism is what keeps these houses maintained. The same rules hold in Huinnyeoul and Choryang, where alleys double as front porches."
+          ]
+        },
+        {
+          "h": "A one-day loop that actually works",
+          "paras": [
+            "These villages cluster on Busan's old west side, so one day covers four of them without backtracking. Start early, use the metro and short bus hops, and save Jeonpo for the evening when the coffee crowd comes out. Choryang Ibagu-gil deserves its own half-day — pair it with Busan Station on arrival or departure."
+          ],
+          "listType": "ol",
+          "list": [
+            "8:30am — Gamcheon Culture Village, before the tour buses arrive.",
+            "11:30am — Bosu-dong Book Alley, then lunch around Nampo-dong.",
+            "1:30pm — bus over the bridge to Huinnyeoul Culture Village and the coastal walk.",
+            "4pm — Kangkangee Arts Village, one short hop away, while the repair docks are still working.",
+            "6pm — metro to Jeonpo for coffee, dinner and dessert."
+          ]
+        },
+        {
+          "h": "Getting to each village",
+          "paras": [
+            "Nothing here needs a car. Gamcheon: metro line 1 to Toseong Station exit 6, then a Saha 1-1 or Seogu 2 / 2-2 village bus up the hill. Bosu-dong: ten minutes on foot from Jagalchi Station. Yeongdo's villages: city buses from Nampo cross the bridge. Choryang Ibagu-gil starts across the boulevard from Busan Station, and Jeonpo has its own metro stop on line 2."
+          ]
+        },
+        {
+          "h": "Refuel like a local",
+          "paras": [
+            "Villages mean stairs, and stairs mean food stops. Between Bosu-dong and the bridge to Yeongdo, BIFF Square's ssiat hotteok stalls — seed-stuffed sweet pancakes, around ₩2,000 — are the classic street snack. End the day near Jeonpo: Seomyeon's dwaeji-gukbap alley is a ten-minute walk, and a steaming pork-and-rice soup (₩9,000–11,000 typical) is Busan's true closing ceremony."
+          ]
+        },
+        {
+          "h": "When to walk (and when not to)",
+          "paras": [
+            "Spring and late October are ideal; in humid July and August, go at first light or not at all. Weekday mornings beat weekends everywhere — Gamcheon on a Saturday afternoon is a queue, not a walk. For photos, Huinnyeoul's white walls glow in late afternoon, and Choryang's harbor panorama is sharpest on crisp winter days."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Gamcheon Culture Village",
+          "kr": "감천문화마을",
+          "wiki": "Gamcheon Culture Village",
+          "desc": "Pastel houses stacked down a Saha District hillside, born as a 1950s refugee settlement and reinvented by artists in 2009. Murals, viewpoints and the Little Prince statue — but real residents still live in most of these houses.",
+          "tip": "Arrive by 9am. Grab the stamp map at the entrance info center, then walk the upper alleys first — the crowd sticks to the main road.",
+          "mapQ": "Gamcheon Culture Village Busan"
+        },
+        {
+          "name": "Huinnyeoul Culture Village",
+          "kr": "흰여울문화마을",
+          "wiki": "Yeongdo District",
+          "desc": "White-walled lanes on a cliff above Yeongdo's Jeoryeong Coastal Walk, facing the open sea and Namhang Bridge. A favorite film location — The Attorney shot here — and the closest Busan gets to a Greek island.",
+          "tip": "Walk the sea-level coastal path first, then climb the stairs into the village. Late-afternoon light on the white walls is the shot.",
+          "mapQ": "Huinnyeoul Culture Village Busan"
+        },
+        {
+          "name": "Jeonpo Cafe Street",
+          "kr": "전포카페거리",
+          "wiki": "Jeonpo-dong",
+          "desc": "The machine-tool and hardware blocks behind Seomyeon, reborn as Busan's specialty-coffee quarter. Roasters, dessert bars and indie shops fill former workshops — the New York Times flagged it back in 2017.",
+          "tip": "Most doors open around 11am. Come weekday afternoons for seats, evenings for the buzz — and wander the side alleys, not just the main strip.",
+          "mapQ": "Jeonpo Cafe Street Busan"
+        },
+        {
+          "name": "Bosu-dong Book Alley",
+          "kr": "보수동 책방골목",
+          "wiki": "Bosu-dong Book Street",
+          "desc": "A lane of secondhand bookshops near Nampo-dong, trading since the late 1940s. Floor-to-ceiling stacks hide Korean classics, vintage magazines and stray English paperbacks; a few cafes have moved in between the shelves.",
+          "tip": "Tell the owner what you're hunting — they know every stack. Ten minutes on foot from Jagalchi Station, so pair it with a Nampo lunch.",
+          "mapQ": "Bosu-dong Book Alley Busan"
+        },
+        {
+          "name": "Choryang Ibagu-gil & 168 Stairs",
+          "kr": "초량 이바구길 · 168계단",
+          "wiki": "Choryang-dong",
+          "desc": "A storytelling trail climbing from Busan Station through old Choryang: modern-history murals, merchant-era buildings, and the steep 168 Stairs where dock workers once sprinted down for day labor. Harbor views widen with every flight.",
+          "tip": "The residents' monorail runs on and off — assume you'll climb. Go in the morning; the little observatory above the stairs frames the whole harbor.",
+          "mapQ": "168 Stairs Choryang Busan"
+        },
+        {
+          "name": "Kangkangee Arts Village",
+          "kr": "깡깡이예술마을",
+          "wiki": "Yeongdo District",
+          "desc": "A working ship-repair village in Daepyeong-dong, Yeongdo — Korea's first modern shipyard opened here in 1887. Murals and installations sit between active docks, and weekday hammering gives the village its name and soundtrack.",
+          "tip": "Visit on a weekday for the real shipyard soundtrack. Start at the village information center, then follow the pier-side murals toward the repair docks.",
+          "mapQ": "Kangkangee Arts Village Busan"
+        }
+      ],
+      "faq": [
+        [
+          "Is Gamcheon Culture Village too touristy to bother with?",
+          "Midday, yes — it's a conga line. Before 10am it's a quiet hillside where residents water plants and cats own the stairs. The village is genuinely beautiful and the history is real; the crowds are a timing problem, not a reason to skip it."
+        ],
+        [
+          "Can I see Huinnyeoul and Kangkangee in one afternoon?",
+          "Easily — both sit on Yeongdo, a short bus ride apart. Do Huinnyeoul and the coastal walk first, then Kangkangee while the repair docks are still noisy. Two to three hours covers both without rushing."
+        ],
+        [
+          "Do any of these villages charge admission?",
+          "No — they're all free, working neighborhoods. Gamcheon sells an optional stamp-tour map at the information center for a small fee, which supports the village. Your real contribution is buying coffee, snacks or crafts from resident-run shops."
+        ],
+        [
+          "Is the 168 Stairs monorail running?",
+          "It was built free of charge for elderly residents, but service has been suspended at times — check on-site and assume you may climb. The stairs take about five sweaty minutes; the harbor view from the observatory at the top is the payoff."
+        ],
+        [
+          "Which village should I pick if I only have time for one?",
+          "Gamcheon for first-timers — it's the fullest experience. Repeat visitors should take Yeongdo: Huinnyeoul plus Kangkangee gives you sea cliffs, film-set alleys and a working shipyard in one loop, with far fewer selfie sticks."
+        ]
+      ],
+      "tips": [
+        "Gamcheon by 9am: tour buses land mid-morning. You'll share the alleys with cats, not crowds.",
+        "Buy Gamcheon's stamp map at the info center — it funds the village and routes you past quieter viewpoints.",
+        "Wear real walking shoes. Every village here is stairs and slopes; sandals are misery on the 168 Stairs.",
+        "Save Huinnyeoul for late afternoon — the white walls glow, and tour groups thin out.",
+        "Voices down in residential alleys, never shoot into windows, and don't open any gate — these are homes first, photo spots second.",
+        "In Bosu-dong, name the book you want — owners navigate their chaos better than you ever will.",
+        "Weekdays at Kangkangee mean real hammering and welding; weekends are quieter but feel like a museum.",
+        "Jeonpo cafes mostly open around 11am and stay lively late — make it your evening stop, not your morning one."
+      ]
+    }
+  },
+  "markets-street-food": {
+    "_emoji": "🦀",
+    "en": {
+      "h1": "Busan Markets & Street Food, the Local Way",
+      "title": "Busan Markets & Street Food: Local's Guide | KoreaPlus",
+      "metaDesc": "A Busan local's guide to Jagalchi, Gukje Market and Kkangtong Night Market — haggling, cash etiquette, and the street food actually worth the queue.",
+      "lead": "Busan runs on its markets. Ajummas who have gutted mackerel for forty years, hotteok griddles that never cool, alleys that fed war refugees and now feed everyone. Forget the department stores — this is where the city actually eats. Here's how to shop, order, and haggle like you grew up three stops down Line 1.",
+      "facts": [
+        "Jagalchi Market is Korea's largest seafood market, and its veteran vendors are known simply as the Jagalchi ajumma.",
+        "Gukje Market began as a trading ground for refugees who flooded into Busan during the Korean War in the early 1950s.",
+        "Bupyeong Kkangtong Market became Korea's first official night market in 2013; stalls fire up around 7:30pm.",
+        "'Kkangtong' means 'tin can' — the market once traded American canned goods from postwar army bases.",
+        "Ssiat hotteok, the seed-stuffed hotteok, is a Busan invention made famous by the BIFF Square stalls.",
+        "Most Busan traditional markets rest one or two fixed days a month — often specific Tuesdays or Sundays — rather than closing weekly."
+      ],
+      "sections": [
+        {
+          "h": "Market culture 101: cash, ajummas, and closed days",
+          "paras": [
+            "Busan markets run on cash and relationships. Vendors take cards more than they used to, but the ₩3,000 snack economy is still cash-first — carry ₩10,000 notes and coins and nobody sighs at you. The women running the stalls are ajumma, and many have held the same corner for decades; a little warmth — 'annyeonghaseyo', a nod, eating what you're handed — buys better service than any phrasebook.",
+            "One thing visitors always miss: traditional markets keep monthly rest days, usually a fixed Tuesday or Sunday pattern rather than a weekly closure. Jagalchi's main building, for example, traditionally rests on the first and third Tuesday. Always check before making a market the anchor of your day — a shuttered arcade is a sad breakfast."
+          ]
+        },
+        {
+          "h": "Jagalchi: haggle downstairs, feast upstairs",
+          "paras": [
+            "Jagalchi is Korea's biggest seafood market, and it works on a beautiful system: buy your fish downstairs, then carry it to the second-floor restaurants where they cut, grill, or boil it for a table fee called sangcharimbi. The fee covers rice, side dishes, and the work — it's standard, not a tourist trap. Point at what's swimming, agree on a price, and lunch is minutes old.",
+            "Haggling is expected on whole fish and bulk shellfish, not on set portions. Ask 'eolmayeyo?' (how much?), look mildly thoughtful, and a vendor will often round down or throw in extras — a handful of clams, an extra crab leg. Pushing past ten percent off is bad form. If an ajumma waves you to her tank, let her talk; the show is half the meal."
+          ]
+        },
+        {
+          "h": "Gukje Market: born from war, run on noodles",
+          "paras": [
+            "Gukje Market was born in the chaos after the Korean War, when refugees who had poured into Busan set up stalls to trade whatever they carried or could salvage. That survivor DNA is still in the layout: a dense grid of alleys, each specializing — fabrics here, kitchenware there, food woven through all of it. It's the market from the film 'Ode to My Father', and it earned the fame.",
+            "Head for the food alleys, where ajummas ladle yubu-jeongol — a gentle hot pot of stuffed fried-tofu pockets — and mix bibim-dangmyeon, chewy glass noodles tossed in sweet-spicy sauce that barely exists outside Busan. Sit on the low stools, order both, and split them. Most bowls land well under ₩10,000, and the ladies top up broth without being asked."
+          ]
+        },
+        {
+          "h": "After dark: Bupyeong Kkangtong Night Market",
+          "paras": [
+            "When Gukje's shutters come down, walk a few blocks to Bupyeong Kkangtong Market. The 'tin can' name dates to the postwar years, when American canned goods — often straight off the bases — were the hot commodity. In 2013 it became Korea's first official night market, and now carts roll out around 7:30pm selling everything from Busan eomuk to Vietnamese spring rolls.",
+            "The night-market strategy: go hungry, buy small, keep moving — portions are snack-sized on purpose. Nearby, the jokbal alley serves Busan's signature naengchae-jokbal, cold braised pork trotters with jellyfish and mustard sauce, which sounds alarming and tastes like a revelation. Cash is king here after dark."
+          ]
+        },
+        {
+          "h": "Haeundae Traditional Market: the post-beach ritual",
+          "paras": [
+            "Haeundae Traditional Market sits one block behind the beach, and the post-swim routine is sacred: hot eomuk broth in a paper cup, a hotteok for the walk, then — if you're committed — gomjangeo, the charcoal-grilled hagfish this market is famous for. It's louder and saltier than the polished beachfront, which is exactly the point. In peak season, go before noon."
+          ]
+        },
+        {
+          "h": "The eating list: don't leave without these",
+          "paras": [
+            "Busan street food has its own canon. Some of it began as refugee survival food, some as beach-town snacking; all of it is cheap, fast, and best eaten standing up."
+          ],
+          "listType": "ul",
+          "list": [
+            "Ssiat hotteok (씨앗호떡) — brown-sugar pancake split and stuffed with seeds; born at BIFF Square",
+            "Bibim-dangmyeon (비빔당면) — Gukje Market's chewy glass-noodle classic in sweet-spicy sauce",
+            "Yubu-jeongol (유부전골) — stuffed fried-tofu-pocket hot pot from the Gukje food alleys",
+            "Busan eomuk (어묵) — fish cake on a stick; the broth cup is part of the deal",
+            "Milmyeon (밀면) — wheat-flour cold noodles, Busan's refugee-era answer to naengmyeon",
+            "Naengchae-jokbal (냉채족발) — cold pork trotters with jellyfish and mustard dressing, Bupyeong style",
+            "Gomjangeo (곰장어) — charcoal-grilled hagfish, the Haeundae market specialty"
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Jagalchi Market",
+          "kr": "자갈치시장",
+          "wiki": "Jagalchi Market",
+          "desc": "Korea's largest seafood market, run largely by veteran ajumma vendors. Tanks of live fish downstairs, restaurants upstairs that cook your purchase on the spot. Loud, wet, and gloriously alive since the postwar years.",
+          "tip": "Go around 10am on a weekday: morning chaos over, tanks full, upstairs tables empty. Budget for the sangcharimbi table fee — it's standard.",
+          "mapQ": "Jagalchi Market Busan"
+        },
+        {
+          "name": "Gukje Market",
+          "kr": "국제시장",
+          "wiki": "Gukje Market",
+          "desc": "A sprawling grid of alleys founded by Korean War refugees, now selling everything from vintage clothes to kitchen knives — with legendary food lanes serving yubu-jeongol and bibim-dangmyeon in between.",
+          "tip": "The food alleys get slammed at lunch; arrive by 11:30am or after 2pm. Order bibim-dangmyeon and yubu-jeongol together — vendors expect the combo.",
+          "mapQ": "Gukje Market Busan"
+        },
+        {
+          "name": "BIFF Square",
+          "kr": "BIFF광장",
+          "wiki": "",
+          "desc": "The old film-festival plaza in Nampo-dong, now better known for its hotteok stalls. This is the birthplace of ssiat hotteok — the seed-stuffed version that became Busan's most copied street snack.",
+          "tip": "Queues look scary but move fast. Take the paper cup and gloves offered — molten brown sugar burns are a Busan rite of passage.",
+          "mapQ": "BIFF Square Busan"
+        },
+        {
+          "name": "Bupyeong Kkangtong Night Market",
+          "kr": "부평깡통야시장",
+          "wiki": "Bupyeong Market (Busan)",
+          "desc": "Korea's first official night market, in an arcade whose 'tin can' nickname comes from postwar trade in American canned goods. From about 7:30pm, carts serve Korean classics beside international street food.",
+          "tip": "Portions are small by design — bring a friend, buy one of everything, and carry cash. Weeknights are far calmer than Friday and Saturday.",
+          "mapQ": "Bupyeong Kkangtong Night Market Busan"
+        },
+        {
+          "name": "Bupyeong Jokbal Alley",
+          "kr": "부평동 족발골목",
+          "wiki": "",
+          "desc": "A strip of decades-old restaurants beside Bupyeong Market that made naengchae-jokbal — cold braised pork trotters with jellyfish and mustard dressing — a Busan signature dish.",
+          "tip": "Order the half-and-half plate: warm jokbal plus cold naengchae on one platter. A medium plate feeds two with drinks.",
+          "mapQ": "Bupyeong jokbal alley Busan"
+        },
+        {
+          "name": "Haeundae Traditional Market",
+          "kr": "해운대전통시장",
+          "wiki": "Haeundae District",
+          "desc": "A covered market lane one block from Haeundae Beach — eomuk stands, hotteok griddles, fruit stalls, and the charcoal-grilled gomjangeo (hagfish) restaurants that stay busy long after the beach empties.",
+          "tip": "Hit it wet-haired straight off the beach like locals do. The eomuk broth is free with your fish cake — hold the cup with both hands.",
+          "mapQ": "Haeundae Traditional Market Busan"
+        }
+      ],
+      "faq": [
+        [
+          "Can I pay by card at Busan markets?",
+          "Bigger stalls and sit-down restaurants usually take cards, but small snack vendors are cash-first. Carry ₩30,000–50,000 in small notes per person for a market day. ATMs cluster near main entrances, though foreign cards tend to work best at convenience-store ATMs nearby."
+        ],
+        [
+          "How does haggling work at Jagalchi if I don't speak Korean?",
+          "Point, smile, and use your phone calculator — vendors will type a price and you can counter. Haggling applies to whole fish and bulk shellfish, not cooked food. Aim for a small discount or free extras rather than a dramatic cut; it's a relationship, not a battle."
+        ],
+        [
+          "What is the table fee at Jagalchi's upstairs restaurants?",
+          "It's called sangcharimbi — a per-person charge covering cooking, rice, and side dishes when you bring up fish bought downstairs. It's standard practice, not a scam. Confirm the fee before sitting down, and expect it to be quoted per person, not per table."
+        ],
+        [
+          "What days are Busan markets closed?",
+          "Most traditional markets rest one or two fixed days a month — commonly specific Tuesdays or Sundays — rather than closing weekly. Jagalchi's main building traditionally closes the first and third Tuesday. Night markets run daily, but individual stalls take their own days off, so check official pages first."
+        ],
+        [
+          "Is Busan street food safe to eat?",
+          "Generally very safe — turnover is fast and everything is cooked in front of you. Stick to busy stalls with lines of locals, eat things served hot, and you'll be fine. Follow the crowd of uniformed school kids; they have the best radar in the city."
+        ]
+      ],
+      "tips": [
+        "Carry small bills; breaking a ₩50,000 note at a ₩3,000 stall earns you a legendary ajumma glare.",
+        "Weekday mornings from 10am to noon are the sweet spot: full stalls, no crowds. Saturday afternoons in Nampo-dong are shoulder-to-shoulder.",
+        "Learn three phrases: annyeonghaseyo (hello), eolmayeyo (how much?), jal meokgesseumnida (I'll eat well). Doors open.",
+        "Jagalchi, Gukje Market, and BIFF Square are a ten-minute walk apart — do all three as one food crawl.",
+        "Check monthly closed days before anchoring your itinerary to one market; a fixed Tuesday or Sunday pattern is common.",
+        "At night markets, split everything. Two people sharing five snacks beats two people finishing two.",
+        "The broth at eomuk stalls is self-serve and free — refill politely, don't camp on it."
+      ]
+    }
+  },
+  "night-views-drone-show": {
+    "_emoji": "🌃",
+    "en": {
+      "h1": "Busan After Dark: Night Views & the Drone Show — A Local's Plan",
+      "title": "Busan Night Views & Drone Show: A Local's Guide | KoreaPlus",
+      "metaDesc": "A Busan local's night plan: the Gwangalli M Drone Light Show, Hwangnyeongsan summit views, Bay 101 reflection tricks, and a Lotte Giants night game.",
+      "lead": "Locals don't \"go sightseeing\" at night in Busan — we drive up Hwangnyeongsan, claim sand at Gwangalli before the Saturday drone show, and argue about which café has the best bridge view. This is my actual rotation: one summit, one beach, one photo trick, and — when the Giants are home — one very loud stadium.",
+      "facts": [
+        "The Gwangalli M Drone Light Show flies every Saturday night over the beach and is free to watch — exact times change by season.",
+        "Gwangan Bridge is 7.4 km long and double-decked; its LED lighting changes with the seasons and days of the week.",
+        "Hwangnyeongsan rises 427 m from the middle of the city — the summit covers both the bridge and the Seomyeon basin in one turn.",
+        "Busan X the SKY sits on floors 98–100 of the 101-story LCT Landmark Tower, one of Korea's highest observatories.",
+        "Dalmaji means 'greeting the moon' — the hill has been Busan's moon-viewing spot for generations.",
+        "Lotte Giants fans at Sajik invented the newspaper-hat-and-orange-bag cheer; the bags are handed out for post-game cleanup."
+      ],
+      "sections": [
+        {
+          "h": "The local logic of a Busan night",
+          "paras": [
+            "Busan's night spots line up along Metro Line 2, so the order matters more than the list. The rule locals follow: height first, water second. Catch sunset from somewhere high — Hwangnyeongsan or Busan X the SKY — while the sky still has color, then come down to Gwangalli as the bridge lights take over. Save Dalmaji or a late bowl of something for after.",
+            "If it's Saturday, the drone show is the anchor and everything else bends around it. If it's baseball season and the Lotte Giants are home, skip the plan entirely — Sajik at night is its own city."
+          ],
+          "listType": "ol",
+          "list": [
+            "Sunset: Hwangnyeongsan Bongsudae or Busan X the SKY",
+            "After dark: Gwangalli sand facing the bridge — drone show if it's Saturday",
+            "Late: Dalmaji Hill's Moontan Road, then grilled shellfish in Cheongsapo"
+          ]
+        },
+        {
+          "h": "Gwangalli M Drone Light Show: the Saturday ritual",
+          "paras": [
+            "Hundreds of drones lift off over the water in front of Gwangan Bridge every Saturday night — it's free, and extra shows run on some holidays. Times shift by season, so check the official schedule that day. The show reads best from the middle stretch of the beach, with the drones framed dead-center against the bridge.",
+            "Arrive at least an hour early in summer — locals spread mats on the sand by late afternoon. If sand isn't your thing, the café buildings along the beach road all face the bridge; second-floor window seats are the prize and go first. Order before the show starts, because nobody takes orders once the drones are up."
+          ]
+        },
+        {
+          "h": "Hwangnyeongsan: the night drive every Busan kid knows",
+          "paras": [
+            "Ask any Busan local where they were taken on a first date and Hwangnyeongsan Bongsudae comes up. The 427-meter peak sits dead-center in the city, so the summit beacon mounds give you a full 360: Gwangan Bridge and Marine City on one side, the Seomyeon basin glowing on the other. No tour buses — it's a taxi-up, lean-on-the-railing kind of place.",
+            "Take a taxi up and ask the driver to wait — twenty minutes at the top is plenty, and catching a return cab on the mountain road at night is a gamble. It's always windier and a few degrees colder than the beach; bring a layer even in July."
+          ]
+        },
+        {
+          "h": "Two photo tricks locals actually use",
+          "paras": [
+            "The Marine City skyline shot everyone posts is taken from The Bay 101, the yacht-marina complex across the water. The trick: go at low tide or right after rain, when shallow puddles form on the flat ground by the water. Crouch, hold your phone almost touching the puddle, and the towers double into a perfect mirror. Zero editing needed.",
+            "For the paid view, Busan X the SKY occupies floors 98–100 of LCT Landmark Tower, roughly 400 meters above Haeundae Beach. Book a slot about 40 minutes before sunset — you get daylight, blue hour, and the bridge lighting up in a single visit. Weekday evenings are noticeably quieter than weekends."
+          ]
+        },
+        {
+          "h": "The other Busan night: baseball at Sajik",
+          "paras": [
+            "A Lotte Giants night game at Sajik Baseball Stadium is Busan's loudest cultural experience — some locals swear the cheering out-noises the drone show. In the late innings the crowd folds newspapers into hats and ties orange plastic bags onto their heads — a tradition that began as cleanup bags and became the uniform.",
+            "You don't need to know baseball. Learn 'Busan Galmaegi' (부산 갈매기) — the seagull anthem the whole stadium sings — grab fried chicken and beer inside, and copy your neighbors. The season runs spring through fall, and evening games are the local after-work ritual."
+          ]
+        },
+        {
+          "h": "Dalmaji Hill: the quiet closer",
+          "paras": [
+            "When the beaches get loud, locals drift up Dalmaji Hill, the cherry-tree road climbing from Haeundae toward Cheongsapo. Dalmaji means 'greeting the moon,' and the hill has been Busan's moon-viewing spot for generations. The Moontan Road (문탠로드) footpath is softly lit and gentle underfoot — a 30–40 minute stroll with the sea black and glittering below. Finish with grilled shellfish down in Cheongsapo."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Gwangalli Beach (M Drone Light Show)",
+          "kr": "광안리해수욕장",
+          "wiki": "Gwangalli Beach",
+          "desc": "The night beach. Gwangan Bridge fills the whole horizon, and every Saturday night hundreds of drones rise over the water for the free M Drone Light Show. Cafés and bars line the sand for the after-show.",
+          "tip": "Claim sand mid-beach an hour early on Saturdays; check the official schedule for show times — they change by season.",
+          "mapQ": "Gwangalli Beach Busan"
+        },
+        {
+          "name": "Gwangan Bridge",
+          "kr": "광안대교",
+          "wiki": "Gwangan Bridge",
+          "desc": "Busan's 7.4-kilometer double-decker bridge, lit every night with LED displays that shift colors through the evening. Locals call it the Diamond Bridge — the backdrop to everything on this side of the city.",
+          "tip": "Best angle is from the Millak Waterside Park end — diagonal, with the full span stretching away. The park is alcohol-free now.",
+          "mapQ": "Gwangan Bridge Busan"
+        },
+        {
+          "name": "Hwangnyeongsan Bongsudae",
+          "kr": "황령산 봉수대",
+          "wiki": "Hwangnyeongsan",
+          "desc": "A 427-meter mountain in the middle of the city, topped with restored beacon-fire mounds and a 360-degree panorama. The classic Busan night drive — couples, taxi drivers on break, photographers, no tour groups.",
+          "tip": "Taxi up and ask the driver to wait; flagging one down at the summit late at night rarely works. Bring a windproof layer.",
+          "mapQ": "Hwangnyeongsan Bongsudae Busan"
+        },
+        {
+          "name": "The Bay 101",
+          "kr": "더베이101",
+          "wiki": "",
+          "desc": "Yacht-marina complex facing the Marine City skyline across the water — home of Busan's most-posted night photo. Restaurants and a terrace on-site, but the view itself is free from the waterfront.",
+          "tip": "Go at low tide or after rain: shoot the skyline's reflection in the puddles with your phone almost touching the water.",
+          "mapQ": "The Bay 101 Busan"
+        },
+        {
+          "name": "Busan X the SKY",
+          "kr": "부산 엑스 더 스카이",
+          "wiki": "Haeundae LCT The Sharp",
+          "desc": "Observatory on floors 98–100 of the 101-story LCT Landmark Tower, about 400 meters up. Glass walls over Haeundae Beach, Dalmaji Hill, and on clear nights the string of Gwangan Bridge lights.",
+          "tip": "Book roughly 40 minutes before sunset for daylight, blue hour, and full night lights on one ticket. Weekday evenings are quietest.",
+          "mapQ": "Busan X the SKY Haeundae"
+        },
+        {
+          "name": "Dalmaji Hill",
+          "kr": "달맞이고개",
+          "wiki": "Dalmaji Hill",
+          "desc": "The moon-viewing hill between Haeundae and Cheongsapo, ringed with cherry trees, galleries, and quiet cafés. At night, the lit Moontan Road footpath winds through pines above the dark sea.",
+          "tip": "Walk Moontan Road after dinner — 30 to 40 easy minutes — then descend to Cheongsapo for grilled shellfish. Full-moon nights are the local pick.",
+          "mapQ": "Dalmaji Hill Haeundae Busan"
+        },
+        {
+          "name": "Sajik Baseball Stadium",
+          "kr": "사직야구장",
+          "wiki": "Sajik Baseball Stadium",
+          "desc": "Home of the Lotte Giants and Korea's rowdiest cheering culture. A night game here — newspaper hats, orange plastic bags, the whole crowd singing — is the other great Busan night out.",
+          "tip": "Sit in the outfield cheering sections, accept the orange bag when it's passed down, and learn 'Busan Galmaegi' before the late innings.",
+          "mapQ": "Sajik Baseball Stadium Busan"
+        }
+      ],
+      "faq": [
+        [
+          "When does the Gwangalli drone show run?",
+          "Every Saturday night over Gwangalli Beach, with extra shows on some holidays. Start times shift with the seasons — earlier in winter, later in summer — so check the official schedule on the day. In warm months, arrive at least an hour early for a good sand spot."
+        ],
+        [
+          "Is Busan X the SKY worth it when Hwangnyeongsan is free?",
+          "They're different views. X the SKY looks straight down on Haeundae Beach from behind glass; Hwangnyeongsan gives an open-air 360 of the whole city with the bridge center-stage. Locals lean Hwangnyeongsan for atmosphere, X the SKY for a rainy or freezing night. Pick one per trip, at sunset."
+        ],
+        [
+          "How do I get up Hwangnyeongsan at night?",
+          "Taxi — there's no bus to the summit. Ask the driver to wait, or use a taxi app for the return, because empty cabs rarely pass the top at night. Walking down is possible but the mountain road is dark; bring a phone light if you try."
+        ],
+        [
+          "Gwangalli or Haeundae for a first night?",
+          "Gwangalli — it faces the lit bridge, so the view works from any bar, café, or patch of sand. Haeundae wins for the paid observatory and the Bay 101 skyline shot. They're about fifteen minutes apart by taxi, so many locals simply do both in one evening."
+        ],
+        [
+          "Do I need to book Lotte Giants tickets in advance?",
+          "For weekend night games and popular matchups, yes — buy online a few days ahead. Weekday games usually have same-day seats. The season runs roughly March to October; the outfield cheering sections are where the newspaper hats and singing happen."
+        ]
+      ],
+      "tips": [
+        "Saturday drone show: sand spots go 60–90 minutes early in summer; bridge-facing second-floor café windows go even earlier.",
+        "Shoot Gwangan Bridge at blue hour, 20–30 minutes after sunset — the sky still has color and the LEDs are already on.",
+        "Millak Waterside Park became alcohol-free in 2023 — bring coffee and snacks instead of convenience-store beer.",
+        "Bay 101 mirror shot: low tide or just after rain, phone lens nearly touching the puddle, tap to focus on the towers.",
+        "Hwangnyeongsan is always windier and colder than the beach — carry a layer even midsummer, and keep your taxi waiting.",
+        "Metro Line 2 links Gwangalli and Haeundae; last trains leave around midnight, then it's Kakao T taxis.",
+        "At Sajik, grab chicken and beer before first pitch — concession lines swell once the cheering songs peak.",
+        "Check the lunar calendar: Dalmaji Hill on a full-moon night is a local's quiet finish to a Busan evening."
+      ]
+    }
+  },
+  "getting-around-insider": {
+    "_emoji": "🚇",
+    "en": {
+      "h1": "Getting Around Busan — Insider Basics",
+      "title": "Getting Around Busan: Insider Transport Tips | KoreaPlus",
+      "metaDesc": "How locals move around Busan: KTX booking tricks, the Sasang airport transfer, Donghae Line beach trains, cheap taxis, and coastal express buses.",
+      "lead": "Busan looks sprawling on a map, but it's really a string of neighborhoods threaded by a handful of rail lines, cheap taxis, and fast coastal buses. Learn the Sasang airport transfer, load a T-money card, and respect the hills — that's most of the battle. Here's how locals actually move around.",
+      "facts": [
+        "KTX Seoul–Busan: about 2h 40m on the fastest services",
+        "Airport light rail to Sasang: three stops, under 10 minutes",
+        "Subway rides: about ₩1,600–1,800 by distance with a transit card",
+        "Taxi base fare: around ₩4,800 — short hops rival the subway for two people",
+        "Donghae Line to Songjeong Beach: near-subway fares on full-size trains",
+        "Metro day pass breaks even at about four rides"
+      ],
+      "sections": [
+        {
+          "h": "KTX from Seoul: Faster Than Flying, Every Time",
+          "paras": [
+            "The KTX covers Seoul–Busan in about 2 hours 40 minutes, landing you at Busan Station — already downtown, no airport transfer needed. Book through the Korail app or letskorail.com; both work in English. The catch: Friday evening trains down and Sunday afternoon trains back sell out days ahead, especially in cherry-blossom and summer seasons. Book those legs the moment your dates firm up.",
+            "Sold out? Check SRT, which runs the same corridor from Suseo Station in southern Seoul on a separate booking system, or take a standing ticket — 2 hours 40 minutes goes by fast."
+          ]
+        },
+        {
+          "h": "Gimhae Airport to Your Hotel: Three Ways, One Winner",
+          "paras": [
+            "From Gimhae Airport, ride the Busan–Gimhae Light Rail three stops to Sasang, then transfer to Metro Line 2, which runs straight through Seomyeon and on to Haeundae. It costs a few thousand won with a transit card and dodges traffic entirely. The light rail is driverless — grab the front window seat for the crossing over the Nakdong River."
+          ],
+          "list": [
+            "Light rail + Line 2: cheapest, traffic-proof, roughly 60–80 minutes to most hotel areas",
+            "Limousine bus: direct to the Haeundae hotel strip, but rush hour can double the ride",
+            "Taxi: roughly ₩15,000–20,000 to Seomyeon, ₩35,000–45,000 to Haeundae with tolls — the only real option after midnight"
+          ],
+          "listType": "ul"
+        },
+        {
+          "h": "One Card Rules Everything: T-money, Cashbee, Day Passes",
+          "paras": [
+            "Any T-money or Cashbee card from Seoul works on Busan's subway, buses, light rail, Donghae Line, and most taxis — no need to buy a new one. Cards also get you discounted transfers between subway and bus within 30 minutes, which single-ride tickets don't. Buy or top up with cash at any convenience store or station machine.",
+            "The Metro one-day pass, sold at station machines, covers unlimited rides on Lines 1–4 and pays off after about four trips — great for a Gamcheon–Jagalchi–Seomyeon day. Note it does not cover buses, the Donghae Line, or the airport light rail."
+          ]
+        },
+        {
+          "h": "The Donghae Line: Beach Trains at Subway Prices",
+          "paras": [
+            "Korail's Donghae Line runs full-size commuter trains at near-subway fares from Bujeon Station up the east coast — BEXCO, Songjeong Beach, OSIRIA (Lotte World Adventure Busan and the Skyline Luge), and Gijang, the crab-and-seafood town. Transfer from Metro Line 1 at Kyodae or Line 2 at Centum City/BEXCO. It's the cheapest way to reach the surf at Songjeong.",
+            "Trains come every 15–30 minutes, not every few minutes like the metro, so check the next departure on Kakao Map before leaving the beach — especially for the last trains of the night."
+          ]
+        },
+        {
+          "h": "Taxis and the Coastal Express Buses",
+          "paras": [
+            "Busan taxis are one of the city's quiet luxuries: base fare around ₩4,800, short distances, lighter traffic than Seoul. Two people splitting a cross-neighborhood hop often pay barely more than the subway. Hail with the Kakao T app — English interface, no phone calls, and drivers come straight to your pin. Ordinary cabs are fine; you rarely need the pricier black deluxe taxis.",
+            "For the coast, look for the red rapid buses: 1003 links the Busan Station area with Haeundae and Gijang, and 1001 covers a similar coastal run toward the city center. They cost slightly more than regular buses but make far fewer stops — and the window views beat the tunnel-heavy subway."
+          ]
+        },
+        {
+          "h": "Hills, Stairs, and Where to Dump Your Luggage",
+          "paras": [
+            "Busan is a port city stacked on mountainsides. Gamcheon Culture Village, Huinnyeoul, Bosu-dong — they're all stairs, and even subway exits can be several flights deep. Pack sneakers with grip, not slippery sandals, and leave the rolling suitcase at your hotel; dragging one up Gamcheon is a rite of passage nobody enjoys.",
+            "Between check-out and a late train, use the coin lockers inside Busan Station — multiple sizes, card payment — so you can spend your last hours at Jagalchi instead of babysitting bags."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Busan Station",
+          "kr": "부산역",
+          "wiki": "Busan Station",
+          "desc": "The KTX terminus and the city's transport anchor: Metro Line 1 below, coin lockers on the concourse, Chinatown and Choryang across the street. Nearly every intercity journey starts or ends here.",
+          "tip": "On holiday weekends, buy your return KTX seat before leaving the station — evening trains to Seoul vanish first.",
+          "mapQ": "Busan Station"
+        },
+        {
+          "name": "Gimhae International Airport",
+          "kr": "김해국제공항",
+          "wiki": "Gimhae International Airport",
+          "desc": "Busan's airport sits west of the city across the Nakdong River, handling domestic hops and short-haul international routes. It's compact — landing to light-rail platform can take fifteen minutes.",
+          "tip": "Domestic and international terminals are a short walk apart, and the light rail station serves both — follow the signs and skip the taxi queue.",
+          "mapQ": "Gimhae International Airport"
+        },
+        {
+          "name": "Sasang Station",
+          "kr": "사상역",
+          "wiki": "Busan–Gimhae Light Rail Transit",
+          "desc": "The airport transfer point where the Busan–Gimhae Light Rail meets Metro Line 2, next to the Seobu intercity bus terminal for buses to Namhae, Tongyeong, and Jinju.",
+          "tip": "The transfer walk is longer than it looks — allow ten minutes between the light rail and Line 2 platforms.",
+          "mapQ": "Sasang Station Busan"
+        },
+        {
+          "name": "Seomyeon Station",
+          "kr": "서면역",
+          "wiki": "Busan Metro",
+          "desc": "The dead center of the network, where Lines 1 and 2 cross beneath Busan's busiest downtown. If you're lost anywhere in the city, getting to Seomyeon fixes most problems.",
+          "tip": "Use the underground shopping arcade as a rain-proof shortcut between exits; the famous pork-gukbap alley is just outside, near Seomyeon Market.",
+          "mapQ": "Seomyeon Station Busan"
+        },
+        {
+          "name": "Bujeon Station",
+          "kr": "부전역",
+          "wiki": "Donghae Line",
+          "desc": "Terminus of the Donghae Line's commuter trains and gateway to Bujeon Market, Busan's biggest traditional market — about ten minutes on foot from Seomyeon's metro hub.",
+          "tip": "Board here for Songjeong or Gijang and you're guaranteed a seat — trains fill up by Centum and BEXCO.",
+          "mapQ": "Bujeon Station Busan"
+        },
+        {
+          "name": "OSIRIA Station",
+          "kr": "오시리아역",
+          "wiki": "",
+          "desc": "The Donghae Line stop built for the OSIRIA tourism complex: Lotte World Adventure Busan, the Skyline Luge, a huge outlet mall, and the Ananti Cove seafront.",
+          "tip": "Weekend queues at Lotte World balloon after 11am — catch an early train from Bujeon and be at the gates for opening.",
+          "mapQ": "OSIRIA Station Busan"
+        },
+        {
+          "name": "Songjeong Station",
+          "kr": "송정역",
+          "wiki": "",
+          "desc": "The Donghae Line stop for Songjeong Beach, Busan's surf town — mellower than Haeundae, with board-rental shops lining the beachfront road. Roughly a fifteen-minute walk from platform to sand.",
+          "tip": "Before you leave the beach at night, check return train times on Kakao Map — gaps stretch toward 30 minutes.",
+          "mapQ": "Songjeong Station Busan"
+        }
+      ],
+      "faq": [
+        [
+          "How do I get from Gimhae Airport to Haeundae?",
+          "Cheapest: Busan–Gimhae Light Rail to Sasang (three stops), then Metro Line 2 straight to Haeundae — about 70–80 minutes total for a few thousand won. The limousine bus is direct but sits in traffic. A taxi runs roughly ₩35,000–45,000 with tolls, and it's your only real option after midnight."
+        ],
+        [
+          "Is the KTX or a flight better from Seoul to Busan?",
+          "KTX, almost always. It's about 2 hours 40 minutes station to station, city center to city center, with no security lines. Flying is only an hour in the air, but airport transfers on both ends make door-to-door times similar — and trains are rarely delayed."
+        ],
+        [
+          "Do Seoul transit cards work in Busan?",
+          "Yes. T-money and Cashbee both work on Busan's metro, buses, Donghae Line, airport light rail, and most taxis. Top up with cash at convenience stores or station machines. If buying new, either brand is fine — Cashbee is the hometown card, but for travelers there's no practical difference."
+        ],
+        [
+          "Is the Busan subway day pass worth it?",
+          "Only on heavy sightseeing days. It covers unlimited rides on Metro Lines 1–4 and breaks even around the fourth trip — but it excludes buses, the Donghae Line, and the airport light rail. Most days, a transit card with its transfer discounts costs about the same and keeps buses in play."
+        ],
+        [
+          "Where can I store luggage in Busan?",
+          "Busan Station has banks of coin lockers in several sizes on the main concourse, payable by card. Major subway stations such as Seomyeon and Haeundae also have lockers. For oversized bags, staffed storage services operate around Busan Station — but for most travelers the lockers are enough."
+        ]
+      ],
+      "tips": [
+        "Korail releases KTX seats about a month ahead — set a reminder for Friday-evening and Sunday-afternoon trains; those sell out first.",
+        "Use Naver Map or Kakao Map for directions — Google Maps can't route Korean transit properly.",
+        "The metro runs roughly 5:30am to midnight; after that, Kakao T taxis are plentiful and cheap by Seoul standards.",
+        "Sit at the very front of the driverless airport light rail for the Nakdong River crossing.",
+        "Bus–subway transfers are discounted within 30 minutes — tap out of the bus with the same card you tap in with.",
+        "Red rapid buses like 1001 and 1003 take the same T-money tap — no separate ticket needed.",
+        "Pack light, grippy shoes — Gamcheon, Huinnyeoul, and half of Busan's viewpoints are staircases in disguise.",
+        "Heading to OSIRIA or Songjeong? Screenshot the Donghae Line timetable — trains run every 15–30 minutes, not metro-frequency."
+      ]
+    }
+  }
+}

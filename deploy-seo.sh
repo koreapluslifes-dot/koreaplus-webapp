@@ -10,7 +10,7 @@ REMOTE="/opt/bitnami/wordpress/guide"
 SSH="ssh -i $PEM -o StrictHostKeyChecking=no bitnami@$IP"
 
 # Top-level SEO dirs + modified root files to ship.
-DIRS="guide ja zh es ko fr de pt id places itinerary faq blog"
+DIRS="guide ja zh es ko fr de pt id places itinerary faq blog busan"
 ROOTS="index.html app.js style.css explore.html destinations.html experiences.html when-to-visit.html travel-basics.html itineraries.html tools.html sitemap.xml about.html festivals.html seasons.html culture.html temples.html nightviews.html kdrama-locations.html phrases.html currency.html subway.html menu-translator.html etiquette.html emergency.html bucket-list.html trending.html quiz.html compare.html seo.css hub-styles.css contact.html plan.html privacy.html terms.html"
 KEYS=$(ls kp*.txt 2>/dev/null | tr '\n' ' ')
 
