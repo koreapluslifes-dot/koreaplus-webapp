@@ -2051,7 +2051,7 @@ function buildBrowseHubsL10n(urls, lang) {
     { title: T.hubs.destinations.sec.besttime, links: allCities.map(c => [`🗓️ ${(CITY_NAME_L10N[lang] || {})[c.name] || c.name}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
     { title: T.hubs.destinations.sec.stay, links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
     { title: T.hubs.destinations.sec.hoods, links: NEIGHBORHOODS.map(n => [`${n.emoji} ${esc(n.name)}`, `guide/${slug(n.name)}-${slug(n.city)}-guide.html`]) },
-    { title: BUSAN_LOCAL_LABEL[lang] || BUSAN_LOCAL_LABEL.en, links: [[BUSAN_LOCAL_LABEL[lang] || BUSAN_LOCAL_LABEL.en, `${dir}/busan/index.html`],...['eat-like-a-local','beaches-coastal-walks','hidden-neighborhoods','markets-street-food','night-views-drone-show','getting-around-insider'].map(s => [((BUSAN_TOPIC_L10N[lang]||BUSAN_TOPIC_L10N.en)[s]||s), `${dir}/busan/${s}.html`])] },
+    { title: BUSAN_LOCAL_LABEL[lang] || BUSAN_LOCAL_LABEL.en, links: [[BUSAN_LOCAL_LABEL[lang] || BUSAN_LOCAL_LABEL.en, `${dir}/busan/index.html`],...Object.keys(BUSAN_TOPIC_L10N.en || {}).map(s => [((BUSAN_TOPIC_L10N[lang]||BUSAN_TOPIC_L10N.en)[s]||s), `${dir}/busan/${s}.html`])] },
     { title: T.hubs.destinations.sec.transport, links: TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`]) },
   ]);
 
@@ -2123,7 +2123,7 @@ function buildBrowseHubs(urls) {
       { title: '🗓️ Best time to visit by city', links: allCities.map(c => [`🗓️ ${esc(c.name)}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
       { title: '🏨 Where to stay', links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
       { title: '🏘️ Seoul neighborhoods', links: NEIGHBORHOODS.map(n => [`${n.emoji} ${esc(n.name)}`, `guide/${slug(n.name)}-${slug(n.city)}-guide.html`]) },
-      { title: '🌊 Busan like a local', links: [['🌊 Busan Like a Local — hub', 'busan/index.html'],['🍜 Eat like a Busan local', 'busan/eat-like-a-local.html'],['🏖️ Beaches & coastal walks', 'busan/beaches-coastal-walks.html'],['🏘️ Hidden neighborhoods', 'busan/hidden-neighborhoods.html'],['🦀 Markets & street food', 'busan/markets-street-food.html'],['🌃 Night views & drone show', 'busan/night-views-drone-show.html'],['🚇 Getting around Busan', 'busan/getting-around-insider.html']] },
+            { title: '🌊 Busan like a local', links: [['🌊 Busan Like a Local — hub', 'busan/index.html'],...Object.keys(BUSAN_TOPIC_L10N.en || {}).map(s => [(BUSAN_TOPIC_L10N.en[s] || s), `busan/${s}.html`])] },
       { title: '🚄 Getting there (Seoul to…)', links: TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`]) },
     ],
   } });
