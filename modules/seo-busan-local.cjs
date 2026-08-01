@@ -30,8 +30,10 @@ const path = require('path');
 module.exports = function (ctx) {
   const {
     shell, writePage, BASEP, L10N, LOCALES,
-    esc, enc, bcHtml, breadcrumbLD, faqLD, keyFactsBox,
+    esc, enc, bcHtml, breadcrumbLD, faqLD, keyFactsBox, ld,
   } = ctx;
+
+  const ORIGIN = 'https://koreaplus-lifes.com';
 
   function loadJSON(file) {
     try { return JSON.parse(fs.readFileSync(path.join(__dirname, '..', file), 'utf8')); }
@@ -51,19 +53,30 @@ module.exports = function (ctx) {
 
   // ── 9-language UI chrome ──────────────────────────────────────────
   const UI = {
-    en: { home: 'Home', hub: 'Busan Like a Local', hubH1: 'Busan Like a Local — Insider Guide by Locals', hubLead: 'Not the top-10 lists — the gukbap alleys, cliff villages, drone-show sand spots and transit tricks that people who live in Busan actually use. Written by locals, checked against the city.', byLocals: 'By Busan locals', spotsH: 'The exact spots', tipsH: 'Quick honey tips (꿀팁)', faqH: 'FAQ', map: 'Google Maps', relatedH: 'More Busan like a local', cityGuide: '📍 Busan city guide', itin: '🗓️ Busan 3-day itinerary', photo: 'Photo' },
-    ko: { home: '홈', hub: '로컬처럼 부산 여행', hubH1: '로컬처럼 부산 여행 — 현지인이 직접 쓴 꿀정보', hubLead: '뻔한 톱10 말고, 부산 사람들이 진짜 가는 국밥 골목·절벽 마을·드론쇼 명당·교통 꿀팁만 모았어요. 현지인이 쓰고 도시에서 직접 확인했습니다.', byLocals: '부산 로컬 작성', spotsH: '스팟 정리', tipsH: '꿀팁 모음', faqH: '자주 묻는 질문', map: '구글 지도', relatedH: '로컬처럼 부산 더 보기', cityGuide: '📍 부산 여행 가이드', itin: '🗓️ 부산 3일 일정', photo: '사진' },
-    ja: { home: 'ホーム', hub: 'ローカル釜山', hubH1: 'ローカルのように釜山を旅する — 現地人の本音ガイド', hubLead: '定番トップ10ではなく、釜山に住む人が本当に通うクッパ横丁・崖の村・ドローンショーの特等席・交通のコツだけを集めました。', byLocals: '釜山ローカル執筆', spotsH: 'スポット一覧', tipsH: 'クイック豆知識', faqH: 'よくある質問', map: 'Googleマップ', relatedH: 'ローカル釜山をもっと見る', cityGuide: '📍 釜山旅行ガイド', itin: '🗓️ 釜山3日モデルコース', photo: '写真' },
-    zh: { home: '首页', hub: '像本地人一样玩釜山', hubH1: '像本地人一样玩釜山 — 本地人亲笔攻略', hubLead: '不是老套的十大榜单，而是釜山本地人真正常去的猪肉汤饭巷、悬崖村落、无人机秀最佳位置和交通窍门。', byLocals: '釜山本地人撰写', spotsH: '地点清单', tipsH: '实用小贴士', faqH: '常见问题', map: '谷歌地图', relatedH: '更多釜山本地玩法', cityGuide: '📍 釜山城市指南', itin: '🗓️ 釜山3日行程', photo: '照片' },
-    es: { home: 'Inicio', hub: 'Busan como un local', hubH1: 'Busan como un local — Guía de los que viven allí', hubLead: 'Nada de listas top-10: los callejones de gukbap, aldeas en acantilados, mejores puntos del show de drones y trucos de transporte que usan los que viven en Busan.', byLocals: 'Por locales de Busan', spotsH: 'Los lugares exactos', tipsH: 'Tips rápidos (kkultip)', faqH: 'Preguntas frecuentes', map: 'Google Maps', relatedH: 'Más Busan como un local', cityGuide: '📍 Guía de Busan', itin: '🗓️ Itinerario de 3 días', photo: 'Foto' },
-    fr: { home: 'Accueil', hub: 'Busan comme un local', hubH1: 'Busan comme un local — le guide des habitants', hubLead: 'Pas de top-10 touristique : les ruelles à gukbap, villages à flanc de falaise, meilleurs spots du show de drones et astuces transport des habitants de Busan.', byLocals: 'Par des locaux de Busan', spotsH: 'Les adresses exactes', tipsH: 'Astuces rapides', faqH: 'FAQ', map: 'Google Maps', relatedH: 'Plus de Busan comme un local', cityGuide: '📍 Guide de Busan', itin: '🗓️ Itinéraire 3 jours', photo: 'Photo' },
-    de: { home: 'Start', hub: 'Busan wie ein Local', hubH1: 'Busan wie ein Local — Insider-Guide von Einheimischen', hubLead: 'Keine Top-10-Listen: die Gukbap-Gassen, Klippendörfer, besten Plätze für die Drohnenshow und Verkehrstricks, die Busaner wirklich nutzen.', byLocals: 'Von Busan-Locals', spotsH: 'Die genauen Orte', tipsH: 'Schnelle Insider-Tipps', faqH: 'FAQ', map: 'Google Maps', relatedH: 'Mehr Busan wie ein Local', cityGuide: '📍 Busan-Stadtguide', itin: '🗓️ 3-Tage-Route', photo: 'Foto' },
-    pt: { home: 'Início', hub: 'Busan como um local', hubH1: 'Busan como um local — guia de quem vive lá', hubLead: 'Nada de listas top-10: os becos de gukbap, vilas no penhasco, melhores pontos do show de drones e truques de transporte que quem mora em Busan realmente usa.', byLocals: 'Por locais de Busan', spotsH: 'Os lugares exatos', tipsH: 'Dicas rápidas', faqH: 'Perguntas frequentes', map: 'Google Maps', relatedH: 'Mais Busan como um local', cityGuide: '📍 Guia de Busan', itin: '🗓️ Roteiro de 3 dias', photo: 'Foto' },
-    id: { home: 'Beranda', hub: 'Busan ala Warga Lokal', hubH1: 'Busan ala Warga Lokal — Panduan Orang Dalam', hubLead: 'Bukan daftar top-10 biasa: gang gukbap, kampung tebing, titik terbaik drone show, dan trik transportasi yang benar-benar dipakai warga Busan.', byLocals: 'Oleh warga lokal Busan', spotsH: 'Lokasi persisnya', tipsH: 'Tips kilat', faqH: 'Tanya jawab', map: 'Google Maps', relatedH: 'Busan ala lokal lainnya', cityGuide: '📍 Panduan kota Busan', itin: '🗓️ Itinerari 3 hari', photo: 'Foto' },
+    en: { home: 'Home', hub: 'Busan Like a Local', hubH1: 'Busan Like a Local — Insider Guide by Locals', hubLead: 'Not the top-10 lists — the gukbap alleys, cliff villages, drone-show sand spots and transit tricks that people who live in Busan actually use. Written by locals, checked against the city.', topicsH: "The six guides", byLocals: 'By Busan locals', spotsH: 'The exact spots', tipsH: 'Quick honey tips (꿀팁)', faqH: 'FAQ', map: 'Google Maps', relatedH: 'More Busan like a local', cityGuide: '📍 Busan city guide', itin: '🗓️ Busan 3-day itinerary', photo: 'Photo' },
+    ko: { home: '홈', hub: '로컬처럼 부산 여행', hubH1: '로컬처럼 부산 여행 — 현지인이 직접 쓴 꿀정보', hubLead: '뻔한 톱10 말고, 부산 사람들이 진짜 가는 국밥 골목·절벽 마을·드론쇼 명당·교통 꿀팁만 모았어요. 현지인이 쓰고 도시에서 직접 확인했습니다.', topicsH: "여섯 가지 가이드", byLocals: '부산 로컬 작성', spotsH: '스팟 정리', tipsH: '꿀팁 모음', faqH: '자주 묻는 질문', map: '구글 지도', relatedH: '로컬처럼 부산 더 보기', cityGuide: '📍 부산 여행 가이드', itin: '🗓️ 부산 3일 일정', photo: '사진' },
+    ja: { home: 'ホーム', hub: 'ローカル釜山', hubH1: 'ローカルのように釜山を旅する — 現地人の本音ガイド', hubLead: '定番トップ10ではなく、釜山に住む人が本当に通うクッパ横丁・崖の村・ドローンショーの特等席・交通のコツだけを集めました。', topicsH: "6つのガイド", byLocals: '釜山ローカル執筆', spotsH: 'スポット一覧', tipsH: 'クイック豆知識', faqH: 'よくある質問', map: 'Googleマップ', relatedH: 'ローカル釜山をもっと見る', cityGuide: '📍 釜山旅行ガイド', itin: '🗓️ 釜山3日モデルコース', photo: '写真' },
+    zh: { home: '首页', hub: '像本地人一样玩釜山', hubH1: '像本地人一样玩釜山 — 本地人亲笔攻略', hubLead: '不是老套的十大榜单，而是釜山本地人真正常去的猪肉汤饭巷、悬崖村落、无人机秀最佳位置和交通窍门。', topicsH: "六大主题攻略", byLocals: '釜山本地人撰写', spotsH: '地点清单', tipsH: '实用小贴士', faqH: '常见问题', map: '谷歌地图', relatedH: '更多釜山本地玩法', cityGuide: '📍 釜山城市指南', itin: '🗓️ 釜山3日行程', photo: '照片' },
+    es: { home: 'Inicio', hub: 'Busan como un local', hubH1: 'Busan como un local — Guía de los que viven allí', hubLead: 'Nada de listas top-10: los callejones de gukbap, aldeas en acantilados, mejores puntos del show de drones y trucos de transporte que usan los que viven en Busan.', topicsH: "Las seis guías", byLocals: 'Por locales de Busan', spotsH: 'Los lugares exactos', tipsH: 'Tips rápidos (kkultip)', faqH: 'Preguntas frecuentes', map: 'Google Maps', relatedH: 'Más Busan como un local', cityGuide: '📍 Guía de Busan', itin: '🗓️ Itinerario de 3 días', photo: 'Foto' },
+    fr: { home: 'Accueil', hub: 'Busan comme un local', hubH1: 'Busan comme un local — le guide des habitants', hubLead: 'Pas de top-10 touristique : les ruelles à gukbap, villages à flanc de falaise, meilleurs spots du show de drones et astuces transport des habitants de Busan.', topicsH: "Les six guides", byLocals: 'Par des locaux de Busan', spotsH: 'Les adresses exactes', tipsH: 'Astuces rapides', faqH: 'FAQ', map: 'Google Maps', relatedH: 'Plus de Busan comme un local', cityGuide: '📍 Guide de Busan', itin: '🗓️ Itinéraire 3 jours', photo: 'Photo' },
+    de: { home: 'Start', hub: 'Busan wie ein Local', hubH1: 'Busan wie ein Local — Insider-Guide von Einheimischen', hubLead: 'Keine Top-10-Listen: die Gukbap-Gassen, Klippendörfer, besten Plätze für die Drohnenshow und Verkehrstricks, die Busaner wirklich nutzen.', topicsH: "Die sechs Guides", byLocals: 'Von Busan-Locals', spotsH: 'Die genauen Orte', tipsH: 'Schnelle Insider-Tipps', faqH: 'FAQ', map: 'Google Maps', relatedH: 'Mehr Busan wie ein Local', cityGuide: '📍 Busan-Stadtguide', itin: '🗓️ 3-Tage-Route', photo: 'Foto' },
+    pt: { home: 'Início', hub: 'Busan como um local', hubH1: 'Busan como um local — guia de quem vive lá', hubLead: 'Nada de listas top-10: os becos de gukbap, vilas no penhasco, melhores pontos do show de drones e truques de transporte que quem mora em Busan realmente usa.', topicsH: "Os seis guias", byLocals: 'Por locais de Busan', spotsH: 'Os lugares exatos', tipsH: 'Dicas rápidas', faqH: 'Perguntas frequentes', map: 'Google Maps', relatedH: 'Mais Busan como um local', cityGuide: '📍 Guia de Busan', itin: '🗓️ Roteiro de 3 dias', photo: 'Foto' },
+    id: { home: 'Beranda', hub: 'Busan ala Warga Lokal', hubH1: 'Busan ala Warga Lokal — Panduan Orang Dalam', hubLead: 'Bukan daftar top-10 biasa: gang gukbap, kampung tebing, titik terbaik drone show, dan trik transportasi yang benar-benar dipakai warga Busan.', topicsH: "Enam panduan", byLocals: 'Oleh warga lokal Busan', spotsH: 'Lokasi persisnya', tipsH: 'Tips kilat', faqH: 'Tanya jawab', map: 'Google Maps', relatedH: 'Busan ala lokal lainnya', cityGuide: '📍 Panduan kota Busan', itin: '🗓️ Itinerari 3 hari', photo: 'Foto' },
   };
   const ui = l => UI[l] || UI.en;
 
   // ── helpers ───────────────────────────────────────────────────────
+  // Cut on a word boundary — a hard slice() left "…Written by l" in the hub's
+  // meta description, which also fed og:description and every social unfurl.
+  function trimWords(s, max) {
+    s = String(s || '').trim();
+    if (s.length <= max) return s;
+    const cut = s.slice(0, max);
+    // CJK has no spaces: only rewind to a space when the text actually has one.
+    const sp = cut.lastIndexOf(' ');
+    return (sp > max * 0.6 ? cut.slice(0, sp) : cut).replace(/[\s,;:·—-]+$/, '') + '…';
+  }
+
   function credit(im, label) {
     const lic = im.license ? ` · ${esc(im.license)}` : '';
     return `${esc(label)}: <a href="${esc(im.byUrl)}" rel="noopener nofollow" target="_blank">${esc(im.by)}</a> / Wikimedia Commons${lic}`;
@@ -114,10 +127,14 @@ module.exports = function (ctx) {
     // spots — card per spot; image only when accurate (Wikimedia hit)
     if (Array.isArray(p.spots) && p.spots.length) {
       body += `<h2>📍 ${esc(t.spotsH)}</h2>`;
+      // A district-wide shot must not be captioned as two different villages:
+      // one file renders at most once per page.
+      const usedImg = new Set();
       for (const sp of p.spots) {
-        const im = sp.wiki && IMGS[sp.wiki];
+        let im = sp.wiki && IMGS[sp.wiki];
+        if (im && usedImg.has(im.raw)) im = null; else if (im) usedImg.add(im.raw);
         body += `<div class="seo-day">`
-          + `<div class="dh">${esc(sp.name)}</div>`
+          + `<h3 class="dh">${esc(sp.name)}</h3>`
           + (sp.kr ? `<div class="ds">${esc(sp.kr)}</div>` : '')
           + (im ? figure(im, sp.name, t.photo, false) : '')
           + `<p>${esc(sp.desc)}</p>`
@@ -138,7 +155,7 @@ module.exports = function (ctx) {
     }
 
     // related: sibling topics in this language + city guide + itinerary
-    const peers = SLUGS.filter(s => s !== sl && has(s, l)).slice(0, 4).map(s =>
+    const peers = SLUGS.filter(s => s !== sl && has(s, l)).map(s =>
       `<a class="seo-card" href="${esc(pagePath(s, l))}"><span class="ce">${DATA[s]._emoji || '🌊'}</span><div class="cn">${esc(DATA[s][l].h1)}</div></a>`);
     if (peers.length) body += `<h2>${esc(t.relatedH)}</h2><div class="seo-grid">${peers.join('')}</div>`;
     body += `<div class="seo-linklist">`
@@ -172,14 +189,14 @@ module.exports = function (ctx) {
     body += `<p class="lead">${esc(t.hubLead)}</p>`;
     const bi = IMGS['Busan'] || IMGS['Gwangan Bridge'];
     if (bi) body += figure(bi, 'Busan, South Korea', t.photo, true);
-    body += `<div class="seo-tiles">` + avail.map(s => {
+    body += `<h2>${esc(t.topicsH)}</h2><div class="seo-tiles">` + avail.map(s => {
       const p = DATA[s][l];
       return `<a class="seo-tile" href="${esc(pagePath(s, l))}">`
         + `<span class="seo-tile-e">${DATA[s]._emoji || '🌊'}</span>`
         + `<span class="seo-tile-h">${esc(p.h1)}</span>`
-        + `<span class="seo-tile-d">${esc((p.metaDesc || '').slice(0, 110))}</span></a>`;
+        + `<span class="seo-tile-d">${esc(trimWords(p.metaDesc, 110))}</span></a>`;
     }).join('') + `</div>`;
-    body += `<div class="seo-linklist">`
+    body += `<h2>${esc(t.relatedH)}</h2><div class="seo-linklist">`
       + `<a href="${esc(d)}guide/things-to-do-in-busan.html">${esc(t.cityGuide)}</a>`
       + `<a href="${esc(d)}itinerary/busan-3-day-itinerary.html">${esc(t.itin)}</a>`
       + `<a href="${esc(d === '' ? 'destinations.html' : d + 'destinations.html')}">🧭 ${esc(t.home)} · Korea</a>`
@@ -189,8 +206,10 @@ module.exports = function (ctx) {
       + `<div class="meta"><span class="seo-badge region">🇰🇷 ${esc(t.byLocals)}</span><span class="seo-badge">Busan · 부산</span></div></header>`;
     const title = `${t.hubH1.split(' — ')[0]} | KoreaPlus`;
     writePage(hubPath(l), shell({
-      url, title, desc: t.hubLead.slice(0, 155), keywords: '',
-      schemas: [breadcrumbLD(trail)],
+      url, title, desc: trimWords(t.hubLead, 155), keywords: '',
+      schemas: [breadcrumbLD(trail), (ld && ld.itemListLD) ? ld.itemListLD(
+        avail.map(s => ({ name: DATA[s][l].h1, url: ORIGIN + BASEP + pagePath(s, l) })),
+        { name: t.hubH1, description: t.hubLead }) : null].filter(Boolean),
       hero, body, lang: l, alts: altsFor('__hub', l),
       image: bi ? bi.raw : undefined,
     }));

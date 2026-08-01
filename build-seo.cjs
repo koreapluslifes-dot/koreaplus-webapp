@@ -735,7 +735,7 @@ const ORG_LD = {
   areaServed: { '@type': 'Country', name: 'South Korea' },
 };
 const siteLD = lang => ({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': ORIGIN + '/#website', name: 'KoreaPlus', url: ORIGIN + BASEP, inLanguage: lang, publisher: { '@id': ORIGIN + '/#org' } });
-const speakableLD = url => ({ '@context': 'https://schema.org', '@type': 'WebPage', url: ORIGIN + url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.seo-tldr', '.lead', '.seo-keyfacts'] }, primaryImageOfPage: { '@type': 'ImageObject', url: ORIGIN + '/guide/og-image.jpg', width: 1200, height: 630 } });
+const speakableLD = (url, img) => ({ '@context': 'https://schema.org', '@type': 'WebPage', url: ORIGIN + url, speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.seo-tldr', '.lead', '.seo-keyfacts'] }, primaryImageOfPage: { '@type': 'ImageObject', url: img || (ORIGIN + '/guide/og-image.jpg') } });
 const TRUST = {
   en: { by: 'By the KoreaPlus Editorial Team', upd: 'Updated', rev: 'Fact-checked for 2026' },
   ko: { by: 'KoreaPlus 편집팀', upd: '업데이트', rev: '2026년 기준 사실 확인' },
@@ -1147,7 +1147,7 @@ ${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 <script defer src="modules/mobile.js?v=1"></script>
 <script defer src="modules/affiliate.js?v=5"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1378943893051810" crossorigin="anonymous"></script>
-${[ORG_LD, siteLD(lang), speakableLD(url), ...schemas].map(jsonld).join('\n')}
+${[ORG_LD, siteLD(lang), speakableLD(url, ogImg), ...schemas].map(jsonld).join('\n')}
 </head>
 <body data-mnav="${homeHref === '/kpop' ? 'kpop' : 'travel'}">
 <a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">${esc(aria(lang).skip)}</a>

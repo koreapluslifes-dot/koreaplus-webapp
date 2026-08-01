@@ -46,8 +46,8 @@
         {
           "h": "Night moves: pojangmacha and the Millak trick",
           "paras": [
-            "After dark, orange pojangmacha tents open along Gwangalli and around Haeundae: plastic stools, steaming grills, shellfish, golbaengi, soju. At Gwangalli you drink with the Gwangan Bridge lit up across the water — and on Saturday nights the M Drone Light Show plays right over the beach (check the official schedule for times).",
-            "The Millak trick is the local cheat code: at Millak-dong Raw Fish Town, the wholesale building at Gwangalli's north end, buy hoe to-go by weight downstairs, grab chopsticks and dipping sauce, and eat at Millak Waterside Park with the bridge in front of you. Waterfront raw fish at market prices."
+            "After dark, pojangmacha-style seafood joints fire up around Gwangalli and Millak-dong: plastic stools, steaming grills, shellfish, golbaengi, soju. (Haeundae’s 60-year-old beachfront tent village, Badamaeul, was demolished in June 2024 — that strip is a car park now, so head to Gwangalli instead.) At Gwangalli you drink with the Gwangan Bridge lit up across the water — and on Saturday nights the M Drone Light Show plays right over the beach (check the official schedule for times).",
+            "The Millak trick is the local cheat code: at Millak-dong Raw Fish Town, the wholesale building at Gwangalli's east end, buy hoe to-go by weight downstairs, grab chopsticks and dipping sauce, and eat at Millak Waterside Park with the bridge in front of you. One rule since July 2023: the park is an alcohol-free zone — staff check bags at the entrances and drinking there carries a ₩50,000 fine, so bring soft drinks and save the soju for a pocha afterwards. Waterfront raw fish at market prices."
           ]
         },
         {
@@ -94,7 +94,7 @@
           "name": "Millak-dong Raw Fish Town",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "A stack of wholesale raw-fish centers at Gwangalli's north end. Same buy-downstairs, eat-upstairs system as Jagalchi, but locals often skip the upstairs entirely and take the hoe away.",
+          "desc": "A stack of wholesale raw-fish centers at Gwangalli's east end. Same buy-downstairs, eat-upstairs system as Jagalchi, but locals often skip the upstairs entirely and take the hoe away.",
           "tip": "Order to-go, walk to Millak Waterside Park, and eat facing Gwangan Bridge — Busan's cheapest waterfront hoe dinner.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
@@ -102,7 +102,7 @@
           "name": "Gwangalli Pojangmacha Row",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "Orange tents on the beachfront pouring soju beside grills of shellfish, with the Gwangan Bridge glittering behind the plastic sheeting. Loud, steamy, and exactly right after midnight.",
+          "desc": "Pocha-style seafood spots along Gwangan Beach-ro and the Millak-dong side, pouring soju beside grills of shellfish with the Gwangan Bridge glittering across the water. Loud, steamy, and exactly right after midnight.",
           "tip": "On Saturdays, claim a seat before the M Drone Light Show starts — check the official schedule for times.",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -167,7 +167,7 @@
         "釜山は韓国のオムク(어묵・魚の練り物)の都。1953年に影島(ヨンド)で創業した三進オムクは、今も操業を続ける韓国最古のメーカーです。",
         "シアッホットク(씨앗호떡)——ホットクを割って種子とナッツをぎっしり詰めたもの——は南浦洞BIFF広場の屋台から有名になりました。",
         "チャガルチ市場は2階建てシステム。1階で活魚を買い、少額の席料を払って2階で食べます。",
-        "光安里(クァンアルリ)のMドローンライトショーは毎週土曜の夜、ビーチ上空で開催——ポジャンマチャ(포장마차・屋台)のゴールデンタイムです。"
+        "広安里(クァンアルリ)のMドローンライトショーは毎週土曜の夜、ビーチ上空で開催——ポジャンマチャ(포장마차・屋台)のゴールデンタイムです。"
       ],
       "sections": [
         {
@@ -201,8 +201,8 @@
         {
           "h": "夜の動き方:ポジャンマチャと民楽の裏ワザ",
           "paras": [
-            "日が暮れると、光安里や海雲台(ヘウンデ)周辺にオレンジ色のポジャンマチャのテントが開きます。プラスチックの丸椅子、湯気の立つ焼き台、貝、ゴルベンイ(골뱅이・つぶ貝)、そしてソジュ。光安里なら、ライトアップされた広安大橋を海越しに眺めながら一杯やれます。土曜の夜にはMドローンライトショーがビーチの真上で開催されます(時間は公式スケジュールで確認を)。",
-            "民楽(ミルラク)の裏ワザは地元民のチートコードです。光安里北端の卸売ビル、民楽洞刺身センターの1階でフェを量り売りのテイクアウトで買い、箸とタレをもらって、民楽水辺公園で橋を正面に食べるのです。市場価格でウォーターフロントの刺身が楽しめます。"
+            "日が暮れると、広安里や海雲台(ヘウンデ)周辺にオレンジ色のポジャンマチャのテントが開きます。プラスチックの丸椅子、湯気の立つ焼き台、貝、ゴルベンイ(골뱅이・つぶ貝)、そしてソジュ。広安里なら、ライトアップされた広安大橋を海越しに眺めながら一杯やれます。土曜の夜にはMドローンライトショーがビーチの真上で開催されます(時間は公式スケジュールで確認を)。",
+            "民楽(ミルラク)の裏ワザは地元民のチートコードです。広安里北端の卸売ビル、民楽洞刺身センターの1階でフェを量り売りのテイクアウトで買い、箸とタレをもらって、民楽水辺公園で橋を正面に食べるのです。市場価格でウォーターフロントの刺身が楽しめます。"
           ]
         },
         {
@@ -216,7 +216,7 @@
             "12:00 — 行列がピークになる前にムルミルミョンとマンドゥ。",
             "15:00 — 南浦洞へ。BIFF広場でシアッホットク、続いて富平カントン市場でオムクとスープ。",
             "17:30 — チャガルチか民楽洞へ。魚を選んで2階で食べるか、ビーチに持ち出すか。",
-            "21:00 — 光安里のポジャンマチャで締めの一杯。土曜ならドローンショーに時間を合わせて。"
+            "21:00 — 広安里のポジャンマチャで締めの一杯。土曜ならドローンショーに時間を合わせて。"
           ]
         }
       ],
@@ -249,12 +249,12 @@
           "name": "民楽洞刺身センター",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "光安里北端に建ち並ぶ刺身の卸売センター群。チャガルチと同じ「1階で買って2階で食べる」方式ですが、地元民は2階をスキップしてフェをテイクアウトすることも多いです。",
+          "desc": "広安里北端に建ち並ぶ刺身の卸売センター群。チャガルチと同じ「1階で買って2階で食べる」方式ですが、地元民は2階をスキップしてフェをテイクアウトすることも多いです。",
           "tip": "テイクアウトで注文して民楽水辺公園へ。広安大橋を正面に食べる、釜山で一番安いウォーターフロント刺身ディナーです。",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
-          "name": "光安里ポジャンマチャ村",
+          "name": "広安里ポジャンマチャ村",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
           "desc": "ビーチフロントに並ぶオレンジ色のテント。貝を焼く鉄板の横でソジュが注がれ、ビニールシートの向こうに広安大橋がきらめきます。騒がしくて湯気が立ちこめて、深夜0時過ぎにこそぴったりの場所です。",
@@ -292,8 +292,8 @@
           "1人あたり数千ウォンが目安で、テーブル、パンチャン、サンチュ、タレ類が含まれます。魚の値段はさばく前に1階で確定を。骨で作るメウンタンを頼むなら少し追加予算を見ておきましょう。それでも合計は、単独の刺身レストランより安く収まります。"
         ],
         [
-          "光安里のドローンショーはいつ?",
-          "光安里Mドローンライトショーは毎週土曜の夜にビーチ上空で開催され、祝日には追加開催もあります。時間は季節で変わるので、ディナーの計画を立てる前に公式スケジュールを確認してください。ビーチフロントのポジャンマチャの席は、開始のかなり前に埋まります。"
+          "広安里のドローンショーはいつ?",
+          "広安里Mドローンライトショーは毎週土曜の夜にビーチ上空で開催され、祝日には追加開催もあります。時間は季節で変わるので、ディナーの計画を立てる前に公式スケジュールを確認してください。ビーチフロントのポジャンマチャの席は、開始のかなり前に埋まります。"
         ],
         [
           "韓国語ができなくても食べられる?",
@@ -306,7 +306,7 @@
         "チャガルチでは包丁が入る前に値段を確定、そのあと骨でメウンタンをお願いしましょう。",
         "民楽洞ではフェのテイクアウトが可能——民楽水辺公園で広安大橋を眺めながらどうぞ。",
         "屋台のオムクスープはおかわり自由。何杯飲んでも誰も数えていません。",
-        "光安里のMドローンライトショーは毎週土曜の夜。公式スケジュールを確認して、終わったらテントで一杯。",
+        "広安里のMドローンライトショーは毎週土曜の夜。公式スケジュールを確認して、終わったらテントで一杯。",
         "屋台や市場の食堂では現金が好まれます。₩10,000札を多めに用意しておきましょう。",
         "クッパ横丁は夜明けから営業。時差ボケには、西面の朝クッパがコーヒーより効きます。"
       ]
@@ -667,7 +667,7 @@
           "h": "밤의 동선: 포장마차, 그리고 민락동 꿀팁",
           "paras": [
             "해가 지면 광안리와 해운대 근처로 주황색 포장마차들이 문을 열어요. 플라스틱 의자, 김이 오르는 불판, 조개, 골뱅이, 소주. 광안리에서는 바다 건너 불 켜진 광안대교를 보며 마실 수 있고, 토요일 밤엔 M 드론라이트쇼가 바로 해변 위에서 펼쳐져요(시간은 공식 일정을 확인하세요).",
-            "민락동 꿀팁은 현지인들의 치트키예요. 광안리 북쪽 끝의 도매 건물인 민락동 회센터 1층에서 회를 무게 단위로 포장하고, 젓가락과 초장을 챙겨 밀락수변공원에 앉으면 광안대교가 눈앞이에요. 시장 가격으로 즐기는 바닷가 회 한 상이죠."
+            "민락동 꿀팁은 현지인들의 치트키예요. 광안리 북쪽 끝의 도매 건물인 민락동 회센터 1층에서 회를 무게 단위로 포장하고, 젓가락과 초장을 챙겨 민락수변공원에 앉으면 광안대교가 눈앞이에요. 시장 가격으로 즐기는 바닷가 회 한 상이죠."
           ]
         },
         {
@@ -715,7 +715,7 @@
           "kr": "민락동 회센터",
           "wiki": "",
           "desc": "광안리 북쪽 끝에 도매 회센터 건물들이 층층이 모여 있어요. 자갈치처럼 1층에서 사서 2층에서 먹는 시스템인데, 현지인들은 아예 2층을 건너뛰고 회만 포장해 가는 경우가 많아요.",
-          "tip": "포장 주문해서 밀락수변공원까지 걸어가 광안대교를 마주 보고 드세요 — 부산에서 가장 저렴한 바닷가 회 저녁이에요.",
+          "tip": "포장 주문해서 민락수변공원까지 걸어가 광안대교를 마주 보고 드세요 — 부산에서 가장 저렴한 바닷가 회 저녁이에요.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
@@ -769,7 +769,7 @@
         "국밥은 일부러 심심하게 나와요. 새우젓으로 간, 부추로 식감, 다대기로 매운맛 — 이 순서로 넣으세요.",
         "밀면집엔 다 만두가 있어요. 한 접시 나눠 먹으면 국수가 든든한 한 끼가 돼요.",
         "자갈치에서는 칼 대기 전에 가격부터 합의하고, 남은 뼈로 매운탕을 부탁하세요.",
-        "민락동은 회 포장이 돼요 — 밀락수변공원에서 광안대교 보면서 드세요.",
+        "민락동은 회 포장이 돼요 — 민락수변공원에서 광안대교 보면서 드세요.",
         "길거리 어묵 수레의 국물 리필은 공짜예요. 몇 컵을 마시든 아무도 안 세요.",
         "광안리 M 드론라이트쇼는 토요일 밤마다 해요 — 공식 일정 확인하고, 끝나면 포장마차에서 한잔하세요.",
         "노점과 시장 바닥은 현금을 선호하는 곳이 많아요. ₩10,000짜리 지폐를 챙겨 두세요.",
@@ -1563,26 +1563,26 @@
     "ja": {
       "h1": "釜山ローカルが本当に愛するビーチと海岸散歩道",
       "title": "地元民が愛する釜山のビーチと海岸散歩道 | KoreaPlus",
-      "metaDesc": "海雲台と光安里の選び方、松亭サーフィン、ブルーラインの海岸列車、二妓台の断崖、五六島スカイウォーク、夕暮れのムーンタンロードまで釜山ローカルが案内。",
-      "lead": "釜山っ子10人に一番好きなビーチを聞けば、口論が始まります。有名なのは海雲台(ヘウンデ)ですが、私たちが泳ぐのは松亭(ソンジョン)、飲むのは光安里(クァンアルリ)、崖を歩くのは二妓台(イギデ)。このガイドでは、地元民の実際の海岸の使い方——どの砂浜の近くに泊まり、どの道を夕暮れに歩くべきか——をお伝えします。",
+      "metaDesc": "海雲台と広安里の選び方、松亭サーフィン、ブルーラインの海岸列車、二妓台の断崖、五六島スカイウォーク、夕暮れのムーンタンロードまで釜山ローカルが案内。",
+      "lead": "釜山っ子10人に一番好きなビーチを聞けば、口論が始まります。有名なのは海雲台(ヘウンデ)ですが、私たちが泳ぐのは松亭(ソンジョン)、飲むのは広安里(クァンアルリ)、崖を歩くのは二妓台(イギデ)。このガイドでは、地元民の実際の海岸の使い方——どの砂浜の近くに泊まり、どの道を夕暮れに歩くべきか——をお伝えします。",
       "facts": [
-        "釜山には海雲台、光安里、松亭、松島、多大浦、日光、林浪の7つの指定海水浴場があり、韓国の都市で最多です。",
+        "釜山には海雲台、広安里、松亭、松島、多大浦、日光、林浪の7つの指定海水浴場があり、韓国の都市で最多です。",
         "松島海水浴場は1913年開設、韓国初の公式海水浴場です。",
         "海雲台ブルーラインパークのビーチトレインは、廃線になった海岸鉄道を再利用し、尾浦から松亭まで4.8kmを走ります。",
-        "光安里のMドローンライトショーは毎週土曜の夜にビーチ上空で開催——正確な時間は公式スケジュールで確認を。",
+        "広安里のMドローンライトショーは毎週土曜の夜にビーチ上空で開催——正確な時間は公式スケジュールで確認を。",
         "五六島の島々は、伝統的に韓国の東海と南海の境界とされています。",
         "冬柏島(トンベクソム)のヌリマルAPECハウスは、2005年APEC首脳会議の会場でした。"
       ],
       "sections": [
         {
-          "h": "海雲台vs光安里:性格の異なる2つのビーチ",
+          "h": "海雲台vs広安里:性格の異なる2つのビーチ",
           "paras": [
-            "海雲台は釜山の「一面トップ」です。リゾートホテルが立ち並び、専用の地下鉄駅まである幅1.5kmの大きなビーチで、夏のサービスは何でも揃います。初めての釜山なら、ここが一番楽な拠点です。一方の光安里は地元民の答え。広安大橋に面した小ぶりな三日月形のビーチで、昼は静かに、日が暮れるとカフェ、クラフトビールバー、砂浜で食べるチキンで賑わいます。",
-            "昼の観光重視なら海雲台の近くへ。ブルーラインの列車、冬柏島、タルマジ峠がすべて徒歩圏です。あなたの釜山が夜の街なら光安里へ——橋は毎晩ライトアップされ、土曜にはMドローンライトショーが海の上で開催されます。"
+            "海雲台は釜山の「一面トップ」です。リゾートホテルが立ち並び、専用の地下鉄駅まである幅1.5kmの大きなビーチで、夏のサービスは何でも揃います。初めての釜山なら、ここが一番楽な拠点です。一方の広安里は地元民の答え。広安大橋に面した小ぶりな三日月形のビーチで、昼は静かに、日が暮れるとカフェ、クラフトビールバー、砂浜で食べるチキンで賑わいます。",
+            "昼の観光重視なら海雲台の近くへ。ブルーラインの列車、冬柏島、タルマジ峠がすべて徒歩圏です。あなたの釜山が夜の街なら広安里へ——橋は毎晩ライトアップされ、土曜にはMドローンライトショーが海の上で開催されます。"
           ],
           "list": [
             "海雲台に泊まる:初めての釜山、家族連れ、昼の観光、目の前のブルーラインパーク",
-            "光安里に泊まる:ナイトライフ、カフェ巡り、橋の眺め、若くてローカルな客層"
+            "広安里に泊まる:ナイトライフ、カフェ巡り、橋の眺め、若くてローカルな客層"
           ],
           "listType": "ul"
         },
@@ -1603,7 +1603,7 @@
         {
           "h": "二妓台と五六島:ドラマチックな南海岸",
           "paras": [
-            "光安里の対岸にある二妓台海岸散策路は、荒々しい断崖に沿ってボードウォークと階段が続く約2時間の道のりです。ご褒美は釜山随一の眺め。海の向こうに広安大橋とマリンシティの摩天楼が重なって見えます。地元民が写真を撮るのは夕暮れどき——歩いている途中で街に灯りがともるのです。",
+            "広安里の対岸にある二妓台海岸散策路は、荒々しい断崖に沿ってボードウォークと階段が続く約2時間の道のりです。ご褒美は釜山随一の眺め。海の向こうに広安大橋とマリンシティの摩天楼が重なって見えます。地元民が写真を撮るのは夕暮れどき——歩いている途中で街に灯りがともるのです。",
             "南側の入口にある五六島スカイウォークは、崖の縁からガラス床が突き出た展望台です。入場無料で靴カバーも貸してくれますが、正直あっという間に終わるので、それ自体を目的地にせず、二妓台の起点か終点として組み込むのがおすすめです。沖に浮かぶ五六島は、伝統的に東海と南海の境目とされています。"
           ]
         },
@@ -1624,7 +1624,7 @@
       ],
       "spots": [
         {
-          "name": "光安里海水浴場",
+          "name": "広安里海水浴場",
           "kr": "광안리해수욕장",
           "wiki": "Gwangalli Beach",
           "desc": "広安大橋に面した三日月形の砂浜で、カフェ、クラフトビールバー、チキン店に囲まれています。昼は海雲台より静かで、日没後は釜山っ子お気に入りの「夜のリビングルーム」に変わります。",
@@ -1690,8 +1690,8 @@
       ],
       "faq": [
         [
-          "泊まるなら海雲台?それとも光安里?",
-          "初めてなら海雲台がおすすめです。ビーチが広く、リゾートホテルが揃い、ブルーラインパーク、冬柏島、タルマジ峠がすべて徒歩圏です。夜を楽しむなら光安里。橋の眺め、カフェ、砂浜沿いのバーがあります。どちらも地下鉄2号線沿いで約15分の距離なので、両方楽しむのも簡単です。"
+          "泊まるなら海雲台?それとも広安里?",
+          "初めてなら海雲台がおすすめです。ビーチが広く、リゾートホテルが揃い、ブルーラインパーク、冬柏島、タルマジ峠がすべて徒歩圏です。夜を楽しむなら広安里。橋の眺め、カフェ、砂浜沿いのバーがあります。どちらも地下鉄2号線沿いで約15分の距離なので、両方楽しむのも簡単です。"
         ],
         [
           "ブルーラインパークのスカイカプセルは本当に完売する?",
@@ -1702,8 +1702,8 @@
           "できます——松亭の穏やかなビーチブレイクこそ、釜山のサーフスクールがここに集まる理由です。レッスンにはボードとウェットスーツのレンタルが含まれ、インストラクターは完全な初心者に慣れています。海が穏やかで人も少ない午前の回を予約しましょう。"
         ],
         [
-          "光安里のドローンショーはいつ見られる?",
-          "Mドローンライトショーは毎週土曜の夜、光安里ビーチの上空で開催されます。開始時間は季節によって変わるので、出かける前に公式スケジュールを確認してください。全体を見渡すならビーチ中央から、あるいは早めにルーフトップカフェの席を確保しましょう。"
+          "広安里のドローンショーはいつ見られる?",
+          "Mドローンライトショーは毎週土曜の夜、広安里ビーチの上空で開催されます。開始時間は季節によって変わるので、出かける前に公式スケジュールを確認してください。全体を見渡すならビーチ中央から、あるいは早めにルーフトップカフェの席を確保しましょう。"
         ],
         [
           "二妓台海岸散策路はきつい?",
@@ -1712,13 +1712,13 @@
       ],
       "tips": [
         "海水浴は夏だけですが、二妓台、ムーンタンロード、冬柏島などの海岸散歩は、むしろ春と秋のほうが快適です。",
-        "地下鉄2号線で海雲台〜光安里は約15分。東海岸のビーチ間の移動にタクシーはほぼ不要です。",
-        "砂浜でのコンビニビールは合法で日常風景。地元流の光安里ナイトは、レジャーシートとチキンと缶ビールです。",
-        "広安大橋の写真は二妓台か冬柏島から。光安里から見ると橋は背景であって、主役にはなりません。",
+        "地下鉄2号線で海雲台〜広安里は約15分。東海岸のビーチ間の移動にタクシーはほぼ不要です。",
+        "砂浜でのコンビニビールは合法で日常風景。地元流の広安里ナイトは、レジャーシートとチキンと缶ビールです。",
+        "広安大橋の写真は二妓台か冬柏島から。広安里から見ると橋は背景であって、主役にはなりません。",
         "青沙浦と松亭の名物は焼き貝のチョゲグイ(조개구이)。量が多いので、シェア前提でグループでどうぞ。",
         "7月下旬〜8月の海雲台はパラソルで大渋滞。早朝に泳ぐか、松亭に足を延ばしましょう。",
         "五六島スカイウォークは悪天候で閉鎖されることがあり、アクセス路も吹きさらしです。風の強い日は状況を確認してください。",
-        "日の出は地元民の時間。朝6時の冬柏島と光安里はジョガーのもので、ボードウォークはほぼ貸切です。"
+        "日の出は地元民の時間。朝6時の冬柏島と広安里はジョガーのもので、ボードウォークはほぼ貸切です。"
       ]
     },
     "zh": {
@@ -2922,7 +2922,7 @@
         {
           "name": "Huinnyeoul Culture Village",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "White-walled lanes on a cliff above Yeongdo's Jeoryeong Coastal Walk, facing the open sea and Namhang Bridge. A favorite film location — The Attorney shot here — and the closest Busan gets to a Greek island.",
           "tip": "Walk the sea-level coastal path first, then climb the stairs into the village. Late-afternoon light on the white walls is the shot.",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -2948,13 +2948,13 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "A storytelling trail climbing from Busan Station through old Choryang: modern-history murals, merchant-era buildings, and the steep 168 Stairs where dock workers once sprinted down for day labor. Harbor views widen with every flight.",
-          "tip": "The residents' monorail runs on and off — assume you'll climb. Go in the morning; the little observatory above the stairs frames the whole harbor.",
+          "tip": "The old inclined elevator is gone; a free inclined elevator, the Choryang 168 Stairs Sky Road, replaced it in March 2025 (06:00–24:00). Go in the morning; the little observatory above the stairs frames the whole harbor.",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
           "name": "Kangkangee Arts Village",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "A working ship-repair village in Daepyeong-dong, Yeongdo — Korea's first modern shipyard opened here in 1887. Murals and installations sit between active docks, and weekday hammering gives the village its name and soundtrack.",
           "tip": "Visit on a weekday for the real shipyard soundtrack. Start at the village information center, then follow the pier-side murals toward the repair docks.",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -2974,8 +2974,8 @@
           "No — they're all free, working neighborhoods. Gamcheon sells an optional stamp-tour map at the information center for a small fee, which supports the village. Your real contribution is buying coffee, snacks or crafts from resident-run shops."
         ],
         [
-          "Is the 168 Stairs monorail running?",
-          "It was built free of charge for elderly residents, but service has been suspended at times — check on-site and assume you may climb. The stairs take about five sweaty minutes; the harbor view from the observatory at the top is the payoff."
+          "Is there a lift up the 168 Stairs?",
+          "Yes. The old monorail was scrapped in 2023 after repeated breakdowns; since March 2025 a free 12-person inclined elevator — the Choryang 168 Stairs Sky Road — runs 06:00 to midnight, stopping at the exhibition space at the bottom, the Kim Min-bu Observatory mid-way, and the top. It closes on the 2nd and 4th Thursdays for maintenance, so the stairs are still the backup."
         ],
         [
           "Which village should I pick if I only have time for one?",
@@ -3064,7 +3064,7 @@
         {
           "name": "ヒンヨウル文化村",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "影島の絶影(チョリョン)海岸散策路を見下ろす崖の上に、白壁の小道が続く村。外海と南港大橋を望みます。映画『弁護人』のロケ地としても人気で、釜山で最もギリシャの島に近い風景です。",
           "tip": "まず海面レベルの海岸散策路を歩き、それから階段で村へ。白壁が輝く午後遅めの光が、狙うべき一枚です。",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -3096,7 +3096,7 @@
         {
           "name": "カンカンイ芸術村",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "影島・大平洞にある現役の船舶修理の村——1887年、韓国初の近代造船所がここに開かれました。稼働中のドックの間に壁画やアート作品が点在し、平日に響くハンマーの音が、村の名前でありBGMです。",
           "tip": "本物の造船所サウンドを聴くなら平日に。村の案内所からスタートして、埠頭沿いの壁画をたどりながら修理ドックの方へ歩きましょう。",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -3206,7 +3206,7 @@
         {
           "name": "白浅滩文化村",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "影岛绝影海岸步道上方悬崖上的白墙小巷，面对开阔海面和南港大桥。热门取景地——《辩护人》就在这里拍摄——也是釜山最接近希腊小岛的地方。",
           "tip": "先走海平面的海岸步道，再爬台阶进村。傍晚打在白墙上的光才是那张照片。",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -3238,7 +3238,7 @@
         {
           "name": "铿铿艺术村",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "影岛大平洞一座仍在运转的修船村——1887年韩国第一家近代造船厂就诞生于此。壁画和装置艺术散布在开工的船坞之间，工作日的锤击声正是村名与背景音乐的由来。",
           "tip": "工作日来才能听到真正的船厂原声。从村口的信息中心出发，沿码头边的壁画一路走向修船坞。",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -3348,7 +3348,7 @@
         {
           "name": "Aldea Cultural Huinnyeoul",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Callejones de paredes blancas sobre un acantilado encima del paseo costero Jeoryeong de Yeongdo, frente al mar abierto y al puente Namhang. Locación de cine favorita — aquí se filmó The Attorney — y lo más cerca que Busan está de una isla griega.",
           "tip": "Camina primero el sendero costero a nivel del mar y luego sube las escaleras a la aldea. La luz de media tarde sobre las paredes blancas es la foto.",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -3380,7 +3380,7 @@
         {
           "name": "Aldea Artística Kangkangee",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Una aldea de reparación de barcos en activo en Daepyeong-dong, Yeongdo — aquí abrió el primer astillero moderno de Corea en 1887. Murales e instalaciones conviven con diques activos, y el martilleo de los días de semana le da a la aldea su nombre y su banda sonora.",
           "tip": "Visítala un día de semana para la verdadera banda sonora del astillero. Empieza en el centro de información de la aldea y sigue los murales del muelle hacia los diques de reparación.",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -3490,7 +3490,7 @@
         {
           "name": "흰여울문화마을",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "영도 절영해안산책로 위 절벽에 하얀 담벼락 골목들이 얹혀 있어요. 탁 트인 바다와 남항대교를 마주 보죠. 영화 촬영지로 사랑받는 곳이고 — '변호인'을 여기서 찍었어요 — 부산에서 그리스 섬에 가장 가까운 풍경이에요.",
           "tip": "바다 높이의 해안 산책로를 먼저 걷고, 계단으로 마을에 올라가세요. 늦은 오후 햇살에 빛나는 흰 벽이 바로 그 사진이에요.",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -3522,7 +3522,7 @@
         {
           "name": "깡깡이예술마을",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "영도 대평동의 현역 수리조선 마을이에요 — 1887년 한국 최초의 근대식 조선소가 여기서 문을 열었죠. 벽화와 설치작품이 가동 중인 독 사이사이에 놓여 있고, 평일의 망치질 소리가 마을의 이름이자 배경음악이에요.",
           "tip": "진짜 조선소 사운드트랙을 들으려면 평일에 가세요. 마을 안내센터에서 시작해 부둣가 벽화를 따라 수리 독 방향으로 걸으면 돼요.",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -3632,7 +3632,7 @@
         {
           "name": "Village culturel de Huinnyeoul",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Des ruelles aux murs blancs sur une falaise dominant la promenade côtière de Jeoryeong, à Yeongdo, face au large et au pont de Namhang. Lieu de tournage adoré — The Attorney y a été filmé — et ce que Busan a de plus proche d'une île grecque.",
           "tip": "Faites d'abord le sentier côtier au niveau de la mer, puis grimpez les escaliers jusqu'au village. La lumière de fin d'après-midi sur les murs blancs, c'est la photo à ne pas manquer.",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -3664,7 +3664,7 @@
         {
           "name": "Village d'artistes de Kangkangee",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Un village de réparation navale en activité à Daepyeong-dong, sur Yeongdo — le premier chantier naval moderne de Corée y a ouvert en 1887. Fresques et installations cohabitent avec les cales actives, et le martèlement des jours de semaine donne au village son nom et sa bande-son.",
           "tip": "Venez en semaine pour la vraie bande-son du chantier. Commencez par le centre d'information du village, puis suivez les fresques le long du quai vers les cales de réparation.",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -3774,7 +3774,7 @@
         {
           "name": "Kulturdorf Huinnyeoul",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Weiß getünchte Gassen auf einer Klippe über dem Jeoryeong-Küstenweg auf Yeongdo, mit Blick aufs offene Meer und die Namhang-Brücke. Beliebter Drehort — „The Attorney“ entstand hier — und näher kommt Busan einer griechischen Insel nicht.",
           "tip": "Erst den Küstenweg auf Meereshöhe laufen, dann die Treppen ins Dorf hoch. Das Licht am späten Nachmittag auf den weißen Wänden ist der Shot.",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -3806,7 +3806,7 @@
         {
           "name": "Kunstdorf Kangkangee",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Ein arbeitendes Schiffsreparaturdorf in Daepyeong-dong auf Yeongdo — 1887 eröffnete hier Koreas erste moderne Werft. Zwischen aktiven Docks stehen Wandbilder und Installationen, und das Hämmern an Werktagen gibt dem Dorf Namen und Soundtrack.",
           "tip": "Komm werktags für den echten Werft-Soundtrack. Starte am Infozentrum des Dorfes und folge dann den Wandbildern am Pier Richtung Reparaturdocks.",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -3916,7 +3916,7 @@
         {
           "name": "Vila Cultural de Huinnyeoul",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Vielas de paredes brancas numa falésia acima da Trilha Costeira de Jeoryeong, em Yeongdo, de frente para o mar aberto e a Ponte Namhang. Locação de cinema predileta — O Advogado foi rodado aqui — e o mais perto que Busan chega de uma ilha grega.",
           "tip": "Faça primeiro a trilha costeira no nível do mar e só depois suba as escadas para dentro da vila. A luz do fim da tarde nas paredes brancas é a foto.",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -3948,7 +3948,7 @@
         {
           "name": "Vila de Artes Kangkangee",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Uma vila de reparo naval em plena atividade em Daepyeong-dong, Yeongdo — o primeiro estaleiro moderno da Coreia abriu aqui em 1887. Murais e instalações convivem com docas ativas, e a martelada dos dias úteis dá à vila o nome e a trilha sonora.",
           "tip": "Visite num dia útil para ouvir a trilha sonora real do estaleiro. Comece no centro de informações da vila e siga os murais à beira do cais em direção às docas de reparo.",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -4058,7 +4058,7 @@
         {
           "name": "Huinnyeoul Culture Village",
           "kr": "흰여울문화마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Lorong-lorong bertembok putih di atas tebing yang membentengi Jalur Pesisir Jeoryeong di Yeongdo, menghadap laut lepas dan Jembatan Namhang. Lokasi syuting favorit — The Attorney diambil di sini — dan paling mirip pulau Yunani yang bisa ditawarkan Busan.",
           "tip": "Susuri jalur pesisir setinggi permukaan laut dulu, baru naik tangga masuk ke kampungnya. Cahaya sore menjelang petang di tembok putihnya itu fotonya.",
           "mapQ": "Huinnyeoul Culture Village Busan"
@@ -4090,7 +4090,7 @@
         {
           "name": "Kangkangee Arts Village",
           "kr": "깡깡이예술마을",
-          "wiki": "Yeongdo District",
+          "wiki": "",
           "desc": "Kampung reparasi kapal yang masih beroperasi di Daepyeong-dong, Yeongdo — galangan kapal modern pertama Korea dibuka di sini pada 1887. Mural dan instalasi berdiri di antara dok aktif, dan bunyi palu di hari kerja memberi kampung ini nama sekaligus musik latarnya.",
           "tip": "Datang di hari kerja untuk mendengar musik latar galangan yang asli. Mulai dari pusat informasi kampung, lalu ikuti mural di sisi dermaga menuju dok reparasi.",
           "mapQ": "Kangkangee Arts Village Busan"
@@ -4139,7 +4139,7 @@
       "lead": "Busan runs on its markets. Ajummas who have gutted mackerel for forty years, hotteok griddles that never cool, alleys that fed war refugees and now feed everyone. Forget the department stores — this is where the city actually eats. Here's how to shop, order, and haggle like you grew up three stops down Line 1.",
       "facts": [
         "Jagalchi Market is Korea's largest seafood market, and its veteran vendors are known simply as the Jagalchi ajumma.",
-        "Gukje Market began as a trading ground for refugees who flooded into Busan during the Korean War in the early 1950s.",
+        "Gukje Market started in 1945, right after Liberation, when goods left behind by departing Japanese and carried home by returning Koreans were traded on open ground — the original \"Dotteqi Market\". Korean War refugees then doubled the city and turned it into the sprawl it is today.",
         "Bupyeong Kkangtong Market became Korea's first official night market in 2013; stalls fire up around 7:30pm.",
         "'Kkangtong' means 'tin can' — the market once traded American canned goods from postwar army bases.",
         "Ssiat hotteok, the seed-stuffed hotteok, is a Busan invention made famous by the BIFF Square stalls.",
@@ -4163,7 +4163,7 @@
         {
           "h": "Gukje Market: born from war, run on noodles",
           "paras": [
-            "Gukje Market was born in the chaos after the Korean War, when refugees who had poured into Busan set up stalls to trade whatever they carried or could salvage. That survivor DNA is still in the layout: a dense grid of alleys, each specializing — fabrics here, kitchenware there, food woven through all of it. It's the market from the film 'Ode to My Father', and it earned the fame.",
+            "Gukje Market was born in the churn of 1945, when Japan’s defeat left a city full of goods and no owners and traders called it the Dotteqi Market. Korean War refugees then doubled Busan’s population and turned the improvised stalls into the sprawl you walk today. That survivor DNA is still in the layout: a dense grid of alleys, each specializing — fabrics here, kitchenware there, food woven through all of it. It's the market from the film 'Ode to My Father', and it earned the fame.",
             "Head for the food alleys, where ajummas ladle yubu-jeongol — a gentle hot pot of stuffed fried-tofu pockets — and mix bibim-dangmyeon, chewy glass noodles tossed in sweet-spicy sauce that barely exists outside Busan. Sit on the low stools, order both, and split them. Most bowls land well under ₩10,000, and the ladies top up broth without being asked."
           ]
         },
@@ -4210,7 +4210,7 @@
           "name": "Gukje Market",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "A sprawling grid of alleys founded by Korean War refugees, now selling everything from vintage clothes to kitchen knives — with legendary food lanes serving yubu-jeongol and bibim-dangmyeon in between.",
+          "desc": "A sprawling grid of alleys that began in 1945 and exploded with Korean War refugees, now selling everything from vintage clothes to kitchen knives — with legendary food lanes serving yubu-jeongol and bibim-dangmyeon in between.",
           "tip": "The food alleys get slammed at lunch; arrive by 11:30am or after 2pm. Order bibim-dangmyeon and yubu-jeongol together — vendors expect the combo.",
           "mapQ": "Gukje Market Busan"
         },
@@ -4241,7 +4241,7 @@
         {
           "name": "Haeundae Traditional Market",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "A covered market lane one block from Haeundae Beach — eomuk stands, hotteok griddles, fruit stalls, and the charcoal-grilled gomjangeo (hagfish) restaurants that stay busy long after the beach empties.",
           "tip": "Hit it wet-haired straight off the beach like locals do. The eomuk broth is free with your fish cake — hold the cup with both hands.",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -4388,7 +4388,7 @@
         {
           "name": "海雲台伝統市場",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "海雲台ビーチから1本入ったアーケード市場。オムクの屋台、ホットクの鉄板、果物の露店、そしてビーチが空いた後もにぎわう炭火焼きコムジャンオ(ヌタウナギ)食堂が並びます。",
           "tip": "地元流は、海から上がって髪が濡れたまま直行すること。オムクを買えばだし汁は無料です。カップは両手で持ちましょう。",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -4535,7 +4535,7 @@
         {
           "name": "해운대전통시장",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "해운대해수욕장에서 한 블록 안쪽의 지붕 덮인 시장 골목 — 어묵 매대, 호떡 철판, 과일 좌판, 그리고 해변이 텅 빈 뒤에도 오래 북적이는 연탄불 곰장어집들.",
           "tip": "현지인처럼 물놀이 끝나고 머리도 덜 마른 채 직행하세요. 어묵 사면 국물은 공짜예요 — 컵은 두 손으로 감싸 쥐고 드세요.",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -4682,7 +4682,7 @@
         {
           "name": "Mercado tradicional de Haeundae",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "Un pasillo de mercado techado a una cuadra de la playa de Haeundae: puestos de eomuk, planchas de hotteok, fruterías y los restaurantes de gomjangeo (pez bruja) al carbón que siguen llenos mucho después de que la playa se vacía.",
           "tip": "Llega con el pelo mojado directo de la playa, como los locales. El caldo de eomuk es gratis con tu brocheta: sostén el vaso con las dos manos.",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -4829,7 +4829,7 @@
         {
           "name": "海云台传统市场",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "距海云台海滩一个街区的带顶市场街——鱼糕摊、糖饼铁板、水果摊，还有海滩人散后依旧火爆的炭烤盲鳗餐厅。",
           "tip": "学本地人，头发还滴着水就直接从海滩过来。鱼糕配的汤免费——记得双手捧杯。",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -4976,7 +4976,7 @@
         {
           "name": "Marché traditionnel de Haeundae",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "Une allée couverte à une rue de la plage de Haeundae : stands d'eomuk, plaques à hotteok, étals de fruits et les restaurants de gomjangeo (myxine grillée au charbon) qui ne désemplissent pas longtemps après que la plage s'est vidée.",
           "tip": "Allez-y les cheveux encore mouillés en sortant de la plage, comme les locaux. Le bouillon d'eomuk est offert avec la brochette — tenez le gobelet à deux mains.",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -5123,7 +5123,7 @@
         {
           "name": "Traditioneller Markt Haeundae",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "Eine überdachte Marktgasse einen Block vom Haeundae-Strand – Eomuk-Stände, Hotteok-Platten, Obststände und die Lokale mit über Holzkohle gegrilltem Gomjangeo (Schleimaal), in denen noch lange Betrieb ist, wenn der Strand längst leer ist.",
           "tip": "Geh mit nassen Haaren direkt vom Strand hin, so wie Einheimische. Die Eomuk-Brühe gibt es gratis zum Fischkuchen – halt den Becher mit beiden Händen.",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -5270,7 +5270,7 @@
         {
           "name": "Mercado Tradicional de Haeundae",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "Uma galeria coberta a um quarteirão da praia de Haeundae — barracas de eomuk, chapas de hotteok, bancas de fruta e os restaurantes de gomjangeo na brasa que seguem cheios muito depois de a praia esvaziar.",
           "tip": "Chegue de cabelo molhado, direto da praia, como fazem os locais. O caldo de eomuk é de graça com o bolinho — segure o copo com as duas mãos.",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -5417,7 +5417,7 @@
         {
           "name": "Pasar Tradisional Haeundae",
           "kr": "해운대전통시장",
-          "wiki": "Haeundae District",
+          "wiki": "",
           "desc": "Lorong pasar beratap satu blok dari Pantai Haeundae — lapak eomuk, wajan hotteok, kios buah, dan rumah makan gomjangeo (hagfish) panggang arang yang tetap ramai lama setelah pantai sepi.",
           "tip": "Datangi dengan rambut masih basah langsung dari pantai seperti warga lokal. Kuah eomuk gratis kalau Anda beli kue ikannya — pegang gelasnya dengan dua tangan.",
           "mapQ": "Haeundae Traditional Market Busan"
@@ -6844,7 +6844,7 @@
       "metaDesc": "How locals move around Busan: KTX booking tricks, the Sasang airport transfer, Donghae Line beach trains, cheap taxis, and coastal express buses.",
       "lead": "Busan looks sprawling on a map, but it's really a string of neighborhoods threaded by a handful of rail lines, cheap taxis, and fast coastal buses. Learn the Sasang airport transfer, load a T-money card, and respect the hills — that's most of the battle. Here's how locals actually move around.",
       "facts": [
-        "KTX Seoul–Busan: about 2h 40m on the fastest services",
+        "KTX Seoul–Busan: about 2h 40m on a typical service",
         "Airport light rail to Sasang: three stops, under 10 minutes",
         "Subway rides: about ₩1,600–1,800 by distance with a transit card",
         "Taxi base fare: around ₩4,800 — short hops rival the subway for two people",
