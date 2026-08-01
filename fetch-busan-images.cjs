@@ -17,6 +17,7 @@ const TITLES = [
   'Gwangan Bridge', 'Hwangnyeongsan', 'Haeundae LCT The Sharp', 'Sajik Baseball Stadium',
   'Korea Train Express', 'Busan Metro', 'Gimhae International Airport',
   'Busan–Gimhae Light Rail Transit', 'Busan Station', 'Donghae Line',
+  "Dongnae District", "Jjimjilbang", "Shinsegae Centum City", "Bathing", "Beomeosa", "Geumjeongsan", "Geumjeong District", "Haedong Yonggungsa", "Gyeongju", "Tongyeong", "Geoje", "Jinhae-gu", "Ulsan", "Tongdosa", "Bulguksa", "Seomyeon", "Nampo-dong", "Busan International Film Festival", "Busan Cinema Center",
 ];
 
 const stripTags = s => (s || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
@@ -55,9 +56,13 @@ async function fetchTitle(title) {
 }
 
 (async () => {
-  const out = {};
+  // MERGE, never overwrite: entries filled from ko.wikipedia or a Commons file
+  // search live only in the JSON, so a fresh en.wikipedia run must not drop them.
+  let out = {};
+  try { out = JSON.parse(fs.readFileSync("busan-images.json", "utf8")); } catch { /* first run */ }
   let ok = 0, miss = 0;
   for (const t of TITLES) {
+    if (out[t]) { console.log("SKIP " + t + " (already have)"); continue; }
     try {
       const r = await fetchTitle(t);
       if (r.entry) { out[t] = r.entry; ok++; console.log('OK   ' + t + '  ←  ' + r.entry.file); }
