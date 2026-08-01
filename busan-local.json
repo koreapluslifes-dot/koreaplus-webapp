@@ -201,8 +201,8 @@
         {
           "h": "夜の動き方:ポジャンマチャと民楽の裏ワザ",
           "paras": [
-            "日が暮れると、広安里や海雲台(ヘウンデ)周辺にオレンジ色のポジャンマチャのテントが開きます。プラスチックの丸椅子、湯気の立つ焼き台、貝、ゴルベンイ(골뱅이・つぶ貝)、そしてソジュ。広安里なら、ライトアップされた広安大橋を海越しに眺めながら一杯やれます。土曜の夜にはMドローンライトショーがビーチの真上で開催されます(時間は公式スケジュールで確認を)。",
-            "民楽(ミルラク)の裏ワザは地元民のチートコードです。広安里北端の卸売ビル、民楽洞刺身センターの1階でフェを量り売りのテイクアウトで買い、箸とタレをもらって、民楽水辺公園で橋を正面に食べるのです。市場価格でウォーターフロントの刺身が楽しめます。"
+            "日が暮れると、広安里から民楽洞(ミルラクドン)にかけて、ポジャンマチャ風の海鮮店が道沿いに火を入れます。プラスチックの丸椅子、湯気の立つ焼き台、貝、ゴルベンイ(골뱅이・つぶ貝)、そしてソジュ。(海雲台のビーチ沿いで60年続いた屋台村「パダマウル」は2024年6月に撤去され、あの一帯は今や駐車場です。テントを探して海雲台へ行かないように——向かうべきは広安里です。)広安里なら、ライトアップされた広安大橋を海越しに眺めながら一杯やれます。土曜の夜にはMドローンライトショーがビーチの真上で開催されます(時間は公式スケジュールで確認を)。",
+            "民楽(ミルラク)の裏ワザは地元民のチートコードです。広安里の東端に建つ卸売ビル、民楽洞刺身センターの1階でフェを量り売りのテイクアウトで買い、箸とタレをもらって、民楽水辺公園で橋を正面に食べるのです。ただしルールがひとつ。2023年7月から公園は禁酒エリアになりました——入口ではスタッフによるかばんチェックがあり、飲めば₩50,000の罰金です。飲み物はノンアルにして、ソジュはその後のポチャに取っておきましょう。それでも、市場価格でウォーターフロントの刺身が楽しめます。"
           ]
         },
         {
@@ -249,15 +249,15 @@
           "name": "民楽洞刺身センター",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "広安里北端に建ち並ぶ刺身の卸売センター群。チャガルチと同じ「1階で買って2階で食べる」方式ですが、地元民は2階をスキップしてフェをテイクアウトすることも多いです。",
-          "tip": "テイクアウトで注文して民楽水辺公園へ。広安大橋を正面に食べる、釜山で一番安いウォーターフロント刺身ディナーです。",
+          "desc": "広安里の東端に建ち並ぶ刺身の卸売センター群。チャガルチと同じ「1階で買って2階で食べる」方式ですが、地元民は2階をスキップしてフェをテイクアウトすることも多いです。",
+          "tip": "テイクアウトで注文して民楽水辺公園へ。広安大橋を正面に食べる、釜山で一番安いウォーターフロント刺身ディナーです。ただし公園は2023年7月から禁酒エリア(入口でかばんチェック、飲めば₩50,000の罰金)。お酒は後のポチャで。",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
           "name": "広安里ポジャンマチャ村",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "ビーチフロントに並ぶオレンジ色のテント。貝を焼く鉄板の横でソジュが注がれ、ビニールシートの向こうに広安大橋がきらめきます。騒がしくて湯気が立ちこめて、深夜0時過ぎにこそぴったりの場所です。",
+          "desc": "広安海辺路(クァンアンヘビョンノ)沿いと民楽洞側に点在するポチャ風の海鮮店。貝を焼く鉄板の横でソジュが注がれ、海の向こうには広安大橋がきらめきます。騒がしくて湯気が立ちこめて、深夜0時過ぎにこそぴったりの場所です。",
           "tip": "土曜はMドローンライトショーが始まる前に席を確保。時間は公式スケジュールで確認しましょう。",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -304,7 +304,7 @@
         "クッパはわざと薄味で出てきます。塩気はセウジョッ、食感はプチュ、辛さはタデギ——この順番で。",
         "ミルミョン店には必ずマンドゥがあります。2人で1皿シェアすれば、麺が立派な一食になります。",
         "チャガルチでは包丁が入る前に値段を確定、そのあと骨でメウンタンをお願いしましょう。",
-        "民楽洞ではフェのテイクアウトが可能——民楽水辺公園で広安大橋を眺めながらどうぞ。",
+        "民楽洞ではフェのテイクアウトが可能——民楽水辺公園で広安大橋を眺めながらどうぞ。ただし公園は禁酒エリアなので、お酒は持ち込まないこと。",
         "屋台のオムクスープはおかわり自由。何杯飲んでも誰も数えていません。",
         "広安里のMドローンライトショーは毎週土曜の夜。公式スケジュールを確認して、終わったらテントで一杯。",
         "屋台や市場の食堂では現金が好まれます。₩10,000札を多めに用意しておきましょう。",
@@ -315,7 +315,7 @@
       "h1": "像釜山本地人一样吃：这座城市的灵魂美食地图",
       "title": "像釜山本地人一样吃：猪肉汤饭与小麦冷面 | KoreaPlus",
       "metaDesc": "釜山本地人的觅食攻略：猪肉汤饭、小麦冷面、坚果糖饼、鱼糕、札嘎其市场的楼上加工玩法，还有海滩边的布帐马车——本地人真正吃饭的地方。",
-      "lead": "釜山的味道是难民的味道、港口的味道、打工人的味道——天没亮的一碗热汤，八月里的一碗冰面，刚下船的鲜鱼。别再吃酒店早餐了，这才是我们平时真正吃饭的地方：汤饭一条街、市场楼层、沙滩上的帐篷摊。带上现金和好胃口就行，行程表就别带了。",
+      "lead": "釜山的味道是难民的味道、港口的味道、打工人的味道——天没亮的一碗热汤，八月里的一碗冰面，刚下船的鲜鱼。别再吃酒店早餐了，这才是我们平时真正吃饭的地方：汤饭一条街、市场楼层、海边马路旁的布帐马车。带上现金和好胃口就行，行程表就别带了。",
       "facts": [
         "猪肉汤饭（돼지국밥）是釜山的招牌菜——早餐吃、午餐吃、解酒吃、失恋了也吃。",
         "小麦冷面（밀면）诞生于朝鲜战争时期，难民用便宜的小麦粉复刻了北方冷面。",
@@ -356,8 +356,8 @@
         {
           "h": "夜幕降临：布帐马车与民乐洞的省钱秘籍",
           "paras": [
-            "天黑之后，橙色的布帐马车在广安里和海云台一带支起来：塑料凳、冒着热气的烤架、贝类、海螺、烧酒。在广安里，你对着灯火通明的广安大桥举杯——每周六晚，M无人机灯光秀就在海滩正上方上演（具体时间以官方日程为准）。",
-            "民乐洞玩法是本地人的作弊码：去广安里北端的批发楼——民乐洞生鱼片中心，在楼下按重量买外带生鱼片，拿好筷子和蘸料，到民乐水边公园坐下，广安大桥就在眼前。市场价吃到海景生鱼片。"
+            "天黑之后，布帐马车（포장마차）式的海鲜摊在广安里和民乐洞一带支起来：塑料凳、冒着热气的烤架、贝类、海螺、烧酒。（海云台海滨那片开了六十年的帐篷村Badamaeul已于2024年6月拆除，原址现在是停车场，所以别往海云台跑，直接去广安里。）在广安里，你对着灯火通明的广安大桥举杯——每周六晚，M无人机灯光秀就在海滩正上方上演（具体时间以官方日程为准）。",
+            "民乐洞玩法是本地人的作弊码：去广安里东端的批发楼——民乐洞生鱼片中心，在楼下按重量买外带生鱼片，拿好筷子和蘸料，到民乐水边公园坐下，广安大桥就在眼前。只有一条规矩要记牢：自2023年7月起公园全面禁酒——入口有工作人员查包，在里面喝酒罚款₩50,000，所以饮料买不含酒精的，烧酒留到之后的布帐马车再说。市场价吃到海景生鱼片。"
           ]
         },
         {
@@ -404,15 +404,15 @@
           "name": "民乐洞生鱼片中心",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "广安里北端一整栋批发生鱼片中心。玩法和札嘎其一样：楼下买、楼上吃，但本地人常常直接跳过楼上，把生鱼片打包带走。",
-          "tip": "点外带，走到民乐水边公园，面对广安大桥开吃——釜山最便宜的海景生鱼片晚餐。",
+          "desc": "广安里东端一整栋批发生鱼片中心。玩法和札嘎其一样：楼下买、楼上吃，但本地人常常直接跳过楼上，把生鱼片打包带走。",
+          "tip": "点外带，走到民乐水边公园，面对广安大桥开吃——釜山最便宜的海景生鱼片晚餐。注意公园禁酒（罚款₩50,000），烧酒留到之后再喝。",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
           "name": "广安里布帐马车村",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "海滩边一排橙色帐篷：烤架上是贝类，桌上是烧酒，塑料棚外是灯光闪烁的广安大桥。吵闹、热气腾腾，午夜之后来正合适。",
+          "desc": "沿广安海边路和民乐洞一侧铺开的布帐马车式海鲜摊：烤架上是贝类，桌上是烧酒，隔着海面是灯光闪烁的广安大桥。吵闹、热气腾腾，午夜之后来正合适。",
           "tip": "周六要在M无人机灯光秀开演前占好座——具体时间查官方日程。",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -459,7 +459,7 @@
         "汤饭端上来就是淡的，这是故意的。按顺序加：虾酱提咸、韭菜加脆、辣酱增辣。",
         "小麦冷面店都卖饺子；两人分一盘，面条立刻升级成正餐。",
         "在札嘎其，先谈好价再让摊主动刀，然后记得让楼上用鱼骨煮辣鱼汤。",
-        "民乐洞的生鱼片可以外带——去民乐水边公园，面对广安大桥吃。",
+        "民乐洞的生鱼片可以外带——去民乐水边公园，面对广安大桥吃；公园禁酒，只带饮料，烧酒之后再喝。",
         "街头鱼糕摊的热汤免费续，没人数你喝了几杯。",
         "广安里M无人机灯光秀每周六晚上演——先查官方日程，看完再钻进帐篷摊。",
         "路边摊和市场楼层大多更认现金；备几张₩10,000的纸币。",
@@ -470,7 +470,7 @@
       "h1": "Come como un local de Busan: el mapa de la comida con alma de la ciudad",
       "title": "Come como local en Busan: gukbap, milmyeon y más | KoreaPlus",
       "metaDesc": "Guía local de Busan: dwaeji-gukbap, milmyeon, ssiat-hotteok, eomuk, el segundo piso de Jagalchi y pojangmacha de playa — donde comemos de verdad.",
-      "lead": "La comida de Busan es comida de refugiados, de puerto, de trabajadores: caldo hirviendo al amanecer, fideos fríos en agosto, pescado recién bajado del barco. Sáltate el desayuno del hotel. Aquí es donde comemos de verdad: los callejones de gukbap, los pisos de los mercados, las carpas sobre la arena. Trae efectivo, apetito y cero itinerario.",
+      "lead": "La comida de Busan es comida de refugiados, de puerto, de trabajadores: caldo hirviendo al amanecer, fideos fríos en agosto, pescado recién bajado del barco. Sáltate el desayuno del hotel. Aquí es donde comemos de verdad: los callejones de gukbap, los pisos de los mercados, las carpas de pojangmacha junto al mar. Trae efectivo, apetito y cero itinerario.",
       "facts": [
         "El dwaeji-gukbap 돼지국밥 (sopa de cerdo con arroz) es el plato insignia de Busan: se come de desayuno, de almuerzo, para la resaca y para el mal de amores.",
         "El milmyeon 밀면 nació durante la Guerra de Corea, cuando los refugiados reinventaron el naengmyeon del norte con harina de trigo barata.",
@@ -511,8 +511,8 @@
         {
           "h": "Movidas nocturnas: pojangmacha y el truco de Millak",
           "paras": [
-            "Al caer la noche, las carpas naranjas de pojangmacha abren a lo largo de Gwangalli y alrededor de Haeundae: bancos de plástico, parrillas humeantes, mariscos, golbaengi, soju. En Gwangalli bebes con el puente Gwangan iluminado al otro lado del agua — y los sábados por la noche el M Drone Light Show vuela justo sobre la playa (revisa el horario oficial).",
-            "El truco de Millak es el código secreto local: en el centro de pescado crudo de Millak-dong, el edificio mayorista en el extremo norte de Gwangalli, compra hoe para llevar por peso en la planta baja, agarra palillos y salsa, y come en el parque Millak Waterside con el puente enfrente. Pescado crudo frente al mar a precio de mercado."
+            "Al caer la noche, los pojangmacha de marisco abren a lo largo de Gwangalli y Millak-dong: bancos de plástico, parrillas humeantes, mariscos, golbaengi, soju. (La aldea de carpas de Haeundae, Badamaeul, 60 años en primera línea de playa, fue demolida en junio de 2024: esa franja hoy es un estacionamiento, así que ve mejor a Gwangalli.) En Gwangalli bebes con el puente Gwangan iluminado al otro lado del agua — y los sábados por la noche el M Drone Light Show vuela justo sobre la playa (revisa el horario oficial).",
+            "El truco de Millak es el código secreto local: en el centro de pescado crudo de Millak-dong, el edificio mayorista en el extremo este de Gwangalli, compra hoe para llevar por peso en la planta baja, agarra palillos y salsa, y come en el parque Millak Waterside con el puente enfrente. Una regla desde julio de 2023: el parque es zona libre de alcohol — el personal revisa las bolsas en las entradas y beber ahí sale con multa de ₩50,000, así que lleva refrescos y deja el soju para un pojangmacha al salir. Pescado crudo frente al mar a precio de mercado."
           ]
         },
         {
@@ -559,15 +559,15 @@
           "name": "Centro de Pescado Crudo de Millak-dong",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "Un conjunto de centros mayoristas de pescado crudo en el extremo norte de Gwangalli. El mismo sistema de comprar abajo y comer arriba que Jagalchi, pero los locales suelen saltarse el piso de arriba y llevarse el hoe.",
-          "tip": "Pide para llevar, camina al parque Millak Waterside y come frente al puente Gwangan: la cena de hoe frente al mar más barata de Busan.",
+          "desc": "Un conjunto de centros mayoristas de pescado crudo en el extremo este de Gwangalli. El mismo sistema de comprar abajo y comer arriba que Jagalchi, pero los locales suelen saltarse el piso de arriba y llevarse el hoe.",
+          "tip": "Pide para llevar, camina al parque Millak Waterside y come frente al puente Gwangan: la cena de hoe frente al mar más barata de Busan. Eso sí, el parque es zona libre de alcohol — el soju, para después.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
           "name": "Hilera de Pojangmacha de Gwangalli",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "Carpas naranjas frente a la playa sirviendo soju junto a parrillas de mariscos, con el puente Gwangan brillando detrás del plástico. Ruidoso, humeante y exactamente lo que pide la medianoche.",
+          "desc": "Locales de marisco estilo pojangmacha repartidos por la avenida Gwangan Beach-ro y el lado de Millak-dong, sirviendo soju junto a parrillas de mariscos con el puente Gwangan brillando al otro lado del agua. Ruidoso, humeante y exactamente lo que pide la medianoche.",
           "tip": "Los sábados, asegura asiento antes de que empiece el M Drone Light Show — revisa el horario oficial.",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -614,7 +614,7 @@
         "El gukbap llega bajo de sal a propósito. Agrega saeujeot para la sal, buchu para el crocante y dadaegi para el picante — en ese orden.",
         "Todas las casas de milmyeon venden mandu; un plato compartido entre dos convierte los fideos en comida completa.",
         "En Jagalchi, acuerda el precio antes de que salga el cuchillo, y luego pide maeuntang con los huesos.",
-        "En Millak-dong venden hoe para llevar — cómelo en el parque Millak Waterside frente al puente Gwangan.",
+        "En Millak-dong venden hoe para llevar — cómelo en el parque Millak Waterside frente al puente Gwangan; ojo, es zona libre de alcohol.",
         "El caldo de los carritos de eomuk se rellena gratis; nadie cuenta tus vasos.",
         "El M Drone Light Show de Gwangalli vuela los sábados por la noche — revisa el horario oficial y luego cena en una carpa.",
         "Los puestos callejeros y los pisos de mercado suelen preferir efectivo; ten a mano billetes de ₩10,000.",
@@ -625,7 +625,7 @@
       "h1": "부산 사람처럼 먹기: 부산의 소울푸드 지도",
       "title": "부산 사람처럼 먹기: 돼지국밥·밀면부터 포장마차까지 | KoreaPlus",
       "metaDesc": "부산 토박이가 알려주는 진짜 먹거리 — 돼지국밥, 밀면, 씨앗호떡, 어묵, 자갈치 2층 시스템, 광안리 포장마차까지. 우리가 실제로 먹는 곳만 담았어요.",
-      "lead": "부산 음식은 피란민의 음식이고, 항구의 음식이고, 노동자의 음식이에요. 새벽엔 뜨거운 국물, 8월엔 차가운 면, 배에서 갓 내린 생선. 호텔 조식은 건너뛰세요. 국밥 골목, 시장 바닥, 모래사장 위 포장마차 — 우리가 진짜로 먹는 곳은 여기예요. 현금이랑 빈속만 챙기고, 일정은 두고 오세요.",
+      "lead": "부산 음식은 피란민의 음식이고, 항구의 음식이고, 노동자의 음식이에요. 새벽엔 뜨거운 국물, 8월엔 차가운 면, 배에서 갓 내린 생선. 호텔 조식은 건너뛰세요. 국밥 골목, 시장 바닥, 광안리 밤바다 앞 포장마차 — 우리가 진짜로 먹는 곳은 여기예요. 현금이랑 빈속만 챙기고, 일정은 두고 오세요.",
       "facts": [
         "돼지국밥은 부산의 대표 음식이에요. 아침으로도, 점심으로도, 해장으로도, 이별한 날에도 먹죠.",
         "밀면은 한국전쟁 때 피란민들이 값싼 밀가루로 북한식 냉면을 다시 만들면서 태어났어요.",
@@ -666,8 +666,8 @@
         {
           "h": "밤의 동선: 포장마차, 그리고 민락동 꿀팁",
           "paras": [
-            "해가 지면 광안리와 해운대 근처로 주황색 포장마차들이 문을 열어요. 플라스틱 의자, 김이 오르는 불판, 조개, 골뱅이, 소주. 광안리에서는 바다 건너 불 켜진 광안대교를 보며 마실 수 있고, 토요일 밤엔 M 드론라이트쇼가 바로 해변 위에서 펼쳐져요(시간은 공식 일정을 확인하세요).",
-            "민락동 꿀팁은 현지인들의 치트키예요. 광안리 북쪽 끝의 도매 건물인 민락동 회센터 1층에서 회를 무게 단위로 포장하고, 젓가락과 초장을 챙겨 민락수변공원에 앉으면 광안대교가 눈앞이에요. 시장 가격으로 즐기는 바닷가 회 한 상이죠."
+            "해가 지면 광안리와 민락동 일대에 포장마차식 해산물집들이 불을 켜요. 플라스틱 의자, 김이 오르는 불판, 조개, 골뱅이, 소주. (해운대 해변가에 60년 있던 포장마차촌 '바다마을'은 2024년 6월에 철거됐어요. 지금 그 자리는 주차장이라, 광안리로 가셔야 해요.) 광안리에서는 바다 건너 불 켜진 광안대교를 보며 마실 수 있고, 토요일 밤엔 M 드론라이트쇼가 바로 해변 위에서 펼쳐져요(시간은 공식 일정을 확인하세요).",
+            "민락동 꿀팁은 현지인들의 치트키예요. 광안리 동쪽 끝의 도매 건물인 민락동 회센터 1층에서 회를 무게 단위로 포장하고, 젓가락과 초장을 챙겨 민락수변공원에 앉으면 광안대교가 눈앞이에요. 딱 하나 규칙이 있어요. 2023년 7월부터 이 공원은 금주 구역이라, 입구에서 가방 검사를 하고 술 마시다 걸리면 과태료가 ₩50,000이에요. 음료수로 챙기시고, 소주는 이따 포장마차에서 하세요. 시장 가격으로 즐기는 바닷가 회 한 상이죠."
           ]
         },
         {
@@ -714,15 +714,15 @@
           "name": "민락동 회센터",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "광안리 북쪽 끝에 도매 회센터 건물들이 층층이 모여 있어요. 자갈치처럼 1층에서 사서 2층에서 먹는 시스템인데, 현지인들은 아예 2층을 건너뛰고 회만 포장해 가는 경우가 많아요.",
-          "tip": "포장 주문해서 민락수변공원까지 걸어가 광안대교를 마주 보고 드세요 — 부산에서 가장 저렴한 바닷가 회 저녁이에요.",
+          "desc": "광안리 동쪽 끝에 도매 회센터 건물들이 층층이 모여 있어요. 자갈치처럼 1층에서 사서 2층에서 먹는 시스템인데, 현지인들은 아예 2층을 건너뛰고 회만 포장해 가는 경우가 많아요.",
+          "tip": "포장 주문해서 민락수변공원까지 걸어가 광안대교를 마주 보고 드세요 — 부산에서 가장 저렴한 바닷가 회 저녁이에요. 단, 공원은 금주 구역이라 술은 못 가지고 들어가요. 음료수로 챙기세요.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
           "name": "광안리 포장마차촌",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "해변가에 늘어선 주황색 천막들이에요. 조개 굽는 불판 옆에서 소주를 따르고, 비닐 너머로 광안대교가 반짝이죠. 시끌시끌하고 김이 자욱하고, 자정 넘어 가면 딱 좋아요.",
+          "desc": "광안해변로와 민락동 쪽 길을 따라 늘어선 포장마차식 해산물집들이에요. 조개 굽는 불판 옆에서 소주를 따르면 바다 건너 광안대교가 반짝이죠. 시끌시끌하고 김이 자욱하고, 자정 넘어 가면 딱 좋아요.",
           "tip": "토요일엔 M 드론라이트쇼 시작 전에 자리를 잡으세요 — 시간은 공식 일정을 확인하시고요.",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -769,7 +769,7 @@
         "국밥은 일부러 심심하게 나와요. 새우젓으로 간, 부추로 식감, 다대기로 매운맛 — 이 순서로 넣으세요.",
         "밀면집엔 다 만두가 있어요. 한 접시 나눠 먹으면 국수가 든든한 한 끼가 돼요.",
         "자갈치에서는 칼 대기 전에 가격부터 합의하고, 남은 뼈로 매운탕을 부탁하세요.",
-        "민락동은 회 포장이 돼요 — 민락수변공원에서 광안대교 보면서 드세요.",
+        "민락동은 회 포장이 돼요 — 민락수변공원에서 광안대교 보면서 드세요. 공원은 금주 구역이니 술은 빼고요.",
         "길거리 어묵 수레의 국물 리필은 공짜예요. 몇 컵을 마시든 아무도 안 세요.",
         "광안리 M 드론라이트쇼는 토요일 밤마다 해요 — 공식 일정 확인하고, 끝나면 포장마차에서 한잔하세요.",
         "노점과 시장 바닥은 현금을 선호하는 곳이 많아요. ₩10,000짜리 지폐를 챙겨 두세요.",
@@ -780,7 +780,7 @@
       "h1": "Manger comme un Busanais : la carte de la cuisine de l'âme",
       "title": "Manger comme un Busanais : gukbap, milmyeon | KoreaPlus",
       "metaDesc": "Le guide d'un Busanais : dwaeji-gukbap, milmyeon, ssiat-hotteok, eomuk, l'étage de Jagalchi et les pojangmacha de plage — là où on mange vraiment.",
-      "lead": "La cuisine de Busan est une cuisine de réfugiés, de port, d'ouvriers : bouillon brûlant à l'aube, nouilles glacées en août, poisson à peine débarqué. Oubliez le petit-déjeuner de l'hôtel. Voici où l'on mange vraiment : les ruelles à gukbap, les allées du marché, les tentes plantées sur le sable. Prévoyez du liquide, de l'appétit, et surtout aucun horaire.",
+      "lead": "La cuisine de Busan est une cuisine de réfugiés, de port, d'ouvriers : bouillon brûlant à l'aube, nouilles glacées en août, poisson à peine débarqué. Oubliez le petit-déjeuner de l'hôtel. Voici où l'on mange vraiment : les ruelles à gukbap, les allées du marché, les pocha en bord de mer à Gwangalli. Prévoyez du liquide, de l'appétit, et surtout aucun horaire.",
       "facts": [
         "Le dwaeji-gukbap 돼지국밥 (soupe de riz au porc) est le plat emblématique de Busan : on l'avale au petit-déjeuner, au déjeuner, après une cuite et après un chagrin d'amour.",
         "Le milmyeon 밀면 est né pendant la guerre de Corée, quand les réfugiés ont réinventé le naengmyeon du Nord avec de la farine de blé bon marché.",
@@ -821,8 +821,8 @@
         {
           "h": "La nuit venue : pojangmacha et l'astuce de Millak",
           "paras": [
-            "À la nuit tombée, les tentes orange des pojangmacha 포장마차 s'ouvrent le long de Gwangalli et autour de Haeundae : tabourets en plastique, grils fumants, coquillages, golbaengi, soju. À Gwangalli, on boit face au pont de Gwangan illuminé de l'autre côté de l'eau — et le samedi soir, le M Drone Light Show se joue juste au-dessus de la plage (vérifiez le programme officiel pour les horaires).",
-            "L'astuce de Millak, c'est le code secret des locaux : au marché aux poissons crus de Millak-dong, la halle de gros à l'extrémité nord de Gwangalli, achetez du hoe à emporter au poids au rez-de-chaussée, prenez des baguettes et de la sauce, et installez-vous au parc au bord de l'eau de Millak, le pont droit devant. Du poisson cru face à la mer, au prix du marché."
+            "À la nuit tombée, les adresses de fruits de mer façon pojangmacha 포장마차 s'allument autour de Gwangalli et de Millak-dong : tabourets en plastique, grils fumants, coquillages, golbaengi, soju. (Le village de tentes du front de mer de Haeundae, Badamaeul, soixante ans au compteur, a été démoli en juin 2024 — cette bande de sable est aujourd'hui un parking, alors filez plutôt à Gwangalli.) À Gwangalli, on boit face au pont de Gwangan illuminé de l'autre côté de l'eau — et le samedi soir, le M Drone Light Show se joue juste au-dessus de la plage (vérifiez le programme officiel pour les horaires).",
+            "L'astuce de Millak, c'est le code secret des locaux : au marché aux poissons crus de Millak-dong, la halle de gros à l'extrémité est de Gwangalli, achetez du hoe à emporter au poids au rez-de-chaussée, prenez des baguettes et de la sauce, et installez-vous au parc au bord de l'eau de Millak, le pont droit devant. Une règle depuis juillet 2023 : le parc est une zone sans alcool — les sacs sont contrôlés aux entrées et boire sur place coûte une amende de ₩50,000. Prenez donc des boissons sans alcool et gardez le soju pour un pocha ensuite. Du poisson cru face à la mer, au prix du marché."
           ]
         },
         {
@@ -836,7 +836,7 @@
             "12h00 — Mul milmyeon et mandu avant le pic de la file du déjeuner.",
             "15h00 — Nampo-dong : ssiat-hotteok à la BIFF Square, puis eomuk et bouillon au marché Bupyeong Kkangtong.",
             "17h30 — Jagalchi ou Millak-dong : on choisit un poisson et on le mange à l'étage — ou on l'emporte sur la plage.",
-            "21h00 — Dernier verre sous une tente pojangmacha à Gwangalli ; le samedi, calez-vous sur le spectacle de drones."
+            "21h00 — Dernier verre en pocha à Gwangalli ; le samedi, calez-vous sur le spectacle de drones."
           ]
         }
       ],
@@ -869,15 +869,15 @@
           "name": "Marché aux poissons crus de Millak-dong",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "Un empilement de halles de gros dédiées au poisson cru, à l'extrémité nord de Gwangalli. Même principe qu'à Jagalchi — on achète en bas, on mange en haut — sauf que les habitants zappent souvent l'étage et emportent leur hoe.",
-          "tip": "Commandez à emporter, marchez jusqu'au parc au bord de l'eau de Millak et mangez face au pont de Gwangan : le dîner de hoe les pieds dans l'eau le moins cher de Busan.",
+          "desc": "Un empilement de halles de gros dédiées au poisson cru, à l'extrémité est de Gwangalli. Même principe qu'à Jagalchi — on achète en bas, on mange en haut — sauf que les habitants zappent souvent l'étage et emportent leur hoe.",
+          "tip": "Commandez à emporter, marchez jusqu'au parc au bord de l'eau de Millak et mangez face au pont de Gwangan : le dîner de hoe les pieds dans l'eau le moins cher de Busan. Attention, le parc est sans alcool depuis juillet 2023 — contrôle des sacs aux entrées, amende de ₩50,000 : le hoe oui, le soju non.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
           "name": "Rangée de pojangmacha de Gwangalli",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "Des tentes orange sur le front de mer, où le soju coule à côté des grils de coquillages, avec le pont de Gwangan qui scintille derrière les bâches. Bruyant, embué, et exactement ce qu'il faut passé minuit.",
+          "desc": "Des adresses de fruits de mer façon pocha le long de Gwangan Beach-ro et du côté de Millak-dong, où le soju coule à côté des grils de coquillages, avec le pont de Gwangan qui scintille de l'autre côté de l'eau. Bruyant, embué, et exactement ce qu'il faut passé minuit.",
           "tip": "Le samedi, prenez place avant le début du M Drone Light Show — vérifiez le programme officiel pour les horaires.",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -924,9 +924,9 @@
         "Le gukbap arrive sous-assaisonné exprès. Ajoutez le saeujeot pour le sel, le buchu pour le croquant, le dadaegi pour le feu — dans cet ordre.",
         "Toutes les maisons de milmyeon vendent des mandu ; une assiette partagée à deux transforme les nouilles en vrai repas.",
         "À Jagalchi, fixez le prix avant que le couteau sorte, puis demandez le maeuntang préparé avec les arêtes.",
-        "Millak-dong vend du hoe à emporter : mangez-le au parc au bord de l'eau de Millak, face au pont de Gwangan.",
+        "Millak-dong vend du hoe à emporter : mangez-le au parc au bord de l'eau de Millak, face au pont de Gwangan — mais le parc est sans alcool depuis juillet 2023 (amende de ₩50,000), alors gardez le soju pour après.",
         "Aux chariots de rue, le rab de bouillon d'eomuk est gratuit ; personne ne compte vos gobelets.",
-        "Le M Drone Light Show de Gwangalli se joue le samedi soir — consultez le programme officiel, puis filez manger sous une tente.",
+        "Le M Drone Light Show de Gwangalli se joue le samedi soir — consultez le programme officiel, puis filez manger dans un pocha juste à côté.",
         "Les stands de rue et les allées de marché préfèrent souvent le liquide : gardez des billets de 10 000 ₩ à portée.",
         "Les ruelles à gukbap servent dès l'aube : un bol matinal à Seomyeon vaut mieux qu'un café contre le décalage horaire."
       ]
@@ -935,7 +935,7 @@
       "h1": "Essen wie ein Local in Busan: die Soulfood-Karte der Stadt",
       "title": "Essen wie ein Local in Busan: Gukbap & Milmyeon | KoreaPlus",
       "metaDesc": "Der Local-Guide für Busan: dwaeji-gukbap, milmyeon, ssiat-hotteok, eomuk, das Jagalchi-System und Pojangmacha am Strand — wo wir wirklich essen.",
-      "lead": "Busans Küche ist Flüchtlingsküche, Hafenküche, Arbeiterküche — heiße Brühe im Morgengrauen, kalte Nudeln im August, Fisch direkt vom Kutter. Lass das Hotelfrühstück aus. Hier essen wir wirklich: in den Gukbap-Gassen, auf den Marktböden, in den Zelten am Sand. Bring Bargeld mit, Hunger und keinen Zeitplan.",
+      "lead": "Busans Küche ist Flüchtlingsküche, Hafenküche, Arbeiterküche — heiße Brühe im Morgengrauen, kalte Nudeln im August, Fisch direkt vom Kutter. Lass das Hotelfrühstück aus. Hier essen wir wirklich: in den Gukbap-Gassen, auf den Marktböden, an den Pojangmacha-Tischen am Wasser. Bring Bargeld mit, Hunger und keinen Zeitplan.",
       "facts": [
         "Dwaeji-gukbap 돼지국밥, die Schweineknochensuppe mit Reis, ist Busans Signature-Gericht — zum Frühstück, zum Mittag, gegen den Kater und gegen Liebeskummer.",
         "Milmyeon 밀면 entstand im Koreakrieg, als Geflüchtete das nordkoreanische Naengmyeon mit billigem Weizenmehl nachbauten.",
@@ -976,8 +976,8 @@
         {
           "h": "Nachts unterwegs: Pojangmacha und der Millak-Trick",
           "paras": [
-            "Nach Einbruch der Dunkelheit öffnen entlang Gwangalli und rund um Haeundae die orangefarbenen Pojangmacha-Zelte 포장마차: Plastikhocker, dampfende Grills, Muscheln, Golbaengi, Soju. In Gwangalli trinkst du mit der beleuchteten Gwangan-Brücke gegenüber auf dem Wasser — und samstagabends läuft die M Drone Light Show direkt über dem Strand (Zeiten im offiziellen Programm prüfen).",
-            "Der Millak-Trick ist der lokale Cheat-Code: In der Rohfisch-Halle Millak-dong am Nordende von Gwangalli kaufst du unten Hoe nach Gewicht zum Mitnehmen, nimmst Stäbchen und Dip-Sauce dazu und isst im Millak-Wasserpark mit der Brücke vor dir. Rohfisch am Wasser zu Marktpreisen."
+            "Nach Einbruch der Dunkelheit heizen rund um Gwangalli und Millak-dong die Pojangmacha-Buden 포장마차 ein: Plastikhocker, dampfende Grills, Muscheln, Golbaengi, Soju. (Haeundaes 60 Jahre altes Zeltdorf Badamaeul direkt am Strand wurde im Juni 2024 abgerissen — dort ist heute ein Parkplatz, halt dich also an Gwangalli.) In Gwangalli trinkst du mit der beleuchteten Gwangan-Brücke gegenüber auf dem Wasser — und samstagabends läuft die M Drone Light Show direkt über dem Strand (Zeiten im offiziellen Programm prüfen).",
+            "Der Millak-Trick ist der lokale Cheat-Code: In der Rohfisch-Halle Millak-dong am Ostende von Gwangalli kaufst du unten Hoe nach Gewicht zum Mitnehmen, nimmst Stäbchen und Dip-Sauce dazu und isst im Millak-Wasserpark mit der Brücke vor dir. Eine Regel gilt seit Juli 2023: Der Park ist alkoholfrei — an den Eingängen werden Taschen kontrolliert, und wer dort trinkt, zahlt ₩50,000 Strafe. Nimm also Softdrinks mit und heb dir den Soju fürs Pojangmacha danach auf. Rohfisch am Wasser zu Marktpreisen."
           ]
         },
         {
@@ -1024,15 +1024,15 @@
           "name": "Rohfischzentrum Millak-dong",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "Ein Block voller Rohfisch-Großhandelszentren am Nordende von Gwangalli. Dasselbe System wie in Jagalchi — unten kaufen, oben essen —, nur dass Einheimische das Obergeschoss oft überspringen und das Hoe mitnehmen.",
-          "tip": "Zum Mitnehmen bestellen, zum Millak-Wasserpark laufen und mit Blick auf die Gwangan-Brücke essen — Busans günstigstes Hoe-Dinner am Wasser.",
+          "desc": "Ein Block voller Rohfisch-Großhandelszentren am Ostende von Gwangalli. Dasselbe System wie in Jagalchi — unten kaufen, oben essen —, nur dass Einheimische das Obergeschoss oft überspringen und das Hoe mitnehmen.",
+          "tip": "Zum Mitnehmen bestellen, zum Millak-Wasserpark laufen und mit Blick auf die Gwangan-Brücke essen — Busans günstigstes Hoe-Dinner am Wasser. Im Park herrscht Alkoholverbot, den Soju hebst du dir fürs Pojangmacha danach auf.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
           "name": "Pojangmacha-Zeile in Gwangalli",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "Orangefarbene Zelte an der Strandpromenade, Soju neben Grills voller Muscheln, dahinter die glitzernde Gwangan-Brücke durch die Plastikplane. Laut, dampfig und nach Mitternacht genau richtig.",
+          "desc": "Meeresfrüchte-Buden im Pocha-Stil entlang der Gwangan Beach-ro und auf der Millak-dong-Seite, Soju neben Grills voller Muscheln, gegenüber die glitzernde Gwangan-Brücke über dem Wasser. Laut, dampfig und nach Mitternacht genau richtig.",
           "tip": "Samstags rechtzeitig einen Platz sichern, bevor die M Drone Light Show beginnt — Zeiten im offiziellen Programm.",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -1079,9 +1079,9 @@
         "Gukbap kommt absichtlich untergewürzt. Saeujeot fürs Salz, Buchu für den Biss, Dadaegi für die Schärfe — in dieser Reihenfolge.",
         "Jedes Milmyeon-Haus verkauft Mandu; ein Teller zu zweit macht aus den Nudeln eine volle Mahlzeit.",
         "In Jagalchi den Preis aushandeln, bevor das Messer kommt, und danach Maeuntang aus den Gräten bestellen.",
-        "In Millak-dong gibt es Hoe zum Mitnehmen — iss es im Millak-Wasserpark mit Blick auf die Gwangan-Brücke.",
+        "In Millak-dong gibt es Hoe zum Mitnehmen — iss es im Millak-Wasserpark mit Blick auf die Gwangan-Brücke. Alkohol ist dort seit Juli 2023 verboten (₩50,000 Strafe), also Softdrinks einpacken.",
         "Die Eomuk-Brühe an den Straßenständen ist gratis; niemand zählt deine Becher.",
-        "Die M Drone Light Show in Gwangalli läuft samstagabends — Zeiten im offiziellen Programm checken und danach im Zelt essen.",
+        "Die M Drone Light Show in Gwangalli läuft samstagabends — Zeiten im offiziellen Programm checken und danach im Pojangmacha essen.",
         "Straßenstände und Marktetagen nehmen oft lieber Bargeld; halte ₩10,000-Scheine bereit.",
         "In den Gukbap-Gassen wird schon im Morgengrauen serviert — eine frühe Schüssel in Seomyeon schlägt gegen Jetlag jeden Kaffee."
       ]
@@ -1131,8 +1131,8 @@
         {
           "h": "Programa noturno: pojangmacha e o truque de Millak",
           "paras": [
-            "Depois que escurece, as barracas laranja (pojangmacha 포장마차) abrem ao longo de Gwangalli e em volta de Haeundae: banquinho de plástico, chapa fumegando, mariscos, golbaengi, soju. Em Gwangalli você bebe com a Ponte Gwangan acesa do outro lado da água — e nas noites de sábado o M Drone Light Show rola bem em cima da praia (confira os horários no calendário oficial).",
-            "O truque de Millak é o código secreto dos locais: no Millak-dong Raw Fish Town, o prédio atacadista na ponta norte de Gwangalli, compre hoe por peso para viagem no térreo, pegue hashi e molho e coma no Parque Beira-Mar de Millak com a ponte bem na sua frente. Peixe cru à beira-mar a preço de atacado."
+            "Depois que escurece, as barracas laranja (pojangmacha 포장마차) de frutos do mar abrem ao longo de Gwangalli e de Millak-dong: banquinho de plástico, chapa fumegando, mariscos, golbaengi, soju. (A vila de barracas na orla de Haeundae, a Badamaeul, com 60 anos de estrada, foi demolida em junho de 2024 — hoje aquele trecho é estacionamento, então vá para Gwangalli.) Em Gwangalli você bebe com a Ponte Gwangan acesa do outro lado da água — e nas noites de sábado o M Drone Light Show rola bem em cima da praia (confira os horários no calendário oficial).",
+            "O truque de Millak é o código secreto dos locais: no Millak-dong Raw Fish Town, o prédio atacadista na ponta leste de Gwangalli, compre hoe por peso para viagem no térreo, pegue hashi e molho e coma no Parque Beira-Mar de Millak com a ponte bem na sua frente. Uma regra desde julho de 2023: o parque é área livre de álcool — os fiscais checam as sacolas nas entradas e beber ali dá multa de ₩50,000, então leve refrigerante e guarde o soju para uma pocha depois. Peixe cru à beira-mar a preço de atacado."
           ]
         },
         {
@@ -1179,8 +1179,8 @@
           "name": "Millak-dong Raw Fish Town",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "Um conjunto de centros atacadistas de peixe cru na ponta norte de Gwangalli. Mesmo esquema do Jagalchi, de comprar embaixo e comer em cima, só que o pessoal daqui costuma pular o andar de cima e levar o hoe embora.",
-          "tip": "Peça para viagem, caminhe até o Parque Beira-Mar de Millak e coma de frente para a Ponte Gwangan — o jantar de hoe à beira-mar mais barato de Busan.",
+          "desc": "Um conjunto de centros atacadistas de peixe cru na ponta leste de Gwangalli. Mesmo esquema do Jagalchi, de comprar embaixo e comer em cima, só que o pessoal daqui costuma pular o andar de cima e levar o hoe embora.",
+          "tip": "Peça para viagem, caminhe até o Parque Beira-Mar de Millak e coma de frente para a Ponte Gwangan — o jantar de hoe à beira-mar mais barato de Busan. Só nada de bebida: o parque é área livre de álcool desde julho de 2023, com multa de ₩50,000.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
@@ -1234,7 +1234,7 @@
         "O gukbap chega sem tempero de propósito. Ponha saeujeot para salgar, buchu para dar crocância e dadaegi para o ardido — nessa ordem.",
         "Toda casa de milmyeon vende mandu; um prato dividido em dois transforma o macarrão em refeição completa.",
         "No Jagalchi, acerte o preço antes de a faca sair, e depois peça o maeuntang feito com a espinha.",
-        "Millak-dong vende hoe para viagem — coma no Parque Beira-Mar de Millak, de frente para a Ponte Gwangan.",
+        "Millak-dong vende hoe para viagem — coma no Parque Beira-Mar de Millak, de frente para a Ponte Gwangan; só deixe o soju de fora, o parque é área livre de álcool (multa de ₩50,000).",
         "Repetir o caldo do eomuk nas barracas de rua é de graça; ninguém conta os seus copos.",
         "O M Drone Light Show de Gwangalli é nas noites de sábado — confira o calendário oficial e depois jante numa barraca.",
         "Barracas de rua e o chão dos mercados costumam preferir dinheiro vivo; tenha notas de ₩10,000 à mão.",
@@ -1245,7 +1245,7 @@
       "h1": "Makan ala Warga Lokal Busan: Peta Kuliner Jiwa Kota Ini",
       "title": "Kuliner Lokal Busan: Gukbap, Milmyeon & Lainnya | KoreaPlus",
       "metaDesc": "Panduan warga Busan: dwaeji-gukbap, milmyeon, ssiat-hotteok, eomuk, sistem dua lantai Jagalchi, dan pojangmacha pantai — tempat kami makan sungguhan.",
-      "lead": "Makanan Busan itu makanan pengungsi, makanan pelabuhan, makanan buruh — kuah panas saat subuh, mi dingin di bulan Agustus, ikan yang baru turun dari kapal. Lewati saja sarapan hotel. Inilah tempat kami benar-benar makan: gang-gang gukbap, lantai pasar, tenda-tenda di atas pasir. Bawa uang tunai, perut kosong, dan jangan bawa jadwal.",
+      "lead": "Makanan Busan itu makanan pengungsi, makanan pelabuhan, makanan buruh — kuah panas saat subuh, mi dingin di bulan Agustus, ikan yang baru turun dari kapal. Lewati saja sarapan hotel. Inilah tempat kami benar-benar makan: gang-gang gukbap, lantai pasar, deretan pocha di pinggir jalan Gwangalli. Bawa uang tunai, perut kosong, dan jangan bawa jadwal.",
       "facts": [
         "Dwaeji-gukbap 돼지국밥 (sup nasi daging babi) adalah hidangan khas Busan — disantap untuk sarapan, makan siang, obat mabuk, dan obat patah hati.",
         "Milmyeon lahir saat Perang Korea, ketika para pengungsi meracik ulang naengmyeon khas Utara memakai tepung terigu murah.",
@@ -1286,8 +1286,8 @@
         {
           "h": "Gerakan malam: pojangmacha dan trik Millak",
           "paras": [
-            "Selepas gelap, tenda pojangmacha oranye buka di sepanjang Gwangalli dan sekitar Haeundae: bangku plastik, panggangan mengepul, kerang-kerangan, golbaengi, soju. Di Gwangalli Anda minum dengan Jembatan Gwangan menyala di seberang air — dan tiap Sabtu malam M Drone Light Show tampil persis di atas pantai (cek jadwal resminya untuk jam mainnya).",
-            "Trik Millak adalah kode curang khas warga lokal: di Millak-dong Raw Fish Town, gedung grosir di ujung utara Gwangalli, beli hoe bungkus berdasarkan berat di lantai bawah, ambil sumpit dan saus cocol, lalu makan di Taman Tepi Air Millak dengan jembatan tepat di depan mata. Hoe tepi laut dengan harga pasar."
+            "Selepas gelap, kedai seafood bergaya pojangmacha menyala di sekitar Gwangalli dan Millak-dong: bangku plastik, panggangan mengepul, kerang-kerangan, golbaengi, soju. (Kampung tenda tepi pantai Haeundae yang sudah berumur 60 tahun, Badamaeul, dibongkar pada Juni 2024 — lahannya kini jadi tempat parkir, jadi langsung saja ke Gwangalli.) Di Gwangalli Anda minum dengan Jembatan Gwangan menyala di seberang air — dan tiap Sabtu malam M Drone Light Show tampil persis di atas pantai (cek jadwal resminya untuk jam mainnya).",
+            "Trik Millak adalah kode curang khas warga lokal: di Millak-dong Raw Fish Town, gedung grosir di ujung timur Gwangalli, beli hoe bungkus berdasarkan berat di lantai bawah, ambil sumpit dan saus cocol, lalu makan di Taman Tepi Air Millak dengan jembatan tepat di depan mata. Satu aturan sejak Juli 2023: taman itu kawasan bebas alkohol — petugas memeriksa tas di pintu-pintu masuk dan minum di sana kena denda ₩50,000, jadi bawa minuman ringan saja dan simpan sojunya untuk pocha setelahnya. Hoe tepi laut dengan harga pasar."
           ]
         },
         {
@@ -1334,15 +1334,15 @@
           "name": "Sentra Hoe Millak-dong",
           "kr": "민락동 회센터",
           "wiki": "",
-          "desc": "Kumpulan gedung grosir hoe di ujung utara Gwangalli. Sistemnya sama seperti Jagalchi — beli di bawah, makan di atas — tapi warga lokal sering melewatkan lantai atas dan membawa pulang hoe-nya.",
-          "tip": "Pesan bungkus, jalan kaki ke Taman Tepi Air Millak, dan makan menghadap Jembatan Gwangan — makan malam hoe tepi laut termurah di Busan.",
+          "desc": "Kumpulan gedung grosir hoe di ujung timur Gwangalli. Sistemnya sama seperti Jagalchi — beli di bawah, makan di atas — tapi warga lokal sering melewatkan lantai atas dan membawa pulang hoe-nya.",
+          "tip": "Pesan bungkus, jalan kaki ke Taman Tepi Air Millak, dan makan menghadap Jembatan Gwangan — makan malam hoe tepi laut termurah di Busan. Ingat, tamannya bebas alkohol sejak Juli 2023 (tas diperiksa, denda ₩50,000), jadi sojunya nanti saja di pocha.",
           "mapQ": "Millak Raw Fish Town Busan"
         },
         {
           "name": "Deretan Pojangmacha Gwangalli",
           "kr": "광안리 포장마차촌",
           "wiki": "Gwangalli Beach",
-          "desc": "Tenda oranye di tepi pantai yang menuang soju di samping panggangan kerang, dengan Jembatan Gwangan berkilau di balik lembaran plastiknya. Berisik, mengepul, dan terasa pas banget lewat tengah malam.",
+          "desc": "Kedai seafood bergaya pocha di sepanjang Gwangan Beach-ro dan sisi Millak-dong, menuang soju di samping panggangan kerang dengan Jembatan Gwangan berkilau di seberang air. Berisik, mengepul, dan terasa pas banget lewat tengah malam.",
           "tip": "Kalau Sabtu, amankan tempat duduk sebelum M Drone Light Show dimulai — cek jadwal resmi untuk jamnya.",
           "mapQ": "Gwangalli pojangmacha Busan"
         },
@@ -1389,9 +1389,9 @@
         "Gukbap sengaja disajikan kurang bumbu. Tambahkan saeujeot untuk asin, buchu untuk kriuk, dadaegi untuk pedas — persis urutan itu.",
         "Semua kedai milmyeon menjual mandu; sepiring dibagi berdua sudah mengubah semangkuk mi jadi makan besar.",
         "Di Jagalchi, sepakati harga sebelum pisau keluar, lalu minta maeuntang dari tulangnya.",
-        "Millak-dong menjual hoe bungkus — santap di Taman Tepi Air Millak menghadap Jembatan Gwangan.",
+        "Millak-dong menjual hoe bungkus — santap di Taman Tepi Air Millak menghadap Jembatan Gwangan, tapi tamannya bebas alkohol (denda ₩50,000), jadi bawa minuman non-alkohol.",
         "Isi ulang kuah eomuk di gerobak kaki lima itu gratis; tidak ada yang menghitung gelas Anda.",
-        "Gwangalli M Drone Light Show digelar Sabtu malam — cek jadwal resminya, lalu makan di tenda setelahnya.",
+        "Gwangalli M Drone Light Show digelar Sabtu malam — cek jadwal resminya, lalu lanjut ke pojangmacha Gwangalli setelahnya.",
         "Kios kaki lima dan lantai pasar sering lebih suka uang tunai; siapkan lembaran ₩10,000.",
         "Gang gukbap sudah menyajikan sejak subuh — semangkuk pagi di Seomyeon lebih ampuh daripada kopi untuk melawan jet lag."
       ]
@@ -3090,7 +3090,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "釜山駅から古い草梁の街を上っていく「物語の道」。近現代史の壁画、商人時代の建物、そして港湾労働者が日雇い仕事を求めて駆け下りた急な168階段。上るごとに港の眺めが広がります。",
-          "tip": "住民用モノレールは動いていたりいなかったり——階段を上る前提で行きましょう。おすすめは午前中。階段の上の小さな展望台から、港全体が一望できます。",
+          "tip": "住民用モノレールは2023年に廃止され、2025年3月から無料の斜行エレベーター「草梁168階段スカイロード」が動いています(06:00〜24:00、第2・第4木曜は運休)。おすすめは午前中。階段の上の小さな展望台から、港全体が一望できます。",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -3116,8 +3116,8 @@
           "かかりません——どこも無料で、人が普通に暮らす町です。甘川では案内所で有料のスタンプツアーマップ(少額)を販売しており、収益は村の維持に充てられます。本当の貢献は、住民が営む店でコーヒーやおやつ、工芸品を買うことです。"
         ],
         [
-          "168階段のモノレールは動いている?",
-          "高齢の住民のために無料で作られたものですが、たびたび運休しています——現地で確認し、上る前提で行きましょう。階段は汗ばむ5分ほど。頂上の展望台から見渡す港の景色が、そのご褒美です。"
+          "168階段を上る乗り物はある?",
+          "あります。故障続きだった旧モノレールは2023年に撤去され、2025年3月から無料の斜行エレベーター「草梁168階段スカイロード」(定員12人)が06:00〜24:00で運行しています。停まるのはふもとの展示スペース、中腹の金敏夫(キム・ミンブ)展望台、そして頂上の3か所。第2・第4木曜は点検で運休なので、その日は階段が出番です——汗ばむ5分ほど。頂上の展望台から見渡す港の景色が、そのご褒美です。"
         ],
         [
           "1か所しか行けないなら、どの村を選ぶべき?",
@@ -3232,7 +3232,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "从釜山站爬进老草梁的叙事步道：近代史壁画、商埠时代的老建筑，以及码头工人当年为抢日结零工狂奔而下的陡峭168阶梯。每上一层，海港的视野就宽一分。",
-          "tip": "居民用的单轨电梯时开时停——默认要靠自己爬。早上去；台阶上方的小观景台正好框住整个海港。",
+          "tip": "以前那台居民用单轨电梯已经拆掉了——2025年3月起换成免费的斜行电梯“草梁168阶梯天空路”，06:00–24:00运行。早上去；台阶上方的小观景台正好框住整个海港。",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -3258,8 +3258,8 @@
           "都不收——它们是免费开放、有人居住的真实街区。甘川的游客中心出售一份自愿购买的盖章地图，价格不高，收入用于村子。你真正的贡献方式，是在居民经营的小店里买杯咖啡、买点小吃或手作。"
         ],
         [
-          "168阶梯的单轨电梯还在运行吗？",
-          "它当年是为高龄居民免费修建的，但曾多次停运——到现场确认，并做好爬楼的准备。台阶大约要爬五分钟、出一身汗；顶端观景台的海港景色就是回报。"
+          "168阶梯有电梯可以坐吗？",
+          "有。原来的单轨电梯故障不断，2023年被拆除；2025年3月起换成免费的斜行电梯——可乘12人的“草梁168阶梯天空路”，06:00一直运行到午夜，中途停三站：底层的展示空间、半山腰的金敏夫观景台，以及最顶端。每月第二、第四个周四检修停运，所以台阶依然是备选方案。"
         ],
         [
           "如果只有时间去一个村，选哪个？",
@@ -3374,7 +3374,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "Un sendero narrativo que sube desde la estación de Busan por el viejo Choryang: murales de historia moderna, edificios de la era mercantil y las empinadas 168 Escaleras por donde los trabajadores del puerto bajaban corriendo en busca de jornal. Las vistas del puerto se abren con cada tramo.",
-          "tip": "El monorriel de los residentes funciona a ratos — asume que subirás a pie. Ve por la mañana; el pequeño observatorio sobre las escaleras enmarca todo el puerto.",
+          "tip": "El viejo monorriel ya no existe: desde marzo de 2025 lo reemplaza un ascensor inclinado gratuito, el Choryang 168 Stairs Sky Road (06:00–24:00). Ve por la mañana; el pequeño observatorio sobre las escaleras enmarca todo el puerto.",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -3400,8 +3400,8 @@
           "No — todas son barrios vivos y gratuitos. Gamcheon vende un mapa opcional del tour de sellos en el centro de información por una tarifa pequeña, que apoya a la aldea. Tu verdadera contribución es comprar café, snacks o artesanías en las tiendas de los residentes."
         ],
         [
-          "¿Funciona el monorriel de las 168 Escaleras?",
-          "Se construyó gratuito para los residentes mayores, pero el servicio se ha suspendido por temporadas — verifica en el lugar y asume que quizá subas a pie. Las escaleras toman unos cinco sudorosos minutos; la vista del puerto desde el observatorio de arriba es la recompensa."
+          "¿Hay algún ascensor para subir las 168 Escaleras?",
+          "Sí. El viejo monorriel se desguazó en 2023 después de averiarse una y otra vez; desde marzo de 2025 funciona un ascensor inclinado gratuito para 12 personas —el Choryang 168 Stairs Sky Road— de 06:00 a medianoche, con parada en la sala de exposiciones de abajo, en el observatorio Kim Min-bu a media subida y en lo alto. Cierra por mantenimiento el segundo y el cuarto jueves del mes, así que las escaleras siguen siendo el plan B."
         ],
         [
           "¿Qué aldea elijo si solo tengo tiempo para una?",
@@ -3516,7 +3516,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "부산역에서 옛 초량을 지나 오르는 스토리텔링 길이에요. 근현대사 벽화, 개항기 상인들의 건물, 그리고 부두 일감을 잡으려 노동자들이 뛰어 내려갔던 가파른 168계단. 한 층 오를 때마다 항구 전망이 넓어져요.",
-          "tip": "주민용 모노레일은 운행이 들쭉날쭉해요 — 걸어 오른다고 생각하세요. 오전에 가세요. 계단 위 작은 전망대가 항구 전체를 담아 줘요.",
+          "tip": "예전 주민용 모노레일은 없어졌고, 2025년 3월부터 무료 경사형 엘리베이터 '초량 168계단 하늘길'이 그 자리를 대신해요 (06:00–24:00). 오전에 가세요. 계단 위 작은 전망대가 항구 전체를 담아 줘요.",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -3542,8 +3542,8 @@
           "아니요 — 전부 무료이고, 사람들이 살아가는 평범한 동네예요. 감천 안내센터에서 마을에 보탬이 되는 유료 스탬프 투어 지도를 팔긴 해요. 진짜 기여는 주민이 운영하는 가게에서 커피, 간식, 공예품을 사는 거예요."
         ],
         [
-          "168계단 모노레일은 운행하나요?",
-          "어르신 주민들을 위해 무료로 만들어졌지만, 운행이 중단된 시기도 있었어요. 현장에서 확인하고, 걸어 오를 수 있다고 생각하고 가세요. 계단은 땀나는 5분 정도인데, 꼭대기 전망대에서 보는 항구 뷰가 그 보상이에요."
+          "168계단, 올라가는 엘리베이터 있나요?",
+          "네, 있어요. 예전 모노레일은 고장이 잦아 2023년에 철거됐고, 2025년 3월부터 12인승 무료 경사형 엘리베이터 '초량 168계단 하늘길'이 06:00부터 자정까지 다녀요. 아래쪽 전시공간, 중간의 김민부 전망대, 그리고 꼭대기까지 세 곳에 서고요. 둘째·넷째 목요일은 정비로 쉬니까, 그날은 계단이 여전히 플랜 B예요. 계단은 땀나는 5분 정도인데, 꼭대기 전망대에서 보는 항구 뷰가 그 보상이에요."
         ],
         [
           "한 곳만 갈 수 있다면 어디를 골라야 해요?",
@@ -3658,7 +3658,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "Un sentier de récits qui grimpe depuis la gare de Busan à travers le vieux Choryang : fresques d'histoire contemporaine, immeubles de l'époque marchande, et les 168 marches très raides que les dockers dévalaient jadis pour décrocher une journée de travail. La vue sur le port s'élargit à chaque volée.",
-          "tip": "Le monorail des habitants fonctionne par intermittence — partez du principe que vous monterez à pied. Allez-y le matin ; le petit observatoire au-dessus des marches cadre tout le port.",
+          "tip": "Le vieux monorail des habitants a disparu ; un ascenseur incliné gratuit, la « Choryang 168 Stairs Sky Road », l'a remplacé en mars 2025 (06:00–24:00). Allez-y le matin ; le petit observatoire au-dessus des marches cadre tout le port.",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -3684,8 +3684,8 @@
           "Non : ce sont tous des quartiers habités, en accès libre. Gamcheon vend au point d'information une carte de parcours à tampons, optionnelle et peu coûteuse, dont les recettes soutiennent le village. Votre vraie contribution, c'est d'acheter un café, un en-cas ou un objet artisanal dans les boutiques tenues par les habitants."
         ],
         [
-          "Le monorail des 168 marches fonctionne-t-il ?",
-          "Il a été construit gratuitement pour les habitants âgés, mais le service a parfois été suspendu : renseignez-vous sur place et partez du principe que vous monterez peut-être à pied. Les marches se grimpent en cinq minutes bien transpirantes ; la vue sur le port depuis l'observatoire, tout en haut, est la récompense."
+          "Y a-t-il un ascenseur pour monter les 168 marches ?",
+          "Oui. Le vieux monorail a été mis à la casse en 2023 après des pannes à répétition ; depuis mars 2025, un ascenseur incliné gratuit de 12 places — la « Choryang 168 Stairs Sky Road » — fonctionne de 06:00 à minuit, avec trois arrêts : l'espace d'exposition en bas, l'observatoire Kim Min-bu à mi-hauteur, et le sommet. Il ferme les 2e et 4e jeudis du mois pour maintenance : les marches restent donc le plan B."
         ],
         [
           "Quel village choisir si je n'ai le temps que pour un seul ?",
@@ -3800,7 +3800,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "Ein Erzählpfad, der vom Bahnhof Busan durch das alte Choryang hinaufführt: Wandbilder zur jüngeren Geschichte, Kaufmannshäuser aus der Handelszeit und die steilen 168 Stufen, die Hafenarbeiter einst für Tagelohn hinunterrannten. Mit jedem Treppenlauf wird der Hafenblick weiter.",
-          "tip": "Die Monorail für die Anwohner fährt mal, mal nicht — rechne mit Steigen. Geh morgens hin; der kleine Aussichtspunkt über der Treppe rahmt den ganzen Hafen.",
+          "tip": "Die alte Anwohner-Monorail ist Geschichte; seit März 2025 fährt hier gratis ein Schrägaufzug, die Choryang 168 Stairs Sky Road (06:00–24:00). Geh morgens hin; der kleine Aussichtspunkt über der Treppe rahmt den ganzen Hafen.",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -3826,8 +3826,8 @@
           "Nein — alle sind frei zugänglich und ganz normale Wohnviertel. In Gamcheon gibt es am Infocenter eine optionale Stempeltour-Karte gegen eine kleine Gebühr, die dem Dorf zugutekommt. Dein eigentlicher Beitrag ist, Kaffee, Snacks oder Kunsthandwerk in den Läden der Anwohner zu kaufen."
         ],
         [
-          "Fährt die Monorail an den 168 Stufen?",
-          "Sie wurde kostenlos für ältere Anwohner gebaut, der Betrieb war aber zeitweise ausgesetzt — frag vor Ort und rechne damit, zu Fuß zu gehen. Die Treppe kostet etwa fünf schweißtreibende Minuten; der Hafenblick vom Aussichtspunkt oben ist der Lohn."
+          "Gibt es einen Aufzug die 168 Stufen hinauf?",
+          "Ja. Die alte Monorail wurde 2023 nach ständigen Pannen verschrottet; seit März 2025 fährt stattdessen ein kostenloser Schrägaufzug für 12 Personen — die Choryang 168 Stairs Sky Road — von 06:00 bis Mitternacht, mit Halt am Ausstellungsraum unten, am Kim-Min-bu-Aussichtspunkt auf halber Höhe und ganz oben. Am 2. und 4. Donnerstag ist er wegen Wartung zu, dann bleibt die Treppe als Reserve."
         ],
         [
           "Welches Dorf soll ich nehmen, wenn ich nur für eines Zeit habe?",
@@ -3942,7 +3942,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "Uma trilha narrativa que sobe da Estação de Busan pela velha Choryang: murais de história moderna, prédios da era dos comerciantes e as íngremes 168 Escadas, por onde os estivadores desciam correndo atrás de trabalho diário. A vista do porto se abre a cada lance.",
-          "tip": "O monotrilho dos moradores funciona de forma intermitente — parta do princípio de que vai subir a pé. Vá de manhã; o mirantinho acima das escadas emoldura o porto inteiro.",
+          "tip": "O antigo monotrilho não existe mais: desde março de 2025 quem faz o serviço é um elevador inclinado gratuito, o Choryang 168 Stairs Sky Road (06:00–24:00). Vá de manhã; o mirantinho acima das escadas emoldura o porto inteiro.",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -3968,8 +3968,8 @@
           "Não — todas são gratuitas e são bairros de verdade, habitados. Gamcheon vende um mapa opcional de carimbos no centro de informações por um valor simbólico, que ajuda a vila. Sua contribuição real é comprar café, lanche ou artesanato nas lojas dos próprios moradores."
         ],
         [
-          "O monotrilho das 168 Escadas está funcionando?",
-          "Ele foi construído gratuitamente para os moradores idosos, mas o serviço já foi suspenso algumas vezes — pergunte no local e conte com a possibilidade de subir a pé. A escadaria leva uns cinco minutos suados; a vista do porto do mirante lá em cima é a recompensa."
+          "Tem algum elevador para subir as 168 Escadas?",
+          "Tem. O antigo monotrilho foi desativado em 2023, depois de quebrar sem parar; desde março de 2025 um elevador inclinado gratuito para 12 pessoas — o Choryang 168 Stairs Sky Road — funciona das 06:00 à meia-noite, com paradas no espaço expositivo lá embaixo, no Mirante Kim Min-bu no meio do caminho e no topo. Fecha para manutenção na segunda e na quarta quinta-feira do mês, então a escadaria continua sendo o plano B."
         ],
         [
           "Se eu só tiver tempo para uma vila, qual escolher?",
@@ -4084,7 +4084,7 @@
           "kr": "초량 이바구길 · 168계단",
           "wiki": "Choryang-dong",
           "desc": "Jalur bercerita yang menanjak dari Stasiun Busan menembus Choryang lama: mural sejarah modern, bangunan era saudagar, dan Tangga 168 yang curam tempat buruh dermaga dulu berlari turun mencari kerja harian. Panorama pelabuhan makin melebar di tiap anak tangga.",
-          "tip": "Monorel untuk warga kadang jalan kadang tidak — anggap saja Anda akan mendaki. Datang pagi hari; observatorium kecil di atas tangga membingkai seluruh pelabuhan.",
+          "tip": "Monorel lamanya sudah tidak ada; sejak Maret 2025 digantikan lift miring gratis bernama Choryang 168 Stairs Sky Road (06:00–24:00). Datang pagi hari; observatorium kecil di atas tangga membingkai seluruh pelabuhan.",
           "mapQ": "168 Stairs Choryang Busan"
         },
         {
@@ -4110,8 +4110,8 @@
           "Tidak — semuanya gratis dan merupakan permukiman warga yang hidup. Gamcheon menjual peta tur stempel opsional di pusat informasi dengan harga kecil, dan uangnya kembali ke kampung. Kontribusi Anda yang sesungguhnya adalah membeli kopi, camilan, atau kerajinan dari toko milik warga."
         ],
         [
-          "Apakah monorel Tangga 168 beroperasi?",
-          "Monorel itu dibangun gratis untuk warga lanjut usia, tapi layanannya pernah beberapa kali dihentikan — cek langsung di lokasi dan siapkan diri untuk mendaki. Tangganya butuh sekitar lima menit penuh keringat; panorama pelabuhan dari observatorium di puncaknya adalah hadiahnya."
+          "Apakah ada lift untuk naik Tangga 168?",
+          "Ada. Monorel lamanya dibongkar pada 2023 setelah berkali-kali mogok; sejak Maret 2025 ada lift miring gratis berkapasitas 12 orang — Choryang 168 Stairs Sky Road — yang beroperasi pukul 06:00 sampai tengah malam, berhenti di ruang pameran di bawah, Observatorium Kim Min-bu di tengah jalur, dan puncaknya. Lift tutup untuk perawatan tiap Kamis kedua dan keempat, jadi tangganya tetap jadi cadangan."
         ],
         [
           "Kalau waktunya cuma cukup untuk satu kampung, pilih yang mana?",
@@ -4286,7 +4286,7 @@
       "lead": "釜山という街は、市場で回っています。40年間サバをさばき続けてきたアジュマたち、冷める暇のないホットク(호떡)の鉄板、戦争避難民のお腹を満たし、今では誰もを養う路地。デパートのことは忘れてください——この街が本当に食べているのはここです。1号線で3駅先の町で生まれ育った人のように買い物し、注文し、値切る方法をお教えします。",
       "facts": [
         "チャガルチ市場は韓国最大の水産市場。長年働くベテランの売り子さんたちは、ただ「チャガルチアジュマ」と呼ばれています。",
-        "国際市場は1950年代初頭、朝鮮戦争で釜山に押し寄せた避難民たちの交易の場として始まりました。",
+        "国際市場は1945年、解放直後に始まりました。引き揚げる日本人が残した品物と、帰国した同胞が持ち帰った品物が空き地で売買され、「トッテギ市場」と呼ばれたのが原型です。その後、朝鮮戦争の避難民が街の人口を倍増させ、市場を今の広さに育てました。",
         "富平(プピョン)カントン市場は2013年に韓国初の公式夜市場となり、屋台は夜7:30頃から動き出します。",
         "「カントン」は「缶」という意味。戦後、米軍基地から流れたアメリカの缶詰がここで取引されていたことに由来します。",
         "種入りホットクのシアッホットク(씨앗호떡)は釜山生まれ。BIFF広場の屋台が有名にしました。",
@@ -4310,7 +4310,7 @@
         {
           "h": "国際市場:戦争から生まれ、麺で回る",
           "paras": [
-            "国際市場は朝鮮戦争後の混乱の中で生まれました。釜山に流れ込んだ避難民たちが、持ち出したもの、かき集めたものを売る屋台を構えたのが始まりです。その生き抜くDNAは今も街区の造りに残っています。路地が碁盤の目のように密集し、ここは布地、あそこは台所用品と専門が分かれ、その全部を縫うように食べ物の店が走ります。映画『国際市場で逢いましょう』の舞台にもなった、その名声に恥じない市場です。",
+            "国際市場が生まれたのは1945年、解放直後の混乱の中でした。日本の敗戦で持ち主のいない品物が街にあふれ、それを売り買いする場は「トッテギ市場」と呼ばれました。そこへ朝鮮戦争の避難民が押し寄せて釜山の人口を倍増させ、即席の露店を、今日あなたが歩くこの広大な市場へと育てたのです。その生き抜くDNAは今も街区の造りに残っています。路地が碁盤の目のように密集し、ここは布地、あそこは台所用品と専門が分かれ、その全部を縫うように食べ物の店が走ります。映画『国際市場で逢いましょう』の舞台にもなった、その名声に恥じない市場です。",
             "目指すべきは食堂路地です。アジュマたちが「ユブジョンゴル(유부전골)」——具を詰めた油揚げ袋のやさしい鍋——をよそい、「ビビムタンミョン(비빔당면)」——甘辛ダレを絡めたもちもちの春雨で、釜山以外ではほぼ出会えない一品——を混ぜてくれます。低い丸椅子に座って両方頼み、シェアするのが正解。ほとんどの丼が₩10,000をゆうに下回り、おばちゃんたちは頼まなくてもスープを注ぎ足してくれます。"
           ]
         },
@@ -4357,7 +4357,7 @@
           "name": "国際市場",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "朝鮮戦争の避難民が築いた広大な路地の碁盤の目。今では古着から包丁まで何でも揃い、その合間にユブジョンゴルとビビムタンミョンを出す伝説の食堂路地が息づいています。",
+          "desc": "1945年に始まり、朝鮮戦争の避難民の流入で一気に膨れ上がった広大な路地の碁盤の目。今では古着から包丁まで何でも揃い、その合間にユブジョンゴルとビビムタンミョンを出す伝説の食堂路地が息づいています。",
           "tip": "食堂路地はランチ時に大混雑。11:30までに入るか、14時以降に。ビビムタンミョンとユブジョンゴルはセットで頼むのがお約束です。",
           "mapQ": "Gukje Market Busan"
         },
@@ -4433,7 +4433,7 @@
       "lead": "부산은 시장으로 돌아가는 도시예요. 40년째 고등어를 손질해 온 아지매들, 식을 틈이 없는 호떡 철판, 피란민을 먹이던 골목이 이제는 모두를 먹이고 있죠. 백화점은 잊으세요 — 이 도시가 진짜로 밥을 먹는 곳은 여기예요. 1호선 세 정거장 옆 동네에서 자란 사람처럼 장 보고, 주문하고, 흥정하는 법을 알려드릴게요.",
       "facts": [
         "자갈치시장은 한국 최대 수산시장이에요. 수십 년 경력의 베테랑 상인들은 '자갈치 아지매'라는 이름으로 통하죠.",
-        "국제시장은 1950년대 초, 6·25 전쟁 때 부산으로 밀려든 피란민들이 좌판을 펴면서 시작됐어요.",
+        "국제시장은 1945년 해방 직후, 돌아가는 일본인들이 두고 간 물건과 귀환 동포들이 들고 온 물건을 공터에서 사고팔면서 시작됐어요 — 원래 이름이 '돗떼기시장'이었죠. 그다음 6·25 피란민들이 도시를 두 배로 불리면서 지금의 규모로 커졌고요.",
         "부평깡통시장은 2013년 한국 최초의 공식 야시장이 됐어요. 매대는 저녁 7시 30분쯤 불을 켜요.",
         "'깡통'이라는 이름은 전쟁 후 미군 부대에서 흘러나온 미제 통조림을 팔던 데서 왔어요.",
         "씨앗을 꽉 채운 씨앗호떡은 BIFF광장 노점들이 유명하게 만든 부산의 발명품이에요.",
@@ -4457,7 +4457,7 @@
         {
           "h": "국제시장: 전쟁이 낳고 국수가 먹여 살리는 곳",
           "paras": [
-            "국제시장은 6·25 이후의 혼란 속에서 태어났어요. 부산으로 쏟아져 들어온 피란민들이 지고 온 것, 주워 모은 것들을 팔려고 좌판을 펴면서 시작됐죠. 그 생존의 DNA는 지금 골목 구조에도 그대로 남아 있어요. 촘촘한 골목마다 전문 분야가 달라요 — 여긴 원단, 저긴 주방용품, 그리고 그 사이사이를 먹거리가 꿰고 있죠. 영화 '국제시장'의 그 시장 맞고요, 그 유명세가 아깝지 않아요.",
+            "국제시장은 1945년의 그 아수라장 속에서 태어났어요. 일본이 패망하면서 주인 없는 물건이 도시에 쏟아졌고, 사람들은 그 난장을 '돗떼기시장'이라고 불렀죠. 그다음 6·25 피란민들이 밀려들어 부산 인구를 두 배로 불리면서, 임시 좌판들이 지금 걷고 있는 이 거대한 미로가 됐어요. 그 생존의 DNA는 지금 골목 구조에도 그대로 남아 있어요. 촘촘한 골목마다 전문 분야가 달라요 — 여긴 원단, 저긴 주방용품, 그리고 그 사이사이를 먹거리가 꿰고 있죠. 영화 '국제시장'의 그 시장 맞고요, 그 유명세가 아깝지 않아요.",
             "먹자골목으로 직행하세요. 아지매들이 유부주머니를 넣은 순한 전골인 유부전골을 떠 주고, 부산 밖에선 거의 못 보는 새콤달콤한 양념에 무친 쫄깃한 비빔당면을 버무려줘요. 낮은 의자에 앉아 둘 다 시켜서 나눠 드세요. 웬만한 건 ₩10,000을 한참 밑돌고, 국물은 달라고 하기도 전에 채워 주세요."
           ]
         },
@@ -4504,7 +4504,7 @@
           "name": "국제시장",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "6·25 피란민들이 일군 드넓은 골목 격자. 지금은 구제 옷부터 부엌칼까지 다 파는데, 그 사이사이 유부전골과 비빔당면을 내는 전설의 먹자골목이 숨어 있어요.",
+          "desc": "1945년에 시작돼 6·25 피란민들과 함께 폭발적으로 커진 드넓은 골목 격자. 지금은 구제 옷부터 부엌칼까지 다 파는데, 그 사이사이 유부전골과 비빔당면을 내는 전설의 먹자골목이 숨어 있어요.",
           "tip": "먹자골목은 점심에 미어터져요. 오전 11시 30분 전이나 오후 2시 이후에 가세요. 비빔당면과 유부전골은 같이 시키는 게 국룰 — 아지매들도 그 조합으로 알고 계세요.",
           "mapQ": "Gukje Market Busan"
         },
@@ -4580,7 +4580,7 @@
       "lead": "Busan vive de sus mercados. Ajummas que llevan cuarenta años limpiando caballa, planchas de hotteok que nunca se enfrían, callejones que alimentaron a refugiados de guerra y hoy alimentan a todos. Olvídate de las tiendas por departamento: aquí es donde la ciudad come de verdad. Así se compra, se pide y se regatea como si hubieras crecido a tres estaciones por la Línea 1.",
       "facts": [
         "El mercado Jagalchi es el mercado de mariscos más grande de Corea, y a sus vendedoras veteranas se les conoce simplemente como las ajummas de Jagalchi.",
-        "El mercado Gukje nació como punto de comercio para los refugiados que llegaron en masa a Busan durante la Guerra de Corea, a inicios de los años 50.",
+        "El mercado Gukje arrancó en 1945, justo después de la Liberación, cuando en un descampado se comerciaba con lo que dejaron los japoneses al marcharse y con lo que traían de vuelta los coreanos que regresaban: el original 'mercado Dotteqi'. Los refugiados de la Guerra de Corea llegaron después, duplicaron la ciudad y lo convirtieron en el laberinto que es hoy.",
         "El mercado Bupyeong Kkangtong se convirtió en 2013 en el primer mercado nocturno oficial de Corea; los puestos se encienden alrededor de las 7:30pm.",
         "'Kkangtong' significa 'lata': el mercado comerciaba con enlatados estadounidenses provenientes de las bases militares de la posguerra.",
         "El ssiat hotteok, el hotteok relleno de semillas, es un invento de Busan que hicieron famoso los puestos de la plaza BIFF.",
@@ -4604,7 +4604,7 @@
         {
           "h": "Mercado Gukje: nacido de la guerra, movido por fideos",
           "paras": [
-            "El mercado Gukje nació en el caos posterior a la Guerra de Corea, cuando los refugiados que habían llegado en masa a Busan montaron puestos para comerciar con lo que traían o podían rescatar. Ese ADN de sobreviviente sigue en el trazado: una cuadrícula densa de callejones, cada uno especializado —telas aquí, utensilios de cocina allá, y comida entretejida por todas partes—. Es el mercado de la película 'Ode to My Father', y la fama se la ganó.",
+            "El mercado Gukje nació en el desorden de 1945, cuando la derrota de Japón dejó una ciudad llena de mercancías sin dueño y los comerciantes lo llamaban el mercado Dotteqi. Los refugiados de la Guerra de Corea llegaron después, duplicaron la población de Busan y convirtieron aquellos puestos improvisados en el laberinto que caminas hoy. Ese ADN de sobreviviente sigue en el trazado: una cuadrícula densa de callejones, cada uno especializado —telas aquí, utensilios de cocina allá, y comida entretejida por todas partes—. Es el mercado de la película 'Ode to My Father', y la fama se la ganó.",
             "Ve directo a los callejones de comida, donde las ajummas sirven yubu-jeongol —una olla caliente y suave de bolsitas de tofu frito rellenas— y mezclan bibim-dangmyeon, fideos de vidrio masticables bañados en una salsa dulce y picante que casi no existe fuera de Busan. Siéntate en los banquitos bajos, pide ambos y compártelos. La mayoría de los platos cuesta bastante menos de ₩10,000, y las señoras te rellenan el caldo sin que lo pidas."
           ]
         },
@@ -4651,7 +4651,7 @@
           "name": "Mercado Gukje",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "Una cuadrícula extensa de callejones fundada por refugiados de la Guerra de Corea, donde hoy se vende de todo, desde ropa vintage hasta cuchillos de cocina, con legendarios pasillos de comida que sirven yubu-jeongol y bibim-dangmyeon entre medio.",
+          "desc": "Una cuadrícula extensa de callejones que arrancó en 1945 y estalló con los refugiados de la Guerra de Corea, donde hoy se vende de todo, desde ropa vintage hasta cuchillos de cocina, con legendarios pasillos de comida que sirven yubu-jeongol y bibim-dangmyeon entre medio.",
           "tip": "Los callejones de comida se llenan al mediodía; llega antes de las 11:30am o después de las 2pm. Pide bibim-dangmyeon y yubu-jeongol juntos: los vendedores esperan el combo.",
           "mapQ": "Gukje Market Busan"
         },
@@ -4727,7 +4727,7 @@
       "lead": "釜山这座城市是靠市场运转的。杀了四十年青花鱼的阿珠妈、从不熄火的糖饼（호떡）铁板、曾经养活战争难民如今喂饱所有人的小巷。别去逛百货商场了——本地人真正吃饭的地方在这里。这份攻略教你怎么买、怎么点、怎么砍价，就像你从小在1号线沿线长大一样。",
       "facts": [
         "札嘎其市场（자갈치시장）是韩国最大的海鲜市场，这里的资深摊主被大家统称为“札嘎其阿珠妈”。",
-        "国际市场（국제시장）起源于20世纪50年代初朝鲜战争期间涌入釜山的难民们摆摊交易的场地。",
+        "国际市场（국제시장）始于1945年光复之后：日本人撤离时留下的物资，加上归国同胞带回来的家当，就在空地上摆开交易——这就是最早的“도떼기시장”。后来朝鲜战争的难民让釜山人口翻倍，也把这片摊子撑成了今天的规模。",
         "富平罐头市场（부평깡통시장）2013年成为韩国第一个官方夜市，摊位晚上7:30左右开张。",
         "“깡통”（罐头）这个名字源于战后年代——市场当年倒卖来自美军基地的美国罐头。",
         "坚果糖饼（씨앗호떡）是釜山的原创小吃，因BIFF广场的摊位而声名远扬。",
@@ -4751,7 +4751,7 @@
         {
           "h": "国际市场：因战争而生，靠粉条延续",
           "paras": [
-            "国际市场诞生于朝鲜战争后的混乱年代，涌入釜山的难民摆起摊子，卖随身带来或捡拾来的一切。那股求生的基因至今还留在市场的格局里：密密麻麻的巷子网格，各有分工——这边卖布料，那边卖厨具，吃的穿插其中。这里就是电影《国际市场》的取景地，名不虚传。",
+            "国际市场诞生于1945年的兵荒马乱：日本战败撤离，满城的货物一夜之间没了主人，做买卖的人就把这里叫作“도떼기시장”。随后涌入的朝鲜战争难民让釜山人口翻倍，也把这些临时摊子撑成了你今天走的这片巷弄。那股求生的基因至今还留在市场的格局里：密密麻麻的巷子网格，各有分工——这边卖布料，那边卖厨具，吃的穿插其中。这里就是电影《国际市场》的取景地，名不虚传。",
             "直奔美食巷吧，阿珠妈们在那儿盛着油豆腐火锅（유부전골）——用塞了馅的油炸豆腐包炖的一锅温润小火锅——还拌着弹牙的拌粉条（비빔당면），裹着甜辣酱的粉条，出了釜山几乎吃不到。坐上小矮凳，两样都点，跟同伴分着吃。大多数一碗不到₩10,000，阿姨们还会不声不响地帮你续汤。"
           ]
         },
@@ -4798,7 +4798,7 @@
           "name": "国际市场",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "由朝鲜战争难民创建的一大片巷弄网格，如今从复古衣物到厨刀什么都卖——巷子之间还藏着传奇美食街，供应油豆腐火锅和拌粉条。",
+          "desc": "1945年起步、又因朝鲜战争难民涌入而膨胀开来的一大片巷弄网格，如今从复古衣物到厨刀什么都卖——巷子之间还藏着传奇美食街，供应油豆腐火锅和拌粉条。",
           "tip": "美食巷午饭时段挤爆；上午11:30前或下午2点后再去。拌粉条和油豆腐火锅要一起点——摊主默认这是套餐。",
           "mapQ": "Gukje Market Busan"
         },
@@ -4874,7 +4874,7 @@
       "lead": "Busan vit au rythme de ses marchés. Des ajummas qui vident du maquereau depuis quarante ans, des plaques à hotteok qui ne refroidissent jamais, des ruelles qui ont nourri les réfugiés de la guerre et qui nourrissent aujourd'hui tout le monde. Oubliez les grands magasins : c'est ici que la ville mange vraiment. Voici comment acheter, commander et marchander comme si on avait grandi trois stations plus bas sur la ligne 1.",
       "facts": [
         "Le marché de Jagalchi est le plus grand marché aux poissons de Corée, et ses vendeuses chevronnées sont connues sous le simple nom d'ajumma de Jagalchi.",
-        "Le marché Gukje est né des échanges entre réfugiés qui ont afflué à Busan pendant la guerre de Corée, au début des années 1950.",
+        "Le marché Gukje est né en 1945, juste après la Libération : on troquait à même le sol les marchandises laissées par les Japonais qui repartaient et celles rapportées par les Coréens de retour — c'était le « marché Dotteqi » d'origine. Les réfugiés de la guerre de Corée ont ensuite doublé la population de la ville et en ont fait le dédale d'aujourd'hui.",
         "Le marché Bupyeong Kkangtong est devenu en 2013 le premier marché de nuit officiel de Corée ; les stands s'allument vers 19h30.",
         "« Kkangtong » signifie « boîte de conserve » : le marché a longtemps écoulé les conserves américaines des bases militaires d'après-guerre.",
         "Le ssiat hotteok, la crêpe fourrée aux graines, est une invention de Busan popularisée par les stands de la BIFF Square.",
@@ -4898,7 +4898,7 @@
         {
           "h": "Marché Gukje : né de la guerre, nourri aux nouilles",
           "paras": [
-            "Le marché Gukje est né du chaos de l'après-guerre de Corée, quand les réfugiés arrivés en masse à Busan ont monté des étals pour échanger ce qu'ils portaient ou pouvaient récupérer. Cet ADN de survie se lit encore dans le plan : une trame dense de ruelles, chacune spécialisée — les tissus ici, les ustensiles de cuisine là, la nourriture tissée partout entre les deux. C'est le marché du film « Ode to My Father », et la réputation est méritée.",
+            "Le marché Gukje est né dans le grand remue-ménage de 1945 : la défaite du Japon avait laissé une ville pleine de marchandises sans propriétaire, et les vendeurs l'appelaient alors le marché Dotteqi. Les réfugiés de la guerre de Corée ont ensuite doublé la population de Busan et transformé ces étals improvisés en dédale que vous arpentez aujourd'hui. Cet ADN de survie se lit encore dans le plan : une trame dense de ruelles, chacune spécialisée — les tissus ici, les ustensiles de cuisine là, la nourriture tissée partout entre les deux. C'est le marché du film « Ode to My Father », et la réputation est méritée.",
             "Filez vers les allées gourmandes, où les ajummas servent à la louche le yubu-jeongol — une fondue douce de poches de tofu frit farcies — et mélangent le bibim-dangmyeon, des nouilles de verre élastiques dans une sauce sucrée-piquante qui n'existe quasiment pas hors de Busan. Asseyez-vous sur les tabourets bas, commandez les deux et partagez. La plupart des bols restent nettement sous ₩10,000, et les patronnes rajoutent du bouillon sans qu'on demande."
           ]
         },
@@ -4945,7 +4945,7 @@
           "name": "Marché Gukje",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "Un dédale tentaculaire de ruelles fondé par les réfugiés de la guerre de Corée, où l'on vend aujourd'hui aussi bien des fripes que des couteaux de cuisine — avec, entre les deux, des allées gourmandes légendaires pour le yubu-jeongol et le bibim-dangmyeon.",
+          "desc": "Un dédale tentaculaire de ruelles né en 1945, qui a explosé avec l'arrivée des réfugiés de la guerre de Corée, et où l'on vend aujourd'hui aussi bien des fripes que des couteaux de cuisine — avec, entre les deux, des allées gourmandes légendaires pour le yubu-jeongol et le bibim-dangmyeon.",
           "tip": "Les allées gourmandes sont prises d'assaut au déjeuner : arrivez avant 11h30 ou après 14h. Commandez bibim-dangmyeon et yubu-jeongol ensemble, les vendeuses s'y attendent.",
           "mapQ": "Gukje Market Busan"
         },
@@ -5021,7 +5021,7 @@
       "lead": "Busan läuft über seine Märkte. Ajummas, die seit vierzig Jahren Makrelen ausnehmen, Hotteok-Platten, die nie abkühlen, Gassen, die einst Kriegsflüchtlinge satt machten und heute einfach alle. Vergiss die Kaufhäuser – hier isst die Stadt wirklich. So kaufst du ein, bestellst und handelst, als wärst du drei Stationen weiter an der Linie 1 aufgewachsen.",
       "facts": [
         "Der Jagalchi-Markt ist Koreas größter Fischmarkt, und seine altgedienten Verkäuferinnen heißen schlicht die Jagalchi-Ajummas.",
-        "Der Gukje-Markt entstand als Handelsplatz für Flüchtlinge, die während des Koreakriegs Anfang der 1950er nach Busan strömten.",
+        "Der Gukje-Markt entstand 1945 direkt nach der Befreiung: Auf freiem Feld wurde gehandelt, was abziehende Japaner zurückließen und heimkehrende Koreaner mitbrachten – der ursprüngliche „Dotteqi-Markt“. Die Flüchtlinge des Koreakriegs verdoppelten dann die Stadt und machten daraus das Gewimmel von heute.",
         "Der Bupyeong-Kkangtong-Markt wurde 2013 Koreas erster offizieller Nachtmarkt; die Stände starten gegen 19:30 Uhr.",
         "„Kkangtong“ heißt „Blechdose“ – hier wurden einst amerikanische Konserven aus den Militärbasen der Nachkriegszeit gehandelt.",
         "Ssiat-Hotteok, der mit Samen gefüllte Hotteok, ist eine Busaner Erfindung, berühmt geworden an den Ständen am BIFF Square.",
@@ -5045,7 +5045,7 @@
         {
           "h": "Gukje-Markt: aus dem Krieg geboren, von Nudeln am Leben gehalten",
           "paras": [
-            "Der Gukje-Markt entstand im Chaos nach dem Koreakrieg, als Flüchtlinge, die nach Busan geströmt waren, Stände aufbauten und verkauften, was sie tragen oder auftreiben konnten. Diese Überlebens-DNA steckt bis heute im Grundriss: ein dichtes Raster aus Gassen, jede mit ihrer Spezialität – Stoffe hier, Küchenkram dort, Essen überall dazwischen. Es ist der Markt aus dem Film „Ode an meinen Vater“, und der Ruhm ist verdient.",
+            "Der Gukje-Markt entstand im Aufruhr des Jahres 1945, als Japans Niederlage eine Stadt voller Waren ohne Besitzer hinterließ – die Händler nannten ihn den Dotteqi-Markt. Die Flüchtlinge des Koreakriegs verdoppelten danach Busans Einwohnerzahl und machten aus den improvisierten Ständen das Gewirr, durch das du heute läufst. Diese Überlebens-DNA steckt bis heute im Grundriss: ein dichtes Raster aus Gassen, jede mit ihrer Spezialität – Stoffe hier, Küchenkram dort, Essen überall dazwischen. Es ist der Markt aus dem Film „Ode an meinen Vater“, und der Ruhm ist verdient.",
             "Steuere die Essensgassen an, wo Ajummas Yubu-Jeongol 유부전골 schöpfen – ein milder Eintopf mit gefüllten Tofutaschen – und Bibim-Dangmyeon 비빔당면 anrühren: bissfeste Glasnudeln in süßscharfer Soße, die es außerhalb Busans kaum gibt. Setz dich auf die niedrigen Hocker, bestell beides und teilt es. Die meisten Schalen liegen deutlich unter ₩10.000, und Brühe wird nachgefüllt, ohne dass du fragen musst."
           ]
         },
@@ -5092,7 +5092,7 @@
           "name": "Gukje-Markt",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "Ein weitläufiges Raster aus Gassen, gegründet von Flüchtlingen des Koreakriegs, heute mit allem von Vintage-Kleidung bis Küchenmessern – und dazwischen legendäre Essensgassen mit Yubu-Jeongol und Bibim-Dangmyeon.",
+          "desc": "Ein weitläufiges Raster aus Gassen, das 1945 begann und mit den Flüchtlingen des Koreakriegs explodierte, heute mit allem von Vintage-Kleidung bis Küchenmessern – und dazwischen legendäre Essensgassen mit Yubu-Jeongol und Bibim-Dangmyeon.",
           "tip": "Mittags sind die Essensgassen überrannt; komm bis 11:30 Uhr oder nach 14 Uhr. Bestell Bibim-Dangmyeon und Yubu-Jeongol zusammen – die Kombi wird erwartet.",
           "mapQ": "Gukje Market Busan"
         },
@@ -5168,7 +5168,7 @@
       "lead": "Busan vive dos seus mercados. Ajummas que limpam cavala há quarenta anos, chapas de hotteok que nunca esfriam, becos que alimentaram refugiados de guerra e hoje alimentam todo mundo. Esqueça as lojas de departamento — é aqui que a cidade come de verdade. Veja como comprar, pedir e pechinchar como quem cresceu três estações abaixo na Linha 1.",
       "facts": [
         "O mercado Jagalchi é o maior mercado de frutos do mar da Coreia, e suas vendedoras veteranas são conhecidas simplesmente como as ajummas de Jagalchi.",
-        "O mercado Gukje nasceu como ponto de troca dos refugiados que chegaram em massa a Busan durante a Guerra da Coreia, no início dos anos 1950.",
+        "O mercado Gukje começou em 1945, logo depois da Libertação, quando as mercadorias deixadas pelos japoneses que partiam e as trazidas pelos coreanos que voltavam eram negociadas a céu aberto — o 'Mercado Dotteqi' original. Os refugiados da Guerra da Coreia vieram depois, dobraram a cidade e transformaram o lugar na imensidão de hoje.",
         "O mercado Bupyeong Kkangtong virou o primeiro mercado noturno oficial da Coreia em 2013; as barracas acendem as chapas por volta das 7:30pm.",
         "'Kkangtong' significa 'lata': o mercado já comercializou enlatados americanos vindos das bases militares do pós-guerra.",
         "O ssiat hotteok 씨앗호떡, o hotteok recheado de sementes, é uma invenção de Busan que ficou famosa nas barracas da praça BIFF.",
@@ -5192,7 +5192,7 @@
         {
           "h": "Mercado Gukje: nascido da guerra, movido a macarrão",
           "paras": [
-            "O mercado Gukje nasceu no caos do pós-Guerra da Coreia, quando os refugiados que tinham desembarcado em Busan montaram bancas para vender o que carregavam ou conseguiam garimpar. Esse DNA de sobrevivência continua no traçado: uma malha densa de becos, cada um com sua especialidade — tecidos aqui, utensílios ali, comida costurando tudo. É o mercado do filme 'Ode ao Meu Pai', e a fama é merecida.",
+            "O mercado Gukje nasceu na confusão de 1945, quando a derrota do Japão deixou a cidade cheia de mercadoria sem dono e os comerciantes batizaram aquilo de Mercado Dotteqi. Depois vieram os refugiados da Guerra da Coreia, que dobraram a população de Busan e transformaram as bancas improvisadas na imensidão que você percorre hoje. Esse DNA de sobrevivência continua no traçado: uma malha densa de becos, cada um com sua especialidade — tecidos aqui, utensílios ali, comida costurando tudo. É o mercado do filme 'Ode ao Meu Pai', e a fama é merecida.",
             "Vá direto para os becos da comida, onde as ajummas servem o yubu-jeongol 유부전골 — um ensopado suave de bolsinhas de tofu frito recheadas — e misturam o bibim-dangmyeon 비빔당면, macarrão de vidro elástico envolto num molho agridoce picante que praticamente não existe fora de Busan. Sente nos banquinhos baixos, peça os dois e divida. Quase todas as tigelas ficam bem abaixo de ₩10,000, e as tias completam o caldo sem você precisar pedir."
           ]
         },
@@ -5239,7 +5239,7 @@
           "name": "Mercado Gukje",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "Uma malha enorme de becos fundada por refugiados da Guerra da Coreia, hoje vendendo de roupa vintage a facas de cozinha — com becos de comida lendários servindo yubu-jeongol e bibim-dangmyeon no meio do caminho.",
+          "desc": "Uma malha enorme de becos que começou em 1945 e explodiu com a chegada dos refugiados da Guerra da Coreia, hoje vendendo de roupa vintage a facas de cozinha — com becos de comida lendários servindo yubu-jeongol e bibim-dangmyeon no meio do caminho.",
           "tip": "Os becos de comida lotam no almoço; chegue até 11:30am ou depois das 2pm. Peça bibim-dangmyeon e yubu-jeongol juntos — os vendedores já esperam a dupla.",
           "mapQ": "Gukje Market Busan"
         },
@@ -5315,7 +5315,7 @@
       "lead": "Busan hidup dari pasarnya. Ajumma yang sudah empat puluh tahun membersihkan ikan makerel, wajan hotteok yang tak pernah dingin, gang-gang yang dulu memberi makan pengungsi perang dan kini memberi makan siapa saja. Lupakan pusat perbelanjaan — di sinilah kota ini benar-benar makan. Ini cara belanja, memesan, dan menawar seolah Anda besar tiga stasiun dari sini di Jalur 1.",
       "facts": [
         "Pasar Jagalchi adalah pasar seafood terbesar di Korea, dan para pedagang seniornya cukup dikenal sebagai Jagalchi ajumma.",
-        "Pasar Gukje bermula sebagai tempat berdagang para pengungsi yang membanjiri Busan saat Perang Korea di awal 1950-an.",
+        "Pasar Gukje bermula pada 1945, tepat setelah kemerdekaan, ketika barang-barang yang ditinggalkan orang Jepang yang pulang dan yang dibawa kembali warga Korea diperdagangkan di tanah lapang — cikal bakal 'Pasar Dotteqi'. Pengungsi Perang Korea kemudian melipatgandakan penduduk kota dan membuatnya melebar jadi seperti sekarang.",
         "Pasar Bupyeong Kkangtong menjadi pasar malam resmi pertama di Korea pada 2013; lapak mulai menyala sekitar pukul 19.30.",
         "'Kkangtong' berarti 'kaleng' — pasar ini dulu memperdagangkan makanan kaleng Amerika dari markas tentara pascaperang.",
         "Ssiat hotteok, hotteok isi aneka biji, adalah kreasi Busan yang dipopulerkan lapak-lapak di BIFF Square.",
@@ -5339,7 +5339,7 @@
         {
           "h": "Pasar Gukje: lahir dari perang, hidup dari mi",
           "paras": [
-            "Pasar Gukje lahir di tengah kekacauan setelah Perang Korea, ketika para pengungsi yang membanjiri Busan membuka lapak untuk menjual apa pun yang mereka bawa atau selamatkan. DNA penyintas itu masih terbaca dari tata letaknya: jaringan gang yang padat, masing-masing punya spesialisasi — kain di sini, peralatan dapur di sana, makanan menyelip di antara semuanya. Inilah pasar dalam film 'Ode to My Father', dan ketenarannya memang pantas.",
+            "Pasar Gukje lahir dari kekacauan tahun 1945, ketika kekalahan Jepang meninggalkan kota yang penuh barang tanpa pemilik dan para pedagang menyebutnya Pasar Dotteqi. Pengungsi Perang Korea kemudian melipatgandakan penduduk Busan dan mengubah lapak-lapak darurat itu menjadi labirin yang Anda susuri hari ini. DNA penyintas itu masih terbaca dari tata letaknya: jaringan gang yang padat, masing-masing punya spesialisasi — kain di sini, peralatan dapur di sana, makanan menyelip di antara semuanya. Inilah pasar dalam film 'Ode to My Father', dan ketenarannya memang pantas.",
             "Menujulah ke gang makanan, tempat para ajumma menyendok yubu-jeongol 유부전골 — hot pot lembut berisi kantong tahu goreng — dan mengaduk bibim-dangmyeon 비빔당면, mi kaca kenyal berbalut saus manis pedas yang nyaris tak ada di luar Busan. Duduklah di bangku pendek, pesan keduanya, lalu bagi berdua. Kebanyakan semangkuknya jauh di bawah ₩10,000, dan para ibu menambah kuah tanpa perlu diminta."
           ]
         },
@@ -5386,7 +5386,7 @@
           "name": "Pasar Gukje",
           "kr": "국제시장",
           "wiki": "Gukje Market",
-          "desc": "Jaringan gang luas yang didirikan para pengungsi Perang Korea, kini menjual segalanya dari baju vintage sampai pisau dapur — dengan gang makanan legendaris yang menyajikan yubu-jeongol dan bibim-dangmyeon di sela-selanya.",
+          "desc": "Jaringan gang luas yang bermula pada 1945 lalu meledak bersama gelombang pengungsi Perang Korea, kini menjual segalanya dari baju vintage sampai pisau dapur — dengan gang makanan legendaris yang menyajikan yubu-jeongol dan bibim-dangmyeon di sela-selanya.",
           "tip": "Gang makanan penuh sesak saat jam makan siang; datanglah sebelum pukul 11.30 atau setelah pukul 14.00. Pesan bibim-dangmyeon dan yubu-jeongol sekaligus — pedagang sudah hafal kombinasi itu.",
           "mapQ": "Gukje Market Busan"
         },
@@ -5669,7 +5669,7 @@
         {
           "h": "タルマジの丘:静かな締めくくり",
           "paras": [
-            "ビーチがにぎやかになりすぎたら、地元民は海雲台から青沙浦方面へ桜並木の坂を上り、タルマジの丘へと流れます。タルマジは「月迎え」の意味で、この丘は何世代も前から釜山の月見の名所です。遊歩道「ムーンタンロード(문탠로드)」はやわらかな灯りに照らされ、足元もなだらか。眼下に黒く煌めく海を見ながらの30〜40分の散歩です。締めは青沙浦へ下りて貝焼きをどうぞ。"
+            "ビーチがにぎやかになりすぎたら、地元民は海雲台から青沙浦方面へ桜並木の坂を上り、タルマジの丘へと流れます。タルマジは「月迎え」の意味で、この丘は何世代も前から釜山の月見の名所です。遊歩道「ムーンタンロード(문탠로드)」はやわらかな灯りに照らされ、足元もなだらか。全長2.2kmで、釜山市の観光案内は所要1〜2時間としています。眼下に黒く煌めく海を眺めながら、のんびりどうぞ。締めは青沙浦へ下りて貝焼きを。"
           ]
         }
       ],
@@ -5719,7 +5719,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "海雲台と青沙浦の間にある月見の丘。桜並木、ギャラリー、静かなカフェに囲まれています。夜は灯りに照らされた遊歩道ムーンタンロードが、暗い海を見下ろす松林の中を縫っていきます。",
-          "tip": "夕食後にムーンタンロードを30〜40分のんびり歩き、青沙浦へ下りて貝焼きで締めましょう。地元民のおすすめは満月の夜です。",
+          "tip": "夕食後にムーンタンロードへ。全長2.2km、釜山市の案内では所要1〜2時間なので、時間には余裕を持って。歩き終えたら青沙浦へ下りて貝焼きで締めましょう。地元民のおすすめは満月の夜です。",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -5822,7 +5822,7 @@
         {
           "h": "迎月岭：安静的收尾",
           "paras": [
-            "海滩热闹起来后，本地人会慢慢晃上迎月岭——从海云台通往青沙浦、种满樱花树的山路。“달맞이”意为“迎月”，这座山世世代代是釜山人赏月的地方。Moontan Road（문탠로드）步道灯光柔和、路面平缓——走30–40分钟，脚下是黑得发亮的大海。最后下到青沙浦吃烤贝收尾。"
+            "海滩热闹起来后，本地人会慢慢晃上迎月岭——从海云台通往青沙浦、种满樱花树的山路。“달맞이”意为“迎月”，这座山世世代代是釜山人赏月的地方。Moontan Road（문탠로드）步道灯光柔和、路面平缓，全长2.2公里，釜山旅游局给的参考时间是1到2小时——一路走下去，脚下是黑得发亮的大海。最后下到青沙浦吃烤贝收尾。"
           ]
         }
       ],
@@ -5872,7 +5872,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "海云台与青沙浦之间的赏月山岭，樱花树、画廊和安静的咖啡馆环绕。入夜后，亮着灯的Moontan Road步道在松林间蜿蜒，脚下是漆黑的大海。",
-          "tip": "晚饭后走Moontan Road——轻松走30到40分钟——然后下山到青沙浦吃烤贝。本地人首选满月之夜。",
+          "tip": "晚饭后走Moontan Road——全长2.2公里，轻松走完要1到2小时——然后下山到青沙浦吃烤贝。本地人首选满月之夜。",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -5975,7 +5975,7 @@
         {
           "h": "La colina Dalmaji: el cierre tranquilo",
           "paras": [
-            "Cuando las playas se ponen ruidosas, los locales suben a la colina Dalmaji, el camino de cerezos que trepa desde Haeundae hacia Cheongsapo. Dalmaji significa 'recibir la luna', y la colina ha sido el mirador lunar de Busan por generaciones. El sendero Moontan Road (문탠로드) tiene iluminación suave y piso amable: un paseo de 30–40 minutos con el mar negro y brillante allá abajo. Cierra con mariscos a la parrilla bajando en Cheongsapo."
+            "Cuando las playas se ponen ruidosas, los locales suben a la colina Dalmaji, el camino de cerezos que trepa desde Haeundae hacia Cheongsapo. Dalmaji significa 'recibir la luna', y la colina ha sido el mirador lunar de Busan por generaciones. El sendero Moontan Road (문탠로드) tiene iluminación suave y piso amable: 2.2 km que la oficina de turismo de Busan calcula en 1 o 2 horas, con el mar negro y brillante allá abajo. Cierra con mariscos a la parrilla bajando en Cheongsapo."
           ]
         }
       ],
@@ -6025,7 +6025,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "La colina para contemplar la luna entre Haeundae y Cheongsapo, rodeada de cerezos, galerías y cafés tranquilos. De noche, el sendero iluminado Moontan Road serpentea entre pinos sobre el mar oscuro.",
-          "tip": "Camina el Moontan Road después de cenar —30 a 40 minutos suaves— y baja a Cheongsapo por mariscos a la parrilla. Las noches de luna llena son la elección local.",
+          "tip": "Camina el Moontan Road después de cenar —2.2 km, entre 1 y 2 horas según la oficina de turismo— y baja a Cheongsapo por mariscos a la parrilla. Las noches de luna llena son la elección local.",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -6128,7 +6128,7 @@
         {
           "h": "달맞이고개: 조용한 마무리",
           "paras": [
-            "해변이 시끄러워지면 현지인들은 달맞이고개로 슬쩍 올라가요. 해운대에서 청사포 쪽으로 오르는 벚나무 길이죠. 달맞이는 말 그대로 '달을 맞이한다'는 뜻이고, 이 고개는 대대로 부산의 달구경 자리였어요. 문탠로드 산책길은 은은한 조명에 길도 순해서, 발밑에 검게 반짝이는 바다를 두고 30–40분 걷기 좋아요. 마무리는 청사포로 내려가 조개구이로 하시고요."
+            "해변이 시끄러워지면 현지인들은 달맞이고개로 슬쩍 올라가요. 해운대에서 청사포 쪽으로 오르는 벚나무 길이죠. 달맞이는 말 그대로 '달을 맞이한다'는 뜻이고, 이 고개는 대대로 부산의 달구경 자리였어요. 문탠로드 산책길은 은은한 조명에 길도 순해서, 발밑에 검게 반짝이는 바다를 두고 걷기 딱 좋아요. 길이는 2.2 km인데 부산 관광공사는 1–2시간 코스로 안내해요 — 후딱 해치우는 길이 아니라 천천히 늘어지는 길이라는 뜻이죠. 마무리는 청사포로 내려가 조개구이로 하시고요."
           ]
         }
       ],
@@ -6178,7 +6178,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "해운대와 청사포 사이의 달구경 고개. 벚나무와 갤러리, 조용한 카페들이 둘러싸고 있어요. 밤이면 불 밝힌 문탠로드 산책길이 어두운 바다 위 솔숲 사이로 이어지고요.",
-          "tip": "저녁 먹고 문탠로드를 걸으세요 — 수월한 30–40분 코스예요. 그다음 청사포로 내려가 조개구이. 보름날 밤이 현지인들의 픽이에요.",
+          "tip": "저녁 먹고 문탠로드를 걸으세요 — 2.2 km 코스라 1–2시간은 잡으셔야 해요. 그다음 청사포로 내려가 조개구이. 보름날 밤이 현지인들의 픽이에요.",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -6281,7 +6281,7 @@
         {
           "h": "Colline de Dalmaji : la sortie en douceur",
           "paras": [
-            "Quand les plages deviennent bruyantes, les locaux remontent la colline de Dalmaji, la route bordée de cerisiers qui grimpe de Haeundae vers Cheongsapo. Dalmaji signifie « accueillir la lune », et la colline sert de belvédère lunaire aux Busanais depuis des générations. Le sentier de la Moontan Road (문탠로드) est doucement éclairé et facile sous le pied : 30 à 40 minutes de promenade, la mer noire et scintillante en contrebas. Terminez par des coquillages grillés en bas, à Cheongsapo."
+            "Quand les plages deviennent bruyantes, les locaux remontent la colline de Dalmaji, la route bordée de cerisiers qui grimpe de Haeundae vers Cheongsapo. Dalmaji signifie « accueillir la lune », et la colline sert de belvédère lunaire aux Busanais depuis des générations. Le sentier de la Moontan Road (문탠로드) est doucement éclairé et facile sous le pied : 2,2 km de promenade, soit 1 à 2 heures selon l'office de tourisme de Busan, la mer noire et scintillante en contrebas. Terminez par des coquillages grillés en bas, à Cheongsapo."
           ]
         }
       ],
@@ -6331,7 +6331,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "La colline d'où l'on regarde la lune, entre Haeundae et Cheongsapo, cernée de cerisiers, de galeries et de cafés tranquilles. La nuit, le sentier éclairé de la Moontan Road serpente entre les pins au-dessus de la mer sombre.",
-          "tip": "Faites la Moontan Road après le dîner — 30 à 40 minutes faciles — puis descendez à Cheongsapo pour des coquillages grillés. Les nuits de pleine lune sont le choix des locaux.",
+          "tip": "Faites la Moontan Road après le dîner — 2,2 km faciles, comptez 1 à 2 heures — puis descendez à Cheongsapo pour des coquillages grillés. Les nuits de pleine lune sont le choix des locaux.",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -6434,7 +6434,7 @@
         {
           "h": "Dalmaji-Hügel: der ruhige Abschluss",
           "paras": [
-            "Wenn es an den Stränden zu laut wird, ziehen Einheimische hoch zum Dalmaji-Hügel, der Kirschbaumstraße, die von Haeundae Richtung Cheongsapo klettert. Dalmaji heißt „den Mond begrüßen“, und der Hügel ist seit Generationen Busans Ort zum Mondschauen. Der Fußweg Moontan Road (문탠로드) ist sanft beleuchtet und angenehm zu gehen – 30 bis 40 Minuten Spaziergang mit dem schwarz glitzernden Meer unter dir. Zum Abschluss gegrillte Muscheln unten in Cheongsapo."
+            "Wenn es an den Stränden zu laut wird, ziehen Einheimische hoch zum Dalmaji-Hügel, der Kirschbaumstraße, die von Haeundae Richtung Cheongsapo klettert. Dalmaji heißt „den Mond begrüßen“, und der Hügel ist seit Generationen Busans Ort zum Mondschauen. Der Fußweg Moontan Road (문탠로드) ist sanft beleuchtet und angenehm zu gehen – 2,2 km, für die Busans Tourismusbehörde ein bis zwei Stunden veranschlagt, unter dir das schwarz glitzernde Meer. Zum Abschluss gegrillte Muscheln unten in Cheongsapo."
           ]
         }
       ],
@@ -6484,7 +6484,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "Der Mondschau-Hügel zwischen Haeundae und Cheongsapo, gesäumt von Kirschbäumen, Galerien und ruhigen Cafés. Nachts windet sich der beleuchtete Fußweg Moontan Road durch Kiefern über dem dunklen Meer.",
-          "tip": "Nach dem Abendessen die Moontan Road gehen – 30 bis 40 entspannte Minuten – und dann hinunter nach Cheongsapo zu gegrillten Muscheln. Vollmondnächte sind die Wahl der Einheimischen.",
+          "tip": "Nach dem Abendessen die Moontan Road gehen – 2,2 km, laut Busans Tourismusbehörde ein bis zwei Stunden – und dann hinunter nach Cheongsapo zu gegrillten Muscheln. Vollmondnächte sind die Wahl der Einheimischen.",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -6587,7 +6587,7 @@
         {
           "h": "Colina Dalmaji: o encerramento silencioso",
           "paras": [
-            "Quando as praias ficam barulhentas, os locais sobem a colina Dalmaji, a estrada de cerejeiras que sobe de Haeundae rumo a Cheongsapo. Dalmaji significa 'saudar a lua', e a colina é o ponto de contemplação lunar de Busan há gerações. A trilha da Moontan Road (문탠로드) tem iluminação suave e piso tranquilo — um passeio de 30 a 40 minutos com o mar preto e cintilante lá embaixo. Termine com mariscos na brasa lá embaixo, em Cheongsapo."
+            "Quando as praias ficam barulhentas, os locais sobem a colina Dalmaji, a estrada de cerejeiras que sobe de Haeundae rumo a Cheongsapo. Dalmaji significa 'saudar a lua', e a colina é o ponto de contemplação lunar de Busan há gerações. A trilha da Moontan Road (문탠로드) tem iluminação suave e piso tranquilo — são 2,2 km, que o órgão de turismo de Busan calcula em 1 a 2 horas de caminhada, com o mar preto e cintilante lá embaixo. Termine com mariscos na brasa lá embaixo, em Cheongsapo."
           ]
         }
       ],
@@ -6637,7 +6637,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "A colina de contemplação da lua entre Haeundae e Cheongsapo, cercada de cerejeiras, galerias e cafés silenciosos. À noite, a trilha iluminada da Moontan Road serpenteia entre os pinheiros acima do mar escuro.",
-          "tip": "Faça a Moontan Road depois do jantar — de 30 a 40 minutos tranquilos — e desça para Cheongsapo para comer marisco na brasa. Noite de lua cheia é a escolha dos locais.",
+          "tip": "Faça a Moontan Road depois do jantar — são 2,2 km, de 1 a 2 horas em ritmo tranquilo — e desça para Cheongsapo para comer marisco na brasa. Noite de lua cheia é a escolha dos locais.",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -6740,7 +6740,7 @@
         {
           "h": "Bukit Dalmaji: penutup yang tenang",
           "paras": [
-            "Ketika pantai mulai riuh, warga lokal menyingkir ke Bukit Dalmaji, jalan berpohon sakura yang mendaki dari Haeundae ke arah Cheongsapo. Dalmaji berarti 'menyambut bulan', dan bukit ini sudah menjadi tempat memandang bulan warga Busan selama berbagai generasi. Jalur pejalan kaki Moontan Road (문탠로드) diterangi lampu lembut dan nyaman dilangkahi — jalan santai 30–40 menit dengan laut hitam berkilau di bawah. Tutup dengan kerang bakar di Cheongsapo."
+            "Ketika pantai mulai riuh, warga lokal menyingkir ke Bukit Dalmaji, jalan berpohon sakura yang mendaki dari Haeundae ke arah Cheongsapo. Dalmaji berarti 'menyambut bulan', dan bukit ini sudah menjadi tempat memandang bulan warga Busan selama berbagai generasi. Jalur pejalan kaki Moontan Road (문탠로드) diterangi lampu lembut dan nyaman dilangkahi — panjangnya 2,2 km, dan dinas pariwisata Busan menghitungnya 1–2 jam berjalan santai dengan laut hitam berkilau di bawah. Tutup dengan kerang bakar di Cheongsapo."
           ]
         }
       ],
@@ -6790,7 +6790,7 @@
           "kr": "달맞이고개",
           "wiki": "Dalmaji Hill",
           "desc": "Bukit tempat memandang bulan di antara Haeundae dan Cheongsapo, dikelilingi pohon sakura, galeri seni, dan kafe-kafe tenang. Saat malam, jalur pejalan kaki Moontan Road yang terang berkelok di antara pohon pinus di atas laut yang gelap.",
-          "tip": "Susuri Moontan Road seusai makan malam — 30 sampai 40 menit santai — lalu turun ke Cheongsapo untuk kerang bakar. Malam bulan purnama adalah pilihan warga lokal.",
+          "tip": "Susuri Moontan Road seusai makan malam — 2,2 km, siapkan 1–2 jam kalau jalannya santai — lalu turun ke Cheongsapo untuk kerang bakar. Malam bulan purnama adalah pilihan warga lokal.",
           "mapQ": "Dalmaji Hill Haeundae Busan"
         },
         {
@@ -6997,7 +6997,7 @@
       "metaDesc": "地元民の釜山移動術。KTX予約のコツ、沙上(ササン)経由の空港アクセス、東海線のビーチ列車、格安タクシー、海岸沿いの急行バスまで解説します。",
       "lead": "地図で見ると釜山は広大ですが、実際はいくつかの鉄道路線と格安タクシー、速い海岸バスでつながった街の連なりです。沙上(ササン)での空港乗り換えを覚え、T-moneyカードにチャージし、坂道に敬意を払う——それでほぼ勝負ありです。地元民の実際の動き方をご紹介します。",
       "facts": [
-        "KTXソウル〜釜山:最速の便で約2時間40分",
+        "KTXソウル〜釜山:標準的な便で約2時間40分",
         "空港軽電鉄で沙上まで:3駅、10分足らず",
         "地下鉄運賃:交通カード利用で距離により約₩1,600〜1,800",
         "タクシー初乗り:約₩4,800——2人なら短距離は地下鉄といい勝負",
@@ -7150,7 +7150,7 @@
       "metaDesc": "本地人在釜山怎么出行：KTX订票技巧、经沙上的机场换乘、东海线海滩列车、便宜的出租车和沿海快速巴士。",
       "lead": "釜山在地图上看着铺得很开，其实就是几条轨道线、便宜的出租车和快速沿海巴士串起来的一串街区。学会经沙上换乘的机场路线、办一张T-money卡、对山坡保持敬畏——仗就打赢大半了。以下是本地人真实的出行方式。",
       "facts": [
-        "KTX首尔–釜山：最快班次约2小时40分",
+        "KTX首尔–釜山：普通班次约2小时40分",
         "机场轻轨到沙上：三站，不到10分钟",
         "地铁票价：用交通卡按里程约₩1,600–1,800",
         "出租车起步价：约₩4,800——两人短途和地铁差不多价",
@@ -7303,7 +7303,7 @@
       "metaDesc": "Cómo se mueven los locales en Busan: trucos para el KTX, el transbordo del aeropuerto en Sasang, trenes de playa Donghae, taxis baratos y buses costeros.",
       "lead": "Busan parece extensa en el mapa, pero en realidad es una cadena de barrios enhebrados por unas cuantas líneas de tren, taxis baratos y buses costeros rápidos. Aprende el transbordo del aeropuerto en Sasang, carga una tarjeta T-money y respeta las cuestas: eso es casi toda la batalla. Así se mueven los locales de verdad.",
       "facts": [
-        "KTX Seúl–Busan: unas 2h 40m en los servicios más rápidos",
+        "KTX Seúl–Busan: unas 2h 40m en un servicio típico",
         "Tren ligero del aeropuerto a Sasang: tres estaciones, menos de 10 minutos",
         "Viajes en metro: unos ₩1,600–1,800 según la distancia con tarjeta de transporte",
         "Tarifa base del taxi: alrededor de ₩4,800 — para dos personas, los trayectos cortos compiten con el metro",
@@ -7456,7 +7456,7 @@
       "metaDesc": "KTX 예매 요령, 사상 공항 환승, 동해선 해변 열차, 착한 택시비, 해안 급행버스까지 — 부산 사람들이 실제로 다니는 방법을 담았어요.",
       "lead": "지도로 보면 부산이 한없이 넓어 보이지만, 실은 몇 개의 철길과 저렴한 택시, 빠른 해안 버스로 꿰어진 동네들의 줄이에요. 사상 공항 환승만 익히고, 티머니 카드 충전해 두고, 언덕을 얕보지만 않으면 — 그게 싸움의 대부분이에요. 부산 사람들이 실제로 움직이는 법, 알려드릴게요.",
       "facts": [
-        "KTX 서울–부산: 최속달 기준 약 2시간 40분",
+        "KTX 서울–부산: 일반적인 열차 기준 약 2시간 40분",
         "공항 경전철로 사상까지: 세 정거장, 10분 이내",
         "지하철 요금: 교통카드 기준 거리에 따라 약 ₩1,600–1,800",
         "택시 기본요금: 약 ₩4,800 — 둘이면 단거리는 지하철과 맞먹어요",
@@ -7609,7 +7609,7 @@
       "metaDesc": "Comment les locaux circulent à Busan : réserver le KTX, la correspondance de Sasang, les trains de plage de la ligne Donghae, taxis et bus côtiers.",
       "lead": "Sur une carte, Busan paraît tentaculaire ; en réalité, c'est un chapelet de quartiers reliés par quelques lignes ferroviaires, des taxis bon marché et des bus côtiers rapides. Maîtrisez la correspondance de Sasang depuis l'aéroport, chargez une carte T-money et respectez les collines : l'essentiel est là. Voici comment les locaux se déplacent vraiment.",
       "facts": [
-        "KTX Séoul–Busan : environ 2 h 40 sur les services les plus rapides",
+        "KTX Séoul–Busan : environ 2 h 40 sur un trajet classique",
         "Métro léger de l'aéroport jusqu'à Sasang : trois stations, moins de 10 minutes",
         "Trajets en métro : environ ₩1,600–1,800 selon la distance avec une carte de transport",
         "Prise en charge du taxi : environ ₩4,800 — à deux, les courts trajets rivalisent avec le métro",
@@ -7762,7 +7762,7 @@
       "metaDesc": "So fahren Einheimische in Busan: KTX-Buchungstricks, Flughafentransfer über Sasang, Donghae-Linie zum Strand, günstige Taxis und Küstenschnellbusse.",
       "lead": "Auf der Karte wirkt Busan weitläufig, tatsächlich ist es eine Kette von Vierteln, aufgefädelt an ein paar Bahnlinien, günstigen Taxis und schnellen Küstenbussen. Lern den Flughafentransfer über Sasang, lad eine T-money-Karte auf und nimm die Hügel ernst – damit ist das Meiste erledigt. So bewegen sich Einheimische wirklich durch die Stadt.",
       "facts": [
-        "KTX Seoul–Busan: rund 2 Std. 40 Min. mit den schnellsten Verbindungen",
+        "KTX Seoul–Busan: rund 2 Std. 40 Min. mit einer üblichen Verbindung",
         "Flughafen-Stadtbahn bis Sasang: drei Stationen, unter 10 Minuten",
         "U-Bahn-Fahrten: je nach Distanz etwa ₩1.600–1.800 mit Verkehrskarte",
         "Taxi-Grundpreis: rund ₩4.800 – kurze Wege lohnen sich zu zweit gegenüber der U-Bahn",
@@ -7915,7 +7915,7 @@
       "metaDesc": "Como os locais circulam por Busan: reservar o KTX, a baldeação de Sasang, trens da Linha Donghae até a praia, táxi barato e ônibus expressos da costa.",
       "lead": "No mapa, Busan parece espalhada, mas na prática é um colar de bairros costurado por umas poucas linhas de trem, táxis baratos e ônibus rápidos da costa. Aprenda a baldeação do aeroporto em Sasang, carregue um cartão T-money e respeite os morros — isso já resolve quase tudo. Veja como a gente daqui se move de verdade.",
       "facts": [
-        "KTX Seul–Busan: cerca de 2h 40m nos serviços mais rápidos",
+        "KTX Seul–Busan: cerca de 2h 40m numa viagem típica",
         "Trem leve do aeroporto até Sasang: três estações, menos de 10 minutos",
         "Viagens de metrô: cerca de ₩1,600–1,800 conforme a distância, com cartão de transporte",
         "Bandeirada de táxi: em torno de ₩4,800 — para duas pessoas, trajetos curtos competem com o metrô",
@@ -8068,7 +8068,7 @@
       "metaDesc": "Cara warga Busan bergerak: trik pesan KTX, transfer bandara lewat Sasang, kereta pantai Jalur Donghae, taksi murah, dan bus ekspres pesisir.",
       "lead": "Di peta Busan terlihat melebar ke mana-mana, padahal sebenarnya kota ini hanyalah untaian permukiman yang dirangkai beberapa jalur kereta, taksi murah, dan bus pesisir yang cepat. Kuasai transfer bandara lewat Sasang, isi kartu T-money, dan hormati bukit-bukitnya — itu sudah sebagian besar perjuangannya. Beginilah cara warga lokal benar-benar berpindah tempat.",
       "facts": [
-        "KTX Seoul–Busan: sekitar 2 jam 40 menit dengan layanan tercepat",
+        "KTX Seoul–Busan: sekitar 2 jam 40 menit untuk perjalanan pada umumnya",
         "Light rail bandara ke Sasang: tiga stasiun, kurang dari 10 menit",
         "Naik subway: sekitar ₩1,600–1,800 tergantung jarak dengan kartu transit",
         "Tarif buka taksi: sekitar ₩4,800 — untuk berdua, jarak dekat sebanding dengan subway",
