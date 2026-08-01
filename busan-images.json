@@ -478,5 +478,65 @@
     "license": "CC BY 2.0",
     "source": "wikimedia",
     "file": "Seomyeon,_Busan.jpg"
+  },
+  "Taejongdae": {
+    "raw": "https://upload.wikimedia.org/wikipedia/commons/4/47/Korea-Busan-Taejongdae-03.jpg",
+    "alt": "Taejongdae is a natural park with magnificent cliffs facing the open sea on the island of Yeongdo in Busan, South Korea.",
+    "by": "*intacto",
+    "byUrl": "https://commons.wikimedia.org/wiki/File:Korea-Busan-Taejongdae-03.jpg",
+    "link": "https://commons.wikimedia.org/wiki/File:Korea-Busan-Taejongdae-03.jpg",
+    "license": "CC BY 2.0",
+    "source": "wikimedia",
+    "file": "Korea-Busan-Taejongdae-03.jpg"
+  },
+  "Busan Museum of Art": {
+    "raw": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Busan_Museum_of_Art.jpg/1280px-Busan_Museum_of_Art.jpg",
+    "alt": "This is the front of the Busan Museum of Art in Busan, South Korea. Photo taken on November 4, 2018",
+    "by": "Bubbahotepblues",
+    "byUrl": "https://en.wikipedia.org/wiki/File:Busan_Museum_of_Art.jpg",
+    "link": "https://en.wikipedia.org/wiki/File:Busan_Museum_of_Art.jpg",
+    "license": "CC-BY-SA-4.0",
+    "source": "wikimedia",
+    "file": "Busan_Museum_of_Art.jpg"
+  },
+  "Busan Citizens Park": {
+    "raw": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Busan_Citizens_Park_%22mirror_pond%22.jpg/1280px-Busan_Citizens_Park_%22mirror_pond%22.jpg",
+    "alt": "Busan Citizens Park",
+    "by": "Vichycombo",
+    "byUrl": "https://commons.wikimedia.org/wiki/File:Busan_Citizens_Park_%22mirror_pond%22.jpg",
+    "link": "https://commons.wikimedia.org/wiki/File:Busan_Citizens_Park_%22mirror_pond%22.jpg",
+    "license": "CC BY-SA 4.0",
+    "source": "wikimedia",
+    "file": "Busan_Citizens_Park_\"mirror_pond\".jpg"
+  },
+  "Busan Tower": {
+    "raw": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Busan_Tower_and_Yongdusan_Park_20200522_003.jpg/1280px-Busan_Tower_and_Yongdusan_Park_20200522_003.jpg",
+    "alt": "Busan Tower and Yongdusan Park in Busan, South korea",
+    "by": "Mobius6",
+    "byUrl": "https://commons.wikimedia.org/wiki/File:Busan_Tower_and_Yongdusan_Park_20200522_003.jpg",
+    "link": "https://commons.wikimedia.org/wiki/File:Busan_Tower_and_Yongdusan_Park_20200522_003.jpg",
+    "license": "CC BY-SA 4.0",
+    "source": "wikimedia",
+    "file": "Busan_Tower_and_Yongdusan_Park_20200522_003.jpg"
+  },
+  "Yongdusan Park": {
+    "raw": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Busan_Tower_and_Yongdusan_Park_20200522_003.jpg/1280px-Busan_Tower_and_Yongdusan_Park_20200522_003.jpg",
+    "alt": "Busan Tower and Yongdusan Park in Busan, South korea",
+    "by": "Mobius6",
+    "byUrl": "https://commons.wikimedia.org/wiki/File:Busan_Tower_and_Yongdusan_Park_20200522_003.jpg",
+    "link": "https://commons.wikimedia.org/wiki/File:Busan_Tower_and_Yongdusan_Park_20200522_003.jpg",
+    "license": "CC BY-SA 4.0",
+    "source": "wikimedia",
+    "file": "Busan_Tower_and_Yongdusan_Park_20200522_003.jpg"
+  },
+  "Busan Museum": {
+    "raw": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Busan_museum.JPG/1280px-Busan_museum.JPG",
+    "alt": "부산광역시 남구에 있는 부산박물관",
+    "by": "hyolee2",
+    "byUrl": "https://commons.wikimedia.org/wiki/File:Busan_museum.JPG",
+    "link": "https://commons.wikimedia.org/wiki/File:Busan_museum.JPG",
+    "license": "CC BY-SA 3.0",
+    "source": "wikimedia",
+    "file": "Busan_museum.JPG"
   }
 }

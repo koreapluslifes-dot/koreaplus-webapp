@@ -17,7 +17,8 @@ const TITLES = [
   'Gwangan Bridge', 'Hwangnyeongsan', 'Haeundae LCT The Sharp', 'Sajik Baseball Stadium',
   'Korea Train Express', 'Busan Metro', 'Gimhae International Airport',
   'Busan–Gimhae Light Rail Transit', 'Busan Station', 'Donghae Line',
-  "Dongnae District", "Jjimjilbang", "Shinsegae Centum City", "Bathing", "Beomeosa", "Geumjeongsan", "Geumjeong District", "Haedong Yonggungsa", "Gyeongju", "Tongyeong", "Geoje", "Jinhae-gu", "Ulsan", "Tongdosa", "Bulguksa", "Seomyeon", "Nampo-dong", "Busan International Film Festival", "Busan Cinema Center",
+  "Dongnae District", "Jjimjilbang", "Shinsegae Centum City", "Beomeosa", "Geumjeongsan", "Geumjeong District", "Haedong Yonggungsa", "Gyeongju", "Tongyeong", "Geoje", "Jinhae-gu", "Ulsan", "Tongdosa", "Bulguksa", "Seomyeon", "Nampo-dong", "Busan International Film Festival", "Busan Cinema Center",
+  "Taejongdae", "Busan Museum of Art", "Busan Citizens Park", "Busan Tower", "Yongdusan Park", "Centum City", "Busan Museum", "Songdo Cable Car", "Dadaepo Beach",
 ];
 
 const stripTags = s => (s || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
