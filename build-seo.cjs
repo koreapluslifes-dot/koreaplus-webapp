@@ -259,6 +259,25 @@ const REGIONAL_CITIES = [{ name: 'Gangneung', kr: '강릉' }, { name: 'Sokcho', 
 
 // "Keep planning {city}" cross-cluster links — emits links only to pages this
 // generator writes. excludeUrl drops the current page from its own list.
+// Busan insider cluster (modules/seo-busan-local.cjs) — link labels per language
+// so the 63 generated pages are reachable from the Busan pages and hubs.
+// Localized topic labels for the Busan cluster links, read from busan-local.json
+// (falls back to English when a language has not been translated yet).
+let BUSAN_TOPIC_L10N = {};
+try {
+  const __bl = JSON.parse(fs.readFileSync(path.join(OUT, "busan-local.json"), "utf8"));
+  for (const [s, byLang] of Object.entries(__bl)) {
+    for (const [lg, pg] of Object.entries(byLang)) {
+      if (lg === "_emoji" || !pg || !pg.h1) continue;
+      (BUSAN_TOPIC_L10N[lg] = BUSAN_TOPIC_L10N[lg] || {})[s] = (byLang._emoji ? byLang._emoji + " " : "") + String(pg.h1).split(/[—:：]/)[0].trim();
+    }
+  }
+} catch { /* cluster data absent — labels fall back to English */ }
+const BUSAN_LOCAL_LABEL = {
+  en: '🌊 Busan Like a Local', ko: '🌊 로컬처럼 부산 여행', ja: '🌊 ローカル釜山ガイド',
+  zh: '🌊 像本地人一样玩釜山', es: '🌊 Busan como un local', fr: '🌊 Busan comme un local',
+  de: '🌊 Busan wie ein Local', pt: '🌊 Busan como um local', id: '🌊 Busan ala Warga Lokal',
+};
 function cityClusterLinks(cityName, excludeUrl) {
   const cs = slug(cityName);
   const links = [];
@@ -267,6 +286,7 @@ function cityClusterLinks(cityName, excludeUrl) {
   links.push([`guide/best-food-in-${cs}.html`, `🍜 Best Food in ${cityName}`]);
   for (const n of NEIGHBORHOODS.filter(x => x.city === cityName)) links.push([`guide/${slug(n.name)}-${slug(n.city)}-guide.html`, `${n.emoji} ${n.name} Guide`]);
   links.push([`guide/things-to-do-in-${cs}.html`, `📍 Things to Do in ${cityName}`]);
+  if (cityName === 'Busan') links.push(['busan/index.html', BUSAN_LOCAL_LABEL.en]);
   const ex = String(excludeUrl || '').replace(BASEP, '');
   const final = links.filter(([h]) => h !== ex);
   if (!final.length) return '';
@@ -1523,7 +1543,7 @@ function buildCityL10n(cityName, lang) {
   const vH = { ja: '📺 動画とK-コンテンツ', zh: '📺 视频与 K-内容', es: '📺 Vídeos y contenido K' }[lang] || '📺 Video';
   const vL = { ja: '▶️ 旅行動画', zh: '▶️ 旅行视频', es: '▶️ Vídeos de viaje' }[lang] || '▶️ Videos';
   body += `<h2>${vH}</h2><div class="seo-linklist"><a href="https://www.youtube.com/results?search_query=${enc(cityName + ' Korea travel')}" target="_blank" rel="noopener">${vL} (${esc(cityName)})</a><a href="kdrama-locations.html">🎬 K-drama</a><a href="kpop.html">🎤 K-pop</a></div>`;
-  body += `<h2>${esc(ui.moreH)}</h2><div class="seo-linklist"><a href="${LOCALES.includes(lang) ? `${dir}/korea-visa-k-eta-guide.html` : 'guide/korea-visa-k-eta-guide.html'}">🛂 ${esc(L.visa.h1)}</a></div>`;
+  body += `<h2>${esc(ui.moreH)}</h2><div class="seo-linklist"><a href="${LOCALES.includes(lang) ? `${dir}/korea-visa-k-eta-guide.html` : 'guide/korea-visa-k-eta-guide.html'}">🛂 ${esc(L.visa.h1)}</a>${cityName === 'Busan' ? `<a href="${dir}/busan/index.html">${esc(BUSAN_LOCAL_LABEL[lang] || BUSAN_LOCAL_LABEL.en)}</a>` : ''}</div>`;
   body += `<div class="seo-cta"><h2>${esc(g.h1)}</h2><div class="btns"><a class="primary" href="plan.html">${esc(ui.planBtn)}</a><a class="ghost" href="${enUrl.replace(BASEP, '')}">${esc(ui.enBtn)}</a></div></div>`;
   const hero = `<header class="seo-hero"><span class="emoji">📍</span><h1>${esc(g.h1)}</h1><div class="kr">${esc((CITY_NAME_L10N[lang] || {})[cityName] || cityName)}</div><div class="meta"><span class="seo-badge">${g.attractions.length} ${lang === 'ja' ? 'スポット' : lang === 'zh' ? '景点' : 'lugares'}</span></div></header>`;
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: g.h1, itemListElement: g.attractions.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.name })) };
@@ -2031,6 +2051,7 @@ function buildBrowseHubsL10n(urls, lang) {
     { title: T.hubs.destinations.sec.besttime, links: allCities.map(c => [`🗓️ ${(CITY_NAME_L10N[lang] || {})[c.name] || c.name}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
     { title: T.hubs.destinations.sec.stay, links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
     { title: T.hubs.destinations.sec.hoods, links: NEIGHBORHOODS.map(n => [`${n.emoji} ${esc(n.name)}`, `guide/${slug(n.name)}-${slug(n.city)}-guide.html`]) },
+    { title: BUSAN_LOCAL_LABEL[lang] || BUSAN_LOCAL_LABEL.en, links: [[BUSAN_LOCAL_LABEL[lang] || BUSAN_LOCAL_LABEL.en, `${dir}/busan/index.html`],...['eat-like-a-local','beaches-coastal-walks','hidden-neighborhoods','markets-street-food','night-views-drone-show','getting-around-insider'].map(s => [((BUSAN_TOPIC_L10N[lang]||BUSAN_TOPIC_L10N.en)[s]||s), `${dir}/busan/${s}.html`])] },
     { title: T.hubs.destinations.sec.transport, links: TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`]) },
   ]);
 
@@ -2102,6 +2123,7 @@ function buildBrowseHubs(urls) {
       { title: '🗓️ Best time to visit by city', links: allCities.map(c => [`🗓️ ${esc(c.name)}`, `guide/best-time-to-visit-${slug(c.name)}.html`]) },
       { title: '🏨 Where to stay', links: (urls.stays || []).map(u => [`🏨 ${esc(cap(u))}`, u.replace(BASEP, '')]) },
       { title: '🏘️ Seoul neighborhoods', links: NEIGHBORHOODS.map(n => [`${n.emoji} ${esc(n.name)}`, `guide/${slug(n.name)}-${slug(n.city)}-guide.html`]) },
+      { title: '🌊 Busan like a local', links: [['🌊 Busan Like a Local — hub', 'busan/index.html'],['🍜 Eat like a Busan local', 'busan/eat-like-a-local.html'],['🏖️ Beaches & coastal walks', 'busan/beaches-coastal-walks.html'],['🏘️ Hidden neighborhoods', 'busan/hidden-neighborhoods.html'],['🦀 Markets & street food', 'busan/markets-street-food.html'],['🌃 Night views & drone show', 'busan/night-views-drone-show.html'],['🚇 Getting around Busan', 'busan/getting-around-insider.html']] },
       { title: '🚄 Getting there (Seoul to…)', links: TRANSPORT_ROUTES.map(r => [`🚄 Seoul → ${esc(r.to)}`, `guide/seoul-to-${slug(r.to)}.html`]) },
     ],
   } });
