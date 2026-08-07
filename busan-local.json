@@ -23888,5 +23888,830 @@
         "Titipkan koper di loker stasiun subway daripada menyeretnya melewati gang-gang pasar."
       ]
     }
+  },
+  "busan-by-season": {
+    "_emoji": "🌸",
+    "en": {
+      "h1": "Busan by Season — a Local's Honest Calendar",
+      "title": "Busan by Season: a Local's Honest Calendar | KoreaPlus",
+      "metaDesc": "Month-by-month Busan from a local: cherry blossoms, jangma rain, typhoon season, BIFF autumn, mild winters and when the sea is actually swimmable.",
+      "lead": "Ask a Busan native for the best month and you'll get a lecture, not an answer. This city has real seasons: blossom tunnels in early April, sticky jangma (장마) rain in July, typhoon drama in September, eomuk (어묵) weather in January. Here's the honest calendar I give friends before they book flights.",
+      "facts": [
+        "Cherry blossoms in Busan usually peak late March–early April",
+        "Jangma monsoon typically runs late June–late July",
+        "Sea comfortably swimmable roughly July–September; August warmest at ~26–27°C",
+        "Typhoon watch season is August–September — follow KMA warnings",
+        "Busan Fireworks Festival at Gwangalli is usually in autumn; date announced yearly",
+        "Winters are mild: daytime often above freezing, snow rare"
+      ],
+      "sections": [
+        {
+          "h": "Spring (March–May): Blossoms Without Leaving the City",
+          "paras": [
+            "Cherry blossoms hit Busan usually late March to early April, a touch ahead of Seoul. Namcheon-dong (남천동) Cherry Blossom Road near Gwangalli becomes a pink ceiling over ordinary apartment lanes, Oncheoncheon (온천천) stream grows a kilometres-long cherry tunnel, and Dalmaji Hill (달맞이고개) mixes blossoms with sea views. Jinhae's famous festival is a separate day trip — our day-trips guide covers it.",
+            "The catch: spring is also hwangsa (황사) yellow-dust season. A few days each March–May the sky turns beige and locals quietly mask up. Check an air-quality app each morning and swap coastal walks for museums on bad days. Temperatures swing hard too — a warm afternoon can follow a near-freezing morning, so dress in layers."
+          ]
+        },
+        {
+          "h": "June and the Jangma: the Quiet Sea",
+          "paras": [
+            "June is underrated. The air is summer-warm but the water still sits around 19–21°C, so beaches stay half-empty while coastal walks and cafe terraces feel like a preview of summer without the crowds. The official swimming season at the main beaches has started in late June in recent years — check city notices for the current dates.",
+            "Then comes jangma, Korea's summer monsoon, usually late June to late July. In Busan it feels less like all-day downpours and more like humid grey skies with frequent showers, often lighter on the coast, and the sea breeze softens the heat. Umbrella in the bag, sandals over sneakers, and keep a backup indoor plan — see our rainy-day guide."
+          ]
+        },
+        {
+          "h": "Late July–September: Peak Beach and Typhoon Watch",
+          "paras": [
+            "Late July to mid-August is peak season: parasol grids at Haeundae, packed trains, room rates that spike. If you want the classic Korean beach scene, this is it. If you don't, September is the local secret — the sea still holds around 24–25°C, the crowds vanish, and lifeguard coverage has run to mid-September in recent years.",
+            "August and September are also typhoon season. Most storms cost you one wet, windy day, but when the KMA issues warnings, beaches close to swimming, coastal parks may shut trails, and ferries stop. Locals just track the KMA app and rearrange — build one flexible day into any late-summer itinerary."
+          ]
+        },
+        {
+          "h": "Autumn (September–November): the Local Favourite",
+          "paras": [
+            "Ask locals their favourite season and most say autumn: dry air, deep-blue sea, perfect hiking weather. It's also festival season — BIFF, the Busan International Film Festival, usually runs late September into October, and the Busan Fireworks Festival takes over Gwangalli (광안리), usually in autumn. Both dates shift yearly, so check the official pages before booking that week.",
+            "Fireworks night is Busan's single biggest evening — bridge-view rooms sell out months ahead and the sand fills hours before the show. If crowds aren't your thing, November brings temple foliage and empty beaches instead; our temples-mountains and night-views guides have the details."
+          ]
+        },
+        {
+          "h": "Winter (December–February): Eomuk Weather",
+          "paras": [
+            "Busan winters are mild by Korean standards — daytime temperatures usually sit above freezing and snow is rare enough to make the local news. This is eomuk-and-hot-springs weather: steaming fish-cake broth from a market stall, then a long soak — our hot-springs guide has the map.",
+            "The Haeundae Polar Bear swim tradition — a mass winter sea dip that has run for decades — usually happens mid-winter with advance registration; check the official page for the current edition and dates. Winter is also migratory-bird season down at the Nakdong estuary."
+          ]
+        },
+        {
+          "h": "What to Pack, Season by Season",
+          "paras": [
+            "The variable people underestimate is Busan's sea wind — it makes every season feel a notch colder on the coast than the forecast suggests. Whatever the month, bring one more layer than a Seoul packing list says, and shoes that can handle hills."
+          ],
+          "listType": "ul",
+          "list": [
+            "Spring (Mar–May): layers for big day-night swings, plus a mask for yellow-dust days",
+            "Jangma (late Jun–Jul): compact umbrella, quick-dry footwear, light rain shell",
+            "High summer (Aug): sun hat, rash guard, the strongest sunscreen you own",
+            "Typhoon window (Aug–Sep): no special gear — flexible plans and the KMA weather app",
+            "Autumn (Oct–Nov): light knit plus a windbreaker for evening sea wind",
+            "Winter (Dec–Feb): a proper coat and gloves for seafront walks; no arctic gear needed"
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Namcheon-dong Cherry Blossom Road",
+          "kr": "남천동 벚꽃길",
+          "wiki": "",
+          "desc": "A residential grid near Gwangalli where old cherry trees meet overhead in a pink ceiling, usually late March–early April. Busan's most photographed blossom street — and quiet apartment lanes the rest of the year, which is the charm.",
+          "tip": "Go before 9 a.m. on a weekday; by lunch the lanes fill with photographers. Pair it with a Gwangalli beach walk.",
+          "mapQ": "Namcheondong Cherry Blossom Road Busan"
+        },
+        {
+          "name": "Oncheoncheon Stream",
+          "kr": "온천천",
+          "wiki": "Oncheoncheon",
+          "desc": "A restored urban stream whose jogging path runs under a cherry tunnel for kilometres each spring, lit up at night in season. The rest of the year it's the city's favourite running track and cafe strip.",
+          "tip": "Enter near Oncheonjang or Dongnae Station and walk downstream; evening strolls in blossom season dodge the daytime crush.",
+          "mapQ": "Oncheoncheon Cafe Street Busan"
+        },
+        {
+          "name": "Dalmaji Hill",
+          "kr": "달맞이고개",
+          "wiki": "Dalmaji Hill",
+          "desc": "The moon-viewing hill above Haeundae: cherry blossoms over the road in spring, sea-view cafes year-round, and some of the softest autumn light in the city.",
+          "tip": "Spring double feature: blossoms up here in the morning, then downhill to Haeundae sand before the tour buses land.",
+          "mapQ": "Dalmaji Hill Busan"
+        },
+        {
+          "name": "Haeundae Beach",
+          "kr": "해운대해수욕장",
+          "wiki": "Haeundae Beach",
+          "desc": "Korea's most famous beach lives several seasonal lives: parasol city in August, blissfully quiet swim spot in early September, and home of the mid-winter Polar Bear swim tradition.",
+          "tip": "For swimming with space, come the first half of September — water still warm, and the season has run to mid-month recently.",
+          "mapQ": "Haeundae Beach Busan"
+        },
+        {
+          "name": "Gwangalli Beach",
+          "kr": "광안리해수욕장",
+          "wiki": "Gwangalli Beach",
+          "desc": "The bridge-view crescent that hosts the Busan Fireworks Festival, usually in autumn — the city's biggest single night. Off-season it settles back into a calm, cafe-lined local beach.",
+          "tip": "For fireworks night, claim sand by mid-afternoon or book a bridge-view room months out — and confirm official dates first.",
+          "mapQ": "Gwangalli Beach Busan"
+        },
+        {
+          "name": "Busan Cinema Center",
+          "kr": "영화의전당",
+          "wiki": "Busan Cinema Center",
+          "desc": "BIFF's futuristic home under a vast cantilever roof. During the festival window — usually late September into October — all of Centum City hums; the rest of the year it screens arthouse films cheaply.",
+          "tip": "BIFF tickets open online in stages and vanish fast; weekday daytime screenings are the easiest seats to land.",
+          "mapQ": "Busan Cinema Center"
+        },
+        {
+          "name": "Songjeong Beach",
+          "kr": "송정해수욕장",
+          "wiki": "Songjeong Beach",
+          "desc": "Busan's surf beach and its most season-proof one: wetsuit surfers paddle out even in winter, and surf schools run well beyond the official swimming season.",
+          "tip": "June and September are the sweet spot — warm-enough water and empty line-ups; a day's notice is usually enough for a lesson.",
+          "mapQ": "Songjeong Beach Busan"
+        },
+        {
+          "name": "Eulsukdo",
+          "kr": "을숙도",
+          "wiki": "Eulsukdo",
+          "desc": "Delta island in the Nakdong estuary where migratory birds winter, roughly November to February. Flat paths make it a good cold-day cycle, with an eco centre for warming up between sightings.",
+          "tip": "Come on a clear winter afternoon for the best light; the eco centre's observation windows beat standing in the estuary wind.",
+          "mapQ": "Eulsukdo Nakdong Estuary Eco Center Busan"
+        }
+      ],
+      "faq": [
+        [
+          "What is the best month to visit Busan?",
+          "Ask ten locals and most say September or October: the sea stays warm into September, the air dries out, and festival season peaks. April is the spring equivalent. Don't default to midsummer — late July to mid-August is the most crowded, most expensive window of the whole year."
+        ],
+        [
+          "When do cherry blossoms bloom in Busan?",
+          "Usually late March to early April, slightly ahead of Seoul. Namcheon-dong, Oncheoncheon and Dalmaji Hill are the in-city classics. Jinhae's mega-festival is a separate day trip — see our day-trips guide. The exact peak shifts each year, so check bloom forecasts close to your dates."
+        ],
+        [
+          "Can I swim in the sea in June?",
+          "You can wade, but the water is still around 19–21°C, so locals mostly don't. The official season has opened in late June in recent years. Comfortable swimming runs roughly July to September — August is warmest at around 26–27°C, and early September is the insider pick."
+        ],
+        [
+          "What happens if a typhoon hits during my trip?",
+          "Usually it costs you one wet, windy day. When the KMA issues warnings, beaches close to swimming, coastal parks may shut trails, ferries stop and events postpone. Track the KMA app, keep one flexible day, and switch to jjimjilbang, museums or covered markets — Busan indoors is a full itinerary."
+        ],
+        [
+          "Is the jangma rainy season a bad time to visit?",
+          "It's not a washout. Busan's jangma — usually late June to late July — means humid skies and frequent showers more than all-day rain, often lighter on the coast. Museums, markets and jjimjilbang fill the gaps, and rooms cost less than in August. Pack an umbrella and go."
+        ],
+        [
+          "When is the Busan Fireworks Festival?",
+          "Usually one autumn evening at Gwangalli Beach with Gwangan Bridge as the backdrop — recent editions have run in October or November. The date is announced fresh each year, so check the official Visit Busan page before locking in that week's accommodation; bridge-view rooms sell out far ahead."
+        ],
+        [
+          "Is winter worth visiting Busan?",
+          "Yes, if you like cities without queues. Winters are mild — daytime often 5–10°C — with sharp, clear light on the sea. It's the season for hot springs, market eomuk, winter birds at Eulsukdo, and the Haeundae Polar Bear swim tradition in mid-winter; check official pages for dates."
+        ]
+      ],
+      "tips": [
+        "Beach season has run late June–mid September recently, but the sea is only comfortable July–September. June is for walking, not swimming.",
+        "In spring, check an air-quality app before planning coastal walks — yellow-dust days cluster March to May.",
+        "Don't pack a serious umbrella for jangma; every convenience store sells cheap ones and rain ponchos.",
+        "August rooms near Haeundae and Gwangalli spike hard — book well ahead or stay inland on a metro line.",
+        "BIFF and the Fireworks Festival move dates yearly; confirm on official pages before booking that week's hotel.",
+        "On fireworks night take the metro, never a taxi — the roads around Gwangalli lock solid.",
+        "Sea wind makes every season feel colder on the coast; pack one layer more than the forecast suggests.",
+        "September weekdays are the local cheat code: warm sea, open beaches, summer prices gone."
+      ]
+    }
+  },
+  "festivals-events": {
+    "_emoji": "🎆",
+    "en": {
+      "h1": "Busan Festivals & Events a Local Would Plan Around",
+      "title": "Busan Festivals a Local Plans Around | KoreaPlus",
+      "metaDesc": "Fireworks over Gwangan Bridge, sand art at Haeundae, Jagalchi seafood, Saturday drone shows — a Busan local's festival calendar with real insider tips.",
+      "lead": "Locals don't discover Busan festivals — we schedule around them. The Saturday drone show is a weekly ritual, spring means baseball at Sajik, May brings sand sculptures, and October stacks film stars, seafood and Korea's biggest fireworks into one frantic month. Here's the calendar I plan my own year around, with the timing tricks that matter.",
+      "facts": [
+        "The Busan Fireworks Festival launches roughly 80,000 fireworks off Gwangan Bridge — Korea's biggest single-night show.",
+        "The Gwangalli M Drone Light Show runs free every Saturday, all year, twice a night.",
+        "October usually stacks BIFF, the Jagalchi Festival and the fireworks festival into one month.",
+        "Haeundae's sand sculptures typically stay on display for weeks after the May festival weekend.",
+        "Nampo-dong's Christmas light festival glows from early December into the new year — recently even into February.",
+        "Sajik's Lotte Giants crowd created Korea's famous newspaper-hat and orange-bag cheering culture."
+      ],
+      "sections": [
+        {
+          "h": "A year in Busan, the way locals count it",
+          "paras": [
+            "Ask a Busan native what month it is and they might answer with an event: sand season, BIFF week, fireworks weekend. The big ones cluster hard in autumn, which is wonderful and brutal — hotels spike, trains fill. Every date below shifts a little each year, so treat this as the rhythm, not gospel, and confirm each festival's official page before you book."
+          ],
+          "listType": "ul",
+          "list": [
+            "May: Haeundae Sand Festival — sculptures linger for weeks after",
+            "Late September–October: BIFF, the city's ten-day film takeover",
+            "October: Jagalchi Festival; the fireworks festival usually late October–November",
+            "December–January: Christmas Tree lights along Gwangbok-ro in Nampo-dong",
+            "Late March–October: Lotte Giants home games at Sajik",
+            "Every Saturday, year-round: Gwangalli M Drone Light Show, free"
+          ]
+        },
+        {
+          "h": "The Fireworks Festival: beach, Igidae, or the mountain?",
+          "paras": [
+            "The Busan Fireworks Festival (부산불꽃축제) fires roughly 80,000 shells off Gwangan Bridge, usually one Saturday evening in late October or November — the exact date moves, and has even shifted after announcement, so check the official page. The free beach fills astonishingly early; by mid-afternoon good sand is gone. Paid reserved seats are sold through official channels most years and disappear fast.",
+            "Locals mostly skip the beach. Igidae (이기대), the coastal park across the water, frames bridge, fireworks and skyline in one view — walk in two to three hours early with a mat. Hwangnyeongsan (황령산) gives the from-above version if you claim a spot before sunset. Afterwards, don't rush the metro; eat in Millak (민락) and let the crowd drain first."
+          ]
+        },
+        {
+          "h": "October takeover: BIFF and the Jagalchi Festival",
+          "paras": [
+            "BIFF — the Busan International Film Festival (부산국제영화제) — takes over the city for about ten days, usually in early October, though recent editions have started in late September. Screenings and star sightings center on the Busan Cinema Center in Centum City; our Film City & BIFF guide covers venues and ticketing, so here I'll just warn you: Haeundae-area rooms vanish for that window.",
+            "The same month, the Jagalchi Festival (부산 자갈치축제) turns Korea's most famous fish market into its largest seafood festival — usually four days in late October, opening with fireworks over the southern port. Free tastings, sea-ritual reenactments, market energy at maximum. Go hungry, go before lunch, and check the official page for the year's dates."
+          ]
+        },
+        {
+          "h": "Sand in May, lights in December",
+          "paras": [
+            "The Haeundae Sand Festival (해운대 모래축제) usually runs a long weekend in May: international carvers raise building-sized sculptures right on the beach, with evening projection shows on the sand. Local secret — the sculptures typically stay up for weeks afterward, so a weekday morning in late May or early June gets you the art without the festival crush.",
+            "Winter belongs to Nampo-dong. The Busan Christmas Tree Cultural Festival (부산크리스마스트리문화축제) strings Gwangbok-ro with light tunnels and giant trees, usually from early December into January — recent editions have stretched even later. It's an evening event; pair it with Gukje Market street food and a hotteok from BIFF Square."
+          ]
+        },
+        {
+          "h": "Baseball season and the Saturday drone habit",
+          "paras": [
+            "From late March to October, the Lotte Giants (롯데 자이언츠) turn Sajik Baseball Stadium into what locals half-jokingly call the world's biggest noraebang. Join the traditions: newspapers folded into cheering hats, the orange plastic-bag headgear that appears in late innings, and the full-stadium 'Busan Galmaegi' singalong. Weekday games are easy tickets; weekends sell out. Our night-views guide covers the stadium itself.",
+            "And every Saturday, all year, the Gwangalli M Drone Light Show (광안리 M 드론라이트쇼) sends a swarm of drones over the water for free — twice a night, with themes that change monthly. It's the closest thing Busan has to a weekly festival, and locals plan dinner reservations around it."
+          ]
+        },
+        {
+          "h": "Dates move — how to plan without getting burned",
+          "paras": [
+            "Busan festival dates are sometimes announced only weeks ahead, and they do shift — the fireworks festival has changed its date within the same season. Book refundable rooms for autumn, follow Visit Busan's English site, and always confirm the year's schedule on the official festival page before locking in trains or flights. Weather cancellations happen too; typhoon season overlaps early autumn."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Busan Fireworks Festival (Gwangalli Beach)",
+          "kr": "부산불꽃축제",
+          "wiki": "Busan Fireworks Festival",
+          "desc": "Korea's biggest fireworks show: tens of thousands of shells launched off Gwangan Bridge, usually one autumn Saturday evening. The beach, the cafe strip and every rooftop become one enormous grandstand. Confirm the date on the official page.",
+          "tip": "Beach space goes by mid-afternoon. If you'd rather sit, grab the officially sold reserved seats the moment they're announced.",
+          "mapQ": "Gwangalli Beach Busan"
+        },
+        {
+          "name": "Igidae Coastal Park (fireworks vantage)",
+          "kr": "이기대",
+          "wiki": "Igidae",
+          "desc": "The rocky coastal park opposite Gwangalli. On fireworks night its shoreline path frames bridge, skyline and shells in one panorama — the composition photographers fight for. On normal days, a gorgeous cliff walk.",
+          "tip": "Arrive two to three hours early with a mat and a headlamp; the path back is dark after the finale.",
+          "mapQ": "Igidae Coastal Walking Trail Busan"
+        },
+        {
+          "name": "Haeundae Sand Festival",
+          "kr": "해운대 모래축제",
+          "wiki": "Haeundae Beach",
+          "desc": "Korea's largest sand festival: international carvers raise building-sized sculptures on Haeundae Beach, usually over a May long weekend, with nightly projection shows. Free and family-friendly by day.",
+          "tip": "Sculptures usually stay up for weeks after closing — a weekday morning visit means empty photos.",
+          "mapQ": "Haeundae Beach Busan"
+        },
+        {
+          "name": "Busan Jagalchi Festival",
+          "kr": "부산 자갈치축제",
+          "wiki": "Jagalchi Market",
+          "desc": "Korea's largest seafood festival at its most famous fish market — usually four October days of free tastings, sea-ritual reenactments and harborside fireworks. The market's ordinary chaos, turned up to eleven.",
+          "tip": "Free tastings run out before noon — come early and hungry, and bring cash for the stalls.",
+          "mapQ": "Jagalchi Market Busan"
+        },
+        {
+          "name": "Busan Christmas Tree Cultural Festival",
+          "kr": "부산크리스마스트리문화축제",
+          "wiki": "",
+          "desc": "Gwangbok-ro in Nampo-dong becomes a canyon of light tunnels, giant trees and small stages, usually early December into January — recent editions ran later. Free, and best after dark when everything switches on.",
+          "tip": "Come on a weekday evening; weekend crowds crawl. Climb toward Yongdusan Park for a quieter view over the lights.",
+          "mapQ": "Gwangbok-ro Nampo-dong Busan"
+        },
+        {
+          "name": "Gwangalli M Drone Light Show",
+          "kr": "광안리 M 드론라이트쇼",
+          "wiki": "Gwangalli Beach",
+          "desc": "Busan's weekly free 'festival': a swarm of drones paints stories over Gwangalli every Saturday night, twice nightly, with themes changing monthly. Roughly twelve minutes of pure phone-camera joy.",
+          "tip": "Winter shows start earlier than summer ones, and weather cancellations are announced same-day — check the official notice before heading out.",
+          "mapQ": "Gwangalli Beach Busan"
+        }
+      ],
+      "faq": [
+        [
+          "When is the Busan Fireworks Festival?",
+          "Usually one Saturday in autumn — recent editions have landed between late October and mid-November, and the date has shifted even after announcement. Never book around an assumed date; confirm on the official festival page or Visit Busan's English site once the year's schedule is out."
+        ],
+        [
+          "Is the fireworks festival free?",
+          "Watching from the beach, Igidae or the hillsides is free; paid reserved seating is usually offered through official channels and sells out quickly. Free spots are first-come — locals claim beach sand by mid-afternoon and Igidae positions a couple of hours before showtime."
+        ],
+        [
+          "Is the Gwangalli drone show really every week?",
+          "Yes — every Saturday year-round, free, twice a night, with earlier start times in the colder months. Shows run about twelve minutes, and bad weather can cancel with same-day notice, so check the official schedule page before making the trip."
+        ],
+        [
+          "Which month is best for festival-hopping in Busan?",
+          "October, no contest: BIFF, the Jagalchi Festival and, most years, the fireworks festival stack into a few weeks, with beach weather still pleasant. The trade-off is the year's toughest hotel prices — book early and refundable."
+        ],
+        [
+          "Can I see the sand sculptures if I miss the Sand Festival weekend?",
+          "Usually yes. The festival proper is a long weekend, typically in May, but the sculptures normally remain on display for several weeks afterward — check the year's official notice for exact display dates."
+        ],
+        [
+          "How do I get Lotte Giants tickets?",
+          "Weekday games are usually easy to buy at short notice through Korean ticketing apps or at the stadium; weekend and rivalry games sell out. The season runs roughly late March to October. Sit near the cheering sections — the fun is the crowd, not the score."
+        ]
+      ],
+      "tips": [
+        "Autumn hotels near Gwangalli spike around fireworks weekend — book refundable early, or stay in Seomyeon and ride the metro in.",
+        "For fireworks on the beach, claim sand by mid-afternoon; for Igidae, walk in two to three hours early with a mat.",
+        "After the fireworks finale, don't rush Gwangan Station — dinner in Millak first lets the crush drain.",
+        "Drone show times: roughly 20:00 and 22:00 in warm months, 19:00 and 21:00 in cold ones. Arrive fifteen minutes early.",
+        "Sand Festival sculptures linger for weeks — weekday mornings after the festival mean empty-beach photos.",
+        "Jagalchi Festival tastings vanish before noon; go early and hungry.",
+        "At Sajik, grab a newspaper on the way in — you'll want the folded hat by the third inning.",
+        "Every festival announces dates on its own official page, sometimes only weeks ahead — recheck before booking anything nonrefundable."
+      ]
+    }
+  },
+  "war-capital-history": {
+    "_emoji": "🏛️",
+    "en": {
+      "h1": "Busan's Korean War Story — the Wartime Capital, Walked",
+      "title": "Busan's Korean War Sites: the Wartime Capital | KoreaPlus",
+      "metaDesc": "Why Busan is the way it is: the 1950–53 wartime capital, the world's only UN cemetery, the 40 Steps and the city's refugee roots — walked with respect.",
+      "lead": "Every Busan guide mentions it in passing — refugee noodles, hillside villages, market alleys born of nothing. This page ties those threads together. For 1,023 days this was Korea's wartime capital, the one major city that never fell, and it absorbed a nation on the move. Walk these sites and the whole city suddenly makes sense.",
+      "facts": [
+        "Busan was the Republic of Korea's capital for 1,023 days across 1950–53 — the only major city never captured in the war.",
+        "The UN Memorial Cemetery is the world's only United Nations cemetery; about 2,300 fallen from 11 nations rest there.",
+        "Its Wall of Remembrance carries the names of 40,896 UN service members killed or missing in Korea.",
+        "War refugees more than doubled the city's population; Gamcheon, Gukje Market, Bosu-dong Book Alley and milmyeon all date from those years.",
+        "Every 11 November at 11:00, the worldwide 'Turn Toward Busan' minute of silence faces this city.",
+        "The wartime-capital sites are on Korea's UNESCO World Heritage Tentative List."
+      ],
+      "sections": [
+        {
+          "h": "The city that held the line",
+          "paras": [
+            "In the summer of 1950 the war had swallowed nearly the whole peninsula; what held was the Busan Perimeter, a last defensive arc along the Nakdong River (낙동강). Busan became the only major city never taken, so the government came here — August to October 1950, then January 1951 until August 1953. Count it up and Busan was the Republic's capital for 1,023 days.",
+            "The port ran the war effort: troops and supplies from sixteen UN combat nations, plus six medical-support nations, moved through these docks — over 5.5 million tons of materiel by the city's own count. That is why the memorials cluster here."
+          ]
+        },
+        {
+          "h": "A city doubled by refugees",
+          "paras": [
+            "Refugees more than doubled the city — a port of well under half a million swelled past a million as two great waves arrived, in late 1950 and after the January 1951 retreat. People lived on staircases, docks and hillsides, and improvised everything: homes, markets, food. Much of what you love about Busan today was born in that improvisation."
+          ],
+          "list": [
+            "Gamcheon Culture Village (감천문화마을) grew from 1950s refugee and Taegeukdo settlements on a steep hillside — our hidden-neighborhoods guide walks it.",
+            "Gukje Market (국제시장) boomed on relief goods and army-surplus trading — the full tour is in markets-street-food.",
+            "Bosu-dong Book Alley (보수동 책방골목) began in 1950 with refugees trading used books — also in the markets guide.",
+            "Milmyeon (밀면) is northern naengmyeon remade with aid-programme wheat flour — the story and where to eat it are in eat-like-a-local."
+          ],
+          "listType": "ul"
+        },
+        {
+          "h": "The walk: old downtown to the cemetery",
+          "paras": [
+            "You can walk the story in half a day, moving through three districts. Start in old Jung-gu (중구), where the wartime city actually lived, then ride the metro out to the cemetery. In this order:"
+          ],
+          "list": [
+            "Busan Modern & Contemporary History Museum (부산근현대역사관) — the century of context, inside the former Bank of Korea building.",
+            "40 Gyedan (40계단) — three minutes away; the stairs where separated families hoped to reunite.",
+            "Provisional Capital Memorial Hall (임시수도기념관) — Line 1 to Toseong; the president's wartime residence.",
+            "Former Government Building (임시수도 정부청사) — five minutes uphill, now Dong-A University's Seokdang Museum.",
+            "UN Memorial Cemetery (유엔기념공원) — Line 2 to Daeyeon; leave the most time, and the most quiet, for last."
+          ],
+          "listType": "ol"
+        },
+        {
+          "h": "Visiting with respect",
+          "paras": [
+            "These are working memorial sites, not photo stops — veterans' families still come, and Korean school groups are taught to treat them with care. Visitors who do the same are warmly received."
+          ],
+          "list": [
+            "Keep voices low and phones silent, especially inside the cemetery gates.",
+            "Dress neatly; beachwear reads as disrespect here.",
+            "Stay on the paths — grave plots and memorial lawns are off-limits.",
+            "No food, drinks or pets in the cemetery; photograph discreetly, never during ceremonies or near mourners.",
+            "If your country served under the UN flag, find its monument — eleven nations have graves here, and more have memorials."
+          ],
+          "listType": "ul"
+        },
+        {
+          "h": "Remembering, the Busan way",
+          "paras": [
+            "Every 11 November at 11:00, sirens sound and people around the world — the tradition was begun by a Canadian veteran — turn toward Busan for a minute of silence. In recent years, elderly UN veterans have chosen to be buried here beside their comrades, seven decades on.",
+            "Korea has placed the wartime-capital sites on its UNESCO World Heritage Tentative List. Busan isn't a city with war memorials bolted on; it is a city the war built — and this walk is the clearest way to feel that."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "UN Memorial Cemetery (UNMCK)",
+          "kr": "유엔기념공원",
+          "wiki": "United Nations Memorial Cemetery",
+          "desc": "The world's only United Nations cemetery, laid out in 1951: about 2,300 fallen from 11 nations rest here, from the 462-strong Turkish section to the Commonwealth rows, beside a Wall of Remembrance bearing 40,896 names.",
+          "tip": "Free. Daeyeon Station Exit 3, about 15 minutes' walk. Weekday late afternoons are near-silent; don't skip the Wall of Remembrance.",
+          "mapQ": "UN Memorial Cemetery Busan"
+        },
+        {
+          "name": "Provisional Capital Memorial Hall",
+          "kr": "임시수도기념관",
+          "wiki": "Provisional Capital Memorial Hall",
+          "desc": "President Syngman Rhee lived and worked in this 1926 former governor's residence while Busan was the capital. The restored office, study and living quarters make the wartime government feel startlingly domestic.",
+          "tip": "Free, closed Mondays. The five-minute walk to the former Government Building completes the picture.",
+          "mapQ": "Provisional Capital Memorial Hall Busan"
+        },
+        {
+          "name": "40 Gyedan (40 Steps) & Theme Street",
+          "kr": "40계단 문화관광테마거리",
+          "wiki": "",
+          "desc": "'Meet me at the 40 steps' — the stairway where separated refugee families hoped to find each other again, now ringed by a themed street of bronze statues recalling the shantytown years.",
+          "tip": "The bronze accordion player mid-stairs marks the spot; the small 40 Steps culture hall up the street is free.",
+          "mapQ": "40 Steps Culture Tourism Theme Street Busan"
+        },
+        {
+          "name": "Busan Modern & Contemporary History Museum",
+          "kr": "부산근현대역사관",
+          "wiki": "Busan Modern History Museum",
+          "desc": "Busan's modern century — colonial port, wartime capital, boom town — told inside the former Bank of Korea branch, fully opened in 2024, with an annex in a 1929 colonial-era building nearby.",
+          "tip": "Free, closed Mondays. Start here: it frames everything else on the walk, and the 40 Steps are minutes away.",
+          "mapQ": "Busan Modern and Contemporary History Museum"
+        },
+        {
+          "name": "Former Government Building (Seokdang Museum)",
+          "kr": "임시수도 정부청사",
+          "wiki": "",
+          "desc": "The red-brick 1925 Gyeongnam Provincial Hall housed the national government through the wartime years; today it is Dong-A University's Seokdang Museum and a registered cultural heritage building.",
+          "tip": "Five minutes uphill from the Memorial Hall. Look for the restored Busan streetcar displayed outside — the city's last tram.",
+          "mapQ": "Dong-A University Seokdang Museum Busan"
+        },
+        {
+          "name": "UN Peace Memorial Hall",
+          "kr": "유엔평화기념관",
+          "wiki": "",
+          "desc": "A modern exhibition hall on the UN's part in the war — veteran testimonies, uniforms, the Busan Perimeter explained — anchoring the Peace Park zone beside the cemetery.",
+          "tip": "Free; visit after the cemetery via leafy UN Peace Park. A good indoor fallback when it rains.",
+          "mapQ": "UN Peace Memorial Hall Busan"
+        },
+        {
+          "name": "Busan Citizens Park",
+          "kr": "부산시민공원",
+          "wiki": "Busan Citizens Park",
+          "desc": "The US Army's Camp Hialeah until 2006, reborn as the city's great lawn in 2014 — preserved base buildings and a small history hall keep the military-era layers visible.",
+          "tip": "A gentle decompression stop after the heavy sites — kids can run, and the history hall is free.",
+          "mapQ": "Busan Citizens Park"
+        }
+      ],
+      "faq": [
+        [
+          "Why is Busan called Korea's wartime capital?",
+          "When Seoul fell in June 1950 the government retreated south, and from August 1950 (with one brief return north) until August 1953 Busan was the seat of the Republic of Korea — 1,023 days in all. The Busan Perimeter along the Nakdong River held, so it was the only major city never captured."
+        ],
+        [
+          "Is the UN Memorial Cemetery free, and how do I get there?",
+          "Yes, entry is free. Take Metro Line 2 to Daeyeon Station, Exit 3, then walk about 15 minutes; buses and taxis also work. Typical hours run roughly 09:00–17:00, later in summer — check the official UNMCK site before you go, especially around ceremony dates."
+        ],
+        [
+          "What etiquette should I follow at the cemetery?",
+          "Keep voices low, dress neatly, and stay on the paths — grave plots and lawns are off-limits. No food, drinks or pets inside. Photography is allowed, but be discreet near mourners and during ceremonies. Treat it as you would any national cemetery: you are a guest of eleven nations' families."
+        ],
+        [
+          "How much time does the war-history route take?",
+          "Half a day covers the downtown sites — the history museum, 40 Steps and Memorial Hall. A full day adds the UN Memorial Cemetery, Peace Memorial Hall and Busan Museum without rushing. With only two hours, choose the cemetery; it is the emotional core of the whole story."
+        ],
+        [
+          "What is 'Turn Toward Busan'?",
+          "Every 11 November at 11:00, sirens sound and participants worldwide — veterans, families, schoolchildren — face Busan for a minute of silence honoring the UN fallen buried here. Memorial events run at the cemetery that week; check the official UNMCK page for each year's programme."
+        ],
+        [
+          "Is this route okay with children?",
+          "Yes — Korean school groups visit constantly. The 40 Steps street and Busan Citizens Park are easy wins, and the museums are free. Brief children on cemetery quiet rules before the gates; if energy runs low, our busan-with-kids guide has nearby escapes."
+        ],
+        [
+          "How do Gamcheon and Gukje Market connect to the war?",
+          "Directly. Gamcheon's terraced lanes grew from 1950s refugee and Taegeukdo settlements, and Gukje Market rose on relief goods and surplus traded by displaced people. This page gives you the history; the hidden-neighborhoods and markets-street-food guides walk you through the places themselves."
+        ]
+      ],
+      "tips": [
+        "Every core site on this page is free — cemetery, both museums, Memorial Hall, 40 Steps. Budget only transport and lunch.",
+        "Metro shorthand: Jungang (Line 1) for the 40 Steps, Toseong (Line 1) for the Memorial Hall, Daeyeon (Line 2) for the cemetery.",
+        "Most museums on this route close Mondays; the cemetery and the 40 Steps street stay open every day.",
+        "The cemetery closes by early evening, earlier in winter — never leave it for last on a short winter day.",
+        "Eat milmyeon for lunch — it is wartime refugee food itself; the eat-like-a-local guide has the full story.",
+        "Rain plan: both history museums and the UN Peace Memorial Hall are fully indoors — the rainy-day guide has more.",
+        "Visiting around 11 November? Ceremonies peak that week — deeply moving, but check the official UNMCK page for timings and access changes.",
+        "Brief kids on cemetery quiet before the gates, and promise them Busan Citizens Park's lawns afterward."
+      ]
+    }
+  },
+  "budget-busan": {
+    "_emoji": "💰",
+    "en": {
+      "h1": "Busan on a Budget — What a Day Really Costs",
+      "title": "Busan on a Budget: What a Day Really Costs | KoreaPlus",
+      "metaDesc": "What a Busan day really costs: three honest daily budgets in won, the free list, ₩6,000 day-pass math, market eating and the overspends locals skip.",
+      "lead": "Busan is one of Korea's kindest big cities to a wallet — the best things here are genuinely free and the best food is the cheapest. Here's what a real day costs at three honest levels, the metro math, and the markups we locals quietly walk past. All prices are typical ranges; check official pages for anything dated.",
+      "facts": [
+        "Metro ride: about ₩1,600 by card · 1-day pass ₩6,000 (metro only)",
+        "Taxi base fare ₩4,800 · night surcharge 23:00–04:00",
+        "Beomeosa and 64 other temples: admission fees abolished May 2023",
+        "Gwangalli M Drone Light Show: free, Saturdays, twice a night",
+        "Gukbap staple meal: typically ₩8,000–10,000 · franchise coffee about ₩2,000",
+        "Tipping does not exist in Korea — prices are final"
+      ],
+      "sections": [
+        {
+          "h": "Three honest daily budgets",
+          "paras": [
+            "These are full-day figures — bed, three meals, transport, one paid activity — at typical 2026 prices, per person. Busan rewards the low end: an ₩8,000–10,000 gukbap (국밥) outclasses most ₩30,000 tourist dinners. Your pillow moves the number more than anything else, so the tiers differ mainly by where you sleep and one daily splurge."
+          ],
+          "listType": "ul",
+          "list": [
+            "Backpacker, roughly ₩50,000–70,000: guesthouse dorm (₩20,000–35,000), gukbap and market meals, ₩2,000 franchise coffee, ₩6,000 metro day pass, free beaches and temples.",
+            "Mid-range, roughly ₩90,000–140,000: clean motel or business hotel (₩50,000–80,000), one proper sit-down meal, a jjimjilbang session (₩10,000–15,000), transit plus one short taxi.",
+            "Comfortable, roughly ₩180,000–300,000: 3–4-star hotel (₩120,000–200,000+, sea view extra), a hoe (회, raw fish) dinner, Spa Land at about ₩20,000, taxis whenever tired."
+          ]
+        },
+        {
+          "h": "The free list is the good list",
+          "paras": [
+            "Busan's headline sights cost nothing: every beach, the Igidae (이기대) and Dalmaji coastal paths, Gamcheon's painted lanes, and — since Korea abolished temple admission fees in May 2023 — the grounds of Beomeosa (범어사) and 64 other Jogye temples. Saturdays add a free drone show over Gwangalli (광안리). Our beaches, night-views and temples guides map the details; a backpacker day can be built entirely from this list."
+          ]
+        },
+        {
+          "h": "Transit math: pass, card or taxi",
+          "paras": [
+            "A card ride on the metro is about ₩1,600 (₩1,700 by paper ticket or QR), so the ₩6,000 one-day pass breaks even on ride four — normal for a sightseeing day — and a ₩13,000 three-day version exists. For three or four people hopping a couple of stops, one taxi from the ₩4,800 base fare often beats everyone tapping separately. Fares rose twice recently, so treat these as typical and check current prices."
+          ]
+        },
+        {
+          "h": "Eat where the regulars eat",
+          "paras": [
+            "The cheap food here is the good food. Follow office workers at lunch to dwaeji-gukbap (돼지국밥) or milmyeon (밀면) counters, where ₩8,000–10,000 buys a full meal with refillable sides and free water. Markets stack the snacks — eomuk (어묵), ssiat hotteok (씨앗호떡), tteokbokki — at roughly ₩1,000–3,000 apiece. Our eat-like-a-local and markets guides name names; the budget rule is simple: no photo menus, no touts, follow the queue."
+          ]
+        },
+        {
+          "h": "Sleep cheap by sleeping smart",
+          "paras": [
+            "Your bed sets the budget. The same comfort costs least around Seomyeon (서면) and Nampo (남포동) — dorms typically ₩20,000–35,000, decent motels ₩50,000–80,000 — and most beside the Haeundae sand, where a sea view can nearly double a room. Sleeping central and metro-ing to the beaches is the local-approved cheat; our where-to-stay guide breaks down each area's price logic, and Friday–Saturday nights spike everywhere."
+          ]
+        },
+        {
+          "h": "Where tourists overspend — and locals don't",
+          "paras": [
+            "The classic leaks: ₩7,000 lattes bought for a sea view the sand gives you free; hotel breakfasts at ₩20,000-plus when the gukbap house next door charges ₩9,000; taxis at rush hour, when the meter ticks while you crawl; and raw-fish dinners ordered without agreeing prices first. None are scams — they're just the tourist path of least resistance.",
+            "And the happiest saving of all: tipping does not exist in Korea. Not in taxis, restaurants, cafés or hotels — prices are final, service is included, and leaving extra genuinely confuses people. Budget exactly what the menu says."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Gukje Market",
+          "kr": "국제시장",
+          "wiki": "Gukje Market",
+          "desc": "Nampo's post-war market sprawl is budget headquarters: clothes, homewares and food alleys where ₩10,000 is a feast. It blends straight into Bupyeong Kkangtong Market (부평깡통시장) and the street-food rows.",
+          "tip": "Eat in the interior food alleys where the stallholders themselves lunch, not the outward tourist-facing rows — same dishes, calmer prices.",
+          "mapQ": "Gukje Market Busan"
+        },
+        {
+          "name": "Jagalchi Market",
+          "kr": "자갈치시장",
+          "wiki": "Jagalchi Market",
+          "desc": "Korea's largest fish market. Raw fish is the splurge; the budget move is a grilled-fish set meal or eomuk from the stalls ringing the building, around ₩10,000.",
+          "tip": "Ordering hoe upstairs? Agree the all-in price — fish plus table-setting charge — before you sit down.",
+          "mapQ": "Jagalchi Market Busan"
+        },
+        {
+          "name": "Gamcheon Culture Village",
+          "kr": "감천문화마을",
+          "wiki": "Gamcheon Culture Village",
+          "desc": "The painted hillside costs nothing to wander — the best free half-day in the city. The optional ₩2,000 stamp map funds village projects and ends in souvenir postcards.",
+          "tip": "Take bus 2-2 from near Toseong Station uphill and walk down — spend energy, not money, in the lanes.",
+          "mapQ": "Gamcheon Culture Village Busan"
+        },
+        {
+          "name": "Beomeosa",
+          "kr": "범어사",
+          "wiki": "Beomeosa",
+          "desc": "Busan's grandest temple dropped its admission fee in May 2023, when Korea scrapped charges at 65 Jogye-order temples. A genuine mountain monastery, now completely free to enter.",
+          "tip": "Metro to Beomeosa Station, then bus 90 up the mountain — the transit taps are the morning's entire cost.",
+          "mapQ": "Beomeosa Temple Busan"
+        },
+        {
+          "name": "Gwangalli Beach",
+          "kr": "광안리해수욕장",
+          "wiki": "Gwangalli Beach",
+          "desc": "Gwangan Bridge views all evening for free, plus the M Drone Light Show on Saturday nights — currently twice a night, times shifting by season. Weather cancels at short notice.",
+          "tip": "Check the official show page that week, claim sand early — and remember nearby Millak Waterside Park is alcohol-free now.",
+          "mapQ": "Gwangalli Beach Busan"
+        },
+        {
+          "name": "Igidae Coastal Walk",
+          "kr": "이기대",
+          "wiki": "Igidae",
+          "desc": "A free clifftop boardwalk with the city's best Gwangan Bridge panorama. Anywhere else, this two-hour coastal walk would sell tickets.",
+          "tip": "Start late afternoon and walk toward Oryukdo — sunset plus the bridge lights for a single bus fare.",
+          "mapQ": "Igidae Coastal Walk Busan"
+        },
+        {
+          "name": "Dadaepo Beach",
+          "kr": "다대포해수욕장",
+          "wiki": "Dadaepo Beach",
+          "desc": "The end-of-Line-1 beach with Busan's widest sunset, entirely free. The Sunset Fountain of Dreams adds free evening shows in the warmer months — check the current schedule first.",
+          "tip": "It's a long ride out — this is the day the ₩6,000 metro pass earns its keep.",
+          "mapQ": "Dadaepo Beach Busan"
+        },
+        {
+          "name": "Yongdusan Park",
+          "kr": "용두산공원",
+          "wiki": "Yongdusan Park",
+          "desc": "The free hilltop park above Nampo, reached by street escalators from the shopping alleys. Harbour views cost nothing; only the tower observatory charges.",
+          "tip": "Skip the paid tower — our night-views guide lists better panoramas that cost nothing at all.",
+          "mapQ": "Yongdusan Park Busan"
+        }
+      ],
+      "faq": [
+        [
+          "How much is a realistic daily budget for Busan?",
+          "Typically ₩50,000–70,000 for a dorm-and-markets backpacker day, ₩90,000–140,000 for a motel-and-restaurants middle, and ₩180,000–300,000 with a 3–4-star hotel and a raw-fish dinner. Weekday off-season trips land near the bottom of each band; summer weekends push the top. All figures are typical ranges, not quotes."
+        ],
+        [
+          "Is the ₩6,000 metro day pass worth it?",
+          "From the fourth ride, yes — card rides are about ₩1,600. But the pass covers the metro only; Gamcheon and Songdo need buses, where a T-money card with its free transfers within 30 minutes wins. Do the math against your actual route, not the brochure."
+        ],
+        [
+          "Do I need to tip anywhere in Busan?",
+          "No — nowhere, ever. Not taxis, restaurants, cafés or hotels. Prices are final and service is included; staff will chase you down the street to return money they think you forgot. Enjoy budgeting to the exact won printed on the menu."
+        ],
+        [
+          "Is Busan cheaper than Seoul?",
+          "Modestly, yes. Beds and market meals run a little lower, and far more of the headline sights are free — beaches, coastal walks, the Saturday drone show, temple grounds. The exception is high season in Haeundae, where sea-view rooms price like Seoul's smartest districts. Book those early or sleep inland."
+        ],
+        [
+          "When does a taxi beat the metro?",
+          "With three or four people going a stop or two, with luggage, or after the metro closes for the night. Base fare is ₩4,800. Avoid weekday rush hours around 8–9:30am and 6–7:30pm, when the meter ticks in stalled traffic, and note the 23:00–04:00 night surcharge."
+        ],
+        [
+          "How much cash should I carry?",
+          "Less than you'd think — cards work almost everywhere, taxis included. Keep ₩30,000–50,000 in small notes for market stalls, some old-school counters, and bus fares if you skip a transit card. ATMs marked 'Global' take foreign cards; airport exchange desks give the worst rates."
+        ]
+      ],
+      "tips": [
+        "A convenience-store breakfast — coffee, gimbap, fruit — runs about ₩4,000–5,000, and locals genuinely do it.",
+        "Budget coffee chains charge roughly ₩1,500–2,500 for an Americano; sea-view cafés charge ₩6,000–8,000 for the glass wall.",
+        "The day pass covers metro only — buses need T-money, which also gives free transfers within 30 minutes.",
+        "Restaurant water and side-dish refills are free; asking for more banchan is normal, not cheeky.",
+        "A jjimjilbang overnight (typically ₩15,000–25,000) is the classic budget bed — see our hot-springs guide.",
+        "Friday and Saturday nights spike room prices; shift beach-area stays to weekdays and pocket the difference.",
+        "Skip the ₩20,000-plus hotel breakfast — there's always a gukbap house within two blocks doing it better.",
+        "Millak Waterside Park has been alcohol-free since July 2023, with a ₩50,000 fine — older blogs still show the parties."
+      ]
+    }
+  },
+  "active-outdoors": {
+    "_emoji": "🏄",
+    "en": {
+      "h1": "Active Busan: Surf, Hike, Paddle, Run",
+      "title": "Active Busan: Surf, Hike, Paddle & Run | KoreaPlus",
+      "metaDesc": "Surf year-round at Songjeong, SUP under Gwangan Bridge, hike the Galmaetgil and Geumjeongsan ridge — a Busan local's guide to doing, not just seeing.",
+      "lead": "Busan's coastline isn't just scenery — it's equipment. This is for travellers who'd rather stand on a board than at a viewpoint: Songjeong's year-round surf, SUP beneath Gwangan Bridge, the Galmaetgil's finest cliff section, Geumjeongsan's ridge, and the flat river paths locals run and ride at dawn. All doable without a car.",
+      "facts": [
+        "The Galmaetgil totals about 278 km — '700 ri' — in 9 courses and 21 sections circling the entire city.",
+        "Songjeong is Korea's original year-round surf beach; schools rent boards and wetsuits every month of the year.",
+        "The Oryukdo Skywalk is free — a glass horseshoe hanging some 35 m above the sea.",
+        "Geumjeongsan's Joseon-era fortress wall runs roughly 18 km along the ridge, Korea's largest mountain fortress.",
+        "Lifeguarded sea swimming runs only from late June to mid-September; surfing and hiking never stop."
+      ],
+      "sections": [
+        {
+          "h": "Songjeong, Korea's year-round surf town",
+          "paras": [
+            "One tunnel past Haeundae, Songjeong (송정) runs on surf time. A strip of schools along the beach road rents boards and wetsuits twelve months a year, and the sandy-bottomed beginner waves are as forgiving as Korea gets. A two-hour group lesson with all gear typically costs ₩50,000–70,000; book a day ahead in July–August. Autumn brings the cleanest swell, and locals keep paddling out right through January.",
+            "During the official swim season — roughly late June to mid-September — lifeguards split the water into swim and surf zones. Follow the flags and the surf-school staff and you'll be fine."
+          ]
+        },
+        {
+          "h": "SUP beneath the Gwangan Bridge",
+          "paras": [
+            "Gwangalli (광안리) is the paddle shot everyone wants: you, a board, and Gwangan Bridge (광안대교) filling the frame. A designated SUP zone, set up in 2020, keeps paddlers clear of swimmers, and several shops on the strip run intro lessons and rentals with showers and lockers. Mornings are glassy; afternoons chop up. The sunset slot is the one to book — the bridge lights switch on while you're still afloat."
+          ]
+        },
+        {
+          "h": "The Galmaetgil — and the one section to do",
+          "paras": [
+            "The Galmaetgil (갈맷길), 'seagull way' after the city's mascot bird, is Busan's 700-ri walking network — about 278 km in 9 courses and 21 sections looping the whole city. Nobody walks it all on holiday. The section worth flying for is the Oryukdo–Igidae coastal stretch: roughly 5 km of cliffs, boardwalks and skyline-across-the-water views.",
+            "Do it properly: bus 24 or 131 to Oryukdo (오륙도), the free glass Skywalk first, then north along the Igidae (이기대) cliffs to the Dongsaengmal trailhead — 2 to 2.5 hours with plenty of stairs. Use the toilets at either end and carry water; there is nothing in between. Our beaches guide covers the gentler shoreline strolls."
+          ]
+        },
+        {
+          "h": "Geumjeongsan: the ridge walk",
+          "paras": [
+            "Geumjeongsan (금정산) is Busan's roof, and the Joseon-era fortress wall riding its ridge — around 18 km of it — is the city's classic hill day. The insider version: take the Geumgang Park cable car up from the Oncheonjang side, walk the ridge north to the fortress's North Gate, then drop to Beomeosa (범어사) and its metro station. Half a day, moderate legs. The temple itself belongs to our temples-and-mountains guide."
+          ]
+        },
+        {
+          "h": "Run and ride like a resident",
+          "paras": [
+            "Dawn on Gwangalli sand is Busan's unofficial running club: firm low-tide sand, empty boardwalk, sunrise beside the bridge. Inland, the Oncheoncheon (온천천) stream path gives kilometres of flat, traffic-free tarmac through Dongnae — outrageous under April's cherry blossoms — and joins the Suyeong River path toward the sea.",
+            "Cyclists get the Nakdong estuary: pancake-flat levee paths where Korea's cross-country river trail ends. Public rental spots at Samnak (삼락) Ecological Park and on Eulsukdo (을숙도) island lend adult and kids' bikes — bring ID; hours are roughly 9 to 6, shorter in winter. Spin south to Dadaepo (다대포) for sunset."
+          ]
+        },
+        {
+          "h": "Seasons, safety, small print",
+          "paras": [
+            "Winter reality: surfing continues in 5-mm rubber, boots and gloves (schools rent everything); SUP mostly hibernates November–March; hiking is at its crisp, clear best. Swimming belongs strictly to the lifeguarded season.",
+            "Respect the flags: rip currents do occur, so stay inside guarded zones. Jellyfish advisories peak in August — nets go up at the big beaches, and stings get rinsed with seawater, never fresh. Mountain trails can close for fire-prevention periods in spring and late autumn; check trailhead notices. And Dadaepo's Sunset Fountain of Dreams runs seasonally, roughly late April to October, resting Mondays — always check the official schedule."
+          ]
+        }
+      ],
+      "spots": [
+        {
+          "name": "Songjeong Beach",
+          "kr": "송정해수욕장",
+          "wiki": "Songjeong Beach",
+          "desc": "Korea's surf-town original: soft sandy-bottom peaks, a beach road lined with surf schools, and a slower village rhythm one tunnel from Haeundae. Rentals and lessons run all twelve months.",
+          "tip": "Autumn has the year's cleanest swell; in July–August book a day ahead and stick to the flagged surf zone.",
+          "mapQ": "Songjeong Beach surf schools Busan"
+        },
+        {
+          "name": "Gwangalli Beach",
+          "kr": "광안리해수욕장",
+          "wiki": "Gwangalli Beach",
+          "desc": "Busan's SUP mecca since the paddle zone was designated in 2020 — glide with Gwangan Bridge filling the horizon, then join the dawn runners on the firm morning sand.",
+          "tip": "Book the sunset SUP slot for the bridge lights; calm mornings are easiest for first-timers.",
+          "mapQ": "Gwangalli Beach SUP zone Busan"
+        },
+        {
+          "name": "Oryukdo Skywalk",
+          "kr": "오륙도 스카이워크",
+          "wiki": "Oryukdo",
+          "desc": "A free glass horseshoe jutting 35 m above the cliffs, eye-to-eye with the five-or-six islets that name it. The Galmaetgil's finest stretch starts right here.",
+          "tip": "Buses 24 and 131 stop nearby; it may close in strong wind, so pair it with the coastal hike either way.",
+          "mapQ": "Oryukdo Skywalk Busan"
+        },
+        {
+          "name": "Igidae Coastal Park",
+          "kr": "이기대",
+          "wiki": "Igidae",
+          "desc": "Clifftop park carrying the Galmaetgil north from Oryukdo: boardwalks, rock shelves and the full Gwangan Bridge–skyline panorama across the water.",
+          "tip": "No shops or toilets mid-trail — carry water and wear proper shoes; the stairs are endless.",
+          "mapQ": "Igidae Coastal Walk Busan"
+        },
+        {
+          "name": "Geumjeongsan",
+          "kr": "금정산",
+          "wiki": "Geumjeongsan",
+          "desc": "Busan's highest ridge, crowned by an 18-km Joseon fortress wall. Cable car up, ridge walk to the North Gate, temple descent — the definitive half-day hill.",
+          "tip": "The Geumgang Park cable car skips the sweaty ascent, but check its operating hours before you build the hike around it.",
+          "mapQ": "Geumgang Park cable car Busan"
+        },
+        {
+          "name": "Oncheoncheon Stream Path",
+          "kr": "온천천",
+          "wiki": "Oncheoncheon",
+          "desc": "The city's stream-side running artery: flat, lit, traffic-free tarmac and cycle path threading Dongnae's neighbourhoods, riotous with cherry blossoms each April.",
+          "tip": "Follow it downstream onto the Suyeong River path and you can run nearly to the sea.",
+          "mapQ": "Oncheoncheon stream path Busan"
+        },
+        {
+          "name": "Dadaepo Beach",
+          "kr": "다대포해수욕장",
+          "wiki": "Dadaepo Beach",
+          "desc": "A vast, shallow sweep where the Nakdong River meets the sea — Busan's best sunset walk, with tidal flats and the seasonal Sunset Fountain of Dreams show.",
+          "tip": "The fountain runs roughly late April–October and rests Mondays — check the official schedule before making the trip.",
+          "mapQ": "Dadaepo Beach Sunset Fountain of Dreams"
+        },
+        {
+          "name": "Eulsukdo",
+          "kr": "을숙도",
+          "wiki": "Eulsukdo",
+          "desc": "Reed-covered estuary island and migratory-bird haven at the Nakdong's mouth, the hub of the delta's dead-flat cycle paths.",
+          "tip": "Public bike rental on the island and at nearby Samnak — bring ID; winter mornings bring the big bird flocks.",
+          "mapQ": "Eulsukdo Ecological Park bike rental Busan"
+        }
+      ],
+      "faq": [
+        [
+          "Can a total beginner really surf at Songjeong?",
+          "Yes — beginners are Songjeong's core business. Two-hour group lessons, typically ₩50,000–70,000 including board and wetsuit, run on soft sandy-bottom waves, and most people stand up on day one. Reserve a day ahead in summer; autumn is quieter with better waves."
+        ],
+        [
+          "I only have half a day — which Galmaetgil section should I walk?",
+          "The Oryukdo–Igidae coastal stretch: about 5 km and 2–2.5 hours of cliffs, boardwalks and skyline views. Take bus 24 or 131 to Oryukdo, do the free Skywalk, then walk north to Dongsaengmal. Carry water — nothing is sold en route."
+        ],
+        [
+          "Is anything doable in winter?",
+          "Plenty. Surfing runs all winter in thick rented wetsuits, hiking is at its clearest, and the flat cycle paths stay open. SUP mostly pauses November–March, and sea swimming waits for the lifeguarded season. Pack windproof layers — the sea wind bites."
+        ],
+        [
+          "Where do I rent a bicycle for the river paths?",
+          "Public rental spots operate at Samnak Ecological Park and on Eulsukdo, with adult and children's bikes — bring ID. Hours are roughly 9 a.m. to 6 p.m., shorter in winter. The estuary levee paths are flat enough for any fitness level."
+        ],
+        [
+          "How safe is the sea for swimming and paddling?",
+          "Swim only in lifeguarded zones during the official season, roughly late June to mid-September, and obey the flags — rip currents happen. Jellyfish advisories peak in late summer, when major beaches install protective nets. SUP operators provide flotation and keep paddlers inside the designated zone."
+        ],
+        [
+          "Do I need to book SUP at Gwangalli in advance?",
+          "Weekday walk-ins usually work, but sunset slots and summer weekends sell out — book those ahead. Sessions typically include a short intro, all equipment, and showers afterwards. Calm mornings are easiest for first-timers; afternoons get choppy."
+        ]
+      ],
+      "tips": [
+        "Songjeong reads small most days — perfect for learners; serious surfers wait for autumn swell windows.",
+        "Start the coastal hike at the Oryukdo end: the city skyline grows ahead of you the whole way.",
+        "Millak Waterside Park went alcohol-free in 2023 (₩50,000 fine) — take post-run beers to Gwangalli's bars instead.",
+        "Dawn is Gwangalli's running hour: firm low-tide sand, empty boardwalk, sunrise beside the bridge.",
+        "Jellyfish sting? Rinse with seawater — never fresh water — and flag the nearest lifeguard tent.",
+        "Fire-prevention closures hit ridge trails in spring and late autumn — read trailhead notices before Geumjeongsan.",
+        "The Geumgang Park cable car keeps limited hours — confirm it's running before relying on it.",
+        "Bike rentals at Samnak and Eulsukdo want ID and close around 6 pm — earlier in winter."
+      ]
+    }
   }
 }
