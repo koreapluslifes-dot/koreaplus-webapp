@@ -2,7 +2,8 @@
    modules/seo-kpop-tools.cjs — module K09: K-pop Idol Birthday & Zodiac
    Matcher (interactive tool + embeddable widget).
 
-   Generates, per language (en + 8 locales = 9):
+   Generates, per language (en + every dir-bearing locale that has strings in
+   kpop-tools-l10n.json — currently 14: en/ja/zh/es/ko/fr/de/pt/id/ar/hi/ru/vi/th):
      1. /guide[/<dir>]/tools/kpop-idol-birthday-finder.html  (indexed, ads
         via ctx.shell, full chrome, FAQ + structured data)
      2. /guide[/<dir>]/embed/kpop-idol-birthday-finder.html  (NOINDEX, NO
@@ -33,6 +34,10 @@ const path = require('path');
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, ROSTER, ENRICH, ld, TODAY } = ctx;
   const ORIGIN = 'https://koreaplus-lifes.com';
+
+  // Mirrors RTL_LANGS in build-seo.cjs — the embed page is written directly
+  // and so never passes through shell(), which is where dir="rtl" is applied.
+  const RTL_LANGS = new Set(['ar']);
 
   // 9 languages: en + the 8 dir-bearing locales present in L10N.
   const LANGS = ['en'].concat(Object.keys(L10N).filter(l => L10N[l] && L10N[l].dir));
@@ -70,6 +75,34 @@ module.exports = function (ctx) {
   function dirOf(lang) { return lang === 'en' ? '' : (L10N[lang].dir + '/'); }
   function urlFor(lang, p) { return `${BASEP}${dirOf(lang)}${p}`; }
   function tr(lang) { return I18N[lang] || I18N.en || {}; }
+
+  // ── counted-noun rendering for the hero badge ───────────────────────
+  // Each locale supplies badgeIdols/badgeGroups as an ARRAY of forms with a
+  // {n} placeholder. Length 1 = the language has no count-driven morphology
+  // (ar collapses via noun-first inversion "عدد النجوم: 191"; hi/vi/th/ja/zh/ko
+  // are invariant). Length 2 = English-style one/other. Length 3 = Russian
+  // one/few/many, which an `n === 1` ternary gets wrong for 4 of 5 bands.
+  function pluralIdx(lang, n, len) {
+    if (len <= 1) return 0;
+    if (lang === 'ru') {
+      const m10 = n % 10, m100 = n % 100;
+      if (m10 === 1 && m100 !== 11) return 0;
+      if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return Math.min(1, len - 1);
+      return Math.min(2, len - 1);
+    }
+    return n === 1 ? 0 : Math.min(1, len - 1);
+  }
+  function countPhrase(lang, forms, n, fallback) {
+    if (!Array.isArray(forms) || !forms.length) return fallback;
+    const f = forms[pluralIdx(lang, n, forms.length)] || forms[0];
+    return String(f).replace(/\{n\}/g, String(n));
+  }
+  // "191 verified idol birthdays across 34 groups" — real counts, never rounded.
+  function countBadge(lang) {
+    const t = tr(lang);
+    return countPhrase(lang, t.badgeIdols, IDOL_COUNT, `${IDOL_COUNT} idols`) +
+      ' · ' + countPhrase(lang, t.badgeGroups, GROUP_COUNT, `${GROUP_COUNT} groups`);
+  }
 
   // hreflang alternates: x-default=en, only languages we actually render.
   function altsFor(lang, p) {
@@ -141,6 +174,7 @@ module.exports = function (ctx) {
       <button type="button" id="kpf-copy" class="kpf-btn sec">📋 ${esc(t.btnCopy || 'Copy link')}</button>
     </div>`}
     <p class="kpf-foot">${esc(t.dataNote || '')}</p>
+    ${t.cnForkNote ? `<p class="kpf-foot">${esc(t.cnForkNote)}</p>` : ''}
   </div>
   <div id="kpf-toast" class="kpf-toast" role="status" aria-live="polite" hidden></div>
 </div>`;
@@ -163,7 +197,7 @@ module.exports = function (ctx) {
     ];
 
     const hero = `<header class="seo-hero"><span class="emoji">🎂</span><h1>${esc(t.h1 || t.title)}</h1>` +
-      `<div class="meta"><span class="seo-badge">K-Pop</span> <span class="seo-badge">${IDOL_COUNT} idols · ${GROUP_COUNT} groups</span></div></header>`;
+      `<div class="meta"><span class="seo-badge">${esc(t.badgeKpop || 'K-Pop')}</span> <span class="seo-badge">${esc(countBadge(lang))}</span></div></header>`;
 
     let body = ctx.bcHtml(trail);
     body += `<p class="seo-lead">${esc(t.lead || '')}</p>`;
@@ -181,7 +215,10 @@ module.exports = function (ctx) {
     // FAQ
     const qa = Array.isArray(t.faq) ? t.faq : [];
     if (qa.length) {
-      body += `<h2>${esc((t.faq && 'FAQ') || 'FAQ')}</h2><div class="seo-faq">`;
+      // Same heading wording the member/agency/month pages use in this
+      // language — a bare Latin "FAQ" inside an otherwise native page reads
+      // as an unfinished build.
+      body += `<h2>${esc(t.faqTitle || 'FAQ')}</h2><div class="seo-faq">`;
       for (const [q, a] of qa) body += `<details><summary>${esc(q)}</summary><div>${esc(a)}</div></details>`;
       body += `</div>`;
     }
@@ -217,7 +254,7 @@ module.exports = function (ctx) {
     const url = urlFor(lang, EMBED_PATH);
     const canonical = ORIGIN + url;
     const html = `<!DOCTYPE html>
-<html lang="${esc(lang)}">
+<html lang="${esc(lang)}"${RTL_LANGS.has(lang) ? ' dir="rtl"' : ''}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

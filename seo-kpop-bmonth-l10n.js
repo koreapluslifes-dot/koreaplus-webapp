@@ -42,6 +42,11 @@ const RU_IN_MONTH = {
 };
 const ruIn = (m) => RU_IN_MONTH[m] || m;
 
+// MONTH_NAMES.vi is locked to "Tháng 3" — correct standing alone (chips, the
+// month link list) but wrong mid-sentence, where Vietnamese writes "tháng 3".
+// Lowercasing at the call site keeps the canonical list untouched.
+const viLow = (m) => String(m).replace(/^Tháng /, 'tháng ');
+
 // Functional templates. {m} = localized month name. All hand-translated.
 const T = {
   en: {
@@ -219,21 +224,25 @@ const T = {
   // rendered by dir="rtl"; hand-reversing them would break the display.
   // Counts follow the noun (عدد النجوم: n) because Arabic governs a counted
   // noun five different ways — an English count ternary is wrong for four.
+  // A music group is فرقة; فريق is a sports team or a work crew. The whole ar
+  // cluster (member, zodiac, cnzodiac, vs, agency pages) says الفرقة, so these
+  // pages must too — the desc already did, which made the block contradict
+  // itself one line apart.
   ar: {
     h1: (m) => `نجوم K-Pop المولودون في ${m}`,
-    title: (m) => `نجوم K-Pop المولودون في ${m} — أعياد الميلاد حسب الفريق | KoreaPlus`,
+    title: (m) => `نجوم K-Pop المولودون في ${m} — أعياد الميلاد حسب الفرقة | KoreaPlus`,
     desc: (m) => `مَن هم نجوم K-Pop الذين يحتفلون بعيد ميلادهم في ${m}؟ قائمة موثَّقة بالنجوم وفرقهم ممن وُلدوا في هذا الشهر، مع تواريخ الميلاد الدقيقة.`,
-    lead: (m) => `هل يحتفل أحدهم بعيد ميلاده في ${m}؟ إليك نجوم K-Pop المولودين في هذا الشهر — يعرض كل سطر اسم النجم وفريقه وتاريخ ميلاده الدقيق كما ورد في قائمتنا.`,
+    lead: (m) => `هل يحتفل أحدهم بعيد ميلاده في ${m}؟ إليك نجوم K-Pop المولودين في هذا الشهر — يعرض كل سطر اسم النجم وفرقته وتاريخ ميلاده الدقيق كما ورد في قائمتنا.`,
     badge: 'أعياد الميلاد',
     listH: (m, n) => `🎂 مواليد ${m} — عدد النجوم: ${n}`,
     none: (m) => `لا يوجد في قائمتنا الحالية أي نجم من مواليد ${m}. تصفَّح الأشهر الأخرى أدناه.`,
     monthsH: '📅 أعياد الميلاد حسب الشهر',
-    col: { idol: 'النجم', group: 'الفريق', date: 'تاريخ الميلاد' },
+    col: { idol: 'النجم', group: 'الفرقة', date: 'تاريخ الميلاد' },
     faqH: '❓ الأسئلة الشائعة',
     q1: (m) => `مَن هم نجوم K-Pop المولودون في ${m}؟`,
-    a1: (m, names) => `من نجوم قائمتنا المولودين في ${m}: ${names}. فريق كل نجم وتاريخ ميلاده الدقيق مذكوران في الجدول أعلاه.`,
+    a1: (m, names) => `من نجوم قائمتنا المولودين في ${m}: ${names}. فرقة كل نجم وتاريخ ميلاده الدقيق مذكوران في الجدول أعلاه.`,
     q2: (m) => `كيف أُعِدَّت قائمة أعياد الميلاد في ${m}؟`,
-    a2: () => `كل تاريخ ميلاد مأخوذ من قائمة الفنانين الموثَّقة لدينا — لا نذكر إلا التواريخ التي يمكننا تأكيدها، مرتبطةً بفريق كل نجم. لا شيء مُقدَّر أو مُخمَّن.`,
+    a2: () => `كل تاريخ ميلاد مأخوذ من قائمة الفنانين الموثَّقة لدينا — لا نذكر إلا التواريخ التي يمكننا تأكيدها، مرتبطةً بفرقة كل نجم. لا شيء مُقدَّر أو مُخمَّن.`,
     relH: '🎤 استكشف المزيد',
     hubLabel: '🎤 مركز K-Pop',
     browseLabel: '📚 تصفَّح كل ما يخص K-Pop',
@@ -279,21 +288,23 @@ const T = {
     hubLabel: '🎤 Центр K-pop',
     browseLabel: '📚 Весь K-pop',
   },
-  // MONTH_NAMES.vi already carries "Tháng", so never prefix another "tháng".
+  // MONTH_NAMES.vi already carries "Tháng", so never prefix another "tháng";
+  // mid-sentence it goes through viLow(). "sinh nhật" is a noun, so the lead
+  // needs its verb — "Ai sinh nhật vào…" is missing one.
   vi: {
-    h1: (m) => `Idol K-pop sinh vào ${m}`,
-    title: (m) => `Idol K-pop sinh vào ${m} — Sinh nhật theo nhóm | KoreaPlus`,
-    desc: (m) => `Idol K-pop nào có sinh nhật vào ${m}? Danh sách đã xác minh gồm các idol sinh trong tháng này cùng nhóm của họ, kèm ngày sinh chính xác.`,
-    lead: (m) => `Ai sinh nhật vào ${m}? Đây là những idol K-pop sinh trong tháng này — mỗi dòng cho biết idol, nhóm của họ và ngày sinh chính xác, lấy từ danh sách của chúng tôi.`,
+    h1: (m) => `Idol K-pop sinh vào ${viLow(m)}`,
+    title: (m) => `Idol K-pop sinh vào ${viLow(m)} — Sinh nhật theo nhóm | KoreaPlus`,
+    desc: (m) => `Idol K-pop nào có sinh nhật vào ${viLow(m)}? Danh sách đã xác minh gồm các idol sinh trong tháng này cùng nhóm của họ, kèm ngày sinh chính xác.`,
+    lead: (m) => `Idol nào có sinh nhật trong ${viLow(m)}? Đây là những idol K-pop sinh trong tháng này — mỗi dòng cho biết idol, nhóm của họ và ngày sinh chính xác, lấy từ danh sách của chúng tôi.`,
     badge: 'Sinh nhật',
-    listH: (m, n) => `🎂 ${n} idol sinh vào ${m}`,
-    none: (m) => `Không có idol nào trong danh sách hiện tại của chúng tôi sinh vào ${m}. Xem các tháng khác bên dưới.`,
+    listH: (m, n) => `🎂 ${n} idol sinh vào ${viLow(m)}`,
+    none: (m) => `Không có idol nào trong danh sách hiện tại của chúng tôi sinh vào ${viLow(m)}. Xem các tháng khác bên dưới.`,
     monthsH: '📅 Sinh nhật theo tháng',
     col: { idol: 'Idol', group: 'Nhóm', date: 'Ngày sinh' },
     faqH: '❓ Câu hỏi thường gặp',
-    q1: (m) => `Những idol K-pop nào sinh vào ${m}?`,
-    a1: (m, names) => `Trong danh sách của chúng tôi, idol sinh vào ${m} có ${names}. Nhóm và ngày sinh chính xác của từng người đều có ở bảng trên.`,
-    q2: (m) => `Danh sách sinh nhật ${m} được lập như thế nào?`,
+    q1: (m) => `Những idol K-pop nào sinh vào ${viLow(m)}?`,
+    a1: (m, names) => `Trong danh sách của chúng tôi, idol sinh vào ${viLow(m)} có ${names}. Nhóm và ngày sinh chính xác của từng người đều có ở bảng trên.`,
+    q2: (m) => `Danh sách sinh nhật ${viLow(m)} được lập như thế nào?`,
     a2: () => `Mọi ngày sinh đều lấy từ danh sách nghệ sĩ đã xác minh của chúng tôi — chúng tôi chỉ liệt kê những ngày có thể xác nhận, gắn với nhóm của từng idol. Không có số liệu nào là ước lượng.`,
     relH: '🎤 Khám phá thêm',
     hubLabel: '🎤 Trung tâm K-pop',

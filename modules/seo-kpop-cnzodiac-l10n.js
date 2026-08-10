@@ -245,7 +245,9 @@ const T = {
     badge: 'चीनी राशिचक्र',
     title: a => `${hiObl(a)} के वर्ष में जन्मे K-pop आइडल — जन्मदिन की लिस्ट | KoreaPlus`,
     h1: a => `${hiObl(a)} के वर्ष में जन्मे K-pop आइडल`,
-    desc: a => `${hiObl(a)} के वर्ष में कौन-कौन से K-pop आइडल जन्मे हैं? बड़े ग्रुप और सोलो आर्टिस्ट की जन्मदिन के हिसाब से लगी लिस्ट, साथ में चीनी राशिचक्र से जुड़ी ज़रूरी चेतावनी।`,
+    // लगना collocates with क्रम («क्रम में लगी»), not with हिसाब; the comma
+    // after आर्टिस्ट stops «सोलो आर्टिस्ट की जन्मदिन» reading as one phrase.
+    desc: a => `${hiObl(a)} के वर्ष में कौन-कौन से K-pop आइडल जन्मे हैं? बड़े ग्रुप और सोलो आर्टिस्ट की, जन्मदिन के क्रम में लगी लिस्ट — साथ में चीनी राशिचक्र से जुड़ी ज़रूरी चेतावनी।`,
     lead: a => `वे K-pop आइडल जिनका जन्म वर्ष चीनी राशिचक्र में ${hiObl(a)} का वर्ष है — हमारी आर्टिस्ट लिस्ट से इकट्ठा किए गए। सिर्फ़ पूरी जन्म तिथि और ग्रुप, इसके अलावा कुछ नहीं।`,
     countOne: '1 आइडल',
     countMany: n => `${n} आइडल`,
@@ -261,10 +263,14 @@ const T = {
   },
   ru: {
     badge: 'Китайский гороскоп',
-    title: a => `K-pop айдолы, родившиеся в год ${ruGen(a)} — список по дням рождения | KoreaPlus`,
-    h1: a => `K-pop айдолы, родившиеся в год ${ruGen(a)}`,
-    desc: a => `Кто из K-pop айдолов родился в год ${ruGen(a)}? Список по дням рождения — крупные группы и сольные артисты, с пояснением, как считается год по китайскому гороскопу.`,
-    lead: a => `Айдолы, чей год рождения по китайскому гороскопу приходится на год ${ruGen(a)} — собраны по нашему списку K-pop. Только точная дата рождения и группа.`,
+    // «K-pop айдолы» is English word order in Russian words; the head noun
+    // comes first — «айдолы K-pop», as the month pages already write it.
+    title: a => `Айдолы K-pop, родившиеся в год ${ruGen(a)} — список по дням рождения | KoreaPlus`,
+    h1: a => `Айдолы K-pop, родившиеся в год ${ruGen(a)}`,
+    desc: a => `Кто из айдолов K-pop родился в год ${ruGen(a)}? Список по дням рождения — крупные группы и сольные артисты, с пояснением, как считается год по китайскому гороскопу.`,
+    // The roster hedge («из нашего списка K-pop») moves up front so the
+    // relative clause can close: the old dash left the sentence a fragment.
+    lead: a => `Айдолы из нашего списка K-pop, чей год рождения по китайскому гороскопу приходится на год ${ruGen(a)}. Только проверенная дата рождения и группа.`,
     countOne: '1 айдол',
     countMany: n => ruIdols(n),
     none: a => `В нашем текущем списке нет айдолов, родившихся в год ${ruGen(a)}. Посмотрите другие годы ниже.`,
@@ -288,7 +294,13 @@ const T = {
     none: a => `Danh sách hiện tại của chúng tôi chưa có idol nào sinh vào năm ${a}. Xem các năm con giáp khác bên dưới.`,
     colName: 'Idol', colGroup: 'Nhóm', colBday: 'Ngày sinh',
     hedgeH: 'Lưu ý về cách tính',
-    hedge: 'Năm con giáp đổi vào Tết Nguyên đán (cuối tháng 1 đến giữa tháng 2), không phải ngày 1/1. Danh sách này xếp theo năm sinh dương lịch, nên người sinh vào tháng 1 hoặc đầu tháng 2 có thể thực ra thuộc về con giáp của năm trước — hãy đối chiếu ngày âm lịch chính xác nếu điều đó quan trọng với bạn. Ở Việt Nam, con giáp thứ tư là Mèo, còn ở Trung Quốc là Thỏ — cùng một năm, khác con vật.',
+    // hedge is one string for all 12 pages, so the required Vietnam/China
+    // cat-rabbit disclosure is phrased as a standing note about the table
+    // rather than as a sentence about "this" animal — it read as a
+    // non-sequitur on the Dog, Pig and Horse pages. Never delete it: we ship
+    // Mão (mèo) at position four, and dropping the note would make that a
+    // silent factual swap.
+    hedge: 'Năm con giáp đổi vào Tết Nguyên đán (cuối tháng 1 đến giữa tháng 2), không phải ngày 1/1. Danh sách này xếp theo năm sinh dương lịch, nên người sinh vào tháng 1 hoặc đầu tháng 2 có thể thực ra thuộc về con giáp của năm trước — hãy đối chiếu ngày âm lịch chính xác nếu điều đó quan trọng với bạn. Lưu ý: bảng 12 con giáp của Việt Nam dùng Mão (mèo) ở vị trí thứ tư, trong khi Trung Quốc dùng Thỏ.',
     otherH: 'Các năm con giáp khác',
     faq: a => [
       [`Sinh vào năm ${a} nghĩa là gì?`, `Trong 12 con giáp, mỗi năm ứng với một trong mười hai con vật theo chu kỳ 12 năm lặp lại. Người sinh vào năm ${a} mang con giáp đó. Lưu ý ranh giới giữa hai năm là Tết Nguyên đán, không phải ngày 1/1.`],
@@ -299,7 +311,10 @@ const T = {
     badge: 'นักษัตรจีน',
     title: a => `ไอดอล K-pop ที่เกิดปี${a} — รายชื่อตามวันเกิด | KoreaPlus`,
     h1: a => `ไอดอล K-pop ที่เกิดปี${a}`,
-    desc: a => `ไอดอล K-pop คนไหนเกิดปี${a} บ้าง รวมรายชื่อเรียงตามวันเกิดจากวงใหญ่และศิลปินเดี่ยว พร้อมข้อควรระวังเรื่องการนับปีนักษัตร`,
+    // Thai has no full stop but does use "?" — a bare interrogative reads as
+    // an unfinished sentence, and every other th FAQ/desc in this build keeps
+    // the question mark.
+    desc: a => `ไอดอล K-pop คนไหนเกิดปี${a} บ้าง? รวมรายชื่อเรียงตามวันเกิดจากวงใหญ่และศิลปินเดี่ยว พร้อมข้อควรระวังเรื่องการนับปีนักษัตร`,
     lead: a => `ไอดอล K-pop ที่ปีเกิดตรงกับปี${a} ตามนักษัตรจีน รวบรวมจากรายชื่อของเรา — มีเฉพาะวันเกิดที่ตรวจสอบแล้วและชื่อวงเท่านั้น`,
     countOne: 'ไอดอล 1 คน',
     countMany: n => `ไอดอล ${n} คน`,
@@ -309,8 +324,8 @@ const T = {
     hedge: 'ปีนักษัตรเปลี่ยนในวันตรุษจีน (ปลายเดือนมกราคมถึงกลางเดือนกุมภาพันธ์) ไม่ใช่วันที่ 1 มกราคม รายชื่อนี้จัดกลุ่มตามปีเกิดแบบสุริยคติ คนที่เกิดเดือนมกราคมหรือต้นเดือนกุมภาพันธ์จึงอาจอยู่ในปีนักษัตรก่อนหน้าจริง ๆ — หากต้องการความแม่นยำ ให้ตรวจสอบกับวันเกิดตามจันทรคติอีกครั้ง',
     otherH: 'ปีนักษัตรอื่น',
     faq: a => [
-      [`เกิดปี${a} หมายความว่าอย่างไร`, `ในนักษัตรจีน แต่ละปีจะตรงกับสัตว์หนึ่งในสิบสองชนิด วนครบรอบทุก 12 ปี คนที่เกิดในปี${a} ก็ถือว่าเป็นปีนักษัตรนั้น แต่เส้นแบ่งของปีคือวันตรุษจีน ไม่ใช่วันที่ 1 มกราคม`],
-      [`รายชื่อนี้รวบรวมมาอย่างไร`, `เรานำวันเกิดของไอดอลแต่ละคนที่ตรวจสอบแล้วมาจัดกลุ่มตามสัตว์ประจำปีเกิด วันเกิดทั้งหมดมาจากรายชื่อวงใหญ่และศิลปินเดี่ยวที่เราคัดไว้ ใช้เฉพาะวันที่เป็นข้อมูลสาธารณะที่ยืนยันแล้วเท่านั้น`],
+      [`เกิดปี${a} หมายความว่าอย่างไร?`, `ในนักษัตรจีน แต่ละปีจะตรงกับสัตว์หนึ่งในสิบสองชนิด วนครบรอบทุก 12 ปี คนที่เกิดในปี${a} ก็ถือว่าเป็นปีนักษัตรนั้น แต่เส้นแบ่งของปีคือวันตรุษจีน ไม่ใช่วันที่ 1 มกราคม`],
+      [`รายชื่อนี้รวบรวมมาอย่างไร?`, `เรานำวันเกิดของไอดอลแต่ละคนที่ตรวจสอบแล้วมาจัดกลุ่มตามสัตว์ประจำปีเกิด วันเกิดทั้งหมดมาจากรายชื่อวงใหญ่และศิลปินเดี่ยวที่เราคัดไว้ ใช้เฉพาะวันที่เป็นข้อมูลสาธารณะที่ยืนยันแล้วเท่านั้น`],
     ],
   },
 };

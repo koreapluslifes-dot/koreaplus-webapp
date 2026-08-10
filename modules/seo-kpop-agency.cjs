@@ -19,6 +19,7 @@
 'use strict';
 
 const L10N_CONTENT = require('./seo-kpop-agency-l10n.js');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, ROSTER, ENRICH, ld } = ctx;
@@ -132,17 +133,23 @@ module.exports = function (ctx) {
       const e = enrichOf(a.id);
       const rows = [];
       rows.push(`<div><b>${esc(T.type)}:</b> ${esc(a.type === 'group' ? (a.gender === 'girl' ? T.girl : a.gender === 'boy' ? T.boy : T.group) : T.soloist)}</div>`);
-      if (a.debut) rows.push(`<div><b>${esc(T.debut)}:</b> ${esc(a.debut)}</div>`);
+      if (a.debut) rows.push(`<div><b>${esc(T.debut)}:</b> ${esc(chrome.chipDate(lang, a.debut))}</div>`);
       if (a.type === 'group' && Array.isArray(a.members) && a.members.length) {
-        rows.push(`<div><b>${esc(T.members)}:</b> ${esc(a.members.join(', '))}</div>`);
+        rows.push(`<div><b>${esc(T.members)}:</b> ${esc(chrome.listJoin(lang, a.members))}</div>`);
       }
       if (a.fandom) rows.push(`<div><b>${esc(T.fandom)}:</b> ${esc(a.fandom)}</div>`);
       if (e && e.lightstick) rows.push(`<div><b>${esc(T.lightstick)}:</b> ${esc(e.lightstick)}</div>`);
-      const profileHref = `${dir}kpop/${a.id}-profile.html`;
+      // The act's profile page comes from kpop-history.json, which covers 9 of
+      // the channel's 14 languages. Where it is missing the whole CTA is
+      // dropped: a dead "read the guide →" is worse than no CTA, and linking
+      // the English page out of a localized card is worse than both.
+      const cta = chrome.hasProfile(a.id, lang)
+        ? `<p style="margin:9px 0 0"><a href="${dir}kpop/${esc(a.id)}-profile.html">${esc(T.coGuide)} →</a></p>`
+        : '';
       return `<article class="seo-card" style="display:block;padding:14px 16px;margin:0 0 12px;background:var(--card,rgba(255,255,255,.04));border:1px solid var(--border,rgba(255,255,255,.08));border-radius:12px">`
         + `<h3 style="margin:0 0 8px">${a.emoji ? esc(a.emoji) + ' ' : ''}${esc(a.nameEn)}${a.nameKo ? ` <span style="color:var(--text2,#9fb0c3);font-weight:400">${esc(a.nameKo)}</span>` : ''}</h3>`
         + `<div style="font-size:13.5px;line-height:1.7;display:flex;flex-direction:column;gap:2px">${rows.join('')}</div>`
-        + `<p style="margin:9px 0 0"><a href="${profileHref}">${esc(T.coGuide)} →</a></p>`
+        + cta
         + `</article>`;
     };
 
@@ -155,7 +162,8 @@ module.exports = function (ctx) {
     }
 
     // FAQ (objective only)
-    const actNames = acts.map(a => a.nameEn).join(', ');
+    // Arabic prose takes the Arabic comma (U+060C) between the Latin act names.
+    const actNames = chrome.listJoin(lang, acts.map(a => a.nameEn));
     const qaRaw = T.faq(grp.name, actNames);
     // Drop the HYBE-specific Q for non-HYBE agencies.
     const qa = qaRaw.filter((pair, i) => !(i === 1 && key !== 'hybe'));

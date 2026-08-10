@@ -19,6 +19,7 @@
 'use strict';
 
 const L10N_STR = require('../seo-kpop-lightstick-l10n.js');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, slug, ld } = ctx;
@@ -127,7 +128,7 @@ module.exports = function (ctx) {
   <span class="emoji" aria-hidden="true">🪄</span>
   <h1>${esc(t.indexH1)}</h1>
   <p class="lead">${esc(t.indexLead)}</p>
-  <div class="meta"><span class="seo-badge">${GROUPS.length} ${esc(t.listLabel)}</span></div>
+  <div class="meta"><span class="seo-badge">${esc(chrome.countTemplate(t.listLabel, lang, GROUPS.length) || `${GROUPS.length} ${t.listLabel}`)}</span></div>
 </header>`;
 
     const body = `
@@ -165,17 +166,21 @@ ${cards}
     const url = pageUrl(groupLeaf(g.id), lang);
     const alts = altsFor(groupLeaf(g.id));
 
-    const typeLabel = g.type === 'group'
-      ? (g.gender === 'girl' ? 'Girl group' : g.gender === 'boy' ? 'Boy group' : 'Group')
-      : (g.type ? g.type.charAt(0).toUpperCase() + g.type.slice(1) : '');
+    // `type`/`gender` are English ROSTER enum values, not UI text. Printing them
+    // raw put "Boy group" inside an otherwise fully Arabic/Thai/Russian fact
+    // strip while the agency pages rendered the same field translated. The
+    // localized pair already ships for all 14 languages — use it.
+    const typeLabel = chrome.typeLabel(lang, g.type, g.gender);
 
     const factItems = [];
     factItems.push(`${t.lightstickLabel}: ${g.lightstick}`);
     if (g.fandom) factItems.push(`${t.fandomLabel}: ${g.fandom}`);
     if (g.agency) factItems.push(`${t.agencyLabel}: ${g.agency}`);
-    if (g.debut) factItems.push(`${t.debutLabel}: ${g.debut}`);
+    if (g.debut) factItems.push(`${t.debutLabel}: ${chrome.chipDate(lang, g.debut)}`);
     if (typeLabel) factItems.push(`${t.typeLabel}: ${typeLabel}`);
-    if (g.members.length) factItems.push(`${t.membersLabel}: ${g.members.length}`);
+    // Thai counts people with a mandatory classifier (สมาชิก 7 คน); a bare
+    // numeral after the person-noun is not a Thai sentence.
+    if (g.members.length) factItems.push(`${t.membersLabel}: ${chrome.countPeople(lang, g.members.length)}`);
 
     const factBox = ctx.keyFactsBox
       ? ctx.keyFactsBox(factItems)

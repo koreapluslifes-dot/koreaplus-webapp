@@ -125,8 +125,30 @@ function heroFigure(im, label) {
 //     the directory entry and is unaffected.
 //   * A rename is atomic, so a reader (the other session, a dev server, a
 //     half-finished run) never sees a partially written page.
+// Every generated page — shell()-built or hand-rolled by a module — goes through
+// here, so this is where two document-wide invariants are enforced:
+//   1. dir="rtl" on <html> for the RTL languages. shell() emits it itself, but
+//      the K-pop tool EMBED builds its own <!DOCTYPE> document and bypassed the
+//      shell entirely, which is why ar/embed/kpop-idol-birthday-finder.html was
+//      the one Arabic page in the repo laid out left-to-right. Enforcing it at
+//      the write boundary covers every future generator that hand-rolls a
+//      document too, instead of waiting for the next one to forget.
+//   2. PAGE_H1 — the plain-text <h1> of everything we wrote, keyed by the same
+//      OUT-relative path. buildKpopBrowse() uses it to label directory links in
+//      the page's own language without duplicating any generator's copy.
+const PAGE_H1 = new Map();
 const writePage = (rel, html) => {
   const fp = path.join(OUT, rel);
+  const key = String(rel).replace(/\\/g, '/').replace(/^\/+/, '');
+  const htmlTag = /<html\s[^>]*>/i.exec(html);
+  if (htmlTag && !/\sdir\s*=/i.test(htmlTag[0])) {
+    const lm = /\slang="([^"]+)"/i.exec(htmlTag[0]);
+    if (lm && RTL_LANGS.has(lm[1])) {
+      html = html.replace(htmlTag[0], htmlTag[0].replace(/>$/, ' dir="rtl">'));
+    }
+  }
+  const h1 = /<h1[^>]*>([\s\S]*?)<\/h1>/i.exec(html);
+  if (h1) PAGE_H1.set(key, h1[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim());
   fs.mkdirSync(path.dirname(fp), { recursive: true });
   const tmp = fp + '.tmp' + process.pid;
   // The write is inside the try too: a crash there (ENOSPC, EPERM) otherwise
@@ -180,12 +202,22 @@ function agodaUrl(city, lang = 'en') {
   const hl = AGODA_HL[lang] ? `&hl=${AGODA_HL[lang]}` : '';
   return `https://www.agoda.com/${pathPart}?cid=${AGODA_CID}${hl}`;
 }
-// Localized copy for the affiliate block (en + the 3 site languages).
+// Localized copy for the Agoda hotel block. DORMANT since 2026-06: affBlock()
+// delegates to klookBlock(), so nothing renders from this map today — it is kept
+// against a reactivation. Coverage is deliberately uneven and you must check it
+// before switching affBlock() back: en/ja/zh/es date from the Agoda era, the five
+// K-pop-only languages were added with the 2026-08 chrome fix, and ko/fr/de/pt/id
+// have NO entry and would fall back to English the moment this map goes live.
 const AFF_T = {
   en: { label: c => `🏨 Where to stay in ${c}`,        cta: c => `🛏️ ${c} Hotels & Stays`, sub: 'Agoda · compare best-price deals', disc: 'Affiliate link — we may earn a small commission at no extra cost to you. It helps keep KoreaPlus free.' },
   ja: { label: () => '🏨 韓国のホテルを探す',            cta: () => '🛏️ 韓国のホテル・宿泊',   sub: 'Agoda · お得な料金を比較',        disc: 'アフィリエイトリンク — ご予約で当サイトに少額の手数料が入ることがあります（追加料金はかかりません）。KoreaPlus の運営に役立ちます。' },
   zh: { label: () => '🏨 寻找韩国酒店',                 cta: () => '🛏️ 韩国酒店与住宿',       sub: 'Agoda · 比较最优价格',           disc: '联盟链接 — 通过预订我们可能获得少量佣金（您无需支付额外费用），这有助于 KoreaPlus 保持免费。' },
   es: { label: () => '🏨 Dónde alojarte en Corea',     cta: () => '🛏️ Hoteles y alojamiento', sub: 'Agoda · compara las mejores ofertas', disc: 'Enlace de afiliado — podríamos ganar una pequeña comisión sin coste adicional para ti. Ayuda a mantener KoreaPlus gratis.' },
+  ar: { label: () => '🏨 أين تقيم في كوريا',            cta: () => '🛏️ فنادق كوريا وأماكن الإقامة', sub: 'Agoda · قارن أفضل الأسعار', disc: 'رابط بالعمولة — قد نحصل على عمولة صغيرة دون أي تكلفة إضافية عليك. هذا يساعدنا على إبقاء KoreaPlus مجانيًا.' },
+  hi: { label: () => '🏨 कोरिया में कहाँ ठहरें',            cta: () => '🛏️ कोरिया के होटल और स्टे', sub: 'Agoda · बेस्ट प्राइस डील की तुलना करें', disc: 'एफ़िलिएट लिंक — हमें छोटा कमीशन मिल सकता है, आपको कोई अतिरिक्त खर्च नहीं देना होगा। इससे KoreaPlus फ्री बना रहता है।' },
+  ru: { label: () => '🏨 Где остановиться в Корее',     cta: () => '🛏️ Отели и жильё в Корее', sub: 'Agoda · сравнение лучших цен', disc: 'Партнёрская ссылка — мы можем получить небольшую комиссию, для вас цена не изменится. Это помогает KoreaPlus оставаться бесплатным.' },
+  vi: { label: () => '🏨 Ở đâu khi đến Hàn Quốc',       cta: () => '🛏️ Khách sạn và chỗ ở tại Hàn Quốc', sub: 'Agoda · so sánh giá tốt nhất', disc: 'Liên kết tiếp thị — chúng tôi có thể nhận một khoản hoa hồng nhỏ mà bạn không phải trả thêm chi phí nào. Điều này giúp KoreaPlus luôn miễn phí.' },
+  th: { label: () => '🏨 พักที่ไหนดีในเกาหลี',              cta: () => '🛏️ โรงแรมและที่พักในเกาหลี', sub: 'Agoda · เทียบราคาดีที่สุด', disc: 'ลิงก์พันธมิตร — เราอาจได้รับค่าคอมมิชชันเล็กน้อย โดยคุณไม่ต้องจ่ายเพิ่ม ซึ่งช่วยให้ KoreaPlus ใช้งานได้ฟรี' },
 };
 // Agoda (hotels) was removed 2026-06 — these blocks now render the city-matched
 // Klook activities widget instead. The affBlock/affHtml names are kept so all
@@ -213,7 +245,16 @@ const KLOOK_T = {
   fr: { h: '🎟️ Activités et essentiels en Corée', s: 'eSIM · transport aéroport · visites — réservez en quelques secondes', disc: 'Lien affilié — nous pouvons percevoir une petite commission sans surcoût.' },
   de: { h: '🎟️ Beliebte Aktivitäten & Reise-Essentials in Korea', s: 'eSIM · Flughafentransfer · Touren — sofort buchen', disc: 'Affiliate-Link — wir erhalten ggf. eine kleine Provision ohne Mehrkosten für dich.' },
   pt: { h: '🎟️ Atividades e essenciais da Coreia', s: 'eSIM · transporte do aeroporto · passeios — reserve em segundos', disc: 'Link de afiliado — podemos receber uma pequena comissão sem custo extra para você.' },
-  id: { h: '🎟️ Aktivitas & kebutuhan perjalanan di Korea', s: 'eSIM · transportasi bandara · tur — pesan seketika', disc: 'Tautan afiliasi — kami dapat memperoleh komisi kecil tanpa biaya tambahan untuk Anda.' }
+  id: { h: '🎟️ Aktivitas & kebutuhan perjalanan di Korea', s: 'eSIM · transportasi bandara · tur — pesan seketika', disc: 'Tautan afiliasi — kami dapat memperoleh komisi kecil tanpa biaya tambahan untuk Anda.' },
+  // The K-pop-only languages. `disc` is a paid-affiliate disclosure, not decoration:
+  // it has to read as an unambiguous disclosure to a native speaker, so each one
+  // names the commission, says we may receive it, and says the reader pays nothing
+  // extra — no softening, no dropping a clause to fit the 11px line.
+  ar: { h: '🎟️ أنشطة كوريا الشهيرة وأساسيات السفر', s: 'شريحة eSIM · التنقل من المطار · جولات — احجز في ثوانٍ', disc: 'رابط بالعمولة — قد نحصل على عمولة صغيرة دون أي تكلفة إضافية عليك.' },
+  hi: { h: '🎟️ कोरिया की पॉपुलर एक्टिविटी और ट्रैवल ज़रूरतें', s: 'eSIM · एयरपोर्ट ट्रांसपोर्ट · टूर — कुछ ही सेकंड में बुक करें', disc: 'एफ़िलिएट लिंक — हमें छोटा कमीशन मिल सकता है, आपको कोई अतिरिक्त खर्च नहीं देना होगा।' },
+  ru: { h: '🎟️ Популярные развлечения и всё нужное для поездки в Корею', s: 'eSIM · трансфер из аэропорта · экскурсии — бронь за секунды', disc: 'Партнёрская ссылка — мы можем получить небольшую комиссию, для вас цена не изменится.' },
+  vi: { h: '🎟️ Hoạt động nổi bật và đồ dùng thiết yếu khi đi Hàn Quốc', s: 'eSIM · đưa đón sân bay · tour — đặt trong vài giây', disc: 'Liên kết tiếp thị — chúng tôi có thể nhận một khoản hoa hồng nhỏ mà bạn không phải trả thêm chi phí nào.' },
+  th: { h: '🎟️ กิจกรรมยอดนิยมและของจำเป็นสำหรับเที่ยวเกาหลี', s: 'eSIM · รถรับส่งสนามบิน · ทัวร์ — จองได้ในไม่กี่วินาที', disc: 'ลิงก์พันธมิตร — เราอาจได้รับค่าคอมมิชชันเล็กน้อย โดยคุณไม่ต้องจ่ายเพิ่ม' }
 };
 // City → Klook dynamic-widget adid (from the affiliate dashboard). The page's
 // city selects the matching widget so each city guide shows THAT city's top
@@ -1292,8 +1333,8 @@ ${injectToc(body, lang)}
   </p>
 </footer>
 <!-- Reading-progress bar + back-to-top (self-contained, no module dependency) -->
-<div id="kp-progress" style="position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#74b9ff,#ff6b9d);z-index:1200;transition:width .1s ease-out"></div>
-<button id="kp-totop" aria-label="${esc(aria(lang).top)}" style="position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(12,24,41,.85);color:#fff;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s;z-index:1200;backdrop-filter:blur(6px)">↑</button>
+<div id="kp-progress" style="position:fixed;top:0;inset-inline-start:0;height:3px;width:0;background:linear-gradient(90deg,#74b9ff,#ff6b9d);z-index:1200;transition:width .1s ease-out"></div>
+<button id="kp-totop" aria-label="${esc(aria(lang).top)}" style="position:fixed;inset-inline-end:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(12,24,41,.85);color:#fff;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .2s;z-index:1200;backdrop-filter:blur(6px)">↑</button>
 <script>(function(){var b=document.getElementById('kp-progress'),t=document.getElementById('kp-totop');function u(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;if(b)b.style.width=Math.min(100,sc/mx*100)+'%';if(t){var on=sc>600;t.style.opacity=on?'1':'0';t.style.visibility=on?'visible':'hidden';}}window.addEventListener('scroll',u,{passive:true});if(t)t.addEventListener('click',function(){var rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:rm?'auto':'smooth'});});u();})();</script>
 ${tabBar(lang)}
 <!-- Localized merch strip runtime: config (optional) → Worker URL fallback → API client → topads -->
@@ -2105,7 +2146,11 @@ function hubAlts(sl, lang) {  // hreflang cluster for one hub slug across en + a
 // translated UI (HUB_L10N) and links pointing to the localized page where it
 // exists (else the English page), so every page stays reachable in-language.
 function buildBrowseHubsL10n(urls, lang) {
-  const T = HUB_L10N[lang]; if (!T) return [];
+  // labelsOnly rows (ar/hi/ru/vi/th) exist purely so primaryNav can label the
+  // dropdown in-language; those locales have no /guide/<lang>/ travel corpus to
+  // build a hub out of, and this generator would emit eight empty hubs full of
+  // links to pages that were never written.
+  const T = HUB_L10N[lang]; if (!T || T.labelsOnly) return [];
   const L = L10N[lang], dir = L.dir;
   const allCities = [...CITIES, ...REGIONAL_CITIES];
   const cap = s => s.split('/').pop().replace('.html', '').replace(/-/g, ' ').replace(/\b\w/g, m => m.toUpperCase());
@@ -2976,6 +3021,15 @@ function buildKpopHistory(slug, lang) {
 // by drilling down from the hub. One localized page per language. ──────────────
 const KPOP_CAT = {
   artists:   { emoji: '🎤', label: { en: 'Artists & Groups', ko: '아티스트 · 그룹', ja: 'アーティスト・グループ', zh: '艺人 · 团体', es: 'Artistas y grupos', fr: 'Artistes et groupes', de: 'Künstler & Gruppen', pt: 'Artistas e grupos', id: 'Artis & Grup', ar: 'الفنانون والفرق', hi: 'आर्टिस्ट और ग्रुप', ru: 'Артисты и группы', vi: 'Nghệ sĩ và nhóm nhạc', th: 'ศิลปินและวง' } },
+  // The six categories above/below this line cover the kpop-history.json corpus.
+  // The five that follow cover the pages the seo-kpop-* modules generate, which
+  // is ALL the K-pop content the five newest languages have — without them their
+  // browse hub would render as a title over an empty page.
+  members:   { emoji: '👥', label: { en: 'Idols by Group', ko: '그룹별 아이돌', ja: 'グループ別メンバー', zh: '按团体看成员', es: 'Ídolos por grupo', fr: 'Idols par groupe', de: 'Idols nach Gruppe', pt: 'Ídolos por grupo', id: 'Idol per grup', ar: 'النجوم حسب الفرقة', hi: 'ग्रुप के हिसाब से आइडल', ru: 'Айдолы по группам', vi: 'Idol theo nhóm', th: 'ไอดอลแยกตามวง' } },
+  birthdays: { emoji: '🎂', label: { en: 'Birthdays & Zodiac', ko: '생일 · 별자리 · 띠', ja: '誕生日・星座・干支', zh: '生日 · 星座 · 生肖', es: 'Cumpleaños y zodiaco', fr: 'Anniversaires et zodiaque', de: 'Geburtstage & Sternzeichen', pt: 'Aniversários e zodíaco', id: 'Ulang tahun & zodiak', ar: 'أعياد الميلاد والأبراج', hi: 'जन्मदिन और राशि', ru: 'Дни рождения и знаки зодиака', vi: 'Ngày sinh và cung hoàng đạo', th: 'วันเกิดและราศี' } },
+  lightsticks: { emoji: '🪄', label: { en: 'Lightsticks', ko: '응원봉', ja: 'ペンライト', zh: '应援棒', es: 'Lightsticks', fr: 'Lightsticks', de: 'Lightsticks', pt: 'Lightsticks', id: 'Lightstick', ar: 'العصي الضوئية', hi: 'लाइटस्टिक', ru: 'Лайтстики', vi: 'Lightstick', th: 'แท่งไฟ' } },
+  compare:   { emoji: '⚖️', label: { en: 'Group Comparisons', ko: '그룹 비교', ja: 'グループ比較', zh: '团体对比', es: 'Comparativas de grupos', fr: 'Comparatifs de groupes', de: 'Gruppenvergleiche', pt: 'Comparações de grupos', id: 'Perbandingan grup', ar: 'مقارنات بين الفرق', hi: 'ग्रुप की आमने-सामने तुलना', ru: 'Сравнения групп', vi: 'So sánh nhóm', th: 'เทียบวงต่อวง' } },
+  releases:  { emoji: '💿', label: { en: 'Releases by Year', ko: '연도별 발매', ja: '年別リリース', zh: '按年份看发行', es: 'Lanzamientos por año', fr: 'Sorties par année', de: 'Releases nach Jahr', pt: 'Lançamentos por ano', id: 'Rilis per tahun', ar: 'الإصدارات حسب السنة', hi: 'साल के हिसाब से रिलीज़', ru: 'Релизы по годам', vi: 'Nhạc phát hành theo năm', th: 'ผลงานแยกตามปี' } },
   basics:    { emoji: '📖', label: { en: 'K-Pop Basics & Terms', ko: 'K-pop 입문 · 용어', ja: 'K-POP入門・用語', zh: 'K-pop 入门 · 术语', es: 'Conceptos y términos', fr: 'Bases et termes', de: 'Grundlagen & Begriffe', pt: 'Básico e termos', id: 'Dasar & Istilah', ar: 'أساسيات K-Pop ومصطلحاته', hi: 'K-Pop बेसिक्स और शब्दावली', ru: 'Основы и термины K-pop', vi: 'Nhập môn và thuật ngữ K-pop', th: 'พื้นฐานและศัพท์ K-pop' } },
   legends:   { emoji: '⭐', label: { en: 'Legendary Acts', ko: '레전드 아티스트', ja: 'レジェンド', zh: '传奇组合', es: 'Grupos legendarios', fr: 'Groupes légendaires', de: 'Legendäre Acts', pt: 'Grupos lendários', id: 'Artis Legendaris', ar: 'الأسماء الأسطورية', hi: 'लेजेंडरी आर्टिस्ट', ru: 'Легендарные артисты', vi: 'Nghệ sĩ huyền thoại', th: 'ศิลปินระดับตำนาน' } },
   history:   { emoji: '🏛️', label: { en: 'History & Generations', ko: '역사 · 세대', ja: '歴史・世代', zh: '历史 · 世代', es: 'Historia y generaciones', fr: 'Histoire et générations', de: 'Geschichte & Generationen', pt: 'História e gerações', id: 'Sejarah & Generasi', ar: 'التاريخ والأجيال', hi: 'इतिहास और जेनरेशन', ru: 'История и поколения', vi: 'Lịch sử và các thế hệ', th: 'ประวัติและเจเนอเรชัน' } },
@@ -3006,12 +3060,45 @@ const KPOP_BROWSE_T = {
   th: { h1: 'สำรวจ K-pop ทั้งหมด', title: 'K-pop ทั้งหมด — ศิลปิน ประวัติ และคู่มือ | KoreaPlus', lead: 'คู่มือ K-pop ทุกเรื่องบน KoreaPlus จัดไว้เป็นหมวด — โปรไฟล์ศิลปิน ศัพท์แฟนด้อม ประวัติ ค่ายเพลง และสถิติระดับโลก เลือกหมวดที่สนใจแล้วกดเข้าไปดูได้เลย', girl: 'เกิร์ลกรุ๊ป', boy: 'บอยกรุ๊ป', solo: 'ศิลปินเดี่ยว', more: '📚 ดูทั้งหมด' },
 };
 const kpopCatLabel = (k, lang) => (KPOP_CAT[k].label[lang] || KPOP_CAT[k].label.en);
-// A language gets a browse page only once it has something to browse — an empty
-// directory in a language nobody has translated yet is a thin page, and its
-// hreflang alternates would advertise pages that were never written.
+// Everything the seo-kpop-* modules reported writing, indexed per language as
+// OUT-relative paths. __out.kpop is the modules' own urls() output, so a member
+// here is a file that exists on disk — which is what lets the directory below
+// list pages without ever guessing at one. Built once, after the modules run.
+let _KPOP_EMITTED = null;
+function kpopEmittedFor(lang) {
+  if (!_KPOP_EMITTED) {
+    _KPOP_EMITTED = new Map();
+    for (const e of __out.kpop) {
+      if (!e || !e.url) continue;
+      const u = String(e.url);
+      const rel = u.startsWith(BASEP) ? u.slice(BASEP.length) : u;
+      // The tool's iframe twin is noindex and is meant to be embedded, not
+      // navigated to; a directory must not hand a reader a chrome-less widget.
+      if (/(^|\/)embed\//.test(rel)) continue;
+      let set = _KPOP_EMITTED.get(e.lang);
+      if (!set) _KPOP_EMITTED.set(e.lang, set = new Set());
+      set.add(rel);
+    }
+  }
+  return _KPOP_EMITTED.get(lang) || new Set();
+}
+// A language gets a browse page once it has translated browse copy AND at least
+// one page to put on it. The old gate asked kpop-history.json instead — the
+// 9-language article corpus — so ar/hi/ru/vi/th were refused a hub even though
+// KPOP_BROWSE_T and every KPOP_CAT label had been translated for them and each
+// had 236 module-built pages to list. 206 pages per language linked to the hub
+// regardless, which is where 1,030 of the cluster's dead links came from.
 const kpopHasPages = (lang) => Object.keys(KPOP_HIST).some(s => KPOP_HIST[s][lang]);
+const kpopBrowseLang = (lang) => !!KPOP_BROWSE_T[lang] && (kpopHasPages(lang) || kpopEmittedFor(lang).size > 0);
+// Calendar/zodiac slugs are English in every language (they are URL slugs), so
+// these orders sort the localized links into the sequence a reader expects
+// instead of alphabetically by an English word they never see. Anything not
+// listed keeps a stable alphabetical position at the end rather than vanishing.
+const KPOP_MONTH_SLUGS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+const KPOP_SIGN_SLUGS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
+const KPOP_ANIMAL_SLUGS = ['rat', 'ox', 'tiger', 'rabbit', 'dragon', 'snake', 'horse', 'goat', 'monkey', 'rooster', 'dog', 'pig'];
 function buildKpopBrowse(lang) {
-  if (!kpopHasPages(lang)) return null;
+  if (!kpopBrowseLang(lang)) return null;
   const dir = KPOP_HIST_DIR(lang);
   const url = `${BASEP}${dir}kpop/browse.html`;
   const T = KPOP_BROWSE_T[lang] || KPOP_BROWSE_T.en;

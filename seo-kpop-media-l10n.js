@@ -32,5 +32,8 @@ module.exports = {
   hi: { photo: 'फोटो', discogH: 'डिस्कोग्राफी', nReleases: (n) => `${n} रिलीज़`, colYear: 'साल', colTitle: 'रिलीज़', colDate: 'रिलीज़ की तारीख', asOf: 'Apple Music का रिलीज़ डेटा · %d तक', upcoming: 'जल्द रिलीज़', latestH: 'लेटेस्ट रिलीज़', comingH: 'अगली रिलीज़' },
   ru: { photo: 'Фото', discogH: 'Дискография', nReleases: (n) => `${n} ${n % 10 === 1 && n % 100 !== 11 ? 'релиз' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'релиза' : 'релизов'}`, colYear: 'Год', colTitle: 'Релиз', colDate: 'Дата выхода', asOf: 'Данные о релизах из Apple Music · по состоянию на %d', upcoming: 'Скоро', latestH: 'Последний релиз', comingH: 'Следующий релиз' },
   vi: { photo: 'Ảnh', discogH: 'Danh sách phát hành', nReleases: (n) => `${n} bản phát hành`, colYear: 'Năm', colTitle: 'Bản phát hành', colDate: 'Ngày phát hành', asOf: 'Dữ liệu phát hành từ Apple Music · tính đến %d', upcoming: 'Sắp phát hành', latestH: 'Bản phát hành mới nhất', comingH: 'Bản phát hành tiếp theo' },
-  th: { photo: 'ภาพ', discogH: 'ผลงานเพลง', nReleases: (n) => `ผลงาน ${n} รายการ`, colYear: 'ปี', colTitle: 'ผลงาน', colDate: 'วันวางจำหน่าย', asOf: 'ข้อมูลการวางจำหน่ายจาก Apple Music ณ วันที่ %d', upcoming: 'เร็ว ๆ นี้', latestH: 'ผลงานล่าสุด', comingH: 'ผลงานถัดไป' },
+  /* th counts as NOUN + NUMERAL + CLASSIFIER, identical at every count. ชิ้น is
+     the classifier the year cluster already uses for a release, so a profile
+     and a year page count the same objects the same way. */
+  th: { photo: 'ภาพ', discogH: 'ผลงานเพลง', nReleases: (n) => `ผลงาน ${n} ชิ้น`, colYear: 'ปี', colTitle: 'ผลงาน', colDate: 'วันวางจำหน่าย', asOf: 'ข้อมูลการวางจำหน่ายจาก Apple Music ณ วันที่ %d', upcoming: 'เร็ว ๆ นี้', latestH: 'ผลงานล่าสุด', comingH: 'ผลงานถัดไป' },
 };

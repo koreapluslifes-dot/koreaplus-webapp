@@ -14,6 +14,38 @@
    ══════════════════════════════════════════════════════════════════════════ */
 'use strict';
 
+/* ── Counted-noun contract ─────────────────────────────────────────────────
+   `${count} ${listLabel}` and `${membersLabel}: ${count}` are English word
+   order. Arabic (11–99 governs a singular accusative tamyīz), Russian (three
+   CLDR forms) and Thai (NOUN + NUMERAL + CLASSIFIER) all break under it, so
+   each locale owns the WHOLE counted phrase through a function instead:
+
+     listCount(n)    → the index badge text, replacing `${n} ${listLabel}`
+     membersFact(n)  → the key-facts chip, replacing `${membersLabel}: ${n}`
+
+   listLabel / membersLabel stay as the bare nouns for any caller that still
+   wants a label on its own; they must never be concatenated to a numeral.
+
+   typeVal is the localized value map for the roster type/gender enum, so a
+   localized table never prints the raw English data value ("Boy group").
+   Sub-key names and strings are copied verbatim from
+   modules/seo-kpop-agency-l10n.js, so the agency, vs and lightstick clusters
+   say the same word in the same language. Select with:
+     type === 'group'
+       ? (gender === 'girl' ? t.typeVal.girl
+          : gender === 'boy' ? t.typeVal.boy : t.typeVal.group)
+       : t.typeVal.soloist
+   ────────────────────────────────────────────────────────────────────────── */
+
+// Russian has three plural forms (CLDR one/few/many); an English `n === 1`
+// ternary is wrong for two of them. 1 → лайтстик, 4 → лайтстика, 9 → лайтстиков.
+const ruPlural = (n, [one, few, many]) => {
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+  return many;
+};
+
 const L = {
   en: {
     indexH1: 'K-pop Lightstick Directory',
@@ -21,6 +53,7 @@ const L = {
     indexTitle: 'K-pop Lightstick Directory — Official Fandom Lightsticks',
     indexDesc: 'Browse official K-pop fandom lightsticks (응원봉): which group each belongs to and the fandom name behind it. NewJeans, BLACKPINK, BTS and more.',
     listLabel: 'lightsticks',
+    listCount: n => `${n} lightstick${n === 1 ? '' : 's'}`,
     groupTitle: n => `${n} Lightstick — Official Fandom Lightstick`,
     groupDesc: (n, ls, fan) => `${n}'s official lightstick is the "${ls}". Meet the ${fan ? fan + ' fandom and ' : ''}the lightstick they wave at every concert.`,
     h1: (n) => `${n} Lightstick`,
@@ -29,7 +62,9 @@ const L = {
     agencyLabel: 'Agency',
     debutLabel: 'Debut',
     typeLabel: 'Type',
+    typeVal: { group: 'Group', soloist: 'Soloist', girl: 'Girl group', boy: 'Boy group' },
     membersLabel: 'Members',
+    membersFact: n => `Members: ${n}`,
     aboutH: 'About this lightstick',
     aboutP: (n, ls, fan) => `The ${ls} is the official light stick (응원봉) of ${n}. ${fan ? `Fans known as ${fan} wave it` : 'Fans wave it'} as a sea of light at concerts and fan events — a core part of K-pop fan culture, where each group has its own distinctly shaped and colored lightstick.`,
     whatIsH: 'What is a lightstick (응원봉)?',
@@ -49,6 +84,7 @@ const L = {
     indexTitle: 'K-POPペンライト図鑑 — 公式応援棒一覧',
     indexDesc: 'K-POP公式ペンライト（応援棒）図鑑。どのグループのものか、ファンダム名も一覧で。NewJeans・BLACKPINK・BTSほか。',
     listLabel: '本のペンライト',
+    listCount: n => `ペンライト${n}本`,
     groupTitle: n => `${n}のペンライト — 公式応援棒`,
     groupDesc: (n, ls, fan) => `${n}の公式ペンライトは「${ls}」。${fan ? fan + 'と' : ''}コンサートで振られるペンライトを紹介します。`,
     h1: (n) => `${n} ペンライト`,
@@ -57,7 +93,9 @@ const L = {
     agencyLabel: '事務所',
     debutLabel: 'デビュー',
     typeLabel: 'タイプ',
+    typeVal: { group: 'グループ', soloist: 'ソロ', girl: 'ガールズグループ', boy: 'ボーイズグループ' },
     membersLabel: 'メンバー',
+    membersFact: n => `メンバー: ${n}人`,
     aboutH: 'このペンライトについて',
     aboutP: (n, ls, fan) => `「${ls}」は${n}の公式ペンライト（応援棒）です。${fan ? `${fan}と呼ばれるファンが` : 'ファンが'}コンサートやイベントで一斉に振り、光の海をつくります。各グループが独自の形と色を持つのがK-POPファン文化の特徴です。`,
     whatIsH: '応援棒（ペンライト）とは？',
@@ -77,6 +115,7 @@ const L = {
     indexTitle: 'K-pop 应援棒图鉴 — 官方应援棒一览',
     indexDesc: 'K-pop 官方应援棒图鉴：每支属于哪个团体、对应粉丝团名称。NewJeans、BLACKPINK、BTS 等。',
     listLabel: '支应援棒',
+    listCount: n => `${n} 支应援棒`,
     groupTitle: n => `${n} 应援棒 — 官方应援棒`,
     groupDesc: (n, ls, fan) => `${n} 的官方应援棒是「${ls}」。认识${fan ? fan + '与' : ''}演唱会上挥舞的应援棒。`,
     h1: (n) => `${n} 应援棒`,
@@ -85,7 +124,9 @@ const L = {
     agencyLabel: '经纪公司',
     debutLabel: '出道',
     typeLabel: '类型',
+    typeVal: { group: '团体', soloist: 'solo', girl: '女子团体', boy: '男子团体' },
     membersLabel: '成员',
+    membersFact: n => `成员：${n} 人`,
     aboutH: '关于这支应援棒',
     aboutP: (n, ls, fan) => `「${ls}」是 ${n} 的官方应援棒（응원봉）。${fan ? `被称为 ${fan} 的粉丝` : '粉丝'}在演唱会和粉丝活动上一同挥舞，汇成一片光海——这是 K-pop 粉丝文化的核心，每个团体都有独特造型与颜色的应援棒。`,
     whatIsH: '什么是应援棒（응원봉）？',
@@ -105,6 +146,7 @@ const L = {
     indexTitle: 'Directorio de Lightsticks K-pop — Lightsticks oficiales de los fandoms',
     indexDesc: 'Explora los lightsticks oficiales de los fandoms K-pop (응원봉): a qué grupo pertenece cada uno y el nombre del fandom. NewJeans, BLACKPINK, BTS y más.',
     listLabel: 'lightsticks',
+    listCount: n => `${n} lightstick${n === 1 ? '' : 's'}`,
     groupTitle: n => `Lightstick de ${n} — Lightstick oficial del fandom`,
     groupDesc: (n, ls, fan) => `El lightstick oficial de ${n} es el "${ls}". Conoce ${fan ? 'al fandom ' + fan + ' y ' : ''}el lightstick que ondean en cada concierto.`,
     h1: (n) => `Lightstick de ${n}`,
@@ -113,7 +155,9 @@ const L = {
     agencyLabel: 'Agencia',
     debutLabel: 'Debut',
     typeLabel: 'Tipo',
+    typeVal: { group: 'Grupo', soloist: 'Solista', girl: 'Grupo femenino', boy: 'Grupo masculino' },
     membersLabel: 'Integrantes',
+    membersFact: n => `Integrantes: ${n}`,
     aboutH: 'Sobre este lightstick',
     aboutP: (n, ls, fan) => `El "${ls}" es el lightstick oficial (응원봉) de ${n}. ${fan ? `Los fans conocidos como ${fan} lo ondean` : 'Los fans lo ondean'} formando un mar de luz en conciertos y eventos — parte esencial de la cultura fan del K-pop, donde cada grupo tiene un lightstick con forma y color propios.`,
     whatIsH: '¿Qué es un lightstick (응원봉)?',
@@ -133,6 +177,7 @@ const L = {
     indexTitle: 'K-팝 응원봉 도감 — 공식 응원봉 모음',
     indexDesc: 'K-팝 공식 응원봉 도감. 어느 그룹의 것인지, 팬덤 이름까지 한눈에. 뉴진스·블랙핑크·BTS 등.',
     listLabel: '개 응원봉',
+    listCount: n => `응원봉 ${n}개`,
     groupTitle: n => `${n} 응원봉 — 공식 응원봉`,
     groupDesc: (n, ls, fan) => `${n}의 공식 응원봉은 '${ls}'입니다. ${fan ? fan + '과(와) ' : ''}콘서트에서 흔드는 응원봉을 소개합니다.`,
     h1: (n) => `${n} 응원봉`,
@@ -141,7 +186,9 @@ const L = {
     agencyLabel: '소속사',
     debutLabel: '데뷔',
     typeLabel: '유형',
+    typeVal: { group: '그룹', soloist: '솔로', girl: '걸그룹', boy: '보이그룹' },
     membersLabel: '멤버',
+    membersFact: n => `멤버: ${n}명`,
     aboutH: '응원봉 소개',
     aboutP: (n, ls, fan) => `'${ls}'은(는) ${n}의 공식 응원봉입니다. ${fan ? `${fan}(이)라 불리는 팬들이` : '팬들이'} 콘서트와 팬 이벤트에서 함께 흔들며 빛의 물결을 만듭니다. 그룹마다 고유한 모양과 색을 가진 응원봉은 K-팝 팬 문화의 핵심입니다.`,
     whatIsH: '응원봉이란?',
@@ -161,6 +208,7 @@ const L = {
     indexTitle: 'Annuaire des lightsticks K-pop — Lightsticks officiels des fandoms',
     indexDesc: 'Parcourez les lightsticks officiels des fandoms K-pop (응원봉) : à quel groupe chacun appartient et le nom du fandom. NewJeans, BLACKPINK, BTS et plus.',
     listLabel: 'lightsticks',
+    listCount: n => `${n} lightstick${n === 1 ? '' : 's'}`,
     groupTitle: n => `Lightstick de ${n} — Lightstick officiel du fandom`,
     groupDesc: (n, ls, fan) => `Le lightstick officiel de ${n} est le « ${ls} ». Découvrez ${fan ? 'le fandom ' + fan + ' et ' : ''}le lightstick agité à chaque concert.`,
     h1: (n) => `Lightstick de ${n}`,
@@ -169,7 +217,9 @@ const L = {
     agencyLabel: 'Agence',
     debutLabel: 'Débuts',
     typeLabel: 'Type',
+    typeVal: { group: 'Groupe', soloist: 'Solo', girl: 'Girl group', boy: 'Boy group' },
     membersLabel: 'Membres',
+    membersFact: n => `Membres : ${n}`,
     aboutH: 'À propos de ce lightstick',
     aboutP: (n, ls, fan) => `Le « ${ls} » est le lightstick officiel (응원봉) de ${n}. ${fan ? `Les fans appelés ${fan} l'agitent` : 'Les fans l\'agitent'} en une mer de lumière lors des concerts et événements — un élément central de la culture des fans de K-pop, où chaque groupe possède un lightstick à la forme et à la couleur propres.`,
     whatIsH: 'Qu\'est-ce qu\'un lightstick (응원봉) ?',
@@ -189,6 +239,7 @@ const L = {
     indexTitle: 'K-Pop-Lightstick-Verzeichnis — Offizielle Fandom-Lightsticks',
     indexDesc: 'Durchstöbere die offiziellen K-Pop-Fandom-Lightsticks (응원봉): zu welcher Gruppe jeder gehört und der Name des Fandoms. NewJeans, BLACKPINK, BTS und mehr.',
     listLabel: 'Lightsticks',
+    listCount: n => `${n} Lightstick${n === 1 ? '' : 's'}`,
     groupTitle: n => `${n} Lightstick — Offizieller Fandom-Lightstick`,
     groupDesc: (n, ls, fan) => `Der offizielle Lightstick von ${n} ist der „${ls}". Lerne ${fan ? 'das Fandom ' + fan + ' und ' : ''}den Lightstick kennen, der bei jedem Konzert geschwenkt wird.`,
     h1: (n) => `${n} Lightstick`,
@@ -197,7 +248,9 @@ const L = {
     agencyLabel: 'Agentur',
     debutLabel: 'Debüt',
     typeLabel: 'Typ',
+    typeVal: { group: 'Gruppe', soloist: 'Solo', girl: 'Girlgroup', boy: 'Boygroup' },
     membersLabel: 'Mitglieder',
+    membersFact: n => `Mitglieder: ${n}`,
     aboutH: 'Über diesen Lightstick',
     aboutP: (n, ls, fan) => `Der „${ls}" ist der offizielle Lightstick (응원봉) von ${n}. ${fan ? `Fans, die als ${fan} bekannt sind, schwenken ihn` : 'Fans schwenken ihn'} zu einem Lichtermeer bei Konzerten und Fan-Events — ein zentraler Teil der K-Pop-Fankultur, in der jede Gruppe einen eigens geformten und gefärbten Lightstick hat.`,
     whatIsH: 'Was ist ein Lightstick (응원봉)?',
@@ -217,6 +270,7 @@ const L = {
     indexTitle: 'Diretório de Lightsticks K-pop — Lightsticks oficiais dos fandoms',
     indexDesc: 'Explore os lightsticks oficiais dos fandoms de K-pop (응원봉): a qual grupo cada um pertence e o nome do fandom. NewJeans, BLACKPINK, BTS e mais.',
     listLabel: 'lightsticks',
+    listCount: n => `${n} lightstick${n === 1 ? '' : 's'}`,
     groupTitle: n => `Lightstick do ${n} — Lightstick oficial do fandom`,
     groupDesc: (n, ls, fan) => `O lightstick oficial do ${n} é o "${ls}". Conheça ${fan ? 'o fandom ' + fan + ' e ' : ''}o lightstick agitado em cada show.`,
     h1: (n) => `Lightstick do ${n}`,
@@ -225,7 +279,9 @@ const L = {
     agencyLabel: 'Agência',
     debutLabel: 'Estreia',
     typeLabel: 'Tipo',
+    typeVal: { group: 'Grupo', soloist: 'Solista', girl: 'Grupo feminino', boy: 'Grupo masculino' },
     membersLabel: 'Integrantes',
+    membersFact: n => `Integrantes: ${n}`,
     aboutH: 'Sobre este lightstick',
     aboutP: (n, ls, fan) => `O "${ls}" é o lightstick oficial (응원봉) do ${n}. ${fan ? `Os fãs conhecidos como ${fan} o agitam` : 'Os fãs o agitam'} formando um mar de luz em shows e eventos — parte essencial da cultura de fãs do K-pop, em que cada grupo tem um lightstick com forma e cor próprias.`,
     whatIsH: 'O que é um lightstick (응원봉)?',
@@ -245,6 +301,7 @@ const L = {
     indexTitle: 'Direktori Lightstick K-pop — Lightstick resmi fandom',
     indexDesc: 'Jelajahi lightstick resmi fandom K-pop (응원봉): milik grup mana dan nama fandomnya. NewJeans, BLACKPINK, BTS, dan lainnya.',
     listLabel: 'lightstick',
+    listCount: n => `${n} lightstick`,
     groupTitle: n => `Lightstick ${n} — Lightstick resmi fandom`,
     groupDesc: (n, ls, fan) => `Lightstick resmi ${n} adalah "${ls}". Kenali ${fan ? 'fandom ' + fan + ' dan ' : ''}lightstick yang diayunkan di setiap konser.`,
     h1: (n) => `Lightstick ${n}`,
@@ -253,7 +310,9 @@ const L = {
     agencyLabel: 'Agensi',
     debutLabel: 'Debut',
     typeLabel: 'Tipe',
+    typeVal: { group: 'Grup', soloist: 'Solois', girl: 'Girl group', boy: 'Boy group' },
     membersLabel: 'Anggota',
+    membersFact: n => `Anggota: ${n}`,
     aboutH: 'Tentang lightstick ini',
     aboutP: (n, ls, fan) => `"${ls}" adalah lightstick resmi (응원봉) ${n}. ${fan ? `Penggemar yang dikenal sebagai ${fan} mengayunkannya` : 'Penggemar mengayunkannya'} menjadi lautan cahaya di konser dan acara penggemar — bagian inti budaya penggemar K-pop, di mana tiap grup punya lightstick dengan bentuk dan warna khas.`,
     whatIsH: 'Apa itu lightstick (응원봉)?',
@@ -272,11 +331,14 @@ const L = {
     indexLead: 'العصي الضوئية الرسمية (응원봉) لفرق K-Pop — أسماؤها، ومن يلوّح بها من المعجبين، وما يجعل كل واحدة منها أيقونة على مسرح الحفلات. اختر فرقة لترى عصاها الضوئية.',
     indexTitle: 'دليل العصي الضوئية في K-Pop — العصي الرسمية للفاندوم',
     indexDesc: 'تصفَّح العصي الضوئية الرسمية لفاندوم فرق K-Pop (응원봉): لأي فرقة تعود كل عصا، وما اسم الفاندوم وراءها. NewJeans وBLACKPINK وBTS والمزيد.',
-    // Badge renders as `${count} ${listLabel}`, so only one form is reachable.
-    // Arabic governs a counted noun by band; this is the singular tamyīz the
-    // 11–99 band takes, which is where the roster sits. A roster that shrank
-    // into 3–10 would need the plural عصي ضوئية instead.
+    // listLabel is the bare noun and must never be concatenated to a numeral:
+    // Arabic governs a counted noun by band (1 bare · 2 dual · 3–10 plural ·
+    // 11–99 singular accusative · 100+ singular genitive), so no single form
+    // survives a `${count} ${listLabel}` template. listCount takes the noun out
+    // of the numeral's government entirely — noun first, number after — which
+    // is what the ar style contract prescribes and is correct at every count.
     listLabel: 'عصا ضوئية',
+    listCount: n => `عدد العصي الضوئية: ${n}`,
     groupTitle: n => `عصا ${n} الضوئية — العصا الرسمية للفاندوم`,
     groupDesc: (n, ls, fan) => `عصا ${n} الضوئية الرسمية هي «${ls}». تعرَّف على ${fan ? 'فاندوم ' + fan + ' و' : ''}العصا التي يلوّح بها الجمهور في كل حفل.`,
     h1: (n) => `عصا ${n} الضوئية`,
@@ -285,7 +347,11 @@ const L = {
     agencyLabel: 'شركة الترفيه',
     debutLabel: 'الظهور الأول',
     typeLabel: 'النوع',
+    typeVal: { group: 'فرقة', soloist: 'فنان منفرد', girl: 'فرقة فتيات', boy: 'فرقة فتيان' },
     membersLabel: 'الأعضاء',
+    // عدد + genitive plural, then the number — same inversion as listCount, so
+    // 1, 4 and 13 all read correctly. Never `${membersLabel}: ${n}`.
+    membersFact: n => `عدد الأعضاء: ${n}`,
     aboutH: 'عن هذه العصا الضوئية',
     aboutP: (n, ls, fan) => `«${ls}» هي عصا ${n} الضوئية الرسمية (응원봉). ${fan ? `يلوّح بها المعجبون المعروفون باسم ${fan}` : 'يلوّح بها المعجبون'} في الحفلات وفعاليات الفاندوم حتى تتحوّل القاعة إلى بحر من الضوء — وهي ركن أساسي في ثقافة جمهور K-Pop، حيث لكل فرقة عصا بشكل ولون خاصين بها.`,
     whatIsH: 'ما هي العصا الضوئية (응원봉)؟',
@@ -304,7 +370,10 @@ const L = {
     indexLead: 'K-pop ग्रुप के ऑफिशियल फैनडम लाइटस्टिक (응원봉) — इनके नाम, इन्हें लहराने वाले फैंस, और वो बात जो हर लाइटस्टिक को कॉन्सर्ट का आइकन बना देती है। कोई ग्रुप चुनें और उसका लाइटस्टिक देखें।',
     indexTitle: 'K-pop लाइटस्टिक डायरेक्टरी — ऑफिशियल फैनडम लाइटस्टिक',
     indexDesc: 'K-pop के ऑफिशियल फैनडम लाइटस्टिक (응원봉) देखें: कौन-सा लाइटस्टिक किस ग्रुप का है और उसके पीछे फैनडम का नाम क्या है। NewJeans, BLACKPINK, BTS और भी बहुत कुछ।',
+    // Hindi loanwords stay invariant in the direct case: 1 लाइटस्टिक / 17 लाइटस्टिक.
+    // Never लाइटस्टिक्स.
     listLabel: 'लाइटस्टिक',
+    listCount: n => `${n} लाइटस्टिक`,
     groupTitle: n => `${n} लाइटस्टिक — ऑफिशियल फैनडम लाइटस्टिक`,
     groupDesc: (n, ls, fan) => `${n} का ऑफिशियल लाइटस्टिक "${ls}" है। ${fan ? fan + ' फैनडम और ' : ''}हर कॉन्सर्ट में लहराए जाने वाले इस लाइटस्टिक के बारे में जानें।`,
     h1: (n) => `${n} लाइटस्टिक`,
@@ -312,8 +381,12 @@ const L = {
     fandomLabel: 'फैनडम',
     agencyLabel: 'एजेंसी',
     debutLabel: 'डेब्यू',
-    typeLabel: 'टाइप',
+    // प्रकार, not टाइप — the agency pages already render this field as प्रकार,
+    // and the same field must not be labelled two ways in the same language.
+    typeLabel: 'प्रकार',
+    typeVal: { group: 'ग्रुप', soloist: 'सोलो आर्टिस्ट', girl: 'गर्ल ग्रुप', boy: 'बॉय ग्रुप' },
     membersLabel: 'मेंबर',
+    membersFact: n => `मेंबर: ${n}`,
     aboutH: 'इस लाइटस्टिक के बारे में',
     aboutP: (n, ls, fan) => `"${ls}" ${n} का ऑफिशियल लाइटस्टिक (응원봉) है। ${fan ? `${fan} कहलाने वाले फैंस इसे` : 'फैंस इसे'} कॉन्सर्ट और फैन इवेंट में एक साथ लहराते हैं और रोशनी का समंदर बना देते हैं — यह K-pop फैन कल्चर का अहम हिस्सा है, जहाँ हर ग्रुप का लाइटस्टिक अपने अलग आकार और रंग में आता है।`,
     whatIsH: 'लाइटस्टिक (응원봉) क्या है?',
@@ -332,11 +405,11 @@ const L = {
     indexLead: 'Официальные фандомные лайтстики (응원봉) групп K-pop: как они называются, кто ими машет и почему каждый стал символом концертов. Выберите группу, чтобы увидеть её лайтстик.',
     indexTitle: 'Каталог лайтстиков K-pop — официальные фандомные лайтстики',
     indexDesc: 'Официальные фандомные лайтстики K-pop (응원봉): какой группе принадлежит каждый и как называется её фандом. NewJeans, BLACKPINK, BTS и другие.',
-    // Badge renders as `${count} ${listLabel}` and the generator reads a string,
-    // not a plural() call, so only one of ru's three forms is reachable. This is
-    // the `many` genitive, correct for the current roster; a count landing on
-    // one (21) or few (22–24) would need лайтстик / лайтстика.
+    // listLabel is the `many` genitive on its own; it must never be pasted after
+    // a numeral, because 21 takes one and 22–24 take few. listCount runs the
+    // real three-form rule: 1 лайтстик · 4 лайтстика · 9 лайтстиков.
     listLabel: 'лайтстиков',
+    listCount: n => `${n} ${ruPlural(n, ['лайтстик', 'лайтстика', 'лайтстиков'])}`,
     groupTitle: n => `Лайтстик ${n} — официальный фандомный лайтстик`,
     groupDesc: (n, ls, fan) => `Официальный лайтстик ${n} — «${ls}». Познакомьтесь с ${fan ? 'фандомом ' + fan + ' и ' : ''}лайтстиком, который поднимают на каждом концерте.`,
     h1: (n) => `Лайтстик ${n}`,
@@ -345,7 +418,13 @@ const L = {
     agencyLabel: 'Агентство',
     debutLabel: 'Дебют',
     typeLabel: 'Тип',
+    typeVal: { group: 'Группа', soloist: 'Сольный артист', girl: 'Гёрл-группа', boy: 'Бой-группа' },
     membersLabel: 'Участники',
+    // Label-colon-number: the numeral does not govern the noun here, so the
+    // nominative label is correct at every count (same shape as the vs pages'
+    // «Число участников: BLACKPINK — 4»). The bug is `${n} Участники`, which is
+    // what membersCount in kpop-vs-l10n.json exists to prevent.
+    membersFact: n => `Участники: ${n}`,
     aboutH: 'Об этом лайтстике',
     aboutP: (n, ls, fan) => `«${ls}» — официальный лайтстик (응원봉) ${n}. ${fan ? `Фанаты, которых называют ${fan}, машут им` : 'Фанаты машут им'} на концертах и фан-встречах, превращая зал в море огней. Это основа фанатской культуры K-pop, где у каждой группы свой лайтстик с собственной формой и цветом.`,
     whatIsH: 'Что такое лайтстик (응원봉)?',
@@ -361,23 +440,29 @@ const L = {
   },
   vi: {
     indexH1: 'Danh mục lightstick K-pop',
-    indexLead: 'Lightstick chính thức của các fandom K-pop (응원봉) — tên gọi của từng cây, những người hâm mộ vẫy chúng, và điều khiến mỗi cây trở thành biểu tượng của concert. Chọn một nhóm để xem lightstick của họ.',
+    indexLead: 'Lightstick chính thức của các fandom K-pop (응원봉) — tên gọi của từng cây, fandom vẫy chúng, và điều khiến mỗi cây trở thành biểu tượng của concert. Chọn một nhóm để xem lightstick của họ.',
     indexTitle: 'Danh mục lightstick K-pop — Lightstick chính thức của fandom',
     indexDesc: 'Xem lightstick chính thức của các fandom K-pop (응원봉): mỗi cây thuộc về nhóm nào và fandom mang tên gì. NewJeans, BLACKPINK, BTS và nhiều nhóm khác.',
+    // Vietnamese has no grammatical number: a bare noun is correct at any count
+    // (1 lightstick / 17 lightstick). Never add a plural marker, and never put
+    // các/những in front of a counted noun.
     listLabel: 'lightstick',
+    listCount: n => `${n} lightstick`,
     groupTitle: n => `Lightstick ${n} — Lightstick chính thức của fandom`,
-    groupDesc: (n, ls, fan) => `Lightstick chính thức của ${n} là "${ls}". Cùng tìm hiểu ${fan ? 'fandom ' + fan + ' và ' : ''}cây lightstick được vẫy trong mọi concert.`,
+    groupDesc: (n, ls, fan) => `Lightstick chính thức của ${n} là “${ls}”. Cùng tìm hiểu ${fan ? 'fandom ' + fan + ' và ' : ''}cây lightstick được vẫy trong mọi concert.`,
     h1: (n) => `Lightstick ${n}`,
     lightstickLabel: 'Lightstick chính thức',
     fandomLabel: 'Fandom',
     agencyLabel: 'Công ty chủ quản',
     debutLabel: 'Debut',
     typeLabel: 'Loại',
+    typeVal: { group: 'Nhóm nhạc', soloist: 'Nghệ sĩ solo', girl: 'Nhóm nữ', boy: 'Nhóm nam' },
     membersLabel: 'Thành viên',
+    membersFact: n => `Thành viên: ${n}`,
     aboutH: 'Về cây lightstick này',
-    aboutP: (n, ls, fan) => `"${ls}" là lightstick chính thức (응원봉) của ${n}. ${fan ? `Người hâm mộ với tên gọi ${fan} vẫy nó` : 'Người hâm mộ vẫy nó'} thành cả một biển ánh sáng trong concert và các sự kiện fan — phần cốt lõi của văn hóa fan K-pop, nơi mỗi nhóm đều có cây lightstick với hình dáng và màu sắc riêng.`,
+    aboutP: (n, ls, fan) => `“${ls}” là lightstick chính thức (응원봉) của ${n}. ${fan ? `Fandom mang tên ${fan} vẫy lightstick` : 'Fan vẫy lightstick'} tạo thành cả một biển ánh sáng trong concert và các sự kiện fan — phần cốt lõi của văn hóa fan K-pop, nơi mỗi nhóm đều có cây lightstick với hình dáng và màu sắc riêng.`,
     whatIsH: 'Lightstick (응원봉) là gì?',
-    whatIsP: 'Lightstick, hay eung-won-bong (응원봉), là đèn cổ vũ chính thức của một nhóm nhạc K-pop. Người hâm mộ mang theo đến concert để tạo nên "biển" ánh sáng đồng loạt. Mỗi nhóm có một thiết kế riêng, và nhiều cây kết nối Bluetooth để ban tổ chức điều khiển màu theo thời gian thực.',
+    whatIsP: 'Lightstick, hay eung-won-bong (응원봉), là đèn cổ vũ chính thức của một nhóm nhạc K-pop. Fan mang theo đến concert để tạo nên “biển” ánh sáng đồng loạt. Mỗi nhóm có một thiết kế riêng, và nhiều cây kết nối Bluetooth để ban tổ chức điều khiển màu theo thời gian thực.',
     relatedH: 'Lightstick khác',
     backToIndex: 'Tất cả lightstick',
     faqQ1: (n) => `Lightstick của ${n} tên là gì?`,
@@ -389,13 +474,15 @@ const L = {
   },
   th: {
     indexH1: 'รวมแท่งไฟ K-pop',
-    indexLead: 'แท่งไฟอย่างเป็นทางการ (응원봉) ของแฟนด้อมวง K-pop — ชื่อของแต่ละแท่ง แฟนด้อมที่โบกมัน และเหตุผลที่ทำให้แท่งไฟกลายเป็นสัญลักษณ์ของคอนเสิร์ต เลือกวงที่สนใจเพื่อดูแท่งไฟของวงนั้น',
+    indexLead: 'แท่งไฟอย่างเป็นทางการ (응원봉) ของแฟนด้อมวง K-pop — ชื่อของแต่ละแท่ง แฟนด้อมที่โบกแท่งไฟนั้น และเหตุผลที่ทำให้แท่งไฟกลายเป็นสัญลักษณ์ของคอนเสิร์ต เลือกวงที่สนใจเพื่อดูแท่งไฟของวงนั้น',
     indexTitle: 'รวมแท่งไฟ K-pop — แท่งไฟอย่างเป็นทางการของทุกแฟนด้อม',
     indexDesc: 'ดูแท่งไฟอย่างเป็นทางการของแฟนด้อม K-pop (응원봉) ว่าแท่งไหนเป็นของวงอะไร และแฟนด้อมชื่อว่าอะไร มีทั้ง NewJeans BLACKPINK BTS และอีกหลายวง',
-    // Badge renders as `${count} ${listLabel}`, which is the reverse of Thai
-    // noun-numeral-classifier order (แท่งไฟ 17 แท่ง). Keeping the noun rather
-    // than the bare classifier แท่ง is the readable half of that trade-off.
+    // Thai counts NOUN + NUMERAL + CLASSIFIER, so `${count} ${listLabel}` is
+    // backwards and drops the mandatory classifier. listCount restores both.
+    // The classifier is แบบ (designs/types), not แท่ง (physical sticks): the
+    // index lists one lightstick design per group, not a pile of sticks.
     listLabel: 'แท่งไฟ',
+    listCount: n => `แท่งไฟ ${n} แบบ`,
     groupTitle: n => `แท่งไฟ ${n} — แท่งไฟอย่างเป็นทางการของแฟนด้อม`,
     groupDesc: (n, ls, fan) => `แท่งไฟอย่างเป็นทางการของ ${n} คือ "${ls}" มาทำความรู้จัก${fan ? `แฟนด้อม ${fan} และ` : ''}แท่งไฟที่แฟน ๆ โบกในทุกคอนเสิร์ต`,
     h1: (n) => `แท่งไฟ ${n}`,
@@ -404,16 +491,22 @@ const L = {
     agencyLabel: 'ค่ายเพลง',
     debutLabel: 'เดบิวต์',
     typeLabel: 'ประเภท',
+    typeVal: { group: 'วง', soloist: 'ศิลปินเดี่ยว', girl: 'เกิร์ลกรุ๊ป', boy: 'บอยกรุ๊ป' },
     membersLabel: 'สมาชิก',
+    // คน is mandatory — "สมาชิก: 7" is English order with the classifier deleted.
+    membersFact: n => `สมาชิก: ${n} คน`,
     aboutH: 'เกี่ยวกับแท่งไฟนี้',
     aboutP: (n, ls, fan) => `"${ls}" คือแท่งไฟอย่างเป็นทางการ (응원봉) ของ ${n} ${fan ? `แฟน ๆ ที่เรียกกันว่า ${fan} จะโบกแท่งไฟนี้` : 'แฟน ๆ จะโบกแท่งไฟนี้'}พร้อมกันในคอนเสิร์ตและงานแฟนมีตจนกลายเป็นทะเลแสง — นี่คือหัวใจของวัฒนธรรมแฟนด้อม K-pop ที่ทุกวงมีแท่งไฟรูปทรงและสีเป็นของตัวเอง`,
-    whatIsH: 'แท่งไฟ (응원봉) คืออะไร',
+    whatIsH: 'แท่งไฟ (응원봉) คืออะไร?',
     whatIsP: 'แท่งไฟ หรืออึงวอนบง (응원봉) คือไฟเชียร์อย่างเป็นทางการของวง K-pop แฟน ๆ จะถือไปในคอนเสิร์ตเพื่อสร้าง "ทะเลแสง" ที่สว่างพร้อมกันทั้งฮอลล์ แต่ละวงมีดีไซน์เฉพาะตัว และแท่งไฟหลายรุ่นเชื่อมต่อ Bluetooth ให้ทีมงานคุมสีได้แบบเรียลไทม์',
     relatedH: 'แท่งไฟของวงอื่น',
     backToIndex: 'แท่งไฟทั้งหมด',
-    faqQ1: (n) => `แท่งไฟของ ${n} ชื่ออะไร`,
+    // Thai has no full stop but does use "?" — a bare interrogative in a
+    // <summary> reads as an unfinished sentence, and every other language in
+    // this bundle keeps the mark.
+    faqQ1: (n) => `แท่งไฟของ ${n} ชื่ออะไร?`,
     faqA1: (n, ls) => `แท่งไฟอย่างเป็นทางการของ ${n} ชื่อว่า "${ls}"`,
-    faqQ2: (n) => `แฟนด้อมของ ${n} ชื่ออะไร`,
+    faqQ2: (n) => `แฟนด้อมของ ${n} ชื่ออะไร?`,
     faqA2: (n, fan) => `แฟนด้อมอย่างเป็นทางการของ ${n} ชื่อว่า "${fan}"`,
     breadcrumbHome: 'K-pop',
     breadcrumbDir: 'แท่งไฟ',

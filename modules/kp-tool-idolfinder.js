@@ -23,6 +23,12 @@
   var LANG = window.KP_TOOL_LANG || 'en';
 
   // ── derive: tropical sun-sign (matches seo-derive SIGNS) ───────────
+  // The `name` fields below are the ENGLISH FALLBACK ONLY. A localized page
+  // ships I.signs / I.animals (key → native name) in its KP_TOOL_I18N bundle
+  // — taken verbatim from the same vocabulary the static zodiac pages use, so
+  // the widget and the pages never print two different words for one sign.
+  // I.animalEmoji optionally overrides an animal glyph where the localized
+  // animal genuinely differs (vi: the 4th branch is Mão/cat, not the rabbit).
   var SIGNS = [
     { key: 'capricorn',   name: 'Capricorn',   emoji: '♑', from: [12, 22] },
     { key: 'aquarius',    name: 'Aquarius',    emoji: '♒', from: [1, 20] },
@@ -80,6 +86,17 @@
     return { key: a.key, name: a.name, emoji: a.emoji, approx: approx };
   }
 
+  // ── localized display names (fall back to the built-in English) ────
+  function signName(s) {
+    return (s && I.signs && I.signs[s.key]) || (s ? s.name : '');
+  }
+  function cnName(c) {
+    return (c && I.animals && I.animals[c.key]) || (c ? c.name : '');
+  }
+  function cnEmoji(c) {
+    return (c && I.animalEmoji && I.animalEmoji[c.key]) || (c ? c.emoji : '');
+  }
+
   // ── tiny helpers ───────────────────────────────────────────────────
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -124,10 +141,10 @@
     // header: your sign + zodiac
     if (r.sign) {
       out += '<p class="kpf-you"><strong>' + esc(I.yourSign || 'Your star sign') + ':</strong> ' +
-        esc(r.sign.emoji) + ' ' + esc(r.sign.name);
+        esc(r.sign.emoji) + ' ' + esc(signName(r.sign));
       if (r.cn) {
         out += ' &nbsp;·&nbsp; <strong>' + esc(I.yourZodiac || 'Your Chinese zodiac') + ':</strong> ' +
-          esc(r.cn.emoji) + ' ' + esc(r.cn.name);
+          esc(cnEmoji(r.cn)) + ' ' + esc(cnName(r.cn));
       }
       out += '</p>';
     }
@@ -141,7 +158,7 @@
       out += '<p class="kpf-none">' + esc(I.noSameDay || '') + '</p>';
     }
     out += listBlock(I.resSameSign || 'Same star sign', (r.sign ? r.sign.emoji : '✨'), r.sameSign);
-    out += listBlock(I.resSameZodiac || 'Same Chinese zodiac', (r.cn ? r.cn.emoji : '🏮'), r.sameZodiac);
+    out += listBlock(I.resSameZodiac || 'Same Chinese zodiac', (r.cn ? cnEmoji(r.cn) : '🏮'), r.sameZodiac);
 
     var res = el('kpf-result');
     if (res) { res.innerHTML = out; res.hidden = false; }

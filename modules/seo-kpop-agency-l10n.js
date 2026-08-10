@@ -339,7 +339,11 @@ const M = {
     crumbAll: 'Agensi',
   },
   ar: {
-    titleSuffix: 'الفنانون والفرق — الدليل الكامل للقائمة',
+    // The generator renders `${name} — ${titleSuffix}`. A second em dash would
+    // make four clauses in a row, so the inner break is a colon; and the
+    // "| KoreaPlus" tail that every other Arabic page carries lives here,
+    // because shell() does not append it.
+    titleSuffix: 'فنانو وفرق K-Pop: الدليل الكامل | KoreaPlus',
     h1: n => `${n}: فنانو وفرق K-Pop`,
     desc: (n, c) => `دليل كامل لفناني وفرق K-Pop لدى شركة ${n} على KoreaPlus — عدد الفرق والفنانين: ${c}، مع تواريخ الظهور الأول والأعضاء وأسماء الفاندوم والقنوات الرسمية.`,
     lead: n => `كل ما تحتاج معرفته عن فناني وفرق K-Pop لدى شركة ${n} — تسلسل الظهور الأول، وتشكيلات الأعضاء، والفاندوم، وأين تتابعهم رسميًا.`,
@@ -368,7 +372,11 @@ const M = {
     relHub: 'مركز K-Pop',
     note: 'تعرض القائمة ما نقدّمه على KoreaPlus من فنانين وفرق، وقد لا تشمل كل الأسماء التابعة للشركة. المعلومات مأخوذة من سجلات الظهور الأول الرسمية.',
     faq: (n, names) => [
-      [`ما هي فرق K-Pop التابعة لشركة ${n}؟`, `نقدّم على KoreaPlus ${names}. تعرض القائمة أدناه تاريخ الظهور الأول والأعضاء والفاندوم لكل فرقة أو فنان.`],
+      // Arabic answers a ما-question with topic then comment, and puts the
+      // colon before the enumeration — the reader must not wait through eight
+      // Latin names to learn what is being listed. This answer is what Google
+      // lifts into the rich result, so the word order is load-bearing.
+      [`ما هي فرق K-Pop التابعة لشركة ${n}؟`, `فرق ${n} وفنانوها الذين نغطّيهم على KoreaPlus هم: ${names}. تعرض القائمة أدناه تاريخ الظهور الأول والأعضاء والفاندوم لكل فرقة أو فنان.`],
       [`كيف جُمعت شركات HYBE الفرعية؟`, `تُجمَع الشركات الفرعية مثل ADOR وBIGHIT MUSIC وPLEDIS وBELIFT LAB وSource Music تحت شركتها الأم HYBE في هذا الدليل.`],
     ],
     crumbHome: 'K-Pop',
@@ -403,7 +411,9 @@ const M = {
     relHub: 'K-pop हब',
     note: 'इस लिस्ट में KoreaPlus पर फीचर किए गए आर्टिस्ट शामिल हैं — ज़रूरी नहीं कि एजेंसी का हर आर्टिस्ट इसमें हो। सारे तथ्य ऑफिशियल डेब्यू रिकॉर्ड से लिए गए हैं।',
     faq: (n, names) => [
-      [`${n} के अंडर कौन-से K-pop ग्रुप हैं?`, `KoreaPlus पर हम ${names} को फीचर करते हैं। नीचे दी गई लिस्ट में हर आर्टिस्ट की डेब्यू डेट, मेंबर और फैनडम दिए गए हैं।`],
+      // "के तहत", not the spoken Hinglish "के अंडर" — this string is also the
+      // FAQPage schema's question text.
+      [`${n} के तहत कौन-से K-pop ग्रुप हैं?`, `KoreaPlus पर हम ${names} को फीचर करते हैं। नीचे दी गई लिस्ट में हर आर्टिस्ट की डेब्यू डेट, मेंबर और फैनडम दिए गए हैं।`],
       [`HYBE के लेबल कैसे ग्रुप किए गए हैं?`, `ADOR, BIGHIT MUSIC, PLEDIS, BELIFT LAB और Source Music जैसे सब-लेबल इस गाइड में अपनी पैरेंट कंपनी HYBE के अंदर रखे गए हैं।`],
     ],
     crumbHome: 'K-pop',
@@ -444,9 +454,14 @@ const M = {
     crumbAll: 'Агентства',
   },
   vi: {
-    titleSuffix: 'nghệ sĩ và nhóm nhạc — danh sách đầy đủ',
+    // "đầy đủ" means exhaustive with no qualifier, so it read as a claim that
+    // this IS the label's whole roster — flatly contradicting `note` further
+    // down the same page. Both the title and the description are scoped to
+    // KoreaPlus's own list instead; those are the strings that get indexed and
+    // shared, so the hedge has to live in them, not only in the small print.
+    titleSuffix: 'nghệ sĩ và nhóm nhạc trên KoreaPlus',
     h1: n => `${n}: nghệ sĩ và nhóm nhạc K-pop`,
-    desc: (n, c) => `Cẩm nang đầy đủ về ${c} nghệ sĩ K-pop thuộc ${n} trên KoreaPlus: ngày debut, thành viên, tên fandom và kênh chính thức.`,
+    desc: (n, c) => `${c} nghệ sĩ K-pop thuộc ${n} có trong danh sách của KoreaPlus: ngày debut, thành viên, tên fandom và kênh chính thức.`,
     lead: n => `Tất cả về các nghệ sĩ và nhóm nhạc K-pop do ${n} quản lý — dòng thời gian debut, đội hình, fandom và nơi theo dõi họ chính thức.`,
     rosterH: 'Nghệ sĩ và nhóm nhạc',
     groupsH: 'Nhóm nhạc',
@@ -469,7 +484,8 @@ const M = {
     faqH: 'Câu hỏi thường gặp',
     relH: 'Khám phá thêm về K-pop',
     relAll: 'Tất cả công ty chủ quản',
-    relHub: 'Chuyên trang K-pop',
+    // One wording for this destination across every vi generator.
+    relHub: 'Trung tâm K-pop',
     note: 'Danh sách gồm những nghệ sĩ được giới thiệu trên KoreaPlus và có thể không phải toàn bộ nghệ sĩ của công ty. Thông tin lấy từ hồ sơ debut chính thức.',
     faq: (n, names) => [
       [`Những nhóm nhạc K-pop nào thuộc ${n}?`, `Trên KoreaPlus, chúng tôi giới thiệu ${names}. Danh sách bên dưới cho biết ngày debut, thành viên và fandom của từng nghệ sĩ.`],
@@ -509,7 +525,10 @@ const M = {
     note: 'รายชื่อนี้คือศิลปินที่ KoreaPlus นำเสนอ และอาจไม่ใช่ศิลปินทั้งหมดของค่าย ข้อมูลอ้างอิงจากบันทึกการเดบิวต์อย่างเป็นทางการ',
     faq: (n, names) => [
       [`วง K-pop ในสังกัด ${n} มีวงไหนบ้าง?`, `บน KoreaPlus เรานำเสนอ ${names} รายการด้านล่างแสดงวันเดบิวต์ สมาชิก และแฟนด้อมของแต่ละราย`],
-      [`ค่ายในเครือ HYBE ถูกจัดกลุ่มอย่างไร?`, `ค่ายย่อยอย่าง ADOR, BIGHIT MUSIC, PLEDIS, BELIFT LAB และ Source Music ถูกจัดรวมไว้ใต้บริษัทแม่ HYBE ในคู่มือนี้`],
+      // Active voice with the guide as the agent: ถูก is Thai's adversative
+      // passive (ถูกจับ, ถูกไล่ออก) and reads as something unwanted being done
+      // to the sub-labels. Also mirrored into the FAQPage schema.
+      [`คู่มือนี้จัดกลุ่มค่ายในเครือ HYBE อย่างไร?`, `คู่มือนี้จัดค่ายย่อยอย่าง ADOR, BIGHIT MUSIC, PLEDIS, BELIFT LAB และ Source Music ไว้ใต้บริษัทแม่ HYBE`],
     ],
     crumbHome: 'K-pop',
     crumbAll: 'ค่ายเพลง',

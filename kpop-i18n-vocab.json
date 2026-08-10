@@ -1,0 +1,462 @@
+[
+ {
+  "lang": "ar",
+  "months": [
+   "يناير",
+   "فبراير",
+   "مارس",
+   "أبريل",
+   "مايو",
+   "يونيو",
+   "يوليو",
+   "أغسطس",
+   "سبتمبر",
+   "أكتوبر",
+   "نوفمبر",
+   "ديسمبر"
+  ],
+  "zodiacSigns": [
+   "الحمل",
+   "الثور",
+   "الجوزاء",
+   "السرطان",
+   "الأسد",
+   "العذراء",
+   "الميزان",
+   "العقرب",
+   "القوس",
+   "الجدي",
+   "الدلو",
+   "الحوت"
+  ],
+  "zodiacDateRanges": [
+   "21 مارس – 19 أبريل",
+   "20 أبريل – 20 مايو",
+   "21 مايو – 20 يونيو",
+   "21 يونيو – 22 يوليو",
+   "23 يوليو – 22 أغسطس",
+   "23 أغسطس – 22 سبتمبر",
+   "23 سبتمبر – 22 أكتوبر",
+   "23 أكتوبر – 21 نوفمبر",
+   "22 نوفمبر – 21 ديسمبر",
+   "22 ديسمبر – 19 يناير",
+   "20 يناير – 18 فبراير",
+   "19 فبراير – 20 مارس"
+  ],
+  "chineseAnimals": [
+   "الفأر",
+   "الثور",
+   "النمر",
+   "الأرنب",
+   "التنين",
+   "الأفعى",
+   "الحصان",
+   "الماعز",
+   "القرد",
+   "الديك",
+   "الكلب",
+   "الخنزير"
+  ],
+  "chrome": {
+   "tldrH": "الملخص",
+   "tocH": "في هذه الصفحة",
+   "tabbar": [
+    "الرئيسية",
+    "استكشف",
+    "بحث",
+    "الخطة",
+    "المحفوظات"
+   ],
+   "trustBy": "فريق تحرير KoreaPlus",
+   "trustUpd": "آخر تحديث",
+   "trustRev": "تدقيق الحقائق لعام 2026",
+   "kpopHistMore": "🎤 المزيد عن تاريخ K-Pop"
+  },
+  "browse": {
+   "h1": "تصفَّح كل ما يخص K-Pop",
+   "title": "كل ما يخص K-Pop — الفنانون والتاريخ والأدلة | KoreaPlus",
+   "lead": "كل أدلة K-Pop على KoreaPlus، مُصنَّفة حسب الفئة: ملفات الفنانين ومصطلحات الفاندوم والتاريخ وشركات الترفيه والأرقام القياسية العالمية. اختر فئة وابدأ الاستكشاف.",
+   "girl": "فرق الفتيات",
+   "boy": "فرق الفتيان",
+   "solo": "الفنانون المنفردون",
+   "more": "📚 تصفَّح الكل"
+  },
+  "categories": {
+   "artists": "الفنانون والفرق",
+   "basics": "أساسيات K-Pop ومصطلحاته",
+   "legends": "الأسماء الأسطورية",
+   "history": "التاريخ والأجيال",
+   "companies": "شركات الترفيه",
+   "global": "الأرقام القياسية العالمية والثقافة"
+  },
+  "notes": "ARABIC (ar) — CANONICAL. Reuse verbatim; do not re-translate a term that already appears above.\n\n## SCRIPT & NUMERALS\nWestern digits 0–9 everywhere (2026, \"21 مارس\", \"عدد الفرق: 12\"). NEVER Eastern Arabic-Indic (٠١٢٣٤٥٦٧٨٩). Rationale: messages/ar.json already ships Western digits throughout (\"8 فئات\", \"12 تجربة\", \"0–100\", \"4 ليالٍ\"), and Arabic K-pop media plus the Gulf/Egyptian web (the bulk of Arabic K-pop readers) use Western digits. Eastern digits would also desync these strings from the ISO dates the build stamps.\nPunctuation: Arabic comma ، (U+060C), question mark ؟ (U+061F), semicolon ؛ — never ASCII , or ?. Em dash — is the clause separator (as in the shipped ar strings). The \"… | KoreaPlus\" pipe stays as written.\n\n## DEFINITE ARTICLE (drift trap)\nzodiacSigns and chineseAnimals INCLUDE ال. Templates must not add a second one — both are correct idafa as-is: \"برج \" + \"الحمل\" → برج الحمل ✓; \"سنة \" + \"الفأر\" → سنة الفأر ✓. months carry NO article (مارس, never المارس).\n\n## NUMBER AGREEMENT — never port an English count ternary\nArabic governs a counted noun five different ways: 1 → bare noun, no numeral (نجم); 2 → dual, no numeral (نجمان); 3–10 → numeral + plural (5 نجوم); 11–99 → numeral + SINGULAR ACCUSATIVE (15 نجمًا); 100+ → numeral + singular genitive (100 نجم). An `n === 1 ? … : …` ternary is wrong for four of those five.\nPRESCRIBED FIX — take the noun out of the numeral's government. Noun first, number after:\n  ✓ عدد النجوم: 5   ✓ عدد النجوم: 15   ✓ عدد الفرق: 1\n  ✓ نجوم K-Pop المولودون في مارس (15)\n  ✗ 15 نجوم   ✗ 1 نجم   ✗ 5 نجم\nTherefore countOne/countMany COLLAPSE INTO ONE ar string: `عدد النجوم: ${n}`. factN → `🎤 عدد النجوم في القائمة: ${n}`; factGroups → `👥 عدد الفرق: ${g}`; listH → `🎂 مواليد ${m} — عدد النجوم: ${n}`. Apply the same inversion to every counter added later.\n\n## ADJECTIVE AGREEMENT (drift trap)\nNon-human plurals take FEMININE SINGULAR agreement: الفرق الأسطورية، الأغاني الجديدة — never الأسطوريون/الأسطوريات.\nHuman plurals take sound-plural agreement: الفنانون المنفردون، النجوم المولودون.\n\n## LOANWORDS — keep in LATIN script; never transliterate, never translate\nK-Pop (exactly this casing — matches nav.kpop / cat.kpop already shipped in messages/ar.json), K-Beauty, K-Drama, KoreaPlus, every artist and group name (BTS, BLACKPINK, SEVENTEEN, aespa, IU), every agency (SM, YG, JYP, HYBE), Billboard, Grammy, Coachella, YouTube, Spotify.\nNEVER write كي بوب / كيبوب / الكيبوب.\n\n## TRANSLATE — do not leave in English\n- idol → نجم / نجوم. \"آيدول\" is fandom slang: permitted only inside a page explicitly teaching fandom vocabulary, never in chrome, H1, title or meta.\n- girl group / boy group → فرق الفتيات / فرق الفتيان. Fixed parallel pair; do not mix in الفرق النسائية / الفرق الرجالية.\n- soloist → الفنانون المنفردون (sg. فنان منفرد).\n- agency / entertainment company → شركات الترفيه. Not وكالات, not شركات الإنتاج.\n- comeback → العودة الفنية. كامباك only on the page that defines the term.\n- fandom → الفاندوم (established Arabic-script loanword — keep it).\n- bias → الفنان المفضل, with البياس as the parenthetical gloss on its definition page.\n- lightstick → العصا الضوئية (لايت ستيك as gloss only).\n- Korean-only terms with no Arabic equivalent transliterate into Arabic script on their definition pages: ماكني (maknae), إيغيو (aegyo), سونبيه / هوبيه.\n\n## HONESTY HEDGES — load-bearing; render exactly, never soften\n- \"as of <date>\" → حتى <date>. Never drop, never weaken to في <date>.\n- \"our current roster\" → قائمتنا الحالية. الحالية is what scopes the claim; deleting it turns a scoped statement into a universal one.\n- \"not all of K-pop\" → لا تشمل كل نجوم K-Pop. Keep the negation explicit and up front.\n- \"verified\" → موثَّقة / مؤكَّدة. \"Nothing is estimated.\" → لا شيء مُقدَّر أو مُخمَّن.\n- Astrology disclaimer: الأبراج تسلية وليست علمًا — وليست علمًا must survive. The factual half stays factual: تواريخ الميلاد والفرق حقائق موثَّقة.\n- Lunar-new-year caveat: السنة الصينية تتغيّر في رأس السنة القمرية (أواخر يناير إلى منتصف فبراير)، وليس في 1 يناير — keep both the parenthetical window and the \"not January 1\" clause.\n\n## RTL MECHANICS\nPages need lang=\"ar\" dir=\"rtl\". Write every string in LOGICAL order — start date first (\"21 مارس – 19 أبريل\"), emoji first (\"🎤 …\"), pipe last (\"… | KoreaPlus\"). The renderer positions them. Do not hand-reverse anything and do not inject RLM/LRM into these data strings.\nThe date-range strings assume an RTL paragraph. If one is ever placed in an LTR container, isolate it (<bdi> / unicode-bidi:isolate) — do not rewrite the string.\n\n## ZODIAC SIGN CHOICES (the exact drift traps that hit ko and fr)\nOne name per sign, locked: Gemini = الجوزاء (not التوأمان) · Virgo = العذراء (not السنبلة) · Sagittarius = القوس (not الرامي) · Capricorn = الجدي (not الجَدي vocalized) · Aquarius = الدلو (not الدلاء) · Pisces = الحوت (not الحوتان).\n\n## CHINESE-ZODIAC CHOICES\n- الثور is deliberately the same word as Taurus. That is correct Arabic for both. Do NOT \"fix\" the Chinese Ox to البقرة.\n- Snake = الأفعى (not الثعبان / الحية) · Tiger = النمر (not البَبْر) · Goat = الماعز (not الخروف) — mirrors the en note that goat==sheep in some traditions while we render Goat.\n- Pig = الخنزير. Keep it; it is the factual animal name. Do not euphemize and do not omit the sign.\n\n## MISC\n- kpopHistMore feeds the KPOP_HIST_MORE constant, whose English is \"More K-Pop history\" (not \"guides\"); the Arabic follows the code, not the field gloss.\n- tabbar labels sit in a ≤768px bottom bar — keep each ≤10 characters. Do not lengthen الخطة to التخطيط, or بحث to البحث.\n- trustBy drops the \"By\" the way es/fr/de/pt/ko/ja already do; the byline template supplies the ✍️ icon."
+ },
+ {
+  "lang": "hi",
+  "months": [
+   "जनवरी",
+   "फ़रवरी",
+   "मार्च",
+   "अप्रैल",
+   "मई",
+   "जून",
+   "जुलाई",
+   "अगस्त",
+   "सितंबर",
+   "अक्तूबर",
+   "नवंबर",
+   "दिसंबर"
+  ],
+  "zodiacSigns": [
+   "मेष",
+   "वृषभ",
+   "मिथुन",
+   "कर्क",
+   "सिंह",
+   "कन्या",
+   "तुला",
+   "वृश्चिक",
+   "धनु",
+   "मकर",
+   "कुंभ",
+   "मीन"
+  ],
+  "zodiacDateRanges": [
+   "21 मार्च – 19 अप्रैल",
+   "20 अप्रैल – 20 मई",
+   "21 मई – 20 जून",
+   "21 जून – 22 जुलाई",
+   "23 जुलाई – 22 अगस्त",
+   "23 अगस्त – 22 सितंबर",
+   "23 सितंबर – 22 अक्तूबर",
+   "23 अक्तूबर – 21 नवंबर",
+   "22 नवंबर – 21 दिसंबर",
+   "22 दिसंबर – 19 जनवरी",
+   "20 जनवरी – 18 फ़रवरी",
+   "19 फ़रवरी – 20 मार्च"
+  ],
+  "chineseAnimals": [
+   "चूहा",
+   "बैल",
+   "बाघ",
+   "खरगोश",
+   "ड्रैगन",
+   "साँप",
+   "घोड़ा",
+   "बकरी",
+   "बंदर",
+   "मुर्गा",
+   "कुत्ता",
+   "सूअर"
+  ],
+  "chrome": {
+   "tldrH": "सारांश",
+   "tocH": "इस पेज पर",
+   "tabbar": [
+    "होम",
+    "एक्सप्लोर",
+    "खोज",
+    "प्लान",
+    "सेव"
+   ],
+   "trustBy": "KoreaPlus संपादकीय टीम",
+   "trustUpd": "अपडेट",
+   "trustRev": "2026 के लिए तथ्य-जाँच",
+   "kpopHistMore": "🎤 K-Pop इतिहास के और गाइड"
+  },
+  "browse": {
+   "h1": "पूरा K-Pop एक्सप्लोर करें",
+   "title": "पूरा K-Pop — आर्टिस्ट, इतिहास और गाइड | KoreaPlus",
+   "lead": "KoreaPlus का हर K-Pop गाइड, कैटेगरी के हिसाब से एक जगह — आर्टिस्ट प्रोफाइल, फैनडम के शब्द, इतिहास, एजेंसियाँ और ग्लोबल रिकॉर्ड। कोई कैटेगरी चुनें और एक्सप्लोर करना शुरू करें।",
+   "girl": "गर्ल ग्रुप",
+   "boy": "बॉय ग्रुप",
+   "solo": "सोलो आर्टिस्ट",
+   "more": "📚 सभी K-Pop गाइड"
+  },
+  "categories": {
+   "artists": "आर्टिस्ट और ग्रुप",
+   "basics": "K-Pop बेसिक्स और शब्दावली",
+   "legends": "लेजेंडरी आर्टिस्ट",
+   "history": "इतिहास और जेनरेशन",
+   "companies": "एजेंसियाँ",
+   "global": "ग्लोबल रिकॉर्ड और संस्कृति"
+  },
+  "notes": "CANONICAL hi VOCABULARY — reuse verbatim, do not re-translate. Written for later translators on this repo.\n\n1. SCRIPT + DIGITS. Devanagari body text, Western digits always: \"21 मार्च\", \"2026\", \"12 आइडल\". NEVER Devanagari digits (२०२६). Keep nuqta and chandrabindu — फ़रवरी, साँप, एजेंसियाँ, पाँच — never strip them. Prefer anusvara over conjunct nasals: सितंबर (not सितम्बर), नवंबर, दिसंबर, कुंभ (not कुम्भ). Hindi needs no apostrophes, so never introduce ' into these JS template-literal files (unlike fr/it).\n\n2. MONTHS ARE LOCKED to CLDR / Intl.DateTimeFormat('hi') so hardcoded tables and any runtime-formatted date always agree. Banned variants: अक्टूबर (use अक्तूबर), फरवरी (use फ़रवरी), सितम्बर/नवम्बर/दिसम्बर. Hindi has NO conventional three-letter month abbreviations — never invent \"मार्च.\" or \"अक्तू.\"; always write the month in full, even where es/fr/pt abbreviate.\n\n3. DATE FORMAT. Day-then-month, en dash with spaces on both sides: \"21 मार्च – 19 अप्रैल\". No comma, no \"से…तक\" inside a range chip (that belongs in prose only).\n\n4. PLURALS. Hindi has no -s. English loanwords stay INVARIANT in the direct case: एक ग्रुप / पाँच ग्रुप, 1 आइडल / 12 आइडल, फोटोकार्ड, चार्ट, लाइटस्टिक. Never write ग्रुप्स, आइडल्स, कमबैक्स, कैटेगरीज़. ONE lexicalized exception: फैंस (fans) — Indian media has fully absorbed it, so फैंस is correct and प्रशंसकों reads stiff to a fandom reader. Oblique plurals do take -ों (आइडलों की, ग्रुपों में) but PREFER restructuring to avoid the ugly form: write \"ग्रुप के हिसाब से\", not \"ग्रुपों के हिसाब से\". Native nouns follow native rules: feminine -ी → -ियाँ (एजेंसी → एजेंसियाँ), masculine -ा → -े (गाना → गाने). Counts take no classifier: \"12 आइडल\", \"1 आइडल\" in a chip, \"एक आइडल\" in prose.\n\n5. STAYS IN LATIN SCRIPT, never transliterated: K-Pop, KoreaPlus, all artist/group names (BTS, BLACKPINK, SEVENTEEN), agency names (HYBE, SM, JYP, YG), Billboard, YouTube, Grammy, Coachella. CASING: follow the file you are editing — build-seo.cjs writes \"K-Pop\", the seo-kpop-*-l10n.js modules write \"K-pop\". Do not normalize one to the other; that is itself a drift.\n\n6. LOANWORDS IN DEVANAGARI (transliterate, never calque — an Indian fan searches the sound, not a Sanskritised coinage): आइडल (idol), ग्रुप, गर्ल ग्रुप, बॉय ग्रुप, सोलो आर्टिस्ट, कमबैक (comeback), बायस (bias), बायस रेकर (bias wrecker), लाइटस्टिक, फोटोकार्ड, फैनडम, फैन चांट, टाइटल ट्रैक, सब-यूनिट, ट्रेनी, फैनसाइन, म्यूज़िक शो, विज़ुअल, जेनरेशन, एजेंसी, कैटेगरी, चार्ट, प्रोफाइल, एक्सप्लोर, अपडेट, सेव. Locked spellings: आइडल (not आयडल), विज़ुअल and म्यूज़िक keep the nuqta, कमबैक is one word.\n\n7. KOREAN FANDOM TERMS: transliterate and gloss the Latin once, on first mention only — मैकने (maknae), एग्यो (aegyo), सनबे (sunbae). Body text after that uses the Devanagari form alone.\n\n8. TRANSLATE, DO NOT BORROW: इतिहास (history), संस्कृति (culture), सारांश (summary), जन्मदिन (birthday), जन्म तिथि (birth date), राशि (star sign), चीनी राशिचक्र (Chinese zodiac), चंद्र नववर्ष (Lunar New Year — gloss \"चीनी नववर्ष\" once if space allows; do not write only \"चीनी नववर्ष\", the boundary is lunar, not Chinese-specific). \"roster\" → हमारी आर्टिस्ट लिस्ट or हमारी वेरिफाइड लिस्ट — NEVER रोस्टर, which reads as a duty-shift chart in India.\n\n9. ZODIAC NAMES are bare rashi nouns — मेष, वृषभ, मिथुन … — with राशि NEVER appended. The word राशि lives in signWord and the surrounding sentence; appending it inside SIGN_NAMES produces \"मेष राशि राशि\". Locked variants: वृषभ (not वृष), धनु (not धनुष — धनुष is the physical bow), कुंभ (not कुम्भ), वृश्चिक (not बिच्छू).\n\n10. CHINESE-ZODIAC ANIMALS are bare singular nouns, no article, no वर्ष baked in — the template supplies it as \"{animal} का वर्ष\". Locked: चूहा (not मूषक), बैल, बाघ (not शेर = lion, not चीता = leopard), खरगोश, ड्रैगन (not अजगर = python, not नाग = cobra — Hindi has no usable native word here and fans say ड्रैगन), साँप, घोड़ा, बकरी, बंदर, मुर्गा (not मुर्गी = hen), कुत्ता, सूअर. COLLISION GUARD: Ox is बैल and Taurus is वृषभ — never swap them, and never render Goat as मेष or Capricorn as बकरी. The two zodiac systems must stay lexically disjoint or the cross-links read as errors.\n\n11. REGISTER. Address the reader as आप, never तुम. Polite imperative in -ें throughout (चुनें, देखें, पढ़ें, एक्सप्लोर करें) — matching messages/hi.json; never mix in -िए or -ो. Sentence-final पूर्ण विराम \"।\" for statements; a question ends in \"?\" not \"।\". Use the em dash \"—\" exactly where the other nine languages use it. Default gender for unmarked loanwords is masculine (यह गाइड, यह ग्रुप, यह आइडल); for a female idol prefer list-level neutral phrasing (\"इस लिस्ट में 12 आइडल हैं\") over guessing agreement per person.\n\n12. HONESTY STRINGS ARE LOAD-BEARING — translate them at full strength, never soften. \"as of <date>\" → \"<date> तक\" must survive; \"not all of K-pop\" → \"पूरा K-Pop नहीं\" must survive; \"Nothing is estimated\" → \"कुछ भी अनुमानित नहीं है\" and the verification qualifier (\"वेरिफाइड\"/\"पुष्ट\") must never be dropped for brevity. The astrology hedge must keep \"विज्ञान नहीं\" (not science) and the lunar-boundary hedge must keep the \"1 जनवरी को नहीं\" clause — those caveats are what make the page accurate, and trimming one turns a correct hedge into a false claim."
+ },
+ {
+  "lang": "ru",
+  "months": [
+   "январь",
+   "февраль",
+   "март",
+   "апрель",
+   "май",
+   "июнь",
+   "июль",
+   "август",
+   "сентябрь",
+   "октябрь",
+   "ноябрь",
+   "декабрь"
+  ],
+  "zodiacSigns": [
+   "Овен",
+   "Телец",
+   "Близнецы",
+   "Рак",
+   "Лев",
+   "Дева",
+   "Весы",
+   "Скорпион",
+   "Стрелец",
+   "Козерог",
+   "Водолей",
+   "Рыбы"
+  ],
+  "zodiacDateRanges": [
+   "21 марта – 19 апреля",
+   "20 апреля – 20 мая",
+   "21 мая – 20 июня",
+   "21 июня – 22 июля",
+   "23 июля – 22 августа",
+   "23 августа – 22 сентября",
+   "23 сентября – 22 октября",
+   "23 октября – 21 ноября",
+   "22 ноября – 21 декабря",
+   "22 декабря – 19 января",
+   "20 января – 18 февраля",
+   "19 февраля – 20 марта"
+  ],
+  "chineseAnimals": [
+   "Крыса",
+   "Бык",
+   "Тигр",
+   "Кролик",
+   "Дракон",
+   "Змея",
+   "Лошадь",
+   "Коза",
+   "Обезьяна",
+   "Петух",
+   "Собака",
+   "Свинья"
+  ],
+  "chrome": {
+   "tldrH": "Кратко",
+   "tocH": "Содержание",
+   "tabbar": [
+    "Главная",
+    "Обзор",
+    "Поиск",
+    "Маршрут",
+    "Избранное"
+   ],
+   "trustBy": "Редакция KoreaPlus",
+   "trustUpd": "Обновлено",
+   "trustRev": "Факты проверены на 2026 год",
+   "kpopHistMore": "🎤 Ещё об истории K-pop"
+  },
+  "browse": {
+   "h1": "Весь K-pop",
+   "title": "Весь K-pop — артисты, история и гиды | KoreaPlus",
+   "lead": "Все гиды по K-pop на KoreaPlus, разложенные по категориям: профили артистов, термины фандома, история, агентства и мировые рекорды. Выберите категорию и погружайтесь.",
+   "girl": "Гёрл-группы",
+   "boy": "Бой-группы",
+   "solo": "Сольные артисты",
+   "more": "📚 Весь K-pop"
+  },
+  "categories": {
+   "artists": "Артисты и группы",
+   "basics": "Основы и термины K-pop",
+   "legends": "Легендарные артисты",
+   "history": "История и поколения",
+   "companies": "Агентства",
+   "global": "Мировые рекорды и культура"
+  },
+  "notes": "ПЛЮРАЛИЗАЦИЯ — 3 формы (CLDR ru: one/few/many). one: n%10==1 && n%100!=11 (1, 21, 101); few: n%10 in 2..4 && n%100 not in 12..14 (2, 3, 4, 22); many: всё остальное, включая 0 и 5–20 (0, 5, 11, 25). НИКОГДА не переносить английский тернарник `n===1?'idol':'idols'` — для ru всегда функция с тремя ветками: plural(n, ['айдол','айдола','айдолов']). Готовые парадигмы: айдол/айдола/айдолов · группа/группы/групп · участник/участника/участников · песня/песни/песен · день рождения/дня рождения/дней рождения · год/года/лет (супплетив, НЕ «годов»). Число ставится перед существительным: «5 айдолов в списке». Ключ countOne из cnzodiac нельзя хардкодить строкой «1 айдол» — 21 и 101 тоже попадают в one, поэтому для ru countOne/countMany заменяются одной plural-функцией.\n\nЗАИМСТВОВАНИЯ (фандомный канон, использовать именно эти формы): айдол (НЕ «идол» — в русском это религиозный идол) · камбэк (НЕ «возвращение») · биас (НЕ «любимчик», НЕ «фаворит») · биас-вреккер, при первом упоминании с пояснением «разрушитель биаса» · лайтстик (НЕ «светящаяся палочка») · фандом · фанчант · фансайн · макнэ · эгьё · саб-юнит · тайтл-трек · фотокарта (НЕ «фотокарточка») · визуал (о позиции в группе) · трейни, несклоняемое, при первом упоминании «стажёр». ПЕРЕВОДИМ, а не транслитерируем: агентство (НЕ «агенси») · поколение (НЕ «дженерейшн») · музыкальные шоу (НЕ «мьюзик-шоу») · мировые рекорды · шоу на выживание. Гёрл-группа / бой-группа — с «ё» и через дефис; НЕ «герл-группа», НЕ «бой-бэнд» (термин западной поп-сцены), НЕ «женская/мужская группа». Сольные артисты — НЕ «сольники», НЕ «соло-артисты». «K-pop» латиницей со строчной p; НЕ «К-поп», НЕ «кейпоп», НЕ «K-POP». Названия групп, агентств и песен остаются латиницей как есть (BTS, BLACKPINK, HYBE, SM Entertainment) — не транслитерировать и не склонять.\n\nПАДЕЖИ — главный источник дрейфа. Массивы months/chineseAnimals/zodiacSigns отдаются в ИМЕНИТЕЛЬНОМ и НЕ вставляются в шаблоны как есть. Месяцы: «родившиеся в <месяце>» — предложный: в январе, в феврале, в марте, в апреле, в мае, в июне, в июле, в августе, в сентябре, в октябре, в ноябре, в декабре. Дата «21 марта» — родительный: января, февраля, марта, апреля, мая, июня, июля, августа, сентября, октября, ноября, декабря. В тексте месяцы со строчной буквы. Животные: «Год <животного>» — родительный: Крысы, Быка, Тигра, Кролика, Дракона, Змеи, Лошади, Козы, Обезьяны, Петуха, Собаки, Свиньи; в заголовке «Год Тигра», внутри фразы «год Тигра», животное с прописной. Знаки: «под знаком <знака>» — родительный: Овна, Тельца, Близнецов, Рака, Льва, Девы, Весов, Скорпиона, Стрельца, Козерога, Водолея, Рыб; знаки всегда с прописной. Каноничные варианты против дрейфа: Стрелец (НЕ «Лучник»), Козерог (НЕ «Козёл»), Овен (НЕ «Баран»), Водолей (НЕ «Аквариус»); Бык (НЕ «Вол»), Крыса (НЕ «Мышь»), Кролик (НЕ «Заяц»), Коза (НЕ «Овца»), Свинья (НЕ «Кабан»), Петух (НЕ «Курица»).\n\nРОД И СОГЛАСОВАНИЕ: в списках пол айдолов смешанный, поэтому только множественное число и причастия без рода — «айдолы, родившиеся в июне». Никогда «рождённый/рождённая» в шаблоне. Если речь об одном айдоле неизвестного пола — переформулировать («в списке — <имя>»), а не выбирать род.\n\nЗАГОЛОВКИ И ТИПОГРАФИКА: русский регистр предложения, НЕ Title Case («Артисты и группы», не «Артисты И Группы»). Кавычки — «ёлочки». Тире в тексте — длинное, с пробелами. «ё» пишем там, где она различает смысл, и в заимствованиях (гёрл-группа, эгьё, тёмная тема). Диапазон дат — короткое тире с пробелами, как в en/es/pt: «21 марта – 19 апреля». Разделитель тысяч — неразрывный пробел (1 200), десятичный разделитель — запятая.\n\nОГОВОРКИ (не смягчать — это правило дома): «по состоянию на <дата>» переводится дословно и не выбрасывается; «не весь K-pop» → «это не весь K-pop», НЕ «почти весь». Пишем «проверенные данные», «подтверждённые даты» — но НЕ «полные» и НЕ «все». Хедж про смену года по лунному Новому году и про то, что знаки зодиака — популярная астрология, а не наука, обязан сохраняться целиком.\n\nСЛУЖЕБНОЕ: trustBy — это целая подпись, а не предлог: «Редакция KoreaPlus». В русском нет идиоматичного одиночного «By» — не эмитить «От» или «Автор:» отдельной строкой. Ссылка «📚 Весь K-pop» — единая формулировка и для browse.more, и для browseLabel в остальных генераторах. Уже зафиксировано в коде и не меняется: TLDR_H.ru = «Кратко», ARIA.ru = {skip: «Перейти к содержанию», nav: «Навигация», top: «Наверх»}, messages/ru.json nav.explore = «Обзор» (отсюда таб «Обзор»), nav.exploreall = «🧭 Все гиды» — поэтому статья/материал у нас «гид», НЕ «гайд»."
+ },
+ {
+  "lang": "vi",
+  "months": [
+   "Tháng 1",
+   "Tháng 2",
+   "Tháng 3",
+   "Tháng 4",
+   "Tháng 5",
+   "Tháng 6",
+   "Tháng 7",
+   "Tháng 8",
+   "Tháng 9",
+   "Tháng 10",
+   "Tháng 11",
+   "Tháng 12"
+  ],
+  "zodiacSigns": [
+   "Bạch Dương",
+   "Kim Ngưu",
+   "Song Tử",
+   "Cự Giải",
+   "Sư Tử",
+   "Xử Nữ",
+   "Thiên Bình",
+   "Thiên Yết",
+   "Nhân Mã",
+   "Ma Kết",
+   "Bảo Bình",
+   "Song Ngư"
+  ],
+  "zodiacDateRanges": [
+   "21/3 – 19/4",
+   "20/4 – 20/5",
+   "21/5 – 20/6",
+   "21/6 – 22/7",
+   "23/7 – 22/8",
+   "23/8 – 22/9",
+   "23/9 – 22/10",
+   "23/10 – 21/11",
+   "22/11 – 21/12",
+   "22/12 – 19/1",
+   "20/1 – 18/2",
+   "19/2 – 20/3"
+  ],
+  "chineseAnimals": [
+   "Tý (chuột)",
+   "Sửu (trâu)",
+   "Dần (hổ)",
+   "Mão (mèo)",
+   "Thìn (rồng)",
+   "Tỵ (rắn)",
+   "Ngọ (ngựa)",
+   "Mùi (dê)",
+   "Thân (khỉ)",
+   "Dậu (gà)",
+   "Tuất (chó)",
+   "Hợi (lợn)"
+  ],
+  "chrome": {
+   "tldrH": "Tóm tắt",
+   "tocH": "Trong bài này",
+   "tabbar": [
+    "Trang chủ",
+    "Khám phá",
+    "Tìm kiếm",
+    "Lịch trình",
+    "Đã lưu"
+   ],
+   "trustBy": "Ban biên tập KoreaPlus",
+   "trustUpd": "Cập nhật",
+   "trustRev": "Đã kiểm chứng cho 2026",
+   "kpopHistMore": "🎤 Thêm về lịch sử K-pop"
+  },
+  "browse": {
+   "h1": "Khám phá toàn bộ K-pop",
+   "title": "Toàn bộ K-pop — Nghệ sĩ, lịch sử và cẩm nang | KoreaPlus",
+   "lead": "Tất cả cẩm nang K-pop trên KoreaPlus, xếp theo từng nhóm chủ đề — hồ sơ nghệ sĩ, thuật ngữ fandom, lịch sử, công ty chủ quản và kỷ lục toàn cầu. Chọn một nhóm chủ đề rồi đi sâu vào bên trong.",
+   "girl": "Nhóm nữ",
+   "boy": "Nhóm nam",
+   "solo": "Nghệ sĩ solo",
+   "more": "📚 Xem toàn bộ"
+  },
+  "categories": {
+   "artists": "Nghệ sĩ và nhóm nhạc",
+   "basics": "Nhập môn và thuật ngữ K-pop",
+   "legends": "Nghệ sĩ huyền thoại",
+   "history": "Lịch sử và các thế hệ",
+   "companies": "Công ty chủ quản",
+   "global": "Kỷ lục toàn cầu và văn hóa"
+  },
+  "notes": "CANONICAL vi VOCABULARY — reuse verbatim, do not re-translate. Written for the translators who ship the next vi strings.\n\n1) PLURALS. Vietnamese has no grammatical number; a bare noun is correct with any count: \"1 idol\", \"47 idol\", \"12 nhóm nhạc\". Never add a plural marker, and never put \"các\"/\"những\" in front of a counted noun (\"47 các idol\" is wrong). Use \"các\"/\"những\" only for a generic, uncounted set (\"các nhóm nhạc thế hệ 3\"). Practical consequence for the generators: countOne and countMany COLLAPSE — both are `${n} idol`. Do not invent a singular/plural split to mirror English.\n\n2) CLASSIFIERS. \"idol\" / \"nghệ sĩ\" are themselves the counted noun — no extra classifier (\"23 idol\", not \"23 người idol\"). Groups take \"nhóm\" (\"từ 23 nhóm\"). Never \"cái\" for people or groups.\n\n3) CASING. Write \"K-pop\" in every position — running text, H1, <title>, badges. Never \"Kpop\", \"KPOP\", \"K-POP\", \"K-Pop\". Grandfathered exception, do NOT fix in isolation: messages/vi.json ships \"🎤 K-Pop\" in nav.kpop; if that ever changes, change it in the same commit as every other vi string. Vietnamese does not title-case — headings are sentence case (\"Khám phá toàn bộ K-pop\", never \"Khám Phá Toàn Bộ K-pop\"). Only proper nouns and the zodiac sign names carry internal capitals.\n\n4) LOANWORDS — keep as-is, lowercase, no italics, no Vietnamese gloss: comeback, bias, bias wrecker, lightstick, fandom, photocard, fanchant, teaser, visual, center, maknae, aegyo, debut, solo, idol. This is what Vietnamese fans actually write; a calque reads like machine output. \"idol\" ALWAYS — never \"thần tượng\", and never mix the two on one page. \"nghệ sĩ solo\", never \"nghệ sĩ đơn ca\".\n\n5) TRANSLATE, do not borrow: girl group → \"nhóm nữ\"; boy group → \"nhóm nam\"; agency/label/company → \"công ty chủ quản\" (never \"đại lý\", never \"hãng\"); generation → \"thế hệ\" (\"thế hệ 3\" in body copy, not \"gen 3\"); trainee → \"thực tập sinh\"; title track → \"ca khúc chủ đề\"; music show → \"sân khấu âm nhạc\"; star sign → \"cung hoàng đạo\"; Chinese zodiac → \"12 con giáp\"; roster → \"danh sách\". \"sub-unit\" may stay English only on its own glossary page, and must be paired with \"nhóm nhỏ\" on first mention.\n\n6) MONTHS. MONTH_NAMES.vi already contains the word \"Tháng\". Interpolate it bare or after a preposition — \"sinh vào {m}\", \"{m}\". NEVER write \"tháng {m}\": that produces \"tháng Tháng 3\".\n\n7) DATES. Day/month, slash, spaced en dash: \"21/3 – 19/4\". Never US month/day order. Full dates in prose: \"10/8/2026\", or \"ngày 10 tháng 8 năm 2026\" for formal lines — pick one form per page and hold it.\n\n8) WESTERN ZODIAC. One canonical name per sign. The listed variants are all common in Vietnamese media and are BANNED here, because that is exactly how ko drifted into 사수자리/궁수자리: Scorpio = Thiên Yết (NOT Bọ Cạp, NOT Hổ Cáp); Sagittarius = Nhân Mã (NOT Xạ Thủ, NOT Cung Thủ); Capricorn = Ma Kết (NOT Nam Dương); Virgo = Xử Nữ (NOT Trinh Nữ). The other eight have no live competitor: Bạch Dương, Kim Ngưu, Song Tử, Cự Giải, Sư Tử, Thiên Bình, Bảo Bình, Song Ngư.\n\n9) CHINESE ZODIAC. Format is Can Chi branch + lowercase animal gloss in parentheses, following the ja pattern already in seo-kpop-cnzodiac-l10n.js (\"子（ねずみ）\" → \"Tý (chuột)\"). Templates read \"tuổi Tý (chuột)\" / \"năm Tý (chuột)\" — that is how Vietnamese states it, not \"tuổi Chuột\".\n   FACTUAL FORK — must be disclosed, never papered over: Vietnam's 4th branch is Mão = mèo (cat); China's is the rabbit. We ship \"Mão (mèo)\" because that is the year Vietnamese readers were actually born in, so the hedge section on those pages MUST carry one extra sentence, e.g. \"Ở Việt Nam, con giáp thứ tư là Mèo, còn ở Trung Quốc là Thỏ — cùng một năm, khác con vật.\" Deleting that sentence turns a correct localisation into a false statement. Never silently swap mèo↔thỏ.\n   Ox is \"Sửu (trâu)\" — trâu (water buffalo) is the Vietnamese animal; do not \"correct\" it to \"bò\" (de already ships Büffel, id Kerbau, so this is precedented). Pig is \"Hợi (lợn)\" — northern written standard; do not use the southern \"heo\" in some files and \"lợn\" in others.\n\n10) HONESTY STRINGS — fixed renderings, reuse verbatim. These are hedges; softening one turns an accurate caveat into a false claim: verified → \"đã xác minh\" (NOT \"chính xác\", NOT \"chuẩn\"); our roster / our list → \"danh sách của chúng tôi\"; \"Nothing is estimated.\" → \"Không có số liệu nào là ước lượng.\"; \"as of <date>\" → \"tính đến <date>\"; \"not all of K-pop\" → \"không phải toàn bộ K-pop\" (keep the negation explicit — \"một phần K-pop\" is a softening and is wrong); \"popular astrology, not science\" → \"chiêm tinh học phổ thông, không phải khoa học\"; \"may actually belong to\" → \"có thể thực ra thuộc về\" (keep \"có thể\" — dropping it upgrades a hedge into a claim).\n\n11) REGISTER. Address the reader as \"bạn\"; never \"quý vị\" (corporate) or \"các bạn\" (classroom). Drop \"hãy\" from CTAs where space is tight (\"Chọn một nhóm chủ đề\", not \"Hãy chọn một nhóm chủ đề\"). Full diacritics everywhere, including inside title/desc/alt attributes — never ship ASCII-folded Vietnamese.\n\n12) ALREADY IN THE CODEBASE — reuse, do not re-translate: build-seo.cjs line 960, TLDR_H.vi = \"Tóm tắt\"; line 669, ARIA.vi = { skip: \"Bỏ qua đến nội dung\", nav: \"Điều hướng\", top: \"Lên đầu trang\" }. The tabbar above deliberately reuses \"Khám phá\" and \"Tìm kiếm\" from messages/vi.json so the app chrome and the SEO chrome say the same words. browse.h1 also uses \"Khám phá\"; that collision with the Explore tab is intentional and matches shipped id/pt."
+ },
+ {
+  "lang": "th",
+  "months": [
+   "มกราคม",
+   "กุมภาพันธ์",
+   "มีนาคม",
+   "เมษายน",
+   "พฤษภาคม",
+   "มิถุนายน",
+   "กรกฎาคม",
+   "สิงหาคม",
+   "กันยายน",
+   "ตุลาคม",
+   "พฤศจิกายน",
+   "ธันวาคม"
+  ],
+  "zodiacSigns": [
+   "ราศีเมษ",
+   "ราศีพฤษภ",
+   "ราศีเมถุน",
+   "ราศีกรกฎ",
+   "ราศีสิงห์",
+   "ราศีกันย์",
+   "ราศีตุลย์",
+   "ราศีพิจิก",
+   "ราศีธนู",
+   "ราศีมังกร",
+   "ราศีกุมภ์",
+   "ราศีมีน"
+  ],
+  "zodiacDateRanges": [
+   "21 มี.ค. – 19 เม.ย.",
+   "20 เม.ย. – 20 พ.ค.",
+   "21 พ.ค. – 20 มิ.ย.",
+   "21 มิ.ย. – 22 ก.ค.",
+   "23 ก.ค. – 22 ส.ค.",
+   "23 ส.ค. – 22 ก.ย.",
+   "23 ก.ย. – 22 ต.ค.",
+   "23 ต.ค. – 21 พ.ย.",
+   "22 พ.ย. – 21 ธ.ค.",
+   "22 ธ.ค. – 19 ม.ค.",
+   "20 ม.ค. – 18 ก.พ.",
+   "19 ก.พ. – 20 มี.ค."
+  ],
+  "chineseAnimals": [
+   "ชวด (หนู)",
+   "ฉลู (วัว)",
+   "ขาล (เสือ)",
+   "เถาะ (กระต่าย)",
+   "มะโรง (มังกร)",
+   "มะเส็ง (งู)",
+   "มะเมีย (ม้า)",
+   "มะแม (แพะ)",
+   "วอก (ลิง)",
+   "ระกา (ไก่)",
+   "จอ (สุนัข)",
+   "กุน (หมู)"
+  ],
+  "chrome": {
+   "tldrH": "สรุป",
+   "tocH": "สารบัญ",
+   "tabbar": [
+    "หน้าแรก",
+    "สำรวจ",
+    "ค้นหา",
+    "แผนเที่ยว",
+    "บันทึกไว้"
+   ],
+   "trustBy": "โดยทีมบรรณาธิการ KoreaPlus",
+   "trustUpd": "อัปเดตเมื่อ",
+   "trustRev": "ตรวจสอบข้อเท็จจริงแล้ว ปี 2026",
+   "kpopHistMore": "🎤 ประวัติ K-pop เพิ่มเติม"
+  },
+  "browse": {
+   "h1": "สำรวจ K-pop ทั้งหมด",
+   "title": "K-pop ทั้งหมด — ศิลปิน ประวัติ และคู่มือ | KoreaPlus",
+   "lead": "คู่มือ K-pop ทุกเรื่องบน KoreaPlus จัดไว้เป็นหมวด — โปรไฟล์ศิลปิน ศัพท์แฟนด้อม ประวัติ ค่ายเพลง และสถิติระดับโลก เลือกหมวดที่สนใจแล้วกดเข้าไปดูได้เลย",
+   "girl": "เกิร์ลกรุ๊ป",
+   "boy": "บอยกรุ๊ป",
+   "solo": "ศิลปินเดี่ยว",
+   "more": "📚 ดูทั้งหมด"
+  },
+  "categories": {
+   "artists": "ศิลปินและวง",
+   "basics": "พื้นฐานและศัพท์ K-pop",
+   "legends": "ศิลปินระดับตำนาน",
+   "history": "ประวัติและเจเนอเรชัน",
+   "companies": "ค่ายเพลง",
+   "global": "สถิติระดับโลกและวัฒนธรรม"
+  },
+  "notes": "REGISTER — Neutral written Thai, informative and warm, second person คุณ only where the English uses \"you\". NEVER use the polite particles ครับ/ค่ะ or the honorific ท่าน; the shipped Thai UI strings in messages/th.json carry none, and adding them breaks the register. Keep the em dash — with one space on each side, exactly as all 9 shipped languages do.\n\nPLURALS — Thai has no grammatical plural. Never pluralise, never invent a plural marker, never use ๆ to mean \"many\". A count is always NOUN + NUMERAL + CLASSIFIER: ไอดอล 12 คน, 8 วง, 3 เพลง, 5 อัลบั้ม. Classifiers are mandatory: people = คน, groups/bands = วง, songs = เพลง, albums = อัลบั้ม, list rows = รายการ, categories = หมวด. countOne and countMany must use IDENTICAL wording — ไอดอล 1 คน / ไอดอล ${n} คน. Do not special-case 1.\n\nSPACING — No spaces inside a phrase. Insert one space (a) at clause boundaries where English uses a comma or period, and (b) before AND after every run of Latin script or digits embedded in Thai: ไอดอล K-pop 12 คน, วง BTS, ปี 2026. Always put a space before the repetition mark ๆ (เร็ว ๆ นี้, ดี ๆ) — this matches existing messages/th.json. Thai has no full stop: end a sentence with a space, never \".\". Do not join list items with a Latin comma; separate with a space and put และ before the final item. Do not use the \" · \" middot separator that ko/ja/zh use — Thai headings read better with และ or a plain space.\n\nNUMERALS & DATES — Arabic numerals only (12), never Thai numerals (๑๒). Years are CE and are NEVER converted to the Buddhist Era: 2026 stays 2026, never 2569. Full month names (มกราคม) in H1/title/lead; the dotted abbreviations (ม.ค. ก.พ. มี.ค. เม.ย. พ.ค. มิ.ย. ก.ค. ส.ค. ก.ย. ต.ค. พ.ย. ธ.ค.) only inside date ranges and table cells. MONTH_NAMES are bare nouns — the template supplies เดือน when the sentence needs \"in <month>\": เกิดเดือนมกราคม. Never write เดือนเดือนมกราคม.\n\nWESTERN ZODIAC — The 12 sign names already carry the classifier ราศี, and signWord is ราศี, so never prefix it twice (ราศีราศีเมษ is wrong): write ไอดอล K-pop ราศีเมษ. Never use a bare stem (*เมษ, *กันย์) — it is not idiomatic standalone Thai. Locked spellings, the whole point of this file: Libra = ราศีตุลย์ (NOT ราศีตุล), Scorpio = ราศีพิจิก (NOT ราศีพฤศจิก), Virgo = ราศีกันย์ (NOT ราศีกันยา, which is the month), Capricorn = ราศีมังกร (NOT ราศีมกร), Aquarius = ราศีกุมภ์ (NOT ราศีกุมภะ). \"Zodiac / star sign\" = ราศี or จักรราศี — never นักษัตร, which is the animal cycle.\n\nCHINESE ZODIAC — Use the นักษัตร cycle name with the animal glossed in parentheses, mirroring the shipped ja pattern 子（ねずみ）: ชวด (หนู). The template supplies ปี: ปีชวด (หนู). Never drop the cycle name for the bare animal (*ปีหนู) and never drop the gloss. These pages describe the Chinese/Korean cycle, so Dragon is มะโรง (มังกร) — do NOT use the Thai-tradition งูใหญ่; Snake is glossed plainly งู, not งูเล็ก. The category noun is ปีนักษัตร and the badge \"Chinese Zodiac\" = นักษัตรจีน — never จักรราศีจีน.\n\nLOANWORDS (transliterate, keep) — Follow Royal Institute finals: final -k → ก, final -t → ต. That is why comeback is คัมแบ็ก, never คัมแบ็ค. Canonical set: ไอดอล (idol), คัมแบ็ก (comeback), เมนบียาส (bias — project-canonical; the street clippings เมน and เบียส exist but must NOT appear in page furniture), เบียสเรกเกอร์ (bias wrecker — the one place the short เบียส is allowed, because *เมนบียาสเรกเกอร์ is not Thai), มักเน (maknae), แอกโย (aegyo — gloss on first use as การทำท่าน่ารัก), แฟนด้อม (fandom — the clipping ด้อม is real fan slang but stays out of headings, titles and meta), แฟนแชนต์ (fan chant), แฟนไซน์ (fansign), เกิร์ลกรุ๊ป, บอยกรุ๊ป, ซับยูนิต (sub-unit), ไตเติลแทร็ก (title track), วิชวล (visual position), เซ็นเตอร์ (center), เดบิวต์ (debut).\n\nTRANSLATE, do not transliterate — lightstick = แท่งไฟ (never ไลท์สติ๊ก), photocard = โฟโต้การ์ด (bare การ์ด only in body copy after first mention), soloist = ศิลปินเดี่ยว, trainee = เด็กฝึก, trainee system = ระบบเด็กฝึก, agency/label = ค่ายเพลง (ต้นสังกัด is acceptable in body copy; never เอเจนซี), music show = รายการเพลง, comeback stage = เวทีคัมแบ็ก, generation = เจเนอเรชัน in headings and เจน in body copy (ไอดอลเจน 4).\n\nNEVER TRANSLITERATE — Brand and proper nouns stay in Latin script exactly as the build emits them: K-pop, K-Beauty, KoreaPlus, BTS, BLACKPINK, HYBE, SM, YG, JYP. Never write เคป็อป or บีทีเอส. Idol, group, song and album names are verified roster data and must pass through untouched.\n\nHONESTY STRINGS (load-bearing — translate literally, never soften) — \"as of <date>\" = ข้อมูล ณ วันที่ <date>; ณ วันที่ must survive. \"verified\" = ตรวจสอบแล้ว, not น่าเชื่อถือ. \"our roster / our current roster\" = รายชื่อของเรา / รายชื่อปัจจุบันของเรา — never รายชื่อทั้งหมด, which would claim completeness we do not have. \"not all of K-pop\" must stay a negation: ไม่ใช่ทั้งหมดของวงการ K-pop. \"may / might\" = อาจ — never delete it. \"Nothing is estimated\" = ไม่มีการประมาณค่า. \"Sun signs are popular astrology, not science\" must keep the ไม่ใช่: เป็นความเชื่อทางโหราศาสตร์ ไม่ใช่วิทยาศาสตร์. The lunar-new-year caveat must keep both halves — the boundary IS Lunar New Year and is NOT 1 January: นักษัตรเปลี่ยนในวันตรุษจีน ไม่ใช่วันที่ 1 มกราคม. Hedges may be reordered to fit Thai word order but must never be shortened away.\n\nTIGHT UI — Tab-bar and chip labels stay at or under 10 Thai characters and must never be broken with an internal space for layout; Thai wraps between words on its own. kpopHistMore renders as the <h2> above the sibling-history link list, so it is worded as \"more K-pop history\", not \"more guides\"."
+ }
+]

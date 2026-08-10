@@ -14,6 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, ROSTER, TODAY, ld, bcHtml, keyFactsBox } = ctx;
@@ -122,7 +123,13 @@ module.exports = function (ctx) {
       [t.row.agency, esc(ra.agency || '—'), esc(rb.agency || '—')],
       [t.row.genres, esc(genresA || '—'), esc(genresB || '—')],
       [t.row.fandom, esc(ra.fandom || '—'), esc(rb.fandom || '—')],
-      [t.row.type, esc(ra.type || '—'), esc(rb.type || '—')],
+      // ra.type is the raw English ROSTER enum ("group"). Shipping it as the
+      // cell value gave every localized comparison table a row whose label was
+      // translated and whose two values both read "group". Route it through the
+      // girl/boy/group/soloist strings that already exist in all 14 languages.
+      [t.row.type,
+        esc(chrome.typeLabel(lang, ra.type, ra.gender) || '—'),
+        esc(chrome.typeLabel(lang, rb.type, rb.gender) || '—')],
     ];
     const tableHtml = `<div class="kp-vs-table" style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;margin:1rem 0">
 <thead><tr><th style="text-align:left;padding:.5rem;border-bottom:2px solid #2a3a52"></th><th style="text-align:left;padding:.5rem;border-bottom:2px solid #2a3a52">${ra.emoji || ''} ${esc(nameA)}</th><th style="text-align:left;padding:.5rem;border-bottom:2px solid #2a3a52">${rb.emoji || ''} ${esc(nameB)}</th></tr></thead>
@@ -144,11 +151,22 @@ module.exports = function (ctx) {
 </div>`;
 
     // ── key facts chips ──
+    // The member chip reused the TABLE ROW LABEL as a counted noun, which is
+    // English number shape: "13 أعضاء" breaks Arabic tamyīz, "4 Участники"
+    // never agrees in Russian, "4 สมาชิก" drops the mandatory Thai classifier,
+    // "4 Thành viên" title-cases a Vietnamese common noun. `chipMembers` lets a
+    // locale own the whole phrase — a "{n}"-bearing string, or an object of
+    // CLDR plural categories where the noun inflects. Bundles without it keep
+    // the previous rendering rather than getting a silently different one.
+    const memberChip = (name, n) => {
+      const phrase = chrome.countTemplate(t.chipMembers, lang, n);
+      return `${name} · ${phrase != null ? phrase : `${n} ${t.row.members}`}`;
+    };
     const facts = keyFactsBox([
-      `${esc(nameA)}: ${esc(ra.debut || '')}`,
-      `${esc(nameB)}: ${esc(rb.debut || '')}`,
-      `${nameA} · ${ma} ${t.row.members}`,
-      `${nameB} · ${mb} ${t.row.members}`,
+      `${esc(nameA)}: ${esc(chrome.chipDate(lang, ra.debut || ''))}`,
+      `${esc(nameB)}: ${esc(chrome.chipDate(lang, rb.debut || ''))}`,
+      esc(memberChip(nameA, ma)),
+      esc(memberChip(nameB, mb)),
     ]);
 
     // ── FAQ (fact-only Q&A) ──

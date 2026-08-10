@@ -18,6 +18,7 @@
 'use strict';
 
 const { ANIMAL_KEYS, ANIMAL_NAMES, T } = require('./seo-kpop-cnzodiac-l10n.js');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, ld, derive } = ctx;
@@ -103,6 +104,9 @@ module.exports = function (ctx) {
       + `<thead>${head}</thead><tbody>${body}</tbody></table></div>`;
   }
 
+  // `lang` reaches this only to look the hub label up — it used to end the page
+  // with a hardcoded English "🎤 K-Pop Hub" in all 14 languages, and that link
+  // is the last thing a reader sees on the way out.
   function otherAnimalsHtml(animal, lang, dir, t, names) {
     const links = ANIMAL_KEYS.filter(k => k !== animal).map(k => {
       const z = derive.CN_ZODIAC.find(x => x.key === k);
@@ -110,7 +114,7 @@ module.exports = function (ctx) {
       const label = names[k] || k;
       return `<a href="${dir}kpop/${slugOf(k)}.html">${emoji} ${esc(label)}</a>`;
     }).join('');
-    return `<h2>${esc(t.otherH)}</h2><div class="seo-linklist">${links}<a href="/kpop">🎤 K-Pop Hub</a></div>`;
+    return `<h2>${esc(t.otherH)}</h2><div class="seo-linklist">${links}<a href="/kpop">${esc(chrome.hubLabel(lang))}</a></div>`;
   }
 
   /* buildAnimal(animal, lang) → url string, or null (untranslated lang). */
@@ -145,7 +149,7 @@ module.exports = function (ctx) {
 
     // FAQ.
     const qa = t.faq(animalName);
-    if (qa.length) body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+    if (qa.length) body += `<h2>${esc(chrome.faqHeading(lang))}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
 
     // Affiliate block (shell auto-injects if omitted; explicit keeps it inline).
     body += ctx.affBlock({ city: 'Seoul', cat: 'general', q: '', lang });

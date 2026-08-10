@@ -21,6 +21,7 @@
 'use strict';
 
 const { MONTH_NAMES, T } = require('../seo-kpop-bmonth-l10n.js');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 // The K-pop channel rolls out locales ahead of the rest of the site, so it has
 // its own list. Tolerate its absence: this cluster must keep building while
@@ -113,11 +114,20 @@ module.exports = function (ctx) {
         + `<th>${esc(tr.col.idol)}</th><th>${esc(tr.col.group)}</th><th>${esc(tr.col.date)}</th>`
         + `</tr></thead><tbody>`;
       for (const e of entries) {
-        const gLink = `${dir(lang)}kpop/${e.group.id}-profile.html`;
-        const signTag = e.sign ? ` <span class="seo-badge">${e.sign.emoji} ${esc(e.sign.name)}</span>` : '';
+        // derive.signOf() returns the ENGLISH sign name; printing it here put
+        // "♓ Pisces" in the middle of an Arabic/Thai/Russian table while the
+        // sign page one click away said الحوت / ราศีมีน / Рыбы. Look the name
+        // up by key in the shared map instead.
+        const signTag = e.sign
+          ? ` <span class="seo-badge">${e.sign.emoji} ${esc(chrome.signName(lang, e.sign.key, e.sign.name))}</span>`
+          : '';
+        // The group's profile page only exists in the languages kpop-history
+        // covers; elsewhere the name is plain text, never a 404 or an
+        // English-language escape hatch out of a localized page.
+        const gCell = chrome.profileLink(e.group.id, lang, dir(lang), groupName(e.group, lang), esc);
         body += `<tr>`
           + `<td>${esc(e.name)}${signTag}</td>`
-          + `<td>${e.group.emoji} <a href="${gLink}">${esc(groupName(e.group, lang))}</a></td>`
+          + `<td>${e.group.emoji} ${gCell}</td>`
           + `<td>${esc(e.date)}</td>`
           + `</tr>`;
       }
@@ -138,7 +148,9 @@ module.exports = function (ctx) {
     // FAQ — only when we have real names to cite (avoid empty/fabricated answers)
     const qa = [];
     if (entries.length) {
-      const sampleNames = entries.slice(0, 6).map(e => e.name).join(', ');
+      // Arabic prose takes the Arabic comma (U+060C); an ASCII comma between
+      // Latin name runs inside an Arabic sentence is a style-contract breach.
+      const sampleNames = chrome.listJoin(lang, entries.slice(0, 6).map(e => e.name));
       qa.push([tr.q1(mName), tr.a1(mName, sampleNames)]);
     }
     qa.push([tr.q2(mName), tr.a2()]);
@@ -164,8 +176,10 @@ module.exports = function (ctx) {
     // keep the primary entity an ItemList (most robust for a roster page).
     const schemas = [];
     if (entries.length) {
+      // url is omitted (not faked) when the profile page does not exist in this
+      // language — an ItemList entry pointing at a 404 asserts the 404 to Google.
       const il = ld.itemListLD(
-        entries.map(e => ({ name: e.name, url: `${BASEP}${dir(lang)}kpop/${e.group.id}-profile.html` })),
+        entries.map(e => ({ name: e.name, url: chrome.profileUrl(e.group.id, lang, BASEP, dir(lang)) })),
         { name: h1, description: tr.desc(mName) }
       );
       if (il) schemas.push(il);

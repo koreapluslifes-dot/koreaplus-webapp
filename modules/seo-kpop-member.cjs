@@ -24,6 +24,7 @@
 'use strict';
 
 const { T, SIGN_NAMES, ANIMAL_NAMES, MONTH_NAMES } = require('./seo-kpop-member-l10n.js');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 // The K-pop channel rolls out locales ahead of the rest of the site, so it has
 // its own list. Tolerate its absence: this cluster must keep building while
@@ -69,12 +70,25 @@ module.exports = function (ctx) {
   const memberSlug = (mem) => `${slug(mem.name)}-${slug(mem.act.id)}-member`;
 
   // Format a YYYY-MM-DD birthday into localized "Month D, YYYY" style text.
+  // The generic "D Month YYYY" tail is not universal, and this is the single
+  // most-read fact on the page: two locales need their own shape.
   function fmtBday(birthday, lang) {
     const p = derive.parseDate(birthday);
     if (!p) return null;
     const mn = (MONTH_NAMES[lang] || MONTH_NAMES.en)[p.m - 1];
     if (lang === 'ja' || lang === 'zh') return `${p.y}年${mn}${p.d}日`;
     if (lang === 'ko') return `${p.y}년 ${mn} ${p.d}일`;
+    // Russian: a day number governs the GENITIVE month, and the year is closed
+    // with "года". «11 апрель 2000» (nominative) is flatly ungrammatical.
+    if (lang === 'ru') {
+      const gen = chrome.monthGenitive('ru', p.m - 1);
+      if (gen) return `${p.d} ${gen} ${p.y} года`;
+    }
+    // Vietnamese: MONTH_NAMES.vi already contains the word "Tháng", so the
+    // generic tail produced "16 Tháng 1 1996" — three numerals with no grammar
+    // holding them together, and ambiguous when the day is small. Vietnamese
+    // writes d/m/yyyy.
+    if (lang === 'vi') return `${p.d}/${p.m}/${p.y}`;
     // Western style: Month D, YYYY (en) / D Month YYYY (others)
     if (lang === 'en') return `${mn} ${p.d}, ${p.y}`;
     return `${p.d} ${mn} ${p.y}`;
@@ -120,7 +134,7 @@ module.exports = function (ctx) {
     if (mem.birthday) facts.push(`🎂 ${esc(t.fBirthday)}: ${esc(fmtBday(mem.birthday, lang))}`);
     if (signName && sign) facts.push(`${sign.emoji} ${esc(t.fSign)}: ${esc(signName)}`);
     if (animalName && cz) facts.push(`${cz.emoji} ${esc(t.fZodiac)}: ${esc(animalName)}`);
-    facts.push(`🗓️ ${esc(isSolo ? t.fActDebut : t.fDebut)}: ${esc(mem.act.debut)}`);
+    facts.push(`🗓️ ${esc(isSolo ? t.fActDebut : t.fDebut)}: ${esc(chrome.chipDate(lang, mem.act.debut))}`);
     if (mem.act.fandom) facts.push(`💗 ${esc(t.fFandom)}: ${esc(mem.act.fandom)}`);
     body += keyFactsBox(facts);
 
@@ -141,9 +155,9 @@ module.exports = function (ctx) {
 
     // ── group / career section ──
     if (isSolo) {
-      body += `<h2>${t.hSolo}</h2><p>${t.soloCareer(esc(m), esc(mem.act.agency), esc(mem.act.debut))}</p>`;
+      body += `<h2>${t.hSolo}</h2><p>${t.soloCareer(esc(m), esc(mem.act.agency), esc(chrome.chipDate(lang, mem.act.debut)))}</p>`;
     } else {
-      body += `<h2>${t.hGroup}</h2><p>${t.groupLine(esc(m), esc(g), esc(mem.act.agency), esc(mem.act.debut))}</p>`;
+      body += `<h2>${t.hGroup}</h2><p>${t.groupLine(esc(m), esc(g), esc(mem.act.agency), esc(chrome.chipDate(lang, mem.act.debut)))}</p>`;
       // Cross-links to the other members of the same act (internal linking).
       const sibs = MEMBERS.filter(o => o.act.id === mem.act.id && o.name !== mem.name);
       if (sibs.length) {

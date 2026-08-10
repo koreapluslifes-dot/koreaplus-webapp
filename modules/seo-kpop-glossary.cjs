@@ -23,6 +23,7 @@
 'use strict';
 
 const { HUB, EXISTING, TERMS } = require('./seo-kpop-glossary-l10n.js');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, ld, TODAY } = ctx;
@@ -192,7 +193,9 @@ module.exports = function (ctx) {
     }
     const qa = (t.faq || []).map(x => Array.isArray(x) ? x : [x.q, x.a]);
     if (qa.length) {
-      body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+      // Was hardcoded English in every language; the localized heading already
+      // ships alongside these pages in the member bundle.
+      body += `<h2>${esc(chrome.faqHeading(lang))}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
     }
 
     // link back to the glossary hub + a few sibling new terms

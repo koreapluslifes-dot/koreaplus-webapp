@@ -22,6 +22,7 @@
 'use strict';
 
 const { T, TRAITS, SIGN_NAMES, DATE_RANGES } = require('../seo-kpop-zodiac-l10n.js');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 // The K-pop channel rolls out locales ahead of the rest of the site, so it has
 // its own list. Tolerate its absence: this cluster must keep building while
@@ -175,7 +176,10 @@ module.exports = function (ctx) {
     // ── FAQ (examples = up to 3 "Idol (Group)") ──
     const examples = members.slice(0, 3).map(m => `${m.idol} (${m.group})`);
     const qa = t.faq(s, n, examples);
-    const faqHtml = `<section><h2>FAQ</h2>` + qa.map(([q, a]) =>
+    // Was a hardcoded English "FAQ" on every star-sign page in every language,
+    // so one locale labelled the same section three different ways. The
+    // member/agency/month clusters already carry the localized heading.
+    const faqHtml = `<section><h2>${esc(chrome.faqHeading(lang))}</h2>` + qa.map(([q, a]) =>
       `<details class="seo-faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('') + `</section>`;
 
     // ── Disclaimer (sun signs = popular astrology) ──

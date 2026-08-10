@@ -17,6 +17,16 @@
    ar is RTL: every string is written in LOGICAL order (emoji first, pipe last,
    name before the parenthesis). The renderer flips it — never hand-reverse a
    string here, and never inject RLM/LRM into this data.
+
+   TWO THINGS THAT LOOK LIKE BUGS AND ARE NOT (both are documented in place):
+   - MONTH_NAMES rows are the form a month takes INSIDE A DATE, not the citation
+     form. fmtBday() in seo-kpop-member.cjs is the table's only caller and only
+     ever renders "<day> <month> <year>", so ru carries the genitive (11 апреля)
+     and vi carries the whole "tháng N năm" fragment. Copying a row out of here
+     to head a page would be wrong for both.
+   - The hi title/desc take an optional third argument, the idol's sex, because
+     the Hindi genitive agrees with the NAME, not with the group. Without it
+     they fall back to a form that needs no agreement at all.
    ══════════════════════════════════════════════════════════════════ */
 'use strict';
 
@@ -77,15 +87,82 @@ const MONTH_NAMES = {
   id: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
   ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
   hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्तूबर', 'नवंबर', 'दिसंबर'],
-  // ru is nominative (the canonical citation form shared with the other K-pop
-  // l10n bundles). A Russian date needs the genitive — "8 августа 2003" — so
-  // fmtBday() must special-case ru instead of interpolating this row raw.
-  ru: ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'],
-  // vi rows already contain the word "Tháng" — a template must never prefix
-  // another one, or it renders "tháng Tháng 3".
-  vi: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+  // ── ru: GENITIVE, deliberately — see MONTH_NAMES_RU_NOM below ──────────
+  // Russian puts the month in the GENITIVE whenever a day number precedes it:
+  // «11 апреля 2000». «11 апрель 2000» (nominative) is flatly ungrammatical
+  // and was the single most visible defect in the Russian tree — it rendered
+  // 5× on each of the 191 profiles. The vocab contract names it: «Дата
+  // "21 марта" — родительный».
+  // The ONLY consumer of this table is fmtBday() in seo-kpop-member.cjs, and
+  // it only ever emits "<day> <month> <year>" — i.e. always the genitive slot.
+  // So the ru row IS the genitive list, and the nominative citation forms are
+  // kept separately below. Do not swap one for the other, and do not reach for
+  // either one to build «родившиеся в апреле» — that needs a third
+  // (prepositional) form this bundle never renders.
+  ru: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
+  // ── vi: a DATE FRAGMENT, not a month label ─────────────────────────────
+  // fmtBday() renders "<day> <this row> <year>". Vietnamese writes a full date
+  // as "16 tháng 1 năm 1996" (or 16/1/1996) — "16 Tháng 1 1996" is English
+  // word order wearing Vietnamese words, and it turns ambiguous the moment the
+  // day is small ("1 Tháng 11 1996" is three bare numerals with no grammar
+  // holding them together). This row therefore carries the whole "tháng N năm"
+  // fragment in lowercase and is NOT a standalone month name — the month
+  // headings live in seo-kpop-bmonth-l10n.js. Never prefix another "tháng".
+  vi: ['tháng 1 năm', 'tháng 2 năm', 'tháng 3 năm', 'tháng 4 năm', 'tháng 5 năm', 'tháng 6 năm', 'tháng 7 năm', 'tháng 8 năm', 'tháng 9 năm', 'tháng 10 năm', 'tháng 11 năm', 'tháng 12 năm'],
+  // th writes "<day> <full month> <year>" with a space around every digit run,
+  // and CE years are never converted to the Buddhist era.
   th: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
 };
+
+/* Russian months in the NOMINATIVE — the citation form the other K-pop l10n
+   bundles carry. Nothing in this bundle renders a bare month name, so this
+   list exists so the genitive row above is never "corrected" back, and so a
+   future caller that genuinely needs «март» has it without guessing. */
+const MONTH_NAMES_RU_NOM = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+
+/* ── Date helpers ────────────────────────────────────────────────────────
+   The generator hands group-debut dates to groupLine()/soloCareer() as the raw
+   ISO string off the roster ("2016-08-08"). ISO reads as machine output inside
+   running prose, and the hi and vi reviewers both flagged it, so those two
+   languages reformat it here. Every roster debut is strict YYYY-MM-DD; when a
+   value is anything else the helpers return it untouched rather than invent a
+   date. Values arrive HTML-escaped, and an ISO date carries nothing escapable,
+   so parsing them is safe. */
+const ISO_DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
+function isoParts(s) {
+  const mm = ISO_DATE_RE.exec(String(s == null ? '' : s));
+  return mm ? { y: +mm[1], m: +mm[2], d: +mm[3] } : null;
+}
+// hi: day-then-month, month spelled out, Western digits — the same shape the
+// birthday two paragraphs above already uses ("16 जनवरी 1996").
+const hiDate = (s) => { const p = isoParts(s); return p ? `${p.d} ${MONTH_NAMES.hi[p.m - 1]} ${p.y}` : String(s); };
+// vi: the long form "ngày 8 tháng 8 năm 2016", matching the birthday on the
+// same page — vocab §7 allows d/m/yyyy or the long form but says to hold one
+// form per page, and fmtBday() can only produce the long one.
+const viDate = (s) => { const p = isoParts(s); return p ? `ngày ${p.d} ${MONTH_NAMES.vi[p.m - 1]} ${p.y}` : String(s); };
+
+/* ── hi genitive postposition ────────────────────────────────────────────
+   In "GROUP का/की NAME" the postposition agrees with the HEAD noun — the
+   idol's name — not with the group, so a female idol takes की and a male के.
+   Shipping a fixed के made roughly half the roster (Jennie, Lisa, Karina,
+   Winter, Nayeon…) ungrammatical in the <title>, meta description, og:title
+   and og:image:alt: the strings a reader sees before opening the page.
+   The generator does not pass the idol's sex today, so with no third argument
+   these templates fall back to the name-first form the H1 already uses, which
+   needs no agreement at all and is correct for everyone. Pass the roster's
+   act.gender ('girl'/'boy') or 'female'/'male'/'f'/'m' as the third argument
+   and the genitive form is emitted instead. NOTE: body copy such as
+   "Jennie BLACKPINK के मेंबर हैं" is already correct and must NOT be gendered —
+   there the head noun is मेंबर (masculine), not the name. */
+const HI_FEM = /^(f|female|girl|girls|woman|women)$/i;
+const HI_MASC = /^(m|male|boy|boys|man|men)$/i;
+const hiPost = (gender) => {
+  const g = String(gender == null ? '' : gender).trim();
+  if (HI_FEM.test(g)) return 'की';
+  if (HI_MASC.test(g)) return 'के';
+  return null; // unknown → caller uses the agreement-free "NAME (GROUP)" form
+};
+const hiHead = (m, g, gender) => { const p = hiPost(gender); return p ? `${g} ${p} ${m}` : `${m} (${g})`; };
 
 /* UI string templates. Functions take plain facts and return localized text.
    `m` = member name, `g` = group/act name, `d` = formatted birthday string,
@@ -96,6 +173,13 @@ const T = {
     badge: 'K-Pop profile',
     h1: (m, g) => `${m} (${g}) — Profile, Birthday & Zodiac`,
     title: (m, g) => `${m} of ${g}: Birthday, Zodiac Sign & Profile | KoreaPlus`,
+    // Soloist <title>. The generator currently assembles this inline as
+    // `${m}: ${fBirthday} · ${fSign} | KoreaPlus`, which is how Title Case and
+    // the " · " separator leaked into ru/vi/th — both banned by their vocab
+    // contracts. Every language below reproduces its CURRENT output except
+    // ru/vi/th, which use the wording their reviewers supplied. Once the
+    // generator calls t.soloTitle(m), only those three change.
+    soloTitle: (m) => `${m}: Birthday · Star sign | KoreaPlus`,
     desc: (m, g) => `${m} from ${g}: verified birthday, Western zodiac sign, Chinese zodiac and group facts. A fact-checked K-pop member profile.`,
     soloDesc: (m) => `${m}: verified birthday, Western zodiac sign, Chinese zodiac and career facts. A fact-checked K-pop profile.`,
     lead: (m, g) => `${m} is a member of the K-pop group ${g}. Below are the verified, publicly known facts — birthday, star sign and group details.`,
@@ -129,6 +213,7 @@ const T = {
     badge: 'K-POPプロフィール',
     h1: (m, g) => `${m}(${g})— プロフィール・誕生日・星座`,
     title: (m, g) => `${g}の${m}：誕生日・星座・プロフィール | KoreaPlus`,
+    soloTitle: (m) => `${m}: 誕生日 · 星座 | KoreaPlus`,
     desc: (m, g) => `${g}の${m}：確認済みの誕生日、西洋占星術の星座、干支、グループ情報。ファクトチェック済みK-POPプロフィール。`,
     soloDesc: (m) => `${m}：確認済みの誕生日、星座、干支、活動情報。ファクトチェック済みK-POPプロフィール。`,
     lead: (m, g) => `${m}はK-POPグループ${g}のメンバーです。以下は公開されている確認済みの事実 — 誕生日、星座、グループ情報です。`,
@@ -162,6 +247,7 @@ const T = {
     badge: 'K-pop 资料',
     h1: (m, g) => `${m}（${g}）— 资料、生日与星座`,
     title: (m, g) => `${g}的${m}：生日、星座与个人资料 | KoreaPlus`,
+    soloTitle: (m) => `${m}: 生日 · 星座 | KoreaPlus`,
     desc: (m, g) => `${g}的${m}：经核实的生日、西方星座、生肖与团体信息。一份经事实核查的 K-pop 成员资料。`,
     soloDesc: (m) => `${m}：经核实的生日、星座、生肖与出道信息。一份经事实核查的 K-pop 资料。`,
     lead: (m, g) => `${m}是 K-pop 团体${g}的成员。以下是公开且经核实的资料 — 生日、星座与团体信息。`,
@@ -195,6 +281,7 @@ const T = {
     badge: 'Perfil K-pop',
     h1: (m, g) => `${m} (${g}) — Perfil, cumpleaños y signo`,
     title: (m, g) => `${m} de ${g}: cumpleaños, signo zodiacal y perfil | KoreaPlus`,
+    soloTitle: (m) => `${m}: Cumpleaños · Signo | KoreaPlus`,
     desc: (m, g) => `${m} de ${g}: cumpleaños verificado, signo del zodiaco occidental, zodiaco chino y datos del grupo. Un perfil de K-pop verificado.`,
     soloDesc: (m) => `${m}: cumpleaños verificado, signo zodiacal, zodiaco chino y datos de carrera. Un perfil de K-pop verificado.`,
     lead: (m, g) => `${m} es integrante del grupo de K-pop ${g}. Aquí están los datos públicos y verificados — cumpleaños, signo y detalles del grupo.`,
@@ -228,6 +315,7 @@ const T = {
     badge: 'K-pop 프로필',
     h1: (m, g) => `${m} (${g}) — 프로필 · 생일 · 별자리`,
     title: (m, g) => `${g} ${m}: 생일 · 별자리 · 프로필 | KoreaPlus`,
+    soloTitle: (m) => `${m}: 생일 · 별자리 | KoreaPlus`,
     desc: (m, g) => `${g} ${m}: 검증된 생일, 서양 별자리, 띠, 그룹 정보. 팩트체크한 K-pop 멤버 프로필.`,
     soloDesc: (m) => `${m}: 검증된 생일, 별자리, 띠, 활동 정보. 팩트체크한 K-pop 프로필.`,
     lead: (m, g) => `${m}은(는) K-pop 그룹 ${g}의 멤버입니다. 아래는 공개된 검증 사실 — 생일, 별자리, 그룹 정보입니다.`,
@@ -261,6 +349,7 @@ const T = {
     badge: 'Profil K-pop',
     h1: (m, g) => `${m} (${g}) — Profil, anniversaire et signe`,
     title: (m, g) => `${m} de ${g} : anniversaire, signe astrologique et profil | KoreaPlus`,
+    soloTitle: (m) => `${m}: Anniversaire · Signe | KoreaPlus`,
     desc: (m, g) => `${m} de ${g} : anniversaire vérifié, signe du zodiaque occidental, zodiaque chinois et infos du groupe. Un profil K-pop vérifié.`,
     soloDesc: (m) => `${m} : anniversaire vérifié, signe astrologique, zodiaque chinois et carrière. Un profil K-pop vérifié.`,
     lead: (m, g) => `${m} est membre du groupe de K-pop ${g}. Voici les faits publics et vérifiés — anniversaire, signe et détails du groupe.`,
@@ -294,6 +383,7 @@ const T = {
     badge: 'K-Pop-Profil',
     h1: (m, g) => `${m} (${g}) — Profil, Geburtstag & Sternzeichen`,
     title: (m, g) => `${m} von ${g}: Geburtstag, Sternzeichen & Profil | KoreaPlus`,
+    soloTitle: (m) => `${m}: Geburtstag · Sternzeichen | KoreaPlus`,
     desc: (m, g) => `${m} von ${g}: geprüfter Geburtstag, westliches Sternzeichen, chinesisches Tierkreiszeichen und Gruppeninfos. Ein faktengeprüftes K-Pop-Profil.`,
     soloDesc: (m) => `${m}: geprüfter Geburtstag, Sternzeichen, chinesisches Tierkreiszeichen und Karriere. Ein faktengeprüftes K-Pop-Profil.`,
     lead: (m, g) => `${m} ist Mitglied der K-Pop-Gruppe ${g}. Hier die öffentlich bekannten, geprüften Fakten — Geburtstag, Sternzeichen und Gruppendetails.`,
@@ -327,6 +417,7 @@ const T = {
     badge: 'Perfil K-pop',
     h1: (m, g) => `${m} (${g}) — Perfil, aniversário e signo`,
     title: (m, g) => `${m} de ${g}: aniversário, signo e perfil | KoreaPlus`,
+    soloTitle: (m) => `${m}: Aniversário · Signo | KoreaPlus`,
     desc: (m, g) => `${m} de ${g}: aniversário verificado, signo do zodíaco ocidental, zodíaco chinês e dados do grupo. Um perfil de K-pop verificado.`,
     soloDesc: (m) => `${m}: aniversário verificado, signo, zodíaco chinês e dados da carreira. Um perfil de K-pop verificado.`,
     lead: (m, g) => `${m} é integrante do grupo de K-pop ${g}. Abaixo estão os fatos públicos e verificados — aniversário, signo e detalhes do grupo.`,
@@ -360,6 +451,7 @@ const T = {
     badge: 'Profil K-pop',
     h1: (m, g) => `${m} (${g}) — Profil, Ulang Tahun & Zodiak`,
     title: (m, g) => `${m} dari ${g}: ulang tahun, zodiak & profil | KoreaPlus`,
+    soloTitle: (m) => `${m}: Ulang tahun · Zodiak | KoreaPlus`,
     desc: (m, g) => `${m} dari ${g}: tanggal lahir terverifikasi, zodiak Barat, shio, dan info grup. Profil anggota K-pop yang telah dicek faktanya.`,
     soloDesc: (m) => `${m}: tanggal lahir terverifikasi, zodiak, shio, dan info karier. Profil K-pop yang telah dicek faktanya.`,
     lead: (m, g) => `${m} adalah anggota grup K-pop ${g}. Berikut fakta publik yang terverifikasi — tanggal lahir, zodiak, dan detail grup.`,
@@ -399,6 +491,9 @@ const T = {
     badge: 'ملف K-Pop',
     h1: (m, g) => `${m} (${g}) — الملف الشخصي وتاريخ الميلاد والبرج`,
     title: (m, g) => `${m} من ${g}: تاريخ الميلاد والبرج والملف الشخصي | KoreaPlus`,
+    // reproduces the title the ar soloist pages already ship (the ar reviewer
+    // read one and did not object) — only ru/vi/th change wording here.
+    soloTitle: (m) => `${m}: تاريخ الميلاد · البرج | KoreaPlus`,
     desc: (m, g) => `${m} من ${g}: تاريخ الميلاد الموثَّق والبرج الغربي والبرج الصيني ومعلومات الفرقة. ملف عضو K-Pop مُدقَّق الحقائق.`,
     soloDesc: (m) => `${m}: تاريخ الميلاد الموثَّق والبرج الغربي والبرج الصيني ومعلومات المسيرة الفنية. ملف K-Pop مُدقَّق الحقائق.`,
     lead: (m, g) => `${m} من أعضاء فرقة K-Pop ${g}. فيما يلي الحقائق المعلنة الموثَّقة — تاريخ الميلاد والبرج وتفاصيل الفرقة.`,
@@ -407,7 +502,10 @@ const T = {
     hBirthday: '🎂 تاريخ الميلاد والعمر',
     hZodiac: '♈ البرج الغربي والبرج الصيني',
     hGroup: '🎤 الفرقة',
-    hSolo: '🎶 الفنان',
+    // "الفنان" is masculine and this heading sits over IU, TAEYEON, LISA…;
+    // the section itself is about the career (agency + first release), so the
+    // gender-free noun phrase is both accurate and consistent with soloDesc.
+    hSolo: '🎶 المسيرة الفنية',
     hFaq: '❓ الأسئلة الشائعة',
     hMore: '👥 أعضاء آخرون',
     fGroup: 'الفرقة', fAgency: 'شركة الترفيه', fDebut: 'ظهور الفرقة الأول', fBirthday: 'تاريخ الميلاد', fSign: 'البرج', fZodiac: 'البرج الصيني', fFandom: 'الفاندوم', fActDebut: 'الظهور الأول',
@@ -416,16 +514,29 @@ const T = {
     signLine: (m, s, em) => `بناءً على هذا التاريخ، برج ${m} الغربي (الاستوائي) هو <strong>${s}</strong> ${em}.`,
     zodiacLine: (m, z, em) => `حسب سنة الميلاد الشمسية، حيوان ${m} في البرج الصيني هو <strong>${z}</strong> ${em}.`,
     groupLine: (m, g, ag, debut) => `${m} من أعضاء <strong>${g}</strong>، وتديرها ${ag}. ظهرت ${g} لأول مرة في ${debut}.`,
-    soloCareer: (m, ag, debut) => `${m} تحت إدارة ${ag}، وكان أول ظهور فني في ${debut}.`,
-    hedge: 'ميلاد قريب من رأس السنة القمرية — السنة الصينية تتغيّر في رأس السنة القمرية لا في 1 يناير، وقد يختلف الحيوان بمقدار واحد حسب التاريخ القمري الدقيق.',
+    // «وكان أول ظهور فني» is an indefinite subject with no possessor — "and a
+    // first appearance happened", leaving the reader to ask whose. The definite
+    // «الظهور الفني الأول» fixes it without introducing a gendered pronoun,
+    // which this block deliberately avoids.
+    soloCareer: (m, ag, debut) => `${m} تحت إدارة ${ag}، وكان الظهور الفني الأول في ${debut}.`,
+    // HEDGE — load-bearing. The vocab contract fixes both halves: the
+    // (أواخر يناير إلى منتصف فبراير) window that makes the warning actionable,
+    // and the explicit «وليس في 1 يناير». The 12 Chinese-zodiac pages already
+    // ship the full sentence; this one had been trimmed to «لا في 1 يناير».
+    hedge: 'ميلاد قريب من رأس السنة القمرية — السنة الصينية تتغيّر في رأس السنة القمرية (أواخر يناير إلى منتصف فبراير)، وليس في 1 يناير، وقد يختلف الحيوان بمقدار واحد حسب التاريخ القمري الدقيق.',
     qBday: (m) => `متى تاريخ ميلاد ${m}؟`,
     aBday: (m, d) => `${m} من مواليد ${d}.`,
     aBdayNone: (m) => `لم يُنشر في هذه الصفحة تاريخ ميلاد موثَّق لـ${m}.`,
     qSign: (m) => `ما برج ${m}؟`,
     aSign: (m, s) => `برج ${m} الغربي هو ${s}.`,
-    qGroup: (m) => `ما فرقة ${m}؟`,
+    // One question serves both page types, so it cannot presuppose a group:
+    // «ما فرقة IU؟» on a soloist profile asks which group she is in and is then
+    // answered "she is a soloist". «هل لدى … فرقة؟» works for both, and لدى
+    // takes no gender agreement (unlike ينتمي). The soloist answer opens with
+    // «لا،» so it actually responds to the question.
+    qGroup: (m) => `هل لدى ${m} فرقة؟`,
     aGroup: (m, g) => `${m} من أعضاء ${g}.`,
-    aSolo: (m) => `${m} من الفنانين المنفردين.`,
+    aSolo: (m) => `لا، ${m} من الفنانين المنفردين.`,
   },
   // hi writes "K-pop" — the casing this module family uses. build-seo.cjs
   // emits "K-Pop"; normalizing either one to the other is itself a drift.
@@ -433,8 +544,12 @@ const T = {
     typeMember: 'मेंबर', typeSoloist: 'सोलो आर्टिस्ट',
     badge: 'K-pop प्रोफाइल',
     h1: (m, g) => `${m} (${g}) — प्रोफाइल, जन्मदिन और राशि`,
-    title: (m, g) => `${g} के ${m}: जन्मदिन, राशि और प्रोफाइल | KoreaPlus`,
-    desc: (m, g) => `${g} के ${m}: वेरिफाइड जन्म तिथि, पश्चिमी राशि, चीनी राशिचक्र और ग्रुप से जुड़े तथ्य। तथ्य-जाँच किया गया K-pop मेंबर प्रोफाइल।`,
+    // See hiHead()/hiPost() above: the genitive agrees with the idol's name,
+    // so a fixed «के» was wrong for every female idol in the roster. With no
+    // gender argument these emit the agreement-free «Jennie (BLACKPINK): …».
+    title: (m, g, gender) => `${hiHead(m, g, gender)}: जन्मदिन, राशि और प्रोफाइल | KoreaPlus`,
+    soloTitle: (m) => `${m}: जन्मदिन · राशि | KoreaPlus`,
+    desc: (m, g, gender) => `${hiHead(m, g, gender)}: वेरिफाइड जन्म तिथि, पश्चिमी राशि, चीनी राशिचक्र और ग्रुप से जुड़े तथ्य। तथ्य-जाँच किया गया K-pop मेंबर प्रोफाइल।`,
     soloDesc: (m) => `${m}: वेरिफाइड जन्म तिथि, पश्चिमी राशि, चीनी राशिचक्र और करियर से जुड़े तथ्य। तथ्य-जाँच किया गया K-pop प्रोफाइल।`,
     lead: (m, g) => `${m} K-pop ग्रुप ${g} के मेंबर हैं। नीचे सार्वजनिक रूप से ज्ञात और वेरिफाइड तथ्य हैं — जन्मदिन, राशि और ग्रुप की जानकारी।`,
     soloLead: (m) => `${m} K-pop आर्टिस्ट हैं। नीचे सार्वजनिक रूप से ज्ञात और वेरिफाइड तथ्य हैं — जन्मदिन, राशि और करियर की जानकारी।`,
@@ -450,9 +565,18 @@ const T = {
     noBday: (m) => `${m} की वेरिफाइड सार्वजनिक जन्म तिथि यहाँ दर्ज नहीं है। नीचे दिए बाकी तथ्य पुष्ट हैं।`,
     signLine: (m, s, em) => `इस तारीख के हिसाब से ${m} की पश्चिमी (ट्रॉपिकल) राशि <strong>${s}</strong> ${em} है।`,
     zodiacLine: (m, z, em) => `सौर जन्म वर्ष के हिसाब से ${m} का चीनी राशिचक्र जानवर <strong>${z}</strong> ${em} है।`,
-    groupLine: (m, g, ag, debut) => `${m} <strong>${g}</strong> का हिस्सा हैं और उनका मैनेजमेंट ${ag} के पास है। ${g} ने ${debut} को डेब्यू किया था।`,
-    soloCareer: (m, ag, debut) => `${m} का मैनेजमेंट ${ag} के पास है और उन्होंने ${debut} को डेब्यू किया था।`,
-    hedge: 'चंद्र नववर्ष के आसपास जन्म — चीनी राशिचक्र का साल चंद्र नववर्ष पर बदलता है, 1 जनवरी को नहीं, इसलिए सटीक चंद्र तिथि के हिसाब से जानवर एक आगे-पीछे हो सकता है।',
+    // «का हिस्सा» is a word-for-word carry of "is part of" and «उनका मैनेजमेंट …
+    // के पास है» of "managed by"; Hindi puts the agency in the subject. The
+    // head noun stays मेंबर (masculine → के) exactly as in aGroup, so no gender
+    // guess enters the body copy. The debut date is spelled out rather than
+    // left as ISO, matching the birthday two paragraphs above.
+    groupLine: (m, g, ag, debut) => `${m} <strong>${g}</strong> के मेंबर हैं और उन्हें ${ag} मैनेज करती है। ${g} ने ${hiDate(debut)} को डेब्यू किया था।`,
+    soloCareer: (m, ag, debut) => `${m} को ${ag} मैनेज करती है और उन्होंने ${hiDate(debut)} को डेब्यू किया था।`,
+    // HEDGE — both halves stay («चंद्र नववर्ष पर बदलता है, 1 जनवरी को नहीं»).
+    // Only the tail is reworded: «एक आगे-पीछे» left «एक» floating with nothing
+    // to count; «एक साल पीछे वाला» names the measure and matches the direction
+    // the Chinese-zodiac pages already describe.
+    hedge: 'चंद्र नववर्ष के आसपास जन्म — चीनी राशिचक्र का साल चंद्र नववर्ष (जनवरी के आख़िर से फ़रवरी के मध्य तक) पर बदलता है, 1 जनवरी को नहीं, इसलिए सटीक चंद्र तिथि के हिसाब से जानवर एक साल पीछे वाला हो सकता है।',
     qBday: (m) => `${m} का जन्मदिन कब है?`,
     aBday: (m, d) => `${m} का जन्म ${d} को हुआ था।`,
     aBdayNone: (m) => `इस पेज पर ${m} की कोई वेरिफाइड जन्म तिथि प्रकाशित नहीं है।`,
@@ -470,27 +594,45 @@ const T = {
     badge: 'Профиль K-pop',
     h1: (m, g) => `${m} (${g}) — профиль, день рождения и знак зодиака`,
     title: (m, g) => `${m} из ${g}: день рождения, знак зодиака и профиль | KoreaPlus`,
-    desc: (m, g) => `${m} из ${g}: проверенная дата рождения, западный знак зодиака, китайский зодиак и факты о группе. Проверенный профиль айдола K-pop.`,
-    soloDesc: (m) => `${m}: проверенная дата рождения, западный знак зодиака, китайский зодиак и факты о карьере. Проверенный профиль K-pop.`,
+    // Russian is sentence case; the soloist titles were the only ones in the
+    // tree capitalising both nouns («IU: День рождения · Знак зодиака»).
+    soloTitle: (m) => `${m}: день рождения и знак зодиака | KoreaPlus`,
+    // «китайский гороскоп», not «китайский зодиак», throughout this block: in
+    // Russian «зодиак» means the Western circle, and the year pages this page
+    // cross-links to already say «китайский гороскоп». One name per concept.
+    desc: (m, g) => `${m} из ${g}: проверенная дата рождения, западный знак зодиака, китайский гороскоп и факты о группе. Проверенный профиль айдола K-pop.`,
+    soloDesc: (m) => `${m}: проверенная дата рождения, западный знак зодиака, китайский гороскоп и факты о карьере. Проверенный профиль K-pop.`,
     lead: (m, g) => `${m} входит в состав K-pop-группы ${g}. Ниже — публично известные проверенные факты: день рождения, знак зодиака и данные о группе.`,
     soloLead: (m) => `${m} выступает сольно в K-pop. Ниже — публично известные проверенные факты: день рождения, знак зодиака и данные о карьере.`,
     hFacts: '🔑 Ключевые факты',
     hBirthday: '🎂 День рождения и возраст',
-    hZodiac: '♈ Знак зодиака и китайский зодиак',
+    hZodiac: '♈ Знак зодиака и китайский гороскоп',
     hGroup: '🎤 Группа',
     hSolo: '🎶 Артист',
     hFaq: '❓ Частые вопросы',
     hMore: '👥 Другие участники',
-    fGroup: 'Группа', fAgency: 'Агентство', fDebut: 'Дебют группы', fBirthday: 'День рождения', fSign: 'Знак зодиака', fZodiac: 'Китайский зодиак', fFandom: 'Фандом', fActDebut: 'Дебют',
-    bornLine: (m, d) => `Дата рождения ${m} — ${d}.`,
+    fGroup: 'Группа', fAgency: 'Агентство', fDebut: 'Дебют группы', fBirthday: 'День рождения', fSign: 'Знак зодиака', fZodiac: 'Китайский гороскоп', fFandom: 'Фандом', fActDebut: 'Дебют',
+    bornLine: (m, d) => `Дата рождения ${m} — ${d} года.`,
     noBday: (m) => `Проверенная публичная дата рождения ${m} здесь не указана. Остальные факты ниже подтверждены.`,
-    signLine: (m, s, em) => `По этой дате западный (тропический) знак зодиака ${m} — <strong>${s}</strong> ${em}.`,
-    zodiacLine: (m, z, em) => `По солнечному году рождения животное китайского зодиака ${m} — <strong>${z}</strong> ${em}.`,
-    groupLine: (m, g, ag, debut) => `${m} входит в состав <strong>${g}</strong>; группой занимается ${ag}. Дебют ${g} — ${debut}.`,
-    soloCareer: (m, ag, debut) => `${m} состоит в агентстве ${ag}; дебют — ${debut}.`,
-    hedge: 'Рождение около лунного Нового года — китайский зодиакальный год меняется в лунный Новый год, а не 1 января, поэтому животное может сдвинуться на одно в зависимости от точной лунной даты.',
+    // «По этой дате…» is a literal transposition of "Based on that date" with
+    // the adverbial dumped in front of the subject; «Исходя из этой даты, …» is
+    // how a Russian writer opens the sentence.
+    signLine: (m, s, em) => `Исходя из этой даты, западный (тропический) знак зодиака ${m} — <strong>${s}</strong> ${em}.`,
+    zodiacLine: (m, z, em) => `По солнечному году рождения животное китайского гороскопа ${m} — <strong>${z}</strong> ${em}.`,
+    // «группой занимается» is colloquial-vague for "managed by"; «состоять в
+    // агентстве» is not Russian at all (состоять в = membership one belongs to:
+    // в партии, в браке). Both replacements stay gender-free, as this block
+    // requires — never «подписана».
+    groupLine: (m, g, ag, debut) => `${m} входит в состав <strong>${g}</strong>; группу представляет агентство ${ag}. Дебют ${g} — ${debut}.`,
+    soloCareer: (m, ag, debut) => `${m} работает с агентством ${ag}; дебют — ${debut}.`,
+    // HEDGE — the window «(с конца января до середины февраля)» and «а не
+    // 1 января» both stay; wording is aligned word-for-word with the Chinese-
+    // zodiac cluster («Год по китайскому гороскопу меняется в лунный Новый год
+    // (…), а не 1 января»), so the two page types state the fact at the same
+    // strength and in the same terms.
+    hedge: 'Рождение около лунного Нового года — год по китайскому гороскопу меняется в лунный Новый год (с конца января до середины февраля), а не 1 января, поэтому животное может сдвинуться на одно в зависимости от точной лунной даты.',
     qBday: (m) => `Когда день рождения ${m}?`,
-    aBday: (m, d) => `Дата рождения ${m} — ${d}.`,
+    aBday: (m, d) => `Дата рождения ${m} — ${d} года.`,
     aBdayNone: (m) => `Проверенная дата рождения ${m} на этой странице не публикуется.`,
     qSign: (m) => `Какой знак зодиака у ${m}?`,
     aSign: (m, s) => `Западный знак зодиака ${m} — ${s}.`,
@@ -503,6 +645,9 @@ const T = {
     badge: 'Hồ sơ K-pop',
     h1: (m, g) => `${m} (${g}) — Hồ sơ, ngày sinh và cung hoàng đạo`,
     title: (m, g) => `${m} của ${g}: ngày sinh, cung hoàng đạo và hồ sơ | KoreaPlus`,
+    // Same shape and casing as the group titles — Vietnamese does not
+    // title-case (vocab §3), and the middot came from the en template.
+    soloTitle: (m) => `${m}: ngày sinh, cung hoàng đạo và hồ sơ | KoreaPlus`,
     desc: (m, g) => `${m} của ${g}: ngày sinh đã xác minh, cung hoàng đạo, 12 con giáp và thông tin nhóm. Hồ sơ thành viên K-pop đã kiểm chứng.`,
     soloDesc: (m) => `${m}: ngày sinh đã xác minh, cung hoàng đạo, 12 con giáp và thông tin sự nghiệp. Hồ sơ K-pop đã kiểm chứng.`,
     lead: (m, g) => `${m} là thành viên của nhóm nhạc K-pop ${g}. Dưới đây là những thông tin công khai đã xác minh — ngày sinh, cung hoàng đạo và chi tiết về nhóm.`,
@@ -514,18 +659,28 @@ const T = {
     hSolo: '🎶 Nghệ sĩ',
     hFaq: '❓ Câu hỏi thường gặp',
     hMore: '👥 Thành viên khác',
-    fGroup: 'Nhóm', fAgency: 'Công ty chủ quản', fDebut: 'Nhóm debut', fBirthday: 'Ngày sinh', fSign: 'Cung hoàng đạo', fZodiac: '12 con giáp', fFandom: 'Fandom', fActDebut: 'Debut',
+    // «Nhóm debut» / «Debut» as a chip label with a date after it reads as the
+    // sentence fragment "the group debuts", not "group debut date" — Vietnamese
+    // needs the linking noun ngày.
+    fGroup: 'Nhóm', fAgency: 'Công ty chủ quản', fDebut: 'Ngày debut của nhóm', fBirthday: 'Ngày sinh', fSign: 'Cung hoàng đạo', fZodiac: '12 con giáp', fFandom: 'Fandom', fActDebut: 'Ngày debut',
     bornLine: (m, d) => `${m} sinh ngày ${d}.`,
     noBday: (m) => `Trang này chưa có ngày sinh công khai đã xác minh của ${m}. Các thông tin còn lại bên dưới đều đã được xác nhận.`,
-    signLine: (m, s, em) => `Theo ngày đó, cung hoàng đạo phương Tây (hệ nhiệt đới) của ${m} là <strong>${s}</strong> ${em}.`,
+    // "(hệ nhiệt đới)" is a literal rendering of "(tropical)", but in
+    // Vietnamese "nhiệt đới" only means the tropical climate belt — it reads as
+    // "the Western zodiac (tropical climate zone)". "phương Tây" already
+    // distinguishes it from the Chinese system, so the gloss is dropped.
+    signLine: (m, s, em) => `Theo ngày đó, cung hoàng đạo phương Tây của ${m} là <strong>${s}</strong> ${em}.`,
     // Vietnam's 4th branch is Mão (cat) where China's is the rabbit — same
     // year, different animal. Saying so is what keeps the localised name
     // honest, so a Mão birth carries the extra sentence and nothing else does.
     zodiacLine: (m, z, em) => `Theo năm sinh dương lịch, ${m} tuổi <strong>${z}</strong> ${em}.`
       + (z.startsWith('Mão') ? ' Ở Việt Nam, con giáp thứ tư là Mèo, còn ở Trung Quốc là Thỏ — cùng một năm, khác con vật.' : ''),
-    groupLine: (m, g, ag, debut) => `${m} là thành viên của <strong>${g}</strong>, thuộc công ty chủ quản ${ag}. ${g} debut vào ${debut}.`,
-    soloCareer: (m, ag, debut) => `${m} thuộc công ty chủ quản ${ag} và debut vào ${debut}.`,
-    hedge: 'Sinh gần Tết Nguyên đán — năm con giáp đổi vào Tết Nguyên đán chứ không phải ngày 1/1, nên con giáp có thể lệch một con tùy ngày âm lịch chính xác.',
+    // ISO dates are ruled out for Vietnamese prose (vocab §7); viDate() writes
+    // the same long form the birthday on this page uses, so one page holds one
+    // date format.
+    groupLine: (m, g, ag, debut) => `${m} là thành viên của <strong>${g}</strong>, thuộc công ty chủ quản ${ag}. ${g} debut vào ${viDate(debut)}.`,
+    soloCareer: (m, ag, debut) => `${m} thuộc công ty chủ quản ${ag} và debut vào ${viDate(debut)}.`,
+    hedge: 'Sinh gần Tết Nguyên đán — năm con giáp đổi vào Tết Nguyên đán (cuối tháng 1 đến giữa tháng 2), không phải ngày 1/1, nên con giáp có thể lệch một con tùy ngày âm lịch chính xác.',
     qBday: (m) => `Ngày sinh của ${m} là ngày nào?`,
     aBday: (m, d) => `${m} sinh ngày ${d}.`,
     aBdayNone: (m) => `Trang này không công bố ngày sinh đã xác minh của ${m}.`,
@@ -544,6 +699,9 @@ const T = {
     badge: 'โปรไฟล์ K-pop',
     h1: (m, g) => `${m} (${g}) — โปรไฟล์ วันเกิด และราศี`,
     title: (m, g) => `${m} วง ${g}: วันเกิด ราศี และโปรไฟล์ | KoreaPlus`,
+    // The contract bans the " · " separator outright for Thai — join with และ.
+    // It had survived from the en template into the 7 soloist titles.
+    soloTitle: (m) => `${m}: วันเกิดและราศี | KoreaPlus`,
     desc: (m, g) => `${m} จากวง ${g}: วันเกิดที่ตรวจสอบแล้ว ราศีแบบตะวันตก นักษัตรจีน และข้อมูลของวง โปรไฟล์สมาชิก K-pop ที่ตรวจสอบข้อเท็จจริงแล้ว`,
     soloDesc: (m) => `${m}: วันเกิดที่ตรวจสอบแล้ว ราศีแบบตะวันตก นักษัตรจีน และข้อมูลผลงาน โปรไฟล์ K-pop ที่ตรวจสอบข้อเท็จจริงแล้ว`,
     lead: (m, g) => `${m} เป็นสมาชิกวง K-pop ${g} ด้านล่างคือข้อเท็จจริงสาธารณะที่ตรวจสอบแล้ว — วันเกิด ราศี และรายละเอียดของวง`,
@@ -562,7 +720,7 @@ const T = {
     zodiacLine: (m, z, em) => `ตามปีเกิดสุริยคติ ${m} เกิดปี<strong>${z}</strong> ${em}`,
     groupLine: (m, g, ag, debut) => `${m} เป็นสมาชิกของ <strong>${g}</strong> ภายใต้สังกัด ${ag} และวง ${g} เดบิวต์เมื่อ ${debut}`,
     soloCareer: (m, ag, debut) => `${m} อยู่ภายใต้สังกัด ${ag} และเดบิวต์เมื่อ ${debut}`,
-    hedge: 'เกิดใกล้วันตรุษจีน — นักษัตรเปลี่ยนในวันตรุษจีน ไม่ใช่วันที่ 1 มกราคม ปีนักษัตรจึงอาจเลื่อนไปหนึ่งปีตามวันจันทรคติที่แน่นอน',
+    hedge: 'เกิดใกล้วันตรุษจีน — นักษัตรเปลี่ยนในวันตรุษจีน (ปลายเดือนมกราคมถึงกลางเดือนกุมภาพันธ์) ไม่ใช่วันที่ 1 มกราคม ปีนักษัตรจึงอาจเลื่อนไปหนึ่งปีตามวันจันทรคติที่แน่นอน',
     qBday: (m) => `${m} เกิดวันไหน?`,
     aBday: (m, d) => `${m} เกิดวันที่ ${d}`,
     aBdayNone: (m) => `หน้านี้ไม่ได้เผยแพร่วันเกิดที่ตรวจสอบแล้วของ ${m}`,
@@ -574,4 +732,4 @@ const T = {
   },
 };
 
-module.exports = { T, SIGN_NAMES, ANIMAL_NAMES, MONTH_NAMES };
+module.exports = { T, SIGN_NAMES, ANIMAL_NAMES, MONTH_NAMES, MONTH_NAMES_RU_NOM };

@@ -189,11 +189,25 @@ module.exports = {
     title: (y) => `إصدارات K-Pop لعام ${y} — كل الألبومات والأغاني المنفردة مرتّبة بالتاريخ | KoreaPlus`,
     // Arabic makes a counted noun agree five different ways, so every figure
     // here follows its noun instead of governing it: عدد الإصدارات 5 / 15 / 137.
-    desc: (y, n, a) => `كل ما صدر في K-Pop خلال عام ${y}: ألبومات وإصدارات EP وأغانٍ منفردة من كبار الفنانين، مرتّبة حسب التاريخ، مع صور الأغلفة وروابط إلى ملف كل فنان — عدد الإصدارات ${n} وعدد الفنانين ${a}.`,
+    // Counts sit at the FRONT: Arabic runs ~40 characters longer than the
+    // English source, and a trailing figure is exactly what Google truncates
+    // out of the snippet. Colon + Arabic comma make it a statement, not a
+    // noun fragment.
+    desc: (y, n, a) => `كل ما صدر في K-Pop خلال عام ${y}: عدد الإصدارات ${n}، وعدد الفنانين ${a} — ألبومات وإصدارات EP وأغانٍ منفردة مرتّبة حسب التاريخ، مع صور الأغلفة وروابط إلى ملف كل فنان.`,
     lead: (y, n, a) => `في عام ${y} بلغ عدد الإصدارات ${n}، وعدد الفنانين الذين أصدروها ${a}. وهي مرتّبة أدناه حسب التاريخ من الأحدث إلى الأقدم، لترى كيف مضى العام فعليًا لا كما تتذكّره قوائم نهاية العام.`,
     scope: 'المصدر: كتالوج Apple Music للفنانين الذين تتابعهم KoreaPlus. شامل لهؤلاء الفنانين، لكنه لا يشمل كل إصدارات K-Pop.',
     monthH: (m, y) => `${m} ${y}`, colDate: 'تاريخ الإصدار', colArtist: 'الفنان', colTitle: 'الإصدار',
-    statsH: 'العام في أرقام', statReleases: 'من الإصدارات', statActs: 'من الفنانين', statBusiest: 'الشهر الأكثر نشاطًا',
+    // statBusiest is emitted LABEL-first ("<label> <b>أكتوبر</b>"), so it takes
+    // the colon that turns it from a run-on into a label/value pair.
+    // statReleases/statActs are emitted NUMBER-first ("<b>156</b> <label>"),
+    // which Arabic cannot make agree: the covered years hit 7 and 8 acts
+    // (3–10 → plural genitive) as well as 26 (11–99 → singular accusative),
+    // and 107 releases as well as 156. «من + definite plural» is the one form
+    // that stays grammatical across every band, because it lifts the noun out
+    // of the numeral's government entirely. The idiomatic noun-first phrasing
+    // used everywhere else in this file (عدد الإصدارات: 156) needs the emit
+    // order flipped in modules/seo-kpop-year.cjs first.
+    statsH: 'العام في أرقام', statReleases: 'من الإصدارات', statActs: 'من الفنانين', statBusiest: 'الشهر الأكثر نشاطًا:',
     topH: (y) => `الأكثر إصدارًا في عام ${y}`, topCol: 'عدد الإصدارات',
     yearsH: 'سنوات أخرى', faqH: '❓ أسئلة شائعة',
     q1: (y) => `كم عدد إصدارات K-Pop في عام ${y}؟`,
@@ -203,7 +217,7 @@ module.exports = {
     q3: 'هل هذه كل إصدارات K-Pop في تلك السنة؟',
     a3: 'لا. الصفحة تغطي الفنانين الذين تتابعهم KoreaPlus اعتمادًا على كتالوج متجر واحد، لذا لا تظهر فيها الفرق الأصغر ولا الإصدارات غير الموجودة في ذلك الكتالوج.',
     relH: 'تابع الاستكشاف', browseLabel: '📚 تصفَّح الكل', hubLabel: '🎤 مركز K-Pop',
-    badge: 'أرشيف الإصدارات', asOf: (d) => `بيانات الإصدار من Apple Music · حتى ${d}`,
+    badge: 'أرشيف الإصدارات', asOf: (d) => `بيانات الإصدارات من Apple Music · حتى ${d}`,
   },
   hi: {
     h1: (y) => `${y} में K-pop के सभी रिलीज़`,
@@ -221,7 +235,10 @@ module.exports = {
     a2: (t, ar, d) => `${ar} का ${t}, ${d} को।`,
     q3: 'क्या उस साल के सारे K-pop रिलीज़ यही हैं?',
     a3: 'नहीं। इसमें सिर्फ़ वे आर्टिस्ट हैं जिन्हें KoreaPlus ट्रैक करता है, और डेटा एक ही स्टोरफ्रंट के कैटलॉग से आता है — इसलिए छोटे आर्टिस्ट और उस कैटलॉग में मौजूद न होने वाले रिलीज़ इस लिस्ट में नहीं हैं।',
-    relH: 'और एक्सप्लोर करें', browseLabel: '📚 सभी K-Pop गाइड', hubLabel: '🎤 K-Pop हब',
+    // browseLabel matches the browse hub's own label (built by build-seo.cjs,
+    // which spells the brand "K-Pop"); every string generated *here* uses the
+    // module spelling "K-pop", hubLabel included.
+    relH: 'और एक्सप्लोर करें', browseLabel: '📚 सभी K-Pop गाइड', hubLabel: '🎤 K-pop हब',
     badge: 'रिलीज़ आर्काइव', asOf: (d) => `Apple Music का रिलीज़ डेटा · ${d} तक`,
   },
   ru: {
@@ -234,7 +251,16 @@ module.exports = {
     scope: 'Источник: каталог Apple Music по артистам, за которыми следит KoreaPlus. Для этих артистов данные исчерпывающие, но это не весь K-pop.',
     // The month array is nominative lower-case for prose; a heading is sentence case.
     monthH: (m, y) => `${m.charAt(0).toUpperCase()}${m.slice(1)} ${y}`, colDate: 'Дата', colArtist: 'Артист', colTitle: 'Релиз',
-    statsH: 'Год в цифрах', statReleases: 'релизов', statActs: 'артистов', statBusiest: 'Самый активный месяц',
+    // statBusiest is emitted LABEL-first, so it carries the dash Russian needs
+    // between a subject and a predicate nominative — without it «Самый
+    // активный месяц ноябрь» parses as one noun phrase, not label + value.
+    // statReleases/statActs are emitted NUMBER-first and are plain strings, so
+    // they cannot take the three CLDR forms: the covered years include 22 and
+    // 43 releases (few → «релиза») alongside 150/156 (many → «релизов»), and 22
+    // acts (few) alongside 27 (many). The correct fix is the noun-first shape
+    // the lead already uses («релизов — 150, артистов — 27»), which needs the
+    // emit order flipped in modules/seo-kpop-year.cjs.
+    statsH: 'Год в цифрах', statReleases: 'релизов', statActs: 'артистов', statBusiest: 'Самый активный месяц —',
     topH: (y) => `Кто больше всех выпускал в ${y} году`, topCol: 'Релизов',
     yearsH: 'Другие годы', faqH: '❓ Частые вопросы',
     q1: (y) => `Сколько релизов K-pop вышло в ${y} году?`,
@@ -263,14 +289,19 @@ module.exports = {
     a2: (t, ar, d) => `${t} của ${ar}, phát hành ${d}.`,
     q3: 'Đây có phải toàn bộ bản phát hành K-pop của năm đó không?',
     a3: 'Không. Trang này chỉ gồm các nghệ sĩ mà KoreaPlus theo dõi và dựa trên danh mục của một cửa hàng nhạc, nên những nghệ sĩ nhỏ hơn và các bản phát hành không có trong đó sẽ không xuất hiện.',
-    relH: 'Khám phá tiếp', browseLabel: '📚 Xem toàn bộ', hubLabel: '🎤 Hub K-pop',
+    // "Trung tâm K-pop" is the one wording for this destination across every
+    // vi generator — "Hub K-pop" left the English word untranslated.
+    relH: 'Khám phá tiếp', browseLabel: '📚 Xem toàn bộ', hubLabel: '🎤 Trung tâm K-pop',
     badge: 'Kho bản phát hành', asOf: (d) => `Dữ liệu phát hành từ Apple Music · tính đến ${d}`,
   },
   th: {
     h1: (y) => `ผลงาน K-pop ที่ปล่อยในปี ${y}`,
     title: (y) => `ผลงาน K-pop ที่ปล่อยในปี ${y} — อัลบั้มและซิงเกิลทั้งหมด เรียงตามวันที่ | KoreaPlus`,
     desc: (y, n, a) => `ผลงาน K-pop ทั้งหมดของปี ${y} — อัลบั้ม EP และซิงเกิล ${n} ชิ้น จากศิลปิน ${a} ราย เรียงตามวันที่ พร้อมภาพปกและลิงก์ไปยังโปรไฟล์ของศิลปินแต่ละราย`,
-    lead: (y, n, a) => `ปี ${y} มีผลงานออกมา ${n} ชิ้น จากศิลปิน ${a} ราย ด้านล่างเรียงตามวันที่จากใหม่ไปเก่า คุณจึงเห็นว่าปีนั้นเดินไปอย่างไรจริง ๆ ไม่ใช่แบบที่บทสรุปส่งท้ายปีจดจำเอาไว้`,
+    // One string renders the 2019 page and the in-progress 2026 page, so it
+    // names the year instead of pointing at it: ปีนั้น ("that year") is distal
+    // and reads wrong on the year the visitor is standing in.
+    lead: (y, n, a) => `ปี ${y} มีผลงานออกมา ${n} ชิ้น จากศิลปิน ${a} ราย ด้านล่างเรียงตามวันที่จากใหม่ไปเก่า คุณจึงเห็นว่าปี ${y} เดินไปอย่างไรจริง ๆ ไม่ใช่แบบที่บทสรุปส่งท้ายปีจดจำเอาไว้`,
     scope: 'ที่มา: แคตตาล็อก Apple Music ของศิลปินที่ KoreaPlus ติดตาม ครบถ้วนเฉพาะศิลปินกลุ่มนี้ ไม่ใช่ทั้งหมดของวงการ K-pop',
     monthH: (m, y) => `${m} ${y}`, colDate: 'วันที่', colArtist: 'ศิลปิน', colTitle: 'ผลงาน',
     statsH: 'สรุปตัวเลขทั้งปี', statReleases: 'ผลงาน', statActs: 'ศิลปิน', statBusiest: 'เดือนที่คึกคักที่สุด',
@@ -280,9 +311,14 @@ module.exports = {
     a1: (y, n, a) => `นับเฉพาะศิลปิน ${a} รายที่ติดตามอยู่ที่นี่ ปี ${y} มีผลงานออกมา ${n} ชิ้น โดยนับอัลบั้ม EP และซิงเกิลแยกเป็นคนละชิ้น ตามที่ Apple Music จัดหมวดไว้`,
     q2: (y) => `ผลงาน K-pop ชิ้นแรกของปี ${y} คืออะไร?`,
     a2: (t, ar, d) => `${t} ของ ${ar} ปล่อยเมื่อ ${d}`,
-    q3: 'นี่คือผลงาน K-pop ทั้งหมดของปีนั้นหรือไม่?',
+    // q3 is a plain string (no year argument), so it must avoid ปีนั้น/ปีนี้
+    // entirely — both are wrong on half the cluster.
+    q3: 'หน้านี้รวมผลงาน K-pop ไว้ครบทั้งปีหรือไม่?',
     a3: 'ไม่ใช่ หน้านี้ครอบคลุมเฉพาะศิลปินที่ KoreaPlus ติดตาม และอ้างอิงจากแคตตาล็อกของร้านเพลงเพียงแห่งเดียว ศิลปินรายเล็กและผลงานที่ไม่มีอยู่ในแคตตาล็อกนั้นจึงไม่ปรากฏในรายการ',
     relH: 'สำรวจต่อ', browseLabel: '📚 ดูทั้งหมด', hubLabel: '🎤 ศูนย์รวม K-pop',
-    badge: 'คลังผลงาน', asOf: (d) => `ข้อมูลผลงานจาก Apple Music · ณ วันที่ ${d}`,
+    // No " · " — Thai does not take the middot separator ko/ja/zh use. Wording
+    // is identical to seo-kpop-media-l10n.js th.asOf so the discography table
+    // and the year page stamp the snapshot the same way.
+    badge: 'คลังผลงาน', asOf: (d) => `ข้อมูลการวางจำหน่ายจาก Apple Music ณ วันที่ ${d}`,
   },
 };

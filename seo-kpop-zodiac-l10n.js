@@ -338,10 +338,13 @@ const T = {
   // ru — sentence case in headings, «айдол» not «идол» (that is the religious
   // one), and every count goes through ruPlural.
   ru: {
-    hub: 'K-pop', dir: 'K-pop айдолы', signWord: 'знак зодиака',
-    title: s => `K-pop айдолы под знаком ${RU_SIGN_GEN[s.key]} ${s.emoji} — гид по знакам зодиака (2026)`,
-    metaDesc: (s, n) => `Кто из K-pop айдолов родился под знаком ${RU_SIGN_GEN[s.key]}? Знак ${s.name} (${s.emoji}): проверенный список — ${n} ${ruPlural(n, ['айдол', 'айдола', 'айдолов'])} с группой и днём рождения. Обновлено в 2026 году.`,
-    h1: s => `K-pop айдолы под знаком ${RU_SIGN_GEN[s.key]} ${s.emoji}`,
+    hub: 'K-pop', dir: 'Айдолы K-pop', signWord: 'знак зодиака',
+    // Russian does not stack an attributive noun in front: «K-pop айдолы» is a
+    // calque. Head noun first, modifier after — «айдолы K-pop», which is what
+    // the month pages and the rest of the ru cluster already say.
+    title: s => `Айдолы K-pop под знаком ${RU_SIGN_GEN[s.key]} ${s.emoji} — гид по знакам зодиака (2026)`,
+    metaDesc: (s, n) => `Кто из айдолов K-pop родился под знаком ${RU_SIGN_GEN[s.key]}? Знак ${s.name} (${s.emoji}): проверенный список — ${n} ${ruPlural(n, ['айдол', 'айдола', 'айдолов'])} с группой и днём рождения. Обновлено в 2026 году.`,
+    h1: s => `Айдолы K-pop под знаком ${RU_SIGN_GEN[s.key]} ${s.emoji}`,
     // «под этим знаком» stays attributive to the count phrase: a participle
     // («родившиеся») would break agreement at n = 1.
     lead: (s, n) => `Под знаком ${RU_SIGN_GEN[s.key]} (${s.emoji}) рождаются те, у кого в момент рождения Солнце находилось в этом знаке. Ниже — ${n} ${ruPlural(n, ['айдол', 'айдола', 'айдолов'])} из нашего списка под этим знаком: с группой и днём рождения, по порядку дат. Факты об айдолах взяты из проверенных профилей; черты характера — это популярный астрологический образ знака, а не утверждение о ком-то конкретном.`,
@@ -352,9 +355,9 @@ const T = {
     factN: n => `🎤 ${n} ${ruPlural(n, ['айдол', 'айдола', 'айдолов'])} в списке`, factGroups: g => `👥 из ${g} ${ruPlural(g, ['группы', 'групп', 'групп'])}`, factSign: s => `${s.emoji} ${s.name}`,
     astroNote: 'Знаки зодиака — популярная астрология, а не наука: это просто развлечение. Дни рождения и группы — проверенные факты.',
     faq: (s, n, ex) => [
-      [`Кто из K-pop айдолов родился под знаком ${RU_SIGN_GEN[s.key]}?`, `На этой странице — ${n} ${ruPlural(n, ['айдол', 'айдола', 'айдолов'])} из нашего списка под знаком ${RU_SIGN_GEN[s.key]} (${s.emoji})${ex.length ? `, например ${ex.join(', ')}` : ''}. В каждой строке — группа айдола и проверенная дата рождения.`],
+      [`Кто из айдолов K-pop родился под знаком ${RU_SIGN_GEN[s.key]}?`, `На этой странице — ${n} ${ruPlural(n, ['айдол', 'айдола', 'айдолов'])} из нашего списка под знаком ${RU_SIGN_GEN[s.key]} (${s.emoji})${ex.length ? `, например ${ex.join(', ')}` : ''}. В каждой строке — группа айдола и проверенная дата рождения.`],
       [`Какие даты у знака ${RU_SIGN_GEN[s.key]}?`, `В западной астрологии ${s.name} — это ${DATE_RANGES.ru[s.key]}. У всех, кто родился в этот промежуток, Солнце стоит в этом знаке.`],
-      [`Насколько точен список по знакам зодиака?`, `Дни рождения и группы — проверенные факты из профилей. Знак рассчитан по дате рождения на основе стандартных западных промежутков. Черты характера — это распространённый астрологический образ, он приведён для развлечения. И это наш список — это не весь K-pop.`],
+      [`Насколько точен список по знакам зодиака?`, `Дни рождения и группы — проверенные факты из профилей. Знак рассчитан по дате рождения на основе стандартных западных промежутков. Черты характера — это распространённый астрологический образ, он приведён для развлечения. И это наш список — не весь K-pop.`],
     ],
   },
   // vi — no grammatical number, so one count form only ("47 idol"); "idol"
@@ -362,17 +365,23 @@ const T = {
   vi: {
     hub: 'K-pop', dir: 'Idol K-pop', signWord: 'cung hoàng đạo',
     title: s => `Idol K-pop cung ${s.name} ${s.emoji} — Cẩm nang hoàng đạo (2026)`,
-    metaDesc: (s, n) => `Idol K-pop nào thuộc cung ${s.name}? Danh sách đã xác minh ${n} idol sinh vào cung ${s.name} (${s.emoji}), kèm nhóm nhạc và ngày sinh. Cập nhật 2026.`,
+    // "Danh sách đã xác minh N idol" reads as "the list HAS VERIFIED N idols";
+    // "gồm" restores "a verified list OF N idols". And "sinh vào" takes a time
+    // expression in Vietnamese, not a sign — a sign takes "thuộc cung".
+    metaDesc: (s, n) => `Idol K-pop nào thuộc cung ${s.name}? Danh sách đã xác minh gồm ${n} idol thuộc cung ${s.name} (${s.emoji}), kèm nhóm nhạc và ngày sinh. Cập nhật 2026.`,
     h1: s => `Idol K-pop cung ${s.name} ${s.emoji}`,
-    lead: (s, n) => `Cung ${s.name} (${s.emoji}) là những người sinh ra khi Mặt Trời đi qua cung này. Dưới đây là ${n} idol K-pop trong danh sách của chúng tôi thuộc cung ${s.name}, kèm nhóm nhạc và ngày sinh, sắp xếp theo ngày. Thông tin idol lấy từ hồ sơ đã xác minh; phần tính cách là hình mẫu chiêm tinh học phổ thông của cung ${s.name}, không phải nhận định về bất kỳ ai.`,
+    // "Cung X là những người sinh ra khi…" equates a sign with a group of
+    // people; "là" asserts identity in Vietnamese, so the relation needs
+    // "là cung hoàng đạo của".
+    lead: (s, n) => `${s.name} (${s.emoji}) là cung hoàng đạo của những người sinh ra khi Mặt Trời đi qua cung này. Dưới đây là ${n} idol K-pop trong danh sách của chúng tôi thuộc cung ${s.name}, kèm nhóm nhạc và ngày sinh, sắp xếp theo ngày. Thông tin idol lấy từ hồ sơ đã xác minh; phần tính cách là hình mẫu chiêm tinh học phổ thông của cung ${s.name}, không phải nhận định về bất kỳ ai.`,
     traitsLabel: 'Tính cách phổ biến', datesLabel: 'Khoảng ngày',
-    memberH: s => `Idol sinh vào cung ${s.name} ${s.emoji}`,
+    memberH: s => `Idol thuộc cung ${s.name} ${s.emoji}`,
     colIdol: 'Idol', colGroup: 'Nhóm nhạc', colBday: 'Ngày sinh',
     factsH: 'Thông tin nhanh',
     factN: n => `🎤 ${n} idol trong danh sách`, factGroups: g => `👥 từ ${g} nhóm`, factSign: s => `${s.emoji} ${s.name}`,
     astroNote: 'Cung hoàng đạo là chiêm tinh học phổ thông, không phải khoa học — chia sẻ ở đây cho vui. Ngày sinh và nhóm nhạc là dữ liệu đã xác minh.',
     faq: (s, n, ex) => [
-      [`Idol K-pop nào thuộc cung ${s.name}?`, `Trang này liệt kê ${n} idol K-pop sinh vào cung ${s.name} (${s.emoji})${ex.length ? `, trong đó có ${ex.join(', ')}` : ''}. Mỗi dòng cho biết nhóm nhạc và ngày sinh đã xác minh của idol.`],
+      [`Idol K-pop nào thuộc cung ${s.name}?`, `Trang này liệt kê ${n} idol K-pop thuộc cung ${s.name} (${s.emoji})${ex.length ? `, trong đó có ${ex.join(', ')}` : ''}. Mỗi dòng cho biết nhóm nhạc và ngày sinh đã xác minh của idol.`],
       [`Cung ${s.name} từ ngày nào đến ngày nào?`, `Trong chiêm tinh phương Tây, cung ${s.name} kéo dài ${DATE_RANGES.vi[s.key]}. Ai sinh trong khoảng đó thì có Mặt Trời ở cung ${s.name}.`],
       [`Danh sách theo cung hoàng đạo có chính xác không?`, `Ngày sinh và nhóm nhạc là dữ liệu đã xác minh từ hồ sơ. Cung hoàng đạo được tính từ ngày sinh theo khoảng ngày chuẩn của phương Tây. Phần tính cách là hình mẫu chiêm tinh quen thuộc, chỉ để giải trí. Đây là danh sách của chúng tôi, không phải toàn bộ K-pop.`],
     ],

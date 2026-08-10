@@ -29,6 +29,7 @@
 const T = require('../seo-kpop-year-l10n.js');
 const { MONTH_NAMES } = require('../seo-kpop-bmonth-l10n.js');
 const media = require('./seo-kpop-media.cjs');
+const chrome = require('./seo-kpop-chrome.cjs');
 
 // The K-pop channel rolls out locales ahead of the rest of the site, so it has
 // its own list. Tolerate its absence: this cluster must keep building while
@@ -127,12 +128,33 @@ module.exports = function (ctx) {
       if (mi >= 0 && mi < 12) perMonth[mi] += 1;
     }
     const busiest = perMonth.indexOf(Math.max(...perMonth));
+    // "<b>n</b> label" is English number shape. Arabic needs the noun out of the
+    // numeral's government (عدد الإصدارات: 156), Thai needs a classifier after
+    // the numeral (ผลงาน 156 ชิ้น), Russian needs a dash before the value. So a
+    // stat string may instead be a template carrying {n} (or {m} for the month)
+    // and, where the noun inflects, a CLDR plural object — the locale then owns
+    // the whole phrase. Bundles that have not adopted that keep the old layout.
+    // A sentinel marks where the value goes, so the <b> wrapper survives esc()
+    // without the escaper ever seeing markup and without a fragile digit search.
+    const SLOT = '\u0000';
+    const statBox = (tpl, value, isNumber) => {
+      const filled = isNumber
+        ? chrome.countTemplate(tpl, lang, value, { n: SLOT })
+        : chrome.countTemplate(tpl, lang, 1, { m: SLOT });
+      if (filled != null) {
+        const html = esc(filled).split(SLOT).join(`<b>${esc(String(value))}</b>`);
+        return `<span class="kp-statbox">${html}</span>`;
+      }
+      return isNumber
+        ? `<span class="kp-statbox"><b>${esc(String(value))}</b> ${esc(tpl)}</span>`
+        // Label first here: the month is a value, not a unit the number counts,
+        // so the "<b>n</b> unit" shape of the boxes above reads as a broken phrase.
+        : `<span class="kp-statbox">${esc(tpl)} <b>${esc(String(value))}</b></span>`;
+    };
     body += `<h2>${esc(t.statsH)}</h2><div class="kp-stats">`
-      + `<span class="kp-statbox"><b>${out.length}</b> ${esc(t.statReleases)}</span>`
-      + `<span class="kp-statbox"><b>${acts.size}</b> ${esc(t.statActs)}</span>`
-      // Label first here: the month is a value, not a unit the number counts, so
-      // the "<b>n</b> unit" shape of the boxes above reads as a broken phrase.
-      + `<span class="kp-statbox">${esc(t.statBusiest)} <b>${esc(mN[busiest])}</b></span>`
+      + statBox(t.statReleases, out.length, true)
+      + statBox(t.statActs, acts.size, true)
+      + statBox(t.statBusiest, mN[busiest], false)
       + `</div>`;
 
     // ── Releases grouped by month, newest month first ───────────────────────
@@ -152,7 +174,9 @@ module.exports = function (ctx) {
           : '';
         body += `<tr${upcoming ? ' class="is-upcoming"' : ''}>`
           + `<td>${esc(r.date)}${upcoming ? ` <span class="seo-badge kp-soon">${esc(mt.upcoming)}</span>` : ''}</td>`
-          + `<td>${r.artist.emoji || '🎤'} <a href="${dir(lang)}kpop/${esc(r.artist.id)}-profile.html">${esc(artistName(r.artist, lang))}</a></td>`
+          // Profile pages exist only in the languages kpop-history covers; the
+          // artist is plain text elsewhere rather than a 404 or a jump to English.
+          + `<td>${r.artist.emoji || '🎤'} ${chrome.profileLink(r.artist.id, lang, dir(lang), artistName(r.artist, lang), esc)}</td>`
           + `<td class="kp-disc-t">${art}<span>${esc(r.title)}${r.badge ? ` <span class="seo-badge">${esc(r.badge)}</span>` : ''}</span></td>`
           + `</tr>`;
       }
@@ -170,7 +194,7 @@ module.exports = function (ctx) {
       top.forEach(([id, n], i) => {
         const a = byId[id]; if (!a) return;
         body += `<tr><td>${i + 1}</td>`
-          + `<td>${a.emoji || '🎤'} <a href="${dir(lang)}kpop/${esc(id)}-profile.html">${esc(artistName(a, lang))}</a></td>`
+          + `<td>${a.emoji || '🎤'} ${chrome.profileLink(id, lang, dir(lang), artistName(a, lang), esc)}</td>`
           + `<td>${n}</td></tr>`;
       });
       body += `</tbody></table>`;
@@ -211,7 +235,9 @@ module.exports = function (ctx) {
     // ItemList mirrors the table, so it carries the announced titles too — an
     // entry is a name and a profile link, and claims nothing about availability.
     const il = ld.itemListLD(
-      rows.slice(0, 60).map(r => ({ name: `${r.title} — ${artistName(r.artist, lang)}`, url: `${BASEP}${dir(lang)}kpop/${r.artist.id}-profile.html` })),
+      // url omitted, not faked, where the profile page does not exist in this
+      // language: a ListItem url is an assertion, and this one would be a 404.
+      rows.slice(0, 60).map(r => ({ name: `${r.title} — ${artistName(r.artist, lang)}`, url: chrome.profileUrl(r.artist.id, lang, BASEP, dir(lang)) })),
       { name: h1, description: t.desc(year, out.length, acts.size) }
     );
     if (il) schemas.push(il);
