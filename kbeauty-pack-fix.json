@@ -1,0 +1,725 @@
+{
+  "_readme": "Diagnostic cluster: 'my skin is doing X'. The reader already owns the product and wants to know what is happening and what to change. Same contract as the rest of the library — cosmetic structure-function wording, hedged claims, no invented statistics, no medical advice, explicit deferral to a clinician wherever the topic touches medicine.",
+  "fix": [
+    {
+      "slug": "why-skincare-pills-and-rolls-off",
+      "title": "Why Your Skincare Pills and Rolls Off",
+      "h1": "Why your skincare pills, and how to stop it happening",
+      "qa": "Pilling is friction, not your skin rejecting anything. Film-forming ingredients — silicones, gums, high-molecular-weight hyaluronic acid, various polymers and the resins in sunscreen — sit on the surface rather than sinking in, and roll into tiny threads when a later layer or your fingertips drag across them. Fewer layers, less product per layer, and pressing instead of rubbing fixes the large majority of cases.",
+      "sections": [
+        {
+          "h": "What is actually rolling off your face",
+          "body": "Those little grey-white worms are almost never dead skin, whatever the internet says. They are the product itself: a film former that has partially dried, then been sheared by a second film former arriving on top of it. Korean routines are unusually prone to this because layering is the whole idea, and because texture-enhancing polymers are cheap, pleasant and everywhere. Korean reviewers call it 밀림 (millim), literally pushing or shoving, which is a more accurate description than anything in English. Nothing has gone wrong with your skin. Something has gone wrong with the stack."
+        },
+        {
+          "h": "The ingredients that most often cause it",
+          "body": "Look for carbomer, xanthan gum, cellulose gums, sodium polyacrylate, PEG compounds, dimethicone and its heavier cousins, and high-molecular-weight sodium hyaluronate. Sunscreens are frequent offenders because the film that gives you protection is by definition designed to stay on the surface. Sheet mask essences and thick hydrating toners full of gums are another common trigger. None of these is a bad ingredient. They simply do not all get along, and Korean shoppers have a word for exactly this problem: 화장품 궁합 (hwajangpum gunghap), the compatibility between two products."
+        },
+        {
+          "h": "What to change, in order",
+          "body": "Cut the number of layers before you cut any single product. Three well-chosen steps pill far less than seven thin ones. Use less of each thing — most people apply toner and essence far more heavily than needed. Press products in with flat palms rather than rubbing in circles. Give each layer thirty seconds or so to settle before the next, and give sunscreen longer than that. If pilling only starts when one specific product enters the sequence, move it earlier, move it later, or accept that it does not belong in this routine."
+        },
+        {
+          "h": "What pilling does not tell you",
+          "body": "It says nothing about whether a product is working, and nothing about whether your skin is absorbing anything. Absorption is not the goal for most of what you apply — a moisturiser is meant to sit at the surface, and a sunscreen absolutely must. Pilling also does not mean a product is badly made. Some of the most pleasant single-use textures in Korean skincare are heavy on gums, and they behave impeccably alone. The failure is combinatorial. Test products in isolation before you write any of them off."
+        }
+      ]
+    },
+    {
+      "slug": "sunscreen-white-cast",
+      "title": "Sunscreen White Cast: Why It Happens",
+      "h1": "White cast: why your sunscreen makes you look grey, and what to change",
+      "qa": "White cast comes from the mineral UV filters zinc oxide and titanium dioxide, which sit on the skin as visible particles and scatter light. The more of them a formula carries, and the deeper your skin tone, the more obvious it is. Switching to a formula built on modern organic filters — what Korean shoppers call 유기자차 (yugijacha) — is the reliable fix. Applying less is not a fix, because it costs you protection.",
+      "sections": [
+        {
+          "h": "The cast is the filter, not the formula's fault",
+          "body": "Zinc oxide and titanium dioxide protect by sitting on the surface as fine particles. Those particles scatter visible light as well as ultraviolet, which is what you see in the mirror and what Korean labels and reviews call 백탁 (baektak). Formulators can reduce the effect with smaller particle sizes, dispersion aids and tinting, but they cannot abolish it without removing the filter. Any product marketed as a purely mineral sunscreen with genuinely no cast at high protection levels is making a claim worth reading sceptically."
+        },
+        {
+          "h": "Why Korean sunscreens often have less of it",
+          "body": "Korea approves a set of modern organic filters that are unavailable or only recently available in some other markets, including several that give strong long-wave UVA coverage in light textures. Because those filters dissolve rather than sit as particles, they leave far less visible residue. This is the concrete reason a Korean sunscreen at a comparable protection level can disappear where a mineral formula from elsewhere does not. Korean shoppers sort products into 무기자차 (mugijacha) for mineral, 유기자차 for organic and 혼합자차 (honhapjacha) for hybrid, and the vocabulary is genuinely useful when shopping."
+        },
+        {
+          "h": "Fixes that keep your protection intact",
+          "body": "Switch filter systems first: an organic or hybrid formula is the single most effective change. Tinted versions containing iron oxides can neutralise the greyness, though only if the shade genuinely matches you. Warming the product between your fingers before pressing it on helps a little. Give it several minutes to settle before judging, because many formulas look worse wet than dry. What does not work is applying a thin layer to hide the cast — protection falls off sharply below the amount used to test the product, so you would be trading a visible problem for an invisible one."
+        },
+        {
+          "h": "When mineral is still worth the compromise",
+          "body": "Some people find organic filters uncomfortable, and some prefer minerals for reasons of their own. That is a legitimate choice. If you are staying mineral, look for formulas with a lower total mineral load paired with a tint, accept the cast on days it does not matter, and consider setting with a powder that matches your tone. If a specific sunscreen leaves your skin visibly irritated rather than merely pale, that is a different problem and worth raising with a doctor rather than solving by trial and error."
+        }
+      ]
+    },
+    {
+      "slug": "sunscreen-stinging-eyes",
+      "title": "Why Sunscreen Stings Your Eyes",
+      "h1": "Sunscreen that stings your eyes: what is likely happening and what to try",
+      "qa": "Sunscreen migrates. Sweat, sebum and facial movement carry a thin film of product toward the eye, where emulsifiers and dissolved filters make contact with a very sensitive surface. Which formulas sting varies enormously between people, and the evidence explaining exactly why is thinner than the confident advice online suggests. Stick formats around the eye area and a lighter hand along the lash line help many people, but persistent stinging deserves a doctor's opinion rather than more experimenting.",
+      "sections": [
+        {
+          "h": "The likely mechanism, honestly hedged",
+          "body": "The usual explanation is migration: a sunscreen film thins with heat and sweat, creeps along the skin, and reaches the eye margin, where surfactants and solubilised UV filters irritate the ocular surface. It is a plausible account and consistent with the fact that stinging tends to arrive minutes to hours after application rather than immediately. What is not well established is why one person reacts to a formula another wears daily without noticing. Anyone telling you a single ingredient category is definitively responsible is overstating what is known. Korean reviews describe the sensation as 눈시림 (nunsirim)."
+        },
+        {
+          "h": "Patterns worth testing on yourself",
+          "body": "Many people find stick and balm formats gentler around the eye, because a waxy base migrates less than a fluid one. Some find mineral-dominant formulas easier, others the opposite. Alcohol-heavy quick-dry textures, common in Korean sun fluids, sting some wearers more. Formulas built for the body sometimes behave worse on the face. Try one variable at a time rather than replacing your whole routine at once, and note the weather — a sunscreen that behaves in October can misbehave in July on the same face."
+        },
+        {
+          "h": "Application changes that reduce it",
+          "body": "Keep sunscreen a few millimetres clear of the lash line and rely on sunglasses and a brimmed hat to cover the gap, which they do well. Let the product set fully before you go out into heat. Blot rather than wipe if you sweat, since wiping drags product across the eye. Apply eye cream first so the sunscreen is not the layer sitting directly against thin skin. Reapply with a stick or a cushion rather than fingers, which lets you place product with more control."
+        },
+        {
+          "h": "The line where this stops being a formula problem",
+          "body": "Do not respond to stinging by abandoning sunscreen. Sun protection is one of the few interventions in this whole field with strong evidence behind it, and going without is a worse trade than any discomfort. If stinging is severe, if your eyes stay red or watery afterwards, if vision is affected, or if it happens with every product you try, that is a conversation for a doctor or an optometrist. Dry eye, blepharitis and contact allergy all present this way and none of them is diagnosable from a product review."
+        }
+      ]
+    },
+    {
+      "slug": "sunscreen-pilling-under-makeup",
+      "title": "Sunscreen Pilling Under Makeup",
+      "h1": "Sunscreen pilling under makeup: the layer clash and how to break it",
+      "qa": "Sunscreen has to form a continuous film to protect you, which is exactly what makes it fragile under a second film. Pilling under foundation is usually a base mismatch — a silicone primer or foundation dragging across a water-based sunscreen, or the reverse — combined with not enough drying time and too much product. Match the bases, use less, wait longer, and stipple rather than sweep.",
+      "sections": [
+        {
+          "h": "Why sunscreen is the layer that pills",
+          "body": "Every sunscreen is a film-forming product by design. The filters have to be held in an even sheet across the skin or the protection you paid for does not exist. That film is the most disruptable layer in your routine, and foundation applied with a sponge or brush is the most mechanically aggressive thing you will do to your face all morning. So sunscreen pills more than anything else, and it is not evidence that you bought a bad one."
+        },
+        {
+          "h": "Base mismatch is the most common cause",
+          "body": "Water-based or gel sunscreens and silicone-heavy primers and foundations tend to repel each other, and the visible result is rolling. Look at the top of your ingredient lists. If your sunscreen leads with water and gums and your foundation leads with dimethicone or cyclopentasiloxane, that pairing is a likely culprit. Matching them — silicone over silicone, water-based over water-based — resolves a surprising number of cases without changing brands. This is the same 화장품 궁합 (hwajangpum gunghap) compatibility question that governs the rest of a layered routine."
+        },
+        {
+          "h": "Technique changes that usually work",
+          "body": "Give sunscreen a full few minutes to set before anything touches it, longer in humidity. Apply foundation by stippling or pressing rather than buffing in circles, which is what shears the film. Use a damp sponge in a patting motion rather than a dense brush. Cut back on the moisturiser underneath, since an over-hydrated base leaves the sunscreen nothing to grip. If you use a primer, consider skipping it — sunscreen already performs most of the smoothing that primers are sold for."
+        },
+        {
+          "h": "What not to do about it",
+          "body": "Do not apply less sunscreen to stop it pilling. Protection drops away quickly at thin application, and a smooth face with poor coverage is the worst outcome available. Do not swap to a foundation containing SPF and call it done — you would need to apply far more than anyone wears for the labelled protection to be meaningful. If nothing works, keep the sunscreen and change the makeup, or move to a cushion compact with its own filters as a reapplication layer over a sunscreen you already trust."
+        }
+      ]
+    },
+    {
+      "slug": "foundation-flashback-in-photos",
+      "title": "Foundation Flashback in Photos",
+      "h1": "Flashback: why your face looks white in flash photos",
+      "qa": "Flashback is a photographic artefact, not a skin problem. Titanium dioxide, zinc oxide and some silica-heavy powders bounce a camera flash straight back at the lens, so a face that looks perfect in daylight photographs as a pale mask. It comes from whatever mineral load sits highest on your face — usually powder or foundation rather than your sunscreen. Test with a flash before the event, not after it.",
+      "sections": [
+        {
+          "h": "What the camera is actually seeing",
+          "body": "A flash fires a burst of light at your face from almost the same axis as the lens. Mineral particles scatter that light efficiently and send a large share of it straight back, so the sensor records those areas as far brighter than the surrounding skin. In daylight the same particles are diffused by ambient light coming from every direction and you never notice. This is why flashback appears suddenly at a wedding or a night out and nowhere else, and why it is worse in dark rooms where the flash has to work hardest."
+        },
+        {
+          "h": "Which product is usually to blame",
+          "body": "Setting powders are the most frequent cause, particularly translucent ones built on silica and titanium dioxide, and they sit on top where the flash meets them first. Foundations and cushions containing mineral filters or heavy pigment loads are next. Sunscreen contributes, but usually less than people assume, because it is buried under two other layers. Korean cushion compacts often carry SPF, which makes them convenient and also makes them a plausible suspect if your flashback is centred on the areas you cushion most heavily."
+        },
+        {
+          "h": "How to test and fix it",
+          "body": "Photograph yourself with a flash in a dim room before the occasion, and repeat it after each change so you know which layer is responsible. Then reduce the mineral load where the light hits hardest: less powder overall, powder only where you shine, and a shade-matched powder rather than a translucent one. Choosing an organic-filter sunscreen instead of a mineral one helps if your sunscreen turns out to be the layer at fault. Blotting paper before photographs is safer than another dusting of powder."
+        },
+        {
+          "h": "The trade nobody should make",
+          "body": "Skipping sunscreen to photograph better is a genuinely bad exchange, and it is worth saying plainly because the advice circulates. You would be accepting cumulative ultraviolet exposure — one of the few things in skincare with unambiguous long-term consequences — to improve one evening's photographs. Change the powder instead. If you want both, a modern organic-filter Korean sunscreen under a shade-matched pressed powder gives you protection and a face that behaves under a flash."
+        }
+      ]
+    },
+    {
+      "slug": "product-suddenly-stings",
+      "title": "When a Product You Tolerated Starts Stinging",
+      "h1": "A product you have used for months suddenly stings: what changed",
+      "qa": "Almost always, the product did not change — your skin did, or the bottle aged. A compromised barrier, a cold dry season, one new active stacked onto three others, or a formula that has oxidised past its best will all turn a familiar product uncomfortable. Occasionally it is genuine sensitisation, an allergy developing to something you have used for years, and that is the one possibility that belongs with a doctor rather than a forum.",
+      "sections": [
+        {
+          "h": "Your barrier is the usual variable",
+          "body": "Skin's outer layer regulates what gets in and how much sensory nerve endings notice. When it is doing well, mild acids, ethanol and fragrance often pass unremarked. When it is not — after over-exfoliating, a course of a strong active, a cold snap, a long-haul flight, illness, or simply a stressful fortnight — the same ingredients register as stinging. Korean copy talks about 피부장벽 (pibu jangbyeok), the skin barrier, to the point of cliché, but the underlying idea is sound and it explains most sudden-onset stinging."
+        },
+        {
+          "h": "Check the bottle before you blame yourself",
+          "body": "Products age. Antioxidants oxidise, oils go rancid, preservative systems weaken once air and fingers have been introduced, and a formula stored on a sunny windowsill or in a steamy bathroom degrades faster than the packaging date suggests. Look for a change in colour, in smell or in how it spreads. Check the period-after-opening symbol — the small jar icon with a number and the letter M. A vitamin C serum that has turned amber, or a facial oil that smells faintly like old nuts, has told you what you need to know."
+        },
+        {
+          "h": "Stacking is invisible until it is not",
+          "body": "People rarely add one active. They add a new toner with a little acid, then an ampoule with niacinamide, then a retinoid twice weekly, and each addition seemed minor. The cumulative load crosses a threshold and the oldest, blandest product in the routine gets the blame because it is the one that started stinging. Strip back to a cleanser, one moisturiser and sunscreen for a fortnight before you conclude anything about any individual product. If the stinging resolves, you have your answer, and you can reintroduce slowly."
+        },
+        {
+          "h": "The version that is not a formulation problem",
+          "body": "Allergic contact dermatitis can develop to a substance you have used happily for years — that is how sensitisation works, and it is the reason long tolerance proves nothing. It typically shows as itching rather than pure stinging, often appears twelve to seventy-two hours after contact, and can spread past where you applied the product. Nobody can distinguish that from ordinary irritation by reading a label, including us. Patch testing carried out by a dermatologist is the only way to identify a specific allergen, and it is worth doing rather than guessing."
+        }
+      ]
+    },
+    {
+      "slug": "burning-vs-tingling-when-to-stop",
+      "title": "Burning vs Tingling: Which Means Stop",
+      "h1": "Burning or tingling: how to tell which sensation means wash it off",
+      "qa": "Tingling that arrives quickly, stays mild and fades within a couple of minutes is usually a sensory effect of ethanol, menthol or a low-pH acid, and it is not, by itself, a warning. Burning that builds rather than fades, spreads beyond where you applied the product, or comes with swelling, hives or blistering means rinse immediately with cool water. Anything involving swelling of the lips or eyes, or difficulty breathing, is an emergency and needs urgent medical help.",
+      "sections": [
+        {
+          "h": "What tingling usually is",
+          "body": "Several common ingredients stimulate sensory nerve endings without causing harm at the levels used. Ethanol evaporates and cools. Menthol and peppermint act directly on cold receptors. Low-pH exfoliating acids produce a brief prickle as they contact skin. Witch hazel and some botanical extracts do something similar. The industry has quietly encouraged people to read this as efficacy, which it is not — the sensation and the result are unrelated. A product that tingles is not working harder. It is merely talking to your nerves."
+        },
+        {
+          "h": "The shape of a sensation matters more than its intensity",
+          "body": "Track the curve rather than the peak. Tingling that starts within seconds, plateaus, then declines over one to three minutes is behaving normally. Discomfort that starts mild and climbs steadily over five, ten, fifteen minutes is behaving badly, and that pattern is the one worth acting on. So is discomfort that appears on the second or third use having been absent on the first, and discomfort that outlasts rinsing. Direction of travel tells you far more than a rating out of ten."
+        },
+        {
+          "h": "Rinse now, without deliberating",
+          "body": "Wash the product off with cool water and a bland cleanser if you see hives or welts, if skin swells, if it blisters or weeps, if the sensation spreads to areas you did not treat, if it is genuinely painful rather than uncomfortable, or if it persists after rinsing. Follow with nothing but a plain moisturiser. Do not apply a soothing serum, a sheet mask or anything else with actives in it to a face that has just reacted — you would be adding variables to a situation you do not yet understand."
+        },
+        {
+          "h": "Where this stops being a skincare question",
+          "body": "Swelling of the lips, tongue or eyelids, difficulty breathing, dizziness or a rash spreading over the body are not cosmetic events and this page is not the right source for them. Seek urgent medical care. Short of that, any reaction that leaves marks, lasts more than a day or two, or repeats with unrelated products is worth taking to a doctor, who can consider contact dermatitis and arrange proper patch testing. Photograph the reaction and bring the packaging with you — the ingredient list is genuinely useful to them."
+        }
+      ]
+    },
+    {
+      "slug": "new-product-breaking-me-out",
+      "title": "A New Product Is Breaking You Out",
+      "h1": "New product, new breakouts: purging, reaction, or coincidence",
+      "qa": "Purging is only a plausible explanation for products that accelerate skin cell turnover — retinoids, AHAs, BHAs and similar. Everything else that breaks you out is breaking you out. The clearest signal is location: spots appearing where you habitually break out, on a turnover-accelerating product, may be purging; new bumps in areas that are normally clear point to the product itself. Stop, wait, and reintroduce one thing at a time.",
+      "sections": [
+        {
+          "h": "The purging concept, and its limits",
+          "body": "The idea is that faster turnover brings existing microcomedones to the surface sooner, compressing weeks of ordinary breakouts into a shorter, uglier window. It is mechanistically reasonable for retinoids and exfoliating acids. It is not a general property of skincare, and it has been stretched into a marketing shield for products that simply do not suit people. The four-to-six week timeframe repeated everywhere is a rule of thumb that circulated its way into fact, not a firmly established figure. Treat it as a rough expectation, not a deadline you owe a product."
+        },
+        {
+          "h": "Read the map, not the calendar",
+          "body": "Spend a moment identifying where you normally break out — for most people that is a stable pattern. Purging tends to appear in those same zones, arrive quickly, and resolve quickly per spot. A reaction tends to show up somewhere new: along the jaw when you have always broken out on the forehead, or in a clean band exactly where you applied a rich cream. Small uniform bumps appearing in a patch, rather than individual inflamed spots, are especially unlikely to be purging."
+        },
+        {
+          "h": "Comedogenicity ratings deserve less trust than they get",
+          "body": "The comedogenic ratings circulated in charts online derive largely from an old rabbit-ear assay whose relevance to human facial skin is limited, and they rate single ingredients rather than finished formulas. Concentration, what an ingredient is combined with and how a product is used all change the outcome. Coconut oil scoring high on a chart tells you very little about a cream containing a small amount of it. Use those lists as a weak hint at most, and your own face as the actual evidence."
+        },
+        {
+          "h": "How to settle the question",
+          "body": "Stop the new product. Return to a cleanser, one plain moisturiser and sunscreen, and hold that for two to four weeks until your skin has a stable baseline. Photograph it in the same light every few days, because memory is unreliable about faces. Reintroduce the product alone, at reduced frequency, and watch. If the same pattern returns, you have your answer. If breakouts are cystic, painful, leaving marks, or persisting for months, that is dermatology, not product selection, and a doctor has options that no routine adjustment matches."
+        }
+      ]
+    },
+    {
+      "slug": "occlusive-clogging-pores",
+      "title": "When an Occlusive Clogs Your Pores",
+      "h1": "Slugging gone wrong: when an occlusive layer leaves you congested",
+      "qa": "Occlusives such as petrolatum are, on their own, among the least likely ingredients to block pores. What they do is amplify. Sealing an unwashed face, an active-heavy routine or a rich cream under an impermeable layer for eight hours magnifies whatever is underneath, and heat and sweat under that layer add to it. If slugging congests you, look at what you sealed in, not just what you sealed with.",
+      "sections": [
+        {
+          "h": "The occlusive is rarely the culprit",
+          "body": "Petrolatum is a large, inert molecule that sits on the surface and slows water loss. It is one of the most studied and least reactive materials in the whole category, widely used in medical settings for exactly that reason. Blaming it for congestion is usually blaming the wrong layer. The Korean and Western enthusiasm for 슬러깅 (seulleoging), slugging, has produced a lot of confident claims in both directions, and the honest position is that the occlusive itself does very little except stop things leaving."
+        },
+        {
+          "h": "What an occlusive amplifies",
+          "body": "Anything already on your face stays there, in contact, for the whole night. That includes residual sunscreen if your evening cleanse was casual, the emollients in a rich cream, sweat if your bedroom is warm, and whatever transfers from a pillowcase you have been sleeping on all week. It also holds actives against skin for far longer than intended, which is why sealing a retinoid or an acid under petrolatum is a reliable way to overshoot. The layer is neutral. The contents are not."
+        },
+        {
+          "h": "How to keep the benefit without the congestion",
+          "body": "Cleanse thoroughly first — a proper double cleanse, 이중세안 (ijung sean), on any day you wore sunscreen or makeup. Seal over something simple: a plain humectant or a light moisturiser, never a heavy occlusive over a heavy cream. Keep actives out of the sandwich entirely, or use them on separate nights. Apply a thin film, not a mask. Try it on two or three nights a week rather than every night, and skip it in humid weather when your skin is losing very little water anyway. Change pillowcases more often than feels necessary."
+        },
+        {
+          "h": "Who should probably not slug",
+          "body": "If you are prone to inflammatory acne or to small clustered bumps along the jaw and hairline, an eight-hour occlusive layer is a poor bet even done carefully. The same applies if you run oily in summer. Slugging suits dry, tight, flaky skin in cold dry air, and that is where the enthusiasm comes from. It is not a universal upgrade, and treating it as one is how a technique that helps one skin type acquires a reputation for congesting everyone else."
+        }
+      ]
+    },
+    {
+      "slug": "makeup-balling-over-skincare",
+      "title": "Makeup Balling Up Over Your Skincare",
+      "h1": "Makeup balling over your skincare: fixing the base underneath",
+      "qa": "Makeup that balls up is telling you the skincare underneath has not set, is too heavy, or is chemically incompatible with the base of your foundation. Water-based gels under silicone foundations are the classic clash. Reduce the number and quantity of skincare layers, wait properly between them, and match the base chemistry of your last skincare step to your first makeup step.",
+      "sections": [
+        {
+          "h": "Three causes, in order of likelihood",
+          "body": "First, insufficient drying time — a skincare layer still slightly wet will move under a brush and gather. Second, sheer volume, because five layers of hydrating toner, essence, serum, cream and sunscreen leave a great deal of film on the face before makeup arrives. Third, base incompatibility between a water-and-gum skincare layer and a silicone-heavy foundation. Most people who complain about balling have all three at once, which is why fixing only one of them can feel like it made no difference."
+        },
+        {
+          "h": "Reading bases off an ingredient list",
+          "body": "Check the first five or six ingredients. Water, glycerin, butylene glycol and gums signal a water-based product. Dimethicone, cyclopentasiloxane and similar signal a silicone base. Water-based skincare under a water-based foundation generally behaves. Silicone under silicone generally behaves. Crossing the two is where product gathers into little balls at the point where your sponge changes direction. This is not a rule with no exceptions, but it explains enough cases to be the first thing you check."
+        },
+        {
+          "h": "A morning sequence that tends to hold",
+          "body": "Cleanse, one hydrating layer pressed in, one moisturiser if you need it, sunscreen, and then wait. Five minutes with a cup of tea is not wasted time — it is the single highest-yield change most people can make. Apply base makeup by pressing and stippling rather than dragging. If you must use a primer, choose one on the same base as your foundation, and consider whether it is doing anything your sunscreen was not already doing."
+        },
+        {
+          "h": "What to do when it happens mid-application",
+          "body": "Stop. Do not add more foundation over the balls, which is the instinctive move and makes it worse. Take a clean damp sponge and gently lift the affected area, then press a small amount of product back over it. If it is widespread, it is faster to remove the base entirely with micellar water, blot the skin dry, wait a few minutes and start again on a lighter skincare layer than to fight it. Cushion compacts, applied by pressing, are more forgiving than liquid foundation buffed with a brush."
+        }
+      ]
+    },
+    {
+      "slug": "skin-suddenly-oilier",
+      "title": "Why Your Skin Is Suddenly Oilier",
+      "h1": "Skin suddenly oilier than it used to be: what actually drives that",
+      "qa": "Temperature and humidity are the most reliable explanations — sebum output rises measurably as skin warms, so summer skin genuinely is oilier than winter skin. Beyond weather, look at hormonal changes, new medication, a switch to a heavier product, and simple perception, because dehydrated skin often looks shinier without producing more oil. The popular claim that harsh cleansing triggers rebound oil production is widely repeated and poorly supported.",
+      "sections": [
+        {
+          "h": "Weather does most of the work",
+          "body": "Sebum production increases as skin surface temperature rises, which is why the same face can be matte in February and shining by lunchtime in August. Humidity compounds it: sweat mixes with sebum and spreads it across the surface, so the film looks and feels greater than it is. Korean summers, hot and heavily humid, are why the local market carries such an extensive range of gel textures, sebum-controlling toners and blotting products between June and September. If your oiliness arrived with the season, that is very likely your whole explanation."
+        },
+        {
+          "h": "The rebound-oil myth, examined",
+          "body": "You will read constantly that stripping your skin makes it produce more oil in retaliation. It is an appealing story and the evidence for it is thin. What harsh cleansing demonstrably does is disturb the surface, which leaves skin feeling tight and flaky while the sebum that is produced sits on a rougher surface and reads as greasier. That is a real problem worth solving with a gentler cleanser. It is just not the feedback loop it is usually described as, and the distinction matters because it changes what you do about it."
+        },
+        {
+          "h": "Causes worth taking seriously",
+          "body": "Hormonal shifts — puberty, cycle phase, pregnancy, coming off or starting hormonal contraception, perimenopause — genuinely change sebum output, and that is a medical context rather than a product one. Several medications do too. Some people find rich occlusive creams leave a residual film they read as their own oil. Stress and sleep debt are commonly reported, though the research linking them to measured sebum is less firm than the internet implies. If the change is abrupt, marked and unexplained, a doctor is a better first stop than a new toner."
+        },
+        {
+          "h": "What actually helps day to day",
+          "body": "Cleanse twice daily with something mild rather than something aggressive. Keep hydrating — 겉기름 속건조 (geotgireum sokgeonjo), oily on the surface and dry underneath, is a Korean shorthand for a genuinely common state, and skipping moisturiser makes it worse rather than better. Use gel or fluid textures in warm months and save the cream for winter. Blot rather than re-powder. Niacinamide has reasonable support for the appearance of oiliness and pore visibility, though the effect is modest and slow, and anyone promising matte skin in a week is selling."
+        }
+      ]
+    },
+    {
+      "slug": "skin-tight-after-cleansing",
+      "title": "Skin Tight After Cleansing: What It Means",
+      "h1": "That tight, squeaky feeling after cleansing is not cleanliness",
+      "qa": "Tightness after washing means your cleanser has removed more than the day's grime — it has taken surface lipids and natural moisturising factors with it, and the skin is contracting slightly as it dries. Squeaky is not a target. The usual causes are a high-pH or sulphate-heavy cleanser, water that is too hot, washing for too long, or hard water. A gentler cleanser and cooler water resolve most of it.",
+      "sections": [
+        {
+          "h": "What the sensation actually is",
+          "body": "Cleansing surfactants cannot distinguish perfectly between sebum you want gone and the lipids and humectants that keep the outer layer supple. Strip enough of both and the surface dries faster than usual, tightening as it does. It is a mechanical sensation, not a sign of purity. The idea that clean skin should feel squeaky is a legacy of soap-era marketing, and it has survived far longer than it deserved. If your face feels taut fifteen minutes after washing, the cleanser is doing too much."
+        },
+        {
+          "h": "pH, surfactants and water temperature",
+          "body": "Skin's surface sits on the acidic side, and cleansers formulated well above that leave it disrupted for a while afterwards. Traditional soap bars run distinctly alkaline. Sulphate-based cleansers foam impressively and clean thoroughly, which is exactly the problem on a face. Hot water increases lipid removal and prolongs the recovery. Long, luxurious washing does the same. Korean cleansing tends toward low-pH gels and cream cleansers specifically because the local routine assumes twice-daily washing, and twice-daily washing with something harsh is punishing."
+        },
+        {
+          "h": "Things people overlook",
+          "body": "Hard water leaves mineral residue that many people find drying and slightly rough, and it is a plausible explanation if tightness began after a house move. Over-cleansing counts — double cleansing is for days you wore sunscreen or makeup, not a moral obligation every evening. Cleansing brushes and rough flannels add mechanical stripping on top of chemical stripping. And if you are also using an exfoliating toner or acid pad, the cleanser may simply be the visible half of a larger load."
+        },
+        {
+          "h": "The fix, and when tightness means something else",
+          "body": "Switch to a low-pH gel or a cream cleanser, use lukewarm water, keep the wash under a minute, and apply a humectant layer onto still-damp skin rather than a dry face. Most people notice the difference within a week. If tightness comes with persistent flaking, redness, itching or cracking that a gentler routine does not settle, stop troubleshooting products — eczema, contact dermatitis and other conditions present exactly like this and they are diagnoses a doctor makes, not ones you make from a symptom list."
+        }
+      ]
+    },
+    {
+      "slug": "flaking-under-makeup",
+      "title": "Flaking Under Makeup: Causes and Fixes",
+      "h1": "Flaking under makeup: why base products cling to dry patches",
+      "qa": "Foundation clings to loose surface flakes and makes them look far worse than bare skin does. The flakes usually come from dryness, over-exfoliation, a retinoid, cold dry air, or a combination — and the fix is to remove them gently, rehydrate, and then apply less product, not more. Scrubbing them off aggressively in the morning reliably makes the next day worse.",
+      "sections": [
+        {
+          "h": "Why makeup exaggerates flaking",
+          "body": "A flake is a partially detached fragment of the outer layer, still anchored at one edge. Liquid foundation runs underneath it, then dries, cementing the lifted edge in place and pigmenting it darker than the skin around it. Powder settles in the same crevices. The result is that a face which looked merely a bit dry in the mirror photographs and reads as visibly patchy once base makeup is on. Korean makeup vocabulary calls this 들뜸 (deultteum), lifting, and it is the most common complaint about winter base makeup there."
+        },
+        {
+          "h": "Find the source before you treat the surface",
+          "body": "Flaking that appeared after starting a retinoid or increasing acid use is chemical, and the answer is frequency, not exfoliation. Flaking that arrived with cold weather or indoor heating is environmental. Flaking that sits in a specific patch, especially with redness or itch, may not be simple dryness at all — seborrhoeic dermatitis and eczema both flake, both are common, and both are medical diagnoses rather than routine problems. If a patch persists for weeks despite a gentle routine, have it looked at."
+        },
+        {
+          "h": "Removing 각질 without making it worse",
+          "body": "Korean routines call surface flakes 각질 (gakjil), and the local instinct is to remove them before makeup rather than paint over them. Do it gently: a warm damp flannel pressed and swept lightly, or a soft cleansing cloth, is enough. Skip scrubs, skip acids on the same morning, and never dry-buff a flaking patch. Follow immediately with a humectant on damp skin and a proper moisturiser, and give it several minutes. A hydrating sheet mask before an event is a reasonable pre-makeup move for this specific problem."
+        },
+        {
+          "h": "Application changes for a flaky day",
+          "body": "Use less base, not more — coverage is what highlights texture. Choose a cushion or a dewy foundation over a matte long-wear formula, which grips dry patches hardest. Press product on with a damp sponge instead of buffing. Powder only the centre of the face, if at all. A hydrating mist after application can soften edges, though it will not rescue a heavily powdered flaking patch. On the worst days, skipping base makeup entirely and using concealer only where needed looks considerably better than fighting it."
+        }
+      ]
+    },
+    {
+      "slug": "routine-stopped-working",
+      "title": "When a Routine Stops Working",
+      "h1": "Your routine stopped working: what usually changed, and what did not",
+      "qa": "Skin rarely becomes immune to skincare. Far more often the season changed, the product oxidised, the formula was quietly reformulated, your application drifted, or your baseline shifted so the improvement you were getting no longer registers as improvement. The tolerance story — that skin adapts and you must rotate products — is repeated far more confidently than the evidence for cosmetic ingredients supports.",
+      "sections": [
+        {
+          "h": "The tolerance claim, examined",
+          "body": "Tachyphylaxis, a diminishing response with repeated exposure, is real in some areas of pharmacology and gets borrowed enthusiastically by beauty marketing to justify buying a new product. For the ingredients in most cosmetics, applied topically at cosmetic concentrations, the case is thin. Niacinamide does not stop working because it got bored. What is far more likely is that something else in the picture moved, and rotating your entire routine on the assumption of tolerance means you lose the one thing that was actually helping."
+        },
+        {
+          "h": "The things that usually did change",
+          "body": "Seasons: a cream that suited December is oppressive in July, and a gel that suited July leaves you flaking in December. Product age: antioxidant serums in particular degrade, and a browning vitamin C is no longer the product you bought. Reformulation happens quietly and ingredient lists change between batches. And adherence drifts — most people apply markedly less sunscreen and markedly less of everything in month six than in week one, without noticing at all."
+        },
+        {
+          "h": "Your baseline moved with you",
+          "body": "This one is uncomfortable but common. A routine that visibly improved things did so against a starting point you no longer remember accurately. Six months later you are comparing today's skin with today's expectations rather than with where you began, and the product looks like a failure. It is the same effect that makes a room's new paint invisible after a fortnight. Photographs taken in the same light at the same time of day are the only real defence, and almost nobody takes them."
+        },
+        {
+          "h": "How to test it properly",
+          "body": "Do not replace everything at once, which destroys the information. Change one variable, hold it for at least four to six weeks for anything affecting texture or pigmentation, and photograph consistently. Check dates and storage on every bottle first — that alone resolves a fair number of cases. If your goal is one that cosmetics were never going to reach, such as substantially changing established pigmentation or deep lines, then the routine did not stop working. It reached its ceiling, and that conversation belongs with a dermatologist."
+        }
+      ]
+    },
+    {
+      "slug": "elimination-test-your-routine",
+      "title": "How to Run an Elimination Test on a Routine",
+      "h1": "Running an elimination test: finding the product that is causing it",
+      "qa": "Strip your routine to a gentle cleanser, one plain moisturiser and sunscreen. Hold that for two to four weeks until your skin reaches a stable baseline, photographing it in the same light every few days. Then reintroduce one product at a time, waiting one to two weeks between additions. It is slow, it is boring, and it is the only method that produces an answer you can trust.",
+      "sections": [
+        {
+          "h": "Why the boring version is the only one that works",
+          "body": "Skin responds on a lag of days to weeks, and most people's routines contain six or more variables. Change three things at once and you have learned nothing, however carefully you watched. The instinct when something goes wrong is to add a calming serum and a barrier cream, which adds two more variables to an already unreadable situation. Elimination testing inverts that instinct. You are not trying to fix your skin during the test. You are trying to find out what is happening to it."
+        },
+        {
+          "h": "Setting the baseline",
+          "body": "Three products only: a low-pH gel or cream cleanser, a simple fragrance-free moisturiser, and sunscreen every morning without exception. No acids, no retinoids, no vitamin C, no essences, no masks, no tools. Hold it for two weeks minimum, four if your skin was badly upset when you started. Photograph in the same place, in the same light, at the same time of day — daylight from a window, no flash, no filter. Write two lines a day about how skin feels, because feel changes before appearance does."
+        },
+        {
+          "h": "Reintroducing without ruining the test",
+          "body": "Add the product you care most about first, since if the test collapses later you will at least have that answer. Use it at a reduced frequency for the first week — every third night for anything active — then daily if all is well. Wait a full week, two for retinoids and exfoliants, before adding anything else. If a reaction appears, stop that product and return to baseline until skin settles, rather than pushing on to see whether it passes. Note the date of every change; memory will not do this for you."
+        },
+        {
+          "h": "What the test cannot tell you",
+          "body": "It identifies which product your skin objects to. It does not identify which ingredient, because finished formulas contain dozens and shared culprits hide across brands. If several unrelated products all provoke the same reaction, a common ingredient — a fragrance component, a preservative, an emulsifier — is a reasonable suspicion, but confirming it requires patch testing by a dermatologist, not more shopping. And if your skin never reaches a calm baseline on three bland products, the problem is not your routine and the next step is a clinic."
+        }
+      ]
+    },
+    {
+      "slug": "irritation-vs-allergy-vs-purging",
+      "title": "Irritation, Allergy or Purging: Telling Them Apart",
+      "h1": "Irritation, allergy and purging: three different things that look similar",
+      "qa": "Irritation is dose-dependent, can happen to anyone, usually appears quickly and stays where you applied the product. Allergy is an immune response, often shows up twelve to seventy-two hours later, is dominated by itching, can spread beyond the application area, and may develop to something you have used for years. Purging is only plausible with turnover-accelerating actives. Only a doctor can confirm an allergy, and it is worth confirming rather than guessing.",
+      "sections": [
+        {
+          "h": "Irritant contact reactions",
+          "body": "This is a direct chemical effect on the skin surface, not an immune one. Enough of a strong enough substance will irritate anybody, which is why irritation is dose-dependent — a small amount of a low-pH acid may be fine where a generous layer is not. It tends to appear within minutes to hours, presents as stinging, burning, redness and sometimes flaking, and stays neatly within the area you treated. It settles when you stop. Most bad experiences with actives fall into this category, and most of them are a frequency problem."
+        },
+        {
+          "h": "Allergic contact reactions",
+          "body": "Here the immune system has learned to recognise a specific substance, which is why prior tolerance proves nothing — sensitisation takes repeated exposure to develop, sometimes over years. The response is typically delayed, appearing anywhere from twelve to seventy-two hours after contact, and itch is usually the dominant sensation rather than sting. It can extend past the application site, and reactions can appear at sites treated days earlier. Fragrance components and preservatives are among the substances most often implicated. This is a medical diagnosis and you cannot make it from a symptom list."
+        },
+        {
+          "h": "Purging, narrowly defined",
+          "body": "Only retinoids, exfoliating acids and comparable turnover accelerators have a plausible mechanism for it. Spots appear faster than usual in the places you already break out, each resolving reasonably quickly, and the overall picture improves over subsequent weeks. Small uniform bumps in a fresh area, itch, or a reaction to a hydrating cream are not purging, whatever the brand says. The widely quoted four-to-six week window is a rule of thumb rather than a documented threshold, and no product has earned an unlimited grace period from you."
+        },
+        {
+          "h": "What to do with the distinction",
+          "body": "For suspected irritation, reduce frequency or concentration, simplify everything else and reintroduce slowly. For suspected purging, hold the course only if the pattern genuinely fits and the trajectory is improving. For anything that itches, spreads, swells, blisters or recurs across unrelated products, stop guessing and see a doctor — patch testing is the established way to identify a specific allergen, it is not something you can approximate at home, and knowing the answer changes what you can safely buy for the rest of your life."
+        }
+      ]
+    },
+    {
+      "slug": "how-to-patch-test-properly",
+      "title": "How to Patch Test a Product Properly",
+      "h1": "Patch testing at home: how to do it, and what it will not catch",
+      "qa": "Apply a small amount of the product to the same spot on your inner forearm or just in front of the ear, twice a day, for seven to ten days, testing one product at a time and leaving the rest of your routine unchanged. It is worth doing and it is far from perfect: home patch testing misses delayed allergy, sunlight-triggered reactions and the simple fact that facial skin behaves differently from arm skin.",
+      "sections": [
+        {
+          "h": "The method",
+          "body": "Choose a discreet, consistent site — the inner forearm is easiest to observe, while the skin just in front of the ear or along the jaw is closer in character to your face. Apply a small amount, roughly what you would use on one cheek, twice daily to the same patch. Leave it unwashed between applications where practical. Continue for seven to ten days. Do not start any other new product during that window, and do not test two things at once, however tempting the shortcut is."
+        },
+        {
+          "h": "What counts as a fail",
+          "body": "Redness, itching, small bumps, dryness or scaling confined to the test patch means stop. Transient stinging on application that fades within a couple of minutes is not, on its own, a failure — that is the same sensory effect that low-pH acids and ethanol produce on anyone. Watch the trend across days rather than the first application. A patch that looks fine on day two and irritated on day six is precisely the pattern that makes the full ten days worth the wait."
+        },
+        {
+          "h": "Where home patch testing falls short",
+          "body": "Arm skin is thicker and less reactive than the skin around your eyes and mouth, so a product can pass on your forearm and misbehave on your face. Ten days is not always long enough for a delayed allergic response to declare itself. Reactions that require sunlight will not show up on a covered arm. And a patch test tells you about that product on that skin at that moment, not about how it will behave stacked under three other things in August. It reduces risk. It does not remove it."
+        },
+        {
+          "h": "The version a clinic does",
+          "body": "Medical patch testing is a different procedure entirely: standardised allergen panels applied under occlusion, read at set intervals by a clinician trained to interpret them. It is the established way to identify a specific contact allergen, and if you have reacted to multiple unrelated products it is far more useful than another round of home trials. Ask a doctor for a referral rather than attempting to approximate it. Bring photographs of your reactions and the packaging of everything involved, because ingredient lists genuinely help them."
+        }
+      ]
+    },
+    {
+      "slug": "day-after-over-exfoliating",
+      "title": "The Day After Over-Exfoliating",
+      "h1": "You over-exfoliated: what to do for the next few days",
+      "qa": "Stop every active immediately — acids, retinoids, vitamin C, scrubs, cleansing brushes, all of it. For several days use only lukewarm water, a mild cleanser, a bland fragrance-free moisturiser and sunscreen. Skin that is stinging does not need a soothing serum on top; it needs fewer ingredients, not different ones. Weeping, blistering, severe pain or spreading redness are not a skincare problem and warrant medical attention.",
+      "sections": [
+        {
+          "h": "Subtract, do not substitute",
+          "body": "The reflex is to reach for something calming, and the shelves are full of products promising 진정 (jinjeong), soothing. Resist it for a few days. Every additional formula is another set of preservatives, emulsifiers and fragrance components landing on a surface that is currently registering everything. The most effective thing available to you costs nothing: a shorter routine. Cleanser, moisturiser, sunscreen. Three products, no exceptions, until stinging on application stops entirely — which for most people takes several days rather than several weeks."
+        },
+        {
+          "h": "What to avoid while it settles",
+          "body": "No acids, no retinoids, no vitamin C, no enzyme powders, no scrubs, no cleansing devices, no hot water, no saunas or 찜질방 (jjimjilbang) steam rooms, and nothing with a high alcohol content. Skip fragrance where you can, including essential oils, since fragrance materials are among the more common triggers on compromised skin. Do not use a sheet mask to soothe it — sitting a saturated fabric layer full of actives against irritated skin for twenty minutes is more exposure, not less. Do not exfoliate the flakes off, however much they annoy you."
+        },
+        {
+          "h": "What a bland recovery routine looks like",
+          "body": "A low-pH gel or cream cleanser, used once at night with lukewarm water and a quick rinse in the morning. A simple moisturiser with humectants and lipids and as short an ingredient list as you can find — panthenol, glycerin and ceramides are reasonable things to see, without expecting miracles from any of them. Sunscreen every morning, because freshly exfoliated skin is more vulnerable to ultraviolet exposure and this is not the week to skip it. Apply everything by pressing rather than rubbing."
+        },
+        {
+          "h": "When to stop managing it yourself",
+          "body": "See a doctor promptly if skin is weeping or oozing, if it blisters, if pain is significant rather than uncomfortable, if redness spreads beyond the treated area, if you develop swelling, or if you see any sign of infection such as yellow crusting or increasing heat. The same applies to anything following a stronger peel, whether done in a clinic or at home. A dermatologist has options here that no cosmetic routine matches, and delay makes marks more likely rather than less."
+        }
+      ]
+    },
+    {
+      "slug": "barrier-recovery-week-by-week",
+      "title": "Barrier Recovery, Week by Week",
+      "h1": "Rebuilding after a wrecked barrier: a realistic week-by-week plan",
+      "qa": "Week one is pure subtraction: cleanser, bland moisturiser, sunscreen, nothing else. Week two you stabilise and stop only when stinging has fully gone. Week three you reintroduce a single gentle product. Week four, one more. The timeline is a structure to keep you from rushing, not a promise — recovery varies enormously between people, and 'barrier' is used far more loosely in marketing than in research.",
+      "sections": [
+        {
+          "h": "Week one: take everything away",
+          "body": "A mild low-pH cleanser at night, lukewarm water only in the morning, one fragrance-free moisturiser, and sunscreen. That is the entire routine. No actives, no masks, no tools, no new purchases — and that last one is the hardest, because a distressed face is an excellent sales environment. Apply by pressing. Expect skin to feel worse before it feels better, particularly if you are also coming off a retinoid. Photograph in consistent light so you have something more reliable than your impression in a bathroom mirror at midnight."
+        },
+        {
+          "h": "Week two: hold, and judge honestly",
+          "body": "Keep the same three products. The signal you are waiting for is not that skin looks perfect but that nothing stings on application, tightness after cleansing has gone, and flaking has settled. If you are not there, stay here — this is the week people rush, and rushing is why the cycle repeats. If your moisturiser itself stings, change it for something blander rather than concluding that all moisturiser hurts. Cut hot showers on your face, and if the air indoors is very dry, a humidifier is a reasonable, unglamorous addition."
+        },
+        {
+          "h": "Week three onward: reintroduce one thing",
+          "body": "Add back the product you value most, at reduced frequency — every third night for a retinoid, twice a week for an exfoliating acid, daily for something gentle like a niacinamide serum. Hold for a full week before adding anything else. Resist rebuilding the whole shelf at once; the routine you had is the routine that got you here. Many people find the version they rebuild is shorter than the original and works better, which is a quietly common outcome worth expecting."
+        },
+        {
+          "h": "What 'barrier repair' claims are worth",
+          "body": "The outer layer's recovery after disruption has been studied in controlled settings and generally proceeds over days rather than months, but conditions in a lab are not conditions on your face in February. Ceramides, cholesterol, fatty acids, panthenol and glycerin all have reasonable support for supporting the feel and look of skin comfort. None of them repairs anything in a medical sense, whatever the packaging says. If skin is not settling after several weeks of a genuinely bland routine, see a doctor — persistent redness, itch and flaking have diagnoses."
+        }
+      ]
+    },
+    {
+      "slug": "skincare-changed-colour-or-smell",
+      "title": "When Skincare Changes Colour or Smell",
+      "h1": "Your product changed colour or smell: what it means and when to bin it",
+      "qa": "A change in colour, smell or texture means the formula has altered since you bought it, usually through oxidation, heat, light or contamination from fingers and air. Vitamin C serums turning yellow then amber then brown are the classic case. Colour change does not always mean a product is unsafe, but it does mean it is no longer the product you tested — and a rancid or sour smell is a straightforward reason to throw it away.",
+      "sections": [
+        {
+          "h": "Oxidation, the most common cause",
+          "body": "Antioxidants work by being oxidised, which means they are consumed over time by exposure to air, light and warmth. L-ascorbic acid serums are the clearest example: a fresh one is near-colourless, then goes pale yellow, then amber, then brown. Some darkening is normal and does not mean the product is dangerous, but a deeply brown serum has lost much of what you were paying for. Plant extracts and unrefined oils darken too. Opaque, airtight packaging slows all of this considerably, which is why so many Korean serums arrive in dark pumps rather than droppers."
+        },
+        {
+          "h": "What smell is telling you",
+          "body": "Fragrance-free products are the most informative, because there is nothing masking the change. A faintly sour, crayon-like or old-nut smell in an oil or an oil-rich cream suggests the lipids have gone rancid. A sharp or yeasty note in a water-based product suggests microbial growth, which matters most in jars, in anything you dip fingers into, and in anything sold as preservative-free. Trust your nose here. A product that smells wrong is not one to test on your face to see what happens."
+        },
+        {
+          "h": "Where you keep it matters more than you think",
+          "body": "Bathrooms are warm, humid and bright, which is close to the worst possible storage for actives, and they are where almost everyone keeps everything. A bedroom drawer is better. Sunlight on a windowsill is worse still. Cars in summer are worst of all. Refrigeration helps vitamin C and some oils but is unnecessary for most products and can make thick creams unpleasant to spread. Close lids properly, use a spatula for jars, and do not decant into unsterile containers for travel."
+        },
+        {
+          "h": "The rules for throwing things away",
+          "body": "Check the period-after-opening symbol on the packaging — a small open jar marked 6M, 12M and so on — and write the opening date on the bottle in marker, since nobody remembers. Bin anything that has separated and will not remix, anything that smells sour or rancid, anything with visible growth, and anything whose texture has changed markedly. If a product causes stinging it never used to cause, treat that as a further reason to discard rather than a puzzle to solve. Sunscreen past its date should be replaced without deliberation."
+        }
+      ]
+    },
+    {
+      "slug": "product-separated-in-the-bottle",
+      "title": "When a Product Separates in the Bottle",
+      "h1": "Your product separated: shake it, or bin it?",
+      "qa": "Some products are designed to separate — biphasic cleansers, mineral sunscreens and certain oil-serum hybrids need a shake before use and say so. Anything else that separates has had its emulsion broken, usually by heat, freezing or age, and shaking it will not truly put it back together. If a formula that was previously uniform has split, or has split and also changed in smell or colour, replace it.",
+      "sections": [
+        {
+          "h": "Separation that is supposed to happen",
+          "body": "Biphasic makeup removers with a visible oil layer over a water layer are built that way and are meant to be shaken. Mineral sunscreens settle because the filter particles are suspended rather than dissolved, and the instruction to shake well before use is not a formality — an unshaken bottle can deliver uneven filter concentration. Some ampoules and oil-in-water serums are deliberately unstable. The packaging usually tells you. If the instructions say shake, separation is information about physics, not about spoilage."
+        },
+        {
+          "h": "Separation that means the formula has failed",
+          "body": "An emulsion holds oil and water together with emulsifiers, and that arrangement is easier to break than to make. Heat is the usual culprit — a summer delivery van, a bathroom shelf above a radiator, a suitcase left in a car. Freezing does it too, which matters for winter shipping. Repeated temperature swings do it slowly. Once a cream has genuinely split, shaking produces a temporary, uneven mixture at best. The active ingredients are not necessarily distributed the way the formulator intended any more, and the preservative system may not be either."
+        },
+        {
+          "h": "How to judge yours",
+          "body": "Ask whether it was ever uniform. If a cream that has been smooth for two months has developed a watery layer on top, that is a broken emulsion. Look for other signals alongside it: a change in colour, a sour or rancid smell, a grainy or curdled texture, or a product that now feels different on the skin. One signal alone may be harmless. Two together is a bin decision. Anything sold with a short shelf life, low preservative load or in a jar deserves less benefit of the doubt."
+        },
+        {
+          "h": "Preventing it, and the sunscreen exception",
+          "body": "Store products cool, dark and dry, away from the shower and away from windowsills. Do not leave anything in a car. Bring sunscreen indoors after a beach day rather than leaving it in a hot bag. Be particularly careful with sunscreen generally: a separated sunscreen cannot be trusted to deliver even protection, shaking or not, and it is the one product where the consequence of guessing wrong is invisible and cumulative. Replace it and do not attempt to salvage it."
+        }
+      ]
+    },
+    {
+      "slug": "sunscreen-grey-on-deeper-skin",
+      "title": "Sunscreen That Turns Grey on Deeper Skin",
+      "h1": "Grey, ashy sunscreen on deeper skin tones: what to buy instead",
+      "qa": "The greyness comes from mineral filters — zinc oxide and titanium dioxide — scattering visible light, and the deeper your skin tone, the greater the contrast. Formulas built on modern organic filters, which Korea approves a wide range of, generally leave no cast at all. Tinted sunscreens can work but only if the shade genuinely matches, and much of the Korean market has historically offered a narrow tonal range.",
+      "sections": [
+        {
+          "h": "Why deeper tones show it most",
+          "body": "Mineral particles reflect and scatter visible light across the surface of the skin. On very fair skin the resulting pale film is closer to the underlying tone and reads as a slight lightening. On deeper skin the same film sits far from the surrounding tone, and the eye registers it as an ashy grey overlay rather than a change in shade. Nothing about your skin is causing this. It is optics, and it is a formulation choice made by the brand."
+        },
+        {
+          "h": "What to look for instead",
+          "body": "Organic filters dissolve rather than sit as particles, so they leave no cast. Korea approves a broad set of them, including several with strong long-wave UVA coverage that are unavailable or newly available elsewhere, which is the concrete reason Korean sun fluids can vanish where a mineral formula does not. On a Korean label these are 유기자차 (yugijacha) products, distinct from mineral 무기자차 (mugijacha) and hybrid 혼합자차 (honhapjacha). Check the ingredient list rather than the front of the tube, because marketing language about invisibility is not a guarantee."
+        },
+        {
+          "h": "Tinted sunscreens, honestly assessed",
+          "body": "Iron oxides can neutralise a mineral cast and, separately, contribute to visible light protection, which is of genuine interest for pigmentation-prone skin. The catch is shade range. A great many tinted sunscreens are offered in one universal shade that is only universal within a narrow band, and a mismatched tint looks worse than no tint. Korean brands have been slower than some markets to broaden shade offerings, though the range is improving. Buy from somewhere you can return, and check the colour in daylight rather than shop lighting."
+        },
+        {
+          "h": "Practical workarounds and the thing not to do",
+          "body": "If you are committed to a mineral formula, warm it between your fingers, apply in thin passes rather than one thick one, let it settle for several minutes, and set with a powder matched to your tone. A cushion compact over sunscreen also evens the appearance while adding some further protection. What you should not do is apply less to reduce the cast, or skip sunscreen altogether — hyperpigmentation and uneven tone, the concerns most often raised on deeper skin, are worsened by ultraviolet exposure, so under-protecting works directly against you."
+        }
+      ]
+    },
+    {
+      "slug": "redness-after-hot-shower",
+      "title": "Redness After a Hot Shower",
+      "h1": "Why your face goes red after a hot shower, and when it matters",
+      "qa": "Heat dilates blood vessels near the skin surface, so a flushed face after a hot shower is an ordinary vascular response and usually fades within twenty minutes or so. It becomes worth attention when it lasts far longer, arrives with stinging or bumps, or has been getting steadily easier to trigger — patterns that overlap with rosacea, which is a medical diagnosis and needs a doctor rather than a soothing serum.",
+      "sections": [
+        {
+          "h": "The normal version",
+          "body": "Warmth causes small blood vessels to widen so the body can lose heat, and the face has a dense superficial vascular supply, which is why it colours first. Steam, exercise, alcohol, spicy food and embarrassment all produce the same mechanism by different routes. Ordinary flushing settles as you cool down, generally within ten to twenty minutes, and leaves nothing behind. The skin may feel warm and slightly tight afterwards, particularly if the shower was long, because hot water also removes surface lipids while it is doing this."
+        },
+        {
+          "h": "What makes it worse than it needs to be",
+          "body": "Very hot water, long showers, washing the face in the shower under the stream, and following all that immediately with an acid toner or a retinoid. Rough towelling adds mechanical irritation to a face whose vessels are already dilated. Cold bathrooms after hot showers create a temperature swing that some people find provokes flushing more than the heat alone. And an already compromised outer layer flushes more readily than a comfortable one, which is why this often begins during a period of over-exfoliating rather than out of nowhere."
+        },
+        {
+          "h": "Practical changes",
+          "body": "Wash your face at the sink in lukewarm water rather than under the shower. Keep showers shorter and cooler than feels indulgent. Pat dry, do not rub. Moisturise while skin is still slightly damp. Leave actives for a time of day when your face is not already flushed — a retinoid an hour after a shower rather than straight out of it. Products marketed for 진정 (jinjeong), calming, may make skin feel more comfortable, but comfort is not the same as changing what the vessels are doing, and it is worth keeping those apart."
+        },
+        {
+          "h": "The signals that mean see a doctor",
+          "body": "Flushing that persists for hours, redness that becomes a permanent background rather than an episode, visible fine vessels, stinging or burning with most products, papules and pustules across the central face, or eye irritation alongside the redness. These overlap with rosacea, which is common, frequently misidentified as sensitive skin, and manageable with medical treatment that no cosmetic product substitutes for. Facial flushing occasionally reflects other medical conditions too. If it is new, persistent or worsening, get it assessed rather than layering more skincare over it."
+        }
+      ]
+    },
+    {
+      "slug": "congestion-along-the-hairline",
+      "title": "Congestion Along the Hairline",
+      "h1": "Small bumps along your hairline: the usual causes",
+      "qa": "Hairline congestion usually comes from something other than your facial skincare — conditioner and styling product left behind at the rinse, sunscreen not fully removed at the edges, sweat under hats and headbands, or hair sitting against the forehead. Korean reviewers call the small clustered bumps 좁쌀 여드름 (jopssal yeodeureum), millet-grain acne. Persistent or inflamed bumps in this area deserve a doctor's look rather than repeated exfoliation.",
+      "sections": [
+        {
+          "h": "Hair products are the first suspect",
+          "body": "Conditioners, masks and styling products contain rich emollients and film formers that are excellent on hair and unhelpful sitting on the forehead. Rinsing in the shower carries them straight down across the hairline, and most people rinse hair last, then rinse the face not at all. Leave-in products and oils spread onto the skin overnight. If congestion sits in a band that follows exactly where your hair falls, or exactly where the rinse water runs, that is a fairly strong hint about where to look."
+        },
+        {
+          "h": "The edges nobody cleanses",
+          "body": "Sunscreen and base makeup get applied to the hairline and then cleansed as though the face stopped an inch lower. Film-forming sunscreen in particular clings at the edge where fingers stop and hair begins. The same happens along the jaw and in front of the ears. Extending your cleanse deliberately past your hairline, and using a proper double cleanse, 이중세안 (ijung sean), on days you wore sunscreen or makeup, addresses more hairline congestion than any spot treatment will."
+        },
+        {
+          "h": "Friction, occlusion and sweat",
+          "body": "Hats, headbands, helmets, hoods and fringes trap heat and moisture against the skin and add mechanical rubbing on top. Gym sessions in a cap, then a delayed shower, is a reliable recipe. So is sleeping with unwashed hair against the forehead. None of this is a hygiene failing — it is contact, heat and time, and the fixes are practical: rinse the face after washing hair, wash headwear, tie hair back overnight, cleanse reasonably soon after sweating rather than hours later."
+        },
+        {
+          "h": "What not to do, and when to get it checked",
+          "body": "Do not attack the area with scrubs or daily acids. Repeated exfoliation of a congested hairline commonly leaves it red, flaky and no clearer. Change the inputs first and give it three or four weeks, because that region is slow to respond. If bumps are inflamed, itchy, pustular, spreading, or unchanged after you have fixed the obvious causes, see a doctor. Several conditions look like clogged pores at the hairline — including fungal and inflammatory ones — and they are treated in very different ways."
+        }
+      ]
+    },
+    {
+      "slug": "breakouts-under-headphones-and-masks",
+      "title": "Breakouts Where Headphones or Masks Sit",
+      "h1": "Acne mechanica: breakouts exactly where something presses on your face",
+      "qa": "Breakouts that map precisely onto a headphone band, a mask edge, a helmet strap or a phone held against the cheek are usually acne mechanica — the result of sustained pressure, friction, heat and trapped moisture rather than anything you applied. The equipment matters more than your routine. Clean the contact surface, take breaks, keep that zone lightly moisturised, and see a doctor if lesions become painful or start leaving marks.",
+      "sections": [
+        {
+          "h": "Why the pattern is so precise",
+          "body": "Follicles under continuous pressure and friction, in a warm humid microclimate created by the equipment itself, become inflamed and blocked more readily. The outline of the affected area is diagnostic in a way most skin problems are not: if you can trace your headphone band or the upper edge of a mask in the breakout, the cause is sitting on your desk. This is not about cleanliness and it is not a reflection of your routine, which is worth saying because people respond by over-cleansing an already irritated area."
+        },
+        {
+          "h": "Change the equipment before the routine",
+          "body": "Wipe headphone cushions, helmet padding and phone screens regularly — they collect sebum and makeup and press it back into the same spot daily. Replace foam ear cushions when they get grubby. Loosen the fit where you can. Take the headset off for a few minutes every hour, which does more than any product. For masks, a smoother fabric and a fresh one each day reduces friction, and changing it when it becomes damp matters more than the material it is made of."
+        },
+        {
+          "h": "What to put on that zone, and what not to",
+          "body": "Keep the contact area simple and lightly moisturised — a bare, dry surface under friction fares worse than a lightly protected one, but a rich occlusive cream under a sealed mask is trapping heat, sweat and product together for hours. A light gel moisturiser is a better bet. Skip actives directly under a mask edge while it is inflamed, and skip heavy base makeup there entirely if you can. Cleanse gently after taking the equipment off rather than scrubbing the area clean."
+        },
+        {
+          "h": "When it needs a doctor",
+          "body": "If lesions are deep, painful, cystic, leaving dark marks or scars, or if they persist after you have genuinely changed the mechanical factors, that is dermatology. Prescription options exist and they work far better than any adjustment to a cosmetic routine. The same applies if what looked like acne turns out to be itchy, uniform and monomorphic, which can indicate something other than acne entirely. Do not spend six months experimenting with cleansers on a problem a clinic could sort out."
+        }
+      ]
+    },
+    {
+      "slug": "skin-worse-in-winter",
+      "title": "Why Your Skin Gets Worse in Winter",
+      "h1": "Winter skin: why the same routine stops being enough in December",
+      "qa": "Cold air holds very little moisture, indoor heating dries it further, and the gap between the two drives water out of the skin surface faster than in summer. The routine has not failed — the conditions changed. Richer textures, gentler cleansing, cooler showers, less frequent exfoliation and a humidifier address most of it. Korean winters, cold and notably dry, are why the local market swings so hard toward heavy creams from November.",
+      "sections": [
+        {
+          "h": "What the season is actually doing",
+          "body": "Cold air carries far less water vapour than warm air, and heating it indoors drops the relative humidity further. Skin loses water to that dry air continuously, and the surface lipids that slow the loss become less pliable at low temperatures. Add wind, which strips the surface mechanically, and hot showers, which strip it chemically, and a routine that was comfortably sufficient in September falls short. Nothing about your skin has changed. The environment did, and the routine needs to answer it."
+        },
+        {
+          "h": "Adjusting the routine, in order of impact",
+          "body": "Move to a richer moisturiser or add an occlusive step at night. Switch a foaming cleanser for a cream or oil-based one and cut morning cleansing to water alone if your skin is tight. Apply humectants onto damp skin, since glycerin and hyaluronic acid draw water from wherever they can, and in dry air that can mean from your own skin if there is nothing sealing them. Cut exfoliation frequency roughly in half. Lower your shower temperature, which nobody wants to hear in January."
+        },
+        {
+          "h": "The Korean winter shelf",
+          "body": "Seoul winters are cold and dry, and the local market reflects it: heavy 크림 (keurim) textures, sleeping masks used as an overnight seal, oil-based cleansers, ceramide-forward barrier creams and a general seasonal pivot in what shops put at the front. Ampoules with panthenol and centella-derived ingredients are marketed hard for 진정 (jinjeong), calming, in this period. The seasonal logic is sound even where individual claims are inflated — the useful part is simply that most people should not run the same routine year round."
+        },
+        {
+          "h": "Where winter dryness becomes medical",
+          "body": "Flaking that cracks or bleeds, patches that itch persistently, redness with scaling in the eyebrows or around the nose, or dryness so severe that a rich moisturiser gives no relief at all — these are not seasonal inconvenience. Eczema, seborrhoeic dermatitis and other conditions flare in winter and they are diagnosed and treated medically. If a genuinely bland, rich routine and a humidifier have not helped after a few weeks, book an appointment rather than buying a fifth cream."
+        }
+      ]
+    },
+    {
+      "slug": "skin-worse-in-summer-humidity",
+      "title": "Why Your Skin Is Worse in Summer Humidity",
+      "h1": "Summer humidity: sweat, sunscreen and a routine that is now too heavy",
+      "qa": "Heat raises sebum output and humidity keeps sweat sitting on the surface, so the same routine that suited you in March becomes an oppressive film in July. Layers that felt comfortable now slip, pill and congest. Lighten every texture, cleanse reasonably soon after sweating, and keep sunscreen non-negotiable. Persistent itchy uniform bumps on the chest, back or forehead in humid weather are worth a doctor's assessment rather than more exfoliation.",
+      "sections": [
+        {
+          "h": "What humidity changes",
+          "body": "Warm skin produces more sebum, and humid air slows evaporation so sweat lingers and mixes with it. The resulting film spreads product around, dissolves makeup and makes everything you apply feel heavier than it did in cool weather. Skin also loses far less water to humid air, which means the rich moisturiser that rescued you in winter is now doing a job nobody asked for. Korean summers are hot and genuinely humid, which is why the local market is so deep in gel textures and sebum-control products from June."
+        },
+        {
+          "h": "Lighten everything, but not sunscreen",
+          "body": "Swap cream for gel or lotion, drop an entire layer or two if you were running seven, and choose fluid or watery sunscreen textures rather than heavy ones. Do not reduce sunscreen quantity — protection depends on how much you apply and thin application costs you disproportionately. Reapply with a stick or cushion over makeup rather than skipping it. If you are outdoors and sweating heavily, look for formulas tested for water resistance and reapply on the interval the packaging states rather than the interval that is convenient."
+        },
+        {
+          "h": "Sweat management is most of the routine",
+          "body": "Rinse your face reasonably soon after heavy sweating rather than letting a mixture of sweat, sunscreen and makeup sit for hours. Blot rather than wipe, since wiping drags sunscreen off unevenly. Shower after exercise and change out of damp clothing, which matters for the chest and back as much as the face. Keep a mild cleanser at work if your commute is brutal. None of this is glamorous, and it accounts for more summer improvement than any product swap."
+        },
+        {
+          "h": "The bumps that are not acne",
+          "body": "Small uniform itchy bumps clustered on the forehead, chest, shoulders or upper back in hot humid weather, which do not respond to acne products and may worsen with rich creams, can indicate a yeast-driven folliculitis rather than acne. That is a medical diagnosis and it is treated differently — often the opposite way round from acne. Heat rash presents differently again. If your summer breakouts itch, look identical to one another, and resist everything you try, stop guessing and see a doctor."
+        }
+      ]
+    },
+    {
+      "slug": "waking-up-with-puffy-eyes",
+      "title": "Waking Up With Puffy Eyes",
+      "h1": "Puffy eyes in the morning: what causes them and what actually helps",
+      "qa": "Lying flat for hours lets fluid settle in the thin tissue around the eyes, and salt, alcohol, crying, allergies and poor sleep all add to it. Most morning puffiness resolves on its own within an hour or two of being upright. Cold and elevation help genuinely; caffeine eye creams offer a modest, temporary change in appearance at best. Sudden one-sided swelling, pain or vision changes need urgent medical attention.",
+      "sections": [
+        {
+          "h": "Why mornings are worst",
+          "body": "The skin around the eye is thin and the tissue beneath it holds fluid readily. Horizontal for seven or eight hours, fluid distributes differently than it does when you are upright, and the periorbital area shows it first. Standing up reverses it gradually, which is why puffiness that alarms you at seven has usually softened by nine. Sleeping face-down or on one side tends to make it more pronounced, and more asymmetric, which is worth knowing before you conclude something is wrong with one eye."
+        },
+        {
+          "h": "The contributors you can influence",
+          "body": "A salty dinner, alcohol the night before, crying, short or broken sleep, and allergies — which add itching and rubbing to fluid retention, and rubbing makes everything worse. Nasal congestion from a cold does it too. Sleeping with your head slightly raised reduces it for many people. So does a genuinely cold compress for a few minutes: chilled spoons, a cold flannel, a gel mask from the fridge. The cooling constricts vessels briefly and the effect is real, modest and temporary."
+        },
+        {
+          "h": "What eye products can and cannot do",
+          "body": "Caffeine is the most commonly used ingredient here and there is some support for a short-term change in the appearance of puffiness, largely through vasoconstriction. The effect is modest, temporary and easily matched by a cold compress. Products containing film formers can tighten the look of the area for a few hours. What none of them do is alter the underlying anatomy. Under-eye bags that are present regardless of sleep, salt or time of day generally relate to fat pad and tissue changes with age, and no cream addresses that — the honest options there are medical, and belong with a clinician."
+        },
+        {
+          "h": "When puffiness is a medical matter",
+          "body": "Get urgent medical attention for sudden swelling of one eye, swelling with pain, redness, fever or any change in vision, or swelling that accompanies swelling of the lips or tongue or difficulty breathing. See a doctor for persistent puffiness that does not settle through the day, swelling that appeared with a new medication, or puffiness alongside changes in weight, urination or fatigue. Periorbital swelling occasionally reflects thyroid, kidney, cardiac or allergic conditions, and none of that is a skincare question."
+        }
+      ]
+    },
+    {
+      "slug": "retinoid-too-strong",
+      "title": "When a Retinoid Is Too Much for Your Skin",
+      "h1": "Your retinoid is too much: how to back off without abandoning it",
+      "qa": "Redness, flaking, stinging and tightness in the first weeks of a retinoid are common and usually a frequency problem rather than a reason to stop entirely. Reduce to twice a week, apply a moisturiser before and after, use a pea-sized amount on a dry face, and build back slowly over months. Persistent severe irritation, or anything with a prescription retinoid, is a conversation for the prescribing doctor.",
+      "sections": [
+        {
+          "h": "What is happening, and what 'retinisation' is worth",
+          "body": "Retinoids accelerate skin cell turnover, and the early weeks often bring dryness, flaking, redness and sensitivity while the surface adjusts. The industry calls this retinisation and treats it as a rite of passage. That framing is useful up to a point and abused past it — it has persuaded a great many people to push through reactions that were simply too much product too often. Discomfort is not evidence that it is working, and there is no prize for enduring it. Efficacy comes from consistent use over months, not from intensity."
+        },
+        {
+          "h": "The adjustments that usually rescue it",
+          "body": "Drop to twice a week and hold there for a month before increasing. Use a genuinely pea-sized amount for the whole face. Apply to completely dry skin, since damp skin increases penetration and irritation. Sandwich it: moisturiser, retinoid, moisturiser. Keep it off the eyelids, the corners of the nose and the lip edges, which react first. Stop all acids and vitamin C while you settle, use them on alternate nights afterwards, and wear sunscreen every morning without exception, which matters more on a retinoid than off one."
+        },
+        {
+          "h": "Strength, form and what Korean shelves offer",
+          "body": "Retinol, retinal and retinyl esters differ in how directly they act, with retinal generally regarded as more potent than retinol at comparable percentages, and esters as gentler and correspondingly less effective. Encapsulated forms are marketed as gentler and there is reasonable rationale for that, though the difference is easy to overstate. Korean formulations often pair a lower-strength retinoid with hydrating and calming ingredients, which suits people who found a Western high-percentage serum unmanageable. Bakuchiol is frequently offered as an alternative; the evidence base for it is much smaller and it is not a like-for-like substitute."
+        },
+        {
+          "h": "When to stop and ask someone",
+          "body": "Stop and see a doctor if you develop persistent swelling, blistering, weeping, severe pain, or irritation that does not settle within a few days of stopping. If you are using a prescription retinoid such as tretinoin, any adjustment belongs with the doctor who prescribed it rather than with an article. Anyone pregnant, trying to conceive or breastfeeding should discuss retinoid use with a clinician before continuing — this is a well-established area of medical caution and not one to resolve by reading forums."
+        }
+      ]
+    },
+    {
+      "slug": "when-to-stop-diy-and-see-someone",
+      "title": "When to Stop DIY and See a Professional",
+      "h1": "When to stop troubleshooting your routine and see a doctor",
+      "qa": "Stop experimenting and book an appointment if something is painful, spreading, blistering, weeping or swelling; if acne is cystic or leaving marks; if a rash keeps returning across unrelated products; if a patch has persisted for weeks despite a bland routine; or if a mole has changed. Skincare troubleshooting is for cosmetic concerns. A great many things that look cosmetic are diagnoses with treatments that no routine substitutes for.",
+      "sections": [
+        {
+          "h": "The urgent list",
+          "body": "Swelling of the lips, tongue or eyelids, difficulty breathing, or a rash spreading over the body needs emergency care, not a forum. So does sudden one-sided facial swelling with pain, any rapid change in vision, or signs of infection — spreading heat, yellow crusting, fever. Blistering, weeping or severe pain after a peel or a strong active also warrants same-day attention. None of these are situations where waiting to see whether a barrier cream helps is a reasonable plan, and the cost of being cautious here is very low."
+        },
+        {
+          "h": "Things that are diagnoses, not skin types",
+          "body": "Rosacea, eczema, seborrhoeic dermatitis, perioral dermatitis, psoriasis, melasma, fungal folliculitis and contact allergy are all commonly self-labelled as sensitive skin, dryness, congestion or stubborn pigmentation. Several of them are made worse by exactly the products people reach for. Perioral dermatitis in particular is often aggravated by heavy creams and by steroid creams borrowed from a drawer. If your skin problem has a shape, a location and a persistence to it, the useful question is what it is, and that requires someone who can examine you."
+        },
+        {
+          "h": "The slower signals people ignore",
+          "body": "Acne that is cystic, painful or leaving marks and scars deserves medical treatment now rather than after another six months of trials, because the marks are the part that is hard to undo. A patch that has not shifted in six weeks on a genuinely bland routine is not a routine problem. Reactions to multiple unrelated products point to a shared allergen and need proper patch testing. Hair loss, persistent itching, and any new, changing, bleeding or irregular mole all belong with a doctor promptly."
+        },
+        {
+          "h": "Going in prepared",
+          "body": "Bring photographs of the problem at its worst, since skin has a habit of behaving in waiting rooms. Bring a list of every product you use, including hair products, and the packaging of anything you suspect — ingredient lists are genuinely useful to a dermatologist. Note when it started, what makes it better or worse, and what you have already tried and for how long. In Korea, dermatology clinics — 피부과 (pibugwa) — are widely accessible, but wherever you are, going earlier costs less than going later."
+        }
+      ]
+    }
+  ]
+}

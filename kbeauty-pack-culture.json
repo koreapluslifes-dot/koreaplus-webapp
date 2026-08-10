@@ -1,0 +1,391 @@
+{
+  "_readme": "Authored content pack: Korean beauty culture (culture/) and buying K-beauty in Korea (shop/). Same no-fabrication contract as the rest of the library — no invented statistics, store counts, prices or opening hours; cosmetic structure-function wording only; medical questions deferred to a clinician. Slugs deliberately avoid every existing file in kb/culture/ and kb/shop/.",
+  "culture": [
+    {
+      "slug": "escape-the-corset-beauty-debate",
+      "title": "Escape the Corset: Korea's Beauty Standard Debate",
+      "h1": "Escape the corset: the argument Korea is still having about beauty standards",
+      "qa": "탈코르셋 (tal-koreuset), usually translated as escape the corset, is a South Korean movement in which mostly younger women publicly gave up makeup, long hair and other appearance routines they described as compulsory rather than chosen. It grew out of the feminist wave of the late 2010s and drew strong support and strong criticism inside Korea, often from women on both sides. It is a live argument about whether beauty work is freely chosen, not a settled verdict.",
+      "sections": [
+        {
+          "h": "What the movement actually involved",
+          "body": "Participants cut their hair short, stopped wearing makeup, swapped contact lenses for glasses and changed how they dressed. Some posted videos of cosmetics being destroyed, which is the image that travelled furthest abroad and was never representative of most participants. The framing was practical as much as ideological: the money, the morning time and the mental attention that a full appearance routine consumes. Some described it as a private decision to stop; others treated it as collective political action with a visible uniform. Online communities and video platforms carried most of it, which shaped how confrontational it looked from outside."
+        },
+        {
+          "h": "The case its participants made",
+          "body": "The core argument was that appearance in Korea functions less like a preference and more like an entry requirement — for hiring, for service work, for being taken seriously — and that a choice made under that pressure is not obviously free. Supporters pointed to the density of the beauty industry, the historical norm of photographs on job applications, and the routine commentary women received about their faces at school and at work. They also pointed to distribution: the labour, cost and risk of falling short landed overwhelmingly on women. Opting out, on that reading, carries a cost precisely because the standard is not optional."
+        },
+        {
+          "h": "The case against it, made inside Korea",
+          "body": "Critics, many of them women who identify as feminists, argued that grooming can be craft, pleasure or self-expression, and that treating makeup as false consciousness dismisses the people wearing it. A second objection was tactical: online shaming of women who kept wearing makeup reproduced the policing it set out to oppose. A third was structural — asking individuals to exit a norm puts the burden on them rather than on employers, broadcasters or schools that set the norm in the first place. Coverage abroad frequently flattened all of this into a single tidy narrative it does not fit."
+        },
+        {
+          "h": "What it did and did not change",
+          "body": "It changed vocabulary. The term entered ordinary conversation, appearance-based comments became easier to name as a problem, and some marketing shifted towards language about choice rather than obligation. What it did to spending is genuinely unclear, and worth treating with suspicion whenever you see a number attached. Domestic cosmetics sales over the same years were moved far more visibly by tourism, exports and then the pandemic, and untangling one influence from the others is not something anyone can do credibly from the outside. Norms move slowly. The argument has not concluded; it has become ordinary."
+        }
+      ]
+    },
+    {
+      "slug": "three-generations-of-korean-skincare",
+      "title": "Skincare Across Three Generations of a Korean Family",
+      "h1": "Skincare across three generations: what gets handed down in a Korean family",
+      "qa": "In many Korean households skincare is an inherited, semi-public habit rather than a private one — a shared bathroom shelf, shared vocabulary and the same warnings about sun and dryness repeated down the line. What changes is where trust comes from: a department-store counter for grandparents, brand loyalty for parents, ingredient lists and online rankings for teenagers. The underlying premise survives all three: skin is maintained, not rescued.",
+      "sections": [
+        {
+          "h": "The vocabulary you inherit",
+          "body": "Korean product naming has its own long-standing shorthand. 스킨 (seukin) still means the watery first step that English calls toner, and 로션 (rosyeon) the light emulsion that follows — names that predate the current wave of marketing and outlived several of them. The whole category is 기초화장품 (gicho hwajangpum), literally basic cosmetics, and the verb attached to it is usually 관리 (gwalli), management. That word choice matters. A grandmother asking whether you put your 스킨 on is not asking about a product launch; she is asking whether you are keeping up maintenance."
+        },
+        {
+          "h": "What the oldest generation kept",
+          "body": "Older Korean households lean towards richer creams, 한방 (hanbang) herbal formulations and the 팩 (paek) as an occasional event rather than a nightly one. Loyalty ran through a person: a specific counter, a specific salesperson, a brand kept for decades. Thrift is part of the habit — samples saved, jars finished, nothing abandoned half-used. The most durable inheritance is not a product but physical sun avoidance: visors, long sleeves, gloves while driving and an umbrella in bright weather, all of it normal here long before daily sunscreen became the default advice."
+        },
+        {
+          "h": "The middle generation set the defaults",
+          "body": "Parents now in middle age are the ones who made sunscreen a daily item for their children and framed skincare as 예방 (yebang), prevention, rather than as a response to a problem. This is the generation that bought a first proper skincare set for a teenager as a milestone, that formed brand loyalties in roadshops and on home-shopping channels, and that treats a shared bathroom shelf as normal. Their instincts are conservative and mostly sound — consistency, moisturising, sun protection — even where the specific product beliefs attached to them have not aged well."
+        },
+        {
+          "h": "What the youngest generation changed",
+          "body": "Trust moved online. Teenagers and twenty-somethings read 성분 (seongbun, ingredients) lists, check sales rankings, and use apps that decode an ingredient list into categories. Routines got shorter and claims got less credit; scepticism about marketing is now the default rather than the exception. Boys are included without comment, which is a real generational break. The failure mode is copying adult routines wholesale — layering strong exfoliating acids and retinoids onto young, reactive skin because a review said so. Persistent breakouts or irritation are a dermatologist's question, not a reason to add another step."
+        }
+      ]
+    },
+    {
+      "slug": "military-service-and-mens-skincare",
+      "title": "Military Service and Men's Skincare in Korea",
+      "h1": "Military service and men's skincare: what conscription actually does to a routine",
+      "qa": "Conscription puts most South Korean men through a long stretch of outdoor training, short haircuts and limited product access, which compresses whatever routine they arrived with down to a cleanser, a moisturiser and whatever sun protection is practical. Discharge then works as a reset point, and grooming purchases cluster around it. The claim that the military built Korea's men's skincare market on its own is over-stated — it is one influence among several.",
+      "sections": [
+        {
+          "h": "What service does to a routine",
+          "body": "Able-bodied Korean men serve for a period that varies by branch, typically somewhere around eighteen months. The conditions do the work: long days outdoors, sweat under equipment, chinstraps and helmets, wind and dry winter air, communal washrooms and early starts. Product access narrows to what the on-base shop stocks or what arrives in a parcel from home. Routines shrink accordingly, and what survives is whatever absorbs quickly, needs no mirror and does not announce itself by scent. Most men leave with a simpler routine than they had going in, and many keep it."
+        },
+        {
+          "h": "Sun exposure is the real variable",
+          "body": "Field training happens outdoors in whatever weather exists, and reapplying sunscreen partway through an exercise is rarely realistic. That makes cumulative ultraviolet exposure the one genuinely defensible skin concern of this period, well ahead of anything about pores or texture. Hats, sleeves and shade do more practical work here than any product. It is worth being blunt about the sequence: protection during the exposure is what counts, and nothing bought afterwards reverses accumulated sun damage, whatever the packaging on a post-discharge gift set implies."
+        },
+        {
+          "h": "Discharge as a reset point",
+          "body": "전역 (jeonyeok), discharge, is a marked event. Hair grows back, appearance re-enters the picture, and a fair amount of buying happens around it — often as gifts, since sets given before enlistment and after discharge are a small genre of their own. The effect on the wider culture is less about spending than visibility: a very large share of Korean men have shared the same grooming baseline at the same age, which is part of why men buying skincare here reads as ordinary rather than as a statement."
+        },
+        {
+          "h": "The claim to be sceptical about",
+          "body": "The tidy story is that conscription manufactured a generation of male skincare buyers. It is repeated often and it is not testable. Idol and actor visibility, appearance expectations in hiring and customer-facing work, and the simple fact that men's products are stocked everywhere all push the same way, and no one can separate their contributions from outside the market. Take the correlation, leave the causation. One practical note: breakouts driven by friction, heat or occlusion under equipment are common during service and are a clinician's question, not a routine-building exercise."
+        }
+      ]
+    },
+    {
+      "slug": "school-and-workplace-grooming-norms",
+      "title": "Grooming Norms in Korean Schools and Workplaces",
+      "h1": "Grooming norms in Korean schools and workplaces, and how much they have loosened",
+      "qa": "Korean schools have historically regulated hair and cosmetics through written rules, while workplaces regulate appearance through unwritten ones. Both have loosened unevenly: student hair rules have been relaxed or dropped in a number of education districts, and legislation now restricts what employers may require about an applicant's appearance. The expectations did not vanish, they changed enforcement — carried by colleagues and habit rather than a rulebook.",
+      "sections": [
+        {
+          "h": "School rules and how students worked around them",
+          "body": "두발 규정 (dubal gyujeong), hair regulations, governed length, dyeing and perms, and makeup was often banned outright. Enforcement varied enormously by school, and periodic inspections are a shared memory for older Koreans. Students did what students do — tinted lip balm that passes as chapped-lip care, sunscreen, a light BB cream. Student rights ordinances in several education offices have since relaxed or removed hair rules, and a number of schools have quietly stopped enforcing cosmetics bans. Practice still differs school by school, so no single description of the current position holds nationally."
+        },
+        {
+          "h": "The interview and the résumé photo",
+          "body": "면접 (myeonjeop), the job interview, developed its own grooming genre: neutral makeup, a specific conservative hairstyle, a suit, and a 증명사진 (jeungmyeong sajin) taken at a photo studio and retouched to convention. Legislation has since restricted employers from requiring appearance-related personal details on applications, and photograph requirements are far less universal than they were. The rule changed faster than the habit — the studios still do brisk business, and plenty of applicants still submit a photo because everyone else does."
+        },
+        {
+          "h": "What offices actually expect",
+          "body": "It varies by sector more than any generalisation survives. Conservative finance, sales and customer-facing roles expect a groomed baseline: light makeup for women, clean-shaven for men, nothing surprising. Startups, creative industries and much of tech expect nothing in particular. Enforcement is social rather than formal — a remark from a manager, not a written policy. What is unremarkable across almost all of them is a sunscreen and a cushion compact in a desk drawer, for men as well as women, reapplied without anyone treating it as an event."
+        },
+        {
+          "h": "Where it is heading",
+          "body": "Younger workers push back on appearance comments in a way that would have been unusual a decade ago, and unsolicited remarks about weight or skin are increasingly treated as a conduct issue rather than office banter. The direction of travel is clear even though the pace is not. For a visitor or someone working in Korea, the useful summary is that a groomed default is read as competence and preparation. That is worth knowing. It is not the same thing as it being required of you."
+        }
+      ]
+    },
+    {
+      "slug": "cosmetics-as-gifts-korean-etiquette",
+      "title": "Giving Cosmetics as a Gift in Korea: Etiquette",
+      "h1": "Giving cosmetics as a gift in Korea: what works, what lands badly",
+      "qa": "Cosmetics are a mainstream gift in Korea, and the gifting calendar is a real part of how the industry sells — boxed holiday sets before Seollal and Chuseok, sets for milestones, small items as everyday thanks. The safe choices are hydrating and cleansing basics, sets rather than single items, and presentation that looks considered. The gifts that land badly imply a diagnosis: anti-ageing or spot-brightening products read as a comment on the recipient's face.",
+      "sections": [
+        {
+          "h": "The holiday gift-set season",
+          "body": "명절 선물세트 (myeongjeol seonmulset), holiday gift sets, fill department stores and supermarkets ahead of 설날 (Seollal) and 추석 (Chuseok), stacked next to food and household sets. Boxed presentation carries more weight here than in most markets — the box is part of the gift, not packaging to be discarded. Heritage and 한방 (hanbang) lines dominate the upper end and mass brands the lower, with a fairly clear price ladder that recipients can read. Buying inside this season is easier than outside it, because the sets are built for the purpose."
+        },
+        {
+          "h": "Everyday gifting and 사은품 culture",
+          "body": "Small-scale gifting is constant and low-ceremony. Sample sizes get passed around, sheet masks circulate in offices, and 사은품 (sa-eunpum), the free gift given with a purchase, is a category shoppers actively compare between counters. Messaging-app gift vouchers have made sending someone a specific product trivially easy, and are now a normal way to say thank you. Exchange is also normal: gift receipts exist, and a recipient swapping a shade for one that suits them is not treated as a rejection of the gift."
+        },
+        {
+          "h": "What to avoid",
+          "body": "Skip specific makeup shades for anyone whose colouring you do not know well, and skip anything framed as a fix — wrinkles, dark spots, acne — unless they asked for it. Heavy fragrance is a gamble. Gifts to teachers and public officials are a separate matter: Korea's anti-graft legislation caps the value of gifts to certain groups including teachers, and many schools discourage gifts entirely regardless of value. The limits have been revised more than once, so check the current position rather than relying on a figure someone quotes."
+        },
+        {
+          "h": "If you are buying gifts as a visitor",
+          "body": "Duty-free and department-store counters are the easiest places to buy something that already looks like a gift, and travel retail is where Korean prestige brands are genuinely discounted rather than merely bundled. For friends abroad, sheet masks and sunscreens travel well, need no shade match and rarely cause offence. Avoid foundation and concealer unless you have been given a shade name. If you have a connecting flight, check liquid rules before committing to a large sealed set you may have to hand over at a transfer point."
+        }
+      ]
+    },
+    {
+      "slug": "k-drama-beauty-and-the-export-effect",
+      "title": "K-Drama Beauty and the Export Effect",
+      "h1": "K-drama beauty and the export effect: what dramas actually sell",
+      "qa": "K-dramas move Korean cosmetics abroad mainly by making a look familiar, and only occasionally by selling a named product. Paid placement is a normal part of drama financing and is disclosed under Korean broadcasting rules, and the famous cases — a lipstick shade selling out across Asia after a hit 2014 series — are real but rare enough to be remembered individually. The durable effect is category interest: a viewer who starts with a drama and buys a cushion months later.",
+      "sections": [
+        {
+          "h": "How placement actually works",
+          "body": "Product placement funds a meaningful share of Korean drama production, and Korean broadcast rules require it to be disclosed, which is why viewers recognise the beat where a character opens a fridge or a compact with the label turned to camera. Placement buys presence on screen. It does not buy desire, and it does not buy distribution. The placed items that convert into sales are almost always ones that were already easy to find and easy to afford in the markets where the drama was watched."
+        },
+        {
+          "h": "The look, not the product",
+          "body": "What dramas exported most successfully is a visual grammar: even luminous skin, a soft gradient lip, straight brows, very little contour, hair that reads as glossy rather than styled. That aesthetic crosses borders far more reliably than any single item. It is also worth stating plainly that lighting, colour grading and a professional makeup team do a large share of the work on screen, so the finish shown is not a standard any product is capable of meeting on its own — regardless of how the advertising alongside it is written."
+        },
+        {
+          "h": "The chain from broadcast to basket",
+          "body": "The route runs broadcast or streaming, then subtitles, then search, then reviews in the viewer's own language, then a retailer who actually stocks the thing. Every step sheds people. What survives to the end is rarely the specific tube from episode four; it is a general willingness to try Korean skincare. Overseas retailers responded to that accurately, stocking categories — cushions, sheet masks, sunscreen, essences — rather than trying to replicate any one drama's shelf."
+        },
+        {
+          "h": "Where the story gets over-sold",
+          "body": "Sales spikes traced to a scene tend to be short, and marketing decks present them as a repeatable mechanism. They are not. The sell-out cases are famous precisely because they are unusual, and the same placement in a less-watched series produces nothing measurable. Be sceptical of any claim that a drama built a brand. Price, availability, retailer relationships and shipping decide far more than screen time does, and a product no one can buy in Manila or Munich stays unbought whoever is holding it."
+        }
+      ]
+    },
+    {
+      "slug": "roadshop-boom-and-bust-2010s",
+      "title": "The 2010s Roadshop Boom and Bust",
+      "h1": "The roadshop boom and bust: how single-brand street stores rose and fell",
+      "qa": "로드샵 (rodeu-syap) refers to the single-brand street stores that defined Korean beauty retail through the 2000s and into the mid-2010s, where every shopfront on a strip sold one brand and staff handed out free sheet masks to pull passers-by inside. The format was undone by multi-brand chains, online shopping, a sharp late-2010s fall in Chinese group tourism and then the pandemic. Most of the brands survived in some form; the store estates did not.",
+      "sections": [
+        {
+          "h": "What the boom looked like",
+          "body": "Myeongdong was the emblem: adjacent shopfronts running Etude House, Missha, The Face Shop, Nature Republic, Innisfree, Tony Moly, Skinfood and Holika Holika within a couple of blocks. The mechanics were loud — one-plus-one baskets, a free mask with any purchase, staff calling from doorways in Korean, Chinese and Japanese, and a launch cadence fast enough that the shelf looked different month to month. The same format replicated in university districts and neighbourhood high streets across the country, usually as franchises."
+        },
+        {
+          "h": "Why it worked while it worked",
+          "body": "Vertical control was the advantage. One brand owned the shelf, the price, the staff and the story, so a trend item could go from decision to street quickly and the margin was legible. Group tourism supplied volume that domestic demand alone would not have produced, particularly in central Seoul. The lasting cultural effect was a repricing of the whole category: skincare stopped being something bought from a salesperson at a counter and became something you picked up on the way home."
+        },
+        {
+          "h": "What broke it",
+          "body": "Multi-brand health-and-beauty chains let a shopper compare brands in one trip, which a single-brand store structurally cannot answer. Online undercut store prices on identical stock. The late-2010s downturn in Chinese group tourism removed the volume that prime-district rents were underwritten by, and the pandemic removed most of what was left. Rents in central shopping districts fall much more slowly than footfall does, so the squeeze arrived from both sides at once and closures ran through franchisees as well as company-operated stores."
+        },
+        {
+          "h": "Where those brands are now",
+          "body": "Most pivoted rather than disappeared: far fewer directly operated stores, shelf space inside multi-brand chains, their own online stores, and export through overseas retailers and marketplaces. Some contracted severely, and at least one well-known name went through court-led restructuring in the late 2010s. The products themselves largely still exist and several remain popular abroad. If you are shopping for them in Korea today, expect to find them on a chain shelf or a website rather than in a shop devoted to them."
+        }
+      ]
+    },
+    {
+      "slug": "how-olive-young-reshaped-korean-beauty-retail",
+      "title": "How Olive Young Reshaped Korean Beauty Retail",
+      "h1": "How Olive Young reshaped Korean beauty retail, for better and worse",
+      "qa": "Olive Young (올리브영) turned Korean beauty retail from a street of single-brand shops into one dominant multi-brand shelf, and became the main gatekeeper between a Korean brand and a Korean shopper in the process. Getting listed there is a strategic milestone, its sales rankings act as a discovery engine at home and abroad, and its promotional calendar sets the rhythm for the whole category. That concentration is convenient for shoppers and precarious for brands.",
+      "sections": [
+        {
+          "h": "From single brand to one shelf",
+          "body": "The health-and-beauty store format lets someone compare a cheap cleanser and a prestige serum on one trip, with no salesperson attached to either. Rival chains launched during the same period and later withdrew, which left one chain with unusual reach across the country. For shoppers that collapsed the effort of comparison to almost nothing. For brands it replaced dozens of separate shop windows with a single buyer's decision, and that shift is the whole story of the last decade of Korean beauty retail."
+        },
+        {
+          "h": "The ranking became the marketing",
+          "body": "The chain's sales rankings are read as recommendations. They get cited in reviews, screenshotted, translated and republished abroad, and for many overseas shoppers they are the primary signal of what is worth buying in Korea. It is worth being clear about what the number measures: units sold over a period, shaped heavily by promotional funding, shelf position and whatever launched that month. A high rank tells you a product moved. It tells you nothing about whether it suits your skin, and nothing about formulation quality."
+        },
+        {
+          "h": "What it changed about products",
+          "body": "Brands now design for the shelf. Ranges get tighter, packaging is built to be legible at arm's length in a crowded aisle, sizes are chosen to fit multi-buy promotions, and launches are timed to the chain's sale weeks. The genuine upside is access: an independent brand can reach the whole country without owning a single store or signing a lease. The consequence is that shelf-space economics rather than shop-front rent now decide which small brands survive, and that is a different set of gatekeepers, not an absence of them."
+        },
+        {
+          "h": "The trade-off",
+          "body": "Depending on one channel means the terms, the promotional funding and the delisting risk all sit with someone else. Trend-led launches multiply because velocity is what the ranking rewards, and slower categories get squeezed. Shoppers get range, comparability and price transparency that the roadshop era never offered. Brands get a landlord. Both statements are true at once, which is why coverage that presents the chain purely as a success story — or purely as a monopoly problem — is describing half of it."
+        }
+      ]
+    }
+  ],
+  "shop": [
+    {
+      "slug": "olive-young-for-first-time-visitors",
+      "title": "Olive Young for First-Time Visitors",
+      "h1": "Olive Young for first-time visitors: how the shop actually works",
+      "qa": "Olive Young is a multi-brand health-and-beauty chain and the simplest single stop for most K-beauty shopping in Korea, with skincare, sunscreen, masks, makeup and toiletries grouped by category, testers out, and staff who generally leave you alone unless asked. Foreign passport holders can usually claim a tax refund, often deducted at the till in participating branches. Prices are set chain-wide, so walking between branches to compare is wasted effort.",
+      "sections": [
+        {
+          "h": "How the shop is laid out",
+          "body": "Organisation is by category first and brand second: cleansers together, sunscreens together, sheet masks in a wall or a bin near the front, colour cosmetics along one side. A ranking display usually sits somewhere prominent. Take a basket at the door. Testers are laid out with cotton pads and sanitiser, and trying textures on the back of your hand is expected. Branches in tourist-heavy districts carry bilingual signage and often have staff who can help in English, Chinese or Japanese if you ask directly."
+        },
+        {
+          "h": "Tax refund and payment",
+          "body": "Bring your passport, not a photograph of it. Many branches operate immediate tax deduction at the register for foreign visitors once a purchase passes a minimum spend, with the refund taken off what you actually pay; where that is not available you keep the receipts and claim at a kiosk or counter before departure. Minimum spends, caps and paperwork are revised periodically, so ask at the till rather than trusting a blog post from a few years ago. Cards are accepted everywhere."
+        },
+        {
+          "h": "How the discounts stack",
+          "body": "Several layers apply at once: a chain-wide sale period, coupons issued through the app to members, membership point accrual and occasional card-issuer promotions. The consequence is that the shelf price is frequently not the final price, and two people can pay different amounts for the same basket on the same afternoon. Multi-buy on masks, cleansers and cotton goods is where the real saving is. Outside a sale week, there is no advantage in rushing — the price will be the same in three days."
+        },
+        {
+          "h": "What to buy here and what not to",
+          "body": "Strong here: sunscreens, sheet masks, cleansers, mid-tier serums, travel sizes and the chain's own-label basics. Weaker here: cheap tools, cotton pads and simple accessories that a budget variety store sells for less, and prestige Korean lines that duty-free discounts more meaningfully. If your skin reacts easily, buy one of something before you buy ten — a bulk pack of a product that stings is a bad souvenir and an unreturnable one once you have flown home."
+        }
+      ]
+    },
+    {
+      "slug": "department-store-counters-vs-roadshops",
+      "title": "Department Store Counters vs Roadshops",
+      "h1": "Department store counters versus roadshops: which one you actually need",
+      "qa": "Department-store beauty halls sell service and prestige Korean lines — seated consultation, shade matching under decent light, samples and gift packaging — at prices that almost never move. Chains and surviving roadshops sell volume and speed: self-service, stacked promotions, low prices and no expectation that you speak to anyone. Use the counter when the purchase genuinely needs a person, and the chain when it does not.",
+      "sections": [
+        {
+          "h": "What a counter actually gives you",
+          "body": "The ground floor of a 백화점 (baekhwajeom) carries Korea's prestige houses — Sulwhasoo, The History of Whoo, Hera, O Hui, Su:m37, AMOREPACIFIC — alongside imported brands. What you are buying beyond the product is time: a seat, a consultation, skin measurement of varying rigour, shade matching in light that is at least consistent, generous samples, and boxed presentation that matters a great deal if the purchase is a gift. For foundation and cushion shades this is the only setting that reliably beats guessing."
+        },
+        {
+          "h": "What the chains give you",
+          "body": "Multi-brand chains and the remaining single-brand roadshops run on self-service. Nobody approaches you, nobody upsells, and equally nobody helps unless you ask. Promotions run more or less continuously and stack on top of each other. The range skews mass and mid-tier, weighted towards skincare basics and whatever is currently trending. For anything you have bought before and already know works on your skin, this is straightforwardly the better option and the cheaper one."
+        },
+        {
+          "h": "Price behaves differently in each",
+          "body": "Department-store shelf prices are stable on purpose — discounting a prestige line on the shop floor undermines its positioning, so the levers used instead are sample sets, gift-with-purchase, membership tiers and seasonal boxed sets. That means the same prestige brand is genuinely cheaper in duty-free and travel retail than at its own counter. Mass-market brands work the opposite way: shelf prices move constantly, and the cheapest moment to buy them is during a chain sale week with coupons applied."
+        },
+        {
+          "h": "A practical split",
+          "body": "Counter: foundation, cushions, anything needing a shade match, and gifts where the box matters. Chain: sunscreen, cleansers, masks, toners and repeat purchases. A reasonable hybrid is to get matched and sampled at a counter, then buy the full size in duty-free when you fly out. Korean counter staff respond well to a clear opening line — say what you are looking for and whether you want to be left alone, and you will generally get exactly that."
+        }
+      ]
+    },
+    {
+      "slug": "myeongdong-then-and-now",
+      "title": "Myeongdong Then and Now: A Beauty District Changes",
+      "h1": "Myeongdong then and now: what happened to Seoul's beauty district",
+      "qa": "Myeongdong (명동) was for years the default beauty district for visitors — a dense grid of single-brand roadshops with staff pressing free sheet masks on anyone walking past. That format thinned out as multi-brand chains and online shopping took over and tourist footfall collapsed during the pandemic. The district has refilled with a different mix of chains, tourist retail and evening street food: still worth a walk, no longer where the best prices are.",
+      "sections": [
+        {
+          "h": "What made it the beauty district",
+          "body": "Central location, direct transport, hotels and duty-free within walking distance, and a critical mass of shopfronts inside a few blocks. Because brands were competing for the same pavement, promotions escalated against each other: free masks, one-plus-one baskets, staff calling out in several languages, discounts that existed mainly to beat the shop next door. For roughly a decade it was the most efficient place anywhere to see the entire Korean cosmetics market in a single hour on foot."
+        },
+        {
+          "h": "What changed",
+          "body": "The single-brand model lost to multi-brand shelves and to online pricing. The late-2010s fall in Chinese group tourism removed a large slice of the demand the district was built around, and the pandemic emptied units outright, leaving long stretches of shuttered frontage. Rents in a prime district do not fall as fast as footfall, so the churn was severe. What came back skewed towards operators able to serve mixed international traffic rather than one brand's estate of stores."
+        },
+        {
+          "h": "What it is like now",
+          "body": "A mixture: multi-brand beauty chains, some remaining brand stores, souvenir and clothing retail, cosmetics shops aimed squarely at visitors, and one of Seoul's busiest street-food cart scenes once the evening starts. Signage in several languages, staff used to foreign customers, and a great deal of noise. It is unmistakably built for tourists now, which is a description rather than a complaint — it is a good place to eat, browse and get a sense of scale."
+        },
+        {
+          "h": "Shopping it sensibly",
+          "body": "The free-mask barkers are a sales funnel, not generosity, and the bundle deals assembled for visitors are not automatically good value. Almost everything on offer sits on a chain shelf elsewhere at a chain price, so check one item you already know before committing to a haul. Carry your passport for tax refunds. The sound approach is to treat Myeongdong as somewhere to browse and eat, and to buy where prices are fixed, labelled and comparable."
+        }
+      ]
+    },
+    {
+      "slug": "duty-free-beauty-rules-of-thumb",
+      "title": "Duty-Free Beauty Buying: Rules of Thumb",
+      "h1": "Duty-free beauty buying in Korea: the rules of thumb that hold",
+      "qa": "Korea runs two different systems that both get called duty-free: pre-tax-exempt shops (사전면세), where you buy without tax and collect at the airport, and post-purchase tax refunds (사후면세) on ordinary shop purchases. Duty-free reliably wins on prestige Korean lines, imported fragrance and anything that never discounts on the high street. It rarely wins on mass-market skincare, which chains already discount harder than an airport ever will.",
+      "sections": [
+        {
+          "h": "The two systems, plainly",
+          "body": "Downtown and airport duty-free shops sell tax-exempt stock to departing travellers. You show a passport and flight details, and goods bought downtown are not carried out of the shop — they are collected at an airport pickup counter before your flight. Ordinary shops work the other way: you pay the full price including tax and reclaim it, either deducted immediately at the till in participating stores or through a kiosk or refund counter at the airport. Different paperwork, different timing, frequently confused."
+        },
+        {
+          "h": "Where the saving is real",
+          "body": "Prestige Korean skincare, imported fragrance and colour cosmetics from houses that hold their shelf prices. These lines are structurally undiscounted at department-store counters, so removing tax is the only meaningful reduction available on them anywhere in the country. Travel-retail exclusive sizes and gift sets can also work out better per millilitre than the standard line. Read the set contents before assuming equivalence, since travel-retail sets are not always composed of the same sizes or the same items as the counter range."
+        },
+        {
+          "h": "Where it is not",
+          "body": "Sheet masks, mass-market sunscreens, cleansers, toners and anything routinely sold on multi-buy in a chain. Airport pricing on those categories is usually worse, and airport shopping happens under time pressure, which is reliably where people overspend. The unexciting correct answer is to buy your everyday basics in the city during a sale week and reserve duty-free for the prestige items and fragrance you could not have discounted any other way."
+        },
+        {
+          "h": "Practical cautions",
+          "body": "Check your destination country's personal import allowance before loading up, since cosmetics count towards it. Check liquid and sealed-bag rules if you are connecting through another airport — a sealed duty-free bag can still be challenged at a transfer security point depending on the route. Leave real time for a downtown pickup counter before departure. Minimum spends, refund thresholds and forms are revised periodically, so confirm the current rules at the counter rather than assuming last year's still apply."
+        }
+      ]
+    },
+    {
+      "slug": "buying-kbeauty-online-what-goes-wrong",
+      "title": "Buying K-Beauty Online From Korea: What Goes Wrong",
+      "h1": "Buying K-beauty online from Korea, and the five ways it goes wrong",
+      "qa": "Buying K-beauty online from Korea usually works, and when it fails it fails in a small and predictable set of ways: grey-market stock near the end of its shelf life, Korean domestic sites that require a local phone number or card, import duty and tax charged on arrival, heat damage in transit, and marketplace listings that are outright counterfeit. Ordering from a brand's own international store or an established Korean global mall removes most of that risk.",
+      "sections": [
+        {
+          "h": "The three routes and their trade-offs",
+          "body": "A brand's own global site is the safest and usually the narrowest in range. A Korean multi-brand global mall gives you breadth, a familiar checkout and worldwide shipping. Third-party marketplaces and independent resellers are the cheapest and the most variable, and this is where nearly all the problems live. Korean domestic sites are a fourth route and the hardest one: identity verification, a Korean mobile number and often a Korean payment card, with no international shipping unless you add a forwarding service."
+        },
+        {
+          "h": "Dates, batches and grey stock",
+          "body": "Korean packaging typically prints 제조 (jejo), the manufacture date, and 사용기한 (sayonggihan), the use-by date, frequently in Korean only and sometimes on the outer box rather than the product. Deeply discounted stock from unofficial resellers is often close to the end of its life, or was bought as a clearance lot after a reformulation. A seller worth using will answer a direct question about the printed date before you order. One who cannot or will not is telling you something useful."
+        },
+        {
+          "h": "Customs, shipping and returns",
+          "body": "Import duty and tax are charged by your own country, not the seller, and are the usual source of an unexpected bill on delivery — check your own threshold before building a large order. Summer shipping is genuinely hard on balms, cushions and emulsions, which can arrive softened or separated even when nothing is wrong with the formula. Cross-border returns are rarely worth the postage, which is exactly why buying a single unit of anything new matters far more online than it does in a shop."
+        },
+        {
+          "h": "What is actually counterfeit",
+          "body": "High-demand cushions, popular serums and a handful of well-known sunscreens are the usual targets on open marketplaces. The signals are consistent: a price well below every legitimate channel, no batch code, stock photography only, a seller with no trading history, and packaging with no Korean-language ingredient labelling. If a product you have used before arrives smelling or behaving noticeably differently, stop using it, and see a doctor or pharmacist if your skin reacts rather than trying to work out the cause yourself."
+        }
+      ]
+    },
+    {
+      "slug": "counterfeit-cosmetics-at-market-stalls",
+      "title": "Spotting Counterfeit Cosmetics at Market Stalls",
+      "h1": "Spotting counterfeit cosmetics at market stalls and informal resellers",
+      "qa": "Counterfeit cosmetics in Korea turn up overwhelmingly through unofficial resellers — tourist stalls, pop-up tables and open marketplaces — rather than in chains, department stores or brand shops. The reliable signals are a price far below every legitimate channel, missing batch and manufacture codes, absent Korean-language ingredient labelling, and print that is subtly wrong. The simplest defence is unglamorous: buy through official channels.",
+      "sections": [
+        {
+          "h": "Where the risk sits",
+          "body": "Chains, department-store counters, brand stores, duty-free and brand-operated online shops are supplied directly and are effectively a non-issue. Risk concentrates wherever provenance is unclear: unattributed stalls, informal resellers, secondhand sales and marketplace sellers with no trading history. Most such sellers are handling genuine stock. The problem is that you have no way to distinguish the ones who are not, and no recourse at all if the item turns out to be fake once you have flown home."
+        },
+        {
+          "h": "What to check on the box",
+          "body": "Cosmetics sold legitimately in Korea carry Korean-language labelling with the ingredient list, the manufacturer or importer, and dates. A box carrying none of that was not intended for Korean retail, whatever the seller says. Look for a batch or lot code, and for 제조 (jejo) and 사용기한 (sayonggihan) printed on the packaging. Then look at the printing itself: misaligned text, substituted fonts, poor colour registration, a cellophane wrap that is loose or unevenly sealed. Counterfeits usually fail on print before they fail on formula."
+        },
+        {
+          "h": "Tells that are not reliable",
+          "body": "Smell, texture and colour are weak evidence. Brands reformulate regularly, so a product differing from the version you remember has probably been reworked rather than faked. Holograms, seals and security stickers are copied routinely. A scannable QR code proves almost nothing, since the code can be lifted from a genuine package. Treat sensory impressions as a prompt to check provenance, never as a conclusion — the question that actually decides it is where the item came from."
+        },
+        {
+          "h": "Testers, not-for-sale units and loose bundles",
+          "body": "Units marked 비매품 (bimaepum, not for sale) or 견본 (gyeonbon, sample) were never meant to be sold, frequently carry no traceable date, and may have been stored anywhere for any length of time. Loose sheet masks bagged in tens with no outer packaging are impossible to verify at all. If you have used something of unknown origin and your skin reacts, stop and see a doctor or pharmacist — an unidentified product is not something to reason your way through alone."
+        }
+      ]
+    },
+    {
+      "slug": "korean-beauty-sales-seasons-explained",
+      "title": "Korean Sales Seasons and How Discounting Works",
+      "h1": "Korean beauty sales seasons, and how the discounting actually works",
+      "qa": "Korean beauty discounting runs on a fairly predictable calendar: chain-wide sale weeks several times a year, gift-set season before Seollal and Chuseok, a nationwide autumn shopping festival, brand anniversary events and imported occasions like Black Friday. What matters more than the calendar is stacking — a base discount plus app coupons plus membership tier plus a card promotion — so the headline figure on the sign is almost never what you pay.",
+      "sections": [
+        {
+          "h": "The recurring beats",
+          "body": "The dominant health-and-beauty chain runs several sale periods across the year, with the autumn one generally treated as the biggest. 명절 (myeongjeol) gift-set season fills department stores ahead of 설날 (Seollal) and 추석 (Chuseok). Korea Sale Festa, a nationwide retail event, falls in autumn. Online malls have adopted Black Friday and the November singles-day promotions, and brand anniversary weeks fill most of the remaining gaps. Exact dates shift year to year, so check before planning a trip around one."
+        },
+        {
+          "h": "How stacking works",
+          "body": "The shelf discount is only the base layer. On top go coupons issued through an app to members, tier-based point accrual, card-issuer discounts and the occasional cashback promotion. The practical result is that two shoppers can pay meaningfully different amounts for an identical basket on the same afternoon, depending entirely on which layers they qualify for. Work out the total at the till rather than calculating savings from the signage, and be aware that some layers exclude some brands."
+        },
+        {
+          "h": "One-plus-one and the volume trap",
+          "body": "Multi-buy is the main mass-market lever, and on masks, cleansers, cotton goods and toners the per-unit price is genuinely good. It is a poor deal on anything you have not used before, and on actives with a limited life once opened, where you are effectively buying a deadline as well as a product. A discounted item that irritates your skin has a saving of zero, and a second free one makes that worse rather than better."
+        },
+        {
+          "h": "How prestige discounts instead",
+          "body": "Luxury Korean brands rarely cut shelf prices, because visible discounting damages the positioning they are selling. Their levers are sample sets, gift-with-purchase, exclusive travel-retail sizes and membership benefits, none of which show up as a percentage. If you want a prestige line cheaper, duty-free and travel retail are the route rather than waiting for a sale week that will not come. Gift-set season is the genuine exception, where boxed value improves and the packaging is part of what you are paying for."
+        }
+      ]
+    },
+    {
+      "slug": "what-is-actually-cheaper-in-korea",
+      "title": "What Is Genuinely Cheaper in Korea Than Abroad",
+      "h1": "What is genuinely cheaper in Korea, and what only feels cheaper",
+      "qa": "Genuinely cheaper in Korea: mass-market Korean skincare — sunscreens, cleansers, sheet masks, toners and mid-tier serums — especially on multi-buy in a chain, plus basics from budget variety stores and launches that reach other countries only through resellers. Not cheaper: imported Western brands, prestige Korean lines at department-store counters, and anything bought at an airport under time pressure. The honest summary is that the case for a large haul has narrowed.",
+      "sections": [
+        {
+          "h": "The genuinely cheaper categories",
+          "body": "Mass-market Korean skincare carries an importer and distributor markup abroad that simply is not there at source, and Korean chains discount it aggressively on top. Sheet masks in bulk, gel and oil cleansers, sunscreens and mid-tier serums are the clearest wins. Budget variety stores sell competent basics — cotton pads, tools, simple moisturisers, storage — at prices that are difficult to match anywhere else. New launches also appear months earlier here and without the premium a reseller adds for getting them out of the country."
+        },
+        {
+          "h": "The categories that are not",
+          "body": "Imported Western skincare and fragrance are frequently more expensive in Korea than at home, sometimes conspicuously so. Prestige Korean lines at a department-store counter are not discounted at all, though the same brand in duty-free is a different calculation entirely. Airport shops are priced for people who have run out of alternatives. And anything heavy or liquid carries a second, invisible price in baggage allowance, which is a real cost people consistently forget to count."
+        },
+        {
+          "h": "The false economies",
+          "body": "Buying a year of sheet masks you will not finish before their use-by date. Stockpiling vitamin C serums and similar actives that degrade once opened. Adding items to reach a multi-buy threshold and abandoning half of them. Worth stating plainly: most staple K-beauty now ships internationally at reasonable prices, so the remaining advantage is narrower than haul culture suggests — it sits in volume basics, budget-store basics and early access to new launches, not in everything on the shelf."
+        },
+        {
+          "h": "Doing the maths honestly",
+          "body": "Compare against what you would actually pay at home for the thing you would actually buy, not against the shelf price of a prestige line you were never going to purchase. Factor in the tax refund if you qualify for it, the exchange rate on the day rather than the one you remember, and any foreign transaction fee your card charges. Buy single units of anything new to your skin, and buy volume only on products you have already used long enough to know they suit you."
+        }
+      ]
+    }
+  ]
+}

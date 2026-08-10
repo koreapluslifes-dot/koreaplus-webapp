@@ -1,0 +1,1919 @@
+{
+  "_readme": "Second library-only extension pack for build-kbeauty-pages.cjs — 54 additional ingredients that appear constantly on Korean labels: UV filters, silicones and esters, humectant polyols, preservative systems, texture agents, emulsifiers, peptides, ferments, marine and hanbang botanicals, oils, mineral actives and the ones readers are most often frightened of for no good reason. Same no-fabrication contract as the core data and ext pack: cosmetic structure-function wording, hedged claims, no invented figures, medicine deferred to clinicians.",
+  "ingredients": [
+    {
+      "id": "butyleneglycol",
+      "name": "Butylene Glycol",
+      "korean": "부틸렌글라이콜",
+      "emoji": "🧴",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dehydration", "dryness"],
+      "benefits": [
+        "Holds water in the surface layers so skin feels supple",
+        "Dissolves other ingredients, which keeps watery Korean textures thin and clear"
+      ],
+      "pairsWith": ["glycerin", "hyaluronic", "niacinamide", "panthenol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Second or third on the ingredient list of roughly half the Korean toners you own, and almost nobody knows what it is. Butylene glycol does two dull jobs at once: it holds a little water, and it dissolves things that water alone cannot. The internet panic about it is borrowed from propylene glycol arguments and does not transfer well."
+    },
+    {
+      "id": "propanediol",
+      "name": "Propanediol",
+      "korean": "프로판다이올",
+      "emoji": "🌽",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dehydration", "dryness"],
+      "benefits": [
+        "Light humectant that leaves less tack than glycerin alone",
+        "Improves how well other water-soluble ingredients dissolve"
+      ],
+      "pairsWith": ["glycerin", "hyaluronic", "betaglucan", "panthenol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The corn-derived glycol that Korean brands reached for once 'glycol-free' became a selling point. Functionally it does what butylene glycol does — a bit of hydration, a lot of solvency — with a slightly softer skin feel. Choosing between them is a formulator's decision about texture and sourcing, not a decision about how well your serum works."
+    },
+    {
+      "id": "hexanediol",
+      "name": "1,2-Hexanediol",
+      "korean": "1,2-헥산다이올",
+      "emoji": "🛡️",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dehydration"],
+      "benefits": [
+        "Adds light hydration while helping keep a formula stable",
+        "Lets brands build gentler, lower-load preservative systems"
+      ],
+      "pairsWith": ["caprylylglycol", "ethylhexylglycerin", "glycerin", "phenoxyethanol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The reason so many Korean products can print 무방부제 (mubangbuje, preservative-free) on the box. 1,2-Hexanediol is a solvent and humectant that also makes life difficult for microbes, so it is not classified as a preservative even though it is doing preservative work. Honest ingredient, slightly dishonest marketing."
+    },
+    {
+      "id": "sodiumpca",
+      "name": "Sodium PCA",
+      "korean": "소듐 PCA",
+      "emoji": "💦",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dehydration", "dryness", "barrier"],
+      "benefits": [
+        "Mimics one of skin's own natural moisturising factors",
+        "Holds water in the outermost layer without any weight"
+      ],
+      "pairsWith": ["amino", "hyaluronic", "urea", "glycerin"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Skin makes its own water-binding salts in the top layer; sodium PCA is a cosmetic version of one of them. It is a supporting act rather than a headline — you will see it in the middle of an ingredient list on hydrating toners and essences, quietly doing the thing that stops a light formula from evaporating off."
+    },
+    {
+      "id": "phenoxyethanol",
+      "name": "Phenoxyethanol",
+      "korean": "페녹시에탄올",
+      "emoji": "🧪",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": [],
+      "benefits": [
+        "Keeps a water-containing product from growing bacteria and mould",
+        "Works across the pH range Korean formulas actually use"
+      ],
+      "pairsWith": ["ethylhexylglycerin", "hexanediol", "caprylylglycol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Not an active. Phenoxyethanol is the preservative doing the unglamorous work of stopping your essence from turning into a petri dish, and Korea, the EU and Japan all cap it at 1%. It has a long safety record at that level. A product with water and no preservation system is a worse gamble than any preservative."
+    },
+    {
+      "id": "ethylhexylglycerin",
+      "name": "Ethylhexylglycerin",
+      "korean": "에틸헥실글리세린",
+      "emoji": "🧫",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": [],
+      "benefits": [
+        "Boosts how well the rest of the preservative system performs",
+        "Softens skin feel and helps control odour in a formula"
+      ],
+      "pairsWith": ["phenoxyethanol", "hexanediol", "caprylylglycol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Almost always sits next to phenoxyethanol on a Korean label, because its job is to make that phenoxyethanol work harder at a lower level. It also acts as a mild skin conditioner. Worth knowing: it is one of the less common contact allergens, so if a patch of products all sting you, it is one to check against."
+    },
+    {
+      "id": "caprylylglycol",
+      "name": "Caprylyl Glycol",
+      "korean": "카프릴릴글라이콜",
+      "emoji": "💧",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dehydration"],
+      "benefits": [
+        "Light humectant with a silky, non-tacky finish",
+        "Supports the preservation system so less preservative is needed"
+      ],
+      "pairsWith": ["hexanediol", "phenoxyethanol", "glycerin", "ethylhexylglycerin"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "A diol that hydrates a little, feels pleasant, and makes preservatives more effective — which is why it appears in the same breath as 1,2-hexanediol on so many Korean labels. Nobody buys a product for caprylyl glycol. It is there so the product can be gentle and still survive six months in a warm bathroom."
+    },
+    {
+      "id": "disodiumedta",
+      "name": "Disodium EDTA",
+      "korean": "디소듐 EDTA",
+      "emoji": "⚗️",
+      "cat": "antioxidant",
+      "star": false,
+      "bestFor": [],
+      "benefits": [
+        "Grabs stray metal ions that would otherwise degrade a formula",
+        "Helps colour, scent and actives stay stable for longer"
+      ],
+      "pairsWith": ["vitaminc", "vitamine", "ferulic", "phenoxyethanol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "A chelator, present at a fraction of a percent, and one of the most maligned ingredients on any label. Trace metals from water and packaging quietly wreck antioxidants and preservatives; EDTA mops them up. It does nothing to your skin, good or bad, at cosmetic levels — it protects everything else in the bottle."
+    },
+    {
+      "id": "carbomer",
+      "name": "Carbomer",
+      "korean": "카보머",
+      "emoji": "🫧",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": [],
+      "benefits": [
+        "Turns water into a gel, which is how watery textures hold together",
+        "Keeps oils and powders evenly suspended so the product stays uniform"
+      ],
+      "pairsWith": ["xanthangum", "glycerin", "hyaluronic"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "If your gel cream holds its shape on the back of your hand instead of running off it, carbomer is usually why. It is a thickener, nothing more, and it needs a neutralising agent to work — which is one reason you often see sodium hydroxide or arginine a few lines later on the same label."
+    },
+    {
+      "id": "xanthangum",
+      "name": "Xanthan Gum",
+      "korean": "잔탄검",
+      "emoji": "🌾",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": [],
+      "benefits": [
+        "Thickens water-based formulas and stops them separating",
+        "Leaves a light film that slows water loss from the surface"
+      ],
+      "pairsWith": ["carbomer", "glycerin", "betaglucan", "hyaluronic"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "A fermentation-derived sugar polymer, the same one that thickens salad dressing. In skincare it gives body to toners and essences without oils, which suits the Korean preference for light textures. Used heavily it turns slimy and pills under sunscreen, so a formulator's restraint with xanthan gum is something you can feel."
+    },
+    {
+      "id": "silica",
+      "name": "Silica",
+      "korean": "실리카",
+      "emoji": "⚪",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["oiliness", "pores", "texture"],
+      "benefits": [
+        "Absorbs surface oil so skin looks matte for longer",
+        "Scatters light, which softens the look of pores and fine texture"
+      ],
+      "pairsWith": ["zincpca", "niacinamide", "silsesquioxane", "kaolin"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "am",
+      "explainer": "The workhorse of Korean primers, sun sticks and mattifying creams. Silica is porous mineral powder: it soaks up oil and diffuses light, so shine takes longer to break through and pores look shallower than they are. The effect is optical and temporary, which is exactly what a primer should be honest about."
+    },
+    {
+      "id": "silsesquioxane",
+      "name": "Polymethylsilsesquioxane",
+      "korean": "폴리메틸실세스퀴옥산",
+      "emoji": "🔮",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["pores", "texture", "oiliness"],
+      "benefits": [
+        "Microspheres roll over skin for a smooth, powdery slip",
+        "Blur the look of pores and fine lines by scattering light"
+      ],
+      "pairsWith": ["silica", "dimethicone", "niacinamide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "am",
+      "explainer": "The 'pore filter' effect in a jar, and the reason a Korean primer can make your nose look airbrushed in about four seconds. These are tiny hard spheres that sit on the surface and bounce light in all directions. Nothing is being treated. Wash it off and the pores are exactly as they were."
+    },
+    {
+      "id": "cetearylalcohol",
+      "name": "Cetearyl Alcohol",
+      "korean": "세테아릴알코올",
+      "emoji": "🕯️",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "barrier", "flaking"],
+      "benefits": [
+        "Softens and conditions skin like a mild wax rather than a solvent",
+        "Gives creams their body and keeps oil and water combined"
+      ],
+      "pairsWith": ["glycerylstearate", "shea", "ceramide", "squalane"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The word alcohol on a label has cost this ingredient a lot of unearned suspicion. Cetearyl alcohol is a fatty alcohol — a waxy solid, closer to shea butter than to vodka — and it thickens and softens rather than dries. If a cream feels rich and stable, this is usually part of the reason."
+    },
+    {
+      "id": "glycerylstearate",
+      "name": "Glyceryl Stearate",
+      "korean": "글리세릴스테아레이트",
+      "emoji": "🥛",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "barrier"],
+      "benefits": [
+        "Holds oil and water together so a cream stays a cream",
+        "Leaves a soft, conditioned finish on the surface"
+      ],
+      "pairsWith": ["cetearylalcohol", "shea", "squalane", "ceramide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "An emulsifier built from glycerin and a fatty acid, and one of the most common ways a Korean emulsion gets its texture. It is structural rather than active: no emulsifier, no lotion, just an oily layer floating on water. It also happens to feel softening on skin, which is a useful bonus."
+    },
+    {
+      "id": "lecithin",
+      "name": "Hydrogenated Lecithin",
+      "korean": "하이드로제네이티드레시틴",
+      "emoji": "🫘",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["barrier", "dryness"],
+      "benefits": [
+        "Phospholipid emulsifier that sits comfortably with skin's own lipids",
+        "Used to build liposomes that carry oil-loving ingredients in water"
+      ],
+      "pairsWith": ["ceramide", "cholesterol", "linoleic", "squalane"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Soy-derived phospholipid, hydrogenated so it does not go rancid. Two jobs: it emulsifies, and it forms the little bilayer spheres that brands call liposomal or capsule delivery. Whether a liposome meaningfully improves delivery depends entirely on the formula, so treat the word capsule on packaging as a claim to check, not a guarantee."
+    },
+    {
+      "id": "alcoholdenat",
+      "name": "Alcohol Denat.",
+      "korean": "변성알코올",
+      "emoji": "🍶",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["oiliness"],
+      "benefits": [
+        "Makes sunscreens and toners dry down fast and weightless",
+        "Dissolves UV filters and botanicals that water cannot carry"
+      ],
+      "pairsWith": ["niacinamide", "zincpca", "octocrylene", "silica"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The single most argued-about line on a Korean sunscreen label. Denatured alcohol is why that sunscreen feels like nothing and vanishes under makeup — it flashes off and leaves the filters behind. It genuinely stings compromised or sensitised skin. The claim that it damages a healthy barrier at cosmetic levels is far shakier than the internet suggests."
+    },
+    {
+      "id": "octocrylene",
+      "name": "Octocrylene",
+      "korean": "옥토크릴렌",
+      "emoji": "🌤️",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["sundamage"],
+      "benefits": [
+        "Absorbs UVB and short UVA wavelengths",
+        "Stabilises avobenzone, which degrades quickly on its own"
+      ],
+      "pairsWith": ["octisalate", "homosalate", "octinoxate", "vitamine"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "am",
+      "explainer": "Rarely the star of a sunscreen and usually the reason the rest of it survives daylight. Octocrylene is a UVB filter that also props up avobenzone, the classic UVA filter that falls apart in sun without help. Korea, the EU and the US all permit it up to 10%. It is oily, so high levels are a texture trade-off."
+    },
+    {
+      "id": "homosalate",
+      "name": "Homosalate",
+      "korean": "호모살레이트",
+      "emoji": "☀️",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["sundamage"],
+      "benefits": [
+        "Absorbs UVB and acts as a solvent for other UV filters",
+        "Helps thick filter blends stay comfortable to spread"
+      ],
+      "pairsWith": ["octisalate", "octocrylene", "octinoxate"],
+      "avoidWith": [],
+      "preg": "caution",
+      "time": "am",
+      "explainer": "A weak UVB filter that earns its place mainly by dissolving stronger ones — a lot of sunscreen chemistry is really solvent chemistry. Ten percent was the traditional ceiling; the EU has since lowered the level allowed in facial products after reviewing it. If you are pregnant and would rather avoid it, mineral or newer-filter sunscreens are easy alternatives. Ask your doctor."
+    },
+    {
+      "id": "octisalate",
+      "name": "Ethylhexyl Salicylate (Octisalate)",
+      "korean": "에틸헥실살리실레이트",
+      "emoji": "🌞",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["sundamage"],
+      "benefits": [
+        "Absorbs UVB and dissolves other filters into a smooth base",
+        "Photostable and unusually low-irritation for an organic filter"
+      ],
+      "pairsWith": ["octocrylene", "homosalate", "vitamine", "squalane"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "am",
+      "explainer": "One of the mildest organic filters in common use, capped at 5% in most markets, and almost never working alone. Like homosalate it is partly a solvent: it keeps a filter blend liquid and spreadable. Despite the name it is not salicylic acid and does not exfoliate — a confusion worth clearing up on sight."
+    },
+    {
+      "id": "octinoxate",
+      "name": "Ethylhexyl Methoxycinnamate (Octinoxate)",
+      "korean": "에틸헥실메톡시신나메이트",
+      "emoji": "🕶️",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["sundamage"],
+      "benefits": [
+        "Strong UVB absorber used across Asian sunscreen formulas",
+        "Oil-soluble, so it suits light emulsion textures"
+      ],
+      "pairsWith": ["octocrylene", "octisalate", "vitamine"],
+      "avoidWith": [],
+      "preg": "caution",
+      "time": "am",
+      "explainer": "For decades the default UVB filter in Asian sunscreens, and still very common in Korean formulas. Market ceilings differ, roughly 7.5 to 10 percent depending on where you are. It is not photostable on its own and gives almost no UVA cover, so what sits beside it in the filter list matters more than the filter itself."
+    },
+    {
+      "id": "polysilicone15",
+      "name": "Polysilicone-15",
+      "korean": "폴리실리콘-15",
+      "emoji": "🧊",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["sundamage"],
+      "benefits": [
+        "Silicone-backboned UVB filter with a notably light feel",
+        "Helps sunscreen textures stay non-greasy and fast-drying"
+      ],
+      "pairsWith": ["octisalate", "octocrylene", "dimethicone", "silica"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "am",
+      "explainer": "A UV filter attached to a silicone backbone, permitted in Korea and the EU but not in the United States — one small piece of why Korean sunscreens feel the way they do. It absorbs UVB, stays put on skin thanks to its size, and adds almost no weight. Not a UVA filter, so it always travels in company."
+    },
+    {
+      "id": "cyclopentasiloxane",
+      "name": "Cyclopentasiloxane",
+      "korean": "사이클로펜타실록산",
+      "emoji": "💨",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["texture"],
+      "benefits": [
+        "Gives instant slip, then evaporates without residue",
+        "Spreads heavier ingredients into a thin, even layer"
+      ],
+      "pairsWith": ["dimethicone", "silsesquioxane", "silica"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The volatile silicone behind the dry, powdery glide of Korean primers, cushion foundations and sun sticks. It carries other ingredients across skin and then leaves. Because it evaporates rather than sits, it does not occlude the way dimethicone does — which makes the pore-clogging accusation aimed at it particularly poorly targeted."
+    },
+    {
+      "id": "caprylictriglyceride",
+      "name": "Caprylic/Capric Triglyceride",
+      "korean": "카프릴릭/카프릭트라이글리세라이드",
+      "emoji": "🥥",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "barrier"],
+      "benefits": [
+        "Light coconut-derived emollient that softens without heaviness",
+        "Very stable, so it does not turn rancid the way plant oils can"
+      ],
+      "pairsWith": ["squalane", "jojoba", "ceramide", "shea"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Coconut-derived, fractionated, and nothing like coconut oil in behaviour. It is one of the most-used emollients in cosmetics because it is light, spreads beautifully and stays fresh for years. If a Korean cleansing oil or ampoule feels silky rather than greasy, this ester is often the quiet reason."
+    },
+    {
+      "id": "cetylethylhexanoate",
+      "name": "Cetyl Ethylhexanoate",
+      "korean": "세틸에틸헥사노에이트",
+      "emoji": "🪶",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "texture"],
+      "benefits": [
+        "Dry-feeling ester that spreads fast and sinks in quickly",
+        "Softens the finish of sunscreens and makeup bases"
+      ],
+      "pairsWith": ["caprylictriglyceride", "squalane", "octisalate", "dimethicone"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "You have read this name a hundred times on Korean sunscreen and cushion labels without registering it. It is a synthetic ester chosen for one quality: a dry, fast-spreading slip that stops filter-heavy formulas feeling like grease. Purely a texture ingredient, and an unusually good one."
+    },
+    {
+      "id": "mineraloil",
+      "name": "Mineral Oil (Paraffinum Liquidum)",
+      "korean": "미네랄오일",
+      "emoji": "🛢️",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "barrier", "flaking"],
+      "benefits": [
+        "Slows water loss from the surface better than almost anything else",
+        "Dissolves makeup and sunscreen without stripping"
+      ],
+      "pairsWith": ["squalane", "shea", "ceramide", "glycerin"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The most effective occlusive in common cosmetic use, and the most unfairly maligned. Cosmetic-grade mineral oil is highly refined, chemically inert and rates as non-comedogenic in testing — the acne folklore comes from crude industrial grades, not from the ingredient in your cleansing oil. It hydrates nothing itself; it simply stops water leaving."
+    },
+    {
+      "id": "argireline",
+      "name": "Acetyl Hexapeptide-8 (Argireline)",
+      "korean": "아세틸헥사펩타이드-8",
+      "emoji": "🎭",
+      "cat": "anti-aging",
+      "star": false,
+      "bestFor": ["aging", "elasticity"],
+      "benefits": [
+        "Studied for the look of expression lines around eyes and forehead",
+        "Well tolerated, so it suits skin that reacts to retinoids"
+      ],
+      "pairsWith": ["peptides", "matrixyl", "hyaluronic", "niacinamide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Sold, endlessly, as 'topical Botox' — a comparison the evidence does not support. Acetyl hexapeptide-8 is studied for softening the appearance of expression lines, and the studies that exist are small and mostly manufacturer-linked. Something may be happening. It is not in the same category as an injectable, and marketing that says otherwise is selling you a mood."
+    },
+    {
+      "id": "matrixyl",
+      "name": "Palmitoyl Pentapeptide-4 (Matrixyl)",
+      "korean": "팔미토일펜타펩타이드-4",
+      "emoji": "🧬",
+      "cat": "anti-aging",
+      "star": false,
+      "bestFor": ["aging", "elasticity", "maturecare"],
+      "benefits": [
+        "Signal peptide linked to the look of firmer, smoother skin",
+        "Gentle enough to layer with almost anything in a routine"
+      ],
+      "pairsWith": ["peptides", "tripeptide1", "niacinamide", "hyaluronic"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The best known of the signal peptides, and a fixture in Korean firming ampoules. The idea is that a short fragment resembling a collagen breakdown product nudges skin to behave as though it should rebuild. Evidence is real but modest, and the visible payoff over months is a fraction of what a retinoid delivers."
+    },
+    {
+      "id": "tripeptide1",
+      "name": "Palmitoyl Tripeptide-1",
+      "korean": "팔미토일트라이펩타이드-1",
+      "emoji": "🪢",
+      "cat": "anti-aging",
+      "star": false,
+      "bestFor": ["aging", "elasticity", "maturecare"],
+      "benefits": [
+        "Usually paired with pentapeptide-4 in firming ampoules",
+        "Low irritation, which makes it easy to use every day"
+      ],
+      "pairsWith": ["matrixyl", "peptides", "adenosine", "ceramide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Rarely appears alone — it is half of the pairing most brands mean when they print 'Matrixyl 3000' on a box. As with its partner, the claim is signalling: a small peptide fragment that skin reads as a cue. Take the marketing about rebuilding structure as a description of appearance over months, not of biology you can verify at home."
+    },
+    {
+      "id": "acetyltetrapeptide5",
+      "name": "Acetyl Tetrapeptide-5",
+      "korean": "아세틸테트라펩타이드-5",
+      "emoji": "👁️",
+      "cat": "anti-aging",
+      "star": false,
+      "bestFor": ["darkcircles", "aging"],
+      "benefits": [
+        "Used in eye creams for the look of puffiness and shadow",
+        "Pairs naturally with caffeine in under-eye formulas"
+      ],
+      "pairsWith": ["caffeine", "peptides", "niacinamide", "hyaluronic"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The peptide that turns up in almost every eye product making a puffiness claim. The proposed idea involves fluid and protein cross-linking under thin eye skin; the supporting data is thin and largely supplier-generated. Reasonable to have in an eye cream. Not reasonable to expect it to do anything about hollowing or inherited pigment."
+    },
+    {
+      "id": "lactococcus",
+      "name": "Lactococcus Ferment Lysate",
+      "korean": "락토코커스발효용해물",
+      "emoji": "🥛",
+      "cat": "ferment",
+      "star": false,
+      "bestFor": ["barrier", "dullness", "sensitivity"],
+      "benefits": [
+        "Conditioning ferment associated with a calmer-looking barrier",
+        "Sits comfortably in low-irritation, fragrance-free formulas"
+      ],
+      "pairsWith": ["bifida", "lactobacillus", "ceramide", "panthenol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "One of the bacterial ferments Korean brands use when they want to say microbiome without saying anything checkable. What reaches the bottle is a filtered soup of peptides, sugars and acids — nothing living. It behaves as a conditioning agent. Claims that it rebalances your skin's own microbial population are well beyond what has been shown."
+    },
+    {
+      "id": "kombucha",
+      "name": "Kombucha Ferment",
+      "korean": "콤부차",
+      "emoji": "🍵",
+      "cat": "ferment",
+      "star": false,
+      "bestFor": ["dullness", "texture", "barrier"],
+      "benefits": [
+        "Fermented tea supplying organic acids and polyphenols",
+        "Used in essences aimed at the look of smoother, brighter skin"
+      ],
+      "pairsWith": ["greentea", "yeast", "galactomyces", "niacinamide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Fermented sweet tea, filtered and put in an essence. It brings green tea polyphenols plus the acids and sugars fermentation produces, which is a plausible mix for surface conditioning. The evidence for kombucha specifically, as opposed to green tea or ferments in general, is slim. A pleasant ingredient with a good story attached."
+    },
+    {
+      "id": "nuruk",
+      "name": "Nuruk (Aspergillus) Ferment",
+      "korean": "누룩발효물",
+      "emoji": "🍶",
+      "cat": "ferment",
+      "star": false,
+      "bestFor": ["dullness", "texture"],
+      "benefits": [
+        "Traditional Korean grain ferment used for the look of smoothness",
+        "Contributes amino acids and mild organic acids to a formula"
+      ],
+      "pairsWith": ["rice", "yeast", "soybean", "galactomyces"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "누룩 (nuruk) is the fermentation starter behind Korean rice wine, and the folklore about brewers' soft hands is the same story Japan tells about sake. Cosmetically it delivers what grain ferments deliver: amino acids, mild acids, sugars. Conditioning, pleasant, and considerably better documented as heritage than as an active."
+    },
+    {
+      "id": "seawater",
+      "name": "Deep Sea Water",
+      "korean": "해양심층수",
+      "emoji": "🌊",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dehydration", "barrier"],
+      "benefits": [
+        "Mineral-rich water base used in place of purified water",
+        "Contributes magnesium and other trace minerals to a formula"
+      ],
+      "pairsWith": ["glycerin", "hyaluronic", "betaglucan", "panthenol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "해양심층수 (haeyang simcheungsu) is deep ocean water drawn off Korea's east coast, desalinated and used as the water phase of a product. The minerals are real. Whether swapping purified water for mineral water changes anything you can see on your face is not established, and the marketing runs a long way ahead of the data."
+    },
+    {
+      "id": "kelp",
+      "name": "Kelp / Laminaria Extract",
+      "korean": "다시마",
+      "emoji": "🌿",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dehydration", "dryness", "barrier"],
+      "benefits": [
+        "Seaweed polysaccharides that hold water at the surface",
+        "Leaves a light, smoothing film on skin"
+      ],
+      "pairsWith": ["hyaluronic", "betaglucan", "polyglutamic", "glycerin"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "다시마 (dasima) is kitchen kelp, and in skincare it does what most seaweed extracts do: supplies big sugar molecules that hold water and form a soft film. Reliable as a humectant. The claims about detoxifying or delivering marine minerals into skin are decoration, not mechanism."
+    },
+    {
+      "id": "omija",
+      "name": "Omija (Schisandra)",
+      "korean": "오미자",
+      "emoji": "🔴",
+      "cat": "antioxidant",
+      "star": false,
+      "bestFor": ["dullness", "sundamage", "aging"],
+      "benefits": [
+        "Berry extract rich in antioxidant lignans and polyphenols",
+        "Used in hanbang formulas for the look of brighter, fresher skin"
+      ],
+      "pairsWith": ["ginseng", "greentea", "vitamine", "niacinamide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "오미자 (omija) means five-flavour berry, and it has been a 한방 (hanbang) tonic ingredient for centuries. In cosmetics it is a competent botanical antioxidant with a good phenolic profile. Most of the research sits in test tubes rather than on faces, so treat it as supporting cast alongside a vitamin C or niacinamide."
+    },
+    {
+      "id": "jakyak",
+      "name": "Jakyak (White Peony Root)",
+      "korean": "작약",
+      "emoji": "🌸",
+      "cat": "soothing",
+      "star": false,
+      "bestFor": ["redness", "sensitivity", "dullness"],
+      "benefits": [
+        "Traditional hanbang root used for the look of calm, even skin",
+        "Contributes paeoniflorin and related antioxidant compounds"
+      ],
+      "pairsWith": ["centella", "licorice", "madecassoside", "danggwi"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "작약 (jakyak), peony root, is one of the four herbs in the classic 사물탕 (samultang) tonic that Korean luxury brands quote constantly. It brings antioxidant and comforting compounds, and it earns its place in soothing formulas — though as with most hanbang botanicals, the lineage is far better documented than the clinical effect."
+    },
+    {
+      "id": "danggwi",
+      "name": "Danggwi (Angelica gigas)",
+      "korean": "당귀",
+      "emoji": "🌱",
+      "cat": "antioxidant",
+      "star": false,
+      "bestFor": ["dullness", "aging", "redness"],
+      "benefits": [
+        "Korean angelica root used across hanbang skincare traditions",
+        "Supplies decursin and related antioxidant compounds"
+      ],
+      "pairsWith": ["jakyak", "jihwang", "ginseng", "omija"],
+      "avoidWith": [],
+      "preg": "caution",
+      "time": "both",
+      "explainer": "당귀 (danggwi) is the Korean angelica that appears in almost every hanbang blend, usually alongside peony and rehmannia. Topically it is an antioxidant botanical with reasonable laboratory backing and very little human skin data. It is also a herb with real internal pharmacology, so if you are pregnant, ask your doctor rather than assuming."
+    },
+    {
+      "id": "jihwang",
+      "name": "Jihwang (Rehmannia Root)",
+      "korean": "지황",
+      "emoji": "🫚",
+      "cat": "hydration",
+      "star": false,
+      "bestFor": ["dryness", "maturecare", "dullness"],
+      "benefits": [
+        "Hanbang root traditionally used for the look of nourished skin",
+        "Contributes polysaccharides that hold water at the surface"
+      ],
+      "pairsWith": ["danggwi", "jakyak", "ginseng", "glycerin"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "지황 (jihwang) is rehmannia, the moistening herb in traditional Korean tonic formulas and a regular on luxury hanbang labels. Its sugar-rich extract behaves as a humectant, which lines up neatly with the traditional framing. Beyond that surface hydration, the claims about deep nourishment are heritage language rather than demonstrated action."
+    },
+    {
+      "id": "yulmu",
+      "name": "Yulmu (Job's Tears / Coix)",
+      "korean": "율무",
+      "emoji": "🌾",
+      "cat": "brightening",
+      "star": false,
+      "bestFor": ["dullness", "texture", "oiliness"],
+      "benefits": [
+        "Grain extract used in Korean formulas for the look of clearer tone",
+        "Starch fraction gives a soft, slightly mattifying finish"
+      ],
+      "pairsWith": ["rice", "niacinamide", "mungbean", "licorice"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "율무 (yulmu) is Job's tears, eaten as tea and porridge in Korea long before it appeared in cleansers. It behaves much like rice extract: a mild, starchy, conditioning botanical with a pleasant finish. The brightening framing is traditional rather than clinical — it will not do what an evidenced tone active does."
+    },
+    {
+      "id": "sophora",
+      "name": "Gosam (Sophora flavescens)",
+      "korean": "고삼",
+      "emoji": "🌾",
+      "cat": "acne-care",
+      "star": false,
+      "bestFor": ["acne", "oiliness", "redness"],
+      "benefits": [
+        "Bitter hanbang root used in blemish-focused Korean formulas",
+        "Contributes matrine and related plant alkaloids"
+      ],
+      "pairsWith": ["teatree", "heartleaf", "zincpca", "niacinamide"],
+      "avoidWith": [],
+      "preg": "caution",
+      "time": "both",
+      "explainer": "고삼 (gosam) is the bitter root that Korean brands reach for in scalp tonics and blemish toners. Laboratory work on its alkaloids is interesting; controlled evidence on human skin is close to absent. Acne that is not shifting is a dermatologist's problem, not a botanical toner's — see one rather than waiting on a root extract."
+    },
+    {
+      "id": "mayu",
+      "name": "Mayu (Horse Oil)",
+      "korean": "마유",
+      "emoji": "🐴",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "barrier", "flaking"],
+      "benefits": [
+        "Rich occlusive-emollient traditionally used on wind-chapped skin",
+        "Fatty acid profile sits closer to skin's own sebum than most plant oils"
+      ],
+      "pairsWith": ["ceramide", "shea", "squalane", "camellia"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "pm",
+      "explainer": "마유 (mayu) is rendered horse fat, a Jeju souvenir-shop staple and a genuine folk remedy for chapped winter skin. Its fatty acid mix is unusually similar to human sebum, which is the usual explanation for why it absorbs so well. That similarity is documented; the leaping claims about regeneration are not. Not for vegans, obviously."
+    },
+    {
+      "id": "perilla",
+      "name": "Perilla (Soyeop) Leaf",
+      "korean": "자소엽",
+      "emoji": "🍃",
+      "cat": "soothing",
+      "star": false,
+      "bestFor": ["redness", "sensitivity", "barrier"],
+      "benefits": [
+        "Leaf extract used in Korean formulas for the look of calmer skin",
+        "Supplies rosmarinic acid and related antioxidant compounds"
+      ],
+      "pairsWith": ["centella", "heartleaf", "mugwort", "panthenol"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "자소엽 (jasoyeop) is the purple perilla leaf you meet as a side dish before you meet it in a toner. Its rosmarinic acid content gives the soothing framing some grounding, and it sits comfortably in the Korean 진정 (jinjeong, calming) category alongside centella and heartleaf. Supporting botanical, not a corrective active."
+    },
+    {
+      "id": "kaolin",
+      "name": "Kaolin Clay",
+      "korean": "카올린",
+      "emoji": "🏺",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["oiliness", "pores", "blackheads"],
+      "benefits": [
+        "Absorbs surface oil without the tightness of stronger clays",
+        "Gives wash-off masks their body and mattifying finish"
+      ],
+      "pairsWith": ["charcoal", "silica", "zincpca", "volcanic"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "pm",
+      "explainer": "The gentlest of the common cosmetic clays, and the one Korean wash-off masks lean on when they want oil control without a stripped face. Kaolin soaks up sebum sitting on the surface. It does not reach into a pore, dissolve a blackhead or shrink anything — those are jobs for a BHA, if they are jobs at all."
+    },
+    {
+      "id": "volcanic",
+      "name": "Jeju Volcanic Ash (Songi)",
+      "korean": "화산송이",
+      "emoji": "🌋",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["oiliness", "pores", "blackheads"],
+      "benefits": [
+        "Porous volcanic mineral that absorbs oil and lifts surface debris",
+        "Gives Jeju-sourced masks and cleansers their gritty texture"
+      ],
+      "pairsWith": ["kaolin", "charcoal", "silica", "zincpca"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "pm",
+      "explainer": "화산송이 (hwasan songi) is the reddish porous scoria that covers parts of Jeju, and it became a Korean beauty signature the way volcanic mud did in Iceland — through provenance as much as chemistry. As an oil absorber it works. As proof of anything about Jeju's air or water, it is a story sold with a mask."
+    },
+    {
+      "id": "ethylascorbic",
+      "name": "3-O-Ethyl Ascorbic Acid",
+      "korean": "에칠아스코빌에텔",
+      "emoji": "🍋",
+      "cat": "brightening",
+      "star": true,
+      "bestFor": ["pigmentation", "dullness", "sundamage"],
+      "benefits": [
+        "Stable vitamin C derivative notified by Korea's MFDS for brightening claims",
+        "Water-soluble and far less prone to oxidising than pure ascorbic acid"
+      ],
+      "pairsWith": ["niacinamide", "arbutin", "tranexamic", "vitamine"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "am",
+      "explainer": "The vitamin C derivative Korean brands use when they want a serum that does not turn orange by March. Korea's MFDS lists it among the notified 미백 (mibaek, brightening) functional actives, which means a product carrying that mark on its strength contains a regulated amount. Gentler than L-ascorbic acid, and slower."
+    },
+    {
+      "id": "ascorbylglucoside",
+      "name": "Ascorbyl Glucoside",
+      "korean": "아스코빌글루코사이드",
+      "emoji": "🍊",
+      "cat": "brightening",
+      "star": false,
+      "bestFor": ["pigmentation", "dullness"],
+      "benefits": [
+        "Sugar-bound vitamin C that survives in a formula for a long time",
+        "One of the MFDS-notified brightening functional actives"
+      ],
+      "pairsWith": ["niacinamide", "arbutin", "licorice", "ethylascorbic"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Vitamin C with a glucose molecule attached as a chaperone, which is why the serum stays clear. Korea's regulator notified it for 미백 functional claims at a set concentration, so the mark on the box tells you the dose. Skin has to cleave off the sugar for anything to happen, and how efficiently it does that is genuinely uncertain."
+    },
+    {
+      "id": "glutathione",
+      "name": "Glutathione",
+      "korean": "글루타치온",
+      "emoji": "✨",
+      "cat": "brightening",
+      "star": false,
+      "bestFor": ["dullness", "pigmentation"],
+      "benefits": [
+        "Antioxidant tripeptide the body already makes",
+        "Popular in Korean brightening ampoules and sheet masks"
+      ],
+      "pairsWith": ["vitaminc", "niacinamide", "tranexamic", "ethylascorbic"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The centrepiece of the glass-skin injectable clinics, which is exactly why the topical version sells so well. Applied to skin, glutathione is a large, unstable molecule with very little evidence it reaches anywhere useful. Injected or infused glutathione is a medical matter with real safety debate attached — a conversation for a doctor, not a shopping decision."
+    },
+    {
+      "id": "witchhazel",
+      "name": "Witch Hazel (Hamamelis)",
+      "korean": "위치하젤",
+      "emoji": "🍂",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["oiliness", "pores", "redness"],
+      "benefits": [
+        "Astringent botanical that makes skin feel instantly tighter",
+        "Tannin content gives a temporary mattifying effect"
+      ],
+      "pairsWith": ["niacinamide", "zincpca", "centella", "greentea"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The tightening sensation is real and almost entirely temporary. Witch hazel's tannins constrict the skin surface for a while, which reads as smaller pores in a mirror. The bigger question is the distillate: many versions carry alcohol, and on already-reactive skin that combination gives you redness dressed up as freshness."
+    },
+    {
+      "id": "willowbark",
+      "name": "Willow Bark Extract",
+      "korean": "버드나무껍질",
+      "emoji": "🌳",
+      "cat": "soothing",
+      "star": false,
+      "bestFor": ["texture", "oiliness", "redness"],
+      "benefits": [
+        "Botanical extract containing salicin and tannins",
+        "Used in gentle toners aimed at the look of clearer skin"
+      ],
+      "pairsWith": ["centella", "niacinamide", "heartleaf", "greentea"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Marketed relentlessly as a natural BHA. It is not one. Willow bark contains salicin, which is a chemical relative of salicylic acid, not the same molecule, and skin does not convert it into working BHA in any quantity that matters. A pleasant, mild botanical. If you want exfoliation, buy actual salicylic acid."
+    },
+    {
+      "id": "beevenom",
+      "name": "Bee Venom",
+      "korean": "봉독",
+      "emoji": "🐝",
+      "cat": "anti-aging",
+      "star": false,
+      "bestFor": ["aging", "elasticity"],
+      "benefits": [
+        "Used in Korean firming products at very low levels",
+        "Often paired with propolis and royal jelly in bee-themed lines"
+      ],
+      "pairsWith": ["propolis", "royaljelly", "peptides", "hyaluronic"],
+      "avoidWith": [],
+      "preg": "caution",
+      "time": "pm",
+      "explainer": "봉독 (bongdok) had a moment in Korean skincare on the theory that a trace irritant provokes a firming response. That is a thin premise and the human data behind it is thinner. The relevant point is safety: anyone with a bee sting allergy should not experiment with this at all, and should ask a doctor first."
+    },
+    {
+      "id": "charcoal",
+      "name": "Activated Charcoal",
+      "korean": "활성탄",
+      "emoji": "⬛",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["oiliness", "blackheads", "pores"],
+      "benefits": [
+        "Adsorbs oil and grime sitting on the skin surface",
+        "Gives cleansers and masks their black, purposeful look"
+      ],
+      "pairsWith": ["kaolin", "volcanic", "bha", "zincpca"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "pm",
+      "explainer": "Charcoal binds things to its surface, which is why it works in water filters and why it looks convincing in a black clay mask. On skin it picks up surface oil during the couple of minutes it is there. The detox framing is nonsense — nothing is being drawn out of a pore, and a peel-off charcoal mask mostly removes your vellus hair."
+    },
+    {
+      "id": "cocoylglutamate",
+      "name": "Sodium Cocoyl Glutamate",
+      "korean": "소듐코코일글루타메이트",
+      "emoji": "🧼",
+      "cat": "oil-control",
+      "star": false,
+      "bestFor": ["sensitivity", "barrier", "dryness"],
+      "benefits": [
+        "Amino-acid-derived cleanser that rinses without the tight feeling",
+        "Works at skin-friendly pH, unlike traditional soap"
+      ],
+      "pairsWith": ["glycerin", "panthenol", "centella", "ceramide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The reason a low-pH Korean cleanser can foam properly and still leave your face comfortable. Built from coconut fatty acids and glutamic acid, this surfactant class cleans without the harsh degreasing of soap or sulfates. On an ingredient list it is a genuinely useful signal of how a cleanser will treat you."
+    },
+    {
+      "id": "meadowfoam",
+      "name": "Meadowfoam Seed Oil",
+      "korean": "메도우폼씨오일",
+      "emoji": "🌼",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "barrier"],
+      "benefits": [
+        "Unusually stable plant oil that resists going rancid",
+        "Cushions skin with a light, non-greasy film"
+      ],
+      "pairsWith": ["squalane", "jojoba", "camellia", "ceramide"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "Chemically closer to jojoba than to a typical seed oil, which is why it lasts so well in a formula. Meadowfoam gives a light cushioning finish without the weight of a butter. Nothing about it is corrective — it is a good emollient chosen by formulators who want an oil that will not turn on them."
+    },
+    {
+      "id": "sunflower",
+      "name": "Sunflower Seed Oil",
+      "korean": "해바라기씨오일",
+      "emoji": "🌻",
+      "cat": "barrier",
+      "star": false,
+      "bestFor": ["dryness", "barrier", "flaking"],
+      "benefits": [
+        "High in linoleic acid, the fatty acid dry barriers tend to lack",
+        "Light, low-comedogenic and cheap enough to use generously"
+      ],
+      "pairsWith": ["linoleic", "ceramide", "squalane", "glycerin"],
+      "avoidWith": [],
+      "preg": "safe",
+      "time": "both",
+      "explainer": "The most sensible boring oil on the shelf. Sunflower oil is linoleic-rich, which is the profile associated with a more comfortable barrier, and it is light enough for skin that dislikes heavier oils. It is a carrier in more Korean products than you would guess — often listed simply as Helianthus Annuus Seed Oil."
+    }
+  ],
+  "dose": [
+    {
+      "id": "butyleneglycol",
+      "pctRange": "1–10% in leave-on formulas; higher in watery toners",
+      "phRange": "tolerant across roughly 3.0–8.0",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Above roughly 10% it starts to feel slightly astringent and adds nothing useful.",
+      "plainRead": "Seeing it second on the list is normal and not a sign of a cheap formula. It is a solvent first, a humectant second."
+    },
+    {
+      "id": "propanediol",
+      "pctRange": "1–10%",
+      "phRange": "tolerant across roughly 3.0–8.0",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Beyond about 10% you gain slip and stickiness rather than hydration.",
+      "plainRead": "Functionally interchangeable with butylene glycol. Choose the product for its actives, not for which glycol the brand picked."
+    },
+    {
+      "id": "hexanediol",
+      "pctRange": "0.3–2%",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Pushing it much past 2% to carry the whole preservation load can sting sensitive skin — one reason preservative-free is not automatically gentler.",
+      "plainRead": "If a Korean product claims no preservatives, look for this and caprylyl glycol. That is the system, whatever the box says."
+    },
+    {
+      "id": "sodiumpca",
+      "pctRange": "0.2–2%",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Very high levels can feel tacky and, in dry air, are no more comfortable than moderate ones.",
+      "plainRead": "A quality signal in a hydrating toner rather than a reason to buy one. It works with glycerin, not instead of it."
+    },
+    {
+      "id": "phenoxyethanol",
+      "pctRange": "up to 1% — the regulatory ceiling in Korea, the EU and Japan",
+      "phRange": "3.0–10.0",
+      "evidenceGrade": "Strong",
+      "onset": "not applicable — it protects the product, not your skin",
+      "ceilingNote": "There is no benefit in exceeding the cap, and no formulator does.",
+      "plainRead": "The 1% figure is a legal limit, not a marketing number. Its presence tells you the product is properly preserved."
+    },
+    {
+      "id": "ethylhexylglycerin",
+      "pctRange": "0.3–1%",
+      "phRange": "3.0–8.0",
+      "evidenceGrade": "Moderate",
+      "onset": "not applicable — a formulation ingredient",
+      "ceilingNote": "Higher levels do not improve preservation and raise the chance of irritation in reactive skin.",
+      "plainRead": "Harmless for nearly everyone. If you react to many otherwise gentle products, it is one of the few worth noting and mentioning to a dermatologist."
+    },
+    {
+      "id": "caprylylglycol",
+      "pctRange": "0.3–1%",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Beyond about 1% it stops adding preservation support and can feel slightly draggy.",
+      "plainRead": "A supporting ingredient. Its presence usually means the brand is trying to keep the preservative load low."
+    },
+    {
+      "id": "disodiumedta",
+      "pctRange": "0.05–0.2%",
+      "phRange": "works best above pH 4.0",
+      "evidenceGrade": "Strong",
+      "onset": "not applicable — it protects the formula",
+      "ceilingNote": "More does nothing useful; it is used at the smallest effective level.",
+      "plainRead": "Near the end of the list, at a whisper of a percentage, doing a job that keeps your vitamin C serum alive. Ignore the scare posts."
+    },
+    {
+      "id": "carbomer",
+      "pctRange": "0.1–0.5%",
+      "phRange": "needs neutralising to around 5.0–7.0 to thicken",
+      "evidenceGrade": "Strong",
+      "onset": "not applicable — a texture ingredient",
+      "ceilingNote": "Too much and the gel goes stringy and pills under sunscreen.",
+      "plainRead": "A structural ingredient with no skin action. Its level is a texture decision, nothing more."
+    },
+    {
+      "id": "xanthangum",
+      "pctRange": "0.1–0.5%",
+      "phRange": "3.0–9.0",
+      "evidenceGrade": "Strong",
+      "onset": "not applicable — a texture ingredient",
+      "ceilingNote": "Past about 0.5% it turns slimy and is a common cause of pilling under sunscreen or makeup.",
+      "plainRead": "If a toner feels slippery in a way you dislike, this is usually the culprit — a formulation choice, not a fault."
+    },
+    {
+      "id": "silica",
+      "pctRange": "1–10% in primers and mattifying formulas",
+      "phRange": "tolerant across the usual range",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (optical)",
+      "ceilingNote": "High levels give a chalky, dry finish that can look powdery on dry skin and emphasise flaking.",
+      "plainRead": "Buys you a few hours of less shine. Reapplying or blotting does the same job — this simply delays the need."
+    },
+    {
+      "id": "silsesquioxane",
+      "pctRange": "1–10% in blurring primers",
+      "phRange": "tolerant across the usual range",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (optical)",
+      "ceilingNote": "Loaded too heavily it goes visibly grey-white on deeper skin tones and can look flat in daylight.",
+      "plainRead": "Judge it in a mirror in the first minute. It is a light trick, and there is nothing wrong with buying a light trick knowingly."
+    },
+    {
+      "id": "cetearylalcohol",
+      "pctRange": "1–5% in creams and emulsions",
+      "phRange": "tolerant across the usual range",
+      "evidenceGrade": "Strong",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Heavy use makes a cream stiff and waxy, and fatty alcohols at high levels can feel occlusive on oily skin.",
+      "plainRead": "Not the drying alcohol you were warned about. If a cream breaks you out, look at the whole formula rather than blaming this line."
+    },
+    {
+      "id": "glycerylstearate",
+      "pctRange": "1–5%",
+      "phRange": "tolerant across the usual range",
+      "evidenceGrade": "Strong",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Overloaded, it makes an emulsion heavy and slow to absorb.",
+      "plainRead": "A structural necessity in any cream. Its position on the list tells you about richness, not about efficacy."
+    },
+    {
+      "id": "lecithin",
+      "pctRange": "0.5–3%",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "not applicable — a delivery and emulsifying ingredient",
+      "ceilingNote": "High levels can smell faintly nutty and darken a pale formula over time.",
+      "plainRead": "Its presence does not prove a product is liposomal. That claim needs the brand to show its work, and most do not."
+    },
+    {
+      "id": "alcoholdenat",
+      "pctRange": "not standardised — anywhere from a few percent to a substantial share of a fast-drying sunscreen",
+      "phRange": "not relevant; it is a solvent",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "High in the ingredient list means a fast, weightless finish and a higher chance of stinging on compromised skin. There is no agreed safe or unsafe threshold.",
+      "plainRead": "Position on the label is your guide. Near the top means a quick-dry texture; if your skin is currently reactive, choose an alcohol-light sunscreen instead."
+    },
+    {
+      "id": "octocrylene",
+      "pctRange": "up to 10% in Korea, the EU and the US",
+      "phRange": "typically 5.0–7.0 in the finished emulsion",
+      "evidenceGrade": "Strong",
+      "onset": "immediate (on application)",
+      "ceilingNote": "At the top of its range it is noticeably oily and heavy, which is why elegant formulas use it as support rather than as the main filter.",
+      "plainRead": "You want it in a formula containing avobenzone. On its own it is unremarkable."
+    },
+    {
+      "id": "homosalate",
+      "pctRange": "10% has been the traditional ceiling; the EU has since lowered the level permitted in facial products",
+      "phRange": "typically 5.0–7.0 in the finished emulsion",
+      "evidenceGrade": "Strong",
+      "onset": "immediate (on application)",
+      "ceilingNote": "It is a weak filter, so high levels are common — which limits how much room is left for better ones.",
+      "plainRead": "A filter list leaning heavily on homosalate is usually an older-style formula. Not unsafe, just not modern."
+    },
+    {
+      "id": "octisalate",
+      "pctRange": "up to 5% in most markets",
+      "phRange": "typically 5.0–7.0 in the finished emulsion",
+      "evidenceGrade": "Strong",
+      "onset": "immediate (on application)",
+      "ceilingNote": "Its UVB absorption is weak, so the cap is reached quickly and other filters have to carry the SPF.",
+      "plainRead": "A good sign for tolerance, a poor sign of strength. Read the rest of the filter list before deciding."
+    },
+    {
+      "id": "octinoxate",
+      "pctRange": "roughly 7.5–10% depending on the market",
+      "phRange": "typically 5.0–7.0 in the finished emulsion",
+      "evidenceGrade": "Strong",
+      "onset": "immediate (on application)",
+      "ceilingNote": "It degrades in sunlight without photostabilisers, so a high level is not the same as high protection over a day outdoors.",
+      "plainRead": "Fine for a commute. For a long day in strong sun, prefer a formula built on more photostable filters."
+    },
+    {
+      "id": "polysilicone15",
+      "pctRange": "up to about 10% where permitted",
+      "phRange": "typically 5.0–7.0 in the finished emulsion",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (on application)",
+      "ceilingNote": "It covers UVB only, so stacking more of it does nothing for the UVA side of the label.",
+      "plainRead": "Part of why Korean sunscreens feel light, and part of why the same formula cannot legally be sold in the United States."
+    },
+    {
+      "id": "cyclopentasiloxane",
+      "pctRange": "not standardised — commonly a substantial share of primers and sticks",
+      "phRange": "not relevant; it is a volatile carrier",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Since it evaporates, its level governs slip and drydown speed rather than any lasting effect on skin.",
+      "plainRead": "A texture ingredient that leaves within minutes. Judge it by how the product applies, not by what it does afterwards."
+    },
+    {
+      "id": "caprylictriglyceride",
+      "pctRange": "1–15% depending on the format",
+      "phRange": "not relevant; it is an oil phase ingredient",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "At high levels in an oily-skin formula it can feel richer than intended, though it rates low for comedogenicity.",
+      "plainRead": "A reliable, stable emollient. Its presence high on a list tells you the texture will be silky rather than greasy."
+    },
+    {
+      "id": "cetylethylhexanoate",
+      "pctRange": "2–15% in sunscreens and makeup bases",
+      "phRange": "not relevant; it is an oil phase ingredient",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Loaded heavily it can pill under layers, which is a common complaint with filter-rich formulas.",
+      "plainRead": "Pure texture engineering. If your sunscreen rolls off under makeup, esters like this and the film formers around them are where to look."
+    },
+    {
+      "id": "mineraloil",
+      "pctRange": "commonly a large share of a cleansing balm; a few percent in creams",
+      "phRange": "not relevant; it is an oil phase ingredient",
+      "evidenceGrade": "Strong",
+      "onset": "immediate (feel), hours for water-loss reduction",
+      "ceilingNote": "It seals; it does not moisturise. Applied over dry skin with nothing underneath, it locks in the dryness.",
+      "plainRead": "Apply it over a damp face or over a humectant layer. Used that way it is one of the most effective things in the cabinet."
+    },
+    {
+      "id": "argireline",
+      "pctRange": "supplied as a dilute trade solution, typically used at 5–10% of that solution",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–12 weeks, if at all",
+      "ceilingNote": "The peptide itself is present at a tiny fraction of the listed solution percentage, and no dose-response has been mapped in independent work.",
+      "plainRead": "A '10% Argireline' claim describes the supplier's diluted solution, not the peptide. Do not read it as a strength rating."
+    },
+    {
+      "id": "matrixyl",
+      "pctRange": "trade solutions typically used at 3–8% of the formula",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "8–12 weeks",
+      "ceilingNote": "The active peptide sits at parts-per-million levels; increasing the solution beyond the recommended range has no demonstrated benefit.",
+      "plainRead": "A sensible daily ingredient that will not irritate. If you can tolerate a retinoid, that remains the better-evidenced choice."
+    },
+    {
+      "id": "tripeptide1",
+      "pctRange": "used within the same trade solutions as pentapeptide-4, typically 3–8%",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "8–12 weeks",
+      "ceilingNote": "Almost never studied on its own, so its individual contribution is difficult to separate from its partner peptide.",
+      "plainRead": "Judge the product, not this line. It is half of a marketed pair and rarely appears alone."
+    },
+    {
+      "id": "acetyltetrapeptide5",
+      "pctRange": "trade solutions typically used at 2–5% of the formula",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–8 weeks, if at all",
+      "ceilingNote": "Independent evidence is sparse; supplier data dominates, and no meaningful dose-response has been published.",
+      "plainRead": "A reasonable inclusion in an eye cream. Puffiness that is constant or one-sided is worth mentioning to a doctor rather than treating with a cream."
+    },
+    {
+      "id": "lactococcus",
+      "pctRange": "not standardised — varies widely by ferment supplier",
+      "phRange": "4.5–6.5",
+      "evidenceGrade": "Emerging",
+      "onset": "4–8 weeks",
+      "ceilingNote": "No established dose-response. A high listed percentage reflects diluted filtrate, not active content.",
+      "plainRead": "Treat it as a conditioning ingredient. There is no way for a shopper to compare one brand's ferment with another's."
+    },
+    {
+      "id": "kombucha",
+      "pctRange": "not standardised — often listed high as a water-phase substitute",
+      "phRange": "4.0–6.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–8 weeks",
+      "ceilingNote": "Composition varies with the culture and brewing time, so two kombucha essences are not comparable products.",
+      "plainRead": "Buy it for the formula around it. The ferment itself is not a measurable active."
+    },
+    {
+      "id": "nuruk",
+      "pctRange": "not standardised — grain ferment filtrates vary by producer",
+      "phRange": "4.0–6.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–8 weeks",
+      "ceilingNote": "No agreed effective level exists, and the traditional framing does not translate into a concentration.",
+      "plainRead": "A heritage ingredient with a genuine Korean story and modest cosmetic action. Enjoy it as both, honestly labelled."
+    },
+    {
+      "id": "seawater",
+      "pctRange": "used as the water phase, so often the highest-listed ingredient",
+      "phRange": "matches the finished formula, usually 4.5–6.5",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Being listed first says only that it replaced purified water. There is no dose to increase.",
+      "plainRead": "A sourcing story, not a strength claim. What matters is what was dissolved into it."
+    },
+    {
+      "id": "kelp",
+      "pctRange": "typically 0.1–5% as an extract",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (feel)",
+      "ceilingNote": "High levels add slipperiness and a marine smell rather than more hydration.",
+      "plainRead": "A decent humectant in the mid-list. Ignore any claim that it draws impurities out of skin."
+    },
+    {
+      "id": "omija",
+      "pctRange": "extract levels are rarely disclosed; typically fractions of a percent to a few percent",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–8 weeks",
+      "ceilingNote": "Botanical extract strength varies with the raw material and the solvent, so a percentage on the front of a box means little.",
+      "plainRead": "A supporting antioxidant with a lovely heritage story. Pair it with an evidenced active rather than relying on it."
+    },
+    {
+      "id": "jakyak",
+      "pctRange": "not standardised — extract concentrations vary and are seldom published",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–8 weeks",
+      "ceilingNote": "There is no established effective concentration for topical peony root, so more on the label proves nothing.",
+      "plainRead": "Comforting, traditional, and gentle. Judge a hanbang cream by its whole formula, not by which classic root it names."
+    },
+    {
+      "id": "danggwi",
+      "pctRange": "not standardised — extract strength varies by preparation",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–8 weeks",
+      "ceilingNote": "Laboratory activity for its compounds does not tell you what a diluted cosmetic extract does on skin.",
+      "plainRead": "A heritage botanical. If you are pregnant or taking medication, mention any herbal-heavy routine to your doctor."
+    },
+    {
+      "id": "jihwang",
+      "pctRange": "not standardised — usually a small percentage of a hanbang blend",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (feel) for hydration",
+      "ceilingNote": "Its polysaccharides thicken a formula before they do anything else, which caps practical use levels.",
+      "plainRead": "The hydration part is credible. The rest is tradition, and tradition is worth something — just not the same thing as evidence."
+    },
+    {
+      "id": "yulmu",
+      "pctRange": "not standardised — extract and starch levels vary by format",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "4–8 weeks",
+      "ceilingNote": "Higher starch levels affect texture and finish more than they affect skin.",
+      "plainRead": "A soft, pleasant grain botanical. For visible tone work, buy niacinamide or a vitamin C derivative instead."
+    },
+    {
+      "id": "sophora",
+      "pctRange": "not standardised — root extracts vary widely in strength",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "unclear — no reliable timeline established",
+      "ceilingNote": "Concentrated bitter root extracts can irritate, and there is no agreed effective cosmetic level to aim for.",
+      "plainRead": "Interesting in a lab, unproven on faces. Persistent or painful acne belongs with a dermatologist."
+    },
+    {
+      "id": "mayu",
+      "pctRange": "not standardised — from a few percent in creams to the bulk of a balm",
+      "phRange": "not relevant; it is an oil phase ingredient",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (feel)",
+      "ceilingNote": "It is a heavy occlusive, so high levels on oily or acne-prone skin are a poor idea regardless of the folklore.",
+      "plainRead": "Very good on chapped, windburnt-looking winter skin. Nothing about it is unique enough to justify a premium over ceramides."
+    },
+    {
+      "id": "perilla",
+      "pctRange": "typically 0.1–5% as an extract",
+      "phRange": "4.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "2–4 weeks for the look of comfort",
+      "ceilingNote": "Extract strength is not standardised, so percentage claims are not comparable between brands.",
+      "plainRead": "A pleasant addition to a calming formula. Centella and panthenol still have far more behind them."
+    },
+    {
+      "id": "kaolin",
+      "pctRange": "5–30% in wash-off masks",
+      "phRange": "4.0–8.0",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (during use)",
+      "ceilingNote": "Leaving a clay mask on until it cracks dries the skin, not the oil — take it off while it is still tacky.",
+      "plainRead": "Once or twice a week at most for oily skin. If your face feels tight afterwards, the mask stayed on too long."
+    },
+    {
+      "id": "volcanic",
+      "pctRange": "not standardised — commonly a visible share of Jeju-positioned masks and scrubs",
+      "phRange": "4.0–8.0",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (during use)",
+      "ceilingNote": "In a scrub, coarser particles at higher levels risk scratching skin — a texture decision with real consequences.",
+      "plainRead": "Works like any porous mineral. The Jeju provenance is a story you may enjoy paying for, which is fine as long as you know that is what it is."
+    },
+    {
+      "id": "ethylascorbic",
+      "pctRange": "1–5% in serums; Korea's MFDS notified it for brightening claims in the 1–2% region",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "8–12 weeks",
+      "ceilingNote": "Higher percentages are a marketing race rather than an evidenced improvement, and above the usual range it stings more without clear extra benefit.",
+      "plainRead": "If the box carries Korea's 기능성화장품 mark for 미백, the concentration is regulated. A big number without that mark is just a number."
+    },
+    {
+      "id": "ascorbylglucoside",
+      "pctRange": "2% is the concentration Korea's MFDS notified for brightening functional claims",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Moderate",
+      "onset": "8–12 weeks",
+      "ceilingNote": "This is a notified functional level, not a dose-response curve. More is not the point.",
+      "plainRead": "Stable, gentle and slow. The uncertainty is not the dose — it is how much your skin converts into usable vitamin C."
+    },
+    {
+      "id": "glutathione",
+      "pctRange": "no standardised topical concentration exists",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "unclear — topical evidence does not support a reliable timeline",
+      "ceilingNote": "It oxidises readily and penetrates poorly, so a higher listed percentage does not translate into more reaching skin.",
+      "plainRead": "Harmless in a serum, unlikely to do much. Injections and drips are a medical decision with genuine safety questions — talk to a doctor, not a clinic salesperson."
+    },
+    {
+      "id": "witchhazel",
+      "pctRange": "distillate is often used at high levels as part of the water phase",
+      "phRange": "4.0–6.0",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (temporary)",
+      "ceilingNote": "The tightening feeling wears off within the hour, and repeated use of alcohol-containing distillates on reactive skin is a common cause of ongoing redness.",
+      "plainRead": "Check whether the version used is alcohol-free. That single detail decides whether it suits your skin."
+    },
+    {
+      "id": "willowbark",
+      "pctRange": "typically 0.1–5% as an extract",
+      "phRange": "4.0–6.0",
+      "evidenceGrade": "Limited",
+      "onset": "unclear — no reliable timeline established",
+      "ceilingNote": "Salicin content is low and inconsistent, and there is no evidence that raising the extract level produces BHA-like exfoliation.",
+      "plainRead": "Fine as a gentle botanical. If a product is sold to you as a natural BHA, the claim is wrong and worth walking away from."
+    },
+    {
+      "id": "beevenom",
+      "pctRange": "used at very low levels; no standardised cosmetic concentration exists",
+      "phRange": "5.0–7.0",
+      "evidenceGrade": "Limited",
+      "onset": "unclear — no reliable timeline established",
+      "ceilingNote": "Higher levels raise the risk of reaction without any evidenced gain, which is why brands keep it minimal.",
+      "plainRead": "Skip it entirely if you have any bee allergy. Otherwise it is a novelty ingredient with a good story and thin support."
+    },
+    {
+      "id": "charcoal",
+      "pctRange": "typically 0.5–5% in cleansers and masks",
+      "phRange": "4.0–8.0",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (during use)",
+      "ceilingNote": "More charcoal mostly makes the product blacker. Beyond a low level there is no evidence of extra oil pick-up on skin.",
+      "plainRead": "Fine in a cleanser. Avoid peel-off charcoal masks if you would rather keep your facial hair and your comfort."
+    },
+    {
+      "id": "cocoylglutamate",
+      "pctRange": "typically 5–20% of a cleanser's surfactant system",
+      "phRange": "5.0–6.5",
+      "evidenceGrade": "Moderate",
+      "onset": "immediate (feel)",
+      "ceilingNote": "Amino acid surfactants foam less than sulfates by nature; pushing the level to chase lather undoes the gentleness that is the point.",
+      "plainRead": "Spotting this near the top of a cleanser list is a good sign. Modest foam is a feature, not a defect."
+    },
+    {
+      "id": "meadowfoam",
+      "pctRange": "1–10% in oils, balms and creams",
+      "phRange": "not relevant; it is an oil phase ingredient",
+      "evidenceGrade": "Limited",
+      "onset": "immediate (feel)",
+      "ceilingNote": "A rich oil at high levels — comfortable on dry skin, unnecessary weight on oily skin.",
+      "plainRead": "Chosen mainly for stability and finish. There is no active story here, and the good formulas do not pretend otherwise."
+    },
+    {
+      "id": "sunflower",
+      "pctRange": "1–20% depending on the format",
+      "phRange": "not relevant; it is an oil phase ingredient",
+      "evidenceGrade": "Moderate",
+      "onset": "days to weeks for the look of comfort",
+      "ceilingNote": "Unrefined versions oxidise faster; a rancid oil is an irritant, so packaging and freshness matter more than percentage.",
+      "plainRead": "A sensible oil for dry, tight-feeling skin. Cheap, light and better evidenced than most of the exotic ones beside it."
+    }
+  ],
+  "moa": [
+    {
+      "id": "butyleneglycol",
+      "target": "surface hydration and formula texture",
+      "mechanism": "Butylene glycol is a small four-carbon diol that binds water and, more importantly, dissolves things water cannot carry on its own — botanical extracts, preservatives, some UV filters. On skin it acts as a mild humectant, holding a little moisture in the top layers, and it slightly loosens the packing of surface lipids, which is why formulas containing it feel like they sink in faster. The humectant effect is genuine but modest, and it is not the reason formulators choose it.",
+      "ceiling": "It hydrates a little and dissolves a lot. It does not exfoliate, brighten or affect pigment.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "propanediol",
+      "target": "surface hydration and solubility",
+      "mechanism": "Propanediol is a three-carbon diol, usually fermented from corn sugar, that behaves like butylene glycol with a lighter skin feel. It binds water at the surface and acts as a solvent for water-soluble actives, and it has been shown to improve how well some ingredients spread through a formula. It is chosen largely for sensory and sourcing reasons rather than for any advantage in performance on skin. Because it carries a natural-derivation story, brands often swap it in when marketing calls for a cleaner-looking ingredient list, which is a positioning decision rather than a functional upgrade.",
+      "ceiling": "A humectant and solvent. Nothing about it corrects tone, texture or lines.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "hexanediol",
+      "target": "formula stability and light surface hydration",
+      "mechanism": "1,2-Hexanediol is a diol with enough of an oily tail to disturb microbial cell membranes, which is why it reduces the preservative load a formula needs without being classified as a preservative itself. It also holds a little water and acts as a solvent. Regulatory classification and biological effect are not the same thing here, which is exactly what makes preservative-free labelling on hexanediol-containing products misleading rather than false. It is also mildly solubilising, so it helps keep botanical extracts dissolved in clear formulas.",
+      "ceiling": "It protects the product and hydrates slightly. It has no corrective action on skin.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "sodiumpca",
+      "target": "water binding in the outermost skin layer",
+      "mechanism": "Pyrrolidone carboxylic acid is one of the components of skin's own natural moisturising factor, the mixture of small water-binding molecules inside surface cells. The sodium salt used in cosmetics is strongly hygroscopic, so it draws and holds water where it is applied. Whether topping up an NMF component from outside meaningfully supplements what skin makes is not really settled, but the surface humectancy itself is straightforward. Like every humectant it performs best under something that seals, since in dry air a water-binding molecule with no water available to it has nothing to hold on to.",
+      "ceiling": "Surface water binding only. It does not rebuild the barrier or replace lipids.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "phenoxyethanol",
+      "target": "microbial growth inside the product",
+      "mechanism": "Phenoxyethanol disrupts bacterial cell membranes and interferes with the processes microbes need to multiply, which keeps a water-containing formula stable through months of dipping fingers and bathroom humidity. It works across a wide pH range, which is why it suits everything from a low-pH acid toner to a neutral cream. Its safety at the capped level has been reviewed repeatedly by regulators in Korea, the EU and elsewhere, which is why the same 1% ceiling appears across markets that rarely agree on anything.",
+      "ceiling": "It acts on the product, not on your skin. It offers no cosmetic benefit whatsoever.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "ethylhexylglycerin",
+      "target": "microbial growth and skin feel",
+      "mechanism": "Ethylhexylglycerin lowers surface tension at microbial cell membranes, which makes it harder for organisms to survive and allows a partner preservative such as phenoxyethanol to work at a lower level. The same surfactant character explains its mild conditioning effect on skin and its use as a deodorising agent. It is a recognised, if uncommon, contact allergen — a small but real reason some people react to products that look gentle on paper.",
+      "ceiling": "A preservative booster and mild conditioner. It treats nothing.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "caprylylglycol",
+      "target": "surface hydration and preservation support",
+      "mechanism": "Caprylyl glycol is a diol with a longer fatty tail than glycerin, which gives it two personalities: a humectant head that binds water and a lipid-friendly tail that destabilises microbial membranes. That combination lets it hydrate lightly, feel silky rather than tacky, and reduce how much conventional preservative a formula needs. It is a genuinely useful multitasker and an entirely unremarkable one on skin. Its dual character explains why it appears beside 1,2-hexanediol so often: between them they cover both the water-loving and the lipid-loving routes to keeping a formula clean.",
+      "ceiling": "Light hydration and formula protection. No active effect on tone, lines or texture.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "disodiumedta",
+      "target": "trace metal ions inside the formula",
+      "mechanism": "Disodium EDTA is a chelator: its structure wraps around metal ions such as iron and copper and holds them inactive. Those trace metals arrive with water, raw materials and packaging, and they catalyse the reactions that oxidise antioxidants, discolour formulas and break down preservatives. Removing them from play extends how long a product performs as intended. It also improves how well surfactants foam in hard water. The tetrasodium version does the same job at a higher pH, so which one a formulator reaches for depends on where the finished product sits on the scale.",
+      "ceiling": "It protects the contents of the bottle. It has no effect on skin at cosmetic levels.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "carbomer",
+      "target": "the physical structure of a water-based formula",
+      "mechanism": "Carbomer is a cross-linked acrylic polymer that stays coiled in acid conditions and uncoils when neutralised, trapping water between its chains and turning a thin liquid into a gel. That structure also suspends oils, pigments and powders so they do not separate on the shelf. Everything it does happens inside the packaging; on skin it simply forms a thin film that washes away. Different carbomer grades flow differently, which is why one gel toner pours and another holds a peak — a decision made long before anyone chose the actives.",
+      "ceiling": "A thickener. It contributes nothing to hydration, barrier or tone.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "xanthangum",
+      "target": "viscosity and suspension in water-based formulas",
+      "mechanism": "Xanthan gum is a polysaccharide made by bacterial fermentation. Its long chains tangle in water to build viscosity, and they thin under shear, which is why a gel toner feels thick in the bottle and spreads easily on skin. The same chains dry into a light film that slows water loss slightly. That film is also what pills when a formula is overloaded or layered under sunscreen. Blending it with a second gum or a carbomer is the usual way formulators buy body without that slippery drag.",
+      "ceiling": "A texture agent with a marginal film effect. It is not a hydrating active.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "silica",
+      "target": "surface oil and the way light hits skin",
+      "mechanism": "Cosmetic silica is a porous mineral powder with an enormous internal surface area, so it soaks up sebum as it appears and delays visible shine. Its particles also scatter incoming light rather than letting it reflect straight back, which softens the visual contrast that makes pores and fine lines read as sharp edges. Both effects are physical, immediate and last only until the powder is saturated or washed off. Silica also comes in different particle shapes, and spherical grades feel markedly smoother than irregular ones.",
+      "ceiling": "An optical and absorbent effect. It does not reduce oil production or change pore size.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "silsesquioxane",
+      "target": "the optical appearance of pores and fine texture",
+      "mechanism": "Polymethylsilsesquioxane is manufactured as uniform microscopic spheres. On skin they roll rather than drag, giving the characteristic powdery slip of a blurring primer, and they scatter light in many directions at once so shadows inside pores and creases lose their definition. This is the same principle as soft-focus photography. Nothing is absorbed, altered or treated — the spheres sit there until you remove them. The same particles are used to give pressed powders and cushion compacts their cushioned slip, which is why they turn up in makeup as often as in skincare.",
+      "ceiling": "Purely optical and purely temporary. It has no effect on the skin underneath.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "cetearylalcohol",
+      "target": "emulsion structure and surface softening",
+      "mechanism": "Cetearyl alcohol is a blend of two long-chain fatty alcohols, cetyl and stearyl, which are waxy solids rather than volatile solvents. In a cream they form crystalline networks with the emulsifier that give the product body and stop the oil and water phases separating. On skin those same lipids sit at the surface as an emollient, filling gaps between surface cells so the skin feels smoother. Shifting the ratio of cetyl to stearyl alcohol moves the finish from light to waxy, which is one of the quieter levers a formulator pulls when tuning a cream.",
+      "ceiling": "It thickens and softens. It is not the drying alcohol people assume from the name.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "glycerylstearate",
+      "target": "emulsion stability and skin softening",
+      "mechanism": "Glyceryl stearate is glycerin joined to stearic acid, giving a molecule with a water-loving end and an oil-loving end. It sits at the boundary between the two phases and holds them together, which is what allows a stable lotion or cream to exist at all. The fatty acid portion also behaves as an emollient on skin, contributing to the soft finish rather than to any active effect. It is usually paired with a second emulsifier such as PEG-100 stearate, which is why those two names appear side by side on so many Korean labels.",
+      "ceiling": "A structural emulsifier with an emollient side effect. It corrects nothing.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "lecithin",
+      "target": "emulsification and ingredient delivery",
+      "mechanism": "Lecithin is a mixture of phospholipids — molecules with a water-loving head and two fatty tails, the same architecture as the membranes around living cells. That structure emulsifies, and under the right processing it self-assembles into liposomes, tiny spheres that can carry oil-soluble ingredients through a water phase. Whether a liposome improves how much of an active reaches skin depends heavily on the formula, and brands rarely publish the evidence.",
+      "ceiling": "An emulsifier and potential carrier. Encapsulation on a label is not proof of better delivery.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "alcoholdenat",
+      "target": "solvency, drydown speed and surface oil",
+      "mechanism": "Denatured ethanol dissolves UV filters and botanical extracts, thins a formula so it spreads in a very fine layer, then evaporates within seconds and leaves the actives behind as a film. That evaporation is what produces the weightless finish Korean sunscreens are known for, and it also briefly degreases the surface. On compromised or sensitised skin it stings and can worsen existing irritation; the evidence that it damages an intact barrier at cosmetic use levels is much weaker than online consensus suggests.",
+      "ceiling": "A solvent and drying aid. It offers no benefit to skin itself, only to texture.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "octocrylene",
+      "target": "UVB and short UVA radiation",
+      "mechanism": "Octocrylene absorbs ultraviolet energy and releases it as a small amount of heat, which is how all organic filters work. Its particular value is photostability: it accepts energy from excited avobenzone molecules before they can break apart, so a sunscreen containing both keeps its UVA protection through a day outdoors. On its own its UVB absorption is unimpressive, which is why it is almost always a supporting filter rather than the one carrying the SPF number on the front of the tube.",
+      "ceiling": "It protects against UV. It is not an antioxidant and does nothing for existing pigment.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "homosalate",
+      "target": "UVB radiation, and solvency for other filters",
+      "mechanism": "Homosalate absorbs in the UVB range and converts that energy to heat. Its absorption is weak enough that high concentrations are needed for a meaningful contribution, and much of its practical value is as a solvent: it dissolves crystalline filters such as avobenzone so they can be formulated at all. Regulators in the EU reviewed it and reduced the level permitted in facial products, which is a reasonable thing to know before choosing a formula built around it.",
+      "ceiling": "UVB only. It gives no UVA protection and no benefit beyond photoprotection.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "octisalate",
+      "target": "UVB radiation, and solvency for other filters",
+      "mechanism": "Ethylhexyl salicylate absorbs UVB energy and dissipates it as heat, and like homosalate it doubles as a solvent that keeps solid filters dissolved in the oil phase. It is photostable and among the least irritating organic filters in general use, which is why it appears in formulas aimed at sensitive skin. Its absorption is weak, so it never carries an SPF on its own. Being oily and mild, it also helps a filter blend spread evenly, which quietly affects how much protection you get from the layer you actually apply.",
+      "ceiling": "UVB only, and mild. Despite the salicylate name it has no exfoliating action.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "octinoxate",
+      "target": "UVB radiation",
+      "mechanism": "Ethylhexyl methoxycinnamate is an efficient UVB absorber and for decades the backbone of Asian sunscreen formulation. Its weakness is photostability: sunlight converts part of it to a less effective form, so protection declines over prolonged exposure unless it is paired with stabilising partners. It also offers essentially no UVA coverage, which means the PA rating on a Korean sunscreen is coming from other filters entirely. It is also among the filters restricted in some reef-protection jurisdictions, a regulatory matter separate from how it behaves on skin.",
+      "ceiling": "UVB only, and it fades in sunlight. It does not address pigment or ageing on its own.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "polysilicone15",
+      "target": "UVB radiation",
+      "mechanism": "Polysilicone-15 attaches a UV-absorbing group to a silicone polymer backbone. The absorbing group takes up UVB energy in the usual way, while the silicone gives the molecule a large size that keeps it sitting on the skin surface and lends the formula a light, fast-drying feel. It is approved in Korea, the EU and Japan but not in the United States, which is one concrete reason sunscreen textures differ so sharply between markets.",
+      "ceiling": "UVB only. It contributes nothing to the UVA side of a sunscreen's protection.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "cyclopentasiloxane",
+      "target": "spreadability and drydown",
+      "mechanism": "Cyclopentasiloxane is a volatile cyclic silicone with very low surface tension, so it spreads across skin almost instantly and carries heavier ingredients with it in a thin, even layer. Within a few minutes it evaporates and leaves only what it was carrying. Because it does not remain on the surface, the occlusion argument used against silicones in general does not really apply to this one. Its volatility is also why sun sticks and primers built on it feel briefly cool going on — evaporation takes a little heat with it.",
+      "ceiling": "A temporary carrier. It leaves before it could benefit or harm skin.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "caprylictriglyceride",
+      "target": "surface softening and water loss",
+      "mechanism": "This is a fractionated coconut-derived oil in which the fatty acids have been narrowed to the shorter, more stable ones and rejoined to glycerin. The result is a light emollient that fills gaps between surface cells and slows evaporation modestly. Its saturated, short-chain composition means it resists oxidation for years, which matters because rancid oils are irritating and unstable formulas are the more common real-world problem. It also serves as a carrier for oil-soluble actives such as vitamin E and retinoids, which is a second reason it appears on so many ingredient lists.",
+      "ceiling": "An emollient. It supports comfort and texture without acting on tone, lines or pores.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "cetylethylhexanoate",
+      "target": "spreadability and finish",
+      "mechanism": "Cetyl ethylhexanoate is a synthetic ester built from a fatty alcohol and a branched fatty acid. The branching is the point: it prevents the molecules packing tightly, which gives a low-viscosity, dry-feeling oil that spreads quickly and absorbs without tack. Formulators use it to make filter-heavy sunscreens and pigment-heavy bases feel light. It softens the surface, and that is the whole of its action on skin. Branched esters are also chosen because they disperse pigments and mineral filters evenly, which affects both colour payoff and how white a sunscreen looks.",
+      "ceiling": "A texture ester. It has no active effect on skin at all.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "mineraloil",
+      "target": "water loss from the skin surface",
+      "mechanism": "Highly refined mineral oil is a mixture of inert saturated hydrocarbons that spreads into a continuous film on the skin surface. That film is one of the most effective barriers to evaporation available in cosmetics, which is why it is used in clinical settings for very dry skin. It is chemically unreactive, does not oxidise, and cosmetic grades test as non-comedogenic — the acne reputation comes from crude, unrefined industrial grades that are not used in skincare.",
+      "ceiling": "It seals water in. It adds no water, no lipids that skin can use, and no actives.",
+      "evidenceGrade": "Strong"
+    },
+    {
+      "id": "argireline",
+      "target": "the appearance of expression lines",
+      "mechanism": "Acetyl hexapeptide-8 is a fragment resembling part of a protein involved in the machinery that releases signalling chemicals at nerve endings, and the proposed idea is that it interferes with that process at the skin surface. Whether a peptide of this size reaches anything relevant after topical application is the unresolved question. Published work is mostly small and supplier-connected. The Botox comparison is a marketing construction, not a description of equivalent action.",
+      "ceiling": "At best a subtle change in appearance. It is nothing like an injectable and does not relax muscle.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "matrixyl",
+      "target": "the look of firmness and fine lines",
+      "mechanism": "Palmitoyl pentapeptide-4 is a short peptide sequence resembling a fragment released when collagen breaks down, attached to a fatty acid that helps it cross the surface. The proposed mechanism is signalling: skin reads the fragment as evidence of damage and responds by supporting its own matrix production. There is reasonable published work behind the idea, though effect sizes are modest and independent head-to-head comparisons with retinoids are scarce. It is stable, cheap to formulate with and essentially non-irritating, which explains its ubiquity as much as its data does.",
+      "ceiling": "A gradual change in appearance. It does not resurface skin or match a retinoid's evidence.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "tripeptide1",
+      "target": "the look of firmness and skin support",
+      "mechanism": "Palmitoyl tripeptide-1 is another lipid-tagged signal peptide, usually formulated alongside pentapeptide-4 because the two are sold as a matched pair. The proposed action is the same category of matrix signalling. Because almost all published work tests the combination rather than the individual peptides, its separate contribution is genuinely unknown — a limitation worth stating plainly rather than glossing over. The palmitoyl tail exists for the same reason as its partner's: a bare peptide is water-loving and would sit on the surface, while a fatty tail gives it a route into the outer lipids.",
+      "ceiling": "Appearance over months, at best. Its individual effect has not been isolated.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "acetyltetrapeptide5",
+      "target": "the look of under-eye puffiness",
+      "mechanism": "Acetyl tetrapeptide-5 is proposed to affect the cross-linking of proteins and the movement of fluid in the delicate tissue under the eye, which would in theory reduce the look of morning puffiness. The supporting evidence is largely from the supplier, on small numbers of people, and independent replication is hard to find. It is well tolerated, which is why it persists in eye formulas despite thin data. Products almost always pair it with caffeine, which has its own short-lived vasoconstricting effect, so crediting any morning improvement to the peptide alone is guesswork.",
+      "ceiling": "A cosmetic effect on appearance at most. Persistent swelling is a medical question for a doctor.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "lactococcus",
+      "target": "barrier comfort and the look of calm skin",
+      "mechanism": "Lactococcus ferment lysate is made by culturing the bacteria, then rupturing and filtering the culture, so the finished ingredient is a mixture of peptides, sugars, organic acids and cell fragments with nothing alive in it. On skin these behave as humectants and conditioning agents. Any claim that it interacts with your skin's resident microbial community goes considerably beyond what has been demonstrated in people. As with every ferment lysate, the composition depends on the strain, the growth medium and the processing, so two ingredients sharing an INCI name are not necessarily comparable.",
+      "ceiling": "A conditioning ferment. It does not colonise skin or rebalance a microbiome.",
+      "evidenceGrade": "Emerging"
+    },
+    {
+      "id": "kombucha",
+      "target": "surface conditioning and the look of radiance",
+      "mechanism": "Kombucha ferment supplies the polyphenols of the tea it was brewed from together with the organic acids, sugars and cellulose fragments that fermentation generates. Topically the acids condition the surface slightly and the polyphenols contribute antioxidant activity. What no one can tell you is whether the fermentation adds anything beyond what green tea extract and a humectant would deliver, because that comparison has not been done properly. The culture also produces cellulose, the same material bio-cellulose sheet masks are grown from — a considerably more literal use of the ferment than the essence version.",
+      "ceiling": "Mild surface conditioning. Not a detoxifying or renewing ingredient in any literal sense.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "nuruk",
+      "target": "surface smoothness and conditioning",
+      "mechanism": "Nuruk is a traditional Korean fermentation starter in which moulds and yeasts break down grain. The resulting filtrate carries amino acids, peptides, mild organic acids and sugars — much the same profile as other grain ferments used in Korean and Japanese skincare. These act as humectants and gentle conditioning agents. The historical link to brewers' hands is folklore, and it has never been tested in the way a cosmetic claim would need.",
+      "ceiling": "A conditioning ferment with heritage value. It is not a resurfacing or brightening active.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "seawater",
+      "target": "the water phase of a formula",
+      "mechanism": "Deep sea water is drawn from below the layer where sunlight and surface mixing reach, then desalinated and filtered so that the sodium is removed while magnesium, calcium and trace minerals remain. Used in place of purified water it carries those minerals into the formula. Magnesium salts have some documented skin-conditioning behaviour, but whether the swap produces a visible difference in a finished product has not been shown convincingly. Mineral content also varies by extraction site and treatment, so the term covers a range of things.",
+      "ceiling": "A water phase choice. It is not an active and carries no proven benefit over purified water.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "kelp",
+      "target": "surface hydration",
+      "mechanism": "Kelp extracts supply polysaccharides — alginates, fucoidan and related sugars — that bind water and form a soft film as they dry. That film holds moisture at the surface and gives a smoothing feel. The extracts also carry minerals and small amounts of antioxidant compounds, though at cosmetic dilution their contribution is likely marginal compared with the humectant effect you can actually feel. Species and extraction method change the polysaccharide profile substantially, so the INCI name alone tells you very little about how a given kelp extract will behave.",
+      "ceiling": "A film-forming humectant. It does not detoxify, decongest or deliver minerals into skin.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "omija",
+      "target": "the look of dullness and environmental stress",
+      "mechanism": "Schisandra berry contains lignans, notably schisandrin, alongside organic acids and polyphenols. In laboratory work these show antioxidant activity, which is the basis for the cosmetic framing around environmental protection and the look of brighter skin. Almost none of that work involves applying a diluted cosmetic extract to human faces, so the gap between the biochemistry and the bathroom shelf remains wide. The berry's Korean name refers to its five tastes, and the compounds behind those flavours are the same ones cosmetic chemists find interesting — which at least makes the heritage framing coherent.",
+      "ceiling": "A supporting antioxidant. It does not act on pigment the way an evidenced brightener does.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "jakyak",
+      "target": "the look of redness and uneven tone",
+      "mechanism": "Peony root supplies paeoniflorin and related glycosides plus tannins, compounds studied in the laboratory for antioxidant and calming activity. In a cosmetic it behaves as a comforting botanical, and its long use in Korean 한방 formulas is why it appears so often in premium lines. Human data on topical peony specifically is scarce, so its role is best understood as supporting a well-built soothing formula. It is almost always used inside a blend rather than alone, so separating its contribution from the centella or licorice beside it is not something a shopper can do.",
+      "ceiling": "A comforting botanical. It does not treat any skin condition.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "danggwi",
+      "target": "the look of dull, tired skin",
+      "mechanism": "Angelica gigas root contains decursin and decursinol angelate, coumarin compounds with documented antioxidant activity in laboratory settings. Cosmetically it is used as part of hanbang blends rather than as a standalone active, and the extract strength in a finished cream is usually small. The plant has genuine internal pharmacology in traditional medicine, which is a reason for caution rather than confidence about a topical extract. Cosmetic extracts are also prepared very differently from the decoctions used in traditional practice, so the traditional record does not transfer neatly into the jar.",
+      "ceiling": "A botanical antioxidant with little human skin evidence. Herbal medicine questions belong with a clinician.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "jihwang",
+      "target": "surface hydration and skin comfort",
+      "mechanism": "Rehmannia root is rich in polysaccharides and iridoid glycosides. The polysaccharide fraction behaves as a humectant and film former, holding water at the surface — which is the part of its traditional 'moistening' reputation that translates directly into cosmetic function. The other compounds have laboratory activity that has not been connected to any demonstrated effect through intact skin. Rehmannia is one of the four herbs in the classic 사물탕 blend that luxury Korean brands quote, so it usually arrives as part of a heritage recipe rather than as a chosen active — and raw and steamed preparations differ in composition again.",
+      "ceiling": "Surface hydration. Deeper nourishment is traditional language, not a documented mechanism.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "yulmu",
+      "target": "the look of clarity and surface smoothness",
+      "mechanism": "Job's tears supplies starch, proteins and coixenolide-type compounds. In cosmetics the starch fraction gives a soft, slightly mattifying finish while the extract contributes mild conditioning. Its reputation for clearing and brightening skin comes from Korean and wider East Asian food and folk traditions rather than from controlled work on topical application, and it should be read that way. Ground yulmu has also been used as a physical cleansing powder in Korea for generations, which is a different mechanism entirely — mild abrasion rather than anything absorbed.",
+      "ceiling": "Mild conditioning and finish. It is not a tone-correcting active.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "sophora",
+      "target": "the look of blemish-prone, oily skin",
+      "mechanism": "Sophora flavescens root contains matrine, oxymatrine and prenylated flavonoids, which show antimicrobial and anti-inflammatory activity in laboratory assays. That is the basis for its use in Korean blemish toners and scalp tonics. Whether a diluted extract does anything comparable on human skin has not been established, and concentrated bitter root extracts carry their own irritation risk. The same alkaloid content responsible for the bitterness is what makes a strong extract a poor idea on already-inflamed skin, which is why Korean brands generally keep it to modest levels in toners rather than building a product around it.",
+      "ceiling": "Unproven on skin. Acne is a medical condition — see a dermatologist rather than relying on a botanical.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "mayu",
+      "target": "water loss and surface softness",
+      "mechanism": "Rendered horse fat has a fatty acid profile — relatively high in oleic and palmitoleic acids — that is closer to human sebum than most plant oils, which is the usual explanation for how readily it absorbs and how well it sits on chapped skin. Functionally it works as an occlusive-emollient: it slows evaporation and softens the surface. The compositional similarity is documented; the regeneration claims built on top of it are not.",
+      "ceiling": "An occlusive emollient. It does not repair anything, and it is not suitable for vegan routines.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "perilla",
+      "target": "the look of redness and irritation",
+      "mechanism": "Perilla leaf supplies rosmarinic acid, luteolin and related polyphenols, which have documented antioxidant and calming activity in laboratory work. In a finished formula it behaves as a supporting soothing botanical, sitting in the same 진정 category Korean brands built around centella and heartleaf. Human evidence for topical perilla specifically is limited, so its contribution is best judged as part of a whole calming formula. Worth checking which part of the plant a label means: the leaf extract used here is not perilla seed oil, which is a fatty oil with a different role altogether.",
+      "ceiling": "A supporting soothing botanical. It does not treat inflammatory skin conditions.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "kaolin",
+      "target": "oil sitting on the skin surface",
+      "mechanism": "Kaolin is a fine aluminium silicate clay with a layered structure and a mild surface charge, so it takes up oil and loose debris that are already on the surface. It is less absorbent than bentonite, which is why it dries skin less and suits a wider range of skin types. As the mask dries, evaporation from the clay pulls water from skin too — which is why leaving it on until it cracks is counterproductive.",
+      "ceiling": "Surface oil absorption. It does not clear a pore, dissolve a plug or change pore size.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "volcanic",
+      "target": "surface oil and physical exfoliation",
+      "mechanism": "Jeju scoria is porous basaltic rock, ground fine for cosmetic use. The pores in the mineral give it a large surface area for taking up sebum, and the particles provide mild physical abrasion in scrubs. It behaves broadly like other absorbent mineral powders. The Jeju origin adds provenance and a marketing story but no documented functional advantage over ordinary clays. Particle size is the variable that actually matters: finely milled scoria behaves as an absorbent powder, while coarse grades act as a scrub and bring the usual risks of over-scrubbing.",
+      "ceiling": "Absorption and abrasion. Nothing about its origin changes what a porous mineral can do.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "ethylascorbic",
+      "target": "the look of uneven tone and dullness",
+      "mechanism": "3-O-Ethyl ascorbic acid is ascorbic acid with an ethyl group attached at a position that normally drives oxidation, which is why it stays stable in water-based formulas where pure vitamin C would not. Skin enzymes are thought to remove that group to release ascorbic acid, which then acts on the pigment-forming pathway and as an antioxidant. How completely that conversion happens is the open question, and it is the reason derivatives are usually slower than the real thing.",
+      "ceiling": "Gradual work on the appearance of tone. Melasma and stubborn pigmentation need a dermatologist.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "ascorbylglucoside",
+      "target": "the look of uneven tone",
+      "mechanism": "Ascorbyl glucoside is vitamin C bonded to glucose, which protects the vulnerable part of the molecule and makes it stable enough to survive in a formula for a long time. Skin enzymes are expected to cleave the glucose and free ascorbic acid, which then interferes with the pigment-forming pathway. The conversion rate in human skin is not well quantified, so it is best treated as a slow, gentle route to the same destination.",
+      "ceiling": "Slow tone work at best. It does not exfoliate and will not match a well-formulated L-ascorbic serum for speed.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "glutathione",
+      "target": "the look of dullness and uneven tone",
+      "mechanism": "Glutathione is a tripeptide antioxidant the body makes, and in cells it participates in the pathway that determines which type of pigment is produced. That is the theory behind topical brightening products. In practice it is a water-loving molecule that oxidises readily and penetrates skin poorly, and the topical evidence is weak. The oral and intravenous versions sold in clinics are a medical matter with unresolved safety questions — a conversation for a doctor.",
+      "ceiling": "Little demonstrated topical effect. Nothing here supports the injectable brightening claims made in clinics.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "witchhazel",
+      "target": "the immediate look of tightness and shine",
+      "mechanism": "Witch hazel is rich in tannins, which bind to proteins at the skin surface and cause a brief contraction — the tight, freshly-scrubbed sensation people read as pore-tightening. That effect fades within the hour. Many commercial distillates also contain alcohol from the extraction process, and on skin that is already reactive the combination of tannin astringency and alcohol is a plausible route to the redness the product was bought to fix.",
+      "ceiling": "A temporary surface effect. Pore size does not change, and nothing is being cleared out.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "willowbark",
+      "target": "the look of clarity and surface comfort",
+      "mechanism": "Willow bark contains salicin, a glycoside that the human liver converts to salicylic acid when the bark is swallowed. Skin does not perform that conversion in any meaningful quantity, and the salicin content of a cosmetic extract is low and variable to begin with. What willow bark does deliver is tannins and polyphenols with mild astringent and antioxidant character, which is a perfectly respectable but entirely different job from exfoliation. Some products pair the two anyway, listing willow bark for the story and salicylic acid for the work.",
+      "ceiling": "It is not a BHA and does not exfoliate. For that, use salicylic acid.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "beevenom",
+      "target": "the look of firmness",
+      "mechanism": "Bee venom contains melittin and other peptides, and the cosmetic rationale is that a controlled low-level irritation prompts a visible tightening response — essentially the same logic as a mild chemical stressor. Laboratory work on individual venom components exists; controlled work on cosmetic products at cosmetic levels is very thin. The important consideration is not efficacy but allergy: venom proteins can provoke serious reactions in sensitised people. Cosmetic-grade venom is heavily diluted, which reduces that concern without removing it, and no cosmetic dilution makes a known bee allergy safe to test at home.",
+      "ceiling": "Unproven cosmetically, and genuinely unsuitable for anyone with a bee allergy. Ask a doctor first.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "charcoal",
+      "target": "oil and debris on the skin surface",
+      "mechanism": "Activated charcoal is carbon processed to create an enormous porous surface area, which lets it adsorb molecules onto that surface. In water treatment this is genuinely powerful. On skin, in a mask worn for a few minutes, it can pick up some surface oil and residue. It cannot reach inside a pore, and adsorption of a substance onto carbon is not the same thing as drawing anything out of skin.",
+      "ceiling": "Surface pick-up only. There is no detoxification, and peel-off versions mainly remove fine facial hair.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "cocoylglutamate",
+      "target": "removing oil and grime while keeping skin comfortable",
+      "mechanism": "Sodium cocoyl glutamate is an anionic surfactant built from coconut-derived fatty acids and the amino acid glutamic acid. Its molecules surround oils so they can be rinsed away, but they are milder toward skin proteins and lipids than sulfates, and the class works at a pH close to skin's own rather than the high pH of true soap. That combination is why an amino acid cleanser leaves less of the tight, squeaky feeling.",
+      "ceiling": "A gentle cleanser. It does not treat acne, and it foams less than a sulfate by design.",
+      "evidenceGrade": "Moderate"
+    },
+    {
+      "id": "meadowfoam",
+      "target": "surface softening and water loss",
+      "mechanism": "Meadowfoam seed oil is dominated by unusually long-chain fatty acids, giving it a composition closer to a liquid wax than a conventional triglyceride oil. That structure makes it exceptionally resistant to oxidation and gives a light cushioning film on the surface that slows evaporation. It behaves, in practice, much like jojoba: a stable, pleasant emollient chosen for reliability rather than for any active property. That stability is why it turns up in balms and cleansing oils meant to sit on a shelf for a long time, where a more delicate seed oil would quietly go off.",
+      "ceiling": "An emollient. There is no evidence it does anything beyond softening and sealing.",
+      "evidenceGrade": "Limited"
+    },
+    {
+      "id": "sunflower",
+      "target": "surface comfort and barrier lipids",
+      "mechanism": "Sunflower seed oil is high in linoleic acid, the essential fatty acid that skin uses in building the lipids between surface cells and which tends to be relatively low in dry and acne-prone skin. Applied topically it softens the surface and slows water loss, and linoleic-rich oils have been studied for barrier comfort with more supportive results than most cosmetic oils manage. Refined, fresh oil matters — oxidised oil is an irritant.",
+      "ceiling": "A supportive emollient. It does not replace ceramides or treat any skin condition.",
+      "evidenceGrade": "Moderate"
+    }
+  ],
+  "conflicts": [
+    {
+      "a": "alcoholdenat",
+      "b": "retinal",
+      "verdict": "caution",
+      "reason": "Retinised skin stings under a high-alcohol formula. Keep the quick-dry sunscreen for mornings and the retinal for nights, and stop stacking them in one step."
+    },
+    {
+      "a": "alcoholdenat",
+      "b": "aha",
+      "verdict": "caution",
+      "reason": "Freshly exfoliated skin is the least forgiving surface for a solvent-heavy formula. Space them, or choose a lower-alcohol sunscreen on acid days."
+    },
+    {
+      "a": "witchhazel",
+      "b": "retinol",
+      "verdict": "caution",
+      "reason": "Astringent distillates on retinised skin is a reliable route to stinging and visible redness. Pick one; the retinol is the one doing the work."
+    },
+    {
+      "a": "witchhazel",
+      "b": "bha",
+      "verdict": "caution",
+      "reason": "Both strip and tighten, and the combination is a classic cause of skin that looks calm for an hour and reacts for a week."
+    },
+    {
+      "a": "ethylascorbic",
+      "b": "copperpeptide",
+      "verdict": "caution",
+      "reason": "Ascorbic derivatives can destabilise copper peptide complexes. Separate them — vitamin C in the morning, peptides at night."
+    },
+    {
+      "a": "ethylascorbic",
+      "b": "retinal",
+      "verdict": "caution",
+      "reason": "Not dangerous, just badly matched in one layer. Morning for the vitamin C derivative, evening for the retinal."
+    },
+    {
+      "a": "ascorbylglucoside",
+      "b": "niacinamide",
+      "verdict": "safe",
+      "reason": "The old vitamin C and niacinamide warning came from a study using heat and raw ascorbic acid. With a stable derivative in a finished formula it does not apply."
+    },
+    {
+      "a": "octocrylene",
+      "b": "octinoxate",
+      "verdict": "safe",
+      "reason": "Deliberately combined. Filters are blended to cover more of the spectrum and to keep each other stable in sunlight."
+    },
+    {
+      "a": "beevenom",
+      "b": "propolis",
+      "verdict": "caution",
+      "reason": "Both are bee-derived. If either has ever caused you a reaction, treat the other as suspect too, and ask a doctor if you have a known bee allergy."
+    },
+    {
+      "a": "kaolin",
+      "b": "aha",
+      "verdict": "caution",
+      "reason": "A clay mask and an acid on the same evening is the most common way people talk themselves into a stripped, stinging face. Choose one per night."
+    },
+    {
+      "a": "charcoal",
+      "b": "bha",
+      "verdict": "caution",
+      "reason": "Both target oil, and doubling up on a blemish is how a spot becomes a dry, flaking patch that lasts longer than the spot would have."
+    },
+    {
+      "a": "mineraloil",
+      "b": "glycerin",
+      "verdict": "safe",
+      "reason": "The intended pairing. A humectant supplies the water, an occlusive keeps it there — mineral oil over a hydrating layer, never over bare dry skin."
+    }
+  ]
+}

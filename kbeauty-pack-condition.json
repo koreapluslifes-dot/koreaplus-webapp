@@ -1,0 +1,629 @@
+{
+  "_readme": "Educational pages on medical skin conditions, consumed by build-kbeauty-pages.cjs via emitContent(). Shape matches kbeauty-clusters-ext.json: {slug, title, h1, qa, sections:[{h, body}]}. Every page describes the condition in plain language, states that diagnosis requires a clinician, frames skincare strictly as barrier support and comfort AROUND medical care, and never names a prescription treatment as a recommendation. Cosmetic structure-function wording throughout. No invented statistics.",
+  "condition": [
+    {
+      "slug": "atopic-dermatitis-eczema-what-skincare-can-do",
+      "title": "Atopic Dermatitis: What Skincare Can and Cannot Do",
+      "h1": "Atopic dermatitis (eczema): where gentle skincare helps, and where it stops",
+      "qa": "Atopic dermatitis is a chronic inflammatory skin condition, not a cosmetic problem, and only a clinician can diagnose it or steer a flare. Consistent emollient use is a genuine part of everyday care because it keeps skin more comfortable and less reactive between flares, but it works alongside medical treatment rather than in place of it. Weeping, cracked, yellow-crusted or sleep-destroying skin is a doctor visit, not a shopping trip.",
+      "sections": [
+        {
+          "h": "What it actually is",
+          "body": "Atopic dermatitis — 아토피 (atopi) in Korean — is a chronic, relapsing inflammatory condition, not dry skin that got out of hand. The barrier loses water too easily and lets irritants in, the immune system overreacts to things it should ignore, and itching drives scratching which damages the barrier further. It runs in families and often travels with asthma and hay fever. In infants it favours the face and the outer limbs; in older children and adults it tends to settle into elbow and knee creases, the neck and the hands. It flares and quietens rather than steadily improving."
+        },
+        {
+          "h": "Why two Korean brands exist almost entirely for this",
+          "body": "Illiyoon and Aestura, both Amorepacific brands, built their ranges around ceramide-led, fragrance-free moisturising for atopic-prone and highly reactive skin, and they sit in the derma section of Korean pharmacies and Olive Young rather than the beauty aisle. Korean cosmetic labelling permits only a narrow, substantiated wording about helping the dryness of atopic-prone skin — a moisturising claim, not a treatment claim, and the distinction is deliberate. Read the front of any such tube as a promise about comfort and water loss, not about the condition itself. A good emollient earns its place; it just is not medicine."
+        },
+        {
+          "h": "What a supporting routine looks like",
+          "body": "Short lukewarm showers rather than long hot ones. A mild 약산성 (yaksanseong, mildly acidic) cleanser used sparingly, or plain water on quiet days. Apply a thick, bland moisturiser to slightly damp skin within a few minutes of towelling off, and reapply more often than feels necessary — twice daily is a floor, not a target. Fragrance-free, essential-oil-free, dye-free. No acids, no retinoids, no scrubs, no botanical sheet masks during a flare. Patch-test anything new on the inner arm across several days. All of this is comfort and barrier support around a clinician's plan."
+        },
+        {
+          "h": "When to stop shopping and call a clinician",
+          "body": "Diagnosis belongs to a doctor, because several conditions mimic eczema and the plans differ. Book an appointment if skin is weeping, crusted yellow, painful or spreading, if there is fever, if sleep is being lost to itching, or if a flare simply will not settle. Sudden widespread worsening, or clusters of blisters and punched-out sores, warrant same-day attention. If something has been prescribed, use it as directed and do not swap it for a cream you read about. Ask your clinician before stopping anything, including on the advice of a stranger online."
+        }
+      ]
+    },
+    {
+      "slug": "contact-dermatitis-irritant-vs-allergic",
+      "title": "Contact Dermatitis: Irritant vs Allergic",
+      "h1": "Contact dermatitis: telling plain irritation apart from a true allergy",
+      "qa": "Irritant contact dermatitis is direct chemical or physical damage to the skin surface and will happen to anyone given enough exposure; allergic contact dermatitis is a specific immune reaction that only occurs in someone already sensitised to that substance. The two can look nearly identical on the skin, so the distinction is made by a clinician, often through patch testing, and not by comparing photographs online. Stop the suspected product and get it looked at.",
+      "sections": [
+        {
+          "h": "The irritant version",
+          "body": "This is dose-and-friction damage. Stinging or burning starts fairly quickly, the rash stays close to where the product went, and the skin looks dry, glazed, chapped or fissured rather than dramatically inflamed. Repeated hand washing, solvents, over-exfoliation and a too-enthusiastic actives routine all produce it. Anyone will react given enough exposure, which is why nobody needs to be allergic for a strong acid toner to wreck their cheeks. It settles when the exposure stops, though badly damaged skin can take weeks to feel normal again."
+        },
+        {
+          "h": "The allergic version",
+          "body": "This one is immune-mediated and delayed. The reaction typically appears hours to a couple of days after contact, itches more than it burns, and can spread beyond the area actually touched. It requires prior sensitisation, so a product used happily for years can suddenly become a problem. Fragrance mixes, preservatives, botanical extracts and hair dye ingredients are among the common culprits, and 'natural' says nothing about allergenicity — plant extracts are a well-recognised source of contact allergy. Once sensitised, you generally stay sensitised."
+        },
+        {
+          "h": "Why patch testing is the honest answer",
+          "body": "Guessing rarely works. Routines contain dozens of ingredients, shampoo and hair products run down the face, and nail products transfer everywhere. Patch testing places standardised allergens on the back and reads the result over several days, which is why it is a clinic procedure rather than something to improvise. A dermatologist can also tell contact dermatitis apart from eczema, seborrhoeic dermatitis or a fungal rash, which look similar and are handled differently. Take photographs and the actual ingredient lists to the appointment; it shortens the process considerably."
+        },
+        {
+          "h": "The skincare sabbatical",
+          "body": "While waiting to be seen, strip the routine to the bones: a bland non-foaming cleanser or water, one plain fragrance-free moisturiser, and sunscreen if the area is exposed. No actives, no exfoliation, no masks, no essential oils, no new products at all — a reaction cannot be identified against a moving background. Cool compresses help comfort. Reintroduce things one at a time, days apart, once the skin is calm and a clinician has weighed in. Skincare here is damage limitation and comfort, not treatment."
+        }
+      ]
+    },
+    {
+      "slug": "rosacea-overview-and-gentle-routine",
+      "title": "Rosacea: A General Overview and a Gentle Routine",
+      "h1": "Rosacea: what the term covers, and how calming skincare fits around treatment",
+      "qa": "Rosacea is a chronic condition of facial redness and flushing that can also involve bumps, visible vessels, thickened skin or eye irritation, and dermatologists group it into several patterns that behave differently. Skincare does not treat it; what it can do is remove the things provoking flushes and keep the barrier comfortable. Persistent facial redness needs a clinician, and any eye involvement should never be self-managed.",
+      "sections": [
+        {
+          "h": "The patterns, described generally",
+          "body": "Clinicians describe rosacea by what dominates. One pattern is flushing and persistent central-face redness with visible small vessels. Another adds inflamed bumps and pustules, which is why it is so often mistaken for adult acne — though rosacea characteristically lacks blackheads. A third involves gradual thickening of skin, most often on the nose. A fourth affects the eyes, causing grittiness, dryness or lid inflammation, and it can appear without much skin change at all. People often overlap categories, and the pattern is what determines a doctor's approach."
+        },
+        {
+          "h": "Triggers are personal, so keep a diary",
+          "body": "Commonly reported provocations include sun, heat, cold wind, hot drinks, alcohol, spicy food, exercise, stress, saunas and abrupt temperature swings. None of these apply to everyone, and lists copied off the internet lead to pointless restriction. A fortnight of noting what preceded a flush usually identifies two or three real culprits, which is far more useful than avoiding everything. Korean bathhouse culture and 찜질방 (jjimjilbang) heat rooms are worth approaching cautiously if heat is one of yours."
+        },
+        {
+          "h": "A 진정 routine that does not provoke it",
+          "body": "진정 (jinjeong) means calming, and it is the entire brief here. Keep the routine short: a non-foaming lukewarm cleanse, one soothing fragrance-free moisturiser, sunscreen every morning. Centella, madecassoside and panthenol are the sensible picks — they help the appearance of redness and support a comfortable barrier, which is a cosmetic contribution, not a clinical one. Skip scrubs, high-strength acids, strong retinoids, alcohol-heavy toners, menthol and hot water. If organic UV filters sting, a mineral or hybrid Korean sunscreen is usually better tolerated. Green colour-correcting primer is camouflage, nothing more."
+        },
+        {
+          "h": "Why a clinician, and why early",
+          "body": "Rosacea is diagnosed clinically, and the things it resembles — seborrhoeic dermatitis, perioral dermatitis, contact reactions, lupus-related rashes — are managed very differently. Getting the label right is the whole game. Raise eye symptoms explicitly, because ocular involvement is under-recognised and is not something to treat with skincare. Vessel changes and skin thickening tend to progress if left, which is a practical argument for seeing someone early rather than cycling through calming serums for two years first."
+        }
+      ]
+    },
+    {
+      "slug": "seborrhoeic-dermatitis-explained",
+      "title": "Seborrhoeic Dermatitis Explained",
+      "h1": "Seborrhoeic dermatitis: the flaky redness people keep treating as dryness",
+      "qa": "Seborrhoeic dermatitis is a common, relapsing inflammatory condition linked to the skin's resident yeast, producing greasy yellowish scale and redness in oil-rich areas — scalp, the creases beside the nose, brows, ears and chest. It flakes, so people reach for richer moisturisers, which often changes nothing. Diagnosis is a clinician's call because it overlaps visibly with psoriasis, rosacea and contact dermatitis, and it is usually managed medically with skincare playing a supporting part.",
+      "sections": [
+        {
+          "h": "What it is and where it appears",
+          "body": "지루성 피부염 (jiruseong pibuyeom) is not an infection in the usual sense — Malassezia yeast lives on everyone's skin, and this condition reflects an inflammatory response to it in people predisposed to react. That is why it favours oil-rich zones: scalp, the folds either side of the nose, eyebrows, behind the ears, the mid-chest. Scale is greasy and yellowish rather than dry and white. It waxes and wanes, often worsening in cold dry months and with stress or illness, and it tends to return whenever management stops."
+        },
+        {
+          "h": "Why more moisturiser rarely fixes it",
+          "body": "The flaking reads as dryness, so the instinct is a heavier cream. But the flaking is coming from inflammation and accelerated turnover, not from a lack of water, and rich occlusive products can sit on skin that already has plenty of sebum. People often report that layering oils makes it worse. Equally, over-cleansing to remove the grease provokes irritation and a rebound. Neither extreme works, which is the frustrating part and a good reason to get an actual diagnosis rather than reformulating the shelf."
+        },
+        {
+          "h": "A supporting routine around medical care",
+          "body": "Keep cleansing gentle and regular rather than harsh — a mild 약산성 (yaksanseong) cleanser, lukewarm water. Do not pick or scrub scale off; it inflames the skin underneath and prolongs the cycle. Lightweight, fragrance-free moisturisers generally sit better than heavy balms in the affected zones. Many people find heavy plant oils unhelpful here. Sunscreen still matters. Anything with an antifungal action is a medicated product, and which one, where and how often is a conversation for a doctor or pharmacist, not a page like this."
+        },
+        {
+          "h": "Get it identified properly",
+          "body": "On the face it is mistaken for rosacea, on the scalp for psoriasis, on the body for a fungal rash, and around the nose for a contact reaction. Those have different management, so a clinician's assessment saves months. See someone promptly if it appears suddenly and severely, spreads widely, involves the eyelids, or is not responding to whatever has been recommended. Sudden extensive onset in an adult is specifically worth mentioning to a doctor rather than self-treating."
+        }
+      ]
+    },
+    {
+      "slug": "perioral-dermatitis-explained",
+      "title": "Perioral Dermatitis Explained",
+      "h1": "Perioral dermatitis: the rash around the mouth that more products make worse",
+      "qa": "Perioral dermatitis is a bumpy, sometimes scaly rash clustered around the mouth, nose or eyes, classically sparing a narrow rim of skin right at the lip border, and it tends to burn or sting more than it itches. It is frequently provoked by heavy occlusive products and by steroid creams used on the face, and it usually gets worse with the instinctive response of adding more skincare. It needs a clinician; adding another cream is the opposite of the plan.",
+      "sections": [
+        {
+          "h": "How to recognise the pattern",
+          "body": "Small red bumps and pustules gathered around the mouth, sometimes at the nostril creases or around the eyes, sitting on a background of mild redness and fine scale. The clear rim of normal skin immediately bordering the lips is the giveaway. It generally burns, stings or feels tight rather than itching, and it comes and goes over weeks to months. It looks enough like acne that people attack it with acne actives, which typically inflames it further, and enough like eczema that people reach for whatever is in the bathroom cabinet."
+        },
+        {
+          "h": "What tends to provoke it",
+          "body": "Topical steroids applied to the face are the best-described association, which is one concrete reason not to borrow a steroid cream or use one on your face without medical direction. Heavy occlusive creams, thick balms and long-wear foundations are commonly implicated. Inhaled steroid sprays for asthma have been linked in some reports. Fluoride or foaming-agent toothpaste is frequently blamed online, but that evidence is thin and worth treating as a hypothesis rather than a fact. Heat, humidity and heavy sunscreen occlusion can aggravate it."
+        },
+        {
+          "h": "Radical simplification, supervised",
+          "body": "The approach most often described is stripping back to almost nothing — water or the blandest possible cleanser, at most one plain fragrance-free moisturiser and nothing else on the area, no makeup while it settles. It often looks worse for a stretch before improving, and improvement is measured in weeks, not days. That waiting period is exactly why it should be done with a clinician's input rather than alone, and it is genuinely uncomfortable. Sunscreen still matters, but choose the lightest formula you tolerate and discuss it at the appointment."
+        },
+        {
+          "h": "Why the appointment matters",
+          "body": "This condition is commonly managed medically, and the specifics belong to the person examining your face. A crucial detail: if you are already using a steroid on the area, stopping it abruptly can cause a marked rebound flare, so that decision needs to be made with the clinician who prescribed it. Do not self-diagnose from photographs — rosacea, seborrhoeic dermatitis, contact dermatitis and acne all overlap here. Around the eyes especially, improvising is a bad idea."
+        }
+      ]
+    },
+    {
+      "slug": "malassezia-folliculitis-fungal-acne",
+      "title": "Malassezia Folliculitis, or So-Called Fungal Acne",
+      "h1": "Malassezia folliculitis: not acne, and the internet's ingredient lists overreach",
+      "qa": "Malassezia folliculitis is an itchy, strikingly uniform crop of small bumps caused by yeast overgrowth within hair follicles — it is not acne, and acne routines usually do nothing for it. Confirmation is a clinician's job, sometimes with a simple skin scraping examined under a microscope. The circulated 'fungal acne safe' ingredient lists are a blunt instrument extrapolated from laboratory growth studies and are best treated as a rough heuristic, not a rule.",
+      "sections": [
+        {
+          "h": "How it differs from acne",
+          "body": "The tell is uniformity. Acne produces a mixed population — blackheads, whiteheads, papules, the occasional deep nodule, in varying sizes. Malassezia folliculitis produces rows of near-identical small dome-shaped bumps, often one to two millimetres, frequently itchy, and clustered on the forehead and hairline, upper back, chest and shoulders. It worsens with heat, sweat, occlusion and long humid summers, and it often flares after a course of antibiotics. If a breakout itches and every bump is the same size, mention that specifically to a doctor."
+        },
+        {
+          "h": "Where the 'safe list' over-claims",
+          "body": "Those lists derive largely from in-vitro work on which fatty acids and esters support Malassezia growth in culture. Skin is not a petri dish: concentration, formulation, delivery and your own immune response all intervene, and the published lists contradict each other on specific ingredients. Treating them as gospel leads people to discard perfectly reasonable moisturisers and to conclude, wrongly, that a product 'caused' a condition. Use them as a rough filter during a flare if it helps, and be honest that the evidence base underneath them is thin."
+        },
+        {
+          "h": "What genuinely helps around treatment",
+          "body": "The controllable factors are environmental. Shower reasonably soon after sweating rather than sitting in damp clothing. Choose breathable fabrics, and rethink tight gym gear and long humid commutes in Korea's summer. Ease off heavy occlusive oils and rich balms on the trunk while flaring. Do not stack more acne actives on top; over-exfoliating an itchy follicular rash reliably backfires. Keep the routine light, fragrance-free and simple. This is supportive comfort — the yeast overgrowth itself is addressed with antifungal medication a clinician chooses."
+        },
+        {
+          "h": "Get it confirmed before committing",
+          "body": "Self-diagnosis here is extremely common and often wrong. Bacterial folliculitis, acne mechanica, ordinary acne, keratosis pilaris and heat rash all present with follicular bumps, and each is handled differently. A dermatologist can usually settle it quickly. If bumps are painful rather than itchy, spreading, or accompanied by fever, that is a same-week appointment. Recurrence is normal after treatment stops, so a maintenance plan is also a conversation to have there rather than to construct from forum posts."
+        }
+      ]
+    },
+    {
+      "slug": "milia-explained",
+      "title": "Milia: The Tiny White Bumps That Are Not Whiteheads",
+      "h1": "Milia: firm keratin cysts under the surface, and why squeezing achieves nothing",
+      "qa": "Milia are tiny, firm, pearly-white bumps formed by keratin trapped in a small pocket beneath the skin surface, most often around the eyes and cheeks. Unlike a whitehead they have no opening, which is precisely why squeezing does not work and only risks bruising or scarring. They are harmless. Removal, when wanted, is a minor procedure done by a clinician — and some bumps that look like milia are something else entirely, which is a further reason to have them looked at.",
+      "sections": [
+        {
+          "h": "What they actually are",
+          "body": "A milium is a very small cyst holding keratin, sitting just under the surface with no follicular opening to the outside. In newborns they are extremely common and clear by themselves. In adults they may appear spontaneously, or in skin that has been injured, burnt, blistered or heavily occluded. They feel firm and grainy rather than soft, look white or pale yellow, and do not become inflamed. 좁쌀 (jopssal), meaning millet grain, is the everyday Korean word for bumps of this sort, though it covers several different things."
+        },
+        {
+          "h": "Why they resist everything you throw at them",
+          "body": "There is no channel to the surface, so there is nothing to extract, dissolve or draw out. Pore strips, squeezing, needling with a sewing pin and suction devices do not empty them; they bruise the surrounding skin and can leave a mark far more visible than the original bump. Steaming does nothing. The honest position is that most topical approaches work slowly, indirectly and unreliably, and a clinician with a sterile lance resolves in seconds what a serum may not resolve at all."
+        },
+        {
+          "h": "What might help the look, slowly",
+          "body": "Gentle chemical exfoliation and retinoid-type ingredients are commonly suggested on the theory that encouraging surface turnover may help some superficial milia work their way out over weeks. Evidence for this is modest and largely experiential, so treat it as worth trying rather than reliable. Lightening a very rich eye cream is reasonable if milia appeared alongside one. Stay gentle around the eye area, apply sunscreen, and set expectations low. Do not escalate to aggressive acids on delicate skin to chase a harmless bump."
+        },
+        {
+          "h": "When to have someone look",
+          "body": "Ask a clinician if bumps are numerous, persistent, growing, appearing in unusual patterns, or clustered on the eyelids — several other harmless growths and a few less harmless ones can resemble milia, and telling them apart is a visual skill, not a guess. Extraction involves a sterile blade or needle and is quick in trained hands; doing it yourself risks infection and scarring on some of the thinnest skin you have. If a bump changes colour, bleeds or enlarges, that is a prompt appointment."
+        }
+      ]
+    },
+    {
+      "slug": "keratosis-pilaris-chicken-skin",
+      "title": "Keratosis Pilaris: Rough Bumps on Arms and Thighs",
+      "h1": "Keratosis pilaris: harmless, stubborn, and nothing to do with hygiene",
+      "qa": "Keratosis pilaris is a very common, harmless variant of normal skin in which keratin plugs the openings of hair follicles, producing rough sandpapery bumps on the upper arms, thighs, buttocks and sometimes cheeks. It is largely genetic, it often eases with age, and nothing available over the counter cures it. Consistent gentle keratolytic care plus moisturiser can improve how it looks and feels, and it returns when you stop — a clinician is worth seeing if it is inflamed, scarring or affecting the face.",
+      "sections": [
+        {
+          "h": "What is happening in the follicle",
+          "body": "Keratin, the protein that makes up the outer skin layer, accumulates at the follicle opening and forms a small hard plug. Each plug creates a bump, sometimes with a trapped hair coiled beneath it, sometimes with a ring of redness around it. Korean speakers call the texture 닭살 (dalgsal), chicken skin, and the analogy is fair. It runs strongly in families, is more noticeable in dry weather and winter, and often improves through adulthood without anyone doing anything. It is not caused by poor washing."
+        },
+        {
+          "h": "What genuinely shifts the look and feel",
+          "body": "The ingredients with the best reputation here soften and loosen that keratin: urea, lactic acid and salicylic acid, used in a body lotion or cream, applied consistently. Expect improvement in smoothness over weeks rather than transformation, and expect the bumps to come back within a month or two of stopping. Pair the keratolytic with a plain moisturiser, because these ingredients can sting or dry skin at higher strengths. Redness responds much less well than roughness does, which is worth knowing before buying anything."
+        },
+        {
+          "h": "What makes it worse",
+          "body": "Scrubs, loofahs, dry brushing and exfoliating gloves feel productive and generally increase the redness while doing little to the plugs. Very hot showers and long soaks strip the skin and worsen the accompanying dryness. Picking at individual bumps leaves marks that outlast the bump considerably. Fragranced body washes on already-dry skin are a common irritant. The pattern across all of these is the same: the condition is not dirt, and friction does not remove it — softening and hydrating do more than abrasion ever will."
+        },
+        {
+          "h": "When it is not simple keratosis pilaris",
+          "body": "See a clinician if bumps are persistently inflamed, if they leave scars or small bald patches, if they involve the eyebrows or cheeks in a child, or if there is progressive redness rather than just roughness. Several related conditions look similar and behave differently, and a few involve permanent follicular scarring that is worth catching early. A dermatologist can also confirm it is nothing more than keratosis pilaris, which is often what people actually want. Skincare here is cosmetic smoothing, no more."
+        }
+      ]
+    },
+    {
+      "slug": "hormonal-acne-explained",
+      "title": "Hormonal Acne: What the Term Does and Does Not Mean",
+      "h1": "Hormonal acne: a useful shorthand and an imprecise label",
+      "qa": "'Hormonal acne' is not a formal diagnosis — it is shorthand for acne that tracks the menstrual cycle or other hormonal shifts, typically clustering along the jaw, chin and neck, and often deeper and more tender than surface congestion. Since hormones are involved in essentially all acne, the phrase describes a pattern rather than a cause. Persistent, painful or scarring acne is a medical matter, and topical skincare works at a level the driver simply is not at.",
+      "sections": [
+        {
+          "h": "The pattern people are describing",
+          "body": "Lesions along the lower third of the face — jawline, chin, upper neck — that flare in a predictable relationship to the cycle, feel sore before they surface, and last longer than a surface whitehead. It commonly appears or persists in adulthood, particularly in women, and it can coexist with otherwise unremarkable skin. The pattern is real and worth noticing. What it does not tell you is whether hormone levels are abnormal; most people with this pattern have entirely normal bloodwork, which is a point clinicians make often."
+        },
+        {
+          "h": "Why topical routines plateau",
+          "body": "Surface actives work on the surface. A BHA can help the look of congestion, niacinamide can help the appearance of tone and oiliness, azelaic acid is well liked for the appearance of both bumps and marks — all cosmetic contributions, and all of them useful. None of them alter androgen signalling in the sebaceous gland, and deep lesions form well below where a serum reaches. That is why people describe hitting a ceiling: the routine is doing its job, the job is just smaller than the problem."
+        },
+        {
+          "h": "A routine that at least does no harm",
+          "body": "Barrier first. Over-stripping is the classic escalation — harsher cleanser, more acid, more spot treatment — and it produces irritated skin with the same acne on it. Use a gentle low-pH cleanser, one active introduced at a time, a light non-comedogenic moisturiser, and daily sunscreen so post-acne marks fade rather than darken. Give any change eight to twelve weeks before judging it. Hydrocolloid patches on surfaced spots are fine; picking is what turns a two-week spot into a six-month mark."
+        },
+        {
+          "h": "What warrants a doctor",
+          "body": "Deep painful lesions, scarring, acne that has not responded to sensible over-the-counter care, or acne causing real distress — all reasons to book. Sudden severe onset, or adult acne appearing alongside irregular periods, unusual hair growth or scalp hair thinning, should be raised with a doctor rather than a shop assistant, since the assessment there goes beyond skin. Bring a photo timeline and a list of what you have already tried and for how long; it makes the appointment substantially more useful."
+        }
+      ]
+    },
+    {
+      "slug": "pcos-and-skin-changes-general",
+      "title": "PCOS and Skin Changes: A General Overview",
+      "h1": "PCOS and the skin: why the acne page is not the whole picture",
+      "qa": "Polycystic ovary syndrome is a hormonal and metabolic condition diagnosed by a doctor, and skin changes are one of several ways it can show up — persistent adult acne along the lower face, coarse hair growth in a male-pattern distribution, scalp hair thinning, and sometimes velvety darkened skin in body folds. None of that is diagnosable from a mirror or a quiz. Where several of these appear together, particularly alongside irregular periods, the sensible next step is a doctor rather than another serum.",
+      "sections": [
+        {
+          "h": "What the condition is, in plain terms",
+          "body": "PCOS is a common hormonal and metabolic condition affecting ovulation, with effects that reach well beyond the skin — menstrual irregularity, fertility, insulin handling and cardiovascular risk are all part of what clinicians consider. Its presentation varies enormously between people, and diagnosis rests on a defined combination of features assessed by a doctor, usually involving history, bloodwork and imaging. That is precisely why it cannot be self-identified from a jawline breakout, and why the online checklists circulating under this name are unreliable."
+        },
+        {
+          "h": "The skin signs, described generally",
+          "body": "Acne that persists into adulthood, often along the jaw and chin, is the one people notice first. Hirsutism — coarser, darker hair in areas where it typically follows a male pattern — is another. So is thinning at the crown or a widening part, which distresses people considerably and is worth raising early. Some people develop velvety, thickened, darkened skin in the neck, armpits or groin; doctors take that sign seriously because of what it can indicate about insulin, and it should be shown to one rather than scrubbed."
+        },
+        {
+          "h": "Where skincare genuinely fits",
+          "body": "It fits around medical care, addressing appearances rather than causes. Gentle cleansing, one considered active rather than five, a light moisturiser, and daily sunscreen so post-acne marks lighten rather than entrenching. Niacinamide and azelaic acid are reasonable cosmetic choices for the look of tone and bumps. Nothing on a shelf changes androgen signalling. Body-hair and hair-thinning concerns in this context are medical conversations too, and expensive cosmetic devices bought before a diagnosis are frequently money spent on the wrong problem."
+        },
+        {
+          "h": "Getting properly assessed",
+          "body": "A doctor will take a history, likely order blood tests and possibly imaging, and will also want to exclude other conditions that mimic this picture. That last part matters: several quite different things produce similar skin signs. Equally, most people with adult acne do not have PCOS, and treating a social-media checklist as a diagnosis causes real anxiety. If the pattern fits, ask for the assessment — it addresses more than the skin, and that is the point."
+        }
+      ]
+    },
+    {
+      "slug": "cystic-acne-when-skincare-is-not-enough",
+      "title": "Cystic Acne: When Skincare Is Not the Answer",
+      "h1": "Cystic and nodular acne: deep painful lesions that need medical care",
+      "qa": "Deep, painful lumps that sit under the skin for weeks and heal leaving a scar are nodular or cystic acne, and this is the point at which over-the-counter skincare stops being the appropriate tool. Scarring is permanent and largely preventable with timely medical treatment, so delay is the actual risk here. See a dermatologist early, and let gentle skincare work around that care rather than substituting for it.",
+      "sections": [
+        {
+          "h": "What makes it different",
+          "body": "Ordinary acne sits near the surface. Nodules and cysts form deep in the dermis, where inflammation involves the whole follicle and the tissue around it. They are firm or fluctuant, tender to touch, often larger than a pea, and they persist for weeks rather than days. Several may cluster and connect. They rarely come to a head, which is why the usual instincts fail. The pain itself is diagnostic information — surface acne does not throb, and something that does deserves an appointment."
+        },
+        {
+          "h": "The scarring argument for not waiting",
+          "body": "Deep inflammation damages the surrounding structure, and once the tissue remodels, the resulting depression or raised scar is permanent. Treating scars afterwards is slower, costlier and less satisfying than preventing them. That is the single strongest reason to see a doctor early rather than working through a queue of serums first. Korea's 피부과 (pibugwa) dermatology clinics are unusually accessible, and if you are in the country the barrier to being seen is low. Elsewhere, ask for the referral sooner than feels necessary."
+        },
+        {
+          "h": "What not to do",
+          "body": "Do not squeeze, needle, lance or attempt drainage. Deep lesions have no exit route and pressure pushes inflammation sideways into surrounding tissue, which enlarges the eventual scar. Skip high-strength acids and aggressive scrubs on actively inflamed skin. Be sceptical of the purging excuse: purging is a real short-term effect of some actives, but months of worsening deep lesions is not purging, it is a signal to stop and get assessed. Do not stack multiple strong actives out of frustration."
+        },
+        {
+          "h": "The supporting routine",
+          "body": "Keep it deliberately boring while under medical care. A gentle non-stripping cleanser twice daily, a light non-comedogenic moisturiser — treatment often makes skin dry and sensitive, and moisturiser makes that tolerable — and daily broad-spectrum sunscreen, because post-inflammatory marks darken with UV and outlast the acne itself by months. Hydrocolloid patches suit surfaced lesions only. Fragrance-free, minimal, consistent. This is barrier support and comfort while the actual treatment does the work."
+        }
+      ]
+    },
+    {
+      "slug": "psoriasis-skincare-support",
+      "title": "Psoriasis: Skincare Around Medical Treatment",
+      "h1": "Psoriasis: an immune condition where moisturiser is comfort, not treatment",
+      "qa": "Psoriasis is a chronic immune-mediated condition in which skin cells turn over far too quickly, producing thickened, sharply defined plaques with silvery scale, classically on elbows, knees, scalp and lower back. It is a medical diagnosis with medical treatment, and no cosmetic product treats it. Emollients do make plaques more comfortable and less prone to painful cracking, which is a genuine contribution — as comfort care alongside a clinician's plan, never instead of one.",
+      "sections": [
+        {
+          "h": "How it differs from eczema",
+          "body": "건선 (geonseon) plaques tend to be well-demarcated, with a clear edge between affected and normal skin, and carry thick silvery-white scale. Eczema is typically less defined, more intensely itchy, and favours the creases rather than the extensor surfaces. Psoriasis also produces recognisable nail changes — pitting, thickening, separation — and can affect the scalp beyond the hairline. It is systemic inflammation expressed in skin, not a surface problem, which is why topical cosmetics cannot reach it. Only a clinician should make this call."
+        },
+        {
+          "h": "Mention any joint symptoms, promptly",
+          "body": "A proportion of people with psoriasis develop inflammatory joint disease, and joint damage from it can be permanent. Stiffness lasting longer than half an hour in the morning, swollen or painful joints, swollen fingers or toes, or persistent heel and lower-back pain should be raised with a doctor without waiting for the next routine appointment. This is the single most important thing on this page. Skin severity does not reliably predict joint involvement, so mild plaques are no reassurance at all."
+        },
+        {
+          "h": "What emollients actually do",
+          "body": "They soften scale, reduce cracking and fissuring, ease the tight painful feeling, and make plaques less visually obvious — all real quality-of-life gains, all cosmetic. Use thick, bland, fragrance-free creams or ointments generously and often, especially after lukewarm bathing while skin is still damp. Soften scale rather than picking or scraping it: skin injury can provoke new plaques at the site of trauma, a well-described phenomenon, which makes scrubbing genuinely counterproductive. Avoid fragrance, alcohol-heavy toners and hot water."
+        },
+        {
+          "h": "Be sceptical of what is sold to you",
+          "body": "A cosmetic product may lawfully describe helping the appearance of dryness, flaking or roughness. It may not treat psoriasis, and any product implying otherwise is over-claiming. Unregulated creams marketed for psoriasis have repeatedly been found by regulators in various countries to contain undeclared steroids, which is a real hazard rather than a theoretical one. Buy from legitimate channels, keep the medical plan with the doctor who wrote it, and treat the shelf as a source of comfort only."
+        }
+      ]
+    },
+    {
+      "slug": "vitiligo-explained",
+      "title": "Vitiligo: Loss of Pigment, Not a Cosmetic Flaw",
+      "h1": "Vitiligo: what it is, why sun protection matters most, and what skincare cannot do",
+      "qa": "Vitiligo is an autoimmune condition in which pigment-producing cells are lost, leaving sharply defined patches of skin with little or no pigment, often symmetrical and often around the hands, face and body openings. No cosmetic product restores pigment, and anything claiming to is over-claiming. Diagnosis and management belong to a dermatologist, and early assessment is worth having, because actively spreading vitiligo is generally approached differently from long-stable patches.",
+      "sections": [
+        {
+          "h": "What is happening",
+          "body": "백반증 (baekbanjeung) involves immune-mediated loss of melanocytes, the cells that produce pigment. The result is patches that are milk-white rather than merely lighter, with a fairly crisp border against normal skin, and hair growing within a patch may turn white too. It often appears symmetrically, commonly on hands, wrists, face, around the eyes and mouth, and in areas of friction. It may be stable for years or extend in episodes. It is associated with other autoimmune conditions, which is one reason a proper medical assessment is useful."
+        },
+        {
+          "h": "What it gets confused with",
+          "body": "Post-inflammatory hypopigmentation, where a patch loses some pigment after eczema, a burn or a treatment, is far more common and usually recovers slowly on its own. Certain superficial fungal conditions produce pale scaly patches, particularly on the trunk in humid weather. Several other pigment conditions exist. These are distinguished by examination, sometimes using a specialised lamp, and they are managed completely differently — which is the entire argument against deciding what you have from photographs."
+        },
+        {
+          "h": "Sun protection is the practical priority",
+          "body": "Depigmented skin has lost its own UV defence and burns readily, so protection is a health matter, not a cosmetic one. High-SPF broad-spectrum sunscreen applied generously and reapplied, plus clothing, hats and shade. There is a second reason: tanning the surrounding skin increases the contrast and makes patches far more conspicuous, so people who protect thoroughly often find the patches less visible. Korean sunscreens carry both an SPF number and a PA rating for UVA, and both matter here."
+        },
+        {
+          "h": "Camouflage, honestly framed",
+          "body": "Cosmetic camouflage products, high-coverage colour-matched makeup and self-tanning preparations can reduce contrast temporarily. That is legitimate and helps some people considerably. It is also purely cosmetic and washes off, and no serum, cream or supplement on the open market repigments skin. Treat 'repigmenting' cosmetic claims with scepticism. Medical options exist and are the dermatologist's territory. The psychological weight of visible vitiligo is real and well recognised; it is a reasonable thing to raise at that appointment too."
+        }
+      ]
+    },
+    {
+      "slug": "urticaria-hives-explained",
+      "title": "Urticaria (Hives): Wheals That Come and Go",
+      "h1": "Urticaria: itchy wheals that move around, and the version that is an emergency",
+      "qa": "Hives are raised, itchy wheals that typically appear and fade within hours, often disappearing from one spot and surfacing in another — the individual wheal is short-lived even when the episode drags on for weeks. Most acute episodes settle, but hives with swelling of the lips, tongue or throat, difficulty breathing, or faintness are a medical emergency: call emergency services immediately. Anything persisting beyond about six weeks is chronic urticaria and needs a doctor.",
+      "sections": [
+        {
+          "h": "The emergency part, first",
+          "body": "If hives come with swelling of the lips, tongue, mouth or throat, a tight or hoarse voice, wheezing or breathing difficulty, vomiting with collapse, or lightheadedness and faintness, treat it as an emergency and call for help immediately. Do not wait to see whether it settles, do not drive yourself, and do not look for a cream. Anyone who has been prescribed emergency medication for allergic reactions should use it as they were instructed. This is the one section on this page that is not about skincare at all."
+        },
+        {
+          "h": "How a wheal behaves",
+          "body": "두드러기 (dudeureogi) presents as raised pale or pink swellings on red skin, intensely itchy, blanching when pressed, and varying from a few millimetres to large joined patches. The defining feature is impermanence: an individual wheal typically resolves within a day, leaving no mark, while new ones appear elsewhere. Tell your doctor if a single lesion lasts longer than a day, is painful rather than itchy, or leaves a bruise or stain, because that changes the picture and points somewhere else."
+        },
+        {
+          "h": "Triggers, and the honest caveat",
+          "body": "Acute episodes can follow infections, medicines, foods or insect stings, and some people react to physical stimuli — pressure, cold, heat, sunlight, exercise. Chronic urticaria is the frustrating case: in a large share of it no external trigger is ever identified, and it is not an allergy in the everyday sense. Elimination diets and expensive intolerance panels are widely marketed for it and rarely deliver. A clinician can investigate sensibly; the internet's confident answers on this topic mostly are not."
+        },
+        {
+          "h": "What skincare can and cannot do",
+          "body": "Very little, and that is worth stating plainly. Keep skin cool, since heat aggravates itch — cool showers, a cool room, loose cotton clothing, no hot baths or saunas while flaring. Use a bland, fragrance-free moisturiser for comfort and skip actives, acids and retinoids on affected skin. Scratching prolongs things. Medication decisions, including anything from a pharmacy shelf, belong to a doctor or pharmacist who knows your history, and long-running hives need proper assessment rather than management by lotion."
+        }
+      ]
+    },
+    {
+      "slug": "sun-allergy-polymorphic-light-eruption",
+      "title": "Sun Allergy and Polymorphic Light Eruption",
+      "h1": "Sun allergy: what PMLE is, and why it appears on the first bright days",
+      "qa": "Polymorphic light eruption is the most common of the conditions people call sun allergy — an itchy rash of bumps, blotches or small blisters appearing hours to a day or two after the first strong sun exposure of the season, typically on skin that has spent winter covered. It usually settles over days and often becomes less reactive as the season progresses. Any sunlight-triggered rash should still be assessed, because drug reactions and autoimmune conditions can look similar.",
+      "sections": [
+        {
+          "h": "The pattern that gives it away",
+          "body": "Timing and location. The rash appears some hours after exposure rather than immediately, and it favours skin that has been covered through winter and is suddenly uncovered — the chest, the outer arms, the backs of hands, the front of the legs. The face is often spared, presumably because it is exposed year-round. It itches, it takes days rather than hours to resolve, and it typically recurs each spring while becoming milder across the summer as skin adapts. Recognition is not diagnosis."
+        },
+        {
+          "h": "The other light-triggered reactions",
+          "body": "Several conditions look like sun allergy and are handled differently. Some medicines and some plant or perfume constituents on skin cause phototoxic reactions that resemble an exaggerated sunburn in exposed areas. Solar urticaria produces wheals within minutes rather than hours. Certain autoimmune conditions produce photosensitive facial rashes. A new sun-triggered rash — particularly after starting a medicine, or with joint pain, mouth ulcers or feeling generally unwell — needs a doctor, not a change of sunscreen."
+        },
+        {
+          "h": "Protection that actually works",
+          "body": "Sunscreen alone is often not enough here, which surprises people. Use a high broad-spectrum SPF applied at a proper thickness and reapplied, and read the PA rating on Korean sunscreens, since UVA is heavily implicated in this pattern. Then add what sunscreen cannot do: tightly woven or UV-rated clothing, a wide brim, and shade in the middle of the day. Gradual controlled exposure is sometimes used to build tolerance, but that is a medically supervised approach, not a DIY tanning project."
+        },
+        {
+          "h": "The routine while it settles",
+          "body": "Keep affected skin cool and undisturbed. Cool compresses or a cool shower for comfort, a bland fragrance-free moisturiser, and nothing else on it — pause acids, retinoids, vitamin C, scrubs and fragranced products until the rash has gone. Loose clothing over affected areas. Do not test whether it is 'better now' by going back into full sun. If the rash blisters extensively, is very painful, spreads, or comes with fever or feeling unwell, see a doctor promptly rather than waiting it out."
+        }
+      ]
+    },
+    {
+      "slug": "pih-vs-pie-vs-melasma",
+      "title": "PIH, PIE and Melasma: Telling Marks Apart",
+      "h1": "Post-inflammatory hyperpigmentation, erythema and melasma are three different problems",
+      "qa": "PIH is brown or grey-brown pigment deposited after inflammation; PIE is pink-to-red discolouration from dilated vessels left behind after inflammation, containing no excess pigment at all; melasma is a chronic, symmetrical pattern driven by hormones, UV, visible light and heat, and it behaves unlike either. They respond to different things, which is why misidentifying yours is the commonest reason a brightening routine goes nowhere. A dermatologist distinguishes them quickly, and melasma in particular benefits from professional input.",
+      "sections": [
+        {
+          "h": "PIH: pigment left behind",
+          "body": "After acne, a burn, an ingrown hair or any inflammation, pigment-producing cells can overshoot and leave a brown, tan or grey-brown flat mark. It is common in every skin tone and tends to be more pronounced and more persistent in deeper tones. Depth matters: pigment sitting in the upper layers fades in months, pigment that has dropped deeper can take far longer and responds much less to topical products. Sun exposure darkens it reliably, which makes daily sunscreen the single most useful habit here."
+        },
+        {
+          "h": "PIE: not pigment at all",
+          "body": "Pink, red or purplish flat marks after a spot are dilated capillaries in skin that has been inflamed, not melanin. The check is simple: press the mark or stretch the skin, and if it blanches and briefly disappears, it is vascular. This matters because brightening actives aimed at melanin — arbutin, kojic acid, tranexamic acid — do relatively little for it. PIE generally fades with time provided the spot is not re-inflamed, so the useful interventions are barrier support, sun protection and not picking."
+        },
+        {
+          "h": "Melasma: a different animal",
+          "body": "기미 (gimi) presents as symmetrical, map-like patches on the cheeks, forehead, upper lip or jaw, and it relapses. UV drives it, but so does visible light — which is why tinted sunscreens containing iron oxides are specifically discussed for melasma — and so does heat, meaning saunas, hot yoga and steaming showers can aggravate it independently of light. Hormonal factors are involved. It is realistically managed rather than cured, it recurs, and it responds far better to a dermatologist's plan than to rotating serums."
+        },
+        {
+          "h": "What all three share",
+          "body": "Two things. First, sun protection is non-negotiable in every case: applied properly, reapplied, and supported by hats and shade. Without it, nothing else you do will show. Second, do not re-injure the skin. The classic own goal is escalating exfoliation to speed fading up, which inflames skin and produces more of exactly the mark you are chasing — particularly in deeper tones, where aggressive treatment carries real risk of worsening pigmentation. Slow, gentle and consistent genuinely outperforms fast and harsh."
+        }
+      ]
+    },
+    {
+      "slug": "heat-rash-miliaria-explained",
+      "title": "Heat Rash (Miliaria): Blocked Sweat, Not Allergy",
+      "h1": "Heat rash: what 땀띠 actually is, and why cooling beats creams",
+      "qa": "Heat rash is what happens when sweat ducts become blocked and sweat leaks into the skin instead of reaching the surface, producing tiny clear blisters or itchy prickly bumps in covered, sweaty areas. Cooling the skin and stopping the sweating is what resolves it; occlusive creams and powders often prolong it by blocking further. If it becomes painful or pustular, or spreads with fever, see a doctor, since infected sweat glands are a genuine complication.",
+      "sections": [
+        {
+          "h": "What is actually blocked",
+          "body": "땀띠 (ttamtti) is a plumbing problem, not an allergy. When sweat cannot escape, it accumulates and leaks into surrounding tissue. If the blockage is very superficial, the result is tiny clear fragile blisters that break at a touch and barely itch. If it sits deeper, the result is the red prickly itchy bumps most people mean by heat rash. It concentrates where clothing traps heat and where skin rubs — the back, chest, waistband, under the breasts, neck folds, and anywhere a strap sits."
+        },
+        {
+          "h": "The Korean summer version",
+          "body": "The 장마 (jangma) monsoon and the humid weeks that follow are a near-perfect setup: high humidity means sweat evaporates poorly, and long commutes in heat compound it. This is exactly the season when a rich occlusive night cream, heavy body oil or thick sunscreen layered over the chest and back stops helping and starts trapping. Switching to lighter gel-textured hydration through the humid months is not a marketing gimmick; it is a sensible response to the way sweat behaves in that weather."
+        },
+        {
+          "h": "What actually helps",
+          "body": "Get cool and stay dry. Air conditioning or a fan, loose breathable fabrics, cool showers, and drying skin properly rather than dressing while damp. Remove the occlusion — that means pausing heavy creams, thick balms and body oils over affected areas, and reconsidering talc-style powders, which cake and can add to the blockage. Calamine is widely used for the itch and is a comfort measure, not a fix. Do not scrub. Most cases settle within days once the skin stops sweating into itself."
+        },
+        {
+          "h": "When it is not heat rash",
+          "body": "See a doctor if bumps become painful, filled with pus, or surrounded by spreading warm redness, if there is fever, or if the rash persists after several cool dry days. Blocked sweat glands can become infected, and deeper forms can affect the body's ability to cool itself, which matters in serious heat. It is also readily confused with fungal folliculitis, an allergic reaction or an irritant rash from a new product, and those go in different directions — a clinician sorts that out."
+        }
+      ]
+    },
+    {
+      "slug": "sudden-one-sided-skin-pain-see-a-doctor",
+      "title": "Sudden One-Sided Skin Pain: See a Doctor Now",
+      "h1": "Burning or stabbing pain in one band of skin: this is a same-day medical matter",
+      "qa": "Pain, burning or intense tingling confined to one band or one side of the body — with or without a rash, which may not have appeared yet — should be assessed by a doctor the same day rather than managed with skincare. Timing matters considerably for several conditions that present this way, and the window in which medical treatment is most useful can be short. If it involves the face, particularly near an eye or an ear, treat it as urgent.",
+      "sections": [
+        {
+          "h": "The pattern worth acting on",
+          "body": "One-sided. Band-like, following a stripe across the trunk, or occupying one region of the face or scalp, and characteristically not crossing to the other side of the body. Pain, burning, itching or an odd crawling sensitivity, often severe enough that light touch or clothing is unpleasant. The pain may arrive a day or two before anything is visible, which is exactly why people spend that window applying creams. If a rash then appears in the same strip, that is more reason to be seen, not less."
+        },
+        {
+          "h": "Why this page will not name it",
+          "body": "Several conditions produce this pattern, and some of them are time-critical. Naming one would invite self-diagnosis, and getting it wrong in either direction has consequences: reassurance where care is needed, or the wrong care entirely. A clinician can identify it quickly, usually on examination alone. Involvement of the face — especially around an eye, the tip of the nose or an ear — is specifically urgent, because complications there can affect vision and hearing. Same-day assessment. That is the whole message of this page."
+        },
+        {
+          "h": "What not to do meanwhile",
+          "body": "Skincare has no role here. Do not apply acids, retinoids, vitamin C or any exfoliant to the area. Do not scrub it, mask it, or cover a painful rash with a heavy occlusive product. Do not open blisters. Do not attempt to identify it from image searches. Keep the area clean and loosely covered with breathable fabric if clothing is uncomfortable, and avoid sharing towels and bedding until a doctor has told you what you are dealing with. Then go and be seen."
+        },
+        {
+          "h": "Afterwards, keep it boring",
+          "body": "Once a clinician is involved and has given instructions, skincare returns only as barrier support: a bland fragrance-free moisturiser on settled skin, gentle cleansing, sunscreen on healed areas since new skin marks easily. Reintroduce actives slowly and well after the skin is fully calm. If pain lingers after the skin itself has settled, that is a medical matter to raise at follow-up rather than something to soothe with a cream — persistent nerve pain after conditions of this type is recognised and treatable, and it is not a skincare problem."
+        }
+      ]
+    },
+    {
+      "slug": "periorbital-eyelid-dermatitis",
+      "title": "Eyelid and Periorbital Dermatitis",
+      "h1": "Eyelid dermatitis: the thinnest skin on your face, reacting to something",
+      "qa": "Red, flaky, itchy or swollen eyelids are among the most common places skin reacts, because eyelid skin is the thinnest on the body and it collects whatever hands, hair and nails transfer to it. The culprit is very often something applied elsewhere — nail polish, shampoo, hair dye, a face serum — rather than an eye product. It needs a clinician, and patch testing is frequently how the answer is finally found.",
+      "sections": [
+        {
+          "h": "Why eyelids react before anything else",
+          "body": "Eyelid skin is markedly thinner than cheek skin, has minimal supporting structure and swells readily, so a substance that causes nothing anywhere else can produce visible redness, crepey flaking and puffiness here. It is also in near-constant motion and gets rubbed whenever eyes itch, which compounds everything. Add the sheer number of things that reach it — makeup, remover, hair products running down at the shower, hands, nails, phone screens, false-lash adhesive — and it becomes the most exposed skin on the face."
+        },
+        {
+          "h": "The transferred culprit",
+          "body": "Dermatologists see this constantly: the reaction is on the eyelids, the cause is on the fingertips. Nail polish and gel products are a classic example, as are shampoos, conditioners and hair dyes rinsing over the face, and fragranced hand creams. So are strong facial actives applied near the orbital bone and migrating upward with sweat and expression. Reviewing only eye products misses the answer, so the review has to cover everything that touches the face, hair and hands."
+        },
+        {
+          "h": "Stripping back",
+          "body": "While waiting to be seen: nothing on the eyelids but a plain fragrance-free moisturiser suitable for the eye area, no eye makeup, no lash serums, no removers containing fragrance. Switch face and hair products to fragrance-free versions temporarily, since hair products count. Keep facial actives well away from the orbital area. Do not rub — the mechanical trauma alone maintains the inflammation. Cool compresses help comfort. Reintroduce one product at a time, several days apart, once the skin has settled and a clinician has weighed in."
+        },
+        {
+          "h": "Why improvising here is a bad idea",
+          "body": "Eyelid skin absorbs more readily than skin elsewhere, so applying a steroid cream around the eyes without medical direction carries real risk and is not something to do on a friend's suggestion. Several conditions overlap here — allergic and irritant contact dermatitis, atopic eczema, seborrhoeic dermatitis, rosacea affecting the lids — and they are distinguished by examination, sometimes with patch testing. Any eye pain, vision change, discharge or marked swelling should be seen urgently rather than at the next convenient appointment."
+        }
+      ]
+    },
+    {
+      "slug": "steroid-damaged-skin-and-withdrawal",
+      "title": "Steroid-Damaged Skin and Topical Steroid Withdrawal",
+      "h1": "Steroid-damaged skin: a real phenomenon, a contested label, and one firm rule",
+      "qa": "Prolonged unsupervised use of potent topical steroids on the face can thin skin, leave visible vessels and provoke rashes, and stopping abruptly after long heavy use can cause a rebound flare — all of that is well described. The online 'topical steroid withdrawal' movement goes further than the evidence in places, and it carries a serious downside: people abandoning treatment their doctor prescribed. Never start or stop a steroid on your own; that conversation belongs with the clinician who prescribed it.",
+      "sections": [
+        {
+          "h": "What long-term potent use can do",
+          "body": "On facial skin especially, extended use of stronger steroids is associated with thinning, increased fragility and bruising, visible small blood vessels, stretch marks where skin folds, and rashes around the mouth and eyes. Skin may become paler in the treated area. These effects relate to potency, duration, how much skin is covered and whether the area is occluded — which is precisely why appropriate steroid use is prescribed with a strength, a site and a time limit attached, and why borrowing someone else's tube is a poor idea."
+        },
+        {
+          "h": "Where the internet overreaches",
+          "body": "Rebound flares after stopping prolonged potent use are documented, and people describing burning, spreading redness and shedding after withdrawal are describing something real. The difficulty is that the online framing sweeps together genuine rebound, the underlying condition simply returning, and unrelated flares, and it is not a settled diagnostic category with agreed criteria. Some of the advice attached to it — indefinite moisturiser withdrawal, refusing all medical treatment — is not supported and causes harm. Hold both facts at once: real phenomenon, over-extended label."
+        },
+        {
+          "h": "The unlicensed-cream problem",
+          "body": "Regulators in numerous countries have repeatedly found unlicensed skin-lightening and 'miracle' creams adulterated with undeclared potent steroids. People using them have no idea what they are applying, for how long, or at what strength, which is how steroid damage happens to someone who never knowingly used one. If you have bought skincare informally, from an unlabelled source, or on a promise of dramatic results in days, mention it to your doctor — it is directly relevant and clinicians are not there to judge it."
+        },
+        {
+          "h": "What skincare can do here",
+          "body": "Comfort and barrier support, nothing more. Bland, thick, fragrance-free moisturisers. No actives, no acids, no retinoids, no essential oils, no experimenting while skin is fragile. Lukewarm short showers, gentle cleansing, sun protection once skin tolerates it. Progress is slow and non-linear, and patience is the main tool. The firm rule remains: do not stop a prescribed steroid abruptly on your own, and do not start one on your own either. Take the whole history to a dermatologist and let them plan the taper."
+        }
+      ]
+    },
+    {
+      "slug": "acne-mechanica-friction-breakouts",
+      "title": "Acne Mechanica: Breakouts from Friction and Pressure",
+      "h1": "Acne mechanica: when the cause is a strap, a helmet or a mask",
+      "qa": "Acne mechanica is acne provoked by mechanical factors — friction, pressure, heat and occlusion from something pressed against the skin, such as a mask, helmet strap, chin rest, phone or backpack. The pattern gives it away: lesions follow the shape of the contact rather than your usual distribution. Escalating to stronger actives rarely helps; reducing the friction usually does more. Persistent, painful or scarring acne still warrants a doctor's assessment.",
+      "sections": [
+        {
+          "h": "Recognising it by shape",
+          "body": "Map the breakout against the object. A band across the forehead where a helmet sits, a stripe along the jaw under a strap, a patch on one cheek where a phone rests, breakouts across the shoulders under a rucksack, a line where a bra band or a violin chin rest presses. If the lesions form a shape rather than a scatter, mechanics are involved. It typically appears as uniform papules and pustules with less blackhead formation than ordinary acne, and it clears when the pressure stops."
+        },
+        {
+          "h": "The mask version",
+          "body": "Korea's long familiarity with everyday mask-wearing made 마스크 트러블 (maseukeu teureobeul), literally mask trouble, a mainstream skincare topic well before it was one elsewhere. Under a mask you get all four factors at once: friction at the edges, pressure across the bridge and cheeks, trapped heat and a humid microclimate. The result concentrates where the fabric contacts, sparing the exposed area — a distribution people find confusing until they see it drawn out."
+        },
+        {
+          "h": "What actually reduces it",
+          "body": "Reduce the load rather than the skin's oil. Take breaks from the equipment where safe. Use a clean fabric layer and change it regularly; wash straps, helmet liners and pillowcases. Loosen anything adjustable. Under occlusion, switch to lighter textures — a gel moisturiser rather than a balm, and skip heavy makeup under gear. Cleanse gently afterwards rather than scrubbing the area, because friction is already the problem and adding abrasion to it is self-defeating. Hydrocolloid patches suit surfaced spots."
+        },
+        {
+          "h": "Where skincare fits, and when to escalate",
+          "body": "A gentle low-pH cleanser, a light non-comedogenic moisturiser, daily sunscreen for the marks left behind, and at most one carefully introduced active. Barrier support matters more than usual here, because friction damages the surface directly. If lesions are deep, painful, scarring, or persist once the mechanical cause has been removed for several weeks, book a doctor rather than adding a fourth product. Recurrent breakouts in one fixed spot are also worth having looked at rather than assumed."
+        }
+      ]
+    },
+    {
+      "slug": "folliculitis-after-waxing-or-shaving",
+      "title": "Folliculitis After Waxing or Shaving",
+      "h1": "Bumps after hair removal: folliculitis, ingrown hairs, and when it is more than irritation",
+      "qa": "Small red or pus-topped bumps around hair follicles after waxing, shaving or epilating are usually folliculitis — inflammation of the follicle, sometimes with a bacterial component — or ingrown hairs, which are a mechanical problem where hair re-enters the skin. Most mild cases settle within about a week. Spreading redness, increasing pain, warmth, fever, or bumps that keep worsening need a doctor, because follicular inflammation can progress to a deeper infection.",
+      "sections": [
+        {
+          "h": "What happens at the follicle",
+          "body": "Hair removal opens and irritates the follicle. Bacteria that live harmlessly on skin can enter, and the follicle becomes inflamed — red, sometimes tender, sometimes topped with a small pustule with a hair at the centre. Ingrown hairs are different: the hair curls back or grows sideways into the skin, provoking a firm inflamed bump, sometimes with a visible dark loop under the surface. Coarse or tightly curled hair is far more prone to the second. Razor burn, a plain irritant reaction, is different again."
+        },
+        {
+          "h": "Prevention and aftercare",
+          "body": "Clean tools, sharp blades, and never a shared razor. Shave on damp softened skin with a lubricating product, in the direction of growth if you are prone to ingrowns, and rinse the blade often. Afterwards, skip heavy occlusive oils and thick balms on freshly opened follicles, skip fragranced body products, and avoid the sauna, pool, hot tub and gym for a day. Wear loose clothing. Gentle chemical exfoliation between sessions may help the look of ingrown-prone areas, but not on freshly waxed skin."
+        },
+        {
+          "h": "Do not dig",
+          "body": "Tweezing out an ingrown hair, squeezing a pustule or opening a bump with a needle all introduce bacteria and deepen the inflammation, and the resulting mark commonly outlasts the original bump by months — particularly in deeper skin tones, where post-inflammatory pigmentation is more persistent. Warm compresses and leaving it alone resolve most ingrowns. If a hair is clearly looped above the surface, a clinician can release it properly. Sunscreen on exposed areas afterwards keeps the marks from darkening."
+        },
+        {
+          "h": "When it is medical",
+          "body": "See a doctor if redness spreads outward, if the area becomes hot, swollen and increasingly painful, if a bump enlarges into a firm tender lump, if there is fever, or if bumps are not improving after a week or so. Recurrent folliculitis in the same area deserves proper assessment rather than another exfoliating pad — bacterial, yeast and mechanical causes look similar and are managed differently. Folliculitis after using a poorly maintained hot tub or pool is worth mentioning specifically."
+        }
+      ]
+    },
+    {
+      "slug": "chronic-hand-eczema",
+      "title": "Chronic Hand Eczema: A Job Hazard, Not Bad Hygiene",
+      "h1": "Chronic hand eczema: wet work, soap and a barrier that never gets a break",
+      "qa": "Hand eczema is persistent inflammation of the skin of the hands — dryness, cracking, itching, sometimes crops of small deep blisters — and it is strongly associated with repeated wet work, soaps, solvents and glove occlusion, which is why hairdressers, nurses, cleaners and cooks get it disproportionately. It is a medical diagnosis, and cracks that bleed or weep need a clinician. Around that care, relentless emollient use and glove discipline do most of the practical work.",
+      "sections": [
+        {
+          "h": "Why hands are the hardest case",
+          "body": "Palm and finger skin is thick, so it fissures rather than flaking, and fissures are painful and slow. Hands are also washed constantly, exposed to detergents, food acids, solvents and metals, and then sealed inside gloves that trap sweat. There is never a recovery window. Add nail involvement, and the everyday reality is that any barrier repair achieved overnight is undone by nine in the morning. This is not a hygiene failure — if anything, frequent washing is part of the mechanism."
+        },
+        {
+          "h": "The occupational and allergic layers",
+          "body": "Two distinct things often sit on top of each other. Irritant damage from repeated wet work and detergents accumulates in almost anyone with enough exposure. Allergic contact dermatitis to a specific substance — rubber accelerators in gloves, preservatives, hair-product ingredients, metals, certain foods handled raw — can hide inside the same picture and will not improve until it is identified. That is what patch testing is for, and it is one of the strongest arguments for a dermatology referral rather than another hand cream."
+        },
+        {
+          "h": "The routine that actually helps",
+          "body": "Emollient after every single hand wash, and again before bed — carry a tube, keep one at the sink. Bland and fragrance-free, thicker than feels elegant; ointments overnight under cotton gloves are unglamorous and effective. Lukewarm water, a mild cleanser, dry thoroughly including between fingers. Cotton liners inside waterproof gloves for wet tasks, and change them when damp. Alcohol sanitiser stings cracked skin badly and is not a substitute for the routine. Rings trap detergent, so remove them before washing up."
+        },
+        {
+          "h": "When to be seen",
+          "body": "Cracks that bleed or weep, yellow crusting, spreading redness, or increasing pain suggest infection and need prompt attention. So does eczema that is not improving with consistent emollient use, that is interfering with work, or that keeps recurring seasonally. If it is work-related, say so at the appointment — occupational health measures and a formal record can matter for both the skin and the job. Cosmetic hand creams help comfort; they do not treat this, and no cream on a shelf claims to."
+        }
+      ]
+    },
+    {
+      "slug": "angular-cheilitis-cracked-mouth-corners",
+      "title": "Angular Cheilitis: Cracked, Sore Mouth Corners",
+      "h1": "Angular cheilitis: sore splits at the corners of the mouth, and why lip balm is not the answer",
+      "qa": "Angular cheilitis is inflammation at the corners of the mouth — redness, cracking, soreness, sometimes crusting or a moist raw look — usually kept going by saliva pooling in the fold, often with a yeast or bacterial component on top. Applying more lip balm over it frequently makes it worse rather than better. It needs a clinician's assessment, partly because persistent cases can point to nutritional, dental or other underlying issues that determine what actually helps.",
+      "sections": [
+        {
+          "h": "What it is and why it lingers",
+          "body": "The corner of the mouth is a fold that stays damp. Saliva collects there, the skin softens and breaks down, and a small split forms — which stings, which prompts licking, which delivers more saliva. That loop is the reason it lasts weeks. Once the skin is broken, yeast or bacteria that live harmlessly in the area can colonise it, and at that point it stops being simple chapping. Deepening folds at the mouth corners, from bite changes or ill-fitting dentures, make the pooling worse."
+        },
+        {
+          "h": "Why lip balm often backfires",
+          "body": "Balm goes on the lips and rarely reaches the fold itself, and many balms are fragranced or flavoured, which irritates already-broken skin. A waxy occlusive layer over a moist, possibly colonised crack traps moisture in the exact place where dryness would help. People then apply more, more often, and conclude their lips are dry. If a lip product stings when applied, that is information. Plain petrolatum has a role as a barrier for the surrounding skin, but it does not resolve the cause."
+        },
+        {
+          "h": "What to stop doing",
+          "body": "Stop licking the corners — this is the single most useful change and the hardest. Stop picking or peeling the crust. Stop flavoured, fragranced or 'tingling' lip products entirely while it settles. Keep the area gently clean and, unusually for skincare advice, keep it dry rather than sealed; pat after eating and drinking. Avoid very acidic or salty foods that sting the split. None of that treats a yeast or bacterial component, and if the corners are not settling within a week or so, that is the message."
+        },
+        {
+          "h": "What a clinician will consider",
+          "body": "Whether there is a yeast or bacterial component, and which — that determines the treatment entirely, and it is not something to guess at from a mirror. Whether dentures, bite changes or dental issues are deepening the folds. Whether nutritional factors such as iron or B-group vitamins are involved, which is assessed with tests rather than by taking supplements speculatively. Whether an underlying condition such as eczema or an ongoing dryness issue is contributing. Recurrent or stubborn cases in particular deserve that full look."
+        }
+      ]
+    },
+    {
+      "slug": "skin-changes-that-need-urgent-medical-attention",
+      "title": "Skin Changes That Need Urgent Medical Attention",
+      "h1": "The skin changes worth stopping everything for",
+      "qa": "Some skin changes are not cosmetic questions at all: a mole that is changing, a sore that will not heal, a rapidly spreading rash, a rash with fever, blistering or peeling skin, a hot painful spreading redness, or any rash with facial swelling and difficulty breathing. Each of those warrants prompt medical contact, and the last is an emergency call. This page exists to prompt you to seek help — it cannot rule anything out, and it is not a diagnostic tool.",
+      "sections": [
+        {
+          "h": "Moles and lesions that change",
+          "body": "The features clinicians ask about are asymmetry, an irregular or blurred border, more than one colour within the same spot, increasing size, and — most important — change over time in something that used to be stable. Also worth showing someone: a lesion that itches, bleeds, crusts and reopens, or a sore that has not healed within a few weeks. A spot that looks different from all your others deserves a look. Skin cancers are generally very treatable when found early, which is the entire argument for going early. No app, photograph or serum substitutes for an examination."
+        },
+        {
+          "h": "Rapid, painful or systemic signs",
+          "body": "Redness that is spreading outward and is warm and painful to touch, especially with fever or feeling unwell, needs same-day assessment — drawing a line around the edge with a pen and noting the time is genuinely useful information for the doctor. Blistering or peeling skin, rash involving the mouth, eyes or genitals, or a rash appearing shortly after starting a new medicine, all need urgent attention. Purple or dark spots that do not fade when pressed with a glass are an emergency, particularly alongside fever or drowsiness."
+        },
+        {
+          "h": "The allergic emergency",
+          "body": "Swelling of the lips, tongue, mouth or throat, a hoarse or tight voice, wheezing, difficulty breathing or swallowing, sudden widespread hives with faintness or collapse: call emergency services immediately. Do not wait, do not drive yourself, and do not take an antihistamine and hope. Anyone carrying prescribed emergency medication for allergic reactions should use it exactly as they were instructed and still seek help. This can develop within minutes, and it is the one situation on this page where speed is the whole thing."
+        },
+        {
+          "h": "What to do while you wait",
+          "body": "Photograph the area in good light with something for scale and note the date — a series of dated photographs is one of the most useful things you can bring. Write down any new medicines, supplements, foods or products from the preceding weeks. Stop all actives and stop anything you have been applying to the area. Do not attempt to treat a suspicious lesion with a cosmetic product or a wart remedy: obscuring or partially removing it delays diagnosis and makes assessment harder. Bring the list, keep the routine bland."
+        }
+      ]
+    },
+    {
+      "slug": "cosmetic-concern-vs-medical-condition",
+      "title": "Cosmetic Concern or Medical Condition?",
+      "h1": "Where the skincare aisle ends and medicine begins",
+      "qa": "Cosmetics are limited, legally and practically, to changing how skin looks and feels — they are not permitted to treat disease, and in most cases they cannot. If a skin problem is painful, spreading, bleeding, scarring, accompanied by other symptoms, or simply not budging after a couple of months of sensible care, it has crossed out of the cosmetics aisle. Seeing a clinician early is usually faster and cheaper than a year of product roulette.",
+      "sections": [
+        {
+          "h": "What a cosmetic is allowed to say",
+          "body": "The wording on packaging is not accidental. 'Helps calm the appearance of redness' is a cosmetic claim about appearance; 'treats rosacea' is a drug claim, and a cosmetic may not make it. Korea's functional-cosmetic framework permits a defined, narrow set of claims — for things like sun protection, brightening the appearance of skin tone, improving the look of wrinkles — verified against specified requirements, and it does not extend to treating conditions. Once you notice the hedged phrasing, you start reading labels for what they carefully do not say."
+        },
+        {
+          "h": "Four questions that flag a medical problem",
+          "body": "Does it hurt? Pain is unusual in cosmetic concerns and common in medical ones. Is it spreading, or changing in a way it did not before? Is it scarring, bleeding, weeping or leaving permanent marks? Are there symptoms beyond skin — fever, joint pain, hair loss, weight or cycle changes, feeling generally unwell? Add a fifth for duration: sensible, consistent care that has produced nothing in eight to twelve weeks is a signal, not an invitation to buy a stronger version of the same thing."
+        },
+        {
+          "h": "Why the internet makes this harder",
+          "body": "Before-and-after photographs are selected, lit and often filtered. Confident diagnoses from strangers cost the stranger nothing. Ingredient lists get treated as diagnostic tools when they are not. And the purging excuse — the idea that things must get worse before better — is stretched far past its real, limited application to justify months of deterioration. Genuine short-term purging with certain actives exists; a rash, pain, spreading lesions or steady worsening over months is not that, and calling it that delays care."
+        },
+        {
+          "h": "How to use a library like this one",
+          "body": "As background, so the appointment is more productive — not as a substitute for it. Korea's 피부과 (pibugwa) dermatology clinics are unusually accessible and normalised, which is part of why Korean skincare culture is comparatively comfortable drawing this line: cosmetics for appearance, clinic for conditions. Bring dated photographs, a list of products and how long each was used, and any medicines. Afterwards, keep the routine gentle and fragrance-free and let it do what it is good at — supporting comfort around whatever the clinician has planned."
+        }
+      ]
+    }
+  ]
+}

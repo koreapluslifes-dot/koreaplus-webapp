@@ -1,0 +1,1093 @@
+{
+  "_readme": "Authored library clusters consumed by build-kbeauty-pages.cjs via emitContent(). Shape matches kbeauty-formulation.json: {slug, title, h1, qa, sections:[{h, body}]}. Same contract as the rest of the library — cosmetic structure-function wording, hedged claims, no invented statistics, no medical advice.",
+  "filter": [
+    {
+      "slug": "why-korean-sunscreens-feel-better",
+      "title": "Why Korean Sunscreens Feel So Much Better",
+      "h1": "Why Korean sunscreens feel better than the ones you grew up with",
+      "qa": "It is mostly regulatory, not magical. Korea approves a range of modern organic UV filters — Uvinul A Plus, Tinosorb S and M, Uvinul T 150 among them — that give strong UVA protection in elegant, non-greasy textures. The United States approved its first new filter in decades in June 2026, when bemotrizinol — Tinosorb S — was added to the sunscreen monograph. As of writing the rest of that list is still unapproved there, so American formulators are working with a mostly older, heavier toolkit while the new arrival slowly reaches shelves.",
+      "sections": [
+        {
+          "h": "The filter list is the whole story",
+          "body": "Sunscreen texture is decided largely by which UV filters a formulator is allowed to use. Korea, the EU, Japan and Australia permit a set of newer organic filters that are photostable, effective in the UVA range, and pleasant to formulate with. The United States regulates sunscreen as an over-the-counter drug, which has made adding new filters extraordinarily slow — as of writing most of the newer ones have still never been approved there, the single exception being bemotrizinol (Tinosorb S), cleared in June 2026 after a gap of nearly thirty years."
+        },
+        {
+          "h": "What that means on your face",
+          "body": "Older filters often need higher concentrations and more supporting solvents to reach the same protection, which is what produces the thick, white, greasy feeling many people associate with sunscreen. Newer filters achieve strong protection at lower use levels and dissolve more readily, so the finished product can be a light fluid or a watery gel instead of a heavy cream."
+        },
+        {
+          "h": "Why this matters more than the SPF number",
+          "body": "The most effective sunscreen is the one you will actually reapply. A pleasant texture is not a vanity concern — it is the difference between a routine you keep and one you abandon by July. That is the real reason Korean sunscreen became a global export category."
+        },
+        {
+          "h": "Reading a Korean sunscreen label",
+          "body": "Look for the SPF number for UVB and the PA rating (PA+ through PA++++) for UVA, which is the system used across Korea and Japan. Then read the filter list itself. Recognising two or three modern filters tells you more about how a sunscreen will wear than any marketing claim on the front of the tube."
+        }
+      ]
+    },
+    {
+      "slug": "uvinul-a-plus",
+      "title": "Uvinul A Plus (Diethylamino Hydroxybenzoyl Hexyl Benzoate)",
+      "h1": "Uvinul A Plus: the UVA filter behind Korea's lightest sunscreens",
+      "qa": "Uvinul A Plus is a photostable UVA filter widely used in Korean, Japanese and European sunscreens. It covers the long UVA range associated with pigmentation and photoageing, stays stable in sunlight without needing a stabiliser, and dissolves easily — which is why it appears in so many watery Korean sun fluids.",
+      "sections": [
+        {
+          "h": "What it protects against",
+          "body": "Its absorption peaks in the long UVA range, the wavelengths most associated with pigmentation, loss of firmness and the cumulative changes grouped under photoageing. UVA passes through window glass and stays relatively constant through the day and year, which is why UVA coverage matters even for indoor days."
+        },
+        {
+          "h": "Why formulators reach for it",
+          "body": "It is photostable on its own, unlike avobenzone, which degrades in sunlight unless it is paired with a stabilising filter. That independence simplifies a formula considerably. It is also oil-soluble and easy to work with, which helps produce the light textures Korean sunscreens are known for."
+        },
+        {
+          "h": "Where you will and will not find it",
+          "body": "Approved and common in Korea, Japan and the EU. Not approved for use in sunscreens in the United States, which is one of the concrete reasons a Korean sunscreen can feel so different from an American one at the same SPF."
+        },
+        {
+          "h": "How to spot it",
+          "body": "On a Korean ingredient list it appears as Diethylamino Hydroxybenzoyl Hexyl Benzoate. The trade name Uvinul A Plus is what you will see discussed in reviews and marketing rather than on the INCI list itself."
+        }
+      ]
+    },
+    {
+      "slug": "tinosorb-s",
+      "title": "Tinosorb S (Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine)",
+      "h1": "Tinosorb S: the broad-spectrum workhorse of modern sunscreen",
+      "qa": "Tinosorb S is an oil-soluble filter that covers both UVB and UVA in a single ingredient. It is highly photostable and also helps stabilise other filters alongside it, which makes it a backbone ingredient in Korean and European sunscreens — and, after a wait of nearly three decades, the first genuinely modern filter American formulators have been cleared to use.",
+      "sections": [
+        {
+          "h": "One filter, both ranges",
+          "body": "Most UV filters cover a relatively narrow band, so formulators combine several to build broad-spectrum protection. Tinosorb S is unusual in absorbing efficiently across both UVB and UVA, which lets a formula reach high broad-spectrum protection with fewer total filters and therefore a lighter finished texture."
+        },
+        {
+          "h": "It stabilises its neighbours",
+          "body": "Beyond its own absorption, it helps protect other, less stable filters from breaking down in sunlight. A formula that pairs avobenzone with Tinosorb S is considerably more robust over a day's wear than avobenzone alone."
+        },
+        {
+          "h": "What it feels like",
+          "body": "It is oil-soluble and used at moderate levels, so it tends to appear in fluid and cream textures rather than the very watery gels. In a well-built formula it is undetectable."
+        },
+        {
+          "h": "Regulatory status",
+          "body": "Permitted in Korea, the EU and Australia at up to 10%, and in Japan at a notably tighter 3%. The United States finally cleared it in June 2026: the FDA added bemotrizinol to the over-the-counter sunscreen monograph as generally recognised as safe and effective at up to 6%, effective from 9 August 2026 and the first new US sunscreen filter since the 1990s. As of writing the first American products containing it are only beginning to reach shelves, and the US ceiling sits below the level used everywhere else."
+        }
+      ]
+    },
+    {
+      "slug": "tinosorb-m",
+      "title": "Tinosorb M (Methylene Bis-Benzotriazolyl Tetramethylbutylphenol)",
+      "h1": "Tinosorb M: the hybrid filter that both absorbs and scatters UV",
+      "qa": "Tinosorb M is unusual — it is an organic filter delivered as a fine particle dispersion, so it absorbs UV like a chemical filter while also scattering and reflecting it like a mineral one. It covers UVB and UVA broadly and is exceptionally photostable, though its particulate nature can leave a slight cast.",
+      "sections": [
+        {
+          "h": "Neither quite chemical nor quite mineral",
+          "body": "The usual sunscreen dichotomy of chemical versus mineral does not fit Tinosorb M well. It is an organic molecule, but it is supplied as microfine particles suspended in water, giving it absorbing, scattering and reflecting behaviour at once. It sits genuinely in between the two categories."
+        },
+        {
+          "h": "Very strong photostability",
+          "body": "It holds up well under prolonged sun exposure and, like Tinosorb S, contributes to the stability of the overall filter system. Formulas built around it tend to keep their protection through a long day outdoors."
+        },
+        {
+          "h": "The trade-off",
+          "body": "Because it works partly as a particle, it can leave a faint white cast — less than zinc oxide, but detectable on deeper skin tones at higher use levels. Korean formulators often use it in combination rather than as the sole filter for exactly this reason."
+        },
+        {
+          "h": "Where it is allowed",
+          "body": "Approved in Korea, the EU, Japan and Australia at up to 10%, though Japan bars it from products used near mucous membranes. As of writing it is still not approved for US sunscreens: its American application has sat unresolved since 2005, and the 2026 decision that cleared its sibling Tinosorb S did not extend to it."
+        }
+      ]
+    },
+    {
+      "slug": "uvinul-t-150",
+      "title": "Uvinul T 150 (Ethylhexyl Triazone)",
+      "h1": "Uvinul T 150: the most efficient UVB filter in a Korean sunscreen",
+      "qa": "Uvinul T 150, or ethylhexyl triazone, is among the most efficient UVB filters available — it delivers high UVB protection at a low use level, which frees up room in the formula for other filters and for a lighter texture. It is photostable and oil-soluble.",
+      "sections": [
+        {
+          "h": "High protection, small dose",
+          "body": "Its efficiency is the point. Because a small percentage delivers substantial UVB absorption, a formulator can hit a high SPF without loading the formula with filter, and can spend the remaining space on UVA coverage or on the emollients that make a sunscreen pleasant."
+        },
+        {
+          "h": "UVB only",
+          "body": "It is a UVB specialist and contributes essentially nothing in the UVA range. It never appears alone — it is always paired with UVA filters such as Uvinul A Plus or one of the Tinosorbs, which is exactly the combination you see on Korean sunscreen labels."
+        },
+        {
+          "h": "Why it suits Korean textures",
+          "body": "Efficiency plus photostability plus oil solubility is the combination that makes a high-SPF sunscreen feel like a serum. It is one of the quiet reasons SPF 50+ Korean sunscreens do not feel like SPF 50+."
+        },
+        {
+          "h": "Regulatory status",
+          "body": "Approved in Korea, the EU and Japan. Not approved in the United States."
+        }
+      ]
+    },
+    {
+      "slug": "zinc-oxide",
+      "title": "Zinc Oxide in Korean Sunscreen",
+      "h1": "Zinc oxide: the mineral filter, and what Korea does with it",
+      "qa": "Zinc oxide is a mineral filter that sits on skin and scatters, reflects and partly absorbs UV across both UVB and UVA. It is very well tolerated, which makes it a common choice for sensitive and reactive skin — the trade-off is a white cast and a heavier feel than modern organic filters.",
+      "sections": [
+        {
+          "h": "How it works",
+          "body": "As a mineral particle it works largely at the surface, and it protects mainly by absorbing UV rather than by bouncing it away — measured reflection across the UV range is only a few per cent. What it does scatter strongly is visible light, which is a different matter and the source of the white cast. Its protection spans UVB and much of the UVA range, making it genuinely broad-spectrum on its own."
+        },
+        {
+          "h": "The tolerance argument",
+          "body": "Because it is inert and stays largely on the surface, it rarely causes stinging or reaction. For reactive skin, for post-procedure skin, and for children, this is a real advantage that the elegance of newer filters does not override."
+        },
+        {
+          "h": "The white cast problem",
+          "body": "The same particles that scatter UV also scatter visible light, which is what leaves a whitish or greyish film. Korean formulators work around this with particle size, dispersion technology and tinted versions, but no mineral sunscreen is entirely invisible on deeper skin tones."
+        },
+        {
+          "h": "Hybrid formulas",
+          "body": "Many Korean sunscreens combine a modest amount of zinc oxide with organic filters — the hybrid approach. It keeps some of the tolerance benefit while letting organic filters carry the protection load, so the texture stays wearable."
+        }
+      ]
+    },
+    {
+      "slug": "titanium-dioxide",
+      "title": "Titanium Dioxide in Korean Sunscreen",
+      "h1": "Titanium dioxide: the other mineral filter",
+      "qa": "Titanium dioxide is a mineral UV filter that is strong in the UVB and short UVA range but weaker in long UVA. That is why it is nearly always paired with zinc oxide or with organic filters rather than used alone, and why it leaves a whiter cast than most people expect.",
+      "sections": [
+        {
+          "h": "Strong where zinc is weaker, weak where zinc is stronger",
+          "body": "Titanium dioxide absorbs and scatters efficiently in the UVB and short UVA range, but its coverage falls away in long UVA — precisely the range most associated with pigmentation. Zinc oxide covers that range better. The two are complementary, which is why mineral sunscreens usually list both."
+        },
+        {
+          "h": "Very high visible whiteness",
+          "body": "Titanium dioxide is a brilliant white pigment — it is the same material used in white paint. Even at cosmetic particle sizes it scatters visible light strongly, so it contributes more cast than zinc oxide at comparable levels."
+        },
+        {
+          "h": "Where it appears in Korean products",
+          "body": "More often in cushion foundations, BB creams and tinted sun products, where the whiteness can be offset by pigment, than in clear facial sunscreens. Korea's clear sunscreens lean on organic filters instead."
+        },
+        {
+          "h": "Tolerance",
+          "body": "Like zinc oxide it is inert and very well tolerated, which keeps it relevant for sensitive skin and for children's products despite the cosmetic drawback."
+        }
+      ]
+    },
+    {
+      "slug": "avobenzone",
+      "title": "Avobenzone (Butyl Methoxydibenzoylmethane)",
+      "h1": "Avobenzone: the UVA filter that needs a partner",
+      "qa": "Avobenzone has long been the main organic UVA filter available in the United States — zinc oxide sits alongside it, and bemotrizinol joined the list in 2026 — and it is used in Korea too. Its weakness is well documented: it degrades in sunlight unless it is paired with a stabilising filter, so what matters is not whether a product contains it but what it contains alongside it.",
+      "sections": [
+        {
+          "h": "Good UVA coverage on paper",
+          "body": "Avobenzone absorbs efficiently across the UVA range, including the long UVA wavelengths that matter most for pigmentation and photoageing. On absorption alone it is a capable filter."
+        },
+        {
+          "h": "The photostability problem",
+          "body": "Exposed to sunlight, avobenzone breaks down measurably over a period of sun exposure, losing protection precisely when you need it. This is a well-established characteristic, not a controversy."
+        },
+        {
+          "h": "How formulators solve it",
+          "body": "Pairing it with octocrylene, or better with Tinosorb S, substantially slows that degradation. In markets with access to the newer filters, formulators increasingly use avobenzone as one component of a stabilised system rather than as the sole UVA filter."
+        },
+        {
+          "h": "What to look for on a label",
+          "body": "If avobenzone appears without a recognised stabilising partner, expect protection to fall off over a long day outdoors — reapplication matters more with that formula than with one built on photostable filters."
+        }
+      ]
+    },
+    {
+      "slug": "pa-rating-explained",
+      "title": "What PA+ to PA++++ Actually Means",
+      "h1": "PA++++ explained: the Korean and Japanese UVA rating",
+      "qa": "PA is the UVA rating used across Korea and Japan, based on the persistent pigment darkening method. More plus signs mean more UVA protection: PA+ is some protection, PA++ moderate, PA+++ high and PA++++ extremely high. SPF measures only UVB, which is why you need both numbers.",
+      "sections": [
+        {
+          "h": "SPF and PA measure different things",
+          "body": "SPF describes protection against UVB, the range primarily responsible for burning. PA describes protection against UVA, which penetrates more deeply and is associated with pigmentation and photoageing. A high SPF with no meaningful UVA protection leaves a real gap."
+        },
+        {
+          "h": "Reading the plus signs",
+          "body": "The rating derives from the persistent pigment darkening protection factor. Broadly: PA+ corresponds to some protection, PA++ to moderate, PA+++ to high, and PA++++ to extremely high. For daily use in Korea, PA+++ or PA++++ is the normal expectation."
+        },
+        {
+          "h": "How it compares with the European system",
+          "body": "The EU uses a different approach: a 2006 Commission Recommendation says a UVA claim should mean UVA protection of at least a third of the labelled SPF, shown by the UVA-in-a-circle logo. It is a recommendation rather than binding law, but it is followed almost universally and retailers expect it. Different systems, similar intent — Korea's simply reports the UVA figure more explicitly."
+        },
+        {
+          "h": "What to buy",
+          "body": "For daily use, look for SPF 30 or higher together with PA+++ or PA++++. Beyond that, the deciding factor should be whether the texture is one you will genuinely reapply."
+        }
+      ]
+    },
+    {
+      "slug": "spf-50-vs-spf-30",
+      "title": "SPF 50 vs SPF 30: Does the Number Matter?",
+      "h1": "SPF 50 vs SPF 30 — how much difference does it really make?",
+      "qa": "The gap is smaller than the numbers suggest: correctly applied, SPF 30 filters roughly 97% of UVB and SPF 50 roughly 98%. The far bigger variable is how much you apply. Most people use well under the tested amount, which drops real-world protection substantially — so a higher number partly buys back your under-application.",
+      "sections": [
+        {
+          "h": "The numbers are not linear",
+          "body": "SPF describes the fraction of UVB filtered, and that curve flattens quickly. Going from SPF 15 to 30 is a meaningful step; going from 30 to 50 is a much smaller one, and beyond 50 the incremental gain becomes very small indeed."
+        },
+        {
+          "h": "Application amount is the real variable",
+          "body": "Laboratory SPF testing applies a standardised, generous amount of product. Studies of real-world use consistently find people apply considerably less than that, which meaningfully reduces the protection actually achieved. Under-application is a much larger effect than the difference between 30 and 50."
+        },
+        {
+          "h": "Why Korean sunscreens are mostly SPF 50+",
+          "body": "Partly market expectation, partly a sensible buffer. If the realistic assumption is that people under-apply, starting from a higher labelled figure leaves more protection standing."
+        },
+        {
+          "h": "The practical answer",
+          "body": "Apply a generous amount, reapply through a day outdoors, and pick a texture you will not resent. Doing those three things with SPF 30 beats owning SPF 50+ and using it sparingly."
+        }
+      ]
+    },
+    {
+      "slug": "chemical-vs-mineral-sunscreen",
+      "title": "Chemical vs Mineral Sunscreen in K-beauty",
+      "h1": "Chemical vs mineral sunscreen: which suits Korean routines?",
+      "qa": "Organic (chemical) filters absorb UV and shed the energy harmlessly; mineral filters mostly absorb it too, with scattering and reflection contributing only a few per cent on top — the popular 'reflects like a mirror' picture is not what the measurements show. Korean sunscreens lean organic or hybrid because the modern filters available in Korea deliver strong broad-spectrum protection in far lighter textures. Mineral remains the better choice for reactive or post-procedure skin.",
+      "sections": [
+        {
+          "h": "The mechanism difference is real but overstated",
+          "body": "Organic filters absorb UV energy and release it as a small amount of heat. Mineral filters largely scatter and reflect, though they absorb some too. The distinction gets framed as natural versus synthetic, which is not a useful way to choose — both are manufactured cosmetic ingredients that have been studied extensively."
+        },
+        {
+          "h": "Texture is where they diverge for most people",
+          "body": "Modern organic filters dissolve into a formula and disappear on skin. Mineral filters are particles that sit on it, which is what produces the cast and the heavier, sometimes chalky finish. For daily wear under makeup, this difference decides most purchases."
+        },
+        {
+          "h": "When mineral genuinely wins",
+          "body": "Reactive skin that stings with organic filters, skin recovering from a procedure, rosacea-prone skin sensitive to heat, and young children. In those cases the tolerance advantage outweighs the cosmetic drawback."
+        },
+        {
+          "h": "The hybrid middle ground",
+          "body": "Many Korean sunscreens use a small amount of zinc oxide alongside organic filters. Done well this keeps some tolerance benefit while letting the organic filters do most of the protective work — often the most practical answer of the three."
+        }
+      ]
+    },
+    {
+      "slug": "sun-stick-vs-sunscreen",
+      "title": "Korean Sun Sticks: Do They Actually Work?",
+      "h1": "Korean sun sticks — convenient, but are you applying enough?",
+      "qa": "Sun sticks contain real, tested filters and they work, with one significant caveat: it is very difficult to apply the tested amount by swiping a stick. Treat them as a reapplication tool over makeup or on the go, not as your primary morning sunscreen.",
+      "sections": [
+        {
+          "h": "The format Korea popularised",
+          "body": "A solid balm of sunscreen in a twist-up tube, designed to be swiped straight onto skin without touching it with your hands. It reapplies over makeup, travels well, and does not run — which is why it took over Korean handbags and then everyone else's."
+        },
+        {
+          "h": "The application-amount problem",
+          "body": "SPF is tested at a specific amount per area of skin. Reaching that amount with a stick requires far more passes than most people make — typically many more than the two or three swipes that feel sufficient. Under-apply, and the protection you get is well below the label."
+        },
+        {
+          "h": "How to use one properly",
+          "body": "Swipe repeatedly until skin looks visibly coated, then press it in with clean fingers. If that feels like too much product, it is roughly the right amount."
+        },
+        {
+          "h": "The honest recommendation",
+          "body": "Apply a fluid or cream sunscreen in the morning where you can control the amount, and carry a stick for reapplication over the day. Used that way it is genuinely one of Korea's better format inventions."
+        }
+      ]
+    },
+    {
+      "slug": "sunscreen-reapplication-over-makeup",
+      "title": "Reapplying Sunscreen Over Makeup",
+      "h1": "How to reapply sunscreen over makeup without ruining it",
+      "qa": "Sunscreen needs reapplying roughly every two hours of sun exposure, which is awkward over a finished face. The workable Korean answers are a sun stick, a cushion sunscreen or a sun powder — pressed rather than rubbed, so makeup underneath stays put.",
+      "sections": [
+        {
+          "h": "Why reapplication matters",
+          "body": "Sunscreen wears off through sweat, friction and, for some filters, sunlight itself. A morning application does not protect an afternoon outdoors, which is the single most common gap in an otherwise careful routine."
+        },
+        {
+          "h": "Press, do not rub",
+          "body": "Rubbing lifts and shifts the makeup underneath. Every workable reapplication method — cushion, stick, powder — is applied by pressing or patting so the new layer sits on top instead of mixing in."
+        },
+        {
+          "h": "The three Korean formats",
+          "body": "Cushion sunscreens deliver a fluid via a sponge and are the easiest to layer. Sun sticks are convenient but need many more passes than feel natural. Sun powders are the lightest, and also the hardest to apply enough of — treat them as a top-up rather than a full reapplication."
+        },
+        {
+          "h": "A realistic standard",
+          "body": "Reapply on days you are genuinely outdoors. A day spent indoors away from windows does not need the same discipline, and pretending otherwise is how people give up on the habit entirely."
+        }
+      ]
+    }
+  ],
+  "functional": [
+    {
+      "slug": "what-is-functional-cosmetics",
+      "title": "Korea's 기능성화장품 (Functional Cosmetics) System",
+      "h1": "Functional cosmetics: the Korean regulatory category with no Western equivalent",
+      "qa": "Korea has a defined class of cosmetic called 기능성화장품 — functional cosmetics — that may claim more than an ordinary cosmetic without becoming a drug. (Korea's actual intermediate legal category is 의약외품, quasi-drugs; functional cosmetics remain cosmetics in law.) Products in it may make specific claims such as brightening, wrinkle improvement or UV protection, but only after filing with the Ministry of Food and Drug Safety — a full review, or a shorter report where the product uses a notified active at its notified concentration.",
+      "sections": [
+        {
+          "h": "A middle tier that most markets lack",
+          "body": "In many countries a product is either a cosmetic, which may not claim to change skin structure or function, or a drug, which faces a long approval path. Korea created a category in between. Functional cosmetics may make defined efficacy claims, subject to review, which is why Korean packaging states things Western packaging carefully avoids."
+        },
+        {
+          "h": "The main claim categories",
+          "body": "The best-known are brightening (미백), wrinkle improvement (주름개선) and UV protection (자외선차단). The scope has widened over time to include claims relating to hair and to skin dryness among others. Each has its own requirements."
+        },
+        {
+          "h": "Notified actives and concentrations",
+          "body": "For many claims there is a list of recognised actives with specified concentrations. Use a notified active at its notified level and the path to claiming is far shorter. This is why the same ingredients recur at the same percentages across many Korean brands — it is regulatory design, not a lack of imagination."
+        },
+        {
+          "h": "What it means when you shop",
+          "body": "A 기능성화장품 marking is a genuine signal that the claim was reviewed rather than simply written by a marketing team. It is not a guarantee the product will work for you, and it says nothing about the rest of the formula."
+        }
+      ]
+    },
+    {
+      "slug": "whitening-brightening-actives",
+      "title": "Korea's Notified Brightening Actives (미백)",
+      "h1": "미백: the actives Korea recognises for brightening claims",
+      "qa": "For brightening claims Korea recognises a defined set of actives at specified concentrations — niacinamide, arbutin, and several vitamin C derivatives including ethyl ascorbyl ether and ascorbyl glucoside among them. A product using one at its notified level may carry a reviewed 미백 claim.",
+      "sections": [
+        {
+          "h": "What 미백 does and does not mean",
+          "body": "The Korean term translates literally as whitening, which reads badly in English and is usually rendered as brightening. In regulatory terms it concerns the appearance of pigmentation — helping skin look more even and reducing the look of dark spots. It does not mean lightening your natural skin tone."
+        },
+        {
+          "h": "The recurring actives",
+          "body": "Niacinamide is the one you will meet most, and it appears at a consistent notified level across many brands. Arbutin and a family of stabilised vitamin C derivatives also appear regularly. Their repetition across price tiers is a direct consequence of the notification system."
+        },
+        {
+          "h": "Why the same percentage keeps appearing",
+          "body": "If you have noticed several unrelated Korean products listing niacinamide at the same figure, that is the notification system rather than a coincidence or a copied formula. Niacinamide and arbutin are both notified across a 2–5% band, so brands cluster at 2% — the lowest level that still earns the claim. Other actives are fixed rather than ranged, which is why their figures never vary at all."
+        },
+        {
+          "h": "How to read it as a shopper",
+          "body": "A 미백 marking tells you a recognised active is present at a reviewed level. It does not tell you whether the rest of the formula is good, whether the texture suits you, or how quickly you will see anything. Pigment work takes months regardless of the label."
+        }
+      ]
+    },
+    {
+      "slug": "wrinkle-improvement-actives",
+      "title": "Korea's Notified Wrinkle-Improvement Actives (주름개선)",
+      "h1": "주름개선: the actives behind Korea's anti-wrinkle claims",
+      "qa": "For wrinkle-improvement claims Korea recognises a small set of actives — adenosine is the most widely used, alongside retinol and retinyl palmitate, and polyethoxylated retinamide. Adenosine's prevalence in Korean anti-ageing creams is a direct result of this system.",
+      "sections": [
+        {
+          "h": "Why adenosine is everywhere",
+          "body": "Adenosine is well tolerated, stable, and notified for wrinkle-improvement claims at a specific concentration. For a formulator that combination is close to ideal: a reviewable claim without the irritation and packaging headaches a retinoid brings. Hence its quiet presence in an enormous number of Korean creams."
+        },
+        {
+          "h": "Retinol in the Korean system",
+          "body": "Retinol and retinyl palmitate are also recognised, at their own notified levels. Because retinoids are less stable and more irritating, Korean brands often pair them with soothing ingredients and opaque, air-restricting packaging."
+        },
+        {
+          "h": "What the claim actually covers",
+          "body": "The claim concerns the appearance of wrinkles. It is a cosmetic claim about how skin looks, reviewed for evidence — not a medical claim about reversing skin ageing, and it should not be read as one."
+        },
+        {
+          "h": "Setting expectations",
+          "body": "Notified actives are notified because there is evidence at that level, not because they work quickly. Wrinkle claims are typically assessed over months of consistent use, and that is the timeframe to judge yours on."
+        }
+      ]
+    },
+    {
+      "slug": "uv-protection-claims",
+      "title": "Korea's UV Protection Claims (자외선차단)",
+      "h1": "자외선차단: how Korea regulates sunscreen claims",
+      "qa": "Sunscreen is a functional cosmetic in Korea, so SPF and PA figures on a Korean product come from prescribed testing and review rather than from the brand's own judgement. That regulatory position is a large part of why Korean sunscreen labelling is comparatively trustworthy.",
+      "sections": [
+        {
+          "h": "Sunscreen sits inside the functional category",
+          "body": "Rather than treating sunscreen as an over-the-counter drug, as the United States does, Korea places it in the functional cosmetics tier. Claims require testing and review, but the route to market for a new filter or a new formula is far shorter than the American one."
+        },
+        {
+          "h": "What gets tested",
+          "body": "SPF is determined by prescribed methodology for UVB protection, and the PA rating by the persistent pigment darkening method for UVA. Water resistance, where claimed, has its own protocol."
+        },
+        {
+          "h": "Why this produces better sunscreen",
+          "body": "A workable approval path means formulators can adopt newer filters as they become available. That is the mechanism behind the texture advantage — not superior chemistry, but a regulatory system that lets good chemistry reach shelves."
+        },
+        {
+          "h": "The caveat worth knowing",
+          "body": "There have been documented cases of Korean sunscreens whose tested SPF did not match the label, which led to tightened oversight. No system is perfect. Buying from established brands and reapplying properly remains sound advice anywhere."
+        }
+      ]
+    },
+    {
+      "slug": "mfds-vs-fda-cosmetics",
+      "title": "MFDS vs FDA: Two Approaches to Cosmetics",
+      "h1": "MFDS vs FDA — why the same product is regulated so differently",
+      "qa": "Korea's Ministry of Food and Drug Safety allows a class of cosmetic called functional cosmetics to make defined efficacy claims after review or a filed report, sitting above ordinary cosmetics but still inside the cosmetics law. The US FDA has cosmetics and drugs with little between them, and treats sunscreen as an over-the-counter drug — which is why US sunscreen innovation has moved so slowly. The US FDA has cosmetics and drugs with little between them, and treats sunscreen as an over-the-counter drug — which is why US sunscreen innovation moves so slowly.",
+      "sections": [
+        {
+          "h": "The structural difference",
+          "body": "Korea: general cosmetics, functional cosmetics, and pharmaceuticals. The United States: cosmetics and drugs, with anything claiming to affect structure or function landing in the drug category. That middle tier is the whole difference."
+        },
+        {
+          "h": "The sunscreen consequence",
+          "body": "Because sunscreen is a drug in the US, adding a new UV filter requires a drug approval process that has proved extraordinarily slow. The logjam cracked in June 2026, when bemotrizinol (Tinosorb S) became the first new filter added to the US monograph since the 1990s — and it got there through the order pathway created in 2020, not the process that had stalled everything before it. As of writing most of the rest, Tinosorb M, Uvinul A Plus and Uvinul T 150 among them, are still unavailable to American formulators."
+        },
+        {
+          "h": "The claims consequence",
+          "body": "A Korean product may state a reviewed brightening or wrinkle-improvement claim. An American cosmetic making the same claim would risk being treated as an unapproved drug, which is why US packaging leans on vaguer appearance language."
+        },
+        {
+          "h": "Neither system is simply better",
+          "body": "Korea's approach moves faster and gives shoppers more information; the US approach demands more evidence before a claim can be made at all. The practical result for a K-beauty shopper is a market where sunscreen is genuinely more advanced and claims are more specific."
+        }
+      ]
+    },
+    {
+      "slug": "how-to-verify-functional-marking",
+      "title": "Verifying a 기능성화장품 Marking",
+      "h1": "How to check whether a Korean product's functional claim is real",
+      "qa": "Genuine functional cosmetics carry the 기능성화장품 marking on the packaging along with the specific claim category. The reviewed or reported claim wording must also be printed on the pack, and the product is on file with the MFDS — so the marking is checkable rather than decorative. One caveat: Korean law does not generally require the active's concentration on the label. Brands often print it anyway, and must do so when the ingredient name forms part of the product name, but its absence is not evidence of anything.",
+      "sections": [
+        {
+          "h": "What appears on genuine packaging",
+          "body": "The marking 기능성화장품 together with the claim category — 미백, 주름개선, 자외선차단 or another approved type. Korean packaging is dense with regulatory text, and this sits among it rather than in the marketing copy."
+        },
+        {
+          "h": "Cross-check the ingredient list",
+          "body": "If a product claims wrinkle improvement, a notified active such as adenosine or retinol should appear. A wrinkle claim with no recognised active anywhere in the list is a reason to be sceptical of the packaging."
+        },
+        {
+          "h": "Watch the translation on export packaging",
+          "body": "Products repackaged for export sometimes translate or drop the marking. Absence on an English-language box does not necessarily mean the Korean original lacked it — but it does mean you cannot verify the claim from the box in front of you."
+        },
+        {
+          "h": "Where counterfeits fall down",
+          "body": "Regulatory text is one of the details fakes most often get wrong: missing markings, misspelled Korean, absent batch codes. It is a useful authenticity check alongside buying from official channels."
+        }
+      ]
+    },
+    {
+      "slug": "korean-cosmetics-safety-standards",
+      "title": "Korea's Cosmetic Ingredient Safety Rules",
+      "h1": "What Korea bans, restricts and requires in cosmetics",
+      "qa": "Korea maintains lists of prohibited and restricted cosmetic ingredients, requires full ingredient labelling, and requires that a set of designated fragrance allergens be declared when present above set thresholds. The framework is broadly comparable in structure to the EU's.",
+      "sections": [
+        {
+          "h": "Prohibited and restricted lists",
+          "body": "For most ingredients Korea works from a negative list, publishing substances that may not be used and substances that may be used only within limits — an approach similar to the EU's. Anything not restricted may be used, with the manufacturer responsible for safety. Three groups are the exception and run on positive lists instead: UV filters, preservatives and colourants may only be used if they appear on the approved list. That is precisely why a Korean sunscreen's filter choices are constrained to a fixed set."
+        },
+        {
+          "h": "Full ingredient disclosure",
+          "body": "Korean cosmetics must declare their full ingredient list. This is why K-beauty packaging is so text-dense, and it is what makes the kind of ingredient-list reading this library encourages possible in the first place."
+        },
+        {
+          "h": "Fragrance allergen declaration",
+          "body": "A defined set of fragrance allergens must be named individually when present above threshold concentrations, rather than being hidden inside the word fragrance. For reactive skin this is genuinely useful information."
+        },
+        {
+          "h": "Animal testing",
+          "body": "Korea has prohibited animal testing for cosmetics, with limited exceptions. This is part of why so many Korean brands can carry cruelty-free positioning credibly."
+        }
+      ]
+    }
+  ],
+  "device": [
+    {
+      "slug": "led-mask",
+      "title": "LED Masks: What the Evidence Supports",
+      "h1": "LED masks — worth the money, or expensive theatre?",
+      "qa": "LED light therapy has genuine published evidence behind it, mostly from clinical-strength devices. Home masks use lower intensity, so results are slower and subtler. Red light is studied for the appearance of firmness and fine lines, blue light for blemish-prone skin. Expect gradual change with consistent use, not transformation.",
+      "sections": [
+        {
+          "h": "What the different colours are used for",
+          "body": "Red and near-infrared light are the wavelengths most studied for the appearance of fine lines and firmness. Blue light is studied for its effect on the bacteria associated with blemishes. Devices offering many colours are largely marketing beyond those two."
+        },
+        {
+          "h": "The intensity gap",
+          "body": "The clinical evidence largely comes from professional devices delivering considerably more energy than a home mask. Home devices are limited for safety and cost reasons, so results are correspondingly gentler and slower — a genuine difference, not a marketing quibble."
+        },
+        {
+          "h": "Consistency is the whole game",
+          "body": "Manufacturers typically recommend several sessions a week over months. A mask used twice and abandoned in a drawer does nothing, which is the actual fate of most of them. Buy one you will use, or do not buy one."
+        },
+        {
+          "h": "Safety notes",
+          "body": "Follow the eye-protection guidance the manufacturer provides. If you take medication that increases light sensitivity, or have a condition affected by light exposure, ask a doctor before starting. One caveat the category rarely mentions: visible light, blue included, can drive pigmentation, so if you have melasma or mark easily after inflammation — more common in deeper skin tones — favour red and near-infrared and treat blue with caution."
+        }
+      ]
+    },
+    {
+      "slug": "microcurrent-device",
+      "title": "Microcurrent Devices",
+      "h1": "Microcurrent devices: real effect, temporary result",
+      "qa": "Microcurrent devices pass a very low-level electrical current through skin, and many users report a visible lifting effect straight after a session. Two honest caveats: independent evidence for the category is limited and a good deal of what exists is manufacturer-funded, and whatever effect there is fades. It depends on continued regular use — a maintenance routine, not a permanent change.",
+      "sections": [
+        {
+          "h": "What actually happens",
+          "body": "Classic microcurrent runs at sub-sensory intensity — tens to a few hundred microamps — deliberately below the level that makes a muscle contract. That is electrical muscle stimulation, a different and stronger thing. The proposed mechanism here is cellular rather than muscular and rests largely on a 1982 animal study of ATP production. Many users do report a visible lift straight after a session, and that is why people reach for these before an event, but independent evidence is thin and part of the immediate effect is likely fluid movement rather than tone."
+        },
+        {
+          "h": "Temporary by nature",
+          "body": "Manufacturers themselves describe results as cumulative-with-continued-use. Stop, and skin gradually returns to baseline. If you are not prepared to use it several times a week indefinitely, the cost is difficult to justify."
+        },
+        {
+          "h": "The conductive gel is not optional",
+          "body": "These devices need a conductive gel to work at all, and it is a recurring cost people rarely factor in. Using one dry is both ineffective and uncomfortable."
+        },
+        {
+          "h": "Who should avoid it",
+          "body": "Manufacturers generally advise against use during pregnancy, with a pacemaker or other implanted electrical device, with epilepsy, or over injectables and metal implants. Read your device's specific contraindications."
+        }
+      ]
+    },
+    {
+      "slug": "home-ultrasound-device",
+      "title": "Home Ultrasound & RF Devices",
+      "h1": "Home ultrasound and radiofrequency devices: managing expectations",
+      "qa": "Home radiofrequency and ultrasound devices work by warming the deeper layers of skin, and Korean brands have made them a mainstream category. They are meaningfully weaker than the clinic equipment they are modelled on, so treat them as gradual maintenance rather than as a substitute for a procedure.",
+      "sections": [
+        {
+          "h": "The mechanism",
+          "body": "Radiofrequency delivers controlled heat below the skin surface, which is associated with the appearance of firmer skin over time. Home \"ultrasound\" devices are mostly low-intensity sonic or ultrasound heads that warm the surface and help spread product — not the focused ultrasound (HIFU) used in clinics, which is a different and far more powerful thing. The principle is borrowed from the clinic treatments; the energy is a small fraction of it. This is the same principle behind the clinic treatments, at a fraction of the energy."
+        },
+        {
+          "h": "Why Korea leads the category",
+          "body": "Korea's aesthetic-clinic culture is unusually mainstream, and home devices grew directly out of it — a way to extend between-appointment maintenance at home. Korean brands have become some of the most visible in the category worldwide as a result, even though the largest players by revenue remain Japanese, American and European."
+        },
+        {
+          "h": "The power gap is the point",
+          "body": "Home devices are deliberately limited for safety — Korean rules cap the skin-contact temperature of these devices at 43°C. That limitation is why they are safer to use unsupervised and why their results are gentler; both facts are true at once. Safer is not the same as harmless: a 2025 Korea Consumer Agency review of handheld home skin devices warned that exceeding the stated time or intensity can cause burns and skin damage. The limits printed on the box are the product, not a suggestion."
+        },
+        {
+          "h": "Use them safely",
+          "body": "Follow the recommended session frequency rather than exceeding it, use the conductive gel specified, and avoid the eye area unless the manufacturer explicitly permits it. If you have had injectables or have an implanted device, check with your clinician first."
+        }
+      ]
+    },
+    {
+      "slug": "cleansing-brush",
+      "title": "Cleansing Brushes & Devices",
+      "h1": "Cleansing brushes: helpful tool or barrier hazard?",
+      "qa": "Silicone cleansing devices are gentler than the bristle brushes that preceded them and can help loosen sunscreen and makeup. The risk is over-use: daily mechanical cleansing on already-clean skin is a common route to a compromised barrier, particularly for sensitive skin.",
+      "sections": [
+        {
+          "h": "Silicone changed the category",
+          "body": "Early bristle brushes were abrasive and harboured bacteria. Silicone devices are non-porous, easier to keep clean, and considerably gentler — which is why they took over the category."
+        },
+        {
+          "h": "Where they genuinely help",
+          "body": "Breaking up long-wear makeup and water-resistant sunscreen during the second cleanse, and for people who find their hands do not remove everything. That is a real use case."
+        },
+        {
+          "h": "Where they cause problems",
+          "body": "Used daily on skin that does not need it, they can leave skin tight, reactive and prone to stinging with products it used to tolerate. If your skin has become sensitive since you started using one, that is the first thing to pause."
+        },
+        {
+          "h": "A sensible frequency",
+          "body": "A few times a week at most, on nights with heavy makeup or sunscreen, with a gentle cleanser. Rinse and dry the device after every use."
+        }
+      ]
+    },
+    {
+      "slug": "derma-roller-at-home",
+      "title": "At-home Microneedling: Read This First",
+      "h1": "At-home derma rollers: the honest risk assessment",
+      "qa": "At-home microneedling carries real risks that marketing tends to skip: infection, scarring and pigment changes if devices are not sterile, if needle length is inappropriate, or if it is used on active breakouts. Professional microneedling is a clinical procedure for good reasons. If you use a home device, keep needles very short and hygiene absolute.",
+      "sections": [
+        {
+          "h": "Why this one deserves caution",
+          "body": "Unlike most of skincare, microneedling deliberately breaks the skin barrier. That changes the risk profile entirely — what would be a harmless product becomes a route for infection, and what would be temporary irritation can become a lasting mark."
+        },
+        {
+          "h": "Needle length matters enormously",
+          "body": "The very short needles on cosmetic home rollers work at the surface. Longer needles reach deeper and belong in professional hands, where sterility, technique and aftercare are controlled. Buying a longer device online does not buy you a clinical treatment."
+        },
+        {
+          "h": "Never roll over active breakouts",
+          "body": "Rolling across inflamed spots spreads bacteria across the face through channels you have just opened. This is one of the most common causes of a bad outcome from home microneedling."
+        },
+        {
+          "h": "Hygiene is not optional",
+          "body": "Disinfect before and after, replace heads on the schedule the manufacturer specifies, and apply nothing but clean, simple products afterwards — no acids, no vitamin C, no fragrance. If you want meaningful results, a clinic is the appropriate setting."
+        }
+      ]
+    },
+    {
+      "slug": "korean-beauty-device-market",
+      "title": "Why Korea Leads Home Beauty Devices",
+      "h1": "How Korea built the home beauty-device market",
+      "qa": "Korea's home-device category grew out of an unusually mainstream aesthetic-clinic culture — devices were positioned as at-home maintenance between appointments rather than as replacements for them. Combined with strong domestic electronics manufacturing, that produced a category in which Korean brands are among the fastest-growing and most visible worldwide — though the largest home-device makers by revenue are still Japanese, American and European.",
+      "sections": [
+        {
+          "h": "Clinic culture came first",
+          "body": "Aesthetic procedures are far less stigmatised and far more routine in Korea than in most markets. A population already familiar with clinic treatments is a population that understands what a home device is imitating — and what it is not."
+        },
+        {
+          "h": "Manufacturing capability",
+          "body": "Korea's consumer-electronics base meant the engineering, supply chain and design capability were already in place. Marrying that to a cosmetics industry that already knew how to sell efficacy was a short step."
+        },
+        {
+          "h": "Positioning as maintenance",
+          "body": "The successful Korean framing has been between-appointment upkeep, not procedure replacement. That is both more honest and more durable than the promises the category makes elsewhere."
+        },
+        {
+          "h": "How to evaluate a device",
+          "body": "Ask what mechanism it uses and whether that mechanism has evidence behind it, at roughly what intensity, and how often you would realistically use it. Devices that cannot answer the first question are selling you a light-up plastic object."
+        }
+      ]
+    }
+  ],
+  "myth": [
+    {
+      "slug": "does-pore-size-change",
+      "title": "Can You Shrink Your Pores?",
+      "h1": "Can you actually shrink your pores? The honest answer",
+      "qa": "No — pore size is largely determined by genetics, and no topical product permanently changes it. What you can change is how visible they look: keeping them clear of oil and debris, supporting collagen so the surrounding skin holds its shape, and using sunscreen to slow the laxity that makes pores look larger over time.",
+      "sections": [
+        {
+          "h": "What a pore actually is",
+          "body": "A pore is the visible opening of a hair follicle with its associated oil gland. Its size is set largely by genetics and by how much oil the gland produces. There is no mechanism by which a cream closes it permanently."
+        },
+        {
+          "h": "Why they look bigger sometimes",
+          "body": "A pore filled with oxidised oil and dead cells reads as larger and darker. So does a pore whose surrounding skin has lost firmness, because the opening loses its support and stretches. Both of those are addressable — the pore itself is not."
+        },
+        {
+          "h": "What genuinely helps the look",
+          "body": "Salicylic acid to keep pores clear, niacinamide for the look of refinement, retinoids for surface turnover and firmness over months, and daily sunscreen to slow the laxity that makes pores appear to widen with age."
+        },
+        {
+          "h": "What to ignore",
+          "body": "Cold water does not close pores — a follicle has no sphincter, so there is nothing to shut. Pore strips lift the top of a plug and leave the rest behind; whether repeated use stretches the opening is argued over, but what they reliably do is irritate the skin the adhesive grips. Any product promising to shrink pores permanently is overpromising."
+        }
+      ]
+    },
+    {
+      "slug": "do-you-need-10-steps",
+      "title": "Do You Really Need a 10-step Routine?",
+      "h1": "The 10-step Korean routine: marketing invention or real practice?",
+      "qa": "No. The ten-step routine was largely a Western marketing framing of Korean habits, not a rule Korean people follow. Most Koreans use a handful of products daily and add steps occasionally. A cleanser, a moisturiser and sunscreen is a complete routine; everything else is optional refinement.",
+      "sections": [
+        {
+          "h": "Where the ten steps came from",
+          "body": "Korean routines genuinely tend to involve more, lighter layers than Western ones. That real habit was packaged for export as a numbered ten-step system — a marketing frame that made an unfamiliar approach legible, and sold a great deal of product in the process."
+        },
+        {
+          "h": "What Koreans actually do",
+          "body": "The pattern is closer to a core daily routine of cleanse, hydrate, moisturise and protect, with occasional additions — a mask a few times a week, an exfoliant when needed, a treatment when something flares. Not ten products every night."
+        },
+        {
+          "h": "The genuine insight worth keeping",
+          "body": "The valuable idea inside the marketing is layering thin hydration rather than relying on one heavy cream, and treating sunscreen as non-negotiable. Those two habits are worth adopting. The count is not."
+        },
+        {
+          "h": "How many steps you need",
+          "body": "Cleanser, moisturiser, sunscreen. Add a treatment for a specific concern if you have one. Reactive skin does noticeably better on fewer products, not more."
+        }
+      ]
+    },
+    {
+      "slug": "is-purging-real",
+      "title": "Purging vs Breaking Out",
+      "h1": "Purging or just breaking out? How to tell the difference",
+      "qa": "Purging is real but narrower than the internet suggests. It applies to ingredients that speed up skin turnover — retinoids, exfoliating acids and, more mildly, azelaic acid — and it appears where you normally break out, settling within roughly four to eight weeks. Spots in new places, or trouble still building past that, are a reaction, not purging. Spots in new places, or lasting longer, are a reaction, not purging.",
+      "sections": [
+        {
+          "h": "The mechanism, and its limits",
+          "body": "Ingredients that accelerate turnover bring already-forming congestion to the surface sooner than it would have arrived. That is purging. It requires an ingredient that actually does this — retinoids and acids. A moisturiser cannot cause purging, and a brand claiming otherwise is explaining away a reaction."
+        },
+        {
+          "h": "The two tests",
+          "body": "Location and time. Purging tends to appear where you normally congest, because that is where the existing blockages are — a useful rule of thumb rather than a test that settles it, since blockages you cannot yet see also count. And it should resolve within a turnover cycle or two: commonly four to six weeks for acids, sometimes eight or more for a retinoid. New locations, or trouble still building past that, points to irritation or a reaction."
+        },
+        {
+          "h": "What to do while it happens",
+          "body": "Reduce frequency rather than stopping outright, keep the rest of the routine simple and barrier-supporting, and be patient. Pushing through with daily use at full strength usually makes it worse and longer."
+        },
+        {
+          "h": "When to stop entirely",
+          "body": "Stinging, swelling, spreading redness or hives are not purging under any definition. Stop, simplify, and see a professional if it does not settle."
+        }
+      ]
+    },
+    {
+      "slug": "does-skin-build-tolerance",
+      "title": "Does Skin 'Get Used To' Products?",
+      "h1": "Does your skin really build tolerance to skincare?",
+      "qa": "Mostly no. Skin does not develop tolerance to skincare the way the body does to a drug. What people interpret as a product stopping work is usually the plateau after initial improvement, a seasonal change, or simply forgetting how their skin looked before. There is no need to rotate products to keep them effective.",
+      "sections": [
+        {
+          "h": "Where the idea comes from",
+          "body": "A new effective product produces a noticeable initial change. Once skin reaches its new baseline, further change slows — which feels like the product stopping. It has not; it is maintaining a result you have stopped noticing."
+        },
+        {
+          "h": "The genuine exception",
+          "body": "Retinoid adjustment works the other way round: skin becomes more tolerant of the irritation over time, which is why you can often increase frequency or strength after a few months. That is building tolerance to a side effect, not losing the benefit."
+        },
+        {
+          "h": "What actually changes results",
+          "body": "Season and humidity, hormonal shifts, a formula reformulation, a product past its shelf life, or a change elsewhere in your routine. Any of these is far more likely than skin becoming immune to niacinamide."
+        },
+        {
+          "h": "So should you rotate?",
+          "body": "Not for tolerance reasons. Rotating for a genuine seasonal need — a lighter texture in summer, richer in winter — makes sense. Rotating to stop products losing effect is solving a problem that does not exist."
+        }
+      ]
+    },
+    {
+      "slug": "is-natural-safer",
+      "title": "Is 'Natural' Skincare Safer?",
+      "h1": "Is natural skincare actually gentler? Not necessarily",
+      "qa": "Not inherently. Some of the most common irritants and sensitisers in cosmetics are botanical — essential oils, citrus extracts and certain plant fragrances among them — while some of the best-tolerated ingredients, such as squalane and dimethicone, are synthetic or synthesised. Tolerance depends on the specific ingredient, not on its origin.",
+      "sections": [
+        {
+          "h": "'Natural' has no regulatory meaning",
+          "body": "Unlike functional cosmetic, natural has no settled meaning. Korea did define 천연화장품 in the Cosmetics Act and ran a government certification scheme from 2019, but that scheme was abolished in an amendment effective August 2025 and handed to private certifiers. What is left is voluntary — ISO 16128, COSMOS and assorted private marks, each with its own criteria. Unless a product carries one of those marks, natural on the front tells you what a brand wants you to feel, not what is in the bottle."
+        },
+        {
+          "h": "Botanicals are a leading cause of reactions",
+          "body": "Essential oils, plant fragrances and certain extracts are among the most frequently identified contact sensitisers in cosmetics. Tea tree, citrus oils and lavender are genuinely useful and genuinely capable of sensitising reactive skin."
+        },
+        {
+          "h": "Synthetic does not mean harsh",
+          "body": "Squalane derived from sugarcane fermentation is more stable and more consistent than the olive-derived version. Dimethicone is one of the best-tolerated film formers in existence. Neither is less gentle for having been made in a factory."
+        },
+        {
+          "h": "A better question to ask",
+          "body": "Instead of natural or synthetic, ask whether the specific ingredient is well tolerated, whether it does what the product claims, and whether the formula is fragrance-free if your skin reacts. Origin is the least useful of those questions."
+        }
+      ]
+    },
+    {
+      "slug": "does-drinking-water-clear-skin",
+      "title": "Does Drinking Water Clear Your Skin?",
+      "h1": "Will drinking more water fix dry or breakout-prone skin?",
+      "qa": "Not directly. If you are adequately hydrated, drinking more water does not measurably change skin hydration or clear breakouts — the body regulates fluid balance long before it reaches your face. Dehydrated-feeling skin is usually about barrier function and the environment, which is a topical and lifestyle problem rather than a drinking one.",
+      "sections": [
+        {
+          "h": "What the body does with extra water",
+          "body": "Fluid balance is tightly regulated. In someone already adequately hydrated, additional water is largely excreted rather than routed to the skin. This is why the advice so rarely produces the promised result."
+        },
+        {
+          "h": "Dehydration in skin is a barrier issue",
+          "body": "Skin that feels tight and looks crepey is usually losing water to the air faster than it can hold it — a barrier and environment problem. Humectants, occlusives and humidity address it; a larger water bottle does not."
+        },
+        {
+          "h": "Where hydration genuinely matters",
+          "body": "Actual dehydration does affect skin, along with everything else. If you are unwell, exercising hard or in extreme heat, drinking properly matters. That is a different situation from adding litres to an already adequate intake."
+        },
+        {
+          "h": "What to do instead",
+          "body": "Use a humectant on damp skin, seal it with a moisturiser, and consider a humidifier if your air is dry — Korean winters and air conditioning are both notorious for this. Those steps do what the water myth promises."
+        }
+      ]
+    },
+    {
+      "slug": "does-sunscreen-cause-vitamin-d-deficiency",
+      "title": "Does Daily Sunscreen Cause Vitamin D Deficiency?",
+      "h1": "Will wearing sunscreen every day leave you short of vitamin D?",
+      "qa": "Real-world studies have generally not found that typical sunscreen use causes vitamin D deficiency — largely because people apply less than the tested amount and get incidental exposure anyway. Deliberately skipping sun protection is not a sensible way to manage vitamin D; diet and supplements are, and that is a conversation for a doctor.",
+      "sections": [
+        {
+          "h": "What the concern is based on",
+          "body": "Sunscreen filters the UVB that skin uses to make vitamin D, so in principle perfect application would reduce production. The theory is sound; the practical effect is where it falls down."
+        },
+        {
+          "h": "Why it does not play out that way",
+          "body": "Studies of everyday sunscreen users have generally not shown the deficiency the theory predicts. People apply thinly, miss areas, and spend unprotected time outdoors regardless. Incidental exposure adds up."
+        },
+        {
+          "h": "The risk trade-off",
+          "body": "Vitamin D can be obtained from food and supplements. The cumulative effects of UV exposure — photoageing, pigmentation and skin cancer risk — cannot be undone as easily. Trading one for the other is a poor exchange."
+        },
+        {
+          "h": "If you are concerned",
+          "body": "Ask your doctor about testing your levels and, if needed, supplementing. That is a medical question with a medical answer, not a reason to abandon sun protection."
+        }
+      ]
+    },
+    {
+      "slug": "expensive-vs-cheap-skincare",
+      "title": "Is Expensive Skincare Actually Better?",
+      "h1": "Does paying more get you better skincare?",
+      "qa": "Often not. Price reflects packaging, marketing, brand positioning and retail margin as much as formulation. Korea's drugstore tier is unusually strong precisely because its manufacturing base serves both ends of the market — the same contract manufacturers frequently produce for budget and premium brands alike.",
+      "sections": [
+        {
+          "h": "What you are paying for",
+          "body": "The cost of the actives in a typical facial product is a small fraction of its retail price. Packaging, advertising, retail margin and brand equity account for far more. That is not a scandal, but it does mean price is a poor proxy for efficacy."
+        },
+        {
+          "h": "Why Korean drugstore products punch above their price",
+          "body": "Korea's cosmetics industry runs on large contract manufacturers such as Cosmax and Kolmar, which produce for brands across the entire price range. A budget brand and a premium one can be formulating with the same expertise and the same facility."
+        },
+        {
+          "h": "Where paying more can be worth it",
+          "body": "Genuinely better packaging for unstable actives such as vitamin C and retinoids, elegant textures that make you actually use the product, and formulations with higher-cost ingredients like well-made peptides. Those are real differences."
+        },
+        {
+          "h": "Where it is not",
+          "body": "Cleansers, which you rinse off within a minute. Basic hydrating toners. Simple moisturisers. Spend where formulation is hard and save where it is not."
+        }
+      ]
+    },
+    {
+      "slug": "does-toner-strip-skin",
+      "title": "Do Korean Toners Strip Your Skin?",
+      "h1": "Korean toner vs Western toner: not the same product",
+      "qa": "They are different categories that share a name. Western toners were historically astringent, alcohol-heavy products for removing residue after cleansing. Korean toners — often called 스킨 — are hydrating first steps designed to add moisture and prepare skin for the layers that follow.",
+      "sections": [
+        {
+          "h": "The historical Western toner",
+          "body": "The astringent, alcohol-based toner belonged to an era whose approach to oily skin was to strip it. That product deserved its reputation for tightness and irritation, and it is largely gone from thoughtful Western ranges too."
+        },
+        {
+          "h": "What a Korean toner does instead",
+          "body": "It hydrates. A Korean toner is a watery layer of humectants applied to damp skin as the first leave-on step, softening skin and preparing it to receive the essence and serum that follow. The job is the opposite of stripping."
+        },
+        {
+          "h": "The naming confusion",
+          "body": "In Korean these are often called 스킨 rather than toner, and the word toner was applied for export markets. That translation choice is the whole reason for the misunderstanding."
+        },
+        {
+          "h": "Should you use one?",
+          "body": "Not obligatory. If your moisturiser leaves skin comfortable, you can skip it. It genuinely helps if your skin feels tight after cleansing, or if you like the layered-hydration approach — and the 7-skin method takes that idea to its logical conclusion."
+        }
+      ]
+    },
+    {
+      "slug": "can-you-close-pores-with-cold-water",
+      "title": "Cold Water, Ice Facials & Pore Closing",
+      "h1": "Does cold water close your pores? What ice actually does",
+      "qa": "Pores are not valves — a follicle has no sphincter around its opening, so there is nothing for cold to shut. Cold does cause a temporary tightening effect on skin and constricts surface blood vessels, which briefly reduces redness and puffiness — a real, short-lived cosmetic effect that has nothing to do with pore size.",
+      "sections": [
+        {
+          "h": "Pores do not open and close",
+          "body": "A pore is a follicular opening, not a valve. It has no sphincter and no mechanism for shutting in the cold — the arrector pili muscle attached to every follicle raises hair, it does not narrow the opening. Steam does soften the contents of a pore, making them easier to clear, which is probably where the belief originated."
+        },
+        {
+          "h": "What cold genuinely does",
+          "body": "It constricts surface blood vessels, which temporarily reduces redness and puffiness, and it produces a brief tightening sensation. Both effects are real and both wear off within minutes to hours."
+        },
+        {
+          "h": "The viral ice-facial caveat",
+          "body": "Ice applied directly and held on skin can cause cold injury, and for rosacea-prone skin extreme temperature swings in either direction are a known trigger. Wrap ice, keep it moving, and keep sessions short."
+        },
+        {
+          "h": "A better use for the idea",
+          "body": "A cool compress on a puffy morning face is genuinely useful. Just recognise you are treating fluid and vessels, not resizing anything permanent."
+        }
+      ]
+    },
+    {
+      "slug": "do-sheet-masks-work",
+      "title": "Are Sheet Masks Worth It?",
+      "h1": "Do sheet masks actually do anything?",
+      "qa": "Yes, for what they are: Yes, for what they are: fifteen to twenty minutes of occlusive hydration that leaves skin visibly plumper and better hydrated for a few hours. They are not a treatment step and will not fix pigmentation or acne. Their real value is habit and enjoyment, which is not a small thing.",
+      "sections": [
+        {
+          "h": "The mechanism is occlusion",
+          "body": "The sheet holds a serum against skin and stops it evaporating, so skin absorbs more of the water and humectants than it would from the same serum applied openly. That is a genuine physical effect and it is why skin looks plumper afterwards."
+        },
+        {
+          "h": "What it cannot do",
+          "body": "Twenty minutes is not long enough for anything requiring sustained exposure. Pigmentation, texture and acne need consistent daily actives over months. A mask is a hydration event, not a treatment."
+        },
+        {
+          "h": "The 20-minute rule",
+          "body": "Do not leave a mask on until it dries. Once the sheet starts to dry it evaporates water from the skin underneath rather than adding it, and prolonged occlusion can over-hydrate the stratum corneum and leave skin red and flaky. Take it off while it is still damp — fifteen to twenty minutes is the usual window — and press in what remains."
+        },
+        {
+          "h": "Why they matter anyway",
+          "body": "Enjoyable routines get followed. In Korea masking is an ordinary, unglamorous habit rather than an event, and a habit you keep beats an optimal routine you abandon."
+        }
+      ]
+    },
+    {
+      "slug": "does-skin-purge-from-moisturizer",
+      "title": "Can a Moisturiser Cause Purging?",
+      "h1": "Your moisturiser is not purging your skin",
+      "qa": "No. Purging requires an ingredient that accelerates skin turnover — a retinoid or an exfoliating acid. A moisturiser, essence or oil does not do that, so breakouts after starting one are congestion, irritation or a reaction to something in the formula, not purging.",
+      "sections": [
+        {
+          "h": "The claim is used to keep you buying",
+          "body": "Telling a customer that breaking out is a sign the product is working converts a reaction into a reason to persist. Applied to a moisturiser it is simply not mechanistically possible, and it is worth recognising when you hear it."
+        },
+        {
+          "h": "What is actually happening",
+          "body": "Usually one of three things: an ingredient that clogs your skin specifically, a reaction to fragrance or an essential oil, or an occlusive layer trapping congestion that was already forming underneath."
+        },
+        {
+          "h": "How to find the culprit",
+          "body": "Stop the new product for two to three weeks and see whether things settle. If they do, reintroduce it alone. Changing several products at once makes this impossible, which is why one-at-a-time matters."
+        },
+        {
+          "h": "The exception worth noting",
+          "body": "A moisturiser layered over an active you have just started can amplify that active's effect. In that case the retinoid is purging you and the moisturiser is along for the ride."
+        }
+      ]
+    },
+    {
+      "slug": "korean-skin-genetics-myth",
+      "title": "Is Korean Skin Just Genetically Better?",
+      "h1": "Do Koreans just have better skin genetically?",
+      "qa": "Genetics play a part in everyone's skin, but the popular framing gets the causation backwards. Korea's visible skin standard owes far more to universal daily sun protection, an early and consistent culture of care, mainstream access to dermatology, and a market that made good products cheap and ordinary.",
+      "sections": [
+        {
+          "h": "What genetics does explain",
+          "body": "Skin tone, sebum patterns and how skin ages differ across populations, and East Asian skin does tend to show certain signs of ageing differently. Skin tone, sebum patterns and how skin ages differ across populations, and East Asian skin does tend to show ageing differently — later wrinkling, more pigmentary change — generally attributed to higher melanin content and a thicker, denser dermis. That is real and it is not trivial. What the myth gets wrong is treating it as the whole explanation, when behaviour and access account for a great deal of what people are actually looking at."
+        },
+        {
+          "h": "Sunscreen as a cultural default",
+          "body": "Sun protection is an ordinary, unremarkable part of the day in Korea in a way it is not in most markets — sunscreen, but also hats, visors and sleeves — and it starts young. Survey data has never shown anything like universal daily sunscreen use, so this is a matter of degree rather than a nation of perfect appliers. Even so, given how much visible facial ageing is attributed to sun exposure, a habit that is merely normal rather than negotiated accounts for a great deal of the difference. Given that a large share of visible facial ageing is attributed to sun exposure, this one habit accounts for an enormous amount of the difference."
+        },
+        {
+          "h": "Access and normality",
+          "body": "Dermatology visits are routine and comparatively affordable, skincare is discussed openly across generations, and effective products are cheap and available in every neighbourhood. Habits form easily when the surrounding culture makes them easy."
+        },
+        {
+          "h": "Why this is good news",
+          "body": "If the advantage were genetic, there would be nothing to learn. Because it is largely behavioural, it transfers: daily sunscreen, gentle consistent cleansing, and starting before you think you need to."
+        }
+      ]
+    }
+  ],
+  "label": [
+    {
+      "slug": "how-to-read-korean-ingredient-list",
+      "title": "How to Read a Korean Ingredient List",
+      "h1": "Reading a Korean ingredient list: the 60-second method",
+      "qa": "Korean cosmetics must list every ingredient, in descending order down to 1%, after which order is arbitrary — with one exception worth knowing: packs of 10ml or 10g and under, and free samples, only have to carry the name, the responsible seller, the price and the date information. Read the first five to understand the base, scan for your known actives, then check the last third for fragrance and preservatives. Position matters more than presence.",
+      "sections": [
+        {
+          "h": "The descending-order rule and where it stops",
+          "body": "Ingredients appear in descending order of concentration until you reach 1%; anything used at 1% or less may be listed in any order. Fragrance (착향제) and colourants (착색제) may also be listed out of order whatever their amount, so position is a strong hint about them rather than a guarantee. This is the single most useful thing to know: an active in the bottom third might be at 1% or at 0.0001%, and the list cannot tell you which."
+        },
+        {
+          "h": "The first five ingredients",
+          "body": "These are the formula. Water, a humectant such as glycerin, an emollient, a thickener — that is the base everything else sits in. If a botanical extract a brand has named the product after appears near the end, the product is mostly not that botanical."
+        },
+        {
+          "h": "Finding fragrance",
+          "body": "Korea requires designated fragrance allergens to be named individually above threshold levels, so look for 향료 or fragrance/parfum, plus specific names such as limonene and linalool. For reactive skin this is the part of the list that matters most."
+        },
+        {
+          "h": "What the list cannot tell you",
+          "body": "It does not reveal exact concentrations below 1%, the pH, the quality of the raw materials, or whether the formula is stable. A good ingredient list is a necessary condition for a good product, not a sufficient one."
+        }
+      ]
+    },
+    {
+      "slug": "korean-expiry-date-codes",
+      "title": "Korean Expiry & Manufacturing Date Codes",
+      "h1": "제조 vs 까지: reading Korean expiry dates correctly",
+      "qa": "Korean packaging shows either a manufacturing date marked 제조 or a use-by date marked 까지. The formats are easy to confuse — a date after 제조 is when it was made, not when it expires. Once opened, the PAO symbol (a jar with a number and M) is what actually applies.",
+      "sections": [
+        {
+          "h": "The two markings",
+          "body": "제조 (jejo) means manufactured, and the date beside it is the production date. 까지 (kkaji) means until, and marks the use-by date. Mistaking one for the other is the single most common misreading of Korean packaging, and it goes both ways."
+        },
+        {
+          "h": "Date formats",
+          "body": "Korean dates usually run year, month, day — often as YYYY.MM.DD or YYYYMMDD. A date reading 2026.03.15 next to 제조 means it was made in March 2026, and tells you nothing directly about when it expires."
+        },
+        {
+          "h": "The PAO symbol is what matters after opening",
+          "body": "The small open-jar symbol with 12M or 6M inside tells you how many months the product remains good once opened. The small open-jar symbol with 12M or 6M inside tells you how many months the product remains good once opened, and Korean rules require the manufacturing date to be printed alongside it. For unstable formulas — vitamin C, retinoids — this is the number to respect. It does not extend a printed use-by date, though: whichever of the two comes first is the one that applies."
+        },
+        {
+          "h": "Practical shelf life",
+          "body": "Unopened and stored sensibly, most Korean cosmetics are given around three years from manufacture. Once opened, follow the PAO. And trust your senses: a changed smell, colour or texture overrides any printed date."
+        }
+      ]
+    },
+    {
+      "slug": "korean-cosmetics-authenticity-check",
+      "title": "Spotting Counterfeit K-beauty",
+      "h1": "How to tell a genuine Korean product from a fake",
+      "qa": "Check the regulatory text, which is what fakes most often get wrong: full Korean ingredient list, manufacturing or expiry date, batch code, importer details and any 기능성화장품 marking. Then check the price and the seller. Deep discounts on popular products through unofficial channels are the most reliable warning sign of all.",
+      "sections": [
+        {
+          "h": "Regulatory text is hard to fake well",
+          "body": "Korean packaging carries dense mandatory text. Counterfeits routinely get it wrong — missing batch codes, misspelled Korean, absent manufacturer details, or a functional-cosmetic marking on a product that should not have one. It is the first place to look."
+        },
+        {
+          "h": "Price and channel",
+          "body": "Price on its own is a weak signal in this market: Olive Young sale weeks, 1+1 promotions, brand outlets and duty-free all discount genuine stock heavily and legitimately. What matters is price plus channel. A viral product at a fraction of its usual price, from an unfamiliar marketplace seller with no official-retailer paperwork, is the classic profile. A viral product at a fraction of its usual price from an unfamiliar marketplace seller is the classic profile."
+        },
+        {
+          "h": "Physical tells",
+          "body": "Print quality, colour accuracy against official images, seal integrity, and the texture and smell of the product itself. Fakes often approximate the packaging closely and the formula not at all."
+        },
+        {
+          "h": "How to buy safely",
+          "body": "Brand-official stores, Olive Young's official channels, and established retailers. If you are buying in Korea, Olive Young and department-store counters are straightforward. The saving from an unofficial seller is rarely worth putting an unknown formula on your face."
+        }
+      ]
+    },
+    {
+      "slug": "korean-vs-english-packaging",
+      "title": "Korean vs Export Packaging: What Changes",
+      "h1": "Why the Korean and export versions of a product differ",
+      "qa": "Export versions are frequently reformulated for the destination market's regulations, which may restrict filters, preservatives or actives that Korea permits. Labels are also translated and sometimes simplified, so a claim or marking present on the Korean box may be absent on the English one — the same product name does not guarantee the same formula.",
+      "sections": [
+        {
+          "h": "Regulations force reformulation",
+          "body": "Korea permits a range of modern organic filters the United States does not. That gap narrowed in 2026, when the FDA cleared bemotrizinol — Tinosorb S — for US sunscreens, the first new filter approved there in more than two decades. Others Korea uses freely, such as bisoctrizole (Tinosorb M) and diethylamino hydroxybenzoyl hexyl benzoate (Uvinul A Plus), still are not permitted in the US. Preservative rules and permitted concentrations differ too. Where they conflict, the export version is reformulated — the same name, a different product."
+        },
+        {
+          "h": "Claims get translated away",
+          "body": "A 기능성화장품 marking has no meaning outside Korea, so it is often dropped. Brightening claims are frequently reworded for markets where such language is regulated differently. The product may be identical while the box says much less."
+        },
+        {
+          "h": "How to tell which you have",
+          "body": "Look for full Korean text with the Korean regulatory markings, versus a multilingual label listing an importer and local compliance information. The presence of a local importer address usually means an export version."
+        },
+        {
+          "h": "Does it matter?",
+          "body": "For sunscreen, yes — the filter list is the product. For most other categories the differences are minor. If you specifically want the Korean formula, buy through Korean channels and check the ingredient list rather than the name."
+        }
+      ]
+    },
+    {
+      "slug": "understanding-korean-skincare-terms",
+      "title": "Korean Words on Skincare Packaging",
+      "h1": "The Korean words worth knowing on a skincare box",
+      "qa": "A short vocabulary unlocks most Korean packaging: 수분 (hydration), 진정 (soothing), 미백 (brightening), 주름개선 (wrinkle improvement), 각질 (dead skin), 모공 (pores), 저자극 (low irritation), 무향료 (fragrance-free) and 민감성 (sensitive skin).",
+      "sections": [
+        {
+          "h": "Concern words",
+          "body": "수분 means hydration or moisture and marks the enormous Korean hydration category. 진정 means soothing or calming, the word on every cica product. 각질 means dead surface skin and appears on exfoliants. 모공 means pores. 탄력 means elasticity or firmness."
+        },
+        {
+          "h": "Claim words",
+          "body": "미백 is brightening, 주름개선 is wrinkle improvement, and 자외선차단 is UV protection — the three main functional-cosmetic claim categories, each requiring review before it may appear."
+        },
+        {
+          "h": "Suitability words",
+          "body": "저자극 means low irritation, 무향료 fragrance-free, 무알콜 alcohol-free, and 민감성 sensitive skin. For reactive skin these four are the most useful words on the box, and they are usually printed together."
+        },
+        {
+          "h": "Format words",
+          "body": "스킨 is what Korea calls toner, 에센스 essence, 앰플 ampoule, 로션 a light emulsion rather than a Western body lotion, and 크림 cream. Knowing 스킨 means toner resolves most of the confusion Western shoppers have with Korean routines."
+        }
+      ]
+    },
+    {
+      "slug": "fragrance-free-vs-unscented",
+      "title": "Fragrance-free vs Unscented in K-beauty",
+      "h1": "무향료 vs unscented: not the same claim",
+      "qa": "Fragrance-free (무향료) means no fragrance was added. Unscented is a claim about how a product smells, and it can be achieved by adding a masking fragrance — so unscented does not mean fragrance-free, and neither term is regulated in Korea or most other markets. For reactive skin, look for 무향료 and check the list for essential oils, which are fragrance by any other name.",
+      "sections": [
+        {
+          "h": "The difference that matters",
+          "body": "Fragrance-free is a statement about what is not in the formula. Unscented is a statement about how it smells, which can be achieved by adding a masking fragrance. The two claims sound alike and mean different things."
+        },
+        {
+          "h": "Essential oils count as fragrance",
+          "body": "A product can claim to be free of synthetic fragrance while containing lavender, tea tree or citrus oils — all well-documented contact sensitisers. If your skin reacts to fragrance, the botanical version is not a safe harbour."
+        },
+        {
+          "h": "The allergens Korea makes you declare",
+          "body": "Korea requires designated fragrance allergens to be named individually above threshold levels. Names such as limonene, linalool, citronellol and geraniol appearing at the end of a list are fragrance components, whatever the front of the box says."
+        },
+        {
+          "h": "What to do if you react",
+          "body": "Choose products marked 무향료, read the end of the ingredient list for the named allergens, and treat a genuinely odourless product with suspicion only if unscented rather than fragrance-free is the wording used."
+        }
+      ]
+    }
+  ]
+}

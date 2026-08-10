@@ -1,0 +1,663 @@
+{
+  "_readme": "Second authored cluster pack — life-stage, body, culture and step-by-step content the library had no home for. Same shape and same contract as kbeauty-clusters-ext.json. The pregnancy cluster is deliberately conservative: it repeatedly defers to a doctor rather than issuing rules, because that is the honest position for a skincare library.",
+  "pregnancy": [
+    {
+      "slug": "korean-skincare-during-pregnancy",
+      "title": "Korean Skincare During Pregnancy",
+      "h1": "Korean skincare during pregnancy: what usually stays and what usually goes",
+      "qa": "The parts of a Korean routine that generally continue are the gentle ones — cleanser, hydrating toner, essence, moisturiser and sunscreen. The ingredients most often paused are retinoids, high-strength acids and some brightening agents. Because guidance varies and your situation is specific, confirm your own list with your doctor or midwife.",
+      "sections": [
+        {
+          "h": "Why a Korean routine adapts well",
+          "body": "The core of a Korean routine is hydration and barrier support — humectants, ceramides, panthenol, centella, gentle cleansing and daily sunscreen. Very little of that is on anyone's caution list, which means the shape of the routine usually survives pregnancy intact even when a few products come out of it."
+        },
+        {
+          "h": "The ingredients most commonly paused",
+          "body": "Retinoids are the clearest case, and topical retinoids are widely advised against during pregnancy. High-strength exfoliating acids and certain brightening agents are also commonly paused, more out of caution than because strong evidence exists against typical cosmetic use. Some essential oils and botanical extracts carry their own advisories."
+        },
+        {
+          "h": "What frequently becomes more relevant",
+          "body": "Melasma often appears or worsens during pregnancy, driven partly by hormones and partly by sun and heat. Since the usual brightening actives may be paused, sun protection carries far more of the load than usual — a hat, shade and reapplied sunscreen genuinely matter here."
+        },
+        {
+          "h": "The honest disclaimer",
+          "body": "This is general educational information, not medical advice, and cosmetic ingredient guidance during pregnancy varies between countries and clinicians. Bring your actual products to your appointment and ask — it takes two minutes and replaces a lot of internet guessing."
+        }
+      ]
+    },
+    {
+      "slug": "pregnancy-safe-alternatives",
+      "title": "Pregnancy-friendly Swaps in a Korean Routine",
+      "h1": "Swaps to consider when a Korean routine needs adjusting",
+      "qa": "The common substitutions are gentle: bakuchiol or peptides in place of a retinoid, PHA in place of a strong AHA or BHA, and niacinamide or vitamin C in place of brighteners you have been advised to pause. Confirm any swap with your own clinician, since advice differs.",
+      "sections": [
+        {
+          "h": "In place of a retinoid",
+          "body": "Bakuchiol is the substitution most often suggested — a botanical positioned as a gentler alternative. Two caveats worth having: its efficacy evidence is considerably younger than retinol's, and there is very little pregnancy-specific data on it either way, so some clinicians advise leaving it out as well. Plant-derived is not the same as studied in pregnancy. Peptides and adenosine are the other routes people are pointed toward. Whichever you are considering, put the actual product in front of your doctor or midwife before you start it."
+        },
+        {
+          "h": "In place of strong acids",
+          "body": "PHA is the mildest of the hydroxy acid family, with a large molecule that works slowly at the surface. Mandelic acid is another gentle option. Both are usually treated as lower-concern than high-strength glycolic or salicylic, but this is exactly the kind of question to confirm rather than assume."
+        },
+        {
+          "h": "For pigmentation",
+          "body": "Niacinamide and vitamin C are the ingredients most often kept, and azelaic acid is frequently discussed in this context. Since pigment work is slow at the best of times, the realistic aim during pregnancy is holding ground with sun protection rather than making progress."
+        },
+        {
+          "h": "What not to change",
+          "body": "Sunscreen is the part worth keeping. Of everything in the routine it is both the least controversial and the most valuable, particularly if melasma has appeared. If you would rather use a mineral filter while pregnant, that is a reasonable preference and a good thing to raise at your appointment."
+        }
+      ]
+    },
+    {
+      "slug": "melasma-in-pregnancy",
+      "title": "Pregnancy Melasma (Chloasma)",
+      "h1": "Melasma during pregnancy: what actually helps",
+      "qa": "Melasma appearing during pregnancy is common and is driven by hormonal changes together with sun and heat exposure. It often fades in the months after birth, though not always. The one intervention that helps regardless of which actives you are avoiding is rigorous, reapplied sun protection.",
+      "sections": [
+        {
+          "h": "Why it happens now",
+          "body": "Hormonal shifts during pregnancy increase pigment-producing activity, and sun exposure then triggers where that pigment lands. The symmetrical, map-like pattern across cheeks, forehead and upper lip is characteristic. It is sometimes called the mask of pregnancy."
+        },
+        {
+          "h": "Sun protection is the whole strategy",
+          "body": "With many brightening actives paused, sun protection stops being one tool among several and becomes the main one. Broad-spectrum SPF applied generously and reapplied, plus a hat and shade at midday. Visible light aggravates melasma as well as UV, which is why tinted sunscreens containing iron oxides are usually suggested for it specifically. Heat alone can aggravate it too, so hot showers and saunas are worth moderating."
+        },
+        {
+          "h": "What to expect afterwards",
+          "body": "Pregnancy melasma frequently fades over the months following birth as hormones settle. Some of it persists, and that is when a dermatologist becomes worth seeing — melasma is genuinely difficult and responds far better to a planned medical approach than to a rotating cast of serums."
+        },
+        {
+          "h": "What not to do",
+          "body": "Do not attempt aggressive at-home treatment while pregnant, and do not scrub. Irritation makes melasma worse, reliably. Hold the line with sunscreen and revisit actives with your doctor afterwards."
+        }
+      ]
+    },
+    {
+      "slug": "postpartum-skin-changes",
+      "title": "Postpartum Skin & Breastfeeding",
+      "h1": "Skin after birth: what changes and when to reintroduce actives",
+      "qa": "Postpartum skin commonly shows dryness, hair shedding, lingering melasma and sometimes a return of acne as hormones resettle. Guidance on which actives are appropriate while breastfeeding differs from pregnancy guidance and from clinician to clinician, so reintroduce in conversation with yours rather than on a schedule from the internet.",
+      "sections": [
+        {
+          "h": "What commonly changes",
+          "body": "Hormonal resettling can bring dryness, increased sensitivity, and noticeable hair shedding a few months after birth — the shedding is usually temporary. Melasma may begin to fade. Acne can return, sometimes in a different pattern than before pregnancy."
+        },
+        {
+          "h": "Reintroducing actives",
+          "body": "Advice for breastfeeding is not identical to advice for pregnancy, and it varies. The general principle clinicians apply is minimal systemic absorption and keeping products away from areas an infant contacts. Ask about your specific list rather than assuming everything resumes at once."
+        },
+        {
+          "h": "Go slowly",
+          "body": "Skin that has been on a simple routine for months will not appreciate three actives arriving in one week. Reintroduce one product at a time with two weeks between, which also tells you which one is responsible if something reacts."
+        },
+        {
+          "h": "Be realistic about the timeframe",
+          "body": "This is the period of life least suited to a demanding routine. A gentle cleanser, a good moisturiser and sunscreen is a complete and entirely respectable routine, and it is the one most likely to actually get done."
+        }
+      ]
+    }
+  ],
+  "men": [
+    {
+      "slug": "korean-mens-skincare-routine",
+      "title": "The Korean Men's Skincare Routine",
+      "h1": "A Korean skincare routine for men, without the ten steps",
+      "qa": "Start with three: a gentle low-pH cleanser, a light moisturiser and sunscreen every morning. Add a soothing product if shaving leaves skin reactive, and a treatment active only once those three are habit. Skin is skin — the actives do not change by gender, only the textures and marketing do.",
+      "sections": [
+        {
+          "h": "Why Korea normalised it first",
+          "body": "Korea has one of the world's highest rates of men's skincare use, and men's ranges sit on ordinary shelves rather than in a separate corner. That normality is the actual advantage — the products are unremarkable, so using them is too."
+        },
+        {
+          "h": "The three that matter",
+          "body": "A gentle cleanser formulated near skin's own pH rather than a stripping foaming wash. A light moisturiser, because male skin being oilier on average does not mean it needs no moisture. And sunscreen, which does more than everything else combined."
+        },
+        {
+          "h": "What differs in practice",
+          "body": "Male skin tends to be thicker, oilier and with larger pores on average, and shaving both irritates and mildly exfoliates. That combination argues for lighter textures, fragrance-free formulas, and going easy on any additional exfoliation."
+        },
+        {
+          "h": "What to add later",
+          "body": "Once the base three are automatic, a niacinamide serum for oil and tone, or a retinoid at night for texture and lines. Adding actives before the basics are habit is how routines collapse."
+        }
+      ]
+    },
+    {
+      "slug": "shaving-and-skin-barrier",
+      "title": "Shaving & Your Skin Barrier",
+      "h1": "Shaving is exfoliation — treat your routine accordingly",
+      "qa": "A razor removes hair and a layer of dead surface cells with it, which means shaving is mild physical exfoliation performed daily. That is why adding an acid or a retinoid on top so often produces stinging, and why post-shave care is barrier care.",
+      "sections": [
+        {
+          "h": "What the razor actually does",
+          "body": "Beyond cutting hair, the blade scrapes across the skin surface, taking dead cells and some barrier lipids with it. Done daily, that is a meaningful and repeated disruption — considerably more than most people account for when planning a routine."
+        },
+        {
+          "h": "Why your actives sting",
+          "body": "Applying an exfoliating acid or a retinoid to freshly shaved skin puts an active onto a surface that has just been mechanically exfoliated. The reaction is not the product being wrong; it is the combination being too much."
+        },
+        {
+          "h": "How to sequence it",
+          "body": "Shave in the evening and apply actives on non-shaving nights, or shave in the morning and keep actives to the evening. Either separation works — doing both at once does not."
+        },
+        {
+          "h": "What to apply after",
+          "body": "Skip alcohol-heavy aftershave, which stings because it is stripping already-disrupted skin. A centella or panthenol product, then a light moisturiser, is the Korean answer and a considerably better one."
+        }
+      ]
+    },
+    {
+      "slug": "mens-sunscreen-korea",
+      "title": "Sunscreen for Men",
+      "h1": "Getting men to wear sunscreen: the texture argument",
+      "qa": "The obstacle is almost never belief, it is feel — greasy, white, sweat-stinging sunscreen does not get reapplied. Korean sunscreens solve exactly that, which is why they became the entry point into skincare for a lot of men.",
+      "sections": [
+        {
+          "h": "The objection is legitimate",
+          "body": "Most people who avoid sunscreen are not disputing the evidence; they dislike how it feels. That is a solvable formulation problem rather than a character flaw, and it is worth naming honestly."
+        },
+        {
+          "h": "What to look for",
+          "body": "A fluid or gel texture rather than a cream, alcohol in the formula for a faster dry-down if you are oily, and a matte or natural finish. Korean sunscreens offer all three because the modern filters available there make light textures possible."
+        },
+        {
+          "h": "The hairline and ears",
+          "body": "The spots men miss most, and the spots dermatologists see most damage on — scalp part lines, the tops of ears, and the back of the neck. A stick or a spray handles the hairline more easily than a cream."
+        },
+        {
+          "h": "Reapplication without a bathroom trip",
+          "body": "A sun stick in a bag or car is the practical answer. Just remember it needs many more passes than feel sufficient to reach a real amount."
+        }
+      ]
+    },
+    {
+      "slug": "mens-acne-and-oiliness",
+      "title": "Oil, Congestion & Adult Male Skin",
+      "h1": "Oily, congested skin: what to do and what makes it worse",
+      "qa": "The instinct to strip oily skin is what sustains the problem — harsh cleansing damages the barrier, which frequently leads to more oil, not less. The Korean approach is a gentle low-pH cleanse, niacinamide or zinc for shine, and salicylic acid a couple of nights a week.",
+      "sections": [
+        {
+          "h": "The stripping cycle",
+          "body": "A foaming, alkaline cleanser leaves skin squeaky and tight, which reads as clean. It also disrupts the barrier and leaves skin irritated and more reactive. How much oil you produce is set mostly by hormones rather than by your cleanser, so the popular \"strip it and it makes more\" story is shakier than it is usually told — but doing this twice daily for years is a reliable way to end up with skin that is both oily and easily stung."
+        },
+        {
+          "h": "What to use instead",
+          "body": "A low-pH gel or amino-acid cleanser, once or twice daily. A lightweight moisturiser — oily skin still needs one, and skipping it is another way to drive the cycle. Niacinamide or zinc PCA for the look of shine."
+        },
+        {
+          "h": "Where salicylic acid fits",
+          "body": "BHA is oil-soluble, so it works inside the pore rather than only on the surface. Two or three nights a week is plenty. Daily use of anything exfoliating on top of daily shaving is too much for most skin."
+        },
+        {
+          "h": "When to see someone",
+          "body": "Persistent, painful or scarring acne is a medical matter with genuinely effective treatments. Cycling through cosmetic products for years when a dermatologist could resolve it in months is a bad trade."
+        }
+      ]
+    }
+  ],
+  "body": [
+    {
+      "slug": "korean-body-care-basics",
+      "title": "Korean Body Care",
+      "h1": "Korean body care: the same logic, applied below the neck",
+      "qa": "Korean body care follows the face's principles — gentle low-pH cleansing, ceramides for the barrier, and consistent moisturising on damp skin. The category is dominated by affordable ceramide lotions rather than by treatment actives.",
+      "sections": [
+        {
+          "h": "The barrier argument applies everywhere",
+          "body": "Body skin is thicker and has fewer oil glands in most areas, which makes it drier and slower to recover. The same barrier logic that transformed Korean facial care — ceramides, gentle surfactants, humectants under an occlusive — applies just as well below the jaw."
+        },
+        {
+          "h": "Moisturise on damp skin",
+          "body": "The single most effective change is applying body lotion within a few minutes of getting out of the shower, while skin is still damp. Humectants have water to bind and the occlusive layer traps what is already there."
+        },
+        {
+          "h": "Water temperature matters more than product",
+          "body": "Long hot showers strip body skin efficiently. Shorter and cooler does more for winter dryness than upgrading your lotion, which is unglamorous advice that happens to be true."
+        },
+        {
+          "h": "The Korean shelf staples",
+          "body": "Ceramide body lotions sold in large, cheap bottles are the backbone of the category. Korea treats body moisturiser as a household consumable rather than a luxury, which is largely why people actually use enough of it."
+        }
+      ]
+    },
+    {
+      "slug": "keratosis-pilaris-korean-approach",
+      "title": "Rough Bumpy Arms (Keratosis Pilaris)",
+      "h1": "Bumpy upper arms: what helps and what does not",
+      "qa": "The small rough bumps on upper arms and thighs are extremely common and generally harmless. They do not scrub away — the useful approach is chemical rather than physical: urea or lactic acid to soften, plus consistent moisturising. Improvement is real but gradual, and it returns if you stop.",
+      "sections": [
+        {
+          "h": "What it is",
+          "body": "Keratin builds up around hair follicles, creating small firm bumps with a sandpaper feel, often with some redness. It is very common, frequently runs in families, and is a cosmetic concern rather than a health one."
+        },
+        {
+          "h": "Why scrubbing fails",
+          "body": "The build-up sits around and within the follicle, not loose on the surface. Physical scrubbing irritates the surrounding skin and adds redness without reaching the actual plug — which is why the bumps look angrier after aggressive exfoliation."
+        },
+        {
+          "h": "What actually helps",
+          "body": "Urea at higher percentages softens the keratin, and lactic or salicylic acid loosens it. Applied consistently alongside a good moisturiser, texture improves over weeks. It is management rather than cure — stop, and it gradually comes back."
+        },
+        {
+          "h": "Be patient and gentle",
+          "body": "Expect gradual change over a couple of months. Escalating strength because week two looks the same is how people end up with irritated, still-bumpy arms."
+        }
+      ]
+    },
+    {
+      "slug": "korean-hand-care",
+      "title": "Korean Hand & Nail Care",
+      "h1": "Hand care, and why Korean hand creams are everywhere",
+      "qa": "Hands are washed constantly, exposed to sun continuously and have little natural oil, which makes them age visibly early. Korean hand creams are cheap, everywhere and formulated to absorb fast — the last of which is the only reason people reapply them.",
+      "sections": [
+        {
+          "h": "Why hands show age first",
+          "body": "Thin skin, few oil glands, constant washing and near-continuous sun exposure while driving and walking. Hands accumulate visible sun damage as readily as the face and almost never get sunscreen."
+        },
+        {
+          "h": "The absorbency point",
+          "body": "A hand cream that leaves you unable to use a phone will be applied once and abandoned. Korean formulas prioritise a fast, non-greasy finish precisely so reapplication happens, which matters far more than the ingredient list."
+        },
+        {
+          "h": "Sunscreen on the backs of hands",
+          "body": "The most-skipped and most-visible omission in most routines. When you apply sunscreen to your face, take what is left on your palms across the backs of your hands."
+        },
+        {
+          "h": "Cuticles and nails",
+          "body": "Cuticle oil works because it is applied often, not because of what is in it. Korean multi-balms and small oil pens exist for exactly this — keeping something within reach makes the habit possible."
+        }
+      ]
+    },
+    {
+      "slug": "back-and-body-acne",
+      "title": "Body Acne (Back & Chest)",
+      "h1": "Back and chest breakouts: a different problem from facial acne",
+      "qa": "Body acne is influenced by sweat, friction, occlusive fabrics and hair products rinsing down your back in the shower. A salicylic acid body wash, showering promptly after sweating, and washing hair before you wash your body help in a lot of cases. Back and chest acne is also often ordinary acne vulgaris, and if it is persistent, painful or leaving marks, a doctor will get you further than a body wash.",
+      "sections": [
+        {
+          "h": "The shower-order fix",
+          "body": "Conditioner and hair oils rinse down your back and chest. Washing and conditioning your hair first, then cleansing your body afterwards, removes that residue — a genuinely effective change that costs nothing."
+        },
+        {
+          "h": "Sweat and friction",
+          "body": "Sweat trapped under tight synthetic fabric is a reliable trigger. Shower promptly after exercise rather than sitting in kit, and choose looser, breathable fabrics where you can."
+        },
+        {
+          "h": "What to use",
+          "body": "A salicylic acid body wash, left on for a minute before rinsing so it has contact time. Body skin is more robust than facial skin and tolerates it well. Follow with a light lotion — stripping body skin backfires the same way it does on the face."
+        },
+        {
+          "h": "Fungal acne looks similar",
+          "body": "Uniform, itchy small bumps across the chest, shoulders and upper back are often not acne at all but a yeast-related folliculitis, which does not respond to acne treatment. If it itches and looks unusually uniform, that is worth a doctor's opinion."
+        }
+      ]
+    }
+  ],
+  "spa": [
+    {
+      "slug": "jjimjilbang-guide",
+      "title": "Jjimjilbang: Korea's Bathhouse Culture",
+      "h1": "Jjimjilbang explained: what happens inside a Korean bathhouse",
+      "qa": "A jjimjilbang is a Korean bathhouse combining gender-separated bathing areas with a mixed-gender common floor of heated rooms, sleeping areas and food. It is an ordinary, family-friendly institution rather than a luxury spa, and it is where Korea's skincare culture is most visible.",
+      "sections": [
+        {
+          "h": "The layout",
+          "body": "You leave shoes at the entrance, receive a locker key and a uniform, and the building splits into two parts: gender-separated wet areas with pools and showers where nobody wears clothing, and a mixed common area where everyone wears the issued uniform."
+        },
+        {
+          "h": "The etiquette that matters",
+          "body": "Shower thoroughly before entering any pool — this is non-negotiable and the most common mistake visitors make. Nudity in the bathing area is standard and unremarkable. Keep your voice down, and note that visible tattoos are still restricted at some establishments."
+        },
+        {
+          "h": "The heated rooms",
+          "body": "The common floor holds rooms lined with different materials — salt, charcoal, jade, clay — each held at a different temperature. Move between them, drink water, and leave when you have had enough rather than enduring."
+        },
+        {
+          "h": "Why it belongs in a skincare library",
+          "body": "Bathing culture is where Korean skin habits are learned: thorough cleansing, the sensation of properly hydrated skin, and moisturising afterwards as a matter of course. The routine did not come from marketing; it came from here."
+        }
+      ]
+    },
+    {
+      "slug": "korean-body-scrub-seshin",
+      "title": "Seshin: The Korean Body Scrub",
+      "h1": "Seshin (때밀이): the Korean body scrub explained",
+      "qa": "Seshin is a vigorous full-body exfoliation performed by an attendant after a long soak, using an abrasive Italy towel. It leaves skin remarkably smooth and is a genuine cultural institution — it is also intense, and not something to do often or on sensitive skin.",
+      "sections": [
+        {
+          "h": "What actually happens",
+          "body": "You soak until skin is thoroughly softened, then lie on a table while an attendant scrubs you with a coarse mitt. Grey rolls of dead skin come off visibly, which is the part first-timers find startling and regulars find satisfying."
+        },
+        {
+          "h": "The Italy towel",
+          "body": "The rough viscose mitt used for seshin was developed in Korea in the 1960s — Korean accounts credit a Busan textile mill, Hanil Textiles, in 1967 — and it is named for the viscose rayon yarn imported from Italy and then woven here, not for anything Italian about the practice. It is sold in every Korean supermarket and is a genuine piece of Korean material culture."
+        },
+        {
+          "h": "The honest caveat",
+          "body": "This is aggressive physical exfoliation. Skin does feel extraordinarily smooth afterwards, and doing it frequently, or on eczema-prone, sensitive or actively broken-out skin, is a route to a damaged barrier. Occasional is the operative word."
+        },
+        {
+          "h": "Afterwards",
+          "body": "Moisturise generously and skip actives that evening. Freshly scrubbed skin absorbs more of everything, including things you would rather it did not absorb more of."
+        }
+      ]
+    },
+    {
+      "slug": "korean-sauna-and-skin",
+      "title": "Saunas, Heat & Your Skin",
+      "h1": "Does the sauna help your skin? The genuine answer",
+      "qa": "Heat increases blood flow and produces an immediate flush that looks like radiance, and the humidity is pleasant. It does not detoxify skin or clean pores — sweat glands and pores are separate structures. For rosacea-prone skin and melasma, heat is a documented trigger.",
+      "sections": [
+        {
+          "h": "What heat does",
+          "body": "It dilates surface blood vessels, producing the post-sauna flush people read as glow. It also relaxes you, which is not nothing. Both effects are real and both are temporary."
+        },
+        {
+          "h": "The detox claim",
+          "body": "Sweat is produced by sweat glands; oil and pore contents come from sebaceous glands. Sweating does not flush out your pores, and the body's actual detoxification runs through the liver and kidneys. Enjoy the sauna for what it is."
+        },
+        {
+          "h": "Who should be careful",
+          "body": "Heat is a well-documented trigger for rosacea-prone flushing and for melasma, which responds to heat as well as to UV. If either applies to you, shorter sessions and cooler rooms are the sensible adjustment."
+        },
+        {
+          "h": "Afterwards",
+          "body": "Rinse, and moisturise while skin is still damp. Prolonged heat and humidity followed by dry air is dehydrating, which is why the post-bathhouse moisturising step is treated as automatic in Korea."
+        }
+      ]
+    },
+    {
+      "slug": "korean-bathhouse-skincare-habits",
+      "title": "What Korea's Bathing Culture Taught K-beauty",
+      "h1": "How bathhouse culture shaped the Korean skincare routine",
+      "qa": "Several defining habits of Korean skincare trace back to bathing culture: thorough cleansing as a first principle, moisturising immediately on damp skin, treating skincare as ordinary maintenance rather than indulgence, and doing it communally across generations.",
+      "sections": [
+        {
+          "h": "Cleansing as the foundation",
+          "body": "A culture where thorough washing precedes everything produced a skincare tradition that takes cleansing seriously — hence double cleansing, low-pH cleansers, and the idea that what you take off matters as much as what you put on."
+        },
+        {
+          "h": "Moisturising on damp skin",
+          "body": "Applying lotion straight after bathing, while skin is still damp, is standard practice rather than an advanced tip. It is also, as it happens, the most effective moment to do it."
+        },
+        {
+          "h": "Skincare as ordinary",
+          "body": "Bathhouses are family places, and skincare is discussed between generations without embarrassment. Habits normalised in that setting form early and stick — which explains more about Korean skin than the usual hand-waving about genetics does, even if skin biology genuinely does differ between populations and plays its own part."
+        },
+        {
+          "h": "What did not survive contact with the export market",
+          "body": "Bathing culture is unhurried and communal; the version exported abroad became a product list. The habits are the transferable part — the ten-step routine was the packaging."
+        }
+      ]
+    }
+  ],
+  "step": [
+    {
+      "slug": "step-1-oil-cleanse",
+      "title": "Step 1: The Oil Cleanse",
+      "h1": "The oil cleanse: the step most people do wrong",
+      "qa": "Apply oil cleanser to dry hands and a dry face, massage for 30 to 60 seconds, then add a splash of water to emulsify until it turns milky before rinsing. Applying it to wet skin is the most common mistake and it stops the cleanser working properly.",
+      "sections": [
+        {
+          "h": "Dry hands, dry face",
+          "body": "Oil dissolves oil. Water on your skin or hands gets in the way of that, so the cleanser starts emulsifying before it has done its job on sunscreen and makeup. This one detail separates an effective oil cleanse from a frustrating one."
+        },
+        {
+          "h": "Massage long enough",
+          "body": "Thirty to sixty seconds. Water-resistant sunscreen in particular needs contact time to break down, and a ten-second pass leaves most of it behind for the second cleanse to fail at."
+        },
+        {
+          "h": "Emulsify before rinsing",
+          "body": "Add water gradually and keep massaging until the oil turns milky white. That is the emulsifiers doing their work, and it is what lets everything rinse away instead of leaving a film."
+        },
+        {
+          "h": "When to skip it",
+          "body": "Mornings, and nights with bare skin and no sunscreen. There is nothing oil-soluble to remove, and cleansing twice for the sake of it is just extra disruption."
+        }
+      ]
+    },
+    {
+      "slug": "step-2-water-cleanse",
+      "title": "Step 2: The Water Cleanse",
+      "h1": "The second cleanse: gentler than you think it should be",
+      "qa": "A low-pH water-based cleanser removes sweat, water-soluble grime and whatever the oil cleanse left behind. It should leave skin comfortable, never squeaky — that tight, clean feeling is the sound of a damaged barrier.",
+      "sections": [
+        {
+          "h": "Why low pH",
+          "body": "Skin's surface sits slightly acidic. Traditional alkaline soaps disrupt that and take time to recover from. Korea's shift to gel and amino-acid cleansers formulated near skin's own pH is one of the quieter but more consequential changes in modern skincare."
+        },
+        {
+          "h": "Squeaky is not clean",
+          "body": "That tight post-wash feeling means the cleanser has taken barrier lipids along with the dirt. If your skin feels like it urgently needs moisturiser the moment you towel off, the cleanser is too harsh."
+        },
+        {
+          "h": "Water temperature",
+          "body": "Lukewarm. Hot water strips efficiently and is a common cause of the winter tightness people blame on their moisturiser."
+        },
+        {
+          "h": "In the morning",
+          "body": "One gentle cleanse, or just water if your skin is dry or reactive. You cleansed thoroughly the night before, and your pillow is not that dirty."
+        }
+      ]
+    },
+    {
+      "slug": "step-3-toner",
+      "title": "Step 3: Toner (스킨)",
+      "h1": "Korean toner: a hydration step, not an astringent",
+      "qa": "A Korean toner is a watery first hydration layer applied to damp skin and pressed in with your palms. It is not the astringent Western toners once were. Optional in principle, genuinely useful if your skin feels tight after cleansing.",
+      "sections": [
+        {
+          "h": "Apply to damp skin",
+          "body": "Humectants pull water from whatever is available. On damp skin that is the water on the surface; on bone-dry skin in dry air it can be moisture from deeper in your skin. Applying to damp skin is the whole trick, and it is free."
+        },
+        {
+          "h": "Press, do not wipe",
+          "body": "Decant into your palms and press it in rather than dragging it across your face with a cotton pad. Less waste, less friction, and none of the tugging that reactive skin objects to."
+        },
+        {
+          "h": "The 7-skin method",
+          "body": "Layering the same hydrating toner up to seven times, pressing each layer in before the next. It builds hydration without a heavy cream and suits dehydrated skin well. Seven is a guide — three does most of the work."
+        },
+        {
+          "h": "Choosing one",
+          "body": "Look for glycerin, hyaluronic acid, panthenol or beta-glucan high in the list. Avoid denatured alcohol high in the list if your skin is dry or reactive."
+        }
+      ]
+    },
+    {
+      "slug": "step-4-essence",
+      "title": "Step 4: Essence",
+      "h1": "Essence: the step Western routines usually skip",
+      "qa": "Essence is a lightweight hydrating layer between toner and serum, often ferment-based. It is the signature Korean step and the one most missing from Western routines — genuinely useful for hydration, though not a treatment step.",
+      "sections": [
+        {
+          "h": "Where it sits",
+          "body": "After toner, before serum. Thinner than a serum and less targeted, its job is to build hydration and condition skin rather than to correct a specific concern."
+        },
+        {
+          "h": "Ferment essences",
+          "body": "Many Korean essences are built on ferment filtrates — galactomyces, bifida, yeast. The evidence for these is emerging rather than strong, so treat them as pleasant conditioning layers rather than as actives."
+        },
+        {
+          "h": "First essence versus essence",
+          "body": "A first essence goes on immediately after cleansing, before toner, and is usually a high-percentage ferment. A regular essence sits after toner. Some routines use both; most people need neither, strictly speaking."
+        },
+        {
+          "h": "Do you need it?",
+          "body": "Not strictly. But if your skin drinks product and still feels tight, an essence is the layer that most reliably fixes that, and it is the step most worth trying from a Korean routine."
+        }
+      ]
+    },
+    {
+      "slug": "step-5-serum-ampoule",
+      "title": "Step 5: Serum & Ampoule",
+      "h1": "Serum and ampoule: where the actual actives live",
+      "qa": "This is the treatment step — the concentrated actives that address a specific concern. It is also the step where doing less works better: one active at a time, introduced over weeks, beats three at once every time.",
+      "sections": [
+        {
+          "h": "Serum versus ampoule",
+          "body": "Ampoules are marketed as more concentrated than serums, and often are, but neither term is regulated. Choose by what is in the formula and how it feels, not by which word is on the bottle."
+        },
+        {
+          "h": "One at a time",
+          "body": "Introducing a single active and waiting two weeks tells you what it does and whether you tolerate it. Starting three at once tells you nothing except that something reacted."
+        },
+        {
+          "h": "Morning and evening",
+          "body": "Antioxidants such as vitamin C suit the morning, where they complement sunscreen. Retinoids and exfoliating acids suit the evening, since light degrades them and they increase sun sensitivity."
+        },
+        {
+          "h": "Layering order",
+          "body": "Thinnest to thickest, water-based before oil-based. If you use a low-pH active such as vitamin C, give it a moment to settle before the next layer."
+        }
+      ]
+    },
+    {
+      "slug": "step-6-moisturizer",
+      "title": "Step 6: Moisturiser",
+      "h1": "Moisturiser: the layer that makes the rest of it stick",
+      "qa": "Moisturiser seals in the hydration you have layered underneath and supplies the lipids skin needs to hold it. Every skin type needs one — oily skin included, and skipping it is one of the more reliable ways to make oiliness worse.",
+      "sections": [
+        {
+          "h": "What it actually does",
+          "body": "A moisturiser combines humectants that hold water, emollients that smooth the surface, and occlusives that slow evaporation. Without that last part, the hydration from your toner and essence leaves faster than it arrived."
+        },
+        {
+          "h": "Oily skin needs it too",
+          "body": "Skipping moisturiser to control shine backfires: a compromised barrier frequently produces more oil. A light gel-cream is the answer, not no cream."
+        },
+        {
+          "h": "Texture by season",
+          "body": "Korean routines shift textures rather than changing philosophy — a gel-cream in humid summer, a richer cream in dry winter. Same steps, different weight."
+        },
+        {
+          "h": "What to look for",
+          "body": "Ceramides, cholesterol and fatty acids together for barrier support. Glycerin and hyaluronic acid for hydration. Fragrance-free if your skin reacts at all."
+        }
+      ]
+    },
+    {
+      "slug": "step-7-sunscreen",
+      "title": "Step 7: Sunscreen",
+      "h1": "Sunscreen: the step that does more than all the others",
+      "qa": "Sunscreen is the last step of the morning routine and the most valuable thing in it. Apply generously, reapply on days you are genuinely outdoors, and choose a texture you will not resent — because the sunscreen you actually wear beats the one you own.",
+      "sections": [
+        {
+          "h": "Why it outranks everything",
+          "body": "A large share of visible facial ageing is attributed to sun exposure. No serum in your routine addresses a comparable share of the problem, which makes sunscreen the least negotiable step and the best value in skincare."
+        },
+        {
+          "h": "Apply enough",
+          "body": "SPF is tested at a generous, standardised amount, and most people apply well under it. That gap matters more than the difference between SPF 30 and 50. Be more generous than feels natural."
+        },
+        {
+          "h": "Read both numbers",
+          "body": "SPF covers UVB. The PA rating, used in Korea and Japan, covers UVA — the range associated with pigmentation and photoageing. Look for SPF 30 or higher with PA+++ or PA++++."
+        },
+        {
+          "h": "Reapplication",
+          "body": "Every couple of hours of genuine sun exposure. A sun stick or cushion sunscreen handles reapplication over makeup by pressing rather than rubbing. A day spent indoors away from windows does not need the same discipline."
+        }
+      ]
+    },
+    {
+      "slug": "step-8-night-treatments",
+      "title": "Step 8: Night Treatments",
+      "h1": "The evening routine: where the heavy lifting happens",
+      "qa": "Evening is when retinoids, exfoliating acids and richer occlusives belong — light degrades some of them and they can increase sun sensitivity. The organising principle is not doing everything every night: alternate, and give skin recovery evenings.",
+      "sections": [
+        {
+          "h": "Why evening",
+          "body": "Retinoids degrade in light, exfoliating acids increase sun sensitivity, and richer textures that would sit badly under makeup are fine overnight. Skin does run on a measurable daily rhythm — cell turnover and water loss both vary across the day — but that is a much thinner basis than night-cream marketing implies. The reasons above are the ones actually deciding this."
+        },
+        {
+          "h": "Alternate, do not stack",
+          "body": "A retinoid one night, an exfoliant another, and plain barrier support on the nights between. Skin cycling is simply a name for this, and it exists because stacking actives nightly is the fastest route to a damaged barrier."
+        },
+        {
+          "h": "Sleeping masks",
+          "body": "An occlusive final layer over your moisturiser, most useful in winter or on skin that wakes up tight. It goes over the routine, not instead of it."
+        },
+        {
+          "h": "Recovery nights are not wasted",
+          "body": "Nights with only cleanser and moisturiser are part of the plan, not a lapse. Barrier recovery is what makes the active nights tolerable and therefore effective."
+        }
+      ]
+    }
+  ],
+  "compare2": [
+    {
+      "slug": "korean-vs-japanese-skincare",
+      "title": "K-beauty vs J-beauty",
+      "h1": "Korean vs Japanese skincare: two philosophies, one region",
+      "qa": "Korean skincare iterates fast on new ingredients and formats, with more steps and a dewy finish as the goal. Japanese skincare tends toward refinement of fewer, longer-standing products, with a lighter, more restrained finish and a heritage of sunscreen and cleansing excellence.",
+      "sections": [
+        {
+          "h": "Pace of change",
+          "body": "Korea's industry is built for speed — contract manufacturers, short development cycles, and a domestic market that rewards novelty. Japan tends to refine established products over years. Neither is better; they optimise for different things."
+        },
+        {
+          "h": "Routine shape",
+          "body": "Korean routines lean on layered hydration and more steps. Japanese routines are typically shorter, with a lotion-and-emulsion structure and a lighter finish. The Korean aim is dewy; the Japanese aim is closer to smooth and even."
+        },
+        {
+          "h": "Where each leads",
+          "body": "Both markets have excellent sunscreen thanks to shared access to modern filters. Japan has a particular reputation for cleansing oils and for refined sunscreen textures; Korea leads on ingredient novelty, sheet masks, cushions and value."
+        },
+        {
+          "h": "Buying from both",
+          "body": "Nothing stops you mixing them, and many people's best routine does. Products do not know what country they came from."
+        }
+      ]
+    },
+    {
+      "slug": "korean-vs-western-dermatology",
+      "title": "Korean vs Western Dermatology Culture",
+      "h1": "Why Koreans see a dermatologist about things Westerners do not",
+      "qa": "Dermatology visits are far more routine and comparatively more affordable in Korea, and aesthetic procedures carry much less stigma. That access shapes the skincare market: cosmetics are positioned as maintenance between clinic visits rather than as a substitute for them.",
+      "sections": [
+        {
+          "h": "Access changes behaviour",
+          "body": "Where seeing a dermatologist is quick, affordable and unremarkable, people go earlier and for smaller things. That alone changes outcomes considerably compared with markets where a visit means a long wait or a large bill."
+        },
+        {
+          "h": "Procedures as maintenance",
+          "body": "Laser toning, skin boosters and similar treatments are discussed in Korea the way haircuts are discussed elsewhere. That normality is why home devices sell so well there — the devices imitate something people already understand. Japan's home beauty-device industry is the older one by decades; Korea's took off from around 2017 and grew far faster."
+        },
+        {
+          "h": "What it means for products",
+          "body": "Korean cosmetics are often positioned alongside clinical treatment rather than against it. Dermocosmetic lines sold through pharmacies are a mainstream category rather than a niche."
+        },
+        {
+          "h": "The transferable lesson",
+          "body": "If something is persistent, painful or scarring, see a professional. Cycling through cosmetic products for years is the expensive way to not solve a medical problem."
+        }
+      ]
+    },
+    {
+      "slug": "korean-vs-french-pharmacy",
+      "title": "K-beauty vs French Pharmacy Skincare",
+      "h1": "Korean drugstore vs French pharmacy: two value traditions",
+      "qa": "Both are known for effective, affordable skincare, and they arrive there differently. French pharmacy brands emphasise minimal, dermatologist-associated formulas with long-unchanged hero products. Korean drugstore brands emphasise ingredient novelty, format invention and rapid iteration.",
+      "sections": [
+        {
+          "h": "Two kinds of trust",
+          "body": "French pharmacy skincare trades on clinical association and continuity — the same thermal-water spray your mother used. Korean drugstore skincare trades on ingredient transparency and responsiveness to what people are asking for this year."
+        },
+        {
+          "h": "Formulation style",
+          "body": "French pharmacy formulas often keep ingredient lists short and fragrance minimal, aimed at sensitive skin. Korean formulas are more willing to stack actives, botanicals and novel textures."
+        },
+        {
+          "h": "Where each wins",
+          "body": "For very reactive skin, the minimalist French approach is often the safer starting point. For sunscreen texture, sheet masks, cushions and value per bottle, Korea is difficult to beat."
+        },
+        {
+          "h": "The overlap",
+          "body": "Both traditions agree on the things that matter most: gentle cleansing, barrier support, and daily sun protection. The disagreements are mostly about everything after that."
+        }
+      ]
+    }
+  ]
+}

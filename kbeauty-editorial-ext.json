@@ -1,0 +1,729 @@
+{
+  "_readme": "Authored extensions to the existing library datasets (say/ hanbang/ ask/ term/) plus four new clusters, merged by build-kbeauty-pages.cjs alongside the originals. Shapes match the files they extend. Romanisations follow Revised Romanization; respellings are approximate English guides, not IPA.",
+  "say": {
+    "brands": [
+      {
+        "id": "dalba",
+        "name": "d'Alba",
+        "hangul": "달바",
+        "romanization": "dalba",
+        "respell": "DAHL-bah",
+        "meaning": "From Alba, the Italian region famed for white truffles — the brand's signature ingredient."
+      },
+      {
+        "id": "heimish",
+        "name": "Heimish",
+        "hangul": "헤이미쉬",
+        "romanization": "heimisui",
+        "respell": "HAY-mish",
+        "meaning": "From the Yiddish-derived word heimish, meaning homely or cosy."
+      },
+      {
+        "id": "imfrom",
+        "name": "I'm From",
+        "hangul": "아임프롬",
+        "romanization": "aimpeurom",
+        "respell": "aim-FROM",
+        "meaning": "English phrase — the brand names the Korean region each hero ingredient comes from."
+      },
+      {
+        "id": "romand",
+        "name": "rom&nd",
+        "hangul": "롬앤",
+        "romanization": "romaen",
+        "respell": "ROM-and",
+        "meaning": "Coined; read as 'romand', a contraction the brand leaves deliberately open."
+      },
+      {
+        "id": "clio",
+        "name": "CLIO",
+        "hangul": "클리오",
+        "romanization": "keullio",
+        "respell": "KLEE-oh",
+        "meaning": "From Clio, the Greek muse of history."
+      },
+      {
+        "id": "peripera",
+        "name": "peripera",
+        "hangul": "페리페라",
+        "romanization": "peripera",
+        "respell": "peh-ree-PEH-rah",
+        "meaning": "Coined brand name with no literal Korean meaning."
+      },
+      {
+        "id": "goodal",
+        "name": "Goodal",
+        "hangul": "구달",
+        "romanization": "gudal",
+        "respell": "GOO-dal",
+        "meaning": "Coined; commonly read as a blend of 'good' and the Korean 달 (dal, moon)."
+      },
+      {
+        "id": "banilaco",
+        "name": "Banila Co",
+        "hangul": "바닐라코",
+        "romanization": "banillako",
+        "respell": "bah-NIL-lah-koh",
+        "meaning": "From vanilla — Korean renders the English word as 바닐라."
+      },
+      {
+        "id": "tonymoly",
+        "name": "TONYMOLY",
+        "hangul": "토니모리",
+        "romanization": "tonimori",
+        "respell": "TOH-nee-moh-lee",
+        "meaning": "Coined; the Korean spelling ends in -mori rather than -moly."
+      },
+      {
+        "id": "hanyul",
+        "name": "Hanyul",
+        "hangul": "한율",
+        "romanization": "hanyul",
+        "respell": "HAHN-yool",
+        "meaning": "한 (han, Korean/one) + 율 (yul, rhythm or law) — roughly 'the Korean rhythm'."
+      },
+      {
+        "id": "vt",
+        "name": "VT Cosmetics",
+        "hangul": "브이티",
+        "romanization": "beuiti",
+        "respell": "vee-TEE",
+        "meaning": "Initials; Koreans read the letters as 브이티."
+      },
+      {
+        "id": "axisy",
+        "name": "Axis-Y",
+        "hangul": "액시스와이",
+        "romanization": "aeksiseuwai",
+        "respell": "AK-sis-why",
+        "meaning": "English coinage referencing the y-axis."
+      },
+      {
+        "id": "hanskin",
+        "name": "Hanskin",
+        "hangul": "한스킨",
+        "romanization": "hanseukin",
+        "respell": "HAHN-skin",
+        "meaning": "한 (han, Korean) + skin."
+      },
+      {
+        "id": "aestura",
+        "name": "Aestura",
+        "hangul": "에스트라",
+        "romanization": "eseuteura",
+        "respell": "es-TOO-rah",
+        "meaning": "Coined; note the Korean reads closer to 'estra' than to 'aestura'."
+      },
+      {
+        "id": "illiyoon",
+        "name": "Illiyoon",
+        "hangul": "일리윤",
+        "romanization": "illiyun",
+        "respell": "IL-lee-yoon",
+        "meaning": "Coined brand name."
+      },
+      {
+        "id": "drg",
+        "name": "Dr.G",
+        "hangul": "닥터지",
+        "romanization": "dakteoji",
+        "respell": "DOK-ter-jee",
+        "meaning": "Doctor G — Koreans say 닥터지, running the two together."
+      },
+      {
+        "id": "celimax",
+        "name": "Celimax",
+        "hangul": "셀리맥스",
+        "romanization": "sellimaekseu",
+        "respell": "SEL-ee-max",
+        "meaning": "Coined, from cell + max."
+      },
+      {
+        "id": "sioris",
+        "name": "SIORIS",
+        "hangul": "시오리스",
+        "romanization": "sioriseu",
+        "respell": "see-OH-riss",
+        "meaning": "Coined brand name."
+      },
+      {
+        "id": "aromatica",
+        "name": "Aromatica",
+        "hangul": "아로마티카",
+        "romanization": "aromatika",
+        "respell": "ah-roh-MAH-tee-kah",
+        "meaning": "From aromatic — the brand began in aromatherapy."
+      },
+      {
+        "id": "kahi",
+        "name": "KAHI",
+        "hangul": "카히",
+        "romanization": "kahi",
+        "respell": "KAH-hee",
+        "meaning": "Coined brand name."
+      },
+      {
+        "id": "apieu",
+        "name": "A'PIEU",
+        "hangul": "어퓨",
+        "romanization": "eopyu",
+        "respell": "uh-PYOO",
+        "meaning": "Coined; the Korean 어퓨 is closer to 'uh-pyu' than to 'a-pew'."
+      },
+      {
+        "id": "thesaem",
+        "name": "The Saem",
+        "hangul": "더샘",
+        "romanization": "deosaem",
+        "respell": "duh-SEM",
+        "meaning": "샘 (saem) is Korean for spring or fountain."
+      },
+      {
+        "id": "espoir",
+        "name": "eSpoir",
+        "hangul": "에스쁘아",
+        "romanization": "eseuppeua",
+        "respell": "es-PWAH",
+        "meaning": "From the French espoir, meaning hope."
+      },
+      {
+        "id": "hince",
+        "name": "hince",
+        "hangul": "힌스",
+        "romanization": "hinseu",
+        "respell": "HINSS",
+        "meaning": "Coined; one syllable in Korean, not two."
+      },
+      {
+        "id": "amuse",
+        "name": "AMUSE",
+        "hangul": "어뮤즈",
+        "romanization": "eomyujeu",
+        "respell": "uh-MYOOZ",
+        "meaning": "English word amuse."
+      }
+    ],
+    "ingredients": [
+      {
+        "id": "adenosine",
+        "name": "Adenosine",
+        "hangul": "아데노신",
+        "romanization": "adenosin",
+        "respell": "ah-deh-noh-SHIN",
+        "meaning": "Korea's most-used notified wrinkle-improvement active."
+      },
+      {
+        "id": "bifida",
+        "name": "Bifida Ferment Lysate",
+        "hangul": "비피다 발효용해물",
+        "romanization": "bipida balhyoyonghaemul",
+        "respell": "bee-PEE-dah bal-hyo-yong-heh-mool",
+        "meaning": "발효 (balhyo) means fermentation — the word that anchors an entire K-beauty category."
+      },
+      {
+        "id": "birch",
+        "name": "Birch Sap",
+        "hangul": "자작나무 수액",
+        "romanization": "jajangnamu suaek",
+        "respell": "jah-jahng-NAH-moo SOO-ek",
+        "meaning": "자작나무 is birch tree, 수액 is sap."
+      },
+      {
+        "id": "camellia",
+        "name": "Camellia Oil",
+        "hangul": "동백 오일",
+        "romanization": "dongbaek oil",
+        "respell": "DONG-bek oil",
+        "meaning": "동백 (dongbaek) is the camellia flower, long associated with Jeju."
+      },
+      {
+        "id": "yuja",
+        "name": "Yuja",
+        "hangul": "유자",
+        "romanization": "yuja",
+        "respell": "YOO-jah",
+        "meaning": "The Korean citron — the same fruit as Japanese yuzu, called yuja in Korea."
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate",
+        "hangul": "석류",
+        "romanization": "seongnyu",
+        "respell": "SUNG-nyoo",
+        "meaning": "Note the pronunciation shift: 석류 is written seok-ryu but said seong-nyu."
+      },
+      {
+        "id": "mungbean",
+        "name": "Mung Bean",
+        "hangul": "녹두",
+        "romanization": "nokdu",
+        "respell": "NOK-doo",
+        "meaning": "Ground nokdu is one of Korea's oldest cleansing traditions."
+      },
+      {
+        "id": "blackginseng",
+        "name": "Black Ginseng",
+        "hangul": "흑삼",
+        "romanization": "heuksam",
+        "respell": "HEUK-sahm",
+        "meaning": "흑 (heuk) means black — ginseng steamed and dried through repeated cycles."
+      },
+      {
+        "id": "pearl",
+        "name": "Pearl Extract",
+        "hangul": "진주 추출물",
+        "romanization": "jinju chuchulmul",
+        "respell": "JIN-joo choo-chool-mool",
+        "meaning": "진주 is pearl; 추출물 means extract, a word worth knowing on any label."
+      },
+      {
+        "id": "royaljelly",
+        "name": "Royal Jelly",
+        "hangul": "로열젤리",
+        "romanization": "royeoljelli",
+        "respell": "ROH-yul-JEL-lee",
+        "meaning": "Loanword from English."
+      },
+      {
+        "id": "bamboo",
+        "name": "Bamboo Sap",
+        "hangul": "대나무 수액",
+        "romanization": "daenamu suaek",
+        "respell": "DEH-nah-moo SOO-ek",
+        "meaning": "대나무 is bamboo."
+      },
+      {
+        "id": "aloe",
+        "name": "Aloe Vera",
+        "hangul": "알로에",
+        "romanization": "alloe",
+        "respell": "AL-loh-eh",
+        "meaning": "Three syllables in Korean, not two."
+      },
+      {
+        "id": "teatree",
+        "name": "Tea Tree",
+        "hangul": "티트리",
+        "romanization": "titeuri",
+        "respell": "TEE-teu-ree",
+        "meaning": "Loanword; ubiquitous on Korean blemish-care packaging."
+      },
+      {
+        "id": "collagen",
+        "name": "Collagen",
+        "hangul": "콜라겐",
+        "romanization": "kollagen",
+        "respell": "KOL-lah-gen",
+        "meaning": "Loanword — note the hard g, unlike English."
+      },
+      {
+        "id": "caffeine",
+        "name": "Caffeine",
+        "hangul": "카페인",
+        "romanization": "kapein",
+        "respell": "kah-PEH-in",
+        "meaning": "Loanword; the same word Koreans use for coffee's caffeine."
+      },
+      {
+        "id": "retinal",
+        "name": "Retinal",
+        "hangul": "레티날",
+        "romanization": "retinal",
+        "respell": "REH-tee-nahl",
+        "meaning": "Distinct from 레티놀 (retinol) — one syllable's difference, a real difference in strength."
+      },
+      {
+        "id": "exosome",
+        "name": "Exosome",
+        "hangul": "엑소좀",
+        "romanization": "eksojom",
+        "respell": "EK-soh-jom",
+        "meaning": "Loanword; the most-hyped term in Korean clinic skincare."
+      },
+      {
+        "id": "ectoin",
+        "name": "Ectoin",
+        "hangul": "엑토인",
+        "romanization": "ektoin",
+        "respell": "EK-toh-in",
+        "meaning": "Loanword."
+      },
+      {
+        "id": "licorice",
+        "name": "Licorice Root",
+        "hangul": "감초",
+        "romanization": "gamcho",
+        "respell": "GAHM-choh",
+        "meaning": "감초 is also a Korean idiom for someone who turns up in everything — it appears in nearly every herbal remedy."
+      },
+      {
+        "id": "soybean",
+        "name": "Fermented Soybean",
+        "hangul": "대두 발효",
+        "romanization": "daedu balhyo",
+        "respell": "DEH-doo BAL-hyo",
+        "meaning": "대두 is soybean; the same fermentation tradition behind doenjang."
+      }
+    ]
+  },
+  "term": [
+    {
+      "term": "Sok-geon-jo",
+      "korean": "속건조",
+      "def": "Literally 'inner dryness' — skin that is oily on the surface yet tight and dehydrated underneath. One of the most useful Korean skincare concepts, and the reason oily skin still needs hydration."
+    },
+    {
+      "term": "Mul-gwang",
+      "korean": "물광",
+      "def": "Literally 'water shine' — the wet-looking, luminous finish that Korean makeup and skincare aim for. The opposite of a matte finish, and the aesthetic ancestor of glass skin."
+    },
+    {
+      "term": "Cho-cho-mak",
+      "korean": "촉촉함",
+      "def": "The particular quality of skin that feels moist, supple and comfortable rather than greasy. Korean product copy uses it constantly; English has no single equivalent."
+    },
+    {
+      "term": "Jin-jeong",
+      "korean": "진정",
+      "def": "Soothing or calming. The word on every cica product in Korea, and the single most useful Korean term to recognise if your skin reacts easily."
+    },
+    {
+      "term": "Gak-jil",
+      "korean": "각질",
+      "def": "Dead surface skin. Korean exfoliating products are almost always labelled with this word, whether they use acids, enzymes or a peeling gel."
+    },
+    {
+      "term": "Mo-gong",
+      "korean": "모공",
+      "def": "Pores. Appears on pore-focused toners, serums and masks — usually paired with 축소 (reduction), a claim about appearance rather than actual pore size."
+    },
+    {
+      "term": "Tan-lyeok",
+      "korean": "탄력",
+      "def": "Elasticity or firmness. The word Korean anti-ageing lines use in place of the wrinkle-focused framing common in Western marketing."
+    },
+    {
+      "term": "Peeling gel",
+      "korean": "필링젤",
+      "def": "A gel that pills as you rub it, taking loose surface debris with it. The pilling is mostly the gel's own cellulose polymer, not your dead skin — gentle and satisfying, but less exfoliating than it looks."
+    },
+    {
+      "term": "Skin (toner)",
+      "korean": "스킨",
+      "def": "What Koreans call toner. The naming difference is the source of most Western confusion about Korean routines: 스킨 is a hydrating first step, not an astringent."
+    },
+    {
+      "term": "Sleeping pack",
+      "korean": "수면팩",
+      "def": "An overnight mask applied as the last step of a PM routine, designed to seal everything beneath it. It goes over your moisturiser, not instead of it."
+    },
+    {
+      "term": "First essence",
+      "korean": "퍼스트 에센스",
+      "def": "A watery, high-percentage ferment applied immediately after cleansing, before anything else. The category SK-II created and Korean brands made affordable."
+    },
+    {
+      "term": "Ampoule",
+      "korean": "앰플",
+      "def": "A concentrated treatment, typically more potent than a serum and sold in a smaller bottle. The distinction is marketing convention rather than a regulated definition."
+    },
+    {
+      "term": "Hydrocolloid patch",
+      "korean": "여드름 패치",
+      "def": "A small adhesive dressing that absorbs fluid from an open blemish and, just as usefully, physically stops you picking at it. A Korean pharmacy staple that went global."
+    },
+    {
+      "term": "Skip-care",
+      "korean": "스킵케어",
+      "def": "The Korean counter-movement to the ten-step routine: fewer, better-chosen products with multiple functions. A response to the excess the export marketing created."
+    },
+    {
+      "term": "Honey skin",
+      "korean": "꿀피부",
+      "def": "Skin with a soft, warm, glowing finish — less mirror-like than glass skin and more attainable. Korean beauty vocabulary distinguishes several finishes English lumps together as 'glowy'."
+    },
+    {
+      "term": "Baby skin",
+      "korean": "아기 피부",
+      "def": "The Korean shorthand for soft, poreless-looking, unlined skin — a compliment and a marketing target in equal measure."
+    },
+    {
+      "term": "Ferment",
+      "korean": "발효",
+      "def": "Culturing an ingredient with micro-organisms before use. Korea's food culture ran on fermentation long before its cosmetics did, and 발효 on a label signals that lineage."
+    },
+    {
+      "term": "Functional cosmetics",
+      "korean": "기능성화장품",
+      "def": "Korea's regulatory tier between ordinary cosmetics and drugs. Products in it may make reviewed claims such as brightening, wrinkle improvement or UV protection."
+    },
+    {
+      "term": "Sun stick",
+      "korean": "선스틱",
+      "def": "Sunscreen in a solid twist-up tube. Convenient for reapplication over makeup, and very easy to under-apply — it needs far more passes than feel sufficient."
+    },
+    {
+      "term": "Toner pad",
+      "korean": "토너패드",
+      "def": "A pre-soaked pad delivering a measured dose of toner or mild exfoliant. One of Korea's most successful format inventions, and easy to over-use if it contains acids."
+    },
+    {
+      "term": "Low pH cleanser",
+      "korean": "약산성 클렌저",
+      "def": "A cleanser formulated near skin's own slightly acidic surface rather than alkaline. The Korean shift away from squeaky-clean foaming washes started here."
+    },
+    {
+      "term": "Purging",
+      "korean": "명현현상",
+      "def": "A temporary increase in breakouts when starting a turnover-accelerating active. Only retinoids and exfoliating acids can cause it, only where you already break out, and only for about four to six weeks."
+    },
+    {
+      "term": "Barrier",
+      "korean": "피부장벽",
+      "def": "The outermost layer of skin and the lipids between its cells, which hold water in and irritants out. Nearly every modern Korean skincare trend is, underneath, about protecting it."
+    },
+    {
+      "term": "Sebaceous filament",
+      "korean": "피지선 필라멘트",
+      "def": "The normal, thread-like structure that channels oil out of a pore. Frequently mistaken for a blackhead, and impossible to remove permanently — it refills because it is meant to."
+    },
+    {
+      "term": "Dewy",
+      "korean": "촉촉",
+      "def": "The hydrated, softly reflective finish Korean routines aim for, as opposed to the matte finish that dominated Western makeup for decades."
+    },
+    {
+      "term": "Olive Young",
+      "korean": "올리브영",
+      "def": "Korea's dominant health-and-beauty retail chain. Its shelves are the closest thing to a live ranking of what Korea is actually buying, which is why its sales are watched as a trend indicator."
+    },
+    {
+      "term": "Cica",
+      "korean": "시카",
+      "def": "Shorthand for Centella asiatica, the soothing botanical behind an entire Korean product category. Named for the centella-derived compounds associated with calming irritated-looking skin."
+    }
+  ],
+  "ask": [
+    {
+      "slug": "how-many-steps-korean-skincare",
+      "q": "How many steps should a Korean skincare routine have?",
+      "answer": "As few as three: cleanser, moisturiser and sunscreen. The ten-step routine was a Western marketing frame rather than a Korean rule — most Koreans use a handful of products daily and add extras occasionally.",
+      "detail": "The genuinely useful idea inside the marketing is layering thin hydration rather than relying on one heavy cream, plus treating sunscreen as non-negotiable. The count itself is arbitrary.",
+      "koreaNote": "The Korean counter-movement is called 스킵케어 (skip-care) — fewer, better-chosen, multi-purpose products."
+    },
+    {
+      "slug": "what-is-sok-geon-jo",
+      "q": "What is 속건조 (inner dryness)?",
+      "answer": "속건조 describes skin that looks and feels oily on the surface while being tight and dehydrated underneath. It is why oily skin still needs hydration, and why stripping it makes things worse.",
+      "detail": "The fix is humectants and barrier support rather than more oil control. Skin that is dehydrated often produces more oil to compensate, which is how the cycle sustains itself.",
+      "koreaNote": "The concept is standard vocabulary in Korean skincare and has no neat English equivalent — 'dehydrated oily skin' is the closest."
+    },
+    {
+      "slug": "why-korean-sunscreen-better",
+      "q": "Why is Korean sunscreen better?",
+      "answer": "Because Korea approves modern UV filters — Uvinul A Plus, Tinosorb S and M among them — that give strong UVA protection in light, non-greasy textures. Some markets, notably the US, have not approved them.",
+      "detail": "It is a regulatory difference, not a chemistry secret. Korea regulates sunscreen as a functional cosmetic with a workable approval path; the US regulates it as an over-the-counter drug, which has made new filters extremely slow to arrive.",
+      "koreaNote": "Korean sunscreens show both SPF for UVB and a PA rating for UVA."
+    },
+    {
+      "slug": "is-korean-skincare-good-for-dark-skin",
+      "q": "Does Korean skincare work for deeper skin tones?",
+      "answer": "The skincare does — hydration, barrier support and soothing actives are not tone-specific. The friction points are mineral sunscreens that leave a cast and a colour-cosmetics shade range that has historically been narrow.",
+      "detail": "For sunscreen, look for organic-filter formulas rather than high-zinc mineral ones, which cast less. Brightening actives such as niacinamide and tranexamic acid are genuinely useful for post-inflammatory hyperpigmentation, which affects deeper tones more persistently.",
+      "koreaNote": "Shade ranges have widened considerably since around 2023, driven partly by international demand."
+    },
+    {
+      "slug": "how-long-until-skincare-works",
+      "q": "How long before Korean skincare shows results?",
+      "answer": "Hydration shows within days. Texture and breakouts take about four to eight weeks. Pigmentation and fine lines take three months or more. Judging anything earlier than its timeframe is the most common reason people abandon products that were working.",
+      "detail": "Skin turnover takes roughly a month, and most actives need several cycles to show their effect. Consistency over three months beats intensity over three weeks in almost every category.",
+      "koreaNote": "Korean routines emphasise steady daily habit over aggressive intervention, which is partly why they suit long timeframes."
+    },
+    {
+      "slug": "can-i-use-korean-and-western-skincare",
+      "q": "Can I mix Korean and Western skincare?",
+      "answer": "Yes. Products do not care where they were made — what matters is the ingredients and the order you apply them. Layer thinnest to thickest, avoid stacking two exfoliating actives, and introduce anything new one at a time.",
+      "detail": "A common and effective combination is Korean hydration layers and sunscreen with a Western prescription retinoid or a well-formulated vitamin C.",
+      "koreaNote": "Korean sunscreen is the single most worthwhile swap for most people, because the texture advantage is real and it makes daily use easier."
+    },
+    {
+      "slug": "is-double-cleansing-necessary",
+      "q": "Do I really need to double cleanse?",
+      "answer": "At night, if you wear sunscreen or makeup — yes. Water-based cleansers cannot break down water-resistant sunscreen, so a single cleanse leaves a film behind. In the morning, one gentle cleanse or just water is plenty.",
+      "detail": "The first cleanse is oil-based and goes on dry skin to dissolve oil-soluble grime. The second is water-based and removes what is left along with sweat and residue.",
+      "koreaNote": "이중세안 (ijung-sean) is the Korean term, and it is treated as routine hygiene rather than an indulgence."
+    },
+    {
+      "slug": "korean-skincare-for-men",
+      "q": "Is Korean skincare different for men?",
+      "answer": "Skin is skin — the actives that work do not change by gender. What differs is context: shaving irritates and mildly exfoliates, male skin tends to be thicker and oilier on average, and men's ranges are usually formulated lighter and unscented.",
+      "detail": "A workable starting routine is a gentle cleanser, a light moisturiser and sunscreen, adding a soothing product if shaving leaves skin reactive.",
+      "koreaNote": "Korea has one of the world's highest rates of men's skincare use, and men's ranges are a mainstream category rather than a niche one."
+    },
+    {
+      "slug": "does-korean-skincare-expire",
+      "q": "How long does Korean skincare last?",
+      "answer": "Unopened and stored sensibly, most Korean cosmetics are given around three years from the manufacturing date. Once opened, follow the PAO symbol — the little open jar marked 6M or 12M — which is what actually applies.",
+      "detail": "Vitamin C and retinoid products degrade fastest and should be replaced on schedule regardless of how much is left. A changed colour, smell or texture overrides any printed date.",
+      "koreaNote": "Korean packaging often shows a manufacturing date marked 제조 rather than an expiry date — a date after 제조 is when it was made."
+    },
+    {
+      "slug": "what-is-a-first-essence",
+      "q": "What is a first essence and do I need one?",
+      "answer": "A first essence is a watery, high-percentage ferment applied straight after cleansing, before anything else. It is a hydration and conditioning step. Pleasant and popular, but genuinely optional.",
+      "detail": "The category began with SK-II's pitera and Korean brands made it affordable. Evidence for ferment filtrates is emerging rather than strong, so treat it as a nice-feeling conditioning layer.",
+      "koreaNote": "In Korean it is 퍼스트 에센스, and it sits before rather than instead of your regular essence or serum."
+    },
+    {
+      "slug": "what-does-cica-mean",
+      "q": "What does cica mean in Korean skincare?",
+      "answer": "Cica is shorthand for Centella asiatica, a botanical used across Korean soothing products. Cica formulas are aimed at the look of redness, irritation and a stressed barrier.",
+      "detail": "The plant supplies several related compounds — madecassoside and asiaticoside among them — which is why some products list those individually rather than the whole extract.",
+      "koreaNote": "시카 (cica) is one of the most recognisable words on Korean packaging, and 진정 (soothing) usually appears alongside it."
+    },
+    {
+      "slug": "can-i-use-vitamin-c-and-retinol",
+      "q": "Can I use vitamin C and retinol together?",
+      "answer": "Not in the same layer, but easily in the same routine — vitamin C in the morning, retinol at night. That split suits both: vitamin C partners with sunscreen, and retinoids are degraded by light.",
+      "detail": "The old warning that they neutralise each other is overstated, but they prefer different pH conditions and stacking them raises irritation for no added benefit.",
+      "koreaNote": "Korean routines separate them naturally, since morning routines are built around sunscreen and evening around treatment."
+    },
+    {
+      "slug": "what-is-glass-skin-routine",
+      "q": "How do you get glass skin?",
+      "answer": "Hydration layered on damp skin, a healthy barrier, gentle regular exfoliation for smoothness, and daily sunscreen. Glass skin is a lighting effect produced by a smooth, well-hydrated surface — not something a single product delivers.",
+      "detail": "In practice: a low-pH cleanser, a hydrating toner pressed in while damp, an essence, a light moisturiser, and sunscreen. Exfoliate once or twice a week, no more.",
+      "koreaNote": "유리 피부 (yuri-pibu) is an aesthetic ideal in Korea, not a health standard — and it photographs better than it lives."
+    },
+    {
+      "slug": "is-korean-skincare-cruelty-free",
+      "q": "Is Korean skincare cruelty-free?",
+      "answer": "Korea has prohibited animal testing for cosmetics, with limited exceptions, so most Korean brands can credibly carry cruelty-free positioning. The complication is export: selling into markets that require animal testing can change a brand's status.",
+      "detail": "Vegan is a separate question from cruelty-free — many Korean formulas contain snail filtrate, propolis, honey or royal jelly, which are animal-derived without involving testing.",
+      "koreaNote": "Vegan certification marks are increasingly common on Korean packaging, particularly from indie brands."
+    },
+    {
+      "slug": "what-is-a-toner-pad",
+      "q": "What is a Korean toner pad?",
+      "answer": "A pre-soaked cotton or embossed pad delivering a measured dose of toner, or of a mild exfoliating or soothing treatment. It removes the guesswork about how much product to use.",
+      "detail": "The important thing is to read what is on the pad. A hydrating pad can be used daily; an AHA or BHA pad used on the same schedule is one of the most common causes of accidental over-exfoliation.",
+      "koreaNote": "토너패드 became one of Korea's biggest format categories in the 2020s, with brands like Abib and Numbuzin leading it."
+    },
+    {
+      "slug": "how-often-exfoliate-korean-routine",
+      "q": "How often should you exfoliate in a Korean routine?",
+      "answer": "Once or twice a week for most people, up to three times for oily and resilient skin. Frequency matters far more than strength — a mild acid used consistently beats a strong one that forces you to stop.",
+      "detail": "Never stack two exfoliating acids, and skip exfoliation entirely on nights you use a retinoid. If skin stings with products it used to tolerate, that is the signal to stop for two to four weeks.",
+      "koreaNote": "Korean peeling gels feel like they exfoliate more than they do — much of the pilling is the gel's own polymer."
+    },
+    {
+      "slug": "difference-essence-serum-ampoule",
+      "q": "What is the difference between essence, serum and ampoule?",
+      "answer": "Essence is the lightest and most hydration-focused, serum is more concentrated and targeted, and ampoule is the most concentrated of the three. The boundaries are marketing convention, not regulated definitions.",
+      "detail": "You do not need all three. Choose by texture and by what the formula actually contains rather than by which word is on the bottle.",
+      "koreaNote": "In Korean these are 에센스, 세럼 and 앰플 — and Korean brands use the terms more loosely than the tidy hierarchy suggests."
+    }
+  ],
+  "hanbang": [
+    {
+      "id": "mugwort-ssuk",
+      "name": "Mugwort (Ssuk)",
+      "hangul": "쑥",
+      "romanization": "ssuk",
+      "respell": "SSOOK",
+      "heritageNote": "Mugwort is embedded in Korean culture beyond medicine — it appears in the Dangun foundation myth, in seasonal foods such as ssuk-tteok, and in the traditional practice of mugwort steam bathing. Traditional Korean medical texts record it among the herbs used for warming and soothing applications.",
+      "modernUse": "In modern K-beauty mugwort extract is used in soothing lines aimed at the look of redness and sensitivity, often in essences, masks and cleansing oils. Cosmetic claims centre on the appearance of calmer, more comfortable skin rather than any medical effect.",
+      "caution": "Mugwort is related to ragweed and other Asteraceae plants. If you have a pollen allergy in that family, patch-test before use."
+    },
+    {
+      "id": "peony",
+      "name": "Peony",
+      "hangul": "작약",
+      "romanization": "jagyak",
+      "respell": "JAH-gyahk",
+      "heritageNote": "Peony root is a long-standing ingredient in East Asian herbal tradition and appears in Korean hanbang formulations. It was historically associated with women's tonics and with formulas intended to be restorative.",
+      "modernUse": "Used in hanbang skincare as a botanical extract in brightening and firming-focused lines, particularly in premium ranges that lean on traditional formulation heritage. Claims concern the appearance of tone and radiance.",
+      "caution": "A botanical extract with limited independent cosmetic evidence. Treat efficacy claims as appearance-based."
+    },
+    {
+      "id": "angelica",
+      "name": "Korean Angelica",
+      "hangul": "당귀",
+      "romanization": "danggwi",
+      "respell": "DAHNG-gwee",
+      "heritageNote": "Danggwi is one of the most frequently used herbs in Korean traditional medicine, appearing across many classical formulations. It has a long association with circulation-related and women's health preparations in the hanbang tradition.",
+      "modernUse": "Appears in hanbang cosmetic blends, usually as one botanical among several rather than as a headline active, in lines marketed for radiance and vitality.",
+      "caution": "Some angelica species contain compounds that can increase sun sensitivity. Use sunscreen — which you should be doing regardless."
+    },
+    {
+      "id": "houttuynia",
+      "name": "Houttuynia (Eoseongcho)",
+      "hangul": "어성초",
+      "romanization": "eoseongcho",
+      "respell": "uh-SUNG-choh",
+      "heritageNote": "Named for its distinctive fishy smell — 어성 means fish smell — houttuynia has a long folk-medicine history in Korea and across East Asia, traditionally used in preparations for skin complaints.",
+      "modernUse": "One of the biggest K-beauty ingredient stories of recent years, driven by brands building entire lines around high-percentage heartleaf extract for blemish-prone and reactive skin.",
+      "caution": "Very well tolerated in general, though as with any botanical, patch-test if your skin reacts easily."
+    },
+    {
+      "id": "sophora",
+      "name": "Sophora Root",
+      "hangul": "고삼",
+      "romanization": "gosam",
+      "respell": "GOH-sahm",
+      "heritageNote": "Gosam, literally 'bitter ginseng', appears in Korean traditional medicine for external preparations. Its bitterness is proverbial, and it was used in washes rather than taken lightly.",
+      "modernUse": "Used in scalp and blemish-focused Korean formulas as a traditional botanical extract, generally in combination with other herbs.",
+      "caution": "Independent cosmetic evidence is limited. Treat as a heritage botanical rather than a proven active."
+    },
+    {
+      "id": "poria",
+      "name": "Poria (Bokryeong)",
+      "hangul": "복령",
+      "romanization": "bongnyeong",
+      "respell": "BONG-nyung",
+      "heritageNote": "A fungus that grows on pine roots, poria is a classic component of Korean hanbang formulations and appears in the Donguibogam among preparations associated with balance and calm.",
+      "modernUse": "Used in premium hanbang skincare as part of traditional herbal complexes, often in lines that name their formulation lineage explicitly.",
+      "caution": "Used as one botanical within a blend; there is little standalone cosmetic evidence."
+    },
+    {
+      "id": "schisandra",
+      "name": "Schisandra (Omija)",
+      "hangul": "오미자",
+      "romanization": "omija",
+      "respell": "oh-MEE-jah",
+      "heritageNote": "Omija means 'five-flavour fruit' — sweet, sour, bitter, pungent and salty at once — and it is drunk as a tea across Korea. It appears in traditional preparations associated with vitality.",
+      "modernUse": "Used in antioxidant-positioned Korean formulas and in hanbang lines, valued for its polyphenol content and its cultural recognisability.",
+      "caution": "A mild antioxidant extract; cosmetic evidence is limited."
+    },
+    {
+      "id": "lotus",
+      "name": "Lotus",
+      "hangul": "연꽃",
+      "romanization": "yeonkkot",
+      "respell": "YUHN-kkot",
+      "heritageNote": "The lotus carries strong Buddhist symbolism in Korea and appears in temple cuisine and traditional preparations. Its association with purity made it a natural fit for beauty formulations.",
+      "modernUse": "Used in hydrating and soothing hanbang formulas, frequently in temple-inspired or heritage-positioned lines.",
+      "caution": "Primarily a heritage and sensory ingredient. Cosmetic evidence is limited."
+    },
+    {
+      "id": "cnidium",
+      "name": "Cnidium (Cheongung)",
+      "hangul": "천궁",
+      "romanization": "cheongung",
+      "respell": "CHUN-goong",
+      "heritageNote": "Cheongung is a classic hanbang herb, frequently paired with danggwi in traditional Korean formulations associated with circulation.",
+      "modernUse": "Appears within traditional herbal complexes in premium Korean skincare, especially in lines that reference classical formulations by name.",
+      "caution": "Used as part of a blend; little standalone cosmetic evidence exists."
+    },
+    {
+      "id": "rehmannia",
+      "name": "Rehmannia (Jihwang)",
+      "hangul": "지황",
+      "romanization": "jihwang",
+      "respell": "JEE-hwahng",
+      "heritageNote": "Jihwang is among the most-used roots in Korean traditional medicine and appears in the Donguibogam. Preparation method matters in the tradition — raw, dried and steamed forms are treated as distinct.",
+      "modernUse": "Used in luxury hanbang skincare as part of heritage herbal complexes, particularly in ranges aimed at mature skin.",
+      "caution": "A heritage botanical within blends; independent cosmetic evidence is limited."
+    }
+  ]
+}
