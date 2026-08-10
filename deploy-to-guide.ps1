@@ -57,7 +57,15 @@ $ASSET_FILES = @(
     "assets/kbeauty-content.fr.json",
     "assets/kbeauty-content.de.json",
     "assets/kbeauty-content.pt.json",
-    "assets/kbeauty-content.id.json"
+    "assets/kbeauty-content.id.json",
+    # ar/hi/ru/vi/th expansion. modules/kbeauty.js already lists all 14 codes in
+    # _SUPPORTED and fetches assets/kbeauty-content.<lang>.json at runtime, so a
+    # file missing here 404s and the overlay silently falls back to English.
+    "assets/kbeauty-content.ar.json",
+    "assets/kbeauty-content.hi.json",
+    "assets/kbeauty-content.ru.json",
+    "assets/kbeauty-content.vi.json",
+    "assets/kbeauty-content.th.json"
 )
 
 $MESSAGE_FILES = @(
@@ -70,7 +78,13 @@ $MESSAGE_FILES = @(
     "messages/fr.json",
     "messages/de.json",
     "messages/pt.json",
-    "messages/id.json"
+    "messages/id.json",
+    # ar/hi/ru/vi/th expansion (14 total)
+    "messages/ar.json",
+    "messages/hi.json",
+    "messages/ru.json",
+    "messages/vi.json",
+    "messages/th.json"
 )
 
 $ICON_FILES = @(
@@ -93,7 +107,7 @@ ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" `
 # typically 20-50x faster. The local tree mirrors the remote /guide layout,
 # so every path extracts 1:1 under $REMOTE_DIR. tar overwrites in place
 # (same as scp); it never deletes remote-only files.
-$SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "kpop", "ja", "zh", "zh-hant", "es", "ko", "fr", "de", "pt", "id", "tools", "embed", "food")
+$SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "kpop", "ja", "zh", "zh-hant", "es", "ko", "fr", "de", "pt", "id", "ar", "hi", "ru", "vi", "th", "tools", "embed", "food")
 $SEO_ROOT_FILES = @("explore.html", "sitemap.xml", "robots.txt", "llms.txt", "blog/feed.xml")
 $KP_TXT = @(Get-ChildItem -Path $LOCAL_DIR -Filter "kp*.txt" -File | ForEach-Object { $_.Name })
 # Runtime data files fetched by client modules + GEO text-twin (built to repo root -> /guide/).

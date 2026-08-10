@@ -4,7 +4,8 @@
 
    Self-contained content translations (NOT the 14-language messages/*.json
    UI bundle). ja / zh / es are authored inline; ko / fr / de / pt / id
-   complete the 9-language set. en is the base/default.
+   complete the original 9; ar / hi / ru / vi / th extend the K-pop clusters
+   only (the travel generators stay at 9). en is the base/default.
 
    Only objective, verifiable framing strings live here — every artist
    fact (debut date, members, agency, fandom) comes from the frozen
@@ -12,8 +13,23 @@
 
    Each language object provides plain strings and a few small template
    functions (n = agency display name, c = artist count).
+
+   The count templates are deliberately NOT parallel across languages: an
+   `c === 1` ternary only describes English. Arabic governs a counted noun
+   five different ways, so ar inverts to noun-first ("عدد الفرق: 5") and the
+   numeral never governs anything; ru needs CLDR one/few/many; hi / vi / th
+   have no grammatical number, so a bare noun is correct at any count.
    ══════════════════════════════════════════════════════════════════ */
 'use strict';
+
+// ru counted nouns take three forms and 21/101 pattern with 1, not with 5 —
+// a two-branch ternary is wrong for most counts, so the ru chips share this.
+const ruPlural = (c, [one, few, many]) => {
+  const t = c % 10, h = c % 100;
+  if (t === 1 && h !== 11) return one;
+  if (t >= 2 && t <= 4 && (h < 12 || h > 14)) return few;
+  return many;
+};
 
 const M = {
   en: {
@@ -321,6 +337,182 @@ const M = {
     ],
     crumbHome: 'K-pop',
     crumbAll: 'Agensi',
+  },
+  ar: {
+    titleSuffix: 'الفنانون والفرق — الدليل الكامل للقائمة',
+    h1: n => `${n}: فنانو وفرق K-Pop`,
+    desc: (n, c) => `دليل كامل لفناني وفرق K-Pop لدى شركة ${n} على KoreaPlus — عدد الفرق والفنانين: ${c}، مع تواريخ الظهور الأول والأعضاء وأسماء الفاندوم والقنوات الرسمية.`,
+    lead: n => `كل ما تحتاج معرفته عن فناني وفرق K-Pop لدى شركة ${n} — تسلسل الظهور الأول، وتشكيلات الأعضاء، والفاندوم، وأين تتابعهم رسميًا.`,
+    rosterH: 'الفنانون والفرق',
+    groupsH: 'الفرق',
+    soloistsH: 'الفنانون المنفردون',
+    factsH: 'نظرة سريعة',
+    // Noun first, numeral after: Arabic would otherwise need a different
+    // noun form for 1, 2, 3–10, 11–99 and 100+.
+    factActs: c => `عدد الفرق والفنانين على KoreaPlus: ${c}`,
+    factGroups: c => `عدد الفرق: ${c}`,
+    factSolo: c => `عدد الفنانين المنفردين: ${c}`,
+    debut: 'الظهور الأول',
+    members: 'الأعضاء',
+    fandom: 'الفاندوم',
+    lightstick: 'العصا الضوئية',
+    type: 'النوع',
+    group: 'فرقة',
+    soloist: 'فنان منفرد',
+    girl: 'فرقة فتيات',
+    boy: 'فرقة فتيان',
+    coGuide: 'عرض الملف الشخصي',
+    faqH: 'الأسئلة الشائعة',
+    relH: 'استكشف المزيد من K-Pop',
+    relAll: 'كل شركات ترفيه K-Pop',
+    relHub: 'مركز K-Pop',
+    note: 'تعرض القائمة ما نقدّمه على KoreaPlus من فنانين وفرق، وقد لا تشمل كل الأسماء التابعة للشركة. المعلومات مأخوذة من سجلات الظهور الأول الرسمية.',
+    faq: (n, names) => [
+      [`ما هي فرق K-Pop التابعة لشركة ${n}؟`, `نقدّم على KoreaPlus ${names}. تعرض القائمة أدناه تاريخ الظهور الأول والأعضاء والفاندوم لكل فرقة أو فنان.`],
+      [`كيف جُمعت شركات HYBE الفرعية؟`, `تُجمَع الشركات الفرعية مثل ADOR وBIGHIT MUSIC وPLEDIS وBELIFT LAB وSource Music تحت شركتها الأم HYBE في هذا الدليل.`],
+    ],
+    crumbHome: 'K-Pop',
+    crumbAll: 'شركات الترفيه',
+  },
+  hi: {
+    titleSuffix: 'आर्टिस्ट और ग्रुप — पूरी लिस्ट गाइड',
+    h1: n => `${n}: K-pop आर्टिस्ट और ग्रुप`,
+    desc: (n, c) => `KoreaPlus पर ${n} के ${c} K-pop आर्टिस्ट और ग्रुप की पूरी गाइड — डेब्यू डेट, मेंबर, फैनडम नाम और ऑफिशियल चैनल।`,
+    lead: n => `${n} के K-pop आर्टिस्ट और ग्रुप के बारे में सब कुछ — डेब्यू टाइमलाइन, लाइन-अप, फैनडम और उन्हें ऑफिशियली कहाँ फॉलो करें।`,
+    rosterH: 'आर्टिस्ट और ग्रुप',
+    groupsH: 'ग्रुप',
+    soloistsH: 'सोलो आर्टिस्ट',
+    factsH: 'एक नज़र में',
+    // Hindi loanwords stay invariant in the direct case — 1 ग्रुप, 12 ग्रुप.
+    factActs: c => `KoreaPlus पर ${c} आर्टिस्ट और ग्रुप`,
+    factGroups: c => `${c} ग्रुप`,
+    factSolo: c => `${c} सोलो आर्टिस्ट`,
+    debut: 'डेब्यू',
+    members: 'मेंबर',
+    fandom: 'फैनडम',
+    lightstick: 'लाइटस्टिक',
+    type: 'प्रकार',
+    group: 'ग्रुप',
+    soloist: 'सोलो आर्टिस्ट',
+    girl: 'गर्ल ग्रुप',
+    boy: 'बॉय ग्रुप',
+    coGuide: 'प्रोफाइल देखें',
+    faqH: 'अक्सर पूछे जाने वाले सवाल',
+    relH: 'और K-pop एक्सप्लोर करें',
+    relAll: 'सभी एजेंसियाँ',
+    relHub: 'K-pop हब',
+    note: 'इस लिस्ट में KoreaPlus पर फीचर किए गए आर्टिस्ट शामिल हैं — ज़रूरी नहीं कि एजेंसी का हर आर्टिस्ट इसमें हो। सारे तथ्य ऑफिशियल डेब्यू रिकॉर्ड से लिए गए हैं।',
+    faq: (n, names) => [
+      [`${n} के अंडर कौन-से K-pop ग्रुप हैं?`, `KoreaPlus पर हम ${names} को फीचर करते हैं। नीचे दी गई लिस्ट में हर आर्टिस्ट की डेब्यू डेट, मेंबर और फैनडम दिए गए हैं।`],
+      [`HYBE के लेबल कैसे ग्रुप किए गए हैं?`, `ADOR, BIGHIT MUSIC, PLEDIS, BELIFT LAB और Source Music जैसे सब-लेबल इस गाइड में अपनी पैरेंट कंपनी HYBE के अंदर रखे गए हैं।`],
+    ],
+    crumbHome: 'K-pop',
+    crumbAll: 'एजेंसियाँ',
+  },
+  ru: {
+    titleSuffix: 'артисты и группы — полный гид по составу',
+    h1: n => `${n}: артисты и группы K-pop`,
+    desc: (n, c) => `Полный гид по артистам K-pop в агентстве ${n} на KoreaPlus: ${c} ${ruPlural(c, ['артист', 'артиста', 'артистов'])} — даты дебюта, составы, названия фандомов и официальные каналы.`,
+    lead: n => `Всё об артистах и группах K-pop, которыми занимается ${n}: хронология дебютов, составы, фандомы и официальные каналы, где за ними следить.`,
+    rosterH: 'Артисты и группы',
+    groupsH: 'Группы',
+    soloistsH: 'Сольные артисты',
+    factsH: 'Главное',
+    factActs: c => `${c} ${ruPlural(c, ['артист', 'артиста', 'артистов'])} на KoreaPlus`,
+    factGroups: c => `${c} ${ruPlural(c, ['группа', 'группы', 'групп'])}`,
+    factSolo: c => `${c} ${ruPlural(c, ['сольный артист', 'сольных артиста', 'сольных артистов'])}`,
+    debut: 'Дебют',
+    members: 'Участники',
+    fandom: 'Фандом',
+    lightstick: 'Лайтстик',
+    type: 'Тип',
+    group: 'Группа',
+    soloist: 'Сольный артист',
+    girl: 'Гёрл-группа',
+    boy: 'Бой-группа',
+    coGuide: 'Открыть профиль',
+    faqH: 'Частые вопросы',
+    relH: 'Ещё о K-pop',
+    relAll: 'Все агентства',
+    relHub: 'Хаб K-pop',
+    note: 'В списке — артисты, представленные на KoreaPlus, поэтому в нём могут быть не все артисты лейбла. Данные взяты из официальных записей о дебютах.',
+    faq: (n, names) => [
+      [`Какие группы K-pop входят в ${n}?`, `На KoreaPlus мы рассказываем о ${names}. В списке ниже — дата дебюта, состав и фандом каждого артиста.`],
+      [`Как сгруппированы лейблы HYBE?`, `Сублейблы ADOR, BIGHIT MUSIC, PLEDIS, BELIFT LAB и Source Music в этом гиде объединены под их материнской компанией HYBE.`],
+    ],
+    crumbHome: 'K-pop',
+    crumbAll: 'Агентства',
+  },
+  vi: {
+    titleSuffix: 'nghệ sĩ và nhóm nhạc — danh sách đầy đủ',
+    h1: n => `${n}: nghệ sĩ và nhóm nhạc K-pop`,
+    desc: (n, c) => `Cẩm nang đầy đủ về ${c} nghệ sĩ K-pop thuộc ${n} trên KoreaPlus: ngày debut, thành viên, tên fandom và kênh chính thức.`,
+    lead: n => `Tất cả về các nghệ sĩ và nhóm nhạc K-pop do ${n} quản lý — dòng thời gian debut, đội hình, fandom và nơi theo dõi họ chính thức.`,
+    rosterH: 'Nghệ sĩ và nhóm nhạc',
+    groupsH: 'Nhóm nhạc',
+    soloistsH: 'Nghệ sĩ solo',
+    factsH: 'Thông tin nhanh',
+    // Vietnamese has no grammatical number — the bare noun is correct at any count.
+    factActs: c => `${c} nghệ sĩ và nhóm nhạc trên KoreaPlus`,
+    factGroups: c => `${c} nhóm nhạc`,
+    factSolo: c => `${c} nghệ sĩ solo`,
+    debut: 'Ngày debut',
+    members: 'Thành viên',
+    fandom: 'Fandom',
+    lightstick: 'Lightstick',
+    type: 'Loại',
+    group: 'Nhóm nhạc',
+    soloist: 'Nghệ sĩ solo',
+    girl: 'Nhóm nữ',
+    boy: 'Nhóm nam',
+    coGuide: 'Xem hồ sơ',
+    faqH: 'Câu hỏi thường gặp',
+    relH: 'Khám phá thêm về K-pop',
+    relAll: 'Tất cả công ty chủ quản',
+    relHub: 'Chuyên trang K-pop',
+    note: 'Danh sách gồm những nghệ sĩ được giới thiệu trên KoreaPlus và có thể không phải toàn bộ nghệ sĩ của công ty. Thông tin lấy từ hồ sơ debut chính thức.',
+    faq: (n, names) => [
+      [`Những nhóm nhạc K-pop nào thuộc ${n}?`, `Trên KoreaPlus, chúng tôi giới thiệu ${names}. Danh sách bên dưới cho biết ngày debut, thành viên và fandom của từng nghệ sĩ.`],
+      [`Các công ty con của HYBE được gộp thế nào?`, `Những công ty con như ADOR, BIGHIT MUSIC, PLEDIS, BELIFT LAB và Source Music được gộp vào công ty mẹ HYBE trong cẩm nang này.`],
+    ],
+    crumbHome: 'K-pop',
+    crumbAll: 'Công ty chủ quản',
+  },
+  th: {
+    titleSuffix: 'ศิลปินและวง — คู่มือฉบับสมบูรณ์',
+    h1: n => `${n}: ศิลปินและวง K-pop`,
+    desc: (n, c) => `คู่มือครบถ้วนของศิลปิน K-pop ในสังกัด ${n} บน KoreaPlus — ${c} ราย พร้อมวันเดบิวต์ สมาชิก ชื่อแฟนด้อม และช่องทางติดตามอย่างเป็นทางการ`,
+    lead: n => `ทุกเรื่องเกี่ยวกับศิลปินและวง K-pop ในสังกัด ${n} — ไทม์ไลน์การเดบิวต์ รายชื่อสมาชิก แฟนด้อม และช่องทางติดตามอย่างเป็นทางการ`,
+    rosterH: 'ศิลปินและวง',
+    groupsH: 'วง',
+    soloistsH: 'ศิลปินเดี่ยว',
+    factsH: 'ข้อมูลสรุป',
+    // Thai counts as noun + numeral + classifier, identical at every count:
+    // ราย for a mixed roster, วง for bands, คน for people.
+    factActs: c => `ศิลปินและวงบน KoreaPlus ${c} ราย`,
+    factGroups: c => `${c} วง`,
+    factSolo: c => `ศิลปินเดี่ยว ${c} คน`,
+    debut: 'เดบิวต์',
+    members: 'สมาชิก',
+    fandom: 'แฟนด้อม',
+    lightstick: 'แท่งไฟ',
+    type: 'ประเภท',
+    group: 'วง',
+    soloist: 'ศิลปินเดี่ยว',
+    girl: 'เกิร์ลกรุ๊ป',
+    boy: 'บอยกรุ๊ป',
+    coGuide: 'ดูโปรไฟล์',
+    faqH: 'คำถามที่พบบ่อย',
+    relH: 'สำรวจ K-pop เพิ่มเติม',
+    relAll: 'ค่ายเพลงทั้งหมด',
+    relHub: 'ศูนย์รวม K-pop',
+    note: 'รายชื่อนี้คือศิลปินที่ KoreaPlus นำเสนอ และอาจไม่ใช่ศิลปินทั้งหมดของค่าย ข้อมูลอ้างอิงจากบันทึกการเดบิวต์อย่างเป็นทางการ',
+    faq: (n, names) => [
+      [`วง K-pop ในสังกัด ${n} มีวงไหนบ้าง?`, `บน KoreaPlus เรานำเสนอ ${names} รายการด้านล่างแสดงวันเดบิวต์ สมาชิก และแฟนด้อมของแต่ละราย`],
+      [`ค่ายในเครือ HYBE ถูกจัดกลุ่มอย่างไร?`, `ค่ายย่อยอย่าง ADOR, BIGHIT MUSIC, PLEDIS, BELIFT LAB และ Source Music ถูกจัดรวมไว้ใต้บริษัทแม่ HYBE ในคู่มือนี้`],
+    ],
+    crumbHome: 'K-pop',
+    crumbAll: 'ค่ายเพลง',
   },
 };
 

@@ -3,7 +3,7 @@
 
    Generates one index page + one page per group that has a VERIFIED official
    lightstick name in ENRICH (kpop-enrich.js → KPOP_ENRICH[id].lightstick), in
-   all 9 channel languages. K-pop channel (homeHref:'/kpop').
+   every channel language that has strings. K-pop channel (homeHref:'/kpop').
 
    FACTS POLICY (날조 0): the only group-specific claims are the lightstick name
    and the fandom name — both pulled straight from the frozen, verified
@@ -25,7 +25,18 @@ module.exports = function (ctx) {
   const ROSTER = ctx.ROSTER || [];
   const ENRICH = ctx.ENRICH || {};
 
-  const LANGS = require("./seo-langs.cjs");
+  // The K-pop channel rolls out locales ahead of the rest of the site, so it
+  // has its own list. Tolerate its absence: this cluster must keep building
+  // while that file is being introduced.
+  let CHANNEL_LANGS;
+  try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+  catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
+
+  // Renderable languages = those with a complete string set. A locale listed
+  // upstream before its translations land would otherwise publish English prose
+  // under its own hreflang. altsFor() reads the same constant, so an advertised
+  // alternate always has a page behind it.
+  const LANGS = CHANNEL_LANGS.filter(l => L10N_STR[l]);
   const ORIGIN = 'https://koreaplus-lifes.com';
   const KPOP_HOME = '/kpop';
   const KPOP_BRAND = '🎤 Korea<span>Plus</span>';
@@ -53,16 +64,20 @@ module.exports = function (ctx) {
   const GROUP_BY_ID = {};
   GROUPS.forEach(g => { GROUP_BY_ID[g.id] = g; });
 
-  // URL helper — honors the L10N dir convention; en has no dir prefix.
+  // URL helper — honors the L10N dir convention; en has no dir prefix. A
+  // missing dir falls back to the bare code, never to '': '' is the English
+  // path, so the localized page would overwrite the English one and both
+  // would claim the same <loc>.
   function pageUrl(pathLeaf, lang) {
-    const dir = lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : '');
+    const dir = lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : lang + '/');
     return `${BASEP}${dir}${pathLeaf}.html`;
   }
   const indexPath = 'kpop-lightsticks-list';
   const groupLeaf = (id) => `kpop-lightstick-${id}`;
 
-  // Languages we can actually render (we have full string coverage for all 9).
-  const L = (lang) => L10N_STR[lang] || L10N_STR.en;
+  // Strings for one language. No English fallback: the page builders gate on
+  // this and emit nothing rather than English text under a foreign hreflang.
+  const L = (lang) => L10N_STR[lang];
 
   // Alternates cluster for a given path-leaf builder (all langs we render).
   function altsFor(leafFn) {
@@ -93,6 +108,7 @@ module.exports = function (ctx) {
   // ── Index page ──────────────────────────────────────────────────────────
   function buildIndex(lang) {
     const t = L(lang);
+    if (!t) return null;
     const url = pageUrl(indexPath, lang);
     const alts = altsFor(indexPath);
 
@@ -145,6 +161,7 @@ ${cards}
   // ── Group page ──────────────────────────────────────────────────────────
   function buildGroup(g, lang) {
     const t = L(lang);
+    if (!t) return null;
     const url = pageUrl(groupLeaf(g.id), lang);
     const alts = altsFor(groupLeaf(g.id));
 
@@ -243,8 +260,12 @@ ${factBox}
   function urls() {
     const out = [];
     LANGS.forEach(lang => {
-      out.push({ lang, url: buildIndex(lang) });
-      GROUPS.forEach(g => { out.push({ lang, url: buildGroup(g, lang) }); });
+      const idx = buildIndex(lang);
+      if (idx) out.push({ lang, url: idx });
+      GROUPS.forEach(g => {
+        const u = buildGroup(g, lang);
+        if (u) out.push({ lang, url: u });
+      });
     });
     return out;
   }

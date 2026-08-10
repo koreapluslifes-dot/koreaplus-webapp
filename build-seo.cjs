@@ -19,11 +19,15 @@ const vm = require('vm');
 // assembled just before the build loop. See `const CTX = {...}` below.
 const __ld = require('./modules/seo-ld.cjs');
 const __derive = require('./modules/seo-derive.cjs');
+const __kpm = require('./modules/seo-kpop-media.cjs');
 
 const ORIGIN = 'https://koreaplus-lifes.com';
 const BASEP = '/guide/';
 const OUT = __dirname;
 const TODAY = new Date().toISOString().slice(0, 10);
+// Release dates are Korean dates; comparing them against a UTC "today" marks a
+// release as upcoming for nine hours after it is already out.
+const TODAY_KST = new Date(Date.now() + 9 * 3600_000).toISOString().slice(0, 10);
 
 // ── Load data ───────────────────────────────────────────────────────
 function loadData() {
@@ -58,6 +62,16 @@ try { KPOP_ROSTER = require('./kpop-data.js').KPOP_ROSTER || []; } catch { /* ro
 // CTX.ENRICH for the generated-content modules. Optional — build works without.
 let KPOP_ENRICH = {};
 try { const ec = { window: {} }; vm.createContext(ec); vm.runInContext(fs.readFileSync(path.join(OUT, 'kpop-enrich.js'), 'utf8'), ec); KPOP_ENRICH = ec.window.KPOP_ENRICH || {}; } catch { /* none yet */ }
+// K-Pop build-time snapshots — the same two files the hub loads at runtime, so
+// generated pages and the SPA never disagree about a release date or a photo.
+//   kpop-discog.js → { "<id>": { artistId, artistName, asOf, albums:[{title,date,year,art}] } }
+//   kpop-images.js → { "<id>": { src, artist, license, page } }  ← licence-verified
+// Regenerate with tools/gen-kpop-{discog,images}.cjs. Optional: absent → the
+// discography sections and photos simply don't render.
+let KPOP_DISCOG = {};
+try { const dc = { window: {} }; vm.createContext(dc); vm.runInContext(fs.readFileSync(path.join(OUT, 'kpop-discog.js'), 'utf8'), dc); KPOP_DISCOG = dc.window.KPOP_DISCOG || {}; } catch { /* none yet */ }
+let KPOP_IMAGES = {};
+try { const ic = { window: {} }; vm.createContext(ic); vm.runInContext(fs.readFileSync(path.join(OUT, 'kpop-images.js'), 'utf8'), ic); KPOP_IMAGES = ic.window.KPOP_IMAGES || {}; } catch { /* none yet */ }
 // Per-city Unsplash photos (element 5 image SEO). { City: { raw, alt, by, byUrl, link } }
 // From prefetch-images.cjs (key never stored here). Hotlinked from the Unsplash
 // CDN with photographer attribution per Unsplash API guidelines.
@@ -74,7 +88,14 @@ const slug = s => String(s).toLowerCase()
 const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const enc = s => encodeURIComponent(s);
-const jsonld = obj => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
+// JSON.stringify's output lands raw inside a <script> element, so any literal
+// "</script" in the data would close it early and spill the rest of the schema
+// into the document. Album titles come from the Apple snapshot and already carry
+// angle brackets ("<HELLO MONSTERS>"), so this is one release title away from
+// breaking every profile and year page for that act. \u-escaping the three
+// characters is still valid JSON and parses to the identical object.
+const _LDESC = { '<': '\\u003c', '>': '\\u003e', '&': '\\u0026' };
+const jsonld = obj => `<script type="application/ld+json">${JSON.stringify(obj).replace(/[<>&]/g, c => _LDESC[c])}</script>`;
 const cityImg = c => CITY_IMAGES[c] || null;
 // Wikimedia Commons thumbnails are already sized (~1280px) and ignore Unsplash-style
 // query params — pass them through unchanged; only Unsplash URLs get the resize query.
@@ -96,10 +117,27 @@ function heroFigure(im, label) {
     `<img src="${esc(imgUrl(im.raw, 1000, 480))}" alt="${esc(alt)}" width="1000" height="480" loading="eager" fetchpriority="high" style="width:100%;height:auto;display:block;aspect-ratio:25/12;object-fit:cover">` +
     `<figcaption style="font-size:11px;color:var(--text3,#8a93a0);padding:6px 10px">${photoCredit(im)}</figcaption></figure>`;
 }
+// Write to a sibling temp file and rename over the target instead of truncating
+// it in place. Two reasons, both real here:
+//   * On Windows, truncating a file that some other process has memory-mapped
+//     fails with ERROR_USER_MAPPED_FILE, which libuv surfaces as an opaque
+//     `UNKNOWN (-4094)` and which aborted this build mid-run. Rename replaces
+//     the directory entry and is unaffected.
+//   * A rename is atomic, so a reader (the other session, a dev server, a
+//     half-finished run) never sees a partially written page.
 const writePage = (rel, html) => {
   const fp = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(fp), { recursive: true });
-  fs.writeFileSync(fp, html);
+  const tmp = fp + '.tmp' + process.pid;
+  // The write is inside the try too: a crash there (ENOSPC, EPERM) otherwise
+  // leaves the partial *.tmp<pid> behind, and deploy tars the whole tree.
+  try {
+    fs.writeFileSync(tmp, html);
+    fs.renameSync(tmp, fp);
+  } catch (e) {
+    try { fs.unlinkSync(tmp); } catch { /* best effort */ }
+    throw e;
+  }
 };
 
 const CAT_META = {
@@ -405,6 +443,14 @@ const CITY_GUIDE_LANGS = ['ja', 'zh', 'es', 'ko', 'fr', 'de', 'pt', 'id'];
 // per-language verified out-of-band. Supersedes the old minimal {dir, visa.h1} stubs so
 // the month/visa builders gain 5 real languages (city guides already used dir + visa.h1).
 Object.assign(L10N, require('./seo-l10n-extra.js'));
+// K-pop-only languages (ar/hi/ru/vi/th). Derived from the channel list rather
+// than repeated, so the two can never disagree about which codes are extra.
+const KPOP_ONLY_LANGS = require('./modules/seo-langs-kpop.cjs').filter(l => l !== 'en' && !LOCALES.includes(l));
+// Dir-only L10N stubs. The K-pop modules build every URL from L10N[lang].dir and
+// two of them refuse to emit a language that has none — but these codes must NOT
+// join LOCALES/CITY_GUIDE_LANGS: buildMonthL10n/buildVisaL10n read L.tw/L.months/
+// L.visa unguarded and would throw. kpopOnly marks the stub for readers.
+for (const l of KPOP_ONLY_LANGS) L10N[l] = { dir: l, kpopOnly: true };
 
 // ── Blog posts (EN) — long-tail, high-intent queries ────────────────
 const BLOG = [
@@ -621,6 +667,11 @@ const TABBAR = {
   de: ['Start', 'Entdecken', 'Suche', 'Planen', 'Merkliste'],
   pt: ['Início', 'Explorar', 'Buscar', 'Planejar', 'Salvos'],
   id: ['Beranda', 'Jelajahi', 'Cari', 'Rencana', 'Disimpan'],
+  ar: ['الرئيسية', 'استكشف', 'بحث', 'الخطة', 'المحفوظات'],
+  hi: ['होम', 'एक्सप्लोर', 'खोज', 'प्लान', 'सेव'],
+  ru: ['Главная', 'Обзор', 'Поиск', 'Маршрут', 'Избранное'],
+  vi: ['Trang chủ', 'Khám phá', 'Tìm kiếm', 'Lịch trình', 'Đã lưu'],
+  th: ['หน้าแรก', 'สำรวจ', 'ค้นหา', 'แผนเที่ยว', 'บันทึกไว้'],
 };
 // ── Localized ARIA / chrome strings (S19) — 14 languages, EN fallback.
 // Keys: skip=skip-to-content link, nav=main nav aria-label, top=back-to-top.
@@ -699,12 +750,26 @@ function primaryNav(lang) {
 // ── Master template ─────────────────────────────────────────────────
 // lang: page language code. alts: [{lang,url}] other-language versions
 // (hreflang cluster; x-default points at the English URL).
-const OG_LOCALE = { en:'en_US', ko:'ko_KR', ja:'ja_JP', zh:'zh_CN', es:'es_ES', fr:'fr_FR', de:'de_DE', pt:'pt_BR', id:'id_ID' };
+// Missing entries are not cosmetic: a lang with no row declares og:locale=en_US,
+// and the alternate filter below drops it from EVERY other language's
+// og:locale:alternate cluster. Values match build-kbeauty-pages.cjs.
+const OG_LOCALE = { en:'en_US', ko:'ko_KR', ja:'ja_JP', zh:'zh_CN', es:'es_ES', fr:'fr_FR', de:'de_DE', pt:'pt_BR', id:'id_ID', ar:'ar_AR', hi:'hi_IN', ru:'ru_RU', vi:'vi_VN', th:'th_TH' };
+// Scripts written right-to-left get dir on <html> (precedent: build-kbeauty-pages.cjs).
+const RTL_LANGS = new Set(['ar']);
+// Inter ships no Arabic, Devanagari or Thai glyphs, so those three need a script
+// font or the page falls out of the type system entirely. ru and vi are covered
+// by Inter (Cyrillic + Latin Extended) and deliberately have no entry.
+const SCRIPT_FONT = { ko: 'Noto+Sans+KR:wght@400;700', ar: 'Noto+Sans+Arabic:wght@400;700', hi: 'Noto+Sans+Devanagari:wght@400;700', th: 'Noto+Sans+Thai:wght@400;700' };
+// Parking the skip link off-canvas at left:-9999px is invisible in LTR but is
+// ~9999px of REAL horizontal scroll under dir="rtl" — K-Beauty shipped that bug
+// on every Arabic page and moved to clip-rect, which is direction-agnostic.
+const SKIP_OFF = 'position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0';
+const SKIP_ON = 'position:fixed;top:0;inset-inline-start:0;width:auto;height:auto;margin:0;padding:10px 16px;overflow:visible;clip:auto;clip-path:none;white-space:nowrap;z-index:999;background:#0c1829;color:#fff;border-radius:0 0 8px 0';
 
 // ── Auto Table of Contents (traffic: SERP "jump to" anchors + dwell time) ──
 // Adds stable ids to every <h2> and prepends a jump-link nav when a page has
 // enough sections. Strips emoji/tags from the visible link text.
-const TOC_H = { en: 'On this page', ko: '목차', ja: '目次', zh: '目录', es: 'En esta página', fr: 'Sur cette page', de: 'Auf dieser Seite', pt: 'Nesta página', id: 'Di halaman ini' };
+const TOC_H = { en: 'On this page', ko: '목차', ja: '目次', zh: '目录', es: 'En esta página', fr: 'Sur cette page', de: 'Auf dieser Seite', pt: 'Nesta página', id: 'Di halaman ini', ar: 'في هذه الصفحة', hi: 'इस पेज पर', ru: 'Содержание', vi: 'Trong bài này', th: 'สารบัญ' };
 function injectToc(body, lang) {
   const heads = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)];
   if (heads.length < 3) return body;
@@ -730,8 +795,10 @@ const ORG_LD = {
   '@context': 'https://schema.org', '@type': 'Organization', '@id': ORIGIN + '/#org',
   name: 'KoreaPlus', alternateName: 'KoreaPlus-Lifes', url: ORIGIN + BASEP,
   logo: { '@type': 'ImageObject', url: ORIGIN + '/guide/icons/kplus.svg' },
-  description: 'Independent expert travel guide to South Korea for international visitors — itineraries, city guides, food, K-culture, visa help and a free AI trip planner, in 9 languages.',
-  knowsLanguage: ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'],
+  // Two counts, because they really are different: the travel guides localize
+  // into 9 languages, the K-pop channel into 14. One number would be wrong.
+  description: 'Independent expert travel guide to South Korea for international visitors — itineraries, city guides, food, K-culture, visa help and a free AI trip planner. Travel guides in 9 languages; K-Pop guides in 14.',
+  knowsLanguage: ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id', 'ar', 'hi', 'ru', 'vi', 'th'],
   areaServed: { '@type': 'Country', name: 'South Korea' },
 };
 const siteLD = lang => ({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': ORIGIN + '/#website', name: 'KoreaPlus', url: ORIGIN + BASEP, inLanguage: lang, publisher: { '@id': ORIGIN + '/#org' } });
@@ -746,6 +813,11 @@ const TRUST = {
   de: { by: 'KoreaPlus-Redaktion', upd: 'Aktualisiert', rev: 'Geprüft für 2026' },
   pt: { by: 'Equipe editorial KoreaPlus', upd: 'Atualizado', rev: 'Verificado para 2026' },
   id: { by: 'Tim Editorial KoreaPlus', upd: 'Diperbarui', rev: 'Diperiksa untuk 2026' },
+  ar: { by: 'فريق تحرير KoreaPlus', upd: 'آخر تحديث', rev: 'تدقيق الحقائق لعام 2026' },
+  hi: { by: 'KoreaPlus संपादकीय टीम', upd: 'अपडेट', rev: '2026 के लिए तथ्य-जाँच' },
+  ru: { by: 'Редакция KoreaPlus', upd: 'Обновлено', rev: 'Факты проверены на 2026 год' },
+  vi: { by: 'Ban biên tập KoreaPlus', upd: 'Cập nhật', rev: 'Đã kiểm chứng cho 2026' },
+  th: { by: 'โดยทีมบรรณาธิการ KoreaPlus', upd: 'อัปเดตเมื่อ', rev: 'ตรวจสอบข้อเท็จจริงแล้ว ปี 2026' },
 };
 // GEO "Key facts" strip — icon-led, scannable, matched by the Speakable selector
 // so AI answer engines can lift the at-a-glance facts. items: ['🗓 …','🗣 …', …].
@@ -801,8 +873,12 @@ const _cityLinkRe = new RegExp('href="guide/things-to-do-in-(' + L10N_CITY_SLUGS
 // localized pages so the whole Explore→hub→page drill-down stays in-language.
 const _hubLinkRe = /href="((?:explore|destinations|experiences|when-to-visit|travel-basics|itineraries|tools)\.html|faq\/index\.html)"/g;
 function localizeLinks(html, lang) {
+  // Gated on the TRAVEL locales, not on L10N membership: L10N also carries
+  // dir-only stubs for the K-pop-only languages, and those have no /guide/ar/…
+  // city or hub pages to point at — rewriting would put ~10 dead links in the
+  // shell footer and nav of every K-pop page in those languages.
+  if (lang === 'en' || !LOCALES.includes(lang)) return html;
   const L = L10N[lang];
-  if (!L || lang === 'en') return html;
   return html
     .replace(_cityLinkRe, 'href="' + L.dir + '/guide/things-to-do-in-$1.html"')
     .replace(_hubLinkRe, 'href="' + L.dir + '/$1"');
@@ -924,11 +1000,13 @@ let PAGE_SUMMARIES = {};
 try { PAGE_SUMMARIES = JSON.parse(fs.readFileSync(path.join(OUT, 'page-summaries.json'), 'utf8')); } catch { /* first run */ }
 const PAGE_SUMMARIES_NEW = {};
 
-// TL;DR / summary heading label — 14 languages (9 site langs + 5 fallback locales).
+// TL;DR / summary heading label — 9 travel langs + the 5 K-pop-only langs, plus
+// `it`, which no builder emits yet but the SPA chrome can fall back to.
 const TLDR_H = {
   en: 'Summary', ko: '요약', ja: '要約', zh: '摘要', es: 'Resumen',
   fr: 'Résumé', de: 'Zusammenfassung', pt: 'Resumo', id: 'Ringkasan',
   it: 'Riepilogo', ru: 'Кратко', vi: 'Tóm tắt', th: 'สรุป', hi: 'सारांश',
+  ar: 'الملخص',
 };
 
 // Strip tags → plain text; collapse whitespace & entities we emit (esc()).
@@ -1096,7 +1174,7 @@ function shell({ url, title, desc, keywords, schemas, hero, body, lang = 'en', a
     summary: _tldr.summary || buildSummary(body, desc),
   });
   const __out = `<!DOCTYPE html>
-<html lang="${lang}">
+<html lang="${lang}"${RTL_LANGS.has(lang) ? ' dir="rtl"' : ''}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -1136,10 +1214,10 @@ ${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <link rel="preconnect" href="https://koreaplus-webapp.jeybeeicon.workers.dev">
 <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${lang === 'ko' ? '&family=Noto+Sans+KR:wght@400;700' : ''}&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900${SCRIPT_FONT[lang] ? '&family=' + SCRIPT_FONT[lang] : ''}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="hub-styles.css?v=15">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="seo.css?v=13">
+<link rel="stylesheet" href="seo.css?v=14">
 <link rel="stylesheet" href="mobile.css?v=1">
 <link rel="stylesheet" href="feature.css?v=1">
 <script>(function(){try{var t=localStorage.getItem('kp_theme')||'dark',f=localStorage.getItem('kp_fontsize')||'md';if(t==='light')document.documentElement.classList.add('light');document.documentElement.classList.add('font-'+f);}catch(e){}})();</script>
@@ -1150,7 +1228,7 @@ ${heroPreload}<link rel="preconnect" href="https://fonts.googleapis.com">
 ${[ORG_LD, siteLD(lang), speakableLD(url, ogImg), ...schemas].map(jsonld).join('\n')}
 </head>
 <body data-mnav="${homeHref === '/kpop' ? 'kpop' : 'travel'}">
-<a href="#main" class="kp-skip" style="position:absolute;left:-9999px;top:0;z-index:999;background:#0c1829;color:#fff;padding:10px 16px;border-radius:0 0 8px 0" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">${esc(aria(lang).skip)}</a>
+<a href="#main" class="kp-skip" style="${SKIP_OFF}" onfocus="this.setAttribute('style','${SKIP_ON}')" onblur="this.setAttribute('style','${SKIP_OFF}')">${esc(aria(lang).skip)}</a>
 <nav class="hub-nav" role="navigation" aria-label="${esc(aria(lang).nav)}">
   <a class="hub-nav-logo" href="${homeHref}" aria-label="KoreaPlus — back to home" title="Home"><span aria-hidden="true">🇰🇷</span> ${brand}</a>
   <div class="hub-nav-links">${primaryNav(lang)}</div>
@@ -2814,12 +2892,21 @@ function buildSeason(s) {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// K-POP HISTORY PAGES (9 languages) — content from kpop-history.json
+// K-POP HISTORY PAGES — content from kpop-history.json
 // ══════════════════════════════════════════════════════════════════
-const KPOP_HIST_LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+// The 9 travel languages in the order this generator has always emitted, plus
+// the K-pop-only codes appended at the tail (so sitemap ordering doesn't churn).
+// A language with no translation for a slug simply produces no page — both
+// builders below check kpop-history.json before emitting anything.
+const KPOP_HIST_LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id', ...KPOP_ONLY_LANGS];
 const KPOP_HIST_DIR = (lang) => lang === 'en' ? '' : ((L10N[lang] && L10N[lang].dir) || lang) + '/';
 const KPOP_HIST_EMOJI = { 'kpop-history': '📜', 'first-generation-kpop': '1️⃣', 'second-generation-kpop': '2️⃣', 'third-generation-kpop': '3️⃣', 'fourth-generation-kpop': '4️⃣', 'fifth-generation-kpop': '5️⃣', 'sm-entertainment-history': '🏛️', 'yg-entertainment-history': '🖤', 'jyp-entertainment-history': '💚', 'hybe-history': '💜' };
-const KPOP_HIST_MORE = { en: '🎤 More K-Pop history', ko: '🎤 K-pop 역사 더보기', ja: '🎤 K-POPの歴史をもっと見る', zh: '🎤 更多 K-pop 历史', es: '🎤 Más historia del K-pop', fr: '🎤 Plus d\'histoire de la K-pop', de: '🎤 Mehr K-Pop-Geschichte', pt: '🎤 Mais história do K-pop', id: '🎤 Sejarah K-pop lainnya' };
+const KPOP_HIST_MORE = { en: '🎤 More K-Pop history', ko: '🎤 K-pop 역사 더보기', ja: '🎤 K-POPの歴史をもっと見る', zh: '🎤 更多 K-pop 历史', es: '🎤 Más historia del K-pop', fr: '🎤 Plus d\'histoire de la K-pop', de: '🎤 Mehr K-Pop-Geschichte', pt: '🎤 Mais história do K-pop', id: '🎤 Sejarah K-pop lainnya', ar: '🎤 المزيد عن تاريخ K-Pop', hi: '🎤 K-Pop इतिहास के और गाइड', ru: '🎤 Ещё об истории K-pop', vi: '🎤 Thêm về lịch sử K-pop', th: '🎤 ประวัติ K-pop เพิ่มเติม' };
+// Years that actually got a kpop-releases-<year> page. Filled from
+// mKpopYear.YEARS after the modules are instantiated (that happens further down,
+// but every buildKpopHistory call happens later still), so the discography's
+// Year column can only ever link to a page that exists.
+const KPOP_YEAR_PAGES = new Set();
 function buildKpopHistory(slug, lang) {
   const byLang = KPOP_HIST[slug]; const t = byLang && byLang[lang];
   if (!t) return null;
@@ -2829,9 +2916,17 @@ function buildKpopHistory(slug, lang) {
   // Standalone K-Pop channel: breadcrumb root is the K-Pop hub (/kpop), not the
   // travel-guide home — keeps users inside the K-Pop property.
   const trail = [{ name: 'K-Pop', url: '/kpop' }, { name: t.h1, url }];
+  // Roster act? Then we have a licence-verified photo and a dated release list
+  // for it — the prose sections describe the discography, these show it.
+  const rosterId = /-profile$/.test(slug) ? slug.replace('-profile', '') : null;
+  const rosterAct = rosterId ? KPOP_ROSTER.find(r => r.id === rosterId) : null;
   let body = bcHtml(trail);
+  if (rosterAct) body += __kpm.photoFigure(KPOP_IMAGES, rosterId, rosterAct.nameEn || t.h1, lang, esc);
   body += `<p class="lead">${esc(t.lead)}</p>`;
   for (const s of (t.sections || [])) body += `<h2>${esc(s.h)}</h2>${(s.body || '').trim().startsWith('<') ? s.body : `<p>${esc(s.body)}</p>`}`;
+  // Structured discography after the prose: the article says what mattered,
+  // the table says exactly what came out and when.
+  if (rosterAct) body += __kpm.discogSection(KPOP_DISCOG, rosterId, lang, TODAY_KST, esc, KPOP_YEAR_PAGES, dir);
   const qa = (t.faq || []).map(x => Array.isArray(x) ? x : [x.q, x.a]);
   if (qa.length) body += `<h2>❓ FAQ</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
   const sibs = Object.keys(KPOP_HIST).filter(s2 => s2 !== slug && KPOP_HIST[s2] && KPOP_HIST[s2][lang]).slice(0, 9);
@@ -2844,30 +2939,35 @@ function buildKpopHistory(slug, lang) {
   // by id). sameAs only from VERIFIED external ids; members listed by name
   // with NO birthDate (per-member bdays absent → never fabricated).
   let musicGroup = null;
-  if (/-profile$/.test(slug)) {
-    const a = KPOP_ROSTER.find(r => r.id === slug.replace('-profile', ''));
-    if (a) {
-      const sameAs = [];
-      if (a.wikidataId && /^Q\d+$/.test(a.wikidataId)) sameAs.push('https://www.wikidata.org/wiki/' + a.wikidataId);
-      if (a.spotifyId && /^[A-Za-z0-9]+$/.test(a.spotifyId)) sameAs.push('https://open.spotify.com/artist/' + a.spotifyId);
-      if (a.youtubeChannelId && /^[A-Za-z0-9_-]+$/.test(a.youtubeChannelId)) sameAs.push('https://www.youtube.com/channel/' + a.youtubeChannelId);
-      musicGroup = __ld.musicGroupLD({
-        name: a.nameEn || t.h1,
-        alternateName: a.nameKo,
-        genre: Array.isArray(a.genres) ? a.genres : undefined,
-        foundingDate: a.debut,
-        url: ORIGIN + url,
-        sameAs,
-        image: ORIGIN + '/guide/og-image.jpg',
-        members: Array.isArray(a.members) ? a.members.map(m => ({ name: m })) : undefined, // no birthDate — never fabricated
-        origin: ORIGIN,
-      });
-    }
+  if (rosterAct) {
+    const a = rosterAct;
+    const sameAs = [];
+    if (a.wikidataId && /^Q\d+$/.test(a.wikidataId)) sameAs.push('https://www.wikidata.org/wiki/' + a.wikidataId);
+    if (a.spotifyId && /^[A-Za-z0-9]+$/.test(a.spotifyId)) sameAs.push('https://open.spotify.com/artist/' + a.spotifyId);
+    if (a.youtubeChannelId && /^[A-Za-z0-9_-]+$/.test(a.youtubeChannelId)) sameAs.push('https://www.youtube.com/channel/' + a.youtubeChannelId);
+    // Prefer the act's own Commons photo over the site's generic OG card.
+    const photo = KPOP_IMAGES[rosterId] && KPOP_IMAGES[rosterId].src;
+    musicGroup = __ld.musicGroupLD({
+      name: a.nameEn || t.h1,
+      alternateName: a.nameKo,
+      genre: Array.isArray(a.genres) ? a.genres : undefined,
+      foundingDate: a.debut,
+      url: ORIGIN + url,
+      sameAs,
+      image: photo || (ORIGIN + '/guide/og-image.jpg'),
+      members: Array.isArray(a.members) ? a.members.map(m => ({ name: m })) : undefined, // no birthDate — never fabricated
+      origin: ORIGIN,
+    });
+    // Dated releases from the Apple snapshot — same source as the visible table.
+    const albums = __kpm.albumSchema(KPOP_DISCOG, rosterId, 12, TODAY_KST);
+    if (musicGroup && albums.length) musicGroup.album = albums;
   }
   const others = KPOP_HIST_LANGS.filter(l => l !== lang && KPOP_HIST[slug][l]);
+  // KPOP_HIST_DIR, not L10N[l].dir: the latter throws on any language that has
+  // no L10N row at all. It already carries the trailing slash.
   const alts = lang === 'en'
-    ? others.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))
-    : [{ lang: 'en', url: enUrl }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/${slug}.html` }))];
+    ? others.map(l => ({ lang: l, url: `${BASEP}${KPOP_HIST_DIR(l)}kpop/${slug}.html` }))
+    : [{ lang: 'en', url: enUrl }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${KPOP_HIST_DIR(l)}kpop/${slug}.html` }))];
   writePage(`${dir}kpop/${slug}.html`, shell({ url, title: t.title, desc: t.metaDesc, keywords: '', schemas: [article, musicGroup, breadcrumbLD(trail), faqLD(qa)].filter(Boolean), hero, body, lang, alts, homeHref: '/kpop', brand: '🎤 Korea<span>Plus</span>' }));
   return url;
 }
@@ -2875,12 +2975,12 @@ function buildKpopHistory(slug, lang) {
 // ── K-Pop browse / directory: subdivided categories so every page is reachable
 // by drilling down from the hub. One localized page per language. ──────────────
 const KPOP_CAT = {
-  artists:   { emoji: '🎤', label: { en: 'Artists & Groups', ko: '아티스트 · 그룹', ja: 'アーティスト・グループ', zh: '艺人 · 团体', es: 'Artistas y grupos', fr: 'Artistes et groupes', de: 'Künstler & Gruppen', pt: 'Artistas e grupos', id: 'Artis & Grup' } },
-  basics:    { emoji: '📖', label: { en: 'K-Pop Basics & Terms', ko: 'K-pop 입문 · 용어', ja: 'K-POP入門・用語', zh: 'K-pop 入门 · 术语', es: 'Conceptos y términos', fr: 'Bases et termes', de: 'Grundlagen & Begriffe', pt: 'Básico e termos', id: 'Dasar & Istilah' } },
-  legends:   { emoji: '⭐', label: { en: 'Legendary Acts', ko: '레전드 아티스트', ja: 'レジェンド', zh: '传奇组合', es: 'Grupos legendarios', fr: 'Groupes légendaires', de: 'Legendäre Acts', pt: 'Grupos lendários', id: 'Artis Legendaris' } },
-  history:   { emoji: '🏛️', label: { en: 'History & Generations', ko: '역사 · 세대', ja: '歴史・世代', zh: '历史 · 世代', es: 'Historia y generaciones', fr: 'Histoire et générations', de: 'Geschichte & Generationen', pt: 'História e gerações', id: 'Sejarah & Generasi' } },
-  companies: { emoji: '🏢', label: { en: 'Agencies', ko: '소속사', ja: '事務所', zh: '经纪公司', es: 'Agencias', fr: 'Agences', de: 'Agenturen', pt: 'Agências', id: 'Agensi' } },
-  global:    { emoji: '🌍', label: { en: 'Global Records & Culture', ko: '세계화 · 기록 · 문화', ja: '世界進出・記録・文化', zh: '全球纪录 · 文化', es: 'Récords globales y cultura', fr: 'Records mondiaux et culture', de: 'Globale Rekorde & Kultur', pt: 'Recordes globais e cultura', id: 'Rekor Global & Budaya' } },
+  artists:   { emoji: '🎤', label: { en: 'Artists & Groups', ko: '아티스트 · 그룹', ja: 'アーティスト・グループ', zh: '艺人 · 团体', es: 'Artistas y grupos', fr: 'Artistes et groupes', de: 'Künstler & Gruppen', pt: 'Artistas e grupos', id: 'Artis & Grup', ar: 'الفنانون والفرق', hi: 'आर्टिस्ट और ग्रुप', ru: 'Артисты и группы', vi: 'Nghệ sĩ và nhóm nhạc', th: 'ศิลปินและวง' } },
+  basics:    { emoji: '📖', label: { en: 'K-Pop Basics & Terms', ko: 'K-pop 입문 · 용어', ja: 'K-POP入門・用語', zh: 'K-pop 入门 · 术语', es: 'Conceptos y términos', fr: 'Bases et termes', de: 'Grundlagen & Begriffe', pt: 'Básico e termos', id: 'Dasar & Istilah', ar: 'أساسيات K-Pop ومصطلحاته', hi: 'K-Pop बेसिक्स और शब्दावली', ru: 'Основы и термины K-pop', vi: 'Nhập môn và thuật ngữ K-pop', th: 'พื้นฐานและศัพท์ K-pop' } },
+  legends:   { emoji: '⭐', label: { en: 'Legendary Acts', ko: '레전드 아티스트', ja: 'レジェンド', zh: '传奇组合', es: 'Grupos legendarios', fr: 'Groupes légendaires', de: 'Legendäre Acts', pt: 'Grupos lendários', id: 'Artis Legendaris', ar: 'الأسماء الأسطورية', hi: 'लेजेंडरी आर्टिस्ट', ru: 'Легендарные артисты', vi: 'Nghệ sĩ huyền thoại', th: 'ศิลปินระดับตำนาน' } },
+  history:   { emoji: '🏛️', label: { en: 'History & Generations', ko: '역사 · 세대', ja: '歴史・世代', zh: '历史 · 世代', es: 'Historia y generaciones', fr: 'Histoire et générations', de: 'Geschichte & Generationen', pt: 'História e gerações', id: 'Sejarah & Generasi', ar: 'التاريخ والأجيال', hi: 'इतिहास और जेनरेशन', ru: 'История и поколения', vi: 'Lịch sử và các thế hệ', th: 'ประวัติและเจเนอเรชัน' } },
+  companies: { emoji: '🏢', label: { en: 'Agencies', ko: '소속사', ja: '事務所', zh: '经纪公司', es: 'Agencias', fr: 'Agences', de: 'Agenturen', pt: 'Agências', id: 'Agensi', ar: 'شركات الترفيه', hi: 'एजेंसियाँ', ru: 'Агентства', vi: 'Công ty chủ quản', th: 'ค่ายเพลง' } },
+  global:    { emoji: '🌍', label: { en: 'Global Records & Culture', ko: '세계화 · 기록 · 문화', ja: '世界進出・記録・文化', zh: '全球纪录 · 文化', es: 'Récords globales y cultura', fr: 'Records mondiaux et culture', de: 'Globale Rekorde & Kultur', pt: 'Recordes globais e cultura', id: 'Rekor Global & Budaya', ar: 'الأرقام القياسية العالمية والثقافة', hi: 'ग्लोबल रिकॉर्ड और संस्कृति', ru: 'Мировые рекорды и культура', vi: 'Kỷ lục toàn cầu và văn hóa', th: 'สถิติระดับโลกและวัฒนธรรม' } },
 };
 const KPOP_CAT_SLUGS = {
   basics: ['what-is-a-comeback-kpop', 'what-is-a-bias-kpop', 'what-is-a-bias-wrecker', 'what-is-a-maknae', 'what-is-aegyo', 'kpop-fandom-culture', 'kpop-fan-chant', 'kpop-visual-position', 'kpop-positions-explained', 'kpop-sub-unit', 'kpop-lightstick', 'kpop-photocard-culture', 'kpop-title-track', 'kpop-fansign-events', 'kpop-music-shows', 'kpop-trainee-system', 'kpop-fandom-names-and-colors'],
@@ -2898,11 +2998,20 @@ const KPOP_BROWSE_T = {
   fr: { h1: 'Explorer tout le K-pop', title: 'Tout le K-pop — Artistes, histoire et guides | KoreaPlus', lead: 'Tous les guides K-pop de KoreaPlus, classés par catégories : profils, termes de fans, histoire, agences et records mondiaux. Choisissez une catégorie et explorez.', girl: 'Girl groups', boy: 'Boy groups', solo: 'En solo', more: '📚 Tout explorer' },
   de: { h1: 'Alle K-Pop entdecken', title: 'Alles über K-Pop — Künstler, Geschichte & Guides | KoreaPlus', lead: 'Alle K-Pop-Guides von KoreaPlus, nach Kategorien sortiert: Profile, Fan-Begriffe, Geschichte, Agenturen und Weltrekorde. Kategorie wählen und eintauchen.', girl: 'Girlgroups', boy: 'Boygroups', solo: 'Solokünstler', more: '📚 Alle entdecken' },
   pt: { h1: 'Explorar todo o K-pop', title: 'Todo o K-pop — Artistas, história e guias | KoreaPlus', lead: 'Todos os guias de K-pop do KoreaPlus, organizados por categorias: perfis, termos de fãs, história, agências e recordes globais. Escolha uma categoria e explore.', girl: 'Girl groups', boy: 'Boy groups', solo: 'Solistas', more: '📚 Explorar tudo' },
-  id: { h1: 'Jelajahi semua K-pop', title: 'Semua K-pop — Artis, Sejarah & Panduan | KoreaPlus', lead: 'Semua panduan K-pop di KoreaPlus, tersusun per kategori: profil artis, istilah fandom, sejarah, agensi, dan rekor global. Pilih kategori lalu telусури.', girl: 'Girl group', boy: 'Boy group', solo: 'Solois', more: '📚 Jelajahi semua' },
+  id: { h1: 'Jelajahi semua K-pop', title: 'Semua K-pop — Artis, Sejarah & Panduan | KoreaPlus', lead: 'Semua panduan K-pop di KoreaPlus, tersusun per kategori: profil artis, istilah fandom, sejarah, agensi, dan rekor global. Pilih kategori lalu telusuri.', girl: 'Girl group', boy: 'Boy group', solo: 'Solois', more: '📚 Jelajahi semua' },
+  ar: { h1: 'تصفَّح كل ما يخص K-Pop', title: 'كل ما يخص K-Pop — الفنانون والتاريخ والأدلة | KoreaPlus', lead: 'كل أدلة K-Pop على KoreaPlus، مُصنَّفة حسب الفئة: ملفات الفنانين ومصطلحات الفاندوم والتاريخ وشركات الترفيه والأرقام القياسية العالمية. اختر فئة وابدأ الاستكشاف.', girl: 'فرق الفتيات', boy: 'فرق الفتيان', solo: 'الفنانون المنفردون', more: '📚 تصفَّح الكل' },
+  hi: { h1: 'पूरा K-Pop एक्सप्लोर करें', title: 'पूरा K-Pop — आर्टिस्ट, इतिहास और गाइड | KoreaPlus', lead: 'KoreaPlus का हर K-Pop गाइड, कैटेगरी के हिसाब से एक जगह — आर्टिस्ट प्रोफाइल, फैनडम के शब्द, इतिहास, एजेंसियाँ और ग्लोबल रिकॉर्ड। कोई कैटेगरी चुनें और एक्सप्लोर करना शुरू करें।', girl: 'गर्ल ग्रुप', boy: 'बॉय ग्रुप', solo: 'सोलो आर्टिस्ट', more: '📚 सभी K-Pop गाइड' },
+  ru: { h1: 'Весь K-pop', title: 'Весь K-pop — артисты, история и гиды | KoreaPlus', lead: 'Все гиды по K-pop на KoreaPlus, разложенные по категориям: профили артистов, термины фандома, история, агентства и мировые рекорды. Выберите категорию и погружайтесь.', girl: 'Гёрл-группы', boy: 'Бой-группы', solo: 'Сольные артисты', more: '📚 Весь K-pop' },
+  vi: { h1: 'Khám phá toàn bộ K-pop', title: 'Toàn bộ K-pop — Nghệ sĩ, lịch sử và cẩm nang | KoreaPlus', lead: 'Tất cả cẩm nang K-pop trên KoreaPlus, xếp theo từng nhóm chủ đề — hồ sơ nghệ sĩ, thuật ngữ fandom, lịch sử, công ty chủ quản và kỷ lục toàn cầu. Chọn một nhóm chủ đề rồi đi sâu vào bên trong.', girl: 'Nhóm nữ', boy: 'Nhóm nam', solo: 'Nghệ sĩ solo', more: '📚 Xem toàn bộ' },
+  th: { h1: 'สำรวจ K-pop ทั้งหมด', title: 'K-pop ทั้งหมด — ศิลปิน ประวัติ และคู่มือ | KoreaPlus', lead: 'คู่มือ K-pop ทุกเรื่องบน KoreaPlus จัดไว้เป็นหมวด — โปรไฟล์ศิลปิน ศัพท์แฟนด้อม ประวัติ ค่ายเพลง และสถิติระดับโลก เลือกหมวดที่สนใจแล้วกดเข้าไปดูได้เลย', girl: 'เกิร์ลกรุ๊ป', boy: 'บอยกรุ๊ป', solo: 'ศิลปินเดี่ยว', more: '📚 ดูทั้งหมด' },
 };
 const kpopCatLabel = (k, lang) => (KPOP_CAT[k].label[lang] || KPOP_CAT[k].label.en);
+// A language gets a browse page only once it has something to browse — an empty
+// directory in a language nobody has translated yet is a thin page, and its
+// hreflang alternates would advertise pages that were never written.
+const kpopHasPages = (lang) => Object.keys(KPOP_HIST).some(s => KPOP_HIST[s][lang]);
 function buildKpopBrowse(lang) {
-  if (!Object.keys(KPOP_HIST).length) return null;
+  if (!kpopHasPages(lang)) return null;
   const dir = KPOP_HIST_DIR(lang);
   const url = `${BASEP}${dir}kpop/browse.html`;
   const T = KPOP_BROWSE_T[lang] || KPOP_BROWSE_T.en;
@@ -2935,10 +3044,13 @@ function buildKpopBrowse(lang) {
   });
   body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
   const hero = `<header class="seo-hero"><span class="emoji">📚</span><h1>${esc(T.h1)}</h1><div class="meta"><span class="seo-badge">K-Pop</span></div></header>`;
-  const others = KPOP_HIST_LANGS.filter(l => l !== lang);
+  // Only languages that actually build a browse page, and KPOP_HIST_DIR (which
+  // has a fallback and supplies the trailing slash) rather than L10N[l].dir.
+  // An advertised alternate with no page behind it hard-fails the S20 gate.
+  const others = KPOP_HIST_LANGS.filter(l => l !== lang && kpopHasPages(l));
   const alts = lang === 'en'
-    ? others.map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/browse.html` }))
-    : [{ lang: 'en', url: `${BASEP}kpop/browse.html` }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${L10N[l].dir}/kpop/browse.html` }))];
+    ? others.map(l => ({ lang: l, url: `${BASEP}${KPOP_HIST_DIR(l)}kpop/browse.html` }))
+    : [...(kpopHasPages('en') ? [{ lang: 'en', url: `${BASEP}kpop/browse.html` }] : []), ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${KPOP_HIST_DIR(l)}kpop/browse.html` }))];
   writePage(`${dir}kpop/browse.html`, shell({ url, title: T.title, desc: T.lead, keywords: '', schemas: [breadcrumbLD(trail)], hero, body, lang, alts, homeHref: '/kpop', brand: '🎤 Korea<span>Plus</span>' }));
   return url;
 }
@@ -2957,9 +3069,11 @@ const FOOD = ALL.filter(i => i.cat === 'food');   // frozen 16-item food pool
 const CTX = {
   shell, writePage, BASEP, L10N, LOCALES,
   esc, slug, enc, bcHtml, breadcrumbLD, faqLD, keyFactsBox, affBlock,
-  ROSTER: KPOP_ROSTER, ENRICH: KPOP_ENRICH,
+  ROSTER: KPOP_ROSTER, ENRICH: KPOP_ENRICH, DISCOG: KPOP_DISCOG, IMAGES: KPOP_IMAGES,
   MONTHS, SEASONS4, CITY_L10N, COMPARES, FOOD, COST_INDEX: COST_DATA,
-  TODAY, ld: __ld, derive: __derive,
+  // TODAY_KST too: release dates in the snapshots are Korean dates, and modules
+  // that compute their own would disagree with this file for nine hours a day.
+  TODAY, TODAY_KST, ld: __ld, derive: __derive,
 };
 
 // ══════════════════════════════════════════════════════════════════
@@ -2984,6 +3098,11 @@ const mKpopGlossary = require('./modules/seo-kpop-glossary.cjs')(CTX);   __out.k
 const mKpopLight    = require('./modules/seo-kpop-lightstick.cjs')(CTX); __out.kpop.push(...mKpopLight.urls());
 const mKpopMember   = require('./modules/seo-kpop-member.cjs')(CTX);     __out.kpop.push(...mKpopMember.urls());
 const mKpopTools    = require('./modules/seo-kpop-tools.cjs')(CTX);      __out.kpop.push(...mKpopTools.urls());
+const mKpopYear     = require('./modules/seo-kpop-year.cjs')(CTX);       __out.kpop.push(...mKpopYear.urls());
+// Year pages exist only for years the snapshot can actually fill, so the set is
+// whatever seo-kpop-year kept. buildKpopHistory (called below) links its
+// discography Year column against it.
+for (const y of mKpopYear.YEARS) KPOP_YEAR_PAGES.add(String(y));
 const mFood         = require('./modules/seo-food.cjs')(CTX);            __out.main.push(...mFood.urls());
 const mStay         = require('./modules/seo-stay.cjs')(CTX);           __out.main.push(...mStay.urls());
 const mSeasonCity   = require('./modules/seo-seasoncity.cjs')(CTX);      __out.main.push(...mSeasonCity.urls());

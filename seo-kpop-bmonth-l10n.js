@@ -2,9 +2,13 @@
    seo-kpop-bmonth-l10n.js — i18n strings for the "K-pop idols born in
    <month>" generator (modules/seo-kpop-bmonth.cjs).
 
-   9 languages: en + ko/ja/zh/es/fr/de/pt/id. Pure data (CommonJS export);
+   14 languages: en + ko/ja/zh/es/fr/de/pt/id + ar/hi/ru/vi/th. The last five
+   are K-pop-only; the travel channels stay at 9. Pure data (CommonJS export);
    no build-seo coupling. Month NAMES are localized per language (12 each).
    Functional strings (title/lead/h2/faq) take the localized month name.
+
+   modules/seo-kpop-year.cjs also imports MONTH_NAMES from here, so a language
+   dropped from that map silently disappears from the year pages too.
 
    Kept separate from messages/*.json (14-lang UI strings) by contract.
    ══════════════════════════════════════════════════════════════════ */
@@ -21,7 +25,22 @@ const MONTH_NAMES = {
   de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
   pt: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
   id: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+  ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+  hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्तूबर', 'नवंबर', 'दिसंबर'],
+  ru: ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'],
+  vi: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+  th: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
 };
+
+// Russian months arrive nominative (the year generator prints them bare in a
+// stat box); every sentence here needs the prepositional "в январе". Deriving
+// the form beats forking the canonical list into a second, drift-prone copy.
+const RU_IN_MONTH = {
+  январь: 'январе', февраль: 'феврале', март: 'марте', апрель: 'апреле',
+  май: 'мае', июнь: 'июне', июль: 'июле', август: 'августе',
+  сентябрь: 'сентябре', октябрь: 'октябре', ноябрь: 'ноябре', декабрь: 'декабре',
+};
+const ruIn = (m) => RU_IN_MONTH[m] || m;
 
 // Functional templates. {m} = localized month name. All hand-translated.
 const T = {
@@ -195,6 +214,111 @@ const T = {
     relH: '🎤 Jelajahi lainnya',
     hubLabel: '🎤 Hub K-pop',
     browseLabel: '📚 Jelajahi semua K-pop',
+  },
+  // Arabic strings are written in LOGICAL order (emoji first, pipe last) and
+  // rendered by dir="rtl"; hand-reversing them would break the display.
+  // Counts follow the noun (عدد النجوم: n) because Arabic governs a counted
+  // noun five different ways — an English count ternary is wrong for four.
+  ar: {
+    h1: (m) => `نجوم K-Pop المولودون في ${m}`,
+    title: (m) => `نجوم K-Pop المولودون في ${m} — أعياد الميلاد حسب الفريق | KoreaPlus`,
+    desc: (m) => `مَن هم نجوم K-Pop الذين يحتفلون بعيد ميلادهم في ${m}؟ قائمة موثَّقة بالنجوم وفرقهم ممن وُلدوا في هذا الشهر، مع تواريخ الميلاد الدقيقة.`,
+    lead: (m) => `هل يحتفل أحدهم بعيد ميلاده في ${m}؟ إليك نجوم K-Pop المولودين في هذا الشهر — يعرض كل سطر اسم النجم وفريقه وتاريخ ميلاده الدقيق كما ورد في قائمتنا.`,
+    badge: 'أعياد الميلاد',
+    listH: (m, n) => `🎂 مواليد ${m} — عدد النجوم: ${n}`,
+    none: (m) => `لا يوجد في قائمتنا الحالية أي نجم من مواليد ${m}. تصفَّح الأشهر الأخرى أدناه.`,
+    monthsH: '📅 أعياد الميلاد حسب الشهر',
+    col: { idol: 'النجم', group: 'الفريق', date: 'تاريخ الميلاد' },
+    faqH: '❓ الأسئلة الشائعة',
+    q1: (m) => `مَن هم نجوم K-Pop المولودون في ${m}؟`,
+    a1: (m, names) => `من نجوم قائمتنا المولودين في ${m}: ${names}. فريق كل نجم وتاريخ ميلاده الدقيق مذكوران في الجدول أعلاه.`,
+    q2: (m) => `كيف أُعِدَّت قائمة أعياد الميلاد في ${m}؟`,
+    a2: () => `كل تاريخ ميلاد مأخوذ من قائمة الفنانين الموثَّقة لدينا — لا نذكر إلا التواريخ التي يمكننا تأكيدها، مرتبطةً بفريق كل نجم. لا شيء مُقدَّر أو مُخمَّن.`,
+    relH: '🎤 استكشف المزيد',
+    hubLabel: '🎤 مركز K-Pop',
+    browseLabel: '📚 تصفَّح كل ما يخص K-Pop',
+  },
+  hi: {
+    h1: (m) => `${m} में जन्मे K-pop आइडल`,
+    title: (m) => `${m} में जन्मे K-pop आइडल — ग्रुप के हिसाब से जन्मदिन | KoreaPlus`,
+    desc: (m) => `${m} में किन K-pop आइडल का जन्मदिन आता है? इस महीने जन्मे आइडल, उनके ग्रुप और सही जन्म तिथि की वेरिफाइड लिस्ट।`,
+    lead: (m) => `${m} में किसका जन्मदिन है? यहाँ इस महीने जन्मे K-pop आइडल हैं — हर पंक्ति में आइडल, उनका ग्रुप और सही जन्म तिथि है, जो हमारी आर्टिस्ट लिस्ट से जोड़ी गई है।`,
+    badge: 'जन्मदिन',
+    listH: (m, n) => `🎂 ${m} में जन्मे ${n} आइडल`,
+    none: (m) => `हमारी मौजूदा लिस्ट में ${m} में जन्मा कोई आइडल नहीं है। नीचे बाकी महीने देखें।`,
+    monthsH: '📅 महीने के हिसाब से जन्मदिन',
+    col: { idol: 'आइडल', group: 'ग्रुप', date: 'जन्म तिथि' },
+    faqH: '❓ आम सवाल',
+    q1: (m) => `${m} में कौन-कौन से K-pop आइडल जन्मे थे?`,
+    a1: (m, names) => `हमारी लिस्ट में ${m} में जन्मे आइडल में ${names} शामिल हैं। हर आइडल का ग्रुप और सही जन्म तिथि ऊपर दी गई है।`,
+    q2: (m) => `${m} की जन्मदिन लिस्ट कैसे बनाई जाती है?`,
+    a2: () => `हर जन्मदिन हमारी वेरिफाइड आर्टिस्ट लिस्ट से आता है — हम सिर्फ़ वही तारीखें देते हैं जिनकी पुष्टि हो सके, और उन्हें हर आइडल के ग्रुप से जोड़ते हैं। कुछ भी अनुमानित नहीं है।`,
+    relH: '🎤 और एक्सप्लोर करें',
+    hubLabel: '🎤 K-pop हब',
+    browseLabel: '📚 सभी K-pop गाइड',
+  },
+  // Russian: gender is unknown per idol and the lists are mixed, so headings
+  // stay on gender-free plural participles and the count goes after a colon —
+  // "n айдол(а/ов)" would need three forms and a gendered participle for n=1.
+  ru: {
+    h1: (m) => `Айдолы K-pop, родившиеся в ${ruIn(m)}`,
+    title: (m) => `Айдолы K-pop, родившиеся в ${ruIn(m)} — дни рождения по группам | KoreaPlus`,
+    desc: (m) => `Кто из айдолов K-pop празднует день рождения в ${ruIn(m)}? Проверенный список айдолов и их групп, родившихся в этом месяце, с точными датами.`,
+    lead: (m) => `Кто отмечает день рождения в ${ruIn(m)}? Вот айдолы K-pop, родившиеся в этом месяце — в каждой строке айдол, группа и точная дата рождения из нашего списка артистов.`,
+    badge: 'Дни рождения',
+    listH: (m, n) => `🎂 Айдолы, родившиеся в ${ruIn(m)}: ${n}`,
+    none: (m) => `В нашем текущем списке нет айдолов, родившихся в ${ruIn(m)}. Ниже можно посмотреть другие месяцы.`,
+    monthsH: '📅 Дни рождения по месяцам',
+    col: { idol: 'Айдол', group: 'Группа', date: 'Дата рождения' },
+    faqH: '❓ Частые вопросы',
+    q1: (m) => `Кто из айдолов K-pop родился в ${ruIn(m)}?`,
+    a1: (m, names) => `Среди айдолов нашего списка, родившихся в ${ruIn(m)}: ${names}. Группа и точная дата у каждого указаны выше.`,
+    q2: (m) => `Как составлен список дней рождения за ${m}?`,
+    a2: () => `Все даты взяты из нашего проверенного списка артистов — мы указываем только те, которые можем подтвердить, и связываем их с группой каждого айдола. Приблизительных дат нет.`,
+    relH: '🎤 Смотрите также',
+    hubLabel: '🎤 Центр K-pop',
+    browseLabel: '📚 Весь K-pop',
+  },
+  // MONTH_NAMES.vi already carries "Tháng", so never prefix another "tháng".
+  vi: {
+    h1: (m) => `Idol K-pop sinh vào ${m}`,
+    title: (m) => `Idol K-pop sinh vào ${m} — Sinh nhật theo nhóm | KoreaPlus`,
+    desc: (m) => `Idol K-pop nào có sinh nhật vào ${m}? Danh sách đã xác minh gồm các idol sinh trong tháng này cùng nhóm của họ, kèm ngày sinh chính xác.`,
+    lead: (m) => `Ai sinh nhật vào ${m}? Đây là những idol K-pop sinh trong tháng này — mỗi dòng cho biết idol, nhóm của họ và ngày sinh chính xác, lấy từ danh sách của chúng tôi.`,
+    badge: 'Sinh nhật',
+    listH: (m, n) => `🎂 ${n} idol sinh vào ${m}`,
+    none: (m) => `Không có idol nào trong danh sách hiện tại của chúng tôi sinh vào ${m}. Xem các tháng khác bên dưới.`,
+    monthsH: '📅 Sinh nhật theo tháng',
+    col: { idol: 'Idol', group: 'Nhóm', date: 'Ngày sinh' },
+    faqH: '❓ Câu hỏi thường gặp',
+    q1: (m) => `Những idol K-pop nào sinh vào ${m}?`,
+    a1: (m, names) => `Trong danh sách của chúng tôi, idol sinh vào ${m} có ${names}. Nhóm và ngày sinh chính xác của từng người đều có ở bảng trên.`,
+    q2: (m) => `Danh sách sinh nhật ${m} được lập như thế nào?`,
+    a2: () => `Mọi ngày sinh đều lấy từ danh sách nghệ sĩ đã xác minh của chúng tôi — chúng tôi chỉ liệt kê những ngày có thể xác nhận, gắn với nhóm của từng idol. Không có số liệu nào là ước lượng.`,
+    relH: '🎤 Khám phá thêm',
+    hubLabel: '🎤 Trung tâm K-pop',
+    browseLabel: '📚 Khám phá toàn bộ K-pop',
+  },
+  // Thai: MONTH_NAMES are bare nouns, so the template supplies เดือน; counts
+  // are NOUN + NUMERAL + CLASSIFIER (คน for people) and never pluralised.
+  th: {
+    h1: (m) => `ไอดอล K-pop ที่เกิดเดือน${m}`,
+    title: (m) => `ไอดอล K-pop ที่เกิดเดือน${m} — วันเกิดแยกตามวง | KoreaPlus`,
+    desc: (m) => `ไอดอล K-pop คนไหนเกิดเดือน${m}บ้าง? รายชื่อไอดอลที่เกิดในเดือนนี้พร้อมชื่อวงและวันเกิดที่แน่นอน ตรวจสอบแล้วทุกรายการ`,
+    lead: (m) => `ใครเกิดเดือน${m}บ้าง? นี่คือไอดอล K-pop ที่เกิดในเดือนนี้ — แต่ละแถวแสดงชื่อไอดอล ชื่อวง และวันเกิดที่แน่นอน ดึงมาจากรายชื่อศิลปินของเรา`,
+    badge: 'วันเกิด',
+    listH: (m, n) => `🎂 ไอดอลที่เกิดเดือน${m} ${n} คน`,
+    none: (m) => `ยังไม่มีไอดอลในรายชื่อปัจจุบันของเราที่เกิดเดือน${m} ดูเดือนอื่นได้ที่ด้านล่าง`,
+    monthsH: '📅 วันเกิดแยกตามเดือน',
+    col: { idol: 'ไอดอล', group: 'วง', date: 'วันเกิด' },
+    faqH: '❓ คำถามที่พบบ่อย',
+    q1: (m) => `ไอดอล K-pop คนไหนเกิดเดือน${m}บ้าง?`,
+    a1: (m, names) => `ไอดอลในรายชื่อของเราที่เกิดเดือน${m} ได้แก่ ${names} ชื่อวงและวันเกิดที่แน่นอนของแต่ละคนอยู่ในตารางด้านบน`,
+    q2: (m) => `รายชื่อวันเกิดเดือน${m} รวบรวมมาอย่างไร?`,
+    a2: () => `วันเกิดทุกรายการมาจากรายชื่อศิลปินที่เราตรวจสอบแล้ว — เราระบุเฉพาะวันที่ยืนยันได้ และเชื่อมกับวงของไอดอลแต่ละคน ไม่มีการประมาณค่า`,
+    relH: '🎤 สำรวจเพิ่มเติม',
+    hubLabel: '🎤 ศูนย์รวม K-pop',
+    browseLabel: '📚 สำรวจ K-pop ทั้งหมด',
   },
 };
 

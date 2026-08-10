@@ -8,7 +8,8 @@
      TERMS — the 8 newly-written term articles (objective, established
              vocabulary only), per term-slug, per language.
 
-   Languages: en (x-default) + ja zh es ko fr de pt id  (9 total).
+   Languages: en (x-default) + ja zh es ko fr de pt id
+              + ar hi ru vi th  (14 total; ar is rendered RTL).
    Any language left empty for a given term is simply not emitted
    (hreflang only covers filled languages — contract requirement).
 
@@ -128,6 +129,66 @@ const HUB = {
     hub: '🎤 Hub K-pop',
     termsH: 'Semua istilah A–Z',
   },
+  ar: {
+    h1: 'قاموس مصطلحات K-Pop من A إلى Z',
+    title: 'قاموس مصطلحات K-Pop من A إلى Z — شرح مصطلحات الفاندوم | KoreaPlus',
+    metaDesc: 'قاموس من A إلى Z لمصطلحات جمهور K-Pop ولغة الصناعة — الفنان المفضل (bias) والعودة الفنية (comeback) وماكني (maknae) والفانكام (fancam) والدايسانغ (daesang) وغيرها، لكل مصطلح تعريف واضح ودليل كامل.',
+    lead: 'جديد على فاندوم K-Pop؟ يجمع هذا القاموس من A إلى Z الكلمات التي يستخدمها الجمهور والصناعة فعلًا — من «الفنان المفضل» و«العودة الفنية» إلى «الفانكام» و«الدايسانغ». لكل مصطلح تعريف قصير هنا ورابط إلى دليل أوسع.',
+    azLabel: 'الانتقال إلى حرف',
+    allTerms: 'كل المصطلحات',
+    relatedH: '🎤 تابع استكشاف K-Pop',
+    browse: '📚 تصفَّح الكل',
+    hub: '🎤 مركز K-Pop',
+    termsH: 'كل المصطلحات من A إلى Z',
+  },
+  hi: {
+    h1: 'K-pop शब्दकोश A–Z',
+    title: 'K-pop शब्दकोश A–Z — फैनडम के शब्द और स्लैंग | KoreaPlus',
+    metaDesc: 'K-pop फैनडम के शब्दों और इंडस्ट्री स्लैंग का A–Z शब्दकोश — बायस, कमबैक, मैकने, फैनकैम, देसांग और बहुत कुछ, हर शब्द की आसान परिभाषा और पूरा गाइड।',
+    lead: 'K-pop फैनडम में नए हैं? यह A–Z शब्दकोश उन शब्दों को एक जगह लाता है जो फैंस और इंडस्ट्री सच में इस्तेमाल करते हैं — "बायस" और "कमबैक" से लेकर "फैनकैम" और "देसांग" तक। हर शब्द की यहाँ छोटी परिभाषा है और पूरे गाइड का लिंक भी।',
+    azLabel: 'अक्षर पर जाएँ',
+    allTerms: 'सभी शब्द',
+    relatedH: '🎤 K-pop और एक्सप्लोर करें',
+    browse: '📚 सभी K-pop गाइड',
+    hub: '🎤 K-pop हब',
+    termsH: 'सभी शब्द, A से Z तक',
+  },
+  ru: {
+    h1: 'Словарь K-pop от A до Z',
+    title: 'Словарь K-pop A–Z — термины и сленг фандома | KoreaPlus',
+    metaDesc: 'Словарь терминов фандома и индустрии K-pop от A до Z: биас, камбэк, макнэ, фанкам, тэсан и другие — у каждого понятное определение и подробный гид.',
+    lead: 'Только начинаете разбираться в K-pop? Этот словарь от A до Z собирает слова, которыми реально пользуются фанаты и индустрия, — от «биаса» и «камбэка» до «фанкама» и «тэсана». У каждого термина здесь короткое определение и ссылка на подробный гид.',
+    azLabel: 'Перейти к букве',
+    allTerms: 'Все термины',
+    relatedH: '🎤 Продолжайте изучать K-pop',
+    browse: '📚 Весь K-pop',
+    hub: '🎤 Раздел K-pop',
+    termsH: 'Все термины от A до Z',
+  },
+  vi: {
+    h1: 'Từ điển K-pop A–Z',
+    title: 'Từ điển K-pop A–Z — Thuật ngữ và tiếng lóng của fan | KoreaPlus',
+    metaDesc: 'Từ điển A–Z các thuật ngữ fan và tiếng lóng trong ngành K-pop: bias, comeback, maknae, fancam, daesang và nhiều nữa, mỗi mục đều có định nghĩa rõ ràng và một bài viết đầy đủ.',
+    lead: 'Bạn mới bước vào fandom K-pop? Từ điển A–Z này gom lại những từ mà fan và người trong ngành thực sự dùng — từ "bias", "comeback" đến "fancam" và "daesang". Mỗi thuật ngữ có một định nghĩa ngắn ở đây và liên kết tới bài viết đầy đủ.',
+    azLabel: 'Nhảy tới chữ cái',
+    allTerms: 'Tất cả thuật ngữ',
+    relatedH: '🎤 Khám phá thêm về K-pop',
+    browse: '📚 Xem toàn bộ',
+    hub: '🎤 Chuyên mục K-pop',
+    termsH: 'Tất cả thuật ngữ, từ A đến Z',
+  },
+  th: {
+    h1: 'พจนานุกรมศัพท์ K-pop A–Z',
+    title: 'พจนานุกรมศัพท์ K-pop A–Z — ศัพท์แฟนด้อมและสแลงในวงการ | KoreaPlus',
+    metaDesc: 'พจนานุกรม A–Z รวมศัพท์แฟนด้อมและสแลงในวงการ K-pop — เมนบียาส คัมแบ็ก มักเน แฟนแคม แทซัง และอีกหลายคำ พร้อมคำอธิบายสั้น ๆ ที่เข้าใจง่ายและคู่มือฉบับเต็มของแต่ละคำ',
+    lead: 'เพิ่งเข้าวงการแฟนด้อม K-pop ใช่ไหม พจนานุกรม A–Z ชุดนี้รวมคำที่แฟน ๆ และคนในวงการใช้กันจริง ตั้งแต่เมนบียาสและคัมแบ็กไปจนถึงแฟนแคมและแทซัง แต่ละคำมีคำอธิบายสั้น ๆ อยู่ที่นี่ พร้อมลิงก์ไปยังคู่มือฉบับเต็ม',
+    azLabel: 'ข้ามไปที่ตัวอักษร',
+    allTerms: 'ศัพท์ทั้งหมด',
+    relatedH: '🎤 สำรวจ K-pop ต่อ',
+    browse: '📚 ดูทั้งหมด',
+    hub: '🎤 ศูนย์รวม K-pop',
+    termsH: 'ศัพท์ทั้งหมด A–Z',
+  },
 };
 
 /* ── Short definitions for EXISTING term articles (used in the A–Z list
@@ -146,6 +207,11 @@ const EXISTING = {
     de: { term: 'Bias', def: 'Dein Lieblingsmitglied einer K-Pop-Gruppe.' },
     pt: { term: 'Bias', def: 'Seu integrante favorito de um grupo de K-pop.' },
     id: { term: 'Bias', def: 'Member favoritmu dalam sebuah grup K-pop.' },
+    ar: { term: 'الفنان المفضل (البياس)', def: 'العضو المفضل لديك في فرقة K-Pop.' },
+    hi: { term: 'बायस (Bias)', def: 'किसी K-pop ग्रुप में आपका सबसे पसंदीदा मेंबर।' },
+    ru: { term: 'Биас', def: 'Ваш любимый участник K-pop-группы.' },
+    vi: { term: 'Bias', def: 'Thành viên bạn yêu thích nhất trong một nhóm K-pop.' },
+    th: { term: 'เมนบียาส (Bias)', def: 'สมาชิกที่คุณชื่นชอบที่สุดในวง K-pop' },
   },
   'what-is-a-bias-wrecker': {
     en: { term: 'Bias wrecker', def: 'A member who threatens to replace your bias.' },
@@ -157,6 +223,11 @@ const EXISTING = {
     de: { term: 'Bias wrecker', def: 'Ein Mitglied, das deinen Bias zu verdrängen droht.' },
     pt: { term: 'Bias wrecker', def: 'Um integrante que ameaça tomar o lugar do seu bias.' },
     id: { term: 'Bias wrecker', def: 'Member yang mengancam menggeser bias-mu.' },
+    ar: { term: 'مُزاحِم الفنان المفضل (Bias wrecker)', def: 'عضو يهدّد بإزاحة فنانك المفضل.' },
+    hi: { term: 'बायस रेकर (Bias wrecker)', def: 'वह मेंबर जो आपके बायस की जगह लेने लगता है।' },
+    ru: { term: 'Биас-вреккер (разрушитель биаса)', def: 'Участник, который грозит потеснить вашего биаса.' },
+    vi: { term: 'Bias wrecker', def: 'Thành viên có nguy cơ soán ngôi bias của bạn.' },
+    th: { term: 'เบียสเรกเกอร์ (Bias wrecker)', def: 'สมาชิกที่กำลังจะมาแทนที่เมนบียาสของคุณ' },
   },
   'what-is-a-comeback-kpop': {
     en: { term: 'Comeback', def: 'A new release with a fresh concept and promotions.' },
@@ -168,6 +239,11 @@ const EXISTING = {
     de: { term: 'Comeback', def: 'Eine neue Veröffentlichung mit frischem Konzept und Promo.' },
     pt: { term: 'Comeback', def: 'Um novo lançamento com conceito e divulgação renovados.' },
     id: { term: 'Comeback', def: 'Rilis baru dengan konsep dan promosi segar.' },
+    ar: { term: 'العودة الفنية (Comeback)', def: 'إصدار جديد بمفهوم فني جديد وأنشطة ترويجية.' },
+    hi: { term: 'कमबैक (Comeback)', def: 'नए कॉन्सेप्ट और प्रमोशन के साथ आने वाली नई रिलीज़।' },
+    ru: { term: 'Камбэк', def: 'Новый релиз с новой концепцией и промокампанией.' },
+    vi: { term: 'Comeback', def: 'Sản phẩm mới ra mắt kèm concept mới và đợt quảng bá.' },
+    th: { term: 'คัมแบ็ก (Comeback)', def: 'การปล่อยผลงานใหม่พร้อมคอนเซปต์ใหม่และช่วงโปรโมต' },
   },
   'what-is-a-maknae': {
     en: { term: 'Maknae', def: 'The youngest member of a group.' },
@@ -179,6 +255,11 @@ const EXISTING = {
     de: { term: 'Maknae', def: 'Das jüngste Mitglied einer Gruppe.' },
     pt: { term: 'Maknae', def: 'O integrante mais novo de um grupo.' },
     id: { term: 'Maknae', def: 'Member termuda dalam sebuah grup.' },
+    ar: { term: 'ماكني (Maknae)', def: 'أصغر أعضاء الفرقة سنًّا.' },
+    hi: { term: 'मैकने (Maknae)', def: 'ग्रुप का सबसे छोटा मेंबर।' },
+    ru: { term: 'Макнэ', def: 'Самый младший участник группы.' },
+    vi: { term: 'Maknae', def: 'Thành viên nhỏ tuổi nhất trong nhóm.' },
+    th: { term: 'มักเน (Maknae)', def: 'สมาชิกที่อายุน้อยที่สุดในวง' },
   },
   'what-is-aegyo': {
     en: { term: 'Aegyo', def: 'A cute, charming display of affection.' },
@@ -190,6 +271,11 @@ const EXISTING = {
     de: { term: 'Aegyo', def: 'Ein niedliches, charmantes Auftreten.' },
     pt: { term: 'Aegyo', def: 'Uma demonstração fofa e encantadora.' },
     id: { term: 'Aegyo', def: 'Ekspresi lucu dan menggemaskan.' },
+    ar: { term: 'إيغيو (Aegyo)', def: 'إظهار الدلال بطريقة لطيفة ومحبَّبة.' },
+    hi: { term: 'एग्यो (Aegyo)', def: 'प्यारे और मासूम अंदाज़ में दुलार जताना।' },
+    ru: { term: 'Эгьё', def: 'Милое, обаятельное проявление нежности.' },
+    vi: { term: 'Aegyo', def: 'Cách thể hiện sự dễ thương, đáng yêu.' },
+    th: { term: 'แอกโย (Aegyo)', def: 'การทำท่าน่ารักเอ็นดูเพื่อเอาใจคนดู' },
   },
   'kpop-fan-chant': {
     en: { term: 'Fan chant', def: 'A synchronized chant fans shout during songs.' },
@@ -201,6 +287,11 @@ const EXISTING = {
     de: { term: 'Fan chant', def: 'Ein synchroner Sprechgesang der Fans während der Songs.' },
     pt: { term: 'Fan chant', def: 'Um grito sincronizado dos fãs durante as músicas.' },
     id: { term: 'Fan chant', def: 'Seruan serempak fans saat lagu berlangsung.' },
+    ar: { term: 'هتاف الجمهور (Fan chant)', def: 'هتاف موحَّد يردّده الجمهور أثناء الأغنية.' },
+    hi: { term: 'फैन चांट (Fan chant)', def: 'गाने के दौरान फैंस का एक साथ लगाया जाने वाला नारा।' },
+    ru: { term: 'Фанчант', def: 'Слаженная кричалка, которую фанаты скандируют во время песни.' },
+    vi: { term: 'Fanchant', def: 'Đoạn hô đồng thanh mà fan hô theo trong lúc bài hát vang lên.' },
+    th: { term: 'แฟนแชนต์ (Fan chant)', def: 'เสียงตะโกนพร้อมกันของแฟน ๆ ระหว่างเพลง' },
   },
   'kpop-trainee-system': {
     en: { term: 'Trainee', def: 'A performer in training before debut.' },
@@ -212,6 +303,11 @@ const EXISTING = {
     de: { term: 'Trainee', def: 'Ein Künstler in Ausbildung vor dem Debüt.' },
     pt: { term: 'Trainee', def: 'Um artista em treinamento antes da estreia.' },
     id: { term: 'Trainee', def: 'Calon artis yang berlatih sebelum debut.' },
+    ar: { term: 'متدرِّب (Trainee)', def: 'فنان يتدرّب قبل الظهور الأول.' },
+    hi: { term: 'ट्रेनी (Trainee)', def: 'डेब्यू से पहले ट्रेनिंग ले रहा कलाकार।' },
+    ru: { term: 'Трейни', def: 'Стажёр, который готовится к дебюту.' },
+    vi: { term: 'Thực tập sinh', def: 'Người đang được đào tạo trước khi debut.' },
+    th: { term: 'เด็กฝึก (Trainee)', def: 'ศิลปินที่กำลังฝึกอยู่ก่อนเดบิวต์' },
   },
   'kpop-sub-unit': {
     en: { term: 'Sub-unit', def: 'A smaller group formed from a larger group\'s members.' },
@@ -223,6 +319,11 @@ const EXISTING = {
     de: { term: 'Sub-Unit', def: 'Eine kleinere Gruppe aus Mitgliedern einer größeren.' },
     pt: { term: 'Sub-unidade', def: 'Um grupo menor formado por integrantes de um maior.' },
     id: { term: 'Sub-unit', def: 'Grup kecil dari sebagian member grup besar.' },
+    ar: { term: 'وحدة فرعية (Sub-unit)', def: 'فرقة صغيرة مكوَّنة من بعض أعضاء فرقة أكبر.' },
+    hi: { term: 'सब-यूनिट (Sub-unit)', def: 'किसी बड़े ग्रुप के कुछ मेंबर से बना छोटा ग्रुप।' },
+    ru: { term: 'Саб-юнит', def: 'Небольшой состав из части участников большой группы.' },
+    vi: { term: 'Sub-unit (nhóm nhỏ)', def: 'Nhóm nhỏ lập ra từ một số thành viên của nhóm lớn.' },
+    th: { term: 'ซับยูนิต (Sub-unit)', def: 'วงย่อยที่ตั้งขึ้นจากสมาชิกบางคนของวงใหญ่' },
   },
   'kpop-title-track': {
     en: { term: 'Title track', def: 'The lead single promoted from a release.' },
@@ -234,6 +335,11 @@ const EXISTING = {
     de: { term: 'Title track', def: 'Die beworbene Leadsingle einer Veröffentlichung.' },
     pt: { term: 'Title track', def: 'O single principal divulgado de um lançamento.' },
     id: { term: 'Title track', def: 'Singel utama yang dipromosikan dari sebuah rilis.' },
+    ar: { term: 'الأغنية الرئيسية (Title track)', def: 'الأغنية التي تُروَّج بوصفها العمل الرئيسي في الإصدار.' },
+    hi: { term: 'टाइटल ट्रैक (Title track)', def: 'किसी रिलीज़ का वह मुख्य गाना जिसका प्रमोशन होता है।' },
+    ru: { term: 'Тайтл-трек', def: 'Главная песня релиза, которую продвигают.' },
+    vi: { term: 'Ca khúc chủ đề', def: 'Bài hát chính được chọn quảng bá cho một sản phẩm.' },
+    th: { term: 'ไตเติลแทร็ก (Title track)', def: 'เพลงหลักที่เลือกมาโปรโมตจากผลงานชุดนั้น' },
   },
   'kpop-lightstick': {
     en: { term: 'Lightstick', def: 'An official fandom light used at concerts.' },
@@ -245,6 +351,11 @@ const EXISTING = {
     de: { term: 'Lightstick', def: 'Das offizielle Fandom-Licht für Konzerte.' },
     pt: { term: 'Lightstick', def: 'A luz oficial do fandom usada em shows.' },
     id: { term: 'Lightstick', def: 'Lampu resmi fandom yang dipakai di konser.' },
+    ar: { term: 'العصا الضوئية (Lightstick)', def: 'أداة تشجيع رسمية مضيئة تُستخدم في الحفلات.' },
+    hi: { term: 'लाइटस्टिक (Lightstick)', def: 'कॉन्सर्ट में इस्तेमाल होने वाली फैनडम की आधिकारिक लाइट।' },
+    ru: { term: 'Лайтстик', def: 'Официальный светящийся атрибут фандома для концертов.' },
+    vi: { term: 'Lightstick', def: 'Đèn cổ vũ chính thức của fandom, dùng trong concert.' },
+    th: { term: 'แท่งไฟ (Lightstick)', def: 'แท่งไฟอย่างเป็นทางการของแฟนด้อมที่ใช้ในคอนเสิร์ต' },
   },
   'kpop-photocard-culture': {
     en: { term: 'Photocard', def: 'A collectible idol card included with albums.' },
@@ -256,6 +367,11 @@ const EXISTING = {
     de: { term: 'Photocard', def: 'Eine Sammelkarte mit Idols, die Alben beiliegt.' },
     pt: { term: 'Photocard', def: 'Um card colecionável de ídolos que vem nos álbuns.' },
     id: { term: 'Photocard', def: 'Kartu idola koleksi yang disertakan dalam album.' },
+    ar: { term: 'الفوتوكارد (Photocard)', def: 'بطاقة نجم قابلة للتجميع تُرفق مع الألبومات.' },
+    hi: { term: 'फोटोकार्ड (Photocard)', def: 'एल्बम के साथ मिलने वाला कलेक्ट करने लायक आइडल कार्ड।' },
+    ru: { term: 'Фотокарта', def: 'Коллекционная карточка с айдолом, которая идёт в комплекте с альбомом.' },
+    vi: { term: 'Photocard', def: 'Thẻ hình idol để sưu tầm, đi kèm trong album.' },
+    th: { term: 'โฟโต้การ์ด (Photocard)', def: 'การ์ดรูปไอดอลสำหรับสะสมที่แถมมากับอัลบั้ม' },
   },
   'kpop-positions-explained': {
     en: { term: 'Positions', def: 'Roles within a group: leader, vocalist, rapper, visual, center.' },
@@ -267,6 +383,11 @@ const EXISTING = {
     de: { term: 'Positionen', def: 'Rollen in der Gruppe: Leader, Vocalist, Rapper, Visual, Center.' },
     pt: { term: 'Posições', def: 'Papéis no grupo: líder, vocalista, rapper, visual, center.' },
     id: { term: 'Posisi', def: 'Peran dalam grup: leader, vokalis, rapper, visual, center.' },
+    ar: { term: 'المراكز (Positions)', def: 'الأدوار داخل الفرقة: القائد، المغني، الرابر، الواجهة، المركز.' },
+    hi: { term: 'पोज़िशन (Positions)', def: 'ग्रुप के अंदर की भूमिकाएँ: लीडर, वोकलिस्ट, रैपर, विज़ुअल, सेंटर।' },
+    ru: { term: 'Позиции', def: 'Роли внутри группы: лидер, вокалист, рэпер, визуал, центр.' },
+    vi: { term: 'Vị trí trong nhóm', def: 'Các vai trò trong nhóm: leader, vocal, rapper, visual, center.' },
+    th: { term: 'ตำแหน่งในวง (Positions)', def: 'บทบาทต่าง ๆ ในวง ได้แก่ ลีดเดอร์ นักร้องนำ แร็ปเปอร์ วิชวล และเซ็นเตอร์' },
   },
   'kpop-visual-position': {
     en: { term: 'Visual', def: 'The member representing the group\'s public image.' },
@@ -278,6 +399,11 @@ const EXISTING = {
     de: { term: 'Visual', def: 'Das Mitglied, das das öffentliche Bild der Gruppe prägt.' },
     pt: { term: 'Visual', def: 'O integrante que representa a imagem pública do grupo.' },
     id: { term: 'Visual', def: 'Member yang mewakili citra publik grup.' },
+    ar: { term: 'الواجهة (Visual)', def: 'العضو الذي يمثّل صورة الفرقة أمام الجمهور.' },
+    hi: { term: 'विज़ुअल (Visual)', def: 'वह मेंबर जो ग्रुप की सार्वजनिक छवि का चेहरा होता है।' },
+    ru: { term: 'Визуал', def: 'Участник, который представляет публичный образ группы.' },
+    vi: { term: 'Visual', def: 'Thành viên đại diện cho hình ảnh của nhóm trước công chúng.' },
+    th: { term: 'วิชวล (Visual)', def: 'สมาชิกที่เป็นภาพลักษณ์ของวงต่อสาธารณะ' },
   },
   'kpop-fansign-events': {
     en: { term: 'Fansign', def: 'A meet-and-greet where fans get autographs.' },
@@ -289,6 +415,11 @@ const EXISTING = {
     de: { term: 'Fansign', def: 'Ein Treffen, bei dem Fans Autogramme bekommen.' },
     pt: { term: 'Fansign', def: 'Um encontro onde os fãs conseguem autógrafos.' },
     id: { term: 'Fansign', def: 'Acara temu sapa di mana fans mendapat tanda tangan.' },
+    ar: { term: 'حفل التوقيع (Fansign)', def: 'لقاء يحصل فيه الجمهور على توقيعات النجوم.' },
+    hi: { term: 'फैनसाइन (Fansign)', def: 'वह मुलाक़ात जहाँ फैंस को ऑटोग्राफ मिलते हैं।' },
+    ru: { term: 'Фансайн', def: 'Встреча, на которой фанаты получают автографы.' },
+    vi: { term: 'Fansign', def: 'Buổi gặp gỡ nơi fan xin được chữ ký.' },
+    th: { term: 'แฟนไซน์ (Fansign)', def: 'งานพบปะที่แฟน ๆ ได้รับลายเซ็น' },
   },
   'kpop-music-shows': {
     en: { term: 'Music shows', def: 'Weekly TV programs where idols perform and win trophies.' },
@@ -300,6 +431,11 @@ const EXISTING = {
     de: { term: 'Music Shows', def: 'Wöchentliche TV-Shows, in denen Idols auftreten und Trophäen gewinnen.' },
     pt: { term: 'Music shows', def: 'Programas semanais de TV onde ídolos se apresentam e ganham troféus.' },
     id: { term: 'Music show', def: 'Program TV mingguan tempat idol tampil dan meraih trofi.' },
+    ar: { term: 'البرامج الموسيقية (Music shows)', def: 'برامج تلفزيونية أسبوعية يقدّم فيها النجوم عروضهم ويتنافسون على المركز الأول.' },
+    hi: { term: 'म्यूज़िक शो (Music shows)', def: 'हर हफ़्ते आने वाले टीवी शो जहाँ आइडल परफॉर्म करते हैं और ट्रॉफी जीतते हैं।' },
+    ru: { term: 'Музыкальные шоу', def: 'Еженедельные телепрограммы, где айдолы выступают и выигрывают трофеи.' },
+    vi: { term: 'Sân khấu âm nhạc', def: 'Các chương trình truyền hình hằng tuần nơi idol biểu diễn và giành cúp.' },
+    th: { term: 'รายการเพลง (Music show)', def: 'รายการโทรทัศน์รายสัปดาห์ที่ไอดอลขึ้นแสดงและชิงถ้วยรางวัล' },
   },
   'kpop-fandom-culture': {
     en: { term: 'Fandom', def: 'The organized community of a group\'s fans.' },
@@ -311,6 +447,11 @@ const EXISTING = {
     de: { term: 'Fandom', def: 'Die organisierte Gemeinschaft der Fans einer Gruppe.' },
     pt: { term: 'Fandom', def: 'A comunidade organizada de fãs de um grupo.' },
     id: { term: 'Fandom', def: 'Komunitas terorganisir dari para fans sebuah grup.' },
+    ar: { term: 'الفاندوم (Fandom)', def: 'مجتمع منظَّم يضم جمهور الفرقة.' },
+    hi: { term: 'फैनडम (Fandom)', def: 'किसी ग्रुप के फैंस का संगठित समुदाय।' },
+    ru: { term: 'Фандом', def: 'Организованное сообщество фанатов группы.' },
+    vi: { term: 'Fandom', def: 'Cộng đồng fan có tổ chức của một nhóm.' },
+    th: { term: 'แฟนด้อม (Fandom)', def: 'ชุมชนแฟนคลับของวงที่รวมตัวกันอย่างเป็นระบบ' },
   },
   'kpop-fandom-names-and-colors': {
     en: { term: 'Fandom name & color', def: 'The official name and signature color of a fandom.' },
@@ -322,6 +463,11 @@ const EXISTING = {
     de: { term: 'Fandom-Name & -Farbe', def: 'Der offizielle Name und die Signaturfarbe eines Fandoms.' },
     pt: { term: 'Nome e cor do fandom', def: 'O nome oficial e a cor símbolo de um fandom.' },
     id: { term: 'Nama & warna fandom', def: 'Nama resmi dan warna khas sebuah fandom.' },
+    ar: { term: 'اسم الفاندوم ولونه', def: 'الاسم الرسمي للفاندوم واللون الذي يرمز إليه.' },
+    hi: { term: 'फैनडम का नाम और रंग', def: 'किसी फैनडम का आधिकारिक नाम और उसका खास रंग।' },
+    ru: { term: 'Название и цвет фандома', def: 'Официальное имя фандома и его фирменный цвет.' },
+    vi: { term: 'Tên và màu fandom', def: 'Tên chính thức và màu đại diện của một fandom.' },
+    th: { term: 'ชื่อและสีประจำแฟนด้อม', def: 'ชื่ออย่างเป็นทางการและสีสัญลักษณ์ของแฟนด้อม' },
   },
 };
 
@@ -353,6 +499,11 @@ const TERMS = {
     de: { term: 'Stan', def: 'Ein hingebungsvoller, sehr aktiver Fan eines Künstlers.', lead: 'In K-Pop und Popkultur bedeutet „stan", ein hingebungsvoller Fan zu sein; das Wort dient als Substantiv („Ich bin ein Stan") und als Verb („Ich stan diese Gruppe").', sections: [{ h: 'Bedeutung und Gebrauch', body: '<p>Der Begriff „stan" entstand Anfang der 2000er im Internet-Slang und verbreitete sich über Online-Musikcommunitys. Als Verb steht er für aktive Unterstützung: Streaming, Voting, Fan-Projekte.</p>' }] },
     pt: { term: 'Stan', def: 'Um fã dedicado e muito ativo de um artista.', lead: 'No K-pop e na cultura pop, "stan" significa ser um fã dedicado; a palavra funciona como substantivo ("sou um stan") e como verbo ("eu stan esse grupo").', sections: [{ h: 'Significado e uso', body: '<p>O termo "stan" surgiu na gíria da internet no início dos anos 2000 e se popularizou em comunidades musicais online. Como verbo, indica apoio ativo: streaming, votações e projetos de fãs.</p>' }] },
     id: { term: 'Stan', def: 'Fan yang sangat setia dan aktif mendukung artis.', lead: 'Di K-pop dan budaya pop, "stan" berarti menjadi fan yang setia; kata ini dipakai sebagai kata benda ("aku stan") maupun kata kerja ("aku stan grup itu").', sections: [{ h: 'Arti dan penggunaan', body: '<p>Istilah "stan" muncul dari slang internet awal 2000-an dan populer lewat komunitas musik daring. Sebagai kata kerja, ia berarti dukungan aktif: streaming, voting, dan proyek fans.</p>' }] },
+    ar: { term: 'ستان (Stan)', def: 'مُعجَب شديد الحماس ونشِط في دعم فنانه.', lead: 'في K-Pop والثقافة الشعبية عمومًا، تعني كلمة «stan» أن تكون معجبًا شديد الحماس بفنان ما، وتُستعمل اسمًا («أنا ستان») وفعلًا («أنا أستان تلك الفرقة»).', sections: [{ h: 'المعنى والاستخدام', body: '<p>ظهرت كلمة «stan» في لغة الإنترنت في أوائل الألفية الثالثة وانتشرت عبر مجتمعات الموسيقى على الإنترنت. وحين تُستعمل فعلًا فهي تدل على دعم نشط: البث المتكرر للأغاني، والتصويت في الجوائز، والمشاركة في مشاريع الجمهور.</p>' }] },
+    hi: { term: 'स्टैन (Stan)', def: 'किसी आर्टिस्ट का समर्पित और बेहद सक्रिय फैन।', lead: 'K-pop और आम पॉप कल्चर में "stan" का मतलब है किसी आर्टिस्ट का समर्पित, जोशीला फैन होना; यह शब्द संज्ञा ("मैं स्टैन हूँ") और क्रिया ("मैं उस ग्रुप को स्टैन करता हूँ") दोनों तरह चलता है।', sections: [{ h: 'मतलब और इस्तेमाल', body: '<p>"stan" शब्द 2000 के दशक की शुरुआत में इंटरनेट स्लैंग से निकला और ऑनलाइन म्यूज़िक कम्युनिटी के ज़रिए फैला। क्रिया के तौर पर इसका मतलब सक्रिय सपोर्ट है — स्ट्रीमिंग करना, अवॉर्ड शो में वोट देना और फैन प्रोजेक्ट में शामिल होना।</p>' }] },
+    ru: { term: 'Стэн', def: 'Преданный и очень активный фанат артиста.', lead: 'В K-pop и поп-культуре в целом «стэнить» артиста значит быть его преданным, увлечённым фанатом. Слово работает и как существительное («я стэн»), и как глагол («я стэню эту группу»).', sections: [{ h: 'Значение и употребление', body: '<p>Слово «stan» пришло из интернет-сленга начала 2000-х и разошлось через онлайн-сообщества меломанов. В роли глагола оно означает активную поддержку: стриминг релизов, голосование на премиях, участие в фанатских проектах.</p>' }] },
+    vi: { term: 'Stan', def: 'Fan hết mình và rất tích cực của một nghệ sĩ.', lead: 'Trong K-pop và văn hóa đại chúng nói chung, "stan" một nghệ sĩ nghĩa là làm fan hết mình của người đó. Từ này vừa là danh từ ("mình là stan"), vừa là động từ ("mình stan nhóm đó").', sections: [{ h: 'Nghĩa và cách dùng', body: '<p>Từ "stan" xuất hiện trong tiếng lóng mạng đầu những năm 2000 và lan rộng qua các cộng đồng âm nhạc trực tuyến. Khi dùng như động từ, nó hàm ý ủng hộ chủ động: stream nhạc, bình chọn ở các giải thưởng và tham gia dự án của fan.</p>' }] },
+    th: { term: 'สแตน (Stan)', def: 'แฟนที่ทุ่มเทและเคลื่อนไหวสนับสนุนศิลปินอย่างจริงจัง', lead: 'ใน K-pop และวัฒนธรรมป็อปโดยรวม คำว่า stan หมายถึงการเป็นแฟนที่ทุ่มเทให้ศิลปินคนหนึ่ง ใช้เป็นคำนามก็ได้ ("ฉันเป็นสแตน") ใช้เป็นคำกริยาก็ได้ ("ฉันสแตนวงนั้น")', sections: [{ h: 'ความหมายและการใช้งาน', body: '<p>คำว่า stan โผล่ขึ้นมาในสแลงอินเทอร์เน็ตช่วงต้นทศวรรษ 2000 แล้วแพร่หลายผ่านคอมมูนิตี้ดนตรีออนไลน์ เมื่อใช้เป็นคำกริยาจะสื่อถึงการสนับสนุนแบบลงมือทำจริง ทั้งการสตรีมเพลง การโหวตในงานประกาศรางวัล และการร่วมโปรเจกต์ของแฟน ๆ</p>' }] },
   },
   'kpop-fancam': {
     en: {
@@ -375,6 +526,11 @@ const TERMS = {
     de: { term: 'Fancam', def: 'Ein Video, das sich auf ein einzelnes Mitglied konzentriert.', lead: 'Ein Fancam (직캠, jikcam) ist ein Video, das ein einzelnes Mitglied während des gesamten Auftritts verfolgt, statt wie ein TV-Schnitt zwischen Mitgliedern zu wechseln.', sections: [{ h: 'Was ein Fancam zeigt', body: '<p>Während eine TV-Übertragung die Kamerawinkel über die ganze Gruppe wechselt, bleibt der Fancam das ganze Lied auf einem Mitglied. So sieht man dessen Choreografie und Bühnenpräsenz ohne Unterbrechung. Heute gibt es auch offizielle Fancams von Sendern und Agenturen.</p>' }] },
     pt: { term: 'Fancam', def: 'Um vídeo focado em um único integrante durante a apresentação.', lead: 'Um fancam (직캠, jikcam) é um vídeo que segue um único integrante durante toda a apresentação, em vez de alternar entre integrantes como uma edição de TV.', sections: [{ h: 'O que um fancam capta', body: '<p>Enquanto a transmissão de TV troca de ângulo por todo o grupo, o fancam fica fixo em um integrante a música inteira, permitindo ver a coreografia e a presença sem cortes. Hoje há também fancams oficiais de emissoras e agências.</p>' }] },
     id: { term: 'Fancam', def: 'Video yang fokus pada satu member selama penampilan.', lead: 'Fancam (직캠, jikcam) adalah video yang mengikuti satu member sepanjang panggung, alih-alih berpindah antar member seperti suntingan siaran.', sections: [{ h: 'Apa yang direkam fancam', body: '<p>Jika siaran TV berganti sudut ke seluruh grup, fancam tetap terkunci pada satu member sepanjang lagu, sehingga fans bisa melihat koreografi dan penguasaan panggungnya tanpa terputus. Kini stasiun dan agensi juga merilis fancam resmi.</p>' }] },
+    ar: { term: 'فانكام (Fancam)', def: 'مقطع مصوَّر يركّز على عضو واحد أثناء العرض.', lead: 'الفانكام (직캠، jikcam) مقطع يتابع عضوًا واحدًا من الفرقة طوال الوصلة، بدل التنقّل بين الأعضاء كما يفعل البث التلفزيوني.', sections: [{ h: 'ماذا يلتقط الفانكام', body: '<p>بينما يبدّل البث التلفزيوني زوايا الكاميرا على الفرقة كلها، يبقى الفانكام مثبَّتًا على عضو واحد طوال الأغنية، فيرى الجمهور رقصه وتعابيره وحضوره على المسرح دون انقطاع. واليوم تنشر القنوات وشركات الترفيه مقاطع فانكام رسمية أيضًا، لكل عضو مقطعه الخاص.</p>' }] },
+    hi: { term: 'फैनकैम (Fancam)', def: 'परफॉर्मेंस के दौरान एक ही मेंबर पर टिका वीडियो।', lead: 'फैनकैम (직캠, jikcam) ऐसा वीडियो है जो पूरे स्टेज के दौरान ग्रुप के सिर्फ़ एक मेंबर को फॉलो करता है, ब्रॉडकास्ट एडिट की तरह मेंबर बदल-बदलकर नहीं दिखाता।', sections: [{ h: 'फैनकैम में क्या दिखता है', body: '<p>टीवी प्रसारण पूरे ग्रुप पर कैमरा एंगल बदलता रहता है, जबकि फैनकैम पूरे गाने भर एक ही मेंबर पर टिका रहता है। इससे फैंस उस मेंबर की कोरियोग्राफी, हाव-भाव और स्टेज प्रेजेंस बिना रुकावट देख पाते हैं। आजकल ब्रॉडकास्टर और एजेंसी भी हर मेंबर का ऑफिशियल फैनकैम जारी करते हैं।</p>' }] },
+    ru: { term: 'Фанкам', def: 'Видео, снятое на одного участника во время выступления.', lead: 'Фанкам (직캠, jikcam) — это видео, которое всё выступление держит в кадре одного участника группы, а не переключается между ними, как эфирный монтаж.', sections: [{ h: 'Что попадает в фанкам', body: '<p>Телеэфир меняет ракурсы по всей группе, а фанкам всю песню остаётся на одном человеке. Так видно его хореографию, мимику и подачу без единой склейки. Сегодня телеканалы и агентства выпускают и официальные фанкамы — по одному на каждого участника.</p>' }] },
+    vi: { term: 'Fancam', def: 'Video bám theo một thành viên trong suốt phần trình diễn.', lead: 'Fancam (직캠, jikcam) là video bám theo một thành viên trong suốt sân khấu, thay vì cắt qua lại giữa các thành viên như bản dựng phát sóng.', sections: [{ h: 'Fancam ghi lại điều gì', body: '<p>Bản phát sóng đổi góc máy khắp cả nhóm, còn fancam thì khóa ống kính vào một người từ đầu đến cuối bài. Nhờ vậy fan xem được trọn vẹn vũ đạo, biểu cảm và khí chất sân khấu của thành viên đó. Hiện nay các đài truyền hình và công ty chủ quản cũng phát hành fancam chính thức cho từng thành viên.</p>' }] },
+    th: { term: 'แฟนแคม (Fancam)', def: 'คลิปที่จับจ้องสมาชิกคนเดียวตลอดการแสดง', lead: 'แฟนแคม (직캠 หรือ jikcam) คือคลิปที่ตามจับสมาชิกเพียงคนเดียวตลอดทั้งเวที แทนที่จะตัดสลับไปมาระหว่างสมาชิกแบบการตัดต่อของรายการโทรทัศน์', sections: [{ h: 'แฟนแคมเก็บภาพอะไรบ้าง', body: '<p>ขณะที่การถ่ายทอดทางโทรทัศน์จะสลับมุมกล้องไปทั้งวง แฟนแคมจะล็อกอยู่ที่สมาชิกคนเดียวตลอดทั้งเพลง แฟน ๆ จึงได้ดูท่าเต้น สีหน้า และการครองเวทีของคนนั้นแบบไม่ขาดตอน ทุกวันนี้สถานีโทรทัศน์และค่ายเพลงก็ปล่อยแฟนแคมอย่างเป็นทางการของสมาชิกแต่ละคนออกมาด้วย</p>' }] },
   },
   'kpop-killing-part': {
     en: {
@@ -397,6 +553,11 @@ const TERMS = {
     de: { term: 'Killing Part', def: 'Der einprägsamste, herausragende Moment eines Songs.', lead: 'Der „Killing Part" eines K-Pop-Songs ist sein einprägsamster, auffälligster Moment — die paar Sekunden, die Fans am häufigsten wiederholen und ausschneiden.', sections: [{ h: 'Was einen Killing Part ausmacht', body: '<p>Meist ist es ein kurzer, markanter Abschnitt — ein Gesangs-Run, eine Rap-Zeile, ein Tanzschritt oder ein Hook —, den man sofort behält. Der Hook ist der mitsingbare Kern; der Killing Part kann der Hook sein, aber auch eine Bridge oder ein Choreo-Highlight.</p>' }] },
     pt: { term: 'Killing part', def: 'O momento mais marcante e destacado de uma música.', lead: 'A "killing part" de uma música de K-pop é seu momento mais marcante e chamativo: os segundos que os fãs mais repetem, recortam e citam.', sections: [{ h: 'O que é uma killing part', body: '<p>Costuma ser um trecho curto e distinto — um run vocal, uma linha de rap, um passo de dança ou um hook — lembrado na hora. O hook é o núcleo cantável; a killing part pode ser o hook, uma ponte ou um destaque coreográfico.</p>' }] },
     id: { term: 'Killing part', def: 'Momen paling berkesan dan menonjol dalam sebuah lagu.', lead: '"Killing part" sebuah lagu K-pop adalah momennya yang paling berkesan dan mencuri perhatian — beberapa detik yang paling sering diputar ulang dan dipotong fans.', sections: [{ h: 'Apa itu killing part', body: '<p>Biasanya berupa bagian singkat dan khas — run vokal, baris rap, gerakan tari, atau hook — yang langsung diingat. Hook adalah inti yang bisa dinyanyikan; killing part bisa berupa hook, bridge, atau sorotan koreografi.</p>' }] },
+    ar: { term: 'كيلينغ بارت (Killing part)', def: 'أبرز لحظة في الأغنية وأكثرها بقاءً في الذاكرة.', lead: '«الكيلينغ بارت» في أغنية K-Pop هي أكثر لحظاتها بقاءً في الذاكرة وجذبًا للانتباه — تلك الثواني القليلة التي يعيد الجمهور تشغيلها ويقتطعها ويردّدها أكثر من غيرها.', sections: [{ h: 'ما الذي يصنع الكيلينغ بارت', body: '<p>هي عادةً مقطع قصير ومميّز — أداء صوتي، أو سطر راب، أو حركة رقص، أو لازمة (hook) — يعلق في الذهن فورًا. اللازمة هي جوهر الأغنية الذي يردّده الجميع، أما الكيلينغ بارت فقد تكون اللازمة نفسها، وقد تكون جسر الأغنية أو لحظة في الرقص يختارها الجمهور بوصفها الأبرز.</p>' }] },
+    hi: { term: 'किलिंग पार्ट (Killing part)', def: 'गाने का सबसे यादगार और सबसे चमकदार हिस्सा।', lead: 'किसी K-pop गाने का "किलिंग पार्ट" उसका सबसे यादगार, सबसे ध्यान खींचने वाला पल होता है — वही चंद सेकंड जिन्हें फैंस सबसे ज़्यादा दोहराते, क्लिप बनाते और कोट करते हैं।', sections: [{ h: 'किलिंग पार्ट क्या होता है', body: '<p>किलिंग पार्ट आम तौर पर एक छोटा और अलग-सा हिस्सा होता है — कोई वोकल रन, कोई रैप लाइन, कोई डांस मूव या हुक — जो तुरंत याद रह जाता है। हुक गाने का वह हिस्सा है जिसे सब साथ गाते हैं; किलिंग पार्ट हुक भी हो सकता है, और ब्रिज या कोरियोग्राफी का कोई खास पल भी।</p>' }] },
+    ru: { term: 'Киллинг-парт', def: 'Самый запоминающийся, ударный момент песни.', lead: '«Киллинг-парт» песни в K-pop — её самый запоминающийся и цепляющий момент: те несколько секунд, которые фанаты чаще всего переслушивают, режут на клипы и цитируют.', sections: [{ h: 'Из чего складывается киллинг-парт', body: '<p>Обычно это короткий, узнаваемый фрагмент — вокальный пассаж, рэп-строчка, движение из хореографии или хук, — который запоминается мгновенно. Хук — это подпеваемая основа песни; киллинг-партом может стать и он, и бридж, и отдельный ход в танце, который фанаты выделяют как главный.</p>' }] },
+    vi: { term: 'Killing part', def: 'Khoảnh khắc đáng nhớ và nổi bật nhất của một bài hát.', lead: '"Killing part" của một bài K-pop là khoảnh khắc đáng nhớ và bắt tai nhất — vài giây mà fan tua lại, cắt clip và nhắc tới nhiều nhất.', sections: [{ h: 'Điều gì làm nên một killing part', body: '<p>Killing part thường là một đoạn ngắn và rất riêng — một câu hát luyến, một câu rap, một động tác vũ đạo hay đoạn hook — nghe một lần là nhớ. Hook là phần lõi ai cũng hát theo được; killing part có thể chính là hook, mà cũng có thể là đoạn bridge hoặc một khoảnh khắc vũ đạo được fan chọn làm điểm sáng.</p>' }] },
+    th: { term: 'คิลลิงพาร์ต (Killing part)', def: 'ช่วงที่โดดเด่นและติดหูที่สุดของเพลง', lead: 'คิลลิงพาร์ตของเพลง K-pop คือช่วงที่น่าจดจำและดึงความสนใจได้มากที่สุด เป็นไม่กี่วินาทีที่แฟน ๆ เปิดซ้ำ ตัดคลิป และพูดถึงกันมากที่สุด', sections: [{ h: 'อะไรทำให้กลายเป็นคิลลิงพาร์ต', body: '<p>คิลลิงพาร์ตมักเป็นท่อนสั้น ๆ ที่มีเอกลักษณ์ ไม่ว่าจะเป็นการเอื้อนเสียง ท่อนแร็ป ท่าเต้น หรือท่อนฮุก ซึ่งฟังครั้งเดียวก็จำได้ ท่อนฮุกคือแกนของเพลงที่ทุกคนร้องตามได้ ส่วนคิลลิงพาร์ตอาจเป็นท่อนฮุกก็ได้ หรืออาจเป็นท่อนบริดจ์หรือช่วงเต้นที่แฟน ๆ ยกให้เป็นไฮไลต์</p>' }] },
   },
   'kpop-point-choreography': {
     en: {
@@ -419,6 +580,11 @@ const TERMS = {
     de: { term: 'Point Choreography', def: 'Der charakteristische, leicht nachzumachende Tanzmove eines Songs.', lead: 'Die Point Choreography (포인트 안무) ist der charakteristische, sofort erkennbare Tanzmove eines K-Pop-Songs.', sections: [{ h: 'Warum es einen Schlüsselmove gibt', body: '<p>Gruppen entwerfen für den Titelsong einen kurzen, markanten Move, der leicht zu merken und nachzumachen ist. Ein starker Move hilft, dass sich der Song verbreitet, weil ihn jeder in Sekunden nachstellen kann — die Basis für Dance-Challenges in sozialen Medien.</p>' }] },
     pt: { term: 'Point choreography', def: 'O passo de dança marcante e fácil de copiar de uma música.', lead: 'A point choreography (포인트 안무) é o passo de dança marcante e reconhecível na hora associado a uma música de K-pop.', sections: [{ h: 'Por que existe o passo-chave', body: '<p>Os grupos criam um movimento curto e distinto para a faixa-título, fácil de lembrar e imitar. Um bom passo-chave ajuda a música a se espalhar, pois qualquer um o recria em segundos, e é a base dos desafios de dança nas redes.</p>' }] },
     id: { term: 'Point choreography', def: 'Gerakan tari khas yang mudah ditiru dari sebuah lagu.', lead: 'Point choreography (포인트 안무) adalah gerakan tari khas yang langsung dikenali dan melekat pada sebuah lagu K-pop.', sections: [{ h: 'Kenapa ada gerakan kunci', body: '<p>Grup merancang gerakan singkat dan khas untuk lagu utama agar mudah diingat dan ditiru. Gerakan kunci yang kuat membantu lagu menyebar karena siapa pun bisa menirunya dalam hitungan detik, dan menjadi dasar dance challenge di media sosial.</p>' }] },
+    ar: { term: 'الرقصة المميّزة (Point choreography)', def: 'حركة رقص مميّزة وسهلة التقليد ترتبط بالأغنية.', lead: 'الرقصة المميّزة (포인트 안무، point choreography) هي حركة الرقص المرتبطة بأغنية K-Pop والتي يتعرّف عليها الجميع فورًا — الجزء الذي يقلّده الجمهور وحتى المشاهد العابر.', sections: [{ h: 'لماذا لكل أغنية حركة مميّزة', body: '<p>تصمّم الفرق حركة قصيرة ولافتة مرتبطة بالأغنية الرئيسية كي يسهل تذكّرها وتقليدها. وكلما كانت الحركة أقوى انتشرت الأغنية أسرع، لأن أي شخص يستطيع إعادتها في ثوانٍ. وعلى هذا الأساس تقوم تحديات الرقص على منصات التواصل، حيث يصوّر الجمهور وفنانون آخرون أنفسهم وهم يؤدّون الحركة.</p>' }] },
+    hi: { term: 'पॉइंट कोरियोग्राफी (Point choreography)', def: 'गाने से जुड़ा वह खास डांस मूव जो आसानी से कॉपी हो जाए।', lead: 'पॉइंट कोरियोग्राफी (포인트 안무) किसी K-pop गाने से जुड़ा वह सिग्नेचर डांस मूव है जिसे देखते ही पहचाना जा सके — वही हिस्सा जिसे फैंस और आम दर्शक भी कॉपी करते हैं।', sections: [{ h: 'हर गाने में पॉइंट मूव क्यों होता है', body: '<p>ग्रुप टाइटल ट्रैक के लिए एक छोटा और अलग दिखने वाला मूव तैयार करते हैं ताकि वह जल्दी याद हो और आसानी से नकल किया जा सके। मूव जितना दमदार, गाना उतनी तेज़ी से फैलता है, क्योंकि कोई भी उसे कुछ सेकंड में दोहरा सकता है। यही मूव सोशल मीडिया के डांस चैलेंज की बुनियाद बनता है, जिनमें फैंस और दूसरे आर्टिस्ट खुद को वह स्टेप करते हुए फ़िल्माते हैं।</p>' }] },
+    ru: { term: 'Поинт-хореография', def: 'Фирменное движение из песни, которое легко повторить.', lead: 'Поинт-хореография (포인트 안무) — фирменное движение, привязанное к песне в K-pop: узнаётся с первого взгляда, и именно его повторяют и фанаты, и случайные зрители.', sections: [{ h: 'Зачем песне ключевое движение', body: '<p>Для тайтл-трека придумывают короткий и характерный жест, который легко запомнить и повторить. Чем сильнее движение, тем быстрее расходится песня: воспроизвести его можно за пару секунд. На этом и держатся танцевальные челленджи в соцсетях, где фанаты и другие артисты снимают себя с фирменным движением.</p>' }] },
+    vi: { term: 'Point choreography', def: 'Động tác vũ đạo đặc trưng, dễ bắt chước của một bài hát.', lead: 'Point choreography (포인트 안무) là động tác vũ đạo đặc trưng gắn với một bài K-pop, nhìn một lần là nhận ra — cũng chính là đoạn fan và cả người xem bình thường hay bắt chước.', sections: [{ h: 'Vì sao bài nào cũng có động tác điểm nhấn', body: '<p>Các nhóm thiết kế cho ca khúc chủ đề một động tác ngắn và dễ nhận diện để khán giả nhớ nhanh và làm theo được. Động tác càng ấn tượng thì bài hát càng dễ lan, vì ai cũng tái hiện được trong vài giây. Đây cũng là nền của các dance challenge trên mạng xã hội, nơi fan và cả nghệ sĩ khác quay lại cảnh mình nhảy động tác đó.</p>' }] },
+    th: { term: 'ท่าเต้นพอยต์ (Point choreography)', def: 'ท่าเต้นซิกเนเจอร์ของเพลงที่เลียนแบบตามได้ง่าย', lead: 'ท่าเต้นพอยต์ (포인트 안무 หรือ point choreography) คือท่าเต้นซิกเนเจอร์ประจำเพลง K-pop ที่เห็นแล้วรู้ทันทีว่าเป็นเพลงอะไร และเป็นท่อนที่ทั้งแฟน ๆ และคนทั่วไปชอบเต้นตาม', sections: [{ h: 'ทำไมทุกเพลงต้องมีท่าเต้นพอยต์', body: '<p>วงจะออกแบบท่าสั้น ๆ ที่มีเอกลักษณ์ผูกไว้กับไตเติลแทร็ก เพื่อให้จำง่ายและเต้นตามง่าย ท่าที่แข็งแรงพอจะช่วยให้เพลงกระจายออกไปไว เพราะใครก็ทำตามได้ในไม่กี่วินาที ท่าเต้นพอยต์จึงเป็นพื้นฐานของแดนซ์ชาเลนจ์บนโซเชียลมีเดีย ที่ทั้งแฟน ๆ และศิลปินคนอื่นถ่ายคลิปตัวเองเต้นท่านั้น</p>' }] },
   },
   'kpop-daesang': {
     en: {
@@ -441,6 +607,11 @@ const TERMS = {
     de: { term: 'Daesang', def: 'Der „große Preis", die höchste Auszeichnung einer koreanischen Musikgala.', lead: 'Ein Daesang (대상) ist der „große Preis" einer koreanischen Musikgala — die höchste Ehre des Abends, etwa Künstler, Song oder Album des Jahres.', sections: [{ h: 'Daesang und Bonsang', body: '<p>Bei koreanischen Galas erhalten mehrere Acts einen <strong>Bonsang</strong> (Hauptpreis). Davon bekommen nur sehr wenige einen <strong>Daesang</strong> (großen Preis), die höchste Auszeichnung der Kategorie. Ein Daesang gilt als großer Meilenstein. Die Kategorien variieren je Gala.</p>' }] },
     pt: { term: 'Daesang', def: 'O "grande prêmio", a maior honraria de uma premiação musical coreana.', lead: 'Um daesang (대상) é o "grande prêmio" de uma premiação musical coreana: a maior honraria da noite, como Artista do Ano, Música do Ano ou Álbum do Ano.', sections: [{ h: 'Daesang x bonsang', body: '<p>Nas premiações coreanas, vários artistas recebem um <strong>bonsang</strong> (prêmio principal). Desses, pouquíssimos recebem um <strong>daesang</strong> (grande prêmio), o máximo da categoria. Ganhar um daesang é um grande marco. As categorias variam por premiação.</p>' }] },
     id: { term: 'Daesang', def: '"Hadiah utama", penghargaan tertinggi di ajang musik Korea.', lead: 'Daesang (대상) adalah "grand prize" di ajang penghargaan musik Korea — kehormatan tertinggi malam itu, seperti Artis Tahun Ini, Lagu Tahun Ini, atau Album Tahun Ini.', sections: [{ h: 'Daesang vs bonsang', body: '<p>Di ajang Korea, beberapa artis menerima <strong>bonsang</strong> (hadiah utama). Dari mereka, hanya sangat sedikit yang meraih <strong>daesang</strong> (grand prize), penghargaan tertinggi di kategorinya. Meraih daesang dianggap tonggak besar. Kategori berbeda tiap ajang.</p>' }] },
+    ar: { term: 'دايسانغ (Daesang)', def: '«الجائزة الكبرى» — أعلى جائزة في حفلات الموسيقى الكورية.', lead: 'الدايسانغ (대상) هي «الجائزة الكبرى» في حفلات توزيع جوائز الموسيقى الكورية — أعلى تكريم في تلك الليلة، مثل فنان العام أو أغنية العام أو ألبوم العام.', sections: [{ h: 'الدايسانغ والبونسانغ', body: '<p>في حفلات الجوائز الكورية يحصل عدد من الفنانين على <strong>البونسانغ</strong> (الجائزة الرئيسية). ومن بين هؤلاء يفوز عدد قليل جدًا بـ<strong>الدايسانغ</strong> (الجائزة الكبرى)، وهي أعلى جائزة في فئتها، ويُعدّ الفوز بها محطة كبرى في مسيرة الفنان. وتختلف الفئات من حفل إلى آخر.</p>' }] },
+    hi: { term: 'देसांग (Daesang)', def: '"ग्रैंड प्राइज़" — कोरियाई म्यूज़िक अवॉर्ड का सर्वोच्च सम्मान।', lead: 'देसांग (대상) कोरियाई म्यूज़िक अवॉर्ड समारोह का "ग्रैंड प्राइज़" है — उस रात का सबसे बड़ा सम्मान, जैसे आर्टिस्ट ऑफ़ द ईयर, सॉन्ग ऑफ़ द ईयर या एल्बम ऑफ़ द ईयर।', sections: [{ h: 'देसांग और बोनसांग', body: '<p>कोरियाई समारोहों में कई कलाकारों को <strong>बोनसांग</strong> (मुख्य पुरस्कार) मिलता है। उनमें से बहुत कम को <strong>देसांग</strong> (ग्रैंड प्राइज़) मिलता है, जो अपनी कैटेगरी का सर्वोच्च पुरस्कार है। देसांग जीतना करियर का बड़ा पड़ाव माना जाता है। कैटेगरी हर समारोह में अलग होती है।</p>' }] },
+    ru: { term: 'Тэсан', def: '«Гран-при» — высшая награда корейской музыкальной премии.', lead: 'Тэсан (대상) — «гран-при» корейской музыкальной премии: главная награда вечера, например «Артист года», «Песня года» или «Альбом года».', sections: [{ h: 'Тэсан и понсан', body: '<p>На корейских премиях <strong>понсан</strong> (основную награду) получают сразу несколько исполнителей. Из них лишь единицы получают <strong>тэсан</strong> — гран-при, высшую награду в своей категории. Это считается крупной вехой в карьере. Набор категорий у каждой премии свой.</p>' }] },
+    vi: { term: 'Daesang', def: '"Giải thưởng lớn" — hạng mục cao nhất của một lễ trao giải âm nhạc Hàn Quốc.', lead: 'Daesang (대상) là "giải thưởng lớn" tại lễ trao giải âm nhạc Hàn Quốc — vinh dự cao nhất của đêm đó, chẳng hạn Nghệ sĩ của năm, Bài hát của năm hay Album của năm.', sections: [{ h: 'Daesang và bonsang', body: '<p>Tại các lễ trao giải Hàn Quốc, nhiều nghệ sĩ cùng nhận <strong>bonsang</strong> (giải chính). Trong số đó, rất ít người nhận được <strong>daesang</strong> (giải thưởng lớn) — hạng mục cao nhất. Giành daesang được xem là một cột mốc lớn trong sự nghiệp. Các hạng mục cụ thể khác nhau tùy từng lễ trao giải.</p>' }] },
+    th: { term: 'แทซัง (Daesang)', def: '"รางวัลใหญ่" หรือรางวัลสูงสุดของงานประกาศรางวัลดนตรีเกาหลี', lead: 'แทซัง (대상) คือรางวัลใหญ่ที่สุดของงานประกาศรางวัลดนตรีเกาหลี เป็นเกียรติสูงสุดของค่ำคืนนั้น เช่น ศิลปินแห่งปี เพลงแห่งปี หรืออัลบั้มแห่งปี', sections: [{ h: 'แทซังกับบนซัง', body: '<p>ในงานประกาศรางวัลของเกาหลี จะมีศิลปินหลายรายได้รับ <strong>บนซัง</strong> (รางวัลหลัก) และจากกลุ่มนั้นจะมีเพียงไม่กี่รายที่ได้ <strong>แทซัง</strong> (รางวัลใหญ่) ซึ่งเป็นรางวัลสูงสุดในสาขานั้น การได้แทซังถือเป็นหมุดหมายสำคัญของเส้นทางอาชีพ ส่วนสาขาที่มอบจะต่างกันไปในแต่ละงาน</p>' }] },
   },
   'kpop-all-kill': {
     en: {
@@ -463,6 +634,11 @@ const TERMS = {
     de: { term: 'All-kill', def: 'Wenn ein Song alle großen koreanischen Charts gleichzeitig anführt.', lead: 'Ein „All-kill" beschreibt einen Song, der gleichzeitig die Spitze aller großen koreanischen Echtzeit-Musikcharts erreicht.', sections: [{ h: 'All-kill und Perfect All-kill', body: '<p>Korea hat mehrere Musikcharts. Steht ein Song zugleich auf Platz 1 aller großen Charts, nennen Fans das All-kill. Der <strong>Perfect All-kill (PAK)</strong> ist strenger: Spitze der Echtzeit- und Tagescharts jedes Dienstes. Es ist eine Chart-Leistung, kein Preis.</p>' }] },
     pt: { term: 'All-kill', def: 'Quando uma música lidera todas as grandes paradas coreanas ao mesmo tempo.', lead: 'Um "all-kill" descreve uma música que chega ao 1º lugar de todas as grandes paradas musicais coreanas em tempo real ao mesmo tempo.', sections: [{ h: 'All-kill e perfect all-kill', body: '<p>A Coreia tem várias paradas. Quando uma música é nº 1 em todas as principais ao mesmo tempo, chama-se all-kill. O <strong>perfect all-kill (PAK)</strong> é mais rígido: topo das paradas em tempo real e diárias de cada serviço. É um feito de paradas, não um prêmio.</p>' }] },
     id: { term: 'All-kill', def: 'Saat sebuah lagu memuncaki semua chart musik Korea utama sekaligus.', lead: '"All-kill" menggambarkan lagu yang mencapai posisi 1 di semua chart musik real-time Korea utama secara bersamaan.', sections: [{ h: 'All-kill vs perfect all-kill', body: '<p>Korea punya beberapa chart musik. Saat sebuah lagu nomor 1 di semua chart utama sekaligus, fans menyebutnya all-kill. <strong>Perfect all-kill (PAK)</strong> lebih ketat: puncak chart real-time dan harian di tiap layanan. Ini capaian chart, bukan penghargaan ajang.</p>' }] },
+    ar: { term: 'أول كيل (All-kill)', def: 'أن تتصدّر أغنية كل قوائم الموسيقى الكورية الكبرى في وقت واحد.', lead: '«الأول كيل» وصف لأغنية تتصدّر في الوقت نفسه كل القوائم الموسيقية الكورية الكبرى المحدَّثة لحظيًا.', sections: [{ h: 'الأول كيل والبيرفكت أول كيل', body: '<p>في كوريا الجنوبية عدة قوائم موسيقية. وحين تحتل أغنية المركز الأول في كل القوائم الكبرى في الوقت نفسه يسمّي الجمهور ذلك «أول كيل». أما <strong>البيرفكت أول كيل (PAK)</strong> فمعيار أشد صرامة: تصدُّر القوائم اللحظية واليومية على كل الخدمات الكبرى في اللحظة نفسها. وهذا إنجاز في القوائم، لا جائزة تُمنح في حفل.</p>' }] },
+    hi: { term: 'ऑल-किल (All-kill)', def: 'जब कोई गाना कोरिया के सभी बड़े म्यूज़िक चार्ट पर एक साथ नंबर 1 हो।', lead: '"ऑल-किल" उस गाने के लिए कहा जाता है जो कोरिया के सभी बड़े रियल-टाइम म्यूज़िक चार्ट पर एक ही समय में सबसे ऊपर पहुँच जाए।', sections: [{ h: 'ऑल-किल और परफेक्ट ऑल-किल', body: '<p>कोरिया में कई म्यूज़िक चार्ट हैं। जब कोई गाना सभी बड़े चार्ट पर एक साथ नंबर 1 हो, तो फैंस उसे ऑल-किल कहते हैं। <strong>परफेक्ट ऑल-किल (PAK)</strong> इससे सख़्त पैमाना है: हर बड़ी सर्विस के रियल-टाइम और डेली, दोनों चार्ट पर एक ही समय में टॉप। यह चार्ट की उपलब्धि है, किसी समारोह का अवॉर्ड नहीं।</p>' }] },
+    ru: { term: 'Олл-килл', def: 'Когда песня одновременно возглавляет все крупные корейские чарты.', lead: '«Олл-килл» — это когда песня одновременно оказывается на первом месте всех крупных корейских музыкальных чартов реального времени.', sections: [{ h: 'Олл-килл и перфект олл-килл', body: '<p>В Южной Корее несколько музыкальных чартов. Если песня одновременно стоит на первом месте во всех основных, фанаты называют это олл-киллом. <strong>Перфект олл-килл (PAK)</strong> строже: первое место и в чартах реального времени, и в суточных на каждом крупном сервисе в один и тот же момент. Это чартовое достижение, а не награда премии.</p>' }] },
+    vi: { term: 'All-kill', def: 'Khi một bài hát cùng lúc đứng đầu mọi bảng xếp hạng nhạc số lớn của Hàn Quốc.', lead: '"All-kill" là khi một bài hát cùng lúc leo lên vị trí số 1 trên tất cả các bảng xếp hạng nhạc số thời gian thực lớn của Hàn Quốc.', sections: [{ h: 'All-kill và perfect all-kill', body: '<p>Hàn Quốc có nhiều bảng xếp hạng nhạc số. Khi một bài đứng nhất ở tất cả các bảng lớn cùng lúc, fan gọi đó là all-kill. <strong>Perfect all-kill (PAK)</strong> khắt khe hơn: dẫn đầu cả bảng thời gian thực lẫn bảng theo ngày của mọi nền tảng lớn trong cùng một thời điểm. Đây là thành tích bảng xếp hạng, không phải giải thưởng của một lễ trao giải.</p>' }] },
+    th: { term: 'ออลคิล (All-kill)', def: 'การที่เพลงหนึ่งขึ้นอันดับ 1 ทุกชาร์ตเพลงใหญ่ของเกาหลีพร้อมกัน', lead: 'ออลคิลคือการที่เพลงหนึ่งขึ้นถึงอันดับ 1 ของชาร์ตเพลงเรียลไทม์รายใหญ่ทุกชาร์ตในเกาหลีพร้อมกันในเวลาเดียวกัน', sections: [{ h: 'ออลคิลกับเพอร์เฟกต์ออลคิล', body: '<p>เกาหลีใต้มีชาร์ตเพลงอยู่หลายชาร์ต เมื่อเพลงใดขึ้นอันดับ 1 ของชาร์ตใหญ่ทุกชาร์ตพร้อมกัน แฟน ๆ จะเรียกว่าออลคิล ส่วน <strong>เพอร์เฟกต์ออลคิล (PAK)</strong> เข้มงวดกว่านั้น คือต้องขึ้นอันดับ 1 ทั้งชาร์ตเรียลไทม์และชาร์ตรายวันของทุกบริการใหญ่ในเวลาเดียวกัน ทั้งหมดนี้เป็นผลงานบนชาร์ต ไม่ใช่รางวัลจากงานประกาศรางวัล</p>' }] },
   },
   'kpop-encore': {
     en: {
@@ -485,6 +661,11 @@ const TERMS = {
     de: { term: 'Encore', def: 'Eine kurze Wiederholung nach dem Sieg in einer Musikshow.', lead: 'In koreanischen Musikshows gibt die Gruppe, die den ersten Platz gewinnt, einen kurzen „Encore" — eine kurze Wiederholung eines Songteils direkt nach der Trophäenvergabe.', sections: [{ h: 'Wann der Encore stattfindet', body: '<p>Am Ende der Show wird der Wochensieger verkündet. Die Siegergruppe gibt den Encore: eine kurze Reprise des Refrains oder Titelteils, oft entspannter und emotionaler als die Hauptbühne. Da er auf einen Sieg folgt, ist es ein spontaner Moment, den Fans gern ausschneiden.</p>' }] },
     pt: { term: 'Encore', def: 'Uma breve repetição após vencer em um programa musical.', lead: 'Nos programas musicais coreanos, o grupo que vence o primeiro lugar faz um breve "encore": repete parte da música logo após o anúncio do troféu.', sections: [{ h: 'Quando o encore acontece', body: '<p>No fim do programa, anuncia-se o vencedor da semana. O grupo vencedor faz o encore: uma repetição curta do refrão ou da parte principal, em geral mais relaxada e emotiva que o palco principal. Por seguir uma vitória, costuma ser um momento espontâneo que os fãs recortam.</p>' }] },
     id: { term: 'Encore', def: 'Penampilan ulang singkat setelah menang di acara musik.', lead: 'Di acara musik Korea, grup yang menang peringkat pertama membawakan "encore" singkat: mengulang sebagian lagu tepat setelah trofi diumumkan.', sections: [{ h: 'Kapan encore berlangsung', body: '<p>Di akhir acara, pemenang minggu itu diumumkan. Grup pemenang membawakan encore: pengulangan singkat reff atau bagian utama, sering lebih santai dan emosional dibanding panggung utama. Karena mengikuti kemenangan, ini momen spontan yang sering dipotong fans.</p>' }] },
+    ar: { term: 'الإنكور (Encore)', def: 'أداء قصير يُعاد بعد الفوز في برنامج موسيقي.', lead: 'في البرامج الموسيقية الكورية، يقدّم الفريق الفائز بالمركز الأول «إنكور» قصيرًا: إعادة سريعة لجزء من الأغنية بعد إعلان الكأس مباشرة.', sections: [{ h: 'متى يحدث الإنكور', body: '<p>في ختام البرنامج يُعلَن فائز الأسبوع، فيقدّم الفريق الفائز الإنكور: إعادة قصيرة للازمة أو للمقطع الرئيسي من الأغنية، وغالبًا بأجواء أهدأ وأكثر عاطفة من الوصلة الأصلية. ولأنه يأتي عقب الفوز مباشرة، يكون لحظة عفوية واحتفالية يقتطعها الجمهور كثيرًا.</p>' }] },
+    hi: { term: 'एनकोर (Encore)', def: 'म्यूज़िक शो जीतने के बाद की छोटी दोबारा परफॉर्मेंस।', lead: 'कोरियाई म्यूज़िक शो में पहला स्थान जीतने वाला ग्रुप छोटा-सा "एनकोर" करता है — ट्रॉफी की घोषणा के तुरंत बाद गाने का एक हिस्सा दोबारा गाना।', sections: [{ h: 'एनकोर कब होता है', body: '<p>शो के आख़िर में उस हफ़्ते का विजेता घोषित होता है और जीतने वाला ग्रुप एनकोर करता है: कोरस या टाइटल हिस्से को दोबारा गाना, जो अक्सर मुख्य स्टेज से ज़्यादा सहज और भावुक होता है। जीत के ठीक बाद आने की वजह से यह खुला और जश्न वाला पल होता है, इसीलिए फैंस एनकोर स्टेज ख़ूब क्लिप करते हैं।</p>' }] },
+    ru: { term: 'Энкор', def: 'Короткое повторное выступление после победы в музыкальном шоу.', lead: 'В корейских музыкальных шоу коллектив, занявший первое место, сразу после вручения трофея исполняет короткий «энкор» — повтор части песни.', sections: [{ h: 'Когда бывает энкор', body: '<p>В финале программы объявляют победителя недели, и он выходит на энкор: коротко повторяет припев или заглавную часть песни, обычно свободнее и эмоциональнее, чем на основной сцене. Это момент сразу после победы, поэтому он получается искренним и праздничным — фанаты часто нарезают именно энкор-сцены.</p>' }] },
+    vi: { term: 'Encore', def: 'Phần diễn lại ngắn sau khi thắng cúp ở sân khấu âm nhạc.', lead: 'Ở các sân khấu âm nhạc Hàn Quốc, nhóm giành hạng nhất sẽ diễn một đoạn "encore" ngắn — hát lại một phần bài hát ngay sau khi cúp được công bố.', sections: [{ h: 'Encore diễn ra khi nào', body: '<p>Cuối chương trình, ban tổ chức công bố quán quân tuần. Nhóm thắng cuộc sẽ hát encore: lặp lại ngắn phần điệp khúc hoặc đoạn chủ đề, thường thoải mái và nhiều cảm xúc hơn sân khấu chính. Vì diễn ra ngay sau chiến thắng nên đây là khoảnh khắc rất thật và rộn ràng, và fan hay cắt lại đúng phần này.</p>' }] },
+    th: { term: 'อังกอร์ (Encore)', def: 'การแสดงซ้ำสั้น ๆ หลังคว้าอันดับ 1 ในรายการเพลง', lead: 'ในรายการเพลงของเกาหลี วงที่ได้อันดับ 1 จะขึ้นแสดงอังกอร์สั้น ๆ คือร้องเพลงซ้ำบางท่อนทันทีหลังประกาศถ้วยรางวัล', sections: [{ h: 'อังกอร์เกิดขึ้นตอนไหน', body: '<p>ช่วงท้ายรายการจะมีการประกาศผู้ชนะประจำสัปดาห์ จากนั้นวงที่ชนะจะขึ้นแสดงอังกอร์ โดยร้องท่อนฮุกหรือท่อนหลักของเพลงซ้ำอีกครั้ง ซึ่งมักผ่อนคลายและเต็มไปด้วยอารมณ์มากกว่าเวทีหลัก เพราะเป็นช่วงต่อจากการคว้าชัย จึงเป็นช่วงเวลาที่จริงใจและชื่นมื่น แฟน ๆ เลยนิยมตัดคลิปเวทีอังกอร์กันมาก</p>' }] },
   },
   'kpop-line-distribution': {
     en: {
@@ -507,6 +688,11 @@ const TERMS = {
     de: { term: 'Line Distribution', def: 'Wie die Parts eines Songs unter den Mitgliedern aufgeteilt sind.', lead: 'Line Distribution beschreibt, wie die Gesangs- und Rap-Parts eines K-Pop-Songs auf die Mitglieder verteilt sind: Wer singt wie viel und welche Zeilen.', sections: [{ h: 'Was sie zeigt', body: '<p>Da K-Pop-Gruppen oft viele Mitglieder haben, teilt jeder Song seine Gesangs- und Rap-Zeilen auf. Line Distribution zeigt, wer welche Teile singt und ungefähr wie viel. Fans dokumentieren das; die Aufteilung legen Produzenten und Agentur fest.</p>' }] },
     pt: { term: 'Line distribution', def: 'Como as partes de uma música se dividem entre os integrantes.', lead: 'A line distribution é como as partes de canto e rap de uma música de K-pop se dividem entre os integrantes: quem canta quanto e quais linhas.', sections: [{ h: 'O que ela mostra', body: '<p>Como os grupos costumam ter muitos integrantes, cada música divide suas linhas de voz e rap. A line distribution detalha quem faz quais partes e quanto cada um canta. Os fãs documentam, mas a divisão é decidida pelos produtores e pela empresa.</p>' }] },
     id: { term: 'Line distribution', def: 'Cara bagian lagu dibagi di antara para member.', lead: 'Line distribution adalah cara bagian nyanyi dan rap sebuah lagu K-pop dibagi di antara para member: siapa menyanyi berapa banyak dan baris mana.', sections: [{ h: 'Apa yang ditunjukkan', body: '<p>Karena grup K-pop sering beranggotakan banyak orang, tiap lagu membagi baris vokal dan rap. Line distribution merinci siapa membawakan bagian apa dan kira-kira sebanyak apa. Fans mendokumentasikannya, tetapi pembagiannya ditentukan produser dan agensi.</p>' }] },
+    ar: { term: 'توزيع المقاطع (Line distribution)', def: 'كيفية تقسيم مقاطع الأغنية بين أعضاء الفرقة.', lead: 'توزيع المقاطع (line distribution) يشير إلى كيفية تقسيم مقاطع الغناء والراب في أغنية K-Pop بين أعضاء الفرقة: من يغني كم، وأي الأسطر.', sections: [{ h: 'ماذا يُظهر توزيع المقاطع', body: '<p>لأن فرق K-Pop تضم غالبًا عددًا كبيرًا من الأعضاء، تُقسَّم مقاطع الغناء والراب في كل أغنية بينهم. وتوزيع المقاطع هو بيان من يؤدي أي جزء وكم يبلغ نصيب كل عضو تقريبًا. يوثّقه الجمهور في مقاطع وجداول، لكن التقسيم نفسه يقرّره منتجو الأغنية وشركة الترفيه.</p>' }] },
+    hi: { term: 'लाइन डिस्ट्रिब्यूशन (Line distribution)', def: 'गाने के हिस्से मेंबर के बीच किस तरह बँटे हैं।', lead: 'लाइन डिस्ट्रिब्यूशन का मतलब है कि किसी K-pop गाने के गायन और रैप के हिस्से ग्रुप के मेंबर में कैसे बँटते हैं — कौन कितना गाता है और कौन-सी लाइन गाता है।', sections: [{ h: 'यह क्या दिखाता है', body: '<p>K-pop ग्रुप में अक्सर बहुत सारे मेंबर होते हैं, इसलिए हर गाना अपनी वोकल और रैप लाइन उनमें बाँटता है। लाइन डिस्ट्रिब्यूशन यही ब्योरा है कि कौन-सा हिस्सा कौन गाता है और हर मेंबर कुल मिलाकर लगभग कितना गाता है। फैंस इसके वीडियो और चार्ट बनाते हैं, लेकिन असल बँटवारा गाने के प्रोड्यूसर और एजेंसी तय करते हैं।</p>' }] },
+    ru: { term: 'Распределение партий', def: 'Как вокальные и рэп-партии песни поделены между участниками группы.', lead: 'Распределение партий (line distribution) — это то, как вокальные и рэп-партии песни в K-pop делятся между участниками группы: кто сколько поёт и какие именно строки.', sections: [{ h: 'Что показывает распределение партий', body: '<p>В K-pop-группах часто много участников, поэтому каждая песня делит вокальные и рэп-строки между ними. Распределение партий — это разбор того, кто исполняет какие куски и сколько примерно поёт каждый. Фанаты сводят это в ролики и диаграммы, но сам расклад определяют продюсеры песни и агентство.</p>' }] },
+    vi: { term: 'Line distribution', def: 'Cách các phần trong một bài hát được chia cho từng thành viên.', lead: 'Line distribution là cách các phần hát và rap của một bài K-pop được chia cho các thành viên trong nhóm: ai hát bao nhiêu và hát những câu nào.', sections: [{ h: 'Line distribution cho thấy điều gì', body: '<p>Nhóm K-pop thường đông thành viên, nên mỗi bài đều phải chia các câu hát và câu rap ra. Line distribution là bản phân tích ai đảm nhận phần nào và mỗi người hát khoảng bao lâu. Fan dựng video và biểu đồ để theo dõi, còn việc chia phần thật sự do nhà sản xuất bài hát và công ty chủ quản quyết định.</p>' }] },
+    th: { term: 'ไลน์ดิสทริบิวชัน (Line distribution)', def: 'การแบ่งท่อนในเพลงให้สมาชิกแต่ละคน', lead: 'ไลน์ดิสทริบิวชันคือการแบ่งท่อนร้องและท่อนแร็ปของเพลง K-pop ให้สมาชิกในวงแต่ละคน ว่าใครได้ร้องมากน้อยแค่ไหนและได้ท่อนไหนบ้าง', sections: [{ h: 'ไลน์ดิสทริบิวชันบอกอะไรเรา', body: '<p>วง K-pop มักมีสมาชิกหลายคน แต่ละเพลงจึงต้องแบ่งท่อนร้องและท่อนแร็ปกันไป ไลน์ดิสทริบิวชันคือการไล่ดูว่าใครรับผิดชอบท่อนใดและแต่ละคนได้ร้องรวมกันประมาณเท่าไร แฟน ๆ ทำเป็นคลิปและกราฟไว้ติดตาม แต่คนที่ตัดสินใจแบ่งท่อนจริง ๆ คือโปรดิวเซอร์ของเพลงและค่ายเพลง</p>' }] },
   },
 };
 

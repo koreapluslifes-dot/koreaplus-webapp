@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════════════
    modules/seo-kpop-bmonth.cjs — "K-pop idols born in <month>" generator.
 
-   12 months × 9 languages (en + ko/ja/zh/es/fr/de/pt/id). For each month
+   12 months × every K-pop channel language that has strings. For each month
    we collect every roster member whose VERIFIED birthday (ENRICH.bdays)
    falls in that month, join the member back to their group meta (ROSTER),
    and render a localized birthday page. Slug: kpop-idols-born-in-<month>.
@@ -22,8 +22,18 @@
 
 const { MONTH_NAMES, T } = require('../seo-kpop-bmonth-l10n.js');
 
-// K-pop channel language set (en first; matches build-seo KPOP_HIST_LANGS).
-const LANGS = require("./seo-langs.cjs");
+// The K-pop channel rolls out locales ahead of the rest of the site, so it has
+// its own list. Tolerate its absence: this cluster must keep building while
+// that file is being introduced.
+let CHANNEL_LANGS;
+try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
+
+// Renderable languages = those with a complete string set. A locale listed
+// upstream before its translations land would otherwise publish English prose
+// under its own hreflang, which is worse than having no page at all. altsFor()
+// reads the same constant, so an advertised alternate always has a page.
+const LANGS = CHANNEL_LANGS.filter(l => T[l] && MONTH_NAMES[l]);
 
 // English month slugs, index 0 (january) … 11 (december).
 const MONTH_SLUGS = ['january', 'february', 'march', 'april', 'may', 'june',
@@ -75,8 +85,8 @@ module.exports = function (ctx) {
   // Localized group display name: Korean roster name for ko, else English.
   const groupName = (grp, lang) => (lang === 'ko' && grp.nameKo) ? grp.nameKo : grp.nameEn;
 
-  // hreflang alts across all 9 langs (every month page exists in all langs,
-  // since the index is language-independent and content is fully translated).
+  // hreflang alts across every renderable lang (the month index is language-
+  // independent, so a page exists in each one LANGS admits — and only those).
   const altsFor = (lang, monthIdx) => {
     const others = LANGS.filter(l => l !== lang);
     if (lang === 'en') return others.map(l => ({ lang: l, url: urlFor(l, monthIdx) }));
@@ -85,8 +95,10 @@ module.exports = function (ctx) {
   };
 
   function buildMonth(monthIdx, lang) {
-    const tr = T[lang] || T.en;
-    const mName = (MONTH_NAMES[lang] || MONTH_NAMES.en)[monthIdx];
+    const tr = T[lang];
+    const months = MONTH_NAMES[lang];
+    if (!tr || !months) return null;   // no strings → no page (an English fallback here ships under a foreign hreflang)
+    const mName = months[monthIdx];
     const entries = byMonth[monthIdx];
     const url = urlFor(lang, monthIdx);
     const h1 = tr.h1(mName);
@@ -118,7 +130,7 @@ module.exports = function (ctx) {
     body += `<h2>${esc(tr.monthsH)}</h2><div class="seo-linklist">`;
     for (let i = 0; i < 12; i++) {
       if (i === monthIdx) continue;
-      const im = (MONTH_NAMES[lang] || MONTH_NAMES.en)[i];
+      const im = months[i];
       body += `<a href="${dir(lang)}kpop/kpop-idols-born-in-${MONTH_SLUGS[i]}.html">🎂 ${esc(im)}</a>`;
     }
     body += `</div>`;

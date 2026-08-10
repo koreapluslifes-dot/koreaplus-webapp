@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════════════
    modules/seo-kpop-glossary.cjs — K-pop term dictionary (A–Z glossary).
 
-   Produces, per language (en + 8 locales):
+   Produces, per language that has the strings:
      1) ONE A–Z glossary hub  →  kpop/glossary.html
         - scans kpop-history.json for the established "what-is" / term
           articles (via the curated EXISTING headword map in l10n) and
@@ -27,7 +27,14 @@ const { HUB, EXISTING, TERMS } = require('./seo-kpop-glossary-l10n.js');
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, ld, TODAY } = ctx;
 
-  const LANGS = require("./seo-langs.cjs");
+  // The K-pop channel rolls out locales ahead of the rest of the site, so it
+  // has its own list. Tolerate its absence: this cluster must keep building
+  // while that file is being introduced.
+  let CHANNEL_LANGS;
+  try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+  catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
+  const LANGS = CHANNEL_LANGS;
+
   // Try to read the history JSON if exposed; fall back to global require so
   // the EXISTING headwords still resolve their per-language article titles.
   // (We only LINK to history pages — we never regenerate them.)
@@ -45,11 +52,12 @@ module.exports = function (ctx) {
   const histPath = (lang, slug) => `${BASEP}${dirOf(lang)}kpop/${slug}.html`;
 
   // Languages in which a brand-new TERM is translated (always include en
-  // when the en block exists).
+  // when the en block exists). A term page also renders hub chrome and links
+  // back to the hub, so a language without a hub is not renderable either.
   function termLangs(slug) {
     const t = TERMS[slug];
     if (!t) return [];
-    return LANGS.filter(l => t[l] && t[l].term);
+    return HUB_LANGS.filter(l => t[l] && t[l].term);
   }
 
   // hreflang alternates for a NEW term page.
@@ -57,9 +65,10 @@ module.exports = function (ctx) {
     const langs = termLangs(slug);
     return langs.filter(l => l !== lang).map(l => ({ lang: l, url: termPath(l, slug) }));
   }
+  // Alternates come from HUB_LANGS — the same set buildHub writes — so a
+  // language whose hub is dropped is never advertised as one.
   function hubAlts(lang) {
-    const langs = LANGS.filter(l => HUB[l]);
-    return langs.filter(l => l !== lang).map(l => ({ lang: l, url: hubPath(l) }));
+    return HUB_LANGS.filter(l => l !== lang).map(l => ({ lang: l, url: hubPath(l) }));
   }
 
   // ── A–Z index entry assembly ───────────────────────────────────────
@@ -72,7 +81,9 @@ module.exports = function (ctx) {
     return m ? m[0] : '#';
   };
 
+  const entryCache = new Map();
   function indexEntries(lang) {
+    if (entryCache.has(lang)) return entryCache.get(lang);
     const out = [];
     // existing articles
     for (const slug of Object.keys(EXISTING)) {
@@ -91,15 +102,20 @@ module.exports = function (ctx) {
     const seen = new Set();
     const uniq = out.filter(e => { const k = e.term.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
     uniq.sort((a, b) => a.term.localeCompare(b.term, 'en', { sensitivity: 'base' }));
+    entryCache.set(lang, uniq);
     return uniq;
   }
 
+  // Languages that actually get a hub: chrome strings AND at least one term
+  // whose article exists in that language. Both halves matter — an empty A–Z
+  // index is not a page, and hubAlts() must advertise only what we write.
+  const HUB_LANGS = LANGS.filter(l => HUB[l] && indexEntries(l).length);
+
   // ── HUB page ───────────────────────────────────────────────────────
   function buildHub(lang) {
+    if (!HUB_LANGS.includes(lang)) return null;
     const T = HUB[lang];
-    if (!T) return null;
     const entries = indexEntries(lang);
-    if (!entries.length) return null;
     const url = hubPath(lang);
     const d = dirOf(lang);
 
@@ -152,7 +168,10 @@ module.exports = function (ctx) {
   // ── NEW term article page ──────────────────────────────────────────
   function buildTerm(slug, lang) {
     const t = TERMS[slug] && TERMS[slug][lang];
-    if (!t || !t.term) return null;
+    // The page wears the hub's chrome and links back to it, so no hub in this
+    // language means no term page either — never English chrome under hreflang.
+    const hubT = HUB[lang];
+    if (!t || !t.term || !hubT) return null;
     const en = TERMS[slug].en || t;
     const url = termPath(lang, slug);
     const d = dirOf(lang);
@@ -160,7 +179,6 @@ module.exports = function (ctx) {
     const title = t.title || `${h1} | KoreaPlus`;
     const metaDesc = t.metaDesc || t.def || '';
 
-    const hubT = HUB[lang] || HUB.en;
     const trail = [
       { name: 'K-Pop', url: '/kpop' },
       { name: hubT.h1, url: hubPath(lang) },
@@ -208,7 +226,7 @@ module.exports = function (ctx) {
     urls() {
       const acc = [];
       // hub (one per language with a HUB translation AND non-empty index)
-      for (const lang of LANGS) {
+      for (const lang of HUB_LANGS) {
         const u = buildHub(lang);
         if (u) acc.push({ lang, url: u });
       }

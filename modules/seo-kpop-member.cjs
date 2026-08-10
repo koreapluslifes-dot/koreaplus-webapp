@@ -4,7 +4,7 @@
    ONE page per (member × language). Members come from CTX.ENRICH `bdays`
    tuples — [[memberName, "YYYY-MM-DD"], ...] keyed by group id — joined to
    the group/act metadata in CTX.ROSTER on the shared `id`. ~191 members ×
-   9 languages.
+   every K-pop channel language that has a complete string set.
 
    CONTENT POLICY — fabrication 0:
    - Only verified, publicly known facts are surfaced: member name, birthday
@@ -25,8 +25,18 @@
 
 const { T, SIGN_NAMES, ANIMAL_NAMES, MONTH_NAMES } = require('./seo-kpop-member-l10n.js');
 
-// 9 languages, en first (x-default). Must be a subset of what L10N supports.
-const LANGS = require("./seo-langs.cjs");
+// The K-pop channel rolls out locales ahead of the rest of the site, so it has
+// its own list. Tolerate its absence: this cluster must keep building while
+// that file is being introduced.
+let CHANNEL_LANGS;
+try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
+
+// Renderable languages, en first (x-default): every string map a profile reads
+// must be present. One short of that and the page ships an English birthday,
+// sign or animal under its own hreflang. The alts list is built from this same
+// constant, so an advertised alternate always has a page behind it.
+const LANGS = CHANNEL_LANGS.filter(l => T[l] && SIGN_NAMES[l] && ANIMAL_NAMES[l] && MONTH_NAMES[l]);
 
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, affBlock, ROSTER, ENRICH, ld, derive } = ctx;
@@ -74,11 +84,12 @@ module.exports = function (ctx) {
   // ko we prefer the Korean name when present, otherwise the English name.
   const actName = (act, lang) => (lang === 'ko' && act.nameKo) ? act.nameKo : act.nameEn;
 
-  // Build one member page for one language. Returns the URL, or null when
-  // the language has no localization (defensive — all 9 are complete).
+  // Build one member page for one language. Returns the URL, or null when the
+  // language is missing any of the string maps this page reads — the same test
+  // LANGS applies, restated here because buildMember is also called directly.
   function buildMember(mem, lang) {
     const t = T[lang];
-    if (!t) return null;
+    if (!t || !SIGN_NAMES[lang] || !ANIMAL_NAMES[lang] || !MONTH_NAMES[lang]) return null;
 
     const isSolo = mem.act.type === 'soloist';
     const m = mem.name;
@@ -164,7 +175,7 @@ module.exports = function (ctx) {
     });
     const schemas = [person, ld.breadcrumbLD(trail), ld.faqLD(qa)].filter(Boolean);
 
-    // ── hreflang alts: en is x-default; only include the 9 complete langs ──
+    // ── hreflang alts: en is x-default; LANGS only, so every alt has a page ──
     const others = LANGS.filter(l => l !== lang);
     const alts = lang === 'en'
       ? others.map(l => ({ lang: l, url: `${BASEP}${dir(l)}kpop/${memberSlug(mem)}.html` }))

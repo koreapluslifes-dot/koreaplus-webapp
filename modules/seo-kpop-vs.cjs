@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════════════
    modules/seo-kpop-vs.cjs — K05: curated K-pop GROUP vs GROUP comparison
-   pages (kpop-vs/{a}-vs-{b}), 9 languages.
+   pages (kpop-vs/{a}-vs-{b}), every language with a translation block.
 
    FACT-ONLY. Compares only objective ROSTER fields — debut date, member
    count, agency, genres (and fandom/type). NO ranking, NO "better than",
@@ -24,9 +24,17 @@ module.exports = function (ctx) {
     T = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'kpop-vs-l10n.json'), 'utf8'));
   } catch { T = {}; }
 
+  // The K-pop channel rolls out locales ahead of the rest of the site, so it
+  // has its own list. Tolerate its absence: this cluster must keep building
+  // while that file is being introduced.
+  let CHANNEL_LANGS;
+  try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+  catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
+
   // Languages we can render = en + every locale that has a translation block.
-  const LANGS = require("./seo-langs.cjs")
-    .filter(l => T[l]);
+  // altsFor() reads the same constant, so an advertised alternate always has a
+  // page behind it.
+  const LANGS = CHANNEL_LANGS.filter(l => T[l]);
 
   // Build a quick id→roster lookup (objective fields only).
   const BY_ID = {};
@@ -67,10 +75,14 @@ module.exports = function (ctx) {
 
   const slugFor = (a, b) => `kpop-vs/${a}-vs-${b}.html`;
 
-  // URL with the BASEP + locale dir convention (dir hardcoding forbidden).
+  // Locale dir prefix (dir hardcoding forbidden). A missing dir falls back to
+  // the bare code, never to '': '' is the English path, so the localized page
+  // would overwrite the English one and both would claim the same <loc>.
+  const dirOf = lang => (lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : lang + '/'));
+
+  // URL with the BASEP + locale dir convention.
   function urlFor(a, b, lang) {
-    const dir = lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : '');
-    return `${BASEP}${dir}${slugFor(a, b)}`;
+    return `${BASEP}${dirOf(lang)}${slugFor(a, b)}`;
   }
 
   // Build hreflang alternates: only languages that can render (all of LANGS,
@@ -174,7 +186,7 @@ module.exports = function (ctx) {
     // ── breadcrumb (K-pop channel root = /kpop) ──
     const trail = [
       { name: t.bcHub, url: '/kpop' },
-      { name: t.bcVs, url: `${BASEP}${lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : '')}kpop-vs/` },
+      { name: t.bcVs, url: `${BASEP}${dirOf(lang)}kpop-vs/` },
       { name: `${nameA} ${t.vs} ${nameB}`, url },
     ];
 

@@ -9,9 +9,14 @@
    in their canonical form. Zodiac sign / Chinese-zodiac / month names are
    localized here via lookup maps keyed by the English key from ctx.derive.
 
-   9 languages: en + ja/zh/es (inline) + ko/fr/de/pt/id. Every language is
-   complete so all 191 members × 9 = 1719 pages can render. No fabrication —
-   templates only restate verified facts.
+   14 languages: the 9 sitewide (en/ja/zh/es/ko/fr/de/pt/id) plus the 5
+   K-pop-only codes (ar/hi/ru/vi/th). Every language is complete so all
+   191 members × 14 = 2674 pages can render. No fabrication — templates only
+   restate verified facts.
+
+   ar is RTL: every string is written in LOGICAL order (emoji first, pipe last,
+   name before the parenthesis). The renderer flips it — never hand-reverse a
+   string here, and never inject RLM/LRM into this data.
    ══════════════════════════════════════════════════════════════════ */
 'use strict';
 
@@ -26,6 +31,13 @@ const SIGN_NAMES = {
   de: { aries: 'Widder', taurus: 'Stier', gemini: 'Zwillinge', cancer: 'Krebs', leo: 'Löwe', virgo: 'Jungfrau', libra: 'Waage', scorpio: 'Skorpion', sagittarius: 'Schütze', capricorn: 'Steinbock', aquarius: 'Wassermann', pisces: 'Fische' },
   pt: { aries: 'Áries', taurus: 'Touro', gemini: 'Gêmeos', cancer: 'Câncer', leo: 'Leão', virgo: 'Virgem', libra: 'Libra', scorpio: 'Escorpião', sagittarius: 'Sagitário', capricorn: 'Capricórnio', aquarius: 'Aquário', pisces: 'Peixes' },
   id: { aries: 'Aries', taurus: 'Taurus', gemini: 'Gemini', cancer: 'Cancer', leo: 'Leo', virgo: 'Virgo', libra: 'Libra', scorpio: 'Scorpio', sagittarius: 'Sagitarius', capricorn: 'Capricorn', aquarius: 'Aquarius', pisces: 'Pisces' },
+  // ar/hi/th sign names already carry their classifier (ال / राशि-less stem / ราศี);
+  // the surrounding template must not prepend a second one.
+  ar: { aries: 'الحمل', taurus: 'الثور', gemini: 'الجوزاء', cancer: 'السرطان', leo: 'الأسد', virgo: 'العذراء', libra: 'الميزان', scorpio: 'العقرب', sagittarius: 'القوس', capricorn: 'الجدي', aquarius: 'الدلو', pisces: 'الحوت' },
+  hi: { aries: 'मेष', taurus: 'वृषभ', gemini: 'मिथुन', cancer: 'कर्क', leo: 'सिंह', virgo: 'कन्या', libra: 'तुला', scorpio: 'वृश्चिक', sagittarius: 'धनु', capricorn: 'मकर', aquarius: 'कुंभ', pisces: 'मीन' },
+  ru: { aries: 'Овен', taurus: 'Телец', gemini: 'Близнецы', cancer: 'Рак', leo: 'Лев', virgo: 'Дева', libra: 'Весы', scorpio: 'Скорпион', sagittarius: 'Стрелец', capricorn: 'Козерог', aquarius: 'Водолей', pisces: 'Рыбы' },
+  vi: { aries: 'Bạch Dương', taurus: 'Kim Ngưu', gemini: 'Song Tử', cancer: 'Cự Giải', leo: 'Sư Tử', virgo: 'Xử Nữ', libra: 'Thiên Bình', scorpio: 'Thiên Yết', sagittarius: 'Nhân Mã', capricorn: 'Ma Kết', aquarius: 'Bảo Bình', pisces: 'Song Ngư' },
+  th: { aries: 'ราศีเมษ', taurus: 'ราศีพฤษภ', gemini: 'ราศีเมถุน', cancer: 'ราศีกรกฎ', leo: 'ราศีสิงห์', virgo: 'ราศีกันย์', libra: 'ราศีตุลย์', scorpio: 'ราศีพิจิก', sagittarius: 'ราศีธนู', capricorn: 'ราศีมังกร', aquarius: 'ราศีกุมภ์', pisces: 'ราศีมีน' },
 };
 
 // Localized Chinese-zodiac animal names (keyed by ctx.derive.cnZodiacOf().key).
@@ -39,6 +51,17 @@ const ANIMAL_NAMES = {
   de: { rat: 'Ratte', ox: 'Büffel', tiger: 'Tiger', rabbit: 'Hase', dragon: 'Drache', snake: 'Schlange', horse: 'Pferd', goat: 'Ziege', monkey: 'Affe', rooster: 'Hahn', dog: 'Hund', pig: 'Schwein' },
   pt: { rat: 'Rato', ox: 'Boi', tiger: 'Tigre', rabbit: 'Coelho', dragon: 'Dragão', snake: 'Serpente', horse: 'Cavalo', goat: 'Cabra', monkey: 'Macaco', rooster: 'Galo', dog: 'Cão', pig: 'Porco' },
   id: { rat: 'Tikus', ox: 'Kerbau', tiger: 'Macan', rabbit: 'Kelinci', dragon: 'Naga', snake: 'Ular', horse: 'Kuda', goat: 'Kambing', monkey: 'Monyet', rooster: 'Ayam', dog: 'Anjing', pig: 'Babi' },
+  // ar Ox is الثور — the same word Arabic uses for Taurus. That collision is
+  // correct Arabic, not a copy-paste slip; do not "fix" it to البقرة.
+  ar: { rat: 'الفأر', ox: 'الثور', tiger: 'النمر', rabbit: 'الأرنب', dragon: 'التنين', snake: 'الأفعى', horse: 'الحصان', goat: 'الماعز', monkey: 'القرد', rooster: 'الديك', dog: 'الكلب', pig: 'الخنزير' },
+  hi: { rat: 'चूहा', ox: 'बैल', tiger: 'बाघ', rabbit: 'खरगोश', dragon: 'ड्रैगन', snake: 'साँप', horse: 'घोड़ा', goat: 'बकरी', monkey: 'बंदर', rooster: 'मुर्गा', dog: 'कुत्ता', pig: 'सूअर' },
+  ru: { rat: 'Крыса', ox: 'Бык', tiger: 'Тигр', rabbit: 'Кролик', dragon: 'Дракон', snake: 'Змея', horse: 'Лошадь', goat: 'Коза', monkey: 'Обезьяна', rooster: 'Петух', dog: 'Собака', pig: 'Свинья' },
+  // vi/th follow the ja pattern — cycle-branch name + animal gloss — because
+  // that is how both languages actually name a birth year (tuổi Tý, ปีชวด).
+  // vi's 4th branch is Mão = mèo (cat), not the Chinese rabbit; that is the
+  // year Vietnamese readers were born in, so never silently swap it to thỏ.
+  vi: { rat: 'Tý (chuột)', ox: 'Sửu (trâu)', tiger: 'Dần (hổ)', rabbit: 'Mão (mèo)', dragon: 'Thìn (rồng)', snake: 'Tỵ (rắn)', horse: 'Ngọ (ngựa)', goat: 'Mùi (dê)', monkey: 'Thân (khỉ)', rooster: 'Dậu (gà)', dog: 'Tuất (chó)', pig: 'Hợi (lợn)' },
+  th: { rat: 'ชวด (หนู)', ox: 'ฉลู (วัว)', tiger: 'ขาล (เสือ)', rabbit: 'เถาะ (กระต่าย)', dragon: 'มะโรง (มังกร)', snake: 'มะเส็ง (งู)', horse: 'มะเมีย (ม้า)', goat: 'มะแม (แพะ)', monkey: 'วอก (ลิง)', rooster: 'ระกา (ไก่)', dog: 'จอ (สุนัข)', pig: 'กุน (หมู)' },
 };
 
 // Localized month names (1-12, index 0-11) for the birthday line.
@@ -52,6 +75,16 @@ const MONTH_NAMES = {
   de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
   pt: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
   id: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+  ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+  hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्तूबर', 'नवंबर', 'दिसंबर'],
+  // ru is nominative (the canonical citation form shared with the other K-pop
+  // l10n bundles). A Russian date needs the genitive — "8 августа 2003" — so
+  // fmtBday() must special-case ru instead of interpolating this row raw.
+  ru: ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'],
+  // vi rows already contain the word "Tháng" — a template must never prefix
+  // another one, or it renders "tháng Tháng 3".
+  vi: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+  th: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
 };
 
 /* UI string templates. Functions take plain facts and return localized text.
@@ -354,6 +387,190 @@ const T = {
     qGroup: (m) => `${m} anggota grup apa?`,
     aGroup: (m, g) => `${m} adalah anggota ${g}.`,
     aSolo: (m) => `${m} adalah solois.`,
+  },
+  // ar is the one language here that cases the loanword "K-Pop": that is the
+  // form already shipped in messages/ar.json (nav.kpop / cat.kpop), and the
+  // app chrome and the SEO chrome have to say the same word.
+  // Every sentence avoids a gendered verb (من مواليد / من أعضاء rather than
+  // وُلد / هو عضو) because the roster mixes male and female idols and this
+  // file never guesses which.
+  ar: {
+    typeMember: 'عضو', typeSoloist: 'فنان منفرد',
+    badge: 'ملف K-Pop',
+    h1: (m, g) => `${m} (${g}) — الملف الشخصي وتاريخ الميلاد والبرج`,
+    title: (m, g) => `${m} من ${g}: تاريخ الميلاد والبرج والملف الشخصي | KoreaPlus`,
+    desc: (m, g) => `${m} من ${g}: تاريخ الميلاد الموثَّق والبرج الغربي والبرج الصيني ومعلومات الفرقة. ملف عضو K-Pop مُدقَّق الحقائق.`,
+    soloDesc: (m) => `${m}: تاريخ الميلاد الموثَّق والبرج الغربي والبرج الصيني ومعلومات المسيرة الفنية. ملف K-Pop مُدقَّق الحقائق.`,
+    lead: (m, g) => `${m} من أعضاء فرقة K-Pop ${g}. فيما يلي الحقائق المعلنة الموثَّقة — تاريخ الميلاد والبرج وتفاصيل الفرقة.`,
+    soloLead: (m) => `${m} من نجوم K-Pop. فيما يلي الحقائق المعلنة الموثَّقة — تاريخ الميلاد والبرج وتفاصيل المسيرة الفنية.`,
+    hFacts: '🔑 الحقائق الأساسية',
+    hBirthday: '🎂 تاريخ الميلاد والعمر',
+    hZodiac: '♈ البرج الغربي والبرج الصيني',
+    hGroup: '🎤 الفرقة',
+    hSolo: '🎶 الفنان',
+    hFaq: '❓ الأسئلة الشائعة',
+    hMore: '👥 أعضاء آخرون',
+    fGroup: 'الفرقة', fAgency: 'شركة الترفيه', fDebut: 'ظهور الفرقة الأول', fBirthday: 'تاريخ الميلاد', fSign: 'البرج', fZodiac: 'البرج الصيني', fFandom: 'الفاندوم', fActDebut: 'الظهور الأول',
+    bornLine: (m, d) => `${m} من مواليد ${d}.`,
+    noBday: (m) => `لا يرد هنا تاريخ ميلاد مُعلَن وموثَّق لـ${m}. أما بقية الحقائق أدناه فمؤكَّدة.`,
+    signLine: (m, s, em) => `بناءً على هذا التاريخ، برج ${m} الغربي (الاستوائي) هو <strong>${s}</strong> ${em}.`,
+    zodiacLine: (m, z, em) => `حسب سنة الميلاد الشمسية، حيوان ${m} في البرج الصيني هو <strong>${z}</strong> ${em}.`,
+    groupLine: (m, g, ag, debut) => `${m} من أعضاء <strong>${g}</strong>، وتديرها ${ag}. ظهرت ${g} لأول مرة في ${debut}.`,
+    soloCareer: (m, ag, debut) => `${m} تحت إدارة ${ag}، وكان أول ظهور فني في ${debut}.`,
+    hedge: 'ميلاد قريب من رأس السنة القمرية — السنة الصينية تتغيّر في رأس السنة القمرية لا في 1 يناير، وقد يختلف الحيوان بمقدار واحد حسب التاريخ القمري الدقيق.',
+    qBday: (m) => `متى تاريخ ميلاد ${m}؟`,
+    aBday: (m, d) => `${m} من مواليد ${d}.`,
+    aBdayNone: (m) => `لم يُنشر في هذه الصفحة تاريخ ميلاد موثَّق لـ${m}.`,
+    qSign: (m) => `ما برج ${m}؟`,
+    aSign: (m, s) => `برج ${m} الغربي هو ${s}.`,
+    qGroup: (m) => `ما فرقة ${m}؟`,
+    aGroup: (m, g) => `${m} من أعضاء ${g}.`,
+    aSolo: (m) => `${m} من الفنانين المنفردين.`,
+  },
+  // hi writes "K-pop" — the casing this module family uses. build-seo.cjs
+  // emits "K-Pop"; normalizing either one to the other is itself a drift.
+  hi: {
+    typeMember: 'मेंबर', typeSoloist: 'सोलो आर्टिस्ट',
+    badge: 'K-pop प्रोफाइल',
+    h1: (m, g) => `${m} (${g}) — प्रोफाइल, जन्मदिन और राशि`,
+    title: (m, g) => `${g} के ${m}: जन्मदिन, राशि और प्रोफाइल | KoreaPlus`,
+    desc: (m, g) => `${g} के ${m}: वेरिफाइड जन्म तिथि, पश्चिमी राशि, चीनी राशिचक्र और ग्रुप से जुड़े तथ्य। तथ्य-जाँच किया गया K-pop मेंबर प्रोफाइल।`,
+    soloDesc: (m) => `${m}: वेरिफाइड जन्म तिथि, पश्चिमी राशि, चीनी राशिचक्र और करियर से जुड़े तथ्य। तथ्य-जाँच किया गया K-pop प्रोफाइल।`,
+    lead: (m, g) => `${m} K-pop ग्रुप ${g} के मेंबर हैं। नीचे सार्वजनिक रूप से ज्ञात और वेरिफाइड तथ्य हैं — जन्मदिन, राशि और ग्रुप की जानकारी।`,
+    soloLead: (m) => `${m} K-pop आर्टिस्ट हैं। नीचे सार्वजनिक रूप से ज्ञात और वेरिफाइड तथ्य हैं — जन्मदिन, राशि और करियर की जानकारी।`,
+    hFacts: '🔑 मुख्य तथ्य',
+    hBirthday: '🎂 जन्मदिन और उम्र',
+    hZodiac: '♈ राशि और चीनी राशिचक्र',
+    hGroup: '🎤 ग्रुप',
+    hSolo: '🎶 आर्टिस्ट',
+    hFaq: '❓ अक्सर पूछे जाने वाले सवाल',
+    hMore: '👥 दूसरे मेंबर',
+    fGroup: 'ग्रुप', fAgency: 'एजेंसी', fDebut: 'ग्रुप डेब्यू', fBirthday: 'जन्मदिन', fSign: 'राशि', fZodiac: 'चीनी राशिचक्र', fFandom: 'फैनडम', fActDebut: 'डेब्यू',
+    bornLine: (m, d) => `${m} का जन्म ${d} को हुआ था।`,
+    noBday: (m) => `${m} की वेरिफाइड सार्वजनिक जन्म तिथि यहाँ दर्ज नहीं है। नीचे दिए बाकी तथ्य पुष्ट हैं।`,
+    signLine: (m, s, em) => `इस तारीख के हिसाब से ${m} की पश्चिमी (ट्रॉपिकल) राशि <strong>${s}</strong> ${em} है।`,
+    zodiacLine: (m, z, em) => `सौर जन्म वर्ष के हिसाब से ${m} का चीनी राशिचक्र जानवर <strong>${z}</strong> ${em} है।`,
+    groupLine: (m, g, ag, debut) => `${m} <strong>${g}</strong> का हिस्सा हैं और उनका मैनेजमेंट ${ag} के पास है। ${g} ने ${debut} को डेब्यू किया था।`,
+    soloCareer: (m, ag, debut) => `${m} का मैनेजमेंट ${ag} के पास है और उन्होंने ${debut} को डेब्यू किया था।`,
+    hedge: 'चंद्र नववर्ष के आसपास जन्म — चीनी राशिचक्र का साल चंद्र नववर्ष पर बदलता है, 1 जनवरी को नहीं, इसलिए सटीक चंद्र तिथि के हिसाब से जानवर एक आगे-पीछे हो सकता है।',
+    qBday: (m) => `${m} का जन्मदिन कब है?`,
+    aBday: (m, d) => `${m} का जन्म ${d} को हुआ था।`,
+    aBdayNone: (m) => `इस पेज पर ${m} की कोई वेरिफाइड जन्म तिथि प्रकाशित नहीं है।`,
+    qSign: (m) => `${m} की राशि क्या है?`,
+    aSign: (m, s) => `${m} की पश्चिमी राशि ${s} है।`,
+    qGroup: (m) => `${m} किस ग्रुप में हैं?`,
+    aGroup: (m, g) => `${m} ${g} के मेंबर हैं।`,
+    aSolo: (m) => `${m} सोलो आर्टिस्ट हैं।`,
+  },
+  // ru never picks a grammatical gender for an idol: the roster is mixed, so
+  // sentences are built from gender-free forms (входит в состав, дата
+  // рождения — …) instead of родился / родилась.
+  ru: {
+    typeMember: 'участник', typeSoloist: 'сольный артист',
+    badge: 'Профиль K-pop',
+    h1: (m, g) => `${m} (${g}) — профиль, день рождения и знак зодиака`,
+    title: (m, g) => `${m} из ${g}: день рождения, знак зодиака и профиль | KoreaPlus`,
+    desc: (m, g) => `${m} из ${g}: проверенная дата рождения, западный знак зодиака, китайский зодиак и факты о группе. Проверенный профиль айдола K-pop.`,
+    soloDesc: (m) => `${m}: проверенная дата рождения, западный знак зодиака, китайский зодиак и факты о карьере. Проверенный профиль K-pop.`,
+    lead: (m, g) => `${m} входит в состав K-pop-группы ${g}. Ниже — публично известные проверенные факты: день рождения, знак зодиака и данные о группе.`,
+    soloLead: (m) => `${m} выступает сольно в K-pop. Ниже — публично известные проверенные факты: день рождения, знак зодиака и данные о карьере.`,
+    hFacts: '🔑 Ключевые факты',
+    hBirthday: '🎂 День рождения и возраст',
+    hZodiac: '♈ Знак зодиака и китайский зодиак',
+    hGroup: '🎤 Группа',
+    hSolo: '🎶 Артист',
+    hFaq: '❓ Частые вопросы',
+    hMore: '👥 Другие участники',
+    fGroup: 'Группа', fAgency: 'Агентство', fDebut: 'Дебют группы', fBirthday: 'День рождения', fSign: 'Знак зодиака', fZodiac: 'Китайский зодиак', fFandom: 'Фандом', fActDebut: 'Дебют',
+    bornLine: (m, d) => `Дата рождения ${m} — ${d}.`,
+    noBday: (m) => `Проверенная публичная дата рождения ${m} здесь не указана. Остальные факты ниже подтверждены.`,
+    signLine: (m, s, em) => `По этой дате западный (тропический) знак зодиака ${m} — <strong>${s}</strong> ${em}.`,
+    zodiacLine: (m, z, em) => `По солнечному году рождения животное китайского зодиака ${m} — <strong>${z}</strong> ${em}.`,
+    groupLine: (m, g, ag, debut) => `${m} входит в состав <strong>${g}</strong>; группой занимается ${ag}. Дебют ${g} — ${debut}.`,
+    soloCareer: (m, ag, debut) => `${m} состоит в агентстве ${ag}; дебют — ${debut}.`,
+    hedge: 'Рождение около лунного Нового года — китайский зодиакальный год меняется в лунный Новый год, а не 1 января, поэтому животное может сдвинуться на одно в зависимости от точной лунной даты.',
+    qBday: (m) => `Когда день рождения ${m}?`,
+    aBday: (m, d) => `Дата рождения ${m} — ${d}.`,
+    aBdayNone: (m) => `Проверенная дата рождения ${m} на этой странице не публикуется.`,
+    qSign: (m) => `Какой знак зодиака у ${m}?`,
+    aSign: (m, s) => `Западный знак зодиака ${m} — ${s}.`,
+    qGroup: (m) => `В какой группе ${m}?`,
+    aGroup: (m, g) => `${m} входит в состав ${g}.`,
+    aSolo: (m) => `${m} выступает сольно.`,
+  },
+  vi: {
+    typeMember: 'thành viên', typeSoloist: 'nghệ sĩ solo',
+    badge: 'Hồ sơ K-pop',
+    h1: (m, g) => `${m} (${g}) — Hồ sơ, ngày sinh và cung hoàng đạo`,
+    title: (m, g) => `${m} của ${g}: ngày sinh, cung hoàng đạo và hồ sơ | KoreaPlus`,
+    desc: (m, g) => `${m} của ${g}: ngày sinh đã xác minh, cung hoàng đạo, 12 con giáp và thông tin nhóm. Hồ sơ thành viên K-pop đã kiểm chứng.`,
+    soloDesc: (m) => `${m}: ngày sinh đã xác minh, cung hoàng đạo, 12 con giáp và thông tin sự nghiệp. Hồ sơ K-pop đã kiểm chứng.`,
+    lead: (m, g) => `${m} là thành viên của nhóm nhạc K-pop ${g}. Dưới đây là những thông tin công khai đã xác minh — ngày sinh, cung hoàng đạo và chi tiết về nhóm.`,
+    soloLead: (m) => `${m} là nghệ sĩ K-pop. Dưới đây là những thông tin công khai đã xác minh — ngày sinh, cung hoàng đạo và chi tiết sự nghiệp.`,
+    hFacts: '🔑 Thông tin chính',
+    hBirthday: '🎂 Ngày sinh và tuổi',
+    hZodiac: '♈ Cung hoàng đạo và 12 con giáp',
+    hGroup: '🎤 Nhóm nhạc',
+    hSolo: '🎶 Nghệ sĩ',
+    hFaq: '❓ Câu hỏi thường gặp',
+    hMore: '👥 Thành viên khác',
+    fGroup: 'Nhóm', fAgency: 'Công ty chủ quản', fDebut: 'Nhóm debut', fBirthday: 'Ngày sinh', fSign: 'Cung hoàng đạo', fZodiac: '12 con giáp', fFandom: 'Fandom', fActDebut: 'Debut',
+    bornLine: (m, d) => `${m} sinh ngày ${d}.`,
+    noBday: (m) => `Trang này chưa có ngày sinh công khai đã xác minh của ${m}. Các thông tin còn lại bên dưới đều đã được xác nhận.`,
+    signLine: (m, s, em) => `Theo ngày đó, cung hoàng đạo phương Tây (hệ nhiệt đới) của ${m} là <strong>${s}</strong> ${em}.`,
+    // Vietnam's 4th branch is Mão (cat) where China's is the rabbit — same
+    // year, different animal. Saying so is what keeps the localised name
+    // honest, so a Mão birth carries the extra sentence and nothing else does.
+    zodiacLine: (m, z, em) => `Theo năm sinh dương lịch, ${m} tuổi <strong>${z}</strong> ${em}.`
+      + (z.startsWith('Mão') ? ' Ở Việt Nam, con giáp thứ tư là Mèo, còn ở Trung Quốc là Thỏ — cùng một năm, khác con vật.' : ''),
+    groupLine: (m, g, ag, debut) => `${m} là thành viên của <strong>${g}</strong>, thuộc công ty chủ quản ${ag}. ${g} debut vào ${debut}.`,
+    soloCareer: (m, ag, debut) => `${m} thuộc công ty chủ quản ${ag} và debut vào ${debut}.`,
+    hedge: 'Sinh gần Tết Nguyên đán — năm con giáp đổi vào Tết Nguyên đán chứ không phải ngày 1/1, nên con giáp có thể lệch một con tùy ngày âm lịch chính xác.',
+    qBday: (m) => `Ngày sinh của ${m} là ngày nào?`,
+    aBday: (m, d) => `${m} sinh ngày ${d}.`,
+    aBdayNone: (m) => `Trang này không công bố ngày sinh đã xác minh của ${m}.`,
+    qSign: (m) => `${m} thuộc cung hoàng đạo nào?`,
+    aSign: (m, s) => `Cung hoàng đạo phương Tây của ${m} là ${s}.`,
+    qGroup: (m) => `${m} thuộc nhóm nào?`,
+    aGroup: (m, g) => `${m} là thành viên của ${g}.`,
+    aSolo: (m) => `${m} là nghệ sĩ solo.`,
+  },
+  // Thai has no full stop — sentences inside one string are separated by a
+  // space, and every run of Latin script or digits gets a space on both sides.
+  // ราศี and ปี are already carried by / prefixed onto the lookup values, so a
+  // template must never add a second one (ราศีราศีเมษ, ปีปีชวด).
+  th: {
+    typeMember: 'สมาชิก', typeSoloist: 'ศิลปินเดี่ยว',
+    badge: 'โปรไฟล์ K-pop',
+    h1: (m, g) => `${m} (${g}) — โปรไฟล์ วันเกิด และราศี`,
+    title: (m, g) => `${m} วง ${g}: วันเกิด ราศี และโปรไฟล์ | KoreaPlus`,
+    desc: (m, g) => `${m} จากวง ${g}: วันเกิดที่ตรวจสอบแล้ว ราศีแบบตะวันตก นักษัตรจีน และข้อมูลของวง โปรไฟล์สมาชิก K-pop ที่ตรวจสอบข้อเท็จจริงแล้ว`,
+    soloDesc: (m) => `${m}: วันเกิดที่ตรวจสอบแล้ว ราศีแบบตะวันตก นักษัตรจีน และข้อมูลผลงาน โปรไฟล์ K-pop ที่ตรวจสอบข้อเท็จจริงแล้ว`,
+    lead: (m, g) => `${m} เป็นสมาชิกวง K-pop ${g} ด้านล่างคือข้อเท็จจริงสาธารณะที่ตรวจสอบแล้ว — วันเกิด ราศี และรายละเอียดของวง`,
+    soloLead: (m) => `${m} เป็นศิลปิน K-pop ด้านล่างคือข้อเท็จจริงสาธารณะที่ตรวจสอบแล้ว — วันเกิด ราศี และรายละเอียดผลงาน`,
+    hFacts: '🔑 ข้อมูลสำคัญ',
+    hBirthday: '🎂 วันเกิดและอายุ',
+    hZodiac: '♈ ราศีและนักษัตรจีน',
+    hGroup: '🎤 วง',
+    hSolo: '🎶 ศิลปิน',
+    hFaq: '❓ คำถามที่พบบ่อย',
+    hMore: '👥 สมาชิกคนอื่น',
+    fGroup: 'วง', fAgency: 'ค่ายเพลง', fDebut: 'เดบิวต์ของวง', fBirthday: 'วันเกิด', fSign: 'ราศี', fZodiac: 'นักษัตรจีน', fFandom: 'แฟนด้อม', fActDebut: 'เดบิวต์',
+    bornLine: (m, d) => `${m} เกิดวันที่ ${d}`,
+    noBday: (m) => `หน้านี้ไม่ได้ระบุวันเกิดสาธารณะที่ตรวจสอบแล้วของ ${m} ข้อเท็จจริงอื่นด้านล่างได้รับการยืนยันแล้ว`,
+    signLine: (m, s, em) => `จากวันเกิดนี้ ${m} เป็น<strong>${s}</strong> ${em} ตามโหราศาสตร์ตะวันตก (แบบทรอปิคัล)`,
+    zodiacLine: (m, z, em) => `ตามปีเกิดสุริยคติ ${m} เกิดปี<strong>${z}</strong> ${em}`,
+    groupLine: (m, g, ag, debut) => `${m} เป็นสมาชิกของ <strong>${g}</strong> ภายใต้สังกัด ${ag} และวง ${g} เดบิวต์เมื่อ ${debut}`,
+    soloCareer: (m, ag, debut) => `${m} อยู่ภายใต้สังกัด ${ag} และเดบิวต์เมื่อ ${debut}`,
+    hedge: 'เกิดใกล้วันตรุษจีน — นักษัตรเปลี่ยนในวันตรุษจีน ไม่ใช่วันที่ 1 มกราคม ปีนักษัตรจึงอาจเลื่อนไปหนึ่งปีตามวันจันทรคติที่แน่นอน',
+    qBday: (m) => `${m} เกิดวันไหน?`,
+    aBday: (m, d) => `${m} เกิดวันที่ ${d}`,
+    aBdayNone: (m) => `หน้านี้ไม่ได้เผยแพร่วันเกิดที่ตรวจสอบแล้วของ ${m}`,
+    qSign: (m) => `${m} ราศีอะไร?`,
+    aSign: (m, s) => `${m} เป็น${s} ตามโหราศาสตร์ตะวันตก`,
+    qGroup: (m) => `${m} อยู่วงอะไร?`,
+    aGroup: (m, g) => `${m} เป็นสมาชิกวง ${g}`,
+    aSolo: (m) => `${m} เป็นศิลปินเดี่ยว`,
   },
 };
 

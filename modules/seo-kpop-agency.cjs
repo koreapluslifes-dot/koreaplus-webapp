@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════════════
    modules/seo-kpop-agency.cjs — K-pop agency artist-guide generator.
 
-   One page per agency × 9 languages, on the K-pop channel (homeHref
+   One page per agency × every translated language, on the K-pop channel (homeHref
    '/kpop', breadcrumb root /kpop). Each page is a factual roster guide:
    the agency's groups & soloists with debut date, members, fandom and
    (when known) lightstick — all sourced from the frozen ROSTER/ENRICH
@@ -23,9 +23,18 @@ const L10N_CONTENT = require('./seo-kpop-agency-l10n.js');
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, ROSTER, ENRICH, ld } = ctx;
 
+  // The K-pop channel rolls out locales ahead of the rest of the site, so it
+  // has its own list. Tolerate its absence: this cluster must keep building
+  // while that file is being introduced.
+  let CHANNEL_LANGS;
+  try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+  catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
+
   // Languages this generator can emit (intersection of content l10n + site L10N).
   // en is base; the rest must exist in both L10N (for dir) and L10N_CONTENT.
-  const LANGS = require("./seo-langs.cjs")
+  // The hreflang alts below are derived from this same constant, so an
+  // advertised alternate always has a page behind it.
+  const LANGS = CHANNEL_LANGS
     .filter(l => L10N_CONTENT[l] && (l === 'en' || (L10N[l] && L10N[l].dir)));
 
   // Minimum acts for an agency to get its own guide page (thin-content guard).
@@ -63,7 +72,10 @@ module.exports = function (ctx) {
     .sort((a, b) => GROUPS[b].acts.length - GROUPS[a].acts.length || GROUPS[a].name.localeCompare(GROUPS[b].name));
 
   // ── helpers ───────────────────────────────────────────────────────
-  const dirOf = lang => (lang === 'en' ? '' : L10N[lang].dir + '/');
+  // A missing dir falls back to the bare code rather than throwing — and never
+  // to '', which is the English path: the localized page would overwrite the
+  // English one and both would claim the same <loc>.
+  const dirOf = lang => (lang === 'en' ? '' : ((L10N[lang] && L10N[lang].dir) || lang) + '/');
   // Page path & url for an agency on the K-pop channel.
   const pathOf = (key, lang) => `${dirOf(lang)}kpop/${key}-kpop-artists-guide.html`;
   const urlOf = (key, lang) => `${BASEP}${pathOf(key, lang)}`;

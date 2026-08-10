@@ -6,9 +6,11 @@
    labels). Idol/group facts come from ROSTER/ENRICH at build time — never
    translated here. Kept separate from the 14-language messages/*.json.
 
-   Languages: en (default) + 8 site locales (ja zh es ko fr de pt id) — i.e.
-   the 9 hreflang languages this vertical ships. A language with no entry is
-   simply skipped (page not generated for it), per the contract.
+   Languages: en (default) + 8 site locales (ja zh es ko fr de pt id) — the 9
+   hreflang languages the travel side ships — plus 5 K-pop-only locales
+   (ar hi ru vi th), which exist for the K-pop clusters and nowhere else. A
+   language with no entry is simply skipped (page not generated for it), per
+   the contract.
 
    ANIM: per-animal localized noun ("Tiger", "Año del Tigre" …). The emoji
    and the canonical date math come from ctx.derive (single source) — only
@@ -22,6 +24,9 @@ const ANIMAL_KEYS = ['rat', 'ox', 'tiger', 'rabbit', 'dragon', 'snake',
 
 // Localized animal nouns (bare, capitalized as a noun). Verified standard
 // translations; goat == sheep/ram in several traditions (we render "Goat").
+// vi/th name the cycle branch with the animal glossed, the way ja already does.
+// vi's 4th branch is genuinely the cat, not the rabbit — the hedge discloses
+// that divergence instead of silently swapping the animal.
 const ANIMAL_NAMES = {
   en: { rat: 'Rat', ox: 'Ox', tiger: 'Tiger', rabbit: 'Rabbit', dragon: 'Dragon', snake: 'Snake', horse: 'Horse', goat: 'Goat', monkey: 'Monkey', rooster: 'Rooster', dog: 'Dog', pig: 'Pig' },
   ko: { rat: '쥐', ox: '소', tiger: '호랑이', rabbit: '토끼', dragon: '용', snake: '뱀', horse: '말', goat: '양', monkey: '원숭이', rooster: '닭', dog: '개', pig: '돼지' },
@@ -32,7 +37,26 @@ const ANIMAL_NAMES = {
   de: { rat: 'Ratte', ox: 'Büffel', tiger: 'Tiger', rabbit: 'Hase', dragon: 'Drache', snake: 'Schlange', horse: 'Pferd', goat: 'Ziege', monkey: 'Affe', rooster: 'Hahn', dog: 'Hund', pig: 'Schwein' },
   pt: { rat: 'Rato', ox: 'Boi', tiger: 'Tigre', rabbit: 'Coelho', dragon: 'Dragão', snake: 'Serpente', horse: 'Cavalo', goat: 'Cabra', monkey: 'Macaco', rooster: 'Galo', dog: 'Cão', pig: 'Porco' },
   id: { rat: 'Tikus', ox: 'Kerbau', tiger: 'Macan', rabbit: 'Kelinci', dragon: 'Naga', snake: 'Ular', horse: 'Kuda', goat: 'Kambing', monkey: 'Monyet', rooster: 'Ayam', dog: 'Anjing', pig: 'Babi' },
+  ar: { rat: 'الفأر', ox: 'الثور', tiger: 'النمر', rabbit: 'الأرنب', dragon: 'التنين', snake: 'الأفعى', horse: 'الحصان', goat: 'الماعز', monkey: 'القرد', rooster: 'الديك', dog: 'الكلب', pig: 'الخنزير' },
+  hi: { rat: 'चूहा', ox: 'बैल', tiger: 'बाघ', rabbit: 'खरगोश', dragon: 'ड्रैगन', snake: 'साँप', horse: 'घोड़ा', goat: 'बकरी', monkey: 'बंदर', rooster: 'मुर्गा', dog: 'कुत्ता', pig: 'सूअर' },
+  ru: { rat: 'Крыса', ox: 'Бык', tiger: 'Тигр', rabbit: 'Кролик', dragon: 'Дракон', snake: 'Змея', horse: 'Лошадь', goat: 'Коза', monkey: 'Обезьяна', rooster: 'Петух', dog: 'Собака', pig: 'Свинья' },
+  vi: { rat: 'Tý (chuột)', ox: 'Sửu (trâu)', tiger: 'Dần (hổ)', rabbit: 'Mão (mèo)', dragon: 'Thìn (rồng)', snake: 'Tỵ (rắn)', horse: 'Ngọ (ngựa)', goat: 'Mùi (dê)', monkey: 'Thân (khỉ)', rooster: 'Dậu (gà)', dog: 'Tuất (chó)', pig: 'Hợi (lợn)' },
+  th: { rat: 'ชวด (หนู)', ox: 'ฉลู (วัว)', tiger: 'ขาล (เสือ)', rabbit: 'เถาะ (กระต่าย)', dragon: 'มะโรง (มังกร)', snake: 'มะเส็ง (งู)', horse: 'มะเมีย (ม้า)', goat: 'มะแม (แพะ)', monkey: 'วอก (ลิง)', rooster: 'ระกา (ไก่)', dog: 'จอ (สุนัข)', pig: 'กุน (หมู)' },
 };
+
+// ru and hi bend the animal noun inside a sentence, so the tables above stay
+// dictionary form (they also label chips and the cross-link list) and the
+// prose asks for the inflected form at the call site.
+// ru: «год» governs the genitive — «год Тигра», never «год Тигр».
+const RU_GEN = { 'Крыса': 'Крысы', 'Бык': 'Быка', 'Тигр': 'Тигра', 'Кролик': 'Кролика', 'Дракон': 'Дракона', 'Змея': 'Змеи', 'Лошадь': 'Лошади', 'Коза': 'Козы', 'Обезьяна': 'Обезьяны', 'Петух': 'Петуха', 'Собака': 'Собаки', 'Свинья': 'Свиньи' };
+const ruGen = a => RU_GEN[a] || a;
+// hi: masculine nouns in -आ take the oblique before a postposition —
+// "चूहे का वर्ष". Consonant-final and feminine nouns are unchanged.
+const HI_OBL = { 'चूहा': 'चूहे', 'घोड़ा': 'घोड़े', 'मुर्गा': 'मुर्गे', 'कुत्ता': 'कुत्ते' };
+const hiObl = a => HI_OBL[a] || a;
+// ru counts pick one of three forms (1 айдол · 2 айдола · 5 айдолов); the
+// en singular/plural pair cannot express that, so countMany carries the rule.
+const ruIdols = n => `${n} ${n % 10 === 1 && n % 100 !== 11 ? 'айдол' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'айдола' : 'айдолов')}`;
 
 // Page chrome. {animal} is replaced with the localized animal noun;
 // functions receive (animal) so each language controls word order.
@@ -197,6 +221,96 @@ const T = {
     faq: a => [
       [`Apa artinya lahir di Tahun ${a}?`, `Dalam zodiak Tionghoa, setiap tahun dikaitkan dengan salah satu dari dua belas hewan dalam siklus 12 tahun. Yang lahir di tahun ${a} memiliki shio itu. Batas tahunnya adalah Tahun Baru Imlek, bukan 1 Januari.`],
       [`Bagaimana daftar ini disusun?`, `Kami mengambil tanggal lahir tervalidasi setiap idol dan mengelompokkannya berdasarkan hewan tahun kelahiran mereka. Tanggal berasal dari daftar grup dan solois kami; hanya tanggal publik terkonfirmasi yang dipakai.`],
+    ],
+  },
+  ar: {
+    badge: 'الأبراج الصينية',
+    title: a => `نجوم K-Pop المولودون في سنة ${a} — قائمة تواريخ الميلاد | KoreaPlus`,
+    h1: a => `نجوم K-Pop المولودون في سنة ${a}`,
+    desc: a => `مَن هم نجوم K-Pop المولودون في سنة ${a}؟ قائمة مرتَّبة حسب تاريخ الميلاد تضم فرقًا كبرى وفنانين منفردين، مع شرح التحفّظ الخاص بالأبراج الصينية.`,
+    lead: a => `نجوم يقع عام ميلادهم ضمن برج ${a} في الأبراج الصينية، جمعناهم من قائمة K-Pop لدينا. لا شيء هنا سوى الحقائق — تاريخ الميلاد الكامل واسم الفرقة.`,
+    countOne: 'عدد النجوم: 1',
+    countMany: n => `عدد النجوم: ${n}`,
+    none: a => `لا يوجد في قائمتنا الحالية أي نجم من مواليد سنة ${a}. اطّلع على سنوات الأبراج الأخرى بالأسفل.`,
+    colName: 'النجم', colGroup: 'الفرقة', colBday: 'تاريخ الميلاد',
+    hedgeH: 'ملاحظة حول طريقة الحساب',
+    hedge: 'السنة الصينية تتغيّر في رأس السنة القمرية (أواخر يناير إلى منتصف فبراير)، وليس في 1 يناير. هذه القائمة تصنّف النجوم حسب سنة الميلاد الميلادية، لذا قد ينتمي مَن وُلد في يناير أو أوائل فبراير إلى حيوان السنة السابقة فعليًا — تحقّق من التاريخ القمري الدقيق إن كان الأمر يهمّك.',
+    otherH: 'سنوات الأبراج الأخرى',
+    faq: a => [
+      [`ماذا يعني أن تُولد في سنة ${a}؟`, `في الأبراج الصينية، تُنسب كل سنة إلى حيوان من اثني عشر حيوانًا ضمن دورة مدتها 12 سنة. ومَن يُولد في سنة ${a} يحمل هذا البرج. لكن حدّ السنة هو رأس السنة القمرية، وليس 1 يناير.`],
+      [`كيف أُعدّت هذه القائمة؟`, `نأخذ تاريخ ميلاد كل نجم بعد توثيقه، ثم نصنّف النجوم حسب حيوان سنة الميلاد. التواريخ مأخوذة من قائمتنا المنسّقة للفرق الكبرى والفنانين المنفردين — ولا نستخدم إلا التواريخ العامة المؤكَّدة.`],
+    ],
+  },
+  hi: {
+    badge: 'चीनी राशिचक्र',
+    title: a => `${hiObl(a)} के वर्ष में जन्मे K-pop आइडल — जन्मदिन की लिस्ट | KoreaPlus`,
+    h1: a => `${hiObl(a)} के वर्ष में जन्मे K-pop आइडल`,
+    desc: a => `${hiObl(a)} के वर्ष में कौन-कौन से K-pop आइडल जन्मे हैं? बड़े ग्रुप और सोलो आर्टिस्ट की जन्मदिन के हिसाब से लगी लिस्ट, साथ में चीनी राशिचक्र से जुड़ी ज़रूरी चेतावनी।`,
+    lead: a => `वे K-pop आइडल जिनका जन्म वर्ष चीनी राशिचक्र में ${hiObl(a)} का वर्ष है — हमारी आर्टिस्ट लिस्ट से इकट्ठा किए गए। सिर्फ़ पूरी जन्म तिथि और ग्रुप, इसके अलावा कुछ नहीं।`,
+    countOne: '1 आइडल',
+    countMany: n => `${n} आइडल`,
+    none: a => `हमारी मौजूदा लिस्ट में ${hiObl(a)} के वर्ष में जन्मा कोई आइडल नहीं है। नीचे बाकी जानवरों के वर्ष देखें।`,
+    colName: 'आइडल', colGroup: 'ग्रुप', colBday: 'जन्मदिन',
+    hedgeH: 'गणना के बारे में एक नोट',
+    hedge: 'चीनी राशिचक्र का वर्ष चंद्र नववर्ष (जनवरी के आख़िर से फ़रवरी के मध्य तक) पर बदलता है, 1 जनवरी को नहीं। यह लिस्ट आइडल को उनके सौर जन्म वर्ष के हिसाब से बाँटती है, इसलिए जनवरी या फ़रवरी की शुरुआत में जन्मे आइडल असल में पिछले जानवर के वर्ष के हो सकते हैं — ज़रूरी हो तो सटीक चंद्र तिथि से मिलान कर लें।',
+    otherH: 'बाकी जानवरों के वर्ष',
+    faq: a => [
+      [`${hiObl(a)} के वर्ष में जन्म लेने का क्या मतलब है?`, `चीनी राशिचक्र में हर वर्ष बारह जानवरों में से किसी एक से जुड़ा होता है और यह चक्र हर 12 साल में दोहराया जाता है। ${hiObl(a)} के वर्ष में जन्मे लोगों की राशि वही जानवर मानी जाती है। ध्यान रहे, वर्ष की सीमा चंद्र नववर्ष (चीनी नववर्ष) है, 1 जनवरी नहीं।`],
+      [`यह लिस्ट कैसे बनाई गई है?`, `हम हर आइडल की पुष्ट जन्म तिथि लेते हैं और उन्हें उनके जन्म वर्ष के जानवर के हिसाब से बाँटते हैं। जन्मदिन हमारी चुनी हुई आर्टिस्ट लिस्ट से आते हैं — सिर्फ़ पुष्ट, सार्वजनिक तारीख़ें ही ली जाती हैं।`],
+    ],
+  },
+  ru: {
+    badge: 'Китайский гороскоп',
+    title: a => `K-pop айдолы, родившиеся в год ${ruGen(a)} — список по дням рождения | KoreaPlus`,
+    h1: a => `K-pop айдолы, родившиеся в год ${ruGen(a)}`,
+    desc: a => `Кто из K-pop айдолов родился в год ${ruGen(a)}? Список по дням рождения — крупные группы и сольные артисты, с пояснением, как считается год по китайскому гороскопу.`,
+    lead: a => `Айдолы, чей год рождения по китайскому гороскопу приходится на год ${ruGen(a)} — собраны по нашему списку K-pop. Только точная дата рождения и группа.`,
+    countOne: '1 айдол',
+    countMany: n => ruIdols(n),
+    none: a => `В нашем текущем списке нет айдолов, родившихся в год ${ruGen(a)}. Посмотрите другие годы ниже.`,
+    colName: 'Айдол', colGroup: 'Группа', colBday: 'День рождения',
+    hedgeH: 'Как это считается',
+    hedge: 'Год по китайскому гороскопу меняется в лунный Новый год (с конца января до середины февраля), а не 1 января. Этот список группирует айдолов по солнечному году рождения, поэтому те, кто родился в январе или начале февраля, на самом деле могут относиться к животному предыдущего года — если это важно, сверьтесь с точной лунной датой.',
+    otherH: 'Другие годы гороскопа',
+    faq: a => [
+      [`Что значит родиться в год ${ruGen(a)}?`, `В китайском гороскопе каждому году соответствует одно из двенадцати животных, и цикл повторяется каждые 12 лет. Те, кто родился в год ${ruGen(a)}, относятся к этому знаку. Но граница года — лунный Новый год, а не 1 января.`],
+      [`Как составлен этот список?`, `Мы берём проверенную дату рождения каждого айдола и группируем айдолов по животному их года рождения. Даты взяты из нашего списка крупных групп и сольных артистов — используются только подтверждённые публичные даты.`],
+    ],
+  },
+  vi: {
+    badge: '12 con giáp',
+    title: a => `Idol K-pop tuổi ${a} — Danh sách theo ngày sinh | KoreaPlus`,
+    h1: a => `Idol K-pop tuổi ${a}`,
+    desc: a => `Idol K-pop nào sinh vào năm ${a}? Danh sách xếp theo ngày sinh của các nhóm lớn và nghệ sĩ solo, kèm lưu ý về cách tính 12 con giáp.`,
+    lead: a => `Những idol có năm sinh rơi vào năm ${a} theo 12 con giáp, tổng hợp từ danh sách của chúng tôi. Chỉ ngày sinh đã xác minh và tên nhóm.`,
+    countOne: '1 idol',
+    countMany: n => `${n} idol`,
+    none: a => `Danh sách hiện tại của chúng tôi chưa có idol nào sinh vào năm ${a}. Xem các năm con giáp khác bên dưới.`,
+    colName: 'Idol', colGroup: 'Nhóm', colBday: 'Ngày sinh',
+    hedgeH: 'Lưu ý về cách tính',
+    hedge: 'Năm con giáp đổi vào Tết Nguyên đán (cuối tháng 1 đến giữa tháng 2), không phải ngày 1/1. Danh sách này xếp theo năm sinh dương lịch, nên người sinh vào tháng 1 hoặc đầu tháng 2 có thể thực ra thuộc về con giáp của năm trước — hãy đối chiếu ngày âm lịch chính xác nếu điều đó quan trọng với bạn. Ở Việt Nam, con giáp thứ tư là Mèo, còn ở Trung Quốc là Thỏ — cùng một năm, khác con vật.',
+    otherH: 'Các năm con giáp khác',
+    faq: a => [
+      [`Sinh vào năm ${a} nghĩa là gì?`, `Trong 12 con giáp, mỗi năm ứng với một trong mười hai con vật theo chu kỳ 12 năm lặp lại. Người sinh vào năm ${a} mang con giáp đó. Lưu ý ranh giới giữa hai năm là Tết Nguyên đán, không phải ngày 1/1.`],
+      [`Danh sách này được lập thế nào?`, `Chúng tôi lấy ngày sinh đã xác minh của từng idol rồi xếp theo con giáp của năm sinh. Ngày sinh lấy từ danh sách các nhóm lớn và nghệ sĩ solo của chúng tôi — chỉ dùng những ngày công khai đã xác nhận.`],
+    ],
+  },
+  th: {
+    badge: 'นักษัตรจีน',
+    title: a => `ไอดอล K-pop ที่เกิดปี${a} — รายชื่อตามวันเกิด | KoreaPlus`,
+    h1: a => `ไอดอล K-pop ที่เกิดปี${a}`,
+    desc: a => `ไอดอล K-pop คนไหนเกิดปี${a} บ้าง รวมรายชื่อเรียงตามวันเกิดจากวงใหญ่และศิลปินเดี่ยว พร้อมข้อควรระวังเรื่องการนับปีนักษัตร`,
+    lead: a => `ไอดอล K-pop ที่ปีเกิดตรงกับปี${a} ตามนักษัตรจีน รวบรวมจากรายชื่อของเรา — มีเฉพาะวันเกิดที่ตรวจสอบแล้วและชื่อวงเท่านั้น`,
+    countOne: 'ไอดอล 1 คน',
+    countMany: n => `ไอดอล ${n} คน`,
+    none: a => `ยังไม่มีไอดอลในรายชื่อปัจจุบันของเราที่เกิดปี${a} ดูปีนักษัตรอื่นด้านล่างได้เลย`,
+    colName: 'ไอดอล', colGroup: 'วง', colBday: 'วันเกิด',
+    hedgeH: 'หมายเหตุเรื่องการคำนวณ',
+    hedge: 'ปีนักษัตรเปลี่ยนในวันตรุษจีน (ปลายเดือนมกราคมถึงกลางเดือนกุมภาพันธ์) ไม่ใช่วันที่ 1 มกราคม รายชื่อนี้จัดกลุ่มตามปีเกิดแบบสุริยคติ คนที่เกิดเดือนมกราคมหรือต้นเดือนกุมภาพันธ์จึงอาจอยู่ในปีนักษัตรก่อนหน้าจริง ๆ — หากต้องการความแม่นยำ ให้ตรวจสอบกับวันเกิดตามจันทรคติอีกครั้ง',
+    otherH: 'ปีนักษัตรอื่น',
+    faq: a => [
+      [`เกิดปี${a} หมายความว่าอย่างไร`, `ในนักษัตรจีน แต่ละปีจะตรงกับสัตว์หนึ่งในสิบสองชนิด วนครบรอบทุก 12 ปี คนที่เกิดในปี${a} ก็ถือว่าเป็นปีนักษัตรนั้น แต่เส้นแบ่งของปีคือวันตรุษจีน ไม่ใช่วันที่ 1 มกราคม`],
+      [`รายชื่อนี้รวบรวมมาอย่างไร`, `เรานำวันเกิดของไอดอลแต่ละคนที่ตรวจสอบแล้วมาจัดกลุ่มตามสัตว์ประจำปีเกิด วันเกิดทั้งหมดมาจากรายชื่อวงใหญ่และศิลปินเดี่ยวที่เราคัดไว้ ใช้เฉพาะวันที่เป็นข้อมูลสาธารณะที่ยืนยันแล้วเท่านั้น`],
     ],
   },
 };

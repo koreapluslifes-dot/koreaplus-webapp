@@ -22,12 +22,24 @@ const { ANIMAL_KEYS, ANIMAL_NAMES, T } = require('./seo-kpop-cnzodiac-l10n.js');
 module.exports = function (ctx) {
   const { shell, writePage, BASEP, L10N, esc, ld, derive } = ctx;
 
-  // Languages this module can emit = those with both an l10n table entry and
-  // (for non-en) a site dir. en is default (no dir).
-  const LANGS = require("./seo-langs.cjs")
-    .filter(l => T[l] && (l === 'en' || (L10N[l] && L10N[l].dir)));
+  // The K-pop channel rolls out locales ahead of the rest of the site, so it
+  // has its own list. Tolerate its absence: this cluster must keep building
+  // while that file is being introduced.
+  let CHANNEL_LANGS;
+  try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+  catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
 
-  const dirOf = (lang) => (lang === 'en' ? '' : L10N[lang].dir + '/');
+  // Languages this module can emit = those with a complete string set (both
+  // the prose table and the animal names) and, for non-en, a site dir.
+  // altsFor() reads the same constant, so an advertised alternate always has a
+  // page behind it.
+  const LANGS = CHANNEL_LANGS
+    .filter(l => T[l] && ANIMAL_NAMES[l] && (l === 'en' || (L10N[l] && L10N[l].dir)));
+
+  // A missing dir falls back to the bare code rather than throwing — and never
+  // to '', which is the English path: the localized page would overwrite the
+  // English one and both would claim the same <loc>.
+  const dirOf = (lang) => (lang === 'en' ? '' : ((L10N[lang] && L10N[lang].dir) || lang) + '/');
   const slugOf = (animal) => `kpop-idols-born-in-the-year-of-the-${animal}`;
   const pathOf = (animal, lang) => `${BASEP}${dirOf(lang)}kpop/${slugOf(animal)}.html`;
 
@@ -104,8 +116,8 @@ module.exports = function (ctx) {
   /* buildAnimal(animal, lang) → url string, or null (untranslated lang). */
   function buildAnimal(animal, lang) {
     const t = T[lang];
-    if (!t) return null;                         // no translation → drop page
-    const names = ANIMAL_NAMES[lang] || ANIMAL_NAMES.en;
+    const names = ANIMAL_NAMES[lang];
+    if (!t || !names) return null;               // no translation → drop page
     const animalName = names[animal] || ANIMAL_NAMES.en[animal];
     const z = derive.CN_ZODIAC.find(x => x.key === animal);
     const emoji = z ? z.emoji : '🎴';

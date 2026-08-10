@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════════════
    modules/seo-kpop-zodiac.cjs — "K-pop idols by Western star sign".
 
-   12 sun signs × 9 languages = up to 108 pages on the K-pop channel.
+   12 sun signs × every channel language with a complete string set.
    Slug: kpop-idols-with-<sign>-star-sign  (e.g. kpop-idols-with-aries-star-sign)
 
    DATA JOIN (zero fabrication):
@@ -21,7 +21,14 @@
    ══════════════════════════════════════════════════════════════════ */
 'use strict';
 
-const { T, TRAITS } = require('../seo-kpop-zodiac-l10n.js');
+const { T, TRAITS, SIGN_NAMES, DATE_RANGES } = require('../seo-kpop-zodiac-l10n.js');
+
+// The K-pop channel rolls out locales ahead of the rest of the site, so it has
+// its own list. Tolerate its absence: this cluster must keep building while
+// that file is being introduced.
+let CHANNEL_LANGS;
+try { CHANNEL_LANGS = require('./seo-langs-kpop.cjs'); }
+catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
 
 // Canonical sign order (matches ctx.derive.SIGNS keys; this is also the
 // page-iteration / slug order).
@@ -36,8 +43,11 @@ module.exports = function (ctx) {
   const KPOP_HOME = '/kpop';
   const KPOP_BRAND = '🎤 Korea<span>Plus</span>';
 
-  // Languages we can fully render: any L10N lang (incl. en) that has a T entry.
-  const LANGS = ['en', ...Object.keys(L10N)].filter((l, i, a) => a.indexOf(l) === i && T[l]);
+  // Languages we can fully render: every string map this page reads must be
+  // present. One short of that and the page ships English prose (traits, sign
+  // name, date range) under its own hreflang. altsFor() reads the same
+  // constant, so an advertised alternate always has a page behind it.
+  const LANGS = CHANNEL_LANGS.filter(l => T[l] && TRAITS[l] && SIGN_NAMES[l] && DATE_RANGES[l]);
 
   // ── Build the sign→members index ONCE (language-independent facts) ──
   // Each bucket: [{ idol, group, groupEmoji, groupId, birthday }] sorted by
@@ -83,28 +93,32 @@ module.exports = function (ctx) {
   // localized sign object {key,name,emoji}
   function signObj(key, lang) {
     const base = derive.SIGNS.find(s => s.key === key);
-    const tr = require('../seo-kpop-zodiac-l10n.js').SIGN_NAMES;
-    const name = (tr[lang] && tr[lang][key]) || (base && base.name) || key;
+    const name = (SIGN_NAMES[lang] && SIGN_NAMES[lang][key]) || (base && base.name) || key;
     return { key, name, emoji: base ? base.emoji : '⭐' };
   }
 
-  // path/url for a given sign + lang (dir hardcoding forbidden → via L10N)
+  // path/url for a given sign + lang (dir hardcoding forbidden → via L10N).
+  // A missing dir falls back to the bare code, never to '': '' is the English
+  // path, so the localized page would overwrite the English one and both would
+  // claim the same <loc>.
   function pathFor(key) { return `kpop-idols-with-${key}-star-sign.html`; }
   function urlFor(key, lang) {
-    const dir = lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : '');
+    const dir = lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : lang + '/');
     return `${BASEP}${dir}${pathFor(key)}`;
   }
 
-  // hreflang alternates: every lang that has both a T entry and ≥1 member.
+  // hreflang alternates. A sign with no verified members is dropped in every
+  // language, so the cluster is all-of-LANGS or nothing — same set the build
+  // loop writes.
   function altsFor(key) {
-    return LANGS
-      .filter(l => bySign[key] && bySign[key].length)
-      .map(l => ({ lang: l, url: urlFor(key, l) }));
+    if (!bySign[key] || !bySign[key].length) return [];
+    return LANGS.map(l => ({ lang: l, url: urlFor(key, l) }));
   }
 
   function buildZodiac(key, lang) {
     const t = T[lang];
-    if (!t) return null;                       // no translation → drop
+    const dates = DATE_RANGES[lang];
+    if (!t || !dates) return null;             // no translation → drop
     const members = bySign[key];
     if (!members || !members.length) return null; // nothing verified → drop
 
@@ -133,7 +147,7 @@ module.exports = function (ctx) {
       t.factSign(s),
       t.factN(n),
       t.factGroups(groupCount),
-      `📅 ${esc(t.datesLabel)}: ${esc(require('../seo-kpop-zodiac-l10n.js').DATE_RANGES[lang][key])}`,
+      `📅 ${esc(t.datesLabel)}: ${esc(dates[key])}`,
     ]);
 
     // ── Traits chip line (clearly archetype, not personal claim) ──

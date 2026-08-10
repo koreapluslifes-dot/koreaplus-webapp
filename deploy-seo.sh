@@ -10,12 +10,22 @@ REMOTE="/opt/bitnami/wordpress/guide"
 SSH="ssh -i $PEM -o StrictHostKeyChecking=no bitnami@$IP"
 
 # Top-level SEO dirs + modified root files to ship.
-DIRS="guide ja zh es ko fr de pt id places itinerary faq blog busan"
+DIRS="guide ja zh es ko fr de pt id ar hi ru vi th places itinerary faq blog busan"
 ROOTS="index.html app.js style.css explore.html destinations.html experiences.html when-to-visit.html travel-basics.html itineraries.html tools.html sitemap.xml about.html festivals.html seasons.html culture.html temples.html nightviews.html kdrama-locations.html phrases.html currency.html subway.html menu-translator.html etiquette.html emergency.html bucket-list.html trending.html quiz.html compare.html seo.css hub-styles.css contact.html plan.html privacy.html terms.html"
 KEYS=$(ls kp*.txt 2>/dev/null | tr '\n' ' ')
 
-echo "==> Tarring $(echo $DIRS | wc -w) dirs + root files…"
-tar czf /c/tmp/kp.tgz $DIRS $ROOTS modules/klook-cards.js modules/page-ads.js modules/week-section.js modules/korea-now.js modules/kp-enhance.js modules/share-viral.js $KEYS
+# Language clusters land in waves, so a code can sit in DIRS before its build has
+# emitted the directory. tar aborts on a missing member and `set -e` would take
+# the whole deploy down with it — ship what exists and name what was skipped.
+HAVE=""
+MISSING=""
+for d in $DIRS; do
+  if [ -d "$d" ]; then HAVE="$HAVE $d"; else MISSING="$MISSING $d"; fi
+done
+if [ -n "$MISSING" ]; then echo "==> Not built yet, skipping:$MISSING"; fi
+
+echo "==> Tarring $(echo $HAVE | wc -w) dirs + root files…"
+tar czf /c/tmp/kp.tgz $HAVE $ROOTS modules/klook-cards.js modules/page-ads.js modules/week-section.js modules/korea-now.js modules/kp-enhance.js modules/share-viral.js $KEYS
 
 echo "==> Uploading tarball…"
 scp -i "$PEM" -o StrictHostKeyChecking=no /c/tmp/kp.tgz "bitnami@$IP:/tmp/kp.tgz"

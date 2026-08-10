@@ -2,6 +2,9 @@
    KoreaPlus — SEO landing/place page styles
    Loaded on auto-generated content pages (places, guides, itineraries).
    Pairs with hub-styles.css + theme.css.
+   Direction-sensitive rules are written as logical properties so the Arabic
+   (dir="rtl") cluster mirrors itself with no second stylesheet; the handful
+   that cannot be expressed logically sit in the [dir="rtl"] block at the end.
    ══════════════════════════════════════════════════════════════════ */
 
 .seo-wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
@@ -23,18 +26,18 @@
 
 /* Article body */
 .seo-body { font-size: 1rem; line-height: 1.8; color: var(--text2, #d2d2d2); }
-.seo-body .lead { font-size: 1.125rem; line-height: 1.75; color: var(--text, #f0f0f0); padding: 18px 22px; background: var(--surface, rgba(255,255,255,.04)); border-left: 3px solid var(--red, #D62246); border-radius: 12px; margin-bottom: 28px; }
+.seo-body .lead { font-size: 1.125rem; line-height: 1.75; color: var(--text, #f0f0f0); padding: 18px 22px; background: var(--surface, rgba(255,255,255,.04)); border-inline-start: 3px solid var(--red, #D62246); border-radius: 12px; margin-bottom: 28px; }
 .seo-body h2 { font-size: 1.375rem; font-weight: 800; color: var(--text, #fff); margin: 36px 0 14px; letter-spacing: -.01em; }
 .seo-body h3 { font-size: 1.0625rem; font-weight: 700; color: var(--text, #fff); margin: 24px 0 10px; }
 .seo-body p { margin: 0 0 16px; }
-.seo-body ul, .seo-body ol { margin: 0 0 20px; padding-left: 22px; }
+.seo-body ul, .seo-body ol { margin: 0 0 20px; padding-inline-start: 22px; }
 .seo-body li { margin-bottom: 9px; }
 .seo-body ol.steps li::marker { color: var(--red, #D62246); font-weight: 800; }
-.seo-body ul.tips { list-style: none; padding-left: 0; }
-.seo-body ul.tips li { padding-left: 26px; position: relative; }
-.seo-body ul.tips li::before { content: '💡'; position: absolute; left: 0; }
+.seo-body ul.tips { list-style: none; padding-inline-start: 0; }
+.seo-body ul.tips li { padding-inline-start: 26px; position: relative; }
+.seo-body ul.tips li::before { content: '💡'; position: absolute; inset-inline-start: 0; }
 
-.seo-pricebox { background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); border-left: 3px solid var(--gold, #C8973A); border-radius: 12px; padding: 16px 20px; margin: 0 0 24px; }
+.seo-pricebox { background: var(--surface, rgba(255,255,255,.04)); border: 1px solid var(--border, rgba(255,255,255,.1)); border-inline-start: 3px solid var(--gold, #C8973A); border-radius: 12px; padding: 16px 20px; margin: 0 0 24px; }
 .seo-pricebox .range { font-size: 1.5rem; font-weight: 900; color: var(--text, #fff); }
 .seo-pricebox .note { font-size: 0.875rem; color: var(--text2, #bbb); margin-top: 4px; }
 
@@ -66,12 +69,12 @@
 
 /* Instant in-page filter on category hubs */
 .hub-filter-wrap { position: relative; display: flex; align-items: center; margin: 4px 0 22px; }
-.hub-filter-ico { position: absolute; left: 14px; font-size: 0.875rem; opacity: .7; pointer-events: none; }
-.hub-filter { width: 100%; box-sizing: border-box; padding: 12px 16px 12px 40px; font-size: 0.9375rem; font-family: inherit; color: var(--text, #fff); background: var(--surface, rgba(255,255,255,.05)); border: 1px solid var(--border, rgba(255,255,255,.12)); border-radius: 12px; }
+.hub-filter-ico { position: absolute; inset-inline-start: 14px; font-size: 0.875rem; opacity: .7; pointer-events: none; }
+.hub-filter { width: 100%; box-sizing: border-box; padding-block: 12px; padding-inline: 40px 16px; font-size: 0.9375rem; font-family: inherit; color: var(--text, #fff); background: var(--surface, rgba(255,255,255,.05)); border: 1px solid var(--border, rgba(255,255,255,.12)); border-radius: 12px; }
 .hub-filter:focus { border-color: var(--accent2, #74b9ff); }
 .hub-filter:focus:not(:focus-visible) { outline: none; }
 .hub-filter::placeholder { color: var(--text3, #8a93a0); }
-.hub-filter-count { position: absolute; right: 14px; font-size: 0.78125rem; color: var(--text3, #8a93a0); pointer-events: none; }
+.hub-filter-count { position: absolute; inset-inline-end: 14px; font-size: 0.78125rem; color: var(--text3, #8a93a0); pointer-events: none; }
 
 /* Itinerary day blocks */
 .seo-day { border: 1px solid var(--border, rgba(255,255,255,.1)); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; background: var(--surface, rgba(255,255,255,.03)); }
@@ -101,7 +104,7 @@
 
 /* Comparison table */
 .seo-tbl { width: 100%; border-collapse: collapse; margin: 8px 0 24px; font-size: 0.875rem; }
-.seo-tbl th, .seo-tbl td { padding: 11px 14px; border: 1px solid var(--border, rgba(255,255,255,.1)); text-align: left; vertical-align: top; }
+.seo-tbl th, .seo-tbl td { padding: 11px 14px; border: 1px solid var(--border, rgba(255,255,255,.1)); text-align: start; vertical-align: top; }
 .seo-tbl th { color: var(--text, #fff); font-weight: 700; background: var(--surface, rgba(255,255,255,.05)); white-space: nowrap; }
 .seo-tbl td { color: var(--text2, #ccc); line-height: 1.55; }
 .seo-tbl tr:first-child th, .seo-tbl tr:first-child td { background: rgba(214,34,70,.12); color: var(--text, #fff); font-weight: 800; }
@@ -155,14 +158,14 @@
 .aff-rich-name { font-size: 0.8125rem; font-weight: 700; color: var(--text, #fff); line-height: 1.25; }
 .aff-rich-meta { font-size: 0.6875rem; color: var(--text2, #9aa7b8); }
 .aff-rich-price { font-size: 0.8125rem; color: var(--text, #fff); }
-.aff-rich-price s { color: var(--text3, #888); font-size: 0.6875rem; margin-right: 2px; }
+.aff-rich-price s { color: var(--text3, #888); font-size: 0.6875rem; margin-inline-end: 2px; }
 .aff-rich-price b { color: #ff6b81; }
 .aff-rich-price em { color: #34d399; font-style: normal; font-weight: 800; font-size: 0.6875rem; }
 .aff-rich-brand { font-size: 0.625rem; color: var(--text3, #888); margin-top: 1px; }
 @media (max-width: 420px) { .seo-aff .aff-grid.aff-grid-rich { grid-template-columns: 1fr; } }
 
 /* K-Pop browse / directory page */
-.kpb-n{display:inline-block;font-size:0.75rem;font-weight:800;color:var(--accent2,#74b9ff);background:var(--card,rgba(255,255,255,.06));border-radius:99px;padding:1px 9px;margin-left:7px;vertical-align:middle;}
+.kpb-n{display:inline-block;font-size:0.75rem;font-weight:800;color:var(--accent2,#74b9ff);background:var(--card,rgba(255,255,255,.06));border-radius:99px;padding:1px 9px;margin-inline-start:7px;vertical-align:middle;}
 .seo-body h3{font-size:0.875rem;font-weight:800;margin:16px 0 8px;color:var(--text2,#9aa4b2);}
 
 /* ══════════════════════════════════════════════════════════════════
@@ -190,6 +193,10 @@
   /* clear the fixed bar + lift the back-to-top above it */
   body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0)); }
   #kp-totop { bottom: calc(72px + env(safe-area-inset-bottom, 0)) !important; right: 14px !important; }
+  /* The page shell inline-styles #kp-totop with a physical `right:`, and an
+     inline declaration survives a logical property here — so RTL needs the
+     physical side explicitly zeroed out before the mirrored one is set. */
+  [dir="rtl"] #kp-totop { right: auto !important; left: 14px !important; }
 
   /* comfortable reading: wider line-height, fewer cramped edges */
   .seo-wrap { padding: 0 16px 40px; }
@@ -212,7 +219,7 @@
   .seo-card { padding: 15px; }
 
   /* sticky-feel filter sized for thumbs */
-  .hub-filter { font-size: 1rem; padding: 13px 16px 13px 40px; } /* 1rem (>=16px) avoids iOS zoom-on-focus */
+  .hub-filter { font-size: 1rem; padding-block: 13px; padding-inline: 40px 16px; } /* 1rem (>=16px) avoids iOS zoom-on-focus */
 
   /* CTA full-width buttons */
   .seo-cta { padding: 22px 18px; }
@@ -238,12 +245,14 @@
 /* on-this-page scroll-spy */
 .kp-toc { margin: 0 0 24px; padding: 14px 18px; border: 1px solid var(--border, rgba(255,255,255,.09)); border-radius: 14px; background: var(--surface, rgba(255,255,255,.03)); }
 .kp-toc-h { font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--text3, #8a93a0); margin-bottom: 8px; }
-.kp-toc a { display: block; font-size: 0.875rem; color: var(--text2, #aab); text-decoration: none; padding: 5px 10px; border-left: 2px solid transparent; border-radius: 0 6px 6px 0; }
+/* Square corners on the rail side, rounded away from it — stated as logical
+   corners so the rail and the flat edge stay on the same side under RTL. */
+.kp-toc a { display: block; font-size: 0.875rem; color: var(--text2, #aab); text-decoration: none; padding: 5px 10px; border-inline-start: 2px solid transparent; border-radius: 6px; border-start-start-radius: 0; border-end-start-radius: 0; }
 .kp-toc a:hover { color: var(--text, #fff); }
-.kp-toc a.on { color: var(--accent2, #74b9ff); border-left-color: var(--accent2, #74b9ff); background: rgba(116,185,255,.08); font-weight: 700; }
+.kp-toc a.on { color: var(--accent2, #74b9ff); border-inline-start-color: var(--accent2, #74b9ff); background: rgba(116,185,255,.08); font-weight: 700; }
 
 /* Korean name tools (listen / copy) */
-.kp-kr-tools { display: inline-flex; gap: 4px; margin-left: 8px; vertical-align: middle; }
+.kp-kr-tools { display: inline-flex; gap: 4px; margin-inline-start: 8px; vertical-align: middle; }
 .kp-kr-btn { border: 1px solid var(--border, rgba(255,255,255,.15)); background: var(--surface, rgba(255,255,255,.05)); border-radius: 8px; width: 30px; height: 30px; font-size: 0.875rem; cursor: pointer; color: var(--text2, #ccc); line-height: 1; padding: 0; }
 .kp-kr-btn:hover { border-color: var(--accent2, #74b9ff); }
 
@@ -251,10 +260,10 @@
 .kp-lb { position: fixed; inset: 0; z-index: 2100; background: rgba(0,0,0,.9); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .2s; padding: 20px; }
 .kp-lb.on { opacity: 1; visibility: visible; }
 .kp-lb img { max-width: 100%; max-height: 92vh; border-radius: 10px; }
-.kp-lb-x { position: absolute; top: 16px; right: 18px; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 42px; height: 42px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; }
+.kp-lb-x { position: absolute; top: 16px; inset-inline-end: 18px; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 42px; height: 42px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; }
 
 /* resume reading pill */
-.kp-resume { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%) translateY(16px); z-index: 1150; display: flex; align-items: center; gap: 8px; background: #12233a; border: 1px solid var(--border, rgba(255,255,255,.14)); border-radius: 999px; padding: 8px 10px 8px 16px; font-size: 0.8125rem; color: var(--text, #fff); box-shadow: 0 8px 30px -10px rgba(0,0,0,.6); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s; }
+.kp-resume { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%) translateY(16px); z-index: 1150; display: flex; align-items: center; gap: 8px; background: #12233a; border: 1px solid var(--border, rgba(255,255,255,.14)); border-radius: 999px; padding-block: 8px; padding-inline: 16px 10px; font-size: 0.8125rem; color: var(--text, #fff); box-shadow: 0 8px 30px -10px rgba(0,0,0,.6); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s; }
 .kp-resume.on { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 .kp-resume button { border: 0; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 0.9375rem; font-weight: 800; }
 .kp-resume-go { background: var(--accent2, #74b9ff); color: #06101d; }
@@ -268,3 +277,49 @@ summary.kp-toc-h::-webkit-details-marker { display: none; }
 summary.kp-toc-h::after { content: " ▾"; opacity: .6; }
 details.kp-toc[open] > summary.kp-toc-h::after { content: " ▴"; }
 details.kp-toc:not([open]) > summary.kp-toc-h { margin-bottom: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   K-pop media blocks — artist photo + discography/release tables.
+   Fed by the build-time snapshots (kpop-images.js / kpop-discog.js) via
+   modules/seo-kpop-media.cjs. The .kp-figcredit line is a licence obligation
+   on every Commons photo, not optional styling — never display:none it.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.kp-figure{margin:0 0 18px;}
+.kp-figure img{width:100%;max-width:480px;height:auto;aspect-ratio:3/2;object-fit:cover;
+  object-position:center top;border-radius:14px;background:var(--surface,#f2f2f2);display:block;}
+.kp-figcredit{margin-top:7px;font-size:.75rem;line-height:1.45;color:var(--text3,#767676);}
+.kp-figcredit a{color:inherit;text-decoration:underline;text-underline-offset:2px;}
+
+.kp-disc-table td{vertical-align:middle;}
+.kp-disc-t{display:flex;align-items:center;gap:10px;}
+.kp-disc-art{width:56px;height:56px;flex-shrink:0;border-radius:8px;object-fit:cover;
+  background:var(--surface,#f2f2f2);}
+.kp-disc-table tr.is-upcoming td{opacity:.85;}
+.kp-soon{white-space:nowrap;}
+.kp-asof{font-size:.75rem;color:var(--text3,#767676);margin:8px 0 20px;}
+
+.kp-stats{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px;}
+.kp-statbox{display:inline-flex;align-items:baseline;gap:6px;padding:9px 14px;border-radius:12px;
+  background:var(--surface,#f6f6f6);border:1px solid var(--border,rgba(128,128,128,.25));
+  font-size:.8125rem;color:var(--text2,#555);}
+.kp-statbox b{font-size:1.125rem;font-weight:800;color:var(--text,#111);}
+
+/* Tables get wide on phones — let them scroll rather than blow out the page. */
+@media (max-width:560px){
+  .kp-disc-art{width:44px;height:44px;}
+  .kp-disc-t{gap:8px;}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RIGHT-TO-LEFT (Arabic). Only ar sets dir="rtl"; hi/ru/vi/th are LTR and
+   never match these selectors.
+   ══════════════════════════════════════════════════════════════════ */
+/* Arabic letterforms join. Tracking that reads as polish in Latin pulls the
+   joins apart here, so words render as loose strings of disconnected glyphs —
+   drop it wherever this sheet sets it. */
+[dir="rtl"] .seo-hero h1,
+[dir="rtl"] .seo-body h2,
+[dir="rtl"] .seo-slot .st,
+[dir="rtl"] .seo-banner-label,
+[dir="rtl"] .kp-toc-h,
+[dir="rtl"] .kp-tabbar .kp-tab-l { letter-spacing: normal; }

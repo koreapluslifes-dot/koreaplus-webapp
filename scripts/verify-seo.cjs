@@ -8,11 +8,12 @@
  *       optional baseline (.seo-baseline.json). Reports growth/shrinkage;
  *       any NET DECREASE is fatal (exit 1).
  *   (2) hreflang symmetry (best-effort): groups URLs by canonical slug across
- *       the 9 supported languages and lists slugs with missing language
+ *       the 14 supported languages and lists slugs with missing language
  *       variants (asymmetric language balance).
  *   (3) duplicates: identical <loc> appearing more than once (dupLocs).
  *       Plus a best-effort orphan sample: on-disk generated .html files
- *       (kpop/, ja/, ... under guide/) that are NOT present in any sitemap.
+ *       (kpop/, ja/, ar/ ... at the repo root, published under /guide/) that
+ *       are NOT present in any sitemap.
  *   (4) per-language and per-prefix page-count summary.
  *
  * Exit codes: 1 = fatal (sitemap parse failure OR net loc decrease);
@@ -35,7 +36,10 @@ const SITEMAPS = [
 const BASELINE_FILE = path.join(ROOT, '.seo-baseline.json');
 
 // Supported languages. `en` is the bare/default variant (no path prefix).
-const LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
+// Must track the language set build-seo.cjs emits: a code missing here falls
+// through classify()'s prefix match and is silently counted as English, so the
+// per-language totals and the symmetry check both go quietly wrong.
+const LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id', 'ar', 'hi', 'ru', 'vi', 'th'];
 const PREFIXED = LANGS.filter((l) => l !== 'en'); // languages that use /guide/<lang>/
 const ORIGIN = 'https://koreaplus-lifes.com';
 
@@ -249,7 +253,14 @@ const locSet = new Set(all.map(({ loc }) => loc));
 const orphanSample = [];
 let orphanTotal = 0;
 
-const SCAN_DIRS = ['kpop', 'kb', ...PREFIXED.map((l) => l)]; // guide/kpop, guide/kb, guide/<lang>
+// Generated clusters live at the REPO ROOT (kpop/, ja/, ar/ …); the whole root
+// is published under the site's /guide/ path, so an on-disk path and its
+// canonical URL differ by exactly that prefix — hence WEB_PREFIX below.
+// kb/ is deliberately not scanned: it is sitemapped by kbeauty-sitemap.xml,
+// which this gate does not read, so every K-beauty page would read as a false
+// orphan.
+const SCAN_DIRS = ['kpop', ...PREFIXED]; // kpop/, plus one dir per prefixed language
+const WEB_PREFIX = '/guide';
 function walkHtml(dir, acc) {
   let entries;
   try {
@@ -264,13 +275,12 @@ function walkHtml(dir, acc) {
   }
 }
 
-const guideDir = path.join(ROOT, 'guide');
 const htmlFiles = [];
-for (const d of SCAN_DIRS) walkHtml(path.join(guideDir, d), htmlFiles);
+for (const d of SCAN_DIRS) walkHtml(path.join(ROOT, d), htmlFiles);
 
 for (const f of htmlFiles) {
-  const rel = f.substring(ROOT.length).split(path.sep).join('/'); // /guide/...
-  const loc = ORIGIN + rel;
+  const rel = f.substring(ROOT.length).split(path.sep).join('/'); // /<lang>/...
+  const loc = ORIGIN + WEB_PREFIX + rel;
   if (!locSet.has(loc)) {
     orphanTotal++;
     if (orphanSample.length < 15) orphanSample.push(rel);
