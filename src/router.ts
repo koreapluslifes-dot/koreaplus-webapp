@@ -16,12 +16,14 @@
  *  GET  /api/bikes               → 따릉이 availability       ?start=1&end=50
  *  GET  /api/exchange            → Exchange rates (KRW base)
  *  GET  /api/cities              → Supported city list
- *  GET  /api/kpop/charts         → iTunes RSS chart (no key)  ?store=kr&type=songs&limit=50
+ *  GET  /api/kpop/charts         → iTunes RSS chart (no key)  ?store=kr&type=songs&limit=50&fresh=1
  *  GET  /api/kpop/ticker         → Live chart ticker (no key)
  *  GET  /api/kpop/bio            → Wikidata/Wikipedia bio (no key)  ?qid=Q..&lang=ko
  *  GET  /api/kpop/artist         → Aggregated profile  ?id=..&qid=..&spotify=..&channel=..&lang=ko
  *  GET  /api/kpop/feed           → Real-time news (NewsData)  ?artist=NewJeans&lang=en
  *  GET  /api/kpop/concerts       → Tour dates (Ticketmaster)  ?artist=SEVENTEEN&country=US
+ *  GET  /api/kpop/vote           → Bias Battle tally (own KV) ?battle=YYYYMMDD:a-vs-b
+ *  POST /api/kpop/vote           → Cast a vote (own KV)       ?battle=..&pick=a|b
  *  GET  /api/health              → Health check (all services)
  */
 
@@ -299,15 +301,19 @@ export async function handleApiRoute(request: Request, env: WorkerEnv): Promise<
 
   // ── GET /api/kpop/charts ──────────────────────────────────────────────────
   // iTunes RSS (NO key). ?store=kr&type=songs|albums|music-videos&limit=50
+  // ?fresh=1 (the hub's ↻ button) skips the KV read so the refresh is real
+  // rather than re-serving the same cached bytes for the rest of the 1h TTL.
   if (request.method === 'GET' && path.endsWith('/api/kpop/charts')) {
     const store = qp(url, 'store', 'kr');
     const type = (qp(url, 'type', 'songs') as ItunesChartType);
     const limit = parseInt(qp(url, 'limit', '50'));
+    const fresh = qp(url, 'fresh') === '1';
     const client = new ItunesClient();
     try {
       const { data, cached, cacheAgeSeconds } = await withCache(
         env, `kpop:charts:${store}:${type}:${limit}`, 3600,
         () => client.getChart({ store, type, limit }),
+        { bypass: fresh },
       );
       return jsonResponse({ data, cached, cacheAgeSeconds, source: 'itunes' });
     } catch (e) {

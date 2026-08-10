@@ -31,6 +31,8 @@ $ROOT_FILES = @(
     "seasons.html", "kdrama-locations.html", "menu-translator.html", "subway.html",
     # K-Pop vertical
     "kpop.html", "kpop.css", "kpop-data.js", "kpop-enrich.js", "seo.css", "mobile.css",
+    # K-Pop build-time snapshots (tools/gen-kpop-images.cjs / gen-kpop-discog.cjs)
+    "kpop-images.js", "kpop-discog.js",
     # Service-improvement 20 (site-wide UX layer)
     "feature.css",
     # K-Beauty vertical

@@ -63,6 +63,9 @@ export class ItunesClient {
 
     const data = await res.json() as AppleFeedResponse;
     const results = data.feed?.results ?? [];
+    // Apple stamps the feed itself; carrying it on every row lets the UI say
+    // when the CHART was published instead of when the browser rendered it.
+    const feedUpdated = data.feed?.updated;
     return results.map((r, i): ChartEntry => ({
       rank: i + 1,
       title: r.name ?? '',
@@ -73,6 +76,7 @@ export class ItunesClient {
       releaseDate: r.releaseDate,
       kind: r.kind ?? type,
       store,
+      feedUpdated,
     }));
   }
 }

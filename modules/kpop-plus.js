@@ -991,15 +991,15 @@ document.addEventListener("keydown",function(e){
     if(LANGS.indexOf(L)<0) L="en";
 
     var I18N={
-      en:{title:"Bias Battle",sub:"Daily face-off",pick:"Tap your bias to vote",voted:"You voted!",youFandom:"You + the fandom",estimate:"Fun fan-favorite estimate — not a live tally",result:"Today's result",youPicked:"Your pick",tomorrow:"New battle tomorrow — come back to vote again",share:"Share",vs:"VS",shareText:"My Bias Battle pick today: {win}! Who's yours? {a} vs {b}",profile:"View profile",copied:"Share line copied!",winLabel:"leading today",tieLabel:"neck and neck today",day:"Day"},
-      ko:{title:"최애 대결",sub:"오늘의 맞대결",pick:"최애를 눌러 투표하세요",voted:"투표 완료!",youFandom:"나 + 팬덤",estimate:"재미로 보는 팬 선호 추정치 — 실시간 집계 아님",result:"오늘의 결과",youPicked:"내 선택",tomorrow:"내일 새 대결이 열려요 — 다시 투표하러 오세요",share:"공유",vs:"VS",shareText:"오늘 내 최애 대결 선택: {win}! 당신은? {a} vs {b}",profile:"프로필 보기",copied:"공유 문구 복사됨!",winLabel:"오늘 우세",tieLabel:"오늘 막상막하",day:"일차"},
-      ja:{title:"推し対決",sub:"今日の一騎打ち",pick:"推しをタップして投票",voted:"投票しました！",youFandom:"あなた + ファンダム",estimate:"お楽しみのファン人気推定 — リアルタイム集計ではありません",result:"今日の結果",youPicked:"あなたの選択",tomorrow:"明日は新しい対決 — また投票しに来てね",share:"シェア",vs:"VS",shareText:"今日の推し対決の選択：{win}！あなたは？ {a} vs {b}",profile:"プロフィールを見る",copied:"シェア文をコピーしました！",winLabel:"今日リード",tieLabel:"今日は互角",day:"日目"},
-      zh:{title:"本命对决",sub:"今日对战",pick:"点击你的本命投票",voted:"投票成功！",youFandom:"你 + 粉丝团",estimate:"趣味粉丝人气估算 — 非实时统计",result:"今日结果",youPicked:"你的选择",tomorrow:"明天有新对决 — 记得回来再投一票",share:"分享",vs:"VS",shareText:"今天我的本命对决选择：{win}！你呢？ {a} vs {b}",profile:"查看资料",copied:"分享文案已复制！",winLabel:"今日领先",tieLabel:"今日势均力敌",day:"对战日"},
-      es:{title:"Batalla de Bias",sub:"Duelo del día",pick:"Toca tu bias para votar",voted:"¡Votaste!",youFandom:"Tú + el fandom",estimate:"Estimación divertida de favoritos — no es un conteo en vivo",result:"Resultado de hoy",youPicked:"Tu elección",tomorrow:"Nueva batalla mañana — vuelve para votar otra vez",share:"Compartir",vs:"VS",shareText:"Mi elección en la Batalla de Bias de hoy: ¡{win}! ¿Y la tuya? {a} vs {b}",profile:"Ver perfil",copied:"¡Frase para compartir copiada!",winLabel:"lidera hoy",tieLabel:"empate técnico hoy",day:"Día"},
-      fr:{title:"Battle de Bias",sub:"Duel du jour",pick:"Touchez votre bias pour voter",voted:"Voté !",youFandom:"Vous + le fandom",estimate:"Estimation fun des favoris — pas un comptage en direct",result:"Résultat du jour",youPicked:"Votre choix",tomorrow:"Nouvelle battle demain — revenez voter",share:"Partager",vs:"VS",shareText:"Mon choix de la Battle de Bias du jour : {win} ! Et vous ? {a} vs {b}",profile:"Voir le profil",copied:"Phrase de partage copiée !",winLabel:"en tête aujourd'hui",tieLabel:"au coude-à-coude aujourd'hui",day:"Jour"},
-      de:{title:"Bias-Battle",sub:"Tagesduell",pick:"Tippe deinen Bias zum Abstimmen",voted:"Abgestimmt!",youFandom:"Du + das Fandom",estimate:"Spaßige Fan-Favoriten-Schätzung — keine Live-Zählung",result:"Heutiges Ergebnis",youPicked:"Deine Wahl",tomorrow:"Morgen neues Battle — komm wieder zum Abstimmen",share:"Teilen",vs:"VS",shareText:"Meine Bias-Battle-Wahl heute: {win}! Und deine? {a} vs {b}",profile:"Profil ansehen",copied:"Share-Text kopiert!",winLabel:"heute vorn",tieLabel:"heute Kopf-an-Kopf",day:"Tag"},
-      pt:{title:"Batalha de Bias",sub:"Duelo do dia",pick:"Toque no seu bias para votar",voted:"Você votou!",youFandom:"Você + o fandom",estimate:"Estimativa divertida de favoritos — não é contagem ao vivo",result:"Resultado de hoje",youPicked:"Sua escolha",tomorrow:"Nova batalha amanhã — volte para votar de novo",share:"Compartilhar",vs:"VS",shareText:"Minha escolha na Batalha de Bias de hoje: {win}! E a sua? {a} vs {b}",profile:"Ver perfil",copied:"Frase de compartilhamento copiada!",winLabel:"na frente hoje",tieLabel:"empate técnico hoje",day:"Dia"},
-      id:{title:"Bias Battle",sub:"Duel hari ini",pick:"Ketuk bias-mu untuk memilih",voted:"Kamu sudah memilih!",youFandom:"Kamu + fandom",estimate:"Perkiraan favorit fans sekadar seru — bukan hitungan langsung",result:"Hasil hari ini",youPicked:"Pilihanmu",tomorrow:"Battle baru besok — datang lagi untuk memilih",share:"Bagikan",vs:"VS",shareText:"Pilihan Bias Battle-ku hari ini: {win}! Punyamu? {a} vs {b}",profile:"Lihat profil",copied:"Teks berbagi disalin!",winLabel:"unggul hari ini",tieLabel:"bersaing ketat hari ini",day:"Hari"}
+      en:{title:"Bias Battle",sub:"Daily face-off",pick:"Tap your bias to vote",voted:"You voted!",youFandom:"You + the fandom",estimate:"Live tally · counts are approximate",votes:"~%n vote|~%n votes",early:"Early votes — results appear once more fans have voted",result:"Today's result",youPicked:"Your pick",tomorrow:"New battle tomorrow — come back to vote again",share:"Share",vs:"VS",shareText:"My Bias Battle pick today: {win}! Who's yours? {a} vs {b}",profile:"View profile",copied:"Share line copied!",winLabel:"leading today",tieLabel:"neck and neck today",day:"Day"},
+      ko:{title:"최애 대결",sub:"오늘의 맞대결",pick:"최애를 눌러 투표하세요",voted:"투표 완료!",youFandom:"나 + 팬덤",estimate:"실시간 집계 · 수치는 근사값",votes:"약 %n표",early:"집계 초반 — 표가 더 모이면 결과가 표시돼요",result:"오늘의 결과",youPicked:"내 선택",tomorrow:"내일 새 대결이 열려요 — 다시 투표하러 오세요",share:"공유",vs:"VS",shareText:"오늘 내 최애 대결 선택: {win}! 당신은? {a} vs {b}",profile:"프로필 보기",copied:"공유 문구 복사됨!",winLabel:"오늘 우세",tieLabel:"오늘 막상막하",day:"일차"},
+      ja:{title:"推し対決",sub:"今日の一騎打ち",pick:"推しをタップして投票",voted:"投票しました！",youFandom:"あなた + ファンダム",estimate:"リアルタイム集計 · 数値は概算",votes:"約%n票",early:"集計開始直後 — 票が集まると結果が表示されます",result:"今日の結果",youPicked:"あなたの選択",tomorrow:"明日は新しい対決 — また投票しに来てね",share:"シェア",vs:"VS",shareText:"今日の推し対決の選択：{win}！あなたは？ {a} vs {b}",profile:"プロフィールを見る",copied:"シェア文をコピーしました！",winLabel:"今日リード",tieLabel:"今日は互角",day:"日目"},
+      zh:{title:"本命对决",sub:"今日对战",pick:"点击你的本命投票",voted:"投票成功！",youFandom:"你 + 粉丝团",estimate:"实时统计 · 数值为近似值",votes:"约 %n 票",early:"刚开始计票 — 票数够多后会显示结果",result:"今日结果",youPicked:"你的选择",tomorrow:"明天有新对决 — 记得回来再投一票",share:"分享",vs:"VS",shareText:"今天我的本命对决选择：{win}！你呢？ {a} vs {b}",profile:"查看资料",copied:"分享文案已复制！",winLabel:"今日领先",tieLabel:"今日势均力敌",day:"对战日"},
+      es:{title:"Batalla de Bias",sub:"Duelo del día",pick:"Toca tu bias para votar",voted:"¡Votaste!",youFandom:"Tú + el fandom",estimate:"Recuento en vivo · cifras aproximadas",votes:"~%n voto|~%n votos",early:"Recuento inicial — los resultados aparecen cuando haya más votos",result:"Resultado de hoy",youPicked:"Tu elección",tomorrow:"Nueva batalla mañana — vuelve para votar otra vez",share:"Compartir",vs:"VS",shareText:"Mi elección en la Batalla de Bias de hoy: ¡{win}! ¿Y la tuya? {a} vs {b}",profile:"Ver perfil",copied:"¡Frase para compartir copiada!",winLabel:"lidera hoy",tieLabel:"empate técnico hoy",day:"Día"},
+      fr:{title:"Battle de Bias",sub:"Duel du jour",pick:"Touchez votre bias pour voter",voted:"Voté !",youFandom:"Vous + le fandom",estimate:"Comptage en direct · chiffres approximatifs",votes:"~%n vote|~%n votes",early:"Comptage débutant — les résultats s'afficheront avec plus de votes",result:"Résultat du jour",youPicked:"Votre choix",tomorrow:"Nouvelle battle demain — revenez voter",share:"Partager",vs:"VS",shareText:"Mon choix de la Battle de Bias du jour : {win} ! Et vous ? {a} vs {b}",profile:"Voir le profil",copied:"Phrase de partage copiée !",winLabel:"en tête aujourd'hui",tieLabel:"au coude-à-coude aujourd'hui",day:"Jour"},
+      de:{title:"Bias-Battle",sub:"Tagesduell",pick:"Tippe deinen Bias zum Abstimmen",voted:"Abgestimmt!",youFandom:"Du + das Fandom",estimate:"Live-Zählung · Zahlen sind Näherungswerte",votes:"~%n Stimme|~%n Stimmen",early:"Zählung läuft gerade an — Ergebnisse erscheinen bei mehr Stimmen",result:"Heutiges Ergebnis",youPicked:"Deine Wahl",tomorrow:"Morgen neues Battle — komm wieder zum Abstimmen",share:"Teilen",vs:"VS",shareText:"Meine Bias-Battle-Wahl heute: {win}! Und deine? {a} vs {b}",profile:"Profil ansehen",copied:"Share-Text kopiert!",winLabel:"heute vorn",tieLabel:"heute Kopf-an-Kopf",day:"Tag"},
+      pt:{title:"Batalha de Bias",sub:"Duelo do dia",pick:"Toque no seu bias para votar",voted:"Você votou!",youFandom:"Você + o fandom",estimate:"Contagem ao vivo · números aproximados",votes:"~%n voto|~%n votos",early:"Contagem inicial — os resultados aparecem com mais votos",result:"Resultado de hoje",youPicked:"Sua escolha",tomorrow:"Nova batalha amanhã — volte para votar de novo",share:"Compartilhar",vs:"VS",shareText:"Minha escolha na Batalha de Bias de hoje: {win}! E a sua? {a} vs {b}",profile:"Ver perfil",copied:"Frase de compartilhamento copiada!",winLabel:"na frente hoje",tieLabel:"empate técnico hoje",day:"Dia"},
+      id:{title:"Bias Battle",sub:"Duel hari ini",pick:"Ketuk bias-mu untuk memilih",voted:"Kamu sudah memilih!",youFandom:"Kamu + fandom",estimate:"Hitungan langsung · angka perkiraan",votes:"~%n suara",early:"Baru mulai dihitung — hasil muncul setelah suara bertambah",result:"Hasil hari ini",youPicked:"Pilihanmu",tomorrow:"Battle baru besok — datang lagi untuk memilih",share:"Bagikan",vs:"VS",shareText:"Pilihan Bias Battle-ku hari ini: {win}! Punyamu? {a} vs {b}",profile:"Lihat profil",copied:"Teks berbagi disalin!",winLabel:"unggul hari ini",tieLabel:"bersaing ketat hari ini",day:"Hari"}
     };
     var t=function(k){ var o=I18N[L]||I18N.en; return (o&&o[k]!=null)?o[k]:(I18N.en[k]!=null?I18N.en[k]:k); };
 
@@ -1055,12 +1055,27 @@ document.addEventListener("keydown",function(e){
       return {a:a,b:b};
     }
 
-    // ── Stable synthetic split (clearly a fun estimate) ──
-    // Returns percent for side A in [38..62] so neither side looks fake-dominant.
-    function splitFor(aId,bId){
-      var s=hash("kpp_poll_split_"+DAYK+"_"+aId+"_"+bId);
-      var pct=38+(s%25); // 38..62
-      return pct;
+    // ── Real tally (worker KV) ──
+    // Sides are "a"/"b"; pickPair() orders the pair by artist id, so every
+    // device derives the same two sides from the same battle key.
+    // TALLY stays null until the server answers, and there is deliberately NO
+    // synthetic fallback: no numbers beat invented numbers.
+    var API=window.KPApi||null;
+    var TALLY=null;
+    var MIN_VOTES=5;                 // below this, percentages are noise
+    function battleKey(a,b){ return DAYK+":"+a.id+"-vs-"+b.id; }
+    // "singular|plural" — langs without the distinction omit the pipe. n===1 is
+    // the most common state on a fresh battle, so it has to read right.
+    function votesLabel(n){
+      var p=String(t("votes")).split("|");
+      return (n===1?p[0]:(p[1]||p[0])).replace("%n",n);
+    }
+    function sideOf(pair,id){ return id===pair.a.id?"a":"b"; }
+    function loadTally(pair,done){
+      if(!API||!API.getKpopVotes){ TALLY=null; done(); return; }
+      API.getKpopVotes(battleKey(pair.a,pair.b)).then(function(d){
+        TALLY=(d&&typeof d.a==="number")?d:null; done();
+      },function(){ TALLY=null; done(); });
     }
 
     var accent=function(a){
@@ -1178,12 +1193,16 @@ document.addEventListener("keydown",function(e){
       if(!pair){ card.innerHTML=""; return; }
       var a=pair.a, b=pair.b;
       var voted=votedToday();
-      var pctA=splitFor(a.id,b.id); // synthetic A share
-      var pctB=100-pctA;
+      // Real counts only. total<MIN_VOTES → no percentages (too few to mean
+      // anything); no tally at all → no bars, rather than a made-up split.
+      var total=TALLY?(TALLY.a+TALLY.b):0;
+      var showPct=!!TALLY&&total>=MIN_VOTES;
+      var pctA=showPct?Math.round(TALLY.a/total*100):50;
+      var pctB=showPct?100-pctA:50;
 
       // Determine the "leading" label
       var leader=null;
-      if(pctA>pctB) leader=a; else if(pctB>pctA) leader=b;
+      if(showPct){ if(pctA>pctB) leader=a; else if(pctB>pctA) leader=b; }
 
       var accA=accent(a), accB=accent(b);
       var styleA=accA?(' style="--accent:'+esc(accA)+'"'):"";
@@ -1219,23 +1238,26 @@ document.addEventListener("keydown",function(e){
       html+='</div>';
 
       if(voted){
-        // Result reveal
-        var startA=reduce?pctA:50, startB=reduce?pctB:50;
-        html+='<div class="kpp-poll-bars">';
-        html+='<div class="kpp-poll-result-ttl" style="font-size:11px;font-weight:800;color:var(--text3,#8a93a0);margin-bottom:7px">'+esc(t("result"))+'</div>';
-        html+='<div class="kpp-poll-bar" role="img" aria-label="'+esc(name(a))+' '+pctA+'% '+esc(t("vs"))+' '+esc(name(b))+' '+pctB+'%">';
-        html+='<div class="kpp-poll-fill kpp-poll-fa" data-fill="a" style="flex:0 0 '+startA+'%"><span class="kpp-poll-pct">'+pctA+'%</span></div>';
-        html+='<div class="kpp-poll-fill kpp-poll-fb" data-fill="b" style="flex:0 0 '+startB+'%"><span class="kpp-poll-pct">'+pctB+'%</span></div>';
-        html+='</div>';
-        html+='<div class="kpp-poll-lg"><span>'+esc(a.emoji||"")+' <b>'+esc(name(a))+'</b></span><span><b>'+esc(name(b))+'</b> '+esc(b.emoji||"")+'</span></div>';
-        html+='</div>';
+        // Result reveal — only when the server actually returned enough votes.
+        if(showPct){
+          var startA=reduce?pctA:50, startB=reduce?pctB:50;
+          html+='<div class="kpp-poll-bars">';
+          html+='<div class="kpp-poll-result-ttl" style="font-size:11px;font-weight:800;color:var(--text3,#8a93a0);margin-bottom:7px">'+esc(t("result"))+' · '+esc(votesLabel(total))+'</div>';
+          html+='<div class="kpp-poll-bar" role="img" aria-label="'+esc(name(a))+' '+pctA+'% '+esc(t("vs"))+' '+esc(name(b))+' '+pctB+'%">';
+          html+='<div class="kpp-poll-fill kpp-poll-fa" data-fill="a" style="flex:0 0 '+startA+'%"><span class="kpp-poll-pct">'+pctA+'%</span></div>';
+          html+='<div class="kpp-poll-fill kpp-poll-fb" data-fill="b" style="flex:0 0 '+startB+'%"><span class="kpp-poll-pct">'+pctB+'%</span></div>';
+          html+='</div>';
+          html+='<div class="kpp-poll-lg"><span>'+esc(a.emoji||"")+' <b>'+esc(name(a))+'</b></span><span><b>'+esc(name(b))+'</b> '+esc(b.emoji||"")+'</span></div>';
+          html+='</div>';
+        }else if(TALLY){
+          html+='<div class="kpp-poll-early">'+esc(t("early"))+' · '+esc(votesLabel(total))+'</div>';
+        }
 
-        var leadTxt;
-        if(leader) leadTxt=name(leader)+" "+t("winLabel");
-        else leadTxt=t("tieLabel");
         var youSide=(voted===a.id)?name(a):name(b);
-        html+='<div class="kpp-poll-you"><em>'+esc(t("youFandom"))+'</em> — '+esc(youSide)+' · '+esc(leadTxt)+'</div>';
-        html+='<div class="kpp-poll-note">'+esc(t("estimate"))+'</div>';
+        var youLine='<em>'+esc(t("youFandom"))+'</em> — '+esc(youSide);
+        if(showPct) youLine+=' · '+esc(leader?(name(leader)+" "+t("winLabel")):t("tieLabel"));
+        html+='<div class="kpp-poll-you">'+youLine+'</div>';
+        if(TALLY) html+='<div class="kpp-poll-note">'+esc(t("estimate"))+'</div>';
 
         // share + profile
         html+='<div class="kpp-poll-foot"><button type="button" class="kpp-poll-btn kpp-poll-share" data-share="1" aria-label="'+esc(t("share"))+'">'+esc(t("share"))+'</button></div>';
@@ -1256,8 +1278,13 @@ document.addEventListener("keydown",function(e){
             if(votedToday()) return;
             var id=btn.getAttribute("data-pick");
             if(!id) return;
-            setVote(DAYK,id);
-            render();
+            setVote(DAYK,id);          // local record: one vote per device per day
+            render();                  // reveal immediately; the count fills in
+            if(API&&API.postKpopVote){
+              API.postKpopVote(battleKey(a,b),sideOf(pair,id)).then(function(d){
+                if(d&&typeof d.a==="number"){ TALLY=d; render(); }
+              },function(){ /* offline → no numbers, never invented ones */ });
+            }
           });
         });
       }else{
@@ -1288,11 +1315,14 @@ document.addEventListener("keydown",function(e){
 
     mount.appendChild(card);
     render();
+    // Already voted on a previous visit → pull today's standing count so the
+    // reveal isn't stuck on "no data" until they vote again.
+    if(votedToday()){ var p0=pickPair(); if(p0) loadTally(p0,render); }
 
     // Re-render on day rollover if follows/views fire and the day key changed.
     function maybeRoll(){
       var nk=todayKey();
-      if(nk!==DAYK){ DAYK=nk; DAYN=dayNumber(); render(); }
+      if(nk!==DAYK){ DAYK=nk; DAYN=dayNumber(); TALLY=null; render(); }
     }
     window.addEventListener("kp:follows",maybeRoll);
     window.addEventListener("kp:view",maybeRoll);

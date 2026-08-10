@@ -16,6 +16,7 @@ import { handleApiRoute } from './router.ts';
 import { handlePlanRequest, handleSharePost, handleShareGet, handleShareHtml } from './handlers/planner.ts';
 import { handleAffiliate } from './handlers/affiliate.ts';
 import { handleReact, handleView } from './handlers/reactions.ts';
+import { handleKpopVote } from './handlers/kpopvote.ts';
 import { handleMenuTranslate } from './handlers/translator.ts';
 import type { CacheEnv } from './cache.ts';
 import type { LLMEnv } from './api/groq.ts';
@@ -500,6 +501,11 @@ export default {
 
     // "Was this helpful?" reactions (GET counts, POST a vote) — element 8 UGC
     if (path.endsWith('/api/react')) return handleReact(request, env);
+
+    // K-pop Bias Battle tally (GET counts, POST a vote). Registered here, not in
+    // router.ts: handleApiRoute below is reached for GET only, so a posted vote
+    // would fall through to the /chat JSON parser and 400.
+    if (path.endsWith('/api/kpop/vote')) return handleKpopVote(request, env);
 
     // S17: page view counter — GET /api/view?slug=... increments & returns views.
     // Real counts only (react.js uses it for social proof). Session-dedup is the

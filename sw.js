@@ -1,5 +1,5 @@
 /* KoreaPlus Service Worker — v7 */
-const CACHE = 'kp-v69';
+const CACHE = 'kp-v70';
 const BASE  = '/guide';
 
 const PRECACHE = [
@@ -38,6 +38,8 @@ const PRECACHE = [
   BASE + '/kpop.css',
   BASE + '/kpop-data.js',
   BASE + '/kpop-enrich.js',
+  BASE + '/kpop-images.js',
+  BASE + '/kpop-discog.js',
   BASE + '/kbeauty.html',
   BASE + '/kbeauty-data.js',
   BASE + '/kbeauty-manifest.json',

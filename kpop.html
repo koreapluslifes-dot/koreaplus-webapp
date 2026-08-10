@@ -43,7 +43,7 @@
   <link rel="stylesheet" href="hub-styles.css?v=8">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="seo.css">
-  <link rel="stylesheet" href="kpop.css?v=7">
+  <link rel="stylesheet" href="kpop.css?v=8">
   <link rel="stylesheet" href="mobile.css?v=1">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Pop Now — Real-Time Charts, Comebacks & Idol News","url":"https://koreaplus-lifes.com/kpop","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-pop"},"description":"Real-time K-pop charts, comeback countdowns, idol news and artist profiles."}
@@ -133,6 +133,9 @@
       <h2 class="kpop-sec-title" data-i18n="kpop.sec.countdowns.title">⏳ Comeback & Anniversary Countdowns</h2>
       <div class="kpop-sec-sub" data-i18n="kpop.sec.countdowns.sub">Next milestones for your favorite artists</div>
     </div>
+    <!-- Releases radar (build-time Apple snapshot) — own container so the
+         "All" preview cap, which targets .cd-grid children, can't hide it. -->
+    <div id="kpop-releases" class="rel-wrap" hidden></div>
     <div id="kpop-cd-grid" class="cd-grid">
       <div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div>
       <div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div><div class="cd-card kp-sk"></div>
@@ -234,12 +237,15 @@
 <script>window.WORKER_URL = window.WORKER_URL || 'https://koreaplus-webapp.jeybeeicon.workers.dev';</script>
 <script src="kpop-data.js"></script>
 <script src="kpop-enrich.js"></script>
-<script src="modules/api-client.js"></script>
+<!-- Build-time snapshots: Commons photos (licence-credited in the UI) + Apple release data -->
+<script src="kpop-images.js?v=1"></script>
+<script src="kpop-discog.js?v=1"></script>
+<script src="modules/api-client.js?v=2"></script>
 <script src="modules/topads.js"></script>
 <script src="modules/kpop-sharecard.js"></script>
 <script src="modules/kpop-player.js?v=3"></script>
-<script src="modules/kpop.js?v=7"></script>
-<script src="modules/kpop-plus.js?v=2"></script>
+<script src="modules/kpop.js?v=8"></script>
+<script src="modules/kpop-plus.js?v=3"></script>
 <script src="modules/kpop-ux.js?v=2"></script>
 <script src="modules/mobile.js?v=1" defer></script>
 </body>

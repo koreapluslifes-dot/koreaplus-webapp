@@ -15,12 +15,17 @@
 
   const _cache = new Map();
 
-  async function kpFetch(path, ttlMs = 60_000) {
+  // bypass:true skips the in-memory tier (the caller is doing a deliberate
+  // refresh); pair it with the worker's own ?fresh=1 to pierce KV as well,
+  // otherwise the "refresh" just re-serves the cached response.
+  async function kpFetch(path, ttlMs = 60_000, opts = {}) {
     const base = window.WORKER_URL || '';
     if (!base) throw new Error('WORKER_URL not set');
-    const key = path;
+    // cacheKey lets a "?fresh=1" variant overwrite the entry its plain
+    // counterpart reads, instead of filling a second, parallel slot.
+    const key = opts.cacheKey || path;
     const hit = _cache.get(key);
-    if (hit && Date.now() - hit.ts < ttlMs) return hit.data;
+    if (hit && !opts.bypass && Date.now() - hit.ts < ttlMs) return hit.data;
     try {
       const res = await fetch(base + path);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -86,8 +91,32 @@
     getBikes:     (lat, lng)      => kpFetch(`/api/bikes?lat=${lat}&lng=${lng}`, 120_000),
 
     // ── K-Pop vertical ──────────────────────────────────────────────────────
-    getKpopCharts: (store = 'kr', type = 'songs') =>
-      kpFetch(`/api/kpop/charts?store=${store}&type=${type}&limit=50`, 60 * 60_000),     // 1 hr
+    // fresh:true = user pressed ↻ — bypasses the in-memory TTL *and* the
+    // worker's KV entry, then overwrites the shared cache slot.
+    getKpopCharts(store = 'kr', type = 'songs', fresh = false) {
+      const base = `/api/kpop/charts?store=${store}&type=${type}&limit=50`;
+      return kpFetch(fresh ? base + '&fresh=1' : base, 60 * 60_000,       // 1 hr
+        fresh ? { bypass: true, cacheKey: base } : {});
+    },
+    getHealth: () => kpFetch('/api/health', 10 * 60_000),                 // 10 min
+
+    /** Bias Battle tally. GET reads, POST casts one vote (server dedups by IP). */
+    getKpopVotes: (battle) =>
+      kpFetch(`/api/kpop/vote?battle=${encodeURIComponent(battle)}`, 60_000),
+    async postKpopVote(battle, pick) {
+      const base = window.WORKER_URL || '';
+      if (!base) throw new Error('WORKER_URL not set');
+      const res = await fetch(
+        `${base}/api/kpop/vote?battle=${encodeURIComponent(battle)}&pick=${pick === 'b' ? 'b' : 'a'}`,
+        { method: 'POST' },
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const env = await res.json();
+      const data = (env && (env.data ?? env)) || {};
+      // Keep the GET slot in step so a re-render doesn't show the pre-vote count.
+      _cache.set(`/api/kpop/vote?battle=${encodeURIComponent(battle)}`, { data, ts: Date.now() });
+      return data;
+    },
     getKpopTicker: () => kpFetch('/api/kpop/ticker', 30 * 60_000),                        // 30 min
     getKpopBio:    (qid, lang = 'en') =>
       kpFetch(`/api/kpop/bio?qid=${encodeURIComponent(qid)}&lang=${lang}`, 24 * 3600_000),

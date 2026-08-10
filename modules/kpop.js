@@ -10,6 +10,12 @@
   const UPCOMING = window.KPOP_UPCOMING || [];
   const API = window.KPApi || null;
   const ENRICH = window.KPOP_ENRICH || {};
+  // Build-time snapshots (see tools/gen-kpop-images.cjs / gen-kpop-discog.cjs).
+  // IMAGES: Wikimedia Commons photos, licence-verified — every render MUST show
+  // the author + licence credit. DISCOG: Apple release dates + artwork, which
+  // also feed the releases radar below.
+  const IMAGES = window.KPOP_IMAGES || {};
+  const DISCOG = window.KPOP_DISCOG || {};
   const FOLLOW_KEY = 'kp_kpop_follow';
   const ONBOARD_KEY = 'kp_kpop_onboard_done';
 
@@ -53,6 +59,32 @@
     el._tm = setTimeout(hide, action ? 5000 : 1800);
   };
 
+  // ── Artist photos (F1) ─────────────────────────────────────────────────────
+  // A real photo where we have one under a free licence, the emoji otherwise.
+  // Explicit width/height + a fixed-size container keep CLS at 0; a broken URL
+  // swaps back to the emoji rather than leaving a hole.
+  function photoHTML(a, px, eager) {
+    const emoji = a.emoji || '🎤';
+    const im = IMAGES[a.id];
+    if (!im || !im.src) return emoji;
+    return `<img class="kp-photo" src="${esc(im.src)}" alt="" width="${px}" height="${px}"`
+      + ` loading="${eager ? 'eager' : 'lazy'}" decoding="async"`
+      + ` onerror="this.hidden=true;var n=this.nextElementSibling;if(n)n.hidden=false">`
+      + `<span class="kp-photo-fb" hidden aria-hidden="true">${emoji}</span>`;
+  }
+  // Commons licences oblige us to name the author and the licence. No credit
+  // rendered → no photo shown, so this markup is not optional decoration.
+  function photoCredit(a) {
+    const im = IMAGES[a.id];
+    if (!im || !im.src) return '';
+    const who = im.artist || 'Wikimedia Commons';
+    const lic = im.license || '';
+    const inner = `${esc(who)}${lic ? ' · ' + esc(lic) : ''} · Wikimedia Commons`;
+    return `<div class="km-credit">📷 ${esc(pstr().photo)}: `
+      + (im.page ? `<a href="${esc(im.page)}" target="_blank" rel="noopener">${inner}</a>` : inner)
+      + `</div>`;
+  }
+
   // ── Follow state ───────────────────────────────────────────────────────────
   const getFollows = () => { try { return new Set(JSON.parse(localStorage.getItem(FOLLOW_KEY) || '[]')); } catch { return new Set(); } };
   const setFollows = (set) => { try { localStorage.setItem(FOLLOW_KEY, JSON.stringify([...set])); } catch {} };
@@ -70,6 +102,7 @@
     if (cand < todayMid) { year += 1; cand = new Date(Date.UTC(year, mo - 1, d) - KST_MS); }
     return { date: cand, years: year - y };
   }
+  const isoTodayKST = () => nowKST().toISOString().slice(0, 10);
   function daysBetween(future) {
     const now = nowKST();
     const a = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
@@ -87,6 +120,16 @@
       const dt = new Date(u.date + 'T00:00:00+09:00');
       const dl = daysBetween(dt); if (dl < 0) continue;
       events.push({ artist: a, type: (u.type || t('comeback')), typeKey: u.type || 'comeback', title: u.title || '', date: dt, daysLeft: dl, confirmed: u.confirmed !== false });
+    }
+    // Announced releases Apple already lists with a future date. KPOP_UPCOMING is
+    // hand-curated and empty, so without these the hub's comeback countdowns are
+    // nothing but debut anniversaries. These are real, dated, and sourced.
+    for (const r of allReleases()) {
+      if (r.date <= isoTodayKST()) break;                  // sorted desc → rest is past
+      const a = byId[r.artist.id]; if (!a) continue;
+      const dt = parseISO(r.date), dl = daysBetween(dt);
+      if (dl < 0) continue;
+      events.push({ artist: a, type: t('comeback'), typeKey: 'release', title: r.title + (r.badge ? ' (' + r.badge + ')' : ''), date: dt, daysLeft: dl, confirmed: true, art: r.art });
     }
     for (const a of ROSTER) {
       const an = nextAnniversary(a.debut); if (!an) continue;
@@ -111,7 +154,7 @@
     const box = $('#kp-spotlight'); if (!box) return;
     const e = EVENTS.find(x => x.daysLeft >= 0); if (!e) { box.hidden = true; return; }
     box.innerHTML = `
-      <div class="kp-spot-emoji" aria-hidden="true">${e.artist.emoji || '🎤'}</div>
+      <div class="kp-spot-emoji" aria-hidden="true">${photoHTML(e.artist, 56, true)}</div>
       <div class="kp-spot-body">
         <div class="kp-spot-eyebrow">${esc(t('spot'))}</div>
         <div class="kp-spot-artist">${esc(e.artist.nameEn)}</div>
@@ -226,6 +269,44 @@
     }));
   }
 
+  // ── Releases radar (F2) ────────────────────────────────────────────────────
+  // A build-time snapshot, so it is stamped "as of <date>" rather than dressed
+  // up as live. Lives in its own container: the "All" preview cap targets
+  // .cd-grid children, and this strip is the section's headline.
+  const RECENT_DAYS = 60;
+  function renderReleases() {
+    const box = $('#kpop-releases'); if (!box) return;
+    const today = isoTodayKST();
+    const cut = new Date(Date.now() + KST_MS - RECENT_DAYS * 86400_000).toISOString().slice(0, 10);
+    const all = allReleases();
+    const soon = all.filter(r => r.date > today).sort((p, q) => (p.date < q.date ? -1 : 1)).slice(0, 8);
+    const fresh = all.filter(r => r.date <= today && r.date >= cut).slice(0, 12);
+    if (!soon.length && !fresh.length) { box.hidden = true; return; }
+
+    const tile = (r, up) => {
+      const when = up ? rt('dueOn').replace('%d', fmtISO(r.date)) : rt('outOn').replace('%d', fmtISO(r.date));
+      const art = r.art
+        ? `<img class="rel-art" src="${esc(r.art)}" alt="" width="104" height="104" loading="lazy" decoding="async">`
+        : '<div class="rel-art"></div>';
+      const meta = `${art}<span class="rel-artist">${esc(r.artist.nameEn)}</span>`
+        + `<span class="rel-title">${esc(r.title)}${r.badge ? ` <span class="rel-badge">${esc(r.badge)}</span>` : ''}</span>`
+        + `<span class="rel-when">${esc(when)}</span>`;
+      // Same rule as the discography: nothing to play before release day.
+      if (up) return `<div class="rel-card is-soon">${meta}</div>`;
+      const q = (r.artist.nameEn + ' ' + r.title).trim();
+      const yt = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q + ' official');
+      return `<a class="rel-card kp-playable" href="${yt}" target="_blank" rel="noopener"`
+        + ` data-play="${esc(q)}" data-ptitle="${esc(r.title)}" data-partist="${esc(r.artist.nameEn)}" data-pchannel="${esc(r.artist.youtubeChannelId || '')}"`
+        + ` aria-label="${esc(r.title + ' — ' + r.artist.nameEn)}">${meta}</a>`;
+    };
+    const group = (label, rows, up) => rows.length
+      ? `<div class="rel-group"><div class="rel-group-h">${esc(label)}</div><div class="rel-rail">${rows.map(r => tile(r, up)).join('')}</div></div>`
+      : '';
+    box.innerHTML = group(rt('soon'), soon, true) + group(rt('fresh'), fresh, false)
+      + `<div class="rel-asof">${esc(rt('asOf').replace('%d', snapshotDate()))}</div>`;
+    box.hidden = false;
+  }
+
   function renderCountdowns() {
     const grid = $('#kpop-cd-grid'); if (!grid) return;
     const follows = getFollows();
@@ -278,9 +359,9 @@
     let list = ROSTER.slice();
     if (showFollowedOnly) list = list.filter(a => follows.has(a.id));
     list.sort((a, b) => (follows.has(b.id) - follows.has(a.id)));
-    grid.innerHTML = list.map(a => {
+    grid.innerHTML = list.map((a, i) => {
       const on = follows.has(a.id);
-      const disc = a.image ? `<img src="${esc(a.image)}" alt="">` : (a.emoji || '🎤');
+      const disc = photoHTML(a, 60, i < 8);   // first row above the fold → eager
       return `<div class="art-card${on ? ' followed' : ''}" data-id="${esc(a.id)}">
         <button class="art-follow" type="button" data-follow="${esc(a.id)}" aria-pressed="${on ? 'true' : 'false'}" aria-label="${esc((on ? t('following') : t('follow')) + ' ' + a.nameEn)}">${on ? '★' : '☆'}</button>
         <button class="art-open" type="button" aria-haspopup="dialog" aria-label="${esc(a.nameEn)}">
@@ -336,7 +417,13 @@
     const ytQ = encodeURIComponent(a.nameEn + ' official');
     const spLink = a.spotifyId ? `https://open.spotify.com/artist/${a.spotifyId}` : `https://open.spotify.com/search/${encodeURIComponent(a.nameEn)}`;
     const ytLink = a.youtubeChannelId ? `https://www.youtube.com/channel/${a.youtubeChannelId}` : `https://www.youtube.com/results?search_query=${ytQ}`;
-    const disc = a.image ? `<img src="${esc(a.image)}" alt="">` : (a.emoji || '🎤');
+    const disc = photoHTML(a, 76, true);
+    const albums = discogFor(a.id);
+    const tabs = albums.length ? `
+      <div class="km-tabs" role="tablist" aria-label="${esc(a.nameEn)}">
+        <button class="km-tab on" type="button" role="tab" aria-selected="true" data-mtab="about">${esc(rt('about'))}</button>
+        <button class="km-tab" type="button" role="tab" aria-selected="false" data-mtab="disc">${esc(rt('disc'))} <span class="km-tab-n">${albums.length}</span></button>
+      </div>` : '';
     box.innerHTML = `
       <button class="kpop-modal-x" type="button" data-close aria-label="Close">✕</button>
       <div class="km-emoji" aria-hidden="true">${disc}</div>
@@ -349,18 +436,33 @@
         ${(ENRICH[a.id] && ENRICH[a.id].lightstick) ? `<span class="km-fact">🔦 ${esc(ENRICH[a.id].lightstick)}</span>` : ''}
         ${(ENRICH[a.id] && ENRICH[a.id].color) ? `<span class="km-fact"><span class="km-swatch" style="background:${esc(ENRICH[a.id].color)}"></span>${esc(ENRICH[a.id].color)}</span>` : ''}
       </div>
-      <div class="km-bio" id="km-bio">${a.wikidataId ? `<span style="opacity:.6">${esc(t('bioSoon'))}</span>` : ''}</div>
-      ${a.members && a.members.length ? `<div class="km-members"><b>${esc(t('members'))}:</b> ${esc(a.members.join(' · '))}</div>` : ''}
-      <div class="km-listen">
-        <span class="km-listen-label">${esc(pstr().listen)}:</span>
-        <a class="km-listen-link km-listen-play" href="${ytLink}" target="_blank" rel="noopener" data-play="${esc(a.nameEn)}" data-ptitle="${esc(a.nameEn)}" data-partist="" data-pchannel="${esc(a.youtubeChannelId || '')}">▶ YouTube</a>
-        <a class="km-listen-link" href="${spLink}" target="_blank" rel="noopener">Spotify ↗</a>
+      <div class="km-stats" id="km-stats" hidden></div>
+      ${tabs}
+      <div class="km-pane" data-mpane="about">
+        <div class="km-bio" id="km-bio">${a.wikidataId ? `<span style="opacity:.6">${esc(t('bioSoon'))}</span>` : ''}</div>
+        ${a.members && a.members.length ? `<div class="km-members"><b>${esc(t('members'))}:</b> ${esc(a.members.join(' · '))}</div>` : ''}
+        <div class="km-listen">
+          <span class="km-listen-label">${esc(pstr().listen)}:</span>
+          <a class="km-listen-link km-listen-play" href="${ytLink}" target="_blank" rel="noopener" data-play="${esc(a.nameEn)}" data-ptitle="${esc(a.nameEn)}" data-partist="" data-pchannel="${esc(a.youtubeChannelId || '')}">▶ YouTube</a>
+          <a class="km-listen-link" href="${spLink}" target="_blank" rel="noopener">Spotify ↗</a>
+        </div>
       </div>
+      ${albums.length ? `<div class="km-pane" data-mpane="disc" hidden>
+        <div class="km-disc-grid">${albums.map(al => albumCard(a, al)).join('')}</div>
+        <div class="km-disc-asof">${esc(rt('asOf').replace('%d', snapshotDate()))}</div>
+      </div>` : ''}
       <div class="km-links">
         <a class="km-link primary km-profile" href="${profileUrl(a.id)}">${esc(pstr().full)} →</a>
         <button class="km-link" type="button" data-followbtn="${esc(a.id)}" aria-pressed="${follows.has(a.id) ? 'true' : 'false'}">${follows.has(a.id) ? '★ ' + esc(t('following')) : '☆ ' + esc(t('follow'))}</button>
         <button class="km-link" type="button" data-fancard="${esc(a.id)}">🪪 ${esc(fanStr.btn)}</button>
-      </div>`;
+      </div>
+      ${photoCredit(a)}`;
+    // Tab switching (About ↔ Discography)
+    $$('.km-tab', box).forEach(tb => tb.addEventListener('click', () => {
+      const want = tb.dataset.mtab;
+      $$('.km-tab', box).forEach(x => { const on = x === tb; x.classList.toggle('on', on); x.setAttribute('aria-selected', on ? 'true' : 'false'); });
+      $$('.km-pane', box).forEach(p => { p.hidden = p.dataset.mpane !== want; });
+    }));
     bg.classList.add('open'); document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => { const x = box.querySelector('.kpop-modal-x'); if (x) x.focus(); });
     const fcb = box.querySelector('[data-fancard]');
@@ -384,6 +486,19 @@
         if (!d || !d.bio) return;
         const bioEl = $('#km-bio'); if (!bioEl) return;
         bioEl.innerHTML = esc(d.bio) + (d.wikipediaUrl ? ` <a href="${esc(d.wikipediaUrl)}" target="_blank" rel="noopener">↗</a>` : '');
+      }).catch(() => {});
+    }
+    // Aggregated profile: real subscriber / follower counts where the worker has
+    // the keys for them. Absent keys simply leave the strip hidden.
+    if (API && API.getKpopArtist) {
+      API.getKpopArtist({ id: a.id, qid: a.wikidataId, spotify: a.spotifyId, channel: a.youtubeChannelId, lang }).then(d => {
+        if (!d) return;
+        const el = $('#km-stats'); if (!el) return;
+        const bits = [];
+        if (d.youtubeSubscribers) bits.push(`<span class="km-stat">▶ ${esc(nfmt(d.youtubeSubscribers))} ${esc(rt('subs'))}</span>`);
+        if (d.spotifyFollowers) bits.push(`<span class="km-stat">🟢 ${esc(nfmt(d.spotifyFollowers))} ${esc(rt('fans'))}</span>`);
+        if (!bits.length) return;
+        el.innerHTML = bits.join(''); el.hidden = false;
       }).catch(() => {});
     }
   }
@@ -411,13 +526,87 @@
     return m ? m.id : null;
   }
   const PROF_STR = {
-    en: { full: '📖 Full profile', listen: 'Listen', more: 'See all' }, ko: { full: '📖 전체 프로필', listen: '듣기', more: '전체 보기' },
-    ja: { full: '📖 プロフィール', listen: '試聴', more: 'すべて見る' }, zh: { full: '📖 完整资料', listen: '收听', more: '查看全部' },
-    es: { full: '📖 Perfil completo', listen: 'Escuchar', more: 'Ver todo' }, fr: { full: '📖 Profil complet', listen: 'Écouter', more: 'Tout voir' },
-    de: { full: '📖 Volles Profil', listen: 'Hören', more: 'Alle ansehen' }, pt: { full: '📖 Perfil completo', listen: 'Ouvir', more: 'Ver tudo' },
-    id: { full: '📖 Profil lengkap', listen: 'Dengar', more: 'Lihat semua' },
+    en: { full: '📖 Full profile', listen: 'Listen', more: 'See all', photo: 'Photo' }, ko: { full: '📖 전체 프로필', listen: '듣기', more: '전체 보기', photo: '사진' },
+    ja: { full: '📖 プロフィール', listen: '試聴', more: 'すべて見る', photo: '写真' }, zh: { full: '📖 完整资料', listen: '收听', more: '查看全部', photo: '照片' },
+    es: { full: '📖 Perfil completo', listen: 'Escuchar', more: 'Ver todo', photo: 'Foto' }, fr: { full: '📖 Profil complet', listen: 'Écouter', more: 'Tout voir', photo: 'Photo' },
+    de: { full: '📖 Volles Profil', listen: 'Hören', more: 'Alle ansehen', photo: 'Foto' }, pt: { full: '📖 Perfil completo', listen: 'Ouvir', more: 'Ver tudo', photo: 'Foto' },
+    id: { full: '📖 Profil lengkap', listen: 'Dengar', more: 'Lihat semua', photo: 'Foto' },
   };
   const pstr = () => PROF_STR[lang] || PROF_STR.en;
+
+  // ── Releases + discography strings (F2/F3) ─────────────────────────────────
+  const REL_STR = {
+    en: { about:'About', disc:'Discography', soon:'Coming soon', fresh:'New releases', asOf:'Release data from Apple Music · as of %d', dueOn:'Due %d', outOn:'Out %d', subs:'subscribers', fans:'followers' },
+    ko: { about:'소개', disc:'디스코그래피', soon:'발매 예정', fresh:'최근 발매', asOf:'애플 뮤직 발매 정보 · %d 기준', dueOn:'%d 예정', outOn:'%d 발매', subs:'구독자', fans:'팔로워' },
+    ja: { about:'プロフィール', disc:'ディスコグラフィ', soon:'リリース予定', fresh:'最新リリース', asOf:'Apple Music のリリース情報 · %d 時点', dueOn:'%d 予定', outOn:'%d リリース', subs:'登録者', fans:'フォロワー' },
+    zh: { about:'简介', disc:'作品年表', soon:'即将发行', fresh:'最新发行', asOf:'Apple Music 发行资料 · 截至 %d', dueOn:'%d 发行', outOn:'%d 发行', subs:'订阅者', fans:'粉丝' },
+    es: { about:'Perfil', disc:'Discografía', soon:'Próximos lanzamientos', fresh:'Novedades', asOf:'Datos de lanzamiento de Apple Music · a %d', dueOn:'Sale el %d', outOn:'Salió el %d', subs:'suscriptores', fans:'seguidores' },
+    fr: { about:'Profil', disc:'Discographie', soon:'Bientôt disponible', fresh:'Nouveautés', asOf:'Données de sortie Apple Music · au %d', dueOn:'Prévu le %d', outOn:'Sorti le %d', subs:'abonnés', fans:'abonnés' },
+    de: { about:'Über', disc:'Diskografie', soon:'Demnächst', fresh:'Neuerscheinungen', asOf:'Release-Daten von Apple Music · Stand %d', dueOn:'Erscheint am %d', outOn:'Erschienen am %d', subs:'Abonnenten', fans:'Follower' },
+    pt: { about:'Perfil', disc:'Discografia', soon:'Em breve', fresh:'Lançamentos recentes', asOf:'Dados de lançamento da Apple Music · em %d', dueOn:'Sai em %d', outOn:'Lançado em %d', subs:'inscritos', fans:'seguidores' },
+    id: { about:'Profil', disc:'Diskografi', soon:'Segera rilis', fresh:'Rilis terbaru', asOf:'Data rilis dari Apple Music · per %d', dueOn:'Rilis %d', outOn:'Rilis %d', subs:'subscriber', fans:'pengikut' },
+  };
+  const rt = (k) => (REL_STR[lang] || REL_STR.en)[k] || REL_STR.en[k] || k;
+  const nfmt = (n) => { try { return new Intl.NumberFormat(lang === 'en' ? undefined : lang, { notation: 'compact', maximumFractionDigits: 1 }).format(n); } catch { return String(n); } };
+  // "How Sweet - EP" → title "How Sweet" + badge "EP". The suffix is Apple's
+  // formatting, not part of the release name, and it wrecks a YouTube query.
+  function splitAlbumTitle(raw) {
+    const m = String(raw || '').match(/^(.*?)\s+-\s+(Single|EP)$/i);
+    return m ? { title: m[1], badge: m[2].toUpperCase() } : { title: String(raw || ''), badge: '' };
+  }
+  const parseISO = (d) => new Date(String(d) + 'T00:00:00+09:00');
+  /** Every roster release from the snapshot, newest first, duplicates removed. */
+  function allReleases() {
+    const byId = Object.fromEntries(ROSTER.map(a => [a.id, a]));
+    const out = [], seen = new Set();
+    for (const [id, d] of Object.entries(DISCOG)) {
+      const a = byId[id]; if (!a || !d || !Array.isArray(d.albums)) continue;
+      for (const al of d.albums) {
+        if (!al || !al.date) continue;
+        const sp = splitAlbumTitle(al.title);
+        const k = (id + '|' + sp.title + '|' + al.date).toLowerCase();
+        if (seen.has(k)) continue;                 // Apple lists some editions twice
+        seen.add(k);
+        out.push({ artist: a, title: sp.title, badge: sp.badge, raw: al.title, date: al.date, year: al.year, art: al.art });
+      }
+    }
+    out.sort((p, q) => (p.date < q.date ? 1 : p.date > q.date ? -1 : 0));
+    return out;
+  }
+  const snapshotDate = () => { const v = Object.values(DISCOG)[0]; return (v && v.asOf) || ''; };
+  /** One act's releases, newest first, editions de-duplicated. */
+  function discogFor(id) {
+    const d = DISCOG[id];
+    if (!d || !Array.isArray(d.albums)) return [];
+    const out = [], seen = new Set();
+    for (const al of d.albums) {
+      if (!al || !al.date) continue;
+      const sp = splitAlbumTitle(al.title);
+      const k = (sp.title + '|' + al.date).toLowerCase();
+      if (seen.has(k)) continue;
+      seen.add(k);
+      out.push({ title: sp.title, badge: sp.badge, date: al.date, year: al.year, art: al.art });
+    }
+    return out.sort((p, q) => (p.date < q.date ? 1 : p.date > q.date ? -1 : 0));
+  }
+  const fmtISO = (iso) => { try { return fmtDate(parseISO(iso)); } catch { return iso; } };
+  /** An album tile. Unreleased titles are deliberately NOT playable — there is
+   *  nothing on YouTube to match yet, and a dead ▶ is worse than no ▶. */
+  function albumCard(a, al) {
+    const art = al.art
+      ? `<img class="km-alb-art" src="${esc(al.art)}" alt="" width="88" height="88" loading="lazy" decoding="async">`
+      : '<div class="km-alb-art"></div>';
+    const meta = `<span class="km-alb-t">${esc(al.title)}</span>`
+      + `<span class="km-alb-y">${esc(al.year || '')}${al.badge ? ' · ' + esc(al.badge) : ''}</span>`;
+    if (al.date > isoTodayKST()) {
+      return `<div class="km-alb is-soon">${art}${meta}<span class="km-alb-soon">${esc(rt('dueOn').replace('%d', fmtISO(al.date)))}</span></div>`;
+    }
+    const q = (a.nameEn + ' ' + al.title).trim();
+    const yt = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q + ' official');
+    return `<a class="km-alb kp-playable" href="${yt}" target="_blank" rel="noopener"`
+      + ` data-play="${esc(q)}" data-ptitle="${esc(al.title)}" data-partist="${esc(a.nameEn)}" data-pchannel="${esc(a.youtubeChannelId || '')}"`
+      + ` aria-label="${esc(al.title + ' — ' + a.nameEn + ' (' + (al.year || '') + ')')}">${art}${meta}</a>`;
+  }
 
   // Per-language default storefront — each audience sees THEIR country's chart.
   const STORE_FOR_LANG = { ko:'kr', en:'kr', ja:'jp', zh:'tw', es:'es', fr:'fr', de:'de', pt:'br', id:'id' };
@@ -461,11 +650,22 @@
     return `<span class="kp-delta kp-delta-eq">=</span>`; // steady — distinguish "no change" from "no data"
   }
 
+  // The KR storefront returns Korean-script artist names. A reader who can't
+  // read Hangul just sees a blank — so append the roster's English name.
+  const HANGUL = /[ㄱ-ㆎ가-힣]/;
+  function chartArtistLabel(name) {
+    if (lang === 'ko' || !name || !HANGUL.test(name)) return name;
+    const id = rosterIdFor(name); if (!id) return name;
+    const a = ROSTER.find(x => x.id === id);
+    if (!a || !a.nameEn || name.toLowerCase().includes(a.nameEn.toLowerCase())) return name;
+    return `${name} (${a.nameEn})`;
+  }
+
   function chartRow(r) {
     const isR = rosterMatch(r.artist), bias = isFollowedArtist(r.artist), eager = r.rank <= 6, art = smallArt(r.artworkUrl);
     const inner = `<span class="chart-rank${r.rank <= 3 ? ' top' : ''}">${r.rank}</span>`
       + (art ? `<img class="chart-art" src="${esc(art)}" alt="" width="46" height="46" loading="${eager ? 'eager' : 'lazy'}" fetchpriority="${eager ? 'high' : 'auto'}" decoding="async">` : '<div class="chart-art"></div>')
-      + `<span class="chart-meta"><span class="chart-title">${esc(r.title)}</span><span class="chart-artist">${esc(r.artist)}</span></span>`
+      + `<span class="chart-meta"><span class="chart-title">${esc(r.title)}</span><span class="chart-artist">${esc(chartArtistLabel(r.artist))}</span></span>`
       + deltaBadge(r);
     const label = esc(`#${r.rank} ${r.title} — ${r.artist}`);
     const cls = `chart-row kp-playable${isR ? ' is-roster' : ''}${bias ? ' is-bias' : ''}`;
@@ -481,7 +681,7 @@
     const cls = `kp-pod${i === 0 ? ' rank1' : ''}${isFollowedArtist(r.artist) ? ' is-bias' : ''}${rosterMatch(r.artist) ? ' is-roster' : ''}`;
     const inner = `<span class="kp-pod-medal" aria-hidden="true">${['🥇', '🥈', '🥉'][i]}</span>`
       + (r.artworkUrl ? `<img class="kp-pod-art" src="${esc(r.artworkUrl)}" alt="" width="84" height="84" loading="eager" fetchpriority="high" decoding="async">` : '<div class="kp-pod-art"></div>')
-      + `<span class="kp-pod-title">${esc(r.title)}</span><span class="kp-pod-artist">${esc(r.artist)}</span>${deltaBadge(r)}`;
+      + `<span class="kp-pod-title">${esc(r.title)}</span><span class="kp-pod-artist">${esc(chartArtistLabel(r.artist))}</span>${deltaBadge(r)}`;
     const label = esc(`#${r.rank} ${r.title} — ${r.artist}`);
     const q = (r.artist + ' ' + r.title).trim();
     const rid = rosterIdFor(r.artist);
@@ -516,7 +716,10 @@
   const DELTA_HINT_KEY = 'kp_kpop_delta_hint';
   let deltaHintOn = false;
   try { deltaHintOn = !localStorage.getItem(DELTA_HINT_KEY); } catch {}
-  function renderChartStamp() {
+  // feedUpdated = the timestamp Apple published the feed with. Rendering the
+  // browser's clock here (as this used to) implied a freshness the data never
+  // had, so when Apple sends no timestamp we now show none.
+  function renderChartStamp(feedUpdated) {
     const ctl = $('#kpop-chart-controls'); if (!ctl) return;
     let el = $('#kpop-chart-stamp');
     if (!el) {
@@ -525,33 +728,60 @@
       el.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0 2px;font-size:11px;opacity:.8';
       ctl.insertAdjacentElement('afterend', el);
     }
-    const tm = new Date().toLocaleTimeString(lang === 'en' ? undefined : lang, { hour: '2-digit', minute: '2-digit' });
+    let stamp = '';
+    if (feedUpdated) {
+      const d = new Date(feedUpdated);
+      if (!isNaN(d)) {
+        const s = d.toLocaleString(lang === 'en' ? undefined : lang, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        stamp = `<span class="kp-chart-asof">${esc(ct('asOf'))} ${esc(s)}</span>`;
+      }
+    }
     const hint = (!chartHadPrev && deltaHintOn) ? `<span class="kp-delta-hint">${esc(ct('deltaHint'))}</span>` : '';
-    el.innerHTML = `<span class="kp-chart-asof">${esc(ct('asOf'))} ${esc(tm)}</span>`
+    el.innerHTML = stamp
       + `<button type="button" class="kp-chart-refresh" aria-label="${esc(ct('refresh'))}" title="${esc(ct('refresh'))}" style="min-width:44px;min-height:44px;background:transparent;border:1px solid var(--border,rgba(128,128,128,.35));border-radius:12px;color:inherit;font-size:15px;cursor:pointer">↻</button>`
       + hint;
     if (!chartHadPrev && deltaHintOn) { try { localStorage.setItem(DELTA_HINT_KEY, '1'); } catch {} }
-    el.querySelector('.kp-chart-refresh').addEventListener('click', () => loadCharts(curStore, curType));
+    // fresh=true → pierces the in-memory TTL *and* the worker's KV entry, so ↻
+    // can actually return different bytes instead of replaying the cache.
+    el.querySelector('.kp-chart-refresh').addEventListener('click', () => loadCharts(curStore, curType, true));
   }
 
-  async function loadCharts(store, type) {
+  async function loadCharts(store, type, fresh) {
     store = store || curStore; type = type || curType; curStore = store; curType = type;
     const list = $('#kpop-charts-list'), podium = $('#kpop-charts-podium'); if (!list || !API) return;
     list.setAttribute('aria-busy', 'true');
     try {
-      let rows = await API.getKpopCharts(store, type).catch(() => null);
+      let rows = await API.getKpopCharts(store, type, !!fresh).catch(() => null);
       // Some Apple storefronts occasionally time out / lack a feed → fall back to KR.
-      if ((!Array.isArray(rows) || !rows.length) && store !== 'kr') rows = await API.getKpopCharts('kr', type).catch(() => null);
+      if ((!Array.isArray(rows) || !rows.length) && store !== 'kr') rows = await API.getKpopCharts('kr', type, !!fresh).catch(() => null);
       if (!Array.isArray(rows) || !rows.length) throw new Error('empty');
       chartDeltas(store, type, rows);
       if (podium) { podium.innerHTML = rows.slice(0, 3).map((r, i) => chartPod(r, i)).join(''); podium.hidden = false; }
       list.innerHTML = rows.slice(3, 30).map(chartRow).join('');
-      renderChartStamp(); // success only — stamp reflects when this data actually landed
+      const fu = (rows.find(r => r && r.feedUpdated) || {}).feedUpdated;
+      renderChartStamp(fu);
     } catch {
       if (podium) podium.hidden = true;
       list.innerHTML = `<div class="kpop-empty">${esc(t('chartFail'))}</div>`;
     }
     list.setAttribute('aria-busy', 'false');
+  }
+  // The news section carries a pulsing "live" dot. Without NEWSDATA_API_KEY it
+  // would blink forever over an empty list, which is a lie about the state of
+  // the app — so the section, its filter chip and the dot go away together, and
+  // come back on their own the moment the worker reports the key is set.
+  function hideNewsSection() {
+    const sec = $('#kpop-news');
+    if (sec) { sec.dataset.locked = '1'; sec.hidden = true; }
+    const chip = $('.filter-chip[data-target="kpop-news"]');
+    if (chip) chip.hidden = true;
+  }
+  async function initNews() {
+    if (!API || !API.getHealth) { hideNewsSection(); return; }
+    let on = false;
+    try { const h = await API.getHealth(); on = !!(h && h.kpop && h.kpop.newsdata); } catch { on = false; }
+    if (!on) { hideNewsSection(); return; }
+    loadNews();
   }
   async function loadNews() {
     const box = $('#kpop-news-list'); if (!box || !API) return;
@@ -608,7 +838,9 @@
     // entries play the song in-page — so the moving text always leads somewhere.
     const render = (it, dup) => {
       const ti = dup ? ' tabindex="-1"' : ''; // marquee clone: keep links out of the tab order
-      const inner = `<span class="tk-kind" aria-hidden="true">${it.kind}</span>${esc(it.text)} <span class="tk-val">${esc(it.val)}</span>`;
+      const im = it.artistId && IMAGES[it.artistId];
+      const av = im ? `<img class="tk-av" src="${esc(im.src)}" alt="" width="20" height="20" loading="lazy" decoding="async">` : '';
+      const inner = `${av}<span class="tk-kind" aria-hidden="true">${it.kind}</span>${esc(it.text)} <span class="tk-val">${esc(it.val)}</span>`;
       const cls = `tk-item${it.soon ? ' is-soon' : ''}`;
       if (it.artistId) return `<a class="${cls}"${ti} href="${esc(profileUrl(it.artistId))}" data-tk-artist="${esc(it.artistId)}">${inner}</a>`;
       if (it.play) return `<a class="${cls}"${ti} href="https://www.youtube.com/results?search_query=${encodeURIComponent(it.play + ' official')}" target="_blank" rel="noopener" data-tk-play="${esc(it.play)}" data-tk-partist="${esc(it.artist)}">${inner}</a>`;
@@ -785,6 +1017,7 @@
     renderHeroStats();
     renderSpotlight();
     renderOnboard();
+    renderReleases();
     renderCountdowns();
     renderBirthdays();
     renderArtists();
@@ -803,7 +1036,7 @@
     renderTicker();
     buildChartControls();
     loadCharts();
-    loadNews();
+    initNews();
     loadConcerts();
 
     // Delegated artist-grid interactions (follow star + open modal)
@@ -861,7 +1094,7 @@
       clearInterval(timer);
       if (!document.hidden) { tickTimers(); timer = setInterval(tickTimers, 1000); }
     });
-    setInterval(() => { EVENTS = buildEvents(); renderCountdowns(); renderHeroStats(); renderSpotlight(); }, 3600_000);
+    setInterval(() => { EVENTS = buildEvents(); renderReleases(); renderCountdowns(); renderHeroStats(); renderSpotlight(); }, 3600_000);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

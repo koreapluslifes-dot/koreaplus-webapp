@@ -27,6 +27,9 @@ const memStore = new Map<string, MemEntry>();
  * @param key        Cache key string
  * @param ttl        Time-to-live in seconds
  * @param fetcher    Async function that fetches fresh data when cache misses
+ * @param opts       bypass:true skips BOTH read tiers and refills them — what a
+ *                   user-pressed "refresh" needs, since a KV hit would
+ *                   otherwise serve the same bytes for the whole TTL.
  * @returns          { data, cached, cacheAgeSeconds }
  */
 export async function withCache<T>(
@@ -34,11 +37,13 @@ export async function withCache<T>(
   key: string,
   ttl: number,
   fetcher: () => Promise<T>,
+  opts: { bypass?: boolean } = {},
 ): Promise<{ data: T; cached: boolean; cacheAgeSeconds?: number }> {
   const cacheKey = `kp:${key}`;
+  const bypass = opts.bypass === true;
 
   // ── Try KV first ──────────────────────────────────────────────────────────
-  if (env.CACHE_KV) {
+  if (env.CACHE_KV && !bypass) {
     try {
       const raw = await env.CACHE_KV.get(cacheKey);
       if (raw) {
@@ -52,7 +57,7 @@ export async function withCache<T>(
   }
 
   // ── Try in-memory ─────────────────────────────────────────────────────────
-  const memEntry = memStore.get(cacheKey);
+  const memEntry = bypass ? undefined : memStore.get(cacheKey);
   if (memEntry && memEntry.expiresAt > Date.now()) {
     const data = JSON.parse(memEntry.value) as T;
     const ageSeconds = Math.floor((Date.now() - (memEntry.expiresAt - ttl * 1000)) / 1000);

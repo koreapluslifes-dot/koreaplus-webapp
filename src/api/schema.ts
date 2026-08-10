@@ -219,6 +219,7 @@ export interface ChartEntry {
   releaseDate?: string;
   kind?: string;               // songs | albums | music-videos
   store?: string;              // storefront code, e.g. 'kr', 'us'
+  feedUpdated?: string;        // ISO timestamp Apple published the feed with
 }
 
 /** A news / 근황 item (NewsData.io — title+excerpt+link only, never full body) */
