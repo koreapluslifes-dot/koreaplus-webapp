@@ -1,0 +1,47 @@
+---
+description: KoreaPlus K-Pop channel — edit, build, and deploy this vertical only
+globs: kpop.html,kpop-standalone.html,kpop.css,kpop-*.js,kpop-*.json,modules/kpop*.js,modules/seo-kpop*.cjs,modules/seo-langs-kpop.cjs,src/handlers/kpopvote.ts,deploy-kpop.ps1,deploy-worker.ps1,wrangler.toml
+alwaysApply: false
+---
+
+# K-Pop 채널 세션
+
+이 채팅은 **K-Pop 전용**. 여행·K-Beauty·부산 파일은 만지지 않는다. 배포는 `.\deploy-kpop.ps1`만 쓴다 (`deploy-to-guide.ps1`는 전 사이트 tar라 다른 세션 WIP를 라이브로 보낸다).
+
+## 라이브 맵
+
+| 로컬 | 라이브 |
+|------|--------|
+| `kpop-standalone.html` | https://koreaplus-lifes.com/kpop (`<base href="/guide/">`) |
+| `kpop.html` | https://koreaplus-lifes.com/guide/kpop.html |
+| `kpop/*.html` (EN 341 = 프로필 34 + 멤버 191 + 역사/토픽) | `/guide/kpop/<slug>.html` |
+| `ko\|ja\|…/kpop/` | `/guide/<lang>/kpop/` |
+| `kpop-sitemap.xml` | 도메인 루트 `/kpop-sitemap.xml` |
+
+생성 HTML은 gitignore. 소스: `kpop-data.js`(로스터 34), `kpop-enrich.js`(생일·응원봉), `kpop-history.json`, `modules/seo-kpop-*.cjs`. 재생성: `node build-seo.cjs` (S20 게이트, **여행 페이지도 다시 찍음**).
+
+## 배포
+
+```
+.\deploy-kpop.ps1              # 허브 + kpop/ 트리 + 사이트맵
+.\deploy-kpop.ps1 -HubOnly     # UX 반복 (html/css/js/data만)
+.\deploy-kpop.ps1 -Worker      # + /api/kpop wrangler
+```
+
+JS 바꾸면 `kpop.html`/`kpop-standalone.html`의 `?v=N`을 **둘 다** 올린다. 공유 파일(`sw.js`, `messages/`, `hub-styles.css`, `header.js`)은 이 스크립트가 안 올린다.
+
+워커만: `.\deploy-worker.ps1` (또는 `.\deploy-kpop.ps1 -Worker`). 둘 다 잘못된 `CLOUDFLARE_API_TOKEN`을 지우고 **jeybeeicon** OAuth로 `koreaplus-webapp`에 올린다. `npm run deploy`는 같은 스크립트.
+
+## 연결 (검증됨)
+
+- Git: `origin` = `koreapluslifes-dot/koreaplus-webapp`, `main` → `origin/main`.
+- 정적: `koreaplus-lifes.com` 은 Cloudflare 프론트 (Lightsail origin). `/kpop` 라이브.
+- 워커: `https://koreaplus-webapp.jeybeeicon.workers.dev` — `/api/health`, `/api/kpop/charts` 라이브. KV `CACHE_KV` 이 계정. `wrangler.toml` `account_id` 고정.
+- GitHub Actions 워커 배포는 시크릿(`CF_API_TOKEN`)은 있으나 **lockfile 불일치로 최근 실패**. 이 세션은 로컬 wrangler가 정본.
+
+## 건드리지 말 것
+
+- `modules/seo-langs.cjs`에 언어 추가 금지 → `seo-langs-kpop.cjs`만.
+- AdSense: 소속사 사진 핫링크/호스팅 금지. 커먼즈 크레딧 `.km-credit` 삭제 금지.
+- 신규 POST API는 `src/handlers/` (`handleApiRoute`는 GET만).
+- 워커: 배포 전 `$env:CLOUDFLARE_API_TOKEN` 제거 (스크립트 `-Worker`가 함).

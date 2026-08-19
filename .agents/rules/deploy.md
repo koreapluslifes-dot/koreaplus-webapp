@@ -4,7 +4,7 @@ description: "Rule for koreaplus-webapp: deploy.md"
 ---
 koreaplus-webapp(`koreaplus-lifes.com/guide/`)는 **Lightsail/Bitnami WordPress 서버에 업로드**로 배포한다 (Cloudflare Pages 아님).
 
-- 명령: `cd C:\Users\juksu\koreaplus-webapp; .\deploy-to-guide.ps1 -ServerIP "18.207.55.50"` (US-East Lightsail 퍼블릭IP, 안정적으로 재사용 중).
+- 명령: `cd C:\Users\juksu\koreaplus-webapp; .\deploy-to-guide.ps1 -ServerIP "18.207.55.50"` (US-East Lightsail 퍼블릭IP, 안정적으로 재사용 중). **K-Pop 채널만** 올릴 때는 전 사이트 tar 대신 `.\deploy-kpop.ps1` (`-HubOnly` = 허브 런타임만, `-Worker` = `/api/kpop` wrangler).
 - PEM 키(`C:\Users\juksu\Documents\blog\koreaplus-lifes\LightsailDefaultKey-us-east-1.pem`)·원격경로(`/opt/bitnami/wordpress/guide`)는 스크립트에 하드코딩, **ServerIP만 인자로 필요**.
 - **전송 방식(2026-06-27 개선, 커밋 4f58321):** 예전엔 파일별 scp(수천 회 SSH 핸드셰이크 → 수 분 소요)였으나, 이제 **전 자산을 gzip tar 1개로 묶어 1회 scp → 원격 1회 추출**(`tar -czf -C $LOCAL_DIR -T list` → `ssh tar -xzf -C $REMOTE_DIR`). 실측 ~55초. 로컬 트리가 원격 /guide와 1:1이라 그대로 추출됨. tar는 in-place 덮어쓰기(scp와 동일, 원격 단독 파일 삭제 안 함). kpop-sitemap·standalone 허브는 도메인루트(/kpop-sitemap.xml, /kpop/index.html)로 별도 단일 scp.
 - 스크립트는 git HEAD가 아니라 **working tree 파일을 전송**한다 → 미커밋/진행중 파일도 함께 올라가니 배포 전 working tree 상태 확인 필수. (특히 같은 레포를 K-pop·k-뷰티 등 **여러 CCD 세션이 동시 편집** — 한 세션에서 배포하면 다른 세션의 미커밋 변경도 라이브로 나간다.)

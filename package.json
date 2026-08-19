@@ -5,7 +5,8 @@
   "description": "KoreaPlus Travel Guide — Cloudflare Worker backend",
   "scripts": {
     "dev": "wrangler dev src/worker.ts --port 8787",
-    "deploy": "wrangler deploy src/worker.ts",
+    "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File deploy-worker.ps1",
+    "deploy:kpop": "powershell -NoProfile -ExecutionPolicy Bypass -File deploy-kpop.ps1",
     "types": "wrangler types",
     "typecheck": "tsc --noEmit",
     "build": "node build-seo.cjs && node scripts/gen-zh-hant.cjs"
