@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "wrangler dev src/worker.ts --port 8787",
     "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File deploy-worker.ps1",
+    "deploy:kbeauty": "powershell -NoProfile -ExecutionPolicy Bypass -File deploy-kbeauty-app.ps1",
     "deploy:kpop": "powershell -NoProfile -ExecutionPolicy Bypass -File deploy-kpop.ps1",
     "types": "wrangler types",
     "typecheck": "tsc --noEmit",

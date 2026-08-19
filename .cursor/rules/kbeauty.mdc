@@ -1,0 +1,35 @@
+---
+description: K-Beauty vertical only — hub, library, cache-bust, and isolated deploy. Do not touch K-pop or travel Guide.
+globs: kbeauty.html,kbeauty-*,kb/**,modules/kbeauty*,assets/kbeauty*,build-kbeauty*,deploy-kbeauty*,llms-kbeauty*,src/api/aliexpress.ts
+alwaysApply: false
+---
+
+# K-Beauty lane
+
+This repo is shared with K-pop and Guide. In the **K-Beauty** chat, edit only this vertical.
+
+## Own these files
+
+- Hub: `kbeauty.html`, `kbeauty-data.js`, `modules/kbeauty.js`, `modules/kbeauty-sharecard.js`
+- Overlays: `assets/kbeauty-content.<lang>.json` (14 langs)
+- Library: `kb/**` via `node build-kbeauty-pages.cjs` (do not hand-edit generated HTML)
+- Live URL: `https://koreaplus-lifes.com/kbeauty` (Worker proxies `/guide/kbeauty.html`)
+
+## Do not
+
+- Edit `kpop.html`, `kpop/`, `index.html` travel chrome, or run `.\deploy-to-guide.ps1` (ships other sessions' WIP)
+- Invent medical claims, doctor names, or exact sales numbers
+- Re-enable affiliates (`AFFILIATE_ON`) unless the user asks
+- Set `document.dir=rtl` globally for Arabic (scope RTL to K-Beauty containers only)
+
+## After JS/CSS/overlay edits, bump together
+
+1. `kbeauty.html` `?v=N` (`kbeauty.js`, `kbeauty-data.js`)
+2. `OVERLAY_VER` in `modules/kbeauty.js` if overlays changed
+3. `sw.js` `CACHE = kp-vNN` only when this session also deploys `sw.js`
+
+## Deploy
+
+- Hub: `.\deploy-kbeauty-app.ps1`
+- Library: `bash deploy-kbeauty.sh`
+- Worker (only if `src/` K-Beauty routes changed): unset `CLOUDFLARE_API_TOKEN`, then `npx wrangler deploy` (account `jeybeeicon@gmail.com`). Or `.\deploy-kbeauty-app.ps1 -Worker`
