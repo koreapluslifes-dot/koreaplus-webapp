@@ -4,6 +4,7 @@ description: "koreaplus-webapp memory index"
 ---
 # KoreaPlus — Memory Index
 
+- [Guide webapp](guide-webapp.md) — **this repo’s travel app**, live at `https://koreaplus-lifes.com/guide/`. SPA `index.html` + generated SEO (`guide/` 144 pages, `busan/` 22, places/itinerary/faq/food). Deploy `.\deploy-to-guide.ps1 -ServerIP "18.207.55.50"`. K-Pop / K-Beauty share this repo but have dedicated sessions — stay in the current vertical.
 - [Religion webapp](religion-webapp.md) — all-lifes.com/religion "종교의 모든것" DEPLOYED LIVE, **1017 URLs/9 langs** (v4 global redesign: Wikimedia hero imagery 73장 + timeline/statistics/places depth pages + compare auto-analysis); 12 religions ENCYCLOPEDIA-GRADE (en+ko). Repo C:\Users\juksu\religion-webapp, deploy `bash deploy-religion.sh`.
 - [PetPlus webapp](pet-webapp.md) — all-lifes.com/pet/ GLOBAL platform, **3,498 URLs / 6 langs (en·ko·ja·es·pt·de)** LIVE: v4 redesign+다크모드, Wikimedia 실사 109장+og:image, 109 breed profiles + matcher + guides + compare + programmatic analytics. Seoul Lightsail (3.36.235.171).
 - [Calculator Hub webapp](calc-webapp.md) — all-lifes.com/calc DEPLOYED & LIVE, **1,146 URLs**: 11 calculators (en/ko, incl. statistics·quadratic) + **scientific calculator ×9 langs** (shunting-yard engine, keypad, usage guide) + conversion engine (12 measures × 108 pairwise × 9 langs) + design system v2. Lightsail-direct `.\deploy.ps1`.

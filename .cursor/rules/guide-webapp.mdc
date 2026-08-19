@@ -1,0 +1,23 @@
+---
+description: KoreaPlus Guide travel app at koreaplus-lifes.com/guide — SPA, SEO pages, Lightsail deploy. Use in Guide sessions.
+globs: index.html,app.js,data.js,style.css,theme.css,build-seo.cjs,deploy-to-guide.ps1,sitemap.xml,busan/**,guide/**,places/**,itinerary/**,faq/**,food/**,blog/**,plan.html,festivals.html,seasons.html,emergency.html,phrases.html,subway.html,modules/seo-busan*.cjs,modules/seo-langs.cjs,modules/seo-food.cjs,modules/seo-stay.cjs,modules/seo-route.cjs,city-l10n.json,messages/**
+alwaysApply: false
+---
+
+# Guide (KoreaPlus Travel)
+
+Live: https://koreaplus-lifes.com/guide/
+Stay on Guide files. Do not edit `kpop.html`, `kpop/`, `kb/`, `kbeauty*` unless asked.
+
+## Surfaces
+- SPA: `index.html` `app.js` `data.js` `style.css` `theme.css` `detail-*.js` `modules/*.js`
+- Hubs: `plan.html` `explore.html` `festivals.html` `seasons.html` `emergency.html` `phrases.html` `subway.html` …
+- SEO (gitignored; rebuild `node build-seo.cjs`): `guide/` **144** pages, `busan/` **22**, plus `places/` `itinerary/` `faq/` `food/` `blog/`
+- City canonicals are doubled: `/guide/guide/things-to-do-seoul.html`. Verify live **without** `curl -L`.
+
+## Deploy
+1. `git status` first — script uploads the **working tree** (other sessions’ dirty files go live too).
+2. Static: `.\deploy-to-guide.ps1 -ServerIP "18.207.55.50"` → `/opt/bitnami/wordpress/guide`
+3. Worker: `.\deploy-worker.ps1` (unsets the wrong-account `CLOUDFLARE_API_TOKEN`; OAuth = jeybeeicon). Do not run bare `npx wrangler deploy` while that env var is set.
+4. After JS/CSS: bump `?v=N` and `sw.js` `CACHE` (`kp-v70` now).
+5. Skip a full tar for one-file fixes if packing stalls; don’t overlap another vertical’s upload.

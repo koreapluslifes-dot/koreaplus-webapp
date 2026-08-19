@@ -1,0 +1,20 @@
+---
+description: Three product lanes share this repo. Isolate edits and never full-deploy another lane's WIP.
+alwaysApply: true
+---
+
+# Parallel verticals
+
+KoreaPlus in this repo is three products, usually edited in **separate Cursor chats**:
+
+| Lane | Live | Isolated deploy |
+|------|------|-----------------|
+| K-Beauty | `/kbeauty` | `.\deploy-kbeauty-app.ps1` (+ `bash deploy-kbeauty.sh` for `kb/`) |
+| K-Pop | `/kpop` | `.\deploy-kpop.ps1` |
+| Guide | `/guide/` | `.\deploy-to-guide.ps1` is the **full tree** |
+
+Shared Worker (`koreaplus-webapp.jeybeeicon.workers.dev`): `.\deploy-worker.ps1` or `npm run deploy`. Unsets a stray `CLOUDFLARE_API_TOKEN` so deploys stay on the jeybeeicon account.
+
+`.\deploy-to-guide.ps1` uploads the working tree, including uncommitted files from other chats. Use it only when the user asks for a full Guide deploy and you have confirmed the other lanes are safe.
+
+Stay inside the lane of the current chat unless the user explicitly asks to cross.

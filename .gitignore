@@ -12,6 +12,7 @@ config.local.js
 # Generated SEO output — rebuild with: node build-seo.cjs
 places/
 guide/
+busan/
 itinerary/
 blog/
 ja/

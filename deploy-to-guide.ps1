@@ -107,7 +107,7 @@ ssh -i $PEM_KEY -o "StrictHostKeyChecking=no" "${REMOTE_USER}@${ServerIP}" `
 # typically 20-50x faster. The local tree mirrors the remote /guide layout,
 # so every path extracts 1:1 under $REMOTE_DIR. tar overwrites in place
 # (same as scp); it never deletes remote-only files.
-$SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "kpop", "ja", "zh", "zh-hant", "es", "ko", "fr", "de", "pt", "id", "ar", "hi", "ru", "vi", "th", "tools", "embed", "food")
+$SEO_DIRS = @("places", "guide", "itinerary", "faq", "blog", "busan", "kpop", "ja", "zh", "zh-hant", "es", "ko", "fr", "de", "pt", "id", "ar", "hi", "ru", "vi", "th", "tools", "embed", "food")
 $SEO_ROOT_FILES = @("explore.html", "sitemap.xml", "robots.txt", "llms.txt", "blog/feed.xml")
 $KP_TXT = @(Get-ChildItem -Path $LOCAL_DIR -Filter "kp*.txt" -File | ForEach-Object { $_.Name })
 # Runtime data files fetched by client modules + GEO text-twin (built to repo root -> /guide/).

@@ -1,7 +1,10 @@
 # Deploys to koreaplus-webapp — the worker the frontend (config.js WORKER_URL)
 # actually calls. Keys (incl. groq_api_key) live on this worker.
+# Pin account_id so a stray CLOUDFLARE_API_TOKEN (other CF accounts) cannot
+# publish this worker to the wrong place.
 name = "koreaplus-webapp"
 main = "src/worker.ts"
+account_id = "9ba6054d0b8a97457cd23dfe558e915e"
 compatibility_date = "2024-11-01"
 
 # ─── Cloudflare Workers KV — cache, rate-limit & shared-itinerary storage ───
