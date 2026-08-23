@@ -220,7 +220,7 @@ const CSS = ':root{--bg:#fff;--text:#1a1320;--text2:#333;--muted:#777;--muted2:#
   + '.kb-src{font-size:13px;color:var(--muted);margin:18px 0 0}.kb-src a{font-weight:700}';
 // Externalize the page CSS to one cached file (cuts ~4KB inline from every one of the
 // 1,852+ pages; browsers cache it once). shell() links /guide/kb/kb.css?v=CSS_VER.
-const JS_VER = '3';  // bump when kb/kb.js (shared runtime) changes
+const JS_VER = '4';  // bump when kb/kb.js (shared runtime) changes
 fs.mkdirSync(OUT, { recursive: true });
 writeRetry(path.join(OUT, 'kb.css'), CSS);
 

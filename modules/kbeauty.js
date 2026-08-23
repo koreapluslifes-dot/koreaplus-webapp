@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '13';
+  const OVERLAY_VER = '14';
   async function loadContent() {
     if (lang === 'en') return;
     try {
@@ -152,16 +152,42 @@
     if (m >= 9 && m <= 11) return 'autumn';
     return 'winter';
   }
+  function seasonLibUrl(season, skin) {
+    const base = KB_LIB + '/seasonal/' + encodeURIComponent(season);
+    return skin ? base + '-' + encodeURIComponent(skin) + '-skin.html' : base + '.html';
+  }
   function renderForecast() {
     const box = $('#kb-forecast-strip'); if (!box) return;
-    const f = FORECAST[currentSeason()]; if (!f) { box.innerHTML = ''; return; }
+    const season = currentSeason();
+    const f = FORECAST[season]; if (!f) { box.innerHTML = ''; return; }
+    const skin = getSkin();
+    const lib = seasonLibUrl(season, skin);
     box.innerHTML = `<div class="kb-forecast">
       <div class="fc-emoji">${f.emoji || '🌤️'}</div>
       <div>
         <div class="fc-head">${esc(f.headline)}</div>
         <ul class="fc-tips">${(f.tips || []).map(tp => `<li>${esc(tp)}</li>`).join('')}</ul>
+        <p class="fc-cta"><a href="${lib}">${esc(cx('ux.season.full', 'Full seasonal guide'))} →</a>${skin ? '' : ' · <a href="/kbeauty#cat=skin">' + esc(cx('ux.season.personal', 'Personalize for your skin')) + ' →</a>'}</p>
       </div>
     </div>`;
+  }
+  function renderSeasonDigest() {
+    const host = $('#kb-season-digest'); if (!host) return;
+    const season = currentSeason();
+    const f = FORECAST[season]; if (!f) { host.style.display = 'none'; return; }
+    const skin = getSkin();
+    const rep = ((window.KBEAUTY_BESTSELLERS_VELOCITY || {}).statusAsOf) || '2026-06';
+    const tip = (f.tips || [])[0] || '';
+    host.style.display = '';
+    host.innerHTML = '<h3>' + esc(cx('ux.season.title', 'Seasonal skin tips')) + '</h3>'
+      + '<div class="kb-season-card">'
+      + '<span class="kb-season-em">' + (f.emoji || '🌤️') + '</span>'
+      + '<div class="kb-season-tx"><strong>' + esc(f.headline) + '</strong>'
+      + (tip ? '<span>' + esc(tip) + '</span>' : '')
+      + '<span class="kb-season-links">'
+      + '<a class="pill" href="' + seasonLibUrl(season, skin) + '">' + esc(cx('ux.season.guide', skin ? 'Your seasonal routine' : 'Seasonal guide')) + '</a>'
+      + '<a class="pill" href="' + KB_LIB + '/report/' + rep + '.html">📰 ' + esc(cx('ux.season.report', 'Trend report')) + '</a>'
+      + '</span></div></div>';
   }
 
   // ── Skin-type quiz ──────────────────────────────────────────────────────────
@@ -1339,18 +1365,33 @@
   }
   function kbRenderSavedLib() {
     const host = $('#kb-savedlib'); if (!host) return;
+    const exp = $('#kb-export-row');
     let map = {}, recent = [];
     try { map = JSON.parse(localStorage.getItem('kp_kbeauty_saved_map') || '{}'); } catch (e) {}
     try { recent = JSON.parse(localStorage.getItem('kp_kbeauty_recent_lib') || '[]'); } catch (e) {}
     const rows = [], seen = {};
     Object.keys(map).forEach(u => { if (map[u] && !seen[u]) { seen[u] = 1; rows.push({ u, t: map[u], s: 1 }); } });
     recent.forEach(x => { if (x && x.u && !seen[x.u]) { seen[x.u] = 1; rows.push({ u: x.u, t: x.t, s: 0 }); } });
+    const savedN = Object.keys(map).filter(u => map[u]).length;
+    if (exp) { exp.style.display = savedN ? '' : 'none'; if (savedN && !$('#kb-export-btn').dataset.wired) { $('#kb-export-btn').dataset.wired = '1'; $('#kb-export-btn').addEventListener('click', kbExportBookmarks); } }
     if (!rows.length) { host.style.display = 'none'; return; }
     host.style.display = '';
     host.innerHTML = '<h3>' + esc(cx('ux.saved.title', 'Continue reading')) + '</h3><div class="pill-row">'
       + rows.slice(0, 6).map(r => '<a class="pill" href="' + esc(r.u) + '">' + (r.s ? '♥ ' : '🕘 ') + esc(String(r.t || r.u).slice(0, 48)) + '</a>').join('') + '</div>';
   }
-  function kbRenderDiscover() { renderPopular(); renderForYou(); kbRenderSavedLib(); kbRenderRecent(); }
+  function kbRenderDiscover() { renderSeasonDigest(); renderPopular(); renderForYou(); kbRenderSavedLib(); kbRenderRecent(); }
+  function kbExportBookmarks() {
+    let map = {};
+    try { map = JSON.parse(localStorage.getItem('kp_kbeauty_saved_map') || '{}'); } catch (e) {}
+    const rows = Object.keys(map).filter(u => map[u]).map(u => map[u] + '\n' + (u.indexOf('http') === 0 ? u : location.origin + u)).join('\n\n');
+    if (!rows) { kbToast(cx('ux.export.empty', 'Save guides with ♡ first')); return; }
+    try {
+      const blob = new Blob([rows + '\n'], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'kbeauty-bookmarks.txt';
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      kbToast(cx('ux.export.done', 'Bookmarks exported ✓'));
+    } catch (e) { kbToast(cx('ux.export.fail', 'Export failed')); }
+  }
   function importProfileFromUrl() {
     try {
       const sp = new URLSearchParams(location.search);
@@ -1434,10 +1475,12 @@
       tb.innerHTML = '<div class="kb-search-wrap"><span class="kb-search-ic">🔎</span>'
         + '<input id="kb-search" class="kb-search" type="search" autocomplete="off" placeholder="' + esc(cx('ux.searchph', 'Search ingredients, brands, concerns…')) + '" aria-label="' + esc(cx('ux.search', 'Search K-beauty')) + '">'
         + '<div id="kb-search-res" class="kb-search-res" role="listbox"></div></div>'
+        + '<div id="kb-season-digest" class="kb-discover" style="display:none"></div>'
         + '<div id="kb-popular" class="kb-discover"></div>'
         + '<div id="kb-foryou" class="kb-discover"></div>'
         + '<div id="kb-savedlib" class="kb-discover" style="display:none"></div>'
-        + '<div id="kb-recent" class="kb-recent" style="display:none"></div>';
+        + '<div id="kb-recent" class="kb-recent" style="display:none"></div>'
+        + '<div id="kb-export-row" class="kb-export-row" style="display:none"><button type="button" id="kb-export-btn" class="kb-export-btn">⬇ ' + esc(cx('ux.export.btn', 'Export saved guides')) + '</button></div>';
       landing.parentNode.insertBefore(tb, landing);
       const inp = $('#kb-search'), res = $('#kb-search-res'); let idx = null;
       inp.addEventListener('input', () => {

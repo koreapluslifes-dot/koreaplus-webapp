@@ -34,6 +34,7 @@
       + '.kb-toc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin:14px 0}.kb-toc summary{cursor:pointer;font-weight:800;color:var(--text);font-size:14px}.kb-toc a{display:block;padding:4px 0;color:var(--link);text-decoration:none;font-size:13.5px}.kb-toc a:hover{text-decoration:underline}.kb-toc .h3{padding-left:14px;font-size:13px}'
       + '.kb-fab{position:fixed;bottom:16px;z-index:300;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--bg);box-shadow:0 4px 16px rgba(0,0,0,.18);color:var(--link);font-size:19px;cursor:pointer;opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none}.kb-fab.show{opacity:1;transform:none;pointer-events:auto}'
       + '.kb-callout{background:linear-gradient(135deg,var(--tint1),var(--tint2));border:1px solid var(--border);border-left:4px solid #d61f6e;border-radius:12px;padding:11px 14px;margin:14px 0;font-size:14px;color:var(--text);min-height:44px}.kb-callout a{color:var(--link);font-weight:700;text-decoration:none}'
+      + '.kb-also{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:14px 0}.kb-also-h{font-weight:800;font-size:14px;margin:0 0 8px;color:var(--text)}.kb-also a{display:inline-block;font-size:12.5px;font-weight:700;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:5px 11px;margin:0 6px 6px 0;color:var(--text2);text-decoration:none}.kb-also a:hover{border-color:#d61f6e;color:var(--link)}'
       + '.kb-tts.on{background:#d61f6e;color:#fff;border-color:#d61f6e}'
       + 'html.kb-fs1 .w{font-size:112%}html.kb-fs2 .w{font-size:124%}html.kb-fs3 .w{font-size:140%}html.kb-space .w{line-height:1.9}html.kb-space .w p{margin:14px 0}html.kb-dys .w{font-family:Verdana,Tahoma,sans-serif;letter-spacing:.02em}html.kb-hc .w{color:#000}html.kb-hc .w .disc,html.kb-hc .w .bc{color:#444}'
       + 'html.kb-dark.kb-hc .w{color:#fff}html.kb-dark.kb-hc .w .disc,html.kb-dark.kb-hc .w .bc{color:#ddd}'
@@ -75,7 +76,8 @@
       + '<button class="kbh-btn" id="kb-lang-b" aria-label="Language" title="Language">🌐</button>'
       + '<button class="kbh-btn kb-tts" id="kb-tts-b" aria-label="Listen" title="Listen">🔊</button>'
       + '<button class="kbh-btn" id="kb-a11y-b" aria-label="Accessibility" title="Text & accessibility">Aa</button>'
-      + '<button class="kbh-btn" id="kb-save-b" aria-label="Save" title="Save">♡</button>';
+      + '<button class="kbh-btn" id="kb-save-b" aria-label="Save" title="Save">♡</button>'
+      + '<button class="kbh-btn" id="kb-export-b" aria-label="Export" title="Export saved">⬇</button>';
     kbh.appendChild(actEl);
   }
   function on(id, fn) { var b = D.getElementById(id); if (b) b.addEventListener('click', fn); }
@@ -190,6 +192,20 @@
       try { var m = JSON.parse(get('kp_kbeauty_saved_map') || '{}'); if (s.has(pageId)) m[pageId] = pageTitle; else delete m[pageId]; set('kp_kbeauty_saved_map', JSON.stringify(m)); } catch (e) { }
     });
   })();
+  function exportBookmarks() {
+    var map = {}; try { map = JSON.parse(get('kp_kbeauty_saved_map') || '{}'); } catch (e) { }
+    var rows = Object.keys(map).filter(function (u) { return map[u]; }).map(function (u) {
+      var url = u.indexOf('http') === 0 ? u : location.origin + u;
+      return map[u] + '\n' + url;
+    }).join('\n\n');
+    if (!rows) { alert(t('Save guides with ♡ first', { ko: '♡로 가이드를 저장하세요', ja: '♡でガイドを保存してください' })); return; }
+    try {
+      var blob = new Blob([rows + '\n'], { type: 'text/plain;charset=utf-8' });
+      var a = D.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'kbeauty-bookmarks.txt';
+      D.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    } catch (e) { }
+  }
+  on('kb-export-b', exportBookmarks);
   // recently-viewed
   var recentBefore = [];
   try { var rv = JSON.parse(get('kp_kbeauty_recent_lib') || '[]'); rv = rv.filter(function (x) { return x.u !== pageId; }); recentBefore = rv.slice(0, 24); rv.unshift({ u: pageId, t: pageTitle.slice(0, 60) }); set('kp_kbeauty_recent_lib', JSON.stringify(rv.slice(0, 24))); } catch (e) { }
@@ -224,6 +240,53 @@
         var c = D.createElement('div'); c.className = 'kb-callout';
         c.innerHTML = '👤 <b>' + esc(msg) + (label ? ' — ' + esc(String(label)) : '') + '.</b> <a href="/kbeauty#cat=skin">' + esc(seemine) + ' →</a>';
         h1n.insertAdjacentElement('afterend', c);
+      }
+    }
+  } catch (e) { }
+
+  // ── profile-smart "Also read" — contextual next clicks from page type + profile ──
+  try {
+    if (main && !/\/(index\.html)?$/.test(location.pathname.replace(/\/(ko|ja|zh|es|fr|de|pt|id|ar|hi|ru|vi|th)\//, '/'))) {
+      var pm = location.pathname.match(/\/guide\/kb\/([^/]+)\/([^/]+)\.html$/);
+      if (pm) {
+        var pdir = pm[1], pslug = pm[2], skin2 = get('kp_kbeauty_skin') || '', concerns2 = [];
+        try { concerns2 = JSON.parse(get('kp_kbeauty_concerns') || '[]'); } catch (e3) { }
+        var sm = new Date().getMonth() + 1;
+        var season2 = sm >= 3 && sm <= 5 ? 'spring' : sm >= 6 && sm <= 8 ? 'summer' : sm >= 9 && sm <= 11 ? 'autumn' : 'winter';
+        var also = [], seenA = {};
+        var addA = function (u, label) { if (!u || !label || seenA[u]) return; seenA[u] = 1; also.push({ u: u, t: label }); };
+        if (pdir === 'ingredient') {
+          var ingId = pslug.split('-for-')[0];
+          if (concerns2[0]) addA('../best/korean-ingredients-for-' + concerns2[0] + '.html', t('Best ingredients for your concern', { ko: '고민별 추천 성분', ja: '悩み別おすすめ成分' }));
+          if (skin2) addA('../seasonal/' + season2 + '-' + skin2 + '-skin.html', t('Seasonal routine for your skin', { ko: '내 피부 계절 루틴', ja: 'あなたの肌の季節ルーティン' }));
+          if (concerns2[0] && pslug.indexOf('-for-') < 0) addA(ingId + '-for-' + concerns2[0] + '.html', t('This ingredient for your concern', { ko: '내 고민에 이 성분', ja: 'あなたの悩みにこの成分' }));
+          addA('../matrix/pairing-matrix.html', t('Ingredient pairing matrix', { ko: '성분 페어링 매트릭스', ja: '成分ペアリング表' }));
+        } else if (pdir === 'concern') {
+          addA('../best/korean-ingredients-for-' + pslug + '.html', t('Best ingredients ranked', { ko: '추천 성분 순위', ja: 'おすすめ成分ランキング' }));
+          if (skin2) addA('../routine/' + skin2 + '-' + pslug + '.html', t('Routine for your skin type', { ko: '내 피부 타입 루틴', ja: 'あなたの肌タイプのルーティン' }));
+          addA('/kbeauty#cat=trouble', t('Troubleshoot on the hub', { ko: '허브에서 문제 해결', ja: 'ハブでトラブルシュート' }));
+        } else if (pdir === 'brand') {
+          if (concerns2[0]) addA('../concern/' + concerns2[0] + '.html', t('Guide for your concern', { ko: '내 고민 가이드', ja: 'あなたの悩みガイド' }));
+          addA('/kbeauty#cat=ingr', t('Decode an INCI list', { ko: '성분표 해독', ja: 'INCIリストを解読' }));
+        } else if (pdir === 'ask' || pdir === 'how-to') {
+          addA('/kbeauty#kb-glassscore', t('Glass Skin Score test', { ko: '글래스 스킨 점수', ja: 'ガラス肌スコア' }));
+          if (skin2) addA('../how-to/how-to-build-a-korean-am-skincare-routine.html', t('Build your AM routine', { ko: '아침 루틴 만들기', ja: '朝ルーティンを作る' }));
+        } else if (pdir === 'vs') {
+          addA('../matrix/pairing-matrix.html', t('Full pairing matrix', { ko: '전체 페어링 표', ja: '全ペアリング表' }));
+          addA('/kbeauty#kb-conflicts', t('What not to mix', { ko: '함께 쓰면 안 되는 조합', ja: '混ぜない方がいい組合せ' }));
+        } else if (pdir === 'seasonal') {
+          if (skin2 && pslug.indexOf('-' + skin2 + '-') < 0) addA(season2 + '-' + skin2 + '-skin.html', t('Routine for your skin this season', { ko: '이번 시즌 내 피부 루틴', ja: '今季のあなたの肌ルーティン' }));
+          addA('/kbeauty#cat=skin', t('Take the skin quiz', { ko: '피부 타입 퀴즈', ja: '肌タイプ診断' }));
+        }
+        also = also.slice(0, 4);
+        if (also.length) {
+          var alsoEl = D.createElement('section'); alsoEl.className = 'kb-also';
+          alsoEl.innerHTML = '<p class="kb-also-h">📚 ' + esc(t('Also read for you', { ko: '추천 읽을거리', ja: 'あなたへのおすすめ', es: 'También para ti', fr: 'À lire aussi pour vous', de: 'Auch für dich', pt: 'Leia também', id: 'Baca juga untukmu', ar: 'اقرأ أيضًا', hi: 'आपके लिए और पढ़ें', ru: 'Читайте также', vi: 'Đọc thêm cho bạn', th: 'อ่านต่อสำหรับคุณ' })) + '</p>'
+            + also.map(function (x) { return '<a href="' + esc(x.u) + '">' + esc(x.t) + '</a>'; }).join('');
+          var rel = main.querySelector('.rel');
+          if (rel) rel.parentNode.insertBefore(alsoEl, rel);
+          else main.appendChild(alsoEl);
+        }
       }
     }
   } catch (e) { }

@@ -100,6 +100,9 @@
     {"@type":"Question","name":"Is Korean skincare good for sensitive skin?","acceptedAnswer":{"@type":"Answer","text":"Many Korean brands emphasize gentle, fragrance-free formulas with soothing ingredients like centella, panthenol, and madecassoside. Patch-test new actives, introduce one product at a time, and use our skin-type quiz to match products to your needs."}}
   ]}
   </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"K-Beauty by KoreaPlus","url":"https://koreaplus-lifes.com/kbeauty","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://koreaplus-lifes.com/guide/kb/?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+  </script>
   <style>
     /* ── K-Beauty hub components (CSS vars from theme.css) ──────────────────── */
     :root {
@@ -194,6 +197,18 @@
     .kb-discover .pill-row a.pill { display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:20px; font-size:13px; font-weight:700; text-decoration:none; color:var(--text); background:var(--surface); border:1px solid var(--border); transition:border-color .15s, background .15s; }
     .kb-discover .pill-row a.pill:hover { border-color:var(--kb1); background:var(--kb-soft); color:var(--kb1); }
     .kb-discover.empty p { margin:0; }
+    .kb-season-card { display:flex; gap:12px; align-items:flex-start; background:linear-gradient(135deg,var(--kb-soft),rgba(199,125,255,.06)); border:1px solid var(--border); border-radius:16px; padding:14px 16px; }
+    .kb-season-em { font-size:32px; line-height:1; flex:0 0 auto; }
+    .kb-season-tx { display:flex; flex-direction:column; gap:6px; min-width:0; }
+    .kb-season-tx strong { font-size:15px; color:var(--text); line-height:1.35; }
+    .kb-season-tx > span { font-size:13.5px; color:var(--text2); line-height:1.45; }
+    .kb-season-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+    .kb-forecast .fc-cta { margin:10px 0 0; font-size:13.5px; }
+    .kb-forecast .fc-cta a { color:var(--kb1); font-weight:800; text-decoration:none; }
+    .kb-forecast .fc-cta a:hover { text-decoration:underline; }
+    .kb-export-row { max-width:740px; margin:0 auto 16px; text-align:center; }
+    .kb-export-btn { background:var(--surface); border:2px solid var(--border); border-radius:20px; padding:9px 18px; font:inherit; font-size:13px; font-weight:800; color:var(--text2); cursor:pointer; }
+    .kb-export-btn:hover { border-color:var(--kb1); color:var(--kb1); }
     #kb-bnav { display:none; }
     @media (max-width:680px) {
       #kb-bnav { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:58; background:var(--bg); border-top:1px solid var(--border); padding:5px 2px calc(env(safe-area-inset-bottom,0px) + 5px); }
@@ -1194,7 +1209,7 @@
 <script defer src="kbeauty-data.js?v=10"></script>
 <script defer src="modules/api-client.js"></script>
 <script defer src="modules/kbeauty-sharecard.js?v=2"></script>
-<script defer src="modules/kbeauty.js?v=31"></script>
+<script defer src="modules/kbeauty.js?v=32"></script>
 <script defer src="/guide/modules/share-viral.js?v=1"></script>
 </body>
 </html>
