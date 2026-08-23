@@ -342,7 +342,7 @@ function shell(o) {
     .filter(hl => hl !== 'x-default')
     .map(hl => OG_LOCALE[hl])
     .filter(loc => loc && loc !== ogLocale))];
-  const ogSocial = `<meta property="og:image" content="${ogImg}"><meta property="og:image:secure_url" content="${ogImg}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="${esc(V.ogAlt)}">
+  const ogSocial = `<meta property="og:image" content="${ogImg}"><meta property="og:image:secure_url" content="${ogImg}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="1200"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="${esc(V.ogAlt)}">
 <meta property="og:locale" content="${ogLocale}">${altLocales.map(l => `<meta property="og:locale:alternate" content="${l}">`).join('')}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(o.h1)}"><meta name="twitter:description" content="${esc(metaDesc)}"><meta name="twitter:image" content="${ogImg}"><meta name="twitter:image:alt" content="${esc(V.ogAlt)}"><meta name="twitter:site" content="@koreaplus">
 <meta property="article:published_time" content="${fr.pub}"><meta property="article:modified_time" content="${fr.mod}"><meta property="article:author" content="KoreaPlus Editorial"><meta property="article:section" content="${esc(o.crumb || 'K-Beauty')}">`;

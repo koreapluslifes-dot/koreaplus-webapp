@@ -1888,6 +1888,8 @@
         var setMeta = function (sel, val) { var m = document.querySelector(sel); if (m) m.setAttribute('content', val); };
         setMeta('meta[property="og:image"]', ogImg);
         setMeta('meta[property="og:image:secure_url"]', ogImg);
+        setMeta('meta[property="og:image:width"]', '1200');
+        setMeta('meta[property="og:image:height"]', '1200');
         setMeta('meta[name="twitter:image"]', ogImg);
         setMeta('meta[property="og:locale"]', OGLC[lang]);
       }
