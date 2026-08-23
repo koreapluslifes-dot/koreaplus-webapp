@@ -37,7 +37,7 @@
   // clean /kbeauty URL (not service-worker controlled) fetches fresh translations
   // instead of a stale HTTP-cached copy. 'default' revalidates rather than the
   // overly-aggressive 'force-cache'.
-  const OVERLAY_VER = '12';
+  const OVERLAY_VER = '13';
   async function loadContent() {
     if (lang === 'en') return;
     try {
@@ -193,7 +193,7 @@
       });
       let best = 'combination', max = -1;
       for (const k in scores) if (scores[k] > max) { max = scores[k]; best = k; }
-      setSkin(best); renderResult(best); refreshPersonalized();
+      setSkin(best); renderResult(best); refreshPersonalized(); kbRenderDiscover();
       kbtrack('quiz_completed', { skin: best });
       try { document.getElementById('kb-quiz').scrollIntoView({ behavior:'smooth', block:'start' }); } catch {}
     });
@@ -215,7 +215,7 @@
       <button class="kb-quiz-cta" id="kb-cta-routine" type="button" style="background:var(--surface);color:var(--kb1);border:2px solid var(--kb1);border-radius:24px;padding:9px 18px;font-weight:800;font-size:14px;cursor:pointer">🧴 ${esc(cx('ux.buildRoutine', 'Build your routine'))} →</button>
     </div>`;
     const rt = $('#kb-retake');
-    if (rt) rt.addEventListener('click', () => { try { localStorage.removeItem(SKIN_KEY); } catch {} for (const k in quizAnswers) delete quizAnswers[k]; renderQuiz(); refreshPersonalized(); });
+    if (rt) rt.addEventListener('click', () => { try { localStorage.removeItem(SKIN_KEY); } catch {} for (const k in quizAnswers) delete quizAnswers[k]; renderQuiz(); refreshPersonalized(); kbRenderDiscover(); });
     const cs = $('#kb-cta-stack'); if (cs) cs.addEventListener('click', () => { const el = document.getElementById('kb-stack'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
     const cr = $('#kb-cta-routine'); if (cr) cr.addEventListener('click', () => { showCategory('routine'); });
     showShareFab();
@@ -503,7 +503,7 @@
       if (s.has(id)) s.delete(id); else s.add(id);
       setConcerns(s); b.classList.toggle('sel');
       b.setAttribute('aria-pressed', b.classList.contains('sel') ? 'true' : 'false');
-      refreshPersonalized(); showShareFab();
+      refreshPersonalized(); showShareFab(); kbRenderDiscover();
     }));
   }
 
@@ -1288,15 +1288,110 @@
     let a = []; try { a = JSON.parse(localStorage.getItem(KB_RECENT_KEY) || '[]'); } catch (e) {}
     if (!a.length) { host.style.display = 'none'; return; }
     host.style.display = '';
-    host.innerHTML = '<h3>' + esc(cx('ux.recent', 'Recently viewed')) + '</h3><div>' + a.map(x =>
+    host.innerHTML = '<h3>' + esc(cx('ux.recent', 'Recently viewed')) + '</h3><div class="pill-row">' + a.map(x =>
       '<a class="pill" href="' + KB_LIB + '/' + (x.t === 'brand' ? 'brand' : 'ingredient') + '/' + encodeURIComponent(x.id) + '.html">' + (x.e || '') + ' ' + esc(x.n) + '</a>'
     ).join('') + '</div>';
+  }
+  function kbSlug(s) {
+    return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+  const POPULAR_GUIDES = () => {
+    const rep = ((window.KBEAUTY_BESTSELLERS_VELOCITY || {}).statusAsOf) || '2026-06';
+    return [
+      { e: '🔮', k: 'ux.pop.glass', t: 'Glass Skin Score test', u: KB_LIB + '/glass-score/' },
+      { e: '⚗️', k: 'ux.pop.matrix', t: 'Ingredient pairing matrix', u: KB_LIB + '/matrix/pairing-matrix.html' },
+      { e: '🧴', k: 'ux.pop.routine', t: '10-step Korean routine', u: KB_LIB + '/ask/what-is-the-10-step-korean-skincare-routine.html' },
+      { e: '🫧', k: 'ux.pop.double', t: 'Double cleanse how-to', u: KB_LIB + '/how-to/how-to-do-the-korean-double-cleanse.html' },
+      { e: '📰', k: 'ux.pop.report', t: 'Monthly trend report', u: KB_LIB + '/report/' + rep + '.html' },
+      { e: '🧅', k: 'ux.pop.layer', t: 'Layer thin → thick', u: KB_LIB + '/how-to/how-to-layer-korean-skincare-routine-thin-to-thick.html' },
+    ];
+  };
+  function renderPopular() {
+    const host = $('#kb-popular'); if (!host) return;
+    host.innerHTML = '<h3>' + esc(cx('ux.popular.title', 'Popular guides')) + '</h3>'
+      + '<p>' + esc(cx('ux.popular.sub', 'Start here — most-read library pages')) + '</p>'
+      + '<div class="pill-row">' + POPULAR_GUIDES().map(g => '<a class="pill" href="' + g.u + '">' + g.e + ' ' + esc(cx(g.k, g.t)) + '</a>').join('') + '</div>';
+  }
+  function renderForYou() {
+    const host = $('#kb-foryou'); if (!host) return;
+    const skin = getSkin(), concerns = [...getConcerns()];
+    if (!skin && !concerns.length) {
+      host.innerHTML = '<h3>' + esc(cx('ux.foryou.title', 'Recommended for you')) + '</h3>'
+        + '<p>' + esc(cx('ux.foryou.quiz', 'Take the quiz to unlock personalized picks.')) + ' <a href="#cat=skin" style="color:var(--kb1);font-weight:700">' + esc(cx('match.goquiz', 'Start the quiz →')) + '</a></p>';
+      return;
+    }
+    const links = [], seen = {};
+    const add = (e, n, u) => { if (!n || !u || seen[u]) return; seen[u] = 1; links.push({ e, n, u }); };
+    if (skin) {
+      const st = SKINTYPES.find(s => s.id === skin);
+      add(st && st.emoji || '✨', cx('ux.foryou.skin', 'Routine for') + ' ' + ((st && st.name) || skin), KB_LIB + '/how-to/how-to-build-a-korean-am-skincare-routine.html');
+    }
+    concerns.slice(0, 2).forEach(c => {
+      const co = CONCERN_BY_ID[c] || {};
+      add(co.emoji || '🎯', co.name || c, KB_LIB + '/concern/' + encodeURIComponent(c) + '.html');
+      add('🏆', cx('ux.foryou.best', 'Best ingredients for') + ' ' + (co.name || c), KB_LIB + '/best/korean-ingredients-for-' + encodeURIComponent(c) + '.html');
+      (co.lookFor || []).slice(0, 2).forEach(id => { const i = ING_BY_ID[id]; if (i) add(i.emoji || '🧪', i.name, KB_LIB + '/ingredient/' + encodeURIComponent(id) + '.html'); });
+    });
+    if (skin && concerns[0]) add('🧴', cx('ux.foryou.combo', 'Your skin + concern routine'), KB_LIB + '/routine/' + encodeURIComponent(skin) + '-' + encodeURIComponent(concerns[0]) + '.html');
+    host.innerHTML = '<h3>' + esc(cx('ux.foryou.title', 'Recommended for you')) + '</h3>'
+      + '<p>' + esc(cx('ux.foryou.sub', 'Based on your skin quiz & concerns')) + '</p>'
+      + '<div class="pill-row">' + links.slice(0, 8).map(x => '<a class="pill" href="' + x.u + '">' + x.e + ' ' + esc(x.n) + '</a>').join('') + '</div>';
+  }
+  function kbRenderSavedLib() {
+    const host = $('#kb-savedlib'); if (!host) return;
+    let map = {}, recent = [];
+    try { map = JSON.parse(localStorage.getItem('kp_kbeauty_saved_map') || '{}'); } catch (e) {}
+    try { recent = JSON.parse(localStorage.getItem('kp_kbeauty_recent_lib') || '[]'); } catch (e) {}
+    const rows = [], seen = {};
+    Object.keys(map).forEach(u => { if (map[u] && !seen[u]) { seen[u] = 1; rows.push({ u, t: map[u], s: 1 }); } });
+    recent.forEach(x => { if (x && x.u && !seen[x.u]) { seen[x.u] = 1; rows.push({ u: x.u, t: x.t, s: 0 }); } });
+    if (!rows.length) { host.style.display = 'none'; return; }
+    host.style.display = '';
+    host.innerHTML = '<h3>' + esc(cx('ux.saved.title', 'Continue reading')) + '</h3><div class="pill-row">'
+      + rows.slice(0, 6).map(r => '<a class="pill" href="' + esc(r.u) + '">' + (r.s ? '♥ ' : '🕘 ') + esc(String(r.t || r.u).slice(0, 48)) + '</a>').join('') + '</div>';
+  }
+  function kbRenderDiscover() { renderPopular(); renderForYou(); kbRenderSavedLib(); kbRenderRecent(); }
+  function importProfileFromUrl() {
+    try {
+      const sp = new URLSearchParams(location.search);
+      const sk = (sp.get('skin') || '').toLowerCase();
+      const cs = sp.get('concerns') || sp.get('concern') || '';
+      if (!sk && !cs) return;
+      let changed = false;
+      if (sk && SKINTYPES.some(s => s.id === sk)) { setSkin(sk); changed = true; }
+      if (cs) {
+        const ids = cs.split(/[,+]/).map(s => s.trim().toLowerCase()).filter(c => CONCERN_BY_ID[c]);
+        if (ids.length) { setConcerns(new Set(ids)); changed = true; }
+      }
+      if (!changed) return;
+      refreshPersonalized();
+      kbRenderDiscover();
+      showShareFab();
+      kbToast(cx('profile.imported', 'Profile loaded from link ✓'));
+      try { kbtrack('profile_import', { skin: sk || '', concerns: cs }); } catch (e) {}
+      const u = new URL(location.href);
+      u.searchParams.delete('skin'); u.searchParams.delete('concerns'); u.searchParams.delete('concern');
+      history.replaceState(null, '', u.pathname + u.search + location.hash);
+    } catch (e) {}
   }
   function kbSearchIndex() {
     const idx = [];
     (window.KBEAUTY_INGREDIENTS || []).forEach(i => idx.push({ l: i.name, e: i.emoji || '🧪', u: KB_LIB + '/ingredient/' + i.id + '.html', t: cx('ux.ingredient', 'Ingredient') }));
     (window.KBEAUTY_BRANDS || []).forEach(b => idx.push({ l: b.name, e: b.emoji || '🏷️', u: KB_LIB + '/brand/' + b.id + '.html', t: cx('ux.brand', 'Brand') }));
     (window.KBEAUTY_CONCERNS || []).forEach(c => idx.push({ l: c.name, e: c.emoji || '🎯', u: KB_LIB + '/concern/' + c.id + '.html', t: cx('ux.concern', 'Concern') }));
+    POPULAR_GUIDES().forEach(g => idx.push({ l: cx(g.k, g.t), e: g.e, u: g.u, t: cx('ux.guide', 'Guide') }));
+    const seenRef = {};
+    (window.KBEAUTY_DUPES || []).forEach(d => {
+      if (!d.reference || seenRef[d.reference]) return; seenRef[d.reference] = 1;
+      const sl = kbSlug(d.reference); if (!sl) return;
+      idx.push({ l: cx('ux.alt', 'Korean alternative to') + ' ' + d.reference, e: d.referenceEmoji || '🔁', u: KB_LIB + '/alternative/' + sl + '.html', t: cx('ux.alt', 'Alternative') });
+    });
+    [
+      ['What is niacinamide?', 'niacinamide', '💬'],
+      ['What is the 10-step Korean skincare routine?', 'what-is-the-10-step-korean-skincare-routine', '💬'],
+      ['What is glass skin?', 'what-is-glass-skin', '💬'],
+      ['Why is Korean sunscreen better?', 'why-is-korean-sunscreen-better', '💬'],
+    ].forEach(([q, slug, e]) => idx.push({ l: q, e, u: KB_LIB + '/ask/' + slug + '.html', t: cx('ux.qa', 'Q&A') }));
     return idx;
   }
   // The bottom tab bar exposes 4 primary destinations; every other category
@@ -1338,7 +1433,11 @@
       const tb = document.createElement('div'); tb.id = 'kb-toolbar';
       tb.innerHTML = '<div class="kb-search-wrap"><span class="kb-search-ic">🔎</span>'
         + '<input id="kb-search" class="kb-search" type="search" autocomplete="off" placeholder="' + esc(cx('ux.searchph', 'Search ingredients, brands, concerns…')) + '" aria-label="' + esc(cx('ux.search', 'Search K-beauty')) + '">'
-        + '<div id="kb-search-res" class="kb-search-res" role="listbox"></div></div><div id="kb-recent" class="kb-recent"></div>';
+        + '<div id="kb-search-res" class="kb-search-res" role="listbox"></div></div>'
+        + '<div id="kb-popular" class="kb-discover"></div>'
+        + '<div id="kb-foryou" class="kb-discover"></div>'
+        + '<div id="kb-savedlib" class="kb-discover" style="display:none"></div>'
+        + '<div id="kb-recent" class="kb-recent" style="display:none"></div>';
       landing.parentNode.insertBefore(tb, landing);
       const inp = $('#kb-search'), res = $('#kb-search-res'); let idx = null;
       inp.addEventListener('input', () => {
@@ -1404,7 +1503,7 @@
     const inCat = $('#kb-back') && !$('#kb-back').hidden;
     const tb2 = $('#kb-toolbar'); if (tb2) tb2.style.display = inCat ? 'none' : '';
     syncBnav(inCat ? ((($('#kb-back-title') || {}).dataset || {}).catid || 'home') : 'home');
-    kbRenderRecent();
+    kbRenderDiscover();
     // Affiliate paused → hide shopping CTAs site-wide (AdSense-first). Toggle via AFFILIATE_ON.
     document.body.classList.toggle('kb-noaffil', !AFFILIATE_ON);
   }
@@ -1499,7 +1598,7 @@
     const back = $('#kb-back'); if (back) back.hidden = true;
     $$('.filter-chip', $('#kb-filters')).forEach(c => { const on = c.dataset.target === 'home'; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
     const tb = $('#kb-toolbar'); if (tb) tb.style.display = '';
-    if (typeof kbRenderRecent === 'function') kbRenderRecent();
+    if (typeof kbRenderDiscover === 'function') kbRenderDiscover();
     if (typeof syncBnav === 'function') syncBnav('home');
   }
   // Lazy render: a category's sections are rendered the first time it opens
@@ -1861,6 +1960,7 @@
     await loadContent();   // per-language content overlay (English fallback)
     localizeData();
     localizeNewData();     // localize the new top-10 datasets (window.KBEAUTY_*)
+    importProfileFromUrl();
     renderTopAds();        // localized AliExpress + AdSense (kept inline: monetization + avoids CLS)
     renderTicker();        // top trends ticker (always visible)
     // Defer non-visual work (SEO JSON-LD + analytics) off the boot critical path → better INP/TBT.

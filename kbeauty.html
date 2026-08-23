@@ -70,7 +70,7 @@
   <link rel="stylesheet" href="seo.css">
   <script src="modules/header.js" defer></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Beauty Guide — Korean Skincare Routine, Ingredients & Brands","url":"https://koreaplus-lifes.com/kbeauty","inLanguage":"en","datePublished":"2026-06-14","dateModified":"2026-06-18","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-beauty (Korean skincare & cosmetics)"},"publisher":{"@type":"Organization","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/","logo":{"@type":"ImageObject","url":"https://koreaplus-lifes.com/guide/icons/kplus.svg"}},"author":{"@type":"Organization","name":"KoreaPlus Editorial"},"description":"Korean skincare routine builder, ingredient decoder, brand directory and shopping guide."}
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Beauty Guide — Korean Skincare Routine, Ingredients & Brands","url":"https://koreaplus-lifes.com/kbeauty","inLanguage":"en","datePublished":"2026-06-14","dateModified":"2026-08-23","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-beauty (Korean skincare & cosmetics)"},"publisher":{"@type":"Organization","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/","logo":{"@type":"ImageObject","url":"https://koreaplus-lifes.com/guide/icons/kplus.svg"}},"author":{"@type":"Organization","name":"KoreaPlus Editorial"},"description":"Korean skincare routine builder, ingredient decoder, brand directory and shopping guide."}
   </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -95,7 +95,9 @@
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"What is the Korean skincare routine order?","acceptedAnswer":{"@type":"Answer","text":"The classic K-beauty order is: oil cleanser (PM), water cleanser, exfoliant (1–3×/week PM), hydrating toner, essence, serum/ampoule, sheet mask (optional), eye cream, moisturizer, and sunscreen in the morning. Apply thinnest to thickest."}},
     {"@type":"Question","name":"What ingredients should you not mix in skincare?","acceptedAnswer":{"@type":"Answer","text":"Generally avoid layering retinol with AHAs/BHAs the same night, and use vitamin C in the morning and retinol at night. The old warning against niacinamide with vitamin C is largely overstated — they pair well in modern formulas. Use our What-Not-To-Mix checker for any combination."}},
-    {"@type":"Question","name":"Why is Korean sunscreen so popular?","acceptedAnswer":{"@type":"Answer","text":"Korean sunscreens are famous for elegant, lightweight textures with no white cast and high UVA protection (PA++++), making daily SPF 50+ comfortable to wear."}}
+    {"@type":"Question","name":"Why is Korean sunscreen so popular?","acceptedAnswer":{"@type":"Answer","text":"Korean sunscreens are famous for elegant, lightweight textures with no white cast and high UVA protection (PA++++), making daily SPF 50+ comfortable to wear."}},
+    {"@type":"Question","name":"What is glass skin in K-beauty?","acceptedAnswer":{"@type":"Answer","text":"Glass skin (yuri pibu) describes a smooth, hydrated, luminous complexion — not oily shine. Korean routines build it with layered hydration, barrier care, and daily SPF. Take our free Glass Skin Score on the K-Beauty hub."}},
+    {"@type":"Question","name":"Is Korean skincare good for sensitive skin?","acceptedAnswer":{"@type":"Answer","text":"Many Korean brands emphasize gentle, fragrance-free formulas with soothing ingredients like centella, panthenol, and madecassoside. Patch-test new actives, introduce one product at a time, and use our skin-type quiz to match products to your needs."}}
   ]}
   </script>
   <style>
@@ -185,8 +187,13 @@
     .kb-search-res a:last-child { border-bottom:0; }
     .kb-search-res a:hover, .kb-search-res a.sel { background:var(--kb-soft); }
     .kb-search-res .ty { margin-left:auto; font-size:12px; color:var(--text3); font-weight:800; }
-    .kb-recent { max-width:740px; margin:0 auto 16px; }
-    .kb-recent h3 { font-size:13px; color:var(--text3); font-weight:800; text-transform:uppercase; letter-spacing:.04em; margin:0 0 8px; }
+    .kb-recent, .kb-discover { max-width:740px; margin:0 auto 16px; }
+    .kb-recent h3, .kb-discover h3 { font-size:13px; color:var(--text3); font-weight:800; text-transform:uppercase; letter-spacing:.04em; margin:0 0 8px; }
+    .kb-discover p { font-size:14px; color:var(--text2); margin:0 0 10px; line-height:1.45; }
+    .kb-discover .pill-row { display:flex; flex-wrap:wrap; gap:8px; }
+    .kb-discover .pill-row a.pill { display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:20px; font-size:13px; font-weight:700; text-decoration:none; color:var(--text); background:var(--surface); border:1px solid var(--border); transition:border-color .15s, background .15s; }
+    .kb-discover .pill-row a.pill:hover { border-color:var(--kb1); background:var(--kb-soft); color:var(--kb1); }
+    .kb-discover.empty p { margin:0; }
     #kb-bnav { display:none; }
     @media (max-width:680px) {
       #kb-bnav { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:58; background:var(--bg); border-top:1px solid var(--border); padding:5px 2px calc(env(safe-area-inset-bottom,0px) + 5px); }
@@ -1187,7 +1194,7 @@
 <script defer src="kbeauty-data.js?v=10"></script>
 <script defer src="modules/api-client.js"></script>
 <script defer src="modules/kbeauty-sharecard.js?v=2"></script>
-<script defer src="modules/kbeauty.js?v=30"></script>
+<script defer src="modules/kbeauty.js?v=31"></script>
 <script defer src="/guide/modules/share-viral.js?v=1"></script>
 </body>
 </html>

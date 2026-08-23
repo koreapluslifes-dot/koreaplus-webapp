@@ -428,6 +428,10 @@ function buyBox(query, label) {
 const KB_TOOLS = `<div style="margin-top:6px">`
   + `<a class="pill" href="${SITE}/kbeauty#cat=skin">🪞 Find your skin type</a>`
   + `<a class="pill" href="${SITE}/kbeauty#cat=routine">🧴 Build a routine</a>`
+  + `<a class="pill" href="${SITE}/kbeauty#kb-ingredients">🧪 Decode any INCI list</a>`
+  + `<a class="pill" href="${SITE}/kbeauty#kb-conflicts">⚗️ What not to mix</a>`
+  + `<a class="pill" href="${SITE}/kbeauty#kb-glassscore">🔮 Glass Skin Score</a>`
+  + `<a class="pill" href="${SITE}/kbeauty#cat=trouble">🩺 Troubleshoot skin</a>`
   + `<a class="pill" href="${SITE}/kbeauty#cat=buy">🛡️ Where to buy authentic</a></div>`;
 function kbCrossLinks(item) {
   const hay = ' ' + [item.title, item.slug, item.h1, item.label].filter(Boolean).join(' ').toLowerCase() + ' ';
@@ -481,7 +485,8 @@ ING.forEach(i => {
     ${constellationSVG(i, pairs, avoid) || (pairs.length ? `<h2>Pairs well with</h2><div>${pairs.map(p => `<a class="pill" href="${p.id}.html">${p.emoji || ''} ${esc(p.name)}</a>`).join('')}</div>` : '')}
     ${avoid.length ? `<div class="box"><b>⚠️ Be careful pairing with:</b> ${avoid.map(p => esc(p.name)).join(', ')} — introduce gradually or alternate nights.</div>` : ''}
     <div class="box">🤰 <b>Pregnancy:</b> ${esc(i.preg === 'safe' ? 'Generally considered fine — confirm with your doctor.' : i.preg === 'caution' ? 'Ask your doctor before use during pregnancy.' : 'Check with your doctor.')} · ⏰ <b>Use:</b> ${esc((i.time || 'both').toUpperCase())}</div>
-    ${buyBox('Korean ' + i.name, 'Shop Korean ' + i.name + ' products')}`;
+    ${buyBox('Korean ' + i.name, 'Shop Korean ' + i.name + ' products')}
+    ${deeperBlock({ title: i.name, slug: i.id })}`;
   const related = ING.filter(x => x.id !== i.id && (x.cat === i.cat || (x.bestFor || []).some(b => (i.bestFor || []).includes(b)))).slice(0, 6).map(x => `<a href="${x.id}.html">${x.emoji || ''} ${esc(x.name)}</a>`).join('');
   emit(`ingredient/${i.id}.html`, shell({ url, depth: 3, crumb: 'Ingredients', emoji: i.emoji, h1: `${i.name}: K-beauty ingredient guide`, ko: i.korean, title: `${i.name} in K-beauty — benefits, how to use, what to pair`, desc: i.explainer, bodyHtml: body, related, ld: [artLD(`${i.name} in K-beauty`, i.explainer, url), faqLD(`What does ${i.name} do for skin?`, (i.benefits || []).join(' ') )] }), '0.7');
 });
@@ -500,7 +505,8 @@ BRANDS.forEach(b => {
     ${(b.hero || []).length ? `<h2>Hero products</h2><ul>${(b.hero || []).map(h => `<li>${esc(h)}</li>`).join('')}</ul>` : ''}
     <h2>Where to buy ${esc(b.name)} authentic</h2>
     <p>${esc(b.name)} is widely counterfeited on open marketplaces — buy from the brand's official store or a trusted first-party retailer.</p>
-    ${buyBox(b.name, 'Shop ' + b.name)}`;
+    ${buyBox(b.name, 'Shop ' + b.name)}
+    ${deeperBlock({ title: b.name, slug: b.id })}`;
   const related = BRANDS.filter(x => x.id !== b.id && x.tier === b.tier).slice(0, 6).map(x => `<a href="${x.id}.html">${x.emoji || ''} ${esc(x.name)}</a>`).join('');
   const brandLd = [
     { '@context': 'https://schema.org', '@type': 'Brand', name: b.name, alternateName: b.korean || undefined, description: b.knownFor, url },
@@ -520,7 +526,8 @@ CONCERNS.forEach(c => {
     ${c.avoid ? `<div class="box">⚠️ <b>Be careful with:</b> ${esc(c.avoid)}</div>` : ''}
     <h2>Build a routine for ${esc(c.name.toLowerCase())}</h2><p>Start gentle, introduce one active at a time, and always finish your morning routine with SPF.</p>
     <div>${SKINTYPES.map(s => `<a class="pill" href="../routine/${s.id}-${c.id}.html">${s.emoji || ''} ${esc(s.name)} skin</a>`).join('')}</div>
-    <p><a href="${SITE}/kbeauty">Use the free routine builder →</a></p>`;
+    <p><a href="${SITE}/kbeauty">Use the free routine builder →</a></p>
+    ${deeperBlock({ title: c.name, slug: c.id })}`;
   const related = look.slice(0, 6).map(i => `<a href="../ingredient/${i.id}.html">${i.emoji || ''} ${esc(i.name)} for ${esc(c.id)}</a>`).join('');
   const cDesc = `${String(c.desc || '').replace(/\.$/, '')}. Korean skincare for ${c.name.toLowerCase()}: the ingredients to look for${look.length ? ` (${look.slice(0, 4).map(i => i.name).join(', ')})` : ''}, what to be careful with, and a routine for every skin type.`;
   emit(`concern/${c.id}.html`, shell({ url, depth: 3, crumb: 'Concerns', emoji: c.emoji, h1: `Korean skincare for ${c.name.toLowerCase()}`, title: `K-beauty for ${c.name} — ingredients, routine & what to avoid`, desc: cDesc, bodyHtml: body, related, ld: [artLD(`Korean skincare for ${c.name}`, c.desc, url), faqLD(`What Korean ingredients help with ${c.name.toLowerCase()}?`, look.map(i => i.name).join(', '))] }), '0.7');
