@@ -478,12 +478,19 @@ export default {
         } catch { /* fall through to the normal proxy */ }
       }
       try {
+        // Do not follow redirects: Apache may 301 kbeauty.html → /guide/kbeauty/ (a stale
+        // redirect stub) which would blank the /kbeauty pretty URL in a reload loop.
         const originResp = await fetch('https://koreaplus-lifes.com/guide/kbeauty.html', {
           cf: { cacheTtl: 300, cacheEverything: true },
           headers: { accept: 'text/html' },
+          redirect: 'manual',
         });
+        if (originResp.status >= 300 && originResp.status < 400) throw new Error('origin redirect ' + originResp.status);
         if (!originResp.ok) throw new Error('origin ' + originResp.status);
         let html = await originResp.text();
+        if (html.includes("location.replace('/kbeauty'") && !html.includes('id="kb-landing"')) {
+          throw new Error('origin redirect stub');
+        }
         // Inject <base> right after <head> so relative URLs resolve to /guide/.
         html = html.replace(/<head(\s[^>]*)?>/i, (m) => `${m}\n<base href="/guide/">`);
         return new Response(html, {

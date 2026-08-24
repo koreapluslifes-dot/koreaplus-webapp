@@ -1373,7 +1373,11 @@
     Object.keys(map).forEach(u => { if (map[u] && !seen[u]) { seen[u] = 1; rows.push({ u, t: map[u], s: 1 }); } });
     recent.forEach(x => { if (x && x.u && !seen[x.u]) { seen[x.u] = 1; rows.push({ u: x.u, t: x.t, s: 0 }); } });
     const savedN = Object.keys(map).filter(u => map[u]).length;
-    if (exp) { exp.style.display = savedN ? '' : 'none'; if (savedN && !$('#kb-export-btn').dataset.wired) { $('#kb-export-btn').dataset.wired = '1'; $('#kb-export-btn').addEventListener('click', kbExportBookmarks); } }
+    if (exp) {
+      exp.style.display = savedN ? '' : 'none';
+      const expBtn = $('#kb-export-btn');
+      if (savedN && expBtn && !expBtn.dataset.wired) { expBtn.dataset.wired = '1'; expBtn.addEventListener('click', kbExportBookmarks); }
+    }
     if (!rows.length) { host.style.display = 'none'; return; }
     host.style.display = '';
     host.innerHTML = '<h3>' + esc(cx('ux.saved.title', 'Continue reading')) + '</h3><div class="pill-row">'

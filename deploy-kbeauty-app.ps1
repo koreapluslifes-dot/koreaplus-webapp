@@ -74,7 +74,7 @@ $chownTargets = ($present | ForEach-Object { "$REMOTE_DIR/$_" }) -join " "
 ssh @ssh "${REMOTE_USER}@${ServerIP}" "sudo chown bitnami:daemon $chownTargets 2>/dev/null; true"
 
 scp @ssh $bundle "${REMOTE_USER}@${ServerIP}:/tmp/kp-kbeauty-deploy-bundle.tar.gz"
-ssh @ssh "${REMOTE_USER}@${ServerIP}" "tar -xzf /tmp/kp-kbeauty-deploy-bundle.tar.gz -C $REMOTE_DIR && rm -f /tmp/kp-kbeauty-deploy-bundle.tar.gz && chmod 644 $chownTargets && echo EXTRACTED"
+ssh @ssh "${REMOTE_USER}@${ServerIP}" "tar -xzf /tmp/kp-kbeauty-deploy-bundle.tar.gz -C $REMOTE_DIR && rm -f /tmp/kp-kbeauty-deploy-bundle.tar.gz && chmod 644 $chownTargets && rm -rf $REMOTE_DIR/kbeauty && echo EXTRACTED"
 
 Remove-Item $bundle, $listFile -ErrorAction SilentlyContinue
 
@@ -90,7 +90,24 @@ foreach ($u in @("/kbeauty", "/guide/kbeauty.html", "/guide/modules/kbeauty.js")
 
 if ($Library) {
     Write-Host "`nLibrary deploy (kb/)..." -ForegroundColor Cyan
+  $bash = Get-Command bash -ErrorAction SilentlyContinue
+  if ($bash) {
     bash deploy-kbeauty.sh --no-indexnow
+  } else {
+    $tarLocal = Join-Path $env:TEMP "kb.tar"
+    $pageCount = (Get-ChildItem -Path (Join-Path $LOCAL_DIR "kb") -Filter *.html -Recurse -File).Count
+    if ($pageCount -lt 4000) { Write-Error "ABORT: only $pageCount kb pages — build looks incomplete"; exit 1 }
+    Write-Host "  $pageCount html files -> uncompressed tar + scp" -ForegroundColor DarkYellow
+    if (Test-Path $tarLocal) { Remove-Item $tarLocal -Force }
+    tar -cf $tarLocal -C $LOCAL_DIR kb kbeauty-sitemap.xml
+    if (-not (Test-Path $tarLocal)) { Write-Error "tar creation failed"; exit 1 }
+    scp @ssh $tarLocal "${REMOTE_USER}@${ServerIP}:/tmp/kb.tar"
+    ssh @ssh "${REMOTE_USER}@${ServerIP}" @"
+sudo tar xf /tmp/kb.tar -C $REMOTE_DIR && sudo chown -R bitnami:daemon $REMOTE_DIR/kb $REMOTE_DIR/kbeauty-sitemap.xml && rm -f /tmp/kb.tar && sudo chmod -R a+rX $REMOTE_DIR/kb && sudo chmod a+r $REMOTE_DIR/kbeauty-sitemap.xml && echo KB_EXTRACTED
+"@
+    Remove-Item $tarLocal -ErrorAction SilentlyContinue
+    Write-Host "  Library uploaded (run node indexnow-submit.cjs to ping search engines)" -ForegroundColor DarkYellow
+  }
 }
 
 if ($Worker) {
