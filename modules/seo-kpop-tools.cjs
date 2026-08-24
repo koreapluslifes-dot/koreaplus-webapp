@@ -32,7 +32,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, ROSTER, ENRICH, ld, TODAY } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, ROSTER, ENRICH, ld, TODAY, kpopPublicUrl } = ctx;
   const ORIGIN = 'https://koreaplus-lifes.com';
 
   // Mirrors RTL_LANGS in build-seo.cjs — the embed page is written directly
@@ -192,7 +192,7 @@ module.exports = function (ctx) {
 
     const trail = [
       { name: t.bcHome || 'Home', url: '/kpop' },
-      { name: t.bcTools || 'K-pop Tools', url: `${BASEP}${dirOf(lang)}kpop/browse.html` },
+      { name: t.bcTools || 'K-pop Tools', url: kpopPublicUrl(lang, 'browse') },
       { name: t.title || 'Idol Birthday Matcher', url },
     ];
 

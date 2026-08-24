@@ -96,7 +96,7 @@
     x.fillText('🎤 KoreaPlus', cx, 1255);
     x.fillStyle = 'rgba(255,255,255,.45)';
     x.font = '500 26px Inter, system-ui, sans-serif';
-    x.fillText('koreaplus-lifes.com/guide/kpop', cx, 1295);
+    x.fillText('koreaplus-lifes.com/kpop', cx, 1295);
 
     const png = await new Promise(res => c.toBlob(res, 'image/png'));
     if (!png) return;

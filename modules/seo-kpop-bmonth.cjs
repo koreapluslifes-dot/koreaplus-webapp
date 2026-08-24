@@ -41,12 +41,10 @@ const MONTH_SLUGS = ['january', 'february', 'march', 'april', 'may', 'june',
   'july', 'august', 'september', 'october', 'november', 'december'];
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, bcHtml, affBlock, ROSTER, ENRICH, derive, ld } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, bcHtml, affBlock, ROSTER, ENRICH, derive, ld, kpopPublicUrl } = ctx;
 
-  // dir() — '' for English, else the locale directory + '/'. Mirrors the
-  // build-seo URL rule; never hardcodes a directory string.
   const dir = (lang) => (lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : lang + '/'));
-  const urlFor = (lang, monthIdx) => `${BASEP}${dir(lang)}kpop/kpop-idols-born-in-${MONTH_SLUGS[monthIdx]}.html`;
+  const urlFor = (lang, monthIdx) => kpopPublicUrl(lang, `kpop-idols-born-in-${MONTH_SLUGS[monthIdx]}`);
 
   // ── Build the month → [entries] index ONCE (language-independent).
   // entry = { name, date, sign, group:{id,nameEn,nameKo,emoji,type,gender} }

@@ -2906,8 +2906,8 @@ try{
   };
   var t=T[L]||T.en;
   function d(){return SUP.indexOf(L)>=0&&L!=="en"?L+"/":"";}
-  function vsPf(a,b){return d()+"kpop-vs/"+a+"-vs-"+b;}
-  function guidePf(s){return d()+"kpop/"+s;}
+  function vsPf(a,b){return "/"+d()+"kpop-vs/"+a+"-vs-"+b;}
+  function guidePf(s){return "/"+d()+"kpop/"+s;}
   var PAIRS=[["bts","seventeen"],["blackpink","twice"],["newjeans","lesserafim"],["aespa","ive"],["straykids","ateez"],["txt","enhypen"]];
   var roster=Array.isArray(window.KPOP_ROSTER)?window.KPOP_ROSTER:[],byId={};
   roster.forEach(function(a){if(a&&a.id)byId[a.id]=a;});
@@ -2932,8 +2932,8 @@ try{
   mount.setAttribute("data-kpp-faq","1");
   var L=(localStorage.getItem("kp_lang")||(navigator.language||"en").slice(0,2)||"en").toLowerCase();
   var FAQ={
-    en:{h:"K-Pop FAQ",items:[["What is KoreaPlus K-Pop Now?","A free real-time hub for charts, comeback countdowns, idol birthdays, artist profiles and news — in 14 languages."],["How often are charts updated?","Apple Music Korea charts refresh when you load the page; comeback and birthday data update daily from our curated roster."],["Can I follow my bias?","Yes — tap the star on any artist. Your follows personalize countdowns, news and the For You tab (saved on this device)."],["Are the group comparison pages biased?","No — comparison pages list only verifiable facts (debut, members, agency, genre). We never rank one group above another."],["How do I read guides in my language?","Use the language picker in the header, or open localized URLs like /guide/ko/kpop/ for Korean profiles and guides."]]},
-    ko:{h:"K-Pop FAQ",items:[["KoreaPlus K-Pop Now란?","실시간 차트, 컴백 카운트다운, 생일, 프로필, 뉴스를 14개 언어로 제공하는 무료 허브입니다."],["차트는 얼마나 자주 갱신되나요?","Apple Music Korea 차트는 페이지 로드 시 갱신되며, 컴백·생일 데이터는 매일 업데이트됩니다."],["최애를 팔로우할 수 있나요?","네 — 아티스트 카드의 별을 누르면 이 기기에 저장되어 컴백·뉴스가 맞춤화됩니다."],["그룹 비교 페이지는 편향되나요?","아니요 — 데뷔, 멤버 수, 소속사, 장르만 나열하며 순위를 매기지 않습니다."],["내 언어로 가이드를 보려면?","헤더 언어 선택기를 쓰거나 /guide/ko/kpop/ 같은 로컬 URL을 이용하세요."]]}
+    en:{h:"K-Pop FAQ",items:[["What is KoreaPlus K-Pop Now?","A free real-time hub for charts, comeback countdowns, idol birthdays, artist profiles and news — in 14 languages."],["How often are charts updated?","Apple Music Korea charts refresh when you load the page; comeback and birthday data update daily from our curated roster."],["Can I follow my bias?","Yes — tap the star on any artist. Your follows personalize countdowns, news and the For You tab (saved on this device)."],["Are the group comparison pages biased?","No — comparison pages list only verifiable facts (debut, members, agency, genre). We never rank one group above another."],["How do I read guides in my language?","Use the language picker in the header, or open localized URLs like /ko/kpop/ for Korean profiles and guides."]]},
+    ko:{h:"K-Pop FAQ",items:[["KoreaPlus K-Pop Now란?","실시간 차트, 컴백 카운트다운, 생일, 프로필, 뉴스를 14개 언어로 제공하는 무료 허브입니다."],["차트는 얼마나 자주 갱신되나요?","Apple Music Korea 차트는 페이지 로드 시 갱신되며, 컴백·생일 데이터는 매일 업데이트됩니다."],["최애를 팔로우할 수 있나요?","네 — 아티스트 카드의 별을 누르면 이 기기에 저장되어 컴백·뉴스가 맞춤화됩니다."],["그룹 비교 페이지는 편향되나요?","아니요 — 데뷔, 멤버 수, 소속사, 장르만 나열하며 순위를 매기지 않습니다."],["내 언어로 가이드를 보려면?","헤더 언어 선택기를 쓰거나 /ko/kpop/ 같은 로컬 URL을 이용하세요."]]}
   };
   var pack=FAQ[L]||FAQ.en;
   var html='<section class="kp-hub-faq"><h2 class="kpop-sec-title">❓ '+pack.h+'</h2><div class="seo-faq">';

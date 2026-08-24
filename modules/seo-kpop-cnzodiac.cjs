@@ -21,7 +21,7 @@ const { ANIMAL_KEYS, ANIMAL_NAMES, T } = require('./seo-kpop-cnzodiac-l10n.js');
 const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, ld, derive } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, ld, derive, kpopPublicUrl } = ctx;
 
   // The K-pop channel rolls out locales ahead of the rest of the site, so it
   // has its own list. Tolerate its absence: this cluster must keep building
@@ -42,7 +42,7 @@ module.exports = function (ctx) {
   // English one and both would claim the same <loc>.
   const dirOf = (lang) => (lang === 'en' ? '' : ((L10N[lang] && L10N[lang].dir) || lang) + '/');
   const slugOf = (animal) => `kpop-idols-born-in-the-year-of-the-${animal}`;
-  const pathOf = (animal, lang) => `${BASEP}${dirOf(lang)}kpop/${slugOf(animal)}.html`;
+  const pathOf = (animal, lang) => kpopPublicUrl(lang, slugOf(animal));
 
   // ── Build the animal → [{name, group, groupEmoji, bday}] index ONCE.
   // Join: ENRICH (member bdays) × ROSTER (group display meta) by id.

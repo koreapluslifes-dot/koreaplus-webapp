@@ -22,7 +22,7 @@ const L10N_STR = require('../seo-kpop-lightstick-l10n.js');
 const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, slug, ld } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, slug, ld, kpopPublicUrl } = ctx;
   const ROSTER = ctx.ROSTER || [];
   const ENRICH = ctx.ENRICH || {};
 
@@ -70,8 +70,7 @@ module.exports = function (ctx) {
   // path, so the localized page would overwrite the English one and both
   // would claim the same <loc>.
   function pageUrl(pathLeaf, lang) {
-    const dir = lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : lang + '/');
-    return `${BASEP}${dir}${pathLeaf}.html`;
+    return kpopPublicUrl(lang, pathLeaf);
   }
   const indexPath = 'kpop-lightsticks-list';
   const groupLeaf = (id) => `kpop-lightstick-${id}`;

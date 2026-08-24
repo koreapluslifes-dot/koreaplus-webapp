@@ -40,7 +40,7 @@ catch { CHANNEL_LANGS = require('./seo-langs.cjs'); }
 const LANGS = CHANNEL_LANGS.filter(l => T[l] && SIGN_NAMES[l] && ANIMAL_NAMES[l] && MONTH_NAMES[l]);
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, affBlock, ROSTER, ENRICH, ld, derive } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, affBlock, ROSTER, ENRICH, ld, derive, kpopPublicUrl } = ctx;
 
   // dir prefix for a language (en → '', else '<dir>/'). Never hardcode.
   const dir = (lang) => lang === 'en' ? '' : ((L10N[lang] && L10N[lang].dir) || lang) + '/';
@@ -108,8 +108,8 @@ module.exports = function (ctx) {
     const isSolo = mem.act.type === 'soloist';
     const m = mem.name;
     const g = actName(mem.act, lang);
-    const url = `${BASEP}${dir(lang)}kpop/${memberSlug(mem)}.html`;
-    const enUrl = `${BASEP}kpop/${memberSlug(mem)}.html`;
+    const url = kpopPublicUrl(lang, memberSlug(mem));
+    const enUrl = kpopPublicUrl('en', memberSlug(mem));
 
     // ── derived facts (pure, from verified birthday only) ──
     const sign = mem.birthday ? derive.signOf(mem.birthday) : null;
@@ -192,8 +192,8 @@ module.exports = function (ctx) {
     // ── hreflang alts: en is x-default; LANGS only, so every alt has a page ──
     const others = LANGS.filter(l => l !== lang);
     const alts = lang === 'en'
-      ? others.map(l => ({ lang: l, url: `${BASEP}${dir(l)}kpop/${memberSlug(mem)}.html` }))
-      : [{ lang: 'en', url: enUrl }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: `${BASEP}${dir(l)}kpop/${memberSlug(mem)}.html` }))];
+      ? others.map(l => ({ lang: l, url: kpopPublicUrl(l, memberSlug(mem)) }))
+      : [{ lang: 'en', url: enUrl }, ...others.filter(l => l !== 'en').map(l => ({ lang: l, url: kpopPublicUrl(l, memberSlug(mem)) }))];
 
     const hero = `<header class="seo-hero"><span class="emoji">${mem.act.emoji || '🎤'}</span><h1>${esc(h1)}</h1>`
       + `<div class="meta"><span class="seo-badge">${esc(t.badge)}</span>`

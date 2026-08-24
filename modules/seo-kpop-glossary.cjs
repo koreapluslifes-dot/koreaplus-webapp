@@ -26,7 +26,7 @@ const { HUB, EXISTING, TERMS } = require('./seo-kpop-glossary-l10n.js');
 const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, ld, TODAY } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, ld, TODAY, kpopPublicUrl } = ctx;
 
   // The K-pop channel rolls out locales ahead of the rest of the site, so it
   // has its own list. Tolerate its absence: this cluster must keep building
@@ -47,10 +47,9 @@ module.exports = function (ctx) {
   // dir helper — mirrors build-seo's KPOP_HIST_DIR exactly.
   const dirOf = (lang) => lang === 'en' ? '' : (((L10N[lang] && L10N[lang].dir) || lang) + '/');
   const HUB_SLUG = 'glossary';
-  const hubPath = (lang) => `${BASEP}${dirOf(lang)}kpop/${HUB_SLUG}.html`;
-  const termPath = (lang, slug) => `${BASEP}${dirOf(lang)}kpop/${slug}.html`;
-  // path to an existing history/term article we link to (same family)
-  const histPath = (lang, slug) => `${BASEP}${dirOf(lang)}kpop/${slug}.html`;
+  const hubPath = (lang) => kpopPublicUrl(lang, HUB_SLUG);
+  const termPath = (lang, slug) => kpopPublicUrl(lang, slug);
+  const histPath = (lang, slug) => kpopPublicUrl(lang, slug);
 
   // Languages in which a brand-new TERM is translated (always include en
   // when the en block exists). A term page also renders hub chrome and links

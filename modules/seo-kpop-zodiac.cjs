@@ -39,7 +39,7 @@ const SIGN_ORDER = [
 ];
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, ld, derive } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, ld, derive, kpopPublicUrl, kpopFileRel } = ctx;
   const ORIGIN = 'https://koreaplus-lifes.com';
   const KPOP_HOME = '/kpop';
   const KPOP_BRAND = '🎤 Korea<span>Plus</span>';
@@ -104,8 +104,7 @@ module.exports = function (ctx) {
   // claim the same <loc>.
   function pathFor(key) { return `kpop-idols-with-${key}-star-sign.html`; }
   function urlFor(key, lang) {
-    const dir = lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : lang + '/');
-    return `${BASEP}${dir}${pathFor(key)}`;
+    return kpopPublicUrl(lang, pathFor(key).replace(/\.html$/, ''));
   }
 
   // hreflang alternates. A sign with no verified members is dropped in every
@@ -211,7 +210,7 @@ ${note}`;
       schemas, hero, body, lang, alts,
       homeHref: KPOP_HOME, brand: KPOP_BRAND,
     });
-    writePage(url.replace(BASEP, ''), html);
+    writePage(kpopFileRel(lang, 'kpop/' + pathFor(key)), html);
     return url;
   }
 

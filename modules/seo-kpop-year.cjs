@@ -50,14 +50,14 @@ const MIN_ACTS = 5;
 const MIN_RELEASES = 12;
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, bcHtml, affBlock, ROSTER, DISCOG, ld } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, bcHtml, affBlock, ROSTER, DISCOG, ld, kpopPublicUrl } = ctx;
 
   // Release dates are Korean dates; against a UTC "today" a title stays flagged
   // as upcoming for nine hours after it is already out.
   const TODAY_KST = ctx.TODAY_KST || new Date(Date.now() + 9 * 3600_000).toISOString().slice(0, 10);
 
   const dir = (lang) => (lang === 'en' ? '' : (L10N[lang] && L10N[lang].dir ? L10N[lang].dir + '/' : lang + '/'));
-  const urlFor = (lang, year) => `${BASEP}${dir(lang)}kpop/kpop-releases-${year}.html`;
+  const urlFor = (lang, year) => kpopPublicUrl(lang, `kpop-releases-${year}`);
 
   // ── Index every release by year ONCE (language-independent) ──────────────
   const all = media.allReleases(DISCOG, ROSTER);

@@ -17,7 +17,7 @@ const path = require('path');
 const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, ROSTER, TODAY, ld, bcHtml, keyFactsBox } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, ROSTER, TODAY, ld, bcHtml, keyFactsBox, kpopVsPublicUrl, kpopFileRel } = ctx;
 
   // ── i18n strings (en + 8 locales). Lives at repo root next to build-seo. ──
   let T = {};
@@ -83,7 +83,7 @@ module.exports = function (ctx) {
 
   // URL with the BASEP + locale dir convention.
   function urlFor(a, b, lang) {
-    return `${BASEP}${dirOf(lang)}${slugFor(a, b)}`;
+    return kpopVsPublicUrl(lang, `${a}-vs-${b}`);
   }
 
   // Build hreflang alternates: only languages that can render (all of LANGS,
@@ -204,7 +204,7 @@ module.exports = function (ctx) {
     // ── breadcrumb (K-pop channel root = /kpop) ──
     const trail = [
       { name: t.bcHub, url: '/kpop' },
-      { name: t.bcVs, url: `${BASEP}${dirOf(lang)}kpop-vs/` },
+      { name: t.bcVs, url: kpopVsPublicUrl(lang, '') },
       { name: `${nameA} ${t.vs} ${nameB}`, url },
     ];
 
@@ -239,7 +239,7 @@ ${relHtml}
     // shell() RETURNS the html string — it does not write. writePage must be
     // called with the OUT-relative path (= url minus the BASEP prefix), else
     // the page is sitemap-listed but never materialized on disk (ghost 404).
-    writePage(url.slice(BASEP.length), shell({
+    writePage(kpopFileRel(lang, slugFor(pair[0], pair[1])), shell({
       url,
       title,
       desc,

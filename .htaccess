@@ -8,6 +8,13 @@ RewriteBase /guide/
 RewriteRule ^kbeauty/?$ https://koreaplus-lifes.com/kbeauty [R=301,L,NE,QSD]
 RewriteRule ^kbeauty\.html$ https://koreaplus-lifes.com/kbeauty [R=301,L,NE,QSD]
 
+# K-Pop channel is standalone at /kpop — redirect legacy /guide/kpop/* paths
+RewriteRule ^kpop\.html$ https://koreaplus-lifes.com/kpop [R=301,L,NE,QSD]
+RewriteRule ^([a-z]{2}(?:-[a-z]+)?)/kpop(?:/(.*))?$ https://koreaplus-lifes.com/$1/kpop/$2 [R=301,L,NE,QSD]
+RewriteRule ^kpop(?:/(.*))?$ https://koreaplus-lifes.com/kpop/$1 [R=301,L,NE,QSD]
+RewriteRule ^([a-z]{2}(?:-[a-z]+)?)/kpop-vs(?:/(.*))?$ https://koreaplus-lifes.com/$1/kpop-vs/$2 [R=301,L,NE,QSD]
+RewriteRule ^kpop-vs(?:/(.*))?$ https://koreaplus-lifes.com/kpop-vs/$1 [R=301,L,NE,QSD]
+
 # External request with .html → extensionless (301)
 RewriteCond %{THE_REQUEST} \s/+guide/+([^\s?]+)\.html[\s?] [NC]
 RewriteRule ^ %1 [R=301,L,NE,QSD]

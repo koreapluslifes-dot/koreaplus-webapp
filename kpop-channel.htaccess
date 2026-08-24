@@ -1,0 +1,13 @@
+# K-Pop standalone channel — extensionless URLs under /kpop/
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /kpop/
+
+RewriteCond %{THE_REQUEST} \s/+kpop/+([^\s?]+)\.html[\s?] [NC]
+RewriteRule ^ %1 [R=301,L,NE,QSD]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>

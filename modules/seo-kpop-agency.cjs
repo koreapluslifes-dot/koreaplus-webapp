@@ -22,7 +22,7 @@ const L10N_CONTENT = require('./seo-kpop-agency-l10n.js');
 const chrome = require('./seo-kpop-chrome.cjs');
 
 module.exports = function (ctx) {
-  const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, ROSTER, ENRICH, ld } = ctx;
+  const { shell, writePage, BASEP, L10N, esc, slug, bcHtml, keyFactsBox, ROSTER, ENRICH, ld, kpopPublicUrl } = ctx;
 
   // The K-pop channel rolls out locales ahead of the rest of the site, so it
   // has its own list. Tolerate its absence: this cluster must keep building
@@ -77,9 +77,8 @@ module.exports = function (ctx) {
   // to '', which is the English path: the localized page would overwrite the
   // English one and both would claim the same <loc>.
   const dirOf = lang => (lang === 'en' ? '' : ((L10N[lang] && L10N[lang].dir) || lang) + '/');
-  // Page path & url for an agency on the K-pop channel.
   const pathOf = (key, lang) => `${dirOf(lang)}kpop/${key}-kpop-artists-guide.html`;
-  const urlOf = (key, lang) => `${BASEP}${pathOf(key, lang)}`;
+  const urlOf = (key, lang) => kpopPublicUrl(lang, `${key}-kpop-artists-guide`);
 
   // ENRICH join: id → { lightstick?, bdays:[[name,iso]] }.
   const enrichOf = id => (ENRICH && ENRICH[id]) || null;
