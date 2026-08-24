@@ -4,6 +4,10 @@
 RewriteEngine On
 RewriteBase /guide/
 
+# K-Beauty hub is standalone at /kbeauty — never serve MultiViews /guide/kbeauty/
+RewriteRule ^kbeauty/?$ https://koreaplus-lifes.com/kbeauty [R=301,L,NE,QSD]
+RewriteRule ^kbeauty\.html$ https://koreaplus-lifes.com/kbeauty [R=301,L,NE,QSD]
+
 # External request with .html → extensionless (301)
 RewriteCond %{THE_REQUEST} \s/+guide/+([^\s?]+)\.html[\s?] [NC]
 RewriteRule ^ %1 [R=301,L,NE,QSD]

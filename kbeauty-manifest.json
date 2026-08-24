@@ -3,8 +3,8 @@
   "short_name": "K-Beauty",
   "id": "/kbeauty",
   "description": "Korean skincare routine builder, ingredient decoder, brand directory & authentic shopping — dermatologist-informed, in 14 languages.",
-  "start_url": "/guide/kbeauty.html?src=pwa",
-  "scope": "/",
+  "start_url": "/kbeauty?src=pwa",
+  "scope": "/kbeauty",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0a0510",
@@ -18,13 +18,13 @@
     { "src": "/guide/kbeauty-icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Skin-type quiz", "short_name": "Skin", "url": "/guide/kbeauty.html#cat=skin" },
-    { "name": "My routine", "short_name": "Routine", "url": "/guide/kbeauty.html#cat=routine" },
-    { "name": "Ingredients", "short_name": "Ingredients", "url": "/guide/kbeauty.html#cat=ingr" },
-    { "name": "Where to buy", "short_name": "Buy", "url": "/guide/kbeauty.html#cat=buy" }
+    { "name": "Skin-type quiz", "short_name": "Skin", "url": "/kbeauty#cat=skin" },
+    { "name": "My routine", "short_name": "Routine", "url": "/kbeauty#cat=routine" },
+    { "name": "Ingredients", "short_name": "Ingredients", "url": "/kbeauty#cat=ingr" },
+    { "name": "Where to buy", "short_name": "Buy", "url": "/kbeauty#cat=buy" }
   ],
   "share_target": {
-    "action": "/guide/kbeauty.html",
+    "action": "/kbeauty",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
     "params": { "title": "title", "text": "share", "url": "url" }

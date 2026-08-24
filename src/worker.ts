@@ -417,12 +417,11 @@ export default {
       }
     }
 
-    // ── Pretty-URL serving ─────────────────────────────────────────────────
-    // The K-Beauty hub is a static file under /guide/. We serve it at the clean
-    // /kbeauty URL by PROXYING the origin file (not redirecting) so the address
-    // bar stays /kbeauty. A <base href="/guide/"> is injected so the page's
-    // relative asset/nav paths still resolve against /guide/ where the app lives.
-    // Registered as Worker routes on koreaplus-lifes.com/kbeauty* and /k-beauty*.
+    // ── K-Beauty standalone hub (/kbeauty) ───────────────────────────────
+    // Hub HTML lives at origin /kbeauty/index.html (K-Pop-style standalone).
+    // Shared assets resolve via <base href="/guide/"> in that file. We proxy
+    // from origin (resolveOverride) so the address bar stays /kbeauty without
+    // hitting this Worker route again. Registered on koreaplus-lifes.com/kbeauty*.
     if (path === '/k-beauty') {
       return Response.redirect('https://koreaplus-lifes.com/kbeauty' + url.search, 301);
     }
@@ -478,30 +477,23 @@ export default {
         } catch { /* fall through to the normal proxy */ }
       }
       try {
-        // Fetch the MultiViews URL (/guide/kbeauty), not kbeauty.html — Apache 301s .html away.
-        const originResp = await fetch('https://koreaplus-lifes.com/guide/kbeauty', {
-          cf: { cacheTtl: 300, cacheEverything: true },
-          headers: { accept: 'text/html' },
+        // Bypass this Worker route — fetch the standalone file directly from origin.
+        const originResp = await fetch('https://koreaplus-lifes.com/kbeauty/index.html', {
+          cf: { resolveOverride: '18.207.55.50', cacheTtl: 300, cacheEverything: true },
+          headers: { accept: 'text/html', host: 'koreaplus-lifes.com' },
         });
         if (!originResp.ok) throw new Error('origin ' + originResp.status);
-        let html = await originResp.text();
-        if (html.includes("location.replace('/kbeauty'") && !html.includes('id="kb-landing"')) {
-          throw new Error('origin redirect stub');
-        }
-        // Ensure <base> so /kbeauty pretty URL resolves assets under /guide/.
-        if (!/<base\s/i.test(html)) {
-          html = html.replace(/<head(\s[^>]*)?>/i, (m) => `${m}\n<base href="/guide/">`);
-        }
+        const html = await originResp.text();
+        if (!html.includes('id="kb-landing"')) throw new Error('standalone hub missing');
         return new Response(html, {
           headers: {
             'content-type': 'text/html; charset=utf-8',
             'cache-control': 'public, max-age=300',
-            'x-served-by': 'kbeauty-pretty-url',
+            'x-served-by': 'kbeauty-standalone',
           },
         });
       } catch {
-        // Graceful fallback to the canonical file if the proxy fetch fails.
-        return Response.redirect('https://koreaplus-lifes.com/guide/kbeauty.html' + url.search, 302);
+        return Response.redirect('https://koreaplus-lifes.com/kbeauty/' + url.search, 302);
       }
     }
 

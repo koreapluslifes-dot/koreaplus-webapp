@@ -16,11 +16,13 @@ param(
 $PEM_KEY = "C:\Users\juksu\Documents\blog\koreaplus-lifes\LightsailDefaultKey-us-east-1.pem"
 $REMOTE_USER = "bitnami"
 $REMOTE_DIR = "/opt/bitnami/wordpress/guide"
+$WP_ROOT = "/opt/bitnami/wordpress"
 $LOCAL_DIR = "C:\Users\juksu\koreaplus-webapp"
 
 if (-not (Test-Path $PEM_KEY)) { Write-Error "PEM not found: $PEM_KEY"; exit 1 }
 
 $items = @(
+    ".htaccess",
     "kbeauty.html",
     "kbeauty-data.js",
     "kbeauty-favicon.svg",
@@ -78,14 +80,37 @@ ssh @ssh "${REMOTE_USER}@${ServerIP}" "tar -xzf /tmp/kp-kbeauty-deploy-bundle.ta
 
 Remove-Item $bundle, $listFile -ErrorAction SilentlyContinue
 
+# Standalone hub → https://koreaplus-lifes.com/kbeauty (K-Pop /kpop pattern)
+$standalone = Join-Path $LOCAL_DIR "kbeauty-standalone.html"
+if (-not (Test-Path $standalone)) { $standalone = Join-Path $LOCAL_DIR "kbeauty.html" }
+Write-Host "`n==> /kbeauty/index.html (standalone hub)..." -ForegroundColor Yellow
+ssh @ssh "${REMOTE_USER}@${ServerIP}" "sudo mkdir -p $WP_ROOT/kbeauty; sudo chown -R bitnami:daemon $WP_ROOT/kbeauty 2>/dev/null; true"
+scp @ssh $standalone "${REMOTE_USER}@${ServerIP}:${WP_ROOT}/kbeauty/index.html"
+ssh @ssh "${REMOTE_USER}@${ServerIP}" "sudo chown bitnami:daemon $WP_ROOT/kbeauty/index.html; sudo chmod 755 $WP_ROOT/kbeauty; sudo chmod 644 $WP_ROOT/kbeauty/index.html; rm -rf $REMOTE_DIR/kbeauty; echo STANDALONE_OK"
+
 Write-Host "`nVerifying live..." -ForegroundColor Yellow
-foreach ($u in @("/kbeauty", "/guide/kbeauty/", "/guide/kbeauty.html", "/guide/modules/kbeauty.js")) {
+$cb = Get-Random
+foreach ($u in @(
+    "https://koreaplus-lifes.com/kbeauty",
+    "https://koreaplus-lifes.com/kbeauty?lang=ko",
+    "https://koreaplus-lifes.com/guide/kbeauty/",
+    "https://koreaplus-lifes.com/guide/kbeauty.html",
+    "https://koreaplus-lifes.com/guide/modules/kbeauty.js"
+)) {
     try {
-        $code = [int](curl.exe -s -o NUL -w "%{http_code}" "https://koreaplus-lifes.com$u")
-        Write-Host ("  {0}  {1}" -f $code, $u)
+        $sep = if ($u -match '\?') { '&' } else { '?' }
+        $code = [int](curl.exe -s -o NUL -w "%{http_code}" --max-time 25 "${u}${sep}cb=$cb")
+        $color = if ($code -eq 200 -or $code -eq 301 -or $code -eq 302) { "Green" } else { "Red" }
+        Write-Host ("  {0}  {1}" -f $code, $u) -ForegroundColor $color
     } catch {
         Write-Host "  ?    $u"
     }
+}
+$html = curl.exe -s --max-time 25 "https://koreaplus-lifes.com/kbeauty?cb=$cb"
+if ($html -match 'id="kb-landing"' -and ($html -match 'kb-logo|kb-cta-hero')) {
+    Write-Host "  OK   /kbeauty HTML has hub shell (kb-landing + branding)" -ForegroundColor Green
+} else {
+    Write-Host "  FAIL /kbeauty HTML missing hub markers" -ForegroundColor Red
 }
 
 if ($Library) {
