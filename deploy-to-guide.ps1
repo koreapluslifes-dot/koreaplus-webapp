@@ -162,10 +162,9 @@ $present = $BUNDLE_ITEMS |
     Select-Object -Unique
 
 Write-Host "`nPacking $($present.Count) items into one tar bundle..." -ForegroundColor Yellow
-$listFile = Join-Path $env:TEMP "kp-deploy-list.txt"
-$bundle   = Join-Path $env:TEMP "kp-deploy-bundle.tar.gz"
+$listFile = Join-Path $env:TEMP ("kp-deploy-list-{0}.txt" -f [guid]::NewGuid().ToString('N'))
+$bundle   = Join-Path $env:TEMP ("kp-deploy-bundle-{0}.tar.gz" -f [guid]::NewGuid().ToString('N'))
 [System.IO.File]::WriteAllLines($listFile, [string[]]$present)
-if ([System.IO.File]::Exists($bundle)) { [System.IO.File]::Delete($bundle) }
 # Windows bsdtar: -C sets the base dir, -T reads the member list (relative paths).
 tar -czf $bundle -C $LOCAL_DIR -T $listFile
 if (-not (Test-Path $bundle)) { Write-Error "tar bundle creation failed"; exit 1 }
