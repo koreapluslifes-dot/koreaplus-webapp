@@ -47,8 +47,8 @@
       { k: 'top',    ic: '⬆️', act: toTop }
     ],
     travel: [
-      { k: 'home',    ic: '🏠', href: 'index.html' },
-      { k: 'explore', ic: '🧭', href: 'explore.html' },
+      { k: 'home',    ic: '🏠', href: './' },
+      { k: 'explore', ic: '🧭', href: 'explore' },
       { k: 'search',  ic: '🔍', act: openSearch },
       { k: 'top',     ic: '⬆️', act: toTop }
     ]
@@ -118,7 +118,9 @@
 
   function init() {
     var ctx = document.body && document.body.getAttribute('data-mnav');
-    if (ctx) build(ctx);
+    if (!ctx) return;
+    if (document.querySelector('.kp-tabbar')) return; /* tab bar already on page */
+    build(ctx);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

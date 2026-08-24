@@ -33,11 +33,13 @@ if ($Rebuild) {
 }
 
 $hub = @(
+    ".htaccess",
     "kpop.html", "kpop.css", "kpop-data.js", "kpop-enrich.js",
     "kpop-images.js", "kpop-discog.js",
     "modules/kpop.js", "modules/kpop-plus.js", "modules/kpop-ux.js",
     "modules/kpop-player.js", "modules/kpop-sharecard.js",
-    "icons/kpop.svg"
+    "icons/kpop.svg", "og", "seo.css",
+    "guide/k-pop-and-culture-guide.html"
 )
 
 $items = New-Object System.Collections.Generic.List[string]
@@ -126,9 +128,9 @@ foreach ($tmp in @($bundle, $listFile)) { try { [System.IO.File]::Delete($tmp) }
 Write-Host "==> Live check..." -ForegroundColor Yellow
 $checks = @(
     "https://koreaplus-lifes.com/kpop",
-    "https://koreaplus-lifes.com/guide/kpop.html",
-    "https://koreaplus-lifes.com/guide/kpop/bts-profile.html",
-    "https://koreaplus-lifes.com/guide/kpop/jungkook-bts-member.html"
+    "https://koreaplus-lifes.com/guide/kpop",
+    "https://koreaplus-lifes.com/guide/kpop/bts-profile",
+    "https://koreaplus-lifes.com/guide/kpop/jungkook-bts-member"
 )
 $cb = Get-Random
 foreach ($u in $checks) {

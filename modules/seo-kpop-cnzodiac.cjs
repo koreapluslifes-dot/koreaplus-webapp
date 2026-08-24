@@ -152,7 +152,6 @@ module.exports = function (ctx) {
     if (qa.length) body += `<h2>${esc(chrome.faqHeading(lang))}</h2><div class="seo-faq">${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
 
     // Affiliate block (shell auto-injects if omitted; explicit keeps it inline).
-    body += ctx.affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
 
     const hero = `<header class="seo-hero"><span class="emoji">${emoji}</span><h1>${esc(t.h1(animalName))}</h1>`
       + `<div class="meta"><span class="seo-badge">${esc(t.badge)}</span><span class="seo-badge">K-Pop</span></div></header>`;

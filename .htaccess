@@ -1,0 +1,19 @@
+# KoreaPlus Guide — extensionless URLs under /guide/
+# Serves destinations.html for /guide/destinations and redirects .html → clean.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /guide/
+
+# External request with .html → extensionless (301)
+RewriteCond %{THE_REQUEST} \s/+guide/+([^\s?]+)\.html[\s?] [NC]
+RewriteRule ^ %1 [R=301,L,NE,QSD]
+
+# /guide/index.html → /guide/
+RewriteRule ^index\.html?$ /guide/ [R=301,L]
+
+# Extensionless path → matching .html file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>

@@ -93,6 +93,13 @@
 .seo-faq summary { font-size: 0.9375rem; font-weight: 700; color: var(--text, #fff); cursor: pointer; }
 .seo-faq details p { font-size: 0.875rem; color: var(--text2, #bbb); line-height: 1.7; margin: 12px 0 0; }
 
+/* Live hub promo — bridges static SEO profiles to the interactive /kpop hub */
+.seo-live-hub{margin:20px 0 24px;padding:16px 18px;border-radius:14px;border:1px solid rgba(255,46,116,.35);background:linear-gradient(135deg,rgba(255,46,116,.08),rgba(124,92,255,.06));}
+.seo-live-hub strong{display:block;font-size:1rem;color:var(--text,#fff);margin-bottom:6px;}
+.seo-live-hub p{font-size:.875rem;color:var(--text2,#bbb);line-height:1.65;margin:0 0 12px;}
+.seo-live-hub a{display:inline-flex;align-items:center;gap:6px;font-size:.875rem;font-weight:800;color:#fff;text-decoration:none;padding:9px 14px;border-radius:10px;background:var(--kp-grad,linear-gradient(90deg,#ff2e74,#7c5cff));}
+.seo-live-hub a:hover{opacity:.92;}
+
 /* CTA */
 .seo-cta { margin: 40px 0 0; padding: 28px 24px; border-radius: 18px; text-align: center; background: linear-gradient(135deg, rgba(214,34,70,.14), rgba(200,151,58,.1)); border: 1px solid var(--border, rgba(255,255,255,.1)); }
 .seo-cta h2 { font-size: 1.375rem; font-weight: 900; color: var(--text, #fff); margin: 0 0 8px; }
@@ -323,3 +330,21 @@ details.kp-toc:not([open]) > summary.kp-toc-h { margin-bottom: 0; }
 [dir="rtl"] .seo-banner-label,
 [dir="rtl"] .kp-toc-h,
 [dir="rtl"] .kp-tabbar .kp-tab-l { letter-spacing: normal; }
+
+/* SEO hub / article pages — never trap vertical scroll (modal/nav locks excepted). */
+html:has(body.seo-hub) {
+  overflow-y: auto;
+  height: auto;
+}
+body.seo-hub {
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100dvh;
+}
+body.seo-hub main.seo-wrap,
+body.seo-hub .seo-body,
+body.seo-hub article.seo-body {
+  overflow: visible;
+  max-height: none;
+}
+body.seo-hub.kp-nav-open { overflow: hidden; }

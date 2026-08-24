@@ -10,7 +10,8 @@
     "deploy:kpop": "powershell -NoProfile -ExecutionPolicy Bypass -File deploy-kpop.ps1",
     "types": "wrangler types",
     "typecheck": "tsc --noEmit",
-    "build": "node build-seo.cjs && node scripts/gen-zh-hant.cjs"
+    "build": "node build-seo.cjs && node scripts/gen-zh-hant.cjs",
+    "build:kpop-og": "node build-kpop-og-images.cjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241022.0",

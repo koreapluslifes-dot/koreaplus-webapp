@@ -181,9 +181,10 @@ html.light .kp-save-btn{background:rgba(0,0,0,.05)}
 .kp-tp-tab.active{color:#D62246;border-bottom-color:#D62246}
 .kp-tp-tab .cnt{font-size:10px;opacity:.7}
 .kp-tp-body{flex:1;overflow-y:auto;padding:16px 18px 24px}
-.kp-tp-empty{text-align:center;padding:44px 16px;color:var(--text3,#999)}
-.kp-tp-empty .ee{font-size:38px;display:block;margin-bottom:10px;opacity:.55}
-.kp-tp-empty p{font-size:13px;line-height:1.6}
+.kp-tp-empty{text-align:center;padding:12px 4px 28px;color:var(--text3,#999)}
+.kp-tp-empty .ee{display:none}
+.kp-tp-empty .kp-empty-vis-img{height:140px}
+.kp-tp-empty p{font-size:13px;line-height:1.6;margin-top:12px}
 .kp-mt-card{display:flex;gap:11px;align-items:flex-start;padding:12px;border:1px solid var(--border,rgba(0,0,0,.08));border-radius:11px;margin-bottom:9px;background:var(--bg2,#fafafa)}
 .kp-mt-card .em{font-size:23px;flex-shrink:0;line-height:1.2}
 .kp-mt-card .bd{flex:1;min-width:0}
@@ -392,7 +393,18 @@ html.light .kp-save-btn{background:rgba(0,0,0,.05)}
       </div>`).join('');
   }
 
-  function empty(e, msg) { return `<div class="kp-tp-empty"><span class="ee">${e}</span><p>${msg}</p></div>`; }
+  function emptyKind() {
+    if (activeTab === 'places') return 'places';
+    if (activeTab === 'notes') return 'notes';
+    if (activeTab === 'checklist') return 'checklist';
+    return 'trip';
+  }
+  function empty(e, msg) {
+    const photo = (window.kpEmpty && kpEmpty.html)
+      ? kpEmpty.html(emptyKind(), '', { compact: true })
+      : '';
+    return `<div class="kp-tp-empty">${photo}<span class="ee">${e}</span><p>${msg}</p></div>`;
+  }
 
   function wireBody(body) {
     body.querySelectorAll('[data-rm-place]').forEach(b => b.addEventListener('click', () => {

@@ -15,6 +15,7 @@ $LOCAL_DIR = "C:\Users\juksu\koreaplus-webapp"
 $ROOT_FILES = @(
     # Core
     "index.html", "style.css", "app.js", "data.js", "config.js",
+    ".htaccess",
     # Phase 7 - rich detail panel + My Trip
     "detail-data.js", "detail-panel.js",
     # Phase 2 shared

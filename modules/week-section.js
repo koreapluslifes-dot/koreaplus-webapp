@@ -115,7 +115,8 @@
       if (!festivals.length && !shows.length) {
         const empty = document.createElement('div');
         empty.className = 'week-card';
-        empty.innerHTML = `<div class="week-card-body"><div class="week-card-type">${t('week.title','This Week')}</div><div class="week-card-name" style="color:rgba(255,255,255,0.4);font-size:11px">${t('week.none','No events found for this week. Check back soon!')}</div></div>`;
+        const photo = window.kpEmpty ? kpEmpty.imgTag('festival', 'week-card-thumb', 'Korea festival') : '<div class="week-card-thumb-ph">🎪</div>';
+        empty.innerHTML = `${photo}<div class="week-card-body"><div class="week-card-type">${t('week.title','This Week')}</div><div class="week-card-name">${t('week.none','No events found for this week. Check back soon!')}</div></div>`;
         container.appendChild(empty);
       }
     } catch (err) {
@@ -132,8 +133,8 @@
     const loc   = (f.address || '').split(' ').slice(0,2).join(' ') || 'Korea';
     el.innerHTML = `
       ${thumb
-        ? `<img class="week-card-thumb" src="${thumb}" alt="${f.nameEn || ''}" loading="lazy" onerror="this.style.display='none'">`
-        : `<div class="week-card-thumb-ph">🎪</div>`}
+        ? `<img class="week-card-thumb" src="${thumb}" alt="${f.nameEn || ''}" loading="lazy" onerror="window.kpEmpty?kpEmpty.onErr(this):this.src=this.dataset.fb" data-fb="${(window.kpEmpty&&kpEmpty.url('festival'))||''}">`
+        : (window.kpEmpty ? kpEmpty.imgTag('festival', 'week-card-thumb', f.nameEn || '') : `<div class="week-card-thumb-ph">🎪</div>`)}
       <div class="week-card-body">
         <div class="week-card-type">${t('week.festival','Festival')}</div>
         <div class="week-card-name">${f.nameEn || f.nameKo || 'Festival'}</div>
@@ -149,8 +150,8 @@
     const date = window.KPApi.fmtDateRange(s.startDate, s.endDate);
     el.innerHTML = `
       ${s.poster
-        ? `<img class="week-card-thumb" src="${s.poster}" alt="${s.title || ''}" loading="lazy" onerror="this.style.display='none'">`
-        : `<div class="week-card-thumb-ph">🎭</div>`}
+        ? `<img class="week-card-thumb" src="${s.poster}" alt="${s.title || ''}" loading="lazy" onerror="window.kpEmpty?kpEmpty.onErr(this):this.style.display='none'">`
+        : (window.kpEmpty ? kpEmpty.imgTag('festival', 'week-card-thumb', s.title || '') : `<div class="week-card-thumb-ph">🎭</div>`)}
       <div class="week-card-body">
         <div class="week-card-type">${s.category || 'Performance'}</div>
         <div class="week-card-name">${s.title || 'Performance'}</div>

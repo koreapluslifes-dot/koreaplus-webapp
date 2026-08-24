@@ -1,20 +1,19 @@
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   kpop.css â€” K-Pop hub design system (loaded after theme.css; scoped .kpop-page)
-   Luminous lightstick palette (magentaâ†’violetâ†’cyan) over the site's restrained
+/* ?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•??   kpop.css ??K-Pop hub design system (loaded after theme.css; scoped .kpop-page)
+   Luminous lightstick palette (magenta?’violet?’cyan) over the site's restrained
    chrome. One gradient, three hues, used sparingly. Degrades to zero-key + emoji.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•??*/
 
-/* â”€â”€ Palette + tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Palette + tokens ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .kpop-page {
   --kp-accent:#ff2e74; --kp-accent2:#b14bff; --kp-accent3:#38d4ff;
   --kp-grad:linear-gradient(100deg,#ff2e74 0%,#b14bff 55%,#38d4ff 130%);
-  /* KP-01 â€” control-button gradient: dark enough for 4.5:1+ white text in BOTH themes */
+  /* KP-01 ??control-button gradient: dark enough for 4.5:1+ white text in BOTH themes */
   --kp-grad-btn:linear-gradient(100deg,#c4125c 0%,#7c22e0 60%,#0e7490 130%);
   --kp-grad-soft:linear-gradient(135deg,rgba(255,46,116,.16),rgba(177,75,255,.13));
   --kp-glow:0 8px 34px rgba(255,46,116,.28);
   --kp-gold:#ffce47; --kp-silver:#cdd6e4; --kp-bronze:#e8965a;
   --accent:var(--kp-accent); --accent2:var(--kp-accent2);
-  /* KP-11 â€” rem type scale: theme.css html.font-sm/lg root-% now scales the hub.
+  /* KP-11 ??rem type scale: theme.css html.font-sm/lg root-% now scales the hub.
      11px floor (no size below --kp-fs-xs). Ad-disclosure sizes raised, wording untouched. */
   --kp-fs-xs:.6875rem;   /* 11px */
   --kp-fs-sm:.75rem;     /* 12px */
@@ -23,12 +22,12 @@
   --kp-fs-lg:.9375rem;   /* 15px */
   --kp-fs-xl:1rem;       /* 16px */
   --kp-fs-2xl:1.125rem;  /* 18px */
-  --kp-fs-title:1.3125rem; /* 21px â€” section titles (KP-10 hierarchy step) */
-  --kp-fs-num:1.25rem;   /* 20px â€” stat/countdown numerals */
+  --kp-fs-title:1.3125rem; /* 21px ??section titles (KP-10 hierarchy step) */
+  --kp-fs-num:1.25rem;   /* 20px ??stat/countdown numerals */
   --font:'Inter','Inter-fallback',-apple-system,BlinkMacSystemFont,sans-serif;
 }
 html.light .kpop-page {
-  /* KP-01 â€” full light-mode contrast repair: darken every color token consumed via var() */
+  /* KP-01 ??full light-mode contrast repair: darken every color token consumed via var() */
   --kp-accent:#d6155f; --kp-accent2:#7c3aed; --kp-accent3:#0e7490; --kp-gold:#a97a00;
   --kp-grad:linear-gradient(100deg,#d6155f 0%,#7c3aed 55%,#0e7490 130%);
   --kp-grad-soft:linear-gradient(135deg,rgba(214,21,95,.10),rgba(124,58,237,.08));
@@ -40,7 +39,7 @@ html.light .kpop-page {
 .kpop-page button,.kpop-page a,.filter-chip,.art-follow,.cd-share,.km-link{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 .kpop-page :focus-visible{outline:2px solid var(--kp-accent);outline-offset:2px;border-radius:6px;}
 
-/* â”€â”€ Hero (image-free CSS mesh + gradient wordmark + live stats) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Hero (image-free CSS mesh + gradient wordmark + live stats) ?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .kp-hero{position:relative;overflow:hidden;padding:46px 20px 40px;text-align:center;border-bottom:1px solid var(--border);}
 .kp-hero-glow{position:absolute;inset:-40% -10% auto;height:340px;pointer-events:none;
   background:
@@ -64,8 +63,8 @@ html.light .kpop-page {
 .kp-stat span{font-size:var(--kp-fs-xs);color:var(--text3);text-transform:uppercase;letter-spacing:.04em;}
 .kp-stat.kp-streak b{-webkit-text-fill-color:var(--kp-gold);color:var(--kp-gold);}
 
-/* â”€â”€ Live ticker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.kpop-ticker-wrap{position:sticky;top:0;z-index:45;min-height:38px;background:var(--bg);border-bottom:1px solid var(--border);overflow:hidden;
+/* ?€?€ Live ticker ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
+.kpop-ticker-wrap{position:sticky;top:0;z-index:45;min-height:38px;background:var(--bg);border-bottom:1px solid var(--border);overflow:hidden;overscroll-behavior:contain;
   -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
 .kpop-ticker{display:flex;gap:26px;white-space:nowrap;padding:9px 40px 9px 16px;opacity:0;transition:opacity .25s;animation:kpop-marquee 44s linear infinite;}
 .kpop-ticker.ready{opacity:1;}
@@ -78,9 +77,9 @@ html.light .kpop-page {
 .tk-item.is-soon .tk-val{-webkit-text-fill-color:var(--kp-accent);color:var(--kp-accent);}
 .kpop-ticker-pause{position:absolute;right:6px;top:50%;transform:translateY(-50%);z-index:2;width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text2);font-size:var(--kp-fs-sm);cursor:pointer;}
 
-/* â”€â”€ Filter bar (tablist + sticky scroll-snap rail) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 22px;align-items:center;position:sticky;top:52px;z-index:40;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--border);}
-/* KP-02 â€” sticky boundary: translucent blur where supported, solid fallback above */
+/* ?€?€ Filter bar (tablist + sticky scroll-snap rail) ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 22px;align-items:center;position:sticky;top:52px;z-index:40;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--border);overscroll-behavior:contain;touch-action:pan-y;}
+/* KP-02 ??sticky boundary: translucent blur where supported, solid fallback above */
 @supports ((backdrop-filter:blur(8px)) or (-webkit-backdrop-filter:blur(8px))){
   .filter-bar{background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
 }
@@ -89,7 +88,7 @@ html.light .kpop-page {
 .kpop-page .filter-chip.active{color:#fff;border-color:transparent;background:var(--kp-grad-btn);box-shadow:0 4px 14px rgba(255,46,116,.3);}
 html.light .kpop-page .filter-chip.active{color:#fff;}
 
-/* â”€â”€ Sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Sections ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .kpop-sec{margin:34px 0;scroll-margin-top:104px;}
 .kpop-sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
 .kpop-sec-title{display:flex;align-items:center;gap:9px;font-size:var(--kp-fs-title);font-weight:900;color:var(--text);margin:0;}
@@ -99,7 +98,7 @@ html.light .kpop-page .filter-chip.active{color:#fff;}
 .kpop-live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:kpop-pulse 2s infinite;vertical-align:middle;}
 @keyframes kpop-pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
 
-/* â”€â”€ Card depth (gradient ring, hover-gated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Card depth (gradient ring, hover-gated) ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .art-card,.cd-card,.news-card,.chart-row,.funnel-card,.kp-pod{position:relative;}
 .art-card::after,.cd-card::after,.news-card::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
   background:var(--kp-grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
@@ -111,7 +110,7 @@ html.light .kpop-page .filter-chip.active{color:#fff;}
 }
 @media (hover:none){.art-card:active,.chart-row:active,.cd-card:active{transform:scale(.985);}}
 
-/* â”€â”€ Charts: podium + list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Charts: podium + list ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .kp-podium{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
 .kp-pod{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 12px;text-decoration:none;}
 .kp-pod-medal{font-size:1.375rem;line-height:1;}
@@ -132,7 +131,7 @@ html.light .kpop-page .filter-chip.active{color:#fff;}
 .chart-row.is-roster{border-color:rgba(255,46,116,.4);}
 .chart-row.is-roster .chart-artist::after{content:' \2605';color:var(--kp-accent);}
 
-/* #2 â€” chart controls (country + type), since-last-visit deltas, bias highlight */
+/* #2 ??chart controls (country + type), since-last-visit deltas, bias highlight */
 .kp-chart-controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin:0 0 14px;}
 .kp-store-toggle,.kp-chart-tabs{display:inline-flex;gap:6px;flex-wrap:wrap;}
 .kp-store-btn,.kp-ctab{min-height:36px;padding:7px 13px;border-radius:18px;font-size:var(--kp-fs-sm);font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:transform .12s,border-color .15s,color .15s,background .15s;}
@@ -141,15 +140,15 @@ html.light .kpop-page .filter-chip.active{color:#fff;}
 .chart-row .chart-meta{flex:1;}
 .kp-delta{margin-left:auto;font-size:var(--kp-fs-xs);font-weight:900;flex-shrink:0;padding-left:8px;font-variant-numeric:tabular-nums;}
 .kp-delta-up{color:#22c55e;}
-html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 â€” 4.5:1 at 11px on light bg */
+html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 ??4.5:1 at 11px on light bg */
 .kp-delta-down{color:var(--text3);}
 .kp-delta-new{color:var(--kp-accent2);font-size:var(--kp-fs-xs);letter-spacing:.04em;}
 .chart-row.is-bias{border-color:var(--kp-accent);box-shadow:inset 0 0 0 1px var(--kp-accent),var(--kp-glow);}
-.chart-row.is-bias .chart-title::before{content:'â˜… ';color:var(--kp-accent);}
+.chart-row.is-bias .chart-title::before{content:'??';color:var(--kp-accent);}
 .kp-pod.is-bias .kp-pod-art{box-shadow:0 0 0 3px var(--kp-accent),0 6px 20px rgba(255,46,116,.4);}
 .kp-pod .kp-delta{position:absolute;top:10px;right:10px;margin:0;}
 
-/* â”€â”€ Countdowns â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Countdowns ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .cd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
 .cd-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px;overflow:hidden;}
 .cd-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:var(--kp-grad);}
@@ -184,14 +183,14 @@ html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 â€” 4.5:1 at 11px on
 .km-swatch{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:middle;border:1px solid var(--border);}
 @media (max-width:600px){.bday-grid{grid-template-columns:1fr;}}
 
-/* Top ad block â€” AdSense + AliExpress merch strip */
+/* Top ad block ??AdSense + AliExpress merch strip */
 .kp-topads{margin:14px 0 6px;display:flex;flex-direction:column;gap:16px;}
 .kp-topads:empty{display:none;}
 .kp-ad-slot{min-height:90px;}
 .kp-ad-tag{display:inline-block;font-size:var(--kp-fs-xs);font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
 /* topads.js injects its own .kp-ad-tag{font-size:9px} <style> at runtime (later in
    document order, so it wins by order). Re-assert the 11px floor with higher
-   specificity â€” hub only; wording and the shared module stay untouched. */
+   specificity ??hub only; wording and the shared module stay untouched. */
 .kpop-page .kp-ad-tag{font-size:var(--kp-fs-xs);}
 .kp-ali-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;font-size:var(--kp-fs-lg);font-weight:800;color:var(--text);}
 .kp-ali-strip{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding-bottom:5px;}
@@ -204,7 +203,7 @@ html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 â€” 4.5:1 at 11px on
 .kp-ad-disc{font-size:var(--kp-fs-xs);color:var(--text3);margin-top:8px;line-height:1.4;}
 .cd-share[disabled]{opacity:.6;cursor:wait;}
 
-/* â”€â”€ Streaming Hub (#6) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Streaming Hub (#6) ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .stream-intro{font-size:var(--kp-fs-base);color:var(--text2);line-height:1.5;margin:0 0 14px;max-width:640px;}
 .stream-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:18px;}
 .stream-card{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .15s,transform .12s,box-shadow .2s;}
@@ -225,7 +224,7 @@ html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 â€” 4.5:1 at 11px on
 .stream-task:hover{background:color-mix(in srgb,var(--text) 5%,transparent);}
 .stream-task input{position:absolute;opacity:0;width:0;height:0;}
 .stream-box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--border2,#555);border-radius:7px;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;}
-.stream-box::after{content:'âœ“';font-size:var(--kp-fs-md);font-weight:900;color:#fff;opacity:0;transform:scale(.5);transition:opacity .15s,transform .15s;}
+.stream-box::after{content:'??;font-size:var(--kp-fs-md);font-weight:900;color:#fff;opacity:0;transform:scale(.5);transition:opacity .15s,transform .15s;}
 .stream-task input:checked+.stream-box{background:var(--kp-accent);border-color:var(--kp-accent);}
 .stream-task input:checked+.stream-box::after{opacity:1;transform:scale(1);}
 .stream-task input:focus-visible+.stream-box{outline:2px solid var(--kp-accent);outline-offset:2px;}
@@ -233,7 +232,7 @@ html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 â€” 4.5:1 at 11px on
 .stream-task.is-done .stream-tk{color:var(--text3);text-decoration:line-through;}
 .stream-alldone{margin:10px 2px 6px;padding:11px 14px;border-radius:11px;background:color-mix(in srgb,var(--kp-accent) 12%,transparent);color:var(--text);font-size:var(--kp-fs-base);font-weight:800;text-align:center;}
 
-/* â”€â”€ Artists â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Artists ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .art-toggle{font-size:var(--kp-fs-sm);font-weight:700;color:var(--kp-accent2);cursor:pointer;background:none;border:none;padding:6px 4px;}
 .art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
 .art-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 13px 16px;text-align:center;transition:transform .12s,box-shadow .2s,border-color .15s;}
@@ -251,7 +250,7 @@ html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 â€” 4.5:1 at 11px on
 @media (hover:none){.art-follow{opacity:.7;}}
 .art-card.followed .art-follow{opacity:1;color:var(--kp-accent);filter:drop-shadow(0 0 6px rgba(255,46,116,.6));}
 
-/* â”€â”€ News â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ News ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .news-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;}
 .news-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:13px;overflow:hidden;text-decoration:none;transition:transform .12s,box-shadow .2s,border-color .15s;}
 .news-img{width:100%;height:140px;object-fit:cover;background:var(--bg);}
@@ -260,14 +259,14 @@ html.light .kpop-page .kp-delta-up{color:#15803d;} /* KP-01 â€” 4.5:1 at 11px on
 .news-meta{font-size:var(--kp-fs-xs);color:var(--text3);margin-top:7px;display:flex;gap:8px;align-items:center;}
 .news-cred{font-size:var(--kp-fs-xs);font-weight:800;text-transform:uppercase;padding:1px 6px;border-radius:4px;background:var(--kp-grad-soft);color:var(--kp-accent2);}
 
-/* â”€â”€ States: skeletons + empty/loading â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ States: skeletons + empty/loading ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .kp-sk{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:14px;}
 .kp-sk::after{content:'';position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);animation:kp-shim 1.2s infinite;}
 html.light .kp-sk::after{background:linear-gradient(90deg,transparent,rgba(0,0,0,.05),transparent);}
 @keyframes kp-shim{to{transform:translateX(100%)}}
 .chart-row.kp-sk{height:64px;} .cd-card.kp-sk{height:150px;} .art-card.kp-sk{height:128px;}
 #kpop-charts-list{min-height:420px;} #kpop-cd-grid{min-height:260px;} #kpop-art-grid{min-height:360px;} #kpop-news-list:empty{min-height:120px;}
-/* KP-03 â€” capped "All" overview: relax reserved heights to the 5-row / 12-card cap
+/* KP-03 ??capped "All" overview: relax reserved heights to the 5-row / 12-card cap
    (single-tab reservations above stay intact = CLS guard preserved) */
 .kpop-sec.kp-cap #kpop-charts-list{min-height:330px;}
 .kpop-sec.kp-cap #kpop-art-grid{min-height:290px;}
@@ -275,7 +274,7 @@ html.light .kp-sk::after{background:linear-gradient(90deg,transparent,rgba(0,0,0
 .kpop-spin{width:22px;height:22px;border:3px solid var(--border);border-top-color:var(--kp-accent);border-radius:50%;animation:kpspin .8s linear infinite;margin:0 auto 10px;}
 @keyframes kpspin{to{transform:rotate(360deg)}}
 
-/* â”€â”€ Onboarding ("pick your bias") + Spotlight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Onboarding ("pick your bias") + Spotlight ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .kp-onboard{background:var(--kp-grad-soft);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin:8px 0 22px;position:relative;}
 .kp-onboard h2{font-size:var(--kp-fs-lg);font-weight:900;color:var(--text);margin:0 0 3px;}
 .kp-onboard p{font-size:var(--kp-fs-md);color:var(--text2);margin:0 0 12px;}
@@ -296,7 +295,7 @@ html.light .kp-sk::after{background:linear-gradient(90deg,transparent,rgba(0,0,0
 .kp-spot-share{flex-shrink:0;font-size:var(--kp-fs-sm);font-weight:800;padding:9px 14px;border-radius:11px;border:0;background:var(--kp-grad-btn);color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(255,46,116,.3);}
 .kp-spot-share[disabled]{opacity:.6;cursor:wait;}
 
-/* â”€â”€ Funnel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Funnel ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .funnel{background:var(--kp-grad-soft);border:1px solid var(--border);border-radius:16px;padding:20px;margin:30px 0;}
 .funnel-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px;}
 .funnel-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-decoration:none;display:block;transition:transform .12s,box-shadow .2s,border-color .15s;}
@@ -305,7 +304,7 @@ html.light .kp-sk::after{background:linear-gradient(90deg,transparent,rgba(0,0,0
 .funnel-d{font-size:var(--kp-fs-sm);color:var(--text3);margin-top:3px;}
 .funnel-disc{font-size:var(--kp-fs-xs);color:var(--text3);margin-top:12px;}
 
-/* â”€â”€ Concerts (P1, keyed Ticketmaster) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Concerts (P1, keyed Ticketmaster) ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .concert-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
 .concert-row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 13px;text-decoration:none;transition:transform .12s,box-shadow .2s,border-color .15s;}
 .concert-row.is-soon{border-color:rgba(255,46,116,.4);box-shadow:var(--kp-glow);}
@@ -316,10 +315,10 @@ html.light .kp-sk::after{background:linear-gradient(90deg,transparent,rgba(0,0,0
 .concert-name{font-size:var(--kp-fs-md);font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .concert-venue{font-size:var(--kp-fs-xs);color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-/* â”€â”€ Modal (desktop dialog â†’ mobile bottom-sheet) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Modal (desktop dialog ??mobile bottom-sheet) ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .kpop-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:200;display:none;align-items:center;justify-content:center;padding:18px;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);}
 .kpop-modal-bg.open{display:flex;}
-/* KP-15 â€” opaque sheet (--surface is 4% alpha â†’ scrim bled through in light mode) + scroll isolation */
+/* KP-15 ??opaque sheet (--surface is 4% alpha ??scrim bled through in light mode) + scroll isolation */
 .kpop-modal{position:relative;background:var(--bg2,var(--bg));border:1px solid var(--border);border-radius:18px;max-width:480px;width:100%;max-height:88vh;overflow:auto;padding:22px;overscroll-behavior:contain;}
 .kpop-modal::before{content:'';position:absolute;inset:0 0 auto;height:96px;border-radius:18px 18px 0 0;background:var(--kp-grad-soft);pointer-events:none;}
 .kpop-modal>*{position:relative;}
@@ -346,10 +345,10 @@ html.light .km-links{box-shadow:0 -6px 16px rgba(0,0,0,.10);}
 }
 @keyframes kp-sheet{from{transform:translateY(100%)}to{transform:translateY(0)}}
 
-/* â”€â”€ Mobile reflow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Mobile reflow ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 @media (max-width:768px){
   .kpop-ticker-wrap{position:static;}
-  /* KP-04 â€” one-line horizontal snap rail (ticker edge-fade technique reused) */
+  /* KP-04 ??one-line horizontal snap rail (ticker edge-fade technique reused) */
   .filter-bar{top:0;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
     -webkit-mask:linear-gradient(90deg,#000 0,#000 92%,transparent);mask:linear-gradient(90deg,#000 0,#000 92%,transparent);}
   .filter-bar::-webkit-scrollbar{display:none;}
@@ -361,7 +360,7 @@ html.light .km-links{box-shadow:0 -6px 16px rgba(0,0,0,.10);}
   .kpop-ticker-pause{display:none;}
 }
 @media (max-width:600px){
-  /* KP-08 â€” first-view compression: hero ~half height, stats as one compact pill row */
+  /* KP-08 ??first-view compression: hero ~half height, stats as one compact pill row */
   .kp-hero{padding:18px 16px 16px;}
   .kp-hero-title{margin:10px 0 6px;font-size:clamp(1.625rem,8vw,2.125rem);}
   .kp-hero-sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
@@ -378,7 +377,7 @@ html.light .km-links{box-shadow:0 -6px 16px rgba(0,0,0,.10);}
   .kp-spotlight{flex-wrap:wrap;}
   .kp-spot-share{width:100%;}
 }
-/* KP-08 â€” compact 3-across podium from 360px up (fits ranks 1-3 in one row) */
+/* KP-08 ??compact 3-across podium from 360px up (fits ranks 1-3 in one row) */
 @media (min-width:360px) and (max-width:600px){
   .kp-podium{grid-template-columns:repeat(3,1fr);gap:8px;}
   .kp-pod{padding:10px 8px;gap:6px;}
@@ -389,18 +388,18 @@ html.light .km-links{box-shadow:0 -6px 16px rgba(0,0,0,.10);}
 }
 @media (max-width:360px){.art-grid,.funnel-steps{grid-template-columns:1fr;}}
 
-/* â”€â”€ Reduced motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ Reduced motion ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 @media (prefers-reduced-motion:reduce){
   .kp-hero-glow,.kp-grad-text,.kpop-live-dot,.kp-sk::after,.kpop-ticker{animation:none!important;}
   .kpop-ticker{opacity:1;}
   .tk-dup{display:none;}
 }
 
-/* â”€â”€ Condensed "All" overview: preview cap + See-all drill-down â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ?€?€ Condensed "All" overview: preview cap + See-all drill-down ?€?€?€?€?€?€?€?€?€?€?€?€?€?€
    In All mode each long section shows a short preview; "See all" jumps to its
    own tab (full list). Single-tab views are uncapped. */
 .kpop-sec.kp-cap #kpop-chart-controls { display:none; }
-/* keep the #1â€“3 podium visible in the condensed "All" overview (it's the headline) */
+/* keep the #1?? podium visible in the condensed "All" overview (it's the headline) */
 .kpop-sec.kp-cap .chart-list > .chart-row:nth-child(n+6),
 .kpop-sec.kp-cap .cd-grid > .cd-card:nth-child(n+7),
 .kpop-sec.kp-cap .art-grid > .art-card:nth-child(n+13),
@@ -410,13 +409,13 @@ html.light .km-links{box-shadow:0 -6px 16px rgba(0,0,0,.10);}
 .kp-seeall:hover{background:var(--kp-grad-btn);border-color:transparent;color:#fff;}
 .kp-seeall[hidden]{display:none;}
 
-/* KP-09 â€” desktop Charts tab: newspaper column flow (rows 4-12 / 13-21 / 22-30 read down).
+/* KP-09 ??desktop Charts tab: newspaper column flow (rows 4-12 / 13-21 / 22-30 read down).
    All-view cap (.kp-cap, 5 rows) keeps the original auto-fill grid. */
 @media (min-width:900px){
   .kpop-sec:not(.kp-cap) .chart-list{grid-auto-flow:column;grid-template-rows:repeat(9,auto);grid-template-columns:repeat(3,1fr);}
 }
 
-/* KP-10 â€” wide (â‰¥1280px) lead-card hierarchy. Selectors are class-qualified so
+/* KP-10 ??wide (??280px) lead-card hierarchy. Selectors are class-qualified so
    .kpop-empty / .kpop-loading placeholders never pick up the span. */
 @media (min-width:1280px){
   .news-list>.news-card:first-child,
@@ -430,43 +429,42 @@ html.light .km-links{box-shadow:0 -6px 16px rgba(0,0,0,.10);}
   .cd-grid>.cd-card:first-child .cd-num{font-size:1.625rem;}
 }
 
-/* â”€â”€ Artist modal: internal profile is primary; external listen de-emphasized â”€ */
+/* ?€?€ Artist modal: internal profile is primary; external listen de-emphasized ?€ */
 .km-listen{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
 .km-listen-label{font-size:var(--kp-fs-xs);font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;}
 .km-listen-link{font-size:var(--kp-fs-md);color:var(--text2);text-decoration:none;opacity:.85;}
 .km-listen-link:hover{opacity:1;color:var(--text);text-decoration:underline;}
 .km-profile.primary{font-size:var(--kp-fs-md);}
 
-/* â”€â”€ Playable chart rows/podium â†’ in-page YouTube mini-player â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Bigger artwork + a â–¶ affordance so it's clear tapping plays the song here. */
+/* ?€?€ Playable chart rows/podium ??in-page YouTube mini-player ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€
+   Bigger artwork + a ??affordance so it's clear tapping plays the song here. */
 .chart-list{align-items:start;}              /* keep rows at natural height (no stretch) */
 .chart-art{width:52px;height:52px;}
 .chart-row.kp-playable,.kp-pod.kp-playable{cursor:pointer;}
-.chart-row.kp-playable::after{content:"â–¶";position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:var(--kp-fs-md);color:var(--accent,#ff2e74);opacity:0;transition:opacity .15s;pointer-events:none;}
+.chart-row.kp-playable::after{content:"??;position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:var(--kp-fs-md);color:var(--accent,#ff2e74);opacity:0;transition:opacity .15s;pointer-events:none;}
 .chart-row.kp-playable:hover::after{opacity:.95;}
-.kp-pod.kp-playable::after{content:"â–¶";position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-size:var(--kp-fs-num);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);opacity:0;transition:opacity .15s;pointer-events:none;}
+.kp-pod.kp-playable::after{content:"??;position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-size:var(--kp-fs-num);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);opacity:0;transition:opacity .15s;pointer-events:none;}
 .kp-pod.kp-playable:hover::after{opacity:1;}
 @media (hover:none){.chart-row.kp-playable::after{opacity:.55;}}
 
-/* Hero â†’ browse/directory CTA */
+/* Hero ??browse/directory CTA */
 .kp-hero-browse{display:inline-flex;align-items:center;gap:6px;margin-top:18px;padding:11px 20px;border-radius:99px;background:var(--surface,#15151f);border:1px solid var(--border,rgba(255,255,255,.18));color:var(--text,#fff);font-size:var(--kp-fs-base);font-weight:800;text-decoration:none;transition:border-color .15s,background .15s,transform .12s,box-shadow .2s;}
 .kp-hero-browse:hover{border-color:transparent;background:var(--kp-grad-btn,linear-gradient(90deg,#c4125c,#7c22e0));color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,46,116,.28);}
 
-/* Clickable ticker items (countdown â†’ artist, chart â†’ play) */
+/* Clickable ticker items (countdown ??artist, chart ??play) */
 a.tk-item{cursor:pointer;text-decoration:none;color:inherit;transition:color .15s;}
 a.tk-item:hover{color:var(--accent,#ff2e74);}
 a.tk-item:hover .tk-val{color:var(--accent,#ff2e74);}
 
-/* â•â•â• Shared hook block â€” naming contract for the JS-side sessions â•â•â•â•â•â•â•â•â•â•â•
-   body.kp-playing / .is-playing / .kp-delta-eq / .tk-dup / [aria-busy="true"]
+/* ?â•??Shared hook block ??naming contract for the JS-side sessions ?â•?â•?â•?â•?â•??   body.kp-playing / .is-playing / .kp-delta-eq / .tk-dup / [aria-busy="true"]
    Additive only: no rule above is modified. */
 
-/* KP-05 â€” while the mini-player is open (body.kp-playing, toggled by kpop-player.js)
+/* KP-05 ??while the mini-player is open (body.kp-playing, toggled by kpop-player.js)
    hide the floating FABs the full-width player would cover on small screens */
 body.kp-playing #kux-btt,
 body.kp-playing #kux-ap-fab{display:none!important;}
 
-/* KP-06 â€” touch target promotion to 44px (visual language unchanged) */
+/* KP-06 ??touch target promotion to 44px (visual language unchanged) */
 @media (hover:none){
   .kp-onboard-x{width:44px;height:44px;font-size:var(--kp-fs-lg);}
   .cd-ics,.bday-ics{min-width:44px;min-height:44px;}
@@ -477,27 +475,27 @@ body.kp-playing #kux-ap-fab{display:none!important;}
   .art-toggle{min-height:44px;padding:10px 8px;}
 }
 
-/* KP-12 â€” now-playing map: row/podium highlight + mini EQ (.is-playing set by kpop-player.js) */
+/* KP-12 ??now-playing map: row/podium highlight + mini EQ (.is-playing set by kpop-player.js) */
 .chart-row.is-playing,.kp-pod.is-playing{border-color:var(--kp-accent);box-shadow:inset 0 0 0 1px var(--kp-accent);}
 .chart-row.is-playing .chart-title,.kp-pod.is-playing .kp-pod-title{color:var(--kp-accent);}
-.chart-row.is-playing.kp-playable::after,.kp-pod.is-playing.kp-playable::after{content:none;} /* â–¶ replaced by EQ */
+.chart-row.is-playing.kp-playable::after,.kp-pod.is-playing.kp-playable::after{content:none;} /* ??replaced by EQ */
 .kp-eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;flex-shrink:0;margin-left:6px;}
 .kp-eq i{width:3px;height:100%;background:var(--kp-accent);border-radius:1px;transform-origin:bottom;animation:kp-eq .9s ease-in-out infinite;}
 .kp-eq i:nth-child(2){animation-delay:.15s;} .kp-eq i:nth-child(3){animation-delay:.3s;}
 @keyframes kp-eq{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
-/* KP-12 â€” touch affordance: podium â–¶ visible; row â–¶ gets its own gutter, clear of .kp-delta */
+/* KP-12 ??touch affordance: podium ??visible; row ??gets its own gutter, clear of .kp-delta */
 @media (hover:none){
   .kp-pod.kp-playable::after{opacity:.6;}
   .chart-row.kp-playable{padding-right:32px;}
   .chart-row.kp-playable::after{right:10px;}
 }
 
-/* KP-13 â€” flat-rank badge + tab-switch loading pulse (aria-busy set by kpop.js loadCharts) */
+/* KP-13 ??flat-rank badge + tab-switch loading pulse (aria-busy set by kpop.js loadCharts) */
 .kp-delta-eq{color:var(--text2);font-size:var(--kp-fs-xs);}
 [aria-busy="true"] .chart-list,
 .chart-list[aria-busy="true"]{opacity:.45;transition:opacity .25s ease;}
 
-/* KP-14 â€” marquee duplicate (.tk-dup wrapper added by kpop.js): hidden for touch too;
+/* KP-14 ??marquee duplicate (.tk-dup wrapper added by kpop.js): hidden for touch too;
    pause on keyboard focus; chevron = "this is a link" affordance */
 @media (hover:none){.tk-dup{display:none;}}
 .kpop-ticker-wrap:focus-within .kpop-ticker{animation-play-state:paused;}
@@ -509,34 +507,33 @@ a.tk-item::after{content:'\203A';font-weight:900;color:var(--text3);margin-left:
   [aria-busy="true"] .chart-list,.chart-list[aria-busy="true"]{transition:none;}
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   F1/F2/F3 â€” real photos, releases radar, modal discography
+/* ?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•??   F1/F2/F3 ??real photos, releases radar, modal discography
    Photos come from Wikimedia Commons under free licences; .km-credit is a
-   licence obligation, not decoration â€” do not drop it.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   licence obligation, not decoration ??do not drop it.
+   ?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•?â•??*/
 
-/* â”€â”€ F1 photos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ?€?€ F1 photos ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€
    Fixed-size round containers already exist (.art-emoji 60px, .km-emoji 76px);
-   the image fills them, so swapping emoji â†’ photo shifts nothing. */
+   the image fills them, so swapping emoji ??photo shifts nothing. */
 .kp-photo{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 .kp-photo[hidden]{display:none;}
 .kp-spot-emoji{overflow:hidden;}
 .kp-spot-emoji .kp-photo{border-radius:inherit;}
 .tk-av{width:20px;height:20px;border-radius:50%;object-fit:cover;object-position:center top;
   vertical-align:-5px;margin-right:6px;background:var(--surface);}
-@media (hover:none){.tk-av{display:none;}}   /* the touch marquee is tight â€” text only */
+@media (hover:none){.tk-av{display:none;}}   /* the touch marquee is tight ??text only */
 
 /* Commons attribution under the modal */
 .km-credit{margin:12px 2px 0;font-size:var(--kp-fs-xs);color:var(--text3);line-height:1.45;text-align:center;}
 .km-credit a{color:var(--text3);text-decoration:underline;text-underline-offset:2px;}
 .km-credit a:hover{color:var(--kp-accent2);}
 
-/* Live profile stats (subscribers / followers) â€” hidden until real numbers land */
+/* Live profile stats (subscribers / followers) ??hidden until real numbers land */
 .km-stats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0 2px;}
 .km-stat{font-size:var(--kp-fs-sm);font-weight:700;color:var(--text2);
   background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3px 11px;}
 
-/* â”€â”€ F3 modal tabs + discography grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ F3 modal tabs + discography grid ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .km-tabs{display:flex;gap:6px;justify-content:center;margin:14px 0 12px;}
 .km-tab{min-height:44px;padding:8px 16px;background:var(--surface);color:var(--text2);
   border:1px solid var(--border);border-radius:22px;font:inherit;font-size:var(--kp-fs-sm);
@@ -559,7 +556,7 @@ a.tk-item::after{content:'\203A';font-weight:900;color:var(--text3);margin-left:
 .km-disc-asof{margin-top:12px;font-size:var(--kp-fs-xs);color:var(--text3);text-align:center;}
 .km-pane[hidden]{display:none;}
 
-/* â”€â”€ F2 releases radar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ?€?€ F2 releases radar ?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€?€ */
 .rel-wrap[hidden]{display:none;}
 .rel-wrap{margin:0 0 18px;}
 .rel-group+.rel-group{margin-top:16px;}
@@ -589,7 +586,7 @@ a.rel-card.kp-playable::after{content:'\25B6';position:absolute;top:14px;right:1
   width:26px;height:26px;display:grid;place-items:center;border-radius:50%;
   background:rgba(0,0,0,.55);color:#fff;font-size:10px;}
 
-/* F4 â€” pre-threshold state: honest label instead of a percentage bar */
+/* F4 ??pre-threshold state: honest label instead of a percentage bar */
 .kpp-poll-early{margin:12px 0 4px;padding:10px 12px;border-radius:11px;text-align:center;
   background:var(--surface);border:1px dashed var(--border);
   font-size:var(--kp-fs-sm);font-weight:700;color:var(--text2);}
@@ -597,3 +594,15 @@ a.rel-card.kp-playable::after{content:'\25B6';position:absolute;top:14px;right:1
 @media (prefers-reduced-motion:reduce){
   a.rel-card:hover{transform:none;}
 }
+
+/* Discover ??popular comparisons & guides (internal linking) */
+.kp-discover{margin:22px 0 28px;padding:18px 16px 16px;border-radius:16px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--surface,rgba(255,255,255,.03));}
+.kp-discover-h{margin:0 0 4px;font-size:var(--kp-fs-title);font-weight:900;color:var(--text);}
+.kp-discover-sub{margin:0 0 14px;font-size:var(--kp-fs-sm);color:var(--text3);}
+.kp-discover-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+.kp-discover-card{display:flex;flex-direction:column;gap:4px;padding:12px 13px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.1));background:var(--bg,#0c0c14);color:var(--text);text-decoration:none;font-weight:800;font-size:var(--kp-fs-sm);line-height:1.35;transition:border-color .15s,transform .12s;}
+.kp-discover-card:hover{border-color:var(--accent,#ff2e74);transform:translateY(-1px);}
+.kp-discover-card small{font-weight:600;color:var(--text3);font-size:var(--kp-fs-xs);}
+.kp-discover-card.is-vs{background:linear-gradient(135deg,rgba(255,46,116,.08),rgba(124,92,255,.08));}
+.kp-hub-faq{margin:28px 0 34px;}
+.kp-hub-faq .seo-faq{margin-top:12px;}

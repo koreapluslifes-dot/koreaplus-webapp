@@ -166,7 +166,9 @@ html.font-lg { font-size: 115%; }
 .kp-search-item .si-title { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .kp-search-item .si-sub   { font-size: 12px; color: var(--text2); margin-top: 1px; }
 .kp-search-item .si-tag   { font-size: 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; color: var(--text3); margin-left: auto; flex-shrink: 0; }
-.kp-search-empty { text-align: center; padding: 32px 16px; color: var(--text3); font-size: 14px; }
+.kp-search-empty { text-align: center; padding: 20px 16px 28px; color: var(--text3); font-size: 14px; }
+.kp-search-empty .kp-empty-vis { max-width: 360px; }
+.kp-search-empty .kp-empty-vis-img { height: 132px; }
 
 /* ── Cookie consent banner ───────────────────────────────────────── */
 .kp-cookie-banner {

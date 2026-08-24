@@ -166,8 +166,6 @@ module.exports = function (ctx) {
       + `<a href="/kpop">${esc(tr.hubLabel)}</a>`
       + `</div>`;
 
-    body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
-
     const hero = `<header class="seo-hero"><span class="emoji">🎂</span><h1>${esc(h1)}</h1>`
       + `<div class="meta"><span class="seo-badge">${esc(tr.badge)}</span><span class="seo-badge">K-Pop</span></div></header>`;
 

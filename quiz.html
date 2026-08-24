@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Korea Travel Quiz: Which Korean City Should You Visit? | KoreaPlus</title>
-<meta name="description" content="Take the 60-second Korea travel quiz to find your perfect Korean city — Seoul, Busan, Jeju, Gyeongju, Jeonju or Gangneung. Get a personalized match + free city guide.">
+<meta name="description" content="Take the 60-second Korea travel quiz to find your perfect Korean city ??Seoul, Busan, Jeju, Gyeongju, Jeonju or Gangneung. Get a personalized match + free city guide.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://koreaplus-lifes.com/guide/quiz.html">
 <link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/guide/quiz.html">
@@ -13,15 +13,18 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0c1829">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Which Korean City Should You Visit? — Korea Travel Quiz">
+<meta property="og:title" content="Which Korean City Should You Visit? ??Korea Travel Quiz">
 <meta property="og:description" content="60-second quiz: discover your perfect Korean city and get a free personalized guide.">
 <meta property="og:url" content="https://koreaplus-lifes.com/guide/quiz.html">
 <meta property="og:site_name" content="KoreaPlus-Lifes">
-<meta property="og:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Which Korean City Should You Visit? — Korea Travel Quiz">
+<meta property="og:image" content="https://koreaplus-lifes.com/guide/og/guide-og-en.png">
+  <meta property="og:image:secure_url" content="https://koreaplus-lifes.com/guide/og/guide-og-en.png">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="1200">
+  <meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Which Korean City Should You Visit? ??Korea Travel Quiz">
 <meta name="twitter:description" content="Take the 60-second quiz and find your Korean city match.">
-<meta name="twitter:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
+<meta name="twitter:image" content="https://koreaplus-lifes.com/guide/og/guide-og-en.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
@@ -67,17 +70,18 @@
   footer a{color:var(--ac)}
   .cred{font-size:10px;color:#67788c;padding:8px 18px 0}
 </style>
+  <script src="modules/og-meta.js?v=1"></script>
 </head>
 <body>
 <a href="#main" style="position:absolute;left:8px;top:-44px;z-index:100;background:var(--ac);color:#06101d;padding:9px 16px;border-radius:0 0 10px 10px;font-weight:800;font-size:14px;text-decoration:none" onfocus="this.style.top='0'" onblur="this.style.top='-44px'">Skip to content</a>
-<div class="top"><a class="logo" href="index.html">Korea<span>Plus</span></a><a href="explore.html" style="font-size:14px">All guides →</a></div>
+<div class="top"><a class="logo" href="index.html">Korea<span>Plus</span></a><a href="explore.html" style="font-size:14px">All guides </a></div>
 <main class="wrap" id="main">
   <!-- INTRO -->
   <section id="intro" class="hero">
-    <span class="badge">⏱️ 60-second quiz · Free city guide</span>
+    <span class="badge">?�️ 60-second quiz · Free city guide</span>
     <h1>Which Korean City Should You Visit?</h1>
-    <p>Answer 7 quick questions and we'll match you with your perfect Korean destination — plus a free, personalized travel guide.</p>
-    <button class="btn" id="start">Start the quiz →</button>
+    <p>Answer 7 quick questions and we'll match you with your perfect Korean destination ??plus a free, personalized travel guide.</p>
+    <button class="btn" id="start">Start the quiz </button>
     <p style="font-size:12.5px;margin-top:14px">Seoul · Busan · Jeju · Gyeongju · Jeonju · Gangneung</p>
   </section>
   <!-- QUIZ -->
@@ -86,11 +90,11 @@
     <div class="prog"><i id="bar"></i></div>
     <div class="q" id="qtext"></div>
     <div class="opts" id="opts"></div>
-    <div style="text-align:center;margin-top:18px"><button class="btn ghost" id="back" style="padding:10px 18px;font-size:14px">← Back</button></div>
+    <div style="text-align:center;margin-top:18px"><button class="btn ghost" id="back" style="padding:10px 18px;font-size:14px">??Back</button></div>
   </section>
   <!-- RESULT -->
   <section id="result" class="hidden">
-    <div class="qstep">Your Korea match 🇰🇷</div>
+    <div class="qstep">Your Korea match ?��?��</div>
     <div class="card">
       <img id="rimg" alt="" loading="lazy">
       <div class="body">
@@ -98,14 +102,14 @@
         <div class="matchn" id="rname"></div>
         <div class="matchd" id="rdesc"></div>
         <div class="row">
-          <a class="btn" id="rguide">📍 Explore <span id="rcity2"></span> →</a>
-          <a class="btn ghost" href="plan.html">🗺️ Plan my trip</a>
+          <a class="btn" id="rguide">?�� Explore <span id="rcity2"></span> </a>
+          <a class="btn ghost" href="plan.html">?���?Plan my trip</a>
         </div>
         <div class="share">
-          <button id="sh-share">📤 Share result</button>
-          <button id="sh-card">🖼️ Save card</button>
-          <button id="sh-copy">🔗 Copy link</button>
-          <button id="sh-retry">🔄 Retake</button>
+          <button id="sh-share">?�� Share result</button>
+          <button id="sh-card">?���?Save card</button>
+          <button id="sh-copy">?�� Copy link</button>
+          <button id="sh-retry">?�� Retake</button>
         </div>
       </div>
     </div>
@@ -113,7 +117,7 @@
   </section>
 </main>
 <footer>
-  <p style="font-weight:700;color:var(--t2)">⭐ Popular Korea guides</p>
+  <p style="font-weight:700;color:var(--t2)">�?Popular Korea guides</p>
   <p>
     <a href="guide/things-to-do-in-seoul.html">Seoul</a> ·
     <a href="guide/things-to-do-in-busan.html">Busan</a> ·
@@ -123,56 +127,56 @@
     <a href="guide/korea-visa-k-eta-guide.html">Visa &amp; K-ETA</a> ·
     <a href="explore.html">All guides</a>
   </p>
-  <p style="margin-top:10px">🇰🇷 <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
+  <p style="margin-top:10px">?��?�� <strong>KoreaPlus-Lifes.com</strong> · Your complete guide to everything Korea</p>
 </footer>
 <script>
 (function(){
   'use strict';
   var CITIES = {
-    Seoul:{slug:'seoul',emoji:'🏙️',img:'https://images.unsplash.com/photo-1546874177-9e664107314e?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Yohan Cho',desc:"The Trendsetter — you thrive on energy: palaces by day, neon, K-pop and endless food by night. Seoul never sleeps, and neither do you."},
-    Busan:{slug:'busan',emoji:'🌊',img:'https://images.unsplash.com/photo-1575869776987-7e3f23a49f46?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Patrick',desc:"The Coastal Free-Spirit — beaches, seafood and a laid-back city by the sea. You want metropolis buzz with sand between your toes."},
-    Jeju:{slug:'jeju',emoji:'🌋',img:'https://images.unsplash.com/photo-1616798249081-30877e213b16?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'N Riazi',desc:"The Nature Romantic — volcanic peaks, waterfalls and ocean sunsets. You travel to slow down, breathe, and reconnect."},
-    Gyeongju:{slug:'gyeongju',emoji:'🏯',img:'https://images.unsplash.com/photo-1715634200890-71de4e5f53cb?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Austin Curtis',desc:"The Time Traveler — thousand-year-old temples, royal tombs and lantern-lit nights. You love history you can walk through."},
-    Jeonju:{slug:'jeonju',emoji:'🍲',img:'https://images.unsplash.com/photo-1653230675261-fe00bde32c8e?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Minku Kang',desc:"The Foodie Soul — bibimbap's birthplace, makgeolli alleys and hanok rooftops. For you, the trip is the table."},
-    Gangneung:{slug:'gangneung',emoji:'☕',img:'https://images.unsplash.com/photo-1669302849400-5cfdf29ff32b?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Seungmin Yoon',desc:"The Quiet Explorer — coffee by the East Sea, sunrise trains and pine-fringed beaches. You seek calm, coast and the road less traveled."}
+    Seoul:{slug:'seoul',emoji:'?���?,img:'https://images.unsplash.com/photo-1546874177-9e664107314e?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Yohan Cho',desc:"The Trendsetter ??you thrive on energy: palaces by day, neon, K-pop and endless food by night. Seoul never sleeps, and neither do you."},
+    Busan:{slug:'busan',emoji:'?��',img:'https://images.unsplash.com/photo-1575869776987-7e3f23a49f46?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Patrick',desc:"The Coastal Free-Spirit ??beaches, seafood and a laid-back city by the sea. You want metropolis buzz with sand between your toes."},
+    Jeju:{slug:'jeju',emoji:'?��',img:'https://images.unsplash.com/photo-1616798249081-30877e213b16?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'N Riazi',desc:"The Nature Romantic ??volcanic peaks, waterfalls and ocean sunsets. You travel to slow down, breathe, and reconnect."},
+    Gyeongju:{slug:'gyeongju',emoji:'?��',img:'https://images.unsplash.com/photo-1715634200890-71de4e5f53cb?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Austin Curtis',desc:"The Time Traveler ??thousand-year-old temples, royal tombs and lantern-lit nights. You love history you can walk through."},
+    Jeonju:{slug:'jeonju',emoji:'?��',img:'https://images.unsplash.com/photo-1653230675261-fe00bde32c8e?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Minku Kang',desc:"The Foodie Soul ??bibimbap's birthplace, makgeolli alleys and hanok rooftops. For you, the trip is the table."},
+    Gangneung:{slug:'gangneung',emoji:'??,img:'https://images.unsplash.com/photo-1669302849400-5cfdf29ff32b?w=800&h=500&fit=crop&q=80&fm=jpg&auto=format',by:'Seungmin Yoon',desc:"The Quiet Explorer ??coffee by the East Sea, sunrise trains and pine-fringed beaches. You seek calm, coast and the road less traveled."}
   };
   var Q = [
     {q:"What's your ideal travel vibe?",o:[
-      ["🌃","Big-city energy & nightlife",{Seoul:2,Busan:1}],
-      ["🍃","Nature, calm & fresh air",{Jeju:2,Gangneung:2}],
-      ["🏛️","History & cultural depth",{Gyeongju:2,Jeonju:1}],
-      ["🍜","Food, food, more food",{Jeonju:2,Busan:1}]]},
+      ["?��","Big-city energy & nightlife",{Seoul:2,Busan:1}],
+      ["?��","Nature, calm & fresh air",{Jeju:2,Gangneung:2}],
+      ["?���?,"History & cultural depth",{Gyeongju:2,Jeonju:1}],
+      ["?��","Food, food, more food",{Jeonju:2,Busan:1}]]},
     {q:"Pick a scene you'd photograph:",o:[
-      ["🌆","Neon skyline at night",{Seoul:2}],
-      ["🌉","A beach & a lit-up bridge",{Busan:2}],
-      ["🌅","Volcanic crater over the sea",{Jeju:2}],
-      ["🏮","Hanok rooftops & lanterns",{Jeonju:1,Gyeongju:1}],
-      ["☕","A coffee cup by the waves",{Gangneung:2}]]},
+      ["?��","Neon skyline at night",{Seoul:2}],
+      ["?��","A beach & a lit-up bridge",{Busan:2}],
+      ["?��","Volcanic crater over the sea",{Jeju:2}],
+      ["?��","Hanok rooftops & lanterns",{Jeonju:1,Gyeongju:1}],
+      ["??,"A coffee cup by the waves",{Gangneung:2}]]},
     {q:"Your perfect meal in Korea?",o:[
-      ["🥩","Sizzling Korean BBQ",{Seoul:2}],
-      ["🦞","Fresh raw fish & seafood",{Busan:2}],
-      ["🐷","Black pork & abalone",{Jeju:2}],
-      ["🍚","Bibimbap & makgeolli",{Jeonju:2}],
-      ["🧈","Soft tofu & a great latte",{Gangneung:2}]]},
+      ["?��","Sizzling Korean BBQ",{Seoul:2}],
+      ["?��","Fresh raw fish & seafood",{Busan:2}],
+      ["?��","Black pork & abalone",{Jeju:2}],
+      ["?��","Bibimbap & makgeolli",{Jeonju:2}],
+      ["?��","Soft tofu & a great latte",{Gangneung:2}]]},
     {q:"Beach or mountain?",o:[
-      ["🏖️","Beach all day",{Busan:1,Jeju:1,Gangneung:1}],
-      ["⛰️","A good mountain hike",{Jeju:1,Seoul:1}],
-      ["🛍️","Neither — streets & cafes",{Seoul:1,Jeonju:1}]]},
+      ["?���?,"Beach all day",{Busan:1,Jeju:1,Gangneung:1}],
+      ["?�️","A good mountain hike",{Jeju:1,Seoul:1}],
+      ["?���?,"Neither ??streets & cafes",{Seoul:1,Jeonju:1}]]},
     {q:"Your travel pace?",o:[
-      ["⚡","Packed — see it all",{Seoul:2}],
-      ["⚖️","Balanced",{Busan:1,Jeju:1}],
-      ["🐌","Slow & soulful",{Gangneung:2,Gyeongju:1}]]},
+      ["??,"Packed ??see it all",{Seoul:2}],
+      ["?�️","Balanced",{Busan:1,Jeju:1}],
+      ["?��","Slow & soulful",{Gangneung:2,Gyeongju:1}]]},
     {q:"Who's coming along?",o:[
-      ["🎒","Solo adventure",{Seoul:1,Gangneung:1}],
-      ["💑","Romantic getaway",{Jeju:2}],
-      ["👯","Friends' trip",{Busan:2,Seoul:1}],
-      ["👨‍👩‍👧","Culture-loving family",{Gyeongju:2}]]},
+      ["?��","Solo adventure",{Seoul:1,Gangneung:1}],
+      ["?��","Romantic getaway",{Jeju:2}],
+      ["?��","Friends' trip",{Busan:2,Seoul:1}],
+      ["?��?�👩‍�?,"Culture-loving family",{Gyeongju:2}]]},
     {q:"Pick a Korean experience:",o:[
-      ["🎤","K-pop show & shopping spree",{Seoul:2}],
-      ["🌄","Sunrise from a peak",{Jeju:1,Gyeongju:1}],
-      ["👘","Hanbok in an old village",{Jeonju:1,Gyeongju:1}],
-      ["🏝️","Cafe-hopping by the sea",{Gangneung:2}],
-      ["🌙","A night-market feast",{Busan:1,Jeonju:1}]]}
+      ["?��","K-pop show & shopping spree",{Seoul:2}],
+      ["?��","Sunrise from a peak",{Jeju:1,Gyeongju:1}],
+      ["?��","Hanbok in an old village",{Jeonju:1,Gyeongju:1}],
+      ["?���?,"Cafe-hopping by the sea",{Gangneung:2}],
+      ["?��","A night-market feast",{Busan:1,Jeonju:1}]]}
   ];
   var $=function(id){return document.getElementById(id)};
   var scores={}, idx=0, answers=[];
@@ -199,7 +203,7 @@
     var best=null,bv=-1;
     Object.keys(CITIES).forEach(function(c){if(scores[c]>bv){bv=scores[c];best=c}});
     var C=CITIES[best];
-    $('rimg').src=C.img;$('rimg').alt=best+', South Korea — '+C.by+' / Unsplash';
+    $('rimg').src=C.img;$('rimg').alt=best+', South Korea ??'+C.by+' / Unsplash';
     $('rname').textContent=C.emoji+' '+best;
     $('rdesc').textContent=C.desc;
     $('rguide').href='guide/things-to-do-in-'+C.slug+'.html';
@@ -213,8 +217,8 @@
   $('start').onclick=function(){idx=0;answers=[];Object.keys(CITIES).forEach(function(c){scores[c]=0});show('quiz');render()};
   $('back').onclick=function(){if(idx){idx--;render()}};
   $('sh-retry').onclick=function(){show('intro')};
-  $('sh-copy').onclick=function(){var u='https://koreaplus-lifes.com/guide/quiz.html';(navigator.clipboard?navigator.clipboard.writeText(u):0);this.textContent='✓ Copied!';};
-  function shareText(){return "I'm a "+window._match+" traveler! 🇰🇷 Which Korean city are you?"}
+  $('sh-copy').onclick=function(){var u='https://koreaplus-lifes.com/guide/quiz.html';(navigator.clipboard?navigator.clipboard.writeText(u):0);this.textContent='??Copied!';};
+  function shareText(){return "I'm a "+window._match+" traveler! ?��?�� Which Korean city are you?"}
   $('sh-share').onclick=function(){
     var data={title:'Korea Travel Quiz',text:shareText(),url:'https://koreaplus-lifes.com/guide/quiz.html'};
     if(navigator.share){navigator.share(data).catch(function(){})}

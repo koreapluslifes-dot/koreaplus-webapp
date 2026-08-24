@@ -165,11 +165,14 @@ button{cursor:pointer;border:none;font-family:inherit}
 .card{
   display:flex;flex-direction:column;cursor:pointer;
   background:var(--bg3);border:1px solid var(--border);border-radius:16px;
-  padding:18px;position:relative;overflow:hidden;
+  padding:0 0 18px;position:relative;overflow:hidden;
   box-shadow:var(--shadow);
   transition:transform 0.22s ease,box-shadow 0.22s ease,border-color 0.22s ease;
   animation:fadeUp 0.4s ease both;
 }
+.card-photo{width:100%;height:118px;object-fit:cover;display:block;background:var(--bg2);margin-bottom:14px}
+.card .card-emoji,.card .card-name,.card .card-kr,.card .card-desc,.card .card-tags,.card .card-actions{padding-left:18px;padding-right:18px}
+.card .card-emoji{margin-top:2px}
 .card::after{
   content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--red),var(--gold));
@@ -229,7 +232,9 @@ button{cursor:pointer;border:none;font-family:inherit}
 .mp-review-stars{color:var(--gold);font-size:11px;margin-bottom:4px;display:block}
 .mp-review-text{color:var(--text2);line-height:1.5;margin-bottom:4px}
 .mp-review-time{color:var(--text3);font-size:11px}
-.mp-no-reviews{color:var(--text3);text-align:center;padding:16px}
+.mp-no-reviews{color:var(--text3);text-align:center;padding:8px 0 12px}
+.mp-no-reviews .kp-empty-vis{max-width:100%}
+.mp-no-reviews .kp-empty-vis-img{height:96px}
 .mp-actions{display:flex;gap:10px}
 .mp-btn{flex:1;padding:11px 14px;border-radius:10px;font-size:13px;font-weight:600;text-align:center;transition:all 0.2s}
 .mp-btn.primary{background:var(--red);color:#fff}
@@ -524,11 +529,12 @@ body.kp-cookie-open .chat-fab{bottom:118px}
 .detail-backdrop.open{display:block}
 
 .dp-header{
-  padding:22px 56px 16px 24px;position:relative;flex-shrink:0;
+  padding:0;position:relative;flex-shrink:0;
   background:linear-gradient(135deg,rgba(214,34,70,0.07),rgba(200,151,58,0.05));
   border-bottom:1px solid var(--border);
 }
-.dp-hero{display:flex;align-items:flex-start;gap:14px}
+.dp-hero-photo{width:100%;height:148px;object-fit:cover;display:block;background:var(--bg2)}
+.dp-hero{display:flex;align-items:flex-start;gap:14px;padding:16px 56px 16px 24px}
 .dp-emoji{font-size:46px;line-height:1;flex-shrink:0;margin-top:2px}
 .dp-title-block{flex:1;min-width:0}
 .dp-title{font-size:21px;font-weight:900;color:var(--text);line-height:1.2;margin-bottom:8px}
@@ -640,6 +646,7 @@ body.kp-cookie-open .chat-fab{bottom:118px}
 .mf-date{font-size:11.5px;color:var(--gold);flex-shrink:0;font-weight:700}
 /* Hide the floating "Korea Now" widget while any panel/modal is open */
 body.kp-modal-open #kp-dashboard{display:none}
+body.kp-scroll-lock{overflow:hidden}
 
 /* ===== PROACTIVE CHAT TEASER ===== */
 .chat-tease{
@@ -720,6 +727,28 @@ body.kp-cookie-open .chat-tease{bottom:190px}
 .kp-rv-chip:hover { border-color:rgba(116,185,255,.45); background:rgba(116,185,255,.07); }
 .kp-rv-chip .rv-emoji { font-size:16px; }
 @media (max-width:768px){ .kp-retain { padding:14px 16px 0; } }
+
+/* ── Korea Now live strip (home + SEO shell) ─────────────────────────── */
+.kp-korea-now { display:none; max-width:920px; margin:0 auto; padding:7px 16px; font-size:12.5px; color:var(--text2); flex-wrap:wrap; gap:6px 14px; align-items:center; justify-content:center; border-bottom:1px solid var(--border); }
+.kp-korea-now b { color:var(--text); font-weight:700; }
+.kp-korea-now span { white-space:nowrap; }
+
+/* ── Sticky mobile Plan Trip CTA ───────────────────────────────────── */
+.kp-plan-cta { position:fixed; left:50%; bottom:calc(72px + env(safe-area-inset-bottom, 0px)); z-index:390; transform:translate(-50%, 120%); display:flex; align-items:center; gap:10px; padding:10px 16px 10px 12px; border-radius:28px; background:linear-gradient(135deg,#1a4a8e,#0c1829); border:1px solid rgba(116,185,255,.35); color:#fff; text-decoration:none; box-shadow:0 8px 28px rgba(0,0,0,.45); opacity:0; pointer-events:none; transition:transform .28s ease,opacity .28s ease; max-width:calc(100vw - 32px); }
+.kp-plan-cta.on { transform:translate(-50%, 0); opacity:1; pointer-events:auto; }
+.kp-plan-cta-i { font-size:22px; line-height:1; }
+.kp-plan-cta-t { display:flex; flex-direction:column; line-height:1.2; }
+.kp-plan-cta-t strong { font-size:13px; font-weight:800; }
+.kp-plan-cta-t span { font-size:10px; opacity:.82; font-weight:500; }
+body.kp-cookie-open .kp-plan-cta { bottom:calc(118px + env(safe-area-inset-bottom, 0px)); }
+@media (min-width:769px){ .kp-plan-cta { display:none !important; } }
+
+/* ── Detail panel: related places rail ───────────────────────────────── */
+.dp-related-rail { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px; }
+.dp-related-rail::-webkit-scrollbar { display:none; }
+.dp-related-chip { flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; padding:8px 12px; border-radius:20px; background:var(--surface); border:1px solid var(--border); color:var(--text); font-size:12.5px; font-weight:600; cursor:pointer; font-family:inherit; transition:border-color .15s,background .15s; }
+.dp-related-chip:hover { border-color:rgba(116,185,255,.45); background:rgba(116,185,255,.07); }
+.dp-rel-emoji { font-size:16px; }
 
 /* ── Mobile "Show more" truncation for Must-Visit / Bucket List ──────── */
 .kp-showmore{display:none}

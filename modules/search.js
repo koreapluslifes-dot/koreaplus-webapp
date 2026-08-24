@@ -82,9 +82,26 @@
         en: 'Close', ko: '닫기', ja: '閉じる', zh: '关闭', es: 'Cerrar', fr: 'Fermer',
         de: 'Schließen', pt: 'Fechar', id: 'Tutup', ru: 'Закрыть', ar: 'إغلاق', hi: 'बंद करें',
         th: 'ปิด', vi: 'Đóng'
+      },
+      popular: {
+        en: 'Popular searches', ko: '인기 검색', ja: '人気の検索', zh: '热门搜索',
+        es: 'Búsquedas populares', fr: 'Recherches populaires', de: 'Beliebte Suchen', pt: 'Buscas populares',
+        id: 'Pencarian populer', ru: 'Популярные запросы', ar: 'عمليات بحث شائعة', hi: 'लोकप्रिय खोज',
+        th: 'การค้นหายอดนิยม', vi: 'Tìm kiếm phổ biến'
       }
     };
     function t(k) { var m = STR[k] || {}; return m[lang] || m.en || k; }
+
+    // High-intent queries → SEO pages (traffic + faster task paths).
+    var POPULAR = [
+      { q: { en: 'Things to do in Seoul', ko: '서울 가볼 곳', ja: 'ソウル観光', zh: '首尔景点', es: 'Qué hacer en Seúl', fr: 'Que faire à Séoul', de: 'Seoul Sehenswürdigkeiten', pt: 'O que fazer em Seul', id: 'Wisata Seoul' }, url: 'guide/things-to-do-in-seoul.html' },
+      { q: { en: 'K-ETA visa guide', ko: 'K-ETA 비자', ja: 'K-ETAビザ', zh: 'K-ETA签证', es: 'Visa K-ETA', fr: 'Visa K-ETA', de: 'K-ETA Visum', pt: 'Visto K-ETA', id: 'Visa K-ETA' }, url: 'guide/korea-visa-k-eta-guide.html' },
+      { q: { en: '3-day Seoul itinerary', ko: '서울 3일 코스', ja: 'ソウル3日プラン', zh: '首尔3日游', es: 'Itinerario 3 días Seúl', fr: 'Itinéraire 3 jours Séoul', de: '3-Tage Seoul', pt: 'Roteiro 3 dias Seul', id: 'Itinerari 3 hari Seoul' }, url: 'itinerary/seoul-3-day-itinerary.html' },
+      { q: { en: 'Best time to visit', ko: '언제 가기 좋을까', ja: 'ベストシーズン', zh: '最佳旅行时间', es: 'Mejor época', fr: 'Meilleure période', de: 'Beste Reisezeit', pt: 'Melhor época', id: 'Waktu terbaik' }, url: 'when-to-visit.html' },
+      { q: { en: 'Seoul vs Busan', ko: '서울 vs 부산', ja: 'ソウル vs 釜山', zh: '首尔 vs 釜山', es: 'Seúl vs Busan', fr: 'Séoul vs Busan', de: 'Seoul vs Busan', pt: 'Seul vs Busan', id: 'Seoul vs Busan' }, url: 'compare.html?cities=seoul,busan' },
+      { q: { en: 'Korean food guide', ko: '한국 음식 가이드', ja: '韓国グルメ', zh: '韩国美食', es: 'Comida coreana', fr: 'Cuisine coréenne', de: 'Koreanisches Essen', pt: 'Comida coreana', id: 'Makanan Korea' }, url: 'guide/best-korean-food.html' }
+    ];
+    function popLabel(item) { return (item.q && (item.q[lang] || item.q.en)) || item.q.en; }
 
     // ── config / state ────────────────────────────────────────────────
     var RECENT_KEY = 'kp_recent_search';
@@ -217,6 +234,39 @@
       return div;
     }
 
+    function renderPopularItem(item) {
+      var div = document.createElement('div');
+      div.className = 'kp-search-item';
+      div.setAttribute('role', 'option');
+      div.tabIndex = 0;
+      div.innerHTML =
+        '<span class="si-icon" aria-hidden="true">🔥</span>' +
+        '<div class="si-body"><div class="si-title">' + esc(popLabel(item)) + '</div></div>';
+      div.addEventListener('click', function () {
+        try {
+          if (window.kpAnalytics && window.kpAnalytics.track) {
+            window.kpAnalytics.track('search_popular_click', { label: popLabel(item), url: item.url });
+          }
+        } catch (e) {}
+        close();
+        if (item.url) window.location.href = item.url;
+      });
+      return div;
+    }
+
+    function appendPopular() {
+      var pl = document.createElement('div');
+      pl.className = 'kp-search-section';
+      pl.textContent = t('popular');
+      resultsEl.appendChild(pl);
+      POPULAR.forEach(function (p) { resultsEl.appendChild(renderPopularItem(p)); });
+    }
+
+    function emptyBlock(kind, label) {
+      var photo = (window.kpEmpty && window.kpEmpty.html) ? window.kpEmpty.html(kind, '', { compact: true }) : '';
+      return '<div class="kp-search-empty">' + photo + '<div>' + esc(label) + '</div></div>';
+    }
+
     function render() {
       if (!resultsEl) return;
       resultsEl.innerHTML = '';
@@ -225,15 +275,17 @@
 
       if (!q.trim()) {
         var recent = getRecent();
-        if (!recent.length) {
-          resultsEl.innerHTML = '<div class="kp-search-empty">' + esc(t('type')) + '</div>';
-          return;
+        if (recent.length) {
+          var rl = document.createElement('div');
+          rl.className = 'kp-search-section';
+          rl.textContent = t('recent');
+          resultsEl.appendChild(rl);
+          recent.forEach(function (term) { resultsEl.appendChild(renderRecentItem(term)); });
         }
-        var rl = document.createElement('div');
-        rl.className = 'kp-search-section';
-        rl.textContent = t('recent');
-        resultsEl.appendChild(rl);
-        recent.forEach(function (term) { resultsEl.appendChild(renderRecentItem(term)); });
+        appendPopular();
+        if (!recent.length && !POPULAR.length) {
+          resultsEl.innerHTML = emptyBlock('search', t('type'));
+        }
         return;
       }
 
@@ -245,7 +297,7 @@
       var tokens = norm(q).split(/\s+/).filter(Boolean);
       var hits = search(q);
       if (!hits.length) {
-        resultsEl.innerHTML = '<div class="kp-search-empty">' + esc(t('noResults')) + '</div>';
+        resultsEl.innerHTML = emptyBlock('search', t('noResults'));
         return;
       }
       var sl = document.createElement('div');

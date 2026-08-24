@@ -1,0 +1,47 @@
+{
+  "en": {
+    "headline": "Korea Travel Guide",
+    "tagline": "Food · Travel · K-Beauty · K-Pop",
+    "alt": "KoreaPlus — your AI-powered Korea travel guide"
+  },
+  "ko": {
+    "headline": "한국 여행 가이드",
+    "tagline": "음식 · 여행 · K뷰티 · K팝",
+    "alt": "KoreaPlus — AI 한국 여행 가이드"
+  },
+  "ja": {
+    "headline": "韓国旅行ガイド",
+    "tagline": "グルメ · 旅行 · Kビューティ · Kポップ",
+    "alt": "KoreaPlus — AI韓国旅行ガイド"
+  },
+  "zh": {
+    "headline": "韩国旅行指南",
+    "tagline": "美食 · 旅行 · K美妆 · K-Pop",
+    "alt": "KoreaPlus — AI韩国旅行指南"
+  },
+  "es": {
+    "headline": "Guía de viaje a Corea",
+    "tagline": "Comida · Viajes · K-Beauty · K-Pop",
+    "alt": "KoreaPlus — guía de viaje a Corea con IA"
+  },
+  "fr": {
+    "headline": "Guide voyage Corée",
+    "tagline": "Gastronomie · Voyage · K-Beauty · K-Pop",
+    "alt": "KoreaPlus — guide voyage Corée avec IA"
+  },
+  "de": {
+    "headline": "Korea Reiseführer",
+    "tagline": "Essen · Reisen · K-Beauty · K-Pop",
+    "alt": "KoreaPlus — KI-Reiseführer für Korea"
+  },
+  "pt": {
+    "headline": "Guia de viagem Coreia",
+    "tagline": "Comida · Viagem · K-Beauty · K-Pop",
+    "alt": "KoreaPlus — guia de viagem Coreia com IA"
+  },
+  "id": {
+    "headline": "Panduan wisata Korea",
+    "tagline": "Kuliner · Wisata · K-Beauty · K-Pop",
+    "alt": "KoreaPlus — panduan wisata Korea berbasis AI"
+  }
+}

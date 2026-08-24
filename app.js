@@ -222,6 +222,7 @@ function initMap() {
 
   mapEl.addEventListener('mousedown',e=>{
     if(e.target.closest('.city-dot,.zoom-ctrl'))return;
+    if(zoom<=1)return; /* at default zoom, leave drag to page scroll */
     isDrag=true; dragX=e.clientX; dragY=e.clientY; svg.style.cursor='grabbing';
   });
   window.addEventListener('mousemove',e=>{
@@ -280,7 +281,8 @@ function initMap() {
   function showPanel(city) {
     const spots = CITY_SPOTS[city.name] || [];
     panel.innerHTML = `
-      <button id="pClose" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:15px;width:40px;height:40px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
+      <button id="pClose" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:15px;width:40px;height:40px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;">✕</button>
+      ${window.kpEmpty ? `<img src="${kpEmpty.forPlace(city.name)}" alt="${city.name}" style="width:calc(100% + 40px);margin:-20px -20px 14px;height:96px;object-fit:cover;display:block;border-radius:18px 18px 0 0" onerror="window.kpEmpty&&kpEmpty.onErr(this)">` : ''}
       <div style="font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.01em;padding-right:28px;">${city.name}</div>
       <div style="font-size:11px;color:${city.color};margin-bottom:14px;letter-spacing:0.04em;">${city.kr} &nbsp;·&nbsp; ${window.kpI18n?.t('city.top') || 'Top Attractions'}</div>
       <div style="border-top:1px solid rgba(255,255,255,0.06);"></div>
@@ -406,9 +408,15 @@ function renderGrid(cat) {
   const i18n = (k, fb) => { const v = window.kpI18n?.t(k); return (!v || v === k) ? (fb || k) : v; };
   const items = KOREA_DATA[cat] || [];
   grid.innerHTML = items.map((item, i) => {
-    const d = JSON.stringify(item).replace(/'/g, '&#39;');
+    const full = Object.assign({}, item, { cat });
+    const d = JSON.stringify(full).replace(/'/g, '&#39;');
+    const fbKind = cat === 'food' ? 'dish' : '';
+    const photo = (window.kpEmpty)
+      ? `<img class="card-photo" src="${kpEmpty.forItem(Object.assign({ cat }, item))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-kp-fb-kind="${fbKind}" onerror="window.kpEmpty&&kpEmpty.onErr(this)">`
+      : '';
     return `
       <div class="card" style="animation-delay:${i * 0.045}s" data-item='${d}' tabindex="0" role="button" aria-label="${i18n('card.learn', 'Learn about')} ${item.name}">
+        ${photo}
         <span class="card-emoji">${item.emoji}</span>
         <div class="card-name">${item.name}</div>
         <div class="card-kr">${item.kr} &nbsp;·&nbsp; ${item.region}</div>
@@ -424,7 +432,7 @@ function renderGrid(cat) {
 
   // K-Beauty: lead into the full interactive hub (not the old travel guide).
   if (cat === 'kbeauty') {
-    grid.insertAdjacentHTML('afterbegin', '<a class="card" href="kbeauty.html" style="grid-column:1/-1;display:flex;align-items:center;gap:14px;text-decoration:none;background:linear-gradient(135deg,#d61f6e,#8b46d6);color:#fff;border:none"><span style="font-size:34px;line-height:1">💄</span><span><span style="display:block;font-weight:900;font-size:17px">' + i18n('kbeauty.homecta.title', 'Open the K-Beauty Hub →') + '</span><span style="display:block;font-size:13px;opacity:.92">' + i18n('kbeauty.homecta.sub', 'Skin quiz, routine builder, ingredient decoder & 1,000+ guides — in your language') + '</span></span></a>');
+    grid.insertAdjacentHTML('afterbegin', '<a class="card" href="kbeauty.html" style="grid-column:1/-1;display:flex;align-items:center;gap:14px;text-decoration:none;background:linear-gradient(135deg,#d61f6e,#8b46d6);color:#fff;border:none;padding:16px 18px"><span style="font-size:34px;line-height:1">💄</span><span><span style="display:block;font-weight:900;font-size:17px">' + i18n('kbeauty.homecta.title', 'Open the K-Beauty Hub →') + '</span><span style="display:block;font-size:13px;opacity:.92">' + i18n('kbeauty.homecta.sub', 'Skin quiz, routine builder, ingredient decoder & 1,000+ guides — in your language') + '</span></span></a>');
   }
 
   grid.querySelectorAll('.card').forEach(card => {
@@ -507,9 +515,9 @@ async function fetchPlaceDetails(query) {
     if (!res.ok) throw new Error('fetch failed');
     const data = await res.json();
     if (data.rating) renderPlaceDetails(data);
-    else document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.no_reviews') || 'No ratings found'}</div>`;
+    else document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpEmpty ? kpEmpty.html('reviews', '', { compact: true }) : ''}${window.kpI18n?.t('mp.no_reviews') || 'No ratings found'}</div>`;
   } catch {
-    document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.no_reviews') || 'No reviews available yet'}</div>`;
+    document.getElementById('mp-reviews').innerHTML = `<div class="mp-no-reviews">${window.kpEmpty ? kpEmpty.html('reviews', '', { compact: true }) : ''}${window.kpI18n?.t('mp.no_reviews') || 'No reviews available yet'}</div>`;
   }
 }
 
@@ -530,7 +538,7 @@ function renderPlaceDetails(data) {
         <div class="mp-review-time">${r.relativeTime}</div>
       </div>`).join('');
   } else {
-    reviewsEl.innerHTML = `<div class="mp-no-reviews">${window.kpI18n?.t('mp.no_reviews') || 'No reviews available yet'}</div>`;
+    reviewsEl.innerHTML = `<div class="mp-no-reviews">${window.kpEmpty ? kpEmpty.html('reviews', '', { compact: true }) : ''}${window.kpI18n?.t('mp.no_reviews') || 'No reviews available yet'}</div>`;
   }
 }
 
@@ -591,13 +599,13 @@ function loadMapExtras(item) {
       })
       .then(listAll => {
       const list = listAll.slice(0, 3);
-      if (!list.length) { fest.innerHTML = `<div class="mp-no-reviews">${t('mp.noFest', 'No events found right now')}</div>`; return; }
+      if (!list.length) { fest.innerHTML = `<div class="mp-no-reviews">${window.kpEmpty ? kpEmpty.html('festival', '', { compact: true }) : ''}${t('mp.noFest', 'No events found right now')}</div>`; return; }
       fest.innerHTML = list.map(f => `
         <a class="mp-fest-row" href="festivals.html">
           <span class="mf-name">${esc(f.nameEn || f.nameKo)}</span>
           <span class="mf-date">${KPApi.fmtDateRange(f.eventStartDate || f.startDate, f.eventEndDate || f.endDate)}</span>
         </a>`).join('');
-    }).catch(() => { fest.innerHTML = `<div class="mp-no-reviews">${t('mp.noFest', 'No events found right now')}</div>`; });
+    }).catch(() => { fest.innerHTML = `<div class="mp-no-reviews">${window.kpEmpty ? kpEmpty.html('festival', '', { compact: true }) : ''}${t('mp.noFest', 'No events found right now')}</div>`; });
   } else {
     fest.innerHTML = `<a class="mp-fest-row" href="festivals.html"><span class="mf-name">📅 Festival calendar</span></a>`;
   }

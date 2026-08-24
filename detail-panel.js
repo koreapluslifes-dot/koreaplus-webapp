@@ -31,6 +31,19 @@
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  // Up to 4 siblings in the same category (excluding the current item).
+  function getRelated(item) {
+    if (!item || !item.name || !window.KOREA_DATA) return [];
+    var cat = item.cat;
+    if (!cat) {
+      for (var k in KOREA_DATA) {
+        if ((KOREA_DATA[k] || []).some(function (x) { return x.name === item.name; })) { cat = k; break; }
+      }
+    }
+    if (!cat || !KOREA_DATA[cat]) return [];
+    return KOREA_DATA[cat].filter(function (x) { return x && x.name && x.name !== item.name; }).slice(0, 4);
+  }
+
   // Matches build-seo.cjs slug() so the modal can deep-link to the SEO page.
   function slugify(s) {
     return String(s).toLowerCase()
@@ -49,6 +62,7 @@
     panel.setAttribute('aria-labelledby', 'dp-title');
     panel.innerHTML = `
       <div class="dp-header">
+        <img class="dp-hero-photo" id="dp-hero-photo" alt="" decoding="async">
         <div class="dp-hero">
           <span class="dp-emoji" id="dp-emoji"></span>
           <div class="dp-title-block">
@@ -127,6 +141,15 @@
     lastItem = item;
     document.getElementById('dp-emoji').textContent = item.emoji || '';
     document.getElementById('dp-title').textContent = item.name || '';
+    const hero = document.getElementById('dp-hero-photo');
+    if (hero && window.kpEmpty) {
+      hero.src = kpEmpty.forItem(item);
+      hero.alt = item.name || '';
+      hero.setAttribute('data-kp-fb-kind', item.cat === 'food' ? 'dish' : '');
+      hero.setAttribute('data-kp-fb', '0');
+      hero.referrerPolicy = 'no-referrer';
+      hero.onerror = function () { kpEmpty.onErr(hero); };
+    }
     const body = document.getElementById('dp-body');
     if (body) body.innerHTML = '<div style="padding:48px 20px;text-align:center;color:var(--text2);font-size:14px">…</div>';
     document.getElementById('detail-panel').classList.add('open');
@@ -142,6 +165,15 @@
 
     document.getElementById('dp-emoji').textContent = item.emoji || '';
     document.getElementById('dp-title').textContent = item.name;
+    const hero = document.getElementById('dp-hero-photo');
+    if (hero && window.kpEmpty) {
+      hero.src = kpEmpty.forItem(item);
+      hero.alt = item.name || '';
+      hero.setAttribute('data-kp-fb-kind', item.cat === 'food' ? 'dish' : '');
+      hero.setAttribute('data-kp-fb', '0');
+      hero.referrerPolicy = 'no-referrer';
+      hero.onerror = function () { kpEmpty.onErr(hero); };
+    }
 
     /* Save (❤️) button — carries full item for My Trip */
     const actions = document.getElementById('dp-head-actions');
@@ -228,12 +260,45 @@
       </div>
     </div>`;
 
+    /* Related places — same category from KOREA_DATA for deeper discovery */
+    var related = getRelated(item);
+    if (related.length) {
+      html += '<div class="dp-section dp-related">' +
+        '<div class="dp-section-title">' + tr('dp.related', '🔗 Also explore') + '</div>' +
+        '<div class="dp-related-rail">' +
+        related.map(function (r) {
+          return '<button type="button" class="dp-related-chip" data-rel="' + esc(r.name) + '">' +
+            '<span class="dp-rel-emoji">' + esc(r.emoji || '📍') + '</span>' +
+            '<span class="dp-rel-name">' + esc(r.name) + '</span></button>';
+        }).join('') +
+        '</div></div>';
+    }
+
     /* Link to the full standalone (SEO/shareable) guide page */
     html += `<a class="dp-fullpage" href="places/${slugify(item.name)}.html">
       📄 ${tr('dp.fullpage', 'Open full guide page')} →
     </a>`;
 
     document.getElementById('dp-body').innerHTML = html;
+
+    /* Wire related-place chips */
+    document.querySelectorAll('.dp-related-chip').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var name = btn.getAttribute('data-rel');
+        var cat = item.cat;
+        var rel = null;
+        if (cat && KOREA_DATA[cat]) rel = KOREA_DATA[cat].find(function (x) { return x.name === name; });
+        if (!rel) {
+          for (var k in KOREA_DATA) {
+            rel = (KOREA_DATA[k] || []).find(function (x) { return x.name === name; });
+            if (rel) { rel = Object.assign({}, rel, { cat: k }); break; }
+          }
+        } else {
+          rel = Object.assign({}, rel, { cat: cat });
+        }
+        if (rel) open(rel);
+      });
+    });
 
     document.getElementById('detail-panel').classList.add('open');
     document.getElementById('detail-backdrop').classList.add('open');

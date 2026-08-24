@@ -126,6 +126,7 @@ module.exports = function (ctx) {
     const trail = [{ name: 'K-Pop', url: '/kpop' }, { name: isSolo ? m : `${m} (${g})`, url }];
     let body = bcHtml(trail);
     body += `<p class="lead">${esc(isSolo ? t.soloLead(m) : t.lead(m, g))}</p>`;
+    body += chrome.liveHubPromo(mem.act.id, mem.act.nameEn || g, lang, esc);
 
     // ── key facts box ──
     const facts = [];
@@ -177,7 +178,6 @@ module.exports = function (ctx) {
       + qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')
       + `</div>`;
 
-    body += affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
 
     // ── JSON-LD: Person (birthDate only when verified), memberOf MusicGroup ──
     const person = ld.personLD({

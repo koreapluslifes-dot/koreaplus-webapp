@@ -518,7 +518,7 @@
   // ── Internal artist profile pages (B6) — keep clicks inside the K-pop channel
   // instead of bouncing out to Apple Music / Spotify. Localized to current lang.
   const KPOP_PROF_LANGS = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt', 'id'];
-  const profileUrl = (id) => { const L = KPOP_PROF_LANGS.includes(lang) ? lang : 'en'; return (L === 'en' ? '' : L + '/') + 'kpop/' + id + '-profile.html'; };
+  const profileUrl = (id) => { const L = KPOP_PROF_LANGS.includes(lang) ? lang : 'en'; return (L === 'en' ? '' : L + '/') + 'kpop/' + id + '-profile'; };
   function rosterIdFor(name) {
     if (!name) return null;
     const n = String(name).toLowerCase();
@@ -1095,6 +1095,16 @@
       if (!document.hidden) { tickTimers(); timer = setInterval(tickTimers, 1000); }
     });
     setInterval(() => { EVENTS = buildEvents(); renderReleases(); renderCountdowns(); renderHeroStats(); renderSpotlight(); }, 3600_000);
+
+    // Deep link: /kpop?artist=bts opens the artist modal (SEO profile pages link here).
+    try {
+      const aid = new URLSearchParams(location.search).get('artist');
+      if (aid && ROSTER.some(a => a.id === aid)) {
+        setTimeout(() => openArtist(aid), 400);
+        const chip = $('.filter-chip[data-target="kpop-artists"]');
+        if (chip) chip.click();
+      }
+    } catch {}
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

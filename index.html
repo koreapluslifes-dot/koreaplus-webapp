@@ -36,7 +36,12 @@
   <meta property="og:description" content="Your complete AI-powered guide to South Korea — food, travel, K-beauty, K-pop, transport & culture. 80+ topics, interactive map.">
   <meta property="og:url" content="https://koreaplus-lifes.com/guide/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
+  <meta property="og:image" content="https://koreaplus-lifes.com/guide/og/guide-og-en.png">
+  <meta property="og:image:secure_url" content="https://koreaplus-lifes.com/guide/og/guide-og-en.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="KoreaPlus — your AI-powered Korea travel guide">
   <meta property="og:site_name" content="KoreaPlus-Lifes">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="ko_KR">
@@ -47,10 +52,12 @@
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="id_ID">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Korea Travel Guide 2026 | KoreaPlus">
   <meta name="twitter:description" content="AI-powered Korea guide: food, travel, K-beauty, K-pop & more. Interactive real map included.">
-  <meta name="twitter:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
+  <meta name="twitter:image" content="https://koreaplus-lifes.com/guide/og/guide-og-en.png">
+  <meta name="twitter:image:alt" content="KoreaPlus — your AI-powered Korea travel guide">
+  <script src="modules/og-meta.js?v=1"></script>
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebApplication","name":"KoreaPlus Korea Travel Guide","url":"https://koreaplus-lifes.com/guide/","description":"Interactive AI-powered guide to South Korea covering food, travel, K-beauty, K-pop, transport, shopping and history.","applicationCategory":"TravelApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI Chatbot","Interactive Real Map","Google Maps Integration","8 Categories","80+ Topics"],"inLanguage":"en","author":{"@type":"Organization","name":"KoreaPlus-Lifes","url":"https://koreaplus-lifes.com"}}
@@ -61,6 +68,9 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://koreaplus-lifes.com/"},{"@type":"ListItem","position":2,"name":"Korea Guide","item":"https://koreaplus-lifes.com/guide/"}]}
   </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"ItemList","name":"Popular Korea Travel Guides","itemListElement":[{"@type":"ListItem","position":1,"url":"https://koreaplus-lifes.com/guide/guide/things-to-do-in-seoul.html","name":"Things to Do in Seoul"},{"@type":"ListItem","position":2,"url":"https://koreaplus-lifes.com/guide/itinerary/seoul-3-day-itinerary.html","name":"3-Day Seoul Itinerary"},{"@type":"ListItem","position":3,"url":"https://koreaplus-lifes.com/guide/guide/korea-visa-k-eta-guide.html","name":"Korea Visa & K-ETA Guide"},{"@type":"ListItem","position":4,"url":"https://koreaplus-lifes.com/guide/when-to-visit.html","name":"When to Visit Korea"},{"@type":"ListItem","position":5,"url":"https://koreaplus-lifes.com/guide/compare.html","name":"Compare Korean Cities"},{"@type":"ListItem","position":6,"url":"https://koreaplus-lifes.com/guide/guide/best-korean-food.html","name":"Best Korean Food"}]}
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +78,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Theme system (apply before render to avoid flash) -->
-  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="theme.css?v=2">
   <script>
     (function(){
       var t=localStorage.getItem('kp_theme')||'dark';
@@ -79,14 +89,14 @@
   </script>
 
   <script src="config.js"></script>
-  <link rel="stylesheet" href="style.css?v=23">
+  <link rel="stylesheet" href="style.css?v=27">
   <!-- hub-styles defines the dark :root used site-wide — load in head (after style.css)
        to win the cascade AND avoid the late-load FOUC/CLS it caused when in <body>. -->
-  <link rel="stylesheet" href="hub-styles.css?v=15">
-  <link rel="stylesheet" href="mobile.css?v=1">
-  <script defer src="modules/mobile.js?v=1"></script>
+  <link rel="stylesheet" href="hub-styles.css?v=18">
+  <link rel="stylesheet" href="mobile.css?v=2">
+  <script defer src="modules/mobile.js?v=2"></script>
 </head>
-<body data-mnav="travel">
+<body>
 <a href="#main" class="kp-skip" data-i18n="a11y.skip">Skip to content</a>
 
 <!-- Header -->
@@ -129,7 +139,7 @@
               </div>
               <div class="kp-pnav-group" role="group">
                 <div class="kp-pnav-gh" data-i18n="nav.group.more">More</div>
-                <a role="menuitem" href="explore.html" data-i18n="nav.exploreall">🧭 All guides</a>
+                <a role="menuitem" href="explore" data-i18n="nav.exploreall">🧭 All guides</a>
                 <a role="menuitem" href="blog/index.html" data-i18n="nav.blog">📰 Blog</a>
               </div>
             </div>
@@ -145,12 +155,12 @@
                 <a role="menuitem" href="guide/things-to-do-in-gyeongju.html" data-i18n="nav.city.gyeongju">📍 Gyeongju</a>
                 <a role="menuitem" href="guide/things-to-do-in-jeonju.html" data-i18n="nav.city.jeonju">📍 Jeonju</a>
                 <a role="menuitem" href="guide/things-to-do-in-incheon.html" data-i18n="nav.city.incheon">📍 Incheon</a>
-                <a role="menuitem" class="kp-pnav-all" href="explore.html" data-i18n="nav.alldest">🗺️ All destinations</a>
+                <a role="menuitem" class="kp-pnav-all" href="explore" data-i18n="nav.alldest">🗺️ All destinations</a>
               </div>
             </div>
           </div>
 
-          <a class="kp-pnav-cta" href="plan.html" data-i18n="nav.plan">🗺️ Plan Trip</a>
+          <a class="kp-pnav-cta" href="plan" data-i18n="nav.plan">🗺️ Plan Trip</a>
         </div>
       </div>
     </nav>
@@ -166,6 +176,9 @@
   </div>
 </header>
 
+<!-- Live Korea strip: weather, FX, air quality, seasonal countdown -->
+<div id="kp-korea-now" class="kp-korea-now" style="display:none" aria-live="polite"></div>
+
 <!-- Full-screen Real Map Hero -->
 <section class="map-hero" id="main" tabindex="-1">
   <div id="korea-map"></div>
@@ -177,7 +190,7 @@
     <p class="hero-sub" data-i18n="hero.sub">Food · Travel · K-Beauty · K-Pop · Shopping · History</p>
     <div class="hero-btns">
       <button class="hero-cta primary" data-cat="food" data-i18n="hero.explore">Explore Korea ↓</button>
-      <a class="hero-cta outline" href="plan.html" data-i18n="hero.plan">🗺️ Plan My Trip</a>
+      <a class="hero-cta outline" href="plan" data-i18n="hero.plan">🗺️ Plan My Trip</a>
     </div>
   </div>
   <div class="map-bottom">
@@ -189,11 +202,11 @@
 <section class="kp-tasks" aria-label="Quick start">
   <h2 class="kp-tasks-h" data-kpt="title">Start here</h2>
   <div class="kp-tasks-grid">
-    <a class="kp-task" href="destinations.html" data-kpt="go"><span class="kp-task-i">📍</span><span class="kp-task-l">Where to go</span></a>
-    <a class="kp-task" href="experiences.html" data-kpt="do"><span class="kp-task-i">🍜</span><span class="kp-task-l">What to do</span></a>
-    <a class="kp-task" href="when-to-visit.html" data-kpt="when"><span class="kp-task-i">📅</span><span class="kp-task-l">When to visit</span></a>
-    <a class="kp-task" href="travel-basics.html" data-kpt="before"><span class="kp-task-i">✈️</span><span class="kp-task-l">Before you go</span></a>
-    <a class="kp-task" href="plan.html" data-kpt="plan"><span class="kp-task-i">🗺️</span><span class="kp-task-l">Plan my trip</span></a>
+    <a class="kp-task" href="destinations" data-kpt="go"><span class="kp-task-i">📍</span><span class="kp-task-l">Where to go</span></a>
+    <a class="kp-task" href="experiences" data-kpt="do"><span class="kp-task-i">🍜</span><span class="kp-task-l">What to do</span></a>
+    <a class="kp-task" href="when-to-visit" data-kpt="when"><span class="kp-task-i">📅</span><span class="kp-task-l">When to visit</span></a>
+    <a class="kp-task" href="travel-basics" data-kpt="before"><span class="kp-task-i">✈️</span><span class="kp-task-l">Before you go</span></a>
+    <a class="kp-task" href="plan" data-kpt="plan"><span class="kp-task-i">🗺️</span><span class="kp-task-l">Plan my trip</span></a>
     <button type="button" class="kp-task" data-action="search" data-kpt="search"><span class="kp-task-i">🔎</span><span class="kp-task-l">Search everything</span></button>
   </div>
 </section>
@@ -463,7 +476,7 @@ apply();document.addEventListener("kp:langchange",apply);})();</script>
 </style>
 <section class="popular-guides" aria-label="Popular Korea guides" style="max-width:1100px;margin:0 auto;padding:48px 24px 8px">
   <h2 style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:6px">Popular Korea Travel Guides</h2>
-  <p style="font-size:14px;color:var(--text2);margin-bottom:22px">Hand-picked guides, itineraries and tips — <a href="explore.html" style="color:var(--red);font-weight:600">browse all 110+ guides →</a></p>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:22px">Hand-picked guides, itineraries and tips — <a href="explore" style="color:var(--red);font-weight:600">browse all 110+ guides →</a></p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
     <div>
       <h3 style="font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">🗺️ Itineraries</h3>
@@ -545,19 +558,24 @@ apply();document.addEventListener("kp:langchange",apply);})();</script>
 <div id="kp-toast" class="kp-toast" role="status" aria-live="polite"></div>
 
 <script src="data.js?v=3"></script>
-<script src="modules/mytrip.js?v=3"></script>
-<script src="detail-panel.js?v=9"></script>
-<script src="app.js?v=24"></script>
-<script src="modules/nav.js?v=3"></script>
+<script src="modules/url.js?v=1"></script>
+<script src="modules/scroll-guard.js?v=2"></script>
+<script src="modules/empty-visual.js?v=3"></script>
+<script src="modules/mytrip.js?v=4"></script>
+<script src="detail-panel.js?v=12"></script>
+<script src="app.js?v=28"></script>
+<script src="modules/nav.js?v=4"></script>
 <script src="modules/api-client.js"></script>
 <script src="modules/dashboard.js?v=2"></script>
-<script src="modules/week-section.js"></script>
+<script src="modules/week-section.js?v=1"></script>
 
 <!-- Phase 5: Theme, i18n, Search, Analytics -->
 <script src="modules/theme.js"></script>
 <script src="modules/i18n.js"></script>
-<script src="modules/search.js?v=2"></script>
+<script src="modules/search.js?v=4"></script>
 <script src="modules/analytics.js"></script>
+<script defer src="modules/korea-now.js?v=3"></script>
+<script defer src="modules/plan-cta.js?v=2"></script>
 
 <script src="modules/pwa.js?v=1"></script>
 <script>
@@ -592,13 +610,13 @@ apply();document.addEventListener("kp:langchange",apply);})();</script>
   window.kpShowToast = showToast;
 </script>
 <nav class="kp-tabbar" aria-label="Mobile navigation">
-  <a href="index.html" data-tab="home"><span class="kp-tab-i" aria-hidden="true">🏠</span><span class="kp-tab-l">Home</span></a>
-  <a href="explore.html" data-tab="explore"><span class="kp-tab-i" aria-hidden="true">🧭</span><span class="kp-tab-l">Explore</span></a>
+  <a href="./" data-tab="home"><span class="kp-tab-i" aria-hidden="true">🏠</span><span class="kp-tab-l">Home</span></a>
+  <a href="explore" data-tab="explore"><span class="kp-tab-i" aria-hidden="true">🧭</span><span class="kp-tab-l">Explore</span></a>
   <button type="button" data-action="search" data-tab="search" aria-label="Search"><span class="kp-tab-i" aria-hidden="true">🔎</span><span class="kp-tab-l">Search</span></button>
-  <a href="plan.html" data-tab="plan"><span class="kp-tab-i" aria-hidden="true">🗗</span><span class="kp-tab-l">Plan</span></a>
-  <a href="bucket-list.html" data-tab="saved"><span class="kp-tab-i" aria-hidden="true">❤️</span><span class="kp-tab-l">Saved</span></a>
+  <a href="plan" data-tab="plan"><span class="kp-tab-i" aria-hidden="true">🗺️</span><span class="kp-tab-l">Plan</span></a>
+  <a href="bucket-list" data-tab="saved"><span class="kp-tab-i" aria-hidden="true">❤️</span><span class="kp-tab-l">Saved</span></a>
 </nav>
-<script>(function(){var T={en:["Home","Explore","Search","Plan","Saved"],ko:["홈","둘러보기","검색","플랜","저장"],ja:["ホーム","見る","検索","プラン","保存"],zh:["首页","探索","搜索","行程","收藏"],es:["Inicio","Explorar","Buscar","Planear","Guardado"],fr:["Accueil","Explorer","Rechercher","Planifier","Enreg."],de:["Start","Entdecken","Suche","Planen","Merkliste"],pt:["Início","Explorar","Buscar","Planejar","Salvos"],id:["Beranda","Jelajahi","Cari","Rencana","Disimpan"]};function lng(){try{return (localStorage.getItem("kp_lang")||document.documentElement.lang||navigator.language||"en").slice(0,2);}catch(e){return "en";}}function apply(){var a=T[lng()]||T.en,e=document.querySelectorAll(".kp-tabbar .kp-tab-l");for(var i=0;i<e.length&&i<a.length;i++)e[i].textContent=a[i];}function active(){try{var p=location.pathname,t="home";if(/explore.html/.test(p))t="explore";else if(/plan.html/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";var el=document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}catch(e){}}apply();active();document.addEventListener("kp:langchange",apply);})();</script>
+<script>(function(){var T={en:["Home","Explore","Search","Plan","Saved"],ko:["홈","둘러보기","검색","플랜","저장"],ja:["ホーム","見る","検索","プラン","保存"],zh:["首页","探索","搜索","行程","收藏"],es:["Inicio","Explorar","Buscar","Planear","Guardado"],fr:["Accueil","Explorer","Rechercher","Planifier","Enreg."],de:["Start","Entdecken","Suche","Planen","Merkliste"],pt:["Início","Explorar","Buscar","Planejar","Salvos"],id:["Beranda","Jelajahi","Cari","Rencana","Disimpan"]};function lng(){try{return (localStorage.getItem("kp_lang")||document.documentElement.lang||navigator.language||"en").slice(0,2);}catch(e){return "en";}}function apply(){var a=T[lng()]||T.en,e=document.querySelectorAll(".kp-tabbar .kp-tab-l");for(var i=0;i<e.length&&i<a.length;i++)e[i].textContent=a[i];}function active(){try{var p=location.pathname,t="home";if(/\/explore(\.html)?$/.test(p))t="explore";else if(/\/plan(\.html)?$/.test(p))t="plan";else if(/bucket-list/.test(p))t="saved";var el=document.querySelector(".kp-tabbar [data-tab=\""+t+"\"]");if(el)el.classList.add("on");}catch(e){}}apply();active();document.addEventListener("kp:langchange",apply);})();</script>
 <script>(function(){try{if(window.innerWidth>768)return;var a=document.getElementById("seo-article");if(!a)return;a.classList.add("kp-clamp");var L={en:"Read more",ko:"더 보기",ja:"もっと見る",zh:"查看更多",es:"Leer más",fr:"Voir plus",de:"Mehr",pt:"Ver mais",id:"Selengkapnya"};var g=(localStorage.getItem("kp_lang")||document.documentElement.lang||"en").slice(0,2);var b=document.createElement("button");b.className="kp-readmore";b.type="button";b.textContent=(L[g]||L.en)+" ▾";b.addEventListener("click",function(){a.classList.remove("kp-clamp");b.remove();});a.parentNode.insertBefore(b,a.nextSibling);}catch(e){}})();</script>
 <script>(function(){try{if(window.innerWidth>768)return;var g=document.getElementById("content-grid");if(!g)return;var L={en:"Show more",ko:"더 보기",ja:"もっと見る",zh:"查看更多",es:"Ver más",fr:"Voir plus",de:"Mehr",pt:"Ver mais",id:"Selengkapnya"};var lg=(localStorage.getItem("kp_lang")||document.documentElement.lang||"en").slice(0,2);
 function arm(){if(g.scrollHeight<1900)return;g.classList.add("kp-clamp-grid");var b=document.createElement("button");b.className="kp-readmore";b.type="button";b.textContent=(L[lg]||L.en)+" ▾";b.addEventListener("click",function(){g.classList.remove("kp-clamp-grid");b.remove();});g.parentNode.insertBefore(b,g.nextSibling);}

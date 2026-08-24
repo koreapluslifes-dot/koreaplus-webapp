@@ -61,11 +61,16 @@
     pnav.__setOpen = setOpen;
   }
 
+  function pageSeg(path) {
+    const seg = (path || '').split('#')[0].split('/').pop().toLowerCase().replace(/\.html$/, '');
+    return seg || 'index';
+  }
+
   function markActive(root) {
-    const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    const here = pageSeg(location.pathname.split('/').pop() || 'index.html');
     root.querySelectorAll('.kp-pnav a[href]').forEach(a => {
       const href = a.getAttribute('href') || '';
-      const seg = href.split('#')[0].split('/').pop().toLowerCase();
+      const seg = pageSeg(href);
       if (seg && seg === here) {
         a.classList.add('kp-active');
         const drop = a.closest('.kp-pnav-drop');

@@ -509,8 +509,14 @@
   if (window.__kuxPullrefresh) return;
   window.__kuxPullrefresh = 1;
   try {
+    // Hub only — SEO pages should scroll normally.
+    if (!document.getElementById("kpop-filters")) return;
     var isTouch = (("ontouchstart" in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
     if (!isTouch) return;
+    // Phones/tablets only — touch laptops keep native scroll.
+    try {
+      if (window.matchMedia && !window.matchMedia("(pointer: coarse)").matches) return;
+    } catch (e) {}
 
     var reduce = false;
     try { reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches; } catch (e) {}
@@ -640,7 +646,8 @@
         pill.classList.toggle("kux-ptr-go", armed);
       }
       setLabel(armed ? t("release") : t("pull"));
-      if (e.cancelable) e.preventDefault();
+      // Only block native scroll once the pull gesture is clearly intentional.
+      if (dy > 12 && e.cancelable) e.preventDefault();
     }
 
     function onEnd() {

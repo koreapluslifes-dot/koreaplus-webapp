@@ -69,6 +69,14 @@
     } catch {}
   }
 
+  function syncOgImage() {
+    try {
+      if (window.kpOgMeta && typeof window.kpOgMeta.apply === 'function') {
+        window.kpOgMeta.apply(lang);
+      }
+    } catch {}
+  }
+
   function applyTranslations() {
     // data-i18n — textContent replacement
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -104,8 +112,9 @@
     });
     // Update <html lang>
     document.documentElement.lang = lang;
-    // Self-canonicalize + sync og:url per language (SEO: makes hreflang reciprocal)
+    // Self-canonicalize + sync og:url / og:image per language (SEO: makes hreflang reciprocal)
     syncCanonical();
+    syncOgImage();
     // Keep the document LTR even for Arabic — the shared travel chrome (cookie banner,
     // search overlay, trip panel) isn't RTL-safe. RTL is scoped to the K-beauty hub
     // content via CSS (html[lang=ar] .hub-content, see kbeauty.html); library pages

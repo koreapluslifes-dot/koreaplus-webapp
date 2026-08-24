@@ -129,6 +129,34 @@ function hubLabel(lang) {
   return (t && t.hubLabel) || '🎤 K-Pop Hub';
 }
 
+/** CTA box on static profile/member pages → interactive /kpop hub with deep link. */
+const LIVE_HUB = {
+  en: { title: 'Live charts & comebacks', body: 'See real-time charts, countdowns and news for {name} on the KoreaPlus K-Pop hub.', cta: 'Open live hub →' },
+  ko: { title: '실시간 차트 · 컴백', body: '{name}의 실시간 차트, 컴백 카운트다운, 뉴스를 KoreaPlus K-Pop 허브에서 확인하세요.', cta: '라이브 허브 열기 →' },
+  ja: { title: 'ライブチャート・カムバック', body: '{name}のリアルタイムチャートとカムバック情報は KoreaPlus K-POP ハブで。', cta: 'ライブハブを開く →' },
+  zh: { title: '实时榜单 · 回归', body: '在 KoreaPlus K-pop 中心查看 {name} 的实时榜单、回归倒计时与新闻。', cta: '打开实时中心 →' },
+  es: { title: 'Charts y comebacks en vivo', body: 'Charts en tiempo real, countdowns y noticias de {name} en el hub K-pop de KoreaPlus.', cta: 'Abrir hub en vivo →' },
+  fr: { title: 'Charts & comebacks en direct', body: 'Charts en direct, countdowns et actus pour {name} sur le hub K-pop KoreaPlus.', cta: 'Ouvrir le hub →' },
+  de: { title: 'Live-Charts & Comebacks', body: 'Echtzeit-Charts, Countdowns und News zu {name} im KoreaPlus K-Pop-Hub.', cta: 'Live-Hub öffnen →' },
+  pt: { title: 'Charts e comebacks ao vivo', body: 'Charts em tempo real, countdowns e notícias de {name} no hub K-pop KoreaPlus.', cta: 'Abrir hub ao vivo →' },
+  id: { title: 'Chart & comeback langsung', body: 'Chart real-time, countdown dan berita {name} di hub K-pop KoreaPlus.', cta: 'Buka hub langsung →' },
+  ar: { title: 'قوائم وكامباك مباشرة', body: 'شاهد القوائم المباشرة والعد التنازلي وأخبار {name} على مركز K-Pop من KoreaPlus.', cta: 'افتح المركز المباشر →' },
+  hi: { title: 'लाइव चार्ट और कमबैक', body: 'KoreaPlus K-Pop हब पर {name} के लाइव चार्ट, काउंटडाउन और न्यूज़ देखें।', cta: 'लाइव हब खोलें →' },
+  ru: { title: 'Чарты и камбэки в реальном времени', body: 'Смотрите чарты, обратный отсчёт и новости {name} в K-pop-хабе KoreaPlus.', cta: 'Открыть хаб →' },
+  vi: { title: 'Bảng xếp hạng & comeback trực tiếp', body: 'Xem bảng xếp hạng, đếm ngược và tin tức {name} trên hub K-pop KoreaPlus.', cta: 'Mở hub trực tiếp →' },
+  th: { title: 'ชาร์ตสดและคัมแบ็ก', body: 'ดูชาร์ตสด นับถอยหลัง และข่าวของ {name} บนฮับ K-Pop ของ KoreaPlus', cta: 'เปิดฮับสด →' },
+};
+function liveHubPromo(actId, name, lang, esc) {
+  if (!actId || !name) return '';
+  const t = LIVE_HUB[lang] || LIVE_HUB.en;
+  const body = (t.body || '').replace(/\{name\}/g, name);
+  const href = `/kpop?artist=${encodeURIComponent(actId)}`;
+  return `<aside class="seo-live-hub" aria-label="${esc(t.title)}">`
+    + `<strong>${esc(t.title)}</strong>`
+    + `<p>${esc(body)}</p>`
+    + `<a href="${href}">${esc(t.cta)}</a></aside>`;
+}
+
 // ── 4. Locale-correct punctuation, dates and counts ───────────────────────
 // The Arabic style contract bans the ASCII comma inside Arabic prose; the
 // Arabic comma also sits correctly in the bidi flow between Latin name runs.
@@ -211,7 +239,7 @@ function countTemplate(tpl, lang, n, extra) {
 
 module.exports = {
   hasProfile, profileLink, profileUrl,
-  typeLabel, signName, faqHeading, hubLabel,
+  typeLabel, signName, faqHeading, hubLabel, liveHubPromo,
   listJoin, monthGenitive, chipDate, countPeople,
   pluralCategory, countTemplate,
   HIST_LOADED,

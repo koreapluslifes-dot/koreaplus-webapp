@@ -33,7 +33,7 @@
     var T=I18N[L]||I18N.en;
     function t(k){return (T&&T[k]!=null)?T[k]:(I18N.en[k]);}
 
-    var pf=function(id){var x=SUPPORTED.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html";};
+    var pf=function(id){var x=SUPPORTED.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile";};
 
     function readFollows(){
       try{var a=JSON.parse(localStorage.getItem(FOLLOW_KEY)||"[]"); return Array.isArray(a)?a:[];}catch(e){return [];}
@@ -255,8 +255,8 @@ var SUP=["en","ko","ja","zh","es","fr","de","pt","id"];
 if(SUP.indexOf(L)<0) L="en";
 
 var I18N={
-  en:{launch:"Search artists",ph:"Search by name, agency, fandom, member…",empty:"Start typing to find artists",none:"No matches found",recent:"Recent",open:"Open",members:"Members",agency:"Agency",fandom:"Fandom",closeL:"Close search",searchL:"Search artists",resultsL:"Search results",clearL:"Clear recent searches",siteSearch:"Search the whole site"},
-  ko:{launch:"아티스트 검색",ph:"이름·소속사·팬덤·멤버로 검색…",empty:"검색어를 입력해 아티스트를 찾아보세요",none:"검색 결과가 없습니다",recent:"최근 검색",open:"열기",members:"멤버",agency:"소속사",fandom:"팬덤",closeL:"검색 닫기",searchL:"아티스트 검색",resultsL:"검색 결과",clearL:"최근 검색 지우기",siteSearch:"사이트 전체 검색"},
+  en:{launch:"Search artists",ph:"Search by name, agency, fandom, member…",empty:"Start typing to find artists",none:"No matches found",recent:"Recent",open:"Open",members:"Members",agency:"Agency",fandom:"Fandom",closeL:"Close search",searchL:"Search artists",resultsL:"Search results",clearL:"Clear recent searches",siteSearch:"Search the whole site",compare:"Comparison",memberProfile:"Member profile"},
+  ko:{launch:"아티스트 검색",ph:"이름·소속사·팬덤·멤버로 검색…",empty:"검색어를 입력해 아티스트를 찾아보세요",none:"검색 결과가 없습니다",recent:"최근 검색",open:"열기",members:"멤버",agency:"소속사",fandom:"팬덤",closeL:"검색 닫기",searchL:"아티스트 검색",resultsL:"검색 결과",clearL:"최근 검색 지우기",siteSearch:"사이트 전체 검색",compare:"그룹 비교",memberProfile:"멤버 프로필"},
   ja:{launch:"アーティスト検索",ph:"名前・事務所・ファンダム・メンバーで検索…",empty:"入力してアーティストを探しましょう",none:"一致する結果がありません",recent:"最近の検索",open:"開く",members:"メンバー",agency:"事務所",fandom:"ファンダム",closeL:"検索を閉じる",searchL:"アーティスト検索",resultsL:"検索結果",clearL:"最近の検索を消去",siteSearch:"サイト全体を検索"},
   zh:{launch:"搜索艺人",ph:"按名称、经纪公司、粉丝名、成员搜索…",empty:"开始输入以查找艺人",none:"未找到匹配结果",recent:"最近搜索",open:"打开",members:"成员",agency:"经纪公司",fandom:"粉丝名",closeL:"关闭搜索",searchL:"搜索艺人",resultsL:"搜索结果",clearL:"清除最近搜索",siteSearch:"搜索整个网站"},
   es:{launch:"Buscar artistas",ph:"Busca por nombre, agencia, fandom, miembro…",empty:"Escribe para encontrar artistas",none:"No se encontraron coincidencias",recent:"Recientes",open:"Abrir",members:"Miembros",agency:"Agencia",fandom:"Fandom",closeL:"Cerrar búsqueda",searchL:"Buscar artistas",resultsL:"Resultados de búsqueda",clearL:"Borrar búsquedas recientes",siteSearch:"Buscar en todo el sitio"},
@@ -268,7 +268,11 @@ var I18N={
 var T=I18N[L]||I18N.en;
 function t(k){return (T&&T[k])||I18N.en[k]||k;}
 
-var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html";};
+var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile";};
+function slugPart(x){return String(x||"").toLowerCase().replace(/['']/g,"").replace(/&/g," and ").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");}
+function memPf(name,actId){var x=SUP.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+slugPart(name)+"-"+slugPart(actId)+"-member";}
+function vsPf(a,b){var x=SUP.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop-vs/"+a+"-vs-"+b;}
+var VS_PAIRS=[["bts","seventeen"],["blackpink","twice"],["newjeans","lesserafim"],["aespa","ive"],["straykids","ateez"],["exo","bts"],["itzy","aespa"],["txt","enhypen"]];
 
 function roster(){return (window.KPOP_ROSTER&&Object.prototype.toString.call(window.KPOP_ROSTER)==="[object Array]")?window.KPOP_ROSTER:[];}
 
@@ -337,12 +341,37 @@ var ov=null,inp=null,list=null,sel=-1,curResults=[],lastFocus=null;
 function buildIndex(){
   return roster().map(function(a){
     var members=(a&&a.members&&Object.prototype.toString.call(a.members)==="[object Array]")?a.members:[];
-    return {a:a,
+    return {kind:"artist",a:a,
       nameEn:(a&&a.nameEn)||"",nameKo:(a&&a.nameKo)||"",
       agency:(a&&a.agency)||"",fandom:(a&&a.fandom)||"",
       members:members,
       hay:[(a&&a.nameEn)||"",(a&&a.nameKo)||"",(a&&a.agency)||"",(a&&a.fandom)||"",members.join(" ")].join(" ").toLowerCase()};
   });
+}
+function buildExtraIndex(){
+  var out=[],byId={},acts=roster();
+  for(var i=0;i<acts.length;i++){if(acts[i]&&acts[i].id)byId[acts[i].id]=acts[i];}
+  var ENRICH=(window.KPOP_ENRICH&&typeof window.KPOP_ENRICH==="object")?window.KPOP_ENRICH:{};
+  for(var aid in ENRICH){
+    if(!Object.prototype.hasOwnProperty.call(ENRICH,aid))continue;
+    var act=byId[aid],e=ENRICH[aid];
+    if(!act||!e||!Array.isArray(e.bdays))continue;
+    for(var j=0;j<e.bdays.length;j++){
+      var row=e.bdays[j];
+      if(!Array.isArray(row)||!row[0])continue;
+      var nm=String(row[0]);
+      out.push({kind:"member",mem:{name:nm,actId:aid,actName:act.nameEn||aid,emoji:act.emoji||"🎤"},
+        hay:(nm+" "+(act.nameEn||"")+" "+(act.nameKo||"")).toLowerCase()});
+    }
+  }
+  for(var p=0;p<VS_PAIRS.length;p++){
+    var ra=byId[VS_PAIRS[p][0]],rb=byId[VS_PAIRS[p][1]];
+    if(!ra||!rb)continue;
+    var label=(ra.nameEn||VS_PAIRS[p][0])+" vs "+(rb.nameEn||VS_PAIRS[p][1]);
+    out.push({kind:"vs",vs:{aId:VS_PAIRS[p][0],bId:VS_PAIRS[p][1],label:label,emoji:"⚖️"},
+      hay:label.toLowerCase()+" "+(ra.nameKo||"")+" "+(rb.nameKo||"")});
+  }
+  return out;
 }
 
 function fuzzy(q,s){ // subsequence match
@@ -354,27 +383,37 @@ function fuzzy(q,s){ // subsequence match
 function search(q){
   q=(q||"").trim();
   if(!q) return [];
-  var ql=q.toLowerCase();
-  var idx=buildIndex(),out=[];
-  for(var i=0;i<idx.length;i++){
-    var e=idx[i],score=-1,why="";
-    var sub=e.hay.indexOf(ql)>=0;
-    if((e.nameEn||e.nameKo) && (e.nameEn.toLowerCase().indexOf(ql)===0||e.nameKo.toLowerCase().indexOf(ql)===0)){score=100;}
-    else if(e.nameEn.toLowerCase().indexOf(ql)>=0||e.nameKo.toLowerCase().indexOf(ql)>=0){score=80;}
-    else {
-      // member match
-      var mm=null;
-      for(var j=0;j<e.members.length;j++){if(String(e.members[j]).toLowerCase().indexOf(ql)>=0){mm=e.members[j];break;}}
-      if(mm){score=60;why=t("members")+": "+mm;}
-      else if(e.agency&&e.agency.toLowerCase().indexOf(ql)>=0){score=50;why=t("agency")+": "+e.agency;}
-      else if(e.fandom&&e.fandom.toLowerCase().indexOf(ql)>=0){score=45;why=t("fandom")+": "+e.fandom;}
-      else if(sub){score=30;}
-      else if(ql.length>=2&&fuzzy(ql,e.hay)){score=10;}
+  var ql=q.toLowerCase(),out=[];
+  function scoreEntry(e){
+    var score=-1,why="";
+    if(e.kind==="artist"){
+      if((e.nameEn||e.nameKo)&&(e.nameEn.toLowerCase().indexOf(ql)===0||e.nameKo.toLowerCase().indexOf(ql)===0))score=100;
+      else if(e.nameEn.toLowerCase().indexOf(ql)>=0||e.nameKo.toLowerCase().indexOf(ql)>=0)score=80;
+      else {
+        var mm=null;
+        for(var j=0;j<e.members.length;j++){if(String(e.members[j]).toLowerCase().indexOf(ql)>=0){mm=e.members[j];break;}}
+        if(mm){score=60;why=t("members")+": "+mm;}
+        else if(e.agency&&e.agency.toLowerCase().indexOf(ql)>=0){score=50;why=t("agency")+": "+e.agency;}
+        else if(e.fandom&&e.fandom.toLowerCase().indexOf(ql)>=0){score=45;why=t("fandom")+": "+e.fandom;}
+        else if(e.hay.indexOf(ql)>=0)score=30;
+        else if(ql.length>=2&&fuzzy(ql,e.hay))score=10;
+      }
+    } else if(e.kind==="member"){
+      if(e.mem.name.toLowerCase().indexOf(ql)===0)score=92;
+      else if(e.mem.name.toLowerCase().indexOf(ql)>=0)score=75;
+      else if(e.hay.indexOf(ql)>=0)score=55;
+      if(score>=0)why=t("memberProfile")+" · "+e.mem.actName;
+    } else if(e.kind==="vs"){
+      if(e.vs.label.toLowerCase().indexOf(ql)>=0)score=70;
+      else if(e.hay.indexOf(ql)>=0)score=40;
+      if(score>=0)why=t("compare");
     }
-    if(score>=0) out.push({e:e,score:score,why:why,q:ql});
+    if(score>=0)out.push({e:e,score:score,why:why,q:ql,kind:e.kind});
   }
-  out.sort(function(a,b){return b.score-a.score||a.e.nameEn.localeCompare(b.e.nameEn);});
-  return out.slice(0,8);
+  buildIndex().forEach(scoreEntry);
+  buildExtraIndex().forEach(scoreEntry);
+  out.sort(function(a,b){return b.score-a.score||(a.e.nameEn||a.e.mem&&a.e.mem.name||a.e.vs&&a.e.vs.label||"").localeCompare(b.e.nameEn||b.e.mem&&b.e.mem.name||b.e.vs&&b.e.vs.label||"");});
+  return out.slice(0,10);
 }
 
 function hi(text,ql){
@@ -416,13 +455,21 @@ function render(q){
   }
   curResults=res;
   res.forEach(function(r,k){
-    var a=r.e.a,id=a&&a.id;
     var li=document.createElement("li");
     li.className="kpp-s-item";li.setAttribute("role","option");li.setAttribute("aria-selected","false");li.setAttribute("data-i",k);
-    var emo=(a&&a.emoji)||"🎵";
-    var nm2=(r.e.nameEn||r.e.nameKo||"")||(id||"");
-    var ko=r.e.nameKo&&r.e.nameKo!==r.e.nameEn?'<small>'+esc(r.e.nameKo)+'</small>':"";
-    var why=r.why?'<div class="kpp-s-why">'+esc(r.why)+'</div>':(r.e.agency?'<div class="kpp-s-why">'+hi(r.e.agency,r.q)+'</div>':"");
+    var emo="🎵",nm2="",ko="",why=r.why?'<div class="kpp-s-why">'+esc(r.why)+'</div>':"";
+    if(r.kind==="member"){
+      emo=r.e.mem.emoji||"👤";nm2=r.e.mem.name;
+      ko=r.e.mem.actName?'<small>'+esc(r.e.mem.actName)+'</small>':"";
+    } else if(r.kind==="vs"){
+      emo=r.e.vs.emoji||"⚖️";nm2=r.e.vs.label;
+    } else {
+      var a=r.e.a,id=a&&a.id;
+      emo=(a&&a.emoji)||"🎵";
+      nm2=(r.e.nameEn||r.e.nameKo||"")||(id||"");
+      ko=r.e.nameKo&&r.e.nameKo!==r.e.nameEn?'<small>'+esc(r.e.nameKo)+'</small>':"";
+      if(!why&&r.e.agency)why='<div class="kpp-s-why">'+hi(r.e.agency,r.q)+'</div>';
+    }
     li.innerHTML='<span class="kpp-s-emo" aria-hidden="true">'+esc(emo)+'</span>'+
       '<span class="kpp-s-meta"><div class="kpp-s-nm">'+hi(nm2,r.q)+ko+'</div>'+why+'</span>'+
       '<svg class="kpp-s-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>';
@@ -448,9 +495,11 @@ function setSel(i){
 
 function choose(i){
   var r=curResults[i];if(!r)return;
-  var id=r.e.a&&r.e.a.id;if(!id)return;
   pushRecent(inp?inp.value:"");
   close();
+  if(r.kind==="member"){location.href=memPf(r.e.mem.name,r.e.mem.actId);return;}
+  if(r.kind==="vs"){location.href=vsPf(r.e.vs.aId,r.e.vs.bId);return;}
+  var id=r.e.a&&r.e.a.id;if(!id)return;
   if(typeof window.kpOpenArtist==="function"){try{window.kpOpenArtist(id);return;}catch(e){}}
   try{location.href=pf(id);}catch(e){}
 }
@@ -571,7 +620,7 @@ document.addEventListener("keydown",function(e){
     var LANGS=["en","ko","ja","zh","es","fr","de","pt","id"];
     if(LANGS.indexOf(L)<0) L="en";
 
-    var pf=function(id){var x=LANGS.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html";};
+    var pf=function(id){var x=LANGS.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile";};
 
     var I18N={
       title:{en:"Daily K-Pop Quiz",ko:"오늘의 K-팝 퀴즈",ja:"今日のK-POPクイズ",zh:"每日K-pop测验",es:"Quiz diario de K-Pop",fr:"Quiz K-Pop du jour",de:"Tägliches K-Pop-Quiz",pt:"Quiz diário de K-Pop",id:"Kuis K-Pop Harian"},
@@ -1006,7 +1055,7 @@ document.addEventListener("keydown",function(e){
     var esc=function(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); };
     var name=function(a){ if(!a) return ""; return (L==="ko"&&a.nameKo)?a.nameKo:(a.nameEn||a.nameKo||a.id||""); };
 
-    var pf=function(id){ var x=LANGS.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html"; };
+    var pf=function(id){ var x=LANGS.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile"; };
     var openArtist=function(id){
       try{
         if(typeof window.kpOpenArtist==="function"){ window.kpOpenArtist(id); return; }
@@ -1345,7 +1394,7 @@ document.addEventListener("keydown",function(e){
     var L=(localStorage.getItem("kp_lang")||(navigator.language||"en").slice(0,2)||"en").toLowerCase();
     if(SUP.indexOf(L)<0) L="en";
 
-    var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html";};
+    var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile";};
 
     var I18N={
       en:{title:"For You",subPop:"Popular right now",subRec:"Fans also stan",follow:"Follow",following:"Following",open:"Open profile",because:function(n){return "Because you follow "+n;},pop:"Trending with fans",empty:"No recommendations yet — follow an artist to get started.",by:"by"},
@@ -1553,7 +1602,7 @@ var t=function(k){var o=I18N[L]||I18N.en;return (o&&o[k]!=null)?o[k]:(I18N.en[k]
 var KEY="kpp_recent";
 var CAP=12;
 
-var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html";};
+var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile";};
 
 var roster=(window.KPOP_ROSTER&&window.KPOP_ROSTER.length)?window.KPOP_ROSTER:[];
 var byId={};
@@ -1695,7 +1744,7 @@ try{
   function t(k){var v=(T&&T[k])||I18N.en[k]||k;return v;}
   function fill(s,map){s=String(s||"");for(var k in map){if(map.hasOwnProperty(k))s=s.split(k).join(map[k]);}return s;}
 
-  var pf=function(id){var x=SUPPORTED.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html";};
+  var pf=function(id){var x=SUPPORTED.indexOf(L)>=0?L:"en";return (x==="en"?"":x+"/")+"kpop/"+id+"-profile";};
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 
@@ -2002,7 +2051,7 @@ try{
 
     var pf = function(id){
       var x = LANGS.indexOf(L) >= 0 ? L : "en";
-      return (x === "en" ? "" : x + "/") + "kpop/" + id + "-profile.html";
+      return (x === "en" ? "" : x + "/") + "kpop/" + id + "-profile";
     };
     var openArtist = function(id){
       try {
@@ -2267,7 +2316,7 @@ try{
   var t=I[L]||I.en, en=I.en;
   function T(k){ return (t[k]!=null?t[k]:en[k])||""; }
 
-  var pf=function(id){ var x=SUP.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html"; };
+  var pf=function(id){ var x=SUP.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile"; };
 
   function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 
@@ -2559,7 +2608,7 @@ try{
   var L=(localStorage.getItem("kp_lang")||(navigator.language||"en").slice(0,2)||"en").toLowerCase();
   if(SUP.indexOf(L)<0) L="en";
 
-  var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile.html";};
+  var pf=function(id){var x=SUP.indexOf(L)>=0?L:"en"; return (x==="en"?"":x+"/")+"kpop/"+id+"-profile";};
 
   var I18N={
     en:{title:"Your achievements",sub:"Unlock badges as you explore",done:"unlocked",of:"of",how:"How to unlock",
@@ -2828,4 +2877,74 @@ try{
     if(!e||!e.key) return;
     if(e.key==="kp_kpop_follow"||e.key==="kpp_quiz"||e.key==="kpp_poll"||e.key==="kpp_recent"||e.key==="kp_lang") schedule();
   });
+})();
+
+/* ===== discover: Popular comparisons & deep guides — internal linking for SEO traffic ===== */
+(function(){
+  "use strict";
+  var mount=document.querySelector("#kpop-discover-slot");
+  if(!mount||mount.getAttribute("data-kpp-discover")==="1") return;
+  mount.setAttribute("data-kpp-discover","1");
+  var L=(localStorage.getItem("kp_lang")||(navigator.language||"en").slice(0,2)||"en").toLowerCase();
+  var SUP=["en","ko","ja","zh","es","fr","de","pt","id","ar","hi","ru","vi","th"];
+  if(SUP.indexOf(L)<0) L="en";
+  var T={
+    en:{h:"Discover K-Pop",sub:"Popular comparisons and deep guides",vs:"Group comparison",browse:"Browse all artists",glossary:"K-Pop glossary",light:"Lightstick guide",releases:"2026 releases"},
+    ko:{h:"K-Pop 둘러보기",sub:"인기 비교 · 심화 가이드",vs:"그룹 비교",browse:"전체 아티스트",glossary:"K-Pop 용어집",light:"응원봉 가이드",releases:"2026 발매"},
+    ja:{h:"K-POPを発見",sub:"人気比較と深掘りガイド",vs:"グループ比較",browse:"全アーティスト",glossary:"K-POP用語集",light:"ペンライトガイド",releases:"2026リリース"},
+    zh:{h:"探索 K-pop",sub:"热门对比与深度指南",vs:"团体对比",browse:"全部艺人",glossary:"K-pop 术语",light:"应援棒指南",releases:"2026 发行"},
+    es:{h:"Descubre K-pop",sub:"Comparaciones y guías",vs:"Comparación",browse:"Todos los artistas",glossary:"Glosario K-pop",light:"Guía de lightsticks",releases:"Lanzamientos 2026"},
+    fr:{h:"Découvrir la K-pop",sub:"Comparaisons et guides",vs:"Comparaison",browse:"Tous les artistes",glossary:"Glossaire K-pop",light:"Guide lightsticks",releases:"Sorties 2026"},
+    de:{h:"K-Pop entdecken",sub:"Vergleiche & Guides",vs:"Gruppenvergleich",browse:"Alle Künstler",glossary:"K-Pop-Glossar",light:"Lightstick-Guide",releases:"Releases 2026"},
+    pt:{h:"Descubra K-pop",sub:"Comparações e guias",vs:"Comparação",browse:"Todos os artistas",glossary:"Glossário K-pop",light:"Guia de lightsticks",releases:"Lançamentos 2026"},
+    id:{h:"Jelajahi K-pop",sub:"Perbandingan & panduan",vs:"Perbandingan grup",browse:"Semua artis",glossary:"Glosarium K-pop",light:"Panduan lightstick",releases:"Rilis 2026"},
+    ar:{h:"اكتشف K-Pop",sub:"مقارنات وأدلة",vs:"مقارنة فرق",browse:"كل الفنانين",glossary:"قاموس K-Pop",light:"دليل اللايت ستيك",releases:"إصدارات 2026"},
+    hi:{h:"K-Pop खोजें",sub:"तुलना और गाइड",vs:"ग्रुप तुलना",browse:"सभी आर्टिस्ट",glossary:"K-Pop शब्दकोश",light:"लाइटस्टिक गाइड",releases:"2026 रिलीज़"},
+    ru:{h:"Откройте K-pop",sub:"Сравнения и гайды",vs:"Сравнение групп",browse:"Все артисты",glossary:"Глоссарий K-pop",light:"Гайд по лайтстикам",releases:"Релизы 2026"},
+    vi:{h:"Khám phá K-pop",sub:"So sánh và hướng dẫn",vs:"So sánh nhóm",browse:"Tất cả nghệ sĩ",glossary:"Thuật ngữ K-pop",light:"Hướng dẫn lightstick",releases:"Phát hành 2026"},
+    th:{h:"ค้นพบ K-pop",sub:"เปรียบเทียบและไกด์",vs:"เปรียบเทียบวง",browse:"ศิลปินทั้งหมด",glossary:"ศัพท์ K-pop",light:"ไกด์ไลท์สติ๊ก",releases:"ผลงาน 2026"}
+  };
+  var t=T[L]||T.en;
+  function d(){return SUP.indexOf(L)>=0&&L!=="en"?L+"/":"";}
+  function vsPf(a,b){return d()+"kpop-vs/"+a+"-vs-"+b;}
+  function guidePf(s){return d()+"kpop/"+s;}
+  var PAIRS=[["bts","seventeen"],["blackpink","twice"],["newjeans","lesserafim"],["aespa","ive"],["straykids","ateez"],["txt","enhypen"]];
+  var roster=Array.isArray(window.KPOP_ROSTER)?window.KPOP_ROSTER:[],byId={};
+  roster.forEach(function(a){if(a&&a.id)byId[a.id]=a;});
+  var cards="";
+  PAIRS.forEach(function(p){
+    var ra=byId[p[0]],rb=byId[p[1]];if(!ra||!rb)return;
+    var label=(ra.nameEn||p[0])+" vs "+(rb.nameEn||p[1]);
+    cards+='<a class="kp-discover-card is-vs" href="'+vsPf(p[0],p[1])+'"><span>⚖️ '+label+'</span><small>'+t.vs+'</small></a>';
+  });
+  cards+='<a class="kp-discover-card" href="'+guidePf("browse")+'"><span>📚 '+t.browse+'</span></a>';
+  cards+='<a class="kp-discover-card" href="'+guidePf("glossary")+'"><span>📖 '+t.glossary+'</span></a>';
+  cards+='<a class="kp-discover-card" href="'+guidePf("kpop-lightsticks-list")+'"><span>💡 '+t.light+'</span></a>';
+  cards+='<a class="kp-discover-card" href="'+guidePf("kpop-releases-2026")+'"><span>💿 '+t.releases+'</span></a>';
+  mount.innerHTML='<section class="kp-discover" aria-label="'+t.h+'"><h2 class="kp-discover-h">'+t.h+'</h2><p class="kp-discover-sub">'+t.sub+'</p><div class="kp-discover-grid">'+cards+'</div></section>';
+})();
+
+/* ===== hub-faq: Visible FAQ + FAQPage JSON-LD for rich results ===== */
+(function(){
+  "use strict";
+  var mount=document.querySelector("#kpop-faq-slot");
+  if(!mount||mount.getAttribute("data-kpp-faq")==="1") return;
+  mount.setAttribute("data-kpp-faq","1");
+  var L=(localStorage.getItem("kp_lang")||(navigator.language||"en").slice(0,2)||"en").toLowerCase();
+  var FAQ={
+    en:{h:"K-Pop FAQ",items:[["What is KoreaPlus K-Pop Now?","A free real-time hub for charts, comeback countdowns, idol birthdays, artist profiles and news — in 14 languages."],["How often are charts updated?","Apple Music Korea charts refresh when you load the page; comeback and birthday data update daily from our curated roster."],["Can I follow my bias?","Yes — tap the star on any artist. Your follows personalize countdowns, news and the For You tab (saved on this device)."],["Are the group comparison pages biased?","No — comparison pages list only verifiable facts (debut, members, agency, genre). We never rank one group above another."],["How do I read guides in my language?","Use the language picker in the header, or open localized URLs like /guide/ko/kpop/ for Korean profiles and guides."]]},
+    ko:{h:"K-Pop FAQ",items:[["KoreaPlus K-Pop Now란?","실시간 차트, 컴백 카운트다운, 생일, 프로필, 뉴스를 14개 언어로 제공하는 무료 허브입니다."],["차트는 얼마나 자주 갱신되나요?","Apple Music Korea 차트는 페이지 로드 시 갱신되며, 컴백·생일 데이터는 매일 업데이트됩니다."],["최애를 팔로우할 수 있나요?","네 — 아티스트 카드의 별을 누르면 이 기기에 저장되어 컴백·뉴스가 맞춤화됩니다."],["그룹 비교 페이지는 편향되나요?","아니요 — 데뷔, 멤버 수, 소속사, 장르만 나열하며 순위를 매기지 않습니다."],["내 언어로 가이드를 보려면?","헤더 언어 선택기를 쓰거나 /guide/ko/kpop/ 같은 로컬 URL을 이용하세요."]]}
+  };
+  var pack=FAQ[L]||FAQ.en;
+  var html='<section class="kp-hub-faq"><h2 class="kpop-sec-title">❓ '+pack.h+'</h2><div class="seo-faq">';
+  var ld={"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]};
+  pack.items.forEach(function(row){
+    html+='<details><summary>'+row[0]+'</summary><p>'+row[1]+'</p></details>';
+    ld.mainEntity.push({"@type":"Question","name":row[0],"acceptedAnswer":{"@type":"Answer","text":row[1]}});
+  });
+  html+='</div></section>';
+  mount.innerHTML=html;
+  var s=document.createElement("script");s.type="application/ld+json";
+  s.textContent=JSON.stringify(ld).replace(/</g,"\\u003c");
+  document.head.appendChild(s);
 })();

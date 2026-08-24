@@ -29,7 +29,7 @@
   // ── Inject theme.css if not already linked ─────────────────────────────────
   if (!document.querySelector('link[href*="theme.css"]')) {
     const l = document.createElement('link');
-    l.rel = 'stylesheet'; l.href = '/guide/theme.css';
+    l.rel = 'stylesheet'; l.href = '/guide/theme.css?v=2';
     document.head.insertBefore(l, document.head.firstChild);
   }
 
@@ -124,7 +124,7 @@
   function loadModules() {
     const base = '/guide/modules/';
     // Load in order: theme.js, i18n.js, search.js, analytics.js
-    const scripts = ['theme.js', 'i18n.js', 'search.js', 'analytics.js', 'mytrip.js', 'nav.js?v=3', 'pwa.js?v=1', 'cro.js?v=2'];
+    const scripts = ['url.js?v=1', 'scroll-guard.js?v=2', 'empty-visual.js?v=4', 'theme.js', 'i18n.js', 'search.js?v=4', 'analytics.js', 'mytrip.js?v=4', 'nav.js?v=4', 'pwa.js?v=1', 'cro.js?v=2', 'plan-cta.js?v=2'];
 
     let chain = Promise.resolve();
     scripts.forEach(s => {

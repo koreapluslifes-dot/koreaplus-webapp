@@ -205,7 +205,6 @@ module.exports = function (ctx) {
     for (const s2 of sibs) body += `<a href="${d}kpop/${s2}.html">🎶 ${esc(TERMS[s2][lang].term)}</a>`;
     body += `<a href="/kpop">${esc(hubT.hub)}</a></div>`;
 
-    if (ctx.affBlock) body += ctx.affBlock({ city: 'Seoul', cat: 'general', q: '', lang });
 
     const hero = `<header class="seo-hero"><span class="emoji">📖</span><h1>${esc(h1)}</h1><div class="meta"><span class="seo-badge">K-Pop</span><span class="seo-badge">${esc(t.term)}</span></div></header>`;
 

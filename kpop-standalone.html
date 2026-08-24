@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <base href="/guide/">
   <title>K-Pop Now: Comebacks, Charts & Idol News (Real-Time) | KoreaPlus</title>
-  <meta name="description" content="The world's K-pop hub — real-time charts, comeback countdowns, idol news and artist profiles for BTS, BLACKPINK, NewJeans, SEVENTEEN, Stray Kids & more. Follow your bias, then see them live and plan the trip. 9 languages.">
+  <meta name="description" content="The world's K-pop hub — real-time charts, comeback countdowns, idol news and artist profiles for BTS, BLACKPINK, NewJeans, SEVENTEEN, Stray Kids & more. Follow your bias, then see them live and plan the trip. 14 languages.">
   <link rel="canonical" href="https://koreaplus-lifes.com/kpop">
   <link rel="alternate" hreflang="x-default" href="https://koreaplus-lifes.com/kpop">
   <link rel="alternate" hreflang="en"    href="https://koreaplus-lifes.com/kpop">
@@ -17,6 +17,11 @@
   <link rel="alternate" hreflang="de"    href="https://koreaplus-lifes.com/kpop?lang=de">
   <link rel="alternate" hreflang="pt"    href="https://koreaplus-lifes.com/kpop?lang=pt">
   <link rel="alternate" hreflang="id"    href="https://koreaplus-lifes.com/kpop?lang=id">
+  <link rel="alternate" hreflang="ar"    href="https://koreaplus-lifes.com/kpop?lang=ar">
+  <link rel="alternate" hreflang="hi"    href="https://koreaplus-lifes.com/kpop?lang=hi">
+  <link rel="alternate" hreflang="ru"    href="https://koreaplus-lifes.com/kpop?lang=ru">
+  <link rel="alternate" hreflang="vi"    href="https://koreaplus-lifes.com/kpop?lang=vi">
+  <link rel="alternate" hreflang="th"    href="https://koreaplus-lifes.com/kpop?lang=th">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000406">
   <link rel="icon" type="image/svg+xml" href="icons/kpop.svg">
@@ -34,8 +39,15 @@
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="id_ID">
-  <meta property="og:image" content="https://koreaplus-lifes.com/guide/og-image.jpg">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://koreaplus-lifes.com/guide/og/kpop-og-en.png">
+  <meta property="og:image:secure_url" content="https://koreaplus-lifes.com/guide/og/kpop-og-en.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="K-Pop by KoreaPlus — real-time charts, comebacks and idol guides">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://koreaplus-lifes.com/guide/og/kpop-og-en.png">
+  <script>(function(){try{var L=(new URLSearchParams(location.search).get('lang')||localStorage.getItem('kp_lang')||'en').slice(0,2).toLowerCase(),ok=['en','ko','ja','zh','es','fr','de','pt','id','ar','hi','ru','vi','th'];if(ok.indexOf(L)<0)L='en';var u='https://koreaplus-lifes.com/guide/og/kpop-og-'+L+'.png';function s(a,n,v){var e=document.querySelector('meta['+a+'="'+n+'"]');if(e)e.setAttribute('content',v);}s('property','og:image',u);s('property','og:image:secure_url',u);s('name','twitter:image',u);}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
@@ -44,7 +56,7 @@
   <link rel="stylesheet" href="hub-styles.css?v=8">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="seo.css">
-  <link rel="stylesheet" href="kpop.css?v=8">
+  <link rel="stylesheet" href="kpop.css?v=9">
   <link rel="stylesheet" href="mobile.css?v=1">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"CollectionPage","name":"K-Pop Now — Real-Time Charts, Comebacks & Idol News","url":"https://koreaplus-lifes.com/kpop","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"KoreaPlus","url":"https://koreaplus-lifes.com/guide/"},"about":{"@type":"Thing","name":"K-pop"},"description":"Real-time K-pop charts, comeback countdowns, idol news and artist profiles."}
@@ -74,11 +86,11 @@
     <p class="kp-hero-sub" data-i18n="kpop.hero.sub">Comebacks, charts, idol news &amp; your bias — all in one place, in your language.</p>
     <div class="kp-hero-stats">
       <span class="kp-stat"><b id="kp-stat-artists">34</b><span data-i18n="kpop.hero.stat.artists">artists</span></span>
-      <span class="kp-stat"><b id="kp-stat-langs">9</b><span data-i18n="kpop.hero.stat.langs">languages</span></span>
+      <span class="kp-stat"><b id="kp-stat-langs">14</b><span data-i18n="kpop.hero.stat.langs">languages</span></span>
       <span class="kp-stat"><b id="kp-stat-next">—</b><span data-i18n="kpop.hero.stat.next">next comeback</span></span>
     </div>
-    <a class="kp-hero-browse" id="kp-browse-cta" href="kpop/browse.html">📚 Browse all K-Pop</a>
-    <script>(function(){try{var L=(localStorage.getItem('kp_lang')||(navigator.language||'en').slice(0,2)||'en').toLowerCase();var M={en:'📚 Browse all K-Pop',ko:'📚 K-pop 전체 둘러보기',ja:'📚 K-POPをすべて見る',zh:'📚 浏览全部 K-pop',es:'📚 Explora todo el K-pop',fr:'📚 Explorer tout le K-pop',de:'📚 Alle K-Pop entdecken',pt:'📚 Explorar todo o K-pop',id:'📚 Jelajahi semua K-pop'};var e=document.getElementById('kp-browse-cta');if(e){if(M[L])e.textContent=M[L];var d=(['ko','ja','zh','es','fr','de','pt','id'].indexOf(L)>=0)?L+'/':'';e.setAttribute('href',d+'kpop/browse.html');}}catch(e){}})();</script>
+    <a class="kp-hero-browse" id="kp-browse-cta" href="kpop/browse.html">?�� Browse all K-Pop</a>
+    <script>(function(){try{var L=(localStorage.getItem('kp_lang')||(navigator.language||'en').slice(0,2)||'en').toLowerCase();var M={en:'?�� Browse all K-Pop',ko:'?�� K-pop ?�체 ?�러보기',ja:'?�� K-POP?�す?�て見る',zh:'?�� 浏览?�部 K-pop',es:'?�� Explora todo el K-pop',fr:'?�� Explorer tout le K-pop',de:'?�� Alle K-Pop entdecken',pt:'?�� Explorar todo o K-pop',id:'?�� Jelajahi semua K-pop',ar:'?�� تص?ح ?? K-Pop',hi:'?�� सभी K-Pop देखे�?,ru:'?�� ??е K-pop',vi:'?�� Khám phá K-pop',th:'?�� ดู K-pop ทั้งหม�?};var e=document.getElementById('kp-browse-cta');if(e){if(M[L])e.textContent=M[L];var d=(['ko','ja','zh','es','fr','de','pt','id','ar','hi','ru','vi','th'].indexOf(L)>=0)?L+'/':'';e.setAttribute('href',d+'kpop/browse.html');}}catch(e){}})();</script>
   </div>
 </header>
 
@@ -87,29 +99,28 @@
   <!-- Live social-proof pulse (modules/kpop-plus.js) -->
   <div id="kpop-pulse-slot"></div>
 
-  <!-- Localized top ads: AdSense + AliExpress merch (geo-localized) -->
-  <div id="kp-topads" class="kp-topads" data-q="kpop lightstick photocard album merch"></div>
-
   <!-- Today's spotlight (JS-filled from the soonest event) -->
   <section class="kp-spotlight" id="kp-spotlight" hidden aria-label="Today's spotlight"></section>
+
+  <div id="kpop-discover-slot"></div>
 
   <!-- Pick-your-bias onboarding (JS shows only when no follows yet) -->
   <section class="kp-onboard" id="kp-onboard" hidden></section>
 
   <div class="filter-bar" id="kpop-filters" role="tablist" aria-label="K-pop sections">
-    <button class="filter-chip active" role="tab" aria-selected="true" tabindex="0" data-target="all" data-i18n="kpop.filter.all">🔥 All</button>
+    <button class="filter-chip active" role="tab" aria-selected="true" tabindex="0" data-target="all" data-i18n="kpop.filter.all">?�� All</button>
     <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-foryou" aria-controls="kpop-foryou" data-i18n="kpop.filter.foryou">✨ For You</button>
-    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-charts" aria-controls="kpop-charts" data-i18n="kpop.filter.charts">📈 Charts</button>
+    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-charts" aria-controls="kpop-charts" data-i18n="kpop.filter.charts">?�� Charts</button>
     <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-countdowns" aria-controls="kpop-countdowns" data-i18n="kpop.filter.countdowns">⏳ Comebacks</button>
-    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-artists" aria-controls="kpop-artists" data-i18n="kpop.filter.artists">🎤 Artists</button>
-    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-birthdays" aria-controls="kpop-birthdays" data-i18n="kpop.filter.bdays">🎂 Birthdays</button>
-    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-news" aria-controls="kpop-news" data-i18n="kpop.filter.news">📰 News</button>
+    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-artists" aria-controls="kpop-artists" data-i18n="kpop.filter.artists">?�� Artists</button>
+    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-birthdays" aria-controls="kpop-birthdays" data-i18n="kpop.filter.bdays">?�� Birthdays</button>
+    <button class="filter-chip" role="tab" aria-selected="false" tabindex="-1" data-target="kpop-news" aria-controls="kpop-news" data-i18n="kpop.filter.news">?�� News</button>
   </div>
 
-  <!-- Search launcher slot (modules/kpop-plus.js mounts a ⌘K search button) -->
+  <!-- Search launcher slot (modules/kpop-plus.js mounts a ?�K search button) -->
   <div id="kpop-search-slot"></div>
 
-  <!-- ✨ For You — personalized & interactive features (modules/kpop-plus.js).
+  <!-- ✨ For You ??personalized & interactive features (modules/kpop-plus.js).
        data-noall: shown only on its own tab, never in the stacked "All" view. -->
   <section class="kpop-sec" id="kpop-foryou" data-noall hidden aria-label="For You"></section>
 
@@ -133,7 +144,7 @@
       <h2 class="kpop-sec-title" data-i18n="kpop.sec.countdowns.title">⏳ Comeback & Anniversary Countdowns</h2>
       <div class="kpop-sec-sub" data-i18n="kpop.sec.countdowns.sub">Next milestones for your favorite artists</div>
     </div>
-    <!-- Releases radar (build-time Apple snapshot) — own container so the
+    <!-- Releases radar (build-time Apple snapshot) ??own container so the
          "All" preview cap, which targets .cd-grid children, can't hide it. -->
     <div id="kpop-releases" class="rel-wrap" hidden></div>
     <div id="kpop-cd-grid" class="cd-grid">
@@ -145,16 +156,16 @@
   <!-- Upcoming member birthdays (zero-key: kpop-enrich.js) -->
   <section class="kpop-sec" id="kpop-birthdays">
     <div class="kpop-sec-head">
-      <h2 class="kpop-sec-title" data-i18n="kpop.sec.bdays.title">🎂 Upcoming Birthdays</h2>
-      <div class="kpop-sec-sub" data-i18n="kpop.sec.bdays.sub">Idol birthdays counting down — add them to your calendar</div>
+      <h2 class="kpop-sec-title" data-i18n="kpop.sec.bdays.title">?�� Upcoming Birthdays</h2>
+      <div class="kpop-sec-sub" data-i18n="kpop.sec.bdays.sub">Idol birthdays counting down ??add them to your calendar</div>
     </div>
     <div id="kpop-bday-grid" class="bday-grid"></div>
   </section>
 
-  <!-- Concerts (keyed: Ticketmaster → only renders when key + results exist) -->
+  <!-- Concerts (keyed: Ticketmaster ??only renders when key + results exist) -->
   <section class="kpop-sec" id="kpop-concerts" hidden>
     <div class="kpop-sec-head">
-      <h2 class="kpop-sec-title" data-i18n="kpop.sec.concerts.title">🎫 Upcoming Concerts</h2>
+      <h2 class="kpop-sec-title" data-i18n="kpop.sec.concerts.title">?�� Upcoming Concerts</h2>
       <div class="kpop-sec-sub" data-i18n="kpop.sec.concerts.sub">World-tour dates near you</div>
     </div>
     <div id="kpop-concerts-list" class="concert-list"></div>
@@ -163,7 +174,7 @@
   <!-- Artists / bias-follow (zero-key: kpop-data.js) -->
   <section class="kpop-sec" id="kpop-artists">
     <div class="kpop-sec-head">
-      <h2 class="kpop-sec-title" data-i18n="kpop.sec.artists.title">🎤 Artists & Groups</h2>
+      <h2 class="kpop-sec-title" data-i18n="kpop.sec.artists.title">?�� Artists & Groups</h2>
       <button class="art-toggle" id="art-toggle" hidden></button>
     </div>
     <div class="kpop-sec-sub" data-i18n="kpop.sec.artists.sub" style="margin-bottom:12px">Tap a star to follow your bias and get their updates first</div>
@@ -173,7 +184,7 @@
     </div>
   </section>
 
-  <!-- News (keyed: NewsData → graceful empty without key) -->
+  <!-- News (keyed: NewsData ??graceful empty without key) -->
   <section class="kpop-sec" id="kpop-news">
     <div class="kpop-sec-head">
       <h2 class="kpop-sec-title"><span class="kpop-live-dot" aria-hidden="true"></span><span data-i18n="kpop.sec.news.title">Latest K-Pop News</span></h2>
@@ -182,29 +193,30 @@
     <div id="kpop-news-list" class="news-list" role="region" aria-live="polite" aria-label="K-pop news"></div>
   </section>
 
-  <!-- Concert → travel → merch funnel -->
+  <!-- Concert ??travel ??merch funnel -->
+  <div id="kpop-faq-slot"></div>
   <section class="funnel" id="kpop-funnel">
-    <h2 class="kpop-sec-title" data-i18n="kpop.funnel.title">🎫 See Them Live → Plan the Trip</h2>
+    <h2 class="kpop-sec-title" data-i18n="kpop.funnel.title">?�� See Them Live ??Plan the Trip</h2>
     <div class="kpop-sec-sub" data-i18n="kpop.funnel.sub">Concert tickets, hotels near the venue, and fan-spot itineraries — all in one trip.</div>
     <div class="funnel-steps" id="kpop-funnel-steps">
-      <a class="funnel-card" href="festivals.html"><div class="funnel-ic" aria-hidden="true">🎫</div><div class="funnel-t" data-i18n="kpop.funnel.tickets">Concerts & Shows</div><div class="funnel-d" data-i18n="kpop.funnel.tickets.sub">Live K-pop dates & tickets</div></a>
-      <a class="funnel-card" href="plan.html"><div class="funnel-ic" aria-hidden="true">✈️</div><div class="funnel-t" data-i18n="kpop.funnel.travel">Flights + Hotels</div><div class="funnel-d" data-i18n="kpop.funnel.travel.sub">Stay near the venue</div></a>
-      <a class="funnel-card" href="kdrama-locations.html"><div class="funnel-ic" aria-hidden="true">📍</div><div class="funnel-t" data-i18n="kpop.funnel.spots">Fan Spots & Cafés</div><div class="funnel-d" data-i18n="kpop.funnel.spots.sub">HYBE, SM, idol cafés</div></a>
-      <a class="funnel-card" href="guide/k-pop-and-culture-guide.html"><div class="funnel-ic" aria-hidden="true">🛍️</div><div class="funnel-t" data-i18n="kpop.funnel.merch">Albums & Merch</div><div class="funnel-d" data-i18n="kpop.funnel.merch.sub">Lightsticks, photocards</div></a>
+      <a class="funnel-card" href="festivals.html"><div class="funnel-ic" aria-hidden="true">?��</div><div class="funnel-t" data-i18n="kpop.funnel.tickets">Concerts & Shows</div><div class="funnel-d" data-i18n="kpop.funnel.tickets.sub">Live K-pop dates & tickets</div></a>
+      <a class="funnel-card" href="plan.html"><div class="funnel-ic" aria-hidden="true">?�️</div><div class="funnel-t" data-i18n="kpop.funnel.travel">Flights + Hotels</div><div class="funnel-d" data-i18n="kpop.funnel.travel.sub">Stay near the venue</div></a>
+      <a class="funnel-card" href="kdrama-locations.html"><div class="funnel-ic" aria-hidden="true">?��</div><div class="funnel-t" data-i18n="kpop.funnel.spots">Fan Spots & Cafés</div><div class="funnel-d" data-i18n="kpop.funnel.spots.sub">HYBE, SM, idol cafés</div></a>
+      <a class="funnel-card" href="guide/k-pop-and-culture-guide.html"><div class="funnel-ic" aria-hidden="true">?���?/div><div class="funnel-t" data-i18n="kpop.funnel.merch">Albums & Merch</div><div class="funnel-d" data-i18n="kpop.funnel.merch.sub">Lightsticks, photocards</div></a>
     </div>
-    <div class="funnel-disc" data-i18n="kpop.funnel.disc">Some links are affiliate links — they help keep KoreaPlus free, at no extra cost to you.</div>
+    <div class="funnel-disc" data-i18n="kpop.funnel.disc">Some links are affiliate links ??they help keep KoreaPlus free, at no extra cost to you.</div>
   </section>
 
   <!-- Keep exploring -->
   <section class="hub-explore">
     <h2 class="hub-explore-title" data-i18n="kpop.explore.title">Keep Exploring K-Culture</h2>
     <div class="hub-explore-grid">
-      <a class="hub-explore-card" href="guide/k-pop-and-culture-guide.html"><span class="ic" aria-hidden="true">🎤</span><span>K-Pop &amp; Culture<span class="sub">Fan spots & shows</span></span></a>
-      <a class="hub-explore-card" href="itinerary/kpop-korea-4-day-itinerary.html"><span class="ic" aria-hidden="true">🎵</span><span>K-Pop 4-Day Itinerary<span class="sub">HYBE, SM & more</span></span></a>
-      <a class="hub-explore-card" href="kdrama-locations.html"><span class="ic" aria-hidden="true">🎬</span><span>K-Drama Locations<span class="sub">Filming spots map</span></span></a>
-      <a class="hub-explore-card" href="festivals.html"><span class="ic" aria-hidden="true">🎪</span><span>Festival Calendar<span class="sub">Concerts & events</span></span></a>
-      <a class="hub-explore-card" href="culture.html"><span class="ic" aria-hidden="true">🏛️</span><span>Korean Culture<span class="sub">Traditions & today</span></span></a>
-      <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic" aria-hidden="true">🤖</span><span>Plan my K-pop trip with AI<span class="sub">Free personalized itinerary</span></span></a>
+      <a class="hub-explore-card" href="guide/k-pop-and-culture-guide.html"><span class="ic" aria-hidden="true">?��</span><span>K-Pop &amp; Culture<span class="sub">Fan spots & shows</span></span></a>
+      <a class="hub-explore-card" href="itinerary/kpop-korea-4-day-itinerary.html"><span class="ic" aria-hidden="true">?��</span><span>K-Pop 4-Day Itinerary<span class="sub">HYBE, SM & more</span></span></a>
+      <a class="hub-explore-card" href="kdrama-locations.html"><span class="ic" aria-hidden="true">?��</span><span>K-Drama Locations<span class="sub">Filming spots map</span></span></a>
+      <a class="hub-explore-card" href="festivals.html"><span class="ic" aria-hidden="true">?��</span><span>Festival Calendar<span class="sub">Concerts & events</span></span></a>
+      <a class="hub-explore-card" href="culture.html"><span class="ic" aria-hidden="true">?���?/span><span>Korean Culture<span class="sub">Traditions & today</span></span></a>
+      <a class="hub-explore-card hub-explore-cta" href="plan.html"><span class="ic" aria-hidden="true">?��</span><span>Plan my K-pop trip with AI<span class="sub">Free personalized itinerary</span></span></a>
     </div>
   </section>
 
@@ -232,12 +244,11 @@
 <script src="kpop-images.js?v=1"></script>
 <script src="kpop-discog.js?v=1"></script>
 <script src="modules/api-client.js?v=2"></script>
-<script src="modules/topads.js"></script>
 <script src="modules/kpop-sharecard.js"></script>
 <script src="modules/kpop-player.js?v=3"></script>
-<script src="modules/kpop.js?v=8"></script>
-<script src="modules/kpop-plus.js?v=3"></script>
-<script src="modules/kpop-ux.js?v=2"></script>
+<script src="modules/kpop.js?v=10"></script>
+<script src="modules/kpop-plus.js?v=5"></script>
+<script src="modules/kpop-ux.js?v=3"></script>
 <script src="modules/mobile.js?v=1" defer></script>
 </body>
 </html>
