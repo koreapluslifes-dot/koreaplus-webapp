@@ -79,7 +79,7 @@ ssh @ssh "${REMOTE_USER}@${ServerIP}" "tar -xzf /tmp/kp-kbeauty-deploy-bundle.ta
 Remove-Item $bundle, $listFile -ErrorAction SilentlyContinue
 
 Write-Host "`nVerifying live..." -ForegroundColor Yellow
-foreach ($u in @("/kbeauty", "/guide/kbeauty.html", "/guide/modules/kbeauty.js")) {
+foreach ($u in @("/kbeauty", "/guide/kbeauty/", "/guide/kbeauty.html", "/guide/modules/kbeauty.js")) {
     try {
         $code = [int](curl.exe -s -o NUL -w "%{http_code}" "https://koreaplus-lifes.com$u")
         Write-Host ("  {0}  {1}" -f $code, $u)
